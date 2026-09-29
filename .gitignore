@@ -1,0 +1,7 @@
+src/*/page.html
+src/*/preview.html
+src/*/test.html
+src/*/jtest.html
+src/*/all.js
+src/*/tests/shots/
+__pycache__/

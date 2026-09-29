@@ -1,8 +1,9 @@
 import base64, pathlib, sys
 D = pathlib.Path(__file__).parent
+FONTS = D.parent.parent/'assets'/'fonts'
 css = (D/'style.css').read_text(encoding='utf-8')
 for k, f in [('__VAZ_R__','Vazirmatn-Regular.woff2'),('__VAZ_B__','Vazirmatn-Bold.woff2'),('__LALE__','Lalezar-Regular.woff2')]:
-    css = css.replace(k, base64.b64encode((D/f).read_bytes()).decode())
+    css = css.replace(k, base64.b64encode((FONTS/f).read_bytes()).decode())
 js = "\n".join((D/n).read_text(encoding='utf-8') for n in ['core.js','st_force.js','st_scale.js','st_lever.js','st_ramp.js','st_pulley.js','st_wheel.js','st_wedge.js','st_sort.js','content.js','app.js','journey.js'])
 page = f'<title>کارگاه ماشین‌های ساده</title>\n<style>\n{css}\n</style>\n<div class="wrap" id="app"></div>\n<script>\n(function(){{\n{js}\n}})();\n</script>\n'
 (D/'page.html').write_text(page, encoding='utf-8')
