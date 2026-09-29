@@ -1,7 +1,7 @@
 # Handoff — state of the project (updated 2026-09-29)
 
 ## Who / what
-- Teacher (javedani66@gmail.com) teaches a term on **simple machines** to grades 2–6 over **12 sessions**. Students use phones and computers; class messengers are **Telegram and WhatsApp**. Iran: claude.ai is not reachable for students; the game is distributed via GitHub Pages (this repo) and as a single offline HTML file.
+- The teacher (repo owner) teaches a term on **simple machines** to grades 2–6 over **12 sessions**. Students use phones and computers; class messengers are **Telegram and WhatsApp**. Iran: claude.ai is not reachable for students; the game is distributed via GitHub Pages (this repo) and as a single offline HTML file.
 - More games are planned for other physics topics, chemistry and later biology, all under this one site (shared origin → a shared student profile is possible later).
 
 ## The simple-machines game (src/simple-machines)
