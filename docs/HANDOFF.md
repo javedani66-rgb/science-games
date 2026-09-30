@@ -38,4 +38,5 @@
 - **Terms:** `quiz.js` has `QTERMS/QDEF/QBANK/QUIZ_AT/quizPick`. Science terms in prompts become tappable (definition card, collected in the backpack notebook). Quiz stations after stops 2, 4, 7, 10, 12 (not blocking, except the final one before level-up).
 - **Lands renamed:** کارگاه نجاری (1–4)، کارگاه ساختمانی و بندر (5–10)، کارخانهٔ اختراع (11–12). Map uses the Gemini badges.
 - **Science/Persian audit** applied (strict "lift" = needed force < available force; balance compares weights → measures mass; units; kid texts without numbers).
+- **Free experiments:** where the child can only find the answer by trying (unknown mass on the two-pan balance, lever balancing), a failed try costs nothing (`A.trial`); 2 points within 3 tries, else 1. Still to do for level 1 in ramp/pulley/wheel/wedge — see docs/NEXT.md.
 - **Stage 2 (next):** replace procedural scene drawings with the Nano-Banana props (mockups in the scratchpad were approved for lever and balance: `lever3.py`, `bal2.py`), direct manipulation (drag the fulcrum), and grade 7–9 specific content (torque, efficiency, gears).

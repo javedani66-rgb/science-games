@@ -4,7 +4,7 @@ Static site on GitHub Pages: https://javedani66-rgb.github.io/science-games/
 Owner: a primary-school science teacher in Iran (grades 2–6). All user-facing text is Persian (RTL).
 Talk to the teacher in Persian, in plain words; she/he is not a programmer.
 
-**Read `docs/HANDOFF.md` first** — it has the project history, decisions and open items.
+**Read `docs/HANDOFF.md` first** — it has the project history, decisions and open items. Then `docs/NEXT.md` (current task list) and `design/README.md` (art sources and approved mockups).
 
 ## Layout
 
