@@ -3,9 +3,9 @@
 Read `CLAUDE.md`, `docs/HANDOFF.md` (section "Version 2, stage 1") and `design/README.md` first.
 The teacher checks the live site herself; talk to her in plain Persian. Mockups before code when she asks for mockups.
 
-## A. Must fix first (reported by the teacher)
-1. **Level 1 (grades 2–3) trial-and-error stations still cost a chance on a failed try.** Level 1 shows no numbers, so in ramp («بکش!»), pulley, wheel-and-axle and wedge/screw the child can only find the answer by trying. Apply the same rule already used in scale «balance/fewest» and lever «balance»: use `A.trial(ok, msgs)` (app.js `board()`) instead of `A.judge` for the physical try when `KID()`. A failed try shows guidance, resets the scene, costs nothing; success gives 2 points within 3 tries, else 1. Places: `st_ramp.js` (fit/pull, ~line 72–74), `st_pulley.js` (`onBlocked` in choose/lift, ~75–76), `st_wheel.js` (`onBlocked`, ~63–64), `st_wedge.js` (`onBlocked`, ~77–78). Also make the kid prompts say «هر چند بار خواستی امتحان کن». Keep levels b/c/d as they are (numbers are given there, so a wrong try is a real mistake). Run `t2.py all all a` afterwards and test one failed try by hand.
-2. **Map: the player's avatar and «تو اینجایی» go off the right edge** when the current stop is on the right side of the path (`jmap()` in journey.js: `tx=q.x>200?q.x+74:q.x-74` — place it toward the centre instead, e.g. `q.x>200?q.x-80:q.x+80`, and keep the label clear of the stop name and the side-quest diamond). Check every stop 1–12 at 390 px and 1280 px.
+## A. Must fix first — DONE (2026-09-30)
+1. Level 1 free experiments: ramp «بکش!», pulley/wheel «choose», wedge/screw now use `A.trial` when `KID()` (failed try = guidance + reset, costs nothing; success on try 1–3 → 2 points, later → 1). Kid prompts say «هر چند بار خواستی امتحان کن». Levels b/c/d unchanged. Test: `tests/failtry.py`.
+2. Map «تو اینجایی»: `hereSpot()` in journey.js picks the nearest free spot (inside the map; clear of stops, names, numbers, stars, side-quest diamonds, quiz pills, land titles). Test: `tests/mapchk.py <grade>` (all 12 stops at 390 and 1280 px; prints nothing when fine; screenshots `shots/map_*`).
 
 ## B. Stage 2 (agreed plan)
 1. Replace the procedural scene drawings with Nano-Banana objects, station by station, starting with scale (`design/mockups/bal2.py`) and lever (`lever3.py`). Keep test hooks (`window.__T`, ids `#sc #cl #fb #nv #dots`) and keep `t2.py` solvable; `ov.py` must print nothing.
@@ -22,4 +22,4 @@ The teacher checks the live site herself; talk to her in plain Persian. Mockups 
 - Map on desktop is a narrow centred column (fine, but could be wider).
 
 ## D. Tests to run after changes
-`python3 src/simple-machines/build.py`, then in `src/simple-machines/tests/`: `t2.py all all a|b|c|d` (parallel per station), `t5.py a|b|c|d`, `ov.py <track> <stations>` (must print nothing), `jt.py <grade 0..7> 12` (plays the whole journey incl. quizzes and level-up), `shot1.py <station> <level> <track> [w h]` for quick screenshots. Then `python3 tools/publish_game.py simple-machines physics/simple-machines "کارگاه ماشین‌های ساده"`, commit, push.
+`python3 src/simple-machines/build.py`, then in `src/simple-machines/tests/`: `t2.py all all a|b|c|d` (parallel per station), `t5.py a|b|c|d`, `ov.py <track> <stations>` (must print nothing), `jt.py <grade 0..7> 12` (plays the whole journey incl. quizzes and level-up), `failtry.py` (level-1 free tries), `mapchk.py <grade>` (map marker), `shot1.py <station> <level> <track> [w h]` for quick screenshots. Then `python3 tools/publish_game.py simple-machines physics/simple-machines "کارگاه ماشین‌های ساده"`, commit, push.

@@ -185,6 +185,23 @@ const QAT=typeof QUIZ_AT!=="undefined"?QUIZ_AT.map(q=>q.after):[1,3,6,9,11];
 const quizOpen=(p,qi)=>stopDone(p,QAT[qi]);
 const pendingQuiz=p=>{for(let qi=0;qi<QAT.length;qi++)if(quizOpen(p,qi)&&!p.quiz[qi]&&curStop(p)<=Math.min(12,QAT[qi]+2))return qi;return -1;};
 function qpos(pos,qi){const a=QAT[qi];if(a>=11)return{x:pos[11].x,y:pos[11].y+140};const A=pos[a],B=pos[a+1],t=(a===3||a===9)?.3:.5;return{x:A.x+(B.x-A.x)*t,y:A.y+136};}
+/* جای عکس بازیکن و «تو اینجایی»: اولین جایی که داخل نقشه باشد و روی منزل، اسم، شماره، ستاره‌ها، الماس کار اضافه، آزمون یا تابلوی سرزمین نیفتد */
+function hereSpot(pos,cs,W){const q=pos[cs],o=q.x>200?1:-1,M=5,cir=[],box=[],B=(x0,y0,x1,y1)=>box.push([x0,y0,x1,y1]);
+  pos.forEach((r,i)=>{const n=(STOPS[i].n||"").length*10+12,sx=r.x>200?r.x-104:r.x+104;
+    cir.push([r.x,r.y,44],[r.x+31,r.y-29,15],[sx,r.y+18,27]);B(r.x-36,r.y-60,r.x-14,r.y-30);
+    B(r.x-n/2,r.y+46,r.x+n/2,r.y+70);B(r.x-35,r.y+72,r.x+35,r.y+94);});
+  QAT.forEach((a,qi)=>{const r=qpos(pos,qi);B(r.x-58,r.y-22,r.x+58,r.y+22);});
+  LANDS.forEach(Ld=>{const y0=pos[Ld.from].y-MBAN-34;B(W-254,y0+14,W-18,y0+84);});
+  const bb=(a,b)=>a[0]<b[2]+M&&a[2]>b[0]-M&&a[1]<b[3]+M&&a[3]>b[1]-M,
+    cc=(x,y,r,c)=>Math.hypot(x-c[0],y-c[1])<r+c[2]+M,
+    cb=(x,y,r,b)=>Math.hypot(x-Math.max(b[0],Math.min(x,b[2])),y-Math.max(b[1],Math.min(y,b[3])))<r+M;
+  const fits=([dx,dy])=>{const x=q.x+dx,y=q.y+dy,L=[x-48,y-58,x+48,y-30];
+    if(L[0]<M||L[2]>W-M||x-31<M||x+31>W-M)return false;
+    return !cir.some(c=>cc(x,y,31,c)||cb(c[0],c[1],c[2],L))&&!box.some(b=>cb(x,y,31,b)||bb(L,b));};
+  /* نزدیک‌ترین جای خالی به منزل؛ بیرونِ مسیر و کمی بالاتر بهتر است */
+  const C=[];for(let dy=-110;dy<=90;dy+=6)for(let dx=-180;dx<=180;dx+=6)C.push([dx,dy]);
+  const cost=([dx,dy])=>Math.hypot(dx,dy*1.3)+(dy>0?25:0)-(dx*o>0?10:0);
+  const c=C.filter(fits).sort((a,b)=>cost(a)-cost(b))[0]||[o*74,-6];return{x:Math.max(52,Math.min(W-52,q.x+c[0])),y:q.y+c[1]};}
 function jmap(opt){opt=opt||{};epoch++;closeOv();clearToasts();const p=JP();if(!p){startApp();return;}fixProfile(p);useProfile(p);applyNums();setC("scale");
   const cs=curStop(p),{pos,H:H0}=mlayout(),H=H0+200,W=MW,L=WL();offBoard(landOf(Math.min(cs,11)));
   let s=`<svg class="j-map" direction="rtl" viewBox="0 0 ${W} ${H}" role="group" aria-label="نقشهٔ سفر">`;
@@ -210,7 +227,7 @@ function jmap(opt){opt=opt||{};epoch++;closeOv();clearToasts();const p=JP();if(!
     if(DB.week===i&&!done)s+=`<g transform="translate(${q.x-34} ${q.y-58})"><path d="M0 26 V0 L18 6 L0 12" fill="#E4553A" stroke="#B53A22" stroke-width="2"/></g>`;
     s+=`</g>`;});
   const mk=(x,y)=>`<g class="j-bob"><circle cx="${x}" cy="${y}" r="30" fill="#fff" stroke="#E4553A" stroke-width="4"/><image class="j-mkimg" href="${IMG.bust[charOf(p)].happy}" x="${x-27}" y="${y-27}" width="54" height="54" clip-path="circle(27px)"/></g>`;
-  if(cs<12){const q=pos[cs],tx=q.x>200?q.x+74:q.x-74;s+=mk(tx,q.y-6)+`<g transform="translate(${tx-48} ${q.y-62})"><rect width="96" height="28" rx="14" fill="#E4553A"/><text x="48" y="19" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">تو اینجایی</text></g>`;}
+  if(cs<12){const h=hereSpot(pos,cs,W);s+=`<g class="j-here">`+mk(h.x,h.y)+`<g transform="translate(${h.x-48} ${h.y-58})"><rect width="96" height="28" rx="14" fill="#E4553A"/><text x="48" y="19" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">تو اینجایی</text></g></g>`;}
   else{const q=pos[11];s+=mk(q.x+90,q.y+140);}
   s+=`</svg>`;
   const week=DB.week!=null&&cs<DB.week&&!p.lvl?`<div class="j-week"><svg width="22" height="22" viewBox="0 0 28 28" aria-hidden="true"><path d="M6 26 V2 L22 8 L6 14" fill="#E4553A" stroke="#B53A22" stroke-width="2"/></svg><span>کلاس به منزل ${fa(DB.week+1)} رسیده؛ تو در منزل ${fa(cs+1)} هستی.</span></div>`:p.lvl?`<div class="j-week"><span>تو از کلاس جلوتری! الان در ${LVLN[trk(p)]} بازی می‌کنی.</span></div>`:"";
@@ -364,5 +381,5 @@ function teacherPage(){epoch++;closeOv();clearToasts();offBoard(0);document.body
     $("#jout").innerHTML=rows.length?`<div class="j-scroll"><table class="j-tbl"><thead><tr><th>نام</th><th>پایه</th><th>سطح</th><th>منزل</th><th>ستاره</th><th>کار خانه</th><th>جانبی</th><th>آزمون</th><th>منزل‌های کم‌ستاره</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${GRADES[r.g]}</td><td>${fa(TRK.indexOf(r.lv)+1)}</td><td>${r.cs>=12?"تمام":fa(r.cs+1)}</td><td>${fa(r.stars)}</td><td>${fa(r.home)}</td><td>${fa(r.side)}</td><td>${fa(r.quiz)}</td><td>${r.per.map((v,i)=>v===1?fa(i+1):null).filter(Boolean).join("، ")||"-"}</td></tr>`).join("")}</tbody></table></div>${bad?`<p class="fb no">${fa(bad)} پیام خوانده نشد؛ احتمالاً کامل کپی نشده است.</p>`:""}`:`<p class="fb no">پیام درستی پیدا نشد. هر پیام باید «نام:» و «کد:» داشته باشد.</p>`;};
   window.scrollTo(0,0);}
 
-if(window.__JT)window.__J={curP,missions,mStars,curStop,levelsOf,closeOv,trk,makeCode,readCode};
+if(window.__JT)window.__J={curP,missions,mStars,curStop,levelsOf,closeOv,trk,makeCode,readCode,jmap,save,hereSpot,mlayout};
 startApp();
