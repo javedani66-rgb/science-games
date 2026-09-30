@@ -784,8 +784,7 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
      let u=KID()?"cube":"kg";const mk=()=>{b=makeBalance(A,{unit:u,edit:"both",tray:u==="cube"?[1]:u==="kg"?[1,2,5,10]:[100,200,500,1000],objTray:["melon","apple","balloon","pillow","book","stone","rice","cotton","iron","dumbbell","backpack"].filter(id=>MASS[u][id]!=null),locked:false});A.refresh=()=>b.render();};
      mk();const c=A.ctrl("");
      btn(c,"وزنه‌ها","",()=>{b.st.trayMode="w";b.render();});btn(c,"اشیا","",()=>{b.st.trayMode="o";b.render();});
-     const lk=btn(c,"گذاشتن پایه‌ها","",()=>{b.setLock(!b.st.locked);lk.textContent=b.st.locked?"برداشتن پایه‌ها":"گذاشتن پایه‌ها";});
-     if(!KID())btn(c,"کیلوگرم / گرم","",()=>{u=u==="kg"?"g":"kg";mk();A.fb(u==="g"?"حالا وزنه‌ها به گرم است. هر کیلوگرم ۱۰۰۰ گرم است.":"حالا وزنه‌ها به کیلوگرم است.","info");lk.textContent="گذاشتن پایه‌ها";});
+     if(!KID())btn(c,"کیلوگرم / گرم","",()=>{u=u==="kg"?"g":"kg";mk();A.fb(u==="g"?"حالا وزنه‌ها به گرم است. هر کیلوگرم ۱۰۰۰ گرم است.":"حالا وزنه‌ها به کیلوگرم است.","info");});
      btn(c,"خالی کردن کفه‌ها","",()=>{b.st.L=[];b.st.R=[];b.settle();});
      btn(c,"نیروسنج و آب","pri",sprMode);}
    function sprMode(){mode="spr";A.prompt(KID()?"سنگ را با دستگیرهٔ زرد پایین ببر و در آب فرو کن. به فنر نگاه کن.":"آزمایشگاه نیروسنج: دستگیرهٔ زرد را پایین بکش تا جسم در آب برود. جسم را عوض کن یا به ماه برو و ببین عدد نیروسنج چه می‌شود.");A.fb("");
@@ -931,7 +930,7 @@ function makeLever(A,cfg){
   const tq=side=>Object.keys(st.stacks).reduce((s,p)=>{p=+p;if((side==="L"&&p<0)||(side==="R"&&p>0))s+=Math.abs(p)*st.stacks[p].reduce((a,it)=>a+lvM(it),0);return s;},0);
   const termStr=side=>Object.keys(st.stacks).map(Number).filter(p=>side==="L"?p<0:p>0).sort((a,b)=>Math.abs(a)-Math.abs(b)).filter(p=>st.stacks[p].length).map(p=>{const hid=st.stacks[p].some(it=>st.hide[it.id]);return hid?`؟ × ${fa(Math.abs(p))}`:`${fa(st.stacks[p].reduce((a,it)=>a+lvM(it),0))} × ${fa(Math.abs(p))}`;}).join(" + ")||"۰";
   const hasHidden=side=>Object.keys(st.stacks).map(Number).some(p=>(side==="L"?p<0:p>0)&&st.stacks[p].some(it=>st.hide[it.id]));
-  const canEdit=p=>!A.locked&&st.sup&&(st.edit==="both"||(st.edit==="R"&&p>0)||(st.edit==="L"&&p<0));
+  const canEdit=p=>!A.locked&&(st.sup||cfg.live)&&(st.edit==="both"||(st.edit==="R"&&p>0)||(st.edit==="L"&&p<0));
   function render(){const tL=tq("L"),tR=tq("R"),bal=!st.sup&&tL===tR;
     let s=bgRoom(380);
     s+=`<g transform="translate(20 20)"><rect width="140" height="40" rx="12" fill="#fff" stroke="#C7D3DE" stroke-width="2"/><rect x="14" y="13" width="112" height="14" rx="7" fill="${bal?"#CDEFD9":"#E9EFF3"}" stroke="${bal?GRN:"#B8C6D3"}" stroke-width="2"/><line x1="70" y1="10" x2="70" y2="30" stroke="${bal?GRN:"#9FB0C0"}" stroke-width="2"/><circle cx="${70+clamp(st.a*3.2,-46,46)}" cy="20" r="6" fill="${bal?GRN:"#7D8CA3"}"/></g>`+T(90,78,bal?"تراز است":"تراز",{size:13,col:bal?GRN:MUT,halo:false});
@@ -961,9 +960,9 @@ function makeLever(A,cfg){
     start(d){if(d.drag==="tray"){const it=findPc(d.pid);return it?{from:"tray",pid:d.pid,it}:null;}if(d.drag==="stk"){const p=+d.p;if(!canEdit(p))return null;return{from:"stk",p,i:+d.i,it:st.stacks[p][+d.i]};}return null;},
     begin(g,pt){if(g.from==="stk"){const it=unput(g.p,g.i);g.pid=it.pid;}st.sel=null;P.ghost(lvItemSvg(g.it,0,20,true),pt.x,pt.y);render();},
     move(g,pt){P.move(pt.x,pt.y);const p=posAt(pt);if(p!==st.hover){st.hover=p;render();}},
-    end(g,pt){P.clear();st.hover=null;const p=posAt(pt);if(p!=null)put(p,g);settle();if(cfg.onChange)cfg.onChange();},
-    tap(g){if(g.from==="tray"){st.sel={pid:g.pid,it:g.it};A.fb("حالا روی جای دلخواه روی تخته بزن.","info");render();}else{unput(g.p,g.i);settle();if(cfg.onChange)cfg.onChange();}},
-    zoneTap(z){if(z.zone==="pos"&&st.sel){const p=+z.p;if(!canEdit(p))return;put(p,st.sel);st.sel=null;A.fb("");settle();if(cfg.onChange)cfg.onChange();}}});
+    end(g,pt){P.clear();st.hover=null;const p=posAt(pt);if(p!=null)put(p,g);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();},
+    tap(g){if(g.from==="tray"){st.sel={pid:g.pid,it:g.it};A.fb("حالا روی جای دلخواه روی تخته بزن.","info");render();}else{unput(g.p,g.i);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}},
+    zoneTap(z){if(z.zone==="pos"&&st.sel){const p=+z.p;if(!canEdit(p))return;put(p,st.sel);st.sel=null;A.fb("");settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}}});
   settle();
   return{st,render,settle,tq,setSup(v,done){st.sup=v;settle(done);}};
 }
@@ -992,12 +991,12 @@ function makeLift(A,cfg){const svg=A.svg,P=A.P;A.view(424);const PX=52,CX=320,CY
 }
 
 const ST_lever={key:"lever",name:"اهرم",c:"#D97706",sub:"الاکلنگ، تکیه‌گاه و قانون اهرم",
- intro:"آجرها را روی تخته بکش. پایه‌های نارنجی تخته را نگه می‌دارند؛ وقتی آماده شدی آن‌ها را بردار و ببین تخته صاف می‌ماند یا نه. وقتی تخته صاف باشد، نشانگر تراز سبز می‌شود.",
+ intro:"آجرها را روی تخته بکش؛ تخته همان لحظه نشان می‌دهد کدام طرف سنگین‌تر است. وقتی تخته صاف باشد، نشانگر تراز سبز می‌شود.",
  art(){let h=bgRoom(380).replace(/id="g/g,'id="al').replace(/url\(#g/g,"url(#al");h+=`<path d="M320 290 L284 380 H356Z" fill="#6B4A2B"/><g transform="rotate(-6 320 290)"><rect x="38" y="278" width="564" height="12" rx="5" fill="#D08A4B"/>${brickSvg(164,278,20)}${brickSvg(528,278,10)}${arrow(164,318,164,370,9,BLUE,.9)}${arrow(528,318,528,350,9,RED,.9)}</g>`;return h;},
- lab(A){A.prompt("آزمایشگاه اهرم: آجر یا جعبهٔ مرموز را روی تخته بکش. برای برداشتن، بیرونش بکش یا رویش بزن. بعد پایه‌ها را بردار.");
-   const lv=makeLever(A,{edit:"both",inf:[5,10,20,"myA","myB"],sup:true,hide:{}});A.refresh=()=>lv.render();
-   const c=A.ctrl("");const sb=btn(c,"برداشتن پایه‌ها","go",()=>{lv.setSup(!lv.st.sup);sb.textContent=lv.st.sup?"برداشتن پایه‌ها":"گذاشتن پایه‌ها";});
-   btn(c,"پاک کردن تخته","",()=>{lv.st.stacks={};lv.setSup(true);sb.textContent="برداشتن پایه‌ها";});
+ lab(A){A.prompt("آزمایشگاه اهرم: آجر یا جعبهٔ مرموز را روی تخته بکش و ببین تخته چطور می‌چرخد. برای برداشتن، بیرونش بکش یا رویش بزن.");
+   const lv=makeLever(A,{edit:"both",inf:[5,10,20,"myA","myB"],sup:false,live:true,hide:{}});A.refresh=()=>lv.render();
+   const c=A.ctrl("");
+   btn(c,"پاک کردن تخته","",()=>{lv.st.stacks={};lv.settle();});
    btn(c,"آزمایش بلند کردن سنگ","pri",()=>{A.prompt("آزمایشگاه: تکیه‌گاه را جابه‌جا کن و ببین نیروی لازم برای بلند کردن سنگ چطور عوض می‌شود.");const lf=makeLift(A,{W:60,S:30,f:0});A.refresh=()=>lf.render();const c2=A.ctrl("");btn(c2,"فشار بده!","go",b=>{b.disabled=true;lf.push(ok=>{A.fb(ok?"سنگ بالا رفت!":"نیرویت کافی نبود؛ تکیه‌گاه را به سنگ نزدیک‌تر کن.",ok?"ok":"no");later(900,()=>{lf.st.a=0;lf.render();b.disabled=false;});});});btn(c2,"برگشت به الاکلنگ","pri",()=>ST_lever.lab(A));});},
  kid:[
   {title:"الاکلنگ",desc:"پیش‌بینی کن کدام طرف پایین می‌رود و آجر را درست بگذار.",gen(r){return[{t:"predict",items:[[-2,10],[4,10]]},{t:"predict",items:[[-2,20],[2,10]]},{t:"balance",items:[[-3,10]],pieces:[10]},{t:"predict",items:[[-3,10],[3,10]]},{t:"balance",items:[[-1,10]],pieces:[10]}];}},
@@ -1022,11 +1021,13 @@ const ST_lever={key:"lever",name:"اهرم",c:"#D97706",sub:"الاکلنگ، ت
     const KL={ok:ans===1?"دو طرف مثل هم است؛ صاف ماند.":`طرف ${ans===0?"راست":"چپ"} پایین رفت.`,retry:"به سنگینی آجرها و دوری‌شان از وسط نگاه کن.",final:ans===1?"دو طرف مثل هم بود؛ صاف ماند.":`طرف ${ans===0?"راست":"چپ"} پایین رفت، چون ${"آجرش سنگین‌تر یا دورتر از وسط است"}.`};
     const c=A.ctrl("");const m=mcq(c,["راست پایین می‌رود","صاف می‌ماند","چپ پایین می‌رود"],(i,b)=>{if(A.locked)return;if(i===ans){m.disable();m.mark(i,"right");lv.setSup(false);A.judge(true,{ok:expl,k:KL});}
       else{m.mark(i,"wrong");b.disabled=true;A.judge(false,{retry:"فقط جرم مهم نیست؛ فاصله از تکیه‌گاه هم مهم است. جرم را در فاصله ضرب کن.",final:expl,k:KL});if(A.locked){m.disable();m.mark(ans,"right");lv.setSup(false);}}});return;}
-  if(sp.t==="balance"){A.prompt(KID()?"آجر را بگذار تا الاکلنگ صاف بماند.":`${sp.pieces.length>1?"آجرها را":"آجر را"} روی سمت راست تخته بگذار تا تخته صاف بماند.<small>بکش و روی تخته رها کن، بعد «برداشتن پایه‌ها» را بزن.</small>`);
-    const lv=makeLever(A,{items:sp.items,pieces:sp.pieces,edit:"R",sup:true});A.refresh=()=>lv.render();const c=A.ctrl("");
-    A.hint(`M${320+(0-(sp.pieces.length-1)/2)*Math.min(96,560/sp.pieces.length)} 478 L${320+3*52} 250`);
-    const go=btn(c,"برداشتن پایه‌ها","go",()=>{if(lv.st.pieces.some(p=>!p.used)){A.fb(KID()?"اول آجر را روی الاکلنگ بگذار.":"همهٔ آجرهای پایین را روی تخته بگذار.","info");return;}go.disabled=true;
-      lv.setSup(false,()=>{const tL=lv.tq("L"),tR=lv.tq("R");const res=A.trial(tL===tR,{k:{ok:"الاکلنگ صاف ماند!",retry:tR>tL?"راست پایین رفت. آجر را به وسط نزدیک‌تر کن.":"چپ پایین رفت. آجر را دورتر بگذار.",final:new Set(sp.items.map(x=>x[1]).concat(sp.pieces)).size===1?"آجرها یکسان‌اند؛ پس باید هر دو به یک اندازه از وسط دور باشند.":"آجر سنگین‌تر باید نزدیک وسط باشد و آجر سبک‌تر دور از وسط."},ok:`هر دو طرف ${fa(tL)} شد.`,retry:`چپ ${fa(tL)} است و راست ${fa(tR)}. جای آجر را عوض کن.`,final:`راه درست: ${levSol(sp)}.`});if(!res&&!A.locked)later(1000,()=>{lv.setSup(true);go.disabled=false;});});});return;}
+  if(sp.t==="balance"){A.prompt(KID()?"آجر را روی الاکلنگ بگذار تا صاف بماند.":`${sp.pieces.length>1?"آجرها را":"آجر را"} روی سمت راست تخته بگذار تا تخته صاف بماند.<small>بکش و روی تخته رها کن؛ تخته همان لحظه می‌چرخد. برای جابه‌جا کردن، آجر را دوباره بکش.</small>`);
+    /* الاکلنگ زنده: پایه ندارد؛ وقتی همهٔ آجرها روی تخته‌اند و صاف ماند، چالش تمام است */
+    const onSettle=()=>{if(A.locked)return;if(lv.st.pieces.some(p=>!p.used)){A.fb("");return;}const tL=lv.tq("L"),tR=lv.tq("R");
+      if(tL===tR){A.trial(true,{ok:`هر دو طرف ${fa(tL)} شد.`,k:{ok:"الاکلنگ صاف ماند!"}});return;}
+      A.fb(KID()?(tR>tL?"راست پایین رفت. آجر را به وسط نزدیک‌تر کن.":"چپ پایین رفت. آجر را دورتر بگذار."):`چپ ${fa(tL)} است و راست ${fa(tR)}. ${tR>tL?"راست سنگین‌تر است؛ آجر را به تکیه‌گاه نزدیک‌تر کن.":"چپ سنگین‌تر است؛ آجر را دورتر بگذار."}`,"info");};
+    const lv=makeLever(A,{items:sp.items,pieces:sp.pieces,edit:"R",sup:false,live:true,onSettle});A.refresh=()=>lv.render();A.ctrl("");
+    A.hint(`M${320+(0-(sp.pieces.length-1)/2)*Math.min(96,560/sp.pieces.length)} 478 L${320+3*52} 250`);return;}
   if(sp.t==="mystery"){const my=sp.items.find(x=>typeof x[1]==="string")[1];A.prompt(`تخته صاف است. جرم ${OB[my].n} چند کیلوگرم است؟<small>از قانون اهرم استفاده کن: جرم × فاصله در دو طرف برابر است.</small>`);
     const lv=makeLever(A,{items:sp.items,sup:false,hide:{[my]:1}});A.refresh=()=>lv.render();const tR=lv.tq("R"),pos=Math.abs(sp.items.find(x=>x[1]===my)[0]),ans=LV_MASS[my];
     const c=A.ctrl("");const stp=stepper(c,{init:0,max:200,steps:[1,5],unit:"کیلوگرم"});
