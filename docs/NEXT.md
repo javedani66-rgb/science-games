@@ -13,7 +13,7 @@ The teacher checks the live site herself; talk to her in plain Persian. Mockups 
 - Asked the teacher: in levels 2+ (numbers shown) should ramp «fit», pulley/wheel/wedge «choose» also be free tries? Today they keep «یک فرصت دیگر داری».
 
 - **2026-09-30 21:39 teacher approved (for ALL similar places):** no «امتحان کن / برداشتن پایه‌ها» button where the result can be shown live. Scale: no supports; beam tilts live as weights are dropped; balanced = done. The separate «جرم نامعلوم» (scale mystery) becomes «balance + then ask the mass» (same challenge type/count, progress safe). Then the same idea station by station (lever balance supports, lever lab, force tug «برو!», ramp «بکش!», …) — a real calculation/prediction question keeps its «بررسی».
-- Live-work checklist: [ ] scale balance/fewest/mystery live  [ ] lever balance live  [ ] lever lab  [ ] review force/ramp/pulley/wheel/wedge buttons (ask teacher when unsure)
+- Live-work checklist: [x] scale balance/fewest/mystery live (published 2026-09-30; mystery hides right-pan total until the mass is answered)  [ ] lever balance live  [ ] lever lab  [ ] review force/ramp/pulley/wheel/wedge buttons (ask teacher when unsure)
 
 ### Stage-2 checklist (tick as you go)
 - [ ] scale: Nano-Banana balance (`design/mockups/bal2.py`) + drag weights to pan

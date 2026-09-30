@@ -67,11 +67,11 @@ def scale(g,pg,sp):
     n=len(sp['tray'])
     for v in combo:
         j=sp['tray'].index(v); x=320+(j-(n-1)/2)*min(90,560/n)
-        g.drag(x,478,516,215)
+        g.drag(x,478,516,215); pg.wait_for_timeout(250)
+    pg.wait_for_timeout(800)   # ترازوی زنده: بعد از ایستادن شاهین خودش داوری می‌کند
     if SHOT: g.shot(f'ch_scale_{t}_{u}_{target}')
     if t=='mystery':
         stepper_set(pg,target); click_text(pg,'بررسی'); return
-    click_text(pg,'بردا'); pg.wait_for_timeout(900)
 
 def lever(g,pg,sp):
     T=pg.evaluate("()=>window.__T"); LM=T['LV_MASS']; t=sp['t']

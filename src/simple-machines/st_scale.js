@@ -72,9 +72,9 @@ function makeBalance(A,cfg){
     start(d){if(d.drag==="tray")return{from:"tray",k:d.k,v:+d.v,id:d.id};if(d.drag==="pan"){if(!canEdit(d.side))return null;const it=st[d.side][+d.i];return{from:"pan",side:d.side,i:+d.i,k:it.k,v:it.v,id:it.id};}return null;},
     begin(g,p){if(g.from==="pan")st[g.side].splice(g.i,1);st.sel=null;P.ghost(g.k==="w"?`<g transform="scale(1.2)">${wSvg(0,20,g.v,u,true)}</g>`:`<g transform="translate(0 30)">${OB[g.id].d}</g>`,p.x,p.y);render();},
     move(g,p){P.move(p.x,p.y);const h=panHit(p);const h2=h&&canEdit(h)?h:null;if(h2!==st.hover){st.hover=h2;render();}},
-    end(g,p){P.clear();st.hover=null;const h=panHit(p);if(h&&canEdit(h))addTo(h,g);settle();if(cfg.onChange)cfg.onChange();},
-    tap(g){if(g.from==="tray"){st.sel={k:g.k,v:g.v,id:g.id};A.fb("حالا روی یکی از کفه‌ها بزن.","info");render();}else{st[g.side].splice(g.i,1);settle();if(cfg.onChange)cfg.onChange();}},
-    zoneTap(z){if(z.zone==="pan"&&st.sel&&canEdit(z.side)){addTo(z.side,st.sel);A.fb("");settle();if(cfg.onChange)cfg.onChange();}}});
+    end(g,p){P.clear();st.hover=null;const h=panHit(p);if(h&&canEdit(h))addTo(h,g);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();},
+    tap(g){if(g.from==="tray"){st.sel={k:g.k,v:g.v,id:g.id};A.fb("حالا روی یکی از کفه‌ها بزن.","info");render();}else{st[g.side].splice(g.i,1);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}},
+    zoneTap(z){if(z.zone==="pan"&&st.sel&&canEdit(z.side)){addTo(z.side,st.sel);A.fb("");settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}}});
   const setLock=(v,done)=>{st.locked=v;settle(done);};
   settle();
   return{st,render,settle,setLock,mass};
@@ -212,27 +212,24 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
       else{m.mark(i,"wrong");bt.disabled=true;A.judge(false,{retry:"به جنس چیزها فکر کن، نه فقط به اندازه‌شان.",final:expl,k:{retry:"به جنس چیزها فکر کن، نه فقط به اندازه.",final:kexp}});if(A.locked){m.disable();m.mark(ans,"right");reveal();}}});
     return;}
   const target=sp.obj.reduce((s,id)=>s+MASS[u][id],0),objNames=andList(sp.obj.map(id=>OB[id].n));
-  const b=makeBalance(A,{unit:u,L:sp.obj.map(id=>({k:"o",id,fixed:1})),edit:"R",tray:sp.tray,locked:true,hideL:true});A.refresh=()=>b.render();
+  /* ترازوی زنده: پایه ندارد؛ هر وزنه که روی کفه برود، شاهین همان لحظه کج یا صاف می‌شود. صاف ماند = تمام (برای «جرم نامعلوم»: بعد جرم را می‌پرسد) */
+  const minN=minCoins(target,sp.tray),unitW=u==="cube"?"مکعب":"وزنه";let asked=false,stp=null,chk=null;
   const c=A.ctrl("");
-  if(sp.t==="balance"||sp.t==="fewest"){const minN=minCoins(target,sp.tray);
-    A.prompt(KID()?"با مکعب‌ها ترازو را صاف کن. هر چند بار خواستی امتحان کن.":sp.t==="balance"?`ترازو را صاف کن: ${u==="cube"?"مکعب‌ها":"وزنه‌ها"} را روی کفهٔ راست بکش و پایه‌ها را بردار. جرم ${objNames} را نمی‌دانی؛ هر چند بار خواستی امتحان کن.<small>اگر ترازو صاف نشد، پایه‌ها خودشان برمی‌گردند. وزنه اضافه یا کم کن و دوباره امتحان کن.</small>`:`ترازو را با <b>کمترین تعداد وزنه</b> صاف کن. هر چند بار خواستی امتحان کن.<small>وزنه‌ها را روی کفهٔ راست بکش، بعد پایه‌ها را بردار. با وزنه‌های بزرگ‌تر شروع کن.</small>`);
-    A.hint(`M${320+(0-(sp.tray.length-1)/2)*Math.min(90,560/sp.tray.length)} 478 L516 215`);
-    const go=btn(c,"برداشتن پایه‌ها","go",()=>{if(!b.st.R.length){A.fb(KID()?"اول مکعب بگذار.":"اول چیزی روی کفهٔ راست بگذار.","info");return;}go.disabled=true;b.st.edit="";
-      b.setLock(false,()=>{const mR=b.mass("R"),n=b.st.R.length,eq=mR===target,ok=eq&&(sp.t==="balance"||n===minN);b.st.hideL=!eq&&!A.locked;
-        const res=(eq&&!ok?A.judge:A.trial)(ok,{ok:sp.t==="balance"?(u==="cube"?`${objNames} هم‌جرمِ ${fa(target)} مکعب است.`:`جرم ${objNames} ${fmtM(target,u)} است.`):`با ${fa(n)} وزنه صاف شد؛ کمتر از این نمی‌شد.`,
-          retry:eq?`صاف شد، ولی با ${fa(n)} وزنه. با وزنه‌های بزرگ‌تر شروع کن تا تعدادشان کمتر شود.`:mR>target?"کفهٔ راست پایین رفت؛ وزنه‌ها زیاد است.":"کفهٔ چپ هنوز پایین است؛ وزنه کم است.",
-          final:`جواب: ${fmtM(target,u)}${sp.t==="fewest"?`، با ${fa(minN)} وزنه: ${minCoinsStr(target,sp.tray,u)}`:""}.`,
-          k:{ok:`ترازو صاف شد! ${fa(target)} مکعب.`,retry:mR>target?"کفهٔ مکعب‌ها پایین رفت. یک مکعب بردار.":"هنوز کم است. مکعب اضافه کن.",final:`${fa(target)} مکعب لازم بود.`}});
-        if(A.locked){b.st.hideL=false;b.render();}else later(1100,()=>{b.st.edit="R";b.setLock(true);go.disabled=false;});});});
-    return;}
-  if(sp.t==="mystery"){A.prompt(`جرم ${objNames} چقدر است؟ هر چند بار خواستی امتحان کن.<small>با وزنه‌ها ترازو را صاف کن (پایه‌ها را هر چند بار خواستی بردار و بگذار)، بعد جرم وزنه‌ها را جمع بزن و وارد کن.</small>`);
-    const lk=btn(c,"برداشتن پایه‌ها","",()=>{b.setLock(!b.st.locked);lk.textContent=b.st.locked?"برداشتن پایه‌ها":"گذاشتن پایه‌ها";});
-    const stp=stepper(c,{init:0,max:u==="g"?9000:99,steps:u==="g"?[100,1000]:[1,10],unit:u==="kg"?"کیلوگرم":u==="g"?"گرم":"مکعب",label:"جرم"});
-    /* آزمایش آزاد: جواب با صاف کردن ترازو پیدا می‌شود، پس «بررسیِ» ناموفق فرصت را کم نمی‌کند */
-    const chk=btn(c,"بررسی","go",()=>{const v=stp.get(),ok=v===target,bal=b.mass("R")===target;
-      A.trial(ok,{ok:`جرم ${objNames} ${fmtM(target,u)} است.`,retry:bal?"ترازو صاف است. حالا جرم وزنه‌های کفهٔ راست را جمع بزن و همان را وارد کن.":!b.st.R.length?"اول وزنه‌ها را روی کفهٔ راست بگذار و پایه‌ها را بردار تا ببینی ترازو صاف می‌شود یا نه.":"ترازو هنوز صاف نیست. وزنه اضافه یا کم کن و پایه‌ها را بردار تا صاف شود.",final:""});
-      if(A.locked){chk.disabled=true;lk.disabled=true;stp.disable();b.st.hideL=false;b.render();}});
-    return;}
+  const onSettle=()=>{if(A.locked||asked)return;const mR=b.mass("R"),n=b.st.R.length,eq=mR===target;
+    if(!n){A.fb("");return;}
+    if(!eq){A.fb(KID()?(mR>target?"کفهٔ مکعب‌ها پایین رفت. یک مکعب بردار.":"کفهٔ چپ هنوز پایین است. مکعب اضافه کن."):(mR>target?`کفهٔ راست پایین رفت؛ ${unitW}ها زیاد است. روی یکی بزن تا برداشته شود.`:`کفهٔ چپ هنوز پایین است؛ ${unitW} اضافه کن.`),"info");return;}
+    if(sp.t==="fewest"&&n!==minN){A.trial(false,{retry:`صاف شد، ولی با ${fa(n)} وزنه. با وزنه‌های بزرگ‌تر می‌شود با وزنه‌های کمتری صافش کرد.`});return;}
+    if(sp.t==="mystery"){asked=true;b.st.edit="";b.render();A.fb("ترازو صاف شد! حالا جرم وزنه‌های کفهٔ راست را جمع بزن.","info");
+      A.prompt(`ترازو صاف است. پس جرم ${objNames} چقدر است؟<small>جرم ${objNames} با جرم وزنه‌های کفهٔ راست برابر است. آن‌ها را جمع بزن.</small>`);
+      stp=stepper(c,{init:0,max:u==="g"?9000:99,steps:u==="g"?[100,1000]:[1,10],unit:u==="kg"?"کیلوگرم":"گرم",label:"جرم"});
+      chk=btn(c,"بررسی","go",()=>{const ok=stp.get()===target;
+        A.trial(ok,{ok:`جرم ${objNames} ${fmtM(target,u)} است: ${b.st.R.map(it=>fa(it.v)).join(" + ")} = ${fa(target)}.`,retry:`جرم وزنه‌های کفهٔ راست را یکی‌یکی جمع بزن: ${b.st.R.map(it=>fa(it.v)).join(" + ")}.`});
+        if(A.locked){chk.disabled=true;stp.disable();b.st.hideL=b.st.hideR=false;b.render();}});return;}
+    b.st.hideL=false;A.trial(true,{ok:sp.t==="balance"?(u==="cube"?`${objNames} هم‌جرمِ ${fa(target)} مکعب است.`:`جرم ${objNames} ${fmtM(target,u)} است.`):`با ${fa(n)} وزنه صاف شد؛ کمتر از این نمی‌شد.`,k:{ok:`ترازو صاف شد! ${fa(target)} مکعب.`}});b.render();};
+  const b=makeBalance(A,{unit:u,L:sp.obj.map(id=>({k:"o",id,fixed:1})),edit:"R",tray:sp.tray,locked:false,hideL:true,hideR:sp.t==="mystery",onSettle});A.refresh=()=>b.render();
+  A.prompt(KID()?"مکعب‌ها را روی کفهٔ راست بگذار تا ترازو صاف شود.":sp.t==="fewest"?`ترازو را با <b>کمترین تعداد وزنه</b> صاف کن.<small>وزنه‌ها را روی کفهٔ راست بکش؛ ترازو همان لحظه نشان می‌دهد کدام طرف سنگین‌تر است. با وزنه‌های بزرگ‌تر شروع کن. برای برداشتن وزنه، رویش بزن.</small>`
+    :`${sp.t==="mystery"?`جرم ${objNames} چقدر است؟ اول ترازو را صاف کن.`:`ترازو را صاف کن. جرم ${objNames} را نمی‌دانی.`}<small>${u==="cube"?"مکعب‌ها":"وزنه‌ها"} را روی کفهٔ راست بکش؛ ترازو همان لحظه نشان می‌دهد کدام طرف سنگین‌تر است. برای برداشتن، رویش بزن.</small>`);
+  A.hint(`M${320+(0-(sp.tray.length-1)/2)*Math.min(90,560/sp.tray.length)} 478 L516 215`);
  }};
 function minCoins(t,vals){const dp=Array(t+1).fill(Infinity);dp[0]=0;const g=vals.reduce((a,b)=>gcd(a,b));for(let s=g;s<=t;s+=g)for(const v of vals)if(v<=s&&dp[s-v]+1<dp[s])dp[s]=dp[s-v]+1;return dp[t];}
 function gcd(a,b){return b?gcd(b,a%b):a;}
