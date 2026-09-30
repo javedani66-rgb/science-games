@@ -28,7 +28,7 @@ The teacher checks the live site herself; talk to her in plain Persian. Mockups 
 
    - **Teacher 22:59:** optional «خیلی سخت/هیولا» must NEVER block the path — the child chooses to enter or skip; nothing is locked behind them. Main-path free-try challenges must not stall either: after 3 failed tries offer «راهنمایی بیشتر» and then «نشانم بده» (solution shown, 1 point).
    - **Everyday-object challenges (scissors, tweezers, doorknob, screwdriver, flagpole, bicycle, …) → VERSION 3**, because they need assets in our style. Exception: ones we already have assets for (wheelbarrow sheet_fix #10, saw/hammer sheet1 #21/#26, barrel sheet_fix #9, pulleys sheet2) may go into stage 2.
-8. **Full test run started 22:50 on commit after «untouched stepper» (results in /tmp/claude-0/fin/*.log if same session; otherwise rerun D + `leakchk.py a|b|c`), then publish.** Teacher 22:39: test all other stations for the same kinds of problems.** Done/doing: untouched stepper «بررسی» no longer costs a chance (core.js `btn`); leak check (answer visible on screen before answering) `tests/leakchk.py`.
+8. **After the background run: rebuild (reset feature added 23:05 in journey.js), run `resetchk.py` + `jt.py 0 3` + `failtry.py`, then publish.** Full test run started 22:50 on commit after «untouched stepper» (results in /tmp/claude-0/fin/*.log if same session; otherwise rerun D + `leakchk.py a|b|c`), then publish.** Teacher 22:39: test all other stations for the same kinds of problems.** Done/doing: untouched stepper «بررسی» no longer costs a chance (core.js `btn`); leak check (answer visible on screen before answering) `tests/leakchk.py`.
 
 ### Stage-2 checklist (tick as you go)
 - [ ] scale: Nano-Banana balance (`design/mockups/bal2.py`) + drag weights to pan
