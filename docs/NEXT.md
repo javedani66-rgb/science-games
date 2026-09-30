@@ -3,6 +3,19 @@
 Read `CLAUDE.md`, `docs/HANDOFF.md` (section "Version 2, stage 1") and `design/README.md` first.
 The teacher checks the live site herself; talk to her in plain Persian. Mockups before code when she asks for mockups.
 
+## RESUME HERE (teacher decisions 2026-09-30 20:20)
+- **Do NOT work on grade 7–9 content (B.4) for now.** First make the current version stable and complete; level d later.
+- **The teacher tests the live site while we work — it must never break.** Only publish + push after the full test set in D passes. Work one station at a time; each finished station = one tested commit + push, so the site is always a working version.
+- **Sessions may hit their limit.** After every step, update the checklist below and push the notes, so a new session can continue from here without the chat.
+- Open questions to the teacher (not answered yet): start with scale+lever (approved mockups)? mockups first for other stations? one register (spoken/written) for buttons? Ask again briefly if still unanswered.
+
+### Stage-2 checklist (tick as you go)
+- [ ] scale: Nano-Banana balance (`design/mockups/bal2.py`) + drag weights to pan
+- [ ] lever: `lever3.py` scene + drag the fulcrum (no slider)
+- [ ] ramp  - [ ] pulley  - [ ] wheel  - [ ] wedge/screw  - [ ] force  - [ ] sort
+- [ ] full land palettes in scenes (B.3)
+- [ ] section C small items
+
 ## A. Must fix first — DONE (2026-09-30)
 1. Level 1 free experiments: ramp «بکش!», pulley/wheel «choose», wedge/screw now use `A.trial` when `KID()` (failed try = guidance + reset, costs nothing; success on try 1–3 → 2 points, later → 1). Kid prompts say «هر چند بار خواستی امتحان کن». Levels b/c/d unchanged. Test: `tests/failtry.py`.
 2. Map «تو اینجایی»: `hereSpot()` in journey.js picks the nearest free spot (inside the map; clear of stops, names, numbers, stars, side-quest diamonds, quiz pills, land titles). Test: `tests/mapchk.py <grade>` (all 12 stops at 390 and 1280 px; prints nothing when fine; screenshots `shots/map_*`).
