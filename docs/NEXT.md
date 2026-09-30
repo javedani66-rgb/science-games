@@ -4,6 +4,7 @@ Read `CLAUDE.md`, `docs/HANDOFF.md` (section "Version 2, stage 1") and `design/R
 The teacher checks the live site herself; talk to her in plain Persian. Mockups before code when she asks for mockups.
 
 ## RESUME HERE (teacher decisions 2026-09-30 20:20)
+- **Teacher 23:16 decided:** (a) lands split **3 + 3**: کارگاه ساختمانی = stops 5 lever 1, 6 lever 2, 7 wedge/screw; بندر = 8 ramp (loading ships), 9 wheel & axle, 10 pulley — i.e. swap the ramp and wedge/screw stops (lesson plan is no constraint). (b) **Written register** for all buttons/UI (no «وقتِ آزمونه!/بزن بریم!»; «چالش بعد» without ezafe mark). (c) **Sound ON by default**, speaker button in every header.
 - **Teacher 23:07: ignore her 12-session lesson plan for now — design the game first; the lesson plan will be adjusted to the game later.** So stops/challenges may move freely. **Teacher 23:10: all current players are her own test profiles — wiping progress is OK.** Still: old saved data/codes must not crash the game (bump the code version, reset unreadable data cleanly).
 - Proposal 23:10: the «نیروسنج» stop stays early (it is the tool for measuring force/weight used everywhere after it); only the water challenges move to «بندر», where they use the spring scale again (crane hangs cargo from a spring scale into the sea).
 - **Do NOT work on grade 7–9 content (B.4) for now.** First make the current version stable and complete; level d later.
