@@ -41,3 +41,10 @@ tools/publish_game.py          build + wrap with PWA head + copy into site + bum
 - Reading levels: track a (grades 2–3, `KID()`) = short sentences, no numbers/formulas, bigger font; b (grade 4) numbers; c (5–6) formulas.
 - SVG text: `T(x,y,text,{anchor})` — note `direction=rtl`, so `anchor:"start"` = right edge at x, `"end"` = left edge at x. Font size is multiplied by 1.6 when halo is on. Keep labels off arrows (`arrow()` polygons carry class `farr`, which ov.py checks).
 - New games: new folder `src/<game>/` + site folder (`physics/…`, `chemistry/…`, `biology/…`), add a card in `index.html`, publish with the tool (it adds the path to sw.js FILES). Reuse fonts from `assets/fonts`.
+
+## How to work with the teacher (her explicit rule, 2026-09-30)
+
+- **Never block the chat on slow tests.** Start long runs (t2 all, jt, t5, ov all, leakchk) in the background with `nohup … > log 2>&1 &`, one chain for everything, logs in a temp folder. Do NOT `sleep`/poll-wait for them. Keep answering the teacher meanwhile; read the logs only when she asks or when you return to the work. Saves tokens and keeps the conversation fast.
+- During coding: only quick targeted checks (`node --check`, one station/level). Run the full suite **once, at the end**, on the final build — never rebuild while a background run is using the built pages.
+- The live site must stay working while she tests: commit + push `src/` as you go (the live site changes only when `publish_game.py` runs); publish only after the full suite passed.
+- Background runs die with the session: note in `docs/NEXT.md` that a run is in progress so the next session reruns it.
