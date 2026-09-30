@@ -87,12 +87,14 @@ function makePainter(svg){let gh="",gx=0,gy=0,hint="";svg.addEventListener("poin
 function stepper(host,o){let v=o.init||0;const steps=o.steps||[1,10];
   host.insertAdjacentHTML("beforeend",`<div class="stp" role="group" aria-label="${o.label||"عدد"}">${steps.slice().reverse().map(s=>`<button type="button" data-d="${-s}" aria-label="کم کردن ${fa(s)}">−${fa(s)}</button>`).join("")}<output aria-live="polite">${fa(v)}</output>${o.unit?`<span class="u">${o.unit}</span>`:""}${steps.map(s=>`<button type="button" data-d="${s}" aria-label="اضافه کردن ${fa(s)}">+${fa(s)}</button>`).join("")}</div>`);
   const box=host.lastElementChild,out=box.querySelector("output");
-  box.onclick=e=>{const b=e.target.closest("[data-d]");if(!b||b.disabled)return;v=clamp(Math.round((v+(+b.dataset.d))*100)/100,o.min==null?0:o.min,o.max==null?9999:o.max);out.textContent=fa(v);if(o.onChange)o.onChange(v);};
+  box.onclick=e=>{const b=e.target.closest("[data-d]");if(!b||b.disabled)return;box.dataset.touched="1";v=clamp(Math.round((v+(+b.dataset.d))*100)/100,o.min==null?0:o.min,o.max==null?9999:o.max);out.textContent=fa(v);if(o.onChange)o.onChange(v);};
   return{get:()=>v,set:x=>{v=x;out.textContent=fa(v);},disable:()=>box.querySelectorAll("button").forEach(b=>b.disabled=true)};}
 function mcq(host,labels,onPick){host.insertAdjacentHTML("beforeend",`<div class="mcq">${labels.map((l,i)=>`<button class="btn" type="button" data-i="${i}">${l}</button>`).join("")}</div>`);
   const box=host.lastElementChild;box.onclick=e=>{const b=e.target.closest("[data-i]");if(!b||b.disabled)return;onPick(+b.dataset.i,b);};
   return{mark(i,c){const b=box.querySelector(`[data-i="${i}"]`);if(b)b.classList.add(c);},clearMarks(){box.querySelectorAll(".btn").forEach(b=>b.classList.remove("right","wrong"));},disable(){box.querySelectorAll(".btn").forEach(b=>b.disabled=true);},enable(){box.querySelectorAll(".btn").forEach(b=>b.disabled=false);}};}
-function btn(host,label,cls,fn){host.insertAdjacentHTML("beforeend",`<button class="btn ${cls||""}" type="button">${label}</button>`);const b=host.lastElementChild;b.onclick=()=>{if(!b.disabled)fn(b);};return b;}
+/* «بررسی» پیش از دست زدن به عدد (هنوز صفر) فرصت را نمی‌سوزاند؛ فقط یادآوری می‌کند */
+function btn(host,label,cls,fn){host.insertAdjacentHTML("beforeend",`<button class="btn ${cls||""}" type="button">${label}</button>`);const b=host.lastElementChild;
+  b.onclick=()=>{if(b.disabled)return;if(label==="بررسی"){const s=host.querySelector(".stp");if(s&&!s.dataset.touched&&!host.querySelector("#dirs")){const f=document.getElementById("fb");if(f){f.textContent="اول عدد را با دکمه‌های + و − تنظیم کن، بعد «بررسی» را بزن.";f.className="fb info";}return;}}fn(b);};return b;}
 
 /* ================= پنجره‌ها ================= */
 function closeOv(){document.querySelectorAll(".ovl,.conf").forEach(e=>e.remove());}

@@ -59,7 +59,8 @@ with sync_playwright() as pw:
             for v in solve_coins(target,sp['tray'],12):
                 j=sp['tray'].index(v); n_=len(sp['tray']); g.drag(320+(j-(n_-1)/2)*min(90,560/n_),478,516,215); pg.wait_for_timeout(250)
             pg.wait_for_timeout(900)
-            for n in range(nfail): click_text(pg,'بررسی'); pg.wait_for_timeout(200)   # جمعِ غلط (صفر)
+            pg.click('.stp button[data-d="1"]')   # جمعِ غلط: ۱ (با صفرِ دست‌نخورده «بررسی» اصلاً داوری نمی‌کند)
+            for n in range(nfail): click_text(pg,'بررسی'); pg.wait_for_timeout(200)
             locked=pg.locator('#nv .btn').count()>0; msg=g.text('#fb')[:70]
             stepper_set(pg,target); click_text(pg,'بررسی'); pg.wait_for_timeout(600)
             got=dot(pg,i); good=(got==want and not locked); ok2&=good

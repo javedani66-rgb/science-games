@@ -23,8 +23,10 @@ The teacher checks the live site herself; talk to her in plain Persian. Mockups 
 4. **Wording.** «دو جسم به هم دست بزنند» → «یکدیگر را لمس کنند» (quiz `f-c2`). Do a full pass for similar spoken/inexact words in written texts (together with item C «register»).
 5. **«روی ماه / روی زمین» tag** (`placeTag` in st_scale.js) looks bad — replace with a proper sign graphic in the art style; same pass for similar plain boxes: moon astronaut figure, «تراز» gauge box of the seesaw, empty white tray panel when all pieces are used.
 6. **Variety + teaching rhythm (teacher 22:38).** More kinds of challenges; every 1–3 challenges must teach one idea (learn → try → apply, ending with a one-line takeaway).
-7. **Difficulty tags آسان / سخت / خیلی سخت / هیولا + child's choice — proposal sent, WAITING for the teacher's answer.** Proposal: tag every challenge; main path (what the class does) = آسان→سخت for everyone at grade level; «خیلی سخت» and «هیولا» = optional challenges at each stop the child chooses (special badge, visible on teacher page; progress-code version bump). Alternative she may pick: child chooses a global difficulty.
+7. **Difficulty tags آسان / سخت / خیلی سخت / هیولا — APPROVED by the teacher 22:39 (my proposal):** tag every challenge; main path (what the class does) = آسان→سخت for everyone at grade level; «خیلی سخت» and «هیولا» = optional challenges at each stop the child chooses (special badge, visible on teacher page; progress-code version bump). A child who is stuck gets more hints, not an easier path.
 - Note: a screenshot still showed «برداشتن پایه‌ها» on the seesaw = old cached version; the live seesaw was published 22:15.
+
+8. **Teacher 22:39: test all other stations for the same kinds of problems.** Done/doing: untouched stepper «بررسی» no longer costs a chance (core.js `btn`); leak check (answer visible on screen before answering) `tests/leakchk.py`.
 
 ### Stage-2 checklist (tick as you go)
 - [ ] scale: Nano-Banana balance (`design/mockups/bal2.py`) + drag weights to pan
