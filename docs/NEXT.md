@@ -26,7 +26,7 @@ The teacher checks the live site herself; talk to her in plain Persian. Mockups 
 7. **Difficulty tags آسان / سخت / خیلی سخت / هیولا — APPROVED by the teacher 22:39 (my proposal):** tag every challenge; main path (what the class does) = آسان→سخت for everyone at grade level; «خیلی سخت» and «هیولا» = optional challenges at each stop the child chooses (special badge, visible on teacher page; progress-code version bump). A child who is stuck gets more hints, not an easier path.
 - Note: a screenshot still showed «برداشتن پایه‌ها» on the seesaw = old cached version; the live seesaw was published 22:15.
 
-8. **Teacher 22:39: test all other stations for the same kinds of problems.** Done/doing: untouched stepper «بررسی» no longer costs a chance (core.js `btn`); leak check (answer visible on screen before answering) `tests/leakchk.py`.
+8. **Full test run started 22:50 on commit after «untouched stepper» (results in /tmp/claude-0/fin/*.log if same session; otherwise rerun D + `leakchk.py a|b|c`), then publish.** Teacher 22:39: test all other stations for the same kinds of problems.** Done/doing: untouched stepper «بررسی» no longer costs a chance (core.js `btn`); leak check (answer visible on screen before answering) `tests/leakchk.py`.
 
 ### Stage-2 checklist (tick as you go)
 - [ ] scale: Nano-Banana balance (`design/mockups/bal2.py`) + drag weights to pan
