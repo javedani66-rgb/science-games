@@ -19,6 +19,16 @@ The teacher checks the live site herself; talk to her in plain Persian. Mockups 
 - **2026-09-30 21:39 teacher approved (for ALL similar places):** no «امتحان کن / برداشتن پایه‌ها» button where the result can be shown live. Scale: no supports; beam tilts live as weights are dropped; balanced = done. The separate «جرم نامعلوم» (scale mystery) becomes «balance + then ask the mass» (same challenge type/count, progress safe). Then the same idea station by station (lever balance supports, lever lab, force tug «برو!», ramp «بکش!», …) — a real calculation/prediction question keeps its «بررسی».
 - Live-work checklist: [x] scale balance/fewest/mystery live (published 2026-09-30; mystery hides right-pan total until the mass is answered)  [~] lever balance live + lever lab + scale lab (code done, NOT yet published — run full tests at the end, then publish)  [x] lever published. [~] physical tries free at ALL levels (ramp, pulley, wheel, wedge, lever lift, force tug) + «هر چند بار خواستی امتحان کن» in prompts — code done 22:40, full test run + publish pending. Rule: state results (scale, seesaw) = live; action results (pull, crank, push, tug) = keep the action, failed try free; calculation/prediction questions keep two chances.
 
+## ORDER OF WORK (teacher 23:25: content first, graphics second) — follow this
+1. Challenge catalogue as data + progress by challenge id + code v3 (enabler; wipe OK).
+2. Force and friction split, rebuilt as 3-packs (see, try, apply) easy→hard, just-in-time terms, hint ladder «راهنمایی بیشتر → نشانم بده», misconception challenges from the research doc. Publish.
+3. Same for scale, then lever. Publish each.
+4. Ramp, wedge/screw, wheel & axle, pulley (in the new 3+3 land order). Publish each.
+5. Machine hunt: «which machine for this job?», compound machines; a short mini-test at the start and end of each land (LoL idea); one story mission per station (Tinybop idea); optional خیلی سخت/هیولا doors + badges.
+6. Sound + mute (cheap, big gain) — can slot in any time after step 1.
+7. THEN graphics pass station by station: Nano-Banana props, full land palettes, 4-land map, moon trip, port, signs.
+Target (comparison doc, without Iran criteria): 61 → ~72 (guidance 6→8, order 5→8, sound 1→7, graphics 5→7, variety 7→8, game feel 7→8).
+
 ### Teacher review 2026-09-30 22:34 — do these INSIDE stage 2, station by station (content + graphics of a station together, so each station is touched once)
 1. **Order easy → hard.** Inside every level: recognise → compare/predict → do by hand → calculate; and across levels. Reordering challenges *inside* a level's `gen()` is safe for progress (stars are stored per level, missions reference levels). Check every station, every track (a–d) and the quiz order.
 2. **Definitions just in time.** A term (اصطکاک، نیروی خالص، جرم، وزن، تکیه‌گاه، بازوی محرک…) must be introduced (short card or one line) right before the first challenge that needs it — not only in the word cards at the stop start, and never after it is used. Audit per stop and per track.
