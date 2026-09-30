@@ -62,7 +62,7 @@ with sync_playwright() as pw:
             pg.click('.stp button[data-d="1"]')   # جمعِ غلط: ۱ (با صفرِ دست‌نخورده «بررسی» اصلاً داوری نمی‌کند)
             for n in range(nfail): click_text(pg,'بررسی'); pg.wait_for_timeout(200)
             locked=pg.locator('#nv .btn').count()>0; msg=g.text('#fb')[:70]
-            stepper_set(pg,target); click_text(pg,'بررسی'); pg.wait_for_timeout(600)
+            pg.click('.stp button[data-d="-1"]'); stepper_set(pg,target); click_text(pg,'بررسی'); pg.wait_for_timeout(600)
             got=dot(pg,i); good=(got==want and not locked); ok2&=good
             print('OK ' if good else '!! ',track,'scale mystery fails',nfail,'->',got,'(want',want+')','|',msg)
     b.close()
