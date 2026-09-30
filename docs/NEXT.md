@@ -32,6 +32,8 @@ The teacher checks the live site herself; talk to her in plain Persian. Mockups 
 
 9. **Split land «کارگاه ساختمانی و بندر» into two (teacher 23:03, proposal: stops 5–8 کارگاه ساختمانی = lever 1, lever 2, ramp, wedge/screw; stops 9–10 بندر = wheel & axle (winch), pulley (crane)) — waiting for her OK on the split point.** Presentation only (no saved data depends on lands): `LANDS` + `landOf` in journey.js, `mlayout()` banner gap before stop 9, a 4th palette `body[data-land="3"]` in style.css, map banner, land badge art. Port assets already in design/nanobanana: sheet2 #29 container, #19/#21 pulleys, #22/#24/#25 rope, #26 hook. Do it together with the map/graphics work in stage 2.
 
+10. **Where do the moon and water challenges go (teacher 23:05)?** Proposal sent, waiting: moon stays in «جرم و وزن / نیروسنج» (stops 2–3, it is the key evidence mass ≠ weight) but its scene gets a proper «trip to the moon» look; water: one simple challenge stays at stop 3 (feels lighter in water), the rest (why, buoyancy numbers, floating/sinking) moves to the new «بندر» land as optional خیلی سخت/هیولا challenges — mission count unchanged, progress safe. Check against her lesson plan (session↔stop) before moving.
+
 ### Stage-2 checklist (tick as you go)
 - [ ] scale: Nano-Banana balance (`design/mockups/bal2.py`) + drag weights to pan
 - [ ] lever: `lever3.py` scene + drag the fulcrum (no slider)
