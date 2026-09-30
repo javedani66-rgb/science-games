@@ -4,7 +4,7 @@ const ORDER=["force","scale","lever","ramp","pulley","wheel","wedge","sort"];
 const TIER=[{n:"آسان",c:"#22965A"},{n:"متوسط",c:"#D99412"},{n:"سخت",c:"#E4553A"},{n:"قهرمان",c:"#7A3FC8"}];
 const KIDLAB={force:"هر چه دوست داری امتحان کن: کشش‌ها را روی طناب بکش و «برو!» را بزن.",scale:"روی کفه‌ها چیز بگذار و ببین کدام پایین می‌رود. دکمهٔ «نیروسنج و آب» را هم امتحان کن.",lever:"آجرها را روی الاکلنگ بکش و پایه‌ها را بردار.",ramp:"دایرهٔ زرد را بکش تا سطح درازتر یا کوتاه‌تر شود. بعد «بکش!» را بزن.",pulley:"قرقره انتخاب کن و طناب را پایین بکش.",wheel:"دسته انتخاب کن و آن را بچرخان.",wedge:"گوه را پایین بکش یا پیچ را بچرخان.",sort:"هر کارت را در جعبهٔ درست بینداز."};
 const KIDINTRO={force:"هل دادن و کشیدن. ببین کدام طرف قوی‌تر است.",scale:"ترازو نشان می‌دهد کدام چیز سنگین‌تر است. نیروسنج نشان می‌دهد زمین یک چیز را چقدر می‌کشد.",lever:"الاکلنگ را صاف کن. سنگین‌تر نزدیک وسط (تکیه‌گاه) بنشیند.",ramp:"با سطح شیب‌دار، جعبه را راحت‌تر بالا ببر.",pulley:"با قرقره، طناب را پایین بکش و بار را بالا ببر.",wheel:"دستهٔ چاه را بچرخان و سطل را بالا بیاور.",wedge:"با گوه چوب را بشکاف و پیچ را در چوب بچرخان.",sort:"هر وسیله را در جعبهٔ ماشین ساده‌اش بینداز."};
-const TRACKS={a:{n:"کاوشگر",g:"دوم و سوم",c:"#22965A",d:"بدون عدد و فرمول. نگاه می‌کند، مقایسه می‌کند و می‌شمارد. دستورها کوتاه‌اند."},b:{n:"سازنده",g:"چهارم",c:"#D97706",d:"عددها را می‌بیند: نیرو به نیوتن، جرم به کیلوگرم و گرم. جمع و تفریق و حساب‌های ساده."},c:{n:"مهندس",g:"پنجم و ششم",c:"#7A3FC8",d:"با فرمول و نمادهای علمی. حساب، طراحی و چالش‌های سخت‌تر."}};
+const TRACKS={a:{n:"سطح ۱",g:"دوم و سوم",c:"#22965A",d:"بدون عدد و فرمول. نگاه می‌کند، مقایسه می‌کند و می‌شمارد. دستورها کوتاه‌اند."},b:{n:"سطح ۲",g:"چهارم",c:"#D97706",d:"عددها را می‌بیند: نیرو به نیوتن، جرم به کیلوگرم و گرم. جمع، تفریق، ضرب و تقسیم ساده."},c:{n:"سطح ۳",g:"پنجم و ششم",c:"#7A3FC8",d:"مطابق علوم پنجم: عدد و نسبت. فرمول‌ها برای کنجکاوها، با دکمهٔ راهنما."},d:{n:"سطح ۴",g:"هفتم تا نهم",c:"#1B6E8F",d:"با فرمول و نمادهای علمی: گشتاور، مزیت مکانیکی و کار."}};
 /* عبارت‌های ریاضیِ داخل متن فارسی از چپ به راست نمایش داده شوند */
 function ltrMath(h){return h.replace(/(\(?[۰-۹0-9][۰-۹0-9٫/]*(?:\s*(?:[a-zA-Z]+\s*)?[×÷+−=≈<>]\s*[۰-۹0-9][۰-۹0-9٫/]*)+(?:\s*(?:N|J|m|kg|g)\b)?\)?)/g,m=>{let tail="";if(m.endsWith(")")&&!m.startsWith("(")){m=m.slice(0,-1);tail=")";}if(m.startsWith("(")&&!m.endsWith(")")){return "("+`<span dir="ltr" class="eqi">${m.slice(1)}</span>`+tail;}return `<span dir="ltr" class="eqi">${m}</span>`+tail;});}
 function mixLevel(k,d0,title,desc){return{title,desc,gen:r=>Array.from({length:6},(_,i)=>ST[k].endless(r,d0+i*.2))};}
@@ -15,10 +15,10 @@ function levelsOf(k){const s=ST[k],cur=s.levels;if(S.track==="a")return s.kid;
 const starsFor=(p,m)=>p>=m*.9?3:p>=m*.66?2:p>=m*.4?1:0;
 function setC(k){document.documentElement.style.setProperty("--c",ST[k]?ST[k].c:"#3B6FD4");}
 
-function home(){epoch++;closeOv();setC("scale");
+function home(){epoch++;closeOv();setC("scale");document.body.classList.remove("bdm");setLand(0);
   const tot=ORDER.reduce((a,k)=>a+starsOfSt(k),0);
   app.innerHTML=`<header class="hero"><h1>کارگاه ماشین‌های ساده</h1><p class="lead">از نیرو شروع کن، بعد ترازو، اهرم و بقیهٔ ماشین‌ها. هر ایستگاه یک آزمایشگاه آزاد دارد و چهار مرحله که هر کدام یک چیز تازه یاد می‌دهد.</p>
-  <div class="toolbar">${TESTMODE?`<button class="chip-btn trackchip" id="tk" type="button">${S.track?`مسیر: ${TRACKS[S.track].n} (${TRACKS[S.track].g})`:"انتخاب پایه"}</button>`:`<button class="chip-btn trackchip" id="tk" type="button">→ نقشهٔ سفر</button>`}<span class="pill">${starSvg(true,20)}<b>${fa(tot)}</b> ستاره</span><button class="chip-btn" id="fm" type="button">${KID()?"قانون‌ها":"فرمول‌ها"}</button><button class="chip-btn" id="gl" type="button">واژه‌نامه</button></div></header>
+  <div class="toolbar">${TESTMODE?`<button class="chip-btn trackchip" id="tk" type="button">${S.track?`${TRACKS[S.track].n} (${TRACKS[S.track].g})`:"انتخاب پایه"}</button>`:`<button class="chip-btn trackchip" id="tk" type="button">→ نقشهٔ سفر</button>`}<span class="pill">${starSvg(true,20)}<b>${fa(tot)}</b> ستاره</span><button class="chip-btn" id="fm" type="button">${KID()?"قانون‌ها":"فرمول‌ها"}</button><button class="chip-btn" id="gl" type="button">واژه‌نامه</button></div></header>
   <div class="stations">${ORDER.map((k,i)=>{const s=ST[k],pg=PG(k),next=pg.lv.findIndex(v=>!v);return `<button class="st" data-k="${k}" type="button" style="--c:${s.c}"><svg viewBox="0 20 640 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${s.art()}</svg><span class="stb"><span class="k">ایستگاه ${fa(i+1)}</span><span class="n">${s.name}</span><span class="s">${s.sub}</span><span class="m"><span>${next<0?"همهٔ مرحله‌ها تمام شد":next===0&&!pg.lv[0]?"شروع کن":`مرحلهٔ ${fa(next+1)}`}</span><span class="minis">${starSvg(starsOfSt(k)>0,16)} ${fa(starsOfSt(k))} از ${fa((S.track?levelsOf(k).length:4)*3)}</span></span></span></button>`;}).join("")}</div>
   ${TESTMODE?`<footer class="foot"><span>ستاره‌ها روی همین دستگاه ذخیره می‌شوند.</span><button id="rs" type="button">پاک کردن همهٔ ستاره‌ها</button></footer>`:""}`;
   app.querySelectorAll(".st").forEach(b=>b.onclick=()=>hub(b.dataset.k));$("#tk").onclick=TESTMODE?chooseTrack:()=>jmap({});
@@ -28,11 +28,11 @@ function home(){epoch++;closeOv();setC("scale");
 function chooseTrack(){const o=overlay(`<div class="sheet"><div class="shead"><h2 style="color:var(--ink)">پایه‌ات را انتخاب کن</h2>${S.track?`<button class="chip-btn" id="cx" type="button">بستن</button>`:""}</div><p class="lead">بازی برای هر گروه سنی مرحله‌ها و متن‌های جدا دارد. ستاره‌های هر مسیر جدا ذخیره می‌شوند و هر وقت خواستی می‌توانی مسیر را عوض کنی.</p><div class="tracks">${Object.entries(TRACKS).map(([id,tr])=>`<button class="trk ${S.track===id?"sel":""}" data-t="${id}" type="button" style="--tc:${tr.c}"><span class="g">${tr.g}</span><span class="t">${tr.n}</span><span class="d">${tr.d}</span></button>`).join("")}</div></div>`,"انتخاب پایه");
   o.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{S.track=b.dataset.t;save();applyNums();closeOv();home();});const cx=o.querySelector("#cx");if(cx)cx.onclick=closeOv;(o.querySelector(".trk.sel")||o.querySelector(".trk")).focus();}
 
-function hub(k){epoch++;closeOv();setC(k);const s=ST[k],pg=PG(k);
+function hub(k){epoch++;closeOv();setC(k);document.body.classList.remove("bdm");setLand(ST_LAND[k]);const s=ST[k],pg=PG(k);
   let h=`<div class="bar"><button class="chip-btn" id="bk" type="button">→ همهٔ ایستگاه‌ها</button><button class="chip-btn fill" id="df" type="button">تعریف و فیلم</button></div>
   <div class="hubhead"><h2>${s.name}</h2><p class="lead">${KID()?KIDINTRO[k]:s.intro}</p></div>
   <div class="modes"><button class="mode lab" id="lab" type="button"><span class="t">آزمایشگاه</span><span class="d">آزادانه امتحان کن. امتیاز و مرحله ندارد؛ فقط کشف کردن.</span></button></div>
-  <div class="sect">مرحله‌ها · مسیر ${TRACKS[S.track||"c"].n} (${TRACKS[S.track||"c"].g}) · برای باز شدن مرحلهٔ بعد، دست‌کم یک ستاره بگیر</div><div class="modes">`;
+  <div class="sect">مرحله‌ها · ${TRACKS[S.track||"c"].n} (${TRACKS[S.track||"c"].g}) · برای باز شدن مرحلهٔ بعد، دست‌کم یک ستاره بگیر</div><div class="modes">`;
   levelsOf(k).forEach((lv,i)=>{const open=i===0||pg.lv[i-1]>0,stn=pg.lv[i];h+=`<button class="mode ${open?"":"lock"}" data-l="${i+1}" type="button" ${open?"":"disabled"} style="--tc:${TIER[Math.min(3,i)].c}"><span class="tag">مرحلهٔ ${fa(i+1)}</span><span class="t">${open?"":LOCK+" "}${lv.title}</span><span class="d">${lv.desc}</span><span class="st3">${[1,2,3].map(j=>starSvg(j<=stn,18)).join("")}</span></button>`;});
   const eOpen=pg.lv[1]>0;h+=`<button class="mode ${eOpen?"":"lock"}" id="end" type="button" ${eOpen?"":"disabled"} style="--tc:#1B2A41"><span class="tag">بی‌پایان</span><span class="t">${eOpen?"":LOCK+" "}چالش بی‌پایان</span><span class="d">${eOpen?"سه جان داری. هر جواب درست، چالش بعدی را سخت‌تر می‌کند.":"بعد از گرفتن ستارهٔ مرحلهٔ ۲ باز می‌شود."}</span><span class="st3" style="font-size:14px;font-weight:700">${pg.best?"بهترین رکورد: "+fa(pg.best):""}</span></button></div>
   <div><button class="chip-btn" id="fx" type="button">${KID()?"قانون این ایستگاه":"فرمول‌های این ایستگاه"}</button></div>`;
@@ -40,33 +40,73 @@ function hub(k){epoch++;closeOv();setC(k);const s=ST[k],pg=PG(k);
   app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>playLevel(k,+b.dataset.l));if(eOpen)$("#end").onclick=()=>playEndless(k);window.scrollTo(0,0);}
 
 function tgBtn(key,label){return `<button class="tg" type="button" data-tg="${key}" aria-pressed="${S[key]?"true":"false"}"><span class="sw"></span>${label}</button>`;}
-function board(k,head){epoch++;closeOv();setC(k);const s=ST[k];
-  app.innerHTML=`<div class="bar"><button class="chip-btn" id="bk" type="button">→ ${head.backLabel}</button><div class="mid"><b>${s.name}</b><small>${head.sub}</small></div><button class="chip-btn fill" id="df" type="button">تعریف و فیلم</button></div>
-  <section class="board">${head.mode!=="lab"?`<div class="phead"><div class="dots" id="dots"></div><div class="score" id="scr"></div></div>`:""}
-  <p class="prompt" id="pr"></p><div class="scw"><svg id="sc" viewBox="0 0 640 520" role="img" aria-label="صحنهٔ آزمایش"></svg></div>
-  <div class="counter" id="ct" aria-live="polite"></div><div class="ctrl" id="cl"></div><p class="fb" id="fb" aria-live="polite"></p><div class="nav" id="nv"></div><div class="formula" id="fm"></div>
-  <div class="toggles">${tgBtn("forces","نمایش نیروها")}${tgBtn("nums","نمایش عددها")}${tgBtn("formula","نمایش فرمول")}</div></section>`;
-  const svg=$("#sc");let fmHtml="";
-  const P0=makePainter(svg);const A={svg,P:P0,hint:d=>P0.hint(d),view:h=>{svg.setAttribute("viewBox",`0 0 640 ${h}`);svg.style.aspectRatio=`640/${h}`;},tries:0,locked:false,lab:head.mode==="lab",refresh:null,done:null,onLane:null,
-    prompt:h=>{if(KID()&&head.mode==="lab")h=KIDLAB[k];const i=h.indexOf("<small>");let main=h,sub="";if(i>=0){main=h.slice(0,i);sub=h.slice(i+7).replace("</small>","");}const pr=$("#pr");main=ltrMath(main);sub=ltrMath(sub);pr.innerHTML=main+(sub&&!KID()?`<button class="helpb" type="button" aria-expanded="false">راهنما</button><small class="help" hidden>${sub}</small>`:"");const hb=pr.querySelector(".helpb");if(hb)hb.onclick=()=>{const s2=pr.querySelector(".help");s2.hidden=!s2.hidden;hb.setAttribute("aria-expanded",String(!s2.hidden));};},counter:h=>{const e=$("#ct");if(e)e.innerHTML=h||"";},
+/* ---------- سرزمین‌ها، کاراکتر و نمادها ---------- */
+const LANDN=["کارگاه نجاری","کارگاه ساختمانی و بندر","کارخانهٔ اختراع"];
+const ST_LAND={force:0,scale:0,lever:1,ramp:1,wedge:1,wheel:1,pulley:1,sort:2};
+function setLand(li){document.body.dataset.land=String((li||0)+1);}
+const UIC={map:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6.5l6-2.5 6 2.5 6-2.5v13.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></svg>',
+ re:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M18.6 3.2v4.4h-4.4"/></svg>',
+ q:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><g transform="translate(24 0) scale(-1 1)"><path d="M8.6 8.4a3.5 3.5 0 1 1 5 3.2c-1 .5-1.6 1.2-1.6 2.3v.9"/><circle cx="12" cy="19.2" r=".6" fill="currentColor"/></g></svg>'};
+const curPlayer=()=>(typeof JP==="function"&&JP())||null;
+const charOf=p=>p&&p.t!=null?(p.t%8)+1:1;
+function titleName(p,land){return (land===2?"مهندس":"اوستا")+(p?" "+esc2(p.name):"");}
+const esc2=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function bustImg(p,mood,cls){const c=charOf(p),B=IMG.bust[c],m=B[mood]?mood:"happy",sh=p&&p.shirt||"";return `<img class="${cls||"bi"}" src="${B[m]}" data-c="${c}" data-m="${m}" data-sh="${sh}" alt="">`;}
+function fullImg(p,c,sh){c=c||charOf(p);sh=sh!=null?sh:(p&&p.shirt||"");return `<img class="fi" src="${IMG.full[c]}" data-c="${c}" data-full="1" data-sh="${sh}" alt="">`;}
+function tintAll(root){(root||document).querySelectorAll("img[data-sh]").forEach(im=>{const sh=im.dataset.sh;if(!sh)return;const c=im.dataset.c;const src=im.dataset.full?IMG.full[c]:IMG.bust[c][im.dataset.m],mask=im.dataset.full?IMG.mfull[c]:IMG.mbust[c][im.dataset.m];tintShirt(src,mask,sh).then(u=>{if(im.dataset.sh===sh)im.src=u;}).catch(()=>{});});}
+function setMood(mood){const im=document.querySelector(".bd .who img");if(!im)return;const p=curPlayer(),c=charOf(p),B=IMG.bust[c];const m=B[mood]?mood:"happy";im.dataset.m=m;im.src=B[m];tintAll(im.parentNode);}
+/* واژه‌های علمیِ متن، قابل لمس می‌شوند و کارت تعریف را باز می‌کنند */
+const TERMLIST=(typeof QDEF!=="undefined"?Object.keys(QDEF):[]).sort((a,b)=>b.length-a.length);
+function lvKey(){return S.track||"c";}
+function qdef(t,lv){const d=QDEF[t];if(!d)return "";const order="abcd",i=order.indexOf(lv||lvKey());for(let j=i;j<4;j++)if(d[order[j]])return d[order[j]];for(let j=i;j>=0;j--)if(d[order[j]])return d[order[j]];return "";}
+function linkTerms(el){if(!TERMLIST.length||!el)return;const seen=new Set();const walk=n=>{if(n.nodeType===3){let t=n.nodeValue;for(const w of TERMLIST){if(seen.has(w))continue;const i=t.indexOf(w);if(i<0)continue;const before=i>0?t[i-1]:" ",after=t[i+w.length]||" ";const nx=t[i+w.length+1]||" ";if(/[\u0600-\u06FF]/.test(before)&&before!=="\u200c")continue;if(/[\u0600-\u06FF]/.test(after)&&after!=="\u200c"&&!(after==="ی"&&!/[\u0600-\u06FF]/.test(nx)))continue;seen.add(w);const r=document.createRange();r.setStart(n,i);r.setEnd(n,i+w.length);const sp=document.createElement("button");sp.type="button";sp.className="term";sp.dataset.term=w;r.surroundContents(sp);walk(n);return;}}else if(n.nodeType===1&&!n.classList.contains("term")&&n.tagName!=="BUTTON"&&n.tagName!=="svg"){[...n.childNodes].forEach(walk);}};[...el.childNodes].forEach(walk);
+  el.querySelectorAll(".term").forEach(b=>b.onclick=e=>{e.stopPropagation();termCard(b.dataset.term);});}
+function termCard(t){const o=overlay(`<div class="sheet tcard"><span class="tk">کارت واژه</span><h2>${t}</h2><p>${ltrMath(qdef(t))}</p><p class="j-note">این کارت در دفترچهٔ کوله‌پشتی‌ات هست.</p><button class="btn go" id="tcx" type="button">فهمیدم</button></div>`,"کارت واژه");const p=curPlayer();if(p){p.cards=p.cards||[];if(!p.cards.includes(t)){p.cards.push(t);save();}}o.querySelector("#tcx").onclick=closeOv;o.querySelector("#tcx").focus();}
+/* ---------- صحنهٔ بازی: سربرگ، صحنه، قاب متن و یک دکمهٔ اصلی ---------- */
+function board(k,head){epoch++;closeOv();if(typeof clearToasts==="function")clearToasts();setC(k);const s=ST[k],p=curPlayer();
+  const land=head.land!=null?head.land:ST_LAND[k];setLand(land);document.body.classList.add("bdm");
+  const chip=head.stop!=null?`<span class="sn" aria-label="منزل ${fa(head.stop+1)}">${fa(head.stop+1)}</span>`:"";
+  app.innerHTML=`<section class="bd">
+  <header class="bh"><button class="nb" id="bk" type="button" aria-label="${head.backLabel}">${head.backLabel==="نقشه"?UIC.map:""}<span>${head.backLabel}</span></button>
+   <div class="tt"><small>${chip}${LANDN[land]}</small><b>${head.title||s.name}</b>${head.mode!=="lab"?`<div class="dots" id="dots"></div>`:`<div class="dots"><span class="lbl">آزمایشگاه</span></div>`}<span class="vh" id="scr"></span></div>
+   <button class="hb" id="rst" type="button" aria-label="از نو">${UIC.re}</button><button class="hb" id="hlpb" type="button" aria-label="راهنما">${UIC.q}</button></header>
+  <div class="bsc"><svg id="sc" viewBox="0 0 640 520" role="img" aria-label="صحنهٔ آزمایش"></svg></div>
+  <div class="bp"><div class="who">${bustImg(p,"thinking")}<span class="nm">${titleName(p,land)}</span></div>
+   <p class="prompt" id="pr"></p><div class="counter" id="ct" aria-live="polite"></div><div class="ctrl" id="cl"></div><div class="formula" id="fm"></div><p class="fb" id="fb" aria-live="polite"></p><div class="nav" id="nv"></div></div></section>`;
+  tintAll(app);
+  const svg=$("#sc");let fmHtml="",helpHtml="";
+  const P0=makePainter(svg);const A={svg,P:P0,hint:d=>P0.hint(d),view:h=>{svg.setAttribute("viewBox",`0 0 640 ${h}`);},tries:0,locked:false,lab:head.mode==="lab",refresh:null,done:null,onLane:null,
+    prompt:h=>{if(KID()&&head.mode==="lab")h=KIDLAB[k];const i=h.indexOf("<small>");let main=h,sub="";if(i>=0){main=h.slice(0,i);sub=h.slice(i+7).replace("</small>","");}const pr=$("#pr");pr.innerHTML=ltrMath(main);helpHtml=sub&&!KID()?ltrMath(sub):"";linkTerms(pr);$("#hlpb").classList.toggle("has",!!helpHtml);},
+    counter:h=>{const e=$("#ct");if(e)e.innerHTML=h||"";},
     formula:h=>{fmHtml=h||"";const e=$("#fm");if(e)e.innerHTML=S.formula?fmHtml:"";},
-    ctrl:h=>{const c=$("#cl");c.innerHTML=h||"";return c;},fb:(m,c)=>{const e=$("#fb");if(!e)return;e.innerHTML=ltrMath(m||"");e.className="fb "+(c||"");},
+    ctrl:h=>{const c=$("#cl");c.innerHTML=h||"";return c;},fb:(m,c)=>{const e=$("#fb");if(!e)return;e.innerHTML=ltrMath(m||"");e.className="fb "+(c||"");if(m)later(80,revealFb);if(c==="ok")setMood("happy");else if(c==="no")setMood("oops");},
     nav:h=>{const n=$("#nv");n.innerHTML=h||"";return n;},
     judge(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);
       if(ok){const pts=m.pts!=null?m.pts:(A.tries===0?2:1);A.locked=true;A.fb(`${pts===2?"آفرین!":"درست شد."} ${m.ok||""} <span style="white-space:nowrap">(+${fa(pts)} امتیاز)</span>`,"ok");if(A.done)A.done(pts);return true;}
-      A.tries++;if(A.tries<2){A.fb(KID()?`دوباره امتحان کن. ${m.retry||""}`:`نه هنوز. ${m.retry||""} یک فرصت دیگر داری.`,"no");return false;}
+      A.tries++;if(A.tries<2){A.fb(KID()?`دوباره امتحان کن. ${m.retry||""}`:`نه هنوز. ${m.retry||""} یک فرصت دیگر داری.`,"no");$("#hlpb").classList.add("nudge");return false;}
       A.locked=true;A.fb(`${m.final||""}`,"no");if(A.done)A.done(0);return false;}};
-  app.querySelectorAll("[data-tg]").forEach(b=>b.onclick=()=>{const key=b.dataset.tg;S[key]=!S[key];save();applyNums();b.setAttribute("aria-pressed",S[key]?"true":"false");A.formula(fmHtml);if(A.refresh)A.refresh();});
-  $("#bk").onclick=head.back;$("#df").onclick=()=>openDef(k);
+  $("#bk").onclick=head.back;
+  $("#rst").onclick=()=>{if(A.locked&&!A.lab){jtoast2("این چالش تمام شده؛ دکمهٔ پایین را بزن.");return;}if(head.restart)head.restart();};
+  $("#hlpb").onclick=()=>helpSheet(k,helpHtml,()=>{A.formula(fmHtml);if(A.refresh)A.refresh();});
   return A;}
+function revealFb(){const e=$("#fb"),bp=document.querySelector(".bp");if(!e||!bp||!e.textContent.trim())return;bp.scrollTop=bp.scrollHeight;}
+function jtoast2(t){if(typeof jtoast==="function")jtoast(t);}
+function helpSheet(k,helpHtml,onToggle){const s=ST[k],D=DEFS[k],terms=(typeof QTERMS!=="undefined"?[...new Set(Object.values(QTERMS[lvKey()]||{}).flat())]:[]).filter(t=>D&&D.paras.join(" ").includes(t)).slice(0,6);
+  const o=overlay(`<div class="sheet"><div class="shead"><h2 style="color:var(--ink)">راهنما</h2><button class="chip-btn" id="cx" type="button">بستن</button></div>
+   ${helpHtml?`<p class="hlp">${helpHtml}</p>`:""}
+   ${terms.length?`<div class="sect">واژه‌های این ایستگاه</div><div class="tchips">${terms.map(t=>`<button type="button" class="term" data-term="${t}">${t}</button>`).join("")}</div>`:""}
+   <button class="btn" id="hdf" type="button">تعریف‌ها و فیلم‌های «${s.name}»</button>
+   ${KID()?"":`<div class="sect">نمایش</div><div class="toggles">${tgBtn("forces","فلش‌های نیرو")}${tgBtn("nums","عددها")}${tgBtn("formula",S.track==="c"?"فرمول‌ها (برای کنجکاوها)":"فرمول‌ها")}</div>`}</div>`,"راهنما");
+  o.querySelector("#cx").onclick=closeOv;o.querySelector("#hdf").onclick=()=>openDef(k);o.querySelectorAll(".term").forEach(b=>b.onclick=()=>termCard(b.dataset.term));
+  o.querySelectorAll("[data-tg]").forEach(b=>b.onclick=()=>{const key=b.dataset.tg;S[key]=!S[key];save();applyNums();b.setAttribute("aria-pressed",S[key]?"true":"false");onToggle();});o.querySelector("#cx").focus();}
 
-function playLab(k){const A=board(k,{mode:"lab",backLabel:"ایستگاه",sub:"آزمایشگاه",back:()=>hub(k)});ST[k].lab(A);window.scrollTo(0,0);}
+function playLab(k,ctx){const go=()=>{const A=board(k,Object.assign({mode:"lab",backLabel:"ایستگاه",sub:"آزمایشگاه",back:()=>hub(k),restart:go},ctx||{}));ST[k].lab(A);};go();window.scrollTo(0,0);}
 function dotsHtml(n,i,res){return Array.from({length:n},(_,j)=>`<i class="${res[j]!=null?"p"+res[j]:j===i?"cur":""}" title="چالش ${fa(j+1)}"></i>`).join("");}
 function playLevel(k,L,ctx){const s=ST[k],LV=levelsOf(k),lv=LV[L-1];const r=rng((Date.now()^hash(k+L))>>>0);const specs=ctx&&ctx.resume?ctx.resume.specs:lv.gen(r);const res=ctx&&ctx.resume?ctx.resume.res.slice():[];let i=ctx&&ctx.resume?ctx.resume.i:0;
   const keep=()=>{if(ctx&&ctx.keep)ctx.keep({specs,res,i});};keep();
-  function show(){const A=board(k,{mode:"level",backLabel:ctx?"نقشه":"ایستگاه",sub:ctx?ctx.sub:`مرحلهٔ ${fa(L)}: ${lv.title}`,back:ctx?()=>{keep();ctx.back();}:()=>hub(k)});
+  function show(){const A=board(k,{mode:"level",backLabel:ctx?"نقشه":"ایستگاه",sub:ctx?ctx.sub:`مرحلهٔ ${fa(L)}: ${lv.title}`,title:ctx&&ctx.title,stop:ctx?ctx.stop:null,back:ctx?()=>{keep();ctx.back();}:()=>hub(k),restart:()=>show()});
     const upd=()=>{$("#dots").innerHTML=dotsHtml(specs.length,i,res);$("#scr").innerHTML=`چالش ${fa(i+1)} از ${fa(specs.length)} · امتیاز: ${fa(res.reduce((a,b)=>a+(b||0),0))} از ${fa(specs.length*2)}`;};upd();
-    A.done=pts=>{res[i]=pts;upd();if(ctx&&ctx.keep)ctx.keep({specs,res,i:i+1<specs.length?i+1:i,done:i+1>=specs.length});const n=A.nav("");const b=btn(n,i+1<specs.length?"چالش بعدی ←":"دیدن نتیجه","go",()=>{i++;if(i<specs.length){show();$("#pr").scrollIntoView({block:"start",behavior:reduceMotion?"auto":"smooth"});}else finish();});later(50,()=>b.focus({preventScroll:true}));};
+    A.done=pts=>{res[i]=pts;upd();if(ctx&&ctx.keep)ctx.keep({specs,res,i:i+1<specs.length?i+1:i,done:i+1>=specs.length});const n=A.nav("");const b=btn(n,i+1<specs.length?"چالشِ بعد":"دیدن نتیجه","go next",()=>{i++;if(i<specs.length){show();}else finish();});later(60,()=>{revealFb();b.focus({preventScroll:true});});};
     if(window.__TEST||window.__JT)window.__T={spec:specs[i],MASS,LV_MASS,k,i};s.mount(specs[i],A);}
   function finish(){const pts=res.reduce((a,b)=>a+b,0),max=specs.length*2,stars=starsFor(pts,max),pg=PG(k);if(stars>pg.lv[L-1])pg.lv[L-1]=stars;save();
     if(ctx){ctx.finish(stars,pts,max);return;}
@@ -75,10 +115,10 @@ function playLevel(k,L,ctx){const s=ST[k],LV=levelsOf(k),lv=LV[L-1];const r=rng(
     if(nextOpen)o.querySelector("#rn").onclick=()=>playLevel(k,L+1);o.querySelector("#rr").onclick=()=>playLevel(k,L);o.querySelector("#rh").onclick=()=>hub(k);(o.querySelector("#rn")||o.querySelector("#rr")).focus();if(stars>=2)confetti();}
   show();window.scrollTo(0,0);}
 function playEndless(k,ctx){const s=ST[k];const r=rng((Date.now()^hash(k+"e"))>>>0);let lives=3,d=1,score=0,count=0,right=0;
-  function show(){const A=board(k,{mode:"endless",backLabel:ctx?"نقشه":"ایستگاه",sub:ctx?ctx.sub:"چالش بی‌پایان",back:ctx?ctx.back:()=>hub(k)});
+  let sp=null;function show(same){const A=board(k,{mode:"endless",backLabel:ctx?"نقشه":"ایستگاه",sub:ctx?ctx.sub:"چالش بی‌پایان",title:ctx&&ctx.title,stop:ctx?ctx.stop:null,back:ctx?ctx.back:()=>hub(k),restart:()=>show(true)});
     const upd=()=>{$("#dots").innerHTML=`<span class="hearts">${[0,1,2].map(j=>heart(j<lives)).join("")}</span>`;$("#scr").innerHTML=ctx?`جواب درست: ${fa(right)} از ${fa(ctx.goal)}`:`چالش ${fa(count+1)} · امتیاز: ${fa(score)} · سختی: ${fa(Math.floor(d))}`;};upd();
-    A.done=pts=>{count++;if(pts===0)lives--;else{score+=pts;d+=.4;right++;}upd();if(ctx&&right>=ctx.goal){later(700,()=>ctx.win());return;}const n=A.nav("");const b=btn(n,lives>0?"چالش بعدی ←":"پایان بازی","go",()=>{if(lives>0){show();$("#pr").scrollIntoView({block:"start",behavior:reduceMotion?"auto":"smooth"});}else finish();});later(50,()=>b.focus({preventScroll:true}));};
-    const sp=s.endless(r,KID()?Math.min(d,1.9):d);if(window.__TEST||window.__JT)window.__T={spec:sp,MASS,LV_MASS,k,d};s.mount(sp,A);}
+    A.done=pts=>{count++;if(pts===0)lives--;else{score+=pts;d+=.4;right++;}upd();if(ctx&&right>=ctx.goal){later(700,()=>ctx.win());return;}const n=A.nav("");const b=btn(n,lives>0?"چالشِ بعد":"پایان بازی","go next",()=>{if(lives>0){show();}else finish();});later(60,()=>{revealFb();b.focus({preventScroll:true});});};
+    if(!same||!sp)sp=s.endless(r,KID()?Math.min(d,1.9):d);if(window.__TEST||window.__JT)window.__T={spec:sp,MASS,LV_MASS,k,d};s.mount(sp,A);}
   function finish(){const pg=PG(k),rec=score>pg.best;if(rec)pg.best=score;save();if(ctx){ctx.lose(right);return;}
     const o=overlay(`<div class="sheet res"><h2>${rec?"رکورد تازه!":"بازی تمام شد"}</h2><p><b>${fa(score)}</b> امتیاز در ${fa(count)} چالش</p><p class="lead">بهترین رکورد تو: ${fa(pg.best)}</p><div class="nav" style="justify-content:center"><button class="btn go" id="ra" type="button">دوباره</button><button class="btn" id="rh" type="button">ایستگاه</button></div></div>`,"پایان چالش بی‌پایان",s.c);
     o.querySelector("#ra").onclick=()=>playEndless(k);o.querySelector("#rh").onclick=()=>hub(k);o.querySelector("#ra").focus();if(rec)confetti();}
@@ -87,7 +127,7 @@ function playEndless(k,ctx){const s=ST[k];const r=rng((Date.now()^hash(k+"e"))>>
 function openDef(k){const s=ST[k],D=DEFS[k];
   const o=overlay(`<div class="sheet"><div class="shead"><h2>${s.name}</h2><button class="chip-btn" id="cx" type="button">بستن</button></div><svg viewBox="0 20 640 360" preserveAspectRatio="xMidYMid slice" style="width:100%;height:auto;border-radius:16px;display:block;aspect-ratio:16/9" aria-hidden="true">${s.art()}</svg>${D.paras.map(p=>`<p>${p}</p>`).join("")}<div class="rem">یادت باشد: ${D.rule}</div><div class="sect">نمونه‌ها در زندگی</div><div class="ex">${D.ex.map(e=>`<span>${e}</span>`).join("")}</div><div class="sect">${KID()?"قانون":"فرمول‌ها"}</div><div class="fcards">${FORMULAS.filter(f=>f.k===k).map(fcard).join("")||"<p class='lead'>این ایستگاه فرمول ندارد.</p>"}</div><div class="sect">فیلم‌ها و شبیه‌سازها</div><div class="vids">${D.vids.map(id=>{const v=V[id];return `<a href="${v[1]}" target="_blank" rel="noopener"><svg class="play-ic" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="${s.c}"/><path d="M14 11 L24 17 L14 23Z" fill="#fff"/></svg><span>${v[0]}<small>${v[2]}</small></span></a>`;}).join("")}</div><p class="lead">فیلم‌های آپارات بدون فیلترشکن باز می‌شوند.</p></div>`,"تعریف "+s.name,s.c);
   o.querySelector("#cx").onclick=closeOv;o.querySelector("#cx").focus();}
-function fcard(f){if(KID())return f.rule?`<div class="fcard" style="--c:${ST[f.k].c}"><span class="gr">${ST[f.k].name}</span><h3>${f.t}</h3><div class="exm" style="font-size:18px;font-weight:700">${f.rule}</div></div>`:"";return `<div class="fcard" style="--c:${ST[f.k].c}"><span class="gr">${ST[f.k].name} · ${f.g==="b"?"از پایهٔ چهارم":"پایهٔ پنجم و ششم"}</span><h3>${f.t}</h3><div class="eq"><span class="eqx" dir="ltr">${f.eq()}</span></div><div class="lg" style="justify-content:center">${f.lg().map(([s,m])=>`<span class="lgi"><span dir="ltr">${s}</span>: ${m}</span>`).join("")}</div><div class="exm">مثال: ${f.ex} <span class="eqx" dir="ltr" style="font-size:16px">${f.exq()}</span></div></div>`;}
+function fcard(f){if(KID())return f.rule?`<div class="fcard" style="--c:${ST[f.k].c}"><span class="gr">${ST[f.k].name}</span><h3>${f.t}</h3><div class="exm" style="font-size:18px;font-weight:700">${f.rule}</div></div>`:"";return `<div class="fcard" style="--c:${ST[f.k].c}"><span class="gr">${ST[f.k].name} · ${f.g==="b"?"از پایهٔ چهارم":"هفتم تا نهم، و پنجم و ششمِ کنجکاو"}</span><h3>${f.t}</h3><div class="eq"><span class="eqx" dir="ltr">${f.eq()}</span></div><div class="lg" style="justify-content:center">${f.lg().map(([s,m])=>`<span class="lgi"><span dir="ltr">${s}</span>: ${m}</span>`).join("")}</div><div class="exm">مثال: ${f.ex} <span class="eqx" dir="ltr" style="font-size:16px">${f.exq()}</span></div></div>`;}
 function openFormulas(k){const list=k?FORMULAS.filter(f=>f.k===k).concat(FORMULAS.filter(f=>f.k!==k)):FORMULAS;
   const o=overlay(`<div class="sheet"><div class="shead"><h2 style="color:var(--ink)">${KID()?"قانون‌ها":"فرمول‌ها"}</h2><button class="chip-btn" id="cx" type="button">بستن</button></div><p class="lead">${KID()?"قانون هر ماشین ساده در یک جمله.":"هر فرمول با نمادهای علمی و یک مثال حل‌شده. فرمول‌ها از چپ به راست خوانده می‌شوند."}</p><div class="fcards">${list.map(fcard).join("")}</div></div>`,"فرمول‌ها",k?ST[k].c:null);
   o.querySelector("#cx").onclick=closeOv;o.querySelector("#cx").focus();}

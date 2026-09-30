@@ -14,7 +14,26 @@ a.card:hover,a.card:focus-visible{box-shadow:inset 0 0 0 3px var(--c);outline:no
 .card .d{font-size:15px;color:var(--muted);line-height:1.7}.card .go{margin-top:8px;font-weight:700;color:var(--c)}
 .soon{display:flex;flex-direction:column;gap:4px;border-radius:20px;padding:18px;border:3px dashed #B7C6D4;text-align:center}.soon .t{font-family:"LalezarLocal","VazirLocal",Tahoma,sans-serif;font-size:26px;line-height:1.4;color:#3B6FD4}.soon .d{font-size:16px;color:var(--muted)}
 .note{font-size:14px}
+.contact{display:flex;gap:18px;align-items:center;background:#fff;border-radius:20px;padding:18px;box-shadow:inset 0 0 0 2px var(--line);border-top:8px solid #1E6F66}
+.contact img{flex:none;width:140px;height:auto;aspect-ratio:360/372;border-radius:16px;object-fit:cover}
+.contact .body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.contact .t{font-family:"LalezarLocal","VazirLocal",Tahoma,sans-serif;font-size:26px;line-height:1.4;color:var(--ink)}
+.contact .d{font-size:15px;color:var(--muted);line-height:1.7}
+.contact .mail{direction:ltr;unicode-bidi:isolate;text-align:right;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:16px;font-weight:700;color:#14504A;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all}
+.contact .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.contact .btn{font:inherit;font-size:15px;font-weight:700;border-radius:12px;padding:8px 16px;cursor:pointer;text-decoration:none;border:2px solid #1E6F66;min-height:44px;display:inline-flex;align-items:center}
+.contact button.btn{background:#1E6F66;color:#fff}.contact a.btn{background:#fff;color:#14504A}
+.contact .btn:focus-visible{outline:3px solid #F2A900;outline-offset:2px}
+.contact .ok{font-size:14px;font-weight:700;color:#1B6E3A;min-height:1.8em}
+@media (max-width:480px){.contact{flex-direction:column;text-align:center}.contact img{width:160px}.contact .body{align-items:center}.contact .mail{text-align:center}.contact .acts{justify-content:center}}
 </style></head><body><main><h1>بازی‌های علوم</h1><p>بازی‌های کلاس علوم برای دبستان. پیشرفت هر بچه روی همان گوشی یا رایانه ذخیره می‌شود. بعد از یک بار باز کردن، بدون اینترنت هم کار می‌کند.</p>
 <div class="grid"><a class="card" href="physics/simple-machines/" style="--c:#22965A"><span class="sub">فیزیک</span><span class="t">ماشین‌های ساده</span><span class="d">اهرم، سطح شیب‌دار، قرقره، چرخ و محور، گوه و پیچ؛ و نیرو، جرم و وزن. پایهٔ دوم تا ششم.</span><span class="go">بازی کن ←</span></a></div>
 <div class="soon"><span class="t">سرزمینِ علوم بزرگ‌تر می‌شه…</span><span class="d">بازی‌های تازهٔ فیزیک، شیمی و زیست در راه‌اند. منتظر بمونید!</span></div>
+<section class="contact" aria-labelledby="ct-t"><img src="assets/img/contact-cat.webp" width="360" height="372" alt="گربهٔ دانشمند با روپوش سفید در آزمایشگاه" loading="lazy"><div class="body"><h2 class="t" id="ct-t" style="margin:0;font-weight:400">با سازندهٔ بازی حرف بزن</h2><span class="d">پیشنهاد، ایراد یا سؤالی داری؟ برایم ایمیل بفرست.</span><span class="mail" id="ct-mail">…</span><div class="acts"><button type="button" class="btn" id="ct-copy">کپیِ نشانیِ ایمیل</button><a class="btn" id="ct-send" href="#">فرستادنِ ایمیل</a></div><span class="ok" id="ct-ok" role="status" aria-live="polite"></span></div></section>
+<script>(()=>{const u=["jave","dani","66"].join(""),d=["gmail","com"].join("."),m=u+String.fromCharCode(64)+d;
+const el=document.getElementById("ct-mail"),ok=document.getElementById("ct-ok");el.textContent=m;document.getElementById("ct-send").href="mai"+"lto:"+m;
+const sel=()=>{const r=document.createRange();r.selectNodeContents(el);const g=getSelection();g.removeAllRanges();g.addRange(r);};
+let tm;document.getElementById("ct-copy").addEventListener("click",async()=>{let done=false;try{await navigator.clipboard.writeText(m);done=true}catch(e){}
+if(!done){sel();try{done=document.execCommand("copy")}catch(e){}}
+ok.textContent=done?"کپی شد ✓":"نشانی انتخاب شد؛ حالا کپی‌اش کن.";clearTimeout(tm);tm=setTimeout(()=>ok.textContent="",3000);});})();</script>
 <p class="note">روی گوشی: از منوی مرورگر «افزودن به صفحهٔ اصلی» یا «نصب برنامه» را بزنید تا مثل یک برنامه باز شود.</p></main></body></html>

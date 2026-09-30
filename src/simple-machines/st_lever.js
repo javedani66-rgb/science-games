@@ -2,7 +2,7 @@
 const LV_MASS={myA:20,myB:15,myC:30};
 function brickSvg(x,yb,m,hl){const w=52,h=m/5*13+3;let s=`<rect x="${x-w/2}" y="${yb-h}" width="${w}" height="${h}" rx="3" fill="#C8553D" stroke="${hl?"#1E6FD9":"#8E3322"}" stroke-width="${hl?3.5:1.5}"/>`;
   for(let y=yb-13;y>yb-h+2;y-=13)s+=`<line x1="${x-w/2}" y1="${y}" x2="${x+w/2}" y2="${y}" stroke="#EBA08E" stroke-width="1.5"/>`;
-  return `<g>${s}${KID()?"":T(x,yb-h/2+4,`${fa(m)} کیلو`,{size:m===5?11:13,col:"#fff",halo:false})}</g>`;}
+  return `<g>${s}${KID()?"":T(x,yb-h/2+4,`${fa(m)} کیلوگرم`,{size:m===5?9:10,col:"#fff",halo:false})}</g>`;}
 const lvItemH=it=>it.k==="b"?it.m/5*13+3:OB[it.id].h*.85;
 function lvItemSvg(it,x,yb,hl){if(it.k==="b")return brickSvg(x,yb,it.m,hl);return `<g transform="translate(${x} ${yb}) scale(.85)">${OB[it.id].d}</g>`;}
 const lvM=it=>it.k==="b"?it.m:LV_MASS[it.id];
@@ -53,7 +53,7 @@ function makeLever(A,cfg){
 
 function makeLift(A,cfg){const svg=A.svg,P=A.P;A.view(424);const PX=52,CX=320,CY=300;const st={f:cfg.f==null?0:cfg.f,a:0,busy:false,W:cfg.W,S:cfg.S};
   const need=()=>st.W*(st.f+5)/(5-st.f);
-  function render(){const F=need(),ok=F<=st.S+1e-9;let s=bgOut(380);
+  function render(){const F=need(),ok=canLift(F,st.S);let s=bgOut(380);
     const fx=CX+st.f*PX;
     let g=`<rect x="${CX-282}" y="${CY-12}" width="564" height="12" rx="5" fill="#D08A4B"/><rect x="${CX-282}" y="${CY-12}" width="564" height="4" rx="2" fill="#EAB47C"/>`;
     for(let p=-5;p<=5;p++){const x=CX+p*PX;g+=`<line x1="${x}" y1="${CY-12}" x2="${x}" y2="${CY}" stroke="#8A5427" stroke-width="2"/>`;}
@@ -65,17 +65,17 @@ function makeLift(A,cfg){const svg=A.svg,P=A.P;A.view(424);const PX=52,CX=320,CY
     s+=gBar(F,st.S,150,36,260);
     
     P.paint(s);
-    A.counter(`<span class="cc">بار: <b class="num">${fa(st.W)}</b></span><span class="cc">بازوی مقاوم: <b>${fa(st.f+5)}</b></span><span class="cc">بازوی محرک: <b>${fa(5-st.f)}</b></span><span class="cc ${ok?"":"r"}">نیروی لازم: <b class="num">${fa(Math.round(F*10)/10)}</b></span>`);
-    A.formula(FX(`${sy("F","1")} × ${sy("d","1")} = ${sy("F","2")} × ${sy("d","2")}`,`${sy("F","1")} = ${fa(st.W)} × ${fa(st.f+5)} ÷ ${fa(5-st.f)} = ${fa(Math.round(F*10)/10)} N`,[[sy("F","1"),"نیروی محرک (دست تو)"],[sy("d","1"),"بازوی محرک"],[sy("F","2"),"نیروی مقاوم (وزن سنگ)"],[sy("d","2"),"بازوی مقاوم"]])+FX(`${sy("MA")} = ${sy("F","2")} ÷ ${sy("F","1")}`,`${sy("MA")} = ${fa(st.W)} ÷ ${fa(Math.round(F*10)/10)} ≈ ${fa(Math.round(st.W/F*10)/10)}`,[[sy("MA"),"مزیت مکانیکی"]]));}
+    A.counter(`<span class="cc">بار: <b class="num">${fa(st.W)} نیوتن</b></span><span class="cc">بازوی مقاوم: <b>${fa(st.f+5)}</b></span><span class="cc">بازوی محرک: <b>${fa(5-st.f)}</b></span><span class="cc ${ok?"":"r"}">نیروی لازم: <b class="num">${fa(Math.round(F*10)/10)} نیوتن</b></span>`);
+    A.formula(FX(`${sy("F","1")} × ${sy("d","1")} = ${sy("F","2")} × ${sy("d","2")}`,`${sy("F","1")} = ${fa(st.W)} × ${fa(st.f+5)} ÷ ${fa(5-st.f)} = ${fa(Math.round(F*10)/10)} N`,[[sy("F","1"),"نیروی محرک (دست تو)"],[sy("d","1"),"بازوی محرک"],[sy("F","2"),"نیروی مقاوم (وزن سنگ)"],[sy("d","2"),"بازوی مقاوم"]])+FX(`${sy("MA")} = ${sy("F","2")} ÷ ${sy("F","1")}`,`${sy("MA")} = ${fa(st.W)} ÷ ${fa(Math.round(F*10)/10)} ${Math.abs(st.W/F-Math.round(st.W/F*10)/10)<1e-9?"=":"≈"} ${fa(Math.round(st.W/F*10)/10)}`,[[sy("MA"),"مزیت مکانیکی"]]));}
   dragKit(svg,{blocked:()=>A.locked||st.busy,start(d){return d.drag==="fulcrum"?{}:null;},begin(){},move(g,p){const f=clamp(Math.round((p.x-CX)/PX),-4,4);if(f!==st.f){st.f=f;render();}},end(){render();},tap(){}});
   render();
-  return{st,render,need,push(done){const F=need(),ok=F<=st.S+1e-9;st.busy=true;const fx=CX+st.f*PX,maxA=Math.asin(Math.min(1,(380-CY)/(5-st.f)/PX))*180/Math.PI;
+  return{st,render,need,push(done){const F=need(),ok=canLift(F,st.S);st.busy=true;const fx=CX+st.f*PX,maxA=Math.asin(Math.min(1,(380-CY)/(5-st.f)/PX))*180/Math.PI;
     if(ok)tween(1200,p=>{st.a=Math.min(maxA,16)*ease(p);render();},()=>{st.busy=false;done&&done(true);});
     else tween(900,p=>{st.a=Math.sin(p*Math.PI*3)*1.5*(1-p);render();},()=>{st.a=0;st.busy=false;render();done&&done(false);});}};
 }
 
 const ST_lever={key:"lever",name:"اهرم",c:"#D97706",sub:"الاکلنگ، تکیه‌گاه و قانون اهرم",
- intro:"آجرها را روی تخته بکش. پایه‌های نارنجی تخته را نگه می‌دارند؛ وقتی آماده شدی آن‌ها را بردار و ببین تخته صاف می‌ماند یا نه. نشانگر تراز وقتی صاف باشد سبز می‌شود.",
+ intro:"آجرها را روی تخته بکش. پایه‌های نارنجی تخته را نگه می‌دارند؛ وقتی آماده شدی آن‌ها را بردار و ببین تخته صاف می‌ماند یا نه. وقتی تخته صاف باشد، نشانگر تراز سبز می‌شود.",
  art(){let h=bgRoom(380).replace(/id="g/g,'id="al').replace(/url\(#g/g,"url(#al");h+=`<path d="M320 290 L284 380 H356Z" fill="#6B4A2B"/><g transform="rotate(-6 320 290)"><rect x="38" y="278" width="564" height="12" rx="5" fill="#D08A4B"/>${brickSvg(164,278,20)}${brickSvg(528,278,10)}${arrow(164,318,164,370,9,BLUE,.9)}${arrow(528,318,528,350,9,RED,.9)}</g>`;return h;},
  lab(A){A.prompt("آزمایشگاه اهرم: آجر یا جعبهٔ مرموز را روی تخته بکش. برای برداشتن، بیرونش بکش یا رویش بزن. بعد پایه‌ها را بردار.");
    const lv=makeLever(A,{edit:"both",inf:[5,10,20,"myA","myB"],sup:true,hide:{}});A.refresh=()=>lv.render();
@@ -93,11 +93,11 @@ const ST_lever={key:"lever",name:"اهرم",c:"#D97706",sub:"الاکلنگ، ت
   {title:"قهرمان اهرم",desc:"چند آجر، چند جای مختلف و جعبه‌های مرموز. همه را با قانون اهرم حل کن.",gen(r){return[levGenBalance(r,3),levGenMystery(r),{t:"lift",W:120,S:25},levGenPredict(r,4),levGenBalance(r,3),levGenMystery(r)];}}],
  endless(r,d){const tp=pick(r,d<2?["predict","balance"]:d<3.5?["predict","balance","mystery","lift"]:["balance","mystery","lift","predict"]);
    if(tp==="predict")return levGenPredict(r,d<2?2:d<3.5?3:4);if(tp==="balance")return levGenBalance(r,d<2?1:d<3.5?2:3);if(tp==="mystery")return levGenMystery(r);
-   const W=pick(r,[60,80,100,120]),f=ri(r,-4,-1);return{t:"lift",W,S:Math.ceil(W*(f+5)/(5-f))};},
+   const W=pick(r,[60,80,100,120]),f=ri(r,-4,-1);return{t:"lift",W,S:Math.floor(W*(f+5)/(5-f)/5)*5+5};},
  mount(sp,A){
   if(sp.t==="lift"){A.hint("M424 340 L216 340");A.prompt(KID()?"تکیه‌گاه را جابه‌جا کن تا بتوانی سنگ را بلند کنی.":`سنگ ${fa(sp.W)} نیوتنی را بلند کن. نیروی تو فقط <b>${fa(sp.S)} نیوتن</b> است.<small>تکیه‌گاه را بکش و جابه‌جا کن، بعد «فشار بده!» را بزن.</small>`);
     const lf=makeLift(A,{W:sp.W,S:sp.S,f:2});A.refresh=()=>lf.render();const c=A.ctrl("");
-    const go=btn(c,"فشار بده!","go",()=>{go.disabled=true;lf.push(ok=>{const res=A.judge(ok,{k:{ok:"سنگ بالا رفت! تکیه‌گاه نزدیک سنگ بود.",retry:"تکیه‌گاه را به سنگ نزدیک‌تر کن.",final:"تکیه‌گاه باید خیلی نزدیک سنگ باشد."},ok:`بازوی محرک ${fa(5-lf.st.f)} و بازوی مقاوم ${fa(lf.st.f+5)} خانه است؛ نیروی لازم ${fa(Math.round(lf.need()*10)/10)} نیوتن شد.`,retry:"تکیه‌گاه را به سنگ نزدیک‌تر کن تا بازوی محرک بلندتر شود.",final:"تکیه‌گاه باید نزدیک سنگ باشد؛ مثلاً روی جای "+fa(liftBest(sp.W,sp.S))+" از سمت سنگ."});if(!res&&!A.locked)go.disabled=false;});});
+    const go=btn(c,"فشار بده!","go",()=>{go.disabled=true;lf.push(ok=>{const res=A.judge(ok,{k:{ok:"سنگ بالا رفت! تکیه‌گاه نزدیک سنگ بود.",retry:"تکیه‌گاه را به سنگ نزدیک‌تر کن.",final:"تکیه‌گاه باید خیلی نزدیک سنگ باشد."},ok:`بازوی محرک ${fa(5-lf.st.f)} و بازوی مقاوم ${fa(lf.st.f+5)} خانه است؛ نیروی لازم ${fa(Math.round(lf.need()*10)/10)} نیوتن شد.`,retry:"تکیه‌گاه را به سنگ نزدیک‌تر کن تا بازوی محرک بلندتر شود.",final:`تکیه‌گاه باید نزدیک سنگ باشد؛ آن را جایی بگذار که بازوی مقاوم ${fa(liftBest(sp.W,sp.S))} خانه شود.`});if(!res&&!A.locked)go.disabled=false;});});
     return;}
   if(sp.t==="predict"){A.prompt(KID()?"پایه‌ها را برمی‌داریم. کدام طرف پایین می‌رود؟":`وقتی پایه‌ها را برداریم، تخته چه می‌شود؟<small>جرم آجرها و فاصله‌شان تا تکیه‌گاه را نگاه کن و پیش‌بینی کن.</small>`);
     const lv=makeLever(A,{items:sp.items,sup:true});A.refresh=()=>lv.render();const tL=lv.tq("L"),tR=lv.tq("R"),ans=tR>tL?0:tR===tL?1:2;
@@ -109,13 +109,13 @@ const ST_lever={key:"lever",name:"اهرم",c:"#D97706",sub:"الاکلنگ، ت
     const lv=makeLever(A,{items:sp.items,pieces:sp.pieces,edit:"R",sup:true});A.refresh=()=>lv.render();const c=A.ctrl("");
     A.hint(`M${320+(0-(sp.pieces.length-1)/2)*Math.min(96,560/sp.pieces.length)} 478 L${320+3*52} 250`);
     const go=btn(c,"برداشتن پایه‌ها","go",()=>{if(lv.st.pieces.some(p=>!p.used)){A.fb(KID()?"اول آجر را روی الاکلنگ بگذار.":"همهٔ آجرهای پایین را روی تخته بگذار.","info");return;}go.disabled=true;
-      lv.setSup(false,()=>{const tL=lv.tq("L"),tR=lv.tq("R");const res=A.judge(tL===tR,{k:{ok:"الاکلنگ صاف ماند!",retry:tR>tL?"راست پایین رفت. آجر را به وسط نزدیک‌تر کن.":"چپ پایین رفت. آجر را دورتر بگذار.",final:"آجر سنگین‌تر باید نزدیک وسط باشد و آجر سبک‌تر دور از وسط."},ok:`هر دو طرف ${fa(tL)} شد.`,retry:`چپ ${fa(tL)} است و راست ${fa(tR)}. جای آجر را عوض کن.`,final:`راه درست: ${levSol(sp)}.`});if(!res&&!A.locked)later(1000,()=>{lv.setSup(true);go.disabled=false;});});});return;}
+      lv.setSup(false,()=>{const tL=lv.tq("L"),tR=lv.tq("R");const res=A.judge(tL===tR,{k:{ok:"الاکلنگ صاف ماند!",retry:tR>tL?"راست پایین رفت. آجر را به وسط نزدیک‌تر کن.":"چپ پایین رفت. آجر را دورتر بگذار.",final:new Set(sp.items.map(x=>x[1]).concat(sp.pieces)).size===1?"آجرها یکسان‌اند؛ پس باید هر دو به یک اندازه از وسط دور باشند.":"آجر سنگین‌تر باید نزدیک وسط باشد و آجر سبک‌تر دور از وسط."},ok:`هر دو طرف ${fa(tL)} شد.`,retry:`چپ ${fa(tL)} است و راست ${fa(tR)}. جای آجر را عوض کن.`,final:`راه درست: ${levSol(sp)}.`});if(!res&&!A.locked)later(1000,()=>{lv.setSup(true);go.disabled=false;});});});return;}
   if(sp.t==="mystery"){const my=sp.items.find(x=>typeof x[1]==="string")[1];A.prompt(`تخته صاف است. جرم ${OB[my].n} چند کیلوگرم است؟<small>از قانون اهرم استفاده کن: جرم × فاصله در دو طرف برابر است.</small>`);
     const lv=makeLever(A,{items:sp.items,sup:false,hide:{[my]:1}});A.refresh=()=>lv.render();const tR=lv.tq("R"),pos=Math.abs(sp.items.find(x=>x[1]===my)[0]),ans=LV_MASS[my];
     const c=A.ctrl("");const stp=stepper(c,{init:0,max:200,steps:[1,5],unit:"کیلوگرم"});
     const chk=btn(c,"بررسی","go",()=>{const ok=stp.get()===ans;A.judge(ok,{ok:`${fa(ans)} × ${fa(pos)} = ${fa(tR)}، همان مقدار سمت راست.`,retry:`اول جرم × فاصلهٔ سمت راست را حساب کن (${S.nums?fa(tR):"جمع آن"}). بعد آن را بر فاصلهٔ جعبه تقسیم کن.`,final:`سمت راست ${fa(tR)} است؛ ${fa(tR)} ÷ ${fa(pos)} = ${fa(ans)} کیلوگرم.`});if(A.locked){chk.disabled=true;stp.disable();lv.st.hide={};lv.render();}});return;}
  }};
-function liftBest(W,Sv){let best=null;for(let f=-4;f<=4;f++)if(W*(f+5)/(5-f)<=Sv+1e-9)best=f;return best==null?1:best+5;}
+function liftBest(W,Sv){let best=null;for(let f=-4;f<=4;f++)if(canLift(W*(f+5)/(5-f),Sv))best=f;return best==null?1:best+5;}
 function levSol(sp){const tL=sp.items.filter(x=>x[0]<0).reduce((s,x)=>s+Math.abs(x[0])*(typeof x[1]==="number"?x[1]:LV_MASS[x[1]]),0)-0;const tRfix=sp.items.filter(x=>x[0]>0).reduce((s,x)=>s+x[0]*x[1],0);const need=tL-tRfix;
   const ps=sp.pieces;let out=null;(function f(i,acc,sum){if(out)return;if(i===ps.length){if(sum===need)out=acc.slice();return;}for(let p=1;p<=5;p++){acc.push([ps[i],p]);f(i+1,acc,sum+ps[i]*p);acc.pop();}})(0,[],0);
   return out?out.map(([m,p])=>`آجر ${fa(m)} کیلوگرمی روی خانهٔ ${fa(p)}`).join(" و "):"—";}

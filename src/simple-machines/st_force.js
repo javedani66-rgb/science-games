@@ -32,7 +32,7 @@ function makeTug(A,cfg){
     P.paint(s);
     const q="<b>؟</b>",sh=st.show;
     A.counter(`<span class="cc l">چپ: ${sh==="none"?q:`<b class="num">${fa(sL)}</b> نیوتن`}</span><span class="cc r">راست: ${sh==="none"?q:`<b class="num">${fa(sR)}</b> نیوتن`}</span><span class="cc n">خالص: ${sh!=="all"?q:`<b class="num">${fa(Math.abs(net))}</b> ${net>0?"به راست":net<0?"به چپ":"(تعادل)"}`}</span>`);
-    A.formula(FX(`${sy("F")} = ${sy("F","2")} − ${sy("F","1")}`,sh==="all"?`${sy("F")} = ${fa(Math.max(sL,sR))} − ${fa(Math.min(sL,sR))} = ${fa(Math.abs(net))} N`:"",[[sy("F"),"نیروی خالص"],[sy("F","2"),"نیروی بزرگ‌تر"],[sy("F","1"),"نیروی کوچک‌تر"],["N","نیوتن"]]));
+    A.formula(FX(`${sy("F")} = ${sy("F","2")} − ${sy("F","1")}`,sh==="all"?`${sy("F")} = ${fa(Math.max(sL,sR))} − ${fa(Math.min(sL,sR))} = ${fa(Math.abs(net))} N`:"",[[sy("F"),"نیروی خالص"],[sy("F","2"),"جمع نیروهای طرفِ قوی‌تر"],[sy("F","1"),"جمع نیروهای طرفِ ضعیف‌تر"],["N","نیوتن"]]));
   }
   const nearSlot=(side,p)=>{let b=null,bd=70;for(let i=0;i<4;i++){if(st[side][i]!=null)continue;const d=Math.hypot(p.x-slotX(side,i),p.y-300);if(d<bd){bd=d;b=i;}}return b;};
   const place=(side,v,i)=>{if(i==null){i=st[side].indexOf(null);if(i<0){A.fb("همهٔ جاهای این طرف پر است.","info");return;}}st[side][i]=v;};
@@ -68,7 +68,7 @@ function makeFriction(A,F){
     if(S.forces){const pl=Math.max(24,Math.min(80,F*1.6));s+=arrow(cx-36-pl,sy-38,cx-37,sy-38,10,BLUE)+T(cx-40,sy-63,`هل<tspan class="num"> ${fa(F)}</tspan>`,{size:13,col:BLUE,anchor:"start"});
       const f=Math.min(F,L.f);if(f>0){const fl=Math.max(16,Math.min(66,f*1.9));s+=arrow(cx-34,sy-7,cx-34-fl,sy-7,7,"#E8590C")+T(cx-48-fl,sy-2,"اصطکاک",{size:12,col:"#E8590C",anchor:"start"});}}
     return s;}
-  function render(){let s=`<rect width="640" height="520" fill="#F4FAFD"/>`;for(let i=0;i<3;i++)s+=lane(i);
+  function render(){let s=`<rect width="640" height="520" style="fill:var(--sw)"/>`;for(let i=0;i<3;i++)s+=lane(i);
     P.paint(s);}
   function run(done){st.busy=true;const tgt=lanes.map(L=>Math.max(0,F-L.f)*9);const p0=st.pos.slice();
     tween(1800,p=>{const e=1-Math.pow(1-p,3);st.pos=tgt.map((t,i)=>Math.min(260,p0[i]+t*e));render();},()=>{st.busy=false;done&&done();});}
@@ -99,7 +99,7 @@ const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، ک�
  levels:[
   {title:"هل دادن و کشیدن",desc:"کدام طرف قوی‌تر است؟ با شمردن کشش‌ها طناب‌کشی را متعادل کن.",gen(r){const a=ri(r,1,3);let b=ri(r,1,3);if(b===a)b=a===3?1:a+1;const c=ri(r,2,3);const d=ri(r,1,3);
     return[{t:"predict",L:Array(a).fill(10),R:Array(b).fill(10)},{t:"balance",fixed:Array(ri(r,2,3)).fill(10),tray:[10]},{t:"predict",L:Array(c).fill(10),R:Array(c).fill(10),spread:true},{t:"fric",q:1,F:20},{t:"balance",fixed:Array(ri(r,1,4)).fill(10),tray:[10],spread:true},{t:"predict",L:Array(d).fill(10),R:Array(d===3?2:d+1).fill(10),spread:true}];}},
-  {title:"جمع نیروها",desc:"کشش‌ها اندازه‌های مختلف دارند. تعداد مهم نیست؛ جمع آن‌ها مهم است.",gen(r){return[{t:"predict",L:[10,10,10],R:[20]},{t:"balance",fixed:shuffle(r,[20,10]),tray:[10,20]},{t:"net",L:[20,20],R:[10]},{t:"fric",q:2,F:20},{t:"balance",fixed:shuffle(r,[20,20,10]),tray:[10,20],side:"L"},{t:"net",L:[10],R:shuffle(r,[20,20,10])}];}},
+  {title:"جمع نیروها",desc:"کشش‌ها اندازه‌های مختلف دارند. تعداد مهم نیست؛ جمعِ اندازهٔ آن‌ها مهم است.",gen(r){return[{t:"predict",L:[10,10,10],R:[20]},{t:"balance",fixed:shuffle(r,[20,10]),tray:[10,20]},{t:"net",L:[20,20],R:[10]},{t:"fric",q:2,F:20},{t:"balance",fixed:shuffle(r,[20,20,10]),tray:[10,20],side:"L"},{t:"net",L:[10],R:shuffle(r,[20,20,10])}];}},
   {title:"نیروی خالص",desc:"نیروی خالص را حساب کن و طناب را طوری بچین که به اندازهٔ دلخواه جابه‌جا شود.",gen(r){return[{t:"make",fixed:[20,10],tray:[10,20,50],target:20,show:"sides"},{t:"net",L:[50],R:[20,10]},{t:"predict",L:[10,10,10,10],R:[50]},{t:"balance",fixed:shuffle(r,[50,20]),tray:[10,20,50],show:"sides",side:"L"},{t:"fric",q:3,F:30},{t:"make",fixed:[20],tray:[10,20,50],target:-30,side:"L",show:"sides"}];}},
   {title:"قهرمان نیرو",desc:"عددهای بزرگ‌تر، کشش‌های بیشتر و جای کم روی طناب.",gen(r){return[{t:"make",fixed:[50,20,10],tray:[20,50],target:40,show:"sides"},{t:"net",L:shuffle(r,[50,20,20,10]),R:shuffle(r,[50,50,10])},{t:"balance",fixed:shuffle(r,[50,50,20,10]),tray:[20,50,10],show:"sides"},{t:"predict",L:shuffle(r,[20,20,20,20]),R:shuffle(r,[50,20,10])},{t:"fric",q:2,F:30},{t:"make",fixed:shuffle(r,[50,20]),tray:[10,20,50],target:-40,side:"L",show:"sides"}];}}],
  endless(r,d){const vals=d<2?[10]:d<3.5?[10,20]:[10,20,50],tp=pick(r,d<2?["predict","balance","fric"]:["predict","balance","net","make","fric"]);const rand=n=>Array.from({length:n},()=>pick(r,vals));

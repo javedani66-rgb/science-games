@@ -1,4 +1,4 @@
-# Handoff — state of the project (updated 2026-09-29)
+# Handoff — state of the project (updated 2026-09-30)
 
 ## Who / what
 - The teacher (repo owner) teaches a term on **simple machines** to grades 2–6 over **12 sessions**. Students use phones and computers; class messengers are **Telegram and WhatsApp**. Iran: claude.ai is not reachable for students; the game is distributed via GitHub Pages (this repo) and as a single offline HTML file.
@@ -29,3 +29,13 @@
 3. Android/Windows packaging — the PWA install covers most of this for now.
 4. Shared student profile across future games (same origin).
 5. Verify github.io is reachable from students' phones without VPN (teacher to check).
+
+## Version 2, stage 1 (2026-09-30)
+- **Levels vs grades:** grades دوم..نهم (`GRADES`, index 0..7). Level (track) a=2–3, b=4, c=5–6 (formulas optional, off by default for new c players), d=7–9 (uses c's missions with formulas on; `STOPS[i].m.d = m.c`). `p.lvl` = level being played if different from the grade's own; `p.done` = finished levels. Level-up after all 12 stops + final quiz (`levelUpSheet`). Per-level words/quiz/side flags are swapped via `p.stash`.
+- **Progress code v2:** 26 letters (character, shirt colour, level, done-levels, quiz bits). 23-letter v1 codes are still read.
+- **Character:** 8 Gemini characters (`assets.js` → `IMG.bust/full`, masks `mbust/mfull`), shirt recolour at runtime (`tintShirt`, `SHIRTS`). `p.t` = character index (old traveler index maps to a character). Skin tone is not recolourable yet (characters differ instead).
+- **Station screen (`board()` in app.js):** land-coloured header (نقشه pill, stop chip + land name, title, progress dots, ↻ restart challenge, ؟ help sheet with toggles/terms/definitions), scene fills the free height, fixed-height text panel with «اوستا/مهندس + name» and bust mood, one primary button that appears only after the challenge is judged. Desktop ≥900px: scene left, panel right. Land palettes are CSS vars on `body[data-land]`; scene backgrounds use them (`bgRoom/bgOut`).
+- **Terms:** `quiz.js` has `QTERMS/QDEF/QBANK/QUIZ_AT/quizPick`. Science terms in prompts become tappable (definition card, collected in the backpack notebook). Quiz stations after stops 2, 4, 7, 10, 12 (not blocking, except the final one before level-up).
+- **Lands renamed:** کارگاه نجاری (1–4)، کارگاه ساختمانی و بندر (5–10)، کارخانهٔ اختراع (11–12). Map uses the Gemini badges.
+- **Science/Persian audit** applied (strict "lift" = needed force < available force; balance compares weights → measures mass; units; kid texts without numbers).
+- **Stage 2 (next):** replace procedural scene drawings with the Nano-Banana props (mockups in the scratchpad were approved for lever and balance: `lever3.py`, `bal2.py`), direct manipulation (drag the fulcrum), and grade 7–9 specific content (torque, efficiency, gears).
