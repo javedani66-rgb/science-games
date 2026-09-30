@@ -5,7 +5,7 @@ const pulFrac=n=>n===1?"برابر وزن بار":({2:"نصفِ",3:"یک‌سو�
 function pulleyIcon(n){let s=`<rect x="4" y="1" width="32" height="3" fill="#8A5427"/>`;if(n===1)return s+`<circle cx="20" cy="9" r="5" fill="none" stroke="${INK}" stroke-width="2"/><path d="M15 9 V22 M25 9 V26" stroke="#7A5634" stroke-width="1.6"/><rect x="11" y="21" width="8" height="6" fill="#E0A45F"/>`;
   const k=n/2;for(let i=0;i<n;i++)s+=`<path d="M${8+i*(24/(n-1||1))} 8 V19" stroke="#7A5634" stroke-width="1.5"/>`;return s+`<rect x="6" y="5" width="28" height="5" rx="2" fill="#8C9BB0"/><rect x="6" y="17" width="28" height="5" rx="2" fill="#8C9BB0"/><rect x="14" y="22" width="12" height="5" fill="#E0A45F"/>`;}
 function makePulley(A,cfg){const svg=A.svg,P=A.P;A.view(404);const G=380,PXM=60,REST=250,MAXD=150;
-  const st={n:cfg.n||1,W:cfg.W,S:cfg.S,h:cfg.h||2,pulled:0,stroke:0,busy:false,blocked:false,flash:0,edit:cfg.edit!==false,hideF:!!cfg.hideF};
+  const st={hideW:!!cfg.hideW,n:cfg.n||1,W:cfg.W,S:cfg.S,h:cfg.h||2,pulled:0,stroke:0,busy:false,blocked:false,flash:0,edit:cfg.edit!==false,hideF:!!cfg.hideF};
   const F=()=>st.W/st.n;const rise=()=>st.pulled/st.n;
   const R=(a,b,c,d)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#7A5634" stroke-width="4" stroke-linecap="round"/>`;
   const Wh=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#F4F7FA" stroke="#34425E" stroke-width="5"/><circle cx="${x}" cy="${y}" r="4" fill="#34425E"/>`;
@@ -22,7 +22,7 @@ function makePulley(A,cfg){const svg=A.svg,P=A.P;A.view(404);const G=380,PXM=60,
     s+=body;
     const coil=Math.min(60,st.pulled*6);if(coil>0){s+=`<g>`;for(let i=0;i<Math.ceil(coil/6);i++)s+=`<ellipse cx="${hx+74}" cy="${G-4-i*3}" rx="${22-i*.4}" ry="6" fill="none" stroke="#7A5634" stroke-width="3"/>`;s+=`</g>`;}
     s+=R(hx,hy,hx+10,G-6);
-    s+=crateSvg(lx,y0+56,64,56,kn(st.W),null);
+    s+=crateSvg(lx,y0+56,64,56,st.hideW?"؟":kn(st.W),null);
     if(S.forces){s+=arrow(lx,y0+62,lx,y0+62+Math.min(80,st.W*.5),9,"#7D8CA3",.9);
       const fl=Math.max(24,Math.min(120,F()*1.6));s+=arrow(hx+34,hy+8,hx+34,hy+8+fl,11,st.hideF?"#7D8CA3":ok?GRN:RED)+T(hx+56,hy+30+fl/2,`نیروی لازم<tspan class="num">: ${st.hideF?"؟":fa(r1(F()))}</tspan>`,{size:13,col:st.hideF?INK:ok?GRN:RED,anchor:"end"});}
     const flash=st.flash>0;s+=`<g data-drag="grip" style="cursor:ns-resize"><rect x="${hx-40}" y="${hy-14}" width="80" height="70" fill="#fff" fill-opacity="0"/><rect x="${hx-26}" y="${hy}" width="52" height="40" rx="12" fill="${flash?RED:"#FFC43D"}" stroke="#fff" stroke-width="3"/>${T(hx,hy+28,"⇩",{size:22,col:INK,halo:false})}</g>`;
@@ -79,11 +79,11 @@ const ST_pulley={key:"pulley",name:"قرقره",c:"#B7791F",sub:"قرقرهٔ ث
   if(sp.t==="count"){const pl=makePulley(A,{n:sp.n,W:60,S:100,h:2,edit:false,hideF:true});const hideN=()=>A.counter(`<span class="cc">طناب‌هایی که بار را نگه می‌دارند: <b>؟</b></span>`);A.refresh=()=>{pl.render();hideN();};hideN();
     A.prompt(KID()?"چند طناب بار را نگه داشته‌اند؟ بشمار.":"چند تکه طناب بار را نگه داشته‌اند؟<small>طناب‌هایی را بشمار که به قرقرهٔ پایینی (یا خود بار) وصل‌اند. طنابی که دست می‌کشد را نشمار.</small>");
     const c=A.ctrl("");const stp=stepper(c,{init:0,max:10,steps:[1],unit:"طناب"});const chk=btn(c,"بررسی","go",()=>{const ok=stp.get()===sp.n;A.judge(ok,{k:{ok:"درست شمردی! هرچه طناب بیشتر، کشیدن آسان‌تر."},ok:`${fa(sp.n)} طناب؛ پس نیروی لازم ${pulFrac(sp.n)} است.`,retry:"فقط طناب‌های بین قرقره‌های بالا و پایین را بشمار.",final:`${fa(sp.n)} طناب بار را نگه داشته‌اند.`});if(A.locked){chk.disabled=true;stp.disable();pl.st.hideF=false;A.refresh=()=>pl.render();pl.render();}});return;}
-  const pl=makePulley(A,{n:sp.n,W:sp.W||(sp.F?sp.F*sp.n:60),S:100,h:sp.h||2,edit:false,hideF:true});A.refresh=()=>pl.render();
+  const pl=makePulley(A,{n:sp.n,W:sp.W||(sp.F?sp.F*sp.n:60),S:100,h:sp.h||2,edit:false,hideF:true,hideW:sp.t==="calcW"});/* در «سنگین‌ترین بار» جواب روی جعبه نوشته نشود */A.refresh=()=>pl.render();
   let q,ans,unit,steps,expl,retry;
   if(sp.t==="calcF"){q=`بار ${fa(sp.W)} نیوتن است و ${fa(sp.n)} طناب آن را نگه داشته‌اند. نیروی لازم چقدر است؟`;ans=sp.W/sp.n;unit="نیوتن";steps=[1,10];expl=`${fa(sp.W)} ÷ ${fa(sp.n)} = ${fa(r1(ans))} نیوتن.`;retry="وزن بار را بر تعداد طناب‌ها تقسیم کن.";}
   else if(sp.t==="calcRope"){q=`با ${fa(sp.n)} طناب، برای اینکه بار ${fa(sp.h)} متر بالا برود، چند متر طناب باید بکشیم؟`;ans=sp.n*sp.h;unit="متر";steps=[.5,1];expl=`${fa(sp.h)} × ${fa(sp.n)} = ${fa(ans)} متر.`;retry="بالا رفتن بار را در تعداد طناب‌ها ضرب کن.";}
   else{q=`با ${fa(sp.n)} طناب و نیروی ${fa(sp.F)} نیوتن، سنگین‌ترین باری که می‌توانی نگه داری چند نیوتن است؟<small>برای بالا بردنش، کمی نیروی بیشتر لازم است.</small>`;ans=sp.F*sp.n;unit="نیوتن";steps=[5,10];expl=`${fa(sp.F)} × ${fa(sp.n)} = ${fa(ans)} نیوتن.`;retry="نیرو را در تعداد طناب‌ها ضرب کن.";}
   A.prompt(q);const c=A.ctrl("");const stp=stepper(c,{init:0,max:500,steps,unit});
-  const chk=btn(c,"بررسی","go",()=>{const ok=Math.abs(stp.get()-ans)<.051;A.judge(ok,{ok:expl,retry,final:expl});if(A.locked){chk.disabled=true;stp.disable();pl.st.hideF=false;pl.render();}});
+  const chk=btn(c,"بررسی","go",()=>{const ok=Math.abs(stp.get()-ans)<.051;A.judge(ok,{ok:expl,retry,final:expl});if(A.locked){chk.disabled=true;stp.disable();pl.st.hideF=pl.st.hideW=false;pl.render();}});
  }};
