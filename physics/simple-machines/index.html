@@ -838,11 +838,11 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
   const b=makeBalance(A,{unit:u,L:sp.obj.map(id=>({k:"o",id,fixed:1})),edit:"R",tray:sp.tray,locked:true,hideL:true});A.refresh=()=>b.render();
   const c=A.ctrl("");
   if(sp.t==="balance"||sp.t==="fewest"){const minN=minCoins(target,sp.tray);
-    A.prompt(KID()?"با مکعب‌ها ترازو را صاف کن.":sp.t==="balance"?`ترازو را صاف کن: ${u==="cube"?"مکعب‌ها":"وزنه‌ها"} را از پایین روی کفهٔ راست بکش.<small>وقتی آماده شدی، «برداشتن پایه‌ها» را بزن.</small>`:`ترازو را با <b>کمترین تعداد وزنه</b> صاف کن.<small>وزنه‌ها را روی کفهٔ راست بکش، بعد پایه‌ها را بردار.</small>`);
+    A.prompt(KID()?"با مکعب‌ها ترازو را صاف کن. هر چند بار خواستی امتحان کن.":sp.t==="balance"?`ترازو را صاف کن: ${u==="cube"?"مکعب‌ها":"وزنه‌ها"} را روی کفهٔ راست بکش و پایه‌ها را بردار. جرم ${objNames} را نمی‌دانی؛ هر چند بار خواستی امتحان کن.<small>اگر ترازو صاف نشد، پایه‌ها خودشان برمی‌گردند. وزنه اضافه یا کم کن و دوباره امتحان کن.</small>`:`ترازو را با <b>کمترین تعداد وزنه</b> صاف کن. هر چند بار خواستی امتحان کن.<small>وزنه‌ها را روی کفهٔ راست بکش، بعد پایه‌ها را بردار. با وزنه‌های بزرگ‌تر شروع کن.</small>`);
     A.hint(`M${320+(0-(sp.tray.length-1)/2)*Math.min(90,560/sp.tray.length)} 478 L516 215`);
     const go=btn(c,"برداشتن پایه‌ها","go",()=>{if(!b.st.R.length){A.fb(KID()?"اول مکعب بگذار.":"اول چیزی روی کفهٔ راست بگذار.","info");return;}go.disabled=true;b.st.edit="";
       b.setLock(false,()=>{const mR=b.mass("R"),n=b.st.R.length,eq=mR===target,ok=eq&&(sp.t==="balance"||n===minN);b.st.hideL=!eq&&!A.locked;
-        const res=A.judge(ok,{ok:sp.t==="balance"?(u==="cube"?`${objNames} هم‌جرمِ ${fa(target)} مکعب است.`:`جرم ${objNames} ${fmtM(target,u)} است.`):`با ${fa(n)} وزنه صاف شد؛ کمتر از این نمی‌شد.`,
+        const res=(eq&&!ok?A.judge:A.trial)(ok,{ok:sp.t==="balance"?(u==="cube"?`${objNames} هم‌جرمِ ${fa(target)} مکعب است.`:`جرم ${objNames} ${fmtM(target,u)} است.`):`با ${fa(n)} وزنه صاف شد؛ کمتر از این نمی‌شد.`,
           retry:eq?`صاف شد، ولی با ${fa(n)} وزنه. با وزنه‌های بزرگ‌تر شروع کن تا تعدادشان کمتر شود.`:mR>target?"کفهٔ راست پایین رفت؛ وزنه‌ها زیاد است.":"کفهٔ چپ هنوز پایین است؛ وزنه کم است.",
           final:`جواب: ${fmtM(target,u)}${sp.t==="fewest"?`، با ${fa(minN)} وزنه: ${minCoinsStr(target,sp.tray,u)}`:""}.`,
           k:{ok:`ترازو صاف شد! ${fa(target)} مکعب.`,retry:mR>target?"کفهٔ مکعب‌ها پایین رفت. یک مکعب بردار.":"هنوز کم است. مکعب اضافه کن.",final:`${fa(target)} مکعب لازم بود.`}});
@@ -1028,7 +1028,7 @@ const ST_lever={key:"lever",name:"اهرم",c:"#D97706",sub:"الاکلنگ، ت
     const lv=makeLever(A,{items:sp.items,pieces:sp.pieces,edit:"R",sup:true});A.refresh=()=>lv.render();const c=A.ctrl("");
     A.hint(`M${320+(0-(sp.pieces.length-1)/2)*Math.min(96,560/sp.pieces.length)} 478 L${320+3*52} 250`);
     const go=btn(c,"برداشتن پایه‌ها","go",()=>{if(lv.st.pieces.some(p=>!p.used)){A.fb(KID()?"اول آجر را روی الاکلنگ بگذار.":"همهٔ آجرهای پایین را روی تخته بگذار.","info");return;}go.disabled=true;
-      lv.setSup(false,()=>{const tL=lv.tq("L"),tR=lv.tq("R");const res=A.judge(tL===tR,{k:{ok:"الاکلنگ صاف ماند!",retry:tR>tL?"راست پایین رفت. آجر را به وسط نزدیک‌تر کن.":"چپ پایین رفت. آجر را دورتر بگذار.",final:new Set(sp.items.map(x=>x[1]).concat(sp.pieces)).size===1?"آجرها یکسان‌اند؛ پس باید هر دو به یک اندازه از وسط دور باشند.":"آجر سنگین‌تر باید نزدیک وسط باشد و آجر سبک‌تر دور از وسط."},ok:`هر دو طرف ${fa(tL)} شد.`,retry:`چپ ${fa(tL)} است و راست ${fa(tR)}. جای آجر را عوض کن.`,final:`راه درست: ${levSol(sp)}.`});if(!res&&!A.locked)later(1000,()=>{lv.setSup(true);go.disabled=false;});});});return;}
+      lv.setSup(false,()=>{const tL=lv.tq("L"),tR=lv.tq("R");const res=A.trial(tL===tR,{k:{ok:"الاکلنگ صاف ماند!",retry:tR>tL?"راست پایین رفت. آجر را به وسط نزدیک‌تر کن.":"چپ پایین رفت. آجر را دورتر بگذار.",final:new Set(sp.items.map(x=>x[1]).concat(sp.pieces)).size===1?"آجرها یکسان‌اند؛ پس باید هر دو به یک اندازه از وسط دور باشند.":"آجر سنگین‌تر باید نزدیک وسط باشد و آجر سبک‌تر دور از وسط."},ok:`هر دو طرف ${fa(tL)} شد.`,retry:`چپ ${fa(tL)} است و راست ${fa(tR)}. جای آجر را عوض کن.`,final:`راه درست: ${levSol(sp)}.`});if(!res&&!A.locked)later(1000,()=>{lv.setSup(true);go.disabled=false;});});});return;}
   if(sp.t==="mystery"){const my=sp.items.find(x=>typeof x[1]==="string")[1];A.prompt(`تخته صاف است. جرم ${OB[my].n} چند کیلوگرم است؟<small>از قانون اهرم استفاده کن: جرم × فاصله در دو طرف برابر است.</small>`);
     const lv=makeLever(A,{items:sp.items,sup:false,hide:{[my]:1}});A.refresh=()=>lv.render();const tR=lv.tq("R"),pos=Math.abs(sp.items.find(x=>x[1]===my)[0]),ans=LV_MASS[my];
     const c=A.ctrl("");const stp=stepper(c,{init:0,max:200,steps:[1,5],unit:"کیلوگرم"});
@@ -2002,6 +2002,9 @@ function board(k,head){epoch++;closeOv();if(typeof clearToasts==="function")clea
     formula:h=>{fmHtml=h||"";const e=$("#fm");if(e)e.innerHTML=S.formula?fmHtml:"";},
     ctrl:h=>{const c=$("#cl");c.innerHTML=h||"";return c;},fb:(m,c)=>{const e=$("#fb");if(!e)return;e.innerHTML=ltrMath(m||"");e.className="fb "+(c||"");if(m)later(80,revealFb);if(c==="ok")setMood("happy");else if(c==="no")setMood("oops");},
     nav:h=>{const n=$("#nv");n.innerHTML=h||"";return n;},
+    /* آزمایش آزاد: وقتی بچه با امتحان کردن جواب را پیدا می‌کند (مثلاً جرمِ نامعلوم)، امتحانِ ناموفق فرصت را کم نمی‌کند */
+    trials:0,trial(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);if(ok)return A.judge(true,Object.assign({},m,{pts:A.trials<3?2:1,k:null}));
+      A.trials++;A.fb(`${m.retry||""} ${KID()?"دوباره امتحان کن.":"دوباره امتحان کن؛ هر چند بار که بخواهی."}`,"info");return false;},
     judge(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);
       if(ok){const pts=m.pts!=null?m.pts:(A.tries===0?2:1);A.locked=true;A.fb(`${pts===2?"آفرین!":"درست شد."} ${m.ok||""} <span style="white-space:nowrap">(+${fa(pts)} امتیاز)</span>`,"ok");if(A.done)A.done(pts);return true;}
       A.tries++;if(A.tries<2){A.fb(KID()?`دوباره امتحان کن. ${m.retry||""}`:`نه هنوز. ${m.retry||""} یک فرصت دیگر داری.`,"no");$("#hlpb").classList.add("nudge");return false;}

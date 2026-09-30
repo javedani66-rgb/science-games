@@ -81,6 +81,9 @@ function board(k,head){epoch++;closeOv();if(typeof clearToasts==="function")clea
     formula:h=>{fmHtml=h||"";const e=$("#fm");if(e)e.innerHTML=S.formula?fmHtml:"";},
     ctrl:h=>{const c=$("#cl");c.innerHTML=h||"";return c;},fb:(m,c)=>{const e=$("#fb");if(!e)return;e.innerHTML=ltrMath(m||"");e.className="fb "+(c||"");if(m)later(80,revealFb);if(c==="ok")setMood("happy");else if(c==="no")setMood("oops");},
     nav:h=>{const n=$("#nv");n.innerHTML=h||"";return n;},
+    /* آزمایش آزاد: وقتی بچه با امتحان کردن جواب را پیدا می‌کند (مثلاً جرمِ نامعلوم)، امتحانِ ناموفق فرصت را کم نمی‌کند */
+    trials:0,trial(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);if(ok)return A.judge(true,Object.assign({},m,{pts:A.trials<3?2:1,k:null}));
+      A.trials++;A.fb(`${m.retry||""} ${KID()?"دوباره امتحان کن.":"دوباره امتحان کن؛ هر چند بار که بخواهی."}`,"info");return false;},
     judge(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);
       if(ok){const pts=m.pts!=null?m.pts:(A.tries===0?2:1);A.locked=true;A.fb(`${pts===2?"آفرین!":"درست شد."} ${m.ok||""} <span style="white-space:nowrap">(+${fa(pts)} امتیاز)</span>`,"ok");if(A.done)A.done(pts);return true;}
       A.tries++;if(A.tries<2){A.fb(KID()?`دوباره امتحان کن. ${m.retry||""}`:`نه هنوز. ${m.retry||""} یک فرصت دیگر داری.`,"no");$("#hlpb").classList.add("nudge");return false;}

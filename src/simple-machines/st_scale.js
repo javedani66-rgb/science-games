@@ -215,11 +215,11 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
   const b=makeBalance(A,{unit:u,L:sp.obj.map(id=>({k:"o",id,fixed:1})),edit:"R",tray:sp.tray,locked:true,hideL:true});A.refresh=()=>b.render();
   const c=A.ctrl("");
   if(sp.t==="balance"||sp.t==="fewest"){const minN=minCoins(target,sp.tray);
-    A.prompt(KID()?"با مکعب‌ها ترازو را صاف کن.":sp.t==="balance"?`ترازو را صاف کن: ${u==="cube"?"مکعب‌ها":"وزنه‌ها"} را از پایین روی کفهٔ راست بکش.<small>وقتی آماده شدی، «برداشتن پایه‌ها» را بزن.</small>`:`ترازو را با <b>کمترین تعداد وزنه</b> صاف کن.<small>وزنه‌ها را روی کفهٔ راست بکش، بعد پایه‌ها را بردار.</small>`);
+    A.prompt(KID()?"با مکعب‌ها ترازو را صاف کن. هر چند بار خواستی امتحان کن.":sp.t==="balance"?`ترازو را صاف کن: ${u==="cube"?"مکعب‌ها":"وزنه‌ها"} را روی کفهٔ راست بکش و پایه‌ها را بردار. جرم ${objNames} را نمی‌دانی؛ هر چند بار خواستی امتحان کن.<small>اگر ترازو صاف نشد، پایه‌ها خودشان برمی‌گردند. وزنه اضافه یا کم کن و دوباره امتحان کن.</small>`:`ترازو را با <b>کمترین تعداد وزنه</b> صاف کن. هر چند بار خواستی امتحان کن.<small>وزنه‌ها را روی کفهٔ راست بکش، بعد پایه‌ها را بردار. با وزنه‌های بزرگ‌تر شروع کن.</small>`);
     A.hint(`M${320+(0-(sp.tray.length-1)/2)*Math.min(90,560/sp.tray.length)} 478 L516 215`);
     const go=btn(c,"برداشتن پایه‌ها","go",()=>{if(!b.st.R.length){A.fb(KID()?"اول مکعب بگذار.":"اول چیزی روی کفهٔ راست بگذار.","info");return;}go.disabled=true;b.st.edit="";
       b.setLock(false,()=>{const mR=b.mass("R"),n=b.st.R.length,eq=mR===target,ok=eq&&(sp.t==="balance"||n===minN);b.st.hideL=!eq&&!A.locked;
-        const res=A.judge(ok,{ok:sp.t==="balance"?(u==="cube"?`${objNames} هم‌جرمِ ${fa(target)} مکعب است.`:`جرم ${objNames} ${fmtM(target,u)} است.`):`با ${fa(n)} وزنه صاف شد؛ کمتر از این نمی‌شد.`,
+        const res=(eq&&!ok?A.judge:A.trial)(ok,{ok:sp.t==="balance"?(u==="cube"?`${objNames} هم‌جرمِ ${fa(target)} مکعب است.`:`جرم ${objNames} ${fmtM(target,u)} است.`):`با ${fa(n)} وزنه صاف شد؛ کمتر از این نمی‌شد.`,
           retry:eq?`صاف شد، ولی با ${fa(n)} وزنه. با وزنه‌های بزرگ‌تر شروع کن تا تعدادشان کمتر شود.`:mR>target?"کفهٔ راست پایین رفت؛ وزنه‌ها زیاد است.":"کفهٔ چپ هنوز پایین است؛ وزنه کم است.",
           final:`جواب: ${fmtM(target,u)}${sp.t==="fewest"?`، با ${fa(minN)} وزنه: ${minCoinsStr(target,sp.tray,u)}`:""}.`,
           k:{ok:`ترازو صاف شد! ${fa(target)} مکعب.`,retry:mR>target?"کفهٔ مکعب‌ها پایین رفت. یک مکعب بردار.":"هنوز کم است. مکعب اضافه کن.",final:`${fa(target)} مکعب لازم بود.`}});
