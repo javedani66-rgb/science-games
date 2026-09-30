@@ -27,7 +27,7 @@ tools/publish_game.py          build + wrap with PWA head + copy into site + bum
    - `python3 t2.py all all a|b|c` — solves every level of every station per track (expect all `p2`, `ERR []`). Slow: run stations in parallel background jobs, ~2 min per station.
    - `python3 t5.py a|b|c` — endless mode.
    - `python3 ov.py <track> <stations>` — **text/arrow overlap + clipping detector**. Must print nothing. The teacher has complained twice about text overlapping arrows/graphics; run this after any scene change and also eyeball `gal.py <track> <stations>` contact sheets (tests/shots/sheet_*.png) for text over non-arrow shapes.
-   - `python3 failtry.py` — level 1 (grades 2–3): a failed physical try must cost nothing; level 2 keeps the two-chance rule; scale «جرم نامعلوم» wrong sum is free too.
+   - `python3 failtry.py` — a failed physical try (ramp «بکش!», pulley/wheel/wedge choose, lever «فشار بده!», tug «برو!») costs nothing at ANY level; scale «جرم نامعلوم» wrong sum is free too. Scale and seesaw are live (no supports). Only calculation/prediction questions keep the two-chance rule.
    - `python3 mapchk.py <gradeIndex>` — map avatar/«تو اینجایی» inside the map and clear of other items for stops 1–12 (prints nothing when fine).
    - `python3 jt.py <gradeIndex 0..4> [stops]` — plays the 12-stop journey as a child, checks resume, side quest, parent hold-button, progress-code round-trip, teacher page.
    - Test pages: `test.html` sets `window.__TEST` (old station grid, legacy storage key); `jtest.html` sets `window.__JT` (journey UI + debug hooks `window.__J`).

@@ -127,11 +127,11 @@ const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، ک�
     {const x0=side==="L"?170:470,n=sp.tray.length,tx=x0+(0-(n-1)/2)*84,sx=side==="L"?225:415;A.hint(`M${tx} 462 L${sx} 300`);}
     const fixedSum=sumA(sp.fixed),tgt=sp.t==="balance"?0:sp.target,need=side==="R"?fixedSum+tgt:fixedSum-tgt;
     const sn=side==="R"?"راست":"چپ";
-    if(sp.t==="balance")A.prompt(KID()?"کاری کن جعبه تکان نخورد.":`طناب‌کشی را متعادل کن تا جعبه تکان نخورد.<small>کشش‌ها را از پایین صفحه بکش و روی طرف ${sn} طناب رها کن. بعد «برو!» را بزن.</small>`);
-    else A.prompt(`طوری بچین که نیروی خالص <b>${fa(Math.abs(tgt))} نیوتن به سمت ${tgt>0?"راست":"چپ"}</b> شود.<small>کشش‌ها را روی طرف ${sn} طناب بکش، بعد «برو!» را بزن.</small>`);
+    if(sp.t==="balance")A.prompt(KID()?"کاری کن جعبه تکان نخورد. هر چند بار خواستی امتحان کن.":`طناب‌کشی را متعادل کن تا جعبه تکان نخورد. هر چند بار خواستی امتحان کن.<small>کشش‌ها را از پایین صفحه بکش و روی طرف ${sn} طناب رها کن. بعد «برو!» را بزن.</small>`);
+    else A.prompt(`طوری بچین که نیروی خالص <b>${fa(Math.abs(tgt))} نیوتن به سمت ${tgt>0?"راست":"چپ"}</b> شود. هر چند بار خواستی امتحان کن.<small>کشش‌ها را روی طرف ${sn} طناب بکش، بعد «برو!» را بزن.</small>`);
     const c=A.ctrl("");const go=btn(c,"برو!","go",()=>{const s=sumA(tug.st[side]);if(!s){A.fb("اول دست‌کم یک کشش روی طناب بگذار.","info");return;}go.disabled=true;
       tug.run(()=>{const net=sumA(tug.st.R)-sumA(tug.st.L),ok=net===tgt;
-        const res=A.judge(ok,{k:{ok:"دو طرف مساوی شد؛ جعبه تکان نخورد.",retry:"کشش‌های دو طرف را بشمار. باید مساوی باشند.",final:`طرف ${sn} باید ${fa(sp.fixed.length)} کشش داشته باشد.`},ok:sp.t==="balance"?"دو طرف برابر شدند و نیروی خالص صفر است.":`نیروی خالص دقیقاً ${fa(Math.abs(tgt))} نیوتن شد.`,
+        const res=A.trial(ok,{k:{ok:"دو طرف مساوی شد؛ جعبه تکان نخورد.",retry:"کشش‌های دو طرف را بشمار. باید مساوی باشند.",final:`طرف ${sn} باید ${fa(sp.fixed.length)} کشش داشته باشد.`},ok:sp.t==="balance"?"دو طرف برابر شدند و نیروی خالص صفر است.":`نیروی خالص دقیقاً ${fa(Math.abs(tgt))} نیوتن شد.`,
           retry:sp.t==="balance"?`جمع طرف ${sn} باید با طرف دیگر (${fa(fixedSum)}) برابر شود. جعبه سر جایش برگشت؛ دوباره بچین.`:`نیروی خالص ${fa(Math.abs(net))} شد. جمع طرف ${sn} باید ${fa(need)} باشد.`,
           final:`جمع طرف ${sn} باید ${fa(need)} می‌شد؛ مثلاً ${solveStr(need,sp.tray)}.`});
         if(!res&&!A.locked){later(500,()=>{tug.reset();go.disabled=false;});}});});

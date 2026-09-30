@@ -1,7 +1,7 @@
 # سطح ۱ (کاوشگر): امتحانِ ناموفق در شیب، قرقره، چرخ و محور، گوه و پیچ نباید فرصت کم کند.
 # برای هر ایستگاه: اولین چالشِ «امتحان کردنی» را پیدا می‌کند، n بار عمداً اشتباه امتحان می‌کند،
 # بعد درست حلش می‌کند. انتظار: درست شدن تا امتحانِ سوم (۲ ناموفق) → ۲ امتیاز (p2)، دیرتر → ۱ امتیاز (p1)، هیچ‌وقت قفل/صفر نشود.
-# در سطح ۲ (b) باید مثل قبل بماند: دو اشتباه = تمام (p0).
+# از ۲۰۲۶-۰۹-۳۰ (تصمیم معلم) در سطح ۲ به بالا هم همین قاعده است.
 # استفاده: python3 failtry.py
 from t2 import *
 KIND={'ramp':('fit',),'pulley':('choose',),'wheel':('choose',),'wedge':('wc','sc')}
@@ -24,7 +24,7 @@ def dot(pg,i): return pg.evaluate("i=>{const d=document.querySelectorAll('#dots 
 ok=True
 with sync_playwright() as pw:
     b=pw.chromium.launch(); pg=b.new_page(viewport={'width':400,'height':900}); errs=[]; pg.on('pageerror',lambda e:errs.append(str(e))); g=G(pg)
-    for track,cases in (('a',((1,'p2'),(2,'p2'),(3,'p1'))),('b',((1,'cur'),(2,'p0')))):
+    for track,cases in (('a',((1,'p2'),(2,'p2'),(3,'p1'))),('b',((1,'p2'),(2,'p2'),(3,'p1')))):
         for k in KIND:
             for nfail,want in cases:
                 pg.goto(TURL); pg.evaluate("p=>localStorage.setItem('sm-workshop-v3',JSON.stringify(p))",{"prog":{f"{track}:{k}":{"lv":[3,3,3,3,3],"best":0}},"nums":True,"forces":True,"formula":True,"track":track}); pg.reload(); pg.wait_for_timeout(150)
@@ -41,7 +41,6 @@ with sync_playwright() as pw:
                     SOL[k](g,pg,sp); pg.wait_for_timeout(600)
                     if not pg.locator('#nv .btn').count(): pg.wait_for_timeout(1500)
                 got=dot(pg,i)
-                if track=='b' and want=='cur': want='p1'   # یک اشتباه در سطح ۲ → بعد از حل، ۱ امتیاز
                 good=got==want; ok&=good
                 print(('OK ' if good else '!! '),track,k,sp['t'],'fails',nfail,'->',got,'(want',want+')','|',msgs[-1] if msgs else '')
     print('ERR',errs[:5]); print('ALL OK' if ok else 'PROBLEMS'); b.close()
