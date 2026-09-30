@@ -161,8 +161,7 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
      let u=KID()?"cube":"kg";const mk=()=>{b=makeBalance(A,{unit:u,edit:"both",tray:u==="cube"?[1]:u==="kg"?[1,2,5,10]:[100,200,500,1000],objTray:["melon","apple","balloon","pillow","book","stone","rice","cotton","iron","dumbbell","backpack"].filter(id=>MASS[u][id]!=null),locked:false});A.refresh=()=>b.render();};
      mk();const c=A.ctrl("");
      btn(c,"وزنه‌ها","",()=>{b.st.trayMode="w";b.render();});btn(c,"اشیا","",()=>{b.st.trayMode="o";b.render();});
-     const lk=btn(c,"گذاشتن پایه‌ها","",()=>{b.setLock(!b.st.locked);lk.textContent=b.st.locked?"برداشتن پایه‌ها":"گذاشتن پایه‌ها";});
-     if(!KID())btn(c,"کیلوگرم / گرم","",()=>{u=u==="kg"?"g":"kg";mk();A.fb(u==="g"?"حالا وزنه‌ها به گرم است. هر کیلوگرم ۱۰۰۰ گرم است.":"حالا وزنه‌ها به کیلوگرم است.","info");lk.textContent="گذاشتن پایه‌ها";});
+     if(!KID())btn(c,"کیلوگرم / گرم","",()=>{u=u==="kg"?"g":"kg";mk();A.fb(u==="g"?"حالا وزنه‌ها به گرم است. هر کیلوگرم ۱۰۰۰ گرم است.":"حالا وزنه‌ها به کیلوگرم است.","info");});
      btn(c,"خالی کردن کفه‌ها","",()=>{b.st.L=[];b.st.R=[];b.settle();});
      btn(c,"نیروسنج و آب","pri",sprMode);}
    function sprMode(){mode="spr";A.prompt(KID()?"سنگ را با دستگیرهٔ زرد پایین ببر و در آب فرو کن. به فنر نگاه کن.":"آزمایشگاه نیروسنج: دستگیرهٔ زرد را پایین بکش تا جسم در آب برود. جسم را عوض کن یا به ماه برو و ببین عدد نیروسنج چه می‌شود.");A.fb("");

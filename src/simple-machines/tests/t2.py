@@ -101,9 +101,9 @@ def lever(g,pg,sp):
     remaining=len(ps)
     for i,pos in enumerate(sol):
         n=remaining; x=320+(0-(n-1)/2)*min(96,560/max(n,1))
-        g.drag(x,478,320+pos*52,250); remaining-=1
+        g.drag(x,478,320+pos*52,250); remaining-=1; pg.wait_for_timeout(300)
+    pg.wait_for_timeout(900)   # الاکلنگ زنده: بعد از ایستادن تخته خودش داوری می‌کند
     if SHOT: g.shot(f'ch_lever_bal_{need}')
-    click_text(pg,'بردا'); pg.wait_for_timeout(1200)
 
 def ramp(g,pg,sp):
     t=sp['t']; H=sp.get('H',1)
