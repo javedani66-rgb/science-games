@@ -225,11 +225,12 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
           k:{ok:`ترازو صاف شد! ${fa(target)} مکعب.`,retry:mR>target?"کفهٔ مکعب‌ها پایین رفت. یک مکعب بردار.":"هنوز کم است. مکعب اضافه کن.",final:`${fa(target)} مکعب لازم بود.`}});
         if(A.locked){b.st.hideL=false;b.render();}else later(1100,()=>{b.st.edit="R";b.setLock(true);go.disabled=false;});});});
     return;}
-  if(sp.t==="mystery"){A.prompt(`جرم ${objNames} چقدر است؟<small>با وزنه‌ها ترازو را صاف کن (هر چند بار خواستی پایه‌ها را بردار و بگذار)، بعد عدد را وارد کن.</small>`);
+  if(sp.t==="mystery"){A.prompt(`جرم ${objNames} چقدر است؟ هر چند بار خواستی امتحان کن.<small>با وزنه‌ها ترازو را صاف کن (پایه‌ها را هر چند بار خواستی بردار و بگذار)، بعد جرم وزنه‌ها را جمع بزن و وارد کن.</small>`);
     const lk=btn(c,"برداشتن پایه‌ها","",()=>{b.setLock(!b.st.locked);lk.textContent=b.st.locked?"برداشتن پایه‌ها":"گذاشتن پایه‌ها";});
     const stp=stepper(c,{init:0,max:u==="g"?9000:99,steps:u==="g"?[100,1000]:[1,10],unit:u==="kg"?"کیلوگرم":u==="g"?"گرم":"مکعب",label:"جرم"});
-    const chk=btn(c,"بررسی","go",()=>{const v=stp.get(),ok=v===target;
-      A.judge(ok,{ok:`جرم ${objNames} ${fmtM(target,u)} است.`,retry:"ترازو را با وزنه‌ها صاف کن و جرم وزنه‌های کفهٔ راست را جمع بزن.",final:`جرم ${objNames} ${fmtM(target,u)} است؛ مثلاً ${minCoinsStr(target,sp.tray,u)}.`});
+    /* آزمایش آزاد: جواب با صاف کردن ترازو پیدا می‌شود، پس «بررسیِ» ناموفق فرصت را کم نمی‌کند */
+    const chk=btn(c,"بررسی","go",()=>{const v=stp.get(),ok=v===target,bal=b.mass("R")===target;
+      A.trial(ok,{ok:`جرم ${objNames} ${fmtM(target,u)} است.`,retry:bal?"ترازو صاف است. حالا جرم وزنه‌های کفهٔ راست را جمع بزن و همان را وارد کن.":!b.st.R.length?"اول وزنه‌ها را روی کفهٔ راست بگذار و پایه‌ها را بردار تا ببینی ترازو صاف می‌شود یا نه.":"ترازو هنوز صاف نیست. وزنه اضافه یا کم کن و پایه‌ها را بردار تا صاف شود.",final:""});
       if(A.locked){chk.disabled=true;lk.disabled=true;stp.disable();b.st.hideL=false;b.render();}});
     return;}
  }};

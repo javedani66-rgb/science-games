@@ -9,6 +9,9 @@ The teacher checks the live site herself; talk to her in plain Persian. Mockups 
 - **Sessions may hit their limit.** After every step, update the checklist below and push the notes, so a new session can continue from here without the chat.
 - Open questions to the teacher (not answered yet): start with scale+lever (approved mockups)? mockups first for other stations? one register (spoken/written) for buttons? Ask again briefly if still unanswered.
 
+- 2026-09-30 20:30 fixed: scale «mystery» (levels 2+) «بررسی» is now a free try (`A.trial`), with guidance by state (no weights / not balanced / balanced but wrong sum). Tested in `failtry.py`.
+- Asked the teacher: in levels 2+ (numbers shown) should ramp «fit», pulley/wheel/wedge «choose» also be free tries? Today they keep «یک فرصت دیگر داری».
+
 ### Stage-2 checklist (tick as you go)
 - [ ] scale: Nano-Banana balance (`design/mockups/bal2.py`) + drag weights to pan
 - [ ] lever: `lever3.py` scene + drag the fulcrum (no slider)

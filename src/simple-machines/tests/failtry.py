@@ -45,3 +45,22 @@ with sync_playwright() as pw:
                 good=got==want; ok&=good
                 print(('OK ' if good else '!! '),track,k,sp['t'],'fails',nfail,'->',got,'(want',want+')','|',msgs[-1] if msgs else '')
     print('ERR',errs[:5]); print('ALL OK' if ok else 'PROBLEMS'); b.close()
+
+# ترازو «جرم نامعلوم» (سطح ۲ به بالا): «بررسیِ» ناموفق نباید فرصت کم کند؛ ۲ ناموفق → p2، ۳ ناموفق → p1
+ok2=True
+with sync_playwright() as pw:
+    b=pw.chromium.launch(); pg=b.new_page(viewport={'width':400,'height':900}); g=G(pg)
+    for track in ('b','c'):
+        for nfail,want in ((2,'p2'),(3,'p1')):
+            pg.goto(TURL); pg.evaluate("p=>localStorage.setItem('sm-workshop-v3',JSON.stringify(p))",{"prog":{f"{track}:scale":{"lv":[3,3,3,3,3],"best":0}},"nums":True,"forces":True,"formula":True,"track":track}); pg.reload(); pg.wait_for_timeout(150)
+            pg.click('.st[data-k=scale]'); pg.click('[data-l="2"]'); pg.wait_for_timeout(300); i=0
+            while spec(pg)['spec']['t']!='mystery':
+                SOL['scale'](g,pg,spec(pg)['spec']); pg.wait_for_timeout(1500); pg.locator('#nv .btn').first.click(); pg.wait_for_timeout(300); i+=1
+            sp=spec(pg)['spec']
+            for n in range(nfail): click_text(pg,'بررسی'); pg.wait_for_timeout(200)
+            locked=pg.locator('#nv .btn').count()>0; msg=g.text('#fb')[:70]
+            SOL['scale'](g,pg,sp); pg.wait_for_timeout(1500)
+            got=dot(pg,i); good=(got==want and not locked); ok2&=good
+            print('OK ' if good else '!! ',track,'scale mystery fails',nfail,'->',got,'(want',want+')','|',msg)
+    b.close()
+print('ALL OK' if ok and ok2 else 'PROBLEMS')
