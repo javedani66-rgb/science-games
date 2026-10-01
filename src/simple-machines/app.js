@@ -2,7 +2,7 @@
 const ST={force:ST_force,fric:ST_fric,scale:ST_scale,lever:ST_lever,ramp:ST_ramp,pulley:ST_pulley,wheel:ST_wheel,wedge:ST_wedge,sort:ST_sort};
 const ORDER=["force","scale","fric","lever","ramp","pulley","wheel","wedge","sort"];
 const TIER=[{n:"آسان",c:"#22965A"},{n:"متوسط",c:"#D99412"},{n:"سخت",c:"#E4553A"},{n:"قهرمان",c:"#7A3FC8"}];
-const KIDLAB={fric:"اندازهٔ هل را انتخاب کن و «هل بده!» را بزن. ببین روی کدام سطح جعبه دورتر می‌رود.",force:"هر چه دوست داری امتحان کن: کشش‌ها را روی طناب بکش و «برو!» را بزن.",scale:"روی کفه‌ها چیز بگذار و ببین کدام پایین می‌رود. دکمهٔ «نیروسنج و آب» را هم امتحان کن.",lever:"آجرها را روی الاکلنگ بکش و پایه‌ها را بردار.",ramp:"دایرهٔ زرد را بکش تا سطح درازتر یا کوتاه‌تر شود. بعد «بکش!» را بزن.",pulley:"قرقره انتخاب کن و طناب را پایین بکش.",wheel:"دسته انتخاب کن و آن را بچرخان.",wedge:"گوه را پایین بکش یا پیچ را بچرخان.",sort:"هر کارت را در جعبهٔ درست بینداز."};
+const KIDLAB={fric:"اندازهٔ هل را انتخاب کن و «هل بده!» را بزن. ببین روی کدام سطح جعبه دورتر می‌رود.",force:"هر چه دوست داری امتحان کن: کشش‌ها را روی طناب بکش و «برو!» را بزن.",scale:"روی کفه‌ها چیز بگذار و ببین کدام پایین می‌رود. دکمهٔ «نیروسنج و آب» را هم امتحان کن.",lever:"آجرها را روی الاکلنگ بکش و ببین تخته چطور می‌چرخد.",ramp:"دایرهٔ زرد را بکش تا سطح درازتر یا کوتاه‌تر شود. بعد «بکش!» را بزن.",pulley:"قرقره انتخاب کن و طناب را پایین بکش.",wheel:"دسته انتخاب کن و آن را بچرخان.",wedge:"گوه را پایین بکش یا پیچ را بچرخان.",sort:"هر کارت را در جعبهٔ درست بینداز."};
 const KIDINTRO={fric:"روی یخ لیز می‌خوریم، روی فرش نه. ببین جعبه کجا راحت‌تر سُر می‌خورد.",force:"هل دادن و کشیدن. ببین کدام طرف قوی‌تر است.",scale:"ترازو نشان می‌دهد کدام چیز سنگین‌تر است. نیروسنج نشان می‌دهد زمین یک چیز را چقدر می‌کشد.",lever:"الاکلنگ را صاف کن. سنگین‌تر نزدیک وسط (تکیه‌گاه) بنشیند.",ramp:"با سطح شیب‌دار، جعبه را راحت‌تر بالا ببر.",pulley:"با قرقره، طناب را پایین بکش و بار را بالا ببر.",wheel:"دستهٔ چاه را بچرخان و سطل را بالا بیاور.",wedge:"با گوه چوب را بشکاف و پیچ را در چوب بچرخان.",sort:"هر وسیله را در جعبهٔ ماشین ساده‌اش بینداز."};
 const TRACKS={a:{n:"سطح ۱",g:"دوم و سوم",c:"#22965A",d:"بدون عدد و فرمول. نگاه می‌کند، مقایسه می‌کند و می‌شمارد. دستورها کوتاه‌اند."},b:{n:"سطح ۲",g:"چهارم",c:"#D97706",d:"عددها را می‌بیند: نیرو به نیوتن، جرم به کیلوگرم و گرم. جمع، تفریق، ضرب و تقسیم ساده."},c:{n:"سطح ۳",g:"پنجم و ششم",c:"#7A3FC8",d:"مطابق علوم پنجم: عدد و نسبت. فرمول‌ها برای کنجکاوها، با دکمهٔ راهنما."},d:{n:"سطح ۴",g:"هفتم تا نهم",c:"#1B6E8F",d:"با فرمول و نمادهای علمی: گشتاور، مزیت مکانیکی و کار."}};
 /* عبارت‌های ریاضیِ داخل متن فارسی از چپ به راست نمایش داده شوند */
@@ -71,6 +71,15 @@ function qdef(t,lv){const d=QDEF[t];if(!d)return "";const order="abcd",i=order.i
 function linkTerms(el){if(!TERMLIST.length||!el)return;const seen=new Set();const walk=n=>{if(n.nodeType===3){let t=n.nodeValue;for(const w of TERMLIST){if(seen.has(w))continue;const i=t.indexOf(w);if(i<0)continue;const before=i>0?t[i-1]:" ",after=t[i+w.length]||" ";const nx=t[i+w.length+1]||" ";if(/[\u0600-\u06FF]/.test(before)&&before!=="\u200c")continue;if(/[\u0600-\u06FF]/.test(after)&&after!=="\u200c"&&!(after==="ی"&&!/[\u0600-\u06FF]/.test(nx)))continue;seen.add(w);const r=document.createRange();r.setStart(n,i);r.setEnd(n,i+w.length);const sp=document.createElement("button");sp.type="button";sp.className="term";sp.dataset.term=w;r.surroundContents(sp);walk(n);return;}}else if(n.nodeType===1&&!n.classList.contains("term")&&n.tagName!=="BUTTON"&&n.tagName!=="svg"){[...n.childNodes].forEach(walk);}};[...el.childNodes].forEach(walk);
   el.querySelectorAll(".term").forEach(b=>b.onclick=e=>{e.stopPropagation();termCard(b.dataset.term);});}
 function termCard(t){const o=overlay(`<div class="sheet tcard"><span class="tk">کارت واژه</span><h2>${t}</h2><p>${ltrMath(qdef(t))}</p><p class="j-note">این کارت در دفترچهٔ کوله‌پشتی‌ات هست.</p><button class="btn go" id="tcx" type="button">فهمیدم</button></div>`,"کارت واژه");const p=curPlayer();if(p){p.cards=p.cards||[];if(!p.cards.includes(t)){p.cards.push(t);save();}}o.querySelector("#tcx").onclick=closeOv;o.querySelector("#tcx").focus();}
+/* ---------- حدس بزن ← ببین ← توضیح بده (POE) ----------
+   وقتی هنوز قاعده‌ای یاد نداده‌ایم، پیش‌بینی فقط حدس است و امتیاز ندارد؛ امتیاز برای سؤالی است که دربارهٔ دیده‌هاست.
+   g={prompt,opts,reveal(guessIndex,next),right}  s={prompt,opts,ans,ok,retry} */
+function poe(A,g,s){A.prompt(g.prompt);const c=A.ctrl("");
+  const m=mcq(c,g.opts,i=>{if(A.locked)return;m.disable();m.mark(i,"sel");A.fb(KID()?"حالا ببین چه می‌شود.":"حدس زدی. حالا ببین چه می‌شود.","info");later(350,()=>g.reveal(i,()=>ask(i)));});
+  function ask(gi){A.prompt(s.prompt);const note=g.right==null?"":gi===g.right?(KID()?" حدست درست بود!":" حدست هم درست بود."):(KID()?" حدست چیز دیگری بود؛ حالا دیدی چه شد.":" حدست چیز دیگری بود؛ آزمایش جواب را نشان داد.");
+    const c2=A.ctrl("");const m2=mcq(c2,s.opts,(j,bt)=>{if(A.locked)return;
+      if(j===s.ans){m2.disable();m2.mark(j,"right");A.judge(true,{ok:s.ok+note});}
+      else{m2.mark(j,"wrong");bt.disabled=true;A.judge(false,{retry:s.retry,final:s.ok});if(A.locked){m2.disable();m2.mark(s.ans,"right");}}});}}
 /* ---------- صحنهٔ بازی: سربرگ، صحنه، قاب متن و یک دکمهٔ اصلی ---------- */
 function board(k,head){epoch++;closeOv();if(typeof clearToasts==="function")clearToasts();setC(k);const s=ST[k],p=curPlayer();
   const land=head.land!=null?head.land:ST_LAND[k];setLand(land);document.body.classList.add("bdm");
@@ -91,14 +100,14 @@ function board(k,head){epoch++;closeOv();if(typeof clearToasts==="function")clea
     ctrl:h=>{const c=$("#cl");c.innerHTML=h||"";return c;},fb:(m,c)=>{const e=$("#fb");if(!e)return;e.innerHTML=ltrMath(m||"");e.className="fb "+(c||"");if(m)later(80,revealFb);if(c==="ok")setMood("happy");else if(c==="no")setMood("oops");},
     nav:h=>{const n=$("#nv");n.innerHTML=h||"";return n;},
     /* آزمایش آزاد: وقتی بچه با امتحان کردن جواب را پیدا می‌کند (مثلاً جرمِ نامعلوم)، امتحانِ ناموفق فرصت را کم نمی‌کند */
-    trials:0,trial(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);if(ok)return A.judge(true,Object.assign({},m,{pts:A.trials<3?2:1,k:null}));
+    trials:0,trial(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);if(ok)return A.judge(true,Object.assign({},m,{pts:A.trials<3?2:1,k:null,act:true}));
       A.trials++;A.fb(`${m.retry||""}${A.trials>=2&&m.more?" "+m.more:""} <b>${voice("retry")}</b>`,"info");
       /* نردبان راهنما: بعد از سه امتحانِ ناموفق، «نشانم بده» (جواب نشان داده می‌شود، ۱ امتیاز) تا بچه گیر نکند */
       if(A.trials>=3&&m.final&&!$("#showme")){const n=$("#nv");n.insertAdjacentHTML("beforeend",`<button class="btn" id="showme" type="button">نشانم بده</button>`);
         $("#showme").onclick=()=>{if(A.locked)return;A.locked=true;if(m.show)m.show();A.fb(m.final,"info");if(A.done)A.done(1);};}
       return false;},
     judge(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);
-      if(ok){const pts=m.pts!=null?m.pts:(A.tries===0?2:1);A.locked=true;A.fb(`${voice(pts===2?(A.trials?"okTries":"ok"):"okLate")} ${m.ok||""} <span style="white-space:nowrap">(+${fa(pts)} امتیاز)</span>`,"ok");if(A.done)A.done(pts);return true;}
+      if(ok){const pts=m.pts!=null?m.pts:(A.tries===0?2:1);A.locked=true;A.fb(`${voice(pts===2?(A.trials?"okTries":m.act?"okDo":"okSay"):"okLate")} ${m.ok||""} <span style="white-space:nowrap">(+${fa(pts)} امتیاز)</span>`,"ok");if(A.done)A.done(pts);return true;}
       A.tries++;if(A.tries<2){A.fb(KID()?`${voice("wrong")} ${m.retry||""}`:`نه هنوز. ${m.retry||""} یک فرصت دیگر داری.`,"no");$("#hlpb").classList.add("nudge");return false;}
       A.locked=true;A.fb(`${m.final||""}`,"no");if(A.done)A.done(0);return false;}};
   $("#bk").onclick=head.back;

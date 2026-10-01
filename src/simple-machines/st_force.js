@@ -147,6 +147,9 @@ function fricChallenge(sp,A){const fr=makeFriction(A,sp.F);A.refresh=()=>fr.rend
   else if(q===3){ans=2;text=KID()?"کدام سطح زبرتر است؟":"اصطکاک کدام سطح از همه بیشتر است؟";expl="پرزهای فرش جلوی سُر خوردن را می‌گیرند؛ پس فرش بیشترین اصطکاک را دارد.";}
   else if(q===4){ans=0;text=KID()?"با هل کم، کدام جعبه راه می‌افتد؟":`با هل کمِ ${fa(sp.F)} نیوتن، روی کدام سطح جعبه راه می‌افتد؟`;expl="فقط اصطکاکِ یخ از این هل کمتر است.";}
   else{ans=2;text=`با هل ${fa(sp.F)} نیوتن، کدام جعبه کمترین راه را می‌رود؟`;expl="هر سه جعبه راه می‌افتند، ولی اصطکاکِ فرش بیشترین مقدار از هل را خنثی می‌کند.";}
+  /* اولین برخورد با اصطکاک: حدس (بی‌امتیاز) ← هل دادن ← سؤال دربارهٔ چیزی که دید */
+  if(sp.poe){poe(A,{prompt:KID()?"هر سه جعبه را با یک اندازه هل می‌دهیم. حدس بزن کدام دورتر می‌رود.":"هر سه جعبه را با یک اندازه هل می‌دهیم. حدس بزن کدام دورتر می‌رود. حدس امتیاز ندارد.",opts:fr.lanes.map(L=>L.n),right:ans,reveal:(i,next)=>fr.run(next)},
+    {prompt:"کدام جعبه دورتر رفت؟",opts:fr.lanes.map(L=>L.n),ans,ok:expl,retry:"به جای جعبه‌ها نگاه کن: کدام از همه جلوتر است؟"});return;}
   A.prompt(`${text}<small>روی یکی از سطح‌ها بزن یا از دکمه‌ها انتخاب کن.</small>`);
   const c=A.ctrl("");let m;const choose=i=>{if(A.locked)return;fr.st.pick=i;fr.render();
     if(i===ans){m.disable();m.mark(i,"right");fr.run(()=>A.judge(true,{ok:expl}));}

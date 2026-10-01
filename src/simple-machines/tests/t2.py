@@ -53,6 +53,8 @@ def scale(g,pg,sp):
         if SHOT: g.shot(f'ch_scale_{t}_{sp["obj"]}')
         if t=='waterF': stepper_set(pg,SPR[sp['obj']][1]); click_text(pg,'بررسی'); return
         mcq(pg,sp['ans']); return
+    if t in ('moon','moonbal'):
+        mcq(pg,0); pg.wait_for_timeout(1300); mcq(pg,1); return
     if 'ans' in sp:
         if SHOT: g.shot(f'ch_scale_{t}')
         mcq(pg,sp['ans']); return
@@ -61,7 +63,11 @@ def scale(g,pg,sp):
     if t=='mcalc': stepper_set(pg,sp['W']/10); click_text(pg,'بررسی'); return
     u=sp['u']
     if t=='heavier':
-        mL=sum(MASS[u][i] for i in sp['L']); mR=sum(MASS[u][i] for i in sp['R']); mcq(pg,0 if mR>mL else 1 if mR==mL else 2); return
+        ma=MASS[u][sp['L'][0]]; mb=MASS[u][sp['R'][0]]
+        mcq(pg,1); pg.wait_for_timeout(200)          # guess (free, never scored)
+        g.drag(272,480,124,240); pg.wait_for_timeout(800); g.drag(320,480,516,240); pg.wait_for_timeout(1000)
+        if SHOT: g.shot(f'ch_scale_heavier_{sp["L"][0]}')
+        mcq(pg,0 if ma>mb else 1 if ma==mb else 2); return
     target=sum(MASS[u][i] for i in sp['obj'])
     combo=solve_coins(target,sp['tray'],12)
     n=len(sp['tray'])
@@ -78,7 +84,10 @@ def lever(g,pg,sp):
     m=lambda it: it if isinstance(it,(int,float)) else LM[it]
     if t=='predict':
         tl=sum(-p*m(it) for p,it in sp['items'] if p<0); tr=sum(p*m(it) for p,it in sp['items'] if p>0)
-        mcq(pg,0 if tr>tl else 1 if tr==tl else 2); return
+        a=0 if tr>tl else 1 if tr==tl else 2
+        if sp.get('poe') or pg.evaluate("()=>document.body.classList.contains('tr-a')"):
+            mcq(pg,0); pg.wait_for_timeout(1800)
+        mcq(pg,a); return
     if t=='mystery':
         my=[it for p,it in sp['items'] if isinstance(it,str)][0]; stepper_set(pg,LM[my]); click_text(pg,'بررسی'); return
     if t=='lift':
@@ -183,6 +192,7 @@ def sort(g,pg,sp):
 def fric(g,pg,sp):
     t=sp['t']
     if t=='fq':
+        if sp.get('poe'): mcq(pg,1); pg.wait_for_timeout(2600)
         mcq(pg,{1:0,2:2,3:2,4:0,5:2}[sp['q']]); pg.wait_for_timeout(2000); return
     if t=='surf':
         a=sp['ans'] if sp['goal']=='flag' else (0 if sp['goal']=='move' else 2)

@@ -352,3 +352,5 @@ body[data-land="1"] .bh .dots i{background:rgba(42,26,20,.18)}
 .bd.qz{display:flex!important}
 .bp .term{padding-block:6px}
 .bp>*,.qzb>*{flex-shrink:0}
+
+.mcq .btn.sel{background:#FFF3D1;box-shadow:inset 0 0 0 3px #F0B429}
