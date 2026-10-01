@@ -44,3 +44,27 @@ Preserve unrelated or uncommitted local changes. The live game remains the worki
 ## Checkpoint rule
 
 At the end of every coherent work stage, update this handoff before pausing or handing the work to another session. Record the current `main` commit, what changed, the exact checks completed and their outcomes, whether the public game changed, open owner decisions or gates, and the next concrete action. Link to durable reports or logs when they exist. Commit and push the updated handoff with the stage checkpoint when repository access permits; if that fails, preserve the update locally and report the failure clearly. Do not leave an unfinished or interrupted check marked as passed.
+
+## Continuation checkpoint — 2026-10-02, release preparation
+
+- Fetched `main` and fast-forwarded a clean local checkout to `4b97c24606a2c18ef4ab5c050a356182170a3b5d` (main before this documentation checkpoint). No local edits were discarded.
+- Compared the full tracked tree against `a3115af5df8f5af94d5d194449c8002e602fbb80`: only this handoff changed. Source, build inputs, publication script, live HTML and service worker are unchanged.
+- Read the current `CLAUDE.md`, this handoff, `docs/HANDOFF.md`, `docs/NEXT.md`, `design/README.md`, build script and publication script. The newer handoff remains authoritative over historical unchecked tasks.
+- Static preflight: all 19 JavaScript inputs listed by the build script exist and are nonempty. The three embedded fonts, web manifest, icon, service worker and existing live HTML are present. This checks file availability only; it is not a new build, browser test or deployment test.
+- The existing review ZIP contains `preview.html`, `stations.html`, `CHILD_TEST_PLAN.md`, `RELEASE_CHECKS.md`, `README.txt` and `RESULTS.txt`. SHA-256: `08b333877a86e35d0bd3520e9705e145e4beb10515dcb042ed43124f5ba0d225`. The child plan and detailed reports are archive members, not standalone tracked repository files.
+- No regression tests were rerun and no agents were assigned: there are no changed code/build inputs or new discrepancies requiring a review. The previous 27-job results remain the recorded technical evidence.
+- No owner scientific/visual signoff is recorded in the supplied conversation or current release handoff. No child pilot was conducted. No publication command was executed; the public game remains unchanged.
+
+Durable verification evidence: [frozen release verification commit](https://github.com/javedani66-rgb/science-games/commit/a3115af5df8f5af94d5d194449c8002e602fbb80), whose commit message records the completed suite; [publication script at the verified checkpoint](https://github.com/javedani66-rgb/science-games/blob/a3115af5df8f5af94d5d194449c8002e602fbb80/tools/publish_game.py). Detailed reports remain in the previously saved owner-review archive.
+
+### Prepared publication and live-verification checklist
+
+Run this sequence only after the owner signoff is recorded for each station in the reviewed release candidate:
+
+1. Fetch `main` again, preserve concurrent edits and compare source/build inputs against the verified checkpoint. If they differ, review the changed scope and run the necessary checks before publishing; signoff must apply to the resulting candidate.
+2. From the repository root run `python3 tools/publish_game.py simple-machines physics/simple-machines "کارگاه ماشین‌های ساده"`. The script rebuilds the game, wraps the PWA HTML, writes the live page and changes the service-worker version. It has no dry-run mode; do not execute it during preparation.
+3. Review `git diff -- physics/simple-machines/index.html sw.js`. Confirm the intended generated page, Persian RTL wrapper, manifest/icon paths and new service-worker version. Stage only the intended release files and checkpoint notes; commit and push to `main` without force. Do not include unrelated local files.
+4. Verify the deployment result and https://javedani66-rgb.github.io/science-games/physics/simple-machines/ . Check the portal link, fresh-load version, an existing-profile resume, representative station interaction, teacher report and offline reload after the service worker installs. Check for console errors and horizontal overflow on phone and desktop. If the live origin is inaccessible, record that limitation and leave live verification pending.
+5. Record the release commit, public URL, exact checks/results and any remaining live-verification gap here. Conduct the child pilot only with a real child and human observer, using the archive's plan; never substitute technical checks for pilot observations.
+
+Next concrete action: await and record owner scientific/visual signoff per station. No independent implementation task remains within this release-preparation stage. After signoff, execute the checklist above; any new scope remains a separate owner decision.
