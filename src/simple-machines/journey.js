@@ -9,20 +9,20 @@ const LANDS=[{n:"کارگاه نجاری",bg:"#F7E3B5",hex:"#8A5A12",ttl:"#5B3A2
 const landOf=i=>i<4?0:i<10?1:2;
 /* هر منزل: اسم، ایستگاه مأموریت جانبی، مأموریت‌های اصلی هر مسیر [ایستگاه، شمارهٔ مرحله] */
 const STOPS=[
- {n:"نیرو",side:"force",m:{a:[["force",1]],b:[["force",1]],c:[["force",1],["force",2]]}},
- {n:"جرم و وزن",side:"scale",m:{a:[["scale",1],["scale",2]],b:[["scale",1],["scale",2]],c:[["scale",1],["scale",2]]}},
- {n:"نیروسنج",side:"scale",m:{a:[["scale",3],["scale",4]],b:[["scale",3],["scale",4]],c:[["scale",3],["scale",4]]}},
- {n:"اصطکاک",side:"force",m:{a:[["force",2],["force",3]],b:[["force",2],["force",3]],c:[["force",3],["force",4]]}},
- {n:"اهرم ۱",side:"lever",m:{a:[["lever",1]],b:[["lever",1]],c:[["lever",1]]}},
- {n:"اهرم ۲",side:"lever",m:{a:[["lever",2],["lever",3]],b:[["lever",2],["lever",3]],c:[["lever",2],["lever",3],["lever",4]]}},
- {n:"سطح شیب‌دار",side:"ramp",m:{a:[["ramp",1],["ramp",2]],b:[["ramp",1],["ramp",2],["ramp",3]],c:[["ramp",1],["ramp",2],["ramp",3]]}},
- {n:"گوه و پیچ",side:"wedge",m:{a:[["wedge",1],["wedge",2]],b:[["wedge",1],["wedge",2],["wedge",3]],c:[["wedge",1],["wedge",2],["wedge",3]]}},
- {n:"چرخ و محور",side:"wheel",m:{a:[["wheel",1],["wheel",2]],b:[["wheel",1],["wheel",2],["wheel",3]],c:[["wheel",1],["wheel",2],["wheel",3]]}},
- {n:"قرقره",side:"pulley",m:{a:[["pulley",1],["pulley",2]],b:[["pulley",1],["pulley",2],["pulley",3]],c:[["pulley",1],["pulley",2],["pulley",3]]}},
- {n:"چالش مهندسی",side:"sort",m:{a:[["sort",1],["sort",2]],b:[["sort",1],["sort",2]],c:[["sort",1],["sort",2]]}},
- {n:"نمایشگاه",side:"sort",m:{a:[["sort",3]],b:[["sort",3],["sort",4]],c:[["sort",3],["sort",4]]}}];
+ {n:"نیرو",side:"force",m:{a:["force.a1"],b:["force.1"],c:["force.2","force.3"]}},
+ {n:"جرم و وزن",side:"scale",m:{a:["scale.a1","scale.a2"],b:["scale.1","scale.2"],c:["scale.2","scale.3"]}},
+ {n:"نیروسنج",side:"scale",m:{a:["scale.a3","scale.a4"],b:["scale.4","scale.5"],c:["scale.4","scale.5"]}},
+ {n:"اصطکاک",side:"force",m:{a:["force.a2","force.a3"],b:["force.2","force.3"],c:["force.4","force.xc"]}},
+ {n:"اهرم ۱",side:"lever",m:{a:["lever.a1"],b:["lever.1"],c:["lever.2"]}},
+ {n:"اهرم ۲",side:"lever",m:{a:["lever.a2","lever.a3"],b:["lever.2","lever.3"],c:["lever.3","lever.4","lever.xc"]}},
+ {n:"گوه و پیچ",side:"wedge",m:{a:["wedge.a1","wedge.a2"],b:["wedge.1","wedge.2","wedge.3"],c:["wedge.2","wedge.3","wedge.4"]}},
+ {n:"سطح شیب‌دار",side:"ramp",m:{a:["ramp.a1","ramp.a2"],b:["ramp.1","ramp.2","ramp.3"],c:["ramp.2","ramp.3","ramp.4"]}},
+ {n:"چرخ و محور",side:"wheel",m:{a:["wheel.a1","wheel.a2"],b:["wheel.1","wheel.2","wheel.3"],c:["wheel.2","wheel.3","wheel.4"]}},
+ {n:"قرقره",side:"pulley",m:{a:["pulley.a1","pulley.a2"],b:["pulley.1","pulley.2","pulley.3"],c:["pulley.2","pulley.3","pulley.4"]}},
+ {n:"چالش مهندسی",side:"sort",m:{a:["sort.a1","sort.a2"],b:["sort.1","sort.2"],c:["sort.2","sort.3"]}},
+ {n:"نمایشگاه",side:"sort",m:{a:["sort.a3"],b:["sort.3","sort.xb"],c:["sort.4","sort.xc"]}}];
 /* کار خانه: همان تمرین خانهٔ برنامهٔ ترم؛ والدین می‌خوانند */
-const HOME=["شکار نیرو: پنج هل و پنج کشش در خانه پیدا کند و نقاشی کند.","با چوب‌لباسی و دو کیسه ترازو بسازد و پنج میوه را از سبک به سنگین بچیند.","با کش مو یک کش‌سنج بسازد؛ یک کفش و یک جامدادی را بکشد و ببیند کدام، کش را بیشتر کش آورد.","یک اسباب‌بازی را روی سرامیک، فرش و پتو بکشد و بگوید کدام سخت‌تر بود.","با خط‌کش و مداد اهرمی بسازد که یک پاک‌کن و یک تراش را صاف نگه دارد.","پنج اهرم در خانه پیدا کند و تکیه‌گاه هر کدام را با نقطهٔ قرمز نشان دهد.","با کتاب و یک تخته سطح شیب‌دار بسازد و یک ماشین اسباب‌بازی را از دو شیب رها کند.","مثلث کاغذی را دور مداد بپیچد و ترفندش را به خانواده نشان دهد.","دستگیرهٔ در را یک بار از خود دستگیره و یک بار از نزدیک میلهٔ وسط بچرخاند.","با کمک شما، با دستهٔ جارو و نخ یک کیسهٔ سبک را بالا ببرد.","با خانواده یک ماشین مرکب در خانه پیدا کند و ماشین‌های ساده‌اش را روی نقاشی نشان دهد.","در یک دقیقه برای خانواده توضیح دهد ماشین گروهشان چطور کار می‌کند."];
+const HOME=["شکار نیرو: پنج هل و پنج کشش در خانه پیدا کند و نقاشی کند.","با چوب‌لباسی و دو کیسه ترازو بسازد و پنج میوه را از سبک به سنگین بچیند.","با کش مو یک کش‌سنج بسازد؛ یک کفش و یک جامدادی را بکشد و ببیند کدام، کش را بیشتر کش آورد.","یک اسباب‌بازی را روی سرامیک، فرش و پتو بکشد و بگوید کدام سخت‌تر بود.","با خط‌کش و مداد اهرمی بسازد که یک پاک‌کن و یک تراش را صاف نگه دارد.","پنج اهرم در خانه پیدا کند و تکیه‌گاه هر کدام را با نقطهٔ قرمز نشان دهد.","مثلث کاغذی را دور مداد بپیچد و ترفندش را به خانواده نشان دهد.","با کتاب و یک تخته سطح شیب‌دار بسازد و یک ماشین اسباب‌بازی را از دو شیب رها کند.","دستگیرهٔ در را یک بار از خود دستگیره و یک بار از نزدیک میلهٔ وسط بچرخاند.","با کمک شما، با دستهٔ جارو و نخ یک کیسهٔ سبک را بالا ببرد.","با خانواده یک ماشین مرکب در خانه پیدا کند و ماشین‌های ساده‌اش را روی نقاشی نشان دهد.","در یک دقیقه برای خانواده توضیح دهد ماشین گروهشان چطور کار می‌کند."];
 /* «امروز یاد گرفتی»: کوتاه برای دوم و سوم، کامل‌تر برای بقیه */
 const LEARN=[
  ["طرفی که قوی‌تر می‌کشد، می‌برد.","نیرو یعنی هل دادن یا کشیدن. وقتی دو طرف می‌کشند، طرفی که نیروی بیشتری دارد می‌برد."],
@@ -31,15 +31,15 @@ const LEARN=[
  ["روی فرش سُر خوردن سخت‌تر است.","اصطکاک با سُر خوردن مخالفت می‌کند. سطح زبرتر اصطکاک بیشتری دارد."],
  ["سنگین‌تر نزدیک وسط بنشیند.","در الاکلنگ، سنگین‌تر نزدیک‌تر به تکیه‌گاه و سبک‌تر دورتر می‌نشیند."],
  ["تکیه‌گاه نزدیک سنگ، نیروی کمتر.","تکیه‌گاه نزدیک بار یعنی نیروی کمتر، ولی دست راه بیشتری می‌رود."],
- ["راه درازتر، نیروی کمتر.","سطح طولانی‌تر و ملایم‌تر نیروی کمتری می‌خواهد، ولی راه بیشتر است."],
  ["گوه تیز است و چوب را باز می‌کند.","گوه دو سطح شیب‌دار پشت به پشت است. پیچ سطح شیب‌داری است که دور میله پیچیده شده."],
+ ["راه درازتر، نیروی کمتر.","سطح طولانی‌تر و ملایم‌تر نیروی کمتری می‌خواهد، ولی راه بیشتر است."],
  ["دستهٔ بلندتر، چرخاندن راحت‌تر.","دستهٔ بلندتر یعنی نیروی کمتر، ولی دست دایرهٔ بزرگ‌تری می‌گردد."],
  ["با قرقره، طناب را پایین می‌کشیم و بار بالا می‌رود.","قرقرهٔ ثابت جهت کشیدن را عوض می‌کند. طناب‌های نگه‌دارندهٔ بیشتر یعنی نیروی کمتر."],
  ["بعضی وسیله‌ها از چند ماشین ساده ساخته شده‌اند.","ماشین مرکب از چند ماشین سادهٔ به هم وصل ساخته شده است."],
  ["شش ماشین ساده را می‌شناسی!","ماشین ساده نیرو را کم می‌کند، جهتش را عوض می‌کند یا حرکت را بیشتر می‌کند؛ ولی کار را کم نمی‌کند."]];
-const WORDS={a:[["نیرو"],["جرم","وزن"],["نیروسنج","نیروی شناوری"],["اصطکاک"],["اهرم","تکیه‌گاه"],[],["سطح شیب‌دار"],["گوه","پیچ"],["چرخ و محور"],["قرقرهٔ ثابت"],["ماشین مرکب"],[]],
- b:[["نیرو","نیروی خالص"],["جرم","وزن"],["نیروسنج","نیروی شناوری"],["اصطکاک"],["اهرم","تکیه‌گاه"],["نیروی محرک","نیروی مقاوم"],["سطح شیب‌دار"],["گوه","پیچ"],["چرخ و محور"],["قرقرهٔ ثابت"],["ماشین مرکب"],[]],
- c:[["نیرو","نیروی خالص"],["جرم","وزن"],["نیروسنج","نیروی شناوری"],["اصطکاک","کار"],["اهرم","تکیه‌گاه"],["نیروی محرک","نیروی مقاوم"],["سطح شیب‌دار"],["گوه","پیچ"],["چرخ و محور"],["قرقرهٔ ثابت"],["ماشین مرکب"],["مزیت مکانیکی"]]};
+const WORDS={a:[["نیرو"],["جرم","وزن"],["نیروسنج","نیروی شناوری"],["اصطکاک"],["اهرم","تکیه‌گاه"],[],["گوه","پیچ"],["سطح شیب‌دار"],["چرخ و محور"],["قرقرهٔ ثابت"],["ماشین مرکب"],[]],
+ b:[["نیرو","نیروی خالص"],["جرم","وزن"],["نیروسنج","نیروی شناوری"],["اصطکاک"],["اهرم","تکیه‌گاه"],["نیروی محرک","نیروی مقاوم"],["گوه","پیچ"],["سطح شیب‌دار"],["چرخ و محور"],["قرقرهٔ ثابت"],["ماشین مرکب"],[]],
+ c:[["نیرو","نیروی خالص"],["جرم","وزن"],["نیروسنج","نیروی شناوری"],["اصطکاک","کار"],["اهرم","تکیه‌گاه"],["نیروی محرک","نیروی مقاوم"],["گوه","پیچ"],["سطح شیب‌دار"],["چرخ و محور"],["قرقرهٔ ثابت"],["ماشین مرکب"],["مزیت مکانیکی"]]};
 /* تعریف‌ها: [برای دوم و سوم، برای چهارم تا ششم] */
 const JDEF={"نیرو":["هل دادن یا کشیدن.","هل دادن یا کشیدن. یکای نیرو نیوتن است."],"نیروی خالص":["","اثر همهٔ نیروهایی که با هم به یک چیز وارد می‌شوند. نیروهای مخالف از هم کم می‌شوند."],
  "جرم":["اندازهٔ ماده‌ای که در یک چیز هست. روی ماه هم همان است.","مقدار ماده‌ای که یک چیز دارد. با ترازوی دوکفه‌ای سنجیده می‌شود و روی ماه هم عوض نمی‌شود."],
@@ -68,16 +68,21 @@ const JP=()=>curP();
 /* «پایه» کلاس واقعی بچه است؛ «سطح» چیزی است که بازی می‌کند (با رفتن به سطح بالاتر عوض می‌شود) */
 const trk=p=>p.lvl||trackOfG(p.g);
 const missions=(p,i)=>STOPS[i].m[trk(p)];
-const mStars=(p,i,j)=>{const [k,L]=missions(p,i)[j];const key=trk(p)+":"+k;const pg=p.S.prog[key];return pg?pg.lv[L-1]||0:0;};
+const lvK=id=>id.slice(0,id.indexOf("."));
+/* مأموریت j از منزل i → ایستگاه و شمارهٔ مرحله در فهرستِ سطحِ بازیکن */
+const mRef=(p,i,j)=>{const id=missions(p,i)[j],k=lvK(id);return{id,k,L:levelsFor(k,trk(p)).findIndex(l=>l.id===id)+1};};
+const mStars=(p,i,j)=>{const id=missions(p,i)[j],tr=trk(p);return((p.S.ls||{})[tr+":"+id])||0;};
 const stopDone=(p,i)=>missions(p,i).every((_,j)=>mStars(p,i,j)>0);
 const curStop=p=>{for(let i=0;i<12;i++)if(!stopDone(p,i))return i;return 12;};
 const minStars=(p,i)=>Math.min(...missions(p,i).map((_,j)=>mStars(p,i,j)));
 const totStars=p=>{let t=0;for(let i=0;i<12;i++)missions(p,i).forEach((_,j)=>t+=mStars(p,i,j));return t;};
 const firstOpen=(p,i)=>{const ms=missions(p,i);for(let j=0;j<ms.length;j++)if(!mStars(p,i,j))return j;return 0;};
-const mName=(p,i,j)=>{const [k,L]=missions(p,i)[j];return levelsOf(k)[L-1].title;};
-function newProfile(name,g,t,shirt){const tr=trackOfG(g);return{id:"p"+Date.now().toString(36),name,g,t,shirt:shirt||"",lvl:null,done:"",quiz:[0,0,0,0,0],stash:{},cards:[],S:{prog:{},nums:true,forces:true,formula:tr==="d",track:tr},home:Array(12).fill(0),side:Array(12).fill(0),words:Array(12).fill(0),at:null,coach:1};}
+const mName=(p,i,j)=>{const r=mRef(p,i,j);return levelsFor(r.k,trk(p))[r.L-1].title;};
+function newProfile(name,g,t,shirt){const tr=trackOfG(g);return{id:"p"+Date.now().toString(36),name,g,t,shirt:shirt||"",lvl:null,done:"",quiz:[0,0,0,0,0],stash:{},cards:[],S:{prog:{},nums:true,forces:true,formula:tr==="d",track:tr},home:Array(12).fill(0),side:Array(12).fill(0),words:Array(12).fill(0),opt:Array(12).fill(0),at:null,coach:1,sv:2};}
 /* پروفایل‌های نسخهٔ قبل را کامل می‌کند (چیزی پاک نمی‌شود) */
-function fixProfile(p){if(!p.quiz)p.quiz=[0,0,0,0,0];if(p.done==null)p.done="";if(!p.stash)p.stash={};if(!p.cards)p.cards=[];if(p.shirt==null)p.shirt="";if(p.lvl===undefined)p.lvl=null;if(p.S&&p.S.track!==trk(p))p.S.track=trk(p);return p;}
+function fixProfile(p){if(p.S)migrateS(p.S);if(!p.opt)p.opt=Array(12).fill(0);
+  /* ۱۴۰۵/۷/۹: منزل ۷ (سطح شیب‌دار) و ۸ (گوه و پیچ) جابه‌جا شدند */
+  if(!p.sv){for(const a of [p.home,p.side,p.words])if(Array.isArray(a))[a[6],a[7]]=[a[7],a[6]];if(p.stash)for(const t in p.stash)for(const x of ["words","side"]){const a=p.stash[t]&&p.stash[t][x];if(Array.isArray(a))[a[6],a[7]]=[a[7],a[6]];}if(p.at&&(p.at.i===6||p.at.i===7))p.at=null;p.sv=2;}if(!p.quiz)p.quiz=[0,0,0,0,0];if(p.done==null)p.done="";if(!p.stash)p.stash={};if(!p.cards)p.cards=[];if(p.shirt==null)p.shirt="";if(p.lvl===undefined)p.lvl=null;if(p.S&&p.S.track!==trk(p))p.S.track=trk(p);return p;}
 DB.profiles.forEach(fixProfile);
 /* رفتن به سطح دیگر: کارت‌ها، آزمون‌ها و جوایزِ هر سطح جدا نگه داشته می‌شوند */
 function switchLevel(p,to,from){from=from||trk(p);if(from!==to){p.stash[from]={words:p.words,quiz:p.quiz,side:p.side};const st=p.stash[to]||{};
@@ -86,23 +91,27 @@ const maxLevel=p=>{let m=TRK.indexOf(trackOfG(p.g));for(const c of p.done)m=Math
 
 /* ---------- کد پیشرفت (داخل پیام معلم؛ همهٔ ستاره‌ها را نگه می‌دارد) ----------
    نسخهٔ ۱: ۲۳ حرف (کدهای قدیمی همچنان خوانده می‌شوند). نسخهٔ ۲: ۲۶ حرف، با کاراکتر، رنگ لباس، سطح، سطح‌های تمام‌شده و آزمون‌ها. */
-const ABC="بپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی",B31=31n,CMASK=0x5A3F9C1E07B4D268A3C5F1n,CLEN=23,CMASK2=0x1B7E3C95A0F24D6C8E1357A9B2D46F0n,CLEN2=26;
-function makeCode(p){let v=0n;const add=(x,b)=>{v=(v<<BigInt(b))|BigInt(x);};add(p.g,3);add(p.t%8,3);add(p.shirt?SHIRTS.indexOf(p.shirt)+1:0,3);add(TRK.indexOf(trk(p)),2);
+const ABC="بپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی",B31=31n,CMASK=0x5A3F9C1E07B4D268A3C5F1n,CLEN=23,CMASK2=0x1B7E3C95A0F24D6C8E1357A9B2D46F0n,CLEN2=26,CMASK3=0xE490FDC393FD0E1CC62BE5783646BF0324AAC3n,CLEN3=31;
+/* نسخهٔ ۳: ۳۱ حرف؛ برای هر منزل ۲ بیت هم برای چالش‌های اختیاری «خیلی سخت» و «هیولا» */
+function makeCode(p){let v=0n;const add=(x,b)=>{v=(v<<BigInt(b))|BigInt(x);};add(0,2);add(p.g,3);add(p.t%8,3);add(p.shirt?SHIRTS.indexOf(p.shirt)+1:0,3);add(TRK.indexOf(trk(p)),2);
   add([..."abcd"].reduce((m,c,i)=>m|(p.done.includes(c)?1<<i:0),0),4);
   for(let i=0;i<12;i++)for(let j=0;j<3;j++)add(j<missions(p,i).length?mStars(p,i,j):0,2);
   for(let i=0;i<12;i++)add(p.home[i]?1:0,1);for(let i=0;i<12;i++)add(p.side[i]?1:0,1);for(let i=0;i<5;i++)add(p.quiz[i]?1:0,1);
-  add(Number(v%2039n),11);v^=CMASK2;const out=[];for(let k=0;k<CLEN2;k++){out.unshift(ABC[Number(v%B31)]);v/=B31;}return out.map((c,x)=>c+(x===CLEN2-1?"":(x%4===3?" ":"‌"))).join("");}
-function readCode(str){const s=(str||"").replace(/[\s\-‌]/g,"").replace(/ي/g,"ی").replace(/ك/g,"ک");if(s.length!==CLEN&&s.length!==CLEN2)return null;const v2=s.length===CLEN2;let v=0n;for(const ch of s){const k=ABC.indexOf(ch);if(k<0)return null;v=v*B31+BigInt(k);}v^=v2?CMASK2:CMASK;
+  for(let i=0;i<12;i++)add(((p.opt||[])[i]|0)&3,2);
+  add(Number(v%2039n),11);v^=CMASK3;const out=[];for(let k=0;k<CLEN3;k++){out.unshift(ABC[Number(v%B31)]);v/=B31;}return out.map((c,x)=>c+(x===CLEN3-1?"":(x%4===3?" ":"‌"))).join("");}
+function readCode(str){const s=(str||"").replace(/[\s\-‌]/g,"").replace(/ي/g,"ی").replace(/ك/g,"ک");if(s.length!==CLEN&&s.length!==CLEN2&&s.length!==CLEN3)return null;const v3=s.length===CLEN3,v2=v3||s.length===CLEN2;let v=0n;for(const ch of s){const k=ABC.indexOf(ch);if(k<0)return null;v=v*B31+BigInt(k);}v^=v3?CMASK3:v2?CMASK2:CMASK;
   const ck=Number(v&2047n);v>>=11n;if(Number(v%2039n)!==ck)return null;const take=b=>{const x=Number(v&((1n<<BigInt(b))-1n));v>>=BigInt(b);return x;};
-  const quiz=[0,0,0,0,0];if(v2)for(let i=4;i>=0;i--)quiz[i]=take(1);
+  const opt=Array(12).fill(0);if(v3)for(let i=11;i>=0;i--)opt[i]=take(2);const quiz=[0,0,0,0,0];if(v2)for(let i=4;i>=0;i--)quiz[i]=take(1);
   const side=[],home=[],st=[];for(let i=11;i>=0;i--)side[i]=take(1);for(let i=11;i>=0;i--)home[i]=take(1);
   for(let i=11;i>=0;i--){st[i]=[];for(let j=2;j>=0;j--)st[i][j]=take(2);}
-  if(!v2){const t=take(2),g=take(3);if(g>4)return null;return{g,t,st,home,side,quiz,shirt:"",lvl:trackOfG(g),done:""};}
-  const dm=take(4),lv=take(2),sh=take(3),t=take(3),g=take(3);return{g,t,st,home,side,quiz,shirt:sh?SHIRTS[sh-1]||"":"",lvl:TRK[lv],done:[..."abcd"].filter((c,i)=>dm&(1<<i)).join("")};}
+  if(!v2){const t=take(2),g=take(3);if(g>4)return null;return oldOrder({g,t,st,home,side,quiz,opt,shirt:"",lvl:trackOfG(g),done:""});}
+  const dm=take(4),lv=take(2),sh=take(3),t=take(3),g=take(3);if(v3&&take(2)!==0)return null;if(g>7)return null;const r={g,t,st,home,side,quiz,opt,shirt:sh?SHIRTS[sh-1]||"":"",lvl:TRK[lv],done:[..."abcd"].filter((c,i)=>dm&(1<<i)).join("")};return v3?r:oldOrder(r);}
+/* کدهای نسخهٔ ۱ و ۲ با ترتیب قدیم منزل‌ها ساخته شده‌اند */
+function oldOrder(r){for(const a of [r.st,r.home,r.side])[a[6],a[7]]=[a[7],a[6]];return r;}
 function applyCode(p,r){fixProfile(p);p.g=r.g;p.t=r.t;p.shirt=r.shirt;p.done=r.done;const tr=r.lvl;p.lvl=tr===trackOfG(r.g)?null:tr;p.S.track=tr;p.S.prog=p.S.prog||{};
-  for(let i=0;i<12;i++)STOPS[i].m[tr].forEach(([k,L],j)=>{const key=tr+":"+k;const pg=p.S.prog[key]||(p.S.prog[key]={lv:[0,0,0,0,0],best:0});pg.lv[L-1]=Math.max(pg.lv[L-1]||0,r.st[i][j]);});
-  p.home=r.home.slice();p.side=r.side.slice();p.quiz=r.quiz.slice();p.words=p.words.map((w,i)=>w||(i<=curStop(p)?1:0));p.at=null;}
-function codeFromMsg(txt){const m=(txt||"").match(/کد\s*:\s*([^\n]+)/);if(m){const r=readCode(m[1]);if(r)return r;}const t=(txt||"").replace(/[\s‌]/g,"");for(const n of [CLEN2,CLEN])for(let a=0;a+n<=t.length;a++){const r=readCode(t.slice(a,a+n));if(r)return r;}return null;}
+  p.S.ls=p.S.ls||{};for(let i=0;i<12;i++)STOPS[i].m[tr].forEach((id,j)=>{const key=tr+":"+id;p.S.ls[key]=Math.max(p.S.ls[key]||0,r.st[i][j]);});
+  p.home=r.home.slice();p.side=r.side.slice();p.quiz=r.quiz.slice();p.opt=(r.opt||Array(12).fill(0)).slice();p.words=p.words.map((w,i)=>w||(i<=curStop(p)?1:0));p.at=null;}
+function codeFromMsg(txt){const m=(txt||"").match(/کد\s*:\s*([^\n]+)/);if(m){const r=readCode(m[1]);if(r)return r;}const t=(txt||"").replace(/[\s‌]/g,"");for(const n of [CLEN3,CLEN2,CLEN])for(let a=0;a+n<=t.length;a++){const r=readCode(t.slice(a,a+n));if(r)return r;}return null;}
 function teacherMsg(p){const own=trackOfG(p.g),tr=trk(p);return `کارگاه ماشین‌های ساده\nنام: ${p.name}\nپایه: ${GRADES[p.g]}${tr!==own?`\nسطح بازی: ${LVLN[tr]}`:""}\n${curStop(p)>=12?"هر ۱۲ منزل تمام شد":`منزل: ${fa(curStop(p)+1)} از ۱۲`} · ستاره: ${fa(totStars(p))} · آزمون: ${fa(p.quiz.filter(Boolean).length)} از ۵\nکد: ${makeCode(p)}`;}
 
 /* ---------- ابزار ---------- */
@@ -122,8 +131,8 @@ function stopIcon(i,col){const s=`stroke="${col}" stroke-width="3" fill="none" s
  `<rect x="-8" y="-9" width="16" height="12" rx="2" ${f}/><path d="M-15 7 H15 M-13 11 l3 -4 M-6 11 l3 -4 M1 11 l3 -4 M8 11 l3 -4" ${s}/>`,
  `<path d="M-15 -2 L15 -8" ${s}/><path d="M0 -5 L-5 8 H5Z" ${f}/><circle cx="-12" cy="-7" r="3.5" ${f}/>`,
  `<path d="M-15 4 L14 -10" ${s}/><path d="M-4 0 L-9 10 H1Z" ${f}/><rect x="-17" y="-3" width="9" height="7" rx="2" ${f}/>`,
- `<path d="M-15 11 L14 -9 V11Z" ${f} opacity=".35"/><path d="M-15 11 L14 -9 V11Z" ${s}/><rect x="-5" y="-4" width="8" height="8" rx="1.5" transform="rotate(-34 -1 0)" ${f}/>`,
  `<path d="M-14 -10 H-2 L-8 12Z" ${f}/><path d="M6 -12 H14 M10 -12 V12 M6 -6 L14 -8 M6 0 L14 -2 M6 6 L14 4" ${s}/>`,
+ `<path d="M-15 11 L14 -9 V11Z" ${f} opacity=".35"/><path d="M-15 11 L14 -9 V11Z" ${s}/><rect x="-5" y="-4" width="8" height="8" rx="1.5" transform="rotate(-34 -1 0)" ${f}/>`,
  `<circle cx="0" cy="0" r="11" ${s}/><circle cx="0" cy="0" r="3" ${f}/><path d="M0 0 L9 -9 M9 -9 h5" ${s}/>`,
  `<circle cx="0" cy="-7" r="7" ${s}/><path d="M-7 -7 V12 M7 -7 V6" ${s}/><rect x="3" y="6" width="8" height="7" rx="1.5" ${f}/>`,
  `<circle cx="0" cy="0" r="6" ${s}/><path d="M0 -13 V-8 M0 8 V13 M-13 0 H-8 M8 0 H13 M-9 -9 l3.5 3.5 M5.5 5.5 L9 9 M-9 9 l3.5 -3.5 M5.5 -5.5 L9 -9" ${s}/>`,
@@ -252,7 +261,7 @@ function coach(p){const K=KID();const o=jsheet(`<div class="shead"><h2>این ن
 
 /* ---------- برگهٔ منزل ---------- */
 function stopSheet(i){const p=JP(),Ld=LANDS[landOf(i)],ms=missions(p,i),L=WL(),K=KID();
-  const rows=ms.map(([k,Lv],j)=>{const st=mStars(p,i,j),open=j===0||mStars(p,i,j-1)>0;return `<div class="j-part ${st?"done":""}"><span class="ic" style="background:${Ld.bg}"><svg viewBox="-16 -16 32 32">${stopIcon(i,Ld.hex)}</svg></span><span class="tx"><span class="k">${L.main}${ms.length>1?" "+fa(j+1)+" از "+fa(ms.length):""}</span><span class="n">${esc(mName(p,i,j))}</span>${st?`<span>${[0,1,2].map(x=>`<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">${JSTAR(x<st)}</svg>`).join("")}</span>`:""}</span><button class="btn ${st?"":"go"}" type="button" data-m="${j}" ${open?"":"disabled"}>${st?"دوباره":"شروع"}</button></div>`;}).join("");
+  const rows=ms.map((id,j)=>{const k=lvK(id);const st=mStars(p,i,j),open=j===0||mStars(p,i,j-1)>0;return `<div class="j-part ${st?"done":""}"><span class="ic" style="background:${Ld.bg}"><svg viewBox="-16 -16 32 32">${stopIcon(i,Ld.hex)}</svg></span><span class="tx"><span class="k">${L.main}${ms.length>1?" "+fa(j+1)+" از "+fa(ms.length):""}</span><span class="n">${esc(mName(p,i,j))}</span>${st?`<span>${[0,1,2].map(x=>`<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">${JSTAR(x<st)}</svg>`).join("")}</span>`:""}</span><button class="btn ${st?"":"go"}" type="button" data-m="${j}" ${open?"":"disabled"}>${st?"دوباره":"شروع"}</button></div>`;}).join("");
   const o=jsheet(`<div class="shead"><div><span class="j-tag" style="background:${Ld.hex}">${Ld.n}</span><h2 style="color:var(--ink)">منزل ${fa(i+1)}: ${STOPS[i].n}</h2></div><button class="chip-btn" id="jcx" type="button">بستن</button></div>${rows}
    <div class="j-part ${p.side[i]?"done":""}"><span class="ic" style="background:#FFF6D6"><svg viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16" rx="3" transform="rotate(45 16 16)" fill="${p.side[i]?"#F0B429":"#fff"}" stroke="#C98A06" stroke-width="2.5"/></svg></span><span class="tx"><span class="k">${L.side}${K?"":" · اختیاری"}</span><span class="n">${K?`${fa(SIDEG.a[landOf(i)])} جواب درست بده`:`${fa(SIDEG[trk(p)][landOf(i)])} جواب درست در چالش بی‌پایان`}</span></span><button class="btn" type="button" id="jsd">${p.side[i]?"دوباره":"برو"}</button></div>
    <div class="j-part"><span class="ic" style="background:#EEF5FF"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="none" stroke="#2F6BD0" stroke-width="3"/><path d="M16 6 v4 M16 22 v4 M6 16 h4 M22 16 h4" stroke="#2F6BD0" stroke-width="3"/></svg></span><span class="tx"><span class="k">آزمایشگاه</span><span class="n">${K?"بازی آزاد":"آزادانه امتحان کن"}</span></span><button class="btn" type="button" id="jlab">برو</button></div>
@@ -261,8 +270,8 @@ function stopSheet(i){const p=JP(),Ld=LANDS[landOf(i)],ms=missions(p,i),L=WL(),K
    <div class="j-row"><button class="chip-btn" id="jwd" type="button">کارت‌های واژهٔ این منزل</button><button class="chip-btn" id="jdf" type="button">تعریف‌ها و فیلم‌ها</button></div>
    <p class="j-note">${stopDone(p,i)?"این منزل تمام شده. هر وقت خواستی دوباره بازی کن.":`با گرفتن دست‌کم یک ستاره در هر ${L.main}، منزل بعدی باز می‌شود.`}</p>`,`منزل ${fa(i+1)}`,Ld.hex);
   o.querySelector("#jcx").onclick=closeOv;o.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>runMission(i,+b.dataset.m));
-  o.querySelector("#jsd").onclick=()=>runSide(i);o.querySelector("#jlab").onclick=()=>{const k=missions(p,i)[0][0];playLab(k,{backLabel:"نقشه",back:()=>jmap({}),stop:i,title:STOPS[i].n,land:landOf(i)});};
-  o.querySelector("#jdf").onclick=()=>openDef(missions(p,i)[0][0]);o.querySelector("#jwd").onclick=()=>{closeOv();wordCard(i,()=>stopSheet(i),true);};
+  o.querySelector("#jsd").onclick=()=>runSide(i);o.querySelector("#jlab").onclick=()=>{const k=lvK(missions(p,i)[0]);playLab(k,{backLabel:"نقشه",back:()=>jmap({}),stop:i,title:STOPS[i].n,land:landOf(i)});};
+  o.querySelector("#jdf").onclick=()=>openDef(lvK(missions(p,i)[0]));o.querySelector("#jwd").onclick=()=>{closeOv();wordCard(i,()=>stopSheet(i),true);};
   const hh=o.querySelector("#jhh");if(hh)wireHold(hh,()=>{p.home[i]=1;save();jtoast("کار خانه تأیید شد.");stopSheet(i);});o.querySelector("#jcx").focus();}
 function sideSheet(i){const p=JP(),K=KID(),goal=SIDEG[trk(p)][landOf(i)];
   const o=jsheet(`<div class="shead"><div><span class="j-tag" style="background:#C98A06">${WL().side}${K?"":" · اختیاری"}</span><h2 style="color:var(--ink)">منزل ${fa(i+1)}</h2></div><button class="chip-btn" id="jcx" type="button">بستن</button></div>
@@ -276,7 +285,7 @@ const termDef=(p,w)=>typeof QDEF!=="undefined"&&QDEF[w]?qdef(w,trk(p)):(JDEF[w]?
 function wordCard(i,then,force){const p=JP(),ws=stopTerms(p,i),K=KID();if(!ws.length||(p.words[i]&&!force)){then();return;}
   const o=jsheet(`<span class="j-step" style="text-align:center">${K?"واژهٔ تازه":"کارت واژهٔ تازه"}</span>${ws.map(w=>`<div class="j-word"><span class="w">${w}</span><p>${ltrMath(termDef(p,w))}</p></div>`).join("")}<p class="j-note" style="text-align:center">این کارت در دفترچهٔ کوله‌پشتی‌ات می‌ماند.</p><button class="btn go j-wide" id="jgo2" type="button">${force?"فهمیدم":K?"شروع":"شروع مأموریت"}</button>`,"کارت واژه","#2F6BD0");
   o.querySelector("#jgo2").onclick=()=>{p.words[i]=1;save();closeOv();then();};o.querySelector("#jgo2").focus();}
-function runMission(i,j,r){const p=JP();wordCard(i,()=>{const [k,L]=missions(p,i)[j],ms=missions(p,i),before=curStop(p);
+function runMission(i,j,r){const p=JP();wordCard(i,()=>{const {k,L}=mRef(p,i,j),ms=missions(p,i),before=curStop(p);
   const sub=`منزل ${fa(i+1)} · ${WL().main}${ms.length>1?" "+fa(j+1)+" از "+fa(ms.length):""}: ${mName(p,i,j)}`;
   playLevel(k,L,{sub,title:STOPS[i].n,stop:i,land:landOf(i),resume:r&&r.specs?r:null,
     keep:st=>{p.at=st.done?null:{i,j,r:{specs:st.specs,res:st.res,i:st.i}};save();},

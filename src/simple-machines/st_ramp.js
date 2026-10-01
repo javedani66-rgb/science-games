@@ -49,13 +49,13 @@ const ST_ramp={key:"ramp",name:"سطح شیب‌دار",c:"#0F9488",sub:"نیر�
    stepper(c,{init:W,min:10,max:200,steps:[10],unit:"وزن جعبه",onChange:v=>{rp.st.W=v;rp.reset();}});stepper(c,{init:Sv,min:10,max:100,steps:[5],unit:"نیروی تو",onChange:v=>{rp.st.S=v;rp.reset();}});
    const b=btn(c,"بکش!","go",()=>{b.disabled=true;rp.pull(ok=>{A.fb(ok?`جعبه بالا رفت. نیروی لازم ${fa(r1(rp.F()))} بود و جعبه ${fa(rp.st.L)} متر راه رفت.`:"نیرویت کافی نبود و جعبه سُر خورد پایین. سطح را درازتر کن.",ok?"ok":"no");later(1200,()=>{rp.reset();b.disabled=false;});});});},
  kid:[
-  {title:"راه طولانی‌تر، نیروی کمتر",desc:"کدام سطح شیب‌دار راحت‌تر است؟",gen(){return[{t:"cmp",q:1},{t:"fit",W:60,S:35},{t:"cmp",q:3},{t:"fit",W:80,S:50},{t:"cmp",q:2}];}},
-  {title:"سطح شیب‌دار بساز",desc:"سطح را آن‌قدر دراز کن که جعبه بالا برود.",gen(){return[{t:"fit",W:90,S:35},{t:"fit",W:100,S:45},{t:"cmp",q:1},{t:"fit",W:70,S:25},{t:"fit",W:120,S:25}];}}],
+  {id:"ramp.a1",title:"راه طولانی‌تر، نیروی کمتر",desc:"کدام سطح شیب‌دار راحت‌تر است؟",gen(){return[{t:"cmp",q:1},{t:"fit",W:60,S:35},{t:"cmp",q:3},{t:"fit",W:80,S:50},{t:"cmp",q:2}];}},
+  {id:"ramp.a2",title:"سطح شیب‌دار بساز",desc:"سطح را آن‌قدر دراز کن که جعبه بالا برود.",gen(){return[{t:"fit",W:90,S:35},{t:"fit",W:100,S:45},{t:"cmp",q:1},{t:"fit",W:70,S:25},{t:"fit",W:120,S:25}];}}],
  levels:[
-  {title:"راه طولانی‌تر، نیروی کمتر",desc:"دو سطح شیب‌دار را مقایسه کن و سطحی بساز که نیرویت برای بالا بردن جعبه برسد.",gen(){return[{t:"cmp",q:1},{t:"fit",W:60,S:35},{t:"cmp",q:2},{t:"fit",W:80,S:30},{t:"cmp",q:3},{t:"fit",W:100,S:45}];}},
-  {title:"طول درست",desc:"کوتاه‌ترین سطح شیب‌داری را پیدا کن که جعبه با آن بالا برود، و نیروی لازم را حساب کن.",gen(){return[{t:"fit",W:90,S:25},{t:"calcF",W:60,L:3},{t:"fit",W:120,S:35},{t:"calcF",W:100,L:4},{t:"cmp",q:2},{t:"fit",W:70,S:25}];}},
-  {title:"فرمول سطح شیب‌دار",desc:"نیرو × طول سطح = وزن × ارتفاع. طول لازم را حساب کن و بساز.",gen(){return[{t:"calcL",W:90,S:30},S.track==="b"?{t:"calcF",W:90,L:6}:{t:"work"},{t:"fit",W:150,S:35},{t:"calcF",W:120,L:6},{t:"calcL",W:80,S:20},{t:"fit",W:110,S:25}];}},
-  {title:"قهرمان سطح شیب‌دار",desc:"سکوی بلندتر (۲ متر)، عددهای بزرگ‌تر.",gen(){return[{t:"fit",W:60,S:25,H:2},{t:"calcF",W:90,L:6,H:2},{t:"fit",W:100,S:45,H:2},{t:"calcL",W:120,S:40,H:2},{t:"work"},{t:"fit",W:80,S:30,H:2}];}}],
+  {id:"ramp.1",title:"راه طولانی‌تر، نیروی کمتر",desc:"دو سطح شیب‌دار را مقایسه کن و سطحی بساز که نیرویت برای بالا بردن جعبه برسد.",gen(){return[{t:"cmp",q:1},{t:"fit",W:60,S:35},{t:"cmp",q:2},{t:"fit",W:80,S:30},{t:"cmp",q:3},{t:"fit",W:100,S:45}];}},
+  {id:"ramp.2",title:"طول درست",desc:"کوتاه‌ترین سطح شیب‌داری را پیدا کن که جعبه با آن بالا برود، و نیروی لازم را حساب کن.",gen(){return[{t:"fit",W:90,S:25},{t:"calcF",W:60,L:3},{t:"fit",W:120,S:35},{t:"calcF",W:100,L:4},{t:"cmp",q:2},{t:"fit",W:70,S:25}];}},
+  {id:"ramp.3",title:"فرمول سطح شیب‌دار",desc:"نیرو × طول سطح = وزن × ارتفاع. طول لازم را حساب کن و بساز.",gen(){return[{t:"calcL",W:90,S:30},S.track==="b"?{t:"calcF",W:90,L:6}:{t:"work"},{t:"fit",W:150,S:35},{t:"calcF",W:120,L:6},{t:"calcL",W:80,S:20},{t:"fit",W:110,S:25}];}},
+  {id:"ramp.4",title:"قهرمان سطح شیب‌دار",desc:"سکوی بلندتر (۲ متر)، عددهای بزرگ‌تر.",gen(){return[{t:"fit",W:60,S:25,H:2},{t:"calcF",W:90,L:6,H:2},{t:"fit",W:100,S:45,H:2},{t:"calcL",W:120,S:40,H:2},{t:"work"},{t:"fit",W:80,S:30,H:2}];}}],
  endless(r,d){const tp=pick(r,d<2?["cmp","fit"]:["fit","calcF","calcL","fit"]);const H=d>3.5&&r()<.5?2:1;
    if(tp==="cmp")return{t:"cmp",q:pick(r,[1,2,3])};const Ls=[];for(let L=H;L<=6;L+=.5)Ls.push(L);
    for(let k=0;k<100;k++){const W=ri(r,4,15)*10,L=pick(r,Ls.filter(x=>x>H));const f=W*H/L;if(tp==="calcF"&&Number.isInteger(f))return{t:"calcF",W,L,H};if(tp==="calcL"){const S=pick(r,[10,15,20,25,30,40]);const Lm=W*H/S;if(Number.isInteger(Lm*2)&&Lm>H&&Lm<=6)return{t:"calcL",W,S,H};}if(tp==="fit"){const S=ri(r,2,10)*5,mL=minL(W,S,H);if(mL&&mL>H&&!Number.isInteger(W*H/S*2))return{t:"fit",W,S,H};}}

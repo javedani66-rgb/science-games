@@ -38,7 +38,7 @@ with sync_playwright() as pw:
     pg.screenshot(path=OUT+tag+'_coach.png'); pg.click('#jok'); pg.wait_for_timeout(200)
     pg.screenshot(path=OUT+tag+'_map0.png')
     # validate all mission levels exist
-    bad=pg.evaluate("()=>{const {curP,missions,levelsOf}=__J;const p=curP();const out=[];for(let i=0;i<12;i++)missions(p,i).forEach(([k,L])=>{if(!levelsOf(k)[L-1])out.push(i+':'+k+L)});return out}")
+    bad=pg.evaluate("()=>{const {curP,missions,levelsOf}=__J;const p=curP();const out=[];for(let i=0;i<12;i++)missions(p,i).forEach(id=>{const k=id.split('.')[0];if(!levelsOf(k).some(l=>l.id===id))out.push(i+':'+id)});return out}")
     print('bad levels',bad)
     for stop in range(upto):
         pg.click('#jgo'); pg.wait_for_timeout(300)

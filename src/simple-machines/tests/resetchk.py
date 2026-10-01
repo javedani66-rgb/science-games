@@ -7,7 +7,7 @@ with sync_playwright() as pw:
     pg.goto(JURL); pg.evaluate("localStorage.clear()"); pg.reload(); pg.wait_for_timeout(200)
     pg.fill('#jnm','سارا'); pg.click('#jnx'); pg.click('[data-t="1"]'); pg.click('#jnx'); pg.click('[data-g="2"]'); pg.click('#jnx'); pg.wait_for_timeout(400)
     if pg.locator('#jok').count(): pg.click('#jok')
-    pg.evaluate("""()=>{const {curP,missions,trk,save}=__J;const p=curP();for(let i=0;i<3;i++)missions(p,i).forEach(([k,L])=>{const key=trk(p)+':'+k;const g=p.S.prog[key]=p.S.prog[key]||{lv:[]};g.lv[L-1]=2;});p.home[0]=1;save();}""")
+    pg.evaluate("""()=>{const {curP,missions,trk,save}=__J;const p=curP();for(let i=0;i<3;i++)missions(p,i).forEach(id=>{p.S.ls=p.S.ls||{};p.S.ls[trk(p)+':'+id]=2;});p.home[0]=1;save();}""")
     before=pg.evaluate("()=>[__J.curStop(__J.curP()),__J.makeCode(__J.curP())]"); pg.evaluate("__J.adults()"); pg.wait_for_timeout(200)
     pg.click('#jrs'); shown=pg.locator('#jrsc b').inner_text(); pg.click('#jry'); pg.wait_for_timeout(400)
     after=pg.evaluate("()=>{const p=__J.curP();return [__J.curStop(p),p.name,p.g,p.t,p.home[0],JSON.parse(localStorage.getItem('sm-journey-v1')).profiles.length]}")

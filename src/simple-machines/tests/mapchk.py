@@ -28,8 +28,8 @@ with sync_playwright() as pw:
         pg.click(f'[data-g="{grade}"]'); pg.click('#jnx'); pg.wait_for_timeout(400)
         if pg.locator('#jok').count(): pg.click('#jok'); pg.wait_for_timeout(200)
         for cs in range(12):
-            pg.evaluate("""cs=>{const {curP,missions,trk,jmap,save}=__J;const p=curP();p.S.prog={};
-              for(let i=0;i<cs;i++)missions(p,i).forEach(([k,L])=>{const key=trk(p)+':'+k;const g=p.S.prog[key]=p.S.prog[key]||{lv:[]};g.lv[L-1]=2;});
+            pg.evaluate("""cs=>{const {curP,missions,trk,jmap,save}=__J;const p=curP();p.S.prog={};p.S.ls={};
+              for(let i=0;i<cs;i++)missions(p,i).forEach(id=>{p.S.ls=p.S.ls||{};p.S.ls[trk(p)+':'+id]=2;});
               save();jmap({});}""",cs)
             pg.wait_for_timeout(150)
             if pg.locator('.ovl').count(): pg.evaluate("__J.closeOv()"); pg.wait_for_timeout(100)

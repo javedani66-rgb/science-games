@@ -44,13 +44,13 @@ const ST_wheel={key:"wheel",name:"چرخ و محور",c:"#7C4DCC",sub:"دسته�
    c.querySelector("#rs").onclick=e=>{const b=e.target.closest("[data-r]");if(!b)return;R=+b.dataset.r;c.querySelectorAll("#rs .opt").forEach(x=>x.classList.toggle("sel",x===b));A.fb("");mk();};
    stepper(c,{init:W,min:10,max:200,steps:[10],unit:"وزن سطل",onChange:v=>{W=v;mk();}});stepper(c,{init:Sv,min:5,max:100,steps:[5],unit:"نیروی تو",onChange:v=>{Sv=v;mk();}});btn(c,"از اول","",()=>{wl.reset();A.fb("");});},
  kid:[
-  {title:"چرخاندن دسته",desc:"دسته را بچرخان و سطل را بالا بیاور.",gen(){return[{t:"crank",R:4,W:40,S:20,h:1},{t:"mcq",q:1},{t:"crank",R:3,W:30,S:20,h:1}];}},
-  {title:"دستهٔ بلندتر",desc:"دسته‌ای انتخاب کن که نیرویت کافی باشد.",gen(){return[{t:"choose",W:60,S:25,opts:[1,2,3,4]},{t:"mcq",q:2},{t:"choose",W:80,S:30,opts:[1,2,3,4]},{t:"mcq",q:3}];}}],
+  {id:"wheel.a1",title:"چرخاندن دسته",desc:"دسته را بچرخان و سطل را بالا بیاور.",gen(){return[{t:"crank",R:4,W:40,S:20,h:1},{t:"mcq",q:1},{t:"crank",R:3,W:30,S:20,h:1}];}},
+  {id:"wheel.a2",title:"دستهٔ بلندتر",desc:"دسته‌ای انتخاب کن که نیرویت کافی باشد.",gen(){return[{t:"choose",W:60,S:25,opts:[1,2,3,4]},{t:"mcq",q:2},{t:"choose",W:80,S:30,opts:[1,2,3,4]},{t:"mcq",q:3}];}}],
  levels:[
-  {title:"چرخاندن دسته",desc:"دسته را بچرخان تا سطل بالا بیاید، و دسته‌ای انتخاب کن که نیرویت کافی باشد.",gen(){return[{t:"crank",R:4,W:40,S:20,h:1},{t:"mcq",q:1},{t:"choose",W:60,S:25,opts:[1,2,3,4]},{t:"crank",R:2,W:30,S:20,h:1.5},{t:"mcq",q:2},{t:"choose",W:80,S:30,opts:[1,2,3,4]}];}},
-  {title:"نیرو و راه دست",desc:"نیروی لازم و راه دست را حساب کن.",gen(){return[{t:"choose",W:100,S:30,opts:[1,2,3,4,5,6]},{t:"calcF",W:90,R:3},{t:"calcPath",R:3,n:4},{t:"choose",W:120,S:25,opts:[1,2,3,4,5,6]},{t:"calcF",W:150,R:6},{t:"mcq",q:3}];}},
-  {title:"طراحی دسته",desc:"کوتاه‌ترین دسته‌ای را که با آن سطل بالا می‌آید حساب کن.",gen(){return[{t:"calcR",W:110,S:20},{t:"choose",W:140,S:30,opts:[1,2,3,4,5,6]},{t:"calcPath",R:5,n:6},{t:"calcF",W:75,R:5},{t:"calcR",W:90,S:20},{t:"choose",W:50,S:12,opts:[1,2,3,4,5,6]}];}},
-  {title:"قهرمان چرخ و محور",desc:"عددهای بزرگ‌تر و همه‌چیز با هم.",gen(r){return[{t:"choose",W:170,S:35,opts:[1,2,3,4,5,6]},{t:"calcR",W:130,S:30},{t:"calcPath",R:6,n:5},{t:"calcF",W:120,R:4},{t:"mcq",q:pick(r,[2,3])},{t:"choose",W:200,S:45,opts:[1,2,3,4,5,6]}];}}],
+  {id:"wheel.1",title:"چرخاندن دسته",desc:"دسته را بچرخان تا سطل بالا بیاید، و دسته‌ای انتخاب کن که نیرویت کافی باشد.",gen(){return[{t:"crank",R:4,W:40,S:20,h:1},{t:"mcq",q:1},{t:"choose",W:60,S:25,opts:[1,2,3,4]},{t:"crank",R:2,W:30,S:20,h:1.5},{t:"mcq",q:2},{t:"choose",W:80,S:30,opts:[1,2,3,4]}];}},
+  {id:"wheel.2",title:"نیرو و راه دست",desc:"نیروی لازم و راه دست را حساب کن.",gen(){return[{t:"choose",W:100,S:30,opts:[1,2,3,4,5,6]},{t:"calcF",W:90,R:3},{t:"calcPath",R:3,n:4},{t:"choose",W:120,S:25,opts:[1,2,3,4,5,6]},{t:"calcF",W:150,R:6},{t:"mcq",q:3}];}},
+  {id:"wheel.3",title:"طراحی دسته",desc:"کوتاه‌ترین دسته‌ای را که با آن سطل بالا می‌آید حساب کن.",gen(){return[{t:"calcR",W:110,S:20},{t:"choose",W:140,S:30,opts:[1,2,3,4,5,6]},{t:"calcPath",R:5,n:6},{t:"calcF",W:75,R:5},{t:"calcR",W:90,S:20},{t:"choose",W:50,S:12,opts:[1,2,3,4,5,6]}];}},
+  {id:"wheel.4",title:"قهرمان چرخ و محور",desc:"عددهای بزرگ‌تر و همه‌چیز با هم.",gen(r){return[{t:"choose",W:170,S:35,opts:[1,2,3,4,5,6]},{t:"calcR",W:130,S:30},{t:"calcPath",R:6,n:5},{t:"calcF",W:120,R:4},{t:"mcq",q:pick(r,[2,3])},{t:"choose",W:200,S:45,opts:[1,2,3,4,5,6]}];}}],
  endless(r,d){const tp=pick(r,d<2?["crank","choose","mcq"]:["choose","calcF","calcR","calcPath"]);
    if(tp==="mcq")return{t:"mcq",q:pick(r,[1,2,3])};if(tp==="crank"){const R=ri(r,2,5),W=ri(r,2,8)*10;return{t:"crank",R,W,S:Math.ceil(W/R)+5,h:pick(r,[1,1.5])};}
    if(tp==="calcF"){const R=ri(r,2,6);return{t:"calcF",W:R*ri(r,3,12)*5,R};}if(tp==="calcPath")return{t:"calcPath",R:ri(r,2,6),n:ri(r,2,8)};

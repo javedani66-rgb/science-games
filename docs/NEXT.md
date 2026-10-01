@@ -3,6 +3,16 @@
 Read `CLAUDE.md`, `docs/HANDOFF.md` (section "Version 2, stage 1") and `design/README.md` first.
 The teacher checks the live site herself; talk to her in plain Persian. Mockups before code when she asks for mockups.
 
+## NOW (2026-10-01 morning session) — step 1 of ORDER OF WORK
+- [x] friction arrows: one scale (push = friction when static) — commit bf363ba, not yet published.
+- [x] step 1a: every level gets a stable `id`; stars stored by id (`S.ls["<track>:<id>"]`), STOPS missions = level ids; old `S.prog[..].lv` migrated on load (test seeds too).
+- [x] step 1b (infra only): challenge catalogue `CH` (id, st, diff 0..3 = آسان/سخت/خیلی سخت/هیولا, teach, terms, mk(r)); a level may list `ch:[ids]` instead of `gen`; best points per challenge in `S.cb`. Stations move to CH one by one in steps 2–4.
+- [x] step 1c: progress code v3 (31 letters: + 2 bits/stop for optional doors, 2-bit version); v1/v2 still read.
+- [x] step 1d: stop order 7 = wedge/screw, 8 = ramp (STOPS, HOME, LEARN, WORDS, QTERMS, stop icons, badges 7↔8; saved home/side/words + v1/v2 codes swapped). Lands 3+3 = presentation, left for the graphics pass.
+- [ ] verify: tests/savechk.py (new, prints nothing when fine) + jt.py; then full suite.
+- [ ] then: full suite once (background), publish.
+- Teacher 2026-10-01 07:51: run EVERYTHING that can run in the background in the background (even a 2-min ov.py), never wait in the chat.
+
 ## RESUME HERE (teacher decisions 2026-09-30 20:20)
 - **Teacher 23:16 decided:** (a) lands split **3 + 3**: کارگاه ساختمانی = stops 5 lever 1, 6 lever 2, 7 wedge/screw; بندر = 8 ramp (loading ships), 9 wheel & axle, 10 pulley — i.e. swap the ramp and wedge/screw stops (lesson plan is no constraint). (b) **Register (APPROVED 23:19; lines in `voice.js`, guide `docs/voice.md`; wired: ok/okTries/okLate/retry/wrong/quiz — still to wire: stopDone, hard, welcome, back):** written for questions, instructions, explanations, definitions, feedback about the science and ALL buttons («شروع آزمون», «چالش بعد» without ezafe mark); spoken allowed only in the character's own voice — short fixed praise/encouragement lines and celebratory titles in its speech bubble (e.g. «وقتِ آزمونه!», «آفرین، دمت گرم!»). Never mix registers inside one sentence or one element. (c) **Sound ON by default**, speaker button in every header.
 - **Teacher 23:07: ignore her 12-session lesson plan for now — design the game first; the lesson plan will be adjusted to the game later.** So stops/challenges may move freely. **Teacher 23:10: all current players are her own test profiles — wiping progress is OK.** Still: old saved data/codes must not crash the game (bump the code version, reset unreadable data cleanly).

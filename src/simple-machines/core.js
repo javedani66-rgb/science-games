@@ -30,11 +30,17 @@ const curP=()=>DB.profiles.find(p=>p.id===DB.cur)||null;
 function useProfile(p){DB.cur=p?p.id:null;if(p)S=p.S;}
 if(!TESTMODE&&curP())S=curP().S;
 const save=()=>{try{if(TESTMODE){localStorage.setItem(KEY,JSON.stringify(S));return;}const p=curP();if(p)p.S=S;localStorage.setItem(JKEY,JSON.stringify(DB));}catch(e){}};
-const PG=k=>{const key=(S.track||"c")+":"+k;return S.prog[key]||(S.prog[key]={lv:[0,0,0,0,0],best:0});};
+const PG=k=>{const key=(S.track||"c")+":"+k;return S.prog[key]||(S.prog[key]={best:0});};
 const KID=()=>S.track==="a";
 const NUMS=()=>S.nums&&!KID();
 const kn=v=>KID()?"":fa(v);
-const starsOfSt=k=>PG(k).lv.reduce((a,b)=>a+b,0);
+/* ستارهٔ هر مرحله با شناسهٔ ثابتِ مرحله: S.ls["<سطح>:<شناسه>"] */
+const LS=(id,tr)=>((S.ls||{})[(tr||S.track||"c")+":"+id])||0;
+const setLS=(id,v,tr)=>{if(!S.ls)S.ls={};const key=(tr||S.track||"c")+":"+id;if(v>(S.ls[key]||0))S.ls[key]=v;};
+const starsOfSt=k=>levelsOf(k).reduce((a,l)=>a+LS(l.id),0);
+/* ذخیرهٔ نسخهٔ قبل (ستاره با شمارهٔ مرحله) را به شناسه برمی‌گرداند؛ هیچ‌وقت خطا نمی‌دهد */
+function migrateS(s0){try{if(!s0||s0.ls)return s0;s0.ls={};for(const key in (s0.prog||{})){const [tr,k]=key.split(":"),pg=s0.prog[key];if(!pg||!Array.isArray(pg.lv)||!ST[k]||!"abcd".includes(tr))continue;
+  const lvs=levelsFor(k,tr==="d"?"c":tr);pg.lv.forEach((v,i)=>{if(v>0&&lvs[i]){const kk=tr+":"+lvs[i].id;s0.ls[kk]=Math.max(s0.ls[kk]||0,Math.min(3,v|0));}});delete pg.lv;}}catch(e){s0.ls=s0.ls||{};}return s0;}
 const applyNums=()=>{document.body.classList.toggle("nonum",!NUMS());document.body.classList.remove("tr-a","tr-b","tr-c");if(S.track)document.body.classList.add("tr-"+S.track);};
 /* فرمول چپ‌به‌راست با نماد */
 const sy=(s,sub)=>`<i>${s}</i>${sub?`<sub>${sub}</sub>`:""}`;

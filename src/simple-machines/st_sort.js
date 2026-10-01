@@ -54,14 +54,14 @@ const ST_sort={key:"sort",name:"شکار ماشین‌ها",c:"#2F8F4E",sub:"ه�
    const show=()=>{const it=order[k%order.length];const so=makeSort(A,it,7,i=>{so.mark(i,i===it[1]);A.fb(i===it[1]?"درست! "+it[3]:`${it[0]} ${MCAT[it[1]].n} است. ${it[3]}`,i===it[1]?"ok":"no");});A.refresh=()=>so.render();};show();A.counter("");A.formula("");
    const c=A.ctrl("");btn(c,"کارت بعدی","go",()=>{k++;A.fb("");show();});},
  kid:[
-  {title:"شش ماشین ساده",desc:"کارت هر وسیله را در جعبهٔ درست بینداز.",gen(r){return kidSort(r,0);}},
-  {title:"وسیله‌های بیشتر",desc:"وسیله‌های تازه، همان شش جعبه.",gen(r){return kidSort(r,1);}},
-  {title:"همه با هم",desc:"کارت‌های قاطی از همهٔ وسیله‌ها.",gen(r){return kidSort(r,2);}}],
+  {id:"sort.a1",title:"شش ماشین ساده",desc:"کارت هر وسیله را در جعبهٔ درست بینداز.",gen(r){return kidSort(r,0);}},
+  {id:"sort.a2",title:"وسیله‌های بیشتر",desc:"وسیله‌های تازه، همان شش جعبه.",gen(r){return kidSort(r,1);}},
+  {id:"sort.a3",title:"همه با هم",desc:"کارت‌های قاطی از همهٔ وسیله‌ها.",gen(r){return kidSort(r,2);}}],
  levels:[
-  {title:"شش ماشین ساده",desc:"وسیله‌های آشنا را در جعبهٔ درست بینداز.",gen(r){return sortPick(r,1,6,false);}},
-  {title:"وسیله‌های خانه",desc:"وسیله‌های بیشتر از آشپزخانه و انباری.",gen(r){return sortPick(r,2,6,false);}},
-  {title:"سخت‌تر",desc:"وسیله‌هایی که ماشین ساده‌شان پنهان‌تر است.",gen(r){return sortPick(r,3,6,false,true);}},
-  {title:"ماشین مرکب",desc:"جعبهٔ هفتم اضافه شد: ماشین‌هایی که از چند ماشین ساده ساخته شده‌اند.",gen(r){return sortPick(r,3,6,true,true);}}],
+  {id:"sort.1",title:"شش ماشین ساده",desc:"وسیله‌های آشنا را در جعبهٔ درست بینداز.",gen(r){return sortPick(r,1,6,false);}},
+  {id:"sort.2",title:"وسیله‌های خانه",desc:"وسیله‌های بیشتر از آشپزخانه و انباری.",gen(r){return sortPick(r,2,6,false);}},
+  {id:"sort.3",title:"سخت‌تر",desc:"وسیله‌هایی که ماشین ساده‌شان پنهان‌تر است.",gen(r){return sortPick(r,3,6,false,true);}},
+  {id:"sort.4",title:"ماشین مرکب",desc:"جعبهٔ هفتم اضافه شد: ماشین‌هایی که از چند ماشین ساده ساخته شده‌اند.",gen(r){return sortPick(r,3,6,true,true);}}],
  endless(r,d){const pool=ITEMS.filter(it=>it[2]<=Math.min(3,Math.floor(d))&&(d>=3.5||it[1]!==6));return{item:pick(r,pool),nb:d>=3.5?7:6};},
  mount(sp,A){A.counter("");A.formula("");A.prompt(KID()?"این کدام ماشین ساده است؟ کارت را در جعبه بینداز.":"این وسیله کدام ماشین ساده است؟<small>کارت را بکش و در جعبهٔ درست بینداز، یا روی جعبه بزن.</small>");const it=sp.item;A.hint(`M320 ${KID()?76:92} L${sp.nb===7?90:118} 250`);
    const so=makeSort(A,it,sp.nb,i=>{if(A.locked)return;const ok=i===it[1];so.mark(i,ok);const res=A.judge(ok,{ok:it[3],retry:"یک بار دیگر: به کاری که وسیله انجام می‌دهد فکر کن. می‌چرخد؟ می‌شکافد؟ روی تکیه‌گاه بالا و پایین می‌رود؟",final:`${it[0]} ${MCAT[it[1]].n} است. ${it[3]}`});

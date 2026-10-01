@@ -7,11 +7,27 @@ const KIDINTRO={force:"هل دادن و کشیدن. ببین کدام طرف ق�
 const TRACKS={a:{n:"سطح ۱",g:"دوم و سوم",c:"#22965A",d:"بدون عدد و فرمول. نگاه می‌کند، مقایسه می‌کند و می‌شمارد. دستورها کوتاه‌اند."},b:{n:"سطح ۲",g:"چهارم",c:"#D97706",d:"عددها را می‌بیند: نیرو به نیوتن، جرم به کیلوگرم و گرم. جمع، تفریق، ضرب و تقسیم ساده."},c:{n:"سطح ۳",g:"پنجم و ششم",c:"#7A3FC8",d:"مطابق علوم پنجم: عدد و نسبت. فرمول‌ها برای کنجکاوها، با دکمهٔ راهنما."},d:{n:"سطح ۴",g:"هفتم تا نهم",c:"#1B6E8F",d:"با فرمول و نمادهای علمی: گشتاور، مزیت مکانیکی و کار."}};
 /* عبارت‌های ریاضیِ داخل متن فارسی از چپ به راست نمایش داده شوند */
 function ltrMath(h){return h.replace(/(\(?[۰-۹0-9][۰-۹0-9٫/]*(?:\s*(?:[a-zA-Z]+\s*)?[×÷+−=≈<>]\s*[۰-۹0-9][۰-۹0-9٫/]*)+(?:\s*(?:N|J|m|kg|g)\b)?\)?)/g,m=>{let tail="";if(m.endsWith(")")&&!m.startsWith("(")){m=m.slice(0,-1);tail=")";}if(m.startsWith("(")&&!m.endsWith(")")){return "("+`<span dir="ltr" class="eqi">${m.slice(1)}</span>`+tail;}return `<span dir="ltr" class="eqi">${m}</span>`+tail;});}
-function mixLevel(k,d0,title,desc){return{title,desc,gen:r=>Array.from({length:6},(_,i)=>ST[k].endless(r,d0+i*.2))};}
-function levelsOf(k){const s=ST[k],cur=s.levels;if(S.track==="a")return s.kid;
-  const sel=ix=>ix.map(i=>cur[i]);
-  if(S.track==="b")return[...(s.bLv?sel(s.bLv):[cur[0],cur[1],cur[2]]),mixLevel(k,2.6,"همه با هم","چالش‌های گوناگون از همهٔ مرحله‌ها، کمی سخت‌تر.")];
-  return[...(s.cLv?sel(s.cLv):[cur[1],cur[2],cur[3]]),mixLevel(k,5,"قهرمان","چالش‌های سخت و تصادفی از همهٔ انواع.")];}
+function mixLevel(k,d0,id,title,desc){return{id,title,desc,gen:r=>Array.from({length:6},(_,i)=>ST[k].endless(r,d0+i*.2))};}
+/* ================= فهرست چالش‌ها (داده) =================
+   هر چالش: id ثابت، ایستگاه، سختی (۰ آسان، ۱ سخت، ۲ خیلی سخت، ۳ هیولا)، یک جملهٔ «یاد گرفتی»، واژه‌ها و mk(r) که مشخصات چالش را می‌سازد.
+   مرحله‌ای که به‌جای gen فهرست ch دارد، چالش‌هایش را از اینجا می‌گیرد. بهترین امتیاز هر چالش در S.cb ذخیره می‌شود. */
+const DIFF=[{n:"آسان",c:"#22965A"},{n:"سخت",c:"#E4553A"},{n:"خیلی سخت",c:"#7A3FC8"},{n:"هیولا",c:"#1B2A41"}];
+const CH={};
+function defCh(st,list){list.forEach(c=>{if(CH[c.id])throw new Error("challenge id twice: "+c.id);CH[c.id]=Object.assign({st,d:0,terms:[]},c);});}
+function chLevel(lv){if(lv.ch&&!lv.gen)lv.gen=r=>lv.ch.map(id=>Object.assign({cid:id},CH[id].mk(r)));return lv;}
+const CB=(id,tr)=>((S.cb||{})[(tr||S.track||"c")+":"+id])||0;
+/* فهرست مرحله‌های هر ایستگاه برای هر سطح؛ هر مرحله شناسهٔ ثابت دارد (ستاره‌ها با شناسه ذخیره می‌شوند، نه با شماره) */
+const LVC={};
+function levelsFor(k,tr){const key=k+":"+tr;if(LVC[key])return LVC[key];const s=ST[k],cur=s.levels;let out;
+  if(tr==="a")out=s.kid;
+  else{const sel=ix=>ix.map(i=>cur[i]);
+    if(tr==="b")out=[...(s.bLv?sel(s.bLv):[cur[0],cur[1],cur[2]]),mixLevel(k,2.6,k+".xb","همه با هم","چالش‌های گوناگون از همهٔ مرحله‌ها، کمی سخت‌تر.")];
+    else out=[...(s.cLv?sel(s.cLv):[cur[1],cur[2],cur[3]]),mixLevel(k,5,k+".xc","قهرمان","چالش‌های سخت و تصادفی از همهٔ انواع.")];}
+  out.forEach(chLevel);return LVC[key]=out;}
+const levelsOf=k=>levelsFor(k,S.track||"c");
+if(TESTMODE)migrateS(S);
+/* شناسهٔ مرحله → {ایستگاه، مرحله} */
+function lvById(id){const k=id.slice(0,id.indexOf("."));if(!ST[k])return null;for(const tr of ["a","b","c"]){const lv=levelsFor(k,tr).find(x=>x.id===id);if(lv)return{k,lv};}return null;}
 const starsFor=(p,m)=>p>=m*.9?3:p>=m*.66?2:p>=m*.4?1:0;
 function setC(k){document.documentElement.style.setProperty("--c",ST[k]?ST[k].c:"#3B6FD4");}
 
@@ -19,7 +35,7 @@ function home(){epoch++;closeOv();setC("scale");document.body.classList.remove("
   const tot=ORDER.reduce((a,k)=>a+starsOfSt(k),0);
   app.innerHTML=`<header class="hero"><h1>کارگاه ماشین‌های ساده</h1><p class="lead">از نیرو شروع کن، بعد ترازو، اهرم و بقیهٔ ماشین‌ها. هر ایستگاه یک آزمایشگاه آزاد دارد و چهار مرحله که هر کدام یک چیز تازه یاد می‌دهد.</p>
   <div class="toolbar">${TESTMODE?`<button class="chip-btn trackchip" id="tk" type="button">${S.track?`${TRACKS[S.track].n} (${TRACKS[S.track].g})`:"انتخاب پایه"}</button>`:`<button class="chip-btn trackchip" id="tk" type="button">→ نقشهٔ سفر</button>`}<span class="pill">${starSvg(true,20)}<b>${fa(tot)}</b> ستاره</span><button class="chip-btn" id="fm" type="button">${KID()?"قانون‌ها":"فرمول‌ها"}</button><button class="chip-btn" id="gl" type="button">واژه‌نامه</button></div></header>
-  <div class="stations">${ORDER.map((k,i)=>{const s=ST[k],pg=PG(k),next=pg.lv.findIndex(v=>!v);return `<button class="st" data-k="${k}" type="button" style="--c:${s.c}"><svg viewBox="0 20 640 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${s.art()}</svg><span class="stb"><span class="k">ایستگاه ${fa(i+1)}</span><span class="n">${s.name}</span><span class="s">${s.sub}</span><span class="m"><span>${next<0?"همهٔ مرحله‌ها تمام شد":next===0&&!pg.lv[0]?"شروع کن":`مرحلهٔ ${fa(next+1)}`}</span><span class="minis">${starSvg(starsOfSt(k)>0,16)} ${fa(starsOfSt(k))} از ${fa((S.track?levelsOf(k).length:4)*3)}</span></span></span></button>`;}).join("")}</div>
+  <div class="stations">${ORDER.map((k,i)=>{const s=ST[k],pg=PG(k),lvs=levelsOf(k),next=lvs.findIndex(l=>!LS(l.id));return `<button class="st" data-k="${k}" type="button" style="--c:${s.c}"><svg viewBox="0 20 640 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${s.art()}</svg><span class="stb"><span class="k">ایستگاه ${fa(i+1)}</span><span class="n">${s.name}</span><span class="s">${s.sub}</span><span class="m"><span>${next<0?"همهٔ مرحله‌ها تمام شد":next===0?"شروع کن":`مرحلهٔ ${fa(next+1)}`}</span><span class="minis">${starSvg(starsOfSt(k)>0,16)} ${fa(starsOfSt(k))} از ${fa((S.track?levelsOf(k).length:4)*3)}</span></span></span></button>`;}).join("")}</div>
   ${TESTMODE?`<footer class="foot"><span>ستاره‌ها روی همین دستگاه ذخیره می‌شوند.</span><button id="rs" type="button">پاک کردن همهٔ ستاره‌ها</button></footer>`:""}`;
   app.querySelectorAll(".st").forEach(b=>b.onclick=()=>hub(b.dataset.k));$("#tk").onclick=TESTMODE?chooseTrack:()=>jmap({});
   $("#fm").onclick=()=>openFormulas();$("#gl").onclick=openGloss;
@@ -33,8 +49,8 @@ function hub(k){epoch++;closeOv();setC(k);document.body.classList.remove("bdm");
   <div class="hubhead"><h2>${s.name}</h2><p class="lead">${KID()?KIDINTRO[k]:s.intro}</p></div>
   <div class="modes"><button class="mode lab" id="lab" type="button"><span class="t">آزمایشگاه</span><span class="d">آزادانه امتحان کن. امتیاز و مرحله ندارد؛ فقط کشف کردن.</span></button></div>
   <div class="sect">مرحله‌ها · ${TRACKS[S.track||"c"].n} (${TRACKS[S.track||"c"].g}) · برای باز شدن مرحلهٔ بعد، دست‌کم یک ستاره بگیر</div><div class="modes">`;
-  levelsOf(k).forEach((lv,i)=>{const open=i===0||pg.lv[i-1]>0,stn=pg.lv[i];h+=`<button class="mode ${open?"":"lock"}" data-l="${i+1}" type="button" ${open?"":"disabled"} style="--tc:${TIER[Math.min(3,i)].c}"><span class="tag">مرحلهٔ ${fa(i+1)}</span><span class="t">${open?"":LOCK+" "}${lv.title}</span><span class="d">${lv.desc}</span><span class="st3">${[1,2,3].map(j=>starSvg(j<=stn,18)).join("")}</span></button>`;});
-  const eOpen=pg.lv[1]>0;h+=`<button class="mode ${eOpen?"":"lock"}" id="end" type="button" ${eOpen?"":"disabled"} style="--tc:#1B2A41"><span class="tag">بی‌پایان</span><span class="t">${eOpen?"":LOCK+" "}چالش بی‌پایان</span><span class="d">${eOpen?"سه جان داری. هر جواب درست، چالش بعدی را سخت‌تر می‌کند.":"بعد از گرفتن ستارهٔ مرحلهٔ ۲ باز می‌شود."}</span><span class="st3" style="font-size:14px;font-weight:700">${pg.best?"بهترین رکورد: "+fa(pg.best):""}</span></button></div>
+  const lvs=levelsOf(k);lvs.forEach((lv,i)=>{const open=i===0||LS(lvs[i-1].id)>0,stn=LS(lv.id);h+=`<button class="mode ${open?"":"lock"}" data-l="${i+1}" type="button" ${open?"":"disabled"} style="--tc:${TIER[Math.min(3,i)].c}"><span class="tag">مرحلهٔ ${fa(i+1)}</span><span class="t">${open?"":LOCK+" "}${lv.title}</span><span class="d">${lv.desc}</span><span class="st3">${[1,2,3].map(j=>starSvg(j<=stn,18)).join("")}</span></button>`;});
+  const eOpen=LS(lvs[1].id)>0;h+=`<button class="mode ${eOpen?"":"lock"}" id="end" type="button" ${eOpen?"":"disabled"} style="--tc:#1B2A41"><span class="tag">بی‌پایان</span><span class="t">${eOpen?"":LOCK+" "}چالش بی‌پایان</span><span class="d">${eOpen?"سه جان داری. هر جواب درست، چالش بعدی را سخت‌تر می‌کند.":"بعد از گرفتن ستارهٔ مرحلهٔ ۲ باز می‌شود."}</span><span class="st3" style="font-size:14px;font-weight:700">${pg.best?"بهترین رکورد: "+fa(pg.best):""}</span></button></div>
   <div><button class="chip-btn" id="fx" type="button">${KID()?"قانون این ایستگاه":"فرمول‌های این ایستگاه"}</button></div>`;
   app.innerHTML=h;$("#bk").onclick=home;$("#df").onclick=()=>openDef(k);$("#fx").onclick=()=>openFormulas(k);$("#lab").onclick=()=>playLab(k);
   app.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>playLevel(k,+b.dataset.l));if(eOpen)$("#end").onclick=()=>playEndless(k);window.scrollTo(0,0);}
@@ -109,11 +125,11 @@ function playLevel(k,L,ctx){const s=ST[k],LV=levelsOf(k),lv=LV[L-1];const r=rng(
   const keep=()=>{if(ctx&&ctx.keep)ctx.keep({specs,res,i});};keep();
   function show(){const A=board(k,{mode:"level",backLabel:ctx?"نقشه":"ایستگاه",sub:ctx?ctx.sub:`مرحلهٔ ${fa(L)}: ${lv.title}`,title:ctx&&ctx.title,stop:ctx?ctx.stop:null,back:ctx?()=>{keep();ctx.back();}:()=>hub(k),restart:()=>show()});
     const upd=()=>{$("#dots").innerHTML=dotsHtml(specs.length,i,res);$("#scr").innerHTML=`چالش ${fa(i+1)} از ${fa(specs.length)} · امتیاز: ${fa(res.reduce((a,b)=>a+(b||0),0))} از ${fa(specs.length*2)}`;};upd();
-    A.done=pts=>{res[i]=pts;upd();if(ctx&&ctx.keep)ctx.keep({specs,res,i:i+1<specs.length?i+1:i,done:i+1>=specs.length});const n=A.nav("");const b=btn(n,i+1<specs.length?"چالشِ بعد":"دیدن نتیجه","go next",()=>{i++;if(i<specs.length){show();}else finish();});later(60,()=>{revealFb();b.focus({preventScroll:true});});};
+    A.done=pts=>{res[i]=pts;upd();const cid=specs[i]&&specs[i].cid;if(cid){if(!S.cb)S.cb={};const kk=(S.track||"c")+":"+cid;if(pts>(S.cb[kk]||0))S.cb[kk]=pts;save();}if(ctx&&ctx.keep)ctx.keep({specs,res,i:i+1<specs.length?i+1:i,done:i+1>=specs.length});const n=A.nav("");const b=btn(n,i+1<specs.length?"چالشِ بعد":"دیدن نتیجه","go next",()=>{i++;if(i<specs.length){show();}else finish();});later(60,()=>{revealFb();b.focus({preventScroll:true});});};
     if(window.__TEST||window.__JT)window.__T={spec:specs[i],MASS,LV_MASS,k,i};s.mount(specs[i],A);}
-  function finish(){const pts=res.reduce((a,b)=>a+b,0),max=specs.length*2,stars=starsFor(pts,max),pg=PG(k);if(stars>pg.lv[L-1])pg.lv[L-1]=stars;save();
+  function finish(){const pts=res.reduce((a,b)=>a+b,0),max=specs.length*2,stars=starsFor(pts,max);setLS(lv.id,stars);save();
     if(ctx){ctx.finish(stars,pts,max);return;}
-    const nextOpen=L<LV.length&&PG(k).lv[L-1]>0;
+    const nextOpen=L<LV.length&&LS(lv.id)>0;
     const o=overlay(`<div class="sheet res"><h2>${stars===3?"عالی بود!":stars===2?"آفرین!":stars===1?"خوب بود!":"دوباره امتحان کن"}</h2><div class="bigst">${[1,2,3].map(j=>`<span style="--d:${j*.18}s">${starSvg(j<=stars,52)}</span>`).join("")}</div><p><b>${fa(pts)}</b> امتیاز از ${fa(max)}</p><p class="lead">${stars===0?"برای باز شدن مرحلهٔ بعد، دست‌کم یک ستاره لازم است. تعریف‌ها را بخوان و دوباره بازی کن.":stars<3?"برای سه ستاره، بیشتر چالش‌ها را در بار اول درست جواب بده.":"همهٔ چالش‌ها را عالی حل کردی."}</p><div class="nav" style="justify-content:center">${nextOpen?`<button class="btn go" id="rn" type="button">مرحلهٔ بعد</button>`:""}<button class="btn" id="rr" type="button">دوباره</button><button class="btn" id="rh" type="button">ایستگاه</button></div></div>`,"نتیجهٔ مرحله",s.c);
     if(nextOpen)o.querySelector("#rn").onclick=()=>playLevel(k,L+1);o.querySelector("#rr").onclick=()=>playLevel(k,L);o.querySelector("#rh").onclick=()=>hub(k);(o.querySelector("#rn")||o.querySelector("#rr")).focus();if(stars>=2)confetti();}
   show();window.scrollTo(0,0);}
