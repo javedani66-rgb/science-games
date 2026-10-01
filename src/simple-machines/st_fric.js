@@ -5,7 +5,7 @@ const SURF=[{n:"یخ",f:4,col:"#CFEFFB",edge:"#8CCFEA"},{n:"کف چوبی",f:15,
 const slideDist=(F,i)=>Math.min(300,Math.max(0,F-SURF[i].f)*9);
 const minPush=i=>Math.floor(SURF[i].f/5)*5+5;
 /* نشانگرِ اندازهٔ اصطکاک: برای سطح ۱ سه پلهٔ تصویری، برای بقیه عدد */
-function fricMeter(x,y,i){if(!NUMS()){let s="";for(let j=0;j<3;j++)s+=`<rect x="${x-22-j*16}" y="${y-12}" width="12" height="12" rx="3" fill="${j<=i?"#E8590C":"#fff"}" stroke="#E8590C" stroke-width="1.5"/>`;return s+T(x-74,y-1,"اصطکاک",{size:11,col:"#B4460A",anchor:"end",halo:false});}
+function fricMeter(x,y,i){if(!NUMS()){let s="";for(let j=0;j<3;j++)s+=`<rect x="${x-22-j*16}" y="${y-12}" width="12" height="12" rx="3" fill="${j<=i?"#E8590C":"#fff"}" stroke="#E8590C" stroke-width="1.5"/>`;return s+T(x-60,y-1,"اصطکاک",{size:11,col:"#B4460A",anchor:"start",halo:false});}
   return T(x,y,`اصطکاک تا <tspan class="num">${fa(SURF[i].f)}</tspan> نیوتن`,{size:12,col:"#B4460A",anchor:"start",halo:false});}
 function surfTex(i,x0,x1,sy){if(i===0){let s="";for(let x=x0+30;x<x1-40;x+=170)s+=`<path d="M${x} ${sy+10} l40 -6" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`;return s;}
   if(i===1){let s="";for(let x=x0+60;x<x1;x+=100)s+=`<line x1="${x}" y1="${sy}" x2="${x}" y2="${sy+26}" stroke="#B9834A" stroke-width="2"/>`;return s;}

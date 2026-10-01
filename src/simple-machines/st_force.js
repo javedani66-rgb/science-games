@@ -24,7 +24,7 @@ function makeTug(A,cfg){
       if(sL)s+=arrow(cx-4,y,cx-4-lL,y,13,BLUE);if(sR)s+=arrow(cx+4,y,cx+4+lR,y,13,RED);
       const xl=clamp(Math.min(cx-lL/2,cx-78),70,570),xr=clamp(Math.max(cx+lR/2,cx+78),70,570);
       if(sL)s+=T(xl,y-27,`چپ<tspan class="num">: ${fa(sL)}</tspan>`,{size:14,col:BLUE});if(sR)s+=T(xr,y-27,`راست<tspan class="num">: ${fa(sR)}</tspan>`,{size:14,col:RED});
-      const ny=140;if(st.show!=="all"){}else if(net!==0){const nl=clamp(net*sc,20-cx,620-cx);s+=arrow(cx,ny,cx+nl,ny,15,PURP);s+=T(clamp(cx+nl/2,90,550),ny-31,`نیروی خالص<tspan class="num">: ${fa(Math.abs(net))}</tspan>`,{size:14,col:PURP});}
+      const ny=140;if(st.show!=="all"||KID()){}else if(net!==0){const nl=clamp(net*sc,20-cx,620-cx);s+=arrow(cx,ny,cx+nl,ny,15,PURP);s+=T(clamp(cx+nl/2,90,550),ny-31,`نیروی خالص<tspan class="num">: ${fa(Math.abs(net))}</tspan>`,{size:14,col:PURP});}
       else if(sL||sR)s+=T(cx,ny,"نیروی خالص: صفر (تعادل)",{size:15,col:PURP});}
     if(st.edit){s+=trayPanel("کارت‌های نیرو",404);
       for(const side of["L","R"]){if(st.edit!=="both"&&st.edit!==side)continue;const x0=side==="L"?170:470;

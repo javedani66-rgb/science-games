@@ -45,10 +45,18 @@ function makeScrew(A,cfg){const svg=A.svg,P=A.P;A.view(404);const G=380,CX=320,H
       if(!canLift(F(),st.S)){st.flash=1;if(cfg.onBlocked)cfg.onBlocked();render();return;}const maxA=D/st.p*2*Math.PI;st.ang=clamp(st.ang+da,0,maxA);render();if(st.ang>=maxA-1e-6&&!st.done){st.done=true;render();cfg.onDone&&cfg.onDone();}},
     end(){st.flash=0;render();},tap(){}});
   render();return{st,render,F,auto(done){const maxA=D/st.p*2*Math.PI;st.busy=true;tween(1800,p=>{st.ang=maxA*ease(p);render();},()=>{st.busy=false;st.done=true;render();done&&done();});}};}
-const WEDGE_MCQ={1:["گوه یعنی لبهٔ تیزی که چیزها را از هم باز می‌کند. کدام‌یک گوه است؟",["تبر","فرمان ماشین","قرقره"],0,"لبهٔ تیز تبر دو سطح شیب‌دار پشت به پشت است؛ یعنی گوه."],
- 2:["پیچ در واقع کدام ماشین ساده است که دور یک میله پیچیده شده؟",["اهرم","سطح شیب‌دار","قرقره"],1,"اگر یک مثلث کاغذی را دور مداد بپیچی، لبهٔ آن شکل شیار پیچ می‌شود؛ پیچ یک سطح شیب‌دار است که دور میله پیچیده شده."],
- 3:["کدام گوه راحت‌تر در چوب فرو می‌رود؟",["گوهٔ کوتاه و پهن","گوهٔ دراز و باریک","فرقی ندارند"],1,"گوهٔ دراز و باریک نیروی کمتری می‌خواهد، ولی باید بیشتر فرو برود."],
- 4:["پیچی که شیارهایش ریزتر و به هم نزدیک‌تر است، با پیچ دیگر چه فرقی دارد؟",["نیروی بیشتر و دور کمتر می‌خواهد","نیروی کمتر و دور بیشتر می‌خواهد","هیچ فرقی ندارد"],1,"شیار ریزتر مثل سطح شیب‌دار کم‌شیب‌تر است: نیروی کمتر، ولی دور بیشتر."]};
+/* پرسش‌های گوه و پیچ؛ هر پرسش صحنهٔ خودش را دارد تا چیزی که درباره‌اش می‌پرسیم روی صفحه دیده شود */
+const WEDGE_MCQ={1:["گوه با این کنده چه می‌کند؟",["آن را از هم باز می‌کند","آن را بالا می‌برد","آن را می‌چرخاند"],0,"گوه تیز است؛ وقتی پایین می‌رود، دو نیمهٔ چوب را به دو طرف هل می‌دهد و کنده را باز می‌کند.","wedge"],
+ 2:["پیچ در واقع کدام ماشین ساده است که دور یک میله پیچیده شده؟",["اهرم","سطح شیب‌دار","قرقره"],1,"اگر یک مثلث کاغذی را دور مداد بپیچی، لبهٔ آن شکل شیار پیچ می‌شود؛ پیچ یک سطح شیب‌دار است که دور میله پیچیده شده است.","screw"],
+ 3:["کدام گوه راحت‌تر در چوب فرو می‌رود؟",["گوهٔ «الف» (کوتاه و پهن)","گوهٔ «ب» (دراز و باریک)","فرقی ندارند"],1,"گوهٔ دراز و باریک نیروی کمتری می‌خواهد، ولی باید بیشتر فرو برود.","twoWedges"],
+ 4:["پیچ «الف» شیارهای ریز و نزدیک به هم دارد و پیچ «ب» شیارهای درشت. چرخاندن پیچ «الف» چه فرقی دارد؟",["نیروی بیشتر و دور کمتر می‌خواهد","نیروی کمتر و دور بیشتر می‌خواهد","هیچ فرقی ندارد"],1,"شیار ریزتر مثل سطح شیب‌دار کم‌شیب‌تر است: نیروی کمتر، ولی دور بیشتر.","twoScrews"]};
+/* دو گوه یا دو پیچ کنار هم برای مقایسه */
+function pairScene(kind){let s=bgOut(380);const lab=(x,t)=>T(x,92,t,{size:18,col:INK});
+  [[180,"الف"],[460,"ب"]].forEach(([cx,n],k)=>{s+=lab(cx,n);
+    if(kind==="twoWedges"){const L=k?150:70,w=k?18:40,top=250-L;s+=`<rect x="${cx-70}" y="250" width="140" height="130" fill="#A8703A"/><rect x="${cx-70}" y="250" width="140" height="10" fill="#C08A50"/><path d="M${cx-w} ${top} H${cx+w} L${cx} 262Z" fill="#C3CDD9" stroke="#5E6E86" stroke-width="2.5" stroke-linejoin="round"/>`;}
+    else{const sp=k?26:11;let th="";for(let y=330;y>150;y-=sp)th+=`<path d="M${cx-14} ${y+sp*.22} L${cx+14} ${y-sp*.22}" stroke="#5E6E86" stroke-width="3" stroke-linecap="round"/>`;
+      s+=`<rect x="${cx-10}" y="140" width="20" height="190" fill="#B9C4D2"/><path d="M${cx-10} 330 H${cx+10} L${cx} 352Z" fill="#B9C4D2"/>${th}<rect x="${cx-30}" y="126" width="60" height="16" rx="6" fill="#8C9BB0"/>`+T(cx,385,k?"شیار درشت":"شیار ریز",{size:15,col:INK});}});
+  return s;}
 const ST_wedge={key:"wedge",name:"گوه و پیچ",c:"#C2417A",sub:"شکافتن چوب و پیچاندن پیچ",
  intro:"گوه را پایین بکش تا کنده را بشکافد و پیچ را بچرخان تا در چوب برود. گوه و پیچ هر دو سطح شیب‌دارند: نیروی کمتر، راه بیشتر.",
  art(){let h=bgOut(380).replace(/id="go"/,'id="ae"').replace(/url\(#go\)/,"url(#ae)");h+=`<path d="M307 150 H333 L320 262Z" fill="#C3CDD9" stroke="#5E6E86" stroke-width="2.5"/><path d="M320 250 H392 V380 H320Z M320 250 H248 V380 H320Z" fill="#A8703A"/><ellipse cx="320" cy="250" rx="72" ry="14" fill="#EDC08A"/>`+arrow(320,70,320,140,11,GRN);return h;},
@@ -70,7 +78,11 @@ const ST_wedge={key:"wedge",name:"گوه و پیچ",c:"#C2417A",sub:"شکافت�
    if(tp==="wF"){const L=pick(r,[2,4,5,8]);return{t:"wF",R:L*ri(r,2,8)*5/2,L};}if(tp==="sF"){const p=pick(r,[2,3,4,6]);return{t:"sF",R:ri(r,3,12)*12/p*p,p};}
    for(let k=0;k<60;k++){const R=ri(r,4,16)*10,Sv=ri(r,4,9)*5;if(tp==="wc"){const o=[2,3,4,6,8],b=o.find(L=>canLift(R*2/L,Sv));if(b&&b>2&&!o.some(L=>R*2/L===Sv))return{t:"wc",R,S:Sv,opts:o};}else{const o=[6,4,3,2],b=o.find(p=>canLift(R*p/12,Sv));if(b&&b<6&&!o.some(p=>R*p/12===Sv))return{t:"sc",R,S:Sv,opts:o};}}return{t:"wc",R:60,S:30,opts:[2,3,4,6]};},
  mount(sp,A){
-  if(sp.t==="mcq"){const wd=makeWedge(A,{L:4,R:60,S:60,edit:false});A.refresh=()=>wd.render();const Q=WEDGE_MCQ[sp.q];A.prompt(Q[0]);const c=A.ctrl("");const m=mcq(c,Q[1],(i,b)=>{if(A.locked)return;if(i===Q[2]){m.disable();m.mark(i,"right");A.judge(true,{ok:Q[3]});}else{m.mark(i,"wrong");b.disabled=true;A.judge(false,{retry:"به شکل وسیله فکر کن: تیز است؟ شیار دارد؟",final:Q[3]});if(A.locked){m.disable();m.mark(Q[2],"right");}}});return;}
+  if(sp.t==="mcq"){const Q=WEDGE_MCQ[sp.q];let wd=null;
+    if(Q[4]==="wedge"){wd=makeWedge(A,{L:4,R:60,S:60,edit:false,hideF:true});A.refresh=()=>wd.render();}
+    else if(Q[4]==="screw"){wd=makeScrew(A,{p:3,R:60,S:60,edit:false,hideF:true});A.refresh=()=>wd.render();}
+    else{A.view(404);const draw=()=>A.P.paint(pairScene(Q[4]));draw();A.refresh=draw;}
+    const show=()=>{if(wd&&wd.auto)wd.auto();};A.prompt(Q[0]);const c=A.ctrl("");const m=mcq(c,Q[1],(i,b)=>{if(A.locked)return;if(i===Q[2]){m.disable();m.mark(i,"right");A.judge(true,{ok:Q[3]});show();}else{m.mark(i,"wrong");b.disabled=true;A.judge(false,{retry:"به شکل وسیله فکر کن: تیز است؟ شیار دارد؟",final:Q[3]});if(A.locked){m.disable();m.mark(Q[2],"right");}}});return;}
   if(sp.t==="wc"||sp.t==="sc"){const isW=sp.t==="wc",o=sp.opts,best=isW?o.find(L=>canLift(sp.R*2/L,sp.S)):o.find(p=>canLift(sp.R*p/12,sp.S));
     if(isW){const top=240-o[0]*9;A.hint(`M320 ${top-12} L320 ${top+70}`);}else A.hint("M320 122 A62 28 0 1 1 319.9 122");
     A.prompt(KID()?(isW?"گوه‌ای انتخاب کن و آن را پایین بکش تا چوب بشکافد. اگر نشد، دوباره امتحان کن.":"پیچی انتخاب کن و بچرخان تا در چوب برود. اگر نشد، دوباره امتحان کن."):isW?`کنده را بشکاف. نیروی مقاوم چوب ${fa(sp.R)} نیوتن و نیروی تو <b>${fa(sp.S)} نیوتن</b> است. اگر نشد، دوباره امتحان کن.<small>کوتاه‌ترین گوه‌ای را انتخاب کن که با نیروی خودت در چوب فرو برود. بعد آن را پایین بکش.</small>`:`پیچ را در تخته فرو کن. نیروی تو <b>${fa(sp.S)} نیوتن</b> است. اگر نشد، دوباره امتحان کن.<small>پیچی انتخاب کن که با نیروی خودت بچرخد و کمترین دور را بخواهد. بعد آن را بچرخان.</small>`);

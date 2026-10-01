@@ -74,11 +74,11 @@ function makeBalance(A,cfg){
   const back=it=>{if(cfg.consume&&it&&it.k==="o"&&st.objTray&&!st.objTray.includes(it.id))st.objTray.push(it.id);};
   const addTo=(side,g)=>{if(cfg.onePer&&st[side].length){st[side].forEach(back);st[side]=[];}st[side].push(g.k==="w"?{k:"w",v:g.v}:{k:"o",id:g.id});if(cfg.consume&&g.k==="o"&&st.objTray)st.objTray=st.objTray.filter(x=>x!==g.id);};
   dragKit(svg,{blocked:()=>A.locked,
-    start(d){if(d.drag==="tray")return{from:"tray",k:d.k,v:+d.v,id:d.id};if(d.drag==="pan"){if(!canEdit(d.side))return null;const it=st[d.side][+d.i];return{from:"pan",side:d.side,i:+d.i,k:it.k,v:it.v,id:it.id};}return null;},
+    start(d){if(st.frozen)return null;if(d.drag==="tray")return{from:"tray",k:d.k,v:+d.v,id:d.id};if(d.drag==="pan"){if(!canEdit(d.side))return null;const it=st[d.side][+d.i];return{from:"pan",side:d.side,i:+d.i,k:it.k,v:it.v,id:it.id};}return null;},
     begin(g,p){if(g.from==="pan"){st[g.side].splice(g.i,1);if(cfg.consume)g.back=1;}st.sel=null;P.ghost(g.k==="w"?`<g transform="scale(1.2)">${wSvg(0,20,g.v,u,true)}</g>`:`<g transform="translate(0 30)">${OB[g.id].d}</g>`,p.x,p.y);render();},
     move(g,p){P.move(p.x,p.y);const h=panHit(p);const h2=h&&canEdit(h)?h:null;if(h2!==st.hover){st.hover=h2;render();}},
     end(g,p){P.clear();st.hover=null;const h=panHit(p);if(h&&canEdit(h))addTo(h,g);else if(g.back)back(g);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();},
-    tap(g){if(g.from==="tray"){st.sel={k:g.k,v:g.v,id:g.id};A.fb("حالا روی یکی از کفه‌ها بزن.","info");render();}else{back(st[g.side][g.i]);st[g.side].splice(g.i,1);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}},
+    tap(g){if(st.frozen)return;if(g.from==="tray"){st.sel={k:g.k,v:g.v,id:g.id};A.fb("حالا روی یکی از کفه‌ها بزن.","info");render();}else{back(st[g.side][g.i]);st[g.side].splice(g.i,1);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}},
     zoneTap(z){if(z.zone==="pan"&&st.sel&&canEdit(z.side)){addTo(z.side,st.sel);A.fb("");settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}}});
   const setLock=(v,done)=>{st.locked=v;settle(done);};
   settle();
@@ -211,15 +211,15 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
     const ans=ma>mb?0:ma===mb?1:2,big=[a,c2].some(id=>["balloon","pillow","cotton"].includes(id));
     const opts=same?[`${na}ِ چپ ${K?"سنگین‌تر است":"جرم بیشتری دارد"}`,"هم‌جرم‌اند",`${na}ِ راست ${K?"سنگین‌تر است":"جرم بیشتری دارد"}`]:[`${na} ${K?"سنگین‌تر است":"جرم بیشتری دارد"}`,"هم‌جرم‌اند",`${nb} ${K?"سنگین‌تر است":"جرم بیشتری دارد"}`];
     const ttl=same?`دو ${na}`:`${na} و ${nb}`;
-    A.prompt(K?`${ttl}. حدس بزن کدام سنگین‌تر است.`:`${ttl}: حدس بزن کدام جرم بیشتری دارد.<small>حدس امتیاز ندارد. بعد با ترازو امتحان می‌کنی.</small>`);
+    A.prompt(K?`${ttl} را پایین صفحه می‌بینی. حدس بزن کدام سنگین‌تر است.`:`${ttl} را پایین صفحه می‌بینی. حدس بزن کدام جرم بیشتری دارد.<small>حدس امتیاز ندارد. بعد با ترازو امتحان می‌کنی.</small>`);
     const items=same?[a+"#1",a+"#2"]:[a,c2];
     /* شیء تکراری (دو کتاب) با شناسهٔ جدا در سینی */
     if(same&&!OB[a+"#1"]){OB[a+"#1"]=OB[a+"#2"]=OB[a];MASS[u][a+"#1"]=MASS[u][a+"#2"]=ma;}
     const b=makeBalance(A,{unit:u,edit:"both",tray:[],objTray:items.slice(),consume:true,onePer:true,locked:false,hideL:true,hideR:true,
       onSettle:()=>{if(phase===1&&b.st.L.length&&b.st.R.length)ask();}});
-    b.st.trayMode="o";b.st.edit="";b.render();A.refresh=()=>b.render();
+    b.st.trayMode="o";b.st.frozen=true;b.render();A.refresh=()=>b.render();
     let phase=0,guess=null;
-    const c=A.ctrl("");const g=mcq(c,opts,i=>{if(phase)return;guess=i;g.disable();g.mark(i,"sel");phase=1;b.st.edit="both";b.render();
+    const c=A.ctrl("");const g=mcq(c,opts,i=>{if(phase)return;guess=i;g.disable();g.mark(i,"sel");phase=1;b.st.frozen=false;b.render();
       A.fb(K?"حالا هر کدام را روی یک کفه بگذار.":"حالا هر کدام را روی یک کفهٔ ترازو بگذار و ببین ترازو چه نشان می‌دهد.","info");A.hint(`M300 470 L190 250`);});
     function ask(){phase=2;const right=guess===ans;
       A.prompt(K?"ترازو چه نشان داد؟":"ترازو چه نشان داد؟<small>به کجیِ ترازو نگاه کن: کفهٔ پایین‌تر جرم بیشتری دارد.</small>");
@@ -290,7 +290,7 @@ function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
     mwMcq(A,K?["کمتر می‌شود","همان است","بیشتر می‌شود"]:["حدود ۱ کیلوگرم","۵ کیلوگرم","صفر"],1,{ok:"جرم یعنی مقدار ماده. هیچ برنجی کم یا زیاد نشده؛ پس جرم همان ۵ کیلوگرم است. آنچه روی ماه کم می‌شود وزن است، یعنی نیرویی که ماه کیسه را با آن می‌کشد.",retry:"جرم یعنی مقدار ماده. آیا در سفر، برنجی از کیسه بیرون ریخت؟",k:{ok:"هیچ برنجی کم یا زیاد نشده؛ پس مقدارش همان است. فقط ماه آن را کمتر می‌کشد.",retry:"آیا در سفر، برنجی از کیسه بیرون ریخت؟"}});return;}
   if(sp.t==="moonbal"){const u=K?"cube":"kg";const b=makeBalance(A,{unit:u,L:[{k:"o",id:"rice",fixed:1}],R:u==="cube"?Array.from({length:MASS.cube.rice},()=>({k:"w",v:1,fixed:1})):[{k:"w",v:5,fixed:1}],locked:true,bg:"moon"});A.refresh=()=>b.render();
     poe(A,{prompt:K?"این ترازو روی زمین صاف بود. آن را به ماه بردیم. حدس بزن روی ماه چه می‌شود.":"روی زمین، کیسهٔ برنج با وزنهٔ ۵ کیلوگرمی روی ترازوی دوکفه‌ای صاف بود. همین ترازو را به ماه بردیم. حدس بزن روی ماه چه می‌شود. حدس امتیاز ندارد.",
-      opts:["کفهٔ کیسه پایین می‌رود","ترازو صاف می‌ماند","کفهٔ وزنه پایین می‌رود"],right:1,reveal:(i,next)=>b.setLock(false,()=>later(300,next))},
+      opts:["کفهٔ کیسه پایین می‌رود","ترازو صاف می‌ماند",K?"کفهٔ مکعب‌ها پایین می‌رود":"کفهٔ وزنه پایین می‌رود"],right:1,reveal:(i,next)=>b.setLock(false,()=>later(300,next))},
      {prompt:K?"ترازو روی ماه هم صاف ماند. مقدار برنج روی ماه چه شد؟":"ترازو روی ماه هم صاف ماند. جرم کیسه روی ماه چقدر است؟",
       opts:K?["کمتر شد","همان ماند","بیشتر شد"]:["کمتر از ۵ کیلوگرم","۵ کیلوگرم","بیشتر از ۵ کیلوگرم"],ans:1,
       ok:K?"ماه هم کیسه و هم مکعب‌ها را کمتر می‌کشد، هر دو به یک اندازه. پس ترازو صاف ماند و مقدار برنج همان است.":"ماه هر دو کفه را به یک نسبت کمتر می‌کشد؛ پس ترازو صاف ماند. ترازوی دوکفه‌ای جرم را مقایسه می‌کند، و جرم کیسه روی ماه هم ۵ کیلوگرم است.",
