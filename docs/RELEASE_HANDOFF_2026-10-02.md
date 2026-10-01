@@ -3,6 +3,7 @@
 Repository: `javedani66-rgb/science-games`
 Branch: `main`
 Verified source checkpoint: `a3115af5df8f5af94d5d194449c8002e602fbb80`
+Handoff documentation commit: `f93fd0cade0d6438e29f0ba492f26d1ee626f2b0`
 Previous source change: `0468be10f8f76d6bc5ef98a3c32ef1464a145275`
 Tree at verification checkpoint: `7fd9e879cdf09693f8dec42cb18937703a11be06`
 
@@ -18,12 +19,24 @@ The frozen final build passed all 27 release jobs. The recorded outcomes include
 
 Detailed test results and boundaries are in the Library review package, `RELEASE_CHECKS.md`. Do not rerun the full suite unless source/build inputs change or a specific discrepancy is found.
 
-## Remaining release gates
+## Work that can proceed without owner input
 
-1. The project owner reviews the science and visuals station by station. The repository's `docs/NEXT.md` explicitly requires this signoff before publishing.
-2. After signoff, run `python3 tools/publish_game.py simple-machines physics/simple-machines "کارگاه ماشین‌های ساده"`, commit and push the generated site/service-worker changes, then verify the live version.
-3. Run the 10–15 minute child pilot using `CHILD_TEST_PLAN.md`; record observations separately from technical QA. No child pilot or learning-efficacy claim has been completed.
+- Fetch current `main`, compare it with the verified checkpoint, inspect changed files, and preserve any unrelated local edits.
+- Keep this handoff current and resolve stale or contradictory release notes when the correction is supported by committed evidence.
+- Inspect the publication script and verify release prerequisites. Build or run targeted tests only if relevant inputs changed; run the release suite only for changed code/build inputs or a concrete discrepancy.
+- Prepare deployment commands and a live-verification checklist. After owner signoff, publish, commit/push generated output, and verify the deployed version.
+- Ask agents for bounded, independent reviews when needed. Useful parallel assignments: (1) science/content and evidence-to-question review, advisory only; (2) visual, keyboard and responsive interaction review; (3) source/build/test and publication-integrity review. Give agents the current commit and changed-file scope. Do not rerun completed checks or ask several agents to repeat the same review. Reconcile findings before any edit.
+
+## Owner input still required
+
+1. The project owner reviews the science and visuals station by station. `docs/NEXT.md` explicitly requires this signoff before publishing; agent reviews cannot replace it.
+2. A 10–15 minute child pilot requires an actual child participant and a human observer. Use `CHILD_TEST_PLAN.md`; report observations separately from technical QA.
+3. Any new scope or product choice arising from the pilot requires owner prioritization. No learning-efficacy claim is supported by the current technical suite.
+
+## Next run plan
+
+At the scheduled continuation, fetch current `main` and read this handoff. First check for newer commits and whether the owner has supplied station signoff. If source/build inputs changed, assign distinct review scopes to agents where useful, inspect their findings, then run only the appropriate tests. If no code changed, do not repeat the completed suite; finish any concrete release-preparation task and report the remaining owner gate. Never publish before per-station signoff. If signoff is already recorded, proceed with the repository publish script, commit/push, and live verification.
 
 ## Resume instructions
 
-Fetch the current `main` before acting and check whether it advanced beyond the checkpoint above. Preserve unrelated or uncommitted local changes. Work only on release-preparation tasks that do not require owner judgment until the owner signoff is available. Do not publish before signoff. If no independent technical task remains, report that the project is ready for owner review and stop at that gate.
+Preserve unrelated or uncommitted local changes. The live game remains the working version until the release gate is met. If no independent technical task remains, leave the release candidate ready for owner review and stop at that gate.
