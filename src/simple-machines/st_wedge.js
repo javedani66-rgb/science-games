@@ -52,7 +52,7 @@ const WEDGE_MCQ={1:["گوه با این کنده چه می‌کند؟",["آن ر
  4:["پیچ «الف» شیارهای ریز و نزدیک به هم دارد و پیچ «ب» شیارهای درشت. چرخاندن پیچ «الف» چه فرقی دارد؟",["نیروی بیشتر و دور کمتر می‌خواهد","نیروی کمتر و دور بیشتر می‌خواهد","هیچ فرقی ندارد"],1,"شیار ریزتر مثل سطح شیب‌دار کم‌شیب‌تر است: نیروی کمتر، ولی دور بیشتر.","twoScrews"]};
 /* دو گوه یا دو پیچ کنار هم برای مقایسه */
 function pairScene(kind){let s=bgOut(380);const lab=(x,t)=>T(x,92,t,{size:18,col:INK});
-  [[180,"الف"],[460,"ب"]].forEach(([cx,n],k)=>{s+=lab(cx,n);
+  [[460,"الف"],[180,"ب"]].forEach(([cx,n],k)=>{s+=lab(cx,n);
     if(kind==="twoWedges"){const L=k?150:70,w=k?18:40,top=250-L;s+=`<rect x="${cx-70}" y="250" width="140" height="130" fill="#A8703A"/><rect x="${cx-70}" y="250" width="140" height="10" fill="#C08A50"/><path d="M${cx-w} ${top} H${cx+w} L${cx} 262Z" fill="#C3CDD9" stroke="#5E6E86" stroke-width="2.5" stroke-linejoin="round"/>`;}
     else{const sp=k?26:11;let th="";for(let y=330;y>150;y-=sp)th+=`<path d="M${cx-14} ${y+sp*.22} L${cx+14} ${y-sp*.22}" stroke="#5E6E86" stroke-width="3" stroke-linecap="round"/>`;
       s+=`<rect x="${cx-10}" y="140" width="20" height="190" fill="#B9C4D2"/><path d="M${cx-10} 330 H${cx+10} L${cx} 352Z" fill="#B9C4D2"/>${th}<rect x="${cx-30}" y="126" width="60" height="16" rx="6" fill="#8C9BB0"/>`+T(cx,385,k?"شیار درشت":"شیار ریز",{size:15,col:INK});}});

@@ -527,7 +527,7 @@ function makeTug(A,cfg){
       if(sL)s+=arrow(cx-4,y,cx-4-lL,y,13,BLUE);if(sR)s+=arrow(cx+4,y,cx+4+lR,y,13,RED);
       const xl=clamp(Math.min(cx-lL/2,cx-78),70,570),xr=clamp(Math.max(cx+lR/2,cx+78),70,570);
       if(sL)s+=T(xl,y-27,`چپ<tspan class="num">: ${fa(sL)}</tspan>`,{size:14,col:BLUE});if(sR)s+=T(xr,y-27,`راست<tspan class="num">: ${fa(sR)}</tspan>`,{size:14,col:RED});
-      const ny=140;if(st.show!=="all"){}else if(net!==0){const nl=clamp(net*sc,20-cx,620-cx);s+=arrow(cx,ny,cx+nl,ny,15,PURP);s+=T(clamp(cx+nl/2,90,550),ny-31,`نیروی خالص<tspan class="num">: ${fa(Math.abs(net))}</tspan>`,{size:14,col:PURP});}
+      const ny=140;if(st.show!=="all"||KID()){}else if(net!==0){const nl=clamp(net*sc,20-cx,620-cx);s+=arrow(cx,ny,cx+nl,ny,15,PURP);s+=T(clamp(cx+nl/2,90,550),ny-31,`نیروی خالص<tspan class="num">: ${fa(Math.abs(net))}</tspan>`,{size:14,col:PURP});}
       else if(sL||sR)s+=T(cx,ny,"نیروی خالص: صفر (تعادل)",{size:15,col:PURP});}
     if(st.edit){s+=trayPanel("کارت‌های نیرو",404);
       for(const side of["L","R"]){if(st.edit!=="both"&&st.edit!==side)continue;const x0=side==="L"?170:470;
@@ -666,7 +666,7 @@ const SURF=[{n:"یخ",f:4,col:"#CFEFFB",edge:"#8CCFEA"},{n:"کف چوبی",f:15,
 const slideDist=(F,i)=>Math.min(300,Math.max(0,F-SURF[i].f)*9);
 const minPush=i=>Math.floor(SURF[i].f/5)*5+5;
 /* نشانگرِ اندازهٔ اصطکاک: برای سطح ۱ سه پلهٔ تصویری، برای بقیه عدد */
-function fricMeter(x,y,i){if(!NUMS()){let s="";for(let j=0;j<3;j++)s+=`<rect x="${x-22-j*16}" y="${y-12}" width="12" height="12" rx="3" fill="${j<=i?"#E8590C":"#fff"}" stroke="#E8590C" stroke-width="1.5"/>`;return s+T(x-74,y-1,"اصطکاک",{size:11,col:"#B4460A",anchor:"end",halo:false});}
+function fricMeter(x,y,i){if(!NUMS()){let s="";for(let j=0;j<3;j++)s+=`<rect x="${x-22-j*16}" y="${y-12}" width="12" height="12" rx="3" fill="${j<=i?"#E8590C":"#fff"}" stroke="#E8590C" stroke-width="1.5"/>`;return s+T(x-60,y-1,"اصطکاک",{size:11,col:"#B4460A",anchor:"start",halo:false});}
   return T(x,y,`اصطکاک تا <tspan class="num">${fa(SURF[i].f)}</tspan> نیوتن`,{size:12,col:"#B4460A",anchor:"start",halo:false});}
 function surfTex(i,x0,x1,sy){if(i===0){let s="";for(let x=x0+30;x<x1-40;x+=170)s+=`<path d="M${x} ${sy+10} l40 -6" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`;return s;}
   if(i===1){let s="";for(let x=x0+60;x<x1;x+=100)s+=`<line x1="${x}" y1="${sy}" x2="${x}" y2="${sy+26}" stroke="#B9834A" stroke-width="2"/>`;return s;}
@@ -845,11 +845,11 @@ function makeBalance(A,cfg){
   const back=it=>{if(cfg.consume&&it&&it.k==="o"&&st.objTray&&!st.objTray.includes(it.id))st.objTray.push(it.id);};
   const addTo=(side,g)=>{if(cfg.onePer&&st[side].length){st[side].forEach(back);st[side]=[];}st[side].push(g.k==="w"?{k:"w",v:g.v}:{k:"o",id:g.id});if(cfg.consume&&g.k==="o"&&st.objTray)st.objTray=st.objTray.filter(x=>x!==g.id);};
   dragKit(svg,{blocked:()=>A.locked,
-    start(d){if(d.drag==="tray")return{from:"tray",k:d.k,v:+d.v,id:d.id};if(d.drag==="pan"){if(!canEdit(d.side))return null;const it=st[d.side][+d.i];return{from:"pan",side:d.side,i:+d.i,k:it.k,v:it.v,id:it.id};}return null;},
+    start(d){if(st.frozen)return null;if(d.drag==="tray")return{from:"tray",k:d.k,v:+d.v,id:d.id};if(d.drag==="pan"){if(!canEdit(d.side))return null;const it=st[d.side][+d.i];return{from:"pan",side:d.side,i:+d.i,k:it.k,v:it.v,id:it.id};}return null;},
     begin(g,p){if(g.from==="pan"){st[g.side].splice(g.i,1);if(cfg.consume)g.back=1;}st.sel=null;P.ghost(g.k==="w"?`<g transform="scale(1.2)">${wSvg(0,20,g.v,u,true)}</g>`:`<g transform="translate(0 30)">${OB[g.id].d}</g>`,p.x,p.y);render();},
     move(g,p){P.move(p.x,p.y);const h=panHit(p);const h2=h&&canEdit(h)?h:null;if(h2!==st.hover){st.hover=h2;render();}},
     end(g,p){P.clear();st.hover=null;const h=panHit(p);if(h&&canEdit(h))addTo(h,g);else if(g.back)back(g);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();},
-    tap(g){if(g.from==="tray"){st.sel={k:g.k,v:g.v,id:g.id};A.fb("حالا روی یکی از کفه‌ها بزن.","info");render();}else{back(st[g.side][g.i]);st[g.side].splice(g.i,1);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}},
+    tap(g){if(st.frozen)return;if(g.from==="tray"){st.sel={k:g.k,v:g.v,id:g.id};A.fb("حالا روی یکی از کفه‌ها بزن.","info");render();}else{back(st[g.side][g.i]);st[g.side].splice(g.i,1);settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}},
     zoneTap(z){if(z.zone==="pan"&&st.sel&&canEdit(z.side)){addTo(z.side,st.sel);A.fb("");settle(cfg.onSettle);if(cfg.onChange)cfg.onChange();}}});
   const setLock=(v,done)=>{st.locked=v;settle(done);};
   settle();
@@ -982,15 +982,15 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
     const ans=ma>mb?0:ma===mb?1:2,big=[a,c2].some(id=>["balloon","pillow","cotton"].includes(id));
     const opts=same?[`${na}ِ چپ ${K?"سنگین‌تر است":"جرم بیشتری دارد"}`,"هم‌جرم‌اند",`${na}ِ راست ${K?"سنگین‌تر است":"جرم بیشتری دارد"}`]:[`${na} ${K?"سنگین‌تر است":"جرم بیشتری دارد"}`,"هم‌جرم‌اند",`${nb} ${K?"سنگین‌تر است":"جرم بیشتری دارد"}`];
     const ttl=same?`دو ${na}`:`${na} و ${nb}`;
-    A.prompt(K?`${ttl}. حدس بزن کدام سنگین‌تر است.`:`${ttl}: حدس بزن کدام جرم بیشتری دارد.<small>حدس امتیاز ندارد. بعد با ترازو امتحان می‌کنی.</small>`);
+    A.prompt(K?`${ttl} را پایین صفحه می‌بینی. حدس بزن کدام سنگین‌تر است.`:`${ttl} را پایین صفحه می‌بینی. حدس بزن کدام جرم بیشتری دارد.<small>حدس امتیاز ندارد. بعد با ترازو امتحان می‌کنی.</small>`);
     const items=same?[a+"#1",a+"#2"]:[a,c2];
     /* شیء تکراری (دو کتاب) با شناسهٔ جدا در سینی */
     if(same&&!OB[a+"#1"]){OB[a+"#1"]=OB[a+"#2"]=OB[a];MASS[u][a+"#1"]=MASS[u][a+"#2"]=ma;}
     const b=makeBalance(A,{unit:u,edit:"both",tray:[],objTray:items.slice(),consume:true,onePer:true,locked:false,hideL:true,hideR:true,
       onSettle:()=>{if(phase===1&&b.st.L.length&&b.st.R.length)ask();}});
-    b.st.trayMode="o";b.st.edit="";b.render();A.refresh=()=>b.render();
+    b.st.trayMode="o";b.st.frozen=true;b.render();A.refresh=()=>b.render();
     let phase=0,guess=null;
-    const c=A.ctrl("");const g=mcq(c,opts,i=>{if(phase)return;guess=i;g.disable();g.mark(i,"sel");phase=1;b.st.edit="both";b.render();
+    const c=A.ctrl("");const g=mcq(c,opts,i=>{if(phase)return;guess=i;g.disable();g.mark(i,"sel");phase=1;b.st.frozen=false;b.render();
       A.fb(K?"حالا هر کدام را روی یک کفه بگذار.":"حالا هر کدام را روی یک کفهٔ ترازو بگذار و ببین ترازو چه نشان می‌دهد.","info");A.hint(`M300 470 L190 250`);});
     function ask(){phase=2;const right=guess===ans;
       A.prompt(K?"ترازو چه نشان داد؟":"ترازو چه نشان داد؟<small>به کجیِ ترازو نگاه کن: کفهٔ پایین‌تر جرم بیشتری دارد.</small>");
@@ -1061,7 +1061,7 @@ function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
     mwMcq(A,K?["کمتر می‌شود","همان است","بیشتر می‌شود"]:["حدود ۱ کیلوگرم","۵ کیلوگرم","صفر"],1,{ok:"جرم یعنی مقدار ماده. هیچ برنجی کم یا زیاد نشده؛ پس جرم همان ۵ کیلوگرم است. آنچه روی ماه کم می‌شود وزن است، یعنی نیرویی که ماه کیسه را با آن می‌کشد.",retry:"جرم یعنی مقدار ماده. آیا در سفر، برنجی از کیسه بیرون ریخت؟",k:{ok:"هیچ برنجی کم یا زیاد نشده؛ پس مقدارش همان است. فقط ماه آن را کمتر می‌کشد.",retry:"آیا در سفر، برنجی از کیسه بیرون ریخت؟"}});return;}
   if(sp.t==="moonbal"){const u=K?"cube":"kg";const b=makeBalance(A,{unit:u,L:[{k:"o",id:"rice",fixed:1}],R:u==="cube"?Array.from({length:MASS.cube.rice},()=>({k:"w",v:1,fixed:1})):[{k:"w",v:5,fixed:1}],locked:true,bg:"moon"});A.refresh=()=>b.render();
     poe(A,{prompt:K?"این ترازو روی زمین صاف بود. آن را به ماه بردیم. حدس بزن روی ماه چه می‌شود.":"روی زمین، کیسهٔ برنج با وزنهٔ ۵ کیلوگرمی روی ترازوی دوکفه‌ای صاف بود. همین ترازو را به ماه بردیم. حدس بزن روی ماه چه می‌شود. حدس امتیاز ندارد.",
-      opts:["کفهٔ کیسه پایین می‌رود","ترازو صاف می‌ماند","کفهٔ وزنه پایین می‌رود"],right:1,reveal:(i,next)=>b.setLock(false,()=>later(300,next))},
+      opts:["کفهٔ کیسه پایین می‌رود","ترازو صاف می‌ماند",K?"کفهٔ مکعب‌ها پایین می‌رود":"کفهٔ وزنه پایین می‌رود"],right:1,reveal:(i,next)=>b.setLock(false,()=>later(300,next))},
      {prompt:K?"ترازو روی ماه هم صاف ماند. مقدار برنج روی ماه چه شد؟":"ترازو روی ماه هم صاف ماند. جرم کیسه روی ماه چقدر است؟",
       opts:K?["کمتر شد","همان ماند","بیشتر شد"]:["کمتر از ۵ کیلوگرم","۵ کیلوگرم","بیشتر از ۵ کیلوگرم"],ans:1,
       ok:K?"ماه هم کیسه و هم مکعب‌ها را کمتر می‌کشد، هر دو به یک اندازه. پس ترازو صاف ماند و مقدار برنج همان است.":"ماه هر دو کفه را به یک نسبت کمتر می‌کشد؛ پس ترازو صاف ماند. ترازوی دوکفه‌ای جرم را مقایسه می‌کند، و جرم کیسه روی ماه هم ۵ کیلوگرم است.",
@@ -1444,9 +1444,10 @@ function makeWell(A,cfg){const svg=A.svg,P=A.P;A.view(404);const G=230,HX=420,HY
   render();
   return{st,render,F,reset(){st.ang=0;st.phi=-Math.PI/2;st.done=false;render();},auto(done){const maxA=st.h/.5*2*Math.PI;st.busy=true;tween(1800,p=>{st.ang=maxA*ease(p);st.phi=-Math.PI/2+st.ang;render();},()=>{st.busy=false;done&&done();});}};
 }
-const WHEEL_MCQ={1:["چرخ و محور یعنی چرخ یا دستهٔ بزرگی که یک میلهٔ باریک را می‌چرخاند. کدام‌یک چرخ و محور است؟",["دستگیرهٔ در","قیچی","سرسره"],0,"دستگیرهٔ در مثل یک چرخ بزرگ است که به یک میلهٔ باریک (محور) وصل است. قیچی اهرم است و سرسره سطح شیب‌دار."],
- 2:["با دستهٔ بلندتر، دستت در هر دور راه کوتاه‌تری می‌رود یا بلندتر؟",["کوتاه‌تر","یکسان","بلندتر"],2,"دستهٔ بلندتر یعنی دایرهٔ بزرگ‌تر؛ نیروی کمتری لازم است، ولی دست راه بیشتری می‌رود."],
- 3:["چرا فرمان ماشین را بزرگ می‌سازند؟",["تا با نیروی کم بچرخد","تا زیباتر باشد","تا ماشین سبک‌تر شود"],0,"فرمان بزرگ چرخ است و میلهٔ وسطش محور؛ چرخ بزرگ‌تر یعنی نیروی کمتر برای چرخاندن."]};
+/* پرسش‌های چرخ و محور؛ همه دربارهٔ همین چاهِ روی صحنه */
+const WHEEL_MCQ={1:["چرخ و محور یعنی چرخ یا دستهٔ بزرگی که یک میلهٔ باریک را می‌چرخاند. در این چاه، محور کدام است؟",["میلهٔ باریکی که طناب دورش پیچیده می‌شود","دستهٔ چرخان","سطل"],0,"دستهٔ بزرگ و میلهٔ باریکِ چاه با هم می‌چرخند؛ میلهٔ باریکی که طناب دورش پیچیده می‌شود، محور است."],
+ 2:["روی صحنه دو دایره می‌بینی: دایرهٔ کوچک مسیر دستِ کوتاه است و دایرهٔ بزرگ مسیر دستِ بلند. با دستهٔ بلندتر، دستت در هر دور راه کوتاه‌تری می‌رود یا بلندتر؟",["کوتاه‌تر","یکسان","بلندتر"],2,"دستهٔ بلندتر یعنی دایرهٔ بزرگ‌تر؛ نیروی کمتری لازم است، ولی دست راه بیشتری می‌رود."],
+ 3:["چرا دستهٔ این چاه را بلند ساخته‌اند؟",["تا با نیروی کمتری بچرخد","تا زیباتر باشد","تا سطل سبک‌تر شود"],0,"دستهٔ بلندتر یعنی نیروی کمتر برای چرخاندن؛ سطل همان‌قدر سنگین است، ولی دست راه بیشتری می‌رود."]};
 const ST_wheel={key:"wheel",name:"چرخ و محور",c:"#7C4DCC",sub:"دستهٔ بلندتر، نیروی کمتر",
  intro:"دستگیرهٔ زرد را دور دایره بچرخان تا سطل از چاه بالا بیاید. طول دسته را عوض کن و ببین نیروی لازم و راه دستت چطور تغییر می‌کند.",
  art(){let h=bgOut(230).replace(/id="go"/,'id="aw"').replace(/url\(#go\)/,"url(#aw)");h+=`<rect x="0" y="230" width="640" height="300" fill="#9A6B43"/><rect x="170" y="230" width="60" height="300" fill="#3F2E22"/><rect x="156" y="202" width="88" height="28" fill="#A3ACB8"/><rect x="160" y="96" width="9" height="100" fill="#8A5427"/><rect x="231" y="96" width="9" height="100" fill="#8A5427"/><path d="M136 100 L200 58 L264 100Z" fill="#E4553A"/><rect x="166" y="130" width="74" height="14" rx="5" fill="#C98A4B"/><rect x="240" y="134" width="180" height="6" fill="#7D8CA3"/><circle cx="420" cy="137" r="56" fill="none" stroke="#7C4DCC" stroke-width="2.5" stroke-dasharray="6 6"/><line x1="420" y1="137" x2="460" y2="97" stroke="#4A5A78" stroke-width="8" stroke-linecap="round"/><circle cx="460" cy="97" r="14" fill="#FFC43D" stroke="#fff" stroke-width="3"/><line x1="200" y1="144" x2="200" y2="250" stroke="#7A5634" stroke-width="3"/><path d="M180 262 H220 L215 296 H185Z" fill="#8FA3B5" stroke="#5E6E86" stroke-width="2.5"/>`;return h;},
@@ -1468,7 +1469,10 @@ const ST_wheel={key:"wheel",name:"چرخ و محور",c:"#7C4DCC",sub:"دسته�
    if(tp==="calcF"){const R=ri(r,2,6);return{t:"calcF",W:R*ri(r,3,12)*5,R};}if(tp==="calcPath")return{t:"calcPath",R:ri(r,2,6),n:ri(r,2,8)};
    for(let k=0;k<60;k++){const W=ri(r,4,20)*10,Sv=ri(r,2,10)*5;const R=Math.ceil(W/Sv);if(R>1&&R<=6&&W%Sv!==0)return tp==="calcR"?{t:"calcR",W,S:Sv}:{t:"choose",W,S:Sv,opts:[1,2,3,4,5,6]};}return{t:"choose",W:60,S:25,opts:[1,2,3,4]};},
  mount(sp,A){
-  if(sp.t==="mcq"){const wl=makeWell(A,{R:4,W:40,S:40,h:2,edit:false});A.refresh=()=>wl.render();const Q=WHEEL_MCQ[sp.q];A.prompt(Q[0]);const c=A.ctrl("");const m=mcq(c,Q[1],(i,b)=>{if(A.locked)return;if(i===Q[2]){m.disable();m.mark(i,"right");A.judge(true,{ok:Q[3]});}else{m.mark(i,"wrong");b.disabled=true;A.judge(false,{retry:"به یک چرخ بزرگ فکر کن که یک میلهٔ باریک را می‌چرخاند.",final:Q[3]});if(A.locked){m.disable();m.mark(Q[2],"right");}}});return;}
+  if(sp.t==="mcq"){const wl=makeWell(A,{R:4,W:40,S:40,h:2,edit:false});
+    /* پرسش ۲: دایرهٔ مسیر دستهٔ کوتاه هم کنار دایرهٔ دستهٔ بلند کشیده می‌شود */
+    const extra=()=>{if(sp.q!==2)return;A.svg.insertAdjacentHTML("beforeend",`<g pointer-events="none"><circle cx="420" cy="137" r="28" fill="none" stroke="#E8590C" stroke-width="3" stroke-dasharray="5 5"/>${T(420,232,"کوچک: دستهٔ کوتاه",{size:12,col:"#B4460A"})}${T(420,256,"بزرگ: دستهٔ بلند",{size:12,col:PURP})}</g>`);};
+    wl.render();extra();A.refresh=()=>{wl.render();extra();};const Q=WHEEL_MCQ[sp.q];A.prompt(Q[0]);const c=A.ctrl("");const m=mcq(c,Q[1],(i,b)=>{if(A.locked)return;if(i===Q[2]){m.disable();m.mark(i,"right");A.judge(true,{ok:Q[3]});}else{m.mark(i,"wrong");b.disabled=true;A.judge(false,{retry:"به یک چرخ بزرگ فکر کن که یک میلهٔ باریک را می‌چرخاند.",final:Q[3]});if(A.locked){m.disable();m.mark(Q[2],"right");}}});return;}
   if(sp.t==="crank"||sp.t==="choose"){const R0=sp.t==="crank"?sp.R:sp.opts[0],rr=Math.max(1,R0)*14;A.hint(`M420 ${137-rr} A${rr} ${rr} 0 1 1 419.9 ${137-rr}`);}
   if(sp.t==="crank"){A.prompt(KID()?"دستگیره را بچرخان تا سطل بالا بیاید.":`سطل آب را تا خط سبز بالا بکش.<small>دستگیرهٔ زرد را دور دایره بچرخان.</small>`);const wl=makeWell(A,{R:sp.R,W:sp.W,S:sp.S,h:sp.h,onTop:()=>A.judge(true,{k:{ok:"سطل بالا آمد!"},ok:`سطل بالا آمد. ${fa(sp.h/.5)} دور چرخاندی و دستت ${fa(sp.h/.5*sp.R*.5)} متر راه رفت.`})});A.refresh=()=>wl.render();A.ctrl("");return;}
   if(sp.t==="choose"){const best=sp.opts.find(R=>canLift(sp.W/R,sp.S));A.prompt(KID()?"دسته‌ای انتخاب کن که با آن بتوانی سطل را بالا بکشی. بعد آن را بچرخان. اگر نشد، دوباره امتحان کن.":`سطل ${fa(sp.W)} نیوتنی را بالا بکش. نیروی تو <b>${fa(sp.S)} نیوتن</b> است. اگر نشد، دوباره امتحان کن.<small>کوتاه‌ترین دسته‌ای را انتخاب کن که با آن بتوانی سطل را بالا بکشی. بعد آن را بچرخان.</small>`);
@@ -1531,10 +1535,18 @@ function makeScrew(A,cfg){const svg=A.svg,P=A.P;A.view(404);const G=380,CX=320,H
       if(!canLift(F(),st.S)){st.flash=1;if(cfg.onBlocked)cfg.onBlocked();render();return;}const maxA=D/st.p*2*Math.PI;st.ang=clamp(st.ang+da,0,maxA);render();if(st.ang>=maxA-1e-6&&!st.done){st.done=true;render();cfg.onDone&&cfg.onDone();}},
     end(){st.flash=0;render();},tap(){}});
   render();return{st,render,F,auto(done){const maxA=D/st.p*2*Math.PI;st.busy=true;tween(1800,p=>{st.ang=maxA*ease(p);render();},()=>{st.busy=false;st.done=true;render();done&&done();});}};}
-const WEDGE_MCQ={1:["گوه یعنی لبهٔ تیزی که چیزها را از هم باز می‌کند. کدام‌یک گوه است؟",["تبر","فرمان ماشین","قرقره"],0,"لبهٔ تیز تبر دو سطح شیب‌دار پشت به پشت است؛ یعنی گوه."],
- 2:["پیچ در واقع کدام ماشین ساده است که دور یک میله پیچیده شده؟",["اهرم","سطح شیب‌دار","قرقره"],1,"اگر یک مثلث کاغذی را دور مداد بپیچی، لبهٔ آن شکل شیار پیچ می‌شود؛ پیچ یک سطح شیب‌دار است که دور میله پیچیده شده."],
- 3:["کدام گوه راحت‌تر در چوب فرو می‌رود؟",["گوهٔ کوتاه و پهن","گوهٔ دراز و باریک","فرقی ندارند"],1,"گوهٔ دراز و باریک نیروی کمتری می‌خواهد، ولی باید بیشتر فرو برود."],
- 4:["پیچی که شیارهایش ریزتر و به هم نزدیک‌تر است، با پیچ دیگر چه فرقی دارد؟",["نیروی بیشتر و دور کمتر می‌خواهد","نیروی کمتر و دور بیشتر می‌خواهد","هیچ فرقی ندارد"],1,"شیار ریزتر مثل سطح شیب‌دار کم‌شیب‌تر است: نیروی کمتر، ولی دور بیشتر."]};
+/* پرسش‌های گوه و پیچ؛ هر پرسش صحنهٔ خودش را دارد تا چیزی که درباره‌اش می‌پرسیم روی صفحه دیده شود */
+const WEDGE_MCQ={1:["گوه با این کنده چه می‌کند؟",["آن را از هم باز می‌کند","آن را بالا می‌برد","آن را می‌چرخاند"],0,"گوه تیز است؛ وقتی پایین می‌رود، دو نیمهٔ چوب را به دو طرف هل می‌دهد و کنده را باز می‌کند.","wedge"],
+ 2:["پیچ در واقع کدام ماشین ساده است که دور یک میله پیچیده شده؟",["اهرم","سطح شیب‌دار","قرقره"],1,"اگر یک مثلث کاغذی را دور مداد بپیچی، لبهٔ آن شکل شیار پیچ می‌شود؛ پیچ یک سطح شیب‌دار است که دور میله پیچیده شده است.","screw"],
+ 3:["کدام گوه راحت‌تر در چوب فرو می‌رود؟",["گوهٔ «الف» (کوتاه و پهن)","گوهٔ «ب» (دراز و باریک)","فرقی ندارند"],1,"گوهٔ دراز و باریک نیروی کمتری می‌خواهد، ولی باید بیشتر فرو برود.","twoWedges"],
+ 4:["پیچ «الف» شیارهای ریز و نزدیک به هم دارد و پیچ «ب» شیارهای درشت. چرخاندن پیچ «الف» چه فرقی دارد؟",["نیروی بیشتر و دور کمتر می‌خواهد","نیروی کمتر و دور بیشتر می‌خواهد","هیچ فرقی ندارد"],1,"شیار ریزتر مثل سطح شیب‌دار کم‌شیب‌تر است: نیروی کمتر، ولی دور بیشتر.","twoScrews"]};
+/* دو گوه یا دو پیچ کنار هم برای مقایسه */
+function pairScene(kind){let s=bgOut(380);const lab=(x,t)=>T(x,92,t,{size:18,col:INK});
+  [[460,"الف"],[180,"ب"]].forEach(([cx,n],k)=>{s+=lab(cx,n);
+    if(kind==="twoWedges"){const L=k?150:70,w=k?18:40,top=250-L;s+=`<rect x="${cx-70}" y="250" width="140" height="130" fill="#A8703A"/><rect x="${cx-70}" y="250" width="140" height="10" fill="#C08A50"/><path d="M${cx-w} ${top} H${cx+w} L${cx} 262Z" fill="#C3CDD9" stroke="#5E6E86" stroke-width="2.5" stroke-linejoin="round"/>`;}
+    else{const sp=k?26:11;let th="";for(let y=330;y>150;y-=sp)th+=`<path d="M${cx-14} ${y+sp*.22} L${cx+14} ${y-sp*.22}" stroke="#5E6E86" stroke-width="3" stroke-linecap="round"/>`;
+      s+=`<rect x="${cx-10}" y="140" width="20" height="190" fill="#B9C4D2"/><path d="M${cx-10} 330 H${cx+10} L${cx} 352Z" fill="#B9C4D2"/>${th}<rect x="${cx-30}" y="126" width="60" height="16" rx="6" fill="#8C9BB0"/>`+T(cx,385,k?"شیار درشت":"شیار ریز",{size:15,col:INK});}});
+  return s;}
 const ST_wedge={key:"wedge",name:"گوه و پیچ",c:"#C2417A",sub:"شکافتن چوب و پیچاندن پیچ",
  intro:"گوه را پایین بکش تا کنده را بشکافد و پیچ را بچرخان تا در چوب برود. گوه و پیچ هر دو سطح شیب‌دارند: نیروی کمتر، راه بیشتر.",
  art(){let h=bgOut(380).replace(/id="go"/,'id="ae"').replace(/url\(#go\)/,"url(#ae)");h+=`<path d="M307 150 H333 L320 262Z" fill="#C3CDD9" stroke="#5E6E86" stroke-width="2.5"/><path d="M320 250 H392 V380 H320Z M320 250 H248 V380 H320Z" fill="#A8703A"/><ellipse cx="320" cy="250" rx="72" ry="14" fill="#EDC08A"/>`+arrow(320,70,320,140,11,GRN);return h;},
@@ -1556,7 +1568,11 @@ const ST_wedge={key:"wedge",name:"گوه و پیچ",c:"#C2417A",sub:"شکافت�
    if(tp==="wF"){const L=pick(r,[2,4,5,8]);return{t:"wF",R:L*ri(r,2,8)*5/2,L};}if(tp==="sF"){const p=pick(r,[2,3,4,6]);return{t:"sF",R:ri(r,3,12)*12/p*p,p};}
    for(let k=0;k<60;k++){const R=ri(r,4,16)*10,Sv=ri(r,4,9)*5;if(tp==="wc"){const o=[2,3,4,6,8],b=o.find(L=>canLift(R*2/L,Sv));if(b&&b>2&&!o.some(L=>R*2/L===Sv))return{t:"wc",R,S:Sv,opts:o};}else{const o=[6,4,3,2],b=o.find(p=>canLift(R*p/12,Sv));if(b&&b<6&&!o.some(p=>R*p/12===Sv))return{t:"sc",R,S:Sv,opts:o};}}return{t:"wc",R:60,S:30,opts:[2,3,4,6]};},
  mount(sp,A){
-  if(sp.t==="mcq"){const wd=makeWedge(A,{L:4,R:60,S:60,edit:false});A.refresh=()=>wd.render();const Q=WEDGE_MCQ[sp.q];A.prompt(Q[0]);const c=A.ctrl("");const m=mcq(c,Q[1],(i,b)=>{if(A.locked)return;if(i===Q[2]){m.disable();m.mark(i,"right");A.judge(true,{ok:Q[3]});}else{m.mark(i,"wrong");b.disabled=true;A.judge(false,{retry:"به شکل وسیله فکر کن: تیز است؟ شیار دارد؟",final:Q[3]});if(A.locked){m.disable();m.mark(Q[2],"right");}}});return;}
+  if(sp.t==="mcq"){const Q=WEDGE_MCQ[sp.q];let wd=null;
+    if(Q[4]==="wedge"){wd=makeWedge(A,{L:4,R:60,S:60,edit:false,hideF:true});A.refresh=()=>wd.render();}
+    else if(Q[4]==="screw"){wd=makeScrew(A,{p:3,R:60,S:60,edit:false,hideF:true});A.refresh=()=>wd.render();}
+    else{A.view(404);const draw=()=>A.P.paint(pairScene(Q[4]));draw();A.refresh=draw;}
+    const show=()=>{if(wd&&wd.auto)wd.auto();};A.prompt(Q[0]);const c=A.ctrl("");const m=mcq(c,Q[1],(i,b)=>{if(A.locked)return;if(i===Q[2]){m.disable();m.mark(i,"right");A.judge(true,{ok:Q[3]});show();}else{m.mark(i,"wrong");b.disabled=true;A.judge(false,{retry:"به شکل وسیله فکر کن: تیز است؟ شیار دارد؟",final:Q[3]});if(A.locked){m.disable();m.mark(Q[2],"right");}}});return;}
   if(sp.t==="wc"||sp.t==="sc"){const isW=sp.t==="wc",o=sp.opts,best=isW?o.find(L=>canLift(sp.R*2/L,sp.S)):o.find(p=>canLift(sp.R*p/12,sp.S));
     if(isW){const top=240-o[0]*9;A.hint(`M320 ${top-12} L320 ${top+70}`);}else A.hint("M320 122 A62 28 0 1 1 319.9 122");
     A.prompt(KID()?(isW?"گوه‌ای انتخاب کن و آن را پایین بکش تا چوب بشکافد. اگر نشد، دوباره امتحان کن.":"پیچی انتخاب کن و بچرخان تا در چوب برود. اگر نشد، دوباره امتحان کن."):isW?`کنده را بشکاف. نیروی مقاوم چوب ${fa(sp.R)} نیوتن و نیروی تو <b>${fa(sp.S)} نیوتن</b> است. اگر نشد، دوباره امتحان کن.<small>کوتاه‌ترین گوه‌ای را انتخاب کن که با نیروی خودت در چوب فرو برود. بعد آن را پایین بکش.</small>`:`پیچ را در تخته فرو کن. نیروی تو <b>${fa(sp.S)} نیوتن</b> است. اگر نشد، دوباره امتحان کن.<small>پیچی انتخاب کن که با نیروی خودت بچرخد و کمترین دور را بخواهد. بعد آن را بچرخان.</small>`);
