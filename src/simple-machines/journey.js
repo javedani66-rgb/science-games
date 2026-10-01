@@ -78,7 +78,7 @@ const minStars=(p,i)=>Math.min(...missions(p,i).map((_,j)=>mStars(p,i,j)));
 const totStars=p=>{let t=0;for(let i=0;i<12;i++)missions(p,i).forEach((_,j)=>t+=mStars(p,i,j));return t;};
 const firstOpen=(p,i)=>{const ms=missions(p,i);for(let j=0;j<ms.length;j++)if(!mStars(p,i,j))return j;return 0;};
 const mName=(p,i,j)=>{const r=mRef(p,i,j);return levelsFor(r.k,trk(p))[r.L-1].title;};
-function newProfile(name,g,t,shirt){const tr=trackOfG(g);return{id:"p"+Date.now().toString(36),name,g,t,shirt:shirt||"",lvl:null,done:"",quiz:[0,0,0,0,0],stash:{},cards:[],S:{prog:{},nums:true,forces:true,formula:tr==="d",track:tr},home:Array(12).fill(0),side:Array(12).fill(0),words:Array(12).fill(0),opt:Array(12).fill(0),at:null,coach:1,sv:2};}
+function newProfile(name,g,t,shirt){const tr=trackOfG(g);return{id:"p"+Date.now().toString(36),name,g,t,shirt:shirt||"",lvl:null,done:"",quiz:[0,0,0,0,0],stash:{},cards:[],S:{prog:{},nums:true,forces:true,formula:tr==="d",track:tr},home:Array(12).fill(0),side:Array(12).fill(0),words:Array(12).fill(0),opt:Array(12).fill(0),lab:Array(12).fill(0),at:null,coach:1,sv:2};}
 /* پروفایل‌های نسخهٔ قبل را کامل می‌کند (چیزی پاک نمی‌شود) */
 function fixProfile(p){
   /* داده‌ی ناقص یا خراب هرگز بازی را از کار نیندازد: هر چیزِ نبود با مقدار پیش‌فرض پر می‌شود */
@@ -290,7 +290,13 @@ const termDef=(p,w)=>typeof QDEF!=="undefined"&&QDEF[w]?qdef(w,trk(p)):(JDEF[w]?
 function wordCard(i,then,force){const p=JP(),ws=stopTerms(p,i),K=KID();if(!ws.length||(p.words[i]&&!force)){then();return;}
   const o=jsheet(`<span class="j-step" style="text-align:center">${K?"واژهٔ تازه":"کارت واژهٔ تازه"}</span>${ws.map(w=>`<div class="j-word"><span class="w">${w}</span><p>${ltrMath(termDef(p,w))}</p></div>`).join("")}<p class="j-note" style="text-align:center">این کارت در دفترچهٔ کوله‌پشتی‌ات می‌ماند.</p><button class="btn go j-wide" id="jgo2" type="button">${force?"فهمیدم":K?"شروع":"شروع مأموریت"}</button>`,"کارت واژه","#2F6BD0");
   o.querySelector("#jgo2").onclick=()=>{p.words[i]=1;save();closeOv();then();};o.querySelector("#jgo2").focus();}
-function runMission(i,j,r){const p=JP();wordCard(i,()=>{const {k,L}=mRef(p,i,j),ms=missions(p,i),before=curStop(p);
+/* اولین ورود به هر منزل: پیشنهادِ چند دقیقه آزمایش آزاد پیش از مأموریت (PhET: اول کاوش آزاد). هرگز راه را نمی‌بندد. */
+function labOffer(i,j,r,then){const p=JP();if(!p.lab)p.lab=Array(12).fill(0);if(j!==0||(r&&r.specs)||p.lab[i]||mStars(p,i,0)||window.__JT){then();return;}
+  const K=KID(),k=lvK(missions(p,i)[0]);
+  const o=jsheet(`<div class="shead"><h2 style="color:var(--ink)">${K?"اول بازی آزاد؟":"اول آزمایش آزاد؟"}</h2></div><p class="j-say">${K?"می‌خواهی اول چند دقیقه آزاد بازی کنی و همه‌چیز را امتحان کنی؟":"می‌خواهی پیش از مأموریت، چند دقیقه در آزمایشگاه آزادانه امتحان کنی؟ امتیاز ندارد؛ فقط برای آشنا شدن است."}</p><div class="nav" style="flex-direction:column"><button class="btn go j-wide" id="jlo" type="button">${K?"بازی آزاد":"آزمایش آزاد"}</button><button class="btn j-wide" id="jlm" type="button">${K?"شروع بازی":"شروع مأموریت"}</button></div>`,"آزمایش آزاد");
+  o.querySelector("#jlo").onclick=()=>{p.lab[i]=1;save();closeOv();playLab(k,{backLabel:"نقشه",back:()=>jmap({msg:K?"حالا بازی را شروع کن.":"حالا مأموریت را شروع کن."}),stop:i,title:STOPS[i].n,land:landOf(i)});};
+  o.querySelector("#jlm").onclick=()=>{p.lab[i]=1;save();closeOv();then();};o.querySelector("#jlo").focus();}
+function runMission(i,j,r){const p=JP();labOffer(i,j,r,()=>wordCard(i,()=>{const {k,L}=mRef(p,i,j),ms=missions(p,i),before=curStop(p);
   const sub=`منزل ${fa(i+1)} · ${WL().main}${ms.length>1?" "+fa(j+1)+" از "+fa(ms.length):""}: ${mName(p,i,j)}`;
   playLevel(k,L,{sub,title:STOPS[i].n,stop:i,land:landOf(i),resume:r&&r.specs?r:null,
     keep:st=>{p.at=st.done?null:{i,j,r:{specs:st.specs,res:st.res,i:st.i}};save();},
@@ -300,7 +306,8 @@ function runMission(i,j,r){const p=JP();wordCard(i,()=>{const {k,L}=mRef(p,i,j),
         ${stars?`<div class="j-part" style="text-align:right"><span class="ic" style="background:#FFF6D6"><svg viewBox="0 0 24 24" width="30" height="30">${JSTAR(true)}</svg></span><span class="tx"><span class="k">امروز یاد گرفتی</span><span class="n" style="font-size:18px">${LEARN[i][K?0:1]}</span></span></div>`:`<p class="lead">${K?"برای منزل بعد، دست‌کم یک ستاره لازم است.":"برای باز شدن منزل بعد، دست‌کم یک ستاره لازم است. بیشتر چالش‌ها را در بار اول درست جواب بده."}</p>`}
         ${opened?`<p style="font-size:20px;font-weight:700;color:#1F8A4C">${after>=12?"سفر تمام شد! همهٔ منزل‌ها را رفتی.":`منزل ${fa(after+1)} باز شد!`}</p>`:""}
         <div class="nav" style="justify-content:center;flex-direction:column"><button class="btn go" id="jn" type="button">${more?`${WL().main} بعدی: ${esc(mName(p,i,j+1))}`:stars?"برگرد به نقشه":"دوباره امتحان کن"}</button>${stars&&!more?"":`<button class="btn" id="jm" type="button">برگرد به نقشه</button>`}</div></div>`,"نتیجه",ST[k].c);
-      o.querySelector("#jn").onclick=()=>{if(more)runMission(i,j+1);else if(stars)jmap({smooth:true,msg:opened?(after>=12?"سفر تمام شد! نشان‌هایت را در کوله‌پشتی ببین.":`به منزل ${fa(after+1)} رسیدی!`):null});else runMission(i,j);};const jm=o.querySelector("#jm");if(jm)jm.onclick=()=>jmap({});o.querySelector("#jn").focus();if(stars>=2)confetti();}});});}
+      o.querySelector("#jn").onclick=()=>{if(more)runMission(i,j+1);else if(stars)jmap({smooth:true,msg:opened?(after>=12?"سفر تمام شد! نشان‌هایت را در کوله‌پشتی ببین.":`به منزل ${fa(after+1)} رسیدی!`):null});else runMission(i,j);};const jm=o.querySelector("#jm");if(jm)jm.onclick=()=>jmap({});o.querySelector("#jn").focus();if(stars>=2)confetti();}});}));}
+
 function runSide(i){const p=JP(),goal=SIDEG[trk(p)][landOf(i)],k=STOPS[i].side;closeOv();
   playEndless(k,{goal,sub:`منزل ${fa(i+1)} · ${WL().side}`,title:STOPS[i].n,stop:i,back:()=>jmap({}),
     win:()=>{p.side[i]=1;save();const o=overlay(`<div class="sheet res"><svg width="96" height="96" viewBox="0 0 32 32" style="margin-inline:auto"><rect x="8" y="8" width="16" height="16" rx="3" transform="rotate(45 16 16)" fill="#F0B429" stroke="#C98A06" stroke-width="2"/></svg><h2>نشان طلایی منزل ${fa(i+1)}!</h2><p class="lead">${fa(goal)} جواب درست دادی. نشانت در کوله‌پشتی است.</p><div class="nav" style="justify-content:center"><button class="btn go" id="jm" type="button">برگرد به نقشه</button></div></div>`,"جایزه","#C98A06");o.querySelector("#jm").onclick=()=>jmap({});o.querySelector("#jm").focus();confetti();},
