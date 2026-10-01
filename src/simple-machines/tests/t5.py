@@ -4,7 +4,7 @@ t2.SHOT=False
 TR=sys.argv[1] if len(sys.argv)>1 else 'c'
 with sync_playwright() as pw:
     b=pw.chromium.launch(); pg=b.new_page(viewport={'width':400,'height':900}); errs=[]; pg.on('pageerror',lambda e:errs.append(str(e))); g=G(pg)
-    for k in ['force','scale','lever','ramp','pulley','wheel','wedge','sort']:
+    for k in ['force','fric','scale','lever','ramp','pulley','wheel','wedge','sort']:
         for rep in range(1):
             pg.goto(TURL); pg.evaluate("p=>localStorage.setItem('sm-workshop-v3',JSON.stringify(p))",{"prog":{f"{TR}:{k}":{"lv":[3,3,3,3,3],"best":0}},"nums":True,"forces":True,"formula":True,"track":TR}); pg.reload(); pg.wait_for_timeout(150)
             pg.click(f'.st[data-k={k}]'); pg.click('#end'); pg.wait_for_timeout(300)

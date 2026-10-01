@@ -1,20 +1,13 @@
 /* ================= صفحه‌ها و جریان بازی ================= */
-const ST={force:ST_force,scale:ST_scale,lever:ST_lever,ramp:ST_ramp,pulley:ST_pulley,wheel:ST_wheel,wedge:ST_wedge,sort:ST_sort};
-const ORDER=["force","scale","lever","ramp","pulley","wheel","wedge","sort"];
+const ST={force:ST_force,fric:ST_fric,scale:ST_scale,lever:ST_lever,ramp:ST_ramp,pulley:ST_pulley,wheel:ST_wheel,wedge:ST_wedge,sort:ST_sort};
+const ORDER=["force","scale","fric","lever","ramp","pulley","wheel","wedge","sort"];
 const TIER=[{n:"آسان",c:"#22965A"},{n:"متوسط",c:"#D99412"},{n:"سخت",c:"#E4553A"},{n:"قهرمان",c:"#7A3FC8"}];
-const KIDLAB={force:"هر چه دوست داری امتحان کن: کشش‌ها را روی طناب بکش و «برو!» را بزن.",scale:"روی کفه‌ها چیز بگذار و ببین کدام پایین می‌رود. دکمهٔ «نیروسنج و آب» را هم امتحان کن.",lever:"آجرها را روی الاکلنگ بکش و پایه‌ها را بردار.",ramp:"دایرهٔ زرد را بکش تا سطح درازتر یا کوتاه‌تر شود. بعد «بکش!» را بزن.",pulley:"قرقره انتخاب کن و طناب را پایین بکش.",wheel:"دسته انتخاب کن و آن را بچرخان.",wedge:"گوه را پایین بکش یا پیچ را بچرخان.",sort:"هر کارت را در جعبهٔ درست بینداز."};
-const KIDINTRO={force:"هل دادن و کشیدن. ببین کدام طرف قوی‌تر است.",scale:"ترازو نشان می‌دهد کدام چیز سنگین‌تر است. نیروسنج نشان می‌دهد زمین یک چیز را چقدر می‌کشد.",lever:"الاکلنگ را صاف کن. سنگین‌تر نزدیک وسط (تکیه‌گاه) بنشیند.",ramp:"با سطح شیب‌دار، جعبه را راحت‌تر بالا ببر.",pulley:"با قرقره، طناب را پایین بکش و بار را بالا ببر.",wheel:"دستهٔ چاه را بچرخان و سطل را بالا بیاور.",wedge:"با گوه چوب را بشکاف و پیچ را در چوب بچرخان.",sort:"هر وسیله را در جعبهٔ ماشین ساده‌اش بینداز."};
+const KIDLAB={fric:"اندازهٔ هل را انتخاب کن و «هل بده!» را بزن. ببین روی کدام سطح جعبه دورتر می‌رود.",force:"هر چه دوست داری امتحان کن: کشش‌ها را روی طناب بکش و «برو!» را بزن.",scale:"روی کفه‌ها چیز بگذار و ببین کدام پایین می‌رود. دکمهٔ «نیروسنج و آب» را هم امتحان کن.",lever:"آجرها را روی الاکلنگ بکش و پایه‌ها را بردار.",ramp:"دایرهٔ زرد را بکش تا سطح درازتر یا کوتاه‌تر شود. بعد «بکش!» را بزن.",pulley:"قرقره انتخاب کن و طناب را پایین بکش.",wheel:"دسته انتخاب کن و آن را بچرخان.",wedge:"گوه را پایین بکش یا پیچ را بچرخان.",sort:"هر کارت را در جعبهٔ درست بینداز."};
+const KIDINTRO={fric:"روی یخ لیز می‌خوریم، روی فرش نه. ببین جعبه کجا راحت‌تر سُر می‌خورد.",force:"هل دادن و کشیدن. ببین کدام طرف قوی‌تر است.",scale:"ترازو نشان می‌دهد کدام چیز سنگین‌تر است. نیروسنج نشان می‌دهد زمین یک چیز را چقدر می‌کشد.",lever:"الاکلنگ را صاف کن. سنگین‌تر نزدیک وسط (تکیه‌گاه) بنشیند.",ramp:"با سطح شیب‌دار، جعبه را راحت‌تر بالا ببر.",pulley:"با قرقره، طناب را پایین بکش و بار را بالا ببر.",wheel:"دستهٔ چاه را بچرخان و سطل را بالا بیاور.",wedge:"با گوه چوب را بشکاف و پیچ را در چوب بچرخان.",sort:"هر وسیله را در جعبهٔ ماشین ساده‌اش بینداز."};
 const TRACKS={a:{n:"سطح ۱",g:"دوم و سوم",c:"#22965A",d:"بدون عدد و فرمول. نگاه می‌کند، مقایسه می‌کند و می‌شمارد. دستورها کوتاه‌اند."},b:{n:"سطح ۲",g:"چهارم",c:"#D97706",d:"عددها را می‌بیند: نیرو به نیوتن، جرم به کیلوگرم و گرم. جمع، تفریق، ضرب و تقسیم ساده."},c:{n:"سطح ۳",g:"پنجم و ششم",c:"#7A3FC8",d:"مطابق علوم پنجم: عدد و نسبت. فرمول‌ها برای کنجکاوها، با دکمهٔ راهنما."},d:{n:"سطح ۴",g:"هفتم تا نهم",c:"#1B6E8F",d:"با فرمول و نمادهای علمی: گشتاور، مزیت مکانیکی و کار."}};
 /* عبارت‌های ریاضیِ داخل متن فارسی از چپ به راست نمایش داده شوند */
 function ltrMath(h){return h.replace(/(\(?[۰-۹0-9][۰-۹0-9٫/]*(?:\s*(?:[a-zA-Z]+\s*)?[×÷+−=≈<>]\s*[۰-۹0-9][۰-۹0-9٫/]*)+(?:\s*(?:N|J|m|kg|g)\b)?\)?)/g,m=>{let tail="";if(m.endsWith(")")&&!m.startsWith("(")){m=m.slice(0,-1);tail=")";}if(m.startsWith("(")&&!m.endsWith(")")){return "("+`<span dir="ltr" class="eqi">${m.slice(1)}</span>`+tail;}return `<span dir="ltr" class="eqi">${m}</span>`+tail;});}
 function mixLevel(k,d0,id,title,desc){return{id,title,desc,gen:r=>Array.from({length:6},(_,i)=>ST[k].endless(r,d0+i*.2))};}
-/* ================= فهرست چالش‌ها (داده) =================
-   هر چالش: id ثابت، ایستگاه، سختی (۰ آسان، ۱ سخت، ۲ خیلی سخت، ۳ هیولا)، یک جملهٔ «یاد گرفتی»، واژه‌ها و mk(r) که مشخصات چالش را می‌سازد.
-   مرحله‌ای که به‌جای gen فهرست ch دارد، چالش‌هایش را از اینجا می‌گیرد. بهترین امتیاز هر چالش در S.cb ذخیره می‌شود. */
-const DIFF=[{n:"آسان",c:"#22965A"},{n:"سخت",c:"#E4553A"},{n:"خیلی سخت",c:"#7A3FC8"},{n:"هیولا",c:"#1B2A41"}];
-const CH={};
-function defCh(st,list){list.forEach(c=>{if(CH[c.id])throw new Error("challenge id twice: "+c.id);CH[c.id]=Object.assign({st,d:0,terms:[]},c);});}
-function chLevel(lv){if(lv.ch&&!lv.gen)lv.gen=r=>lv.ch.map(id=>Object.assign({cid:id},CH[id].mk(r)));return lv;}
 const CB=(id,tr)=>((S.cb||{})[(tr||S.track||"c")+":"+id])||0;
 /* فهرست مرحله‌های هر ایستگاه برای هر سطح؛ هر مرحله شناسهٔ ثابت دارد (ستاره‌ها با شناسه ذخیره می‌شوند، نه با شماره) */
 const LVC={};
@@ -58,7 +51,7 @@ function hub(k){epoch++;closeOv();setC(k);document.body.classList.remove("bdm");
 function tgBtn(key,label){return `<button class="tg" type="button" data-tg="${key}" aria-pressed="${S[key]?"true":"false"}"><span class="sw"></span>${label}</button>`;}
 /* ---------- سرزمین‌ها، کاراکتر و نمادها ---------- */
 const LANDN=["کارگاه نجاری","کارگاه ساختمانی و بندر","کارخانهٔ اختراع"];
-const ST_LAND={force:0,scale:0,lever:1,ramp:1,wedge:1,wheel:1,pulley:1,sort:2};
+const ST_LAND={force:0,fric:0,scale:0,lever:1,ramp:1,wedge:1,wheel:1,pulley:1,sort:2};
 function setLand(li){document.body.dataset.land=String((li||0)+1);}
 const UIC={map:'<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M3 6.5l6-2.5 6 2.5 6-2.5v13.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></svg>',
  re:'<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M18.6 3.2v4.4h-4.4"/></svg>',
@@ -99,7 +92,11 @@ function board(k,head){epoch++;closeOv();if(typeof clearToasts==="function")clea
     nav:h=>{const n=$("#nv");n.innerHTML=h||"";return n;},
     /* آزمایش آزاد: وقتی بچه با امتحان کردن جواب را پیدا می‌کند (مثلاً جرمِ نامعلوم)، امتحانِ ناموفق فرصت را کم نمی‌کند */
     trials:0,trial(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);if(ok)return A.judge(true,Object.assign({},m,{pts:A.trials<3?2:1,k:null}));
-      A.trials++;A.fb(`${m.retry||""} <b>${voice("retry")}</b>`,"info");return false;},
+      A.trials++;A.fb(`${m.retry||""}${A.trials>=2&&m.more?" "+m.more:""} <b>${voice("retry")}</b>`,"info");
+      /* نردبان راهنما: بعد از سه امتحانِ ناموفق، «نشانم بده» (جواب نشان داده می‌شود، ۱ امتیاز) تا بچه گیر نکند */
+      if(A.trials>=3&&m.final&&!$("#showme")){const n=$("#nv");n.insertAdjacentHTML("beforeend",`<button class="btn" id="showme" type="button">نشانم بده</button>`);
+        $("#showme").onclick=()=>{if(A.locked)return;A.locked=true;if(m.show)m.show();A.fb(m.final,"info");if(A.done)A.done(1);};}
+      return false;},
     judge(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);
       if(ok){const pts=m.pts!=null?m.pts:(A.tries===0?2:1);A.locked=true;A.fb(`${voice(pts===2?(A.trials?"okTries":"ok"):"okLate")} ${m.ok||""} <span style="white-space:nowrap">(+${fa(pts)} امتیاز)</span>`,"ok");if(A.done)A.done(pts);return true;}
       A.tries++;if(A.tries<2){A.fb(KID()?`${voice("wrong")} ${m.retry||""}`:`نه هنوز. ${m.retry||""} یک فرصت دیگر داری.`,"no");$("#hlpb").classList.add("nudge");return false;}

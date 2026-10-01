@@ -180,7 +180,18 @@ def sort(g,pg,sp):
     x=g2+col*(bw+g2)+bw/2; y=200+row*(bh+14)+bh/2
     g.drag(320,92,x,y)
 
-SOL={'force':force,'scale':scale,'lever':lever,'ramp':ramp,'pulley':pulley,'wheel':wheel,'wedge':wedge,'sort':sort}
+def fric(g,pg,sp):
+    t=sp['t']
+    if t=='fq':
+        mcq(pg,{1:0,2:2,3:2,4:0,5:2}[sp['q']]); pg.wait_for_timeout(2000); return
+    if t=='surf':
+        a=sp['ans'] if sp['goal']=='flag' else (0 if sp['goal']=='move' else 2)
+        pg.click(f'#surfs [data-s="{a}"]'); click_text(pg,'هل بده'); pg.wait_for_timeout(1900); return
+    if t=='min':
+        f=[4,15,35][sp['s']]; ans=(f//5)*5+5
+        stepper_set(pg,ans-5); click_text(pg,'هل بده'); pg.wait_for_timeout(1900); return
+
+SOL={'force':force,'fric':fric,'scale':scale,'lever':lever,'ramp':ramp,'pulley':pulley,'wheel':wheel,'wedge':wedge,'sort':sort}
 if __name__=='__main__':
     track=sys.argv[3] if len(sys.argv)>3 else 'c'
     keys=sys.argv[1].split(',') if len(sys.argv)>1 and sys.argv[1]!='all' else list(SOL)

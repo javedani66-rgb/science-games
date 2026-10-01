@@ -55,7 +55,7 @@ function makeTug(A,cfg){
 }
 
 function makeFriction(A,F){
-  const svg=A.svg,P=A.P;A.view(424);const lanes=[{n:"یخ",f:4,col:"#CFEFFB",edge:"#8CCFEA"},{n:"کف چوبی",f:15,col:"#E3B77F",edge:"#B9834A"},{n:"فرش",f:35,col:"#D9776B",edge:"#A94B41"}];
+  const svg=A.svg,P=A.P;A.view(424);const lanes=SURF;
   const st={F,pos:[0,0,0],busy:false,pick:null};
   function lane(i){const L=lanes[i],y=46+i*124,sy=y+92;let tex="";
     if(i===0)tex=`<path d="M120 ${sy+10} l40 -6 M300 ${sy+18} l60 -8 M470 ${sy+9} l50 -6" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`;
@@ -63,7 +63,7 @@ function makeFriction(A,F){
     else{for(let x=110;x<600;x+=18)tex+=`<circle cx="${x}" cy="${sy+8+(x%36?8:0)}" r="2.2" fill="#B85548"/>`;}
     const cx=196+st.pos[i],sel=st.pick===i;
     let s=`<g data-zone="lane" data-i="${i}" style="cursor:pointer"><rect x="84" y="${y+2}" width="540" height="118" rx="14" fill="${sel?"#FFF6D6":"#fff"}" fill-opacity="${sel?1:.5}" stroke="${sel?"#F0B429":"none"}" stroke-width="3"/><rect x="96" y="${sy}" width="516" height="26" rx="6" fill="${L.col}" stroke="${L.edge}" stroke-width="2"/>${tex}</g>`;
-    s+=T(604,y+26,L.n,{size:15,col:INK,anchor:"start"});
+    s+=T(604,y+26,L.n,{size:15,col:INK,anchor:"start"})+fricMeter(604,y+52,i);
     s+=shadow(cx,sy+1,70)+crateSvg(cx,sy,66,52,"",null);
     if(S.forces){const AL=v=>Math.max(16,Math.min(80,v*1.6)),pl=AL(F);s+=arrow(cx-36-pl,sy-38,cx-37,sy-38,10,BLUE)+T(cx-40,sy-63,`هل<tspan class="num"> ${fa(F)}</tspan>`,{size:13,col:BLUE,anchor:"start"});
       const f=Math.min(F,L.f);if(f>0){const fl=AL(f);s+=arrow(cx-34,sy-7,cx-34-fl,sy-7,7,"#E8590C")+T(cx-48-fl,sy-2,"اصطکاک",{size:12,col:"#E8590C",anchor:"start"});}}
@@ -76,41 +76,33 @@ function makeFriction(A,F){
   render();return{st,render,run,lanes,reset(){st.pos=[0,0,0];render();}};
 }
 
-const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، کشیدن، نیروی خالص و اصطکاک",
- intro:"نیرو یعنی هل دادن یا کشیدن. در طناب‌کشی کشش‌ها را روی طناب بگذار و ببین جعبه به کدام طرف می‌رود. بعد اصطکاک را روی یخ، چوب و فرش امتحان کن.",
+const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، کشیدن و نیروی خالص",
+ intro:"نیرو یعنی هل دادن یا کشیدن. در طناب‌کشی کشش‌ها را روی طناب بگذار و ببین جعبه به کدام طرف می‌رود.",
  art(){const s={};let h=bgRoom(330).replace(/id="g/g,'id="a'+"f").replace(/url\(#g/g,"url(#af");
    h+=`<line x1="14" y1="285" x2="626" y2="285" stroke="#8A6A48" stroke-width="6"/><rect x="268" y="258" width="104" height="58" rx="10" fill="#5E7395"/><rect x="268" y="258" width="104" height="12" rx="6" fill="#7F93B3"/><circle cx="290" cy="318" r="12" fill="${INK}"/><circle cx="350" cy="318" r="12" fill="${INK}"/>`+tokenSvg(225,292,20,"L")+tokenSvg(163,292,10,"L")+tokenSvg(415,292,50,"R")+arrow(316,222,256,222,13,BLUE)+arrow(324,222,404,222,13,RED)+arrow(320,170,370,170,15,PURP);return h;},
  lab(A){A.prompt("آزمایشگاه: کشش‌ها را از پایین روی طناب بکش. برای برداشتن، کشش را از طناب بیرون بکش یا رویش بزن. بعد «برو!» را بزن.");
    let mode="tug",tug=null;
    function tugMode(){mode="tug";A.formula("");tug=makeTug(A,{edit:"both",tray:KID()?[10]:[10,20,50]});A.refresh=()=>tug.render();
      const c=A.ctrl("");btn(c,"برو!","go",b=>{b.disabled=true;tug.run(dir=>{A.fb(dir===0?"جعبه تکان نخورد: نیروها برابرند و نیروی خالص صفر است.":`جعبه به ${dir>0?"راست":"چپ"} رفت، چون نیروی ${dir>0?"راست":"چپ"} بیشتر است.`,"info");b.disabled=false;});});
-     btn(c,"برگرداندن جعبه","",()=>{tug.reset();A.fb("");});btn(c,"پاک کردن طناب","",()=>{tug.st.L=[null,null,null,null];tug.st.R=[null,null,null,null];tug.reset();A.fb("");});
-     btn(c,"آزمایش اصطکاک","pri",fricMode);}
-   function fricMode(){mode="fric";A.prompt("آزمایشگاه اصطکاک: اندازهٔ هل را انتخاب کن و «هل بده!» را بزن. ببین روی هر سطح جعبه چقدر جلو می‌رود.");A.counter("");
-     let F=20,fr=makeFriction(A,F);A.formula(`<span class="fl">قانون</span><span>اصطکاک تا یک اندازه جلوی هل را می‌گیرد. اگر هل از آن اندازه بیشتر شود، جعبه راه می‌افتد.</span>`);A.refresh=()=>fr.render();
-     const c=A.ctrl("");const sp=stepper(c,{init:F,min:5,max:60,steps:[5],unit:"نیوتن هل",onChange:v=>{F=v;fr=makeFriction(A,F);A.refresh=()=>fr.render();}});
-     btn(c,"هل بده!","go",b=>{b.disabled=true;fr.reset();fr.run(()=>{b.disabled=false;const moved=fr.lanes.filter(L=>F>L.f).map(L=>L.n);A.fb(moved.length?`با ${fa(F)} نیوتن، جعبه روی ${andList(moved)} حرکت کرد.${moved.length<3?" روی بقیه، اصطکاک همهٔ هل را خنثی کرد.":""}`:"روی هیچ سطحی حرکت نکرد؛ هل آن‌قدر نبود که بر اصطکاک غلبه کند.","info");});});
-     btn(c,"برگشت به طناب‌کشی","pri",()=>{A.prompt("آزمایشگاه: کشش‌ها را از پایین روی طناب بکش. بعد «برو!» را بزن.");A.fb("");tugMode();});}
+     btn(c,"برگرداندن جعبه","",()=>{tug.reset();A.fb("");});btn(c,"پاک کردن طناب","",()=>{tug.st.L=[null,null,null,null];tug.st.R=[null,null,null,null];tug.reset();A.fb("");});}
    tugMode();},
  kid:[
-  {id:"force.a1",title:"کدام طرف قوی‌تر است؟",desc:"کشش‌ها را بشمار و بگو کدام طرف می‌برد.",gen(r){const P=[[1,2],[3,1],[2,2],[1,3],[3,2]];return shuffle(r,P).map(([a,b])=>({t:"predict",L:Array(a).fill(10),R:Array(b).fill(10),spread:true}));}},
+  {id:"force.a1",title:"کدام طرف قوی‌تر است؟",desc:"کشش‌ها را بشمار و بگو کدام طرف می‌برد. بعد خودت کشش بگذار.",gen(r){return[{t:"predict",L:[10],R:[10,10,10]},{t:"predict",L:[10,10,10],R:[10]},{t:"balance",fixed:[10],tray:[10]},{t:"predict",L:[10,10],R:[10,10],spread:true},{t:"balance",fixed:[10,10],tray:[10]},{t:"predict",L:[10,10],R:[10,10,10],spread:true}];}},
   {id:"force.a2",title:"جعبه را نگه دار",desc:"کشش بگذار تا دو طرف مساوی شوند.",gen(r){return[{t:"balance",fixed:[10],tray:[10]},{t:"balance",fixed:[10,10],tray:[10]},{t:"predict",L:[10,10],R:[10,10,10],spread:true},{t:"balance",fixed:[10,10,10],tray:[10],side:"L"},{t:"balance",fixed:[10,10],tray:[10],spread:true,side:"L"}];}},
-  {id:"force.a3",title:"لیز یا زبر؟",desc:"جعبه روی یخ، چوب و فرش. کدام راحت‌تر سُر می‌خورد؟",gen(r){return[{t:"fric",q:1,F:20},{t:"fric",q:3,F:20},{t:"predict",L:[10,10,10,10],R:[10,10,10],spread:true},{t:"fric",q:2,F:20},{t:"balance",fixed:[10,10,10,10],tray:[10]}];}}],
+  {id:"force.a3",title:"کشش‌های بیشتر",desc:"طناب شلوغ‌تر می‌شود. با دقت بشمار.",gen(r){return[{t:"predict",L:[10,10,10],R:[10,10,10,10],spread:true},{t:"balance",fixed:[10,10,10],tray:[10]},{t:"predict",L:[10,10,10,10],R:[10,10,10,10],spread:true},{t:"balance",fixed:[10,10,10,10],tray:[10],side:"L"},{t:"predict",L:[10,10,10,10],R:[10,10,10],spread:true}];}}],
  levels:[
   {id:"force.1",title:"هل دادن و کشیدن",desc:"کدام طرف قوی‌تر است؟ با شمردن کشش‌ها طناب‌کشی را متعادل کن.",gen(r){const a=ri(r,1,3);let b=ri(r,1,3);if(b===a)b=a===3?1:a+1;const c=ri(r,2,3);const d=ri(r,1,3);
-    return[{t:"predict",L:Array(a).fill(10),R:Array(b).fill(10)},{t:"balance",fixed:Array(ri(r,2,3)).fill(10),tray:[10]},{t:"predict",L:Array(c).fill(10),R:Array(c).fill(10),spread:true},{t:"fric",q:1,F:20},{t:"balance",fixed:Array(ri(r,1,4)).fill(10),tray:[10],spread:true},{t:"predict",L:Array(d).fill(10),R:Array(d===3?2:d+1).fill(10),spread:true}];}},
-  {id:"force.2",title:"جمع نیروها",desc:"کشش‌ها اندازه‌های مختلف دارند. تعداد مهم نیست؛ جمعِ اندازهٔ آن‌ها مهم است.",gen(r){return[{t:"predict",L:[10,10,10],R:[20]},{t:"balance",fixed:shuffle(r,[20,10]),tray:[10,20]},{t:"net",L:[20,20],R:[10]},{t:"fric",q:2,F:20},{t:"balance",fixed:shuffle(r,[20,20,10]),tray:[10,20],side:"L"},{t:"net",L:[10],R:shuffle(r,[20,20,10])}];}},
-  {id:"force.3",title:"نیروی خالص",desc:"نیروی خالص را حساب کن و طناب را طوری بچین که به اندازهٔ دلخواه جابه‌جا شود.",gen(r){return[{t:"make",fixed:[20,10],tray:[10,20,50],target:20,show:"sides"},{t:"net",L:[50],R:[20,10]},{t:"predict",L:[10,10,10,10],R:[50]},{t:"balance",fixed:shuffle(r,[50,20]),tray:[10,20,50],show:"sides",side:"L"},{t:"fric",q:3,F:30},{t:"make",fixed:[20],tray:[10,20,50],target:-30,side:"L",show:"sides"}];}},
-  {id:"force.4",title:"قهرمان نیرو",desc:"عددهای بزرگ‌تر، کشش‌های بیشتر و جای کم روی طناب.",gen(r){return[{t:"make",fixed:[50,20,10],tray:[20,50],target:40,show:"sides"},{t:"net",L:shuffle(r,[50,20,20,10]),R:shuffle(r,[50,50,10])},{t:"balance",fixed:shuffle(r,[50,50,20,10]),tray:[20,50,10],show:"sides"},{t:"predict",L:shuffle(r,[20,20,20,20]),R:shuffle(r,[50,20,10])},{t:"fric",q:2,F:30},{t:"make",fixed:shuffle(r,[50,20]),tray:[10,20,50],target:-40,side:"L",show:"sides"}];}}],
- endless(r,d){const vals=d<2?[10]:d<3.5?[10,20]:[10,20,50],tp=pick(r,d<2?["predict","balance","fric"]:["predict","balance","net","make","fric"]);const rand=n=>Array.from({length:n},()=>pick(r,vals));
-   if(tp==="fric")return{t:"fric",q:pick(r,[1,2,3]),F:pick(r,[20,30])};
+    return[{t:"predict",L:Array(a).fill(10),R:Array(b).fill(10)},{t:"balance",fixed:Array(ri(r,2,3)).fill(10),tray:[10]},{t:"predict",L:Array(c).fill(10),R:Array(c).fill(10),spread:true},{t:"balance",fixed:[10,10],tray:[10],side:"L"},{t:"balance",fixed:Array(ri(r,1,4)).fill(10),tray:[10],spread:true},{t:"predict",L:Array(d).fill(10),R:Array(d===3?2:d+1).fill(10),spread:true}];}},
+  {id:"force.2",title:"جمع نیروها",desc:"کشش‌ها اندازه‌های مختلف دارند. تعداد مهم نیست؛ جمعِ اندازهٔ آن‌ها مهم است.",gen(r){return[{t:"predict",L:[10,10,10],R:[20]},{t:"balance",fixed:shuffle(r,[20,10]),tray:[10,20]},{t:"net",L:[20,20],R:[10]},{t:"predict",L:[20,10],R:[10,10,10]},{t:"balance",fixed:shuffle(r,[20,20,10]),tray:[10,20],side:"L"},{t:"net",L:[10],R:shuffle(r,[20,20,10])}];}},
+  {id:"force.3",title:"نیروی خالص",desc:"نیروی خالص را حساب کن و طناب را طوری بچین که به اندازهٔ دلخواه جابه‌جا شود.",gen(r){return[{t:"make",fixed:[20,10],tray:[10,20,50],target:20,show:"sides"},{t:"net",L:[50],R:[20,10]},{t:"predict",L:[10,10,10,10],R:[50]},{t:"balance",fixed:shuffle(r,[50,20]),tray:[10,20,50],show:"sides",side:"L"},{t:"net",L:[20,20],R:[50]},{t:"make",fixed:[20],tray:[10,20,50],target:-30,side:"L",show:"sides"}];}},
+  {id:"force.4",title:"قهرمان نیرو",desc:"عددهای بزرگ‌تر، کشش‌های بیشتر و جای کم روی طناب.",gen(r){return[{t:"make",fixed:[50,20,10],tray:[20,50],target:40,show:"sides"},{t:"net",L:shuffle(r,[50,20,20,10]),R:shuffle(r,[50,50,10])},{t:"balance",fixed:shuffle(r,[50,50,20,10]),tray:[20,50,10],show:"sides"},{t:"predict",L:shuffle(r,[20,20,20,20]),R:shuffle(r,[50,20,10])},{t:"net",L:shuffle(r,[50,20]),R:shuffle(r,[20,20,10])},{t:"make",fixed:shuffle(r,[50,20]),tray:[10,20,50],target:-40,side:"L",show:"sides"}];}}],
+ endless(r,d){const vals=d<2?[10]:d<3.5?[10,20]:[10,20,50],tp=pick(r,d<2?["predict","balance"]:["predict","balance","net","make"]);const rand=n=>Array.from({length:n},()=>pick(r,vals));
    if(tp==="predict"){const L=rand(ri(r,1,4));let R=rand(ri(r,1,4));return{t:"predict",L,R,spread:true};}
    if(tp==="net")return{t:"net",L:rand(ri(r,1,4)),R:rand(ri(r,1,4))};
    for(let k=0;k<50;k++){const L=rand(ri(r,1,3+Math.min(1,Math.floor(d/3))));if(tp==="balance"&&reach(sumA(L),vals,4))return{t:"balance",fixed:L,tray:vals,side:pick(r,["L","R"]),show:d>3?"sides":"all"};
      if(tp==="make"){const t=pick(r,[10,20,30,40]);if(reach(sumA(L)+t,vals,4))return{t:"make",fixed:L,tray:vals,target:t,show:"sides"};}}
    return{t:"balance",fixed:[10,10],tray:[10]};},
  mount(sp,A){
-  if(sp.t==="fric")return fricChallenge(sp,A);
   const spread=(a,seed)=>{const out=[null,null,null,null];if(!a)return out;const idx=sp.spread?shuffle(rng(seed+a.length*7+sumA(a)),[0,1,2,3]).slice(0,a.length).sort():a.map((_,i)=>i);a.forEach((v,j)=>out[idx[j]]=v);return out;};
   if(sp.t==="predict"){A.prompt(KID()?"کدام طرف قوی‌تر است؟":`کدام طرف طناب‌کشی را می‌برد؟<small>عددهای روی کشش‌ها را جمع کن و قبل از دیدن حرکت، پیش‌بینی کن.</small>`);
     const tug=makeTug(A,{L:spread(sp.L,1),R:spread(sp.R,2),show:"none"});A.refresh=()=>tug.render();
@@ -152,7 +144,9 @@ function fricChallenge(sp,A){const fr=makeFriction(A,sp.F);A.refresh=()=>fr.rend
   const q=sp.q;let ans,text,expl;
   if(q===1){ans=0;text=KID()?"کدام جعبه دورتر می‌رود؟":"هر سه جعبه را با یک اندازه هل می‌دهیم. کدام جعبه دورتر می‌رود؟";expl="روی یخ اصطکاک خیلی کم است؛ پس جعبه راحت سُر می‌خورد.";}
   else if(q===2){ans=2;text=KID()?"کدام جعبه تکان نمی‌خورد؟":`با نیروی ${fa(sp.F)} نیوتن هل می‌دهیم. روی کدام سطح جعبه اصلاً تکان نمی‌خورد؟`;expl="اصطکاکِ فرش آن‌قدر زیاد است که این هل نمی‌تواند جعبه را راه بیندازد.";}
-  else{ans=2;text=KID()?"کدام سطح زبرتر است؟":"اصطکاک کدام سطح از همه بیشتر است؟";expl="پرزهای فرش جلوی سُر خوردن را می‌گیرند؛ پس فرش بیشترین اصطکاک را دارد.";}
+  else if(q===3){ans=2;text=KID()?"کدام سطح زبرتر است؟":"اصطکاک کدام سطح از همه بیشتر است؟";expl="پرزهای فرش جلوی سُر خوردن را می‌گیرند؛ پس فرش بیشترین اصطکاک را دارد.";}
+  else if(q===4){ans=0;text=KID()?"با هل کم، کدام جعبه راه می‌افتد؟":`با هل کمِ ${fa(sp.F)} نیوتن، روی کدام سطح جعبه راه می‌افتد؟`;expl="فقط اصطکاکِ یخ از این هل کمتر است.";}
+  else{ans=2;text=`با هل ${fa(sp.F)} نیوتن، کدام جعبه کمترین راه را می‌رود؟`;expl="هر سه جعبه راه می‌افتند، ولی اصطکاکِ فرش بیشترین مقدار از هل را خنثی می‌کند.";}
   A.prompt(`${text}<small>روی یکی از سطح‌ها بزن یا از دکمه‌ها انتخاب کن.</small>`);
   const c=A.ctrl("");let m;const choose=i=>{if(A.locked)return;fr.st.pick=i;fr.render();
     if(i===ans){m.disable();m.mark(i,"right");fr.run(()=>A.judge(true,{ok:expl}));}

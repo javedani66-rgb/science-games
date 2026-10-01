@@ -9,10 +9,10 @@ const LANDS=[{n:"کارگاه نجاری",bg:"#F7E3B5",hex:"#8A5A12",ttl:"#5B3A2
 const landOf=i=>i<4?0:i<10?1:2;
 /* هر منزل: اسم، ایستگاه مأموریت جانبی، مأموریت‌های اصلی هر مسیر [ایستگاه، شمارهٔ مرحله] */
 const STOPS=[
- {n:"نیرو",side:"force",m:{a:["force.a1"],b:["force.1"],c:["force.2","force.3"]}},
+ {n:"نیرو",side:"force",m:{a:["force.a1","force.a2"],b:["force.1","force.2"],c:["force.2","force.3"]}},
  {n:"جرم و وزن",side:"scale",m:{a:["scale.a1","scale.a2"],b:["scale.1","scale.2"],c:["scale.2","scale.3"]}},
  {n:"نیروسنج",side:"scale",m:{a:["scale.a3","scale.a4"],b:["scale.4","scale.5"],c:["scale.4","scale.5"]}},
- {n:"اصطکاک",side:"force",m:{a:["force.a2","force.a3"],b:["force.2","force.3"],c:["force.4","force.xc"]}},
+ {n:"اصطکاک",side:"fric",m:{a:["fric.a1","fric.a2"],b:["fric.1","fric.2"],c:["fric.2","fric.3"]}},
  {n:"اهرم ۱",side:"lever",m:{a:["lever.a1"],b:["lever.1"],c:["lever.2"]}},
  {n:"اهرم ۲",side:"lever",m:{a:["lever.a2","lever.a3"],b:["lever.2","lever.3"],c:["lever.3","lever.4","lever.xc"]}},
  {n:"گوه و پیچ",side:"wedge",m:{a:["wedge.a1","wedge.a2"],b:["wedge.1","wedge.2","wedge.3"],c:["wedge.2","wedge.3","wedge.4"]}},
@@ -80,9 +80,14 @@ const firstOpen=(p,i)=>{const ms=missions(p,i);for(let j=0;j<ms.length;j++)if(!m
 const mName=(p,i,j)=>{const r=mRef(p,i,j);return levelsFor(r.k,trk(p))[r.L-1].title;};
 function newProfile(name,g,t,shirt){const tr=trackOfG(g);return{id:"p"+Date.now().toString(36),name,g,t,shirt:shirt||"",lvl:null,done:"",quiz:[0,0,0,0,0],stash:{},cards:[],S:{prog:{},nums:true,forces:true,formula:tr==="d",track:tr},home:Array(12).fill(0),side:Array(12).fill(0),words:Array(12).fill(0),opt:Array(12).fill(0),at:null,coach:1,sv:2};}
 /* پروفایل‌های نسخهٔ قبل را کامل می‌کند (چیزی پاک نمی‌شود) */
-function fixProfile(p){if(p.S)migrateS(p.S);if(!p.opt)p.opt=Array(12).fill(0);
+function fixProfile(p){
+  /* داده‌ی ناقص یا خراب هرگز بازی را از کار نیندازد: هر چیزِ نبود با مقدار پیش‌فرض پر می‌شود */
+  const oldSv=p.sv;if(!(p.g>=0&&p.g<GRADES.length))p.g=0;if(!(p.t>=0))p.t=0;const d0=newProfile(String(p.name||"بازیکن"),p.g,p.t);
+  for(const k in d0)if(p[k]==null)p[k]=d0[k];for(const k of ["home","side","words"])if(!Array.isArray(p[k])||p[k].length!==12)p[k]=d0[k];
+  if(!p.S||typeof p.S!=="object")p.S=d0.S;if(!p.S.prog||typeof p.S.prog!=="object")p.S.prog={};
+  migrateS(p.S);if(!p.opt)p.opt=Array(12).fill(0);
   /* ۱۴۰۵/۷/۹: منزل ۷ (سطح شیب‌دار) و ۸ (گوه و پیچ) جابه‌جا شدند */
-  if(!p.sv){for(const a of [p.home,p.side,p.words])if(Array.isArray(a))[a[6],a[7]]=[a[7],a[6]];if(p.stash)for(const t in p.stash)for(const x of ["words","side"]){const a=p.stash[t]&&p.stash[t][x];if(Array.isArray(a))[a[6],a[7]]=[a[7],a[6]];}if(p.at&&(p.at.i===6||p.at.i===7))p.at=null;p.sv=2;}if(!p.quiz)p.quiz=[0,0,0,0,0];if(p.done==null)p.done="";if(!p.stash)p.stash={};if(!p.cards)p.cards=[];if(p.shirt==null)p.shirt="";if(p.lvl===undefined)p.lvl=null;if(p.S&&p.S.track!==trk(p))p.S.track=trk(p);return p;}
+  if(!oldSv){for(const a of [p.home,p.side,p.words])if(Array.isArray(a))[a[6],a[7]]=[a[7],a[6]];if(p.stash)for(const t in p.stash)for(const x of ["words","side"]){const a=p.stash[t]&&p.stash[t][x];if(Array.isArray(a))[a[6],a[7]]=[a[7],a[6]];}if(p.at&&(p.at.i===6||p.at.i===7))p.at=null;p.sv=2;}if(!p.quiz)p.quiz=[0,0,0,0,0];if(p.done==null)p.done="";if(!p.stash)p.stash={};if(!p.cards)p.cards=[];if(p.shirt==null)p.shirt="";if(p.lvl===undefined)p.lvl=null;if(p.S&&p.S.track!==trk(p))p.S.track=trk(p);return p;}
 DB.profiles.forEach(fixProfile);
 /* رفتن به سطح دیگر: کارت‌ها، آزمون‌ها و جوایزِ هر سطح جدا نگه داشته می‌شوند */
 function switchLevel(p,to,from){from=from||trk(p);if(from!==to){p.stash[from]={words:p.words,quiz:p.quiz,side:p.side};const st=p.stash[to]||{};

@@ -46,6 +46,13 @@ const applyNums=()=>{document.body.classList.toggle("nonum",!NUMS());document.bo
 const sy=(s,sub)=>`<i>${s}</i>${sub?`<sub>${sub}</sub>`:""}`;
 function FX(eq,sub,lg){return `<span class="fl">فرمول</span><span class="eqx" dir="ltr">${eq}</span>${sub?`<span class="eqx sub num" dir="ltr">${sub}</span>`:""}${lg?`<span class="lg">${lg.map(([s,m])=>`<span class="lgi"><span dir="ltr">${s}</span>: ${m}</span>`).join("")}</span>`:""}`;}
 
+/* ================= فهرست چالش‌ها (داده) =================
+   هر چالش: id ثابت، ایستگاه، سختی (۰ آسان، ۱ سخت، ۲ خیلی سخت، ۳ هیولا)، یک جملهٔ «یاد گرفتی»، واژه‌ها و mk(r) که مشخصات چالش را می‌سازد.
+   مرحله‌ای که به‌جای gen فهرست ch دارد، چالش‌هایش را از اینجا می‌گیرد. بهترین امتیاز هر چالش در S.cb ذخیره می‌شود. */
+const DIFF=[{n:"آسان",c:"#22965A"},{n:"سخت",c:"#E4553A"},{n:"خیلی سخت",c:"#7A3FC8"},{n:"هیولا",c:"#1B2A41"}];
+const CH={};
+function defCh(st,list){list.forEach(c=>{if(CH[c.id])throw new Error("challenge id twice: "+c.id);CH[c.id]=Object.assign({st,d:0,terms:[]},c);});}
+function chLevel(lv){if(lv.ch&&!lv.gen)lv.gen=r=>lv.ch.map(id=>Object.assign({cid:id},CH[id].mk(r)));return lv;}
 /* ================= رنگ و نگاره‌های پایه ================= */
 const INK="#1B2A41",BLUE="#2F6BD0",RED="#D8452B",PURP="#7A3FC8",GRN="#22965A",MUT="#56677F";
 const starSvg=(on,size)=>`<svg width="${size||18}" height="${size||18}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.8 5.9 6.4.9-4.6 4.5 1.1 6.4L12 17.3l-5.7 3 1.1-6.4-4.6-4.5 6.4-.9z" fill="${on?"#FFC43D":"none"}" stroke="${on?"#D99A12":"#B8C6D3"}" stroke-width="1.7" stroke-linejoin="round"/></svg>`;
