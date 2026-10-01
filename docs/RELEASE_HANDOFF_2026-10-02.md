@@ -17,7 +17,7 @@ A portable owner-review package named `science-games-review.zip` is saved in the
 
 The frozen final build passed all 27 release jobs. The recorded outcomes include 132 level runs and 789 full-credit challenges across tracks a–d; complete journeys for grades 0, 2, 3, and 6; endless mode, save/restore, reset, map and lever checks; zero findings in final overlap checks across all four tracks; and reviewed answer-leak flags. Physics model checks: 9,010. Focused machine interaction checks: 15/15. Offline layout checks covered 320×568, 390×844, and 1280×800. Independent review reported no release blocker.
 
-Detailed test results and boundaries are in the Library review package, `RELEASE_CHECKS.md`. Do not rerun the full suite unless source/build inputs change or a specific discrepancy is found.
+Detailed test results and boundaries are in the Library review package, `RELEASE_CHECKS.md`. Do not rerun the full suite unless source/build inputs change or a specific discrepancy is found. This handoff and verification commit supersede older historical checklist entries in `docs/NEXT.md` and earlier continuation notes wherever they still describe the scale/lever work as next or the final test suite as pending.
 
 ## Work that can proceed without owner input
 
