@@ -53,6 +53,10 @@ def scale(g,pg,sp):
         if SHOT: g.shot(f'ch_scale_{t}_{sp["obj"]}')
         if t=='waterF': stepper_set(pg,SPR[sp['obj']][1]); click_text(pg,'بررسی'); return
         mcq(pg,sp['ans']); return
+    if t=='hang':
+        ma=MASS['cube'][sp['o'][0]]; mb=MASS['cube'][sp['o'][1]]; ans=0 if ma>mb else 1 if ma==mb else 2
+        if sp.get('poe'): mcq(pg,1); pg.wait_for_timeout(1300)
+        mcq(pg,ans); return
     if t in ('moon','moonbal'):
         mcq(pg,0); pg.wait_for_timeout(1300); mcq(pg,1); return
     if 'ans' in sp:

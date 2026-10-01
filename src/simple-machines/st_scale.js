@@ -135,7 +135,7 @@ function makeSpring(A,cfg){
   return{st,render,read,sub,W,FB,setPlace(pl){st.place=pl;render();}};
 }
 /* دو نیروسنج کنار هم: زمین و ماه */
-function springPanel(x0,w,where,massKg,reading,label){const moon=where==="moon";let s=`<g><rect x="${x0}" y="16" width="${w}" height="376" rx="18" fill="${moon?"#1E2A44":"#DDF0F8"}"/>`;
+function springPanel(x0,w,where,massKg,reading,label,obj){obj=obj||"rice";const moon=where==="moon";let s=`<g><rect x="${x0}" y="16" width="${w}" height="376" rx="18" fill="${moon?"#1E2A44":"#DDF0F8"}"/>`;
   if(moon)s+=`<circle cx="${x0+w-40}" cy="54" r="16" fill="#3E7BD8"/>`+[30,90,150,220].map((x,i)=>`<circle cx="${x0+x}" cy="${40+i*17%50}" r="1.6" fill="#fff"/>`).join("");
   else s+=`<circle cx="${x0+w-44}" cy="60" r="20" fill="#FFD66B"/>`;
   s+=`<rect x="${x0}" y="352" width="${w}" height="40" fill="${moon?"#B9C2CF":"#8ACB74"}"/>`+T(x0+w/2,378,moon?"روی ماه":"روی زمین",{size:17,col:moon?INK:"#1B4D2A",halo:false});
@@ -145,8 +145,8 @@ function springPanel(x0,w,where,massKg,reading,label){const moon=where==="moon";
   let zz=`M${cx} 66`;const n=9;for(let i=1;i<=n;i++)zz+=` L${cx+(i%2?-12:12)} ${66+i*(sl-10)/n}`;s+=`<path d="${zz}" stroke="#7D8CA3" stroke-width="3" fill="none"/>`;
   const ry=66+sl;s+=`<rect x="${cx-26}" y="${ry-4}" width="52" height="8" rx="3" fill="#E8590C"/>`;
   s+=T(cx+44,ry+7,!hung?"؟":NUMS()?`${fa(reading)} نیوتن`:"",{size:14,col:"#C93B22",anchor:"end",haloCol:moon?"#1E2A44":"#fff"});
-  if(hung)s+=`<line x1="${cx}" y1="${ry+4}" x2="${cx}" y2="${96+sl+14}" stroke="#5E6E86" stroke-width="3"/><g transform="translate(${cx} ${150+sl+10}) scale(.9)">${OB.rice.d}</g>`+T(cx,160+sl+22,label,{size:13,col:moon?"#fff":INK,haloCol:moon?"#1E2A44":"#fff"});
-  else s+=`<g transform="translate(${cx+60} 350) scale(.8)">${OB.rice.d}</g>`;
+  if(hung)s+=`<line x1="${cx}" y1="${ry+4}" x2="${cx}" y2="${96+sl+14}" stroke="#5E6E86" stroke-width="3"/><g transform="translate(${cx} ${150+sl+10}) scale(.9)">${OB[obj].d}</g>`+T(cx,160+sl+22,label,{size:13,col:moon?"#fff":INK,haloCol:moon?"#1E2A44":"#fff"});
+  else s+=`<g transform="translate(${cx+60} 350) scale(.8)">${OB[obj].d}</g>`;
   return s+"</g>";}
 /* ترازوی حمام روی ماه */
 function bathScene(){let s=moonBg(330)+placeTag("moon",540,110);
@@ -181,6 +181,7 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
   {id:"scale.a1",title:"کدام سنگین‌تر است؟",desc:"پیش‌بینی کن کدام کفه پایین می‌رود.",gen(r){return shuffle(r,[{t:"heavier",u:"cube",L:["apple"],R:["melon"]},{t:"heavier",u:"cube",L:["balloon"],R:["stone"]},{t:"heavier",u:"cube",L:["book"],R:["book"]},{t:"heavier",u:"cube",L:["car"],R:["pillow"]},{t:"heavier",u:"cube",L:["rice"],R:["melon"]}]);}},
   {id:"scale.a2",title:"با مکعب صاف کن",desc:"مکعب بگذار تا ترازو صاف شود و بشمار چند مکعب شد.",gen(r){return shuffle(r,["apple","book","car","stone","pillow"]).map(id=>({t:"balance",u:"cube",obj:[id],tray:[1]}));}},
   {id:"scale.a3",title:"بزرگ اما سبک",desc:"چیزهای بزرگ همیشه سنگین نیستند!",gen(r){return[{t:"heavier",u:"cube",L:["cotton"],R:["iron"]},{t:"balance",u:"cube",obj:["balloon"],tray:[1]},{t:"heavier",u:"cube",L:["pillow"],R:["car"]},{t:"balance",u:"cube",obj:["pillow"],tray:[1]},{t:"heavier",u:"cube",L:["pillow"],R:["stone"]}];}},
+  {id:"scale.a5",title:"فنرِ نیروسنج",desc:"چیزها را به نیروسنج آویزان کن. چیزِ سنگین‌تر فنر را بیشتر کش می‌آورد.",gen(r){return[{t:"hang",o:["apple","melon"],poe:1},{t:"hang",o:["balloon","stone"]},{t:"hang",o:["car","pillow"]},{t:"hang",o:["book","book"]},{t:"hang",o:["rice","cotton"]}];}},
   {id:"scale.a4",title:"روی ماه و در آب",desc:"نیروسنج را به ماه ببر و سنگ را در آب فرو کن. چه چیزی عوض می‌شود؟",gen(r){return[{t:"moon",q:1,ans:2},{t:"massq",ans:1},{t:"moonbal",ans:1},{t:"water",obj:"stone",ans:2},{t:"water",obj:"brick",ans:2}];}}],
  levels:[
   {id:"scale.1",title:"کدام سنگین‌تر است؟",desc:"با ترازوی دوکفه‌ای مقایسه کن و با مکعب‌ها جرم هر چیز را بشمار. بزرگ همیشه سنگین نیست!",gen(r){const b=pick(r,["book","pillow","car"]),m=pick(r,["melon","rice"]);
@@ -201,7 +202,7 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
    if(tp==="heavier"){const vis=ids.filter(k=>!k.startsWith("my"));const a=pick(r,vis);let b=pick(r,vis);return{t:"heavier",u,L:[a],R:[b]};}
    const n=d>4?2:1,obj=shuffle(r,ids).slice(0,n);return{t:tp,u,obj,tray:u==="cube"?[1]:u==="kg"?[1,2,5,10]:[100,200,500,1000]};},
  mount(sp,A){
-  if(["moon","wcalc","mcalc","massq","moonbal","bath","water","waterF","waterWhy"].includes(sp.t))return massWeight(sp,A);
+  if(["hang","moon","wcalc","mcalc","massq","moonbal","bath","water","waterF","waterWhy"].includes(sp.t))return massWeight(sp,A);
   const u=sp.u;
   /* «کدام سنگین‌تر است؟» به روش حدس بزن ← امتحان کن ← توضیح بده:
      حدس امتیاز ندارد (از ظاهر نمی‌شود فهمید)؛ بچه خودش دو چیز را روی کفه‌ها می‌گذارد و ترازو زنده کج می‌شود؛
@@ -261,6 +262,18 @@ function mwMcq(A,opts,ans,msg){const c=A.ctrl("");const m=mcq(c,opts,(i,bt)=>{if
     if(i===ans){m.disable();m.mark(i,"right");if(msg.reveal)msg.reveal();A.judge(true,{ok:msg.ok,k:msg.k?{ok:msg.k.ok}:undefined});}
     else{m.mark(i,"wrong");bt.disabled=true;A.judge(false,{retry:msg.retry,final:msg.ok,k:msg.k?{retry:msg.k.retry,final:msg.k.ok}:undefined});if(A.locked){m.disable();m.mark(ans,"right");if(msg.reveal)msg.reveal();}}});return m;}
 function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
+  /* نیروسنج برای سطح ۱: دو نیروسنج کنار هم. اولی حدس ← آویزان کردن ← «فنر کدام بیشتر کش آمد؟»؛ بعدی‌ها خواندنِ نیروسنج:
+     فنری که بیشتر کش آمده، چیزِ سنگین‌تری را نگه داشته (بزرگ بودن مهم نیست). */
+  if(sp.t==="hang"){A.view(404);const [a,b]=sp.o,ra=MASS.cube[a]*8,rb=MASS.cube[b]*8,ans=ra>rb?0:ra===rb?1:2,na=OB[a].n,nb=OB[b].n;
+    const draw=h=>P.paint(`<rect width="640" height="520" style="fill:var(--sw)"/>`+springPanel(16,296,"earth",0,h?ra:null,na,a)+springPanel(328,296,"earth",0,h?rb:null,nb,b));
+    A.formula(`<span class="fl">قانون</span><span>هرچه چیزی سنگین‌تر باشد، فنرِ نیروسنج را بیشتر کش می‌آورد.</span>`);
+    const big=[a,b].some(id=>["balloon","pillow","cotton"].includes(id)),same=a===b;
+    const ok=ans===1?"فنرها به یک اندازه کش آمدند؛ این دو هم‌وزن‌اند.":`فنرِ ${ans===0?na:nb} بیشتر کش آمد؛ پس ${ans===0?na:nb} سنگین‌تر است.${big?" اندازهٔ بزرگ مهم نیست؛ فنر نشان می‌دهد کدام سنگین‌تر است.":""}`;
+    const o3=same?[`فنرِ ${na}ِ چپ`,"هر دو یک‌اندازه",`فنرِ ${na}ِ راست`]:[`فنرِ ${na}`,"هر دو یک‌اندازه",`فنرِ ${nb}`];
+    if(sp.poe){draw(false);poe(A,{prompt:`${na} و ${nb} را به دو نیروسنج آویزان می‌کنیم. حدس بزن فنرِ کدام بیشتر کش می‌آید.`,opts:o3,right:ans,reveal:(i,next)=>{draw(true);later(600,next);}},
+      {prompt:"فنرِ کدام بیشتر کش آمد؟",opts:o3,ans,ok,retry:"به نوار نارنجی هر فنر نگاه کن: کدام پایین‌تر آمده؟"});return;}
+    draw(true);A.prompt(`فنرِ کدام بیشتر کش آمده؟ پس کدام سنگین‌تر است؟`);
+    mwMcq(A,same?[`${na}ِ چپ`,"هم‌وزن‌اند",`${na}ِ راست`]:[na,"هم‌وزن‌اند",nb],ans,{ok,retry:"فنری که بیشتر کش آمده، چیزِ سنگین‌تری را نگه داشته.",k:{ok,retry:"به نوار نارنجی هر فنر نگاه کن: کدام پایین‌تر آمده؟"}});return;}
   if(sp.t==="moon"){A.view(404);const draw=rev=>P.paint(`<rect width="640" height="520" style="fill:var(--sw)"/>`+springPanel(16,296,"earth",5,50,K?"کیسهٔ برنج":"کیسهٔ ۵ کیلوگرمی")+springPanel(328,296,"moon",5,rev?8:null,"همان کیسه"));draw(false);
     A.formula(FX_W(`${sy("W")} = ۵ × ۱۰ = ۵۰ N`));
     poe(A,{prompt:K?"همین کیسه را به ماه بردیم و به نیروسنج آویزان کردیم. حدس بزن فنرِ نیروسنج روی ماه بیشتر کش می‌آید، همان‌قدر یا کمتر.":"همین کیسه را به ماه بردیم و به نیروسنج آویزان کردیم. حدس بزن نیروسنج روی ماه چه عددی نشان می‌دهد. حدس امتیاز ندارد.",
