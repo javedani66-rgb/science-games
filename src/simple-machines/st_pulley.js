@@ -4,12 +4,12 @@ const pulName=k=>(KID()?PUL_NAMES_K:PUL_NAMES_B)[k];
 const pulFrac=n=>n===1?"برابر وزن بار":({2:"نصفِ",3:"یک‌سومِ",4:"یک‌چهارمِ",6:"یک‌ششمِ"}[n]||`یک‌${fa(n)}مِ`)+" وزن بار";
 function pulleyIcon(n){let s=`<rect x="4" y="1" width="32" height="3" fill="#8A5427"/>`;if(n===1)return s+`<circle cx="20" cy="9" r="5" fill="none" stroke="${INK}" stroke-width="2"/><path d="M15 9 V22 M25 9 V26" stroke="#7A5634" stroke-width="1.6"/><rect x="11" y="21" width="8" height="6" fill="#E0A45F"/>`;
   const k=n/2;for(let i=0;i<n;i++)s+=`<path d="M${8+i*(24/(n-1||1))} 8 V19" stroke="#7A5634" stroke-width="1.5"/>`;return s+`<rect x="6" y="5" width="28" height="5" rx="2" fill="#8C9BB0"/><rect x="6" y="17" width="28" height="5" rx="2" fill="#8C9BB0"/><rect x="14" y="22" width="12" height="5" fill="#E0A45F"/>`;}
-function makePulley(A,cfg){cfg=machineScene(A,cfg);const svg=A.svg,P=A.P;A.view(404);const G=380,PXM=60,REST=250,MAXD=150;
+function makePulley(A,cfg){cfg=machineScene(A,cfg);const svg=A.svg,P=A.P;A.view(544);const G=380,PXM=60,REST=250,MAXD=150;
   const st={hideW:!!cfg.hideW,n:cfg.n||1,W:cfg.W,S:cfg.S,h:cfg.h||2,pulled:0,stroke:0,busy:false,blocked:false,flash:0,edit:cfg.edit!==false,hideF:!!cfg.hideF};
   const F=()=>MACHINE.pulley(st.W,st.n);const rise=()=>st.pulled/st.n;
   const R=(a,b,c,d)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#7A5634" stroke-width="4" stroke-linecap="round"/>`;
   const Wh=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#F4F7FA" stroke="#34425E" stroke-width="5"/><circle cx="${x}" cy="${y}" r="4" fill="#34425E"/>`;
-  function render(){if(!cfg.current())return;const ok=canLift(F(),st.S),y0=G-56-rise()*PXM,hy=REST+st.stroke;let s=bgRoom(G);
+  function render(){if(!cfg.current())return;const ok=canLift(F(),st.S),y0=G-56-rise()*PXM,hy=REST+st.stroke;let s=bgRoom(G)+`<rect y="520" width="640" height="24" style="fill:var(--sf)"/>`;
     s+=`<rect x="100" y="16" width="440" height="22" rx="6" fill="#8A5427"/><rect x="100" y="16" width="440" height="6" rx="3" fill="#A86A36"/>`;
     const th=G-st.h*PXM;s+=`<line x1="70" y1="${G}" x2="70" y2="${th-26}" stroke="#7D8CA3" stroke-width="4"/><path d="M70 ${th-26} l34 10 -34 10Z" fill="${GRN}"/><line x1="60" y1="${th}" x2="560" y2="${th}" stroke="${GRN}" stroke-width="2" stroke-dasharray="8 6" opacity=".7"/>`+T(82,th+22,NUMS()?`هدف: ${fa(st.h)} متر`:"هدف",{size:13,col:GRN,anchor:"end"});
     let lx,hx,body="";const yp=y0-34;

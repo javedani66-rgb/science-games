@@ -90,8 +90,8 @@ function makeLift(A,cfg){const svg=A.svg,P=A.P;A.view(524);svg.setAttribute('rol
     s+=`<g data-zone="press" data-focus="press" tabindex="${A.locked?-1:0}" role="button" aria-label="فشار دادن سر راست تخته"><circle cx="${geo.press.x}" cy="${geo.press.y-12}" r="22" fill="#fff" fill-opacity=".03" stroke="#D9498B" stroke-width="2" stroke-dasharray="4 4"/></g>`;
     s+=`<g pointer-events="none">${T(geo.fx,PY+29,"⟷",{size:20,col:"#8A5427",halo:false})}</g>`;
     s+=`<path d="M60 492 H${geo.fx} M${geo.fx} 489 V495 M${geo.fx} 492 H580 M60 489 V495 M580 489 V495" fill="none" stroke="#7D8CA3"/>`;
-    s+=T(160,517,KID()?"سمت سنگ":`بازوی مقاوم: ${fa(st.f+5)} خانه`,{size:18,col:INK,halo:false})+
-       T(475,517,KID()?"سمت دست":`بازوی محرک: ${fa(5-st.f)} خانه`,{size:18,col:INK,halo:false});
+    s+=T(160,510,KID()?"سمت سنگ":`بازوی مقاوم: ${fa(st.f+5)} خانه`,{size:18,col:INK,halo:false})+
+       T(475,510,KID()?"سمت دست":`بازوی محرک: ${fa(5-st.f)} خانه`,{size:18,col:INK,halo:false});
     if(cfg.paths&&st.a>0){const before=-Math.asin((FL-6-PY)/geo.left),paths=[];
       // Trace the same contact points as the animated scene, rather than only
       // their vertical displacement. Both ends move along circular arcs.

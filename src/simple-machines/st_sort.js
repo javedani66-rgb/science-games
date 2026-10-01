@@ -74,8 +74,8 @@ function makeSort(A,item,nb,onPick){const pic=KID()&&ICO[item[0]];const svg=A.sv
   const itFocus=()=>item[1]===6?"بخش‌های این وسیله با هم کار می‌کنند":sortFocus(item);
   const cols=nb===7?4:3,bw=nb===7?146:196,bh=100,gx=(640-cols*bw)/(cols+1);const bins=MCAT.slice(0,nb).map((c,i)=>{const row=Math.floor(i/cols),inRow=Math.min(cols,nb-row*cols),col=i%cols,g2=(640-inRow*bw)/(inRow+1);return{i,x:g2+col*(bw+g2),y:200+row*(bh+14),c};});
   const binAt=p=>bins.find(b=>p.x>=b.x&&p.x<=b.x+bw&&p.y>=b.y&&p.y<=b.y+bh);
-  function card(x,y){const lines=sortLines(item[0],pic?14:24),size=pic?20:lines.length>2?21:item[0].length>18?25:36;
-    const title=lines.map((line,i)=>`<text x="${pic?x-12:x}" y="${y+(i-(lines.length-1)/2)*(size+3)+9}" text-anchor="${pic?"start":"middle"}" font-size="${size}" font-family="LalezarLocal,VazirLocal,Tahoma" fill="${INK}" direction="rtl">${line}</text>`).join("");
+  function card(x,y){const lines=sortLines(item[0],pic?14:24),size=pic?20:lines.length>2?19:item[0].length>18?25:36;
+    const title=lines.map((line,i)=>`<text x="${pic?x-12:x}" y="${y+(i-(lines.length-1)/2)*(size+9)+6}" text-anchor="${pic?"start":"middle"}" font-size="${size}" font-family="LalezarLocal,VazirLocal,Tahoma" fill="${INK}" direction="rtl">${line}</text>`).join("");
     if(pic)return `<g><rect x="${x-150}" y="${y-60}" width="300" height="120" rx="18" fill="#fff" stroke="#F0B429" stroke-width="3"/><g transform="translate(${x+20} ${y-50}) scale(1.25)">${pic}</g>${title}</g>`;
     return `<g><rect x="${x-150}" y="${y-44}" width="300" height="88" rx="18" fill="#fff" stroke="#F0B429" stroke-width="3"/><rect x="${x-150}" y="${y-44}" width="300" height="10" rx="5" fill="#FFE08A"/>${title}</g>`;}
   function render(){let s=`<defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6F4EA"/><stop offset="1" stop-color="#F7FCF8"/></linearGradient></defs><rect width="640" height="520" fill="url(#sg)"/>`;
