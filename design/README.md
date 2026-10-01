@@ -22,3 +22,6 @@
 
 ## Runtime balance layers (2026-10-01)
 `tools/build_balance_art.py` exports the approved bal2 masks/recolouring from sheet1 to embedded `src/simple-machines/balance_art.js`. Re-run with Pillow, NumPy, OpenCV, SciPy and scikit-learn available; the game build only needs Python and the checked-in generated asset. The live model supplies rotation, equal arms, vertical chains/pans and the readable zero gauge.
+
+## Runtime lever layers (2026-10-01)
+`tools/build_lever_art.py` exports the existing lever3 plank/stone/wedge through `harm.py` into embedded `src/simple-machines/lever_art.js`. The wedge stores its alpha-mask apex so the rigid plank pivots on the visible contact point. Stone grounding, motion and contact-point traces are supplied by `makeLift`; no network asset is needed by the game. Use the same Python image dependencies as the balance exporter.

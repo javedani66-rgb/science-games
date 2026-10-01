@@ -36,22 +36,64 @@ const ITEMS=[
  ["دستگیرهٔ در",4,1,"دستگیرهٔ بزرگ را می‌چرخانی و میلهٔ باریک وسط می‌چرخد."],["فرمان ماشین",4,1,"چرخ بزرگ فرمان، میلهٔ وسط را با نیروی کم می‌چرخاند."],["پیچ‌گوشتی",4,2,"دستهٔ پهن چرخ است و تنهٔ باریک محور."],["شیر آب",4,2,"دستهٔ شیر را می‌چرخانی تا میلهٔ داخلش بچرخد."],["چاه با دستهٔ چرخان",4,2,"دسته را می‌چرخانی و محور، طناب سطل را می‌پیچد."],
  ["میلهٔ پرچم مدرسه",5,1,"طناب را پایین می‌کشی و پرچم بالا می‌رود."],["جرثقیل",5,2,"چند قرقره با هم بارهای خیلی سنگین را بلند می‌کنند."],["چاه با قرقرهٔ بالای سرش",5,2,"طناب از روی قرقره رد می‌شود و سطل بالا می‌آید."],["پردهٔ سالن نمایش",5,3,"طناب از روی قرقره‌های بالای صحنه رد می‌شود."],
  ["دوچرخه",6,3,"چرخ و محور (چرخ‌ها و پدال)، اهرم (دستهٔ ترمز) و پیچ؛ چند ماشین ساده با هم."],["ناخن‌گیر",6,3,"دو اهرم با لبه‌های تیز گوه‌ای."],["چرخ‌گوشت دستی",6,3,"دستهٔ چرخان، پیچ داخلی و تیغهٔ گوه‌ای."],["قوطی‌بازکن دستی",6,3,"دسته‌ها اهرم‌اند، دستهٔ چرخان (پروانه) چرخ و محور است و تیغه گوه است."]];
+/* Keep stored item names/categories intact; identify the mechanism being asked. */
+const SORT_PARTS={
+ "دربازکن نوشابه":"دسته و محل تکیهٔ دربازکن روی درِ بطری",
+ "جارو":"دستهٔ جارو، وقتی دو دست آن را حرکت می‌دهند",
+ "منگنه":"بازوی بالایی و لولای عقب منگنه",
+ "انبرک":"دو بازوی انبرک و محل اتصالشان",
+ "پاروی قایق":"پارو، وقتی دور جاپاروییِ لبهٔ قایق می‌چرخد",
+ "فرغون":"دسته‌ها و بار، با تکیه بر چرخ جلو",
+ "چاقو":"لبهٔ برندهٔ چاقو",
+ "تبر":"لبهٔ برندهٔ تبر",
+ "دندان‌های جلو":"لبهٔ دندان‌های جلو هنگام بریدن غذا",
+ "درِ بطری آب":"شیارهای در و گلوی بطری هنگام باز و بسته شدن",
+ "درِ شیشهٔ مربا":"شیارهای در و دهانهٔ شیشه هنگام باز و بسته شدن",
+ "تهِ پیچ‌دارِ لامپ":"شیارهای تهِ لامپ هنگام بستن آن در سرپیچ",
+ "چهارپایهٔ پیانو که با چرخاندن بالا و پایین می‌رود":"پیچِ تنظیم ارتفاع چهارپایه",
+ "دستگیرهٔ در":"دستگیره و میلهٔ وسط هنگام چرخاندن",
+ "فرمان ماشین":"حلقهٔ فرمان و میلهٔ وسط هنگام چرخاندن",
+ "پیچ‌گوشتی":"دستهٔ پهن و میلهٔ باریک، هنگام چرخاندن پیچ",
+ "شیر آب":"دستهٔ چرخان شیر و میلهٔ متصل به آن",
+ "چاه با دستهٔ چرخان":"دسته و محوری که طناب سطل دورش می‌پیچد",
+ "میلهٔ پرچم مدرسه":"قرقرهٔ بالای میله که طناب از روی آن می‌گذرد",
+ "جرثقیل":"قرقره‌های بخشِ بالا بردن بار",
+ "چاه با قرقرهٔ بالای سرش":"قرقرهٔ بالای چاه که طناب از روی آن می‌گذرد",
+ "پردهٔ سالن نمایش":"قرقره‌هایی که طنابِ پرده از روی آن‌ها می‌گذرد"
+};
+function sortFocus(item){return SORT_PARTS[item[0]]||item[0];}
+function sortPrompt(item){return item[1]===6?
+ `در «${item[0]}» چند ماشین ساده با هم به کار می‌روند. کارت را در کدام جعبه می‌گذاری؟`:
+ `در «${item[0]}» به این بخش توجه کن: ${sortFocus(item)}. این بخش کدام ماشین ساده است؟`;}
+function sortResult(item){return item[1]===6?`«${item[0]}» یک ماشین مرکب است. ${item[3]}`:
+ `بخشِ مورد سؤال در «${item[0]}» مانند ${MCAT[item[1]].n} عمل می‌کند. ${item[3]}`;}
+function sortLines(text,max){const lines=[];let line="";text.split(" ").forEach(word=>{
+ if(line&&(line+" "+word).length>max){lines.push(line);line=word;}else line+=(line?" ":"")+word;});
+ if(line)lines.push(line);return lines;}
 function makeSort(A,item,nb,onPick){const pic=KID()&&ICO[item[0]];const svg=A.svg,P=A.P;A.view(440);const st={cx:320,cy:pic?76:92,drag:false,hover:null,done:null};
+  const itFocus=()=>item[1]===6?"بخش‌های این وسیله با هم کار می‌کنند":sortFocus(item);
   const cols=nb===7?4:3,bw=nb===7?146:196,bh=100,gx=(640-cols*bw)/(cols+1);const bins=MCAT.slice(0,nb).map((c,i)=>{const row=Math.floor(i/cols),inRow=Math.min(cols,nb-row*cols),col=i%cols,g2=(640-inRow*bw)/(inRow+1);return{i,x:g2+col*(bw+g2),y:200+row*(bh+14),c};});
   const binAt=p=>bins.find(b=>p.x>=b.x&&p.x<=b.x+bw&&p.y>=b.y&&p.y<=b.y+bh);
-  function card(x,y){if(pic)return `<g><rect x="${x-150}" y="${y-60}" width="300" height="120" rx="18" fill="#fff" stroke="#F0B429" stroke-width="3"/><g transform="translate(${x+20} ${y-50}) scale(1.25)">${pic}</g><text x="${x-12}" y="${y+12}" text-anchor="start" font-size="${item[0].length>12?20:28}" font-family="LalezarLocal,VazirLocal,Tahoma" fill="${INK}" direction="rtl">${item[0]}</text></g>`;return `<g><rect x="${x-150}" y="${y-44}" width="300" height="88" rx="18" fill="#fff" stroke="#F0B429" stroke-width="3"/><rect x="${x-150}" y="${y-44}" width="300" height="10" rx="5" fill="#FFE08A"/><text x="${x}" y="${y+14}" text-anchor="middle" font-size="${item[0].length>18?26:36}" font-family="LalezarLocal,VazirLocal,Tahoma" fill="${INK}" direction="rtl">${item[0]}</text></g>`;}
+  function card(x,y){const lines=sortLines(item[0],pic?14:24),size=pic?20:lines.length>2?21:item[0].length>18?25:36;
+    const title=lines.map((line,i)=>`<text x="${pic?x-12:x}" y="${y+(i-(lines.length-1)/2)*(size+3)+9}" text-anchor="${pic?"start":"middle"}" font-size="${size}" font-family="LalezarLocal,VazirLocal,Tahoma" fill="${INK}" direction="rtl">${line}</text>`).join("");
+    if(pic)return `<g><rect x="${x-150}" y="${y-60}" width="300" height="120" rx="18" fill="#fff" stroke="#F0B429" stroke-width="3"/><g transform="translate(${x+20} ${y-50}) scale(1.25)">${pic}</g>${title}</g>`;
+    return `<g><rect x="${x-150}" y="${y-44}" width="300" height="88" rx="18" fill="#fff" stroke="#F0B429" stroke-width="3"/><rect x="${x-150}" y="${y-44}" width="300" height="10" rx="5" fill="#FFE08A"/>${title}</g>`;}
   function render(){let s=`<defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6F4EA"/><stop offset="1" stop-color="#F7FCF8"/></linearGradient></defs><rect width="640" height="520" fill="url(#sg)"/>`;
-    bins.forEach(b=>{const hv=st.hover===b.i,dn=st.done&&st.done.i===b.i;s+=`<g data-zone="bin" data-c="${b.i}" style="cursor:pointer"><rect x="${b.x}" y="${b.y}" width="${bw}" height="${bh}" rx="16" fill="${dn?(st.done.ok?"#DDF3E6":"#FDE3DC"):hv?"#FFF6D6":"#fff"}" stroke="${dn?(st.done.ok?GRN:RED):hv?"#F0B429":b.c.c}" stroke-width="${hv||dn?4:2.5}"/><path d="M${b.x+10} ${b.y+bh-14} h${bw-20}" stroke="${b.c.c}" stroke-width="3" opacity=".25"/><g transform="translate(${b.x+bw/2-19} ${b.y+10}) scale(1.6)" style="color:${b.c.c}">${MICON[b.i]}</g>${T(b.x+bw/2,b.y+78,b.c.n,{size:nb===7?19:22,col:INK,halo:false})}</g>`;});
+    bins.forEach(b=>{const hv=st.hover===b.i,dn=st.done&&st.done.i===b.i;s+=`<g data-zone="bin" data-c="${b.i}" tabindex="${A.locked?-1:0}" role="button" aria-label="${b.c.n}" aria-disabled="${A.locked}" style="cursor:pointer"><rect x="${b.x}" y="${b.y}" width="${bw}" height="${bh}" rx="16" fill="${dn?(st.done.ok?"#DDF3E6":"#FDE3DC"):hv?"#FFF6D6":"#fff"}" stroke="${dn?(st.done.ok?GRN:RED):hv?"#F0B429":b.c.c}" stroke-width="${hv||dn?4:2.5}"/><path d="M${b.x+10} ${b.y+bh-14} h${bw-20}" stroke="${b.c.c}" stroke-width="3" opacity=".25"/><g transform="translate(${b.x+bw/2-19} ${b.y+10}) scale(1.6)" style="color:${b.c.c}">${MICON[b.i]}</g>${T(b.x+bw/2,b.y+78,b.c.n,{size:nb===7?19:22,col:INK,halo:false})}</g>`;});
+    const focus=itFocus();sortLines(focus,52).forEach((line,i)=>{s+=T(320,154+i*21,line,{size:15,halo:false,col:MUT});});
     if(!st.drag&&!st.done)s+=`<g data-drag="card" style="cursor:grab">${card(st.cx,st.cy)}</g>`;if(st.done)s+=`<g opacity=".9">${card(320,st.cy)}</g>`;
-        P.paint(s);}
+    const focused=svg.contains(document.activeElement)&&document.activeElement.dataset.c;
+    P.paint(s);
+    svg.onkeydown=e=>{const bin=e.target.closest('[data-zone="bin"]');if(!bin||!["Enter"," "].includes(e.key))return;e.preventDefault();if(!A.locked)onPick(+bin.dataset.c);};
+    if(focused!==false&&focused!=null&&!A.locked){const bin=svg.querySelector('[data-c="'+focused+'"]');if(bin)bin.focus({preventScroll:true});}}
   dragKit(svg,{blocked:()=>A.locked,start(d){return d.drag==="card"?{}:null;},begin(g,p){st.drag=true;P.ghost(card(0,0),p.x,p.y);render();},move(g,p){P.move(p.x,p.y);const b=binAt(p);const h=b?b.i:null;if(h!==st.hover){st.hover=h;render();}},
     end(g,p){P.clear();st.drag=false;st.hover=null;const b=binAt(p);render();if(b)onPick(b.i);},tap(){},zoneTap(z){if(z.zone==="bin")onPick(+z.c);}});
   render();return{st,render,mark(i,ok){st.done={i,ok};render();},clear(){st.done=null;render();}};}
-const ST_sort={key:"sort",name:"شکار ماشین‌ها",c:"#2F8F4E",sub:"هر وسیله کدام ماشین ساده است؟",
- intro:"کارت هر وسیله را بردار و در جعبهٔ ماشین سادهٔ آن بینداز. در مرحلهٔ آخر ماشین‌های مرکب هم هستند؛ یعنی وسیله‌هایی که از چند ماشین ساده ساخته شده‌اند.",
+const ST_sort={key:"sort",name:"شکار ماشین‌ها",c:"#2F8F4E",sub:"ماشین ساده را در بخش‌های وسیله پیدا کن",
+ intro:"بخشِ مورد سؤالِ هر وسیله را بخوان و کارت را در جعبهٔ ماشین سادهٔ آن بگذار. می‌توانی جعبه را با کلیک یا کلید ورود انتخاب کنی. در مرحلهٔ آخر، وسیله‌های مرکب هم هستند.",
  art(){let s=`<rect width="640" height="520" fill="#DDF0E2"/>`;for(let i=0;i<6;i++){const x=70+(i%3)*180,y=150+Math.floor(i/3)*130;s+=`<rect x="${x}" y="${y}" width="140" height="104" rx="20" fill="#fff" stroke="${MCAT[i].c}" stroke-width="3"/><g transform="translate(${x+46} ${y+18}) scale(2)" style="color:${MCAT[i].c}">${MICON[i]}</g>`;}s+=`<rect x="200" y="40" width="240" height="80" rx="18" fill="#fff" stroke="#F0B429" stroke-width="3"/>`+T(320,92,"دستگیرهٔ در",{size:26,halo:false});return s;},
  lab(A){A.prompt("آزمایشگاه: هر کارتی را که آمد در جعبهٔ درست بینداز. این‌جا امتیاز ندارد؛ فقط تمرین است.");let k=0;const order=shuffle(rng(Date.now()),ITEMS);
-   const show=()=>{const it=order[k%order.length];const so=makeSort(A,it,7,i=>{so.mark(i,i===it[1]);A.fb(i===it[1]?"درست! "+it[3]:`${it[0]} ${MCAT[it[1]].n} است. ${it[3]}`,i===it[1]?"ok":"no");});A.refresh=()=>so.render();};show();A.counter("");A.formula("");
+   const show=()=>{const it=order[k%order.length];A.prompt(sortPrompt(it));const so=makeSort(A,it,7,i=>{so.mark(i,i===it[1]);A.fb((i===it[1]?"درست! ":"")+sortResult(it),i===it[1]?"ok":"no");});A.refresh=()=>so.render();};show();A.counter("");A.formula("");
    const c=A.ctrl("");btn(c,"کارت بعدی","go",()=>{k++;A.fb("");show();});},
  kid:[
   {id:"sort.a1",title:"شش ماشین ساده",desc:"کارت هر وسیله را در جعبهٔ درست بینداز.",gen(r){return kidSort(r,0);}},
@@ -63,9 +105,9 @@ const ST_sort={key:"sort",name:"شکار ماشین‌ها",c:"#2F8F4E",sub:"ه�
   {id:"sort.3",title:"سخت‌تر",desc:"وسیله‌هایی که ماشین ساده‌شان پنهان‌تر است.",gen(r){return sortPick(r,3,6,false,true);}},
   {id:"sort.4",title:"ماشین مرکب",desc:"جعبهٔ هفتم اضافه شد: ماشین‌هایی که از چند ماشین ساده ساخته شده‌اند.",gen(r){return sortPick(r,3,6,true,true);}}],
  endless(r,d){const pool=ITEMS.filter(it=>it[2]<=Math.min(3,Math.floor(d))&&(d>=3.5||it[1]!==6));return{item:pick(r,pool),nb:d>=3.5?7:6};},
- mount(sp,A){A.counter("");A.formula("");A.prompt(KID()?"این کدام ماشین ساده است؟ کارت را در جعبه بینداز.":"این وسیله کدام ماشین ساده است؟<small>کارت را بردار و در جعبهٔ درست بینداز، یا روی جعبهٔ درست بزن.</small>");const it=sp.item;A.hint(`M320 ${KID()?76:92} L${sp.nb===7?90:118} 250`);
-   const so=makeSort(A,it,sp.nb,i=>{if(A.locked)return;const ok=i===it[1];so.mark(i,ok);const res=A.judge(ok,{ok:it[3],retry:"یک بار دیگر: به کاری که وسیله انجام می‌دهد فکر کن. می‌چرخد؟ می‌شکافد؟ روی تکیه‌گاه بالا و پایین می‌رود؟",final:`${it[0]} ${MCAT[it[1]].n} است. ${it[3]}`});
-     if(!ok&&!A.locked)later(900,()=>so.clear());if(!ok&&A.locked)later(600,()=>so.mark(it[1],true));});A.refresh=()=>so.render();A.ctrl("");}};
+ mount(sp,A){A.counter("");A.formula("");A.prompt(sortPrompt(sp.item)+"<small>کارت را بکش یا جعبه را با کلیک، یا با کلید تب و ورود انتخاب کن.</small>");const it=sp.item;A.hint(`M320 ${KID()?76:92} L${sp.nb===7?90:118} 250`);
+   const so=makeSort(A,it,sp.nb,i=>{if(A.locked)return;const ok=i===it[1];so.mark(i,ok);const res=A.judge(ok,{ok:it[3],retry:`به بخشِ مورد سؤال توجه کن: ${sortFocus(it)}. ببین نیرو و حرکت چگونه از این بخش می‌گذرند.`,final:sortResult(it)});
+     so.render();if(!ok&&!A.locked)later(900,()=>{if(!A.locked)so.clear();});if(!ok&&A.locked)later(600,()=>so.mark(it[1],true));});A.refresh=()=>so.render();A.ctrl("");}};
 function sortPick(r,dmax,n,withC,hardFirst){let pool=ITEMS.filter(it=>it[2]<=dmax&&(withC||it[1]!==6));if(hardFirst)pool=pool.filter(it=>it[2]>=2);
   let pick6=[];const byCat={};pool.forEach(it=>(byCat[it[1]]=byCat[it[1]]||[]).push(it));const cats=shuffle(r,Object.keys(byCat));
   if(withC){pick6=shuffle(r,byCat[6]).slice(0,2);cats.filter(c=>c!=="6").slice(0,n-2).forEach(c=>pick6.push(pick(r,byCat[c])));}else cats.slice(0,n).forEach(c=>pick6.push(pick(r,byCat[c])));

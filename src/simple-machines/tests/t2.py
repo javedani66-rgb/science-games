@@ -97,10 +97,12 @@ def lever(g,pg,sp):
     if t=='lift':
         W,Sv=sp['W'],sp['S']; best=None
         for f in range(-4,5):
-            if W*(f+5)/(5-f)<=Sv+1e-9: best=f
-        g.drag(320+2*52,340,320+best*52,340); pg.wait_for_timeout(200)
+            if W*(f+5)/(5-f)<Sv-1e-9: best=f
+        state=spec(pg)['lift']; g.drag(state['pivot']['x'],state['pivot']['y']+15,320+best*52,state['pivot']['y']+15); pg.wait_for_timeout(200)
         if SHOT: g.shot(f'ch_lever_lift_{W}')
         click_text(pg,'فشار'); pg.wait_for_timeout(1500); return
+    if t=='liftq':
+        click_text(pg,'فشار'); pg.wait_for_timeout(1500); mcq(pg,0); return
     tl=sum(-p*m(it) for p,it in sp['items'] if p<0); tr=sum(p*m(it) for p,it in sp['items'] if p>0); need=tl-tr
     ps=sp['pieces']; sol=None
     def f(i,acc,s):
@@ -118,14 +120,21 @@ def lever(g,pg,sp):
     pg.wait_for_timeout(900)   # الاکلنگ زنده: بعد از ایستادن تخته خودش داوری می‌کند
     if SHOT: g.shot(f'ch_lever_bal_{need}')
 
+def observations(pg):
+    # Observe both controlled trials before answering; no assessed input exists yet.
+    for label in ('آزمایش الف','آزمایش ب','دستهٔ کوتاه را آزمایش کن','دستهٔ بلند را آزمایش کن','آزمایش را ببین'):
+        b=pg.locator('#cl .btn').filter(has_text=label)
+        if b.count():
+            b.first.click(); pg.wait_for_timeout(2100)
+
 def ramp(g,pg,sp):
     t=sp['t']; H=sp.get('H',1)
-    if t=='cmp': mcq(pg,{1:2,2:2,3:0}[sp['q']]); return
+    if t=='cmp': observations(pg); mcq(pg,{1:2,2:2,3:0}[sp['q']]); return
     if t=='work': mcq(pg,1); return
     if t=='calcF': stepper_set(pg,sp['W']*H/sp['L']) or print('  stepper approx'); click_text(pg,'بررسی'); pg.wait_for_timeout(300); return
     if t=='calcL': stepper_set(pg,sp['W']*H/sp['S']); click_text(pg,'بررسی'); return
     L=H
-    while sp['W']*H/L>sp['S']+1e-9: L+=.5
+    while sp['W']*H/L>=sp['S']-1e-9: L+=.5
     run=math.sqrt(L*L-H*H)*70
     L0=min(6,H+1); x0=470-math.sqrt(L0*L0-H*H)*70
     g.drag(x0,380,470-run,380,20); pg.wait_for_timeout(150)
@@ -137,10 +146,10 @@ def pull_until(g,pg,hx,maxn=12):
         if pg.locator('#nv .btn.next').count(): break
         g.drag(hx,264,hx,264+150,10); pg.wait_for_timeout(300)
 def pulley(g,pg,sp):
-    t=sp['t']; HX={1:328,2:376,4:376,6:392}
-    if t=='fixedq': mcq(pg,1); return
-    if t=='fixedk': mcq(pg,0); return
-    if t=='ropeq': mcq(pg,1); return
+    t=sp['t']; HX={1:328,2:376,4:376,6:408}
+    if t=='fixedq': observations(pg); mcq(pg,1); return
+    if t=='fixedk': observations(pg); mcq(pg,0); return
+    if t=='ropeq': observations(pg); mcq(pg,1); return
     if t=='count': stepper_set(pg,sp['n']); click_text(pg,'بررسی'); return
     if t=='calcF': stepper_set(pg,sp['W']/sp['n']); click_text(pg,'بررسی'); return
     if t=='calcRope': stepper_set(pg,sp['n']*sp['h']); click_text(pg,'بررسی'); return
@@ -148,7 +157,7 @@ def pulley(g,pg,sp):
     if t=='lift':
         if SHOT: g.shot(f'ch_pulley_lift_{sp["n"]}')
         pull_until(g,pg,HX[sp['n']]); return
-    best=[n for n in sp['opts'] if sp['W']/n<=sp['S']+1e-9][0]
+    best=[n for n in sp['opts'] if sp['W']/n<sp['S']-1e-9][0]
     pg.click(f'#sys [data-n="{best}"]'); pg.wait_for_timeout(150)
     if SHOT: g.shot(f'ch_pulley_choose_{best}')
     pull_until(g,pg,HX[best])
@@ -157,34 +166,34 @@ def crank(g,pg,R,turns):
     g.circle(420,137,R*14,turns+0.4,start=-math.pi/2)
 def wheel(g,pg,sp):
     t=sp['t']
-    if t=='mcq': mcq(pg,{1:0,2:2,3:0}[sp['q']]); return
+    if t=='mcq': observations(pg); mcq(pg,{1:0,2:2,3:0}[sp['q']]); return
     if t=='calcF': stepper_set(pg,sp['W']/sp['R']); click_text(pg,'بررسی'); return
-    if t=='calcR': stepper_set(pg,math.ceil(sp['W']/sp['S'])); click_text(pg,'بررسی'); return
+    if t=='calcR': stepper_set(pg,math.floor(sp['W']/sp['S'])+1); click_text(pg,'بررسی'); return
     if t=='calcPath': stepper_set(pg,sp['n']*sp['R']*.5); click_text(pg,'بررسی'); return
     if t=='crank':
         if SHOT: g.shot(f'ch_wheel_crank_{sp["R"]}')
         crank(g,pg,sp['R'],sp['h']/.5); return
-    best=[R for R in sp['opts'] if sp['W']/R<=sp['S']+1e-9][0]
+    best=[R for R in sp['opts'] if sp['W']/R<sp['S']-1e-9][0]
     pg.click(f'#rs [data-r="{best}"]'); pg.wait_for_timeout(150)
     if SHOT: g.shot(f'ch_wheel_choose_{best}')
     crank(g,pg,best,2)
 
 def wedge(g,pg,sp):
     t=sp['t']
-    if t=='mcq': mcq(pg,{1:0,2:1,3:1,4:1}[sp['q']]); return
+    if t=='mcq': observations(pg); mcq(pg,{1:0,2:1,3:1,4:1}[sp['q']]); return
     if t=='turns': stepper_set(pg,12/sp['p']); click_text(pg,'بررسی'); return
     if t=='wF': stepper_set(pg,sp['R']*2/sp['L']); click_text(pg,'بررسی'); return
     if t=='sF': stepper_set(pg,sp['R']*sp['p']/12); click_text(pg,'بررسی'); return
     if t=='wc':
-        best=[L for L in sp['opts'] if sp['R']*2/L<=sp['S']+1e-9][0]
+        best=[L for L in sp['opts'] if sp['R']*2/L<sp['S']-1e-9][0]
         pg.click(f'#vs [data-v="{best}"]'); pg.wait_for_timeout(150)
         top=240-best*9
         if SHOT: g.shot(f'ch_wedge_wc_{best}')
         g.drag(320,top-12,320,top-12+best*9*.85+30,15); pg.wait_for_timeout(900); return
-    best=[p for p in sp['opts'] if sp['R']*p/12<=sp['S']+1e-9][0]
+    best=[p for p in sp['opts'] if sp['R']*p/12<sp['S']-1e-9][0]
     pg.click(f'#vs [data-v="{best}"]'); pg.wait_for_timeout(150)
     if SHOT: g.shot(f'ch_wedge_sc_{best}')
-    g.circle(320,150,62,12/best+0.4,start=-math.pi/2,ry=62*.45,steps_per_turn=24)
+    g.circle(320,130,62,12/best+0.4,start=-math.pi/2,ry=62*.45,steps_per_turn=24)
 
 def sort(g,pg,sp):
     it=sp['item']; cat=it[1]; nb=sp['nb']

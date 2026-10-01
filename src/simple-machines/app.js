@@ -100,7 +100,7 @@ function board(k,head){epoch++;closeOv();if(typeof clearToasts==="function")clea
     ctrl:h=>{const c=$("#cl");c.innerHTML=h||"";return c;},fb:(m,c)=>{const e=$("#fb");if(!e)return;e.innerHTML=ltrMath(m||"");e.className="fb "+(c||"");if(m)later(80,revealFb);if(c==="ok")setMood("happy");else if(c==="no")setMood("oops");},
     nav:h=>{const n=$("#nv");n.innerHTML=h||"";return n;},
     /* آزمایش آزاد: وقتی بچه با امتحان کردن جواب را پیدا می‌کند (مثلاً جرمِ نامعلوم)، امتحانِ ناموفق فرصت را کم نمی‌کند */
-    trials:0,trial(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);if(ok)return A.judge(true,Object.assign({},m,{pts:A.trials<3?2:1,k:null,act:true}));
+    trials:0,trial(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);if(ok)return A.judge(true,Object.assign({},m,{pts:m.pts!=null?m.pts:(A.trials<3?2:1),k:null,act:true}));
       A.trials++;A.fb(`${m.retry||""}${A.trials>=2&&m.more?" "+m.more:""} <b>${voice("retry")}</b>`,"info");
       /* نردبان راهنما: بعد از سه امتحانِ ناموفق، «نشانم بده» (جواب نشان داده می‌شود، ۱ امتیاز) تا بچه گیر نکند */
       if(A.trials>=3&&m.final&&!$("#showme")){const n=$("#nv");n.insertAdjacentHTML("beforeend",`<button class="btn" id="showme" type="button">نشانم بده</button>`);
@@ -157,4 +157,3 @@ function openFormulas(k){const list=k?FORMULAS.filter(f=>f.k===k).concat(FORMULA
   const o=overlay(`<div class="sheet"><div class="shead"><h2 style="color:var(--ink)">${KID()?"قانون‌ها":"فرمول‌ها"}</h2><button class="chip-btn" id="cx" type="button">بستن</button></div><p class="lead">${KID()?"قانون هر ماشین ساده در یک جمله.":"هر فرمول با نمادهای علمی و یک مثال حل‌شده. فرمول‌ها از چپ به راست خوانده می‌شوند."}</p><div class="fcards">${list.map(fcard).join("")}</div></div>`,"فرمول‌ها",k?ST[k].c:null);
   o.querySelector("#cx").onclick=closeOv;o.querySelector("#cx").focus();}
 function openGloss(){const o=overlay(`<div class="sheet"><div class="shead"><h2 style="color:var(--ink)">واژه‌نامه</h2><button class="chip-btn" id="cx" type="button">بستن</button></div><dl class="gl">${GLOSS.map(([t,d])=>`<div><dt>${t}</dt><dd>${d}</dd></div>`).join("")}</dl></div>`,"واژه‌نامه");o.querySelector("#cx").onclick=closeOv;o.querySelector("#cx").focus();}
-

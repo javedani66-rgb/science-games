@@ -1,6 +1,7 @@
 # سطح ۱ (کاوشگر): امتحانِ ناموفق در شیب، قرقره، چرخ و محور، گوه و پیچ نباید فرصت کم کند.
 # برای هر ایستگاه: اولین چالشِ «امتحان کردنی» را پیدا می‌کند، n بار عمداً اشتباه امتحان می‌کند،
 # بعد درست حلش می‌کند. انتظار: درست شدن تا امتحانِ سوم (۲ ناموفق) → ۲ امتیاز (p2)، دیرتر → ۱ امتیاز (p1)، هیچ‌وقت قفل/صفر نشود.
+# ۲۰۲۶-۱۰-۰۱: تلاش‌های فیزیکی امتیاز کم نمی‌کنند؛ نمایش راه‌حل ۱ امتیاز دارد.
 # از ۲۰۲۶-۰۹-۳۰ (تصمیم معلم) در سطح ۲ به بالا هم همین قاعده است.
 # استفاده: python3 failtry.py
 from t2 import *
@@ -11,7 +12,7 @@ def fail_once(g,pg,k,sp):
     if k=='ramp': click_text(pg,'بکش'); pg.wait_for_timeout(1800); return
     if k=='pulley':
         bad=[n for n in sp['opts'] if sp['W']/n>sp['S']+1e-9][0]
-        pg.click(f'#sys [data-n="{bad}"]'); pg.wait_for_timeout(150); g.drag({1:328,2:376,4:376,6:392}[bad],264,{1:328,2:376,4:376,6:392}[bad],400,8); pg.wait_for_timeout(300); return
+        pg.click(f'#sys [data-n="{bad}"]'); pg.wait_for_timeout(150); g.drag({1:328,2:376,4:376,6:408}[bad],264,{1:328,2:376,4:376,6:408}[bad],400,8); pg.wait_for_timeout(300); return
     if k=='wheel':
         bad=[R for R in sp['opts'] if sp['W']/R>sp['S']+1e-9][0]
         pg.click(f'#rs [data-r="{bad}"]'); pg.wait_for_timeout(150); crank(g,pg,bad,.5); pg.wait_for_timeout(300); return
@@ -19,12 +20,12 @@ def fail_once(g,pg,k,sp):
         bad=[L for L in sp['opts'] if sp['R']*2/L>sp['S']+1e-9][0]
         pg.click(f'#vs [data-v="{bad}"]'); pg.wait_for_timeout(150); top=240-bad*9; g.drag(320,top-12,320,top+60,10); pg.wait_for_timeout(600); return
     bad=[p for p in sp['opts'] if sp['R']*p/12>sp['S']+1e-9][0]
-    pg.click(f'#vs [data-v="{bad}"]'); pg.wait_for_timeout(150); g.circle(320,150,62,1,start=-math.pi/2,ry=62*.45); pg.wait_for_timeout(300)
+    pg.click(f'#vs [data-v="{bad}"]'); pg.wait_for_timeout(150); g.circle(320,130,62,1,start=-math.pi/2,ry=62*.45); pg.wait_for_timeout(300)
 def dot(pg,i): return pg.evaluate("i=>{const d=document.querySelectorAll('#dots i')[i];return d?d.className:''}",i)
 ok=True
 with sync_playwright() as pw:
     b=pw.chromium.launch(); pg=b.new_page(viewport={'width':400,'height':900}); errs=[]; pg.on('pageerror',lambda e:errs.append(str(e))); g=G(pg)
-    for track,cases in (('a',((1,'p2'),(2,'p2'),(3,'p1'))),('b',((1,'p2'),(2,'p2'),(3,'p1')))):
+    for track,cases in (('a',((1,'p2'),(2,'p2'),(3,'p2'))),('b',((1,'p2'),(2,'p2'),(3,'p2')))):
         for k in KIND:
             for nfail,want in cases:
                 pg.goto(TURL); pg.evaluate("p=>localStorage.setItem('sm-workshop-v3',JSON.stringify(p))",{"prog":{f"{track}:{k}":{"lv":[3,3,3,3,3],"best":0}},"nums":True,"forces":True,"formula":True,"track":track}); pg.reload(); pg.wait_for_timeout(150)

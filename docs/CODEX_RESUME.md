@@ -86,6 +86,49 @@ NOT published. `physics/simple-machines/index.html` and `sw.js` were not changed
 
 Remaining scale scope: spring-scale/planet art, broader water/port placement decision, persistent quiz outcomes/reporting, full accessibility and offline/device coverage. The 17-item global checklist remains partially open; this checkpoint completes only its scale portions.
 
+## Checkpoint: lever rebuild (2026-10-01)
+
+Base: scale source checkpoint `431c7e1e956b8b4dda06442efd19011fafdd613c`. Main was fetched again before this checkpoint; no new upstream source changes were present. This source commit is titled `Rebuild lever learning packs and approved lift geometry`.
+
+Completed in source:
+- Stable level ids now select catalogue packs in see/try/apply order. Level a uses visual dots instead of numeric arm labels. Old in-flight types still mount; journey topology, storage and progress-code version remain unchanged.
+- Approved lever3 props are embedded by `tools/build_lever_art.py`. The plank bottom pivots on the wedge apex; the stone begins on the ground, rises on the short end and stays upright. Dragging the wedge, tapping the press target and keyboard manipulation work; decorative layers do not intercept dragging.
+- An observed motion challenge compares the actual circular trajectories of the two contact points before assessment. Fulcrum/arm names and ideal assumptions are introduced in the visible prompt. Predictions explicitly cost no points.
+- Exploration in lever balance/lift earns p2 on success regardless of failed experiments; show-me after three failed attempts displays the actual solved scene and earns p1. The balance demonstration cancels stale tilt animations. `A.trial` now honors an explicit `pts` override; other station defaults are unchanged.
+- Keyboard placement/removal and fulcrum movement preserve focus. Consumed selections cannot clone pieces. The drop hit-test transforms through the inverse beam rotation, so a visible tilted slot accepts an actual drop.
+- Known weight arrows stay vertical and share one proportional scale; they avoid house-number labels. Both derived totals and quantitative arrows are hidden during unknown-mass questions; input brick masses remain visible.
+
+Verification actually completed:
+- Build, `node --check` and `git diff --check`.
+- `t2.py lever all a/b/c/d`: all p2, ERR []. a and c rerun after the final interaction fixes; b/d passed before the inverse-drop/arc/arrow fixes and need the final release suite.
+- Final `leverchk.py`: all four tracks observe before assessment, keyboard balancing/free trials, drop onto a visibly tilted plank, hidden mass totals/arrows, real show-me and cancellation of stale tween, all nine fulcrum positions, correct formula/grounded stone, keyboard press, lift help and observed trajectories. ALL OK.
+- `ov.py c lever`: final run silent/pass after moving weight arrows above the bricks. Initial arrow/text collisions were corrected.
+- `savechk.py`: silent/pass. `leakchk.py c lever`: no derived-total leak; one incidental match of the unknown answer with a visible input brick mass was inspected (both totals were hidden).
+- `firstscreen.py c lever`: six challenge kinds, desktop contact sheet examined. Independent reviewer also inspected phone 390×844 and desktop 1280×800 geometry and interaction.
+- Independent review found vertical-displacement labels masquerading as paths, tilted-plank drop rejection and misleading hidden-mass arrow scales; all were corrected and targeted regression checks added. Fresh reviewer independently rechecked all fixes on the final build at 390/1280 px: no remaining blocker in this scope and no JavaScript errors.
+
+NOT published. Required release-wide tests and owner's per-station scientific/visual signoff are pending. `physics/simple-machines/index.html` and `sw.js` are unchanged. The seesaw uses the existing procedural room/brick/gauge art; full land palettes, the remaining global checklist and broader art/accessibility coverage are still open. Grades 7–9 dedicated content remains deferred.
+
 ## Next concrete action
 
-Continue the lever step: inspect its actual current tasks, arrange see/try/apply packs with stable level ids, add the approved lever3 lift scene with the pivot on the wedge apex, preserve direct fulcrum dragging, and fix hint/show-me dead ends. Check current main again, then targeted lever tests and source-only checkpoint push. Do not publish before the release-wide checks and required owner review.
+Continue with ramp, then wedge/screw, wheel/axle and pulley, per docs/NEXT.md. Ramp still lacks evidence-first catalogue packs, controlled displayed comparisons, a keyboard handle, and a real show-me solution. It currently treats a successful nonminimum ramp as a failed attempt; acknowledge lifting before requesting optimization. Inspect current main before editing. Keep source-only checkpoints and postpone publishing until the full release suite and owner review.
+
+## Checkpoint: machine bundle and reporting (2026-10-01)
+
+Combined worktree: `codex/machines-bundle`; includes scale `431c7e1`, lever `781c241`, machines `cd878a3`, merge `2dd2b3e`. Remote main was fetched and remained `431c7e1` before this checkpoint. No publication.
+
+Completed source:
+- Ramp, wheel/axle, wedge/screw and pulley now share ideal models and controlled observed comparisons. Numeric assumptions are visible. Stable level/mission ids and progress code v3 remain unchanged.
+- Physical exploration earns full credit for any successful allowed configuration; minimum/optimization is only judged when explicitly asked. Three failed trials provide working guide/show-me exits.
+- Keyboard controls preserve focus, scene generations reject stale animation callbacks, and pulley observation moves the free end with rope travel.
+- Classification identifies the specific part of each tool, supports keyboard bins and wraps long titles. Existing categories/item identifiers remain intact.
+- Home tasks/end statements match actual practiced work. Quiz evidence preserves first answers separately from shown-answer corrections; parent/local teacher summary and copied message distinguish these. Detailed evidence stays on this device and is excluded from compact code.
+- Lever follow-up assumptions/readable labels reconciled from the original worktree. Purple circular paths retain accurate path wording. Original worktree pending edits were preserved untouched.
+
+Verified before checkpoint: 9010 deterministic physics checks; quiz evidence unit/restore/replay checks; 15 machine browser checks (keyboard, guided exits, nonminimum credit, stale callbacks); actual mobile quiz/report/replay/code31-char roundtrip with zero JS errors. Prior targeted t2 all levels of four machines on a/b/c passed. Sort keyboard checks passed; two title bounds issues were fixed in source, awaiting rebuild.
+
+In progress, not yet passing: full release suite on generated build before the final sort font adjustment (t2 a-d, journeys grades0/2/3/6 x12, t5 a-d, ov a-d, failtry/save/reset/map/lever, leak a-d, firstscreen a/c). Logs in workspace `release_*.log`. The initial suite's no-argument leakchk/firstscreen jobs are invalid invocations; correct explicitly parameterized jobs run separately in release_extra.py. Do not count those invalid jobs as game defects or passing checks.
+
+Next exact action: inspect every release log for exceptions, non-p2/stuck outcomes and JS errors; inspect leak flags and visual sheets. Wait until jobs finish before rebuilding. Then rebuild the small sort title fix and rerun `review_interaction_sort.py` (workspace), relevant sort/ov checks. Fresh `release_review` agent checks science/interaction source independently. Record actual results, commit/push continuation notes. Produce a standalone owner-review preview; publication still requires per-station owner scientific/visual signoff.
+
+Remaining broader enhancements: new everyday art, full land palette/art pass, sound/mute, optional difficulty badges/code changes and dedicated7-9 content were not implemented in this bundle. Do not claim the entire historical wishlist is complete. Real child testing is still pending. Half-hour automatic scheduling is unsupported by the available scheduler (minimum hourly); no substitute recurring cadence was created.
