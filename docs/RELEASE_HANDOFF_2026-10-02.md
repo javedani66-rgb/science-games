@@ -40,3 +40,7 @@ At the scheduled continuation, fetch current `main` and read this handoff. First
 ## Resume instructions
 
 Preserve unrelated or uncommitted local changes. The live game remains the working version until the release gate is met. If no independent technical task remains, leave the release candidate ready for owner review and stop at that gate.
+
+## Checkpoint rule
+
+At the end of every coherent work stage, update this handoff before pausing or handing the work to another session. Record the current `main` commit, what changed, the exact checks completed and their outcomes, whether the public game changed, open owner decisions or gates, and the next concrete action. Link to durable reports or logs when they exist. Commit and push the updated handoff with the stage checkpoint when repository access permits; if that fails, preserve the update locally and report the failure clearly. Do not leave an unfinished or interrupted check marked as passed.
