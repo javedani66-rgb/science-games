@@ -77,15 +77,22 @@ with sync_playwright() as pw:
     pg.screenshot(path=OUT+tag+'_mapN.png')
     pg.screenshot(path=OUT+tag+'_mapN_full.png',full_page=True)
     # side quest on stop 1
-    pg.evaluate("()=>{window.scrollTo(0,0)}"); pg.locator('[data-side="0"]').dispatch_event('click'); pg.wait_for_timeout(300); pg.screenshot(path=OUT+tag+'_side.png'); pg.click('#jsd'); pg.wait_for_timeout(300)
-    for _ in range(12):
-        if pg.locator('#jm').count(): break
-        T=spec(pg); SOL[T['k']](g,pg,T['spec']); pg.wait_for_timeout(900)
-        if pg.locator('#jm').count(): break
-        nb=pg.locator('#nv .btn')
-        if nb.count(): nb.first.click(); pg.wait_for_timeout(300)
-    pg.screenshot(path=OUT+tag+'_sidewin.png'); print('side done', pg.evaluate("()=>{const {curP,curStop}=__J;return curP().side[0]}"))
-    pg.click('#jm'); pg.wait_for_timeout(300)
+    pg.evaluate("()=>{window.scrollTo(0,0)}")
+    side_open=pg.evaluate("()=>{const {curP,missions,mStars}=__J;const p=curP();return missions(p,0).every((_,j)=>mStars(p,0,j)>0)}")
+    pg.locator('[data-side="0"]').dispatch_event('click'); pg.wait_for_timeout(300)
+    if not side_open:
+        if pg.locator('#jsd:not([disabled])').count(): log.append('side quest open before missions')
+        print('side quest locked until stop 1 missions are done: OK')
+    else:
+      pg.screenshot(path=OUT+tag+'_side.png'); pg.click('#jsd'); pg.wait_for_timeout(300)
+      for _ in range(12):
+          if pg.locator('#jm').count(): break
+          T=spec(pg); SOL[T['k']](g,pg,T['spec']); pg.wait_for_timeout(900)
+          if pg.locator('#jm').count(): break
+          nb=pg.locator('#nv .btn.next')
+          if nb.count(): nb.first.click(); pg.wait_for_timeout(300)
+      pg.screenshot(path=OUT+tag+'_sidewin.png'); print('side done', pg.evaluate("()=>{const {curP,curStop}=__J;return curP().side[0]}"))
+      pg.click('#jm'); pg.wait_for_timeout(300)
     # stop sheet + home confirm
     pg.locator('[data-stop="0"]').dispatch_event('click'); pg.wait_for_timeout(300); pg.screenshot(path=OUT+tag+'_sheet.png')
     box=pg.locator('#jhh').bounding_box(); pg.mouse.move(box['x']+20,box['y']+20); pg.mouse.down(); pg.wait_for_timeout(2300); pg.mouse.up(); pg.wait_for_timeout(300)
