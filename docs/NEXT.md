@@ -3,6 +3,17 @@
 Read `CLAUDE.md`, `docs/HANDOFF.md` (section "Version 2, stage 1") and `design/README.md` first.
 The teacher checks the live site herself; talk to her in plain Persian. Mockups before code when she asks for mockups.
 
+## CURRENT CHECKPOINT (2026-10-01, scale continuation)
+
+Scale balance rebuild is saved in the commit titled `Rebuild scale learning packs and approved balance interaction` (base 62d629f). See docs/CODEX_RESUME.md for exact checks, remaining scope and next action.
+- [x] Balance see/try/apply catalogue packs, live approved bal2 art, keyboard placement/removal, guidance exits and balanced-before-optimization.
+- [x] Scale/quiz prerequisite order, decimal Moon input, keyboard spring/water handle, hidden unknown-mass totals, help-phase handoff and no consumed-object cloning.
+- [x] Targeted scale checks, legacy save/code checks, independent reviewer follow-up. This is NOT the full release regression suite.
+- [ ] Next: lever content + approved lever3 lift scene, direct fulcrum movement and guidance.
+- [ ] Release: full suite on the final built pages and required owner review, then publish. Current live output stays unchanged.
+
+Older unchecked entries below are historical and must be compared with current source, not repeated blindly.
+
 ## NOW (2026-10-01 morning session) — step 1 of ORDER OF WORK
 - [x] friction arrows: one scale (push = friction when static) — commit bf363ba, not yet published.
 - [x] step 1a: every level gets a stable `id`; stars stored by id (`S.ls["<track>:<id>"]`), STOPS missions = level ids; old `S.prog[..].lv` migrated on load (test seeds too).
@@ -78,7 +89,7 @@ Target (comparison doc, without Iran criteria): 61 → ~72 (guidance 6→8, orde
 11b. **Full audit 23:15** (Claude Doc https://claude.ai/code/artifact/b137e73f-fc9a-4e0f-8b0e-2547607f1895). Priority: (1) publish tonight's work after the full run; (2) refactor challenges into a DATA catalogue (id, station, type, params, difficulty آسان/سخت/خیلی سخت/هیولا, teaches, terms, misconception) + progress keyed by challenge id + progress code v3 (wipe OK); (3) station by station content+graphics; (4) map: 4 lands, water in port, moon trip, optional-challenge doors/badges; (5) **sound + mute button — never ported from the «سفر در کارخانه» prototype (8 Kenney sounds, speaker toggle remembered in localStorage)**; (6) language pass; (7) v3: everyday objects, recorded voice for level-1 texts (speechSynthesis rarely has a Persian voice), grades 7–9. Leak fixes still to do: lever mystery at distance 1 (answer = right torque), scale waterF brick (answer = underwater reading).
 
 ### Stage-2 checklist (tick as you go)
-- [ ] scale: Nano-Banana balance (`design/mockups/bal2.py`) + drag weights to pan
+- [x] scale: Nano-Banana balance (`design/mockups/bal2.py`) + drag weights to pan
 - [ ] lever: `lever3.py` scene + drag the fulcrum (no slider)
 - [ ] ramp  - [ ] pulley  - [ ] wheel  - [ ] wedge/screw  - [ ] force  - [ ] sort
 - [ ] full land palettes in scenes (B.3)

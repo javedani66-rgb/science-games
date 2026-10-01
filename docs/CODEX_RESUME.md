@@ -58,6 +58,34 @@ Use targeted scientific/interaction checks while implementing, then the required
 Use independent review when repository instructions require it.
 Publish through `python3 tools/publish_game.py simple-machines physics/simple-machines "کارگاه ماشین‌های ساده"` after all release checks pass, then commit/push and verify the live version. If checks cannot run, record the concrete blocker and keep the current live game intact.
 
+## Checkpoint: scale rebuild (2026-10-01)
+
+Base: `62d629f57d25aab54a37e37a96682718b5f5d4fb`; main was fetched again before saving and had not changed.
+The code commit containing this checkpoint is titled `Rebuild scale learning packs and approved balance interaction`.
+
+Completed in source:
+- Six balance levels now use stable catalogue challenge ids and see/try/apply packs. Existing level ids, journey mission counts, storage key and code v3 are unchanged. Old in-flight challenge types still mount.
+- Approved bal2 artwork exported reproducibly by `tools/build_balance_art.py`; beam/needle rotate about one pivot, pans stay vertical, equal-arm model remains independent of art, assets are embedded for standalone use.
+- Predictions visibly say they are unscored. Pan interpretation is visible before the first scored answer even with formulas off. Unknown-mass totals remain hidden until the sum is answered.
+- Balance is acknowledged before requesting fewer weights. Exploratory balancing always earns full success credit; using show-me earns one point. The previously agreed free-sum policy is retained: 2 failed sums then success = 2 points, 3 = 1 point. Physical attempts do not count as failed sums.
+- Help prevents dead ends; the physical help button is removed when the sum phase starts. Consumed object selections cannot clone an object across pans.
+- Balance placing/removal and spring/water handle have keyboard alternatives; focus survives repaint. Lab objects are paged rather than overlapping.
+- Spring observation comes before calculation/Moon tasks. Numeric spring comparison uses kg/g masses; Moon decimals are enterable. First-quiz Moon/weight/spring questions are delayed until the relevant stop. Weight word cards moved to stop 3; unsupported bathroom-scale questions remain in legacy mounting code but are not selected by the new main missions.
+
+Verification actually completed:
+- Build and `node --check`; `git diff --check`.
+- `t2.py scale all a/b/c/d`: all challenges p2, ERR []. These station runs were on intermediate builds; subsequent focused fixes were checked below and need the final release-wide t2 run.
+- Final `scalechk.py`: evidence and keyboard placement on all four tracks, no consumed-object duplication, four unsuccessful balancing experiments followed by p2, balanced-before-optimization, no answer-total leak, clean help handoff and disabled sum inputs, water with keyboard, 400 first-quiz prerequisite samples. ALL OK.
+- `failtry.py`: ALL OK (all existing physical-try cases and revised b/c mystery order); `savechk.py`: silent/pass.
+- `ov.py a/b/c scale`: silent/pass; c was rerun on the final build. `leakchk.py c scale`: no suspected leaks.
+- `jt.py 0 3` and `jt.py 3 3`: LOG [], ERR [], saved resume and progress-code round-trip True.
+- `firstscreen.py c scale`, `gal.py a scale`, desktop 1280×800 and phone 390×844 screenshots examined. No new object/text obstruction seen.
+- Fresh independent reviewer reproduced the two interaction bugs, then independently confirmed their fixes plus visible reading rule and keyboard water slider. No remaining blocker in this scale change scope.
+
+NOT published. `physics/simple-machines/index.html` and `sw.js` were not changed. The release-wide suite and owner's per-station scientific/visual signoff required in docs/NEXT.md have not happened. Do not mistake targeted checks for release approval.
+
+Remaining scale scope: spring-scale/planet art, broader water/port placement decision, persistent quiz outcomes/reporting, full accessibility and offline/device coverage. The 17-item global checklist remains partially open; this checkpoint completes only its scale portions.
+
 ## Next concrete action
 
-Fetch the newest main, inspect scale challenge definitions and approved balance mockup, map the current scale missions to see/try/apply, and implement the first coherent scale step with its targeted checks. Update docs/NEXT.md and this file with the result.
+Continue the lever step: inspect its actual current tasks, arrange see/try/apply packs with stable level ids, add the approved lever3 lift scene with the pivot on the wedge apex, preserve direct fulcrum dragging, and fix hint/show-me dead ends. Check current main again, then targeted lever tests and source-only checkpoint push. Do not publish before the release-wide checks and required owner review.

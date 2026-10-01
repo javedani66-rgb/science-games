@@ -52,7 +52,7 @@ with sync_playwright() as pw:
     for track in ('b','c'):
         for nfail,want in ((2,'p2'),(3,'p1')):
             pg.goto(TURL); pg.evaluate("p=>localStorage.setItem('sm-workshop-v3',JSON.stringify(p))",{"prog":{f"{track}:scale":{"lv":[3,3,3,3,3],"best":0}},"nums":True,"forces":True,"formula":True,"track":track}); pg.reload(); pg.wait_for_timeout(150)
-            pg.click('.st[data-k=scale]'); pg.click('[data-l="2"]'); pg.wait_for_timeout(300); i=0
+            pg.click('.st[data-k=scale]'); pg.click(f'[data-l="{2 if track=="b" else 1}"]'); pg.wait_for_timeout(300); i=0
             while spec(pg)['spec']['t']!='mystery':
                 SOL['scale'](g,pg,spec(pg)['spec']); pg.wait_for_timeout(1500); pg.locator('#nv .btn').first.click(); pg.wait_for_timeout(300); i+=1
             sp=spec(pg)['spec']; T=pg.evaluate("()=>window.__T"); target=sum(T['MASS'][sp['u']][x] for x in sp['obj'])

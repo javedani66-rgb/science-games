@@ -354,3 +354,6 @@ body[data-land="1"] .bh .dots i{background:rgba(42,26,20,.18)}
 .bp>*,.qzb>*{flex-shrink:0}
 
 .mcq .btn.sel{background:#FFF3D1;box-shadow:inset 0 0 0 3px #F0B429}
+
+/* Keyboard alternative for placing/removing balance objects. */
+#sc [data-focus]:focus-visible{outline:3px solid #1E6FD9;outline-offset:4px;border-radius:8px}

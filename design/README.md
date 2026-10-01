@@ -19,3 +19,6 @@
 
 ## reports/
 - `science_audit_2026-09-30.md`: the scientific/Persian audit of all game texts (already applied in stage 1).
+
+## Runtime balance layers (2026-10-01)
+`tools/build_balance_art.py` exports the approved bal2 masks/recolouring from sheet1 to embedded `src/simple-machines/balance_art.js`. Re-run with Pillow, NumPy, OpenCV, SciPy and scikit-learn available; the game build only needs Python and the checked-in generated asset. The live model supplies rotation, equal arms, vertical chains/pans and the readable zero gauge.
