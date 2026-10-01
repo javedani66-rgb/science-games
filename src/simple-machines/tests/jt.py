@@ -1,4 +1,4 @@
-import sys
+import sys, os
 from harness import *
 from t2 import SOL, spec
 JURL='file://'+D+'jtest.html'
@@ -19,6 +19,7 @@ def solve_level(pg,g,log):
     n=pg.locator('#dots i').count(); cur=pg.evaluate("()=>[...document.querySelectorAll('#dots i')].findIndex(e=>e.className==='cur')")
     for i in range(max(0,cur),n):
         T=spec(pg); sp=T['spec']; k=T['k']
+        if os.environ.get('JTDBG'): print('  ch',k,i,sp,flush=True); pg.screenshot(path=OUT+f'dbg_{k}_{i}.png')
         try: SOL[k](g,pg,sp)
         except Exception as e: log.append(f'EXC {k} {i} {sp.get("t")} {e}')
         pg.wait_for_timeout(450)
