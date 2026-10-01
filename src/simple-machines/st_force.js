@@ -65,8 +65,8 @@ function makeFriction(A,F){
     let s=`<g data-zone="lane" data-i="${i}" style="cursor:pointer"><rect x="84" y="${y+2}" width="540" height="118" rx="14" fill="${sel?"#FFF6D6":"#fff"}" fill-opacity="${sel?1:.5}" stroke="${sel?"#F0B429":"none"}" stroke-width="3"/><rect x="96" y="${sy}" width="516" height="26" rx="6" fill="${L.col}" stroke="${L.edge}" stroke-width="2"/>${tex}</g>`;
     s+=T(604,y+26,L.n,{size:15,col:INK,anchor:"start"});
     s+=shadow(cx,sy+1,70)+crateSvg(cx,sy,66,52,"",null);
-    if(S.forces){const pl=Math.max(24,Math.min(80,F*1.6));s+=arrow(cx-36-pl,sy-38,cx-37,sy-38,10,BLUE)+T(cx-40,sy-63,`هل<tspan class="num"> ${fa(F)}</tspan>`,{size:13,col:BLUE,anchor:"start"});
-      const f=Math.min(F,L.f);if(f>0){const fl=Math.max(16,Math.min(66,f*1.9));s+=arrow(cx-34,sy-7,cx-34-fl,sy-7,7,"#E8590C")+T(cx-48-fl,sy-2,"اصطکاک",{size:12,col:"#E8590C",anchor:"start"});}}
+    if(S.forces){const AL=v=>Math.max(16,Math.min(80,v*1.6)),pl=AL(F);s+=arrow(cx-36-pl,sy-38,cx-37,sy-38,10,BLUE)+T(cx-40,sy-63,`هل<tspan class="num"> ${fa(F)}</tspan>`,{size:13,col:BLUE,anchor:"start"});
+      const f=Math.min(F,L.f);if(f>0){const fl=AL(f);s+=arrow(cx-34,sy-7,cx-34-fl,sy-7,7,"#E8590C")+T(cx-48-fl,sy-2,"اصطکاک",{size:12,col:"#E8590C",anchor:"start"});}}
     return s;}
   function render(){let s=`<rect width="640" height="520" style="fill:var(--sw)"/>`;for(let i=0;i<3;i++)s+=lane(i);
     P.paint(s);}
