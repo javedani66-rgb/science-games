@@ -65,7 +65,7 @@ function makeFriction(A,F){
     let s=`<g data-zone="lane" data-i="${i}" style="cursor:pointer"><rect x="84" y="${y+2}" width="540" height="118" rx="14" fill="${sel?"#FFF6D6":"#fff"}" fill-opacity="${sel?1:.5}" stroke="${sel?"#F0B429":"none"}" stroke-width="3"/><rect x="96" y="${sy}" width="516" height="26" rx="6" fill="${L.col}" stroke="${L.edge}" stroke-width="2"/>${tex}</g>`;
     s+=T(604,y+26,L.n,{size:15,col:INK,anchor:"start"})+fricMeter(604,y+52,i);
     s+=shadow(cx,sy+1,70)+crateSvg(cx,sy,66,52,"",null);
-    if(S.forces){const AL=v=>Math.max(16,Math.min(80,v*1.6)),pl=AL(F);s+=arrow(cx-36-pl,sy-38,cx-37,sy-38,10,BLUE)+T(cx-40,sy-63,`هل<tspan class="num"> ${fa(F)}</tspan>`,{size:13,col:BLUE,anchor:"start"});
+    if(S.forces){const AL=v=>Math.max(16,Math.min(80,v*1.6)),pl=AL(F);s+=arrow(cx-36-pl,sy-38,cx-37,sy-38,10,BLUE)+T(cx-40,sy-63,`نیروی هل دادن<tspan class="num"> ${fa(F)}</tspan>`,{size:13,col:BLUE,anchor:"start"});
       const f=Math.min(F,L.f);if(f>0){const fl=AL(f);s+=arrow(cx-34,sy-7,cx-34-fl,sy-7,7,"#E8590C")+T(cx-48-fl,sy-2,"اصطکاک",{size:12,col:"#E8590C",anchor:"start"});}}
     return s;}
   function render(){let s=`<rect width="640" height="520" style="fill:var(--sw)"/>`;for(let i=0;i<3;i++)s+=lane(i);
@@ -140,13 +140,13 @@ const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، ک�
  }};
 function solveStr(sum,vals){const res=[];(function f(s,acc){if(res.length)return;if(s===0){res.push(acc.slice());return;}if(acc.length>=4)return;for(const v of vals.slice().sort((a,b)=>b-a)){if(v<=s){acc.push(v);f(s-v,acc);acc.pop();}}})(sum,[]);return res.length?res[0].map(fa).join(" + "):fa(sum);}
 function fricChallenge(sp,A){const fr=makeFriction(A,sp.F);A.refresh=()=>fr.render();A.counter("");
-  A.formula(`<span class="fl">قانون</span><span>اگر هل از اصطکاک بیشتر باشد، جعبه حرکت می‌کند.</span>`);
+  A.formula(`<span class="fl">قانون</span><span>اگر نیروی هل دادن از اصطکاک بیشتر باشد، جعبه حرکت می‌کند.</span>`);
   const q=sp.q;let ans,text,expl;
   if(q===1){ans=0;text=KID()?"کدام جعبه دورتر می‌رود؟":"هر سه جعبه را با یک اندازه هل می‌دهیم. کدام جعبه دورتر می‌رود؟";expl="روی یخ اصطکاک خیلی کم است؛ پس جعبه راحت سُر می‌خورد.";}
-  else if(q===2){ans=2;text=KID()?"کدام جعبه تکان نمی‌خورد؟":`با نیروی ${fa(sp.F)} نیوتن هل می‌دهیم. روی کدام سطح جعبه اصلاً تکان نمی‌خورد؟`;expl="اصطکاکِ فرش آن‌قدر زیاد است که این هل نمی‌تواند جعبه را راه بیندازد.";}
+  else if(q===2){ans=2;text=KID()?"کدام جعبه تکان نمی‌خورد؟":`با نیروی ${fa(sp.F)} نیوتن هل می‌دهیم. روی کدام سطح جعبه اصلاً تکان نمی‌خورد؟`;expl="اصطکاکِ فرش آن‌قدر زیاد است که این نیروی هل دادن نمی‌تواند جعبه را راه بیندازد.";}
   else if(q===3){ans=2;text=KID()?"کدام سطح زبرتر است؟":"اصطکاک کدام سطح از همه بیشتر است؟";expl="پرزهای فرش جلوی سُر خوردن را می‌گیرند؛ پس فرش بیشترین اصطکاک را دارد.";}
-  else if(q===4){ans=0;text=KID()?"با هل کم، کدام جعبه راه می‌افتد؟":`با هل کمِ ${fa(sp.F)} نیوتن، روی کدام سطح جعبه راه می‌افتد؟`;expl="فقط اصطکاکِ یخ از این هل کمتر است.";}
-  else{ans=2;text=`با هل ${fa(sp.F)} نیوتن، کدام جعبه کمترین راه را می‌رود؟`;expl="هر سه جعبه راه می‌افتند، ولی روی فرش اصطکاک بیشترِ هل را خنثی می‌کند.";}
+  else if(q===4){ans=0;text=KID()?"اگر آرام هل بدهیم، کدام جعبه راه می‌افتد؟":`اگر هر جعبه را فقط با نیروی ${fa(sp.F)} نیوتن هل بدهیم، روی کدام سطح جعبه راه می‌افتد؟`;expl="فقط اصطکاکِ یخ از این نیروی هل دادن کمتر است.";}
+  else{ans=2;text=`اگر هر جعبه را با نیروی ${fa(sp.F)} نیوتن هل بدهیم، کدام جعبه کمترین راه را می‌رود؟`;expl="هر سه جعبه راه می‌افتند، ولی روی فرش، اصطکاک بیشترِ نیروی هل دادن را خنثی می‌کند.";}
   /* اولین برخورد با اصطکاک: حدس (بی‌امتیاز) ← هل دادن ← سؤال دربارهٔ چیزی که دید */
   if(sp.poe){poe(A,{prompt:KID()?"هر سه جعبه را با یک اندازه هل می‌دهیم. حدس بزن کدام دورتر می‌رود.":"هر سه جعبه را با یک اندازه هل می‌دهیم. حدس بزن کدام دورتر می‌رود. حدس امتیاز ندارد.",opts:fr.lanes.map(L=>L.n),right:ans,reveal:(i,next)=>fr.run(next)},
     {prompt:"کدام جعبه دورتر رفت؟",opts:fr.lanes.map(L=>L.n),ans,ok:expl,retry:"به جای جعبه‌ها نگاه کن: کدام از همه جلوتر است؟"});return;}
