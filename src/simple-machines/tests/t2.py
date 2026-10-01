@@ -134,7 +134,7 @@ def ramp(g,pg,sp):
 
 def pull_until(g,pg,hx,maxn=12):
     for k in range(maxn):
-        if pg.locator('#nv .btn').count(): break
+        if pg.locator('#nv .btn.next').count(): break
         g.drag(hx,264,hx,264+150,10); pg.wait_for_timeout(300)
 def pulley(g,pg,sp):
     t=sp['t']; HX={1:328,2:376,4:376,6:392}
@@ -225,7 +225,7 @@ if __name__=='__main__':
                     try: SOL[k](g,pg,sp)
                     except Exception as e: print('  EXC',k,L,i,sp.get('t'),e)
                     pg.wait_for_timeout(500)
-                    if not pg.locator('#nv .btn').count(): pg.wait_for_timeout(1500)
+                    if not pg.locator('#nv .btn.next').count(): pg.wait_for_timeout(1500)
                     cls=pg.evaluate("i=>{const d=document.querySelectorAll('#dots i')[i];return d?d.className:''}",i)
                     got.append(cls)
                     if cls!='p2': print('  !!',k,L,i,sp.get('t'),cls,g.text('#fb')[:120].replace('\n',' '))

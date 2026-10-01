@@ -162,11 +162,11 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
    h+=`<g transform="translate(${lx} ${ly+152})">${OB.balloon.d}</g>`+wSvg(rx-24,ry+152,5,"kg")+wSvg(rx+26,ry+152,2,"kg");return h;},
  lab(A){
    let mode="bal",b,spr,obj="stone",place="earth";
-   function balMode(){mode="bal";A.prompt("آزمایشگاه ترازوی دوکفه‌ای: وزنه یا شیء را روی هر کفه بکش. برای برداشتن، آن را بیرون بکش یا رویش بزن.");
+   function balMode(){mode="bal";A.prompt("آزمایشگاه ترازوی دوکفه‌ای: وزنه‌ها و چیزها را از پایین صفحه بردار و روی کفه‌ها بگذار. برای برداشتن، رویشان بزن.");
      let u=KID()?"cube":"kg";const mk=()=>{b=makeBalance(A,{unit:u,edit:"both",tray:u==="cube"?[1]:u==="kg"?[1,2,5,10]:[100,200,500,1000],objTray:["melon","apple","balloon","pillow","book","stone","rice","cotton","iron","dumbbell","backpack"].filter(id=>MASS[u][id]!=null),locked:false});A.refresh=()=>b.render();};
      mk();const c=A.ctrl("");
      btn(c,"وزنه‌ها","",()=>{b.st.trayMode="w";b.render();});btn(c,"اشیا","",()=>{b.st.trayMode="o";b.render();});
-     if(!KID())btn(c,"کیلوگرم / گرم","",()=>{u=u==="kg"?"g":"kg";mk();A.fb(u==="g"?"حالا وزنه‌ها به گرم است. هر کیلوگرم ۱۰۰۰ گرم است.":"حالا وزنه‌ها به کیلوگرم است.","info");});
+     if(!KID())btn(c,"کیلوگرم / گرم","",()=>{u=u==="kg"?"g":"kg";mk();A.fb(u==="g"?"حالا وزنه‌ها گرمی‌اند. هر کیلوگرم ۱۰۰۰ گرم است.":"حالا وزنه‌ها کیلوگرمی‌اند.","info");});
      btn(c,"خالی کردن کفه‌ها","",()=>{b.st.L=[];b.st.R=[];b.settle();});
      btn(c,"نیروسنج و آب","pri",sprMode);}
    function sprMode(){mode="spr";A.prompt(KID()?"سنگ را با دستگیرهٔ زرد پایین ببر و در آب فرو کن. به فنر نگاه کن.":"آزمایشگاه نیروسنج: دستگیرهٔ زرد را پایین بکش تا جسم در آب برود. جسم را عوض کن یا به ماه برو و ببین عدد نیروسنج چه می‌شود.");A.fb("");
@@ -179,12 +179,12 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
    balMode();},
  kid:[
   {id:"scale.a1",title:"کدام سنگین‌تر است؟",desc:"پیش‌بینی کن کدام کفه پایین می‌رود.",gen(r){return shuffle(r,[{t:"heavier",u:"cube",L:["apple"],R:["melon"]},{t:"heavier",u:"cube",L:["balloon"],R:["stone"]},{t:"heavier",u:"cube",L:["book"],R:["book"]},{t:"heavier",u:"cube",L:["car"],R:["pillow"]},{t:"heavier",u:"cube",L:["rice"],R:["melon"]}]);}},
-  {id:"scale.a2",title:"با مکعب صاف کن",desc:"مکعب بگذار تا ترازو صاف شود و بشمار چند مکعب شد.",gen(r){return shuffle(r,["apple","book","car","stone","pillow"]).map(id=>({t:"balance",u:"cube",obj:[id],tray:[1]}));}},
+  {id:"scale.a2",title:"با مکعب صاف کن",desc:"مکعب بگذار تا ترازو صاف شود. بعد بشمار چند مکعب گذاشتی.",gen(r){return shuffle(r,["apple","book","car","stone","pillow"]).map(id=>({t:"balance",u:"cube",obj:[id],tray:[1]}));}},
   {id:"scale.a3",title:"بزرگ اما سبک",desc:"چیزهای بزرگ همیشه سنگین نیستند!",gen(r){return[{t:"heavier",u:"cube",L:["cotton"],R:["iron"]},{t:"balance",u:"cube",obj:["balloon"],tray:[1]},{t:"heavier",u:"cube",L:["pillow"],R:["car"]},{t:"balance",u:"cube",obj:["pillow"],tray:[1]},{t:"heavier",u:"cube",L:["pillow"],R:["stone"]}];}},
   {id:"scale.a5",title:"فنرِ نیروسنج",desc:"چیزها را به نیروسنج آویزان کن. چیزِ سنگین‌تر فنر را بیشتر کش می‌آورد.",gen(r){return[{t:"hang",o:["apple","melon"],poe:1},{t:"hang",o:["balloon","stone"]},{t:"hang",o:["car","pillow"]},{t:"hang",o:["book","book"]},{t:"hang",o:["rice","cotton"]}];}},
   {id:"scale.a4",title:"روی ماه و در آب",desc:"نیروسنج را به ماه ببر و سنگ را در آب فرو کن. چه چیزی عوض می‌شود؟",gen(r){return[{t:"moon",q:1,ans:2},{t:"massq",ans:1},{t:"moonbal",ans:1},{t:"water",obj:"stone",ans:2},{t:"water",obj:"brick",ans:2}];}}],
  levels:[
-  {id:"scale.1",title:"کدام سنگین‌تر است؟",desc:"با ترازوی دوکفه‌ای مقایسه کن و با مکعب‌ها جرم هر چیز را بشمار. بزرگ همیشه سنگین نیست!",gen(r){const b=pick(r,["book","pillow","car"]),m=pick(r,["melon","rice"]);
+  {id:"scale.1",title:"کدام سنگین‌تر است؟",desc:"با ترازوی دوکفه‌ای مقایسه کن و جرم هر چیز را با مکعب‌ها بسنج. بزرگ همیشه سنگین نیست!",gen(r){const b=pick(r,["book","pillow","car"]),m=pick(r,["melon","rice"]);
     return[{t:"heavier",u:"cube",L:["apple"],R:[m]},{t:"balance",u:"cube",obj:[b],tray:[1]},{t:"heavier",u:"cube",L:["balloon"],R:["stone"]},{t:"balance",u:"cube",obj:["pillow"],tray:[1]},{t:"heavier",u:"cube",L:["cotton"],R:["iron"]},{t:"balance",u:"cube",obj:[m],tray:[1]}];}},
   {id:"scale.2",title:"کیلوگرم و گرم",desc:"جرم را با وزنه‌های کیلوگرمی و گرمی بسنج. هر کیلوگرم ۱۰۰۰ گرم است.",gen(r){return[{t:"balance",u:"kg",obj:["melon"],tray:[1,2]},{t:"mystery",u:"kg",obj:["myA"],tray:[1,2,5]},{t:"heavier",u:"kg",L:["dumbbell"],R:["melon"]},{t:"mystery",u:"g",obj:["book"],tray:[100,200,500]},{t:"heavier",u:"g",L:["cotton"],R:["iron"]},{t:"mystery",u:"g",obj:["myB"],tray:[100,200,500,1000]}];}},
   {id:"scale.3",title:"کمترین وزنه",desc:"ترازو را با کمترین تعداد وزنه صاف کن.",gen(r){return[{t:"fewest",u:"g",obj:["apple"],tray:[100,200,500]},{t:"mystery",u:"kg",obj:["myC"],tray:[1,2,5,10]},{t:"fewest",u:"g",obj:["book","apple"],tray:[100,200,500]},{t:"fewest",u:"kg",obj:["stone","dumbbell"],tray:[1,2,5]},{t:"mystery",u:"g",obj:["backpack"],tray:[100,200,500,1000]},{t:"fewest",u:"g",obj:["car","backpack"],tray:[100,200,500,1000]}];}},
@@ -223,7 +223,7 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
       A.fb(K?"حالا هر کدام را روی یک کفه بگذار.":"حالا هر کدام را روی یک کفهٔ ترازو بگذار و ببین ترازو چه نشان می‌دهد.","info");A.hint(`M300 470 L190 250`);});
     function ask(){phase=2;const right=guess===ans;
       A.prompt(K?"ترازو چه نشان داد؟":"ترازو چه نشان داد؟<small>به کجیِ ترازو نگاه کن: کفهٔ پایین‌تر جرم بیشتری دارد.</small>");
-            const gNote=right?(K?"حدست هم درست بود!":"حدست هم درست بود."):(big?(K?" حدست چیز دیگری بود. بزرگ‌تر همیشه سنگین‌تر نیست!":" حدست چیز دیگری بود: بزرگ‌تر بودن یعنی جرم بیشتر نیست. برای همین با ترازو می‌سنجیم، نه با چشم."):(K?" حدست چیز دیگری بود؛ ترازو جواب را نشان داد.":" حدست چیز دیگری بود؛ ترازو جواب را نشان داد."));
+            const gNote=right?(K?"حدست هم درست بود!":"حدست هم درست بود."):(big?(K?" حدست چیز دیگری بود. بزرگ‌تر همیشه سنگین‌تر نیست!":" حدست چیز دیگری بود: بزرگ‌تر بودن به این معنا نیست که جرمش بیشتر است. برای همین با ترازو می‌سنجیم، نه با چشم."):(K?" حدست چیز دیگری بود؛ ترازو جواب را نشان داد.":" حدست چیز دیگری بود؛ ترازو جواب را نشان داد."));
       const hv=ans===0?na:nb,expl=(ans===1?(K?"ترازو صاف ماند؛ هم‌جرم‌اند.":`ترازو صاف ماند؛ هر دو ${fmtM(ma,u)} هستند.`):(K?`کفهٔ ${hv} پایین رفت.`:`کفهٔ ${hv} پایین رفت، پس ${hv} جرم بیشتری دارد: ${fmtM(Math.max(ma,mb),u)} در برابر ${fmtM(Math.min(ma,mb),u)}.`))+" "+gNote;
       b.st.hideL=b.st.hideR=false;b.st.edit="";b.render();
       const c3=A.ctrl("");const m=mcq(c3,opts,(i,bt)=>{if(A.locked)return;
@@ -236,18 +236,18 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
   const c=A.ctrl("");
   const onSettle=()=>{if(A.locked||asked)return;const mR=b.mass("R"),n=b.st.R.length,eq=mR===target;
     if(!n){A.fb("");return;}
-    if(!eq){A.fb(KID()?(mR>target?"کفهٔ مکعب‌ها پایین رفت. یک مکعب بردار.":"کفهٔ چپ هنوز پایین است. مکعب اضافه کن."):(mR>target?`کفهٔ راست پایین رفت؛ ${unitW}ها زیاد است. روی یکی بزن تا برداشته شود.`:`کفهٔ چپ هنوز پایین است؛ ${unitW} اضافه کن.`),"info");return;}
-    if(sp.t==="fewest"&&n!==minN){A.trial(false,{retry:`صاف شد، ولی با ${fa(n)} وزنه. با وزنه‌های بزرگ‌تر می‌شود با وزنه‌های کمتری صافش کرد.`});return;}
+    if(!eq){A.fb(KID()?(mR>target?"کفهٔ مکعب‌ها پایین رفت. یک مکعب بردار.":"کفهٔ چپ هنوز پایین است. مکعب اضافه کن."):(mR>target?`کفهٔ راست پایین رفت؛ ${unitW}ها زیادند. روی یکی بزن تا برداشته شود.`:`کفهٔ چپ هنوز پایین است؛ ${unitW} اضافه کن.`),"info");return;}
+    if(sp.t==="fewest"&&n!==minN){A.trial(false,{retry:`ترازو صاف شد، ولی با ${fa(n)} وزنه. اگر وزنه‌های بزرگ‌تر بگذاری، با تعداد کمتری هم صاف می‌شود.`});return;}
     if(sp.t==="mystery"){asked=true;b.st.edit="";b.render();A.fb("ترازو صاف شد! حالا جرم وزنه‌های کفهٔ راست را جمع بزن.","info");
       A.prompt(`ترازو صاف است. پس جرم ${objNames} چقدر است؟<small>جرم ${objNames} با جرم وزنه‌های کفهٔ راست برابر است. آن‌ها را جمع بزن.</small>`);
       stp=stepper(c,{init:0,max:u==="g"?9000:99,steps:u==="g"?[100,1000]:[1,10],unit:u==="kg"?"کیلوگرم":"گرم",label:"جرم"});
       chk=btn(c,"بررسی","go",()=>{const ok=stp.get()===target;
         A.trial(ok,{ok:`جرم ${objNames} ${fmtM(target,u)} است: ${b.st.R.map(it=>fa(it.v)).join(" + ")} = ${fa(target)}.`,retry:`جرم وزنه‌های کفهٔ راست را یکی‌یکی جمع بزن: ${b.st.R.map(it=>fa(it.v)).join(" + ")}.`});
         if(A.locked){chk.disabled=true;stp.disable();b.st.hideL=b.st.hideR=false;b.render();}});return;}
-    b.st.hideL=false;A.trial(true,{ok:sp.t==="balance"?(u==="cube"?`${objNames} هم‌جرمِ ${fa(target)} مکعب است.`:`جرم ${objNames} ${fmtM(target,u)} است.`):`با ${fa(n)} وزنه صاف شد؛ کمتر از این نمی‌شد.`,k:{ok:`ترازو صاف شد. پس ${objNames} هم‌جرمِ ${fa(target)} مکعب است.${sp.obj.length===1&&["balloon","pillow","cotton"].includes(sp.obj[0])?` ${objNames} بزرگ است، ولی جرمش کم است!`:""}`}});b.render();};
+    b.st.hideL=false;A.trial(true,{ok:sp.t==="balance"?(u==="cube"?`${objNames} هم‌جرمِ ${fa(target)} مکعب است.`:`جرم ${objNames} ${fmtM(target,u)} است.`):`با ${fa(n)} وزنه صاف شد؛ با کمتر از این نمی‌شد.`,k:{ok:`ترازو صاف شد. پس ${objNames} هم‌جرمِ ${fa(target)} مکعب است.${sp.obj.length===1&&["balloon","pillow","cotton"].includes(sp.obj[0])?` ${objNames} بزرگ است، ولی جرمش کم است!`:""}`}});b.render();};
   const b=makeBalance(A,{unit:u,L:sp.obj.map(id=>({k:"o",id,fixed:1})),edit:"R",tray:sp.tray,locked:false,hideL:true,hideR:sp.t==="mystery",onSettle});A.refresh=()=>b.render();
-  A.prompt(KID()?"مکعب‌ها را روی کفهٔ راست بگذار تا ترازو صاف شود.":sp.t==="fewest"?`ترازو را با <b>کمترین تعداد وزنه</b> صاف کن.<small>وزنه‌ها را روی کفهٔ راست بکش؛ ترازو همان لحظه نشان می‌دهد کدام طرف سنگین‌تر است. با وزنه‌های بزرگ‌تر شروع کن. برای برداشتن وزنه، رویش بزن.</small>`
-    :`${sp.t==="mystery"?`جرم ${objNames} چقدر است؟ اول ترازو را صاف کن.`:`ترازو را صاف کن. جرم ${objNames} را نمی‌دانی.`}<small>${u==="cube"?"مکعب‌ها":"وزنه‌ها"} را روی کفهٔ راست بکش؛ ترازو همان لحظه نشان می‌دهد کدام طرف سنگین‌تر است. برای برداشتن، رویش بزن.</small>`);
+  A.prompt(KID()?"مکعب‌ها را روی کفهٔ راست بگذار تا ترازو صاف شود.":sp.t==="fewest"?`ترازو را با <b>کمترین تعداد وزنه</b> صاف کن.<small>وزنه‌ها را روی کفهٔ راست بگذار؛ ترازو همان لحظه نشان می‌دهد کدام طرف سنگین‌تر است. با وزنه‌های بزرگ‌تر شروع کن. برای برداشتن وزنه، رویش بزن.</small>`
+    :`${sp.t==="mystery"?`جرم ${objNames} چقدر است؟ اول ترازو را صاف کن.`:`جرم ${objNames} را نمی‌دانیم. با وزنه‌ها ترازو را صاف کن.`}<small>${u==="cube"?"مکعب‌ها":"وزنه‌ها"} را روی کفهٔ راست بگذار؛ ترازو همان لحظه نشان می‌دهد کدام طرف سنگین‌تر است. برای برداشتن، رویش بزن.</small>`);
   A.hint(`M${320+(0-(sp.tray.length-1)/2)*Math.min(90,560/sp.tray.length)} 478 L516 215`);
  }};
 function minCoins(t,vals){const dp=Array(t+1).fill(Infinity);dp[0]=0;const g=vals.reduce((a,b)=>gcd(a,b));for(let s=g;s<=t;s+=g)for(const v of vals)if(v<=s&&dp[s-v]+1<dp[s])dp[s]=dp[s-v]+1;return dp[t];}
@@ -269,7 +269,7 @@ function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
     A.formula(`<span class="fl">قانون</span><span>هرچه چیزی سنگین‌تر باشد، فنرِ نیروسنج را بیشتر کش می‌آورد.</span>`);
     const big=[a,b].some(id=>["balloon","pillow","cotton"].includes(id)),same=a===b;
     const ok=ans===1?"فنرها به یک اندازه کش آمدند؛ این دو هم‌وزن‌اند.":`فنرِ ${ans===0?na:nb} بیشتر کش آمد؛ پس ${ans===0?na:nb} سنگین‌تر است.${big?" اندازهٔ بزرگ مهم نیست؛ فنر نشان می‌دهد کدام سنگین‌تر است.":""}`;
-    const o3=same?[`فنرِ ${na}ِ چپ`,"هر دو یک‌اندازه",`فنرِ ${na}ِ راست`]:[`فنرِ ${na}`,"هر دو یک‌اندازه",`فنرِ ${nb}`];
+    const o3=same?[`فنرِ ${na}ِ چپ`,"هر دو به یک اندازه",`فنرِ ${na}ِ راست`]:[`فنرِ ${na}`,"هر دو به یک اندازه",`فنرِ ${nb}`];
     if(sp.poe){draw(false);poe(A,{prompt:`${na} و ${nb} را به دو نیروسنج آویزان می‌کنیم. حدس بزن فنرِ کدام بیشتر کش می‌آید.`,opts:o3,right:ans,reveal:(i,next)=>{draw(true);later(600,next);}},
       {prompt:"فنرِ کدام بیشتر کش آمد؟",opts:o3,ans,ok,retry:"به نوار نارنجی هر فنر نگاه کن: کدام پایین‌تر آمده؟"});return;}
     draw(true);A.prompt(`فنرِ کدام بیشتر کش آمده؟ پس کدام سنگین‌تر است؟`);
@@ -284,9 +284,9 @@ function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
       retry:K?"آیا برنجی از کیسه بیرون ریخت؟":"جرم یعنی مقدار ماده و وزن یعنی کشش. آیا برنجی از کیسه کم شد؟"});return;}
   if(sp.t==="massq"){A.view(404);P.paint((sp.water?bgRoom(382):moonBg(382))+placeTag(sp.water?"earth":"moon",540,70)+(sp.water?`<rect x="206" y="228" width="228" height="156" rx="12" fill="#fff" fill-opacity=".45" stroke="#7FA7C4" stroke-width="4"/><rect x="210" y="262" width="220" height="118" rx="8" fill="#6EC3EA" fill-opacity=".6"/><g transform="translate(320 360) scale(1.7)">${OB.stone.d}</g>`:`<g transform="translate(320 382) scale(1.6)">${OB.rice.d}</g>`));
     A.formula(sp.water?FX_B(""):FX_W(""));
-    if(sp.water){A.prompt(K?"سنگ را در آب گذاشتیم. مقدار سنگ کم می‌شود؟":"سنگ ۵ کیلوگرمی زیر آب است و نیروسنج عدد کمتری نشان می‌دهد. جرم سنگ در آب چقدر است؟");
+    if(sp.water){A.prompt(K?"سنگ را در آب گذاشتیم. آیا از مقدار سنگ کم می‌شود؟":"سنگ ۵ کیلوگرمی زیر آب است و نیروسنج عدد کمتری نشان می‌دهد. جرم سنگ در آب چقدر است؟");
       mwMcq(A,K?["کم می‌شود","همان است","زیاد می‌شود"]:["کمتر از ۵ کیلوگرم","همان ۵ کیلوگرم","بیشتر از ۵ کیلوگرم"],1,{ok:"جرم یعنی مقدار ماده. هیچ تکه‌ای از سنگ کم نشده؛ پس جرمش همان ۵ کیلوگرم است. وزنش هم عوض نشده؛ فقط آب آن را به بالا هل می‌دهد و عدد نیروسنج کم می‌شود.",retry:"آیا تکه‌ای از سنگ در آب حل شد یا کنده شد؟",k:{ok:"هیچ تکه‌ای از سنگ کم نشده؛ پس مقدارش همان است.",retry:"آیا تکه‌ای از سنگ کم شد؟"}});return;}
-    A.prompt(K?"کیسهٔ برنج را از زمین به ماه بردیم. مقدار برنجِ توی کیسه چه می‌شود؟":"جرم این کیسه روی زمین ۵ کیلوگرم است. آن را به ماه بردیم. روی ماه جرمش چقدر است؟");
+    A.prompt(K?"کیسهٔ برنج را از زمین به ماه بردیم. مقدار برنجِ درون کیسه چه می‌شود؟":"جرم این کیسه روی زمین ۵ کیلوگرم است. آن را به ماه بردیم. روی ماه جرمش چقدر است؟");
     mwMcq(A,K?["کمتر می‌شود","همان است","بیشتر می‌شود"]:["حدود ۱ کیلوگرم","۵ کیلوگرم","صفر"],1,{ok:"جرم یعنی مقدار ماده. هیچ برنجی کم یا زیاد نشده؛ پس جرم همان ۵ کیلوگرم است. آنچه روی ماه کم می‌شود وزن است، یعنی نیرویی که ماه کیسه را با آن می‌کشد.",retry:"جرم یعنی مقدار ماده. آیا در سفر، برنجی از کیسه بیرون ریخت؟",k:{ok:"هیچ برنجی کم یا زیاد نشده؛ پس مقدارش همان است. فقط ماه آن را کمتر می‌کشد.",retry:"آیا در سفر، برنجی از کیسه بیرون ریخت؟"}});return;}
   if(sp.t==="moonbal"){const u=K?"cube":"kg";const b=makeBalance(A,{unit:u,L:[{k:"o",id:"rice",fixed:1}],R:u==="cube"?Array.from({length:MASS.cube.rice},()=>({k:"w",v:1,fixed:1})):[{k:"w",v:5,fixed:1}],locked:true,bg:"moon"});A.refresh=()=>b.render();
     poe(A,{prompt:K?"این ترازو روی زمین صاف بود. آن را به ماه بردیم. حدس بزن روی ماه چه می‌شود.":"روی زمین، کیسهٔ برنج با وزنهٔ ۵ کیلوگرمی روی ترازوی دوکفه‌ای صاف بود. همین ترازو را به ماه بردیم. حدس بزن روی ماه چه می‌شود. حدس امتیاز ندارد.",
@@ -294,7 +294,7 @@ function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
      {prompt:K?"ترازو روی ماه هم صاف ماند. مقدار برنج روی ماه چه شد؟":"ترازو روی ماه هم صاف ماند. جرم کیسه روی ماه چقدر است؟",
       opts:K?["کمتر شد","همان ماند","بیشتر شد"]:["کمتر از ۵ کیلوگرم","۵ کیلوگرم","بیشتر از ۵ کیلوگرم"],ans:1,
       ok:K?"ماه هم کیسه و هم مکعب‌ها را کمتر می‌کشد، هر دو به یک اندازه. پس ترازو صاف ماند و مقدار برنج همان است.":"ماه هر دو کفه را به یک نسبت کمتر می‌کشد؛ پس ترازو صاف ماند. ترازوی دوکفه‌ای جرم را مقایسه می‌کند، و جرم کیسه روی ماه هم ۵ کیلوگرم است.",
-      retry:K?"ترازو صاف ماند. یعنی دو طرف هنوز هم‌اندازه‌اند.":"ترازوی صاف یعنی جرم دو کفه برابر است. جرم وزنه عوض نشده."});return;}
+      retry:K?"ترازو صاف ماند؛ یعنی دو طرف هنوز به یک اندازه سنگین‌اند.":"ترازوی صاف یعنی جرم دو کفه برابر است. جرم وزنه عوض نشده."});return;}
   if(sp.t==="bath"){A.view(404);P.paint(bathScene());A.formula(FX_W(""));
     A.prompt("ترازوی حمام در اصل نیرو را می‌سنجد و آن را به «کیلوگرمِ زمینی» نشان می‌دهد. بچه‌ای که روی زمین ۳۰ کیلوگرم نشان می‌دهد، با همین ترازو روی ماه می‌رود. ترازو چه عددی نشان می‌دهد؟");
     mwMcq(A,["حدود ۵ کیلوگرم","۳۰ کیلوگرم","بیشتر از ۳۰ کیلوگرم"],0,{ok:"ترازوی حمام وزن را می‌سنجد و روی ماه وزن حدود یک‌ششم است؛ پس حدود ۵ نشان می‌دهد: ۳۰ × ۱٫۶ ÷ ۱۰ ≈ ۵. ولی جرم این بچه همان ۳۰ کیلوگرم است. برای سنجیدن جرم روی ماه باید ترازوی دوکفه‌ای برد.",retry:"این ترازو نیرو را می‌سنجد، نه جرم را. روی ماه نیرو چه می‌شود؟"});return;}
@@ -319,7 +319,7 @@ function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
   A.formula(FX_B(""));
   const wOk=`آب ${OB[sp.obj].n} را به بالا هل می‌دهد؛ به این نیرو «نیروی شناوری» می‌گویند. وزن جسم عوض نشده، ولی نیروسنج عدد کمتری نشان می‌دهد. به این عدد «وزن ظاهری» می‌گویند.`;
   if(sp.t==="water"){A.prompt(K?`${OB[sp.obj].n} را آرام در آب ببر. فنر نیروسنج بیشتر کش می‌آید، همان‌قدر یا کمتر؟`:`${OB[sp.obj].n} را با دستگیرهٔ زرد آرام در آب ببر. عدد نیروسنج چه می‌شود؟`);
-    mwMcq(A,K?["بیشتر کش می‌آید","همان‌قدر کش می‌آید","کمتر کش می‌آید"]:["بیشتر می‌شود","همان می‌ماند","کمتر می‌شود"],2,{gate,ok:wOk,retry:"دوباره به عقربهٔ نارنجی نگاه کن. خط‌چین جای قبلی آن است.",k:{ok:`آب ${OB[sp.obj].n} را کمی به بالا هل می‌دهد؛ برای همین فنر کمتر کش می‌آید. ${OB[sp.obj].n} کوچک‌تر نشده است.`,retry:"به عقربهٔ نارنجی نگاه کن. خط‌چین جای قبلی آن است."}});return;}
+    mwMcq(A,K?["بیشتر کش می‌آید","همان‌قدر کش می‌آید","کمتر کش می‌آید"]:["بیشتر می‌شود","همان می‌ماند","کمتر می‌شود"],2,{gate,ok:wOk,retry:"دوباره به نوار نارنجی نگاه کن. خط‌چین جای قبلی آن است.",k:{ok:`آب ${OB[sp.obj].n} را کمی به بالا هل می‌دهد؛ برای همین فنر کمتر کش می‌آید. ${OB[sp.obj].n} کوچک‌تر نشده است.`,retry:"به نوار نارنجی نگاه کن. خط‌چین جای قبلی آن است."}});return;}
   if(sp.t==="waterWhy"){A.prompt(`${OB[sp.obj].n} را در آب ببر. چرا عدد نیروسنج کم می‌شود؟`);
     mwMcq(A,["چون وزن آهن کم می‌شود","چون آب آن را به بالا هل می‌دهد","چون جرم آهن کم می‌شود"],1,{gate,ok:wOk+" جرم و وزن واقعی آهن همان است.",retry:"وقتی در استخر هستی، آب تو را به کدام طرف هل می‌دهد؟"});return;}
   A.prompt(`${OB[sp.obj].n} را کامل در آب ببر. آب با چند نیوتن آن را به بالا هل می‌دهد؟ (نیروی آب = عدد نیروسنج در هوا − عددش در آب)`);

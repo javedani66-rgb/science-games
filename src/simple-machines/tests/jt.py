@@ -22,7 +22,7 @@ def solve_level(pg,g,log):
         try: SOL[k](g,pg,sp)
         except Exception as e: log.append(f'EXC {k} {i} {sp.get("t")} {e}')
         pg.wait_for_timeout(450)
-        if not pg.locator('#nv .btn').count(): pg.wait_for_timeout(1500)
+        if not pg.locator('#nv .btn.next').count(): pg.wait_for_timeout(1500)
         cls=pg.evaluate("i=>{const d=document.querySelectorAll('#dots i')[i];return d?d.className:''}",i)
         if cls!='p2': log.append(f'!! {k} {i} {sp.get("t")} {cls} {g.text("#fb")[:80]}')
         nb=pg.locator('#nv .btn')

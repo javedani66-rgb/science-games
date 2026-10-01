@@ -26,7 +26,7 @@ function makeTug(A,cfg){
       if(sL)s+=T(xl,y-27,`چپ<tspan class="num">: ${fa(sL)}</tspan>`,{size:14,col:BLUE});if(sR)s+=T(xr,y-27,`راست<tspan class="num">: ${fa(sR)}</tspan>`,{size:14,col:RED});
       const ny=140;if(st.show!=="all"){}else if(net!==0){const nl=clamp(net*sc,20-cx,620-cx);s+=arrow(cx,ny,cx+nl,ny,15,PURP);s+=T(clamp(cx+nl/2,90,550),ny-31,`نیروی خالص<tspan class="num">: ${fa(Math.abs(net))}</tspan>`,{size:14,col:PURP});}
       else if(sL||sR)s+=T(cx,ny,"نیروی خالص: صفر (تعادل)",{size:15,col:PURP});}
-    if(st.edit){s+=trayPanel("",404);
+    if(st.edit){s+=trayPanel("کارت‌های نیرو",404);
       for(const side of["L","R"]){if(st.edit!=="both"&&st.edit!==side)continue;const x0=side==="L"?170:470;
         st.tray.forEach((v,j)=>{const x=x0+(j-(st.tray.length-1)/2)*84,sel=st.sel&&st.sel.side===side&&st.sel.v===v;s+=`<g data-drag="tray" data-side="${side}" data-v="${v}" style="cursor:grab"><g transform="translate(${x} 440) scale(1.2) translate(${-x} -440)">${tokenSvg(x,432,v,side,sel)}</g></g>`;});}}
     P.paint(s);
@@ -42,10 +42,10 @@ function makeTug(A,cfg){
     begin(g,p){if(g.from==="slot"){st[g.side][g.i]=null;}st.sel=null;P.ghost(tokenSvg(0,-30,g.v,g.side,true),p.x,p.y);render();},
     move(g,p){P.move(p.x,p.y);const i=nearSlot(g.side,p);const h=i==null?null:{side:g.side,i};if(JSON.stringify(h)!==JSON.stringify(st.hover)){st.hover=h;render();}},
     end(g,p){P.clear();st.hover=null;const i=nearSlot(g.side,p);if(i!=null)st[g.side][i]=g.v;render();if(cfg.onChange)cfg.onChange();},
-    tap(g){if(g.from==="tray"){st.sel={side:g.side,v:g.v};A.fb("حالا روی یکی از دایره‌های خالی روی طناب بزن، یا کشش را بکش و آنجا رها کن.","info");render();}
+    tap(g){if(g.from==="tray"){st.sel={side:g.side,v:g.v};A.fb("حالا روی یکی از دایره‌های خالیِ طناب بزن. می‌توانی کارت را هم با انگشت ببری و آنجا رها کنی.","info");render();}
       else{st[g.side][g.i]=null;render();if(cfg.onChange)cfg.onChange();}},
     zoneTap(z){if(z.zone!=="slot")return;const side=z.side;if(st.sel&&st.sel.side===side){st[side][+z.i]=st.sel.v;st.sel=null;A.fb("");render();if(cfg.onChange)cfg.onChange();}
-      else if(st.edit){A.fb("اول یکی از کشش‌های پایین صفحه را انتخاب کن یا بکش.","info");}}});
+      else if(st.edit){A.fb("اول یکی از کارت‌های نیروی پایین صفحه را انتخاب کن.","info");}}});
   function run(done){const net=sumA(st.R)-sumA(st.L);st.busy=true;const x0=st.cx;
     if(net===0){tween(900,p=>{st.cx=x0+Math.sin(p*Math.PI*6)*3*(1-p);render();},()=>{st.cx=x0;st.busy=false;render();done&&done(0);});return;}
     const dir=Math.sign(net),k=Math.abs(net);const xs=[];for(const sd of["L","R"])for(let i=0;i<4;i++)if(st[sd][i]!=null)xs.push(slotX(sd,i));const lim=Math.max(24,dir>0?610-Math.max(x0+60,...xs):Math.min(x0-60,...xs)-30);tween(2000,p=>{st.cx=x0+dir*Math.min(lim,200*Math.min(1,(k/10)*.45)*p*p*2.2);render();},()=>{st.busy=false;done&&done(dir);});}
@@ -77,25 +77,25 @@ function makeFriction(A,F){
 }
 
 const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، کشیدن و نیروی خالص",
- intro:"نیرو یعنی هل دادن یا کشیدن. در طناب‌کشی کشش‌ها را روی طناب بگذار و ببین جعبه به کدام طرف می‌رود.",
+ intro:"نیرو یعنی هل دادن یا کشیدن. در طناب‌کشی، کارت‌های نیرو را روی طناب بگذار و ببین جعبه به کدام طرف می‌رود.",
  art(){const s={};let h=bgRoom(330).replace(/id="g/g,'id="a'+"f").replace(/url\(#g/g,"url(#af");
    h+=`<line x1="14" y1="285" x2="626" y2="285" stroke="#8A6A48" stroke-width="6"/><rect x="268" y="258" width="104" height="58" rx="10" fill="#5E7395"/><rect x="268" y="258" width="104" height="12" rx="6" fill="#7F93B3"/><circle cx="290" cy="318" r="12" fill="${INK}"/><circle cx="350" cy="318" r="12" fill="${INK}"/>`+tokenSvg(225,292,20,"L")+tokenSvg(163,292,10,"L")+tokenSvg(415,292,50,"R")+arrow(316,222,256,222,13,BLUE)+arrow(324,222,404,222,13,RED)+arrow(320,170,370,170,15,PURP);return h;},
- lab(A){A.prompt("آزمایشگاه: کشش‌ها را از پایین روی طناب بکش. برای برداشتن، کشش را از طناب بیرون بکش یا رویش بزن. بعد «برو!» را بزن.");
+ lab(A){A.prompt("آزمایشگاه: کارت‌های نیرو را از پایین صفحه بردار و روی طناب بگذار. برای برداشتن یک کارت، رویش بزن. بعد «برو!» را بزن.");
    let mode="tug",tug=null;
    function tugMode(){mode="tug";A.formula("");tug=makeTug(A,{edit:"both",tray:KID()?[10]:[10,20,50]});A.refresh=()=>tug.render();
      const c=A.ctrl("");btn(c,"برو!","go",b=>{b.disabled=true;tug.run(dir=>{A.fb(dir===0?"جعبه تکان نخورد: نیروها برابرند و نیروی خالص صفر است.":`جعبه به ${dir>0?"راست":"چپ"} رفت، چون نیروی ${dir>0?"راست":"چپ"} بیشتر است.`,"info");b.disabled=false;});});
      btn(c,"برگرداندن جعبه","",()=>{tug.reset();A.fb("");});btn(c,"پاک کردن طناب","",()=>{tug.st.L=[null,null,null,null];tug.st.R=[null,null,null,null];tug.reset();A.fb("");});}
    tugMode();},
  kid:[
-  {id:"force.a1",title:"کدام طرف قوی‌تر است؟",desc:"کشش‌ها را بشمار و بگو کدام طرف می‌برد. بعد خودت کشش بگذار.",gen(r){return[{t:"predict",L:[10],R:[10,10,10]},{t:"predict",L:[10,10,10],R:[10]},{t:"balance",fixed:[10],tray:[10]},{t:"predict",L:[10,10],R:[10,10],spread:true},{t:"balance",fixed:[10,10],tray:[10]},{t:"predict",L:[10,10],R:[10,10,10],spread:true}];}},
-  {id:"force.a2",title:"جعبه را نگه دار",desc:"کشش بگذار تا دو طرف مساوی شوند.",gen(r){return[{t:"balance",fixed:[10],tray:[10]},{t:"balance",fixed:[10,10],tray:[10]},{t:"predict",L:[10,10],R:[10,10,10],spread:true},{t:"balance",fixed:[10,10,10],tray:[10],side:"L"},{t:"balance",fixed:[10,10],tray:[10],spread:true,side:"L"}];}},
-  {id:"force.a3",title:"کشش‌های بیشتر",desc:"طناب شلوغ‌تر می‌شود. با دقت بشمار.",gen(r){return[{t:"predict",L:[10,10,10],R:[10,10,10,10],spread:true},{t:"balance",fixed:[10,10,10],tray:[10]},{t:"predict",L:[10,10,10,10],R:[10,10,10,10],spread:true},{t:"balance",fixed:[10,10,10,10],tray:[10],side:"L"},{t:"predict",L:[10,10,10,10],R:[10,10,10],spread:true}];}}],
+  {id:"force.a1",title:"کدام طرف قوی‌تر است؟",desc:"کارت‌های نیرو را بشمار و بگو کدام طرف می‌برد. بعد خودت کارت بگذار.",gen(r){return[{t:"predict",L:[10],R:[10,10,10]},{t:"predict",L:[10,10,10],R:[10]},{t:"balance",fixed:[10],tray:[10]},{t:"predict",L:[10,10],R:[10,10],spread:true},{t:"balance",fixed:[10,10],tray:[10]},{t:"predict",L:[10,10],R:[10,10,10],spread:true}];}},
+  {id:"force.a2",title:"جعبه را نگه دار",desc:"کارت نیرو بگذار تا دو طرف مساوی شوند.",gen(r){return[{t:"balance",fixed:[10],tray:[10]},{t:"balance",fixed:[10,10],tray:[10]},{t:"predict",L:[10,10],R:[10,10,10],spread:true},{t:"balance",fixed:[10,10,10],tray:[10],side:"L"},{t:"balance",fixed:[10,10],tray:[10],spread:true,side:"L"}];}},
+  {id:"force.a3",title:"کارت‌های بیشتر",desc:"طناب شلوغ‌تر می‌شود. با دقت بشمار.",gen(r){return[{t:"predict",L:[10,10,10],R:[10,10,10,10],spread:true},{t:"balance",fixed:[10,10,10],tray:[10]},{t:"predict",L:[10,10,10,10],R:[10,10,10,10],spread:true},{t:"balance",fixed:[10,10,10,10],tray:[10],side:"L"},{t:"predict",L:[10,10,10,10],R:[10,10,10],spread:true}];}}],
  levels:[
-  {id:"force.1",title:"هل دادن و کشیدن",desc:"کدام طرف قوی‌تر است؟ با شمردن کشش‌ها طناب‌کشی را متعادل کن.",gen(r){const a=ri(r,1,3);let b=ri(r,1,3);if(b===a)b=a===3?1:a+1;const c=ri(r,2,3);const d=ri(r,1,3);
+  {id:"force.1",title:"هل دادن و کشیدن",desc:"کدام طرف قوی‌تر است؟ با شمردن کارت‌های نیرو، طناب‌کشی را متعادل کن.",gen(r){const a=ri(r,1,3);let b=ri(r,1,3);if(b===a)b=a===3?1:a+1;const c=ri(r,2,3);const d=ri(r,1,3);
     return[{t:"predict",L:Array(a).fill(10),R:Array(b).fill(10)},{t:"balance",fixed:Array(ri(r,2,3)).fill(10),tray:[10]},{t:"predict",L:Array(c).fill(10),R:Array(c).fill(10),spread:true},{t:"balance",fixed:[10,10],tray:[10],side:"L"},{t:"balance",fixed:Array(ri(r,1,4)).fill(10),tray:[10],spread:true},{t:"predict",L:Array(d).fill(10),R:Array(d===3?2:d+1).fill(10),spread:true}];}},
-  {id:"force.2",title:"جمع نیروها",desc:"کشش‌ها اندازه‌های مختلف دارند. تعداد مهم نیست؛ جمعِ اندازهٔ آن‌ها مهم است.",gen(r){return[{t:"predict",L:[10,10,10],R:[20]},{t:"balance",fixed:shuffle(r,[20,10]),tray:[10,20]},{t:"net",L:[20,20],R:[10]},{t:"predict",L:[20,10],R:[10,10,10]},{t:"balance",fixed:shuffle(r,[20,20,10]),tray:[10,20],side:"L"},{t:"net",L:[10],R:shuffle(r,[20,20,10])}];}},
-  {id:"force.3",title:"نیروی خالص",desc:"نیروی خالص را حساب کن و طناب را طوری بچین که به اندازهٔ دلخواه جابه‌جا شود.",gen(r){return[{t:"make",fixed:[20,10],tray:[10,20,50],target:20,show:"sides"},{t:"net",L:[50],R:[20,10]},{t:"predict",L:[10,10,10,10],R:[50]},{t:"balance",fixed:shuffle(r,[50,20]),tray:[10,20,50],show:"sides",side:"L"},{t:"net",L:[20,20],R:[50]},{t:"make",fixed:[20],tray:[10,20,50],target:-30,side:"L",show:"sides"}];}},
-  {id:"force.4",title:"قهرمان نیرو",desc:"عددهای بزرگ‌تر، کشش‌های بیشتر و جای کم روی طناب.",gen(r){return[{t:"make",fixed:[50,20,10],tray:[20,50],target:40,show:"sides"},{t:"net",L:shuffle(r,[50,20,20,10]),R:shuffle(r,[50,50,10])},{t:"balance",fixed:shuffle(r,[50,50,20,10]),tray:[20,50,10],show:"sides"},{t:"predict",L:shuffle(r,[20,20,20,20]),R:shuffle(r,[50,20,10])},{t:"net",L:shuffle(r,[50,20]),R:shuffle(r,[20,20,10])},{t:"make",fixed:shuffle(r,[50,20]),tray:[10,20,50],target:-40,side:"L",show:"sides"}];}}],
+  {id:"force.2",title:"جمع نیروها",desc:"کارت‌های نیرو عددهای مختلف دارند. تعداد کارت‌ها مهم نیست؛ جمعِ اندازهٔ آن‌ها مهم است.",gen(r){return[{t:"predict",L:[10,10,10],R:[20]},{t:"balance",fixed:shuffle(r,[20,10]),tray:[10,20]},{t:"net",L:[20,20],R:[10]},{t:"predict",L:[20,10],R:[10,10,10]},{t:"balance",fixed:shuffle(r,[20,20,10]),tray:[10,20],side:"L"},{t:"net",L:[10],R:shuffle(r,[20,20,10])}];}},
+  {id:"force.3",title:"نیروی خالص",desc:"نیروی خالص را حساب کن و کارت‌های نیرو را طوری بگذار که نیروی خالص همان عددِ خواسته‌شده شود.",gen(r){return[{t:"make",fixed:[20,10],tray:[10,20,50],target:20,show:"sides"},{t:"net",L:[50],R:[20,10]},{t:"predict",L:[10,10,10,10],R:[50]},{t:"balance",fixed:shuffle(r,[50,20]),tray:[10,20,50],show:"sides",side:"L"},{t:"net",L:[20,20],R:[50]},{t:"make",fixed:[20],tray:[10,20,50],target:-30,side:"L",show:"sides"}];}},
+  {id:"force.4",title:"قهرمان نیرو",desc:"عددهای بزرگ‌تر و کارت‌های بیشتر، با جای کم روی طناب.",gen(r){return[{t:"make",fixed:[50,20,10],tray:[20,50],target:40,show:"sides"},{t:"net",L:shuffle(r,[50,20,20,10]),R:shuffle(r,[50,50,10])},{t:"balance",fixed:shuffle(r,[50,50,20,10]),tray:[20,50,10],show:"sides"},{t:"predict",L:shuffle(r,[20,20,20,20]),R:shuffle(r,[50,20,10])},{t:"net",L:shuffle(r,[50,20]),R:shuffle(r,[20,20,10])},{t:"make",fixed:shuffle(r,[50,20]),tray:[10,20,50],target:-40,side:"L",show:"sides"}];}}],
  endless(r,d){const vals=d<2?[10]:d<3.5?[10,20]:[10,20,50],tp=pick(r,d<2?["predict","balance"]:["predict","balance","net","make"]);const rand=n=>Array.from({length:n},()=>pick(r,vals));
    if(tp==="predict"){const L=rand(ri(r,1,4));let R=rand(ri(r,1,4));return{t:"predict",L,R,spread:true};}
    if(tp==="net")return{t:"net",L:rand(ri(r,1,4)),R:rand(ri(r,1,4))};
@@ -104,14 +104,14 @@ const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، ک�
    return{t:"balance",fixed:[10,10],tray:[10]};},
  mount(sp,A){
   const spread=(a,seed)=>{const out=[null,null,null,null];if(!a)return out;const idx=sp.spread?shuffle(rng(seed+a.length*7+sumA(a)),[0,1,2,3]).slice(0,a.length).sort():a.map((_,i)=>i);a.forEach((v,j)=>out[idx[j]]=v);return out;};
-  if(sp.t==="predict"){A.prompt(KID()?"کدام طرف قوی‌تر است؟":`کدام طرف طناب‌کشی را می‌برد؟<small>عددهای روی کشش‌ها را جمع کن و قبل از دیدن حرکت، پیش‌بینی کن.</small>`);
+  if(sp.t==="predict"){A.prompt(KID()?"کدام طرف قوی‌تر است؟":`کدام طرف طناب‌کشی را می‌برد؟<small>عددهای روی کارت‌ها را جمع کن و قبل از دیدن حرکت، پیش‌بینی کن.</small>`);
     const tug=makeTug(A,{L:spread(sp.L,1),R:spread(sp.R,2),show:"none"});A.refresh=()=>tug.render();
     const sL=sumA(sp.L),sR=sumA(sp.R),ans=sR>sL?0:sR===sL?1:2;
     const reveal=()=>{tug.st.show="all";tug.render();tug.run();};
-    const cL=sp.L.length,cR=sp.R.length,KK={ok:ans===1?"دو طرف مساوی‌اند؛ جعبه تکان نمی‌خورد.":`طرف ${ans===0?"راست":"چپ"} کشش‌های بیشتری دارد.`,retry:"کشش‌های هر طرف را بشمار.",final:`جواب: ${["راست","مساوی","چپ"][ans]}. چپ ${fa(cL)} کشش دارد و راست ${fa(cR)} کشش.`};
+    const cL=sp.L.length,cR=sp.R.length,KK={ok:ans===1?"دو طرف مساوی‌اند؛ جعبه تکان نمی‌خورد.":`طرف ${ans===0?"راست":"چپ"} کارت‌های نیروی بیشتری دارد.`,retry:"کارت‌های هر طرف را بشمار.",final:`جواب: ${["راست","مساوی","چپ"][ans]}. طرف چپ ${fa(cL)} کارت نیرو دارد و طرف راست ${fa(cR)} کارت.`};
     const c=A.ctrl("");const m=mcq(c,KID()?[`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 H18 M13 6 L19 12 L13 18" stroke="${RED}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>راست قوی‌تر`,"مساوی",`چپ قوی‌تر<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12 H6 M11 6 L5 12 L11 18" stroke="${BLUE}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`]:["راست می‌برد →","هیچ‌کدام؛ تعادل","← چپ می‌برد"],(i,b)=>{if(A.locked)return;
       if(i===ans){m.disable();m.mark(i,"right");reveal();A.judge(true,{ok:ans===1?`هر دو طرف ${fa(sL)} است؛ نیروی خالص صفر است.`:`جمع ${ans===0?"راست":"چپ"} بیشتر است: ${fa(Math.max(sL,sR))} در برابر ${fa(Math.min(sL,sR))}.`,k:KK});}
-      else{m.mark(i,"wrong");b.disabled=true;A.judge(false,{retry:"جمع عددهای هر طرف را مقایسه کن، نه تعداد کشش‌ها را.",final:`جواب: ${["راست می‌برد","تعادل","چپ می‌برد"][ans]}. جمع چپ ${fa(sL)} و جمع راست ${fa(sR)} است.`,k:KK});if(A.locked){m.disable();m.mark(ans,"right");reveal();}}});
+      else{m.mark(i,"wrong");b.disabled=true;A.judge(false,{retry:"جمع عددهای هر طرف را مقایسه کن، نه تعداد کارت‌ها را.",final:`جواب: ${["راست می‌برد","تعادل","چپ می‌برد"][ans]}. جمع چپ ${fa(sL)} و جمع راست ${fa(sR)} است.`,k:KK});if(A.locked){m.disable();m.mark(ans,"right");reveal();}}});
     return;}
   if(sp.t==="balance"||sp.t==="make"){const side=sp.side||"R",other=side==="R"?"L":"R";
     const cfg={edit:side,tray:sp.tray,show:sp.show||"all"};cfg[other]=spread(sp.fixed,3);cfg[side]=[];
@@ -119,11 +119,11 @@ const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، ک�
     {const x0=side==="L"?170:470,n=sp.tray.length,tx=x0+(0-(n-1)/2)*84,sx=side==="L"?225:415;A.hint(`M${tx} 462 L${sx} 300`);}
     const fixedSum=sumA(sp.fixed),tgt=sp.t==="balance"?0:sp.target,need=side==="R"?fixedSum+tgt:fixedSum-tgt;
     const sn=side==="R"?"راست":"چپ";
-    if(sp.t==="balance")A.prompt(KID()?"کاری کن جعبه تکان نخورد. هر چند بار خواستی امتحان کن.":`طناب‌کشی را متعادل کن تا جعبه تکان نخورد. هر چند بار خواستی امتحان کن.<small>کشش‌ها را از پایین صفحه بکش و روی طرف ${sn} طناب رها کن. بعد «برو!» را بزن.</small>`);
-    else A.prompt(`طوری بچین که نیروی خالص <b>${fa(Math.abs(tgt))} نیوتن به سمت ${tgt>0?"راست":"چپ"}</b> شود. هر چند بار خواستی امتحان کن.<small>کشش‌ها را روی طرف ${sn} طناب بکش، بعد «برو!» را بزن.</small>`);
-    const c=A.ctrl("");const go=btn(c,"برو!","go",()=>{const s=sumA(tug.st[side]);if(!s){A.fb("اول دست‌کم یک کشش روی طناب بگذار.","info");return;}go.disabled=true;
+    if(sp.t==="balance")A.prompt(KID()?"کارت نیرو بگذار تا جعبه تکان نخورد. اگر نشد، دوباره امتحان کن.":`طناب‌کشی را متعادل کن تا جعبه تکان نخورد. اگر نشد، دوباره امتحان کن.<small>کارت‌های نیرو را از پایین صفحه بردار و روی طرف ${sn} طناب بگذار. بعد «برو!» را بزن.</small>`);
+    else A.prompt(`طوری بچین که نیروی خالص <b>${fa(Math.abs(tgt))} نیوتن به سمت ${tgt>0?"راست":"چپ"}</b> شود. اگر نشد، دوباره امتحان کن.<small>کارت‌های نیرو را روی طرف ${sn} طناب بگذار. بعد «برو!» را بزن.</small>`);
+    const c=A.ctrl("");const go=btn(c,"برو!","go",()=>{const s=sumA(tug.st[side]);if(!s){A.fb("اول دست‌کم یک کارت نیرو روی طناب بگذار.","info");return;}go.disabled=true;
       tug.run(()=>{const net=sumA(tug.st.R)-sumA(tug.st.L),ok=net===tgt;
-        const res=A.trial(ok,{k:{ok:"دو طرف مساوی شد؛ جعبه تکان نخورد.",retry:"کشش‌های دو طرف را بشمار. باید مساوی باشند.",final:`طرف ${sn} باید ${fa(sp.fixed.length)} کشش داشته باشد.`},ok:sp.t==="balance"?"دو طرف برابر شدند و نیروی خالص صفر است.":`نیروی خالص دقیقاً ${fa(Math.abs(tgt))} نیوتن شد.`,
+        const res=A.trial(ok,{k:{ok:"دو طرف مساوی شد؛ جعبه تکان نخورد.",retry:"کارت‌های دو طرف را بشمار. باید مساوی باشند.",final:`طرف ${sn} باید ${fa(sp.fixed.length)} کارت نیرو داشته باشد.`},ok:sp.t==="balance"?"دو طرف برابر شدند و نیروی خالص صفر است.":`نیروی خالص دقیقاً ${fa(Math.abs(tgt))} نیوتن شد.`,
           retry:sp.t==="balance"?`جمع طرف ${sn} باید با طرف دیگر (${fa(fixedSum)}) برابر شود. جعبه سر جایش برگشت؛ دوباره بچین.`:`نیروی خالص ${fa(Math.abs(net))} شد. جمع طرف ${sn} باید ${fa(need)} باشد.`,
           final:`جمع طرف ${sn} باید ${fa(need)} می‌شد؛ مثلاً ${solveStr(need,sp.tray)}.`});
         if(!res&&!A.locked){later(500,()=>{tug.reset();go.disabled=false;});}});});
@@ -134,19 +134,19 @@ const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، ک�
     c.insertAdjacentHTML("beforeend",`<div class="ctrl" id="dirs"><button class="opt" data-d="1" type="button">به راست →</button><button class="opt" data-d="0" type="button">بدون جهت (صفر)</button><button class="opt" data-d="-1" type="button">← به چپ</button></div>`);
     const dirs=c.querySelector("#dirs");dirs.onclick=e=>{const b=e.target.closest("[data-d]");if(!b)return;dir=+b.dataset.d;dirs.querySelectorAll(".opt").forEach(x=>x.classList.toggle("sel",x===b));};
     const chk=btn(c,"بررسی","go",()=>{const v=stp.get();if(dir==null){A.fb("جهت را هم انتخاب کن.","info");return;}const ok=v===Math.abs(net)&&(net===0?dir===0:dir===Math.sign(net));
-      A.judge(ok,{ok:`نیروی خالص ${fa(Math.abs(net))} نیوتن ${net>0?"به راست":net<0?"به چپ":""} است.`,retry:"اول جمع هر طرف را حساب کن، بعد کوچک‌تر را از بزرگ‌تر کم کن. جهت، طرفِ بزرگ‌تر است.",final:`جمع چپ ${fa(sumA(sp.L))} و جمع راست ${fa(sumA(sp.R))} است؛ نیروی خالص ${fa(Math.abs(net))} ${net>0?"به راست":net<0?"به چپ":"(تعادل)"}.`});
+      A.judge(ok,{ok:`نیروی خالص ${fa(Math.abs(net))} نیوتن ${net>0?"به راست":net<0?"به چپ":""} است.`,retry:"اول جمع هر طرف را حساب کن، بعد کوچک‌تر را از بزرگ‌تر کم کن. نیروی خالص به طرفِ بزرگ‌تر است.",final:`جمع چپ ${fa(sumA(sp.L))} و جمع راست ${fa(sumA(sp.R))} است؛ نیروی خالص ${fa(Math.abs(net))} ${net>0?"به راست":net<0?"به چپ":"(تعادل)"}.`});
       if(A.locked){chk.disabled=true;stp.disable();tug.st.show="all";tug.render();tug.run();}});
     return;}
  }};
 function solveStr(sum,vals){const res=[];(function f(s,acc){if(res.length)return;if(s===0){res.push(acc.slice());return;}if(acc.length>=4)return;for(const v of vals.slice().sort((a,b)=>b-a)){if(v<=s){acc.push(v);f(s-v,acc);acc.pop();}}})(sum,[]);return res.length?res[0].map(fa).join(" + "):fa(sum);}
 function fricChallenge(sp,A){const fr=makeFriction(A,sp.F);A.refresh=()=>fr.render();A.counter("");
-  A.formula(`<span class="fl">قانون</span><span>جعبه حرکت می‌کند اگر هل از اصطکاک بیشتر باشد</span>`);
+  A.formula(`<span class="fl">قانون</span><span>اگر هل از اصطکاک بیشتر باشد، جعبه حرکت می‌کند.</span>`);
   const q=sp.q;let ans,text,expl;
   if(q===1){ans=0;text=KID()?"کدام جعبه دورتر می‌رود؟":"هر سه جعبه را با یک اندازه هل می‌دهیم. کدام جعبه دورتر می‌رود؟";expl="روی یخ اصطکاک خیلی کم است؛ پس جعبه راحت سُر می‌خورد.";}
   else if(q===2){ans=2;text=KID()?"کدام جعبه تکان نمی‌خورد؟":`با نیروی ${fa(sp.F)} نیوتن هل می‌دهیم. روی کدام سطح جعبه اصلاً تکان نمی‌خورد؟`;expl="اصطکاکِ فرش آن‌قدر زیاد است که این هل نمی‌تواند جعبه را راه بیندازد.";}
   else if(q===3){ans=2;text=KID()?"کدام سطح زبرتر است؟":"اصطکاک کدام سطح از همه بیشتر است؟";expl="پرزهای فرش جلوی سُر خوردن را می‌گیرند؛ پس فرش بیشترین اصطکاک را دارد.";}
   else if(q===4){ans=0;text=KID()?"با هل کم، کدام جعبه راه می‌افتد؟":`با هل کمِ ${fa(sp.F)} نیوتن، روی کدام سطح جعبه راه می‌افتد؟`;expl="فقط اصطکاکِ یخ از این هل کمتر است.";}
-  else{ans=2;text=`با هل ${fa(sp.F)} نیوتن، کدام جعبه کمترین راه را می‌رود؟`;expl="هر سه جعبه راه می‌افتند، ولی اصطکاکِ فرش بیشترین مقدار از هل را خنثی می‌کند.";}
+  else{ans=2;text=`با هل ${fa(sp.F)} نیوتن، کدام جعبه کمترین راه را می‌رود؟`;expl="هر سه جعبه راه می‌افتند، ولی روی فرش اصطکاک بیشترِ هل را خنثی می‌کند.";}
   /* اولین برخورد با اصطکاک: حدس (بی‌امتیاز) ← هل دادن ← سؤال دربارهٔ چیزی که دید */
   if(sp.poe){poe(A,{prompt:KID()?"هر سه جعبه را با یک اندازه هل می‌دهیم. حدس بزن کدام دورتر می‌رود.":"هر سه جعبه را با یک اندازه هل می‌دهیم. حدس بزن کدام دورتر می‌رود. حدس امتیاز ندارد.",opts:fr.lanes.map(L=>L.n),right:ans,reveal:(i,next)=>fr.run(next)},
     {prompt:"کدام جعبه دورتر رفت؟",opts:fr.lanes.map(L=>L.n),ans,ok:expl,retry:"به جای جعبه‌ها نگاه کن: کدام از همه جلوتر است؟"});return;}

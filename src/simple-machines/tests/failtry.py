@@ -35,11 +35,11 @@ with sync_playwright() as pw:
                 sp=spec(pg)['spec']; msgs=[]
                 for n in range(nfail):
                     fail_once(g,pg,k,sp); msgs.append(g.text('#fb')[:60])
-                    if pg.locator('#nv .btn').count(): break
+                    if pg.locator('#nv .btn.next').count(): break
                 if nfail==3 and track=='a' and k=='ramp': g.shot('failtry_ramp_a')
-                if want!='p0' and not pg.locator('#nv .btn').count():
+                if want!='p0' and not pg.locator('#nv .btn.next').count():
                     SOL[k](g,pg,sp); pg.wait_for_timeout(600)
-                    if not pg.locator('#nv .btn').count(): pg.wait_for_timeout(1500)
+                    if not pg.locator('#nv .btn.next').count(): pg.wait_for_timeout(1500)
                 got=dot(pg,i)
                 good=got==want; ok&=good
                 print(('OK ' if good else '!! '),track,k,sp['t'],'fails',nfail,'->',got,'(want',want+')','|',msgs[-1] if msgs else '')
@@ -61,7 +61,7 @@ with sync_playwright() as pw:
             pg.wait_for_timeout(900)
             pg.click('.stp button[data-d="1"]')   # جمعِ غلط: ۱ (با صفرِ دست‌نخورده «بررسی» اصلاً داوری نمی‌کند)
             for n in range(nfail): click_text(pg,'بررسی'); pg.wait_for_timeout(200)
-            locked=pg.locator('#nv .btn').count()>0; msg=g.text('#fb')[:70]
+            locked=pg.locator('#nv .btn.next').count()>0; msg=g.text('#fb')[:70]
             pg.click('.stp button[data-d="-1"]'); stepper_set(pg,target); click_text(pg,'بررسی'); pg.wait_for_timeout(600)
             got=dot(pg,i); good=(got==want and not locked); ok2&=good
             print('OK ' if good else '!! ',track,'scale mystery fails',nfail,'->',got,'(want',want+')','|',msg)
