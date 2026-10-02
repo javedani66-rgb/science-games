@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "design-contract-proposal-not-rendered-not-runtime",
+  "status": "owner-selected-whole-card-concept-runtime-pending",
   "date": "2026-10-02",
   "report": "../../docs/CARD_ART_DIRECTION_2026-10-02.md",
   "scope": "harbor-first; reusable across lands and routes",
@@ -12,7 +12,6 @@
     "replaceable-hero-art",
     "mission",
     "optional-route-difference",
-    "cta",
     "selection-completion-and-lock-states"
   ],
   "identity": {
@@ -28,7 +27,8 @@
     "position": "stable top-center slot",
     "reuse": "same location badge for fishing and pirate routes",
     "accessibleNameRequired": true,
-    "colorIndependentFromDifficulty": true
+    "colorIndependentFromDifficulty": true,
+    "labelPlacement": "above-or-below-icon-on-center-axis; never beside"
   },
   "illustration": {
     "priority": "largest identifiable visual region",
@@ -55,5 +55,36 @@
     "no child usability test yet",
     "not connected to the runtime renderer",
     "no third location implementation"
-  ]
+  ],
+  "interaction": {
+    "routeEntry": "whole-card",
+    "separateCTAInsideRouteCard": false,
+    "inputs": [
+      "touch",
+      "mouse",
+      "keyboard"
+    ],
+    "keyboard": "visible focus; Enter/Space activation",
+    "challengeConfirmationCopy": "مطمئنی؟ باید شجاع باشی!",
+    "monsterConfirmationCopy": "واقعا؟ تو یه پهلوانی!",
+    "confirmationActions": [
+      "برو بریم!",
+      "برگردیم"
+    ],
+    "confirmationFrequency": "first-entry-only remains a proposal"
+  },
+  "geometry": {
+    "peerCards": "equal outer width and height within each responsive layout; includes future monster card",
+    "sharedSlots": [
+      "title",
+      "image-viewport",
+      "difficulty-marker"
+    ],
+    "mobile": "portrait vertical equal cards with scrolling when needed",
+    "desktop": "responsive equal-card grid",
+    "selection": "ring/shadow without layout shift",
+    "largeText": "shared adaptive height or responsive reflow; no essential clipping or font shrinking",
+    "orientation": "landscape not required for route selection"
+  },
+  "copyExample": "بار رو بکش بالا!"
 }
