@@ -107,3 +107,19 @@ This checkpoint supersedes the previous missing-source note: the owner corrected
 - No publication command was run. Public HTML, service worker and previous review ZIP are unchanged. No child pilot or new owner station signoff occurred.
 
 Next concrete work: implement replay after demonstration and completion with stable progress and distinct learning evidence, then reduce required primary-grade calculations using the existing audit and curriculum guide. Lower-secondary development stays deferred; the archive guides a future separate design. Upper-secondary math-stream sources have not yet been supplied or reviewed. Review and test the final revised candidate before requesting station signoff for publication.
+
+
+## Current continuation checkpoint — 2026-10-02, map/path precedents research
+
+The owner requested a study of comparable map/path games before the full current-content difficulty inventory. The owner explicitly authorized agent delegation wherever helpful; use distinct bounded agents and parallel work as needed. Before a new task, announce a visible model/effort recommendation and pause for the owner's choice or continuation instruction. These are project continuation preferences, not a claim that global ChatGPT memory was written.
+
+- Base main: `7967ddeef8f3bd52279b4c11a77362e769e402e8`; base tree: `e6aca37cd52b3a698884eb445f8a27382079c6a3`. The commit containing this section is the durable checkpoint for this documentation stage.
+- Three agents reviewed official sources for Wonder/Yoshi, Prodigy/DragonBox, and Slay the Spire/Celeste. The root reopened the sources used in the synthesis and inspected current journey map/mission/side flow. Khan Academy Kids and Game Accessibility Guidelines provide complementary navigation/accessibility examples.
+- Added [map/path game research](MAP_PATH_GAME_RESEARCH_2026-10-02.md), in Persian: six game cases, evidence vs design inference, exact source links, limits of transfer, current-code implications, a proposed harbor branch diagram, content/progression data requirements and pilot questions.
+- No games were directly played and no child pilot or learning-efficacy study was conducted. Official descriptions support stated mechanics; historical release notes support recorded UI changes. They do not establish outcomes for Persian-speaking primary pupils or two pedagogically equivalent routes.
+- Design direction discussed by the owner: thematic routes such as carpentry workshop/factory and fishing/pirate docks; optional harder branches with challenge symbols; alternate routes may progress only when required learning goals are covered. Red alone must not encode difficulty, and current red location-marker use requires review.
+- Existing side quests unlock after main stop completion and do not replace the main route. The report explicitly distinguishes a proposed alternate route from this existing system.
+- A bounded independent review found no factual/source-limit blocker in the Slay the Spire/Celeste cases and confirmed that alternate-route credit depends on required learning-goal coverage.
+- Checks: report source-reference inventory, relative report links, Persian glyphs, balanced diagram fences and whitespace diff. No code/build changes, new gameplay tests, live publication or changes to the old review ZIP occurred.
+
+Next concrete work: the full inventory of existing content (missions, quizzes, endless mode, labs, home tasks), recording prerequisites and separate conceptual/calculation/reading/control difficulty. Then select one harbor prototype and define equivalent learning-goal coverage for its two routes before implementation. Replay and primary-required-calculation revisions remain pending. Publication still requires the final revised-candidate checks and per-station owner signoff.
