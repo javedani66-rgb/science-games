@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 853 280" role="img" aria-labelledby="location-title">
+  <title id="location-title">نام محیط</title>
+  <!-- Game-level geometry. Land skins own the artwork inside these slots. -->
+  <g id="location-module" data-location-id="">
+    <circle id="emblem-slot" cx="426" cy="116" r="81" fill="none" stroke="currentColor" stroke-width="2"/>
+    <rect id="label-slot" x="299" y="200" width="254" height="69" rx="26" fill="none" stroke="currentColor" stroke-width="2"/>
+    <g id="land-ornament-slot"/>
+    <g id="location-glyph-slot"/>
+    <text id="location-name-slot" x="426" y="246" text-anchor="middle" direction="rtl" font-family="Lalezar, sans-serif">نام محیط</text>
+  </g>
+</svg>
