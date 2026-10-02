@@ -202,3 +202,13 @@ Next concrete action: H2 full harbor, beginning with shared required stop goals 
 - Checks: JSON parse, unique evidence/video IDs, four video entries explicitly watched=false with empty timestamps, local links and whitespace. Runtime/build/source hashes and live/public output unchanged; no gameplay tests repeated for documentation-only changes.
 
 Next: a bounded second harbor copy/hierarchy pass before H2; use the new contract, inspect actual rendered last lines and selective emphasis, preserve progress and record child/owner findings separately. Keep the announce-model/effort-and-wait preference before starting a new task. After that resume H2 and the existing whole-game rollout; do not restart primary textbook or whole-game audits.
+
+
+## Current continuation checkpoint — 2026-10-02, owner card preview
+
+- Base main: `19d239794f4c479810c9b7b7e10f9b3428de8f09`. Owner accepted announced GPT-6.1 Sol / medium by asking continuation. One bounded read-only agent rechecked Dicey/Wildfrost title placement; root viewed the same two official images. No broad repeated research, video viewing or child-study claim.
+- [Latest owner decisions](HARBOR_CARD_OWNER_REVIEW_2026-10-02.md) supersede historical visible-status/count guidance for route selection cards. Live conversational preview has centered titles, stronger tier fills, accessible emoji, requested CTAs, independent ring/elevation/check selection, no visible selected/open sentences or activity counter. Preview copy is directly editable locally; it does not automatically write runtime or save files.
+- Updated copy contract/evidence; saved three preview screenshots and two Twemoji PNG sources with full graphics license and attribution. No commercial game artwork copied. Rewards/costumes/treasure/video/teacher code are recorded as future design only; do not assume implemented or that a shared code proves individual completion.
+- Verified 320/390/736 layouts, textarea growth, emoji loading, exclusive aria-pressed state, no script errors; measured palette text contrast. New dark visual/200%/child review remains pending. No runtime/build/public/service-worker/save changes; existing selector/game tests are not rerun or claimed for this preview-only turn.
+
+Next: collect owner feedback on preview, implement the agreed reusable card roles in H1 source, update targeted selector checks without losing progress/replay contracts, then H2 and whole-game rollout. Never restart the completed books/content audit or broad indie research.

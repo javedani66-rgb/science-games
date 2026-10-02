@@ -14,7 +14,13 @@
       "screen": "shop purchase choices",
       "inspection": "image-viewed-by-agent-and-root",
       "observation": "Name/effect regions are separate; focused card is larger; price is below; insufficient-funds explanation is explicit.",
-      "limit": "English PC screenshot, no mobile/RTL/child test; not all bottoms align."
+      "limit": "English PC screenshot, no mobile/RTL/child test; not all bottoms align.",
+      "titleAlignmentReview": {
+        "date": "2026-10-02",
+        "alignment": "center",
+        "inspection": "same official image re-viewed by bounded agent and root",
+        "report": "../../docs/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md"
+      }
     },
     {
       "id": "dicey.upgrade",
@@ -25,7 +31,13 @@
       "screen": "two equipment cards before/after upgrade",
       "inspection": "image-viewed-by-agent-and-root",
       "observation": "Shared functional bands; bold title, lighter effect; arrow and separate confirmation/exit.",
-      "limit": "Equipment comparison, not route selection; no Persian evidence."
+      "limit": "Equipment comparison, not route selection; no Persian evidence.",
+      "titleAlignmentReview": {
+        "date": "2026-10-02",
+        "alignment": "center",
+        "inspection": "same official image re-viewed by bounded agent and root",
+        "report": "../../docs/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md"
+      }
     },
     {
       "id": "dicey.trade",

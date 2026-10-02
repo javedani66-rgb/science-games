@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "proposal-not-implemented",
+  "status": "owner-revised-preview-runtime-pending",
   "date": "2026-10-02",
   "runtimeBase": "a05dcdc202ed713d8cbc4d2e9708041ad723869b",
   "purpose": "Next harbor text/hierarchy iteration; shared future card contributions.",
@@ -10,7 +10,8 @@
     "destinationTitle": {
       "purpose": "where the child goes",
       "weight": "bold",
-      "required": true
+      "required": true,
+      "alignment": "center"
     },
     "goalLead": {
       "purpose": "what the child does",
@@ -20,7 +21,8 @@
       "initialWordBudgetHypothesis": [
         5,
         8
-      ]
+      ],
+      "alignment": "right"
     },
     "choiceDifference": {
       "purpose": "why this route differs",
@@ -28,13 +30,20 @@
       "required": "only when needed for informed choice"
     },
     "difficulty": {
-      "purpose": "reviewed challenge tier, independent of place name"
+      "purpose": "reviewed challenge tier, independent of place name",
+      "visible": "emoji",
+      "accessibleName": "reviewed tier name",
+      "proposedEmojiByTier": {
+        "core": "🌱",
+        "challenge": "🔥",
+        "very-hard": "🌋"
+      }
     },
     "state": {
-      "purpose": "selection and completion separately identifiable; unmet prerequisite reason when actually locked"
+      "purpose": "selection by independent ring, elevation and check plus accessible state; no visible selected/open sentences or activity count on route card; actual lock reason retained"
     },
     "entry": {
-      "purpose": "one explicit action"
+      "purpose": "one playful action; completion still permits replay in actual game"
     }
   },
   "copyReview": [
@@ -45,7 +54,7 @@
     "short copy may need one explanatory sentence for newcomers"
   ],
   "geometryReview": [
-    "right edge of Persian prose",
+    "centered destination title; right edge of Persian mission and supporting prose",
     "shared role positions",
     "last line of goal group and start of following status/action",
     "natural line-count balance at actual 320/390/1280 viewport",
@@ -65,14 +74,16 @@
       "destinationTitle": "اسکلهٔ ماهیگیری",
       "goalLead": "بار را با طناب بالا ببر.",
       "choiceDifference": "جهت حرکت را ببین.",
-      "label": "proposed copy; not runtime content replacement"
+      "label": "proposed copy; not runtime content replacement",
+      "entry": "برو بریم!"
     },
     {
       "routeId": "harbor.pirate",
       "destinationTitle": "اسکلهٔ دزدان دریایی",
       "goalLead": "بار را با طناب بالا ببر.",
       "choiceDifference": "دلیل انتخابت را بگو.",
-      "label": "proposed copy; not runtime content replacement"
+      "label": "proposed copy; not runtime content replacement",
+      "entry": "شجاع باش! برو بریم!"
     }
   ],
   "artistHandoff": [
@@ -91,5 +102,6 @@
     "record accepted/rejected variant and reason",
     "reuse contracts for new routes; review progression migration separately"
   ],
-  "validationStatus": "proposal consistency checked; no rendered or child approval for new contract"
+  "validationStatus": "interactive preview checked at 320/390/736; copy editing and selection checked; runtime, child approval, new 200% and dark visual review pending",
+  "latestReview": "../../docs/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md"
 }
