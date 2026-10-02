@@ -88,7 +88,7 @@
     "selection": "ring/shadow without layout shift",
     "largeText": "shared adaptive height or responsive reflow; no essential clipping or font shrinking",
     "orientation": "landscape not required for route selection",
-    "rearCardAppearance": "only title strip visible; true near-background grayscale; readable neutral text and clickable/focusable input; never imply lock",
+    "rearCardAppearance": "only title strip visible; saturation reduced while retaining its own route-family hue; readable text and input; not disabled",
     "choicePrompt": {
       "copy": "راهت رو انتخاب کن",
       "surface": "quiet gray-neutral",
@@ -98,18 +98,19 @@
   "copyExample": "بار رو بکش بالا!",
   "environmentFrame": {
     "selection": "replaceable location-specific theme; separate from semantic difficulty palette and shared card geometry",
-    "harbor": "restrained rope wraps and wooden edges",
+    "harbor": "restrained nautical rope and wood with natural warm material tones; avoid total desaturation",
     "carpentry": "wood joinery/grain and workshop motifs; art direction still pending",
     "density": "retain a few meaningful environmental details; avoid both generic bare frames and ornamental overload",
     "surface": "matte/moderate chroma; selected action more visually prominent than decorative frame"
   },
   "paletteHierarchy": {
-    "background": "plain quiet neutral; no sky/clouds/wood competing with art",
-    "rearCards": "true grayscale, slightly raised above background; readable neutral text; no tier-color tint",
-    "activeCard": "one owned tier family across scene/frame/details; quiet gray/ivory neutrals allowed",
-    "crossFamilyAccents": "do not introduce red/orange/gold into green fishing frame, wood chips, net or rope",
-    "contextualRope": "muted matte gray; limited density; no golden highlights",
-    "foregroundScene": "fishing remains sunlit green/teal; pirate copper-orange; sea dragon crimson/burgundy",
-    "check": "review whole card, not only frame; recheck after every art edit"
+    "background": "quiet original warm cream/ivory; no competing scenery",
+    "rearCards": "reduced saturation with residual own family hue; subtle elevation, readable text; not dead grayscale",
+    "activeCard": "dominant coherent family plus restrained harmonizing warm secondary colors; not monochrome",
+    "fishing": "warm leaf/olive green and green-teal sea, restrained yellow/ochre/ivory sunlit accents; avoid cold teal-only scheme",
+    "pirate": "owner attached preferred ship/lantern/copper-night composition is art reference",
+    "monster": "warm crimson/red/charcoal, cartoon scary expressive sea dragon; no purple/blue ambient cast",
+    "contextualDetails": "natural restrained rope/wood warmth may remain; decorative colors must support owned palette",
+    "check": "palette coherence means color hierarchy, not banning every secondary hue"
   }
 }
