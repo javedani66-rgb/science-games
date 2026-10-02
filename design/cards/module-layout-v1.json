@@ -12,25 +12,25 @@
   "slots": {
     "locationEmblem": {
       "box": [
-        352,
-        75,
-        148,
-        137
+        345,
+        40,
+        162,
+        155
       ],
       "z": 20,
       "source": "locationId",
-      "rule": "anchor fully visible inside circle; never covered by label"
+      "rule": "complete anchor circle fully visible above label; the medallion and its rim may not tuck beneath the plaque"
     },
     "locationLabel": {
       "box": [
         305,
-        205,
+        199,
         242,
-        68
+        72
       ],
       "z": 30,
       "source": "locationId/name",
-      "rule": "center text in its own plaque; plaque may touch ornament but not glyph"
+      "rule": "independent plaque, centered text by actual glyph bounds, with visible separation from emblem"
     },
     "cardFrame": {
       "box": [
@@ -52,7 +52,7 @@
       ],
       "z": 40,
       "source": "routeId/title",
-      "rule": "large warm-white display type, dark palette shadow and restrained outline"
+      "rule": "warm-white bold display text optically centered vertically within plaque by rendered glyph bounds; dark route-specific shadow"
     },
     "heroViewport": {
       "box": [
@@ -78,14 +78,14 @@
     },
     "difficultyMedallion": {
       "box": [
-        355,
-        1380,
-        143,
-        143
+        347,
+        1368,
+        158,
+        158
       ],
       "z": 50,
       "source": "difficultyId",
-      "rule": "icon centered; lower rim and backing belong to route palette, no unrelated copper patch"
+      "rule": "separate icon asset; full annular rim/backing in route-family green for core, without orange/copper"
     },
     "pageReturn": {
       "box": [
@@ -96,7 +96,7 @@
       ],
       "z": 60,
       "source": "page navigation",
-      "rule": "single control outside card, returns to journey map"
+      "rule": "single centered text-only control outside card, returns to journey map; no arrow"
     }
   },
   "typography": {
@@ -108,12 +108,14 @@
       "size": "> previous 82 design px; fit by shared plaque height, never perspective-shrink",
       "fill": "warm ivory",
       "shadow": "dark blue-green on fishing; palette-specific dark shadow on other cards",
-      "weight": "bold display"
+      "weight": "bold display",
+      "opticalVerticalCenter": true
     },
     "otherText": {
       "family": "same display family",
       "sizeWeightColor": "role-specific",
-      "shadow": "subtle hue-related dark shadow; legibility checked at mobile width"
+      "shadow": "subtle hue-related dark shadow; legibility checked at mobile width",
+      "opticalVerticalCenter": true
     }
   },
   "palette": {
@@ -136,12 +138,14 @@
     "behavior": "selection/confirmation and page navigation separate from appearance"
   },
   "qa": [
+    "measure rendered glyph bounds and center within each plaque; do not assume baseline is optical center",
     "overlay slot outlines during review and verify no emblem-label or mission-medallion collisions",
     "inspect 320px and 390px wide portrait render; no title shrinking or clipped letters",
     "measure color dominance across illustration and frame; inspect for broad competing orange/copper patches",
     "compare rear title strips' saturation and tap targets",
     "confirm Persian glyph joining and exact «اسکلهٔ ماهیگیری»",
-    "one page-level return goes to journey map"
+    "one page-level return goes to journey map",
+    "check complete emblem rim above label, difficulty-ring color, and text-only map return"
   ],
   "limitation": "Geometry is a first review prototype, not approved production measurements; existing game renderer remains unchanged."
 }
