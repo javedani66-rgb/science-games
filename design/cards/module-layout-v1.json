@@ -52,7 +52,7 @@
       ],
       "z": 40,
       "source": "routeId/title",
-      "rule": "warm-white bold display text optically centered vertically within plaque by rendered glyph bounds; dark route-specific shadow"
+      "rule": "Review candidate: exact rounded vector boundary contained within main frame; green family fill/rim, thin neutral-metal highlight. Any text shadow is a separate dark teal palette effect; no orange frame shadow."
     },
     "heroViewport": {
       "box": [
@@ -63,7 +63,7 @@
       ],
       "z": 25,
       "source": "artAssetId",
-      "rule": "separate replaceable image; cropped behind frame; focal subject and educational object in safe area"
+      "rule": "Review candidate: art image clipped to one precise rounded vector window; all four sides use one shared rect/radius, no irregular hand-drawn edge or offset crop; image fully covers window."
     },
     "missionPlaque": {
       "box": [
@@ -145,7 +145,19 @@
     "compare rear title strips' saturation and tap targets",
     "confirm Persian glyph joining and exact «اسکلهٔ ماهیگیری»",
     "one page-level return goes to journey map",
-    "check complete emblem rim above label, difficulty-ring color, and text-only map return"
+    "check complete emblem rim above label, difficulty-ring color, and text-only map return",
+    "Inspect title and image frame outlines at full mobile size; verify no border disappears beneath main green frame."
   ],
-  "limitation": "Geometry is a first review prototype, not approved production measurements; existing game renderer remains unchanged."
+  "limitation": "Geometry is a first review prototype, not approved production measurements; existing game renderer remains unchanged.",
+  "twoLevelModules": {
+    "game": "Fixed semantic slots and equal geometry: location badge (icon and label), title plaque, hero viewport, mission, difficulty and page return. Content and progress IDs stay independent of skin.",
+    "land": "Harbor skin supplies rope, anchor artwork, material palette and ornament assets inside the location slot; another land swaps this skin without moving the slot.",
+    "example": {
+      "slot": "locationEmblem + locationLabel",
+      "locationId": "port",
+      "skin": "harbor-rope-anchor",
+      "name": "بندر"
+    },
+    "approvedScope": "Location badge arrangement and route color hierarchy; title and hero frame shape remain review candidates."
+  }
 }
