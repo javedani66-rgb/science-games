@@ -95,5 +95,12 @@
       "exclamationMark": false
     }
   },
-  "copyExample": "بار رو بکش بالا!"
+  "copyExample": "بار رو بکش بالا!",
+  "environmentFrame": {
+    "selection": "replaceable location-specific theme; separate from semantic difficulty palette and shared card geometry",
+    "harbor": "restrained rope wraps and wooden edges",
+    "carpentry": "wood joinery/grain and workshop motifs; art direction still pending",
+    "density": "retain a few meaningful environmental details; avoid both generic bare frames and ornamental overload",
+    "surface": "matte/moderate chroma; selected action more visually prominent than decorative frame"
+  }
 }
