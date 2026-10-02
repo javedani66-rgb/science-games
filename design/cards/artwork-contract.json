@@ -71,7 +71,10 @@
       "برو بریم!",
       "برگردیم"
     ],
-    "confirmationFrequency": "first-entry-only remains a proposal"
+    "confirmationFrequency": "owner requires confirmation also for core selection; replay/session frequency still undecided",
+    "confirmationRequiredForAllTiers": true,
+    "coreConfirmationCopy": "آماده‌ای؟",
+    "coreConfirmationCopyStatus": "proposed mockup wording; owner requires core confirmation/actions"
   },
   "geometry": {
     "peerCards": "equal outer width and height within each responsive layout; includes future monster card",
@@ -84,7 +87,13 @@
     "desktop": "responsive equal-card grid",
     "selection": "ring/shadow without layout shift",
     "largeText": "shared adaptive height or responsive reflow; no essential clipping or font shrinking",
-    "orientation": "landscape not required for route selection"
+    "orientation": "landscape not required for route selection",
+    "rearCardAppearance": "only title strip visible; reduced chroma/gray tint; retain readable dark text and clickable/focusable input; never imply a lock",
+    "choicePrompt": {
+      "copy": "راهت رو انتخاب کن",
+      "surface": "quiet gray-neutral",
+      "exclamationMark": false
+    }
   },
   "copyExample": "بار رو بکش بالا!"
 }
