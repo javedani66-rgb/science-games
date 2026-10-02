@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "status": "review-prototype-not-runtime",
+  "date": "2026-10-02",
+  "scope": "route-card visual module; harbor fishing first",
+  "viewport": {
+    "width": 853,
+    "height": 1844,
+    "unit": "design-px",
+    "mobile": "scale uniformly within viewport; preserve upright card and scroll page if needed"
+  },
+  "slots": {
+    "locationEmblem": {
+      "box": [
+        352,
+        75,
+        148,
+        137
+      ],
+      "z": 20,
+      "source": "locationId",
+      "rule": "anchor fully visible inside circle; never covered by label"
+    },
+    "locationLabel": {
+      "box": [
+        305,
+        205,
+        242,
+        68
+      ],
+      "z": 30,
+      "source": "locationId/name",
+      "rule": "center text in its own plaque; plaque may touch ornament but not glyph"
+    },
+    "cardFrame": {
+      "box": [
+        35,
+        285,
+        783,
+        1228
+      ],
+      "z": 10,
+      "source": "frameThemeId",
+      "rule": "equal geometry for every route; theme colors and ornament assets replaceable"
+    },
+    "titlePlaque": {
+      "box": [
+        120,
+        348,
+        613,
+        145
+      ],
+      "z": 40,
+      "source": "routeId/title",
+      "rule": "large warm-white display type, dark palette shadow and restrained outline"
+    },
+    "heroViewport": {
+      "box": [
+        80,
+        500,
+        693,
+        730
+      ],
+      "z": 25,
+      "source": "artAssetId",
+      "rule": "separate replaceable image; cropped behind frame; focal subject and educational object in safe area"
+    },
+    "missionPlaque": {
+      "box": [
+        85,
+        1245,
+        683,
+        200
+      ],
+      "z": 40,
+      "source": "routeId/mission",
+      "rule": "centered RTL native text; retain full copy without shrinking"
+    },
+    "difficultyMedallion": {
+      "box": [
+        355,
+        1380,
+        143,
+        143
+      ],
+      "z": 50,
+      "source": "difficultyId",
+      "rule": "icon centered; lower rim and backing belong to route palette, no unrelated copper patch"
+    },
+    "pageReturn": {
+      "box": [
+        100,
+        1545,
+        653,
+        155
+      ],
+      "z": 60,
+      "source": "page navigation",
+      "rule": "single control outside card, returns to journey map"
+    }
+  },
+  "typography": {
+    "fontFamily": "Lalezar",
+    "textBakedIntoArt": false,
+    "direction": "rtl",
+    "alignment": "center",
+    "title": {
+      "size": "> previous 82 design px; fit by shared plaque height, never perspective-shrink",
+      "fill": "warm ivory",
+      "shadow": "dark blue-green on fishing; palette-specific dark shadow on other cards",
+      "weight": "bold display"
+    },
+    "otherText": {
+      "family": "same display family",
+      "sizeWeightColor": "role-specific",
+      "shadow": "subtle hue-related dark shadow; legibility checked at mobile width"
+    }
+  },
+  "palette": {
+    "page": "quiet warm ivory, fixed across cards",
+    "dominance": "each route's own color family must dominate hero illustration AND frame; warm secondary colors only as restrained material accents",
+    "fishing": "leaf/olive green and green-teal dominate; blue sea/sky permitted; wood/rope muted cream/gray-tan; orange roofs, orange dock and broad copper bands must not dominate",
+    "pirate": "copper/orange night family",
+    "monster": "warm red/burgundy charcoal; warm red water, red eyes; no prominent blue/orange",
+    "difficultyBacking": "from active route palette"
+  },
+  "states": {
+    "front": "full saturation for owned palette; upright",
+    "rear": "same full card geometry, only title strips exposed; own hue with subtle saturation reduction, independent elevated edge and shadow, readable and selectable"
+  },
+  "replaceability": {
+    "layout": "slot coordinates and z-order in this file",
+    "content": "route and location copy data",
+    "theme": "frame palette/ornaments",
+    "art": "hero image per artAssetId",
+    "behavior": "selection/confirmation and page navigation separate from appearance"
+  },
+  "qa": [
+    "overlay slot outlines during review and verify no emblem-label or mission-medallion collisions",
+    "inspect 320px and 390px wide portrait render; no title shrinking or clipped letters",
+    "measure color dominance across illustration and frame; inspect for broad competing orange/copper patches",
+    "compare rear title strips' saturation and tap targets",
+    "confirm Persian glyph joining and exact «اسکلهٔ ماهیگیری»",
+    "one page-level return goes to journey map"
+  ],
+  "limitation": "Geometry is a first review prototype, not approved production measurements; existing game renderer remains unchanged."
+}
