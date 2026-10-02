@@ -169,3 +169,14 @@ The owner accepted GPT-6.1 Sol / medium and explicitly requested as many paralle
 - Built local pages only. Public HTML, service worker and old review ZIP are unchanged. No child pilot or owner scientific/visual signoff is claimed.
 
 Next: review the H1 sample and define common required stop-10 goals and compatible main progression/code migration, then H2 complete harbor (ramp/wheel/pulley and grade-specific primary content). Reuse this route/replay implementation and its checks. Continue under the whole-game roadmap; do not restart unrelated full audits. New task model/effort announcement and owner choice preference remains in force.
+
+
+## Current continuation checkpoint — 2026-10-02, route visual/text research
+
+- Base main: `0ae943727e903897b6e11f8073690429fb5b7eb0`. Owner explicitly requested agents, similar-game research, saved lessons and a report covering graphics, justification/alignment and related usability. Two bounded agents worked in parallel: visual precedents and Persian text/accessibility. GPT-6.1 Sol / medium scope continues.
+- Added [research and concrete H1 recommendations](ROUTE_VISUAL_TEXT_RESEARCH_2026-10-02.md) and `design/routes/ui-guidelines.json`. Root checked primary pages and viewed Wonder, Khan Kids and Sackboy images; Forza/Grounded examples were also inspected. Sackboy provenance and screenshot/mobile/child-study limits are explicit. No third-party artwork was copied into the repository.
+- Recommended semantic whole-card green/orange/red difficulty, separate selection/completion/lock/focus, original scene identity, shared role tracks, right-aligned Persian descriptions, bidi isolation and visible branches. Color sequence is our project proposal; examples do not establish it as a universal game convention. Guidance accepts arbitrary route counts and avoids array-index semantics.
+- Current CSS/code confirms centered white cards, differing title heights, small mobile text, completion replacing selected text and an anchor/down-arrow connector. Proposed changes are not implemented. Agent text note's historical next-work paragraph was superseded by existing H1/inventory checkpoints and was not adopted.
+- Checks: JSON parse, relative local report links and whitespace checks. Research only: no runtime/build change, no new game regression run or child result. Live HTML, service worker and review ZIP remain unchanged.
+
+Next concrete action: refine and visually check H1 selector under the new rules before H2 progression/code migration and full-harbor content. Preserve all existing progress/evidence contracts; reuse the whole-game rollout rather than repeat baseline audits. Announce model/effort and allow owner adjustment before beginning a new task.

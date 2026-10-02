@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "status": "proposed-not-implemented",
+  "date": "2026-10-02",
+  "sourceCheckpoint": "0ae943727e903897b6e11f8073690429fb5b7eb0",
+  "report": "../../docs/ROUTE_VISUAL_TEXT_RESEARCH_2026-10-02.md",
+  "scope": "Shared route selector; refine H1 before H2; reuse across all lands.",
+  "difficulty": {
+    "key": "semantic tier from reviewed content, never array index or environment name",
+    "wholeCardColor": true,
+    "requiresVisibleLabelAndLevelSymbol": true,
+    "tiers": [
+      {
+        "id": "core",
+        "colorFamily": "green"
+      },
+      {
+        "id": "challenge",
+        "colorFamily": "orange"
+      },
+      {
+        "id": "very-hard",
+        "colorFamily": "red"
+      }
+    ],
+    "note": "Project design proposal, not a convention proven by the cited games. No third shipped route is added."
+  },
+  "card": {
+    "roleOrder": [
+      "original environment scene",
+      "short title",
+      "difficulty label and symbol",
+      "one-action summary",
+      "selection state",
+      "completion state",
+      "contextual entry action"
+    ],
+    "layout": "Shared role tracks for cards in a row; track height follows longest content; allow growth and reflow.",
+    "arbitraryRouteCount": true,
+    "forbid": [
+      "nth-child difficulty colors",
+      "manual text padding",
+      "essential text clipping",
+      "font shrinking to equalize heights",
+      "nested interactive controls inside a card button"
+    ]
+  },
+  "states": {
+    "selected": [
+      "distinct ring",
+      "filled-circle marker",
+      "visible selected label",
+      "aria-pressed when a toggle button is used"
+    ],
+    "completed": [
+      "check marker",
+      "separate activity-completion label; does not claim mastery"
+    ],
+    "locked": [
+      "padlock",
+      "short prerequisite reason at affected activity"
+    ],
+    "focus": [
+      "independent visible keyboard outline"
+    ]
+  },
+  "text": {
+    "baseDirection": "rtl",
+    "paragraphAlignment": "start",
+    "shortTitleAlignment": "may center",
+    "fullJustification": "avoid for narrow short route descriptions; not a universal Persian ban",
+    "mixedDirection": "isolate known LTR runs with dir; unknown inserted runs with bdi/dir=auto; preserve logical order",
+    "summary": "one action/objective; move supporting detail after selection without hiding essential progression meaning",
+    "lineHeightProposal": 1.5,
+    "letterSpacing": "do not apply Latin spacing recipes to joined Persian without review"
+  },
+  "map": {
+    "fork": "visible connections from shared arrival to every destination",
+    "identity": "retain environment identity in selected, completed and locked states"
+  },
+  "assetPolicy": "Use existing approved assets or original art; third-party screenshots are source references only.",
+  "acceptance": {
+    "status": "not-run-for-proposed-refinement",
+    "viewportWidths": [
+      320,
+      390,
+      1280
+    ],
+    "textScalePercent": 200,
+    "touchTargetCssPxProposal": 44,
+    "checks": [
+      "long Persian title and aligned role tracks",
+      "mixed Persian/Latin/numbers/brackets at wraps",
+      "no essential clipping or overlap",
+      "three/four route data extension",
+      "grayscale state identification",
+      "rendered contrast in every state",
+      "keyboard focus and logical reading order",
+      "child identifies difficulty, selection, completion and switching without coaching"
+    ]
+  },
+  "evidenceLimits": [
+    "No game session or child study performed.",
+    "Console screenshots do not validate phone usability.",
+    "Sackboy source is the designer personal portfolio.",
+    "Current checkpoint runtime remains unchanged."
+  ],
+  "sources": [
+    "https://www.nintendo.com/au/news-and-articles/super-mario-bros-wonder-heres-a-few-tips-for-secret-seekers/",
+    "https://khankids.zendesk.com/hc/en-us/articles/4403657703821-Find-books-and-lessons-in-the-Khan-Kids-Library",
+    "https://gamedesignframework.net/sackboy-a-big-adventure/",
+    "https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/101",
+    "https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/103",
+    "https://www.w3.org/TR/alreq/",
+    "https://www.w3.org/International/articles/inline-bidi-markup/"
+  ]
+}
