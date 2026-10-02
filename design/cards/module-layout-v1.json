@@ -19,7 +19,7 @@
       ],
       "z": 20,
       "source": "locationId",
-      "rule": "complete anchor circle fully visible above label; the medallion and its rim may not tuck beneath the plaque"
+      "rule": "complete anchor circle and rim remain above the centered name plaque; rope may connect the two only as part of the same location-skin module"
     },
     "locationLabel": {
       "box": [
@@ -30,7 +30,7 @@
       ],
       "z": 30,
       "source": "locationId/name",
-      "rule": "independent plaque, centered text by actual glyph bounds, with visible separation from emblem"
+      "rule": "own complete muted-gold frame; all text centered optically; top label module stays in its header lane above main card frame"
     },
     "cardFrame": {
       "box": [
@@ -45,25 +45,25 @@
     },
     "titlePlaque": {
       "box": [
-        120,
-        348,
-        613,
-        145
+        124,
+        347,
+        605,
+        135
       ],
       "z": 40,
       "source": "routeId/title",
-      "rule": "Review candidate: exact rounded vector boundary contained within main frame; green family fill/rim, thin neutral-metal highlight. Any text shadow is a separate dark teal palette effect; no orange frame shadow."
+      "rule": "complete muted-gold outer stroke with route-green fill; contained between upper bolt row and side studs; dark blue-green shadow belongs to text only; no contact or overlap with frame ornaments"
     },
     "heroViewport": {
       "box": [
-        80,
-        500,
-        693,
-        730
+        86,
+        508,
+        681,
+        712
       ],
       "z": 25,
       "source": "artAssetId",
-      "rule": "Review candidate: art image clipped to one precise rounded vector window; all four sides use one shared rect/radius, no irregular hand-drawn edge or offset crop; image fully covers window."
+      "rule": "precise rounded clip with uniform sides; separate replaceable art, fits within a muted-gold frame lane; outer lane clears title and frame studs"
     },
     "missionPlaque": {
       "box": [
@@ -74,7 +74,7 @@
       ],
       "z": 40,
       "source": "routeId/mission",
-      "rule": "centered RTL native text; retain full copy without shrinking"
+      "rule": "use the reserved lower panel's muted-gold frame; center mission optically inside the clear text area and keep a gap from corner bolts and difficulty medallion"
     },
     "difficultyMedallion": {
       "box": [
@@ -97,6 +97,17 @@
       "z": 60,
       "source": "page navigation",
       "rule": "single centered text-only control outside card, returns to journey map; no arrow"
+    },
+    "heroFrame": {
+      "box": [
+        68,
+        496,
+        717,
+        734
+      ],
+      "z": 24,
+      "source": "frameThemeId",
+      "rule": "uniform rounded vector border, thin muted-gold edge; keep clear of card bolts/studs; clip art to inner viewport"
     }
   },
   "typography": {
@@ -146,7 +157,8 @@
     "confirm Persian glyph joining and exact «اسکلهٔ ماهیگیری»",
     "one page-level return goes to journey map",
     "check complete emblem rim above label, difficulty-ring color, and text-only map return",
-    "Inspect title and image frame outlines at full mobile size; verify no border disappears beneath main green frame."
+    "Inspect title and image frame outlines at full mobile size; verify no border disappears beneath main green frame.",
+    "Check safe gaps between title border, bolts, image frame, mission studs and difficulty icon; check return button has no arrow."
   ],
   "limitation": "Geometry is a first review prototype, not approved production measurements; existing game renderer remains unchanged.",
   "twoLevelModules": {
@@ -159,5 +171,6 @@
       "name": "بندر"
     },
     "approvedScope": "Location badge arrangement and route color hierarchy; title and hero frame shape remain review candidates."
-  }
+  },
+  "validationStatus": "safe-lane sample reviewed at 390px portrait; candidate geometry recorded; game renderer not connected"
 }
