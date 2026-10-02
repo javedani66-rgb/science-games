@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "scope": "Design audit candidates only; no runtime integration. Paths are relative to this manifest.",
+  "scope": "Route design assets and H1 runtime scene assets; per-entry availability records integration.",
   "status": "unreviewed-route-design",
   "style": {
     "outline": "#3B2417",
@@ -447,6 +447,36 @@
         "origin": "Existing project source documented in design/README.md; Gemini (Nano Banana Pro) for the art sheets.",
         "license_claim": "No formal third-party license established by the repository documentation."
       }
+    },
+    {
+      "id": "fishing-dock-scene",
+      "path": "scenes/fishing-dock.svg",
+      "kind": "environment-scene",
+      "availability": "embedded-runtime",
+      "approval": "owner-review-pending",
+      "purpose": "H1 route identity; navigation illustration, not a physics apparatus diagram.",
+      "provenance": {
+        "origin": "Original SVG geometry authored during H1 visual refinement; no external artwork.",
+        "external_source": null
+      },
+      "viewBox": "0 0 240 128",
+      "transparent_background": false,
+      "runtime": "../../src/simple-machines/harbor-routes.js"
+    },
+    {
+      "id": "pirate-dock-scene",
+      "path": "scenes/pirate-dock.svg",
+      "kind": "environment-scene",
+      "availability": "embedded-runtime",
+      "approval": "owner-review-pending",
+      "purpose": "H1 route identity; navigation illustration, not a physics apparatus diagram.",
+      "provenance": {
+        "origin": "Original SVG geometry authored during H1 visual refinement; no external artwork.",
+        "external_source": null
+      },
+      "viewBox": "0 0 240 128",
+      "transparent_background": false,
+      "runtime": "../../src/simple-machines/harbor-routes.js"
     }
   ],
   "gaps": [

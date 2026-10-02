@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "proposed-not-implemented",
+  "status": "implemented-h1-selector",
   "date": "2026-10-02",
   "sourceCheckpoint": "0ae943727e903897b6e11f8073690429fb5b7eb0",
   "report": "../../docs/ROUTE_VISUAL_TEXT_RESEARCH_2026-10-02.md",
@@ -80,7 +80,7 @@
   },
   "assetPolicy": "Use existing approved assets or original art; third-party screenshots are source references only.",
   "acceptance": {
-    "status": "not-run-for-proposed-refinement",
+    "status": "technical-checks-passed-child-review-pending",
     "viewportWidths": [
       320,
       390,
@@ -97,13 +97,30 @@
       "rendered contrast in every state",
       "keyboard focus and logical reading order",
       "child identifies difficulty, selection, completion and switching without coaching"
+    ],
+    "verifiedChecks": [
+      "320/390/1280 layouts and shared role tracks",
+      "200% text without clipped card roles",
+      "RTL description alignment",
+      "keyboard focus",
+      "separate selected/completed state",
+      "card/role text contrast at least 4.5:1",
+      "four reordered fixture routes with semantic color and neutral unknown tier",
+      "only unmet prerequisites in lock reason"
+    ],
+    "pendingChecks": [
+      "child comprehension test",
+      "owner visual approval",
+      "grayscale human review",
+      "mixed Latin/formula wrapping when introduced",
+      "whole-game final release suite"
     ]
   },
   "evidenceLimits": [
     "No game session or child study performed.",
     "Console screenshots do not validate phone usability.",
     "Sackboy source is the designer personal portfolio.",
-    "Current checkpoint runtime remains unchanged."
+    "H1 selector refined; live output remains unchanged."
   ],
   "sources": [
     "https://www.nintendo.com/au/news-and-articles/super-mario-bros-wonder-heres-a-few-tips-for-secret-seekers/",
@@ -113,5 +130,6 @@
     "https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/103",
     "https://www.w3.org/TR/alreq/",
     "https://www.w3.org/International/articles/inline-bidi-markup/"
-  ]
+  ],
+  "implementationReport": "../../docs/HARBOR_UI_REFINEMENT_2026-10-02.md"
 }

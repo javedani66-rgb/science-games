@@ -1,4 +1,4 @@
-const HARBOR_ROUTE_ICONS={"fishing-dock": "<svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" width=\"64\" height=\"64\" viewBox=\"0 0 64 64\" role=\"img\" aria-labelledby=\"title\"><title id=\"title\">Fishing dock</title><g stroke=\"#3B2417\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 44h48v7H8z\" fill=\"#C78E56\"/><path d=\"M15 51v7m34-7v7M10 38q7 5 14 0t14 0t16 0\" fill=\"none\" stroke=\"#1F6F7F\"/><path d=\"M15 43V13q24 0 30 13v5\" fill=\"none\"/><path d=\"M38 32q-8-8-15 0 7 8 15 0l6-5v10Z\" fill=\"#9ED2D9\"/><circle cx=\"29\" cy=\"31\" r=\"1\" fill=\"#3B2417\" stroke=\"none\"/></g></svg>\n", "pirate-dock": "<svg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" width=\"64\" height=\"64\" viewBox=\"0 0 64 64\" role=\"img\" aria-labelledby=\"title\"><title id=\"title\">Pirate dock</title><g stroke=\"#3B2417\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 44h48v7H8z\" fill=\"#C78E56\"/><path d=\"M15 51v7m34-7v7M10 38q7 5 14 0t14 0t16 0\" fill=\"none\" stroke=\"#1F6F7F\"/><path d=\"M20 43V8\" fill=\"none\"/><path d=\"M20 11h31l-7 10 7 10H20Z\" fill=\"#F2785C\"/><path d=\"m30 16 9 10m0-10-9 10\" fill=\"none\"/><circle cx=\"34.5\" cy=\"21\" r=\"3.5\" fill=\"#FFF8E8\"/></g></svg>\n"};
+const HARBOR_ROUTE_ICONS={"fishing-dock": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 128\" aria-hidden=\"true\" focusable=\"false\"><rect width=\"240\" height=\"128\" rx=\"14\" fill=\"#DFF1F2\"/><circle cx=\"204\" cy=\"23\" r=\"12\" fill=\"#FFE5A1\"/><path d=\"M0 89Q35 77 68 89T137 89T205 89T260 89V128H0Z\" fill=\"#86C4CC\"/><path d=\"M10 110q13-6 26 0m18 6q13-6 26 0m78-6q13-6 26 0m16 6q13-6 26 0\" stroke=\"#1F6F7F\" stroke-width=\"2\" fill=\"none\"/><g stroke=\"#3B2417\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M124 86h84l-12 17h-60Z\" fill=\"#F5C476\"/><path d=\"M170 86V56\" fill=\"none\"/><path d=\"M171 56l25 26h-25Z\" fill=\"#FFF8E8\"/><path d=\"M24 85V21h76v11\" fill=\"none\"/><circle cx=\"100\" cy=\"38\" r=\"7\" fill=\"#F7DCA5\"/><path d=\"M100 32v30\" fill=\"none\"/><path d=\"M82 62h34l-5 19H87Z\" fill=\"#E8B57E\"/><path d=\"M85 68h28m-22-5v16m9-16v16m9-16v16\" fill=\"none\" stroke-width=\"2\"/><path d=\"M52 76q12-12 26 0-14 12-26 0l-8-6v12Z\" fill=\"#9ED2D9\"/><circle cx=\"71\" cy=\"74\" r=\"2\" fill=\"#3B2417\" stroke=\"none\"/><path d=\"M8 86h99v10H8Z\" fill=\"#D5A26B\"/><path d=\"M24 96v25m62-25v25M8 91h99\" fill=\"none\"/></g></svg>", "pirate-dock": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 128\" aria-hidden=\"true\" focusable=\"false\"><rect width=\"240\" height=\"128\" rx=\"14\" fill=\"#DFF1F2\"/><circle cx=\"204\" cy=\"23\" r=\"12\" fill=\"#FFE5A1\"/><path d=\"M0 89Q35 77 68 89T137 89T205 89T260 89V128H0Z\" fill=\"#86C4CC\"/><path d=\"M10 110q13-6 26 0m18 6q13-6 26 0m78-6q13-6 26 0m16 6q13-6 26 0\" stroke=\"#1F6F7F\" stroke-width=\"2\" fill=\"none\"/><g stroke=\"#3B2417\" stroke-width=\"3\" stroke-linejoin=\"round\" stroke-linecap=\"round\"><path d=\"M116 83h110l-15 23h-80Z\" fill=\"#A9754C\"/><path d=\"M171 83V17\" fill=\"none\"/><path d=\"M172 21h34l-7 10 7 10h-34Z\" fill=\"#F2785C\"/><path d=\"m181 26 12 10m0-10-12 10\" stroke=\"#FFF8E8\"/><path d=\"M166 45l-24 33h24Zm11 0 25 33h-25Z\" fill=\"#FFF8E8\"/><path d=\"M34 85V26h61v9\" fill=\"none\"/><circle cx=\"95\" cy=\"41\" r=\"7\" fill=\"#F7DCA5\"/><path d=\"M95 35v23\" fill=\"none\"/><rect x=\"75\" y=\"58\" width=\"38\" height=\"24\" rx=\"3\" fill=\"#D5A26B\"/><path d=\"M75 67h38m-26-9v24m14-24v24\" fill=\"none\" stroke-width=\"2\"/><rect x=\"90\" y=\"66\" width=\"8\" height=\"7\" rx=\"1\" fill=\"#FFE5A1\"/><path d=\"M8 86h99v10H8Z\" fill=\"#D5A26B\"/><path d=\"M24 96v25m62-25v25M8 91h99\" fill=\"none\"/></g></svg>"};
 /* H1 local prototype. Route evidence never fabricates legacy mission stars.
    Stable IDs and versioned profile storage allow more routes without new slots. */
 const harborEligible=p=>!!p&&HARBOR_CONTENT.grades.includes(p.g)&&trk(p)==='c';
@@ -22,23 +22,51 @@ function harborRecord(p,routeId,activityId,answer,practice){
  state.activities[activityId]=old;return true;
 }
 const harborRouteDone=(p,route)=>route.activities.every(a=>{const state=p.routeProgress&&p.routeProgress.version===1&&p.routeProgress.regions&&p.routeProgress.regions.harbor;return !!(state&&state.contentVersion===HARBOR_CONTENT.version&&state.activities&&state.activities[a.id]&&state.activities[a.id].latest&&state.activities[a.id].latest.correct);});
-function harborCanPlay(p,activity){
+function harborMissingGoals(p,activity){
  const state=p.routeProgress?.version===1?p.routeProgress.regions?.harbor:null;
  const goals=new Set();if(state?.contentVersion===HARBOR_CONTENT.version)for(const r of HARBOR_CONTENT.routes)for(const a of r.activities)if(state.activities?.[a.id]?.latest?.correct)for(const g of a.goals)goals.add(g);
- return harborEligible(p)&&(activity.prerequisiteGoals||[]).every(g=>goals.has(g));
+ return (activity.prerequisiteGoals||[]).filter(g=>!goals.has(g));
 }
+function harborCanPlay(p,activity){return harborEligible(p)&&harborMissingGoals(p,activity).length===0;}
 function harborEntry(p){return harborEligible(p)?`<div class="harbor-entry"><span aria-hidden="true">⚓</span><div><b>بندر: راهت را انتخاب کن</b><p>اسکلهٔ ماهیگیری یا اسکلهٔ دزدان دریایی؟</p><button class="btn" type="button" data-harbor>دیدن راه‌های بندر</button></div></div>`:'';}
+/* Difficulty follows content, never card position. Future data may name a tier. */
+function harborDifficulty(route){
+ const tiers={core:{id:'core',title:'آسان‌تر',symbol:'●'},challenge:{id:'challenge',title:'چالشی',symbol:'◆ ◆'},'very-hard':{id:'very-hard',title:'خیلی سخت',symbol:'◆ ◆ ◆'}};
+ const key=route.difficulty.tier||(route.difficulty.concept>=3?'very-hard':route.difficulty.concept>=2?'challenge':'core');
+ return tiers[key]||{id:'unknown',title:'سختی مشخص نشده',symbol:'؟'};
+}
+function harborDrawBranches(o){
+ const map=o.querySelector('.harbor-choice-map'),svg=map.querySelector('.harbor-branches');
+ const draw=()=>{
+  if(!o.isConnected){observer.disconnect();return;}
+  const box=map.getBoundingClientRect(),cards=[...map.querySelectorAll('[data-route]')].map(b=>b.getBoundingClientRect());
+  const rows=[];for(const r of cards){let row=rows.find(x=>Math.abs(x.top-(r.top-box.top))<2);if(!row){row={top:r.top-box.top,cards:[]};rows.push(row);}row.cards.push(r);}
+  const cx=box.width/2;let paths='',dots='';
+  rows.forEach((row,i)=>{
+   const rail=row.top-18;
+   const stem=i===0?`M${cx} 9V${rail}`:`M${cx} 9H4V${rail}H${cx}`;
+   paths+=`<path d="${stem}"/>`;
+   for(const r of row.cards){const x=(r.left+r.right)/2-box.left;paths+=`<path d="M${cx} ${rail}H${x}V${row.top-3}"/>`;dots+=`<circle cx="${x}" cy="${row.top-3}" r="4"/>`;}
+  });
+  svg.setAttribute('viewBox',`0 0 ${box.width} ${box.height}`);svg.innerHTML=`<circle cx="${cx}" cy="9" r="6"/>${paths}${dots}`;
+ };
+ const observer=new ResizeObserver(draw);observer.observe(map);map.querySelectorAll('[data-route]').forEach(b=>observer.observe(b));requestAnimationFrame(draw);
+}
 function harborSelector(){
  const p=JP();if(!harborEligible(p))return;closeOv();
  const state=harborState(p);
- const cards=HARBOR_CONTENT.routes.map(route=>{const done=harborRouteDone(p,route),sel=state.routeId===route.id;return `<button class="harbor-route ${sel?'selected':''}" type="button" data-route="${esc(route.id)}" aria-pressed="${sel}">${HARBOR_ROUTE_ICONS[route.environmentAssetId]||''}<b>${esc(route.title)}</b><span class="harbor-difficulty ${route.difficulty.concept>1?'hard':''}">${route.difficulty.concept>1?'⚑ ':''}${esc(route.difficulty.label)}</span><span>${esc(route.description)}</span><span>${done?'✓ فعالیت‌ها انجام شده‌اند':sel?'این راه را انتخاب کرده‌ای':'این راه را انتخاب کن'}</span></button>`;}).join('');
- const o=jsheet(`<div class="shead"><h2>کدام راهِ بندر را می‌روی؟</h2><button class="chip-btn" id="hclose" type="button">نقشه</button></div><p>در هر دو راه، حرکت طناب و بار را می‌بینی و آرایش مناسب را پیدا می‌کنی. هر وقت خواستی می‌توانی راهت را عوض کنی.</p><div class="harbor-fork" aria-hidden="true">⚓<span>↓</span></div><div class="harbor-routes">${cards}</div><p class="j-note">این راه‌ها برای تمرین قرقره‌اند. می‌توانی هر دو را امتحان کنی و به نقشه برگردی.</p>`,"راه‌های بندر","#1F6F7F");
- o.querySelector('#hclose').onclick=()=>jmap({scroll:false});o.querySelectorAll('[data-route]').forEach(b=>b.onclick=()=>{state.routeId=b.dataset.route;save();harborRouteSheet(b.dataset.route);});o.querySelector('[data-route]').focus();
+ const cards=HARBOR_CONTENT.routes.map(route=>{
+  const done=harborRouteDone(p,route),sel=state.routeId===route.id,tier=harborDifficulty(route);
+  const count=route.activities.filter(a=>state.activities[a.id]?.latest?.correct).length;
+  return `<button class="harbor-route tier-${tier.id} ${sel?'selected':''}" type="button" data-route="${esc(route.id)}" aria-pressed="${sel}"><span class="harbor-scene">${HARBOR_ROUTE_ICONS[route.environmentAssetId]||''}</span><b class="harbor-title">${esc(route.title)}</b><span class="harbor-difficulty"><span aria-hidden="true">${tier.symbol}</span> ${tier.title} · ${esc(route.difficulty.label)}</span><span class="harbor-summary">${esc(route.description)}</span><span class="harbor-selection ${sel?'is-selected':''}">${sel?'● راه انتخاب‌شده':'○ راه باز است'}</span><span class="harbor-completion">${done?'✓ فعالیت‌ها انجام شده‌اند':`${fa(count)} از ${fa(route.activities.length)} فعالیت انجام شده`}</span><span class="harbor-card-action">${done?'دوباره تمرین کن':'از این راه برو'} <span aria-hidden="true">←</span></span></button>`;
+ }).join('');
+ const o=jsheet(`<div class="harbor-selector" dir="rtl"><div class="shead"><h2>از کدام اسکله می‌روی؟</h2><button class="chip-btn" id="hclose" type="button">نقشه</button></div><p class="harbor-intro">راهت را انتخاب کن. هر وقت خواستی می‌توانی آن را عوض کنی.</p><div class="harbor-choice-map"><svg class="harbor-branches" aria-hidden="true" focusable="false"></svg><div class="harbor-routes">${cards}</div></div><p class="j-note">این راه‌ها برای تمرین قرقره‌اند. برای ادامهٔ سفر به نقشه برگرد.</p></div>`,"راه‌های بندر","#1F6F7F");
+ o.querySelector('#hclose').onclick=()=>jmap({scroll:false});o.querySelectorAll('[data-route]').forEach(b=>b.onclick=()=>{state.routeId=b.dataset.route;save();harborRouteSheet(b.dataset.route);});harborDrawBranches(o);o.querySelector('[data-route]')?.focus();
 }
 function harborRouteSheet(id){
  const p=JP(),route=harborRoute(id);if(!harborEligible(p)||!route)return;
  const state=harborState(p);
- const rows=route.activities.map((a,i)=>{const e=state.activities[a.id],done=!!(e&&e.latest&&e.latest.correct);return `<div class="j-part ${done?'done':''}"><span class="ic">${fa(i+1)}</span><span class="tx"><span class="n">${esc(a.title)}</span><span>${done?'انجام شد؛ دوباره هم می‌توانی تمرین کنی':'ببین، امتحان کن، پاسخ بده'}</span></span><button class="btn" type="button" data-activity="${i}" ${harborCanPlay(p,a)?'':'disabled'}>${done?'دوباره':'شروع'}</button></div>`;}).join('');
+ const rows=route.activities.map((a,i)=>{const e=state.activities[a.id],done=!!(e&&e.latest&&e.latest.correct),available=harborCanPlay(p,a);const reason=harborMissingGoals(p,a).map(g=>HARBOR_CONTENT.goalTitles[g]).join(' و ');return `<div class="j-part ${done?'done':''}"><span class="ic">${fa(i+1)}</span><span class="tx"><span class="n">${esc(a.title)}</span><span>${done?'انجام شد؛ دوباره هم می‌توانی تمرین کنی':available?'ببین، امتحان کن، پاسخ بده':'🔒 اول '+esc(reason)+' را انجام بده'}</span></span><button class="btn" type="button" data-activity="${i}" ${available?'':'disabled'}>${done?'دوباره':'شروع'}</button></div>`;}).join('');
  const o=jsheet(`<div class="shead"><h2>${esc(route.title)}</h2><button class="chip-btn" id="hchange" type="button">تغییر راه</button></div>${rows}<p class="j-note">در این مدل، اصطکاک و وزن طناب و قرقره را در نظر نمی‌گیریم. این راه برای تمرین است.</p>`,route.title,"#1F6F7F");
  o.querySelector('#hchange').onclick=harborSelector;o.querySelectorAll('[data-activity]').forEach(b=>b.onclick=()=>harborPlay(id,+b.dataset.activity));o.querySelector('[data-activity]').focus();
 }

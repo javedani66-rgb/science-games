@@ -180,3 +180,14 @@ Next: review the H1 sample and define common required stop-10 goals and compatib
 - Checks: JSON parse, relative local report links and whitespace checks. Research only: no runtime/build change, no new game regression run or child result. Live HTML, service worker and review ZIP remain unchanged.
 
 Next concrete action: refine and visually check H1 selector under the new rules before H2 progression/code migration and full-harbor content. Preserve all existing progress/evidence contracts; reuse the whole-game rollout rather than repeat baseline audits. Announce model/effort and allow owner adjustment before beginning a new task.
+
+
+## Current continuation checkpoint — 2026-10-02, H1 selector UI refinement
+
+- Base main: `ff96bd77ed0060220fe2618a4a8ee85deeb8b21d`. Owner accepted announced GPT-6.1 Sol / medium by instructing continuation. Root implemented; one bounded agent reviewed Persian wording/accessibility and the final source/mobile image without edits. See [UI checkpoint](HARBOR_UI_REFINEMENT_2026-10-02.md).
+- Semantic tier colors cover whole cards; two original embedded SVG scenes are saved with provenance. Shared grid roles, right-aligned descriptions, separate selected/completed state, keyboard focus, contextual lock reasons and responsive SVG connections support arbitrary route counts. Only two routes ship.
+- Reviewer caught completed prerequisites still being named in the lock reason. A shared missing-goal helper now drives both availability and explanation; focused regression verifies it. Content version and stable IDs/save formats are unchanged; short summaries and tier metadata do not reset evidence.
+- Checks passed on the final local build: JS syntax/build; harbor_selector.py at 320/390/1280, text200%, role alignment/overflow, focus, distinct simultaneous states, role text contrast >=4.5:1 and four reordered fixture routes; harbor_routes.js; harbor_browser.py (six activities, save/code/replay/reload); primarycompat.js; source re-extraction unchanged except hashes and content audit/path checks. Source/audit hashes refreshed; scientific assessments were not repeated. Mobile/desktop screenshots saved in design/routes/h1-selector-*-refined.png.
+- Public HTML, service worker and old review ZIP are unchanged. No owner/child approval or full revised-release suite claimed. Subgrid fallback, grayscale human review and future mixed-script text remain bounded review items.
+
+Next concrete action: H2 full harbor, beginning with shared required stop goals and versioned preservation/migration for main progression and code transfer. Reuse H1 source/UI/activities and the whole-game roadmap. Do not restart the baseline content/book audit. Announce model/effort and allow owner adjustment before the new task.

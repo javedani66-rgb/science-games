@@ -16,9 +16,9 @@
     "st_sort.js": "76348c002eee97ce287f7d8a3c9a932a4d15d3e8c8a2a441d9fff72121adeb5c",
     "content.js": "0f31ef1a727055bce40d2936ced28a95a88a7bda93b8661981ad310efe5ff8da",
     "quiz.js": "27738c1b3e775fe47dfaa613b20ccf60c25560711a99caeebf0de55bdf6713bb",
-    "harbor-content.js": "8030662b5b933db0409da30d130110f549bedff5e4a540dd9d21984ce8cafe49",
+    "harbor-content.js": "f3cbbf756ff78d529d5994010113a2d599ccfcf18c5db6ceebe05947b9104773",
     "app.js": "9ea50396f2599b9ca4d02d5c439a4290a383969673c9908b5c87173c1d3bb839",
-    "harbor-routes.js": "c522deebc7fc8bdda040adda3ad3f4925de65121d7979beea00f04727f073bc9",
+    "harbor-routes.js": "d59490c979fc2f831c25c842c649b591bd3f33414eedf08346710f69d4db2570",
     "journey.js": "b9f45d0a7660a826b794cb4494d8b8aa8235c98d91074763b070d516f863dce3"
   },
   "method": {
@@ -17747,7 +17747,7 @@
     {
       "file": "harbor-content.js",
       "baselineHash": null,
-      "currentHash": "8030662b5b933db0409da30d130110f549bedff5e4a540dd9d21984ce8cafe49",
+      "currentHash": "f3cbbf756ff78d529d5994010113a2d599ccfcf18c5db6ceebe05947b9104773",
       "scope": "H1 route content, replay/save/assistance integration and qualitative pulley rendering; legacy definition extraction unchanged."
     },
     {
@@ -17759,7 +17759,7 @@
     {
       "file": "harbor-routes.js",
       "baselineHash": null,
-      "currentHash": "c522deebc7fc8bdda040adda3ad3f4925de65121d7979beea00f04727f073bc9",
+      "currentHash": "d59490c979fc2f831c25c842c649b591bd3f33414eedf08346710f69d4db2570",
       "scope": "H1 route content, replay/save/assistance integration and qualitative pulley rendering; legacy definition extraction unchanged."
     },
     {

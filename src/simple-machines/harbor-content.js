@@ -4,8 +4,8 @@ const HARBOR_CONTENT={
  requiredGoals:["pulley.direction","pulley.compare","pulley.fit"],
  goalTitles:{"pulley.direction":"تغییر جهت کشیدن","pulley.compare":"مقایسهٔ دو آرایش","pulley.fit":"انتخاب برای یک نیاز"},
  routes:[
-  {id:"harbor.fishing",title:"اسکلهٔ ماهیگیری",description:"تور و بار قایق را با قرقره بالا ببر.",environmentAssetId:"fishing-dock",
-   difficulty:{concept:1,calculation:0,reading:1,controls:1,label:"آغاز آرام"},grades:[3,4],returnAllowed:true,
+  {id:"harbor.fishing",title:"اسکلهٔ ماهیگیری",description:"تور را با طناب بالا ببر.",environmentAssetId:"fishing-dock",
+   difficulty:{tier:"core",concept:1,calculation:0,reading:1,controls:1,label:"آغاز آرام"},grades:[3,4],returnAllowed:true,
    activities:[
     {id:"harbor.fishing.direction",title:"بالا کشیدن تور",goals:["pulley.direction"],prerequisiteGoals:[],phase:"observe-apply",
      make:r=>({t:"fixedq",context:"تور کنار اسکله است. حرکت طناب و بار را ببین."})},
@@ -14,8 +14,8 @@ const HARBOR_CONTENT={
     {id:"harbor.fishing.fit",title:"انتخاب برای تور",goals:["pulley.fit"],prerequisiteGoals:["pulley.direction","pulley.compare"],phase:"try-apply",
      make:r=>({t:"harborNeed",need:"direction",W:30,S:40,h:1,context:"می‌خواهیم از روی اسکله طناب را پایین بکشیم و تور بالا برود.",question:"اگر فقط تغییر جهت کشیدن را بخواهیم، کدام آرایش کافی است؟"})}
    ]},
-  {id:"harbor.pirate",title:"اسکلهٔ دزدان دریایی",description:"برای پرچم و صندوق کشتی، آرایش مناسب پیدا کن.",environmentAssetId:"pirate-dock",
-   difficulty:{concept:2,calculation:0,reading:1,controls:1,label:"دلیل بیاور"},grades:[3,4],returnAllowed:true,
+  {id:"harbor.pirate",title:"اسکلهٔ دزدان دریایی",description:"برای صندوق، قرقرهٔ مناسب پیدا کن.",environmentAssetId:"pirate-dock",
+   difficulty:{tier:"challenge",concept:2,calculation:0,reading:1,controls:1,label:"دلیل بیاور"},grades:[3,4],returnAllowed:true,
    activities:[
     {id:"harbor.pirate.direction",title:"پرچم کشتی",goals:["pulley.direction"],prerequisiteGoals:[],phase:"observe-apply",
      make:r=>({t:"fixedq",context:"پرچم کشتی باید بالا برود. حرکت طناب و بار را ببین."})},
