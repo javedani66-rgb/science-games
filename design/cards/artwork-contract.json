@@ -88,11 +88,12 @@
     "selection": "ring/shadow without layout shift",
     "largeText": "shared adaptive height or responsive reflow; no essential clipping or font shrinking",
     "orientation": "landscape not required for route selection",
-    "rearCardAppearance": "only title strip visible; saturation reduced while retaining its own route-family hue; readable text and input; not disabled",
+    "rearCardAppearance": "only title strip visible; own route-family hue at very low saturation; raised edge/shadow and luminance separation rather than bright saturation; readable text and input; not disabled",
     "choicePrompt": {
       "copy": "راهت رو انتخاب کن",
       "surface": "quiet gray-neutral",
-      "exclamationMark": false
+      "exclamationMark": false,
+      "status": "removal recommended after owner questioned necessity; owner approval pending; optional first-use guidance subject to child testing"
     }
   },
   "copyExample": "بار رو بکش بالا!",
@@ -109,7 +110,7 @@
     "activeCard": "dominant coherent family plus restrained harmonizing warm secondary colors; not monochrome",
     "fishing": "warm leaf/olive green and green-teal sea, restrained yellow/ochre/ivory sunlit accents; avoid cold teal-only scheme",
     "pirate": "owner attached preferred ship/lantern/copper-night composition is art reference",
-    "monster": "warm crimson/red/charcoal, cartoon scary expressive sea dragon; no purple/blue ambient cast",
+    "monster": "warm crimson/burgundy/charcoal; expressive snarling cartoon sea dragon with solid red eyes; water/foam warm pale pink/ivory with no blue/purple; dock warm red-tinted gray with no orange",
     "contextualDetails": "natural restrained rope/wood warmth may remain; decorative colors must support owned palette",
     "check": "palette coherence means color hierarchy, not banning every secondary hue"
   }
