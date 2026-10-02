@@ -54,7 +54,8 @@
     "illustration area not percentage-locked",
     "no child usability test yet",
     "not connected to the runtime renderer",
-    "no third location implementation"
+    "no third location implementation",
+    "module-layout-v1 slot measurements are review coordinates, pending responsive renderer validation"
   ],
   "interaction": {
     "routeEntry": "whole-card",
@@ -107,11 +108,13 @@
   "paletteHierarchy": {
     "background": "quiet original warm cream/ivory; no competing scenery",
     "rearCards": "reduced saturation with residual own family hue; subtle elevation, readable text; not dead grayscale",
-    "activeCard": "dominant coherent family plus restrained harmonizing warm secondary colors; not monochrome",
-    "fishing": "warm leaf/olive green and green-teal sea, restrained yellow/ochre/ivory sunlit accents; avoid cold teal-only scheme",
+    "activeCard": "Owned route color family dominates BOTH central illustration and frame; restrained secondary materials allowed; warm accents cannot form a competing broad field.",
+    "fishing": "Warm leaf/olive green and green-teal dominate illustration, dock, boat and frame. Blue sea/sky remain visible. Restrained ochre/ivory/gray-tan materials are allowed; broad orange roofs, dock or copper bands are rejected.",
     "pirate": "owner attached preferred ship/lantern/copper-night composition is art reference",
     "monster": "warm crimson/burgundy/charcoal; expressive snarling cartoon sea dragon with solid red eyes; water/foam warm pale pink/ivory with no blue/purple; dock warm red-tinted gray with no orange",
     "contextualDetails": "natural restrained rope/wood warmth may remain; decorative colors must support owned palette",
-    "check": "palette coherence means color hierarchy, not banning every secondary hue"
-  }
+    "check": "palette coherence means color hierarchy, not banning every secondary hue",
+    "difficultyBacking": "Difficulty marker and its backing use route palette; no isolated copper/orange patch beneath the core sprout."
+  },
+  "moduleLayout": "module-layout-v1.json"
 }
