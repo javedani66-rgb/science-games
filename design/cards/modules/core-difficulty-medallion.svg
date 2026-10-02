@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="346 1371 160 160"><defs>
+  <linearGradient id="frame" x2="1" y2="1"><stop stop-color="#308f38"/><stop offset=".32" stop-color="#075d35"/><stop offset=".7" stop-color="#03452f"/><stop offset="1" stop-color="#176936"/></linearGradient>
+  <linearGradient id="enamel" x2=".2" y2="1"><stop stop-color="#08734c"/><stop offset=".45" stop-color="#024632"/><stop offset="1" stop-color="#002f2b"/></linearGradient>
+  <linearGradient id="blue" x2=".7" y2="1"><stop stop-color="#0a6680"/><stop offset="1" stop-color="#05354b"/></linearGradient>
+  <linearGradient id="ivory" x2="0" y2="1"><stop stop-color="#fffaf0"/><stop offset=".75" stop-color="#f4e8ce"/><stop offset="1" stop-color="#e8d5ad"/></linearGradient>
+  <linearGradient id="metal" x2="0" y2="1"><stop stop-color="#f7e2a8"/><stop offset=".32" stop-color="#c5ac6b"/><stop offset=".65" stop-color="#947b47"/><stop offset="1" stop-color="#e6cb85"/></linearGradient>
+  <linearGradient id="leaf" x2=".9" y2="1"><stop stop-color="#ebf77a"/><stop offset=".45" stop-color="#9bdf39"/><stop offset="1" stop-color="#2f9c3e"/></linearGradient>
+  <clipPath id="heroClip"><rect x="86" y="511" width="681" height="711" rx="30"/></clipPath>
+</defs><g id="difficulty-medallion" aria-label="چالش معمولی">
+ <circle cx="426" cy="1451" r="77" fill="#102d25"/><circle cx="426" cy="1450" r="72" fill="url(#frame)" stroke="#142e22" stroke-width="4"/><circle cx="426" cy="1450" r="60" fill="url(#enamel)" stroke="#88b852" stroke-width="4"/><circle cx="426" cy="1450" r="52" fill="#073e2d" stroke="#173e2d" stroke-width="2"/>
+ <path d="M425 1490 C423 1461 424 1447 426 1421" fill="none" stroke="#b9d64c" stroke-width="8" stroke-linecap="round"/>
+ <path d="M424 1449 C406 1422 386 1418 378 1420 C379 1447 397 1459 424 1449Z" fill="url(#leaf)" stroke="#114529" stroke-width="4"/>
+ <path d="M427 1448 C436 1417 457 1414 474 1417 C472 1441 456 1457 427 1448Z" fill="url(#leaf)" stroke="#114529" stroke-width="4"/>
+ <path d="M390 1428 C403 1431 414 1441 421 1448 M467 1424 C447 1430 436 1440 429 1448" fill="none" stroke="#effaa1" stroke-width="2" opacity=".75"/>
+ <ellipse cx="426" cy="1493" rx="28" ry="9" fill="#514a2a"/><ellipse cx="426" cy="1490" rx="20" ry="5" fill="#9c8953"/>
+</g></svg>
