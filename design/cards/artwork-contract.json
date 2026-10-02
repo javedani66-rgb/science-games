@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "status": "design-contract-proposal-not-rendered-not-runtime",
+  "date": "2026-10-02",
+  "report": "../../docs/CARD_ART_DIRECTION_2026-10-02.md",
+  "scope": "harbor-first; reusable across lands and routes",
+  "alignment": "all visible text, location glyph and difficulty glyph centered; Persian RTL",
+  "layers": [
+    "tier-surface-and-frame",
+    "location-badge",
+    "destination-title",
+    "replaceable-hero-art",
+    "mission",
+    "optional-route-difference",
+    "cta",
+    "selection-completion-and-lock-states"
+  ],
+  "identity": {
+    "locationId": "place identity; e.g. port; independent from route difficulty",
+    "difficultyId": "semantic tier; independent from place and list order",
+    "artAssetId": "replaceable illustration; does not identify progress",
+    "frameThemeId": "shared frame settings; does not own card content"
+  },
+  "locationBadge": {
+    "exampleLocationId": "port",
+    "exampleGlyph": "⚓",
+    "shape": "circle",
+    "position": "stable top-center slot",
+    "reuse": "same location badge for fishing and pirate routes",
+    "accessibleNameRequired": true,
+    "colorIndependentFromDifficulty": true
+  },
+  "illustration": {
+    "priority": "largest identifiable visual region",
+    "editableSourceRequired": true,
+    "textBakedIntoImage": false,
+    "cropSafeAreaRequired": true,
+    "smallSizeSilhouetteCheck": true,
+    "artistCreditAndReusePermissionRequired": true
+  },
+  "assetRecordFields": [
+    "assetId",
+    "sourceFile",
+    "exportFile",
+    "artist",
+    "sourceOrCommission",
+    "licenseAndReusePermission",
+    "aspectRatio",
+    "cropSafeArea",
+    "version"
+  ],
+  "proposalLimits": [
+    "badge dimensions not approved",
+    "illustration area not percentage-locked",
+    "no child usability test yet",
+    "not connected to the runtime renderer",
+    "no third location implementation"
+  ]
+}
