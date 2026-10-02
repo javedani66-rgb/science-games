@@ -88,7 +88,7 @@
     "selection": "ring/shadow without layout shift",
     "largeText": "shared adaptive height or responsive reflow; no essential clipping or font shrinking",
     "orientation": "landscape not required for route selection",
-    "rearCardAppearance": "only title strip visible; reduced chroma/gray tint; retain readable dark text and clickable/focusable input; never imply a lock",
+    "rearCardAppearance": "only title strip visible; true near-background grayscale; readable neutral text and clickable/focusable input; never imply lock",
     "choicePrompt": {
       "copy": "راهت رو انتخاب کن",
       "surface": "quiet gray-neutral",
@@ -102,5 +102,14 @@
     "carpentry": "wood joinery/grain and workshop motifs; art direction still pending",
     "density": "retain a few meaningful environmental details; avoid both generic bare frames and ornamental overload",
     "surface": "matte/moderate chroma; selected action more visually prominent than decorative frame"
+  },
+  "paletteHierarchy": {
+    "background": "plain quiet neutral; no sky/clouds/wood competing with art",
+    "rearCards": "true grayscale, slightly raised above background; readable neutral text; no tier-color tint",
+    "activeCard": "one owned tier family across scene/frame/details; quiet gray/ivory neutrals allowed",
+    "crossFamilyAccents": "do not introduce red/orange/gold into green fishing frame, wood chips, net or rope",
+    "contextualRope": "muted matte gray; limited density; no golden highlights",
+    "foregroundScene": "fishing remains sunlit green/teal; pirate copper-orange; sea dragon crimson/burgundy",
+    "check": "review whole card, not only frame; recheck after every art edit"
   }
 }
