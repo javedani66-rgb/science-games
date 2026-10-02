@@ -219,3 +219,10 @@ Next: collect owner feedback on preview, implement the agreed reusable card role
 Owner explicitly requested the modular rule for all sections and its registration in Git. Added root `AGENTS.md` and `docs/MODULARITY.md`, linked from README/CLAUDE/NEXT. Covers content/config, presentation/assets, behavior, stable state and build tools, concise local contracts, low-token continuation and bounded parallel ownership. This records policy, not a completed architecture migration or permission for a whole-project rewrite.
 
 Latest card feedback supersedes previous right-aligned mission prose: all visible text, emoji/icon and CTA centered; Persian stays RTL. Updated card contract; no preview or runtime rendering change in this documentation-only turn. Next implementation remains the bounded harbor card pass before H2 and whole-game rollout.
+
+
+## Current continuation checkpoint — 2026-10-02, supplied palette reference
+
+Owner steered pending H1 card implementation to analyze supplied screenshot first. Image successfully opened, identified as Beecarbonize; creator primary page/graphics/update/artbook announcement inspected. One bounded agent inspected Stacklands first GIF frame and Reigns screenshot; root viewed both and re-viewed Dicey action screenshot. Added report, candidate multi-shade semantic palette and evidence entries. Candidate values are ours, not exact sampled/official creator colors. All-centered card rule remains current. No commercial reference art committed, no artbook PDF/video/gameplay/child-review claim.
+
+Checks: JSON parse, measured candidate ink/surface contrast, local link paths and whitespace. Runtime, source audit, saved progress, built/public HTML and conversational preview remain unchanged in this research-only turn. Next remains the bounded reusable H1 card implementation with full centering and reference-inspired family colors/title bands, then H2/whole-game rollout. No further broad research needed for this pass.

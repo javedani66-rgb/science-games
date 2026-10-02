@@ -141,6 +141,36 @@
       "inspection": "text-read-by-agent-and-root",
       "observation": "Gamepad episode-state tooltips fixed; flexible generators support additions without replacing existing generators.",
       "limit": "Historical version record; not a claim that science-games has a public mod API."
+    },
+    {
+      "id": "beecarbonize.sectors",
+      "game": "Beecarbonize",
+      "url": "https://charlesgames.itch.io/beecarbonize",
+      "mediaUrl": "https://img.itch.zone/aW1nLzExMzEyNzkzLnBuZw%3D%3D/original/ODk2a8.png",
+      "inspection": "owner image viewed; creator page and linked official image opened by root",
+      "observation": "strong complete sector color families; dark frames; title strips and central art",
+      "limit": "content categories, not difficulty tiers; dense small Latin UI",
+      "report": "../../docs/CARD_PALETTE_REFERENCE_2026-10-02.md"
+    },
+    {
+      "id": "stacklands.flat-cards",
+      "game": "Stacklands",
+      "url": "https://sokpop.itch.io/stacklands",
+      "mediaUrl": "https://img.itch.zone/aW1nLzg1NDI4ODkuZ2lm/original/nQhWf%2B.gif",
+      "inspection": "first GIF frame viewed by bounded agent and root",
+      "observation": "dark frame, separate title band, centered line art; light Villager versus dark Berry Bush",
+      "limit": "left-aligned titles; only first frame inspected",
+      "report": "../../docs/CARD_PALETTE_REFERENCE_2026-10-02.md"
+    },
+    {
+      "id": "reigns.centered-card",
+      "game": "Reigns",
+      "url": "https://store.steampowered.com/app/474750/Reigns/",
+      "mediaUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/474750/ss_2134bcd41d8e5464b93ba867d9c024d553e6ebe2.1920x1080.jpg",
+      "inspection": "official screenshot viewed by bounded agent and root",
+      "observation": "centered name/question and geometric portrait; separated content/status zones",
+      "limit": "one dominant swipe card, not simultaneous colored route choices",
+      "report": "../../docs/CARD_PALETTE_REFERENCE_2026-10-02.md"
     }
   ],
   "videos": [

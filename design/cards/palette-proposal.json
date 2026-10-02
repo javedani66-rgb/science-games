@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "status": "reference-inspired-proposal-not-rendered-not-runtime",
+  "date": "2026-10-02",
+  "report": "../../docs/CARD_PALETTE_REFERENCE_2026-10-02.md",
+  "sourceIdentity": "Beecarbonize; supplied user image and creator page",
+  "rule": "semantic tiers; not array position or place name",
+  "alignment": "all visible text and difficulty symbols centered; Persian RTL",
+  "shared": {
+    "ink": "#211D19",
+    "frame": "#211D19",
+    "frameWidthPx": 3,
+    "cornerRadiusPx": 14
+  },
+  "families": {
+    "core": {
+      "surface": "#B9DB66",
+      "titleSurface": "#D8EAA2",
+      "illustrationSurface": "#769C3A",
+      "contentSurface": "#D8EAA2",
+      "emoji": "🌱",
+      "contrastInkOnSurface": 10.67
+    },
+    "challenge": {
+      "surface": "#F4BE4F",
+      "titleSurface": "#F9D994",
+      "illustrationSurface": "#BD8922",
+      "contentSurface": "#F9D994",
+      "emoji": "🔥",
+      "contrastInkOnSurface": 9.82
+    },
+    "very-hard": {
+      "surface": "#EF7464",
+      "titleSurface": "#F6ADA1",
+      "illustrationSurface": "#A7443A",
+      "contentSurface": "#F6ADA1",
+      "emoji": "🌋",
+      "contrastInkOnSurface": 5.86
+    }
+  },
+  "selection": "independent frame/elevation/check; never replace tier family",
+  "limits": [
+    "candidate light palette only",
+    "contrast measured for ink/surface pair only",
+    "not exact sampled colors or creator official palette",
+    "no child, grayscale or dark-theme acceptance",
+    "third route not implemented"
+  ]
+}
