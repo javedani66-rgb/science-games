@@ -1,3 +1,5 @@
+> **Current roadmap — 2026-10-02:** Use [whole-game rollout](WHOLE_GAME_ROLLOUT_2026-10-02.md), [coverage ledger](../design/routes/rollout-ledger.json) and the latest section of [release handoff](RELEASE_HANDOFF_2026-10-02.md) before historical tasks below. The whole-game baseline audit is done. Next implementation is H1 harbor/pulley prototype; after it H2 completes harbor, then R1 first land, R2 construction, R3 exhibition, R4 reconciliation/release checks. Earlier direct lever/scale-next instructions are historical; do not restart them independently. Grades 7–9 stay deferred; no publication is authorized by this roadmap.
+
 # Next work — stage 2 of version 2 (written 2026-09-30)
 
 Read `CLAUDE.md`, `docs/HANDOFF.md` (section "Version 2, stage 1") and `design/README.md` first.
