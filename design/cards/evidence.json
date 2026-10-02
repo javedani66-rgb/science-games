@@ -171,6 +171,39 @@
       "observation": "centered name/question and geometric portrait; separated content/status zones",
       "limit": "one dominant swipe card, not simultaneous colored route choices",
       "report": "../../docs/CARD_PALETTE_REFERENCE_2026-10-02.md"
+    },
+    {
+      "id": "wingspan.hero-art",
+      "game": "Wingspan",
+      "type": "publisher-product-and-artist-contributor-information",
+      "url": "https://europe.stonemaiergames.com/products/wingspan",
+      "contributorUrl": "https://store.stonemaiergames.com/products/wingspan-fan-art-cards",
+      "inspection": "official product descriptions checked; no physical play session",
+      "observation": "publisher lists 170 unique bird cards; official fan-art pack credits artists and states artists retain ownership",
+      "limit": "not evidence of child comprehension or permission to reuse Wingspan artwork",
+      "report": "../../docs/CARD_ART_DIRECTION_2026-10-02.md"
+    },
+    {
+      "id": "earthborne.location-symbol",
+      "game": "Earthborne Rangers",
+      "type": "official-game-page-and-rulebook",
+      "url": "https://earthbornegames.com/the-game/",
+      "rulebookUrl": "https://earthbornegames.com/wp-content/uploads/EBR001_Rulebook_web.pdf",
+      "inspection": "official game page and rulebook searchable text checked",
+      "observation": "rulebook states that path-card set icons are placed in the upper-left corner; use as evidence for a consistent location/set marker, not the same alignment",
+      "limit": "mature tabletop information density; upper-left position conflicts with our all-centered card rule",
+      "report": "../../docs/CARD_ART_DIRECTION_2026-10-02.md"
+    },
+    {
+      "id": "wildfrost.character-art",
+      "game": "Wildfrost",
+      "type": "developer-presskit-and-publisher-page",
+      "url": "https://www.wildfrostgame.com/presskit/",
+      "publisherUrl": "https://store.steampowered.com/app/1811990/Wildfrost/",
+      "inspection": "official presskit and Steam page checked; art observation is a design inference",
+      "observation": "colorful card companions, items and charms offer a precedent for distinctive character silhouettes and separable upgrade markers",
+      "limit": "visual inspiration only; no child test or license to copy the art; battle tone and density do not transfer",
+      "report": "../../docs/CARD_ART_DIRECTION_2026-10-02.md"
     }
   ],
   "videos": [
