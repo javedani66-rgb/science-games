@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "scope": "Design audit candidates only; no runtime integration. Paths are relative to this manifest.",
+  "status": "unreviewed-route-design",
+  "style": {
+    "outline": "#3B2417",
+    "stroke_width": 2.5,
+    "icon_viewBox": "0 0 64 64",
+    "background": "transparent"
+  },
+  "assets": [
+    {
+      "id": "workshop",
+      "path": "icons/workshop.svg",
+      "kind": "environment-icon",
+      "availability": "candidate",
+      "approval": "unreviewed",
+      "purpose": "Map environment identity; no physics semantics.",
+      "provenance": {
+        "origin": "Original SVG geometry authored for this repository during the route asset audit.",
+        "external_source": null,
+        "license_claim": "No third-party license claim; project ownership/terms remain to be established."
+      },
+      "viewBox": "0 0 64 64",
+      "transparent_background": true
+    },
+    {
+      "id": "factory",
+      "path": "icons/factory.svg",
+      "kind": "environment-icon",
+      "availability": "candidate",
+      "approval": "unreviewed",
+      "purpose": "Map environment identity; no physics semantics.",
+      "provenance": {
+        "origin": "Original SVG geometry authored for this repository during the route asset audit.",
+        "external_source": null,
+        "license_claim": "No third-party license claim; project ownership/terms remain to be established."
+      },
+      "viewBox": "0 0 64 64",
+      "transparent_background": true
+    },
+    {
+      "id": "fishing-dock",
+      "path": "icons/fishing-dock.svg",
+      "kind": "environment-icon",
+      "availability": "candidate",
+      "approval": "unreviewed",
+      "purpose": "Map environment identity; no physics semantics.",
+      "provenance": {
+        "origin": "Original SVG geometry authored for this repository during the route asset audit.",
+        "external_source": null,
+        "license_claim": "No third-party license claim; project ownership/terms remain to be established."
+      },
+      "viewBox": "0 0 64 64",
+      "transparent_background": true
+    },
+    {
+      "id": "pirate-dock",
+      "path": "icons/pirate-dock.svg",
+      "kind": "environment-icon",
+      "availability": "candidate",
+      "approval": "unreviewed",
+      "purpose": "Map environment identity; no physics semantics.",
+      "provenance": {
+        "origin": "Original SVG geometry authored for this repository during the route asset audit.",
+        "external_source": null,
+        "license_claim": "No third-party license claim; project ownership/terms remain to be established."
+      },
+      "viewBox": "0 0 64 64",
+      "transparent_background": true
+    },
+    {
+      "id": "difficulty-marker",
+      "path": "icons/difficulty-marker.svg",
+      "kind": "difficulty-symbol",
+      "availability": "candidate",
+      "approval": "unreviewed",
+      "purpose": "Three-step visual motif; pair with explicit difficulty text. No route/level mapping assigned.",
+      "provenance": {
+        "origin": "Original SVG geometry authored for this repository during the route asset audit.",
+        "external_source": null,
+        "license_claim": "No third-party license claim; project ownership/terms remain to be established."
+      },
+      "viewBox": "0 0 64 64",
+      "transparent_background": true
+    },
+    {
+      "id": "stop-1-available",
+      "path": "../../src/simple-machines/img/badge1.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 1: force; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-1-locked",
+      "path": "../../src/simple-machines/img/badgeoff1.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 1: force; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-2-available",
+      "path": "../../src/simple-machines/img/badge2.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 2: mass-weight; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-2-locked",
+      "path": "../../src/simple-machines/img/badgeoff2.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 2: mass-weight; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-3-available",
+      "path": "../../src/simple-machines/img/badge3.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 3: spring-scale; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-3-locked",
+      "path": "../../src/simple-machines/img/badgeoff3.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 3: spring-scale; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-4-available",
+      "path": "../../src/simple-machines/img/badge4.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 4: friction; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-4-locked",
+      "path": "../../src/simple-machines/img/badgeoff4.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 4: friction; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-5-available",
+      "path": "../../src/simple-machines/img/badge5.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 5: lever-1; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-5-locked",
+      "path": "../../src/simple-machines/img/badgeoff5.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 5: lever-1; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-6-available",
+      "path": "../../src/simple-machines/img/badge6.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 6: lever-2; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-6-locked",
+      "path": "../../src/simple-machines/img/badgeoff6.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 6: lever-2; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-7-available",
+      "path": "../../src/simple-machines/img/badge7.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 7: wedge-screw; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-7-locked",
+      "path": "../../src/simple-machines/img/badgeoff7.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 7: wedge-screw; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-8-available",
+      "path": "../../src/simple-machines/img/badge8.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 8: inclined-plane; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-8-locked",
+      "path": "../../src/simple-machines/img/badgeoff8.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 8: inclined-plane; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-9-available",
+      "path": "../../src/simple-machines/img/badge9.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 9: wheel-axle; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-9-locked",
+      "path": "../../src/simple-machines/img/badgeoff9.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 9: wheel-axle; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-10-available",
+      "path": "../../src/simple-machines/img/badge10.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 10: pulley; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-10-locked",
+      "path": "../../src/simple-machines/img/badgeoff10.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 10: pulley; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-11-available",
+      "path": "../../src/simple-machines/img/badge11.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 11: machine-recognition; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-11-locked",
+      "path": "../../src/simple-machines/img/badgeoff11.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 11: machine-recognition; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-12-available",
+      "path": "../../src/simple-machines/img/badge12.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 12: exhibition; available appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "stop-12-locked",
+      "path": "../../src/simple-machines/img/badgeoff12.webp",
+      "kind": "existing-stop-badge",
+      "availability": "available-runtime",
+      "purpose": "Existing stop 12: exhibition; locked appearance.",
+      "provenance": {
+        "origin": "Existing project Gemini (Nano Banana Pro) source; design/README.md records badge cuts from badges_color.png.",
+        "source_path": "../nanobanana/badges_color.png",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "sheet1",
+      "path": "../nanobanana/sheet1.jpg",
+      "kind": "source-reference",
+      "availability": "available-source",
+      "purpose": "Existing carpentry source sheet; map decoration requires selection and extraction.",
+      "provenance": {
+        "origin": "Existing project source documented in design/README.md; Gemini (Nano Banana Pro) for the art sheets.",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "sheet_fix",
+      "path": "../nanobanana/sheet_fix.jpg",
+      "kind": "source-reference",
+      "availability": "available-source",
+      "purpose": "Preferred construction source sheet; source parts are not route scenery.",
+      "provenance": {
+        "origin": "Existing project source documented in design/README.md; Gemini (Nano Banana Pro) for the art sheets.",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "sheet3_fix",
+      "path": "../nanobanana/sheet3_fix.jpg",
+      "kind": "source-reference",
+      "availability": "available-source",
+      "purpose": "Preferred factory source sheet; source parts are not route scenery.",
+      "provenance": {
+        "origin": "Existing project source documented in design/README.md; Gemini (Nano Banana Pro) for the art sheets.",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "boxes",
+      "path": "../nanobanana/boxes.json",
+      "kind": "source-reference",
+      "availability": "available-source",
+      "purpose": "Existing source-sheet extraction coordinates.",
+      "provenance": {
+        "origin": "Existing project source documented in design/README.md; Gemini (Nano Banana Pro) for the art sheets.",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "badges_color",
+      "path": "../nanobanana/badges_color.png",
+      "kind": "source-reference",
+      "availability": "available-source",
+      "purpose": "Source sheet for existing stop badges.",
+      "provenance": {
+        "origin": "Existing project source documented in design/README.md; Gemini (Nano Banana Pro) for the art sheets.",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    },
+    {
+      "id": "chosen-style-D",
+      "path": "../nanobanana/chosen-style-D.png",
+      "kind": "source-reference",
+      "availability": "available-source",
+      "purpose": "Teacher-selected character style reference; not a route environment asset.",
+      "provenance": {
+        "origin": "Existing project source documented in design/README.md; Gemini (Nano Banana Pro) for the art sheets.",
+        "license_claim": "No formal third-party license established by the repository documentation."
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "need": "Workshop and factory map identities",
+      "coverage": "Original icon candidates available; environment scene/background not designed."
+    },
+    {
+      "need": "Fishing dock and pirate dock identities",
+      "coverage": "Original icon candidates available; separate route scenery and content remain unspecified."
+    },
+    {
+      "need": "Difficulty cue",
+      "coverage": "Separate original three-step marker candidate; text label and exact level mapping need content approval."
+    },
+    {
+      "need": "Three or more independent route maps",
+      "coverage": "No route-specific maps extracted or shipped. Current runtime is one map shared by three active grade tracks."
+    },
+    {
+      "need": "Responsive route-selector and map placement states",
+      "coverage": "No approved route-selector layout, locked/selected candidate states or contrast QA in runtime."
+    }
+  ]
+}

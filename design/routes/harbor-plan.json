@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "status": "draft",
+  "note": "Planning example only. Source content IDs are reuse candidates; mixed level content must be split and grade-reviewed before implementation. Proposed goals are not verified learning evidence.",
+  "targetGrades": [
+    5,
+    6
+  ],
+  "objectives": [
+    {
+      "id": "pulley.direction",
+      "title": "مشاهدهٔ تغییر جهت کشیدن"
+    },
+    {
+      "id": "pulley.compare",
+      "title": "مقایسهٔ آرایش‌ها پس از آزمایش"
+    },
+    {
+      "id": "pulley.combine",
+      "title": "ترکیب ابزارهای آموخته‌شده"
+    }
+  ],
+  "activities": [
+    {
+      "id": "harbor.fishing.task",
+      "sourceContentIds": [
+        "pulley.a1",
+        "pulley.a2"
+      ],
+      "proposedGoals": [
+        "pulley.direction",
+        "pulley.compare"
+      ],
+      "prerequisiteGoals": [],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "harbor.pirate.task",
+      "sourceContentIds": [
+        "pulley.1",
+        "pulley.2"
+      ],
+      "proposedGoals": [
+        "pulley.direction",
+        "pulley.compare"
+      ],
+      "prerequisiteGoals": [],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "harbor.rescue.task",
+      "sourceContentIds": [
+        "pulley.a1",
+        "pulley.1"
+      ],
+      "proposedGoals": [
+        "pulley.direction",
+        "pulley.compare"
+      ],
+      "prerequisiteGoals": [],
+      "reviewStatus": "pending"
+    },
+    {
+      "id": "harbor.curse.task",
+      "sourceContentIds": [
+        "pulley.4"
+      ],
+      "proposedGoals": [
+        "pulley.combine"
+      ],
+      "prerequisiteGoals": [
+        "pulley.direction",
+        "pulley.compare"
+      ],
+      "reviewStatus": "pending"
+    }
+  ],
+  "regions": [
+    {
+      "id": "harbor",
+      "requiredGoals": [
+        "pulley.direction",
+        "pulley.compare"
+      ],
+      "nextRegionId": null
+    }
+  ],
+  "routes": [
+    {
+      "id": "harbor.fishing",
+      "regionId": "harbor",
+      "title": "اسکلهٔ ماهیگیری",
+      "role": "alternative",
+      "environmentAssetId": "fishing-dock",
+      "difficulty": {
+        "concept": 1,
+        "calculation": 0,
+        "reading": 1,
+        "controls": 1
+      },
+      "activityIds": [
+        "harbor.fishing.task"
+      ],
+      "returnAllowed": true,
+      "grantsRegionCompletion": true
+    },
+    {
+      "id": "harbor.pirate",
+      "regionId": "harbor",
+      "title": "اسکلهٔ دزدان دریایی",
+      "role": "alternative",
+      "environmentAssetId": "pirate-dock",
+      "difficulty": {
+        "concept": 2,
+        "calculation": 0,
+        "reading": 1,
+        "controls": 1
+      },
+      "activityIds": [
+        "harbor.pirate.task"
+      ],
+      "returnAllowed": true,
+      "grantsRegionCompletion": true
+    },
+    {
+      "id": "harbor.rescue",
+      "regionId": "harbor",
+      "title": "اسکلهٔ نجات",
+      "role": "alternative",
+      "environmentAssetId": "fishing-dock",
+      "difficulty": {
+        "concept": 1,
+        "calculation": 0,
+        "reading": 1,
+        "controls": 1
+      },
+      "activityIds": [
+        "harbor.rescue.task"
+      ],
+      "returnAllowed": true,
+      "grantsRegionCompletion": true
+    },
+    {
+      "id": "harbor.curse",
+      "regionId": "harbor",
+      "title": "کشتی نفرین‌شده",
+      "role": "side",
+      "environmentAssetId": "pirate-dock",
+      "difficulty": {
+        "concept": 3,
+        "calculation": 2,
+        "reading": 2,
+        "controls": 2
+      },
+      "activityIds": [
+        "harbor.curse.task"
+      ],
+      "returnAllowed": true,
+      "grantsRegionCompletion": false
+    }
+  ]
+}

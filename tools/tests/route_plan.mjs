@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {validateRoutePlan} from '../validate_route_plan.mjs';
+const plan=JSON.parse(fs.readFileSync(new URL('../../design/routes/harbor-plan.json',import.meta.url)));
+const inventory=JSON.parse(fs.readFileSync(new URL('../../design/content/source-inventory.json',import.meta.url)));
+const check=p=>validateRoutePlan(p,inventory);
+assert.deepEqual(check(plan),[]);
+assert.equal(plan.routes.filter(r=>r.role==='alternative').length,3);
+const variant=fn=>{const p=structuredClone(plan);fn(p);return check(p);};
+assert(variant(p=>p.routes.push({...p.routes[0],id:'fourth-alternative'})).length===0);
+assert(variant(p=>p.activities[0].sourceContentIds.push('missing.activity')).some(e=>e.includes('unknown')));
+assert(variant(p=>p.activities[0].proposedGoals=[]).length>0);
+assert(variant(p=>p.routes.find(r=>r.role==='side').grantsRegionCompletion=true).length>0);
+assert(variant(p=>p.routes[0].returnAllowed=false).length>0);
+assert(variant(p=>p.regions[0].nextRegionId=p.regions[0].id).length>0);
+assert(variant(p=>p.status='ready').length>0);
+assert(variant(p=>p.routes[0].difficulty.concept=4).length>0);
+console.log('route_plan: three/four alternatives, unknown refs, missing goals, side credit, return, cycle and draft boundary passed');
