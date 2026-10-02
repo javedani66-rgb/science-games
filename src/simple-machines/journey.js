@@ -1,7 +1,9 @@
 /* ================= نقشهٔ سفر: ۱۲ منزل، به ترتیب جلسه‌های کلاس ================= */
 const GRADES=["دوم","سوم","چهارم","پنجم","ششم","هفتم","هشتم","نهم"];
 const trackOfG=g=>g<=1?"a":g===2?"b":g<=4?"c":"d";
-const TRK="abcd";
+const TRK="abcd"; // Keep persisted grade/track indices and historical progress codes stable.
+const ACTIVE_GRADES=[0,1,2,3,4],ACTIVE_TRK="abc";
+const canOfferLevel=to=>typeof to==="string"&&to.length===1&&ACTIVE_TRK.includes(to);
 const LVLN={a:"سطح ۱ (دوم و سوم)",b:"سطح ۲ (چهارم)",c:"سطح ۳ (پنجم و ششم)",d:"سطح ۴ (هفتم تا نهم)"};
 const LVLG={a:"دوم و سوم",b:"چهارم",c:"پنجم و ششم",d:"هفتم تا نهم"};
 const SHIRTS=["#1F6F6B","#F2785C","#7A3FC8","#F2C14E","#3B6FD4","#C2417A","#2E7D32"];
@@ -98,9 +100,9 @@ function quizEvidenceFinish(entry){entry.latest.complete=true;if(!entry.first)en
 function quizEvidenceText(p,tr){const bank=quizEvidence(p,tr),lines=[];for(let qi=0;qi<5;qi++){const entry=bank[qi],run=entry&&(entry.first||entry.latest);if(!run||!Array.isArray(run.items))continue;const items=run.items,correct=items.filter(x=>x.first).length,fixed=items.filter(x=>!x.first&&x.corrected===true).length,missed=[...new Set(items.filter(x=>!x.first).map(x=>x.term||x.question))];lines.push(`آزمون ${fa(qi+1)}: ${run.complete?"نخستین اجرای کامل":"اجرای ناتمام"}؛ پاسخ اول ${fa(correct)} از ${fa(items.length)} درست${run.complete?"":` (${fa(run.total)} سؤال در آزمون)`}؛ پس از دیدن پاسخ ${fa(fixed)} اصلاح شد.${missed.length?` برای مرور: ${missed.join("؛ ")}.`:""}`);}return lines.length?lines.join("\n"):"نتیجهٔ پاسخ‌های اول ثبت نشده است؛ مُهر آزمون فقط انجام‌شدن آن را نشان می‌دهد.";}
 function quizEvidencePanel(p,tr){return `<p class="j-note">${esc(LVLN[tr])}</p><p style="white-space:pre-line">${esc(quizEvidenceText(p,tr))}</p><p class="j-note">پاسخ اصلاح‌شده پس از نمایش جواب ثبت شده است. این گزارش شاهد فهم مستقل یا علت عقب‌ماندن در مسیر نیست. جزئیات روی همین دستگاه می‌مانند؛ کد پیشرفت آن‌ها را منتقل نمی‌کند.</p>`;}
 /* رفتن به سطح دیگر: کارت‌ها، آزمون‌ها و جوایزِ هر سطح جدا نگه داشته می‌شوند */
-function switchLevel(p,to,from){from=from||trk(p);if(from!==to){p.stash[from]={words:p.words,quiz:p.quiz,side:p.side};const st=p.stash[to]||{};
+function switchLevel(p,to,from){if(!canOfferLevel(to)&&to!==trk(p))return false;from=from||trk(p);if(from!==to){p.stash[from]={words:p.words,quiz:p.quiz,side:p.side};const st=p.stash[to]||{};
   p.words=st.words||Array(12).fill(0);p.quiz=st.quiz||[0,0,0,0,0];p.side=st.side||Array(12).fill(0);p.at=null;}p.lvl=to===trackOfG(p.g)?null:to;p.S.track=to;if(to==="d")p.S.formula=true;useProfile(p);save();applyNums();}
-const maxLevel=p=>{let m=TRK.indexOf(trackOfG(p.g));for(const c of p.done)m=Math.max(m,Math.min(3,TRK.indexOf(c)+1));return m;};
+const maxLevel=p=>{let m=TRK.indexOf(trackOfG(p.g));for(const c of p.done)m=Math.max(m,Math.min(3,TRK.indexOf(c)+1));return Math.min(ACTIVE_TRK.length-1,m);};
 
 /* ---------- کد پیشرفت (داخل پیام معلم؛ همهٔ ستاره‌ها را نگه می‌دارد) ----------
    نسخهٔ ۱: ۲۳ حرف (کدهای قدیمی همچنان خوانده می‌شوند). نسخهٔ ۲: ۲۶ حرف، با کاراکتر، رنگ لباس، سطح، سطح‌های تمام‌شده و آزمون‌ها. */
@@ -184,15 +186,14 @@ function welcome(canBack){epoch++;closeOv();clearToasts();offBoard(0);document.b
       ${st.t!=null?`<div class="j-me">${fullImg(null,st.t+1,st.shirt)}<div><p class="j-q" style="margin:0">اوستا ${esc(st.name)}</p><p class="j-note">رنگ لباس</p>${shirtPicker(st)}</div></div>`:""}
       <button class="btn go j-wide" id="jnx" type="button" ${st.t==null?"disabled":""}>بعدی</button>`;
     if(st.step===2){const tr=st.g!=null?trackOfG(st.g):null;body=`<h2 class="j-h2">کلاس چندمی؟</h2>
-      <p class="j-grp">دبستان</p><div class="j-grid5" role="group" aria-label="پایه دبستان">${[0,1,2,3,4].map(i=>`<button class="j-choice" type="button" data-g="${i}" aria-pressed="${st.g===i}">${GRADES[i]}</button>`).join("")}</div>
-      <p class="j-grp">متوسطهٔ اول</p><div class="j-grid5" role="group" aria-label="پایه متوسطه">${[5,6,7].map(i=>`<button class="j-choice" type="button" data-g="${i}" aria-pressed="${st.g===i}">${GRADES[i]}</button>`).join("")}</div>
+      <p class="j-grp">دبستان</p><div class="j-grid5" role="group" aria-label="پایه دبستان">${ACTIVE_GRADES.map(i=>`<button class="j-choice" type="button" data-g="${i}" aria-pressed="${st.g===i}">${GRADES[i]}</button>`).join("")}</div>
       ${tr?`<p class="j-grp">نمونهٔ یک چالش در این کلاس:</p><div class="j-sample">${bustImg({t:st.t,shirt:st.shirt},"happy","bi")}<p><b>اوستا ${esc(st.name)}:</b> ${LVSAMPLE[tr]}</p></div>`:""}
       <button class="btn go j-wide" id="jnx" type="button" ${st.g==null?"disabled":""}>شروع</button>`;}
     app.innerHTML=`<div class="j-page"><span class="j-step">قدم ${fa(st.step+1)} از ۳</span>${body}${st.step||canBack?`<button class="btn" id="jbk" type="button">برگشت</button>`:""}</div>`;tintAll(app);
     const nx=$("#jnx"),bk=$("#jbk");
     if(st.step===0){const i=$("#jnm");i.focus();i.oninput=()=>{st.name=i.value;};i.onkeydown=e=>{if(e.key==="Enter")nx.click();};nx.onclick=()=>{st.name=i.value.trim();if(!st.name){i.focus();jtoast("اول اسمت را بنویس.");return;}st.step=1;draw();};}
     if(st.step===1){app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>{st.t=+b.dataset.t;draw();});app.querySelectorAll("[data-sh]").forEach(b=>b.onclick=()=>{st.shirt=b.dataset.sh;draw();});nx.onclick=()=>{st.step=2;draw();};}
-    if(st.step===2){app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{st.g=+b.dataset.g;draw();});nx.onclick=()=>{const p=newProfile(st.name,st.g,st.t,st.shirt);DB.profiles.push(p);useProfile(p);save();applyNums();jmap({scroll:true});};}
+    if(st.step===2){app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{st.g=+b.dataset.g;draw();});nx.onclick=()=>{if(!ACTIVE_GRADES.includes(st.g))return;const p=newProfile(st.name,st.g,st.t,st.shirt);DB.profiles.push(p);useProfile(p);save();applyNums();jmap({scroll:true});};}
     if(bk)bk.onclick=()=>{if(st.step){st.step--;draw();}else if(DB.profiles.length)pickPlayer();};};
   draw();window.scrollTo(0,0);}
 /* تغییر کاراکتر و رنگ لباس (از کوله‌پشتی) */
@@ -254,7 +255,7 @@ function jmap(opt){opt=opt||{};epoch++;closeOv();clearToasts();const p=JP();if(!
   s+=`</svg>`;
   const week=DB.week!=null&&cs<DB.week&&!p.lvl?`<div class="j-week"><svg width="22" height="22" viewBox="0 0 28 28" aria-hidden="true"><path d="M6 26 V2 L22 8 L6 14" fill="#E4553A" stroke="#B53A22" stroke-width="2"/></svg><span>کلاس به منزل ${fa(DB.week+1)} رسیده؛ تو در منزل ${fa(cs+1)} هستی.</span></div>`:p.lvl?`<div class="j-week"><span>تو از کلاس جلوتری! الان در ${LVLN[trk(p)]} بازی می‌کنی.</span></div>`:"";
   const pq=pendingQuiz(p),allDone=cs>=12,finalQ=p.quiz[QAT.length-1];
-  const goLbl=pq>=0?`شروع آزمون<small>ایستگاه آزمون ${fa(pq+1)}</small>`:!allDone?`ادامه بده<small>${contLabel(p)}</small>`:!finalQ?`شروع آزمون<small>آزمون پایانی</small>`:maxLevel(p)<3||TRK.indexOf(trk(p))<3?`سطحِ بالاتر!<small>${LVLN[trk(p)]} تمام شد</small>`:`سفر تمام شد!<small>کوله‌پشتی‌ات را ببین</small>`;
+  const goLbl=pq>=0?`شروع آزمون<small>ایستگاه آزمون ${fa(pq+1)}</small>`:!allDone?`ادامه بده<small>${contLabel(p)}</small>`:!finalQ?`شروع آزمون<small>آزمون پایانی</small>`:TRK.indexOf(trk(p))<ACTIVE_TRK.length-1?`سطحِ بالاتر!<small>${LVLN[trk(p)]} تمام شد</small>`:`سفر تمام شد!<small>کوله‌پشتی‌ات را ببین</small>`;
   app.innerHTML=`<header class="j-top"><button class="j-who" id="jme" type="button" aria-label="کاراکتر من">${bustImg(p,"happy","bi")}<span class="nm">${esc(p.name)}</span><span class="pill"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">${JSTAR(true)}</svg> ${fa(totStars(p))}</span></button>
     <button class="j-ib" id="jbp" type="button"><svg viewBox="0 0 28 28" width="26" height="26" aria-hidden="true"><rect x="5" y="8" width="18" height="17" rx="5" fill="#B8743A"/><path d="M10 8 V6 a4 4 0 0 1 8 0 V8" stroke="#8A5427" stroke-width="2.5" fill="none"/><rect x="9" y="15" width="10" height="6" rx="2" fill="#E0A45F"/></svg><span>کوله</span></button>
     <button class="j-ib" id="jad" type="button"><svg viewBox="0 0 28 28" width="26" height="26" aria-hidden="true"><circle cx="14" cy="9" r="5" fill="#8C9BB0"/><path d="M4 25 a10 9 0 0 1 20 0Z" fill="#8C9BB0"/></svg><span>بزرگ‌ترها</span></button></header>
@@ -355,7 +356,7 @@ function quizRun(qi){epoch++;closeOv();clearToasts();const p=JP(),tr=trk(p),K=KI
   show();window.scrollTo(0,0);}
 /* ---------- پایان سطح و رفتن به سطح بالاتر ---------- */
 function levelUpSheet(){const p=JP(),tr=trk(p),i=TRK.indexOf(tr);jmap({});if(!p.done.includes(tr)){p.done+=tr;save();}
-  if(i>=3){const o=jsheet(`<h2 style="color:var(--ink);text-align:center">همهٔ سطح‌ها را تمام کردی!</h2><p class="j-say" style="text-align:center">مأموریت‌های این مسیر را تمام کردی. نتیجه‌ها و نشان‌هایت را در کوله‌پشتی ببین؛ می‌توانی آزمایش‌ها را دوباره انجام بدهی.</p><button class="btn go j-wide" id="jok" type="button">کوله‌پشتی</button>`,"پایان سفر");o.querySelector("#jok").onclick=()=>backpack();confetti();return;}
+  if(i>=ACTIVE_TRK.length-1){const o=jsheet(`<h2 style="color:var(--ink);text-align:center">این مسیر را تمام کردی!</h2><p class="j-say" style="text-align:center">مأموریت‌های این مسیر را تمام کردی. نتیجه‌ها و نشان‌هایت را در کوله‌پشتی ببین؛ می‌توانی آزمایش‌ها را دوباره انجام بدهی.</p><button class="btn go j-wide" id="jok" type="button">کوله‌پشتی</button>`,"پایان سفر");o.querySelector("#jok").onclick=()=>backpack();confetti();return;}
   const nx=TRK[i+1];
   const o=jsheet(`<div style="text-align:center"><span class="j-bic big" style="margin-inline:auto">${bustImg(p,"happy","bi")}</span></div><h2 style="color:var(--ink);text-align:center">${LVLN[tr]} تمام شد!</h2>
    <p class="j-say">${esc(p.name)}، همهٔ منزل‌ها و آزمون پایانی را تمام کردی. سطح بالاتر، <b>${LVLN[nx]}</b>، همان ماشین‌ها را با مطالب پایهٔ ${LVLG[nx]} دارد. امتحانش می‌کنی؟</p>
@@ -384,8 +385,8 @@ function adults(){epoch++;closeOv();clearToasts();const p=JP(),cs=curStop(p);off
   app.innerHTML=jtop(`<h2 class="j-h2" style="flex:1">بزرگ‌ترها</h2>`)+`<div class="j-page">
    <section class="j-sec"><h3 class="j-h3">پیشرفت ${esc(p.name)} · پایهٔ ${GRADES[p.g]}</h3><p>الان در منزل ${fa(Math.min(12,cs+1))} از ۱۲ است و ${fa(totStars(p))} ستاره دارد. وقتی کار خانهٔ هر منزل انجام شد، آن را تأیید کنید.</p><div class="j-scroll"><table class="j-tbl"><thead><tr><th>منزل و کار خانه</th><th>ستاره</th><th>جانبی</th></tr></thead><tbody>${rows}</tbody></table></div></section>
    <section class="j-sec"><h3 class="j-h3">گزارش پاسخ‌های آزمون</h3>${quizEvidencePanel(p,trk(p))}</section>
-   <section class="j-sec"><h3 class="j-h3">پایهٔ ${esc(p.name)}</h3><p>اگر پایه اشتباه انتخاب شده، اینجا درستش کنید.</p><div class="j-grid5" role="group" aria-label="پایه">${GRADES.map((g,i)=>`<button class="j-choice" type="button" data-g="${i}" aria-pressed="${p.g===i}">${g}</button>`).join("")}</div><div id="jgc"></div></section>
-   <section class="j-sec"><h3 class="j-h3">سطح بازی</h3><p>بچه بعد از تمام کردن هر سطح می‌تواند به سطح بالاتر برود. ستاره‌های هر سطح جدا می‌ماند. سطح‌های باز: </p><div class="j-grid2" role="group" aria-label="سطح">${[...TRK].map((c,i)=>i<=maxLevel(p)?`<button class="j-choice" type="button" data-lv="${c}" aria-pressed="${trk(p)===c}">${LVLN[c]}</button>`:"").join("")}</div></section>
+   <section class="j-sec"><h3 class="j-h3">پایهٔ ${esc(p.name)}</h3><p>اگر پایه اشتباه انتخاب شده، اینجا درستش کنید.</p><div class="j-grid5" role="group" aria-label="پایه">${ACTIVE_GRADES.map(i=>`<button class="j-choice" type="button" data-g="${i}" aria-pressed="${p.g===i}">${GRADES[i]}</button>`).join("")}</div><div id="jgc"></div></section>
+   ${trk(p)==="d"||p.g>4?`<p class="j-note">این پروفایل از نسخهٔ قبلی است؛ پایه و پیشرفت قبلی محفوظ‌اند. مسیرهای تازه برای دبستان‌اند. با انتخاب پایه یا سطح دبستان، به همان مسیر می‌روی و داده‌های قبلی نگه داشته می‌شوند.</p>`:""}<section class="j-sec"><h3 class="j-h3">سطح بازی</h3><p>بچه بعد از تمام کردن هر سطح می‌تواند به سطح بالاتر برود. ستاره‌های هر سطح جدا می‌ماند. سطح‌های باز: </p><div class="j-grid2" role="group" aria-label="سطح">${[...ACTIVE_TRK].map((c,i)=>i<=maxLevel(p)?`<button class="j-choice" type="button" data-lv="${c}" aria-pressed="${trk(p)===c}">${LVLN[c]}</button>`:"").join("")}</div></section>
    <section class="j-sec"><h3 class="j-h3">کار این هفته</h3><p>معلم هر هفته می‌گوید کلاس به کدام منزل رسیده. آن را اینجا انتخاب کنید تا روی نقشه پرچم بخورد.</p><div class="j-grid6">${STOPS.map((S0,i)=>`<button class="j-choice" type="button" data-w="${i}" aria-pressed="${DB.week===i}">${fa(i+1)}</button>`).join("")}</div><button class="chip-btn" id="jnw" type="button">بدون پرچم</button></section>
    <section class="j-sec"><h3 class="j-h3">بازیکن‌های این دستگاه</h3>${DB.profiles.map(q=>`<div class="j-row"><span style="flex:1;display:flex;gap:8px;align-items:center"><span class="j-bic">${bustImg(q,"happy","bi sm")}</span> ${esc(q.name)} · ${GRADES[q.g]}</span>${q.id===p.id?`<span class="j-small">(الان)</span>`:`<button class="chip-btn" type="button" data-sw="${q.id}">رفتن به این بازیکن</button>`}<button class="chip-btn" type="button" data-del="${q.id}">پاک کردن</button></div>`).join("")}<button class="chip-btn" id="jadd" type="button">+ بازیکن تازه</button><div id="jdel"></div></section>
    <section class="j-sec"><h3 class="j-h3">شروع دوباره برای ${esc(p.name)}</h3><p>همهٔ ستاره‌ها، منزل‌ها، کارهای خانه و آزمون‌ها پاک می‌شود و بازی از منزل ۱ شروع می‌شود. نام، پایه و شخصیت می‌ماند.</p><button class="chip-btn" id="jrs" type="button">شروع دوباره</button><div id="jrsc"></div></section>
@@ -394,8 +395,8 @@ function adults(){epoch++;closeOv();clearToasts();const p=JP(),cs=curStop(p);off
   $("#jmap").onclick=()=>jmap({});
   app.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>{const i=+b.dataset.h;p.home[i]=p.home[i]?0:1;save();adults();});
   app.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{DB.week=+b.dataset.w;save();adults();jtoast(`پرچم روی منزل ${fa(DB.week+1)} گذاشته شد.`);});
-  app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{const g=+b.dataset.g;if(g===p.g)return;const to=trackOfG(g),from=trk(p),same=to===from||(p.lvl&&TRK.indexOf(p.lvl)>TRK.indexOf(to));
-    $("#jgc").innerHTML=`<div class="j-week" style="flex-direction:column;align-items:stretch"><span>${same?`پایه از ${GRADES[p.g]} به ${GRADES[g]} عوض شود؟ سطح بازی همان «${LVLN[from]}» می‌ماند.`:`پایه از ${GRADES[p.g]} به ${GRADES[g]} عوض شود؟ بازی به «${LVLN[to]}» می‌رود که مرحله‌ها و متن‌هایش فرق دارد. ستاره‌های «${LVLN[from]}» پاک نمی‌شوند و اگر برگردید، سر جایشان هستند.`}</span><div class="j-row"><button class="btn go" id="jgy" type="button">بله، عوض کن</button><button class="btn" id="jgn" type="button">نه</button></div></div>`;
+  app.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{const g=+b.dataset.g;if(!ACTIVE_GRADES.includes(g)||g===p.g)return;const to=trackOfG(g),from=trk(p),same=to===from||(canOfferLevel(from)&&p.lvl&&TRK.indexOf(p.lvl)>TRK.indexOf(to));
+    $("#jgc").innerHTML=`<div class="j-week" style="flex-direction:column;align-items:stretch"><span>${same?`پایه از ${GRADES[p.g]} به ${GRADES[g]} عوض شود؟ سطح بازی همان «${LVLN[from]}» می‌ماند.`:`پایه از ${GRADES[p.g]} به ${GRADES[g]} عوض شود؟ بازی به «${LVLN[to]}» می‌رود که مرحله‌ها و متن‌هایش فرق دارد. ${from==="d"?`داده‌های «${LVLN[from]}» محفوظ می‌مانند؛ این مسیر در انتخاب‌های تازه ارائه نمی‌شود.`:`ستاره‌های «${LVLN[from]}» پاک نمی‌شوند و اگر برگردید، سر جایشان هستند.`}`}</span><div class="j-row"><button class="btn go" id="jgy" type="button">بله، عوض کن</button><button class="btn" id="jgn" type="button">نه</button></div></div>`;
     $("#jgn").onclick=()=>{$("#jgc").innerHTML="";};$("#jgy").onclick=()=>{p.g=g;switchLevel(p,same?from:to,from);adults();jtoast(`پایه شد ${GRADES[g]}.`);};$("#jgy").focus();});
   app.querySelectorAll("[data-lv]").forEach(b=>b.onclick=()=>{switchLevel(p,b.dataset.lv);adults();jtoast(`سطح بازی: ${LVLN[b.dataset.lv]}`);});
   $("#jnw").onclick=()=>{DB.week=null;save();adults();};
