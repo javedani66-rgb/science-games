@@ -52,7 +52,12 @@
         "license_claim": "No third-party license claim; project ownership/terms remain to be established."
       },
       "viewBox": "0 0 64 64",
-      "transparent_background": true
+      "transparent_background": true,
+      "integration": {
+        "source": "../../src/simple-machines/harbor-routes.js",
+        "mode": "inline SVG snapshot",
+        "release": "not-published; owner visual approval pending"
+      }
     },
     {
       "id": "pirate-dock",
@@ -67,7 +72,12 @@
         "license_claim": "No third-party license claim; project ownership/terms remain to be established."
       },
       "viewBox": "0 0 64 64",
-      "transparent_background": true
+      "transparent_background": true,
+      "integration": {
+        "source": "../../src/simple-machines/harbor-routes.js",
+        "mode": "inline SVG snapshot",
+        "release": "not-published; owner visual approval pending"
+      }
     },
     {
       "id": "difficulty-marker",

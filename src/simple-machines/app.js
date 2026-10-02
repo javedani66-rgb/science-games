@@ -93,7 +93,7 @@ function board(k,head){epoch++;closeOv();if(typeof clearToasts==="function")clea
    <p class="prompt" id="pr"></p><div class="counter" id="ct" aria-live="polite"></div><div class="ctrl" id="cl"></div><div class="formula" id="fm"></div><p class="fb" id="fb" aria-live="polite"></p><div class="nav" id="nv"></div></div></section>`;
   tintAll(app);
   const svg=$("#sc");let fmHtml="",helpHtml="";
-  const P0=makePainter(svg);const A={svg,P:P0,hint:d=>P0.hint(d),view:h=>{svg.setAttribute("viewBox",`0 0 640 ${h}`);},tries:0,locked:false,lab:head.mode==="lab",refresh:null,done:null,onLane:null,
+  const P0=makePainter(svg);const A={svg,P:P0,hint:d=>P0.hint(d),view:h=>{svg.setAttribute("viewBox",`0 0 640 ${h}`);},tries:0,assisted:false,answerShown:false,locked:false,lab:head.mode==="lab",refresh:null,done:null,onLane:null,
     prompt:h=>{if(KID()&&head.mode==="lab")h=KIDLAB[k];const i=h.indexOf("<small>");let main=h,sub="";if(i>=0){main=h.slice(0,i);sub=h.slice(i+7).replace("</small>","");}const pr=$("#pr");pr.innerHTML=ltrMath(main);helpHtml=sub&&!KID()?ltrMath(sub):"";linkTerms(pr);$("#hlpb").classList.toggle("has",!!helpHtml);},
     counter:h=>{const e=$("#ct");if(e)e.innerHTML=h||"";},
     formula:h=>{fmHtml=h||"";const e=$("#fm");if(e)e.innerHTML=S.formula?fmHtml:"";},
@@ -104,15 +104,15 @@ function board(k,head){epoch++;closeOv();if(typeof clearToasts==="function")clea
       A.trials++;A.fb(`${m.retry||""}${A.trials>=2&&m.more?" "+m.more:""} <b>${voice("retry")}</b>`,"info");
       /* نردبان راهنما: بعد از سه امتحانِ ناموفق، «نشانم بده» (جواب نشان داده می‌شود، ۱ امتیاز) تا بچه گیر نکند */
       if(A.trials>=3&&m.final&&!$("#showme")){const n=$("#nv");n.insertAdjacentHTML("beforeend",`<button class="btn" id="showme" type="button">نشانم بده</button>`);
-        $("#showme").onclick=()=>{if(A.locked)return;A.locked=true;if(m.show)m.show();A.fb(m.final,"info");if(A.done)A.done(1);};}
+        $("#showme").onclick=()=>{if(A.locked)return;A.assisted=true;A.answerShown=true;A.locked=true;if(m.show)m.show();A.fb(m.final,"info");if(A.done)A.done(1);};}
       return false;},
     judge(ok,m){if(A.locked||A.lab)return ok;if(KID()&&m.k)m=Object.assign({},m,m.k);
-      if(ok){const pts=m.pts!=null?m.pts:(A.tries===0?2:1);A.locked=true;A.fb(`${voice(pts===2?(A.trials?"okTries":m.act?"okDo":"okSay"):"okLate")} ${m.ok||""} <span style="white-space:nowrap">(+${fa(pts)} امتیاز)</span>`,"ok");if(A.done)A.done(pts);return true;}
+      if(ok){const pts=m.pts!=null?m.pts:(A.tries===0?2:1);A.locked=true;A.fb(`${voice(pts===2?(A.trials?"okTries":m.act?"okDo":"okSay"):"okLate")} ${m.ok||""} ${head.unscored||head.practice?"":`<span style="white-space:nowrap">(+${fa(pts)} امتیاز)</span>`}`,"ok");if(A.done)A.done(pts);return true;}
       A.tries++;if(A.tries<2){A.fb(KID()?`${voice("wrong")} ${m.retry||""}`:`نه هنوز. ${m.retry||""} یک فرصت دیگر داری.`,"no");$("#hlpb").classList.add("nudge");return false;}
-      A.locked=true;A.fb(`${m.final||""}`,"no");if(A.done)A.done(0);return false;}};
+      A.answerShown=true;A.locked=true;A.fb(`${m.final||""}`,"no");if(A.done)A.done(0);return false;}};
   $("#bk").onclick=head.back;
-  $("#rst").onclick=()=>{if(A.locked&&!A.lab){jtoast2("این چالش تمام شده؛ دکمهٔ پایین را بزن.");return;}if(head.restart)head.restart();};
-  $("#hlpb").onclick=()=>helpSheet(k,helpHtml,()=>{A.formula(fmHtml);if(A.refresh)A.refresh();});
+  $("#rst").onclick=()=>{if(A.locked&&!A.lab&&!head.allowReplay){jtoast2("این چالش تمام شده؛ دکمهٔ پایین را بزن.");return;}if(head.restart)head.restart();};
+  $("#hlpb").onclick=()=>{A.assisted=true;if(head.help){head.help();return;}helpSheet(k,helpHtml,()=>{A.formula(fmHtml);if(A.refresh)A.refresh();});};
   return A;}
 function revealFb(){const e=$("#fb"),bp=document.querySelector(".bp");if(!e||!bp||!e.textContent.trim())return;bp.scrollTop=bp.scrollHeight;}
 function jtoast2(t){if(typeof jtoast==="function")jtoast(t);}
@@ -128,10 +128,11 @@ function helpSheet(k,helpHtml,onToggle){const s=ST[k],D=DEFS[k],terms=(typeof QT
 function playLab(k,ctx){const go=()=>{const A=board(k,Object.assign({mode:"lab",backLabel:"ایستگاه",sub:"آزمایشگاه",back:()=>hub(k),restart:go},ctx||{}));ST[k].lab(A);};go();window.scrollTo(0,0);}
 function dotsHtml(n,i,res){return Array.from({length:n},(_,j)=>`<i class="${res[j]!=null?"p"+res[j]:j===i?"cur":""}" title="چالش ${fa(j+1)}"></i>`).join("");}
 function playLevel(k,L,ctx){const s=ST[k],LV=levelsOf(k),lv=LV[L-1];const r=rng((Date.now()^hash(k+L))>>>0);const specs=ctx&&ctx.resume?ctx.resume.specs:lv.gen(r);const res=ctx&&ctx.resume?ctx.resume.res.slice():[];let i=ctx&&ctx.resume?ctx.resume.i:0;
-  const keep=()=>{if(ctx&&ctx.keep)ctx.keep({specs,res,i});};keep();
-  function show(){const A=board(k,{mode:"level",backLabel:ctx?"نقشه":"ایستگاه",sub:ctx?ctx.sub:`مرحلهٔ ${fa(L)}: ${lv.title}`,title:ctx&&ctx.title,stop:ctx?ctx.stop:null,back:ctx?()=>{keep();ctx.back();}:()=>hub(k),restart:()=>show()});
+  const keep=()=>{if(ctx&&ctx.keep)ctx.keep({specs,res:res.slice(),i:res[i]!=null&&i+1<specs.length?i+1:i,done:res[i]!=null&&i+1>=specs.length});};keep();
+  function show(practice){practice=!!practice||res[i]!=null;const A=board(k,{allowReplay:true,practice,mode:"level",backLabel:ctx?"نقشه":"ایستگاه",sub:ctx?ctx.sub:`مرحلهٔ ${fa(L)}: ${lv.title}`,title:ctx&&ctx.title,stop:ctx?ctx.stop:null,land:ctx&&ctx.land,back:ctx?()=>{keep();ctx.back();}:()=>hub(k),restart:()=>show(res[i]!=null)});
     const upd=()=>{$("#dots").innerHTML=dotsHtml(specs.length,i,res);$("#scr").innerHTML=`چالش ${fa(i+1)} از ${fa(specs.length)} · امتیاز: ${fa(res.reduce((a,b)=>a+(b||0),0))} از ${fa(specs.length*2)}`;};upd();
-    A.done=pts=>{res[i]=pts;upd();const cid=specs[i]&&specs[i].cid;if(cid){if(!S.cb)S.cb={};const kk=(S.track||"c")+":"+cid;if(pts>(S.cb[kk]||0))S.cb[kk]=pts;save();}if(ctx&&ctx.keep)ctx.keep({specs,res,i:i+1<specs.length?i+1:i,done:i+1>=specs.length});const n=A.nav("");const b=btn(n,i+1<specs.length?"چالشِ بعد":"دیدن نتیجه","go next",()=>{i++;if(i<specs.length){show();}else finish();});later(60,()=>{revealFb();b.focus({preventScroll:true});});};
+    A.done=pts=>{if(practice){const n=A.nav("");btn(n,"دوباره تمرین کن","",()=>show(true));btn(n,i+1<specs.length?"ادامهٔ مرحله":"دیدن نتیجه","go next",()=>{i++;if(i<specs.length)show();else finish();});A.fb(`${$("#fb").innerHTML||""}<br>تمرین انجام شد. نتیجه و امتیاز قبلی محفوظ است.`,"info");return;}res[i]=pts;upd();const cid=specs[i]&&specs[i].cid;if(cid){if(!S.cb)S.cb={};const kk=(S.track||"c")+":"+cid;if(pts>(S.cb[kk]||0))S.cb[kk]=pts;save();}if(ctx&&ctx.keep)ctx.keep({specs,res,i:i+1<specs.length?i+1:i,done:i+1>=specs.length});const n=A.nav("");const b=btn(n,i+1<specs.length?"چالشِ بعد":"دیدن نتیجه","go next",()=>{i++;if(i<specs.length){show();}else finish();});btn(n,"بیا یک بار دیگر انجامش بدهیم","",()=>show(true));later(60,()=>{revealFb();b.focus({preventScroll:true});});};
+    if(practice){$("#scr").textContent="تمرین دوباره؛ امتیاز قبلی محفوظ است.";}
     if(window.__TEST||window.__JT)window.__T={spec:specs[i],MASS,LV_MASS,k,i};s.mount(specs[i],A);}
   function finish(){const pts=res.reduce((a,b)=>a+b,0),max=specs.length*2,stars=starsFor(pts,max);setLS(lv.id,stars);save();
     if(ctx){ctx.finish(stars,pts,max);return;}

@@ -9,7 +9,7 @@
   "stages": [
     {
       "id": "H1",
-      "state": "pending",
+      "state": "prototype-complete; learning-goal/child/owner-review-and-main-credit-pending",
       "scope": "Pulley harbor prototype for grades 5/6, shared route/replay/evidence/save contract; validate actual common goals first."
     },
     {
@@ -1020,5 +1020,19 @@
     "wedge.xc",
     "wheel.xb",
     "wheel.xc"
-  ]
+  ],
+  "implementationCheckpoint": {
+    "stage": "H1",
+    "status": "prototype-implemented-and-targeted-checks-passed; main-progression-mapping-and-child-review-pending",
+    "routeActivityIds": [
+      "harbor.fishing.direction",
+      "harbor.fishing.compare",
+      "harbor.fishing.fit",
+      "harbor.pirate.direction",
+      "harbor.pirate.compare",
+      "harbor.pirate.fit"
+    ],
+    "legacyLevelsRewritten": [],
+    "note": "H1 is a separate local practice branch. No legacy mission stars or code format changes; code omits pilot evidence. Full pulley/harbor audit disposition remains pending in H2."
+  }
 }

@@ -357,3 +357,8 @@ body[data-land="1"] .bh .dots i{background:rgba(42,26,20,.18)}
 
 /* Keyboard alternative for placing/removing balance objects. */
 #sc [data-focus]:focus-visible{outline:3px solid #1E6FD9;outline-offset:4px;border-radius:8px}
+
+/* Harbor prototype: branching choices remain readable on a narrow screen. */
+.harbor-entry{display:flex;gap:16px;align-items:center;padding:18px;margin:12px 0 60px;background:#E4F3F5;border:3px solid #1F6F7F;border-radius:20px}.harbor-entry>span{font-size:42px}.harbor-entry p{margin:6px 0 12px}.harbor-fork{display:flex;flex-direction:column;text-align:center;font-size:32px;color:#1F6F7F}.harbor-routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));gap:16px;border-top:4px solid #1F6F7F;padding-top:16px}.harbor-route{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px;background:#fff;border:3px solid #81989D;border-radius:20px;font:inherit;color:var(--ink);cursor:pointer;text-align:center}.harbor-route.selected{border-color:#1F6F7F;box-shadow:0 0 0 3px #A9DBDE}.harbor-route svg{width:72px;height:72px}.harbor-route b{font-size:20px}.harbor-difficulty{padding:4px 10px;border-radius:12px;background:#DCEEDF}.harbor-difficulty.hard{background:#FFE1D8;color:#8B261C;border:2px solid #B6412A}.harbor-route:focus-visible{outline:4px solid #1F6F7F;outline-offset:3px}
+
+@media(max-width:480px){.harbor-route{padding:10px;gap:8px;font-size:14px}.harbor-route b{font-size:17px}.harbor-route svg{width:56px;height:56px}.harbor-fork{font-size:26px}.harbor-routes{gap:12px}}

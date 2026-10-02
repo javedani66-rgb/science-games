@@ -7,7 +7,7 @@ import {fileURLToPath} from 'node:url';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const dir=path.join(root,'src/simple-machines');
-const files=['core.js','machines.js','st_force.js','st_fric.js','st_scale.js','st_lever.js','st_ramp.js','st_pulley.js','st_wheel.js','st_wedge.js','st_sort.js','content.js','quiz.js','app.js','journey.js'];
+const files=['core.js','machines.js','st_force.js','st_fric.js','st_scale.js','st_lever.js','st_ramp.js','st_pulley.js','st_wheel.js','st_wedge.js','st_sort.js','content.js','quiz.js','harbor-content.js','app.js','harbor-routes.js','journey.js'];
 const sources=Object.fromEntries(files.map(f=>[f,fs.readFileSync(path.join(dir,f),'utf8')]));
 // The environment is deliberately inert: definitions/generators only, no storage/UI.
 const context=vm.createContext({window:{__TEST:true},document:{querySelector:()=>null,addEventListener:()=>{}},localStorage:{getItem:()=>null},matchMedia:()=>({matches:true})});
@@ -32,7 +32,7 @@ const data=vm.runInContext(`(()=>{
  }
  const challenges=Object.values(CH).map(ch=>({id:ch.id,station:ch.st,legacyDifficulty:ch.d,phase:ch.phase||null,terms:ch.terms,teach:ch.teach||'',typesByTrack:Object.fromEntries(tracks.map(tr=>[tr,types(r=>[ch.mk(r)],tr)]))}));
  const questions=QBANK.map(q=>({id:q.id,term:q.term,tracks:[...q.lv],type:q.type,after:q.after??null,eligibleAt:tracks.flatMap(tr=>QUIZ_AT.filter(at=>q.lv.includes(tr)&&(q.after==null||q.after<=at.after)&&QTERMS[tr].slice(0,at.after+1).some(ts=>ts.includes(q.term))).map(at=>({track:tr,afterStop:at.after+1})))}));
- return {tracks:{active:['a','b','c'],historicalOnly:['d']},stations,levels,challenges,questions,stops:STOPS.map((s,i)=>({id:'stop.'+(i+1),number:i+1,title:s.n,sideStation:s.side,missions:s.m,home:HOME[i],learn:LEARN[i]})),terms:QTERMS,definitionTerms:Object.keys(QDEF),quizSchedule:QUIZ_AT,sideGoals:SIDEG,definitionStations:Object.keys(DEFS),formulaCards:FORMULAS.map(x=>({station:x.k,title:x.t,trackGate:x.g,example:x.ex,rule:x.rule})),videoReferences:Object.entries(V).map(([id,x])=>({id,title:x[0],url:x[1]}))};
+ return {routeActivities:HARBOR_CONTENT.routes.flatMap(route=>route.activities.map(a=>({id:a.id,routeId:route.id,regionId:HARBOR_CONTENT.regionId,title:a.title,grades:HARBOR_CONTENT.grades.map(g=>g+2),goals:a.goals,prerequisiteGoals:a.prerequisiteGoals,type:a.make(rng(1)).t}))),tracks:{active:['a','b','c'],historicalOnly:['d']},stations,levels,challenges,questions,stops:STOPS.map((s,i)=>({id:'stop.'+(i+1),number:i+1,title:s.n,sideStation:s.side,missions:s.m,home:HOME[i],learn:LEARN[i]})),terms:QTERMS,definitionTerms:Object.keys(QDEF),quizSchedule:QUIZ_AT,sideGoals:SIDEG,definitionStations:Object.keys(DEFS),formulaCards:FORMULAS.map(x=>({station:x.k,title:x.t,trackGate:x.g,example:x.ex,rule:x.rule})),videoReferences:Object.entries(V).map(([id,x])=>({id,title:x[0],url:x[1]}))};
 })()`,context,{timeout:10000});
 const payload={schemaVersion:1,method:{kind:'definition-extraction-and-deterministic-generator-sampling',seedsPerBand:64,limits:'Spec type sampling is not exhaustive over random parameters. Does not mount UI, validate physics or infer textbook alignment. eligibleAt is eligibility, not a guaranteed quiz draw.'},sourceHashes:Object.fromEntries(files.map(f=>[f,crypto.createHash('sha256').update(sources[f]).digest('hex')])),...data};
 const output=JSON.stringify(payload,null,2)+'\n';

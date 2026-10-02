@@ -4,14 +4,14 @@ const pulName=k=>(KID()?PUL_NAMES_K:PUL_NAMES_B)[k];
 const pulFrac=n=>n===1?"برابر وزن بار":({2:"نصفِ",3:"یک‌سومِ",4:"یک‌چهارمِ",6:"یک‌ششمِ"}[n]||`یک‌${fa(n)}مِ`)+" وزن بار";
 function pulleyIcon(n){let s=`<rect x="4" y="1" width="32" height="3" fill="#8A5427"/>`;if(n===1)return s+`<circle cx="20" cy="9" r="5" fill="none" stroke="${INK}" stroke-width="2"/><path d="M15 9 V22 M25 9 V26" stroke="#7A5634" stroke-width="1.6"/><rect x="11" y="21" width="8" height="6" fill="#E0A45F"/>`;
   const k=n/2;for(let i=0;i<n;i++)s+=`<path d="M${8+i*(24/(n-1||1))} 8 V19" stroke="#7A5634" stroke-width="1.5"/>`;return s+`<rect x="6" y="5" width="28" height="5" rx="2" fill="#8C9BB0"/><rect x="6" y="17" width="28" height="5" rx="2" fill="#8C9BB0"/><rect x="14" y="22" width="12" height="5" fill="#E0A45F"/>`;}
-function makePulley(A,cfg){cfg=machineScene(A,cfg);const svg=A.svg,P=A.P;A.view(544);const G=380,PXM=60,REST=250,MAXD=150;
+function makePulley(A,cfg){cfg=machineScene(A,cfg);const qualitative=!!(cfg.qualitative||A.qualitative);const svg=A.svg,P=A.P;A.view(544);const G=380,PXM=60,REST=250,MAXD=150;
   const st={hideW:!!cfg.hideW,n:cfg.n||1,W:cfg.W,S:cfg.S,h:cfg.h||2,pulled:0,stroke:0,busy:false,blocked:false,flash:0,edit:cfg.edit!==false,hideF:!!cfg.hideF};
   const F=()=>MACHINE.pulley(st.W,st.n);const rise=()=>st.pulled/st.n;
   const R=(a,b,c,d)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#7A5634" stroke-width="4" stroke-linecap="round"/>`;
   const Wh=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#F4F7FA" stroke="#34425E" stroke-width="5"/><circle cx="${x}" cy="${y}" r="4" fill="#34425E"/>`;
   function render(){if(!cfg.current())return;const ok=canLift(F(),st.S),y0=G-56-rise()*PXM,hy=REST+st.stroke;let s=bgRoom(G)+`<rect y="520" width="640" height="24" style="fill:var(--sf)"/>`;
     s+=`<rect x="100" y="16" width="440" height="22" rx="6" fill="#8A5427"/><rect x="100" y="16" width="440" height="6" rx="3" fill="#A86A36"/>`;
-    const th=G-st.h*PXM;s+=`<line x1="70" y1="${G}" x2="70" y2="${th-26}" stroke="#7D8CA3" stroke-width="4"/><path d="M70 ${th-26} l34 10 -34 10Z" fill="${GRN}"/><line x1="60" y1="${th}" x2="560" y2="${th}" stroke="${GRN}" stroke-width="2" stroke-dasharray="8 6" opacity=".7"/>`+T(82,th+22,NUMS()?`هدف: ${fa(st.h)} متر`:"هدف",{size:13,col:GRN,anchor:"end"});
+    const th=G-st.h*PXM;s+=`<line x1="70" y1="${G}" x2="70" y2="${th-26}" stroke="#7D8CA3" stroke-width="4"/><path d="M70 ${th-26} l34 10 -34 10Z" fill="${GRN}"/><line x1="60" y1="${th}" x2="560" y2="${th}" stroke="${GRN}" stroke-width="2" stroke-dasharray="8 6" opacity=".7"/>`+T(82,th+22,!qualitative&&NUMS()?`هدف: ${fa(st.h)} متر`:"هدف",{size:13,col:GRN,anchor:"end"});
     let lx,hx,body="";const yp=y0-34;
     if(st.n===1){lx=272;hx=328;body=R(300,38,300,50)+R(272,70,272,y0)+R(328,70,328,hy)+`<path d="M272 70 A28 28 0 0 1 328 70" stroke="#7A5634" stroke-width="4" fill="none"/>`+Wh(300,70,28);}
     else if(st.n===2){lx=304;hx=376;body=R(352,38,352,48)+R(280,38,280,yp)+R(328,yp,328,70)+R(376,70,376,hy)+`<path d="M328 70 A24 24 0 0 1 376 70" stroke="#7A5634" stroke-width="4" fill="none"/><path d="M280 ${yp} A24 24 0 0 0 328 ${yp}" stroke="#7A5634" stroke-width="4" fill="none"/>`+Wh(352,70,24)+Wh(304,yp,24)+R(304,yp,304,y0);}
@@ -28,11 +28,11 @@ function makePulley(A,cfg){cfg=machineScene(A,cfg);const svg=A.svg,P=A.P;A.view(
     s+=body;
     const coil=Math.min(60,st.pulled*6);if(coil>0){s+=`<g>`;for(let i=0;i<Math.ceil(coil/6);i++)s+=`<ellipse cx="${hx+74}" cy="${G-4-i*3}" rx="${22-i*.4}" ry="6" fill="none" stroke="#7A5634" stroke-width="3"/>`;s+=`</g>`;}
     s+=R(hx,hy,hx+10,G-6);
-    s+=crateSvg(lx,y0+56,64,56,st.hideW?"؟":kn(st.W),null);
+    s+=crateSvg(lx,y0+56,64,56,qualitative?"بار":st.hideW?"؟":kn(st.W),null);
     if(S.forces){s+=arrow(lx,y0+62,lx,y0+62+Math.min(80,st.W*.5),9,"#7D8CA3",.9);
-      const fl=Math.max(24,Math.min(120,F()*1.6));s+=arrow(hx+34,hy+8,hx+34,hy+8+fl,11,st.hideF?"#7D8CA3":ok?GRN:RED)+T(hx+56,hy+30+fl/2,`نیروی لازم<tspan class="num">: ${st.hideF?"؟":fa(r1(F()))}</tspan>`,{size:13,col:st.hideF?INK:ok?GRN:RED,anchor:"end"});}
+      const fl=Math.max(24,Math.min(120,F()*1.6));s+=arrow(hx+34,hy+8,hx+34,hy+8+fl,11,st.hideF?"#7D8CA3":ok?GRN:RED)+T(hx+56,hy+30+fl/2,qualitative?"نیروی لازم":`نیروی لازم<tspan class="num">: ${st.hideF?"؟":fa(r1(F()))}</tspan>`,{size:13,col:st.hideF?INK:ok?GRN:RED,anchor:"end"});}
     const flash=st.flash>0;s+=`<g data-drag="grip" style="cursor:ns-resize"><rect x="${hx-40}" y="${hy-14}" width="80" height="70" fill="#fff" fill-opacity="0"/><rect x="${hx-26}" y="${hy}" width="52" height="40" rx="12" fill="${flash?RED:"#FFC43D"}" stroke="#fff" stroke-width="3"/>${T(hx,hy+28,"⇩",{size:22,col:INK,halo:false})}</g>`;
-    s+=gBar(st.hideF?0:F(),st.S,400,70,170);
+    if(!qualitative)s+=gBar(st.hideF?0:F(),st.S,400,70,170);
     
     machinePaint(A,s);
     machineKeys(A,'[data-drag="grip"]',"کشیدن طناب؛ ورود یا کلید پایین",()=>{if(st.busy||!st.edit||st.done)return;

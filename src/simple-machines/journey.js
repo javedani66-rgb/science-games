@@ -259,12 +259,13 @@ function jmap(opt){opt=opt||{};epoch++;closeOv();clearToasts();const p=JP();if(!
   app.innerHTML=`<header class="j-top"><button class="j-who" id="jme" type="button" aria-label="کاراکتر من">${bustImg(p,"happy","bi")}<span class="nm">${esc(p.name)}</span><span class="pill"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">${JSTAR(true)}</svg> ${fa(totStars(p))}</span></button>
     <button class="j-ib" id="jbp" type="button"><svg viewBox="0 0 28 28" width="26" height="26" aria-hidden="true"><rect x="5" y="8" width="18" height="17" rx="5" fill="#B8743A"/><path d="M10 8 V6 a4 4 0 0 1 8 0 V8" stroke="#8A5427" stroke-width="2.5" fill="none"/><rect x="9" y="15" width="10" height="6" rx="2" fill="#E0A45F"/></svg><span>کوله</span></button>
     <button class="j-ib" id="jad" type="button"><svg viewBox="0 0 28 28" width="26" height="26" aria-hidden="true"><circle cx="14" cy="9" r="5" fill="#8C9BB0"/><path d="M4 25 a10 9 0 0 1 20 0Z" fill="#8C9BB0"/></svg><span>بزرگ‌ترها</span></button></header>
-    <main class="j-mapwrap">${s}</main>
+    <main class="j-mapwrap">${s}${harborEntry(p)}</main>
     <div class="j-cont"><div class="in">${week}<button class="btn go" id="jgo" type="button">${goLbl}</button></div></div>`;
   tintAll(app);if(p.shirt){const c=charOf(p);tintShirt(IMG.bust[c].happy,IMG.mbust[c].happy,p.shirt).then(u=>app.querySelectorAll(".j-mkimg").forEach(im=>im.setAttribute("href",u))).catch(()=>{});}
   app.querySelectorAll("[data-stop]").forEach(g=>{const i=+g.dataset.stop;const act=()=>{if(i>cs){jtoast(`منزل ${fa(i+1)} هنوز بسته است. اول منزل ${fa(cs+1)} را تمام کن.`);return;}stopSheet(i);};g.onclick=act;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}};});
   app.querySelectorAll("[data-side]").forEach(g=>{const i=+g.dataset.side;const act=()=>{if(!stopDone(JP(),i)){jtoast(`${WL().side} بعد از ${WL().main}های منزل ${fa(i+1)} باز می‌شود.`);return;}sideSheet(i);};g.onclick=act;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}};});
   app.querySelectorAll("[data-quiz]").forEach(g=>{const qi=+g.dataset.quiz;const act=()=>{if(!quizOpen(p,qi)){jtoast(`این آزمون بعد از منزل ${fa(QAT[qi]+1)} باز می‌شود.`);return;}quizIntro(qi);};g.onclick=act;g.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}};});
+  const hb=app.querySelector("[data-harbor]");if(hb)hb.onclick=harborSelector;
   $("#jgo").onclick=()=>{if(pq>=0)quizIntro(pq);else if(!allDone)resume(p);else if(!finalQ)quizIntro(QAT.length-1);else levelUpSheet();};$("#jbp").onclick=()=>backpack();$("#jad").onclick=adultGate;$("#jme").onclick=editMe;
   if(opt.scroll!==false){const q=pos[Math.min(cs,11)];requestAnimationFrame(()=>{const svg=app.querySelector(".j-map");if(!svg)return;const r=svg.getBoundingClientRect(),k=r.width/W;window.scrollTo({top:Math.max(0,r.top+window.scrollY+q.y*k-window.innerHeight*.42),behavior:opt.smooth?"smooth":"auto"});});}
   if(p.coach){p.coach=0;save();setTimeout(()=>coach(p),350);}
@@ -418,5 +419,5 @@ function teacherPage(){epoch++;closeOv();clearToasts();offBoard(0);document.body
     $("#jout").innerHTML=rows.length?`<div class="j-scroll"><table class="j-tbl"><thead><tr><th>نام</th><th>پایه</th><th>سطح</th><th>منزل</th><th>ستاره</th><th>کار خانه</th><th>جانبی</th><th>آزمون</th><th>منزل‌های کم‌ستاره</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${GRADES[r.g]}</td><td>${fa(TRK.indexOf(r.lv)+1)}</td><td>${r.cs>=12?"تمام":fa(r.cs+1)}</td><td>${fa(r.stars)}</td><td>${fa(r.home)}</td><td>${fa(r.side)}</td><td>${fa(r.quiz)}</td><td>${r.per.map((v,i)=>v===1?fa(i+1):null).filter(Boolean).join("، ")||"-"}</td></tr>`).join("")}</tbody></table></div>${bad?`<p class="fb no">${fa(bad)} پیام خوانده نشد؛ احتمالاً کامل کپی نشده است.</p>`:""}`:`<p class="fb no">پیام درستی پیدا نشد. هر پیام باید «نام:» و «کد:» داشته باشد.</p>`;};
   window.scrollTo(0,0);}
 
-if(window.__JT)window.__J={quizPick,curP,missions,mStars,curStop,levelsOf,closeOv,trk,makeCode,readCode,jmap,save,hereSpot,mlayout,adults};
+if(window.__JT)window.__J={harborCanPlay,harborSelector,harborPlay,harborState,harborRecord,harborEligible,harborRouteDone,harborRoute,quizPick,curP,missions,mStars,curStop,levelsOf,closeOv,trk,makeCode,readCode,jmap,save,hereSpot,mlayout,adults};
 startApp();

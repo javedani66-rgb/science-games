@@ -10,14 +10,16 @@
     "st_scale.js": "61f7110189a8192e072908423a3231dbd294f0f5fc6f3cbe135ee46ea330b846",
     "st_lever.js": "40faa55162ed9089fe002903a62d5992b4f03cebd9eac857ac07eff8712ab1e5",
     "st_ramp.js": "51e354b1a77294a7144404cf9e410901be1c59bb15f6aac016cdcbfe4130adc2",
-    "st_pulley.js": "996fc5c7864659945c7aa6f10734cf046abb72ece76c18dda274e56acc2061de",
+    "st_pulley.js": "7cda6dd58b86f727c1eaf9152909baf06c489ff1f7bc725da802c5c6760a371a",
     "st_wheel.js": "e31331d2f0907d5f4d0ae7aa0f1f6fd66901ef0abbb95becf86f9260e274d721",
     "st_wedge.js": "f691a784d4de7315e527fecda47c577ce68f337da2a27281f91e077aa3872aba",
     "st_sort.js": "76348c002eee97ce287f7d8a3c9a932a4d15d3e8c8a2a441d9fff72121adeb5c",
     "content.js": "0f31ef1a727055bce40d2936ced28a95a88a7bda93b8661981ad310efe5ff8da",
     "quiz.js": "27738c1b3e775fe47dfaa613b20ccf60c25560711a99caeebf0de55bdf6713bb",
-    "app.js": "4a1b33ca50c61817afbefd415e14be61118efdf06d628f63c534beafc105f8fa",
-    "journey.js": "3bed2bba6423d6aa623bc82defa9fc232b63f152ce3ecae8aef8d062b13c65e8"
+    "harbor-content.js": "8030662b5b933db0409da30d130110f549bedff5e4a540dd9d21984ce8cafe49",
+    "app.js": "9ea50396f2599b9ca4d02d5c439a4290a383969673c9908b5c87173c1d3bb839",
+    "harbor-routes.js": "c522deebc7fc8bdda040adda3ad3f4925de65121d7979beea00f04727f073bc9",
+    "journey.js": "b9f45d0a7660a826b794cb4494d8b8aa8235c98d91074763b070d516f863dce3"
   },
   "method": {
     "levelReview": "All 78 registered level IDs; generator families sampled, not every numeric variant.",
@@ -17716,5 +17718,205 @@
         "پشتیبانی: goalهای موجود از شاهد کتاب استخراج نشده‌اند؛ تنظیم آن‌ها تصمیم طراحی و نیازمند مشاهدهٔ کودک است، نه ادعای معیار پایه."
       ]
     }
-  }
+  },
+  "baselineSourceHashes": {
+    "core.js": "03a0f29297dbbc19a118d8279af8c27c541fda4c4a82c4bc64b8705cec23f7fd",
+    "machines.js": "d82f2e831597530bc1ace1789f48ca649b067a0dfeb80c5086cc934f531a36e2",
+    "st_force.js": "5e96ebd5e7aa7141706087752f474576f9481806e47cd179915c7d8941b63faa",
+    "st_fric.js": "53bee2a3bb0713c374e68f02abe47f03445f3fd306b0668b907ec0743721369e",
+    "st_scale.js": "61f7110189a8192e072908423a3231dbd294f0f5fc6f3cbe135ee46ea330b846",
+    "st_lever.js": "40faa55162ed9089fe002903a62d5992b4f03cebd9eac857ac07eff8712ab1e5",
+    "st_ramp.js": "51e354b1a77294a7144404cf9e410901be1c59bb15f6aac016cdcbfe4130adc2",
+    "st_pulley.js": "996fc5c7864659945c7aa6f10734cf046abb72ece76c18dda274e56acc2061de",
+    "st_wheel.js": "e31331d2f0907d5f4d0ae7aa0f1f6fd66901ef0abbb95becf86f9260e274d721",
+    "st_wedge.js": "f691a784d4de7315e527fecda47c577ce68f337da2a27281f91e077aa3872aba",
+    "st_sort.js": "76348c002eee97ce287f7d8a3c9a932a4d15d3e8c8a2a441d9fff72121adeb5c",
+    "content.js": "0f31ef1a727055bce40d2936ced28a95a88a7bda93b8661981ad310efe5ff8da",
+    "quiz.js": "27738c1b3e775fe47dfaa613b20ccf60c25560711a99caeebf0de55bdf6713bb",
+    "app.js": "4a1b33ca50c61817afbefd415e14be61118efdf06d628f63c534beafc105f8fa",
+    "journey.js": "3bed2bba6423d6aa623bc82defa9fc232b63f152ce3ecae8aef8d062b13c65e8"
+  },
+  "baselineCommit": "a6b1d509877dcae7047634db7bc84e916bbd593e",
+  "reviewedSourceDeltas": [
+    {
+      "file": "st_pulley.js",
+      "baselineHash": "996fc5c7864659945c7aa6f10734cf046abb72ece76c18dda274e56acc2061de",
+      "currentHash": "7cda6dd58b86f727c1eaf9152909baf06c489ff1f7bc725da802c5c6760a371a",
+      "scope": "H1 route content, replay/save/assistance integration and qualitative pulley rendering; legacy definition extraction unchanged."
+    },
+    {
+      "file": "harbor-content.js",
+      "baselineHash": null,
+      "currentHash": "8030662b5b933db0409da30d130110f549bedff5e4a540dd9d21984ce8cafe49",
+      "scope": "H1 route content, replay/save/assistance integration and qualitative pulley rendering; legacy definition extraction unchanged."
+    },
+    {
+      "file": "app.js",
+      "baselineHash": "4a1b33ca50c61817afbefd415e14be61118efdf06d628f63c534beafc105f8fa",
+      "currentHash": "9ea50396f2599b9ca4d02d5c439a4290a383969673c9908b5c87173c1d3bb839",
+      "scope": "H1 route content, replay/save/assistance integration and qualitative pulley rendering; legacy definition extraction unchanged."
+    },
+    {
+      "file": "harbor-routes.js",
+      "baselineHash": null,
+      "currentHash": "c522deebc7fc8bdda040adda3ad3f4925de65121d7979beea00f04727f073bc9",
+      "scope": "H1 route content, replay/save/assistance integration and qualitative pulley rendering; legacy definition extraction unchanged."
+    },
+    {
+      "file": "journey.js",
+      "baselineHash": "3bed2bba6423d6aa623bc82defa9fc232b63f152ce3ecae8aef8d062b13c65e8",
+      "currentHash": "b9f45d0a7660a826b794cb4494d8b8aa8235c98d91074763b070d516f863dce3",
+      "scope": "H1 route content, replay/save/assistance integration and qualitative pulley rendering; legacy definition extraction unchanged."
+    }
+  ],
+  "routeActivityReviews": [
+    {
+      "id": "harbor.fishing.direction",
+      "routeId": "harbor.fishing",
+      "regionId": "harbor",
+      "title": "بالا کشیدن تور",
+      "grades": [
+        5,
+        6
+      ],
+      "goals": [
+        "pulley.direction"
+      ],
+      "prerequisiteGoals": [],
+      "type": "fixedq",
+      "status": "source-reviewed; child-validation-and-owner-signoff-pending",
+      "placement": "core-candidate",
+      "sourceRefs": [
+        {
+          "document": "docs/HARBOR_CONTENT_2026-10-02.md",
+          "locator": "H1 activities; primary fifth-grade witness printed76–77/PDF84–85"
+        }
+      ]
+    },
+    {
+      "id": "harbor.fishing.compare",
+      "routeId": "harbor.fishing",
+      "regionId": "harbor",
+      "title": "دو راه برای بار قایق",
+      "grades": [
+        5,
+        6
+      ],
+      "goals": [
+        "pulley.compare"
+      ],
+      "prerequisiteGoals": [
+        "pulley.direction"
+      ],
+      "type": "harborCompare",
+      "status": "source-reviewed; child-validation-and-owner-signoff-pending",
+      "placement": "core-candidate",
+      "sourceRefs": [
+        {
+          "document": "docs/HARBOR_CONTENT_2026-10-02.md",
+          "locator": "H1 activities; primary fifth-grade witness printed76–77/PDF84–85"
+        }
+      ]
+    },
+    {
+      "id": "harbor.fishing.fit",
+      "routeId": "harbor.fishing",
+      "regionId": "harbor",
+      "title": "انتخاب برای تور",
+      "grades": [
+        5,
+        6
+      ],
+      "goals": [
+        "pulley.fit"
+      ],
+      "prerequisiteGoals": [
+        "pulley.direction",
+        "pulley.compare"
+      ],
+      "type": "harborNeed",
+      "status": "source-reviewed; child-validation-and-owner-signoff-pending",
+      "placement": "core-candidate",
+      "sourceRefs": [
+        {
+          "document": "docs/HARBOR_CONTENT_2026-10-02.md",
+          "locator": "H1 activities; primary fifth-grade witness printed76–77/PDF84–85"
+        }
+      ]
+    },
+    {
+      "id": "harbor.pirate.direction",
+      "routeId": "harbor.pirate",
+      "regionId": "harbor",
+      "title": "پرچم کشتی",
+      "grades": [
+        5,
+        6
+      ],
+      "goals": [
+        "pulley.direction"
+      ],
+      "prerequisiteGoals": [],
+      "type": "fixedq",
+      "status": "source-reviewed; child-validation-and-owner-signoff-pending",
+      "placement": "core-candidate",
+      "sourceRefs": [
+        {
+          "document": "docs/HARBOR_CONTENT_2026-10-02.md",
+          "locator": "H1 activities; primary fifth-grade witness printed76–77/PDF84–85"
+        }
+      ]
+    },
+    {
+      "id": "harbor.pirate.compare",
+      "routeId": "harbor.pirate",
+      "regionId": "harbor",
+      "title": "آزمایش صندوق",
+      "grades": [
+        5,
+        6
+      ],
+      "goals": [
+        "pulley.compare"
+      ],
+      "prerequisiteGoals": [
+        "pulley.direction"
+      ],
+      "type": "harborCompare",
+      "status": "source-reviewed; child-validation-and-owner-signoff-pending",
+      "placement": "core-candidate",
+      "sourceRefs": [
+        {
+          "document": "docs/HARBOR_CONTENT_2026-10-02.md",
+          "locator": "H1 activities; primary fifth-grade witness printed76–77/PDF84–85"
+        }
+      ]
+    },
+    {
+      "id": "harbor.pirate.fit",
+      "routeId": "harbor.pirate",
+      "regionId": "harbor",
+      "title": "صندوق سنگین",
+      "grades": [
+        5,
+        6
+      ],
+      "goals": [
+        "pulley.fit"
+      ],
+      "prerequisiteGoals": [
+        "pulley.direction",
+        "pulley.compare"
+      ],
+      "type": "harborNeed",
+      "status": "source-reviewed; child-validation-and-owner-signoff-pending",
+      "placement": "core-candidate",
+      "sourceRefs": [
+        {
+          "document": "docs/HARBOR_CONTENT_2026-10-02.md",
+          "locator": "H1 activities; primary fifth-grade witness printed76–77/PDF84–85"
+        }
+      ]
+    }
+  ]
 }

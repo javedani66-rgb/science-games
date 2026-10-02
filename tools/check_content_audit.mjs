@@ -11,6 +11,7 @@ const sameIds=(a,b,label)=>{assert.equal(new Set(a).size,a.length,`${label}: dup
 sameIds(audit.stations.flatMap(s=>s.levels.map(x=>x.id)),inv.levels.map(x=>x.id),'levels');
 sameIds(audit.questions.map(x=>x.id),inv.questions.map(x=>x.id),'questions');
 sameIds(audit.challengeReviews.map(x=>x.id),inv.challenges.map(x=>x.id),'catalog');
+if(inv.routeActivities)sameIds((audit.routeActivityReviews||[]).map(x=>x.id),inv.routeActivities.map(x=>x.id),'route activities');
 assert.deepEqual(audit.sourceHashes,inv.sourceHashes);
 for(const [file,expected] of Object.entries(inv.sourceHashes))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'src/simple-machines',file))).digest('hex'),expected,`source drift: ${file}; re-export and re-review`);
 const placements=new Set(['core','challenge','extension','mixed']);

@@ -1,3 +1,5 @@
+> **H1 source prototype — 2026-10-02:** [implementation checkpoint](HARBOR_IMPLEMENTATION_2026-10-02.md). Two harbor practice routes and same-example replay are implemented with targeted checks; main-region credit/code transfer and H2 full-harbor work remain pending. Live output is unchanged. Use latest release handoff for exact continuation.
+
 > **Current roadmap — 2026-10-02:** Use [whole-game rollout](WHOLE_GAME_ROLLOUT_2026-10-02.md), [coverage ledger](../design/routes/rollout-ledger.json) and the latest section of [release handoff](RELEASE_HANDOFF_2026-10-02.md) before historical tasks below. The whole-game baseline audit is done. Next implementation is H1 harbor/pulley prototype; after it H2 completes harbor, then R1 first land, R2 construction, R3 exhibition, R4 reconciliation/release checks. Earlier direct lever/scale-next instructions are historical; do not restart them independently. Grades 7–9 stay deferred; no publication is authorized by this roadmap.
 
 # Next work — stage 2 of version 2 (written 2026-09-30)
