@@ -191,3 +191,14 @@ Next concrete action: refine and visually check H1 selector under the new rules 
 - Public HTML, service worker and old review ZIP are unchanged. No owner/child approval or full revised-release suite claimed. Subgrid fallback, grayscale human review and future mixed-script text remain bounded review items.
 
 Next concrete action: H2 full harbor, beginning with shared required stop goals and versioned preservation/migration for main progression and code transfer. Reuse H1 source/UI/activities and the whole-game roadmap. Do not restart the baseline content/book audit. Announce model/effort and allow owner adjustment before the new task.
+
+
+## Current continuation checkpoint — 2026-10-02, indie card UI research and contributor foundation
+
+- Base main: `a05dcdc202ed713d8cbc4d2e9708041ad723869b`. Owner accepted announced GPT-6.1 Sol / medium and explicitly requested indie games, creator forums and YouTube. Three bounded agents split visual precedents, forum accounts and video discovery. Root verified source pages and selected images; no repeated broad map/content audit.
+- Added [card study](INDIE_CARD_UI_RESEARCH_2026-10-02.md), `design/cards/README.md`, `evidence.json` and `copy-contract.json`. Records distinguish route/shop/upgrade/reward/action cards, first-hand reports versus visual observations, unresolved problems and untested project inferences. Four YouTube links verified via creator/publisher pages; playback/transcripts unavailable, no watched-video or timestamp claim.
+- Wildfrost shop, Dicey upgrade/trade, Obelisk rewards/event and Dolven image reviewed. Root caught a misidentified Dicey screenshot: VECy3S is two-card trade, not a three-card Buy shop; that claim is rejected and the correction is recorded in evidence. Forum cases include Rampallians and The Cup; designer/creator accounts include Battle Casters, Dragon Bridge and Steamhounds.
+- Owner copy/typography review stays open despite prior technical passes. Proposed goalLead uses actual bold font, balanced information roles and last-line/end-of-block review. JSON examples are proposals, not runtime rewrites. Contributor guide specifies editable art, crop/text zones, states, provenance, stable IDs and before/after decision records. No third-party art or new licensing assertion added.
+- Checks: JSON parse, unique evidence/video IDs, four video entries explicitly watched=false with empty timestamps, local links and whitespace. Runtime/build/source hashes and live/public output unchanged; no gameplay tests repeated for documentation-only changes.
+
+Next: a bounded second harbor copy/hierarchy pass before H2; use the new contract, inspect actual rendered last lines and selective emphasis, preserve progress and record child/owner findings separately. Keep the announce-model/effort-and-wait preference before starting a new task. After that resume H2 and the existing whole-game rollout; do not restart primary textbook or whole-game audits.

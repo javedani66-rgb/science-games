@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-02",
+  "researchStatus": "bounded-review-complete-video-playback-pending",
+  "method": "Three bounded agents; root checked primary URLs and selected images; no direct game session or child study.",
+  "report": "../../docs/INDIE_CARD_UI_RESEARCH_2026-10-02.md",
+  "entries": [
+    {
+      "id": "wildfrost.shop",
+      "game": "Wildfrost",
+      "type": "publisher-screenshot",
+      "url": "https://store.steampowered.com/app/1811990/Wildfrost/",
+      "mediaUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1811990/ss_099d1276c899b5d6813bb2fd354fe1f0c9dbe789.1920x1080.jpg?t=1778084209",
+      "screen": "shop purchase choices",
+      "inspection": "image-viewed-by-agent-and-root",
+      "observation": "Name/effect regions are separate; focused card is larger; price is below; insufficient-funds explanation is explicit.",
+      "limit": "English PC screenshot, no mobile/RTL/child test; not all bottoms align."
+    },
+    {
+      "id": "dicey.upgrade",
+      "game": "Dicey Dungeons",
+      "type": "developer-presskit-screenshot",
+      "url": "https://terrycavanaghgames.com/dice/presskit/xbox/",
+      "mediaUrl": "https://terrycavanaghgames.com/dice/presskit/xbox/dicey_dungeons/images/diceydungeons_4.png",
+      "screen": "two equipment cards before/after upgrade",
+      "inspection": "image-viewed-by-agent-and-root",
+      "observation": "Shared functional bands; bold title, lighter effect; arrow and separate confirmation/exit.",
+      "limit": "Equipment comparison, not route selection; no Persian evidence."
+    },
+    {
+      "id": "dicey.trade",
+      "game": "Dicey Dungeons",
+      "type": "developer-screenshot",
+      "url": "https://terrycavanagh.itch.io/dicey-dungeons",
+      "mediaUrl": "https://img.itch.zone/aW1hZ2UvMjc2MDg1LzIwMTg0MTUucG5n/original/VECy3S.png",
+      "screen": "two-card trade offer; Deal/No Deal",
+      "inspection": "image-viewed-by-root",
+      "observation": "Trading two equipment cards; acceptance/rejection beneath offer.",
+      "limit": "NOT a three-card purchase shop. Preliminary identification was corrected; do not cite Buy alignment from this image."
+    },
+    {
+      "id": "obelisk.reward",
+      "game": "Across the Obelisk",
+      "type": "publisher-screenshot",
+      "url": "https://store.steampowered.com/app/1385380/Across_the_Obelisk/",
+      "mediaUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1385380/0725e5d26b68956ea39e1b4a41583a1f871bff84/ss_0725e5d26b68956ea39e1b4a41583a1f871bff84.1920x1080.jpg?t=1790078458",
+      "screen": "Combat rewards, version label AtO #1.6.0",
+      "inspection": "image-viewed-by-agent-and-root",
+      "observation": "Equal card frames in each character row; different effect lengths; separate shard alternative.",
+      "limit": "Dense adult reward UI; not child route selector."
+    },
+    {
+      "id": "obelisk.event",
+      "game": "Across the Obelisk",
+      "type": "publisher-screenshot",
+      "url": "https://store.steampowered.com/app/1385380/Across_the_Obelisk/",
+      "mediaUrl": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1385380/eb5ce1b874c1521585454e152d1634a7b1a9b7cd/ss_eb5ce1b874c1521585454e152d1634a7b1a9b7cd.1920x1080.jpg?t=1790078458",
+      "screen": "Ylmer's awakening narrative event, AtO #1.6.0",
+      "inspection": "image-viewed-by-agent-and-root",
+      "observation": "Story/art and wide choices separated; visible condition strips.",
+      "limit": "Long narrative text and mostly heavy type; weak selective-bold precedent."
+    },
+    {
+      "id": "dolven.iteration",
+      "game": "Dolven: Runes Gambit",
+      "type": "creator-account-and-image",
+      "url": "https://www.covyne.com/news/5-ui-mistakes-i-made-and-the-principles-that-fixed-them",
+      "mediaUrl": "https://images.squarespace-cdn.com/content/v1/65712d8fe5b62f34482150d3/1777790016087-7TX648AWR83L3VLYUU6R/Red%2Bgildrene%2B%2844%29.png",
+      "inspection": "article-read-and-selected-image-viewed-by-root",
+      "observation": "Author describes excessive text/decoration and template reuse; final Gildrene image separates title, effect and lighter flavor.",
+      "limit": "Digital-to-physical card adaptation; creator reports, no numeric usability result. No blanket no-reading rule adopted."
+    },
+    {
+      "id": "dragonbridge.readability",
+      "game": "Dragon Bridge",
+      "type": "creator-devlog",
+      "url": "https://keithburgun.net/improving-readability-in-dragon-bridge/",
+      "date": "2019-10-05",
+      "inspection": "article-read-by-root",
+      "observation": "Author explains bold title, separate action region, ambiguous notation revised and redundant sub-name removed.",
+      "limit": "Primarily tabletop card readability; not Persian UI evidence."
+    },
+    {
+      "id": "rampallians.feedback",
+      "game": "Rampallians",
+      "type": "creator-forum-thread",
+      "url": "https://www.reddit.com/r/gamedev/comments/1dninrv/card_game_card_ui_feedback_request/",
+      "followup": "https://www.reddit.com/r/gamedev/comments/1dvbb3d/follow_up_on_card_game_card_ui_feedback_request/",
+      "inspection": "threads-read-by-agent-and-root; linked art not inspected",
+      "observation": "Creator accepted feedback on floating title and nested hover explanations; follow-up still acknowledges palette/description issues.",
+      "limit": "Practitioner feedback; no validated improvement measure."
+    },
+    {
+      "id": "thecup.unresolved",
+      "game": "The Cup",
+      "type": "creator-forum-and-devlog",
+      "url": "https://itch.io/t/6943105/first-video-devlog-and-the-card-layout-problem-it-did-not-solve",
+      "followup": "https://tkayyy.itch.io/the-cup/devlog/1664121/video-devlog-1-what-the-paper-version-still-does-better",
+      "date": "2026-09-14",
+      "inspection": "texts-read-by-agent-and-root",
+      "observation": "Creator reports more boxes/longer effects after digitization; column-vs-box comparison planned.",
+      "limit": "Explicitly unresolved; forum image-blur comment is not a player study."
+    },
+    {
+      "id": "battlecasters.mobile",
+      "game": "Battle Casters",
+      "type": "designer-portfolio",
+      "url": "https://derekliu.design/works/battlecaster",
+      "inspection": "text-read-by-agent-and-root",
+      "observation": "Designer reports removing texture, increasing text and relocating flavor/art credits.",
+      "limit": "Personal portfolio; no measured outcome; client changed delivered design."
+    },
+    {
+      "id": "steamhounds.copy",
+      "game": "Steamhounds",
+      "type": "creator-community-article",
+      "url": "https://gamedev.net/tutorials/game-design/ux-for-games/7-ux-lessons-from-the-trenches-r4969",
+      "date": "2018-10-01",
+      "inspection": "text-read-by-agent-and-root",
+      "observation": "Creator reports terse jargon failed to convey benefit and explanatory copy helped newcomers.",
+      "limit": "Not card-route UI; author account without controlled outcome; brevity alone is not clarity."
+    },
+    {
+      "id": "dicey.extensibility",
+      "game": "Dicey Dungeons",
+      "type": "developer-changelog",
+      "url": "https://terrycavanagh.itch.io/dicey-dungeons/devlog/178714/dicey-dungeons-version-19",
+      "date": "2020-09-14",
+      "inspection": "text-read-by-agent-and-root",
+      "observation": "Gamepad episode-state tooltips fixed; flexible generators support additions without replacing existing generators.",
+      "limit": "Historical version record; not a claim that science-games has a public mod API."
+    }
+  ],
+  "videos": [
+    {
+      "id": "wildfrost.explainer",
+      "title": "Wildfrost Explained: A Unique Tactical Roguelike Deckbuilder",
+      "url": "https://www.youtube.com/watch?v=7gD8nbyN3ps",
+      "verifiedFrom": "https://www.wildfrostgame.com/presskit/",
+      "section": "Videos / Explainer Trailer",
+      "inspection": "link-verified; playback/transcript-unavailable",
+      "watched": false,
+      "timestamps": [],
+      "nextReview": [
+        "watch actual choice sequence",
+        "record timestamp range, game version, language, viewport and input",
+        "separate trailer composition from real UI"
+      ]
+    },
+    {
+      "id": "dicey.launch",
+      "title": "Dicey Dungeons Launch Trailer",
+      "url": "https://www.youtube.com/watch?v=E2AdLWsRuHg",
+      "verifiedFrom": "https://terrycavanagh.itch.io/dicey-dungeons",
+      "section": "official embedded trailer",
+      "inspection": "link-verified; playback/transcript-unavailable",
+      "watched": false,
+      "timestamps": [],
+      "nextReview": [
+        "watch actual choice sequence",
+        "record timestamp range, game version, language, viewport and input",
+        "separate trailer composition from real UI"
+      ]
+    },
+    {
+      "id": "spire.launch",
+      "title": "Slay the Spire - Official Launch Trailer",
+      "url": "https://www.youtube.com/watch?v=9SZUtyYSOjQ",
+      "verifiedFrom": "https://www.megacrit.com/games/",
+      "section": "official launch trailer link",
+      "inspection": "link-verified; playback/transcript-unavailable",
+      "watched": false,
+      "timestamps": [],
+      "nextReview": [
+        "watch actual choice sequence",
+        "record timestamp range, game version, language, viewport and input",
+        "separate trailer composition from real UI"
+      ]
+    },
+    {
+      "id": "thecup.devlog1",
+      "title": "The Cup: Video Devlog 1",
+      "url": "https://www.youtube.com/watch?v=5bOT5jxgpF8",
+      "verifiedFrom": "https://tkayyy.itch.io/the-cup/devlog/1664121/video-devlog-1-what-the-paper-version-still-does-better",
+      "section": "creator embedded video",
+      "inspection": "link-verified; playback/transcript-unavailable",
+      "watched": false,
+      "timestamps": [],
+      "nextReview": [
+        "watch actual choice sequence",
+        "record timestamp range, game version, language, viewport and input",
+        "separate trailer composition from real UI"
+      ]
+    }
+  ],
+  "reuse": "Reference links only; no external game art included as project assets.",
+  "inferences": "Project recommendations live in copy-contract.json and README.md; do not attribute them to source creators."
+}

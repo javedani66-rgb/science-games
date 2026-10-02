@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "status": "proposal-not-implemented",
+  "date": "2026-10-02",
+  "runtimeBase": "a05dcdc202ed713d8cbc4d2e9708041ad723869b",
+  "purpose": "Next harbor text/hierarchy iteration; shared future card contributions.",
+  "existingRules": "../routes/ui-guidelines.json",
+  "evidence": "evidence.json",
+  "roles": {
+    "destinationTitle": {
+      "purpose": "where the child goes",
+      "weight": "bold",
+      "required": true
+    },
+    "goalLead": {
+      "purpose": "what the child does",
+      "weight": 700,
+      "required": true,
+      "copy": "one complete concrete action sentence",
+      "initialWordBudgetHypothesis": [
+        5,
+        8
+      ]
+    },
+    "choiceDifference": {
+      "purpose": "why this route differs",
+      "weight": "regular",
+      "required": "only when needed for informed choice"
+    },
+    "difficulty": {
+      "purpose": "reviewed challenge tier, independent of place name"
+    },
+    "state": {
+      "purpose": "selection and completion separately identifiable; unmet prerequisite reason when actually locked"
+    },
+    "entry": {
+      "purpose": "one explicit action"
+    }
+  },
+  "copyReview": [
+    "same information question across peer cards",
+    "no filler to equalize length",
+    "no essential meaning removed to fit",
+    "no literal bold markers in data; renderer applies semantic text role",
+    "short copy may need one explanatory sentence for newcomers"
+  ],
+  "geometryReview": [
+    "right edge of Persian prose",
+    "shared role positions",
+    "last line of goal group and start of following status/action",
+    "natural line-count balance at actual 320/390/1280 viewport",
+    "200% text may reflow to one column; retain meaning"
+  ],
+  "forbid": [
+    "full justification to force sentence endings",
+    "fixed spaces or viewport-specific manual breaks",
+    "font shrinking",
+    "essential clipping",
+    "all text bold",
+    "essential UI text baked into art"
+  ],
+  "examples": [
+    {
+      "routeId": "harbor.fishing",
+      "destinationTitle": "اسکلهٔ ماهیگیری",
+      "goalLead": "بار را با طناب بالا ببر.",
+      "choiceDifference": "جهت حرکت را ببین.",
+      "label": "proposed copy; not runtime content replacement"
+    },
+    {
+      "routeId": "harbor.pirate",
+      "destinationTitle": "اسکلهٔ دزدان دریایی",
+      "goalLead": "بار را با طناب بالا ببر.",
+      "choiceDifference": "دلیل انتخابت را بگو.",
+      "label": "proposed copy; not runtime content replacement"
+    }
+  ],
+  "artistHandoff": [
+    "editable source",
+    "image crop and essential-object safe area",
+    "quiet text background",
+    "replaceable art without progress ID changes",
+    "states and long-title examples",
+    "small icon render",
+    "provenance and reuse permission recorded"
+  ],
+  "continuation": [
+    "revise harbor copy/hierarchy before H2",
+    "compare before/after screenshots at actual size",
+    "observe child explanation of task and route difference",
+    "record accepted/rejected variant and reason",
+    "reuse contracts for new routes; review progression migration separately"
+  ],
+  "validationStatus": "proposal consistency checked; no rendered or child approval for new contract"
+}

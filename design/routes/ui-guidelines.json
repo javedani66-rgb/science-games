@@ -131,5 +131,7 @@
     "https://www.w3.org/TR/alreq/",
     "https://www.w3.org/International/articles/inline-bidi-markup/"
   ],
-  "implementationReport": "../../docs/HARBOR_UI_REFINEMENT_2026-10-02.md"
+  "implementationReport": "../../docs/HARBOR_UI_REFINEMENT_2026-10-02.md",
+  "copyReviewStatus": "owner-requested-revision; existing technical checks do not close typography/copy review",
+  "nextCopyContract": "../cards/copy-contract.json"
 }

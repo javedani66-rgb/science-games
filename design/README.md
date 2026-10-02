@@ -1,3 +1,5 @@
+> کارت‌ها و مسیرها: [راهنمای مشارکت گرافیست و توسعه‌دهنده](cards/README.md)، [شواهد بازی‌های ایندی و فروم‌ها](cards/evidence.json) و [قرارداد پیشنهادی متن](cards/copy-contract.json). بازبینی متن و برجستگی مأموریت بندر هنوز باز است.
+
 # design/ — art sources and approved mockups (not shipped to the site)
 
 ## nanobanana/ — Gemini (Nano Banana Pro) source sheets
