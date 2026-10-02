@@ -1,5 +1,7 @@
 # Science games — working guide
 
+**Owner policy (2026-10-02):** project-wide modularity and low-cost continuation are mandatory for new/touched components. Read `AGENTS.md` and `docs/MODULARITY.md`; do not infer a whole-project rewrite. Latest card alignment is centered for all text/icons, preserving RTL.
+
 Static site on GitHub Pages: https://javedani66-rgb.github.io/science-games/
 Owner: a primary-school science teacher in Iran (grades 2–6). All user-facing text is Persian (RTL).
 Talk to the teacher in Persian, in plain words; she/he is not a programmer.

@@ -212,3 +212,10 @@ Next: a bounded second harbor copy/hierarchy pass before H2; use the new contrac
 - Verified 320/390/736 layouts, textarea growth, emoji loading, exclusive aria-pressed state, no script errors; measured palette text contrast. New dark visual/200%/child review remains pending. No runtime/build/public/service-worker/save changes; existing selector/game tests are not rerun or claimed for this preview-only turn.
 
 Next: collect owner feedback on preview, implement the agreed reusable card roles in H1 source, update targeted selector checks without losing progress/replay contracts, then H2 and whole-game rollout. Never restart the completed books/content audit or broad indie research.
+
+
+## Current continuation checkpoint — 2026-10-02, project-wide modularity policy
+
+Owner explicitly requested the modular rule for all sections and its registration in Git. Added root `AGENTS.md` and `docs/MODULARITY.md`, linked from README/CLAUDE/NEXT. Covers content/config, presentation/assets, behavior, stable state and build tools, concise local contracts, low-token continuation and bounded parallel ownership. This records policy, not a completed architecture migration or permission for a whole-project rewrite.
+
+Latest card feedback supersedes previous right-aligned mission prose: all visible text, emoji/icon and CTA centered; Persian stays RTL. Updated card contract; no preview or runtime rendering change in this documentation-only turn. Next implementation remains the bounded harbor card pass before H2 and whole-game rollout.

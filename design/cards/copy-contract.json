@@ -22,12 +22,13 @@
         5,
         8
       ],
-      "alignment": "right"
+      "alignment": "center"
     },
     "choiceDifference": {
       "purpose": "why this route differs",
       "weight": "regular",
-      "required": "only when needed for informed choice"
+      "required": "only when needed for informed choice",
+      "alignment": "center"
     },
     "difficulty": {
       "purpose": "reviewed challenge tier, independent of place name",
@@ -37,13 +38,16 @@
         "core": "🌱",
         "challenge": "🔥",
         "very-hard": "🌋"
-      }
+      },
+      "alignment": "center"
     },
     "state": {
-      "purpose": "selection by independent ring, elevation and check plus accessible state; no visible selected/open sentences or activity count on route card; actual lock reason retained"
+      "purpose": "selection by independent ring, elevation and check plus accessible state; no visible selected/open sentences or activity count on route card; actual lock reason retained",
+      "alignment": "center"
     },
     "entry": {
-      "purpose": "one playful action; completion still permits replay in actual game"
+      "purpose": "one playful action; completion still permits replay in actual game",
+      "alignment": "center"
     }
   },
   "copyReview": [
@@ -54,7 +58,7 @@
     "short copy may need one explanatory sentence for newcomers"
   ],
   "geometryReview": [
-    "centered destination title; right edge of Persian mission and supporting prose",
+    "center all visible card text and difficulty icons; preserve RTL, shared field centers and role tracks",
     "shared role positions",
     "last line of goal group and start of following status/action",
     "natural line-count balance at actual 320/390/1280 viewport",
@@ -102,6 +106,8 @@
     "record accepted/rejected variant and reason",
     "reuse contracts for new routes; review progression migration separately"
   ],
-  "validationStatus": "interactive preview checked at 320/390/736; copy editing and selection checked; runtime, child approval, new 200% and dark visual review pending",
-  "latestReview": "../../docs/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md"
+  "validationStatus": "previous mixed-alignment preview checked; latest all-centered owner decision recorded but not yet rendered or applied to game",
+  "latestReview": "../../docs/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md",
+  "projectPolicy": "../../docs/MODULARITY.md",
+  "latestAlignmentDecision": "all visible card text, emoji/icon and CTA centered; Persian remains RTL; owner instruction 2026-10-02 supersedes right-aligned prose proposal"
 }
