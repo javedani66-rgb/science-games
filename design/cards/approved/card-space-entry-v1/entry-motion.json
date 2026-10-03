@@ -1,0 +1,48 @@
+{
+  "status": "approved",
+  "approved_date": "2026-10-03",
+  "scope": "map_to_card_space_entry",
+  "prototype_only": true,
+  "map_dissolve_ms": 700,
+  "header": {
+    "delay_ms": 400,
+    "duration_ms": 800,
+    "translate_y_px": -48,
+    "opacity_duration_ms": 650,
+    "easing": "cubic-bezier(.35,0,.15,1)"
+  },
+  "cards": {
+    "order": [
+      "rear",
+      "middle",
+      "front"
+    ],
+    "delays_ms": [
+      1100,
+      1350,
+      1600
+    ],
+    "stagger_ms": 250,
+    "duration_ms": 1000,
+    "translate_y_px": 95,
+    "opacity_duration_ms": 600,
+    "easing": "cubic-bezier(.22,.08,.16,1)",
+    "rotation_deg": 0,
+    "scale": 1
+  },
+  "cards_settled_ms": 2600,
+  "interaction_unlock_ms": 2700,
+  "back_control": {
+    "delay_ms": 2450,
+    "fade_duration_ms": 400
+  },
+  "replay": "reset leaving and readiness; disable transitions during initial reset; force layout; resume entry after two animation frames",
+  "reduced_motion": "minimal-duration transitions; no card entrance delays",
+  "unapproved": [
+    "exit_to_map",
+    "start_game_transition",
+    "return_from_game",
+    "production_integration",
+    "child_testing"
+  ]
+}

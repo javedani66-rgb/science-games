@@ -1,0 +1,41 @@
+{
+  "approved_at": "2026-10-03T01:10:06+03:30",
+  "scope": "Approved interaction prototype with simplified ornamental graphics; not a replacement for harbor-v1 artwork or production integration",
+  "card_switch": {
+    "duration_ms": 650,
+    "horizontal_excursion_px": 22,
+    "scale": 1,
+    "layer_transfer": "gradual crossfade of overlay; no abrupt visible z-order change",
+    "rear_saturation": 0.62,
+    "rear_brightness": 0.82,
+    "preserve_unselected_relative_order": true
+  },
+  "readiness_transition": {
+    "duration_ms": 260,
+    "mode": "mission crossfades to phrase and action together",
+    "automatic_start": false,
+    "other_routes_selectable": true
+  },
+  "action": {
+    "label": "بزن بریم!",
+    "width_percent_of_copy_area": 68,
+    "min_height_css_px": 48,
+    "gap_from_phrase_css_px": 8,
+    "palette": "route family; cream label; gold border"
+  },
+  "prototype_geometry_css_px": {
+    "card_height": 414,
+    "title_height": 55,
+    "rear_strip_step": 64,
+    "mission_height": 122,
+    "copy_inset": [
+      6,
+      9,
+      30,
+      9
+    ],
+    "badge_diameter": 48
+  },
+  "navigation": "Map and game navigation are placeholders in this prototype",
+  "reduced_motion": "Immediate card selection and readiness update"
+}

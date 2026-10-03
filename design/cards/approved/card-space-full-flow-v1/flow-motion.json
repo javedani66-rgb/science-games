@@ -1,0 +1,58 @@
+{
+  "status": "approved",
+  "approved_date": "2026-10-03",
+  "scope": "integrated_card_space_motion_prototype",
+  "references": {
+    "card_interaction": "3baaa05",
+    "map_entry": "0ea8f2b",
+    "map_exit": "f6b7a2a"
+  },
+  "start_game": {
+    "press_feedback_ms": 150,
+    "header_and_rear_cards_fade_ms": 650,
+    "selected_card_turn": {
+      "duration_ms": 800,
+      "origin": "left center",
+      "rotation_y_deg": -100,
+      "translation_x_px": -18,
+      "easing": "cubic-bezier(.35,0,.25,1)"
+    },
+    "clear_background_gap_ms": 200,
+    "scene": {
+      "delay_after_press_feedback_ms": 1000,
+      "duration_ms": 900,
+      "from": "right",
+      "translation_x_from": "100%",
+      "easing": "cubic-bezier(.22,.08,.16,1)"
+    },
+    "controls_fade_interval_after_press_feedback_ms": [
+      1444,
+      1900
+    ],
+    "total_ms": 2050
+  },
+  "return_to_cards": {
+    "game_fade_ms": 750,
+    "header_delay_ms": 300,
+    "header_duration_ms": 800,
+    "card_delays_ms": [
+      800,
+      1050,
+      1300
+    ],
+    "card_duration_ms": 1000,
+    "card_easing": "cubic-bezier(.22,.08,.16,1)",
+    "cards_settled_ms": 2300,
+    "total_ms": 2400,
+    "preserve_selected_path": true,
+    "preserve_readiness": true,
+    "horizontal_scene_exit": false
+  },
+  "prototype_only": true,
+  "remaining": [
+    "sound",
+    "production_integration",
+    "post_game_result_and_destination",
+    "child_testing"
+  ]
+}

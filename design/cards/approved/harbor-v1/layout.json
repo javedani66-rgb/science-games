@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "status": "owner-approved-static-sample",
+  "date": "2026-10-02",
+  "canvas": {
+    "width": 853,
+    "height": 1844,
+    "coordinateUnit": "viewBox px"
+  },
+  "originalFrameBounds": {
+    "title": {
+      "x": 124,
+      "y": 347,
+      "w": 605,
+      "h": 135
+    },
+    "art": {
+      "x": 68,
+      "y": 496,
+      "w": 717,
+      "h": 734
+    },
+    "source": "card-frame-adjuster.html defaults; frame geometry in the approved sample remains unchanged"
+  },
+  "approvedContentSlots": {
+    "title": {
+      "x": 144,
+      "y": 363,
+      "w": 565,
+      "h": 105
+    },
+    "art": {
+      "x": 86,
+      "y": 518,
+      "w": 679,
+      "h": 696,
+      "fit": "cover",
+      "clipRadius": 34
+    },
+    "artPlacementNote": "Final approved placement moves the art 8 px left from the initial x=94/w=671 sample while holding its right edge at x=765; the original gold frame remains untouched."
+  },
+  "text": {
+    "location": "بندر",
+    "title": "اسکلهٔ ماهیگیری",
+    "mission": "تور را با طناب بکش بالا!",
+    "return": "برگردیم به نقشه",
+    "font": "Lalezar",
+    "alignment": "center",
+    "direction": "rtl",
+    "fontSizeViewBoxPx": {
+      "location": 47,
+      "title": 76,
+      "mission": 57,
+      "return": 58
+    }
+  },
+  "editableGroups": [
+    "card-shell",
+    "hero-art",
+    "location-name",
+    "destination-title",
+    "mission",
+    "difficulty-marker",
+    "return-to-map"
+  ],
+  "responsiveReview": {
+    "previewWidthCssPx": 390,
+    "status": "visually reviewed",
+    "childTest": "not performed"
+  },
+  "runtimeIntegration": "pending",
+  "assetSources": {
+    "card-shell": "Original project-generated frame image; preserved without resizing or recolouring.",
+    "hero-art": "Project-generated harbor illustration; the editable sample clips it into the approved art slot.",
+    "difficulty-marker": "Project-generated core-challenge marker used by the sample.",
+    "font": {
+      "name": "Lalezar",
+      "file": "assets/Lalezar.woff2",
+      "license": "SIL Open Font License 1.1",
+      "copyright": "The Lalezar Project Authors"
+    }
+  }
+}

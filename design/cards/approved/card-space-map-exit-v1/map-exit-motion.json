@@ -1,0 +1,33 @@
+{
+  "status": "approved",
+  "approved_date": "2026-10-03",
+  "scope": "card_space_to_map_exit",
+  "prototype_only": true,
+  "total_duration_ms": 1150,
+  "button_press_feedback_ms": 100,
+  "collection_and_back_control": {
+    "delay_ms": 100,
+    "fade_duration_ms": 900,
+    "easing": "cubic-bezier(.35,0,.25,1)",
+    "translation_px": 0,
+    "rotation_deg": 0,
+    "scale": 1,
+    "stagger_ms": 0
+  },
+  "map_and_card_background": {
+    "delay_ms": 250,
+    "fade_duration_ms": 900,
+    "easing": "cubic-bezier(.35,0,.25,1)"
+  },
+  "map_highlight_after_return": false,
+  "preserve_map_position_in_production": true,
+  "entry_reference_commit": "0ea8f2b",
+  "replay_entry_from_start": true,
+  "reduced_motion": "minimal fade durations and zero delays",
+  "unapproved": [
+    "start_game_transition",
+    "return_from_game",
+    "production_integration",
+    "child_testing"
+  ]
+}
