@@ -1,0 +1,2771 @@
+{
+ "entries": {
+  "title.node.F01": {
+   "id": "title.node.F01",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ F01 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: وقتی چیزی را هل می‌دهیم یا می‌کشیم به آن «نیرو» می‌دهیم.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F01",
+    "title"
+   ],
+   "text": "هل دادن و کشیدن",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.F02": {
+   "id": "title.node.F02",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ F02 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: نیرو می‌تواند چیزی را به حرکت دربیاورد، نگه دارد، تندتر/کندتر کند، جهتش را عوض کند یا شکلش را عوض کند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F02",
+    "title"
+   ],
+   "text": "اثر نیرو",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.F03": {
+   "id": "title.node.F03",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ F03 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: نیرو یک سو دارد و می‌تواند کم یا زیاد باشد؛ فنر یا کش اندازه‌اش را نشان می‌دهد؛ بعدها نیروسنج و نیوتون.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F03",
+    "title"
+   ],
+   "text": "جهت و اندازهٔ نیرو",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.F04": {
+   "id": "title.node.F04",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ F04 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: بعضی نیروها با تماس‌اند (دست)، بعضی از دور کار می‌کنند (آهنربا، گرانش).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F04",
+    "title"
+   ],
+   "text": "نیروی تماسی و نیروی از دور",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.F08": {
+   "id": "title.node.F08",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ F08 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: چند نیرو هم‌زمان روی یک جسم‌اند؛ اگر برابر و مخالف باشند حرکت عوض نمی‌شود، وگرنه می‌شود.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F08",
+    "title"
+   ],
+   "text": "چند نیرو با هم (برآیند)",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.F09": {
+   "id": "title.node.F09",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ F09 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: وقتی چیزی را هل می‌دهی آن هم تو را هل می‌دهد؛ جسم تا نیرو نباشد حالتش را نگه می‌دارد.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F09",
+    "title"
+   ],
+   "text": "کنش و واکنش و لختی",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.F05": {
+   "id": "title.node.F05",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ F05 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: زمین هر چیز را به سوی خودش می‌کشد؛ برای همین چیزها می‌افتند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F05",
+    "title"
+   ],
+   "text": "گرانش (کشش زمین)",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.W01": {
+   "id": "title.node.W01",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ W01 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: مقایسهٔ سنگینی دو چیز با دست یا با ترازو.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "W01",
+    "title"
+   ],
+   "text": "سنگین و سبک",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.W02": {
+   "id": "title.node.W02",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ W02 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: «مقدار ماده»ی جسم؛ با ترازو و به گرم و کیلوگرم.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "W02",
+    "title"
+   ],
+   "text": "جرم",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.W03": {
+   "id": "title.node.W03",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ W03 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: وزن نیرویی است که زمین به جسم وارد می‌کند؛ با نیروسنج و بر حسب نیوتون.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "W03",
+    "title"
+   ],
+   "text": "وزن (نیروی گرانش)",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.W04": {
+   "id": "title.node.W04",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ W04 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: جرم جابه‌جا نمی‌شود، وزن بسته به جا فرق می‌کند؛ یکایشان فرق دارد (kg و N).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "W04",
+    "title"
+   ],
+   "text": "جرم در برابر وزن",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.F06": {
+   "id": "title.node.F06",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ F06 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: وقتی دو سطح به هم می‌مالند نیرویی هست که حرکت را کند می‌کند یا نمی‌گذارد چیزی بلغزد؛ هم مزاحم است هم لازم.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F06",
+    "title"
+   ],
+   "text": "اصطکاک",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.F07": {
+   "id": "title.node.F07",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ F07 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: هوا و آب هم مثل اصطکاک جلوی حرکت را می‌گیرند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F07",
+    "title"
+   ],
+   "text": "مقاومت هوا و آب",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.B01": {
+   "id": "title.node.B01",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ B01 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: جسم وقتی می‌ایستد که نقطهٔ تکیه‌اش درست زیر «مرکز وزنش» باشد.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "B01",
+    "title"
+   ],
+   "text": "تعادل و مرکز گرانش",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.B02": {
+   "id": "title.node.B02",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ B02 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: ترازوی دوکفه وقتی تعادل دارد که دو طرف یکی باشند؛ برای مقایسهٔ جرم.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "B02",
+    "title"
+   ],
+   "text": "ترازو: برابری دو طرف",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M04": {
+   "id": "title.node.M04",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M04 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: میله‌ای که روی یک تکیه‌گاه می‌چرخد؛ سه چیز دارد: بار، تکیه‌گاه، نیروی ما.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M04",
+    "title"
+   ],
+   "text": "اهرم",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M05": {
+   "id": "title.node.M05",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M05 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: هرچه بار به تکیه‌گاه نزدیک‌تر، نیروی لازم کمتر؛ تعادل به فاصله بستگی دارد نه فقط به وزن.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M05",
+    "title"
+   ],
+   "text": "جای تکیه‌گاه",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M06": {
+   "id": "title.node.M06",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M06 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: سه چیدمان ممکن از بار، تکیه‌گاه و نیرو (مثل الاکلنگ، فرغون، جارو).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M06",
+    "title"
+   ],
+   "text": "سه نوع اهرم",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.E05": {
+   "id": "title.node.E05",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ E05 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: اثر چرخاندنِ نیرو = نیرو × فاصله از محور (فقط «بیشتر بدانیم»).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E05",
+    "title"
+   ],
+   "text": "گشتاور (اثر چرخاندن)",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M03": {
+   "id": "title.node.M03",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M03 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: بالا بردن روی شیب نیروی کمتری می‌خواهد ولی مسافت بیشتری.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M03",
+    "title"
+   ],
+   "text": "سطح شیب‌دار (رمپ)",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M09": {
+   "id": "title.node.M09",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M09 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: دو سطح شیب‌دار پشت‌به‌پشت؛ نیروی رو به پایین را به کناری تبدیل می‌کند (برش، شکافتن).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M09",
+    "title"
+   ],
+   "text": "گوه",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M10": {
+   "id": "title.node.M10",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M10 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: سطح شیب‌داری که دور استوانه پیچیده شده.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M10",
+    "title"
+   ],
+   "text": "پیچ",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M02": {
+   "id": "title.node.M02",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M02 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: چرخ روی میله می‌چرخد؛ غلتیدن آسان‌تر از لغزیدن است؛ دستهٔ بزرگ‌تر چرخاندن را آسان‌تر می‌کند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M02",
+    "title"
+   ],
+   "text": "چرخ و محور",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M07": {
+   "id": "title.node.M07",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M07 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: چرخ شیاردار با طناب؛ فقط جهت نیرو را عوض می‌کند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M07",
+    "title"
+   ],
+   "text": "قرقرهٔ ثابت",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M08": {
+   "id": "title.node.M08",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M08 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: طناب‌های بیشتر یعنی نیروی کمتر ولی طناب بیشتر باید کشید.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M08",
+    "title"
+   ],
+   "text": "قرقرهٔ متحرک و دستگاه قرقره",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M11": {
+   "id": "title.node.M11",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M11 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: چرخ‌های دندانه‌دار که حرکت و جهت را انتقال می‌دهند؛ شمارش دندانه‌ها و دور.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M11",
+    "title"
+   ],
+   "text": "چرخ‌دنده",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M01": {
+   "id": "title.node.M01",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M01 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: وسیله‌ای که کار را آسان می‌کند (نیروی لازم را کم می‌کند، جهت یا سرعت را عوض می‌کند)؛ ساده و مرکب.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M01",
+    "title"
+   ],
+   "text": "ماشین چیست",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.E01": {
+   "id": "title.node.E01",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ E01 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: انرژی شکل‌های گوناگون دارد و از شکلی به شکل دیگر می‌رود (گرما، حرکت، ذخیره در ارتفاع یا فنر).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E01",
+    "title"
+   ],
+   "text": "انرژی و تبدیلش",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.E02": {
+   "id": "title.node.E02",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ E02 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: وقتی نیرو چیزی را جابه‌جا کند «کار» شده؛ هل دادن دیوار کار نیست. بعداً: نیرو × جابه‌جایی، ژول.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E02",
+    "title"
+   ],
+   "text": "کار (نیرو و جابه‌جایی)",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.E03": {
+   "id": "title.node.E03",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ E03 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: ماشین نیروی لازم را کم می‌کند، به قیمت مسافت بیشتر.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E03",
+    "title"
+   ],
+   "text": "نیروی کمتر، مسافت بیشتر",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.E06": {
+   "id": "title.node.E06",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ E06 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: کار ورودی و خروجی (در حالت ایده‌آل) برابرند؛ ماشین کار را کم نمی‌کند، فقط نیرو و مسافت را معاوضه می‌کند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E06",
+    "title"
+   ],
+   "text": "نیروی کمتر اما زحمت بیشتر",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.M12": {
+   "id": "title.node.M12",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ M12 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: چند ماشین ساده کنار هم (قیچی، چرخ‌دستی، دوچرخه).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M12",
+    "title"
+   ],
+   "text": "ماشین مرکب",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.E04": {
+   "id": "title.node.E04",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ E04 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: چند برابر شدن نیرو توسط ماشین (نسبت بار به نیرو یا نسبت مسافت‌ها). فقط سال‌های آخر، مسیر «بیشتر بدانیم»/انحرافی مخفی و سخت (B31).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E04",
+    "title"
+   ],
+   "text": "مزیت مکانیکی",
+   "status": "draft",
+   "applied": true
+  },
+  "title.node.E07": {
+   "id": "title.node.E07",
+   "kind": "title",
+   "where_fa": "عنوان گرهٔ E07 روی نقشه",
+   "context_fa": "محیطی دربارهٔ: سرعت انجام کار؛ وات. فقط سقف «بیشتر بدانیم».",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E07",
+    "title"
+   ],
+   "text": "توان: سرعت انجام کار",
+   "status": "draft",
+   "applied": true
+  },
+  "title.land.L1": {
+   "id": "title.land.L1",
+   "kind": "title",
+   "where_fa": "نام سرزمین L1",
+   "context_fa": "",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "lands",
+    "L1",
+    "title"
+   ],
+   "text": "نیرو، حرکت و اصطکاک",
+   "status": "draft",
+   "applied": true
+  },
+  "title.land.L2": {
+   "id": "title.land.L2",
+   "kind": "title",
+   "where_fa": "نام سرزمین L2",
+   "context_fa": "",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "lands",
+    "L2",
+    "title"
+   ],
+   "text": "جرم، وزن و گرانش",
+   "status": "draft",
+   "applied": true
+  },
+  "title.land.LW": {
+   "id": "title.land.LW",
+   "kind": "title",
+   "where_fa": "نام سرزمین LW",
+   "context_fa": "",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "lands",
+    "LW",
+    "title"
+   ],
+   "text": "کار و انرژی",
+   "status": "draft",
+   "applied": true
+  },
+  "title.land.LM": {
+   "id": "title.land.LM",
+   "kind": "title",
+   "where_fa": "نام سرزمین LM",
+   "context_fa": "",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "lands",
+    "LM",
+    "title"
+   ],
+   "text": "ماشین‌های ساده",
+   "status": "draft",
+   "applied": true
+  },
+  "title.zone.Z1": {
+   "id": "title.zone.Z1",
+   "kind": "title",
+   "where_fa": "نام منطقهٔ Z1 در سرزمین ماشین‌های ساده",
+   "context_fa": "",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "zones",
+    "Z1",
+    "title"
+   ],
+   "text": "اهرم و تعادل",
+   "status": "draft",
+   "applied": true
+  },
+  "title.zone.Z2": {
+   "id": "title.zone.Z2",
+   "kind": "title",
+   "where_fa": "نام منطقهٔ Z2 در سرزمین ماشین‌های ساده",
+   "context_fa": "",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "zones",
+    "Z2",
+    "title"
+   ],
+   "text": "سطح شیب‌دار، گوه و پیچ",
+   "status": "draft",
+   "applied": true
+  },
+  "title.zone.Z3": {
+   "id": "title.zone.Z3",
+   "kind": "title",
+   "where_fa": "نام منطقهٔ Z3 در سرزمین ماشین‌های ساده",
+   "context_fa": "",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "zones",
+    "Z3",
+    "title"
+   ],
+   "text": "چرخ، قرقره و چرخ‌دنده",
+   "status": "draft",
+   "applied": true
+  },
+  "title.stage.1": {
+   "id": "title.stage.1",
+   "kind": "title",
+   "where_fa": "نام مرحلهٔ 1 از مسیر هشت‌مرحله‌ای",
+   "context_fa": "مسیر پیشنهادی از نیرو تا ماشین‌های ساده",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_stages",
+    "0",
+    "title"
+   ],
+   "text": "نیرو",
+   "status": "draft",
+   "applied": true
+  },
+  "title.stage.2": {
+   "id": "title.stage.2",
+   "kind": "title",
+   "where_fa": "نام مرحلهٔ 2 از مسیر هشت‌مرحله‌ای",
+   "context_fa": "مسیر پیشنهادی از نیرو تا ماشین‌های ساده",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_stages",
+    "1",
+    "title"
+   ],
+   "text": "نیرو و حرکت (کار خیلی ساده معرفی می‌شود)",
+   "status": "draft",
+   "applied": true
+  },
+  "title.stage.3": {
+   "id": "title.stage.3",
+   "kind": "title",
+   "where_fa": "نام مرحلهٔ 3 از مسیر هشت‌مرحله‌ای",
+   "context_fa": "مسیر پیشنهادی از نیرو تا ماشین‌های ساده",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_stages",
+    "2",
+    "title"
+   ],
+   "text": "جرم، وزن و گرانش",
+   "status": "draft",
+   "applied": true
+  },
+  "title.stage.4": {
+   "id": "title.stage.4",
+   "kind": "title",
+   "where_fa": "نام مرحلهٔ 4 از مسیر هشت‌مرحله‌ای",
+   "context_fa": "مسیر پیشنهادی از نیرو تا ماشین‌های ساده",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_stages",
+    "3",
+    "title"
+   ],
+   "text": "کار و انرژی",
+   "status": "draft",
+   "applied": true
+  },
+  "title.stage.5": {
+   "id": "title.stage.5",
+   "kind": "title",
+   "where_fa": "نام مرحلهٔ 5 از مسیر هشت‌مرحله‌ای",
+   "context_fa": "مسیر پیشنهادی از نیرو تا ماشین‌های ساده",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_stages",
+    "4",
+    "title"
+   ],
+   "text": "ماشین چیست و تعادل",
+   "status": "draft",
+   "applied": true
+  },
+  "title.stage.6": {
+   "id": "title.stage.6",
+   "kind": "title",
+   "where_fa": "نام مرحلهٔ 6 از مسیر هشت‌مرحله‌ای",
+   "context_fa": "مسیر پیشنهادی از نیرو تا ماشین‌های ساده",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_stages",
+    "5",
+    "title"
+   ],
+   "text": "اهرم",
+   "status": "draft",
+   "applied": true
+  },
+  "title.stage.7": {
+   "id": "title.stage.7",
+   "kind": "title",
+   "where_fa": "نام مرحلهٔ 7 از مسیر هشت‌مرحله‌ای",
+   "context_fa": "مسیر پیشنهادی از نیرو تا ماشین‌های ساده",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_stages",
+    "6",
+    "title"
+   ],
+   "text": "سطح شیب‌دار، گوه و پیچ",
+   "status": "draft",
+   "applied": true
+  },
+  "title.stage.8": {
+   "id": "title.stage.8",
+   "kind": "title",
+   "where_fa": "نام مرحلهٔ 8 از مسیر هشت‌مرحله‌ای",
+   "context_fa": "مسیر پیشنهادی از نیرو تا ماشین‌های ساده",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_stages",
+    "7",
+    "title"
+   ],
+   "text": "چرخ، قرقره و چرخ‌دنده (پایان: نیروی کمتر اما زحمت بیشتر)",
+   "status": "draft",
+   "applied": true
+  },
+  "title.path.main": {
+   "id": "title.path.main",
+   "kind": "title",
+   "where_fa": "نام مسیر «main»",
+   "context_fa": "",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_names",
+    "main",
+    "title"
+   ],
+   "text": "مسیر بزرگ: از نیرو تا ماشین‌های ساده",
+   "status": "draft",
+   "applied": true
+  },
+  "title.path.machines": {
+   "id": "title.path.machines",
+   "kind": "title",
+   "where_fa": "نام مسیر «machines»",
+   "context_fa": "",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "path_names",
+    "machines",
+    "title"
+   ],
+   "text": "میانبر: فقط ماشین‌ها (مراحل ۵ تا ۸)",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F01.plain": {
+   "id": "concept.F01.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «هل دادن و کشیدن»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "0",
+    "plain_fa"
+   ],
+   "text": "وقتی چیزی را هل می‌دهیم یا می‌کشیم به آن «نیرو» می‌دهیم.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F01.D2": {
+   "id": "concept.F01.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «هل دادن و کشیدن»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "0",
+    "depths",
+    "D2"
+   ],
+   "text": "«نیرو یعنی هل یا کشش».",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F02.plain": {
+   "id": "concept.F02.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «اثر نیرو»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "1",
+    "plain_fa"
+   ],
+   "text": "نیرو می‌تواند چیزی را به حرکت دربیاورد، نگه دارد، تندتر/کندتر کند، جهتش را عوض کند یا شکلش را عوض کند.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F02.D2": {
+   "id": "concept.F02.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «اثر نیرو»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "1",
+    "depths",
+    "D2"
+   ],
+   "text": "فهرست اثرها و پیش‌بینی اثر.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F03.plain": {
+   "id": "concept.F03.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «جهت و اندازهٔ نیرو»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "2",
+    "plain_fa"
+   ],
+   "text": "نیرو یک سو دارد و می‌تواند کم یا زیاد باشد؛ فنر یا کش اندازه‌اش را نشان می‌دهد؛ بعدها نیروسنج و نیوتون.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F03.D2": {
+   "id": "concept.F03.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «جهت و اندازهٔ نیرو»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "2",
+    "depths",
+    "D2"
+   ],
+   "text": "«بیشتر/کمتر»، جهت.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F03.D3": {
+   "id": "concept.F03.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «جهت و اندازهٔ نیرو»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "2",
+    "depths",
+    "D3"
+   ],
+   "text": "نیروسنج و نیوتون.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F04.plain": {
+   "id": "concept.F04.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «نیروی تماسی و نیروی از دور»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "3",
+    "plain_fa"
+   ],
+   "text": "بعضی نیروها با تماس‌اند (دست)، بعضی از دور کار می‌کنند (آهنربا، گرانش).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F04.D2": {
+   "id": "concept.F04.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «نیروی تماسی و نیروی از دور»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "3",
+    "depths",
+    "D2"
+   ],
+   "text": "تماسی/از دور؛ جذب و دفع.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F08.plain": {
+   "id": "concept.F08.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «چند نیرو با هم (برآیند)»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "4",
+    "plain_fa"
+   ],
+   "text": "چند نیرو هم‌زمان روی یک جسم‌اند؛ اگر برابر و مخالف باشند حرکت عوض نمی‌شود، وگرنه می‌شود.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F08.D2": {
+   "id": "concept.F08.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «چند نیرو با هم (برآیند)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "4",
+    "depths",
+    "D2"
+   ],
+   "text": "برابر و مخالف ⇒ بی‌حرکت.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F08.D4": {
+   "id": "concept.F08.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «چند نیرو با هم (برآیند)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "4",
+    "depths",
+    "D4"
+   ],
+   "text": "جمع و تفریق نیروها (ایران G9).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F09.plain": {
+   "id": "concept.F09.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «کنش و واکنش و لختی»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "5",
+    "plain_fa"
+   ],
+   "text": "وقتی چیزی را هل می‌دهی آن هم تو را هل می‌دهد؛ جسم تا نیرو نباشد حالتش را نگه می‌دارد.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F09.D2": {
+   "id": "concept.F09.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «کنش و واکنش و لختی»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "5",
+    "depths",
+    "D2"
+   ],
+   "text": "کیفی: «هل ↔ هل متقابل».",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F09.D4": {
+   "id": "concept.F09.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «کنش و واکنش و لختی»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "5",
+    "depths",
+    "D4"
+   ],
+   "text": "قوانین نیوتون (ایران G9).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F05.plain": {
+   "id": "concept.F05.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «گرانش (کشش زمین)»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "6",
+    "plain_fa"
+   ],
+   "text": "زمین هر چیز را به سوی خودش می‌کشد؛ برای همین چیزها می‌افتند.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F05.D2": {
+   "id": "concept.F05.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «گرانش (کشش زمین)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "6",
+    "depths",
+    "D2"
+   ],
+   "text": "«زمین به سوی خودش می‌کشد».",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W01.plain": {
+   "id": "concept.W01.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «سنگین و سبک»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "7",
+    "plain_fa"
+   ],
+   "text": "مقایسهٔ سنگینی دو چیز با دست یا با ترازو.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W01.D2": {
+   "id": "concept.W01.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «سنگین و سبک»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "7",
+    "depths",
+    "D2"
+   ],
+   "text": "«سنگین‌تر» با ترازو.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W02.plain": {
+   "id": "concept.W02.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «جرم»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "8",
+    "plain_fa"
+   ],
+   "text": "«مقدار ماده»ی جسم؛ با ترازو و به گرم و کیلوگرم.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W02.D2": {
+   "id": "concept.W02.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «جرم»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "8",
+    "depths",
+    "D2"
+   ],
+   "text": "جرم = مقدار ماده.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W02.D3": {
+   "id": "concept.W02.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «جرم»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "8",
+    "depths",
+    "D3"
+   ],
+   "text": "خواندن گرم و کیلوگرم.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W03.plain": {
+   "id": "concept.W03.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «وزن (نیروی گرانش)»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "9",
+    "plain_fa"
+   ],
+   "text": "وزن نیرویی است که زمین به جسم وارد می‌کند؛ با نیروسنج و بر حسب نیوتون.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W03.D2": {
+   "id": "concept.W03.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «وزن (نیروی گرانش)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "9",
+    "depths",
+    "D2"
+   ],
+   "text": "وزن یک نیرو است (زمین می‌کشد).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W03.D3": {
+   "id": "concept.W03.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «وزن (نیروی گرانش)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "9",
+    "depths",
+    "D3"
+   ],
+   "text": "نیروسنج، نیوتون؛ ۱ kg ≈ ۱۰ N.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W03.D4": {
+   "id": "concept.W03.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «وزن (نیروی گرانش)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "9",
+    "depths",
+    "D4"
+   ],
+   "text": "W = m×g (فقط «بیشتر بدانیم»).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W04.plain": {
+   "id": "concept.W04.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «جرم در برابر وزن»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "10",
+    "plain_fa"
+   ],
+   "text": "جرم جابه‌جا نمی‌شود، وزن بسته به جا فرق می‌کند؛ یکایشان فرق دارد (kg و N).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W04.D2": {
+   "id": "concept.W04.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «جرم در برابر وزن»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "10",
+    "depths",
+    "D2"
+   ],
+   "text": "دو کمیت متفاوت.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W04.D3": {
+   "id": "concept.W04.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «جرم در برابر وزن»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "10",
+    "depths",
+    "D3"
+   ],
+   "text": "kg در برابر N.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.W04.D4": {
+   "id": "concept.W04.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «جرم در برابر وزن»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "10",
+    "depths",
+    "D4"
+   ],
+   "text": "W = m×g.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F06.plain": {
+   "id": "concept.F06.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «اصطکاک»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "11",
+    "plain_fa"
+   ],
+   "text": "وقتی دو سطح به هم می‌مالند نیرویی هست که حرکت را کند می‌کند یا نمی‌گذارد چیزی بلغزد؛ هم مزاحم است هم لازم.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F06.D2": {
+   "id": "concept.F06.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «اصطکاک»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "11",
+    "depths",
+    "D2"
+   ],
+   "text": "مفید و مضر؛ علت (سطح، فشار).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F06.D3": {
+   "id": "concept.F06.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «اصطکاک»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "11",
+    "depths",
+    "D3"
+   ],
+   "text": "اندازه با نیروسنج.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F06.D4": {
+   "id": "concept.F06.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «اصطکاک»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "11",
+    "depths",
+    "D4"
+   ],
+   "text": "μ (فقط فیزیک ۱۲؛ فراتر).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F07.plain": {
+   "id": "concept.F07.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «مقاومت هوا و آب»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "12",
+    "plain_fa"
+   ],
+   "text": "هوا و آب هم مثل اصطکاک جلوی حرکت را می‌گیرند.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.F07.D2": {
+   "id": "concept.F07.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «مقاومت هوا و آب»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "12",
+    "depths",
+    "D2"
+   ],
+   "text": "«هوا هم مثل اصطکاک می‌گیرد».",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.B01.plain": {
+   "id": "concept.B01.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «تعادل و مرکز گرانش»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "13",
+    "plain_fa"
+   ],
+   "text": "جسم وقتی می‌ایستد که نقطهٔ تکیه‌اش درست زیر «مرکز وزنش» باشد.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.B01.D2": {
+   "id": "concept.B01.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «تعادل و مرکز گرانش»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "13",
+    "depths",
+    "D2"
+   ],
+   "text": "مرکز گرانش.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.B01.D3": {
+   "id": "concept.B01.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «تعادل و مرکز گرانش»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "13",
+    "depths",
+    "D3"
+   ],
+   "text": "شمارش سکه.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.B02.plain": {
+   "id": "concept.B02.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «ترازو: برابری دو طرف»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "14",
+    "plain_fa"
+   ],
+   "text": "ترازوی دوکفه وقتی تعادل دارد که دو طرف یکی باشند؛ برای مقایسهٔ جرم.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.B02.D2": {
+   "id": "concept.B02.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «ترازو: برابری دو طرف»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "14",
+    "depths",
+    "D2"
+   ],
+   "text": "برابر ⇒ تعادل ⇒ جرم برابر.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M04.plain": {
+   "id": "concept.M04.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «اهرم»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "15",
+    "plain_fa"
+   ],
+   "text": "میله‌ای که روی یک تکیه‌گاه می‌چرخد؛ سه چیز دارد: بار، تکیه‌گاه، نیروی ما.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M04.D2": {
+   "id": "concept.M04.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «اهرم»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "15",
+    "depths",
+    "D2"
+   ],
+   "text": "بار، تکیه‌گاه، نیرو.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M05.plain": {
+   "id": "concept.M05.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «جای تکیه‌گاه»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "16",
+    "plain_fa"
+   ],
+   "text": "هرچه بار به تکیه‌گاه نزدیک‌تر، نیروی لازم کمتر؛ تعادل به فاصله بستگی دارد نه فقط به وزن.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M05.D2": {
+   "id": "concept.M05.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «جای تکیه‌گاه»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "16",
+    "depths",
+    "D2"
+   ],
+   "text": "نزدیک‌تر به بار ⇒ نیروی کمتر.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M05.D3": {
+   "id": "concept.M05.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «جای تکیه‌گاه»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "16",
+    "depths",
+    "D3"
+   ],
+   "text": "شمارش سکه/مکعب و فاصله.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M05.D4": {
+   "id": "concept.M05.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «جای تکیه‌گاه»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "16",
+    "depths",
+    "D4"
+   ],
+   "text": "d₁F₁ = d₂F₂ (فقط «بیشتر بدانیم»).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M06.plain": {
+   "id": "concept.M06.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «سه نوع اهرم»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "17",
+    "plain_fa"
+   ],
+   "text": "سه چیدمان ممکن از بار، تکیه‌گاه و نیرو (مثل الاکلنگ، فرغون، جارو).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M06.D2": {
+   "id": "concept.M06.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «سه نوع اهرم»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "17",
+    "depths",
+    "D2"
+   ],
+   "text": "دسته‌بندی اشیای روزمره بر پایهٔ «چیزِ وسط».",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E05.plain": {
+   "id": "concept.E05.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «گشتاور (اثر چرخاندن)»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "18",
+    "plain_fa"
+   ],
+   "text": "اثر چرخاندنِ نیرو = نیرو × فاصله از محور (فقط «بیشتر بدانیم»).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E05.D2": {
+   "id": "concept.E05.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «گشتاور (اثر چرخاندن)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "18",
+    "depths",
+    "D2"
+   ],
+   "text": "دستهٔ بلندتر ⇒ اثر چرخاندن بیشتر.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E05.D4": {
+   "id": "concept.E05.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «گشتاور (اثر چرخاندن)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "18",
+    "depths",
+    "D4"
+   ],
+   "text": "نیرو × فاصله.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M03.plain": {
+   "id": "concept.M03.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «سطح شیب‌دار (رمپ)»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "19",
+    "plain_fa"
+   ],
+   "text": "بالا بردن روی شیب نیروی کمتری می‌خواهد ولی مسافت بیشتری.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M03.D2": {
+   "id": "concept.M03.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «سطح شیب‌دار (رمپ)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "19",
+    "depths",
+    "D2"
+   ],
+   "text": "نیروی کمتر، مسافت بیشتر.",
+   "status": "reviewed",
+   "applied": true
+  },
+  "concept.M03.D3": {
+   "id": "concept.M03.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «سطح شیب‌دار (رمپ)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "19",
+    "depths",
+    "D3"
+   ],
+   "text": "اندازه با کش/نیروسنج.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M03.D4": {
+   "id": "concept.M03.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «سطح شیب‌دار (رمپ)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "19",
+    "depths",
+    "D4"
+   ],
+   "text": "طول ÷ ارتفاع.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M09.plain": {
+   "id": "concept.M09.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «گوه»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "20",
+    "plain_fa"
+   ],
+   "text": "دو سطح شیب‌دار پشت‌به‌پشت؛ نیروی رو به پایین را به کناری تبدیل می‌کند (برش، شکافتن).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M09.D2": {
+   "id": "concept.M09.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «گوه»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "20",
+    "depths",
+    "D2"
+   ],
+   "text": "شکافتن؛ جهت نیرو عوض می‌شود.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M09.D4": {
+   "id": "concept.M09.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «گوه»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "20",
+    "depths",
+    "D4"
+   ],
+   "text": "طول ÷ پهنا (Bv).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M10.plain": {
+   "id": "concept.M10.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «پیچ»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "21",
+    "plain_fa"
+   ],
+   "text": "سطح شیب‌داری که دور استوانه پیچیده شده.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M10.D2": {
+   "id": "concept.M10.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «پیچ»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "21",
+    "depths",
+    "D2"
+   ],
+   "text": "سطح شیب‌دار پیچ‌خورده؛ رزوهٔ فشرده‌تر، دور بیشتر، فشار کمتر.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M10.D3": {
+   "id": "concept.M10.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «پیچ»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "21",
+    "depths",
+    "D3"
+   ],
+   "text": "شمارش دور.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M10.D4": {
+   "id": "concept.M10.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «پیچ»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "21",
+    "depths",
+    "D4"
+   ],
+   "text": "2πr/d (Bv؛ فراتر).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M02.plain": {
+   "id": "concept.M02.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «چرخ و محور»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "22",
+    "plain_fa"
+   ],
+   "text": "چرخ روی میله می‌چرخد؛ غلتیدن آسان‌تر از لغزیدن است؛ دستهٔ بزرگ‌تر چرخاندن را آسان‌تر می‌کند.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M02.D2": {
+   "id": "concept.M02.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «چرخ و محور»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "22",
+    "depths",
+    "D2"
+   ],
+   "text": "چرخ + محور؛ دستهٔ بزرگ‌تر آسان‌تر.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M02.D4": {
+   "id": "concept.M02.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «چرخ و محور»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "22",
+    "depths",
+    "D4"
+   ],
+   "text": "D/d (فقط «بیشتر بدانیم»).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M07.plain": {
+   "id": "concept.M07.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «قرقرهٔ ثابت»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "23",
+    "plain_fa"
+   ],
+   "text": "چرخ شیاردار با طناب؛ فقط جهت نیرو را عوض می‌کند.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M07.D2": {
+   "id": "concept.M07.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «قرقرهٔ ثابت»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "23",
+    "depths",
+    "D2"
+   ],
+   "text": "فقط جهت را عوض می‌کند.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M08.plain": {
+   "id": "concept.M08.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «قرقرهٔ متحرک و دستگاه قرقره»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "24",
+    "plain_fa"
+   ],
+   "text": "طناب‌های بیشتر یعنی نیروی کمتر ولی طناب بیشتر باید کشید.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M08.D2": {
+   "id": "concept.M08.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «قرقرهٔ متحرک و دستگاه قرقره»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "24",
+    "depths",
+    "D2"
+   ],
+   "text": "طناب بیشتر ⇒ نیروی کمتر (کیفی).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M08.D3": {
+   "id": "concept.M08.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «قرقرهٔ متحرک و دستگاه قرقره»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "24",
+    "depths",
+    "D3"
+   ],
+   "text": "شمارش رشته‌ها.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M08.D4": {
+   "id": "concept.M08.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «قرقرهٔ متحرک و دستگاه قرقره»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "24",
+    "depths",
+    "D4"
+   ],
+   "text": "MA = تعداد رشته‌ها (فقط «بیشتر بدانیم»).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M11.plain": {
+   "id": "concept.M11.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «چرخ‌دنده»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "25",
+    "plain_fa"
+   ],
+   "text": "چرخ‌های دندانه‌دار که حرکت و جهت را انتقال می‌دهند؛ شمارش دندانه‌ها و دور.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M11.D2": {
+   "id": "concept.M11.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «چرخ‌دنده»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "25",
+    "depths",
+    "D2"
+   ],
+   "text": "جهت مخالف؛ بزرگ‌تر ≠ قوی‌تر.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M11.D3": {
+   "id": "concept.M11.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «چرخ‌دنده»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "25",
+    "depths",
+    "D3"
+   ],
+   "text": "شمارش دندانه و دور.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M11.D4": {
+   "id": "concept.M11.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «چرخ‌دنده»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "25",
+    "depths",
+    "D4"
+   ],
+   "text": "نسبت دندانه‌ها (فقط «بیشتر بدانیم»).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M01.plain": {
+   "id": "concept.M01.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «ماشین چیست»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "26",
+    "plain_fa"
+   ],
+   "text": "وسیله‌ای که کار را آسان می‌کند (نیروی لازم را کم می‌کند، جهت یا سرعت را عوض می‌کند)؛ ساده و مرکب.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M01.D2": {
+   "id": "concept.M01.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «ماشین چیست»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "26",
+    "depths",
+    "D2"
+   ],
+   "text": "«کار را آسان می‌کند»؛ ساده/مرکب.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E01.plain": {
+   "id": "concept.E01.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «انرژی و تبدیلش»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "27",
+    "plain_fa"
+   ],
+   "text": "انرژی شکل‌های گوناگون دارد و از شکلی به شکل دیگر می‌رود (گرما، حرکت، ذخیره در ارتفاع یا فنر).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E01.D2": {
+   "id": "concept.E01.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «انرژی و تبدیلش»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "27",
+    "depths",
+    "D2"
+   ],
+   "text": "تبدیل شکل‌ها.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E01.D3": {
+   "id": "concept.E01.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «انرژی و تبدیلش»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "27",
+    "depths",
+    "D3"
+   ],
+   "text": "ژول (فقط نام در G6).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E02.plain": {
+   "id": "concept.E02.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «کار (نیرو و جابه‌جایی)»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "28",
+    "plain_fa"
+   ],
+   "text": "وقتی نیرو چیزی را جابه‌جا کند «کار» شده؛ هل دادن دیوار کار نیست. بعداً: نیرو × جابه‌جایی، ژول.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E02.D2": {
+   "id": "concept.E02.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «کار (نیرو و جابه‌جایی)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "28",
+    "depths",
+    "D2"
+   ],
+   "text": "«کار = هل/کشش + جابه‌جایی»؛ جدا از «کار» روزمره.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E02.D3": {
+   "id": "concept.E02.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «کار (نیرو و جابه‌جایی)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "28",
+    "depths",
+    "D3"
+   ],
+   "text": "ژول؛ نیرو و جابه‌جایی را با عدد.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E02.D4": {
+   "id": "concept.E02.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «کار (نیرو و جابه‌جایی)»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "28",
+    "depths",
+    "D4"
+   ],
+   "text": "W = F×d (ایران G7).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E03.plain": {
+   "id": "concept.E03.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «نیروی کمتر، مسافت بیشتر»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "29",
+    "plain_fa"
+   ],
+   "text": "ماشین نیروی لازم را کم می‌کند، به قیمت مسافت بیشتر.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E03.D2": {
+   "id": "concept.E03.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «نیروی کمتر، مسافت بیشتر»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "29",
+    "depths",
+    "D2"
+   ],
+   "text": "نیروی کمتر ⇐ مسافت بیشتر.",
+   "status": "reviewed",
+   "applied": true
+  },
+  "concept.E03.D3": {
+   "id": "concept.E03.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «نیروی کمتر، مسافت بیشتر»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "29",
+    "depths",
+    "D3"
+   ],
+   "text": "اندازهٔ نیرو و راه.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E06.plain": {
+   "id": "concept.E06.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «نیروی کمتر اما زحمت بیشتر»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "30",
+    "plain_fa"
+   ],
+   "text": "کار ورودی و خروجی (در حالت ایده‌آل) برابرند؛ ماشین کار را کم نمی‌کند، فقط نیرو و مسافت را معاوضه می‌کند.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E06.D2": {
+   "id": "concept.E06.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «نیروی کمتر اما زحمت بیشتر»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "30",
+    "depths",
+    "D2"
+   ],
+   "text": "«کار همان است».",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E06.D4": {
+   "id": "concept.E06.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «نیروی کمتر اما زحمت بیشتر»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "30",
+    "depths",
+    "D4"
+   ],
+   "text": "ورودی = خروجی (ایران G9).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M12.plain": {
+   "id": "concept.M12.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «ماشین مرکب»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "31",
+    "plain_fa"
+   ],
+   "text": "چند ماشین ساده کنار هم (قیچی، چرخ‌دستی، دوچرخه).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.M12.D2": {
+   "id": "concept.M12.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «ماشین مرکب»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "31",
+    "depths",
+    "D2"
+   ],
+   "text": "ترکیب چند ماشین.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E04.plain": {
+   "id": "concept.E04.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «مزیت مکانیکی»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "32",
+    "plain_fa"
+   ],
+   "text": "چند برابر شدن نیرو توسط ماشین (نسبت بار به نیرو یا نسبت مسافت‌ها). فقط سال‌های آخر، مسیر «بیشتر بدانیم»/انحرافی مخفی و سخت (B31).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E04.D2": {
+   "id": "concept.E04.D2",
+   "kind": "explainer",
+   "where_fa": "متن سطح D2 گرهٔ «مزیت مکانیکی»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "32",
+    "depths",
+    "D2"
+   ],
+   "text": "«چند برابر» کیفی.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E04.D3": {
+   "id": "concept.E04.D3",
+   "kind": "explainer",
+   "where_fa": "متن سطح D3 گرهٔ «مزیت مکانیکی»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "32",
+    "depths",
+    "D3"
+   ],
+   "text": "شمارش (۲ رشته ⇒ ۲×).",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E04.D4": {
+   "id": "concept.E04.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «مزیت مکانیکی»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "32",
+    "depths",
+    "D4"
+   ],
+   "text": "نسبت‌ها.",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E07.plain": {
+   "id": "concept.E07.plain",
+   "kind": "explainer",
+   "where_fa": "توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «توان: سرعت انجام کار»",
+   "context_fa": "یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "33",
+    "plain_fa"
+   ],
+   "text": "سرعت انجام کار؛ وات. فقط سقف «بیشتر بدانیم».",
+   "status": "draft",
+   "applied": true
+  },
+  "concept.E07.D4": {
+   "id": "concept.E07.D4",
+   "kind": "explainer",
+   "where_fa": "متن سطح D4 گرهٔ «توان: سرعت انجام کار»",
+   "context_fa": "D2 کیفی، D3 عددی، D4 فرمول",
+   "band": "همه",
+   "file": "docs/research/world/nodes_v2_draft.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "33",
+    "depths",
+    "D4"
+   ],
+   "text": "P = W ÷ t (فقط فیزیک ۱۰).",
+   "status": "draft",
+   "applied": true
+  },
+  "card.pulley.b1.band": {
+   "id": "card.pulley.b1.band",
+   "kind": "label",
+   "where_fa": "کارت آموزشی قرقره، پایهٔ ۱ و ۲: برچسب سطح بالای کارت",
+   "context_fa": "کارت درس با تصویر طناب و قرقره (ثابت و متحرک)",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261007/lesson-card-options/card.html",
+   "target": "card",
+   "locator": [
+    "1",
+    "band"
+   ],
+   "text": "پایهٔ ۱ و ۲",
+   "status": "draft",
+   "applied": true
+  },
+  "card.pulley.b1.say": {
+   "id": "card.pulley.b1.say",
+   "kind": "card",
+   "where_fa": "کارت آموزشی قرقره، پایهٔ ۱ و ۲: جملهٔ اصلی زیر تصویر",
+   "context_fa": "کارت درس با تصویر طناب و قرقره (ثابت و متحرک)",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261007/lesson-card-options/card.html",
+   "target": "card",
+   "locator": [
+    "1",
+    "say"
+   ],
+   "text": "چرخِ ثابت فقط راهِ طناب را عوض می‌کند.<br>چرخِ متحرک کشیدن را سبک‌تر می‌کند.",
+   "status": "draft",
+   "applied": true
+  },
+  "card.pulley.b2.band": {
+   "id": "card.pulley.b2.band",
+   "kind": "label",
+   "where_fa": "کارت آموزشی قرقره، پایهٔ ۳ و ۴: برچسب سطح بالای کارت",
+   "context_fa": "کارت درس با تصویر طناب و قرقره (ثابت و متحرک)",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261007/lesson-card-options/card.html",
+   "target": "card",
+   "locator": [
+    "2",
+    "band"
+   ],
+   "text": "پایهٔ ۳ و ۴",
+   "status": "draft",
+   "applied": true
+  },
+  "card.pulley.b2.say": {
+   "id": "card.pulley.b2.say",
+   "kind": "card",
+   "where_fa": "کارت آموزشی قرقره، پایهٔ ۳ و ۴: جملهٔ اصلی زیر تصویر",
+   "context_fa": "کارت درس با تصویر طناب و قرقره (ثابت و متحرک)",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261007/lesson-card-options/card.html",
+   "target": "card",
+   "locator": [
+    "2",
+    "say"
+   ],
+   "text": "چرخِ ثابت فقط مسیرِ طناب را عوض می‌کند. (آزمون)",
+   "status": "reviewed",
+   "applied": true
+  },
+  "card.pulley.b2.sub": {
+   "id": "card.pulley.b2.sub",
+   "kind": "card",
+   "where_fa": "کارت آموزشی قرقره، پایهٔ ۳ و ۴: توضیح تکمیلی کوچک‌تر",
+   "context_fa": "کارت درس با تصویر طناب و قرقره (ثابت و متحرک)",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261007/lesson-card-options/card.html",
+   "target": "card",
+   "locator": [
+    "2",
+    "sub"
+   ],
+   "text": "با چرخِ متحرک نیروی کشیدن نصف می‌شود؛ طناب دو برابر کشیده می‌شود.",
+   "status": "draft",
+   "applied": true
+  },
+  "card.pulley.b3.band": {
+   "id": "card.pulley.b3.band",
+   "kind": "label",
+   "where_fa": "کارت آموزشی قرقره، پایهٔ ۵ و ۶: برچسب سطح بالای کارت",
+   "context_fa": "کارت درس با تصویر طناب و قرقره (ثابت و متحرک)",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261007/lesson-card-options/card.html",
+   "target": "card",
+   "locator": [
+    "3",
+    "band"
+   ],
+   "text": "پایهٔ ۵ و ۶",
+   "status": "draft",
+   "applied": true
+  },
+  "card.pulley.b3.say": {
+   "id": "card.pulley.b3.say",
+   "kind": "card",
+   "where_fa": "کارت آموزشی قرقره، پایهٔ ۵ و ۶: جملهٔ اصلی زیر تصویر",
+   "context_fa": "کارت درس با تصویر طناب و قرقره (ثابت و متحرک)",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261007/lesson-card-options/card.html",
+   "target": "card",
+   "locator": [
+    "3",
+    "say"
+   ],
+   "text": "چرخ‌های ثابت فقط مسیر را عوض می‌کنند؛ رشته‌های حامل بار مهم‌اند.",
+   "status": "draft",
+   "applied": true
+  },
+  "card.pulley.b3.sub": {
+   "id": "card.pulley.b3.sub",
+   "kind": "card",
+   "where_fa": "کارت آموزشی قرقره، پایهٔ ۵ و ۶: توضیح تکمیلی کوچک‌تر",
+   "context_fa": "کارت درس با تصویر طناب و قرقره (ثابت و متحرک)",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261007/lesson-card-options/card.html",
+   "target": "card",
+   "locator": [
+    "3",
+    "sub"
+   ],
+   "text": "n = شمار رشته‌های حامل بار؛ با فرضِ طنابِ سبک و بدون اصطکاک",
+   "status": "draft",
+   "applied": true
+  }
+ },
+ "meta": {
+  "updated": "2026-10-08",
+  "glossary": {
+   "نیرو": "نه «زور»",
+   "جرم": "مقدار ماده؛ ترازو، گرم و کیلوگرم",
+   "وزن": "نیروی گرانش؛ نیروسنج، نیوتون",
+   "مسافت": "نه «راه» برای فاصلهٔ پیموده‌شده (B45)",
+   "نیوتون": "یکای نیرو؛ نه «نیوتن»",
+   "اهرم": "",
+   "تکیه‌گاه": "",
+   "قرقره": "",
+   "سطح شیب‌دار": "",
+   "گوه": "",
+   "پیچ": "",
+   "چرخ‌دنده": "",
+   "کار": "در علوم: نیرو × جابه‌جایی؛ به‌معنای روزمره نیست"
+  },
+  "banned": {
+   "زور": "به‌جای «نیرو»",
+   "باهوشی": "ستایش فرایند، نه هوش (voice.md)",
+   "راه بیشتر": "به‌جای «مسافت بیشتر» (B45)",
+   "هل می‌خوری": "فارسی نیست"
+  }
+ }
+}
