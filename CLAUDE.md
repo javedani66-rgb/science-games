@@ -54,7 +54,7 @@ tools/publish_game.py          build + wrap with PWA head + copy into site + bum
 ## Rules that matter
 
 - Never break saved progress: localStorage key `sm-journey-v1` ({profiles, cur, week}); star data per track in `profile.S.prog["<track>:<station>"].lv[]`. Journey missions reference levels by index (`STOPS` in journey.js) — if you reorder/insert levels, migrate or keep indices stable. The progress code (`makeCode/readCode`, 23 letters) encodes stars by stop/mission position; changing STOPS mission counts changes the code format — bump/handle versions.
-- Science/language: «نیرو» not «زور»; mass (جرم, kg, two-pan balance) vs weight (وزن, N, نیروسنج); formulas LTR with standard symbols (`ltrMath`, `.eqi`); units in Persian (نیوتن، کیلوگرم).
+- Science/language: «نیرو» not «زور»; mass (جرم, kg, two-pan balance) vs weight (وزن, N, نیروسنج); formulas LTR with standard symbols (`ltrMath`, `.eqi`); units in Persian (نیوتون، کیلوگرم — spelling «نیوتون» as in the official textbooks, B28/D33; the code still has «نیوتن» until the planned replace).
 - Register: questions, instructions, science text and ALL buttons are written Persian; only Ostad's own lines are spoken, taken from `voice.js` (process praise, never «باهوشی») — see `docs/voice.md`.
 - **Approved grade bands (owner, D13/B1):** 1–2, 3–4, 5–6. The code's tracks a/b/c are the old grouping (a≈grades 2–3, b≈4, c≈5–6) until migrated; see `docs/GAME_STRUCTURE_FA.md`.
 - Reading levels: track a (grades 2–3, `KID()`) = short sentences, no numbers/formulas, bigger font; b (grade 4) numbers; c (5–6) formulas.
