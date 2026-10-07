@@ -53,6 +53,8 @@ tools/publish_game.py          build + wrap with PWA head + copy into site + bum
 
 ## Rules that matter
 
+- **Text layer (B49/B50, owner 2026-10-08):** every new user-facing Persian string (cards, stage/land names, buttons, tutorial…) lives in a `strings.fa.json` next to its component, referenced by stable id — never hard-coded in code or graphics. These files are auto-collected into `docs/texts/TEXT_BANK_FA.json` (`python3 tools/text_bank.py collect`; `check` before commit; health check runs it). The owner will hand the whole bank to another AI for Persian rewriting after all cards/stages/tutorial are done and give it back; `import` + `apply` put each text in its place. Your own Persian text is `draft` only. See `docs/texts/README_FA.md`.
+
 - Never break saved progress: localStorage key `sm-journey-v1` ({profiles, cur, week}); star data per track in `profile.S.prog["<track>:<station>"].lv[]`. Journey missions reference levels by index (`STOPS` in journey.js) — if you reorder/insert levels, migrate or keep indices stable. The progress code (`makeCode/readCode`, 23 letters) encodes stars by stop/mission position; changing STOPS mission counts changes the code format — bump/handle versions.
 - Science/language: «نیرو» not «زور»; mass (جرم, kg, two-pan balance) vs weight (وزن, N, نیروسنج); formulas LTR with standard symbols (`ltrMath`, `.eqi`); units in Persian (نیوتون، کیلوگرم — scientific terms follow the official textbooks first, then common scientific usage, B28/D33).
 - Register: questions, instructions, science text and ALL buttons are written Persian; only Ostad's own lines are spoken, taken from `voice.js` (process praise, never «باهوشی») — see `docs/voice.md`.

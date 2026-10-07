@@ -140,6 +140,10 @@ if unlogged:
 else:
     print(f"OK   research references: {len(cited)} cited, {len(logged)} logged")
 
+_tb = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'text_bank.py'), 'check'], capture_output=True, text=True)
+if _tb.returncode == 0: print('OK   text bank:', _tb.stdout.strip().splitlines()[-1])
+else: hard.append('text bank check failed (python3 tools/text_bank.py check):\n' + _tb.stdout.strip())
+
 print()
 for w in warn:
     print("WARN", w)

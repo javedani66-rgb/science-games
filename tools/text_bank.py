@@ -73,6 +73,12 @@ def sources():
             if m.group(idx):
                 out.append((f'card.pulley.b{b}.{key}', kind, f'کارت آموزشی قرقره، پایهٔ {band}: {what}', 'کارت درس با تصویر طناب و قرقره (ثابت و متحرک)', f'پایهٔ {band}',
                             CARD, 'card', [str(b), key], m.group(idx)))
+    # مؤلفه‌های تازه: هر فایل strings.fa.json (فرمت: {"id": {"text":..., "kind":..., "where_fa":..., "context_fa":..., "band":...}})
+    # به‌طور خودکار جمع می‌شود؛ مؤلفه فقط با شناسه به متن مراجعه می‌کند (B50).
+    for sf in sorted(list((ROOT / 'design').rglob('strings.fa.json')) + list((ROOT / 'src').rglob('strings.fa.json')) + list((ROOT / 'pilot').rglob('strings.fa.json'))):
+        for sid, v in load(sf).items():
+            if sid.startswith('_'): continue
+            out.append((sid, v.get('kind', 'card'), v.get('where_fa', sid), v.get('context_fa', ''), v.get('band', 'همه'), sf, 'json', [sid, 'text'], v['text']))
     return out
 
 def regroup(src):
