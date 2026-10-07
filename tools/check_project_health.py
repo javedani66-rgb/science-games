@@ -129,6 +129,17 @@ for entry in ("CLAUDE.md", "AGENTS.md", "START_HERE_FA.md"):
             else:
                 print(f"OK   {entry} digest ({len(ids)} principle IDs, all in ledger)")
 
+# 7. research references: every R-code cited by a principle must be logged -
+refdoc = open("docs/DESIGN_EVIDENCE_REFERENCES_FA.md", encoding="utf-8").read() if os.path.exists("docs/DESIGN_EVIDENCE_REFERENCES_FA.md") else ""
+logged = set(re.findall(r"^\| (R\d+) \|", refdoc, re.M))
+cited = set(re.findall(r"\bR(\d+)\b", " ".join(l for l in ledger.splitlines() if re.match(r"\| [A-Z]\d+ \|", l))))
+cited = {"R" + c for c in cited}
+unlogged = sorted(cited - logged, key=lambda x: int(x[1:]))
+if unlogged:
+    hard.append(f"principles cite research codes missing from DESIGN_EVIDENCE_REFERENCES_FA.md: {unlogged}")
+else:
+    print(f"OK   research references: {len(cited)} cited, {len(logged)} logged")
+
 print()
 for w in warn:
     print("WARN", w)

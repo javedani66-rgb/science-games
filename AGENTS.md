@@ -18,6 +18,7 @@ Latest card decision: all visible card text, difficulty emoji/icon and action la
 - Every stage teaches or reviews via a lesson card; the card's problem is a schematic of the game situation; card box + spaced practice from grade 1; cards link to stages (B15, B17, B24).
 - No stars or accumulating rewards; entering and leaving only by the child's choice (B4, B5). A failed physical try costs nothing; no artificial failure (A8, A9). Every scored question is answerable from what is on screen (A2).
 - Child understanding or UX is claimed only from real observation (B9).
+- Every external source behind a principle or decision (paper, similar game, other countries' curricula) is logged with full reference, verification level and limits in `docs/DESIGN_EVIDENCE_REFERENCES_FA.md` (R-codes); the final justification report is built from it (E5).
 - Items marked «پیشنهاد» in the ledger are proposals, **not decisions**.
 - **Process:** when the owner states a rule or decision in chat, record it in the same turn in `docs/PRINCIPLES.md`, `docs/DECISIONS.md` and `docs/STATE.md`, commit and push. Run `python3 tools/check_project_health.py` at session start and end.
 <!-- principles-digest:end -->
