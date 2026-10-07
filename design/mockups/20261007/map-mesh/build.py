@@ -45,7 +45,8 @@ HEIGHT = y
 nodes = [{k: n.get(k) for k in ('id','land','label_fa','plain_fa','d1_idea_fa','depths','band_entry','band_entry_note_fa','optional','hidden_detour','main_map_max_depth','textbook_grades','evidence_refs','experimental','experimental_note_fa','zone')} for n in D['nodes'] if not n.get('deferred')]
 for n in nodes:
     n['x'], n['y'] = POS[n['id']]
-lands = [{'id': l['id'], 'label_fa': l['label_fa'], 'summary_fa': l['summary_fa'], 'y0': LAND_BOX[l['id']][0], 'y1': LAND_BOX[l['id']][1], 'zones': [{'id': z['id'], 'label_fa': z['label_fa'], 'y0': ZONE_BOX[z['id']][0], 'y1': ZONE_BOX[z['id']][1]} for z in l.get('zones', [])]} for l in D['lands']]
+THEMES = json.load(open(ROOT / 'design/themes/map-themes-proposal.json', encoding='utf-8'))  # temporary colour themes (owner-approved 2026-10-08, B52)
+lands = [{'id': l['id'], 'theme': THEMES['lands'][l['id']], 'label_fa': l['label_fa'], 'summary_fa': l['summary_fa'], 'y0': LAND_BOX[l['id']][0], 'y1': LAND_BOX[l['id']][1], 'zones': [{'id': z['id'], 'theme': THEMES['zones'][z['id']], 'label_fa': z['label_fa'], 'y0': ZONE_BOX[z['id']][0], 'y1': ZONE_BOX[z['id']][1]} for z in l.get('zones', [])]} for l in D['lands']]
 PATHS = {  # proposal B37/B42: main path from force to simple machines (numbers = stages; shortcut = machines only)
  'main': {'label_fa':'مسیر بزرگ: از نیرو تا ماشین‌های ساده', 'stages':[
   {'t':'نیرو','n':['F01','F02','F03','F04']},

@@ -180,16 +180,23 @@ function buildGrades(){
   });
 }
 
+function isDark(){ const r=document.documentElement.getAttribute('data-theme'); return r==='dark' || (r!=='light' && matchMedia('(prefers-color-scheme: dark)').matches); }
 function draw(){
   const svg = $('map'); svg.textContent = '';
   const W = 900;
   // land bands
   DATA.lands.forEach(l=>{
-    el('rect', {x:10, y:l.y0, width:W-20, height:l.y1-l.y0, rx:28, class:'land', style:`fill:var(${LAND_VAR[l.id]})`}, svg);
-    const t = el('text', {x:W-34, y:l.y0+52, class:'landlabel', 'text-anchor':'start', direction:'rtl'}, svg); t.textContent = l.label_fa;
+    const th = l.theme, dk = isDark();
+    el('rect', {x:10, y:l.y0, width:W-20, height:l.y1-l.y0, rx:28, class:'land', style:`fill:${dk?th.hdr:th.paper};fill-opacity:${dk?.45:1};stroke:${th.edge};stroke-width:3`}, svg);
+    el('rect', {x:10, y:l.y0, width:W-20, height:70, rx:28, class:'land', style:`fill:${th.hdr}`}, svg);
+    el('rect', {x:10, y:l.y0+40, width:W-20, height:30, class:'land', style:`fill:${th.hdr}`}, svg);
+    const t = el('text', {x:W-34, y:l.y0+46, class:'landlabel', 'text-anchor':'start', direction:'rtl', style:`fill:${th.hink};opacity:1`}, svg); t.textContent = l.label_fa;
     (l.zones || []).forEach(z=>{
-      el('rect', {x:34, y:z.y0, width:W-68, height:z.y1-z.y0, rx:22, class:'zone'}, svg);
-      const zt = el('text', {x:W-58, y:z.y0+44, class:'zonelabel', 'text-anchor':'start', direction:'rtl'}, svg); zt.textContent = 'منطقه: ' + z.label_fa;
+      const zh = z.theme;
+      el('rect', {x:34, y:z.y0, width:W-68, height:z.y1-z.y0, rx:22, class:'zone', style:`fill:${dk?zh.hdr:zh.sky};fill-opacity:${dk?.5:.92};stroke:${zh.edge};stroke-width:3`}, svg);
+      el('rect', {x:34, y:z.y0, width:W-68, height:58, rx:22, class:'zone', style:`fill:${zh.hdr};fill-opacity:1;stroke:${zh.edge};stroke-width:3`}, svg);
+      el('rect', {x:36, y:z.y0+30, width:W-72, height:28, class:'zone', style:`fill:${zh.hdr};fill-opacity:1;stroke:none`}, svg);
+      const zt = el('text', {x:W-58, y:z.y0+38, class:'zonelabel', 'text-anchor':'start', direction:'rtl', style:`fill:${zh.hink};opacity:1`}, svg); zt.textContent = 'منطقه: ' + z.label_fa;
     });
   });
   // arrow marker

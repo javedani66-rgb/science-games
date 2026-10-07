@@ -34,18 +34,20 @@ SC = {
   <path d="M0 150 h400" stroke="#6C8FA6" stroke-width="4" opacity=".0"/><rect x="120" y="124" width="34" height="14" rx="3" fill="#B98A45" stroke="{v['edge']}" stroke-width="2"/><circle cx="130" cy="140" r="5" fill="{v['edge']}"/><circle cx="146" cy="140" r="5" fill="{v['edge']}"/>
   <path d="M330 24 l-14 28 h12 l-8 26 l24 -34 h-14 l10 -20z" fill="#FFD36B" stroke="{v['edge']}" stroke-width="2" transform="translate(-70 -8) scale(.7)"/>''',
  'LM': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/>
-  {''.join(f'<circle cx="{x}" cy="{y}" r="3" fill="{v["edge"]}" opacity=".35"/>' for x in range(30,400,52) for y in (28,60))}
-  <g fill="none" stroke="{v['hdr']}" stroke-width="5" opacity=".28"><circle cx="80" cy="95" r="38" stroke-dasharray="10 6"/><circle cx="80" cy="95" r="14"/><circle cx="165" cy="70" r="26" stroke-dasharray="8 5"/><circle cx="165" cy="70" r="9"/></g>
-  <path d="M250 110 h110" stroke="{v['hdr']}" stroke-width="7" opacity=".28" stroke-linecap="round"/><path d="M285 110 l12 -14 l12 14z" fill="{v['hdr']}" opacity=".28"/>
-  <rect y="135" width="400" height="35" fill="{v['gnd']}"/>''',
- 'Z1': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/><path d="M0 115 Q120 85 230 112 T400 104 V170 H0Z" fill="{v['hill']}"/><rect y="135" width="400" height="35" fill="{v['gnd']}"/>
-  <path d="M120 122 L280 106" stroke="#7A5A3A" stroke-width="8" stroke-linecap="round"/><path d="M200 114 l-18 26 h36z" fill="#8B6B4A"/>
-  <circle cx="125" cy="108" r="9" fill="#E9A93B"/><circle cx="278" cy="92" r="14" fill="#E9A93B"/>''',
- 'Z2': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/><rect y="132" width="400" height="38" fill="{v['gnd']}"/>
-  <path d="M0 132 V96 h30 v-16 h28 v16 h24 v36z" fill="{v['hill']}"/>
-  <g fill="#E4CDB4" stroke="{v['edge']}" stroke-width="2"><rect x="110" y="62" width="14" height="72"/><rect x="170" y="62" width="14" height="72"/><rect x="104" y="54" width="26" height="9"/><rect x="164" y="54" width="26" height="9"/><path d="M124 62 Q147 30 170 62z"/></g>
-  <path d="M215 134 h20 v-9 h20 v-9 h20 v-9 h20 v-9 h20 v-9" stroke="{v['edge']}" stroke-width="3" fill="none" opacity=".6"/>
-  <path d="M350 134 l22 -52 l12 52z" fill="#8F7A66" stroke="{v['edge']}" stroke-width="2"/><path d="M40 150 q22 -9 44 0 q-22 -10 -44 -20" stroke="{v['edge']}" stroke-width="3" fill="none" opacity=".6"/>''',
+  <g fill="{v['hdr']}" opacity=".3"><rect x="20" y="70" width="40" height="70"/><rect x="66" y="50" width="34" height="90"/><rect x="106" y="84" width="50" height="56"/><rect x="250" y="62" width="44" height="78"/><rect x="300" y="86" width="60" height="54"/><rect x="128" y="40" width="10" height="46"/><rect x="334" y="48" width="10" height="40"/></g>
+  <g fill="none" stroke="{v['hdr']}" stroke-width="5" opacity=".3"><circle cx="205" cy="84" r="34" stroke-dasharray="10 6"/><circle cx="205" cy="84" r="12"/></g>
+  <rect y="138" width="400" height="32" fill="{v['gnd']}"/><g fill="#8F7A66" stroke="{v['edge']}" stroke-width="2"><rect x="170" y="116" width="10" height="26"/><rect x="230" y="116" width="10" height="26"/><rect x="166" y="108" width="78" height="9" rx="3"/></g>''',
+ 'Z1': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/><rect y="136" width="400" height="34" fill="{v['gnd']}"/>
+  <g stroke="{v['edge']}" stroke-width="4" fill="none"><path d="M40 136 V62 M110 136 V62 M40 62 H110 M40 100 H110"/><path d="M110 62 H250 M200 62 V30 H320 M300 30 V80" /></g>
+  <rect x="294" y="80" width="16" height="12" fill="#B98A45" stroke="{v['edge']}" stroke-width="2"/>
+  <path d="M150 128 L270 112" stroke="#7A5A3A" stroke-width="8" stroke-linecap="round"/><path d="M210 120 l-14 22 h28z" fill="#8B6B4A"/><rect x="146" y="106" width="22" height="18" fill="#C3CED8" stroke="{v['edge']}" stroke-width="2"/>
+  <path d="M330 136 l30 -20 h16 l-8 20z" fill="#6C7C8A" stroke="{v['edge']}" stroke-width="2"/><circle cx="352" cy="142" r="9" fill="#2B3640"/>''',
+ 'Z2': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/><rect y="130" width="400" height="40" fill="{v['gnd']}"/>
+  <g fill="#C79A6B" stroke="{v['edge']}" stroke-width="2"><rect x="30" y="98" width="130" height="32" rx="16"/><path d="M170 130 L240 130 L240 118z"/></g><circle cx="46" cy="114" r="8" fill="#E4CDB4"/><path d="M40 114 h12" stroke="{v['edge']}" stroke-width="2"/>
+  <path d="M96 98 l10 -34 l10 34z" fill="#8F8F95" stroke="{v['edge']}" stroke-width="2"/>
+  <g stroke="{v['edge']}" stroke-width="3" fill="#B7B7BD"><path d="M250 70 h70 v12 h-70z"/><path d="M250 70 l-10 6 l10 6" fill="none"/></g><g stroke="{v['edge']}" stroke-width="2"><path d="M262 70 v-6 M274 70 v-6 M286 70 v-6 M298 70 v-6 M310 70 v-6"/></g>
+  <g fill="#E4CDB4" stroke="{v['edge']}" stroke-width="2"><rect x="270" y="112" width="100" height="8"/><rect x="278" y="122" width="100" height="8"/></g>
+  <path d="M190 40 v26 M182 58 l8 8 l8 -8 M174 34 l32 0" stroke="{v['edge']}" stroke-width="3" fill="none"/><path d="M180 150 q20 -9 40 0" stroke="{v['edge']}" stroke-width="3" fill="none" opacity=".5"/>''',
  'Z3': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/><rect y="110" width="400" height="60" fill="{v['hill']}"/>
   <path d="M0 125 q25 -9 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/><rect x="250" y="102" width="150" height="14" fill="#8F7A66"/>
   <rect x="335" y="30" width="7" height="74" fill="#5C6B78"/><path d="M338 34 H240" stroke="#5C6B78" stroke-width="6"/><circle cx="262" cy="46" r="9" fill="none" stroke="#12405F" stroke-width="3"/><path d="M262 55 v32" stroke="#12405F" stroke-width="2"/><rect x="252" y="86" width="20" height="14" fill="#E9A93B"/>
