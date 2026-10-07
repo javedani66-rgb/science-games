@@ -14,13 +14,15 @@ SC = {
   <path d="M0 150 h150" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".55"/>
   <path d="M170 150 l12 -5 l12 5 l12 -5 l12 5 l12 -5 l12 5 l12 -5 l12 5" stroke="{v['edge']}" stroke-width="3" fill="none" opacity=".5"/>
   <rect x="60" y="116" width="30" height="26" rx="3" fill="#B98A45" stroke="#5B3A29" stroke-width="2"/>
-  <path d="M34 129 h22 m-6 -6 l6 6 l-6 6" stroke="#5B3A29" stroke-width="3" fill="none"/>''',
+  <path d="M34 129 h22 m-6 -6 l6 6 l-6 6" stroke="#5B3A29" stroke-width="3" fill="none"/>
+  <g fill="#6B9A5A" stroke="#3E6B3A" stroke-width="2"><rect x="330" y="86" width="14" height="52" rx="7"/><rect x="314" y="102" width="12" height="7" rx="3"/><rect x="314" y="92" width="7" height="17" rx="3"/><rect x="348" y="100" width="12" height="7" rx="3"/><rect x="353" y="90" width="7" height="17" rx="3"/></g>''',
  'L2': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/>
   {''.join(star(x,y,r) for x,y,r in [(30,24,2),(80,60,1.5),(140,20,2),(210,50,1.5),(300,26,2),(350,70,1.5),(260,90,1.5),(40,95,1.5)])}
   <circle cx="330" cy="40" r="22" fill="#F7F1F4"/><circle cx="338" cy="35" r="20" fill="{v['sky']}"/>
   <circle cx="120" cy="70" r="16" fill="#8E6FA3"/><ellipse cx="120" cy="70" rx="26" ry="5" fill="none" stroke="#C9B6D6" stroke-width="3"/>
   <path d="M0 140 Q120 112 240 138 T400 130 V170 H0Z" fill="{v['hill']}"/><rect y="150" width="400" height="20" fill="{v['gnd']}"/>
-  <path d="M200 40 v60 m-8 -10 l8 10 l8 -10" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/>''',
+  <path d="M200 40 v50 m-8 -10 l8 10 l8 -10" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/>
+  <path d="M230 150 a42 42 0 0 1 84 0z" fill="#EDEAF5" stroke="#8E6FA3" stroke-width="3"/><rect x="262" y="132" width="20" height="18" fill="#8E6FA3"/><path d="M300 108 v-26" stroke="#EDEAF5" stroke-width="3"/><circle cx="300" cy="80" r="4" fill="#6BD2C6"/>''',
  'LW': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/>
   <g stroke="#F6A23A" stroke-width="5" stroke-linecap="round" opacity=".8">{''.join(f'<line x1="200" y1="120" x2="{200+150*__import__("math").cos(a):.0f}" y2="{120-150*__import__("math").sin(a):.0f}"/>' for a in [0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,2.95])}</g>
   <circle cx="200" cy="120" r="38" fill="#FFD36B"/>
@@ -34,9 +36,11 @@ SC = {
  'Z1': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/><path d="M0 115 Q120 85 230 112 T400 104 V170 H0Z" fill="{v['hill']}"/><rect y="135" width="400" height="35" fill="{v['gnd']}"/>
   <path d="M120 122 L280 106" stroke="#7A5A3A" stroke-width="8" stroke-linecap="round"/><path d="M200 114 l-18 26 h36z" fill="#8B6B4A"/>
   <circle cx="125" cy="108" r="9" fill="#E9A93B"/><circle cx="278" cy="92" r="14" fill="#E9A93B"/>''',
- 'Z2': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/><path d="M0 150 L120 50 L200 110 L290 30 L400 130 V170 H0Z" fill="{v['hill']}"/>
-  <path d="M0 160 L290 30" stroke="{v['edge']}" stroke-width="3" opacity=".35"/><path d="M0 170 L160 118 L260 170Z" fill="{v['gnd']}"/>
-  <path d="M310 150 l26 -60 l16 60z" fill="#8F7A66" stroke="{v['edge']}" stroke-width="2"/><path d="M60 150 q20 -8 40 0 q-20 -10 -40 -20 q30 -4 40 8" stroke="{v['edge']}" stroke-width="3" fill="none" opacity=".6"/>''',
+ 'Z2': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/><rect y="132" width="400" height="38" fill="{v['gnd']}"/>
+  <path d="M0 132 V96 h30 v-16 h28 v16 h24 v36z" fill="{v['hill']}"/>
+  <g fill="#E4CDB4" stroke="{v['edge']}" stroke-width="2"><rect x="110" y="62" width="14" height="72"/><rect x="170" y="62" width="14" height="72"/><rect x="104" y="54" width="26" height="9"/><rect x="164" y="54" width="26" height="9"/><path d="M124 62 Q147 30 170 62z"/></g>
+  <path d="M215 134 h20 v-9 h20 v-9 h20 v-9 h20 v-9 h20 v-9" stroke="{v['edge']}" stroke-width="3" fill="none" opacity=".6"/>
+  <path d="M350 134 l22 -52 l12 52z" fill="#8F7A66" stroke="{v['edge']}" stroke-width="2"/><path d="M40 150 q22 -9 44 0 q-22 -10 -44 -20" stroke="{v['edge']}" stroke-width="3" fill="none" opacity=".6"/>''',
  'Z3': lambda v: f'''<rect width="400" height="170" fill="{v['sky']}"/><rect y="110" width="400" height="60" fill="{v['hill']}"/>
   <path d="M0 125 q25 -9 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/><rect x="250" y="102" width="150" height="14" fill="#8F7A66"/>
   <rect x="335" y="30" width="7" height="74" fill="#5C6B78"/><path d="M338 34 H240" stroke="#5C6B78" stroke-width="6"/><circle cx="262" cy="46" r="9" fill="none" stroke="#12405F" stroke-width="3"/><path d="M262 55 v32" stroke="#12405F" stroke-width="2"/><rect x="252" y="86" width="20" height="14" fill="#E9A93B"/>
@@ -60,8 +64,8 @@ h1{{font-size:22px;margin:0 0 4px}}h2{{font-size:18px;margin:28px 0 10px}}.note{
 .sw{{display:flex;gap:6px}}.sw i{{width:26px;height:26px;border-radius:7px;border:1px solid #0003}}
 .btn{{display:inline-block;background:var(--btn);color:#fff;padding:4px 14px;border-radius:12px;margin-bottom:8px}}
 .dif{{display:flex;gap:8px;margin:16px 0}}.dif span{{padding:4px 12px;border-radius:10px;border:3px solid #211D19;color:#211D19}}</style></head><body>
-<h1>پیشنهاد موقت: رنگ و پس‌زمینهٔ تم سرزمین‌ها و منطقه‌ها</h1>
-<p class="note">پیشنهاد است، مصوب نیست. رنگ‌ها از تم‌های بازی اولیه گرفته شد (شنی، آبی‌سبز، بنفش). نام‌ها همان نام‌های موقت‌اند و با عوض‌شدنشان فقط تصویر پس‌زمینه باید با نام جدید جور شود. متن همیشه روی سطح روشن است.</p>
+<h1>تم موقت سرزمین‌ها و منطقه‌ها (تأیید مالک؛ بعداً با تصویر طراحی‌شده جایگزین می‌شود)</h1>
+<p class="note">رنگ‌ها و محیط‌ها را مالک به‌عنوان موقت تأیید کرد (۸ اکتبر). رنگ‌ها از تم‌های بازی اولیه گرفته شد (شنی، آبی‌سبز، بنفش). نام‌ها همان نام‌های موقت‌اند و با عوض‌شدنشان فقط تصویر پس‌زمینه باید با نام جدید جور شود. متن همیشه روی سطح روشن است.</p>
 <h2>چهار سرزمین (به ترتیب مسیر)</h2><div class="grid">{lands}</div>
 <h2>سه منطقهٔ سرزمین ماشین‌های ساده (رنگ سرزمین ماشین‌ها را ادامه می‌دهند)</h2><div class="grid">{zones}</div>
 <h2>نشان سختی ثابت می‌ماند (تم روی آن اثر نمی‌گذارد)</h2><div class="dif"><span style="background:#B9DB66">ساده</span><span style="background:#F4BE4F">چالشی</span><span style="background:#EF7464">خیلی سخت</span></div>
