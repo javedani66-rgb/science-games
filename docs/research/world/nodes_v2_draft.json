@@ -713,7 +713,6 @@
       "hidden_detour": false,
       "detour_entrances": [],
       "prereq_soft": [
-        "F01",
         "F02"
       ],
       "textbook_grades": {
@@ -1438,9 +1437,7 @@
         "M10"
       ],
       "prereq_soft": [
-        "E03",
-        "M08",
-        "M03"
+        "M08"
       ],
       "textbook_grades": {
         "9": "D4"
@@ -1695,11 +1692,6 @@
       "kind": "soft_prereq"
     },
     {
-      "from": "F01",
-      "to": "E02",
-      "kind": "soft_prereq"
-    },
-    {
       "from": "F02",
       "to": "E02",
       "kind": "soft_prereq"
@@ -1725,17 +1717,7 @@
       "kind": "soft_prereq"
     },
     {
-      "from": "E03",
-      "to": "E04",
-      "kind": "soft_prereq"
-    },
-    {
       "from": "M08",
-      "to": "E04",
-      "kind": "soft_prereq"
-    },
-    {
-      "from": "M03",
       "to": "E04",
       "kind": "soft_prereq"
     },
