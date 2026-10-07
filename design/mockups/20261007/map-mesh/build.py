@@ -33,7 +33,7 @@ for lid, spec in LAYOUT:
         zb = last + 105 + 14
         for zid, rows in spec['zones']:
             zt = zb
-            last = place(rows, zt + 100)
+            last = place(rows, zt + 135)
             zb = last + 105
             ZONE_BOX[zid] = (zt, zb)
             zb += 14
@@ -46,7 +46,19 @@ nodes = [{k: n.get(k) for k in ('id','land','label_fa','plain_fa','d1_idea_fa','
 for n in nodes:
     n['x'], n['y'] = POS[n['id']]
 lands = [{'id': l['id'], 'label_fa': l['label_fa'], 'summary_fa': l['summary_fa'], 'y0': LAND_BOX[l['id']][0], 'y1': LAND_BOX[l['id']][1], 'zones': [{'id': z['id'], 'label_fa': z['label_fa'], 'y0': ZONE_BOX[z['id']][0], 'y1': ZONE_BOX[z['id']][1]} for z in l.get('zones', [])]} for l in D['lands']]
-data = {'lands': lands, 'nodes': nodes, 'edges': D['edges'], 'height': HEIGHT, 'policy': D['depth_policy_proposal']['table']}
+PATHS = {  # proposal B37/B42: main path from force to simple machines (numbers = stages; shortcut = machines only)
+ 'main': {'label_fa':'مسیر بزرگ: از نیرو تا ماشین‌های ساده', 'stages':[
+  {'t':'نیرو','n':['F01','F02','F03','F04']},
+  {'t':'نیرو و حرکت (کار خیلی ساده معرفی می‌شود)','n':['F06','F07','F08','F09']},
+  {'t':'جرم، وزن و گرانش','n':['F05','W01','W02','W03','W04']},
+  {'t':'کار و انرژی','n':['E02','E01','E03']},
+  {'t':'ماشین چیست و تعادل','n':['M01','B01','B02']},
+  {'t':'اهرم','n':['M05','M04','M06']},
+  {'t':'سطح شیب‌دار، گوه و پیچ','n':['M03','M09','M10']},
+  {'t':'چرخ، قرقره و چرخ‌دنده (پایان: ماشین کار نمی‌سازد)','n':['M02','M07','M08','M11','E06']}]},
+ 'machines': {'label_fa':'میانبر: فقط ماشین‌ها (مراحل ۵ تا ۸)', 'from_stage':5},
+}
+data = {'paths': PATHS, 'lands': lands, 'nodes': nodes, 'edges': D['edges'], 'height': HEIGHT, 'policy': D['depth_policy_proposal']['table']}
 tpl = (pathlib.Path(__file__).parent / 'template.html').read_text(encoding='utf-8')
 out = tpl.replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False)).replace('__H__', str(HEIGHT))
 (pathlib.Path(__file__).parent / 'index.html').write_text(out, encoding='utf-8')

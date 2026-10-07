@@ -45,6 +45,8 @@ h1{font-size:1.2rem;margin:0 0 2px;font-weight:800;text-wrap:balance}
 svg#map{width:100%;min-width:700px;height:auto;display:block}
 .land{stroke:none}
 .landlabel{font-size:26px;font-weight:800;fill:var(--fg);opacity:.85}
+.stg circle{fill:var(--ring);stroke:var(--card);stroke-width:2}
+.stg text{fill:#fff;font-size:18px;font-weight:800}
 .zone{fill:var(--card);fill-opacity:.55;stroke:var(--border);stroke-width:2}
 .zonelabel{font-size:20px;font-weight:700;fill:var(--fg);opacity:.85}
 .landsub{font-size:15px;fill:var(--muted)}
@@ -96,6 +98,8 @@ table.pol th{background:var(--card)}
   <div class="ctrl">
     <span class="t" style="font-size:.85rem;color:var(--muted)">پایهٔ کودک:</span>
     <div class="seg" role="radiogroup" aria-label="پایهٔ کودک" id="grades"></div>
+    <label class="t" for="pathsel" style="font-size:.85rem;color:var(--muted)">مسیر پیشنهادی:</label>
+    <select id="pathsel" style="min-height:44px;border:1.5px solid var(--border);border-radius:10px;background:var(--card);color:var(--fg);font:inherit;padding-inline:10px"><option value="">بدون مسیر</option></select>
     <span class="count" id="count" aria-live="polite"></span>
     <label class="sw" for="hidmode"><input type="checkbox" id="hidmode"> نمای معلم: همهٔ مسیرهای مخفی</label>
     <button type="button" class="sw" id="reset" style="border:1.5px solid var(--border);border-radius:10px;background:var(--card);color:var(--fg);padding-inline:12px;font:inherit;cursor:pointer">پاک‌کردن کشف‌ها</button>
@@ -117,6 +121,7 @@ table.pol th{background:var(--card)}
 <p class="foot">داده از <code dir="ltr">docs/research/world/nodes_v2_draft.json</code> (۳۴ گره، ۴ سرزمین + ۱ سرزمین مخفی، ۳ منطقه). چیدمان این صفحه دستی است و چیدمان نهایی نیست. حلقهٔ کتاب درسی داده‌ای دربارهٔ کتاب‌های ایران است و دربارهٔ فهم کودک چیزی نمی‌گوید.</p>
 <h2 style="font-size:1rem;margin:18px 0 6px;max-width:900px;margin-inline:auto">قاعدهٔ پیشنهادی عمق بر پایهٔ باند (جهت از مالک، مقدارها پیشنهاد)</h2>
 <div class="polwrap"><table class="pol" id="pol"></table></div>
+<div id="stagelist" class="polwrap" style="margin-top:12px" hidden></div>
 <div class="spacer" id="sp"></div>
 
 <aside class="sheet" id="sheet" hidden aria-live="polite"><div class="in" id="sin"></div><button class="close" id="cls" aria-label="بستن">✕</button></aside>
@@ -130,7 +135,7 @@ const DEPTH = {D1:'ببین و حس کن', D2:'کیفی', D3:'عدد و اندا
 const GR = {'7':'هفتم','8':'هشتم','9':'نهم','10':'فیزیک ۱'};
 const LAND_VAR = {L1:'--l1',L2:'--l2',LW:'--l7',LM:'--l4',LC:'--l3'};
 const byId = Object.fromEntries(DATA.nodes.map(n=>[n.id,n]));
-const state = {grade:null, teacher:false, sel:null, allLinks:false, found:new Set()};
+const state = {path:'', grade:null, teacher:false, sel:null, allLinks:false, found:new Set()};
 const R = 36;
 
 function el(tag, attrs, parent){
@@ -153,6 +158,9 @@ DATA.edges.forEach(e=>{ if (HID.has(e.to) && !HID.has(e.from) && e.kind==='detou
 DATA.edges.forEach(e=>{ if (HID.has(e.to) && !HID.has(e.from) && e.kind==='soft_prereq' && !ENTR[e.to]){ (ENTR[e.to] = ENTR[e.to] || new Set()).add(e.from); }});
 const DOOR = {}; // source id -> hidden ids it leads to
 Object.keys(ENTR).forEach(h=>ENTR[h].forEach(s=>{ (DOOR[s] = DOOR[s] || []).push(h); }));
+// مسیر پیشنهادی: شمارهٔ مرحله برای هر گره (فقط راهنما، نه قفل)
+function stageMap(){ const m = {}; if (!state.path) return m; const P = DATA.paths; const from = state.path==='machines' ? P.machines.from_stage : 1;
+  P.main.stages.forEach((s,i)=>{ const k = i+1; if (k>=from) s.n.forEach(id=>{ if (!m[id]) m[id] = k; }); }); return m; }
 function grp(n){ return n.zone || n.land; }
 function visible(n){ return !n.hidden_detour || state.teacher || state.found.has(n.id); }
 // تجمعی: محتوای پایه‌های قبل هم مجاز است (با سطح بالاترِ امسال). 2 = امسال، 1 = از سال‌های قبل، 0 = نه
@@ -207,11 +215,14 @@ function draw(){
   });
   // nodes
   const gn = el('g', {}, svg);
-  let cnt = 0;
+  let cnt = 0; const STG = stageMap();
   DATA.nodes.forEach(n=>{
     if (!visible(n)) return;
     const g = el('g', {class:'nd' + (n.hidden_detour ? ' hid' : '') + (state.sel===n.id ? ' sel' : ''), tabindex:'0', role:'button', 'aria-label':n.label_fa, transform:`translate(${n.x},${n.y})`}, gn);
+    const st = STG[n.id];
+    if (state.path && !st) g.style.opacity = '.3';
     el('circle', {r:R, class:'body'}, g);
+    if (st){ const sg = el('g', {class:'stg', transform:`translate(0,${-R-14})`}, g); el('circle', {r:15}, sg); const stt = el('text', {y:6,'text-anchor':'middle'}, sg); stt.textContent = faD(st); }
     if (hasTb(n)){
       cnt++;
       const lv = tbLevel(n);
@@ -284,5 +295,18 @@ $('reset').addEventListener('click', ()=>{ state.found.clear(); draw(); });
   Object.keys(DATA.policy).forEach(b=>{ const p = DATA.policy[b]; rows.push([b.replace('-','–'), p.green, p.orange, p.red, p.numbers, p.formulas, p.card]); });
   rows.forEach((r,i)=>{ const tr = document.createElement('tr'); r.forEach(c=>{ const x = document.createElement(i===0?'th':'td'); x.textContent = c; tr.append(x); }); tb.append(tr); });
 })();
+(function(){
+  const sel = $('pathsel');
+  [['main', DATA.paths.main.label_fa], ['machines', DATA.paths.machines.label_fa]].forEach(([v,l])=>{ const o = document.createElement('option'); o.value = v; o.textContent = l; sel.append(o); });
+  sel.addEventListener('change', ()=>{ state.path = sel.value; draw(); renderStages(); });
+})();
+function renderStages(){
+  const box = $('stagelist'); box.textContent = ''; if (!state.path){ box.hidden = true; return; }
+  box.hidden = false; const from = state.path==='machines' ? DATA.paths.machines.from_stage : 1;
+  const h = document.createElement('p'); h.style.cssText = 'font-size:.85rem;color:var(--muted);margin:0 0 6px'; h.textContent = 'فقط راهنما است، نه قفل. کودک هر جا بخواهد می‌تواند برود. محیط‌های مخفی در مسیر نیستند.'; box.append(h);
+  const ol = document.createElement('ol'); ol.style.cssText = 'margin:0;padding-inline-start:26px;font-size:.9rem;line-height:1.9';
+  DATA.paths.main.stages.forEach((s,i)=>{ if (i+1<from) return; const li = document.createElement('li'); li.value = i+1; li.textContent = s.t + ' — ' + s.n.map(id=>byId[id].label_fa).join('، '); ol.append(li); });
+  box.append(ol);
+}
 buildGrades(); draw();
 </script>
