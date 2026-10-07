@@ -1,0 +1,49 @@
+<!doctype html><html lang="fa" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>layout mockup</title>
+<style>
+@font-face{font-family:V;src:url(../../assets/fonts/Vazirmatn-Regular.woff2)}
+@font-face{font-family:V;font-weight:700;src:url(../../assets/fonts/Vazirmatn-Bold.woff2)}
+:root{--bg:#fffaf0;--ink:#2b3a2b;--g:#6b9a7e;--gd:#2f6b4a;--line:#d9c9a3}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font:15px/1.4 V,sans-serif;background:var(--bg);color:var(--ink);display:grid;overflow:hidden}
+body{grid-template-rows:auto auto minmax(0,1fr) auto}
+header{display:flex;align-items:center;justify-content:space-between;padding:4px 10px;min-height:44px;border-bottom:1px solid var(--line)}
+header h1{font-size:17px;color:var(--gd)}
+.btn{min-height:44px;min-width:44px;border:2px solid var(--line);background:#fff8e6;border-radius:12px;padding:0 12px;font:700 14px V;color:var(--ink)}
+.btn.p{background:var(--g);color:#fff;border-color:var(--gd)}
+.mission{text-align:center;font-weight:700;font-size:14px;padding:3px 8px;color:var(--gd)}
+.stage{min-height:0;display:flex;justify-content:center;align-items:center;padding:4px 0}
+.stage img{height:100%;width:auto;max-width:calc(100% - 20px);aspect-ratio:370/555;object-fit:contain;border-radius:14px}
+.bar{padding:6px 10px 8px;display:grid;gap:6px;border-top:1px solid var(--line)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg .btn{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px}
+.seg .btn[aria-pressed=true]{background:#e4f1e6;border-color:var(--gd)}
+.row{display:grid;grid-template-columns:2fr 1fr;gap:6px}
+/* B: collapsed */
+.B .row{grid-template-columns:2fr 1fr 44px}
+.B .seg{display:none}
+/* landscape */
+@media (orientation:landscape){
+ body{grid-template-rows:auto minmax(0,1fr);grid-template-columns:minmax(0,1fr) 300px}
+ header{grid-column:1/-1}
+ .mission{display:none}
+ .stage{grid-row:2;grid-column:1}
+ .bar{grid-row:2;grid-column:2;align-content:center;border-top:0;border-right:1px solid var(--line)}
+ .land-m{display:block!important}
+ .A .row,.B .row{grid-template-columns:1fr}
+ .B .seg{display:grid}
+}
+.land-m{display:none;text-align:center;font-weight:700;color:var(--gd);padding:4px}
+</style>
+<body class="X">
+<header><h1>اسکلهٔ ماهیگیری</h1><button class="btn">مسیر و راهنما</button></header>
+<div class="mission">تور رو تا لبهٔ اسکله بالا بیار!</div>
+<div class="stage"><img src="scene-v8-crop.webp" alt="صحنه"></div>
+<div class="bar"><div class="land-m">تور رو تا لبهٔ اسکله بالا بیار!</div>
+ <div class="seg"><button class="btn" aria-pressed="true">ثابت</button><button class="btn" aria-pressed="false">ثابت + متحرک</button></div>
+ <div class="row"><button class="btn p">یک‌بار بکش</button><button class="btn">کمکم کن</button><button class="btn" id="more" aria-label="بیشتر">⋯</button></div></div>
+<script>
+const o=new URLSearchParams(location.search).get('o')||'A';document.body.className=o;
+if(o==='A'){document.getElementById('more').style.display='none'}
+</script>
