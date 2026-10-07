@@ -1,4 +1,4 @@
-# نقشهٔ R-کدهای منابع جهانی (R37 تا R82)
+# نقشهٔ R-کدهای منابع جهانی (R37 تا R87)
 
 تاریخ: ۷ اکتبر ۲۰۲۶. این جدول هر R-کد تازه را به منبع و فایل جزئیات می‌رساند تا فایل‌های دیگر با کد ارجاع بدهند. ردیف کامل (مرجع، سطح راستی‌آزمایی، محدودیت) در `docs/research/DESIGN_EVIDENCE_REFERENCES_FA.md` بخش «ث» است. اصل B30 و تصمیم D35 **پیشنهادند، نه تصمیم**. فایل‌های جزئیات در همین پوشه‌اند (`docs/research/world/`)؛ «بازبینی» یعنی ردیف مربوط در بازبینی مستقل همان فایل.
 
@@ -50,5 +50,10 @@
 | R80 | Macaulay & Ardley، The Way Things Work Now (خوانده‌نشده) | `books_read/GROUP_D2_20261007_FA.md §۲؛ BOOKS_WORLD_20261007_FA.md E15–E16` | `books_read/REVIEW_BOOKS ردیف ۷۳؛ REVIEW_WORLD_20261007_FA.md ردیف ۴۷` |
 | R81 | DK Findout! Science (◻) | `BOOKS_WORLD_20261007_FA.md (بخش ۶-الف، ردیف ۱–۳)` | — |
 | R82 | Usborne See Inside How Things Work (◻) | `BOOKS_WORLD_20261007_FA.md (بخش ۶-الف، ردیف ۶)` | — |
+| R83 | برنامه‌های درسی بیشتر: آلمان، انتاریو، کره، چین، فرانسه، نیوزیلند + نسخهٔ بهتر فنلاند، سنگاپور، ژاپن، انگلستان، Cambridge، ترکیه، استرالیا، IB | `CURRICULA_MORE_20261007_FA.md` | `REVIEW_ROUND2_20261007_FA.md` (§۲–۴) |
+| R84 | منابع چرخ‌دنده (G01–G55: برنامه‌ها، LEGO، Ingenium، Reuter & Leuchter 2022) | `GEARS_SOURCES_20261007_FA.md` | `REVIEW_ROUND2_20261007_FA.md` (§۲–۴) |
+| R85 | منابع اهرم و رده‌های آن (van der Graaf 2020، NSTA/Keeley، Macmillan، FLE 123) | `LEVER_CLASSES_SOURCES_20261007_FA.md` | `REVIEW_ROUND2_20261007_FA.md` (§۲–۴) |
+| R86 | منابع کار و سود مکانیکی (W1–W6، R-a تا R-g؛ Core Knowledge پایهٔ ۱، Norbury 2006) | `WORK_AND_MA_SOURCES_20261007_FA.md` | `REVIEW_ROUND2_20261007_FA.md` (§۲–۴) |
+| R87 | منابع گوه و پیچ (C2 Core Knowledge، E1/E2، S4 Roth) | `WEDGE_SCREW_SOURCES_20261007_FA.md` | `REVIEW_ROUND2_20261007_FA.md` (§۲–۴) |
 
 نکته: ردیف‌های R41 و R46 و R50 و R53 در ردیف‌های قدیمی‌تر (R27، R28، R30، R25) هم ذکر شده‌اند؛ ردیف جدید همان منبع را با مرجع کامل و اصلاح بازبین ثبت می‌کند و ردیف قدیمی دست‌نخورده ماند. R38 هم تکمیل R26 است.
