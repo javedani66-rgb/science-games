@@ -69,6 +69,7 @@ table.pol{border-collapse:collapse;font-size:.82rem;min-width:560px}
 table.pol th,table.pol td{border:1px solid var(--border);padding:6px 9px;text-align:start;vertical-align:top}
 table.pol th{background:var(--card)}
 .polwrap{overflow-x:auto;max-width:900px;margin-inline:auto}
+.tbring.prev{stroke-dasharray:7 5;opacity:.8}
 .tbring{fill:none;stroke:var(--ring);stroke-width:6}
 .tbbadge rect{fill:var(--ring)}
 .tbbadge path{stroke:var(--card);fill:none;stroke-width:2}
@@ -89,7 +90,7 @@ table.pol th{background:var(--card)}
 
 <div class="top">
   <h1>اسکیس نقشهٔ مفاهیم</h1>
-  <details class="note"><summary>دربارهٔ این اسکیس</summary><p style="margin:4px 0">پیشنهاد، نه تصمیم (B30 تا B32). هر دایره یک «محیط» است و سرزمین‌ها خوشه‌های مفهومی‌اند. رنگ سرزمین فقط پوسته است؛ سختی (سبز، نارنجی، قرمز) داخل هر محیط و جدا از این نقشه است. روی دایره بزن تا جزئیاتش را ببینی. پایهٔ کودک را عوض کن تا حلقهٔ کتاب درسی جابه‌جا شود. پیوندهای میان سرزمین‌ها فقط برای دایرهٔ انتخاب‌شده نشان داده می‌شوند.</p></details>
+  <details class="note"><summary>دربارهٔ این اسکیس</summary><p style="margin:4px 0">پیشنهاد، نه تصمیم (B30 تا B32). هر دایره یک «محیط» است و سرزمین‌ها خوشه‌های مفهومی‌اند. رنگ سرزمین فقط پوسته است؛ سختی (سبز، نارنجی، قرمز) داخل هر محیط و جدا از این نقشه است. روی دایره بزن تا جزئیاتش را ببینی. پایهٔ کودک را عوض کن: حلقه‌ها تجمعی‌اند و محتوای پایه‌های قبل هم روشن می‌ماند. پیوندهای میان سرزمین‌ها فقط برای دایرهٔ انتخاب‌شده نشان داده می‌شوند.</p></details>
   <div class="ctrl">
     <span class="t" style="font-size:.85rem;color:var(--muted)">پایهٔ کودک:</span>
     <div class="seg" role="radiogroup" aria-label="پایهٔ کودک" id="grades"></div>
@@ -102,7 +103,8 @@ table.pol th{background:var(--card)}
 
 <div class="legend" aria-label="راهنما">
   <span><svg viewBox="0 0 30 22"><circle cx="15" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2"/></svg>محیط (یک مفهوم)</span>
-  <span><svg viewBox="0 0 30 22"><circle cx="15" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="15" cy="11" r="10" fill="none" stroke="var(--ring)" stroke-width="3"/></svg>حلقهٔ کتاب درسی پایهٔ انتخاب‌شده</span>
+  <span><svg viewBox="0 0 30 22"><circle cx="15" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="15" cy="11" r="10" fill="none" stroke="var(--ring)" stroke-width="3"/></svg>حلقهٔ پر: در کتاب همین پایه</span>
+  <span><svg viewBox="0 0 30 22"><circle cx="15" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="15" cy="11" r="10" fill="none" stroke="var(--ring)" stroke-width="3" stroke-dasharray="5 3"/></svg>حلقهٔ خط‌چین: از پایه‌های قبل (با سطح بالاتر)</span>
   <span><svg viewBox="0 0 30 22"><circle cx="15" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/></svg>بیشتر بدانیم (اختیاری، مخفی و سخت)</span>
   <span><svg viewBox="0 0 30 22"><rect x="9" y="2" width="12" height="18" rx="6" fill="none" stroke="var(--ring)" stroke-width="2"/></svg>در: ورودی مسیر مخفی (بزن تا کشف شود)</span>
   <span><svg viewBox="0 0 30 22"><rect x="2" y="5" width="26" height="12" rx="6" fill="none" stroke="currentColor" stroke-dasharray="3 2"/></svg>آزمایشی: شاهد کافی نیست</span>
@@ -110,7 +112,7 @@ table.pol th{background:var(--card)}
 </div>
 
 <div class="mapwrap"><svg id="map" viewBox="0 0 900 __H__" role="group" aria-label="نقشهٔ شبکه‌ای مفاهیم"></svg></div>
-<p class="foot">داده از <code dir="ltr">docs/research/world/nodes_v2_draft.json</code> (۳۴ گره، ۷ سرزمین). چیدمان این صفحه دستی است و چیدمان نهایی نیست. حلقهٔ کتاب درسی داده‌ای دربارهٔ کتاب‌های ایران است و دربارهٔ فهم کودک چیزی نمی‌گوید.</p>
+<p class="foot">داده از <code dir="ltr">docs/research/world/nodes_v2_draft.json</code> (۳۴ گره، ۶ سرزمین). چیدمان این صفحه دستی است و چیدمان نهایی نیست. حلقهٔ کتاب درسی داده‌ای دربارهٔ کتاب‌های ایران است و دربارهٔ فهم کودک چیزی نمی‌گوید.</p>
 <h2 style="font-size:1rem;margin:18px 0 6px;max-width:900px;margin-inline:auto">قاعدهٔ پیشنهادی عمق بر پایهٔ باند (جهت از مالک، مقدارها پیشنهاد)</h2>
 <div class="polwrap"><table class="pol" id="pol"></table></div>
 <div class="spacer" id="sp"></div>
@@ -150,7 +152,10 @@ DATA.edges.forEach(e=>{ if (HID.has(e.to) && !HID.has(e.from) && e.kind==='soft_
 const DOOR = {}; // source id -> hidden ids it leads to
 Object.keys(ENTR).forEach(h=>ENTR[h].forEach(s=>{ (DOOR[s] = DOOR[s] || []).push(h); }));
 function visible(n){ return !n.hidden_detour || state.teacher || state.found.has(n.id); }
-function hasTb(n){ return state.grade && n.textbook_grades && n.textbook_grades[state.grade] != null; }
+// تجمعی: محتوای پایه‌های قبل هم مجاز است (با سطح بالاترِ امسال). 2 = امسال، 1 = از سال‌های قبل، 0 = نه
+function tbLevel(n){ if (!state.grade || !n.textbook_grades) return 0; const g = +state.grade; const ks = Object.keys(n.textbook_grades).map(Number);
+  if (ks.includes(g)) return 2; return ks.some(k=>k<g) ? 1 : 0; }
+function hasTb(n){ return tbLevel(n) > 0; }
 
 function buildGrades(){
   const g = $('grades');
@@ -202,10 +207,11 @@ function draw(){
     el('circle', {r:R, class:'body'}, g);
     if (hasTb(n)){
       cnt++;
-      el('circle', {r:R+9, class:'tbring'}, g);
-      const b = el('g', {class:'tbbadge', transform:`translate(${R-2},${-R-6})`}, g);
+      const lv = tbLevel(n);
+      el('circle', {r:R+9, class:'tbring' + (lv===1 ? ' prev' : '')}, g);
+      if (lv===2){ const b = el('g', {class:'tbbadge', transform:`translate(${R-2},${-R-6})`}, g);
       el('rect', {x:-13, y:-13, width:26, height:26, rx:6}, b);
-      el('path', {d:'M-7 -6H7M-7 0H7M-7 6H3'}, b);
+      el('path', {d:'M-7 -6H7M-7 0H7M-7 6H3'}, b); }
     }
     if (n.experimental){
       const x = el('g', {class:'xp', transform:`translate(${-R-8},${-R-4})`}, g);
@@ -227,7 +233,7 @@ function draw(){
     g.addEventListener('click', ()=>openNode(n.id));
     g.addEventListener('keydown', ev=>{ if(ev.key==='Enter' || ev.key===' '){ ev.preventDefault(); openNode(n.id); }});
   });
-  $('count').textContent = state.grade ? `در کتاب پایهٔ ${faD(state.grade)}: ${faD(cnt)} محیط` : '';
+  $('count').textContent = state.grade ? `تا پایهٔ ${faD(state.grade)} (با سال‌های قبل): ${faD(cnt)} محیط` : '';
 }
 
 function openNode(id){
@@ -254,7 +260,7 @@ function openNode(id){
   dt('در کتاب‌های درسی ایران');
   if (keys.length){
     const x = document.createElement('dd');
-    keys.forEach(k=>{ const c = document.createElement('span'); c.className = 'chip' + (k===state.grade ? ' tb' : ''); c.textContent = (GR[k] || 'پایهٔ ' + faD(k)) + ': ' + tg[k]; x.append(c); });
+    keys.forEach(k=>{ const c = document.createElement('span'); c.className = 'chip' + (state.grade && +k<=+state.grade ? ' tb' : ''); c.textContent = (GR[k] || 'پایهٔ ' + faD(k)) + ': ' + tg[k]; x.append(c); });
     dl.append(x);
   } else dd('در کتاب‌های دبستان نیامده است.');
   if (n.band_entry_note_fa){ dt('شاهد'); dd(n.band_entry_note_fa); }
