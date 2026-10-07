@@ -31,8 +31,8 @@ function makeTug(A,cfg){
         st.tray.forEach((v,j)=>{const x=x0+(j-(st.tray.length-1)/2)*84,sel=st.sel&&st.sel.side===side&&st.sel.v===v;s+=`<g data-drag="tray" data-side="${side}" data-v="${v}" style="cursor:grab"><g transform="translate(${x} 440) scale(1.2) translate(${-x} -440)">${tokenSvg(x,432,v,side,sel)}</g></g>`;});}}
     P.paint(s);
     const q="<b>؟</b>",sh=st.show;
-    A.counter(`<span class="cc l">چپ: ${sh==="none"?q:`<b class="num">${fa(sL)}</b> نیوتن`}</span><span class="cc r">راست: ${sh==="none"?q:`<b class="num">${fa(sR)}</b> نیوتن`}</span><span class="cc n">خالص: ${sh!=="all"?q:`<b class="num">${fa(Math.abs(net))}</b> ${net>0?"به راست":net<0?"به چپ":"(تعادل)"}`}</span>`);
-    A.formula(FX(`${sy("F")} = ${sy("F","2")} − ${sy("F","1")}`,sh==="all"?`${sy("F")} = ${fa(Math.max(sL,sR))} − ${fa(Math.min(sL,sR))} = ${fa(Math.abs(net))} N`:"",[[sy("F"),"نیروی خالص"],[sy("F","2"),"جمع نیروهای طرفِ قوی‌تر"],[sy("F","1"),"جمع نیروهای طرفِ ضعیف‌تر"],["N","نیوتن"]]));
+    A.counter(`<span class="cc l">چپ: ${sh==="none"?q:`<b class="num">${fa(sL)}</b> نیوتون`}</span><span class="cc r">راست: ${sh==="none"?q:`<b class="num">${fa(sR)}</b> نیوتون`}</span><span class="cc n">خالص: ${sh!=="all"?q:`<b class="num">${fa(Math.abs(net))}</b> ${net>0?"به راست":net<0?"به چپ":"(تعادل)"}`}</span>`);
+    A.formula(FX(`${sy("F")} = ${sy("F","2")} − ${sy("F","1")}`,sh==="all"?`${sy("F")} = ${fa(Math.max(sL,sR))} − ${fa(Math.min(sL,sR))} = ${fa(Math.abs(net))} N`:"",[[sy("F"),"نیروی خالص"],[sy("F","2"),"جمع نیروهای طرفِ قوی‌تر"],[sy("F","1"),"جمع نیروهای طرفِ ضعیف‌تر"],["N","نیوتون"]]));
   }
   const nearSlot=(side,p)=>{let b=null,bd=70;for(let i=0;i<4;i++){if(st[side][i]!=null)continue;const d=Math.hypot(p.x-slotX(side,i),p.y-300);if(d<bd){bd=d;b=i;}}return b;};
   const place=(side,v,i)=>{if(i==null){i=st[side].indexOf(null);if(i<0){A.fb("همهٔ جاهای این طرف پر است.","info");return;}}st[side][i]=v;};
@@ -120,21 +120,21 @@ const ST_force={key:"force",name:"نیرو",c:"#E8590C",sub:"هل دادن، ک�
     const fixedSum=sumA(sp.fixed),tgt=sp.t==="balance"?0:sp.target,need=side==="R"?fixedSum+tgt:fixedSum-tgt;
     const sn=side==="R"?"راست":"چپ";
     if(sp.t==="balance")A.prompt(KID()?"کارت نیرو بگذار تا جعبه تکان نخورد. اگر نشد، دوباره امتحان کن.":`طناب‌کشی را متعادل کن تا جعبه تکان نخورد. اگر نشد، دوباره امتحان کن.<small>کارت‌های نیرو را از پایین صفحه بردار و روی طرف ${sn} طناب بگذار. بعد «برو!» را بزن.</small>`);
-    else A.prompt(`طوری بچین که نیروی خالص <b>${fa(Math.abs(tgt))} نیوتن به سمت ${tgt>0?"راست":"چپ"}</b> شود. اگر نشد، دوباره امتحان کن.<small>کارت‌های نیرو را روی طرف ${sn} طناب بگذار. بعد «برو!» را بزن.</small>`);
+    else A.prompt(`طوری بچین که نیروی خالص <b>${fa(Math.abs(tgt))} نیوتون به سمت ${tgt>0?"راست":"چپ"}</b> شود. اگر نشد، دوباره امتحان کن.<small>کارت‌های نیرو را روی طرف ${sn} طناب بگذار. بعد «برو!» را بزن.</small>`);
     const c=A.ctrl("");const go=btn(c,"برو!","go",()=>{const s=sumA(tug.st[side]);if(!s){A.fb("اول دست‌کم یک کارت نیرو روی طناب بگذار.","info");return;}go.disabled=true;
       tug.run(()=>{const net=sumA(tug.st.R)-sumA(tug.st.L),ok=net===tgt;
-        const res=A.trial(ok,{k:{ok:"دو طرف مساوی شد؛ جعبه تکان نخورد.",retry:"کارت‌های دو طرف را بشمار. باید مساوی باشند.",final:`طرف ${sn} باید ${fa(sp.fixed.length)} کارت نیرو داشته باشد.`},ok:sp.t==="balance"?"دو طرف برابر شدند و نیروی خالص صفر است.":`نیروی خالص دقیقاً ${fa(Math.abs(tgt))} نیوتن شد.`,
+        const res=A.trial(ok,{k:{ok:"دو طرف مساوی شد؛ جعبه تکان نخورد.",retry:"کارت‌های دو طرف را بشمار. باید مساوی باشند.",final:`طرف ${sn} باید ${fa(sp.fixed.length)} کارت نیرو داشته باشد.`},ok:sp.t==="balance"?"دو طرف برابر شدند و نیروی خالص صفر است.":`نیروی خالص دقیقاً ${fa(Math.abs(tgt))} نیوتون شد.`,
           retry:sp.t==="balance"?`جمع طرف ${sn} باید با طرف دیگر (${fa(fixedSum)}) برابر شود. جعبه سر جایش برگشت؛ دوباره بچین.`:`نیروی خالص ${fa(Math.abs(net))} شد. جمع طرف ${sn} باید ${fa(need)} باشد.`,
           final:`جمع طرف ${sn} باید ${fa(need)} می‌شد؛ مثلاً ${solveStr(need,sp.tray)}.`});
         if(!res&&!A.locked){later(500,()=>{tug.reset();go.disabled=false;});}});});
     return;}
   if(sp.t==="net"){A.prompt(`نیروی خالص چقدر است و به کدام طرف؟<small>عدد را تنظیم کن، جهت را انتخاب کن و «بررسی» را بزن.</small>`);
     const tug=makeTug(A,{L:spread(sp.L,4),R:spread(sp.R,5),show:"sides"});A.refresh=()=>tug.render();
-    const net=sumA(sp.R)-sumA(sp.L);let dir=null;const c=A.ctrl("");const stp=stepper(c,{init:0,max:400,steps:[10],unit:"نیوتن",label:"اندازهٔ نیروی خالص"});
+    const net=sumA(sp.R)-sumA(sp.L);let dir=null;const c=A.ctrl("");const stp=stepper(c,{init:0,max:400,steps:[10],unit:"نیوتون",label:"اندازهٔ نیروی خالص"});
     c.insertAdjacentHTML("beforeend",`<div class="ctrl" id="dirs"><button class="opt" data-d="1" type="button">به راست →</button><button class="opt" data-d="0" type="button">بدون جهت (صفر)</button><button class="opt" data-d="-1" type="button">← به چپ</button></div>`);
     const dirs=c.querySelector("#dirs");dirs.onclick=e=>{const b=e.target.closest("[data-d]");if(!b)return;dir=+b.dataset.d;dirs.querySelectorAll(".opt").forEach(x=>x.classList.toggle("sel",x===b));};
     const chk=btn(c,"بررسی","go",()=>{const v=stp.get();if(dir==null){A.fb("جهت را هم انتخاب کن.","info");return;}const ok=v===Math.abs(net)&&(net===0?dir===0:dir===Math.sign(net));
-      A.judge(ok,{ok:`نیروی خالص ${fa(Math.abs(net))} نیوتن ${net>0?"به راست":net<0?"به چپ":""} است.`,retry:"اول جمع هر طرف را حساب کن، بعد کوچک‌تر را از بزرگ‌تر کم کن. نیروی خالص به طرفِ بزرگ‌تر است.",final:`جمع چپ ${fa(sumA(sp.L))} و جمع راست ${fa(sumA(sp.R))} است؛ نیروی خالص ${fa(Math.abs(net))} ${net>0?"به راست":net<0?"به چپ":"(تعادل)"}.`});
+      A.judge(ok,{ok:`نیروی خالص ${fa(Math.abs(net))} نیوتون ${net>0?"به راست":net<0?"به چپ":""} است.`,retry:"اول جمع هر طرف را حساب کن، بعد کوچک‌تر را از بزرگ‌تر کم کن. نیروی خالص به طرفِ بزرگ‌تر است.",final:`جمع چپ ${fa(sumA(sp.L))} و جمع راست ${fa(sumA(sp.R))} است؛ نیروی خالص ${fa(Math.abs(net))} ${net>0?"به راست":net<0?"به چپ":"(تعادل)"}.`});
       if(A.locked){chk.disabled=true;stp.disable();tug.st.show="all";tug.render();tug.run();}});
     return;}
  }};
@@ -143,10 +143,10 @@ function fricChallenge(sp,A){const fr=makeFriction(A,sp.F);A.refresh=()=>fr.rend
   A.formula(`<span class="fl">قانون</span><span>اگر نیروی هل دادن از اصطکاک بیشتر باشد، جعبه حرکت می‌کند.</span>`);
   const q=sp.q;let ans,text,expl;
   if(q===1){ans=0;text=KID()?"کدام جعبه دورتر می‌رود؟":"هر سه جعبه را با یک اندازه هل می‌دهیم. کدام جعبه دورتر می‌رود؟";expl="روی یخ اصطکاک خیلی کم است؛ پس جعبه راحت سُر می‌خورد.";}
-  else if(q===2){ans=2;text=KID()?"کدام جعبه تکان نمی‌خورد؟":`با نیروی ${fa(sp.F)} نیوتن هل می‌دهیم. روی کدام سطح جعبه اصلاً تکان نمی‌خورد؟`;expl="اصطکاکِ فرش آن‌قدر زیاد است که این نیروی هل دادن نمی‌تواند جعبه را راه بیندازد.";}
+  else if(q===2){ans=2;text=KID()?"کدام جعبه تکان نمی‌خورد؟":`با نیروی ${fa(sp.F)} نیوتون هل می‌دهیم. روی کدام سطح جعبه اصلاً تکان نمی‌خورد؟`;expl="اصطکاکِ فرش آن‌قدر زیاد است که این نیروی هل دادن نمی‌تواند جعبه را راه بیندازد.";}
   else if(q===3){ans=2;text=KID()?"کدام سطح زبرتر است؟":"اصطکاک کدام سطح از همه بیشتر است؟";expl="پرزهای فرش جلوی سُر خوردن را می‌گیرند؛ پس فرش بیشترین اصطکاک را دارد.";}
-  else if(q===4){ans=0;text=KID()?"اگر آرام هل بدهیم، کدام جعبه راه می‌افتد؟":`اگر هر جعبه را فقط با نیروی ${fa(sp.F)} نیوتن هل بدهیم، روی کدام سطح جعبه راه می‌افتد؟`;expl="فقط اصطکاکِ یخ از این نیروی هل دادن کمتر است.";}
-  else{ans=2;text=`اگر هر جعبه را با نیروی ${fa(sp.F)} نیوتن هل بدهیم، کدام جعبه کمترین راه را می‌رود؟`;expl="هر سه جعبه راه می‌افتند، ولی روی فرش، اصطکاک بیشترِ نیروی هل دادن را خنثی می‌کند.";}
+  else if(q===4){ans=0;text=KID()?"اگر آرام هل بدهیم، کدام جعبه راه می‌افتد؟":`اگر هر جعبه را فقط با نیروی ${fa(sp.F)} نیوتون هل بدهیم، روی کدام سطح جعبه راه می‌افتد؟`;expl="فقط اصطکاکِ یخ از این نیروی هل دادن کمتر است.";}
+  else{ans=2;text=`اگر هر جعبه را با نیروی ${fa(sp.F)} نیوتون هل بدهیم، کدام جعبه کمترین راه را می‌رود؟`;expl="هر سه جعبه راه می‌افتند، ولی روی فرش، اصطکاک بیشترِ نیروی هل دادن را خنثی می‌کند.";}
   /* اولین برخورد با اصطکاک: حدس (بی‌امتیاز) ← هل دادن ← سؤال دربارهٔ چیزی که دید */
   if(sp.poe){poe(A,{prompt:KID()?"هر سه جعبه را با یک اندازه هل می‌دهیم. حدس بزن کدام دورتر می‌رود.":"هر سه جعبه را با یک اندازه هل می‌دهیم. حدس بزن کدام دورتر می‌رود. حدس امتیاز ندارد.",opts:fr.lanes.map(L=>L.n),right:ans,reveal:(i,next)=>fr.run(next)},
     {prompt:"کدام جعبه دورتر رفت؟",opts:fr.lanes.map(L=>L.n),ans,ok:expl,retry:"به جای جعبه‌ها نگاه کن: کدام از همه جلوتر است؟"});return;}

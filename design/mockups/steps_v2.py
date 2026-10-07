@@ -55,6 +55,6 @@ before=f'''<style>{CSS2}</style><section class="ph" style="{var(L)}">{hdr2(L,"ک
 after=f'''<style>{CSS2}</style><section class="ph" style="{var(L)}">{hdr2(L,"کارگاه ساختمانی و بندر",5,"اهرم",2)}
 {scene('lever3_after.png',dims(M['after']),vb=VB)}<div class="panel">
 <div class="who"><div class="nm">{bust(1,"happy",52,"#B84A33","#FFFFFF")}اوستا هستی</div><p style="font-weight:700;color:#0F4F2A">آفرین! <span style="color:#7A3FC8">بازوی محرک</span> ۴ متر است و <span style="color:#2E5AA8">بازوی مقاوم</span> ۱ متر. چون تکیه‌گاه نزدیکِ سنگ است، سنگ با نیروی کمتری بلند&nbsp;شد.</p></div>
-<div class="fx"><span class="f">F<sub>1</sub></span> × <span class="p">۴</span> = ۲۴۰ × <span class="b">۱</span> &nbsp;⟹&nbsp; <span class="f">F<sub>1</sub></span> = ۶۰ N<small>با ۶۰ نیوتن، اهرم در تعادل&nbsp;است.</small></div>
+<div class="fx"><span class="f">F<sub>1</sub></span> × <span class="p">۴</span> = ۲۴۰ × <span class="b">۱</span> &nbsp;⟹&nbsp; <span class="f">F<sub>1</sub></span> = ۶۰ N<small>با ۶۰ نیوتون، اهرم در تعادل&nbsp;است.</small></div>
 <div class="bar"><button class="btn pri full">مأموریتِ بعد</button></div></div></section>'''
 open('s2_before.html','w').write('<meta charset=utf8>'+before);open('s2_after.html','w').write('<meta charset=utf8>'+after)
