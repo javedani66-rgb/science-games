@@ -160,7 +160,7 @@ const DOOR = {}; // source id -> hidden ids it leads to
 Object.keys(ENTR).forEach(h=>ENTR[h].forEach(s=>{ (DOOR[s] = DOOR[s] || []).push(h); }));
 // مسیر پیشنهادی: شمارهٔ مرحله برای هر گره (فقط راهنما، نه قفل)
 function stageMap(){ const m = {}; if (!state.path) return m; const P = DATA.paths; const from = state.path==='machines' ? P.machines.from_stage : 1;
-  P.main.stages.forEach((s,i)=>{ const k = i+1; if (k>=from) s.n.forEach(id=>{ if (!m[id]) m[id] = k; }); }); return m; }
+  P.main.stages.forEach((s,i)=>{ const k = i+1; if (k>=from) s.n.forEach(id=>{ (m[id] = m[id] || []).push(k); }); }); return m; }
 function grp(n){ return n.zone || n.land; }
 function visible(n){ return !n.hidden_detour || state.teacher || state.found.has(n.id); }
 // تجمعی: محتوای پایه‌های قبل هم مجاز است (با سطح بالاترِ امسال). 2 = امسال، 1 = از سال‌های قبل، 0 = نه
@@ -222,7 +222,7 @@ function draw(){
     const st = STG[n.id];
     if (state.path && !st) g.style.opacity = '.3';
     el('circle', {r:R, class:'body'}, g);
-    if (st){ const sg = el('g', {class:'stg', transform:`translate(0,${-R-14})`}, g); el('circle', {r:15}, sg); const stt = el('text', {y:6,'text-anchor':'middle'}, sg); stt.textContent = faD(st); }
+    if (st){ const sg = el('g', {class:'stg', transform:`translate(0,${-R-14})`}, g); el('circle', {r:15}, sg); const stt = el('text', {y:6,'text-anchor':'middle'}, sg); stt.textContent = st.map(faD).join('،'); if (st.length>1){ sg.querySelector('circle').setAttribute('r', 22); stt.setAttribute('font-size','15'); } }
     if (hasTb(n)){
       cnt++;
       const lv = tbLevel(n);

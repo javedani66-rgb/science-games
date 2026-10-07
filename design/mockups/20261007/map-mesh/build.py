@@ -49,7 +49,7 @@ lands = [{'id': l['id'], 'label_fa': l['label_fa'], 'summary_fa': l['summary_fa'
 PATHS = {  # proposal B37/B42: main path from force to simple machines (numbers = stages; shortcut = machines only)
  'main': {'label_fa':'مسیر بزرگ: از نیرو تا ماشین‌های ساده', 'stages':[
   {'t':'نیرو','n':['F01','F02','F03','F04']},
-  {'t':'نیرو و حرکت (کار خیلی ساده معرفی می‌شود)','n':['F06','F07','F08','F09']},
+  {'t':'نیرو و حرکت (کار خیلی ساده معرفی می‌شود)','n':['F06','F07','F08','F09','E02']},
   {'t':'جرم، وزن و گرانش','n':['F05','W01','W02','W03','W04']},
   {'t':'کار و انرژی','n':['E02','E01','E03']},
   {'t':'ماشین چیست و تعادل','n':['M01','B01','B02']},
