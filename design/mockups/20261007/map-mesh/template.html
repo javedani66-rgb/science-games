@@ -1,7 +1,7 @@
 <title>اسکیس نقشهٔ مفاهیم</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
 <style>
-/* Layout: sticky controls on top, one tall vertical mesh map (4 concept lands + hidden compound land, 3 zones), bottom sheet for the tapped environment. */
+/* Layout: sticky controls on top, one tall vertical mesh map (4 concept lands, 3 zones), bottom sheet for the tapped environment. */
 :root{
   --bg:#f3f5f7; --fg:#1b2530; --muted:#5a6775; --line:#9aa6b3; --card:#ffffff; --border:#cfd7df;
   --ring:#3b3fc4; --ring-soft:#c9cbf5; --node:#ffffff; --node-stroke:#52606e; --dash:#7d8a98;
@@ -118,7 +118,7 @@ table.pol th{background:var(--card)}
 </div>
 
 <div class="mapwrap"><svg id="map" viewBox="0 0 900 __H__" role="group" aria-label="نقشهٔ شبکه‌ای مفاهیم"></svg></div>
-<p class="foot">داده از <code dir="ltr">docs/research/world/nodes_v2_draft.json</code> (۳۴ گره، ۴ سرزمین + ۱ سرزمین مخفی، ۳ منطقه). چیدمان این صفحه دستی است و چیدمان نهایی نیست. حلقهٔ کتاب درسی داده‌ای دربارهٔ کتاب‌های ایران است و دربارهٔ فهم کودک چیزی نمی‌گوید.</p>
+<p class="foot">داده از <code dir="ltr">docs/research/world/nodes_v2_draft.json</code> (۳۳ گره، ۴ سرزمین، ۳ منطقه؛ «ماشین مرکب» به توسعهٔ بعدی موکول شد). چیدمان این صفحه دستی است و چیدمان نهایی نیست. حلقهٔ کتاب درسی داده‌ای دربارهٔ کتاب‌های ایران است و دربارهٔ فهم کودک چیزی نمی‌گوید.</p>
 <h2 style="font-size:1rem;margin:18px 0 6px;max-width:900px;margin-inline:auto">قاعدهٔ پیشنهادی عمق بر پایهٔ باند (جهت از مالک، مقدارها پیشنهاد)</h2>
 <div class="polwrap"><table class="pol" id="pol"></table></div>
 <div id="stagelist" class="polwrap" style="margin-top:12px" hidden></div>
@@ -133,7 +133,7 @@ const $ = (id)=>document.getElementById(id);
 const faD = (n)=>String(n).replace(/\d/g, d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
 const DEPTH = {D1:'ببین و حس کن', D2:'کیفی', D3:'عدد و اندازه', D4:'فرمول (بیشتر بدانیم)'};
 const GR = {'7':'هفتم','8':'هشتم','9':'نهم','10':'فیزیک ۱'};
-const LAND_VAR = {L1:'--l1',L2:'--l2',LW:'--l7',LM:'--l4',LC:'--l3'};
+const LAND_VAR = {L1:'--l1',L2:'--l2',LW:'--l7',LM:'--l4'};
 const byId = Object.fromEntries(DATA.nodes.map(n=>[n.id,n]));
 const state = {path:'', grade:null, teacher:false, sel:null, allLinks:false, found:new Set()};
 const R = 36;

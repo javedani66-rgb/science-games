@@ -13,8 +13,7 @@ LAYOUT = [
          'zones':[('Z1',[[('B01',780),('B02',560),('M04',340),('M05',120)],[('M06',450),('E05',230)]]),
                   ('Z2',[[('M03',700),('M09',480),('M10',260)]]),
                   ('Z3',[[('M02',780),('M07',560),('M08',340),('M11',120)]])],
-         'post':[[('E06',780)]]}),
- ('LC', [[('M12',700),('E04',420)]]),
+         'post':[[('E06',780),('E04',420)]]}),
 ]
 POS, LAND_BOX, ZONE_BOX = {}, {}, {}
 y = 30
@@ -42,7 +41,7 @@ for lid, spec in LAYOUT:
     LAND_BOX[lid] = (top, bottom)
     y = bottom + 28
 HEIGHT = y
-nodes = [{k: n.get(k) for k in ('id','land','label_fa','plain_fa','d1_idea_fa','depths','band_entry','band_entry_note_fa','optional','hidden_detour','main_map_max_depth','textbook_grades','evidence_refs','experimental','experimental_note_fa','zone')} for n in D['nodes']]
+nodes = [{k: n.get(k) for k in ('id','land','label_fa','plain_fa','d1_idea_fa','depths','band_entry','band_entry_note_fa','optional','hidden_detour','main_map_max_depth','textbook_grades','evidence_refs','experimental','experimental_note_fa','zone')} for n in D['nodes'] if not n.get('deferred')]
 for n in nodes:
     n['x'], n['y'] = POS[n['id']]
 lands = [{'id': l['id'], 'label_fa': l['label_fa'], 'summary_fa': l['summary_fa'], 'y0': LAND_BOX[l['id']][0], 'y1': LAND_BOX[l['id']][1], 'zones': [{'id': z['id'], 'label_fa': z['label_fa'], 'y0': ZONE_BOX[z['id']][0], 'y1': ZONE_BOX[z['id']][1]} for z in l.get('zones', [])]} for l in D['lands']]
@@ -58,7 +57,7 @@ PATHS = {  # proposal B37/B42: main path from force to simple machines (numbers 
   {'t':'چرخ، قرقره و چرخ‌دنده (پایان: ماشین کار نمی‌سازد)','n':['M02','M07','M08','M11','E06']}]},
  'machines': {'label_fa':'میانبر: فقط ماشین‌ها (مراحل ۵ تا ۸)', 'from_stage':5},
 }
-data = {'paths': PATHS, 'lands': lands, 'nodes': nodes, 'edges': D['edges'], 'height': HEIGHT, 'policy': D['depth_policy_proposal']['table']}
+data = {'paths': PATHS, 'lands': lands, 'nodes': nodes, 'edges': [e for e in D['edges'] if e['from'] in POS and e['to'] in POS], 'height': HEIGHT, 'policy': D['depth_policy_proposal']['table']}
 tpl = (pathlib.Path(__file__).parent / 'template.html').read_text(encoding='utf-8')
 out = tpl.replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False)).replace('__H__', str(HEIGHT))
 (pathlib.Path(__file__).parent / 'index.html').write_text(out, encoding='utf-8')
