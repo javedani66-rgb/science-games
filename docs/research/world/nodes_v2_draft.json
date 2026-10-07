@@ -35,20 +35,31 @@
    "exists": "already in src/simple-machines (station and/or MACHINE)",
    "partial": "some model/scene exists, needs new scene or D1",
    "new": "needs new engine/scene code"
-  }
+  },
+  "decisions_applied": [
+   "B31",
+   "B32",
+   "B33",
+   "D36",
+   "D37",
+   "D38 (6 lands: friction merged into L1; experimental labels; hidden path = discoverable with visible entrance; depth rule below)"
+  ],
+  "hidden_path_mode": "discoverable_with_visible_entrance (owner accepted 2026-10-07 23:36; no lock, no points; teacher view lists all)"
  },
  "lands": [
   {
    "id": "L1",
-   "label_fa": "نیرو و حرکت",
-   "summary_fa": "هل و کشش، اثر نیرو، اندازه و جهت، آهنربا، چند نیرو با هم، کنش و واکنش.",
+   "label_fa": "نیرو، حرکت و اصطکاک",
+   "summary_fa": "هل و کشش، اثر نیرو، اندازه و جهت، آهنربا، چند نیرو با هم، کنش و واکنش؛ اصطکاک، مقاومت هوا و آب.",
    "nodes": [
     "F01",
     "F02",
     "F03",
     "F04",
     "F08",
-    "F09"
+    "F09",
+    "F06",
+    "F07"
    ],
    "status": "proposal"
   },
@@ -62,16 +73,6 @@
     "W02",
     "W03",
     "W04"
-   ],
-   "status": "proposal"
-  },
-  {
-   "id": "L3",
-   "label_fa": "اصطکاک و مقاومت",
-   "summary_fa": "اصطکاک سطح‌ها و مقاومت هوا و آب؛ مفید و مضر.",
-   "nodes": [
-    "F06",
-    "F07"
    ],
    "status": "proposal"
   },
@@ -166,7 +167,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "ایستگاه «نیرو» (st_force.js): هل/کشش با کارت‌های نیرو.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "F02",
@@ -202,7 +205,9 @@
    },
    "engine": "partial",
    "engine_note_fa": "هل/کشش و نیروی خالص هست؛ صحنهٔ «شکل عوض شد/جهت عوض شد» جدا نیست.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "F03",
@@ -240,7 +245,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "کارت‌های ۱۰/۲۰/۵۰ نیوتون و نیروسنج فنری (st_force.js، st_scale.js).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "F04",
@@ -273,7 +280,9 @@
    },
    "engine": "new",
    "engine_note_fa": "آهنربا در موتور نیست؛ یک صحنهٔ ساده (جذب/دفع) لازم است. مدل MACHINE به آن نیازی ندارد.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "F08",
@@ -310,7 +319,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "طناب‌کشی، جمع نیروها و نیروی خالص در st_force.js.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "F09",
@@ -344,7 +355,9 @@
    },
    "engine": "new",
    "engine_note_fa": "صحنهٔ اسکیت/لختی در موتور نیست.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": true,
+   "experimental_note_fa": "بدون شاهد کافی؛ روی نقشه با برچسب «آزمایشی» (باید با کودک آزموده شود)"
   },
   {
    "id": "F05",
@@ -381,7 +394,9 @@
    },
    "engine": "partial",
    "engine_note_fa": "فقط «روی ماه» در st_scale.js (g=1.6 در برابر 10)؛ صحنهٔ افتادن نیست.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "W01",
@@ -414,7 +429,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "ترازوی دوکفه (st_scale.js).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "W02",
@@ -452,7 +469,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "مکعب و گرم/کیلوگرم، جرم نامعلوم (st_scale.js).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "W03",
@@ -491,7 +510,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "فنر نیروسنج، ماه، آب (st_scale.js).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "W04",
@@ -528,11 +549,13 @@
    },
    "engine": "exists",
    "engine_note_fa": "روی ماه/در آب، جرم نامعلوم (st_scale.js).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "F06",
-   "land": "L3",
+   "land": "L1",
    "label_fa": "اصطکاک",
    "plain_fa": "وقتی دو سطح به هم می‌مالند نیرویی هست که حرکت را کند می‌کند یا نمی‌گذارد چیزی بلغزد؛ هم مزاحم است هم لازم.",
    "d1_idea_fa": "جعبه را روی یخ و روی فرش هل بده؛ روی یکی سر می‌خورد و روی دیگری می‌ایستد؛ با لرزش و صدا.",
@@ -567,11 +590,13 @@
    },
    "engine": "exists",
    "engine_note_fa": "ایستگاه اصطکاک (st_fric.js).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "F07",
-   "land": "L3",
+   "land": "L1",
    "label_fa": "مقاومت هوا و آب",
    "plain_fa": "هوا و آب هم مثل اصطکاک جلوی حرکت را می‌گیرند.",
    "d1_idea_fa": "چتر باز و بسته یا کاغذ مچاله و باز را رها کن؛ یکی آهسته‌تر می‌افتد.",
@@ -601,7 +626,9 @@
    },
    "engine": "new",
    "engine_note_fa": "مدل مقاومت هوا/آب (کشش) نیست؛ فقط یک صحنهٔ نمایشی ساده لازم است (بدون فرمول).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "B01",
@@ -636,7 +663,9 @@
    },
    "engine": "partial",
    "engine_note_fa": "تعادل میله با جرم×فاصله هست (st_lever.js)؛ «مرکز گرانش» جسم دلخواه مدل نشده.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "B02",
@@ -671,7 +700,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "st_scale.js (ترازوی زنده، بدون تکیه‌گاه).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M04",
@@ -711,7 +742,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "st_lever.js (الاکلنگ و بلند کردن با اهرم). تابع اهرم در MACHINE نیست؛ منطق داخل ایستگاه است.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M05",
@@ -750,7 +783,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "جرم×فاصله در st_lever.js؛ پیش‌بینی/تعادل/جرم نامعلوم.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M06",
@@ -785,7 +820,9 @@
    "textbook_grades": {},
    "engine": "new",
    "engine_note_fa": "st_lever.js فقط الاکلنگ دارد؛ لازم: میلهٔ عمومی با جای دلخواه تکیه‌گاه/بار/نیرو، دسته‌بندی بدون شکست (A8/A9). مدل نیرو/فاصله همان است.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": true,
+   "experimental_note_fa": "فقط معرفی سادهٔ D1 آزمایشی است (شاهد کودک‌محور ندارد)"
   },
   {
    "id": "E05",
@@ -821,7 +858,9 @@
    },
    "engine": "partial",
    "engine_note_fa": "همان مدل جرم×فاصله؛ نام/نمایش «گشتاور» و فرمول نیست.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": true,
+   "experimental_note_fa": "بدون شاهد کافی؛ روی نقشه با برچسب «آزمایشی» (باید با کودک آزموده شود)"
   },
   {
    "id": "M03",
@@ -861,7 +900,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "MACHINE.ramp و st_ramp.js.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M09",
@@ -898,7 +939,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "MACHINE.wedge و st_wedge.js (مدل ایده‌آل: عرض پشت گوه ۲ cm پیش‌فرض).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M10",
@@ -935,7 +978,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "MACHINE.screw/turns و st_wedge.js («گوه و پیچ»).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M02",
@@ -972,7 +1017,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "MACHINE.wheel/hand و st_wheel.js.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M07",
@@ -1010,7 +1057,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "MACHINE.pulley(W,1) و st_pulley.js.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M08",
@@ -1048,7 +1097,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "MACHINE.pulley/rope و st_pulley.js (۱ تا ۶ رشته).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M11",
@@ -1086,7 +1137,9 @@
    },
    "engine": "new",
    "engine_note_fa": "چرخ‌دنده در موتور نیست (جز یک سؤال دوچرخه در quiz). لازم: مدل جهت/نسبت دندانه (ساده، مجزا از MACHINE)، چرخ واسط، زنجیرهٔ ۳ تا ۴ تایی.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "M01",
@@ -1122,7 +1175,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "st_sort.js «شکار ماشین‌ها» (شش ماشین ساده).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "E01",
@@ -1158,7 +1213,9 @@
    },
    "engine": "new",
    "engine_note_fa": "انرژی (انواع/تبدیل) در موتور نیست؛ صحنه‌های نمایشی ساده. (واژهٔ ژول فقط در بخش کار/quiz هست.)",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "E02",
@@ -1197,7 +1254,9 @@
    },
    "engine": "partial",
    "engine_note_fa": "D4 هست (صحنه work در st_ramp، فرمول، quiz k-c4). D1 لمسی (دیوار/جعبه) نیست.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "E03",
@@ -1236,7 +1295,9 @@
    },
    "engine": "exists",
    "engine_note_fa": "مدل MACHINE نیرو×راه را حفظ می‌کند (machinephysics.js: work conservation).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "E06",
@@ -1272,7 +1333,9 @@
    },
    "engine": "partial",
    "engine_note_fa": "مدل درست است (work conservation در تست‌ها)؛ نمایش «دو نوار کار» نیست.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": true,
+   "experimental_note_fa": "بدون شاهد کافی؛ روی نقشه با برچسب «آزمایشی» (باید با کودک آزموده شود)"
   },
   {
    "id": "M12",
@@ -1304,7 +1367,9 @@
    "textbook_grades": {},
    "engine": "exists",
    "engine_note_fa": "st_sort.js «ماشین مرکب» (sort.4).",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": true,
+   "experimental_note_fa": "بدون شاهد کافی؛ روی نقشه با برچسب «آزمایشی» (باید با کودک آزموده شود)"
   },
   {
    "id": "E04",
@@ -1348,7 +1413,9 @@
    },
    "engine": "partial",
    "engine_note_fa": "مدل نیروی هر ماشین (ratio) در MACHINE هست؛ صحنه/کارت MA و نوار هم‌مقیاس نیست.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": false,
+   "experimental_note_fa": null
   },
   {
    "id": "E07",
@@ -1381,7 +1448,9 @@
    },
    "engine": "new",
    "engine_note_fa": "زمان/توان در موتور نیست.",
-   "status": "proposal"
+   "status": "proposal",
+   "experimental": true,
+   "experimental_note_fa": "بدون شاهد کافی؛ روی نقشه با برچسب «آزمایشی» (باید با کودک آزموده شود)"
   }
  ],
  "edges": [
@@ -2011,5 +2080,35 @@
     "depth": "D4"
    }
   ]
+ },
+ "depth_policy_proposal": {
+  "owner_statement": "عدد و اندازه می‌تواند در چالش نارنجی و قرمز بیاید حتی اگر در کتاب درسی نیست؛ بسته به سطح کودک: باند ۱–۲ نه، باند ۳–۴ کم، باند ۵–۶ بیشتر؛ کارت آموزشی هم همین‌طور.",
+  "table": {
+   "1-2": {
+    "green": "D1",
+    "orange": "D1-D2 (کیفی)",
+    "red": "D2 (کیفی)",
+    "numbers": "none",
+    "formulas": "none",
+    "card": "D1/D2"
+   },
+   "3-4": {
+    "green": "D1-D2",
+    "orange": "D2 + کمی عدد (شمارش/اندازهٔ ساده)",
+    "red": "D2-D3 کم",
+    "numbers": "few",
+    "formulas": "none",
+    "card": "D2 (+ کمی عدد)"
+   },
+   "5-6": {
+    "green": "D2",
+    "orange": "D2-D3",
+    "red": "D3 + فرمول (D4) در چالش قرمز",
+    "numbers": "more",
+    "formulas": "red challenge + advanced part of some cards",
+    "card": "D2-D3 + بخش پیشرفتهٔ فرمول در بعضی کارت‌ها"
+   }
+  },
+  "status": "proposal; details of amounts are mine, the direction is the owner's"
  }
 }
