@@ -6,12 +6,12 @@ Updated: 2026-10-01. Repository: javedani66-rgb/science-games.
 
 ## Resume procedure
 
-1. Fetch the CURRENT main HEAD. Read CLAUDE.md, docs/NEXT.md, docs/HANDOFF.md, docs/AUDIT_2026-10-01.md, design/README.md and this file. Follow applicable repository instructions.
+1. Fetch the CURRENT main HEAD. Read CLAUDE.md, docs/archive/NEXT.md, docs/archive/HANDOFF.md, docs/archive/AUDIT_2026-10-01.md, design/README.md and this file. Follow applicable repository instructions.
 2. Check newer commits and source before choosing work. Some unchecked items in older notes were already completed. Do not repeat fixes just because an old checklist says "todo".
-3. Continue stage 2, starting with the scale station, then lever, then the remaining stations in docs/NEXT.md. Work one coherent step at a time. Use the approved balance and lever mockups.
+3. Continue stage 2, starting with the scale station, then lever, then the remaining stations in docs/archive/NEXT.md. Work one coherent step at a time. Use the approved balance and lever mockups.
 4. Preserve the working live site. Edit src/simple-machines/, build generated output through the repository scripts, and publish only after required checks and review pass.
 5. After each coherent step, commit and push source plus updated continuation notes. Record the commit, completed checks and their results, remaining checks, exact next action, and whether publication happened. Never report an unfinished or interrupted check as passing.
-6. If interrupted, resume from these committed notes. Do not rely on scratch files or background processes surviving a session. In unattended work run tests in foreground chunks under ten minutes, as docs/NEXT.md requires.
+6. If interrupted, resume from these committed notes. Do not rely on scratch files or background processes surviving a session. In unattended work run tests in foreground chunks under ten minutes, as docs/archive/NEXT.md requires.
 7. If another contributor changed the same station, inspect and reconcile the latest changes before editing. Do not overwrite them or continue from the older baseline.
 
 Communicate with the owner in plain Persian. Make routine technical choices autonomously within the agreed scope.
@@ -40,7 +40,7 @@ Integrate this checklist into the existing station-by-station work, rather than 
 - [ ] 7. Distinguish completing a task from optimizing it; explain the goal and success criteria before judging.
 - [ ] 8. Give feedback from the actual scene state; verify the hint ladder and show-me option prevent dead ends.
 - [ ] 9. Audit scoring across exploratory and assessed tasks; failed exploration should give guidance and follow the agreed free-try policy.
-- [ ] 10. Differentiate teaching and task wording for current a/b/c tracks. Dedicated grade 7–9 content remains DEFERRED under the latest docs/NEXT.md decision; do not implement that extension now.
+- [ ] 10. Differentiate teaching and task wording for current a/b/c tracks. Dedicated grade 7–9 content remains DEFERRED under the latest docs/archive/NEXT.md decision; do not implement that extension now.
 - [ ] 11. Align engineering/exhibition tasks with actual machine parts and classifications; show the specific part being classified and use supported builds.
 - [ ] 12. Connect home tasks and story goals to the scientific action; adapt wording where grade levels require it.
 - [ ] 13. Audit persistent quiz outcomes and teacher reporting; distinguish completion from evidence of understanding without inventing an unapproved server or new progress-code format.
@@ -84,7 +84,7 @@ Verification actually completed:
 - `firstscreen.py c scale`, `gal.py a scale`, desktop 1280×800 and phone 390×844 screenshots examined. No new object/text obstruction seen.
 - Fresh independent reviewer reproduced the two interaction bugs, then independently confirmed their fixes plus visible reading rule and keyboard water slider. No remaining blocker in this scale change scope.
 
-NOT published. `physics/simple-machines/index.html` and `sw.js` were not changed. The release-wide suite and owner's per-station scientific/visual signoff required in docs/NEXT.md have not happened. Do not mistake targeted checks for release approval.
+NOT published. `physics/simple-machines/index.html` and `sw.js` were not changed. The release-wide suite and owner's per-station scientific/visual signoff required in docs/archive/NEXT.md have not happened. Do not mistake targeted checks for release approval.
 
 Remaining scale scope: spring-scale/planet art, broader water/port placement decision, persistent quiz outcomes/reporting, full accessibility and offline/device coverage. The 17-item global checklist remains partially open; this checkpoint completes only its scale portions.
 
@@ -113,7 +113,7 @@ NOT published. Required release-wide tests and owner's per-station scientific/vi
 
 ## Next concrete action
 
-Continue with ramp, then wedge/screw, wheel/axle and pulley, per docs/NEXT.md. Ramp still lacks evidence-first catalogue packs, controlled displayed comparisons, a keyboard handle, and a real show-me solution. It currently treats a successful nonminimum ramp as a failed attempt; acknowledge lifting before requesting optimization. Inspect current main before editing. Keep source-only checkpoints and postpone publishing until the full release suite and owner review.
+Continue with ramp, then wedge/screw, wheel/axle and pulley, per docs/archive/NEXT.md. Ramp still lacks evidence-first catalogue packs, controlled displayed comparisons, a keyboard handle, and a real show-me solution. It currently treats a successful nonminimum ramp as a failed attempt; acknowledge lifting before requesting optimization. Inspect current main before editing. Keep source-only checkpoints and postpone publishing until the full release suite and owner review.
 
 ## Checkpoint: machine bundle and reporting (2026-10-01)
 

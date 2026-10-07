@@ -48,7 +48,7 @@ sha256 کامل:
 
 این شش سند در گیت و zip هر دو هستند ولی محتوا فرق دارد؛ نسخهٔ zip بعد از آخرین کامیت `main` به‌روز شده. باید مقایسهٔ diff شود، نه رونویسی خودکار:
 
-`docs/NEXT.md`، `docs/HANDOFF.md`، `docs/CODEX_RESUME.md`، `docs/START_HERE_CARD_END_GAME_FA.md`، `docs/HARBOR_CARD_DESIGN_RULES_2026-10-02.md`، `docs/CHILD_GAME_UX_EVIDENCE_AND_DESIGN_NOTES.md`.
+`docs/archive/NEXT.md`، `docs/archive/HANDOFF.md`، `docs/archive/CODEX_RESUME.md`، `docs/archive/START_HERE_CARD_END_GAME_FA.md`، `docs/harbor/HARBOR_CARD_DESIGN_RULES_2026-10-02.md`، `docs/research/CHILD_GAME_UX_EVIDENCE_AND_DESIGN_NOTES.md`.
 
 ## پیشنهاد انتقال به گیت (هنوز انجام نشده)
 

@@ -4,7 +4,7 @@
   "baselineCommit": "23264b13090a7ed87cc71d3aaf8acd960ccff4b7",
   "baselineInventory": "../content/source-inventory.json",
   "baselineAudit": "../content/content-audit.json",
-  "roadmap": "../../docs/WHOLE_GAME_ROLLOUT_2026-10-02.md",
+  "roadmap": "../../docs/plans/WHOLE_GAME_ROLLOUT_2026-10-02.md",
   "note": "Initial inventory/audit exists for the whole game. Rewrite, per-variant scientific review, route integration and child validation remain pending. Stage ownership prevents duplicate work; no runtime eligibility is implied.",
   "stages": [
     {

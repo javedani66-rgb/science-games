@@ -16,12 +16,12 @@ Talk to the teacher in Persian, in plain words; she/he is not a programmer.
 - Every stage teaches or reviews via a lesson card; the card's problem is a schematic of the game situation; card box + spaced practice from grade 1; cards link to stages (B15, B17, B24).
 - No stars or accumulating rewards; entering and leaving only by the child's choice (B4, B5). A failed physical try costs nothing; no artificial failure (A8, A9). Every scored question is answerable from what is on screen (A2).
 - Child understanding or UX is claimed only from real observation (B9).
-- Every external source behind a principle or decision (paper, similar game, other countries' curricula) is logged with full reference, verification level and limits in `docs/DESIGN_EVIDENCE_REFERENCES_FA.md` (R-codes); the final justification report is built from it (E5).
+- Every external source behind a principle or decision (paper, similar game, other countries' curricula) is logged with full reference, verification level and limits in `docs/research/DESIGN_EVIDENCE_REFERENCES_FA.md` (R-codes); the final justification report is built from it (E5).
 - Items marked «پیشنهاد» in the ledger are proposals, **not decisions**.
 - **Process:** when the owner states a rule or decision in chat, record it in the same turn in `docs/PRINCIPLES.md`, `docs/DECISIONS.md` and `docs/STATE.md`, commit and push. Run `python3 tools/check_project_health.py` at session start and end.
 <!-- principles-digest:end -->
 
-**Read `docs/HANDOFF.md` first** — it has the project history, decisions and open items. Then `docs/NEXT.md` (current task list) and `design/README.md` (art sources and approved mockups).
+**Start with `START_HERE_FA.md`, then `docs/STATE.md`** (where we are, open items), `docs/README_FA.md` (map of the docs folder), `docs/FUTURE_TASKS_FA.md` (task list) and `design/README.md` (art sources, approved mockups, `design/ASSET_LAYOUT_FA.md`). Old handoffs live in `docs/archive/` — history only, do not start there.
 
 ## Layout
 
@@ -67,4 +67,4 @@ tools/publish_game.py          build + wrap with PWA head + copy into site + bum
 - During coding: only quick targeted checks (`node --check`, one station/level). Run the full suite **once, at the end**, on the final build — never rebuild while a background run is using the built pages.
 - The live site must stay working while she tests: commit + push `src/` as you go (the live site changes only when `publish_game.py` runs); publish only after the full suite passed.
 - The cloud workspace restarts after the chat is idle for a while (background jobs die). When working unattended, run the suite in foreground chunks under 10 minutes each (e.g. `xargs -P 2`) instead of one long background chain.
-- Background runs die with the session: note in `docs/NEXT.md` that a run is in progress so the next session reruns it.
+- Background runs die with the session: note in `docs/STATE.md` that a run is in progress so the next session reruns it.

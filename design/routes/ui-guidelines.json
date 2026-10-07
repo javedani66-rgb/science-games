@@ -3,7 +3,7 @@
   "status": "implemented-h1-selector",
   "date": "2026-10-02",
   "sourceCheckpoint": "0ae943727e903897b6e11f8073690429fb5b7eb0",
-  "report": "../../docs/ROUTE_VISUAL_TEXT_RESEARCH_2026-10-02.md",
+  "report": "../../docs/research/ROUTE_VISUAL_TEXT_RESEARCH_2026-10-02.md",
   "scope": "Shared route selector; refine H1 before H2; reuse across all lands.",
   "difficulty": {
     "key": "semantic tier from reviewed content, never array index or environment name",
@@ -131,7 +131,7 @@
     "https://www.w3.org/TR/alreq/",
     "https://www.w3.org/International/articles/inline-bidi-markup/"
   ],
-  "implementationReport": "../../docs/HARBOR_UI_REFINEMENT_2026-10-02.md",
+  "implementationReport": "../../docs/harbor/HARBOR_UI_REFINEMENT_2026-10-02.md",
   "copyReviewStatus": "owner-requested-revision; existing technical checks do not close typography/copy review",
   "nextCopyContract": "../cards/copy-contract.json"
 }

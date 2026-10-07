@@ -3,7 +3,7 @@
   "date": "2026-10-02",
   "researchStatus": "bounded-review-complete-video-playback-pending",
   "method": "Three bounded agents; root checked primary URLs and selected images; no direct game session or child study.",
-  "report": "../../docs/INDIE_CARD_UI_RESEARCH_2026-10-02.md",
+  "report": "../../docs/research/INDIE_CARD_UI_RESEARCH_2026-10-02.md",
   "entries": [
     {
       "id": "wildfrost.shop",
@@ -19,7 +19,7 @@
         "date": "2026-10-02",
         "alignment": "center",
         "inspection": "same official image re-viewed by bounded agent and root",
-        "report": "../../docs/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md"
+        "report": "../../docs/harbor/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md"
       }
     },
     {
@@ -36,7 +36,7 @@
         "date": "2026-10-02",
         "alignment": "center",
         "inspection": "same official image re-viewed by bounded agent and root",
-        "report": "../../docs/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md"
+        "report": "../../docs/harbor/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md"
       }
     },
     {
@@ -150,7 +150,7 @@
       "inspection": "owner image viewed; creator page and linked official image opened by root",
       "observation": "strong complete sector color families; dark frames; title strips and central art",
       "limit": "content categories, not difficulty tiers; dense small Latin UI",
-      "report": "../../docs/CARD_PALETTE_REFERENCE_2026-10-02.md"
+      "report": "../../docs/harbor/CARD_PALETTE_REFERENCE_2026-10-02.md"
     },
     {
       "id": "stacklands.flat-cards",
@@ -160,7 +160,7 @@
       "inspection": "first GIF frame viewed by bounded agent and root",
       "observation": "dark frame, separate title band, centered line art; light Villager versus dark Berry Bush",
       "limit": "left-aligned titles; only first frame inspected",
-      "report": "../../docs/CARD_PALETTE_REFERENCE_2026-10-02.md"
+      "report": "../../docs/harbor/CARD_PALETTE_REFERENCE_2026-10-02.md"
     },
     {
       "id": "reigns.centered-card",
@@ -170,7 +170,7 @@
       "inspection": "official screenshot viewed by bounded agent and root",
       "observation": "centered name/question and geometric portrait; separated content/status zones",
       "limit": "one dominant swipe card, not simultaneous colored route choices",
-      "report": "../../docs/CARD_PALETTE_REFERENCE_2026-10-02.md"
+      "report": "../../docs/harbor/CARD_PALETTE_REFERENCE_2026-10-02.md"
     },
     {
       "id": "wingspan.hero-art",
@@ -181,7 +181,7 @@
       "inspection": "official product descriptions checked; no physical play session",
       "observation": "publisher lists 170 unique bird cards; official fan-art pack credits artists and states artists retain ownership",
       "limit": "not evidence of child comprehension or permission to reuse Wingspan artwork",
-      "report": "../../docs/CARD_ART_DIRECTION_2026-10-02.md"
+      "report": "../../docs/harbor/CARD_ART_DIRECTION_2026-10-02.md"
     },
     {
       "id": "earthborne.location-symbol",
@@ -192,7 +192,7 @@
       "inspection": "official game page and rulebook searchable text checked",
       "observation": "rulebook states that path-card set icons are placed in the upper-left corner; use as evidence for a consistent location/set marker, not the same alignment",
       "limit": "mature tabletop information density; upper-left position conflicts with our all-centered card rule",
-      "report": "../../docs/CARD_ART_DIRECTION_2026-10-02.md"
+      "report": "../../docs/harbor/CARD_ART_DIRECTION_2026-10-02.md"
     },
     {
       "id": "wildfrost.character-art",
@@ -203,7 +203,7 @@
       "inspection": "official presskit and Steam page checked; art observation is a design inference",
       "observation": "colorful card companions, items and charms offer a precedent for distinctive character silhouettes and separable upgrade markers",
       "limit": "visual inspiration only; no child test or license to copy the art; battle tone and density do not transfer",
-      "report": "../../docs/CARD_ART_DIRECTION_2026-10-02.md"
+      "report": "../../docs/harbor/CARD_ART_DIRECTION_2026-10-02.md"
     }
   ],
   "videos": [

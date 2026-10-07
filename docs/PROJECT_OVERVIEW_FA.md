@@ -107,11 +107,11 @@
 اسناد آنلاین زیر در ۷ اکتبر از مخزن خوانده شدند. بیشتر آن‌ها مربوط به ۲ اکتبر یا قبل‌اند؛ تصمیم‌های ۳ تا ۶ اکتبر و همین گفتگو دربارهٔ سطح‌بندی، کارت‌ها و دامنهٔ پایلوت بر موارد متعارض قدیمی مقدم‌اند.
 
 - [README.md](https://github.com/javedani66-rgb/science-games/blob/main/README.md): توزیع، ذخیره و گزارش معلم.
-- [HANDOFF.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/HANDOFF.md): امکانات و ساختار تاریخی نسخهٔ پایه؛ سطح‌بندی قدیمی آن مبنای فعلی نیست.
-- [CONTENT_ROUTE_FOUNDATION_2026-10-02.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/CONTENT_ROUTE_FOUNDATION_2026-10-02.md): ممیزی محتوا، هدف‌ها و مسیرهای پیشنهادی.
-- [CURRICULUM_LEVELS_PRIMARY_2026-10-02.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/CURRICULUM_LEVELS_PRIMARY_2026-10-02.md): مبنای اسنادی سطح‌بندی؛ این معرفی ادعای بررسی دوبارهٔ کتاب‌های درسی ندارد.
-- [MAP_PATH_GAME_RESEARCH_2026-10-02.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/MAP_PATH_GAME_RESEARCH_2026-10-02.md): انتخاب مسیر و نسبت آن با هدف و پیشرفت.
-- [WHOLE_GAME_ROLLOUT_2026-10-02.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/WHOLE_GAME_ROLLOUT_2026-10-02.md): تعمیم روش به کل بازی؛ ترتیب و دامنهٔ متأخر پایلوت مقدم است.
+- [HANDOFF.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/archive/HANDOFF.md): امکانات و ساختار تاریخی نسخهٔ پایه؛ سطح‌بندی قدیمی آن مبنای فعلی نیست.
+- [CONTENT_ROUTE_FOUNDATION_2026-10-02.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/plans/CONTENT_ROUTE_FOUNDATION_2026-10-02.md): ممیزی محتوا، هدف‌ها و مسیرهای پیشنهادی.
+- [CURRICULUM_LEVELS_PRIMARY_2026-10-02.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/plans/CURRICULUM_LEVELS_PRIMARY_2026-10-02.md): مبنای اسنادی سطح‌بندی؛ این معرفی ادعای بررسی دوبارهٔ کتاب‌های درسی ندارد.
+- [MAP_PATH_GAME_RESEARCH_2026-10-02.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/research/MAP_PATH_GAME_RESEARCH_2026-10-02.md): انتخاب مسیر و نسبت آن با هدف و پیشرفت.
+- [WHOLE_GAME_ROLLOUT_2026-10-02.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/plans/WHOLE_GAME_ROLLOUT_2026-10-02.md): تعمیم روش به کل بازی؛ ترتیب و دامنهٔ متأخر پایلوت مقدم است.
 - [MODULARITY.md](https://github.com/javedani66-rgb/science-games/blob/main/docs/MODULARITY.md): سیاست جداسازی محتوا، نمایش، رفتار، دارایی و وضعیت.
 
 منابع متأخر در harbor-stage-continuation-20261006.zip و harbor-stage-references-20261006.zip بررسی شدند: پنج سند ورودی تحویل، قواعد متأخر کارت، interaction.json، flow-motion.json، PILOT_GENERALIZATION_AND_AUTOMATION_FA.md، PILOT_STAGE_DATA_CONTRACT_FA.md، PHYSICS_CORE_ARCHITECTURE_DECISION_FA.md، VISUAL_DIRECTION_AND_LIGHTWEIGHT_DELIVERY_FA.md، پیش‌نویس راهنمای معلم و تصمیم‌های v8. این معرفی، انتشار این بسته‌ها در Git را ادعا نمی‌کند.
