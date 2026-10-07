@@ -3,6 +3,7 @@
 Sketch only (proposal B30-B32): layout positions are hand-placed here; data comes from the JSON."""
 import json, pathlib
 ROOT = pathlib.Path(__file__).resolve().parents[4]
+TITLES = json.load(open(ROOT / 'docs/research/world/titles_fa.json', encoding='utf-8'))  # the one place to rename (nodes, lands, zones, path stages)
 D = json.load(open(ROOT / 'docs/research/world/nodes_v2_draft.json', encoding='utf-8'))
 N = lambda *a: list(a)
 LAYOUT = [
@@ -58,6 +59,18 @@ PATHS = {  # proposal B37/B42: main path from force to simple machines (numbers 
  'machines': {'label_fa':'میانبر: فقط ماشین‌ها (مراحل ۵ تا ۸)', 'from_stage':5},
 }
 data = {'paths': PATHS, 'lands': lands, 'nodes': nodes, 'edges': [e for e in D['edges'] if e['from'] in POS and e['to'] in POS], 'height': HEIGHT, 'policy': D['depth_policy_proposal']['table']}
+for n in nodes:
+    t = TITLES['nodes'].get(n['id'])
+    if t: n['label_fa'] = t['title']; n['title_status'] = t['status']
+for l in lands:
+    t = TITLES['lands'].get(l['id'])
+    if t: l['label_fa'] = t['title']
+    for z in l['zones']:
+        tz = TITLES['zones'].get(z['id'])
+        if tz: z['label_fa'] = tz['title']
+for k, v in TITLES['path_names'].items(): PATHS[k]['label_fa'] = v['title']
+for i, s in enumerate(PATHS['main']['stages']): s['t'] = TITLES['path_stages'][i]['title']
+data['paths'] = PATHS
 tpl = (pathlib.Path(__file__).parent / 'template.html').read_text(encoding='utf-8')
 out = tpl.replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False)).replace('__H__', str(HEIGHT))
 (pathlib.Path(__file__).parent / 'index.html').write_text(out, encoding='utf-8')

@@ -1,0 +1,217 @@
+{
+ "_readme_fa": "این فایل تنها جای اصلاح نام‌هاست. فقط مقدار «title» (یا نام مرحله/سرزمین/منطقه) را عوض کن، سپس `python3 design/mockups/20261007/map-mesh/build.py`. وضعیت draft = نام موقت؛ بعد از تأیید مالک approved. هیچ نامی هنوز نهایی نیست (۸ اکتبر).",
+ "nodes": {
+  "F01": {
+   "title": "هل دادن و کشیدن",
+   "status": "draft"
+  },
+  "F02": {
+   "title": "اثر نیرو",
+   "status": "draft"
+  },
+  "F03": {
+   "title": "جهت و اندازهٔ نیرو",
+   "status": "draft"
+  },
+  "F04": {
+   "title": "نیروی تماسی و نیروی از دور",
+   "status": "draft"
+  },
+  "F08": {
+   "title": "چند نیرو با هم (برآیند)",
+   "status": "draft"
+  },
+  "F09": {
+   "title": "کنش و واکنش و لختی",
+   "status": "draft"
+  },
+  "F05": {
+   "title": "گرانش (کشش زمین)",
+   "status": "draft"
+  },
+  "W01": {
+   "title": "سنگین و سبک",
+   "status": "draft"
+  },
+  "W02": {
+   "title": "جرم",
+   "status": "draft"
+  },
+  "W03": {
+   "title": "وزن (نیروی گرانش)",
+   "status": "draft"
+  },
+  "W04": {
+   "title": "جرم در برابر وزن",
+   "status": "draft"
+  },
+  "F06": {
+   "title": "اصطکاک",
+   "status": "draft"
+  },
+  "F07": {
+   "title": "مقاومت هوا و آب",
+   "status": "draft"
+  },
+  "B01": {
+   "title": "تعادل و مرکز گرانش",
+   "status": "draft"
+  },
+  "B02": {
+   "title": "ترازو: برابری دو طرف",
+   "status": "draft"
+  },
+  "M04": {
+   "title": "اهرم",
+   "status": "draft"
+  },
+  "M05": {
+   "title": "جای تکیه‌گاه",
+   "status": "draft"
+  },
+  "M06": {
+   "title": "سه نوع اهرم",
+   "status": "draft"
+  },
+  "E05": {
+   "title": "گشتاور (اثر چرخاندن)",
+   "status": "draft"
+  },
+  "M03": {
+   "title": "سطح شیب‌دار (رمپ)",
+   "status": "draft"
+  },
+  "M09": {
+   "title": "گوه",
+   "status": "draft"
+  },
+  "M10": {
+   "title": "پیچ",
+   "status": "draft"
+  },
+  "M02": {
+   "title": "چرخ و محور",
+   "status": "draft"
+  },
+  "M07": {
+   "title": "قرقرهٔ ثابت",
+   "status": "draft"
+  },
+  "M08": {
+   "title": "قرقرهٔ متحرک و دستگاه قرقره",
+   "status": "draft"
+  },
+  "M11": {
+   "title": "چرخ‌دنده",
+   "status": "draft"
+  },
+  "M01": {
+   "title": "ماشین چیست",
+   "status": "draft"
+  },
+  "E01": {
+   "title": "انرژی و تبدیلش",
+   "status": "draft"
+  },
+  "E02": {
+   "title": "کار (نیرو و جابه‌جایی)",
+   "status": "draft"
+  },
+  "E03": {
+   "title": "نیروی کمتر، مسافت بیشتر",
+   "status": "draft"
+  },
+  "E06": {
+   "title": "نیروی کمتر اما زحمت بیشتر",
+   "status": "draft"
+  },
+  "M12": {
+   "title": "ماشین مرکب",
+   "status": "draft"
+  },
+  "E04": {
+   "title": "مزیت مکانیکی",
+   "status": "draft"
+  },
+  "E07": {
+   "title": "توان: سرعت انجام کار",
+   "status": "draft"
+  }
+ },
+ "lands": {
+  "L1": {
+   "title": "نیرو، حرکت و اصطکاک",
+   "status": "draft"
+  },
+  "L2": {
+   "title": "جرم، وزن و گرانش",
+   "status": "draft"
+  },
+  "LW": {
+   "title": "کار و انرژی",
+   "status": "draft"
+  },
+  "LM": {
+   "title": "ماشین‌های ساده",
+   "status": "draft"
+  }
+ },
+ "zones": {
+  "Z1": {
+   "title": "اهرم و تعادل",
+   "status": "draft"
+  },
+  "Z2": {
+   "title": "سطح شیب‌دار، گوه و پیچ",
+   "status": "draft"
+  },
+  "Z3": {
+   "title": "چرخ، قرقره و چرخ‌دنده",
+   "status": "draft"
+  }
+ },
+ "path_stages": [
+  {
+   "title": "نیرو",
+   "status": "draft"
+  },
+  {
+   "title": "نیرو و حرکت (کار خیلی ساده معرفی می‌شود)",
+   "status": "draft"
+  },
+  {
+   "title": "جرم، وزن و گرانش",
+   "status": "draft"
+  },
+  {
+   "title": "کار و انرژی",
+   "status": "draft"
+  },
+  {
+   "title": "ماشین چیست و تعادل",
+   "status": "draft"
+  },
+  {
+   "title": "اهرم",
+   "status": "draft"
+  },
+  {
+   "title": "سطح شیب‌دار، گوه و پیچ",
+   "status": "draft"
+  },
+  {
+   "title": "چرخ، قرقره و چرخ‌دنده (پایان: نیروی کمتر اما زحمت بیشتر)",
+   "status": "draft"
+  }
+ ],
+ "path_names": {
+  "main": {
+   "title": "مسیر بزرگ: از نیرو تا ماشین‌های ساده",
+   "status": "draft"
+  },
+  "machines": {
+   "title": "میانبر: فقط ماشین‌ها (مراحل ۵ تا ۸)",
+   "status": "draft"
+  }
+ }
+}

@@ -264,6 +264,7 @@ function openNode(id){
   const add = (t, c)=>{ const s = document.createElement('span'); s.className = 'chip' + (c ? ' '+c : ''); s.textContent = t; row.append(s); };
   add('سرزمین: ' + land.label_fa);
   add('از چه سنی شاهد داریم: ' + (n.band_entry === 'to_test' ? 'هنوز شاهد کافی نیست؛ باید با کودک آزمود' : 'باند ' + n.band_entry.replace('-','–')) + (n.band_entry === '1-2' ? '' : ' — نسخهٔ ساده برای همهٔ سنین هست (B36)'));
+  if (n.title_status !== 'approved') add('نام: موقت و قابل تغییر (فایل titles_fa.json)');
   if (n.hidden_detour) add('بیشتر بدانیم / مسیر مخفی (با ورودی دیدنی)');
   if (n.experimental) add('آزمایشی: ' + (n.experimental_note_fa || ''));
   if (n.main_map_max_depth) add('سقف نقشهٔ اصلی: ' + n.main_map_max_depth);
