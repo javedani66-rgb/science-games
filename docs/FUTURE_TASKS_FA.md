@@ -24,7 +24,8 @@
 
 ## ت. تحویل‌ها و اسناد
 - **قالب گزارش توجیهی پایانی:** `docs/templates/JUSTIFICATION_REPORT_TEMPLATE_FA.md` (ساخته شد؛ پر کردنش در پایان پروژه، از روی `docs/research/DESIGN_EVIDENCE_REFERENCES_FA.md`).
-- مجوزها: `LICENSE` (GPL-3.0)، `LICENSE-ART-TEXT` (CC-BY-SA 4.0)، `CREDITS.md`، متن مجوز فونت‌ها.
+- مجوزها: `LICENSE`، `CREDITS.md` و فایل‌های اشاره‌ای ساخته شد؛ مانده: متن کامل CC BY-SA 4.0 در `LICENSE-ART-TEXT` و متن OFL کنار فونت‌ها (از محیط ابری قابل دریافت نبود).
+- اجرای توصیه‌های `docs/research/STRUCTURE_AUDIT_20261007_FA.md` (جدول شمارش واحد، سند ذخیرهٔ نسخهٔ ۲، واژه‌نامه، شناسه‌های بدون برخورد، سقف حجم).
 - ادغام شاخهٔ مستندات در `main`.
 - واردکردن آرشیوهای سنگین طبق `ARCHIVE_MANIFEST.md` پس از تأیید.
 
