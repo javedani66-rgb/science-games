@@ -20,6 +20,8 @@
 
 # Next work — stage 2 of version 2 (written 2026-09-30)
 
+> **گروه‌بندی مصوب (D13، B1، ۷ اکتبر ۲۰۲۶):** پایه‌های ۱–۲، ۳–۴، ۵–۶. «a/b/c» و «track» در این سند یعنی مسیرهای قدیمی کد (a≈پایه‌های ۲–۳، b≈۴، c≈۵–۶) تا مهاجرت. نقشهٔ کامل بازی: `docs/GAME_STRUCTURE_FA.md`.
+
 Read `CLAUDE.md`, `docs/HANDOFF.md` (section "Version 2, stage 1") and `design/README.md` first.
 The teacher checks the live site herself; talk to her in plain Persian. Mockups before code when she asks for mockups.
 

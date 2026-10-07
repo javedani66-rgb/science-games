@@ -1,5 +1,7 @@
 # Codex continuation — stage 2
 
+> **گروه‌بندی مصوب (D13، B1، ۷ اکتبر ۲۰۲۶):** پایه‌های ۱–۲، ۳–۴، ۵–۶. «a/b/c» و «track» در این سند یعنی مسیرهای قدیمی کد (a≈پایه‌های ۲–۳، b≈۴، c≈۵–۶) تا مهاجرت. نقشهٔ کامل بازی: `docs/GAME_STRUCTURE_FA.md`.
+
 Updated: 2026-10-01. Repository: javedani66-rgb/science-games.
 
 ## Resume procedure

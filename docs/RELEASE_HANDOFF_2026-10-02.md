@@ -1,5 +1,7 @@
 # Release continuation handoff — 2026-10-02
 
+> **گروه‌بندی مصوب (D13، B1، ۷ اکتبر ۲۰۲۶):** پایه‌های ۱–۲، ۳–۴، ۵–۶. «a/b/c» و «track» در این سند یعنی مسیرهای قدیمی کد (a≈پایه‌های ۲–۳، b≈۴، c≈۵–۶) تا مهاجرت. نقشهٔ کامل بازی: `docs/GAME_STRUCTURE_FA.md`.
+
 Repository: `javedani66-rgb/science-games`
 Branch: `main`
 Verified source checkpoint: `a3115af5df8f5af94d5d194449c8002e602fbb80`

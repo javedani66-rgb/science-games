@@ -1,5 +1,7 @@
 # Handoff — state of the project (updated 2026-09-30, evening)
 
+> **گروه‌بندی مصوب (D13، B1، ۷ اکتبر ۲۰۲۶):** پایه‌های ۱–۲، ۳–۴، ۵–۶. «a/b/c» و «track» در این سند یعنی مسیرهای قدیمی کد (a≈پایه‌های ۲–۳، b≈۴، c≈۵–۶) تا مهاجرت. نقشهٔ کامل بازی: `docs/GAME_STRUCTURE_FA.md`.
+
 ## Who / what
 - The teacher (repo owner) teaches a term on **simple machines** to grades 2–6 over **12 sessions**. Students use phones and computers; class messengers are **Telegram and WhatsApp**. Iran: claude.ai is not reachable for students; the game is distributed via GitHub Pages (this repo) and as a single offline HTML file.
 - More games are planned for other physics topics, chemistry and later biology, all under this one site (shared origin → a shared student profile is possible later).
