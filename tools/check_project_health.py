@@ -107,6 +107,28 @@ else:
     if last_hand and last_state and int(last_hand) > int(last_state):
         warn.append("docs/STATE.md is older than the newest handoff")
 
+# 6. principles must be reachable from every entry file ------------------
+ledger = open("docs/PRINCIPLES.md", encoding="utf-8").read() if os.path.exists("docs/PRINCIPLES.md") else ""
+ledger_ids = set(re.findall(r"^\| ([A-Z]\d+) \|", ledger, re.M))
+for entry in ("CLAUDE.md", "AGENTS.md", "START_HERE_FA.md"):
+    if not os.path.exists(entry):
+        hard.append(f"{entry} missing (entry file for AI sessions)")
+        continue
+    t = open(entry, encoding="utf-8").read()
+    if "PRINCIPLES.md" not in t:
+        hard.append(f"{entry} does not point to docs/PRINCIPLES.md")
+    if entry != "START_HERE_FA.md":
+        m = re.search(r"principles-digest:start -->(.*?)<!-- principles-digest:end", t, re.S)
+        if not m:
+            hard.append(f"{entry} has no principles digest block")
+        else:
+            ids = set(re.findall(r"\b([A-Z]\d+)\b", m.group(1)))
+            gone = sorted(i for i in ids if i not in ledger_ids)
+            if gone:
+                hard.append(f"{entry} digest cites principle IDs missing from PRINCIPLES.md: {gone}")
+            else:
+                print(f"OK   {entry} digest ({len(ids)} principle IDs, all in ledger)")
+
 print()
 for w in warn:
     print("WARN", w)
