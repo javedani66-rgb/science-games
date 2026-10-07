@@ -2,6 +2,8 @@
 
 # design/ — art sources and approved mockups (not shipped to the site)
 
+**نقشهٔ پوشه (۷ اکتبر ۲۰۲۶):** `ASSET_LAYOUT_FA.md` = قرارداد پیشنهادی چیدمان دارایی‌ها و تم‌ها (`design/` منبع، `assets/` فایل آمادهٔ بازی، Drive اصل سنگین)؛ `themes/lands.json` = فهرست سرزمین‌ها؛ `mockups/20261007/` = ماکت‌های ۷ اکتبر (چیدمان موبایل، کارت آموزشی)؛ `cards/`، `routes/`، `content/` = قرارداد و ممیزی کارت، مسیر و محتوا؛ `nanobanana/` = برگه‌های منبع قدیمی.
+
 ## nanobanana/ — Gemini (Nano Banana Pro) source sheets
 - `sheet1.jpg` carpentry props (approved style: dark wood, flat side view). `sheet2.jpg` construction (partly 3D — prefer `sheet_fix.jpg` for cart, ramps, logs, A-frame, barrel, wheelbarrow, wedge-fulcrum). `sheet3.jpg` factory (partly 3D — prefer `sheet3_fix.jpg`: meshing gears, switches, conveyor, workbench, podium). `badges_color.png` = map badges (already cut into `src/simple-machines/img/badge*.webp`).
 - `boxes.json` = bounding box of every object per sheet; `idx_*.png` show the index numbers on each sheet.

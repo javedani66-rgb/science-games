@@ -107,7 +107,7 @@
     "reuse contracts for new routes; review progression migration separately"
   ],
   "validationStatus": "previous mixed-alignment preview checked; latest all-centered owner decision recorded but not yet rendered or applied to game",
-  "latestReview": "../../docs/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md",
+  "latestReview": "../../docs/harbor/HARBOR_CARD_OWNER_REVIEW_2026-10-02.md",
   "projectPolicy": "../../docs/MODULARITY.md",
   "latestAlignmentDecision": "all visible card text, emoji/icon and CTA centered; Persian remains RTL; owner instruction 2026-10-02 supersedes right-aligned prose proposal"
 }

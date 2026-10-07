@@ -6,7 +6,22 @@ Static site on GitHub Pages: https://javedani66-rgb.github.io/science-games/
 Owner: a primary-school science teacher in Iran (grades 2–6). All user-facing text is Persian (RTL).
 Talk to the teacher in Persian, in plain words; she/he is not a programmer.
 
-**Read `docs/HANDOFF.md` first** — it has the project history, decisions and open items. Then `docs/NEXT.md` (current task list) and `design/README.md` (art sources and approved mockups).
+<!-- principles-digest:start -->
+## Owner-approved principles digest (full ledger: `docs/PRINCIPLES.md`; read it before any design proposal)
+
+- Readability and an easy UI come first in every conflict (B13).
+- Grade bands 1–2, 3–4, 5–6 (B1); a stage's grade band is not fixed (B14).
+- Structure: map → land (topic + own theme) → environment → 3 challenges (green/orange/red, each with its own story, card art and scene) → missions as steps inside a challenge (B26, B2, D11). Land theme is a skin only; button/icon positions stay fixed; difficulty colour is a separate fixed badge (D11, D3).
+- **Everything layered and modular, graphics included** (T17).
+- Every stage teaches or reviews via a lesson card; the card's problem is a schematic of the game situation; card box + spaced practice from grade 1; cards link to stages (B15, B17, B24).
+- No stars or accumulating rewards; entering and leaving only by the child's choice (B4, B5). A failed physical try costs nothing; no artificial failure (A8, A9). Every scored question is answerable from what is on screen (A2).
+- Child understanding or UX is claimed only from real observation (B9).
+- Every external source behind a principle or decision (paper, similar game, other countries' curricula) is logged with full reference, verification level and limits in `docs/research/DESIGN_EVIDENCE_REFERENCES_FA.md` (R-codes); the final justification report is built from it (E5).
+- Items marked «پیشنهاد» in the ledger are proposals, **not decisions**.
+- **Process:** when the owner states a rule or decision in chat, record it in the same turn in `docs/PRINCIPLES.md`, `docs/DECISIONS.md` and `docs/STATE.md`, commit and push. Run `python3 tools/check_project_health.py` at session start and end.
+<!-- principles-digest:end -->
+
+**Start with `START_HERE_FA.md`, then `docs/STATE.md`** (where we are, open items), `docs/README_FA.md` (map of the docs folder), `docs/FUTURE_TASKS_FA.md` (task list) and `design/README.md` (art sources, approved mockups, `design/ASSET_LAYOUT_FA.md`). Old handoffs live in `docs/archive/` — history only, do not start there.
 
 ## Layout
 
@@ -41,6 +56,7 @@ tools/publish_game.py          build + wrap with PWA head + copy into site + bum
 - Never break saved progress: localStorage key `sm-journey-v1` ({profiles, cur, week}); star data per track in `profile.S.prog["<track>:<station>"].lv[]`. Journey missions reference levels by index (`STOPS` in journey.js) — if you reorder/insert levels, migrate or keep indices stable. The progress code (`makeCode/readCode`, 23 letters) encodes stars by stop/mission position; changing STOPS mission counts changes the code format — bump/handle versions.
 - Science/language: «نیرو» not «زور»; mass (جرم, kg, two-pan balance) vs weight (وزن, N, نیروسنج); formulas LTR with standard symbols (`ltrMath`, `.eqi`); units in Persian (نیوتن، کیلوگرم).
 - Register: questions, instructions, science text and ALL buttons are written Persian; only Ostad's own lines are spoken, taken from `voice.js` (process praise, never «باهوشی») — see `docs/voice.md`.
+- **Approved grade bands (owner, D13/B1):** 1–2, 3–4, 5–6. The code's tracks a/b/c are the old grouping (a≈grades 2–3, b≈4, c≈5–6) until migrated; see `docs/GAME_STRUCTURE_FA.md`.
 - Reading levels: track a (grades 2–3, `KID()`) = short sentences, no numbers/formulas, bigger font; b (grade 4) numbers; c (5–6) formulas.
 - SVG text: `T(x,y,text,{anchor})` — note `direction=rtl`, so `anchor:"start"` = right edge at x, `"end"` = left edge at x. Font size is multiplied by 1.6 when halo is on. Keep labels off arrows (`arrow()` polygons carry class `farr`, which ov.py checks).
 - New games: new folder `src/<game>/` + site folder (`physics/…`, `chemistry/…`, `biology/…`), add a card in `index.html`, publish with the tool (it adds the path to sw.js FILES). Reuse fonts from `assets/fonts`.
@@ -51,4 +67,4 @@ tools/publish_game.py          build + wrap with PWA head + copy into site + bum
 - During coding: only quick targeted checks (`node --check`, one station/level). Run the full suite **once, at the end**, on the final build — never rebuild while a background run is using the built pages.
 - The live site must stay working while she tests: commit + push `src/` as you go (the live site changes only when `publish_game.py` runs); publish only after the full suite passed.
 - The cloud workspace restarts after the chat is idle for a while (background jobs die). When working unattended, run the suite in foreground chunks under 10 minutes each (e.g. `xargs -P 2`) instead of one long background chain.
-- Background runs die with the session: note in `docs/NEXT.md` that a run is in progress so the next session reruns it.
+- Background runs die with the session: note in `docs/STATE.md` that a run is in progress so the next session reruns it.

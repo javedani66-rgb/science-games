@@ -1,0 +1,12 @@
+{
+  "status": "پیشنهاد؛ مالک تأیید نکرده (D30)",
+  "note": "شناسهٔ سرزمین‌ها از فهرست مالک در ۷ اکتبر. تعداد محیط در هر سرزمین هنوز باز است. تم (پالت، رنگ منو، کارت) هر سرزمین بعد از تأیید طراحی پر می‌شود.",
+  "lands": [
+    {"id": "energy", "name_fa": "انرژی", "theme": null, "environments": []},
+    {"id": "force", "name_fa": "نیرو، اصطکاک و جاذبه", "theme": null, "environments": [], "includes": ["mass-weight", "force-meter"], "open": "جاذبه سرزمین جدا یا شاخهٔ فرعی؟ (آب، ماه، سیاره‌ها)"},
+    {"id": "lever", "name_fa": "اهرم‌ها", "theme": null, "environments": [], "open": "جای چرخ و محور"},
+    {"id": "ramp", "name_fa": "سطح شیب‌دار", "theme": null, "environments": [], "includes": ["wedge", "screw"]},
+    {"id": "pulley", "name_fa": "قرقره", "theme": null, "environments": [{"id": "harbor", "name_fa": "بندر", "challenges": {"green": "fishing", "orange": "pirates", "red": "dragon"}, "status": "پایلوت؛ صحنهٔ سبز مصوب (v8)، نارنجی و قرمز فقط تصویر مرجع"}]},
+    {"id": "finale", "name_fa": "مرحلهٔ ترکیبی یا آزاد نهایی", "theme": null, "environments": []}
+  ]
+}

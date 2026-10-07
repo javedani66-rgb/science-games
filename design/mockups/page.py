@@ -1,6 +1,6 @@
 import base64,io,pathlib,math
 from PIL import Image
-D='/tmp/claude-0/-home-claude-science-games/3daf9092-144f-588c-9647-272dca618339/scratchpad/gem/'
+D='design/nanobanana/'
 F=pathlib.Path('/home/claude/science-games/assets/fonts');fb=lambda n: base64.b64encode((F/n).read_bytes()).decode()
 FONTS=f'@font-face{{font-family:V;src:url(data:font/woff2;base64,{fb("Vazirmatn-Regular.woff2")});font-weight:400}}@font-face{{font-family:V;src:url(data:font/woff2;base64,{fb("Vazirmatn-Bold.woff2")});font-weight:700}}'
 def b64(p,maxw=None):
