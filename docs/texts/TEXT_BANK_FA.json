@@ -1035,7 +1035,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "4",
+    "6",
     "plain_fa"
    ],
    "text": "چند نیرو هم‌زمان روی یک جسم‌اند؛ اگر برابر و مخالف باشند حرکت عوض نمی‌شود، وگرنه می‌شود.",
@@ -1052,7 +1052,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "4",
+    "6",
     "depths",
     "D2"
    ],
@@ -1070,7 +1070,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "4",
+    "6",
     "depths",
     "D4"
    ],
@@ -1088,7 +1088,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "5",
+    "7",
     "plain_fa"
    ],
    "text": "وقتی چیزی را هل می‌دهی آن هم تو را هل می‌دهد؛ جسم تا نیرو نباشد حالتش را نگه می‌دارد.",
@@ -1105,7 +1105,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "5",
+    "7",
     "depths",
     "D2"
    ],
@@ -1123,7 +1123,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "5",
+    "7",
     "depths",
     "D4"
    ],
@@ -1141,7 +1141,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "6",
+    "8",
     "plain_fa"
    ],
    "text": "زمین هر چیز را به سوی خودش می‌کشد؛ برای همین چیزها می‌افتند.",
@@ -1158,7 +1158,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "6",
+    "8",
     "depths",
     "D2"
    ],
@@ -1176,7 +1176,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "7",
+    "9",
     "plain_fa"
    ],
    "text": "مقایسهٔ سنگینی دو چیز با دست یا با ترازو.",
@@ -1193,7 +1193,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "7",
+    "9",
     "depths",
     "D2"
    ],
@@ -1211,7 +1211,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "8",
+    "10",
     "plain_fa"
    ],
    "text": "«مقدار ماده»ی جسم؛ با ترازو و به گرم و کیلوگرم.",
@@ -1228,7 +1228,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "8",
+    "10",
     "depths",
     "D2"
    ],
@@ -1246,7 +1246,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "8",
+    "10",
     "depths",
     "D3"
    ],
@@ -1264,7 +1264,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "9",
+    "11",
     "plain_fa"
    ],
    "text": "وزن نیرویی است که زمین به جسم وارد می‌کند؛ با نیروسنج و بر حسب نیوتون.",
@@ -1281,7 +1281,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "9",
+    "11",
     "depths",
     "D2"
    ],
@@ -1299,7 +1299,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "9",
+    "11",
     "depths",
     "D3"
    ],
@@ -1317,7 +1317,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "9",
+    "11",
     "depths",
     "D4"
    ],
@@ -1335,7 +1335,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "10",
+    "12",
     "plain_fa"
    ],
    "text": "جرم جابه‌جا نمی‌شود، وزن بسته به جا فرق می‌کند؛ یکایشان فرق دارد (kg و N).",
@@ -1352,7 +1352,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "10",
+    "12",
     "depths",
     "D2"
    ],
@@ -1370,7 +1370,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "10",
+    "12",
     "depths",
     "D3"
    ],
@@ -1388,7 +1388,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "10",
+    "12",
     "depths",
     "D4"
    ],
@@ -1406,7 +1406,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "11",
+    "4",
     "plain_fa"
    ],
    "text": "وقتی دو سطح به هم می‌مالند نیرویی هست که حرکت را کند می‌کند یا نمی‌گذارد چیزی بلغزد؛ هم مزاحم است هم لازم.",
@@ -1423,7 +1423,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "11",
+    "4",
     "depths",
     "D2"
    ],
@@ -1441,7 +1441,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "11",
+    "4",
     "depths",
     "D3"
    ],
@@ -1459,7 +1459,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "11",
+    "4",
     "depths",
     "D4"
    ],
@@ -1477,7 +1477,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "12",
+    "5",
     "plain_fa"
    ],
    "text": "هوا و آب هم مثل اصطکاک جلوی حرکت را می‌گیرند.",
@@ -1494,7 +1494,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "12",
+    "5",
     "depths",
     "D2"
    ],
@@ -1512,7 +1512,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "13",
+    "17",
     "plain_fa"
    ],
    "text": "جسم وقتی می‌ایستد که نقطهٔ تکیه‌اش درست زیر «مرکز وزنش» باشد.",
@@ -1529,7 +1529,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "13",
+    "17",
     "depths",
     "D2"
    ],
@@ -1547,7 +1547,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "13",
+    "17",
     "depths",
     "D3"
    ],
@@ -1565,7 +1565,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "14",
+    "18",
     "plain_fa"
    ],
    "text": "ترازوی دوکفه وقتی تعادل دارد که دو طرف یکی باشند؛ برای مقایسهٔ جرم.",
@@ -1582,7 +1582,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "14",
+    "18",
     "depths",
     "D2"
    ],
@@ -1600,7 +1600,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "15",
+    "19",
     "plain_fa"
    ],
    "text": "میله‌ای که روی یک تکیه‌گاه می‌چرخد؛ سه چیز دارد: بار، تکیه‌گاه، نیروی ما.",
@@ -1617,7 +1617,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "15",
+    "19",
     "depths",
     "D2"
    ],
@@ -1635,7 +1635,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "16",
+    "20",
     "plain_fa"
    ],
    "text": "هرچه بار به تکیه‌گاه نزدیک‌تر، نیروی لازم کمتر؛ تعادل به فاصله بستگی دارد نه فقط به وزن.",
@@ -1652,7 +1652,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "16",
+    "20",
     "depths",
     "D2"
    ],
@@ -1670,7 +1670,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "16",
+    "20",
     "depths",
     "D3"
    ],
@@ -1688,7 +1688,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "16",
+    "20",
     "depths",
     "D4"
    ],
@@ -1706,7 +1706,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "17",
+    "21",
     "plain_fa"
    ],
    "text": "سه چیدمان ممکن از بار، تکیه‌گاه و نیرو (مثل الاکلنگ، فرغون، جارو).",
@@ -1723,7 +1723,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "17",
+    "21",
     "depths",
     "D2"
    ],
@@ -1741,7 +1741,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "18",
+    "22",
     "plain_fa"
    ],
    "text": "اثر چرخاندنِ نیرو = نیرو × فاصله از محور (فقط «بیشتر بدانیم»).",
@@ -1758,7 +1758,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "18",
+    "22",
     "depths",
     "D2"
    ],
@@ -1776,7 +1776,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "18",
+    "22",
     "depths",
     "D4"
    ],
@@ -1794,7 +1794,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "19",
+    "23",
     "plain_fa"
    ],
    "text": "بالا بردن روی شیب نیروی کمتری می‌خواهد ولی مسافت بیشتری.",
@@ -1811,7 +1811,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "19",
+    "23",
     "depths",
     "D2"
    ],
@@ -1829,7 +1829,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "19",
+    "23",
     "depths",
     "D3"
    ],
@@ -1847,7 +1847,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "19",
+    "23",
     "depths",
     "D4"
    ],
@@ -1865,7 +1865,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "20",
+    "24",
     "plain_fa"
    ],
    "text": "دو سطح شیب‌دار پشت‌به‌پشت؛ نیروی رو به پایین را به کناری تبدیل می‌کند (برش، شکافتن).",
@@ -1882,7 +1882,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "20",
+    "24",
     "depths",
     "D2"
    ],
@@ -1900,7 +1900,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "20",
+    "24",
     "depths",
     "D4"
    ],
@@ -1918,7 +1918,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "21",
+    "25",
     "plain_fa"
    ],
    "text": "سطح شیب‌داری که دور استوانه پیچیده شده.",
@@ -1935,7 +1935,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "21",
+    "25",
     "depths",
     "D2"
    ],
@@ -1953,7 +1953,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "21",
+    "25",
     "depths",
     "D3"
    ],
@@ -1971,7 +1971,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "21",
+    "25",
     "depths",
     "D4"
    ],
@@ -1989,7 +1989,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "22",
+    "27",
     "plain_fa"
    ],
    "text": "چرخ روی میله می‌چرخد؛ غلتیدن آسان‌تر از لغزیدن است؛ دستهٔ بزرگ‌تر چرخاندن را آسان‌تر می‌کند.",
@@ -2006,7 +2006,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "22",
+    "27",
     "depths",
     "D2"
    ],
@@ -2024,7 +2024,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "22",
+    "27",
     "depths",
     "D4"
    ],
@@ -2042,7 +2042,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "23",
+    "28",
     "plain_fa"
    ],
    "text": "چرخ شیاردار با طناب؛ فقط جهت نیرو را عوض می‌کند.",
@@ -2059,7 +2059,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "23",
+    "28",
     "depths",
     "D2"
    ],
@@ -2077,7 +2077,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "24",
+    "29",
     "plain_fa"
    ],
    "text": "طناب‌های بیشتر یعنی نیروی کمتر ولی طناب بیشتر باید کشید.",
@@ -2094,7 +2094,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "24",
+    "29",
     "depths",
     "D2"
    ],
@@ -2112,7 +2112,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "24",
+    "29",
     "depths",
     "D3"
    ],
@@ -2130,7 +2130,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "24",
+    "29",
     "depths",
     "D4"
    ],
@@ -2148,7 +2148,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "25",
+    "30",
     "plain_fa"
    ],
    "text": "چرخ‌های دندانه‌دار که حرکت و جهت را انتقال می‌دهند؛ شمارش دندانه‌ها و دور.",
@@ -2165,7 +2165,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "25",
+    "30",
     "depths",
     "D2"
    ],
@@ -2183,7 +2183,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "25",
+    "30",
     "depths",
     "D3"
    ],
@@ -2201,7 +2201,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "25",
+    "30",
     "depths",
     "D4"
    ],
@@ -2219,7 +2219,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "26",
+    "16",
     "plain_fa"
    ],
    "text": "وسیله‌ای که کار را آسان می‌کند (نیروی لازم را کم می‌کند، جهت یا سرعت را عوض می‌کند)؛ ساده و مرکب.",
@@ -2236,7 +2236,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "26",
+    "16",
     "depths",
     "D2"
    ],
@@ -2254,7 +2254,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "27",
+    "13",
     "plain_fa"
    ],
    "text": "انرژی شکل‌های گوناگون دارد و از شکلی به شکل دیگر می‌رود (گرما، حرکت، ذخیره در ارتفاع یا فنر).",
@@ -2271,7 +2271,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "27",
+    "13",
     "depths",
     "D2"
    ],
@@ -2289,7 +2289,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "27",
+    "13",
     "depths",
     "D3"
    ],
@@ -2307,7 +2307,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "28",
+    "14",
     "plain_fa"
    ],
    "text": "وقتی نیرو چیزی را جابه‌جا کند «کار» شده؛ هل دادن دیوار کار نیست. بعداً: نیرو × جابه‌جایی، ژول.",
@@ -2324,7 +2324,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "28",
+    "14",
     "depths",
     "D2"
    ],
@@ -2342,7 +2342,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "28",
+    "14",
     "depths",
     "D3"
    ],
@@ -2360,7 +2360,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "28",
+    "14",
     "depths",
     "D4"
    ],
@@ -2378,7 +2378,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "29",
+    "26",
     "plain_fa"
    ],
    "text": "ماشین نیروی لازم را کم می‌کند، به قیمت مسافت بیشتر.",
@@ -2395,7 +2395,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "29",
+    "26",
     "depths",
     "D2"
    ],
@@ -2413,7 +2413,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "29",
+    "26",
     "depths",
     "D3"
    ],
@@ -2431,7 +2431,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "30",
+    "31",
     "plain_fa"
    ],
    "text": "کار ورودی و خروجی (در حالت ایده‌آل) برابرند؛ ماشین کار را کم نمی‌کند، فقط نیرو و مسافت را معاوضه می‌کند.",
@@ -2448,7 +2448,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "30",
+    "31",
     "depths",
     "D2"
    ],
@@ -2466,7 +2466,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "30",
+    "31",
     "depths",
     "D4"
    ],
@@ -2484,7 +2484,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "31",
+    "33",
     "plain_fa"
    ],
    "text": "چند ماشین ساده کنار هم (قیچی، چرخ‌دستی، دوچرخه).",
@@ -2501,7 +2501,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "31",
+    "33",
     "depths",
     "D2"
    ],
@@ -2590,7 +2590,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "33",
+    "15",
     "plain_fa"
    ],
    "text": "سرعت انجام کار؛ وات. فقط سقف «بیشتر بدانیم».",
@@ -2607,7 +2607,7 @@
    "target": "json",
    "locator": [
     "nodes",
-    "33",
+    "15",
     "depths",
     "D4"
    ],

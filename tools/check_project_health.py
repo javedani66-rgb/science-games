@@ -144,6 +144,10 @@ _tb = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspa
 if _tb.returncode == 0: print('OK   text bank:', _tb.stdout.strip().splitlines()[-1])
 else: hard.append('text bank check failed (python3 tools/text_bank.py check):\n' + _tb.stdout.strip())
 
+_po = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'check_prereq_order.py')], capture_output=True, text=True)
+if _po.returncode == 0: print('OK   prerequisite order:', _po.stdout.strip().splitlines()[-1])
+else: hard.append('prerequisite order broken (python3 tools/check_prereq_order.py):\n' + _po.stdout.strip())
+
 print()
 for w in warn:
     print("WARN", w)
