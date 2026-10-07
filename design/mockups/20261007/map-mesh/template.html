@@ -1,0 +1,233 @@
+<title>اسکیس نقشهٔ مفاهیم</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap">
+<style>
+/* Layout: sticky controls on top, one tall vertical mesh map (7 concept lands stacked), bottom sheet for the tapped environment. */
+:root{
+  --bg:#f3f5f7; --fg:#1b2530; --muted:#5a6775; --line:#9aa6b3; --card:#ffffff; --border:#cfd7df;
+  --ring:#3b3fc4; --ring-soft:#c9cbf5; --node:#ffffff; --node-stroke:#52606e; --dash:#7d8a98;
+  --l1:#dbe9f4; --l2:#e6e0f2; --l3:#f6e3d4; --l4:#dcefe0; --l5:#f5ecc9; --l6:#d9eef0; --l7:#f1dde6;
+  --font:"Vazirmatn", Tahoma, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#10161c; --fg:#e6ebf0; --muted:#9aa8b6; --line:#5d6b79; --card:#18212a; --border:#2d3946;
+    --ring:#a5a8ff; --ring-soft:#34377a; --node:#0d1318; --node-stroke:#9fb0c0; --dash:#8493a2;
+    --l1:#1f3447; --l2:#2f2a45; --l3:#4a3426; --l4:#223c2a; --l5:#463f1f; --l6:#1e3d40; --l7:#46283a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#10161c; --fg:#e6ebf0; --muted:#9aa8b6; --line:#5d6b79; --card:#18212a; --border:#2d3946;
+  --ring:#a5a8ff; --ring-soft:#34377a; --node:#0d1318; --node-stroke:#9fb0c0; --dash:#8493a2;
+  --l1:#1f3447; --l2:#2f2a45; --l3:#4a3426; --l4:#223c2a; --l5:#463f1f; --l6:#1e3d40; --l7:#46283a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);margin:0;padding-inline:16px;padding-block:0 14px;direction:rtl;line-height:1.7;font-size:15px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px 8px;border-bottom:1px solid var(--border)}
+h1{font-size:1.2rem;margin:0 0 2px;font-weight:800;text-wrap:balance}
+.note{font-size:.82rem;color:var(--muted);margin:0 0 8px;max-width:70ch}
+.note summary{cursor:pointer;min-height:32px}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.ctrl label.t{font-size:.85rem;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{min-width:44px;min-height:44px;display:grid;place-items:center;border:1.5px solid var(--border);border-radius:10px;background:var(--card);cursor:pointer;font-weight:600;padding-inline:10px}
+.seg input:checked + label{border-color:var(--ring);background:var(--ring-soft);color:var(--fg)}
+.seg input:focus-visible + label{outline:3px solid var(--ring);outline-offset:2px}
+.count{font-size:.85rem;color:var(--muted)}
+.sw{display:flex;gap:8px;align-items:center;min-height:44px}
+.sw input{width:22px;height:22px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.78rem;color:var(--muted);margin-block:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend svg{width:30px;height:22px;flex:none}
+.mapwrap{max-width:900px;margin-inline:auto;overflow-x:auto}
+svg#map{width:100%;min-width:700px;height:auto;display:block}
+.land{stroke:none}
+.landlabel{font-size:26px;font-weight:800;fill:var(--fg);opacity:.85}
+.landsub{font-size:15px;fill:var(--muted)}
+.edge{fill:none;stroke:var(--line);stroke-width:2;opacity:.8}
+.edge.cross{opacity:.45}
+.edge.hot{stroke:var(--fg);stroke-width:3;opacity:.95}
+.edge.related{stroke-dasharray:2 6;stroke-width:1.6;opacity:.5}
+.edge.detour{stroke-dasharray:9 6;stroke:var(--dash);opacity:.8}
+.nd{cursor:pointer}
+.nd circle.body{fill:var(--node);stroke:var(--node-stroke);stroke-width:2.5}
+.nd.hid circle.body{stroke-dasharray:6 5;fill:transparent;stroke:var(--dash)}
+.nd.hid{opacity:.8}
+.nd.sel circle.body{stroke:var(--fg);stroke-width:4}
+.nd:focus-visible circle.body{stroke:var(--ring);stroke-width:5}
+.nd .id{font-size:15px;fill:var(--muted);font-family:var(--font);direction:ltr;font-variant-numeric:tabular-nums}
+.nd text.lab{font-size:20px;font-weight:600;fill:var(--fg);paint-order:stroke;stroke:var(--bg);stroke-width:6px;stroke-linejoin:round}
+.tbring{fill:none;stroke:var(--ring);stroke-width:6}
+.tbbadge rect{fill:var(--ring)}
+.tbbadge path{stroke:var(--card);fill:none;stroke-width:2}
+.sheet{position:fixed;inset-inline:0;bottom:0;max-height:52vh;overflow:auto;background:var(--card);border-top:2px solid var(--border);padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 24px rgba(0,0,0,.18);z-index:8}
+.sheet[hidden]{display:none}
+.sheet .in{max-width:760px;margin-inline:auto}
+.sheet h2{margin:0 0 4px;font-size:1.1rem}
+.sheet .row{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.85rem;color:var(--muted);margin-block:4px 8px}
+.sheet dt{font-weight:600;font-size:.85rem;color:var(--muted);margin-top:8px}
+.sheet dd{margin:0}
+.chip{display:inline-block;padding:1px 9px;border-radius:99px;border:1px solid var(--border);font-size:.8rem;margin-inline-end:6px}
+.chip.tb{border-color:var(--ring);background:var(--ring-soft)}
+.close{position:absolute;inset-block-start:8px;inset-inline-start:12px;min-width:44px;min-height:44px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--fg);font-size:1rem;cursor:pointer}
+.spacer{height:12px}
+.foot{font-size:.8rem;color:var(--muted);margin-top:14px;max-width:70ch}
+@media (prefers-reduced-motion:no-preference){.nd circle.body{transition:stroke-width .15s}}
+</style>
+
+<div class="top">
+  <h1>اسکیس نقشهٔ مفاهیم</h1>
+  <details class="note"><summary>دربارهٔ این اسکیس</summary><p style="margin:4px 0">پیشنهاد، نه تصمیم (B30 تا B32). هر دایره یک «محیط» است و سرزمین‌ها خوشه‌های مفهومی‌اند. رنگ سرزمین فقط پوسته است؛ سختی (سبز، نارنجی، قرمز) داخل هر محیط و جدا از این نقشه است. روی دایره بزن تا جزئیاتش را ببینی. پایهٔ کودک را عوض کن تا حلقهٔ کتاب درسی جابه‌جا شود. پیوندهای میان سرزمین‌ها فقط برای دایرهٔ انتخاب‌شده نشان داده می‌شوند.</p></details>
+  <div class="ctrl">
+    <span class="t" style="font-size:.85rem;color:var(--muted)">پایهٔ کودک:</span>
+    <div class="seg" role="radiogroup" aria-label="پایهٔ کودک" id="grades"></div>
+    <span class="count" id="count" aria-live="polite"></span>
+    <label class="sw" for="hidmode"><input type="checkbox" id="hidmode"> مسیرهای مخفی را پنهان کن</label>
+    <label class="sw" for="alllinks"><input type="checkbox" id="alllinks"> همهٔ پیوندهای میان سرزمین‌ها</label>
+  </div>
+</div>
+
+<div class="legend" aria-label="راهنما">
+  <span><svg viewBox="0 0 30 22"><circle cx="15" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2"/></svg>محیط (یک مفهوم)</span>
+  <span><svg viewBox="0 0 30 22"><circle cx="15" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="15" cy="11" r="10" fill="none" stroke="var(--ring)" stroke-width="3"/></svg>حلقهٔ کتاب درسی پایهٔ انتخاب‌شده</span>
+  <span><svg viewBox="0 0 30 22"><circle cx="15" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3"/></svg>بیشتر بدانیم (اختیاری، مخفی و سخت)</span>
+  <span><svg viewBox="0 0 30 22"><path d="M2 11H24" stroke="currentColor" stroke-width="2"/><path d="M24 6l5 5-5 5z" fill="currentColor"/></svg>پیشنهاد پیش‌نیاز نرم (قفل نیست)</span>
+</div>
+
+<div class="mapwrap"><svg id="map" viewBox="0 0 900 __H__" role="group" aria-label="نقشهٔ شبکه‌ای مفاهیم"></svg></div>
+<p class="foot">داده از <code dir="ltr">docs/research/world/nodes_v2_draft.json</code> (۳۴ گره، ۷ سرزمین). چیدمان این صفحه دستی است و چیدمان نهایی نیست. حلقهٔ کتاب درسی داده‌ای دربارهٔ کتاب‌های ایران است و دربارهٔ فهم کودک چیزی نمی‌گوید.</p>
+<div class="spacer" id="sp"></div>
+
+<aside class="sheet" id="sheet" hidden aria-live="polite"><div class="in" id="sin"></div><button class="close" id="cls" aria-label="بستن">✕</button></aside>
+
+<script>
+const DATA = /*__DATA__*/null;
+const NS = 'http://www.w3.org/2000/svg';
+const $ = (id)=>document.getElementById(id);
+const faD = (n)=>String(n).replace(/\d/g, d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const DEPTH = {D1:'ببین و حس کن', D2:'کیفی', D3:'عدد و اندازه', D4:'فرمول (بیشتر بدانیم)'};
+const GR = {'7':'هفتم','8':'هشتم','9':'نهم','10':'فیزیک ۱'};
+const LAND_VAR = {L1:'--l1',L2:'--l2',L3:'--l3',L4:'--l4',L5:'--l5',L6:'--l6',L7:'--l7'};
+const byId = Object.fromEntries(DATA.nodes.map(n=>[n.id,n]));
+const state = {grade:null, hideHidden:false, sel:null, allLinks:false};
+const R = 36;
+
+function el(tag, attrs, parent){
+  const e = document.createElementNS(NS, tag);
+  for (const k in (attrs||{})) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function wrap(s, max){
+  const w = s.split(' '); const lines = []; let cur = '';
+  for (const x of w){
+    if ((cur + ' ' + x).trim().length > max && cur){ lines.push(cur); cur = x; } else cur = (cur + ' ' + x).trim();
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+function hasTb(n){ return state.grade && n.textbook_grades && n.textbook_grades[state.grade] != null; }
+
+function buildGrades(){
+  const g = $('grades');
+  const opts = [['', 'هیچ']].concat([1,2,3,4,5,6].map(i=>[String(i), faD(i)]));
+  opts.forEach(([v, t], i)=>{
+    const id = 'g' + (v || '0');
+    const inp = document.createElement('input'); inp.type='radio'; inp.name='grade'; inp.id=id; inp.value=v; if(i===0) inp.checked = true;
+    const lab = document.createElement('label'); lab.htmlFor = id; lab.textContent = t;
+    g.append(inp, lab);
+    inp.addEventListener('change', ()=>{ state.grade = v || null; draw(); });
+  });
+}
+
+function draw(){
+  const svg = $('map'); svg.textContent = '';
+  const W = 900;
+  // land bands
+  DATA.lands.forEach(l=>{
+    el('rect', {x:10, y:l.y0, width:W-20, height:l.y1-l.y0, rx:28, class:'land', style:`fill:var(${LAND_VAR[l.id]})`}, svg);
+    const t = el('text', {x:W-34, y:l.y0+52, class:'landlabel', 'text-anchor':'start', direction:'rtl'}, svg); t.textContent = l.label_fa;
+  });
+  // arrow marker
+  const defs = el('defs', {}, svg);
+  const mk = el('marker', {id:'ar', viewBox:'0 0 10 10', refX:'9', refY:'5', markerWidth:'8', markerHeight:'8', orient:'auto-start-reverse'}, defs);
+  el('path', {d:'M0 0L10 5L0 10z', fill:'var(--line)'}, mk);
+  // edges
+  const ge = el('g', {}, svg);
+  DATA.edges.forEach(e=>{
+    const a = byId[e.from], b = byId[e.to]; if(!a || !b) return;
+    const hiddenEdge = (a.hidden_detour || b.hidden_detour);
+    const touches = state.sel && (e.from===state.sel || e.to===state.sel);
+    if (a.land!==b.land && !touches && !state.allLinks) return;
+    if (state.hideHidden && hiddenEdge) return;
+    const dx = b.x-a.x, dy = b.y-a.y, len = Math.hypot(dx,dy) || 1;
+    const ux = dx/len, uy = dy/len;
+    const sx = a.x + ux*(R+4), sy = a.y + uy*(R+4);
+    const ex = b.x - ux*(R+10), ey = b.y - uy*(R+10);
+    const cx = (sx+ex)/2 - uy*len*0.08, cy = (sy+ey)/2 + ux*len*0.08;
+    const cls = 'edge' + (e.kind==='related' ? ' related' : '') + (e.kind==='detour_entrance' ? ' detour' : '') + (a.land!==b.land ? ' cross' : '') + (touches ? ' hot' : '');
+    const p = el('path', {d:`M${sx},${sy} Q${cx},${cy} ${ex},${ey}`, class:cls}, ge);
+    if (e.kind !== 'related') p.setAttribute('marker-end', 'url(#ar)');
+  });
+  // nodes
+  const gn = el('g', {}, svg);
+  let cnt = 0;
+  DATA.nodes.forEach(n=>{
+    if (state.hideHidden && n.hidden_detour) return;
+    const g = el('g', {class:'nd' + (n.hidden_detour ? ' hid' : '') + (state.sel===n.id ? ' sel' : ''), tabindex:'0', role:'button', 'aria-label':n.label_fa, transform:`translate(${n.x},${n.y})`}, gn);
+    el('circle', {r:R, class:'body'}, g);
+    if (hasTb(n)){
+      cnt++;
+      el('circle', {r:R+9, class:'tbring'}, g);
+      const b = el('g', {class:'tbbadge', transform:`translate(${R-2},${-R-6})`}, g);
+      el('rect', {x:-13, y:-13, width:26, height:26, rx:6}, b);
+      el('path', {d:'M-7 -6H7M-7 0H7M-7 6H3'}, b);
+    }
+    const idt = el('text', {y:6, 'text-anchor':'middle', class:'id'}, g); idt.textContent = n.id;
+    const lines = wrap(n.label_fa, 15);
+    const lab = el('text', {y:R+28, 'text-anchor':'middle', class:'lab', direction:'rtl'}, g);
+    lines.forEach((ln,i)=>{ const ts = el('tspan', {x:0, dy: i===0 ? 0 : 24}, lab); ts.textContent = ln; });
+    g.addEventListener('click', ()=>openNode(n.id));
+    g.addEventListener('keydown', ev=>{ if(ev.key==='Enter' || ev.key===' '){ ev.preventDefault(); openNode(n.id); }});
+  });
+  $('count').textContent = state.grade ? `در کتاب پایهٔ ${faD(state.grade)}: ${faD(cnt)} محیط` : '';
+}
+
+function openNode(id){
+  state.sel = id; draw();
+  const n = byId[id]; const land = DATA.lands.find(l=>l.id===n.land);
+  const sin = $('sin'); sin.textContent = '';
+  const h = document.createElement('h2'); h.textContent = n.label_fa; sin.append(h);
+  const p = document.createElement('p'); p.textContent = n.plain_fa || ''; p.style.margin = '0 0 4px'; sin.append(p);
+  const row = document.createElement('div'); row.className = 'row';
+  const add = (t, c)=>{ const s = document.createElement('span'); s.className = 'chip' + (c ? ' '+c : ''); s.textContent = t; row.append(s); };
+  add('سرزمین: ' + land.label_fa);
+  add('ورود پیشنهادی: ' + (n.band_entry === 'to_test' ? 'باید با کودک آزمود' : 'باند ' + n.band_entry));
+  if (n.hidden_detour) add('بیشتر بدانیم / مسیر مخفی');
+  if (n.main_map_max_depth) add('سقف نقشهٔ اصلی: ' + n.main_map_max_depth);
+  sin.append(row);
+  const dl = document.createElement('dl');
+  const dt = (t)=>{ const x = document.createElement('dt'); x.textContent = t; dl.append(x); };
+  const dd = (t)=>{ const x = document.createElement('dd'); x.textContent = t; dl.append(x); };
+  if (n.d1_idea_fa){ dt('معرفی ساده برای کوچک‌ترها (بدون نوشته)'); dd(n.d1_idea_fa); }
+  const ds = n.depths || {};
+  ['D2','D3','D4'].forEach(k=>{ if (ds[k]){ dt(DEPTH[k]); dd(ds[k]); }});
+  const tg = n.textbook_grades || {}; const keys = Object.keys(tg).sort((a,b)=>a-b);
+  dt('در کتاب‌های درسی ایران');
+  if (keys.length){
+    const x = document.createElement('dd');
+    keys.forEach(k=>{ const c = document.createElement('span'); c.className = 'chip' + (k===state.grade ? ' tb' : ''); c.textContent = (GR[k] || 'پایهٔ ' + faD(k)) + ': ' + tg[k]; x.append(c); });
+    dl.append(x);
+  } else dd('در کتاب‌های دبستان نیامده است.');
+  if (n.band_entry_note_fa){ dt('شاهد'); dd(n.band_entry_note_fa); }
+  sin.append(dl);
+  $('sheet').hidden = false;
+  $('sp').style.height = Math.round(window.innerHeight*0.5) + 'px';
+}
+$('cls').addEventListener('click', ()=>{ $('sheet').hidden = true; state.sel = null; $('sp').style.height = '12px'; draw(); });
+$('alllinks').addEventListener('change', e=>{ state.allLinks = e.target.checked; draw(); });
+$('hidmode').addEventListener('change', e=>{ state.hideHidden = e.target.checked; draw(); });
+buildGrades(); draw();
+</script>
