@@ -3286,6 +3286,1611 @@
    ],
    "text": "توان: سرعت انجام کار",
    "status": "draft"
+  },
+  "flow.nav.toMap": {
+   "id": "flow.nav.toMap",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بازگشت به نقشه",
+   "context_fa": "برگشتن از صفحهٔ سرزمین، جعبه و مانند آن به نقشه؛ همان واژهٔ کارت مصوب «برگردیم به نقشه»",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.nav.toMap",
+    "text"
+   ],
+   "text": "برگردیم به نقشه",
+   "status": "draft"
+  },
+  "flow.nav.toLand": {
+   "id": "flow.nav.toLand",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بازگشت به سرزمین",
+   "context_fa": "بالای صفحهٔ محیط",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.nav.toLand",
+    "text"
+   ],
+   "text": "برگرد به سرزمین",
+   "status": "draft"
+  },
+  "flow.nav.toEnv": {
+   "id": "flow.nav.toEnv",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بازگشت به محیط",
+   "context_fa": "بالای صحنهٔ چالش",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.nav.toEnv",
+    "text"
+   ],
+   "text": "برگرد به محیط",
+   "status": "draft"
+  },
+  "flow.nav.toGame": {
+   "id": "flow.nav.toGame",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بازگشت به بازی",
+   "context_fa": "بالای کارت درس که از صحنه باز شده",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.nav.toGame",
+    "text"
+   ],
+   "text": "برگرد به بازی",
+   "status": "draft"
+  },
+  "flow.nav.toBox": {
+   "id": "flow.nav.toBox",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بازگشت به جعبه",
+   "context_fa": "بالای کارتی که از جعبه باز شده",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.nav.toBox",
+    "text"
+   ],
+   "text": "برگرد به جعبه",
+   "status": "draft"
+  },
+  "flow.menu.btn": {
+   "id": "flow.menu.btn",
+   "kind": "ui",
+   "where_fa": "دکمهٔ «مسیر و راهنما»",
+   "context_fa": "آیکون و واژه، به‌جای باکس تکراری (چیدمان الف، D25)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.btn",
+    "text"
+   ],
+   "text": "مسیر و راهنما",
+   "status": "draft"
+  },
+  "flow.help.btn": {
+   "id": "flow.help.btn",
+   "kind": "ui",
+   "where_fa": "دکمهٔ «کمکم کن»",
+   "context_fa": "آیکون و واژه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.help.btn",
+    "text"
+   ],
+   "text": "کمکم کن",
+   "status": "draft"
+  },
+  "flow.lesson.btn": {
+   "id": "flow.lesson.btn",
+   "kind": "ui",
+   "where_fa": "دکمهٔ کارت درس",
+   "context_fa": "روی صحنه؛ شرط پیشروی نیست",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.lesson.btn",
+    "text"
+   ],
+   "text": "کارت درس",
+   "status": "draft"
+  },
+  "flow.box.btn": {
+   "id": "flow.box.btn",
+   "kind": "ui",
+   "where_fa": "دکمهٔ جعبهٔ کارت‌ها",
+   "context_fa": "پایین نقشه و در منو",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.btn",
+    "text"
+   ],
+   "text": "جعبهٔ کارت‌ها",
+   "status": "draft"
+  },
+  "flow.close": {
+   "id": "flow.close",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بستن",
+   "context_fa": "ورقه‌ها",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.close",
+    "text"
+   ],
+   "text": "بستن",
+   "status": "draft"
+  },
+  "flow.next": {
+   "id": "flow.next",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بعدی",
+   "context_fa": "آموزش بازی",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.next",
+    "text"
+   ],
+   "text": "بعدی",
+   "status": "draft"
+  },
+  "flow.skip": {
+   "id": "flow.skip",
+   "kind": "ui",
+   "where_fa": "دکمهٔ ردکردن",
+   "context_fa": "آموزش بازی؛ همیشه دیده می‌شود",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.skip",
+    "text"
+   ],
+   "text": "ردکن",
+   "status": "draft"
+  },
+  "flow.done": {
+   "id": "flow.done",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایان آموزش",
+   "context_fa": "آخرین گام آموزش",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.done",
+    "text"
+   ],
+   "text": "فهمیدم",
+   "status": "draft"
+  },
+  "flow.map.title": {
+   "id": "flow.map.title",
+   "kind": "title",
+   "where_fa": "عنوان صفحهٔ نقشه",
+   "context_fa": "بالای نقشه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.map.title",
+    "text"
+   ],
+   "text": "نقشهٔ علوم",
+   "status": "draft"
+  },
+  "flow.map.here": {
+   "id": "flow.map.here",
+   "kind": "ui",
+   "where_fa": "نشانهٔ «تو اینجایی»",
+   "context_fa": "روی سرزمینی که کودک در آن است",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.map.here",
+    "text"
+   ],
+   "text": "تو اینجایی",
+   "status": "draft"
+  },
+  "flow.map.suggested": {
+   "id": "flow.map.suggested",
+   "kind": "ui",
+   "where_fa": "نشانهٔ شروع پیشنهادی",
+   "context_fa": "فقط پیشنهاد است، قفل نیست (B4، B18)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.map.suggested",
+    "text"
+   ],
+   "text": "شروع پیشنهادی",
+   "status": "draft"
+  },
+  "flow.map.tap": {
+   "id": "flow.map.tap",
+   "kind": "ui",
+   "where_fa": "راهنمای لمس سرزمین",
+   "context_fa": "زیر هر سرزمین",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.map.tap",
+    "text"
+   ],
+   "text": "برای ورود بزن",
+   "status": "draft"
+  },
+  "flow.land.here": {
+   "id": "flow.land.here",
+   "kind": "ui",
+   "where_fa": "برچسب محیط فعلی",
+   "context_fa": "روی دایرهٔ محیط",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.land.here",
+    "text"
+   ],
+   "text": "تو اینجایی",
+   "status": "draft"
+  },
+  "flow.land.visited": {
+   "id": "flow.land.visited",
+   "kind": "ui",
+   "where_fa": "برچسب محیط دیده‌شده",
+   "context_fa": "روی دایرهٔ محیط",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.land.visited",
+    "text"
+   ],
+   "text": "رفته‌ای",
+   "status": "draft"
+  },
+  "flow.land.experimental": {
+   "id": "flow.land.experimental",
+   "kind": "ui",
+   "where_fa": "برچسب آزمایشی",
+   "context_fa": "محیطی که شاهد کافی ندارد (B31)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.land.experimental",
+    "text"
+   ],
+   "text": "آزمایشی",
+   "status": "draft"
+  },
+  "flow.land.legend.ring": {
+   "id": "flow.land.legend.ring",
+   "kind": "ui",
+   "where_fa": "راهنمای حلقهٔ پر",
+   "context_fa": "نشانهٔ کتاب درسی همین پایه (B35)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.land.legend.ring",
+    "text"
+   ],
+   "text": "حلقهٔ پر: در کتاب همین پایه",
+   "status": "draft"
+  },
+  "flow.land.legend.dash": {
+   "id": "flow.land.legend.dash",
+   "kind": "ui",
+   "where_fa": "راهنمای حلقهٔ خط‌چین",
+   "context_fa": "نشانهٔ کتاب پایه‌های قبل",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.land.legend.dash",
+    "text"
+   ],
+   "text": "خط‌چین: در کتاب پایه‌های قبل",
+   "status": "draft"
+  },
+  "flow.peek.enter": {
+   "id": "flow.peek.enter",
+   "kind": "ui",
+   "where_fa": "دکمهٔ ورود به محیط",
+   "context_fa": "ورود فقط با انتخاب کودک (B5)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.peek.enter",
+    "text"
+   ],
+   "text": "برویم به این محیط",
+   "status": "draft"
+  },
+  "flow.env.start": {
+   "id": "flow.env.start",
+   "kind": "ui",
+   "where_fa": "دکمهٔ شروع چالش",
+   "context_fa": "واژهٔ مصوب کارت بندر",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.env.start",
+    "text"
+   ],
+   "text": "بزن بریم!",
+   "status": "draft"
+  },
+  "flow.env.pending": {
+   "id": "flow.env.pending",
+   "kind": "story",
+   "where_fa": "متن چالشِ طراحی‌نشده",
+   "context_fa": "برای محیط‌هایی که هنوز داستان و تصویر ندارند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.env.pending",
+    "text"
+   ],
+   "text": "داستان و تصویر این چالش هنوز ساخته نشده است.",
+   "status": "draft"
+  },
+  "flow.tier.core": {
+   "id": "flow.tier.core",
+   "kind": "ui",
+   "where_fa": "نام سطح سبز",
+   "context_fa": "برچسب ثابت سختی، جدا از پوستهٔ سرزمین (D3، D11)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tier.core",
+    "text"
+   ],
+   "text": "شروع",
+   "status": "draft"
+  },
+  "flow.tier.challenge": {
+   "id": "flow.tier.challenge",
+   "kind": "ui",
+   "where_fa": "نام سطح نارنجی",
+   "context_fa": "برچسب ثابت سختی",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tier.challenge",
+    "text"
+   ],
+   "text": "چالش",
+   "status": "draft"
+  },
+  "flow.tier.veryhard": {
+   "id": "flow.tier.veryhard",
+   "kind": "ui",
+   "where_fa": "نام سطح قرمز",
+   "context_fa": "برچسب ثابت سختی",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tier.veryhard",
+    "text"
+   ],
+   "text": "چالش بزرگ",
+   "status": "draft"
+  },
+  "flow.harbor.green.title": {
+   "id": "flow.harbor.green.title",
+   "kind": "title",
+   "where_fa": "عنوان چالش سبز بندر",
+   "context_fa": "همان عنوان کارت مصوب",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.harbor.green.title",
+    "text"
+   ],
+   "text": "اسکلهٔ ماهیگیری",
+   "status": "draft"
+  },
+  "flow.harbor.green.mission": {
+   "id": "flow.harbor.green.mission",
+   "kind": "story",
+   "where_fa": "مأموریت چالش سبز بندر",
+   "context_fa": "همان جملهٔ کارت مصوب",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.harbor.green.mission",
+    "text"
+   ],
+   "text": "تور را با طناب بکش بالا!",
+   "status": "draft"
+  },
+  "flow.harbor.orange.title": {
+   "id": "flow.harbor.orange.title",
+   "kind": "title",
+   "where_fa": "عنوان چالش نارنجی بندر",
+   "context_fa": "پیشنهاد؛ نام مسیر harbor.pirate",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.harbor.orange.title",
+    "text"
+   ],
+   "text": "اسکلهٔ دزدان دریایی",
+   "status": "draft"
+  },
+  "flow.harbor.orange.mission": {
+   "id": "flow.harbor.orange.mission",
+   "kind": "story",
+   "where_fa": "مأموریت چالش نارنجی بندر",
+   "context_fa": "پیشنهاد؛ داستان تأییدنشده",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.harbor.orange.mission",
+    "text"
+   ],
+   "text": "صندوق گنج را با طناب بالا ببر!",
+   "status": "draft"
+  },
+  "flow.harbor.red.title": {
+   "id": "flow.harbor.red.title",
+   "kind": "title",
+   "where_fa": "عنوان چالش قرمز بندر",
+   "context_fa": "پیشنهاد؛ هیولا طبق گفتهٔ مالک",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.harbor.red.title",
+    "text"
+   ],
+   "text": "اسکلهٔ هیولای دریا",
+   "status": "draft"
+  },
+  "flow.harbor.red.mission": {
+   "id": "flow.harbor.red.mission",
+   "kind": "story",
+   "where_fa": "مأموریت چالش قرمز بندر",
+   "context_fa": "پیشنهاد؛ داستان تأییدنشده",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.harbor.red.mission",
+    "text"
+   ],
+   "text": "چند قرقره را با هم به کار ببر و بار سنگین را بالا بکش!",
+   "status": "draft"
+  },
+  "flow.scene.mission": {
+   "id": "flow.scene.mission",
+   "kind": "story",
+   "where_fa": "جملهٔ بالای صحنهٔ ماهیگیری",
+   "context_fa": "زیر عنوان صحنه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.scene.mission",
+    "text"
+   ],
+   "text": "تور را تا لبهٔ اسکله بالا بیاور!",
+   "status": "draft"
+  },
+  "flow.scene.arr.fixed": {
+   "id": "flow.scene.arr.fixed",
+   "kind": "ui",
+   "where_fa": "دکمهٔ آرایش ثابت",
+   "context_fa": "انتخاب آرایش قرقره",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.scene.arr.fixed",
+    "text"
+   ],
+   "text": "ثابت",
+   "status": "draft"
+  },
+  "flow.scene.arr.moving": {
+   "id": "flow.scene.arr.moving",
+   "kind": "ui",
+   "where_fa": "دکمهٔ آرایش ثابت و متحرک",
+   "context_fa": "انتخاب آرایش قرقره",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.scene.arr.moving",
+    "text"
+   ],
+   "text": "ثابت + متحرک",
+   "status": "draft"
+  },
+  "flow.scene.pull": {
+   "id": "flow.scene.pull",
+   "kind": "ui",
+   "where_fa": "دکمهٔ یک‌بار بکش",
+   "context_fa": "اقدام اصلی صحنه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.scene.pull",
+    "text"
+   ],
+   "text": "یک‌بار بکش",
+   "status": "draft"
+  },
+  "flow.scene.pending": {
+   "id": "flow.scene.pending",
+   "kind": "story",
+   "where_fa": "متن صحنهٔ ساخته‌نشده",
+   "context_fa": "برای چالش‌هایی که هنوز صحنه ندارند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.scene.pending",
+    "text"
+   ],
+   "text": "صحنهٔ این چالش هنوز ساخته نشده است.",
+   "status": "draft"
+  },
+  "flow.help.title": {
+   "id": "flow.help.title",
+   "kind": "title",
+   "where_fa": "عنوان ورقهٔ کمکم کن",
+   "context_fa": "بالای ورقه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.help.title",
+    "text"
+   ],
+   "text": "کمکم کن",
+   "status": "draft"
+  },
+  "flow.help.h1": {
+   "id": "flow.help.h1",
+   "kind": "hint",
+   "where_fa": "سرنخ اول",
+   "context_fa": "فقط نگاه‌کردن؛ بدون جواب",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.help.h1",
+    "text"
+   ],
+   "text": "به طناب نگاه کن: از روی کدام چرخ‌ها رد می‌شود؟",
+   "status": "draft"
+  },
+  "flow.help.h2": {
+   "id": "flow.help.h2",
+   "kind": "hint",
+   "where_fa": "سرنخ دوم",
+   "context_fa": "شمردن",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.help.h2",
+    "text"
+   ],
+   "text": "بشمار: چند تکه طناب بار را نگه داشته است؟",
+   "status": "draft"
+  },
+  "flow.help.h3": {
+   "id": "flow.help.h3",
+   "kind": "hint",
+   "where_fa": "سرنخ سوم",
+   "context_fa": "مقایسه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.help.h3",
+    "text"
+   ],
+   "text": "مقایسه کن: با چرخِ متحرک، کشیدن سبک‌تر شد یا سنگین‌تر؟",
+   "status": "draft"
+  },
+  "flow.help.more": {
+   "id": "flow.help.more",
+   "kind": "ui",
+   "where_fa": "دکمهٔ سرنخ بعدی",
+   "context_fa": "ورقهٔ کمکم کن",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.help.more",
+    "text"
+   ],
+   "text": "سرنخ بعدی",
+   "status": "draft"
+  },
+  "flow.help.end": {
+   "id": "flow.help.end",
+   "kind": "ui",
+   "where_fa": "پایان سرنخ‌ها",
+   "context_fa": "پس از سومین سرنخ",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.help.end",
+    "text"
+   ],
+   "text": "سرنخ‌ها تمام شد. دوباره بکش و ببین.",
+   "status": "draft"
+  },
+  "flow.menu.title": {
+   "id": "flow.menu.title",
+   "kind": "title",
+   "where_fa": "عنوان ورقهٔ منو",
+   "context_fa": "بالای ورقه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.title",
+    "text"
+   ],
+   "text": "مسیر و راهنما",
+   "status": "draft"
+  },
+  "flow.menu.path": {
+   "id": "flow.menu.path",
+   "kind": "title",
+   "where_fa": "عنوان بخش مسیر پیشنهادی",
+   "context_fa": "فهرست هشت‌مرحله‌ای (B37)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.path",
+    "text"
+   ],
+   "text": "مسیر پیشنهادی",
+   "status": "draft"
+  },
+  "flow.menu.pathNote": {
+   "id": "flow.menu.pathNote",
+   "kind": "ui",
+   "where_fa": "توضیح مسیر پیشنهادی",
+   "context_fa": "قفل نیست",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.pathNote",
+    "text"
+   ],
+   "text": "فقط پیشنهاد است. هر جا خواستی برو.",
+   "status": "draft"
+  },
+  "flow.menu.legend": {
+   "id": "flow.menu.legend",
+   "kind": "title",
+   "where_fa": "عنوان راهنمای نشانه‌ها",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.legend",
+    "text"
+   ],
+   "text": "نشانه‌ها",
+   "status": "draft"
+  },
+  "flow.menu.legend.lesson": {
+   "id": "flow.menu.legend.lesson",
+   "kind": "ui",
+   "where_fa": "معنی دکمهٔ کارت درس",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.legend.lesson",
+    "text"
+   ],
+   "text": "کارت درس: خلاصهٔ آنچه دیدی",
+   "status": "draft"
+  },
+  "flow.menu.legend.help": {
+   "id": "flow.menu.legend.help",
+   "kind": "ui",
+   "where_fa": "معنی دکمهٔ کمکم کن",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.legend.help",
+    "text"
+   ],
+   "text": "کمکم کن: سرنخ، بدون جریمه",
+   "status": "draft"
+  },
+  "flow.menu.legend.box": {
+   "id": "flow.menu.legend.box",
+   "kind": "ui",
+   "where_fa": "معنی دکمهٔ جعبهٔ کارت‌ها",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.legend.box",
+    "text"
+   ],
+   "text": "جعبهٔ کارت‌ها: همهٔ کارت‌هایی که دیده‌ای",
+   "status": "draft"
+  },
+  "flow.menu.replay": {
+   "id": "flow.menu.replay",
+   "kind": "ui",
+   "where_fa": "دکمهٔ دیدن دوبارهٔ آموزش",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.replay",
+    "text"
+   ],
+   "text": "دیدن آموزش دوباره",
+   "status": "draft"
+  },
+  "flow.menu.adults": {
+   "id": "flow.menu.adults",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بخش بزرگ‌ترها",
+   "context_fa": "پایین منو",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.adults",
+    "text"
+   ],
+   "text": "بخش بزرگ‌ترها",
+   "status": "draft"
+  },
+  "flow.tut.map1": {
+   "id": "flow.tut.map1",
+   "kind": "ui",
+   "where_fa": "گام اول آموزش نقشه",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tut.map1",
+    "text"
+   ],
+   "text": "این نقشهٔ توست. نشانهٔ «تو اینجایی» جای تو را نشان می‌دهد.",
+   "status": "draft"
+  },
+  "flow.tut.map2": {
+   "id": "flow.tut.map2",
+   "kind": "ui",
+   "where_fa": "گام دوم آموزش نقشه",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tut.map2",
+    "text"
+   ],
+   "text": "یک سرزمین را لمس کن تا واردش شوی.",
+   "status": "draft"
+  },
+  "flow.tut.map3": {
+   "id": "flow.tut.map3",
+   "kind": "ui",
+   "where_fa": "گام سوم آموزش نقشه",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tut.map3",
+    "text"
+   ],
+   "text": "اینجا جعبهٔ کارت‌هاست و اینجا مسیر و راهنما.",
+   "status": "draft"
+  },
+  "flow.tut.scene1": {
+   "id": "flow.tut.scene1",
+   "kind": "ui",
+   "where_fa": "گام اول آموزش صحنه",
+   "context_fa": "اولین بار، پیش از نوع بازی «قرقره»",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tut.scene1",
+    "text"
+   ],
+   "text": "اول یکی از دو آرایش را انتخاب کن.",
+   "status": "draft"
+  },
+  "flow.tut.scene2": {
+   "id": "flow.tut.scene2",
+   "kind": "ui",
+   "where_fa": "گام دوم آموزش صحنه",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tut.scene2",
+    "text"
+   ],
+   "text": "بعد «یک‌بار بکش» را بزن و ببین چه می‌شود.",
+   "status": "draft"
+  },
+  "flow.tut.scene3": {
+   "id": "flow.tut.scene3",
+   "kind": "ui",
+   "where_fa": "گام سوم آموزش صحنه",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tut.scene3",
+    "text"
+   ],
+   "text": "گیر کردی؟ «کمکم کن» سرنخ می‌دهد.",
+   "status": "draft"
+  },
+  "flow.card.title": {
+   "id": "flow.card.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت آموزشی قرقره",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.title",
+    "text"
+   ],
+   "text": "قرقره",
+   "status": "draft"
+  },
+  "flow.card.fixed": {
+   "id": "flow.card.fixed",
+   "kind": "ui",
+   "where_fa": "عنوان نمودار ثابت",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.fixed",
+    "text"
+   ],
+   "text": "ثابت",
+   "status": "draft"
+  },
+  "flow.card.moving": {
+   "id": "flow.card.moving",
+   "kind": "ui",
+   "where_fa": "عنوان نمودار ثابت و متحرک",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.moving",
+    "text"
+   ],
+   "text": "ثابت + متحرک",
+   "status": "draft"
+  },
+  "flow.card.load": {
+   "id": "flow.card.load",
+   "kind": "ui",
+   "where_fa": "برچسب بار",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.load",
+    "text"
+   ],
+   "text": "بار",
+   "status": "draft"
+  },
+  "flow.card.pull": {
+   "id": "flow.card.pull",
+   "kind": "ui",
+   "where_fa": "برچسب کشیدن",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.pull",
+    "text"
+   ],
+   "text": "کشیدن",
+   "status": "draft"
+  },
+  "flow.card.legend.w": {
+   "id": "flow.card.legend.w",
+   "kind": "ui",
+   "where_fa": "راهنمای فلش وزن",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.legend.w",
+    "text"
+   ],
+   "text": "وزنِ بار",
+   "status": "draft"
+  },
+  "flow.card.legend.f": {
+   "id": "flow.card.legend.f",
+   "kind": "ui",
+   "where_fa": "راهنمای فلش کشیدن",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.legend.f",
+    "text"
+   ],
+   "text": "نیروی کشیدن",
+   "status": "draft"
+  },
+  "flow.card.problem": {
+   "id": "flow.card.problem",
+   "kind": "title",
+   "where_fa": "عنوان بخش مسئله",
+   "context_fa": "هر کارت یک مسئلهٔ شماتیک دارد (B24)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.problem",
+    "text"
+   ],
+   "text": "مسئله",
+   "status": "draft"
+  },
+  "flow.card.q1": {
+   "id": "flow.card.q1",
+   "kind": "hint",
+   "where_fa": "مسئلهٔ کارت قرقره",
+   "context_fa": "فقط از روی نمودار پاسخ‌پذیر",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q1",
+    "text"
+   ],
+   "text": "در کدام تصویر کشیدنِ طناب سبک‌تر است؟",
+   "status": "draft"
+  },
+  "flow.card.q1.ok": {
+   "id": "flow.card.q1.ok",
+   "kind": "hint",
+   "where_fa": "پاسخ درست مسئلهٔ پایهٔ ۱ و ۲",
+   "context_fa": "",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q1.ok",
+    "text"
+   ],
+   "text": "درست است. چرخِ متحرک کشیدن را سبک‌تر می‌کند.",
+   "status": "draft"
+  },
+  "flow.card.q2": {
+   "id": "flow.card.q2",
+   "kind": "hint",
+   "where_fa": "مسئلهٔ کارت قرقره",
+   "context_fa": "عددها بدون یکا (تصمیم یکا برای ۳ و ۴ باز است)",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q2",
+    "text"
+   ],
+   "text": "بار ۶ است. با چرخِ متحرک، نیروی کشیدن چقدر می‌شود؟",
+   "status": "draft"
+  },
+  "flow.card.q2.ok": {
+   "id": "flow.card.q2.ok",
+   "kind": "hint",
+   "where_fa": "پاسخ درست مسئلهٔ پایهٔ ۳ و ۴",
+   "context_fa": "",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q2.ok",
+    "text"
+   ],
+   "text": "درست است. نیروی کشیدن نصف می‌شود: ۶ ÷ ۲ = ۳.",
+   "status": "draft"
+  },
+  "flow.card.q3": {
+   "id": "flow.card.q3",
+   "kind": "hint",
+   "where_fa": "مسئلهٔ کارت قرقره",
+   "context_fa": "",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q3",
+    "text"
+   ],
+   "text": "وزن بار ۶۰ نیوتون و n برابر ۲ است. نیروی کشیدن F چقدر است؟",
+   "status": "draft"
+  },
+  "flow.card.q3.ok": {
+   "id": "flow.card.q3.ok",
+   "kind": "hint",
+   "where_fa": "پاسخ درست مسئلهٔ پایهٔ ۵ و ۶",
+   "context_fa": "",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q3.ok",
+    "text"
+   ],
+   "text": "درست است. F = W / n = ۶۰ / ۲ = ۳۰ نیوتون.",
+   "status": "draft"
+  },
+  "flow.card.q.retry": {
+   "id": "flow.card.q.retry",
+   "kind": "hint",
+   "where_fa": "پیام پاسخ نادرست",
+   "context_fa": "بدون جریمه و بدون شمارش خطا",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q.retry",
+    "text"
+   ],
+   "text": "هنوز نه. دوباره به نمودار نگاه کن و امتحان کن.",
+   "status": "draft"
+  },
+  "flow.card.related": {
+   "id": "flow.card.related",
+   "kind": "title",
+   "where_fa": "عنوان کارت‌های مربوط",
+   "context_fa": "از پیوندهای نقشه ساخته می‌شود (B39)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.related",
+    "text"
+   ],
+   "text": "کارت‌های مربوط",
+   "status": "draft"
+  },
+  "flow.card.video": {
+   "id": "flow.card.video",
+   "kind": "ui",
+   "where_fa": "ردیف ویدیو",
+   "context_fa": "با تأیید بزرگ‌تر (B38)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.video",
+    "text"
+   ],
+   "text": "ببین و بیشتر بدان (با بزرگ‌تر)",
+   "status": "draft"
+  },
+  "flow.card.goGame": {
+   "id": "flow.card.goGame",
+   "kind": "ui",
+   "where_fa": "دکمهٔ برو به بازی",
+   "context_fa": "فقط اگر مرحله باز شده باشد",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.goGame",
+    "text"
+   ],
+   "text": "برو به بازی",
+   "status": "draft"
+  },
+  "flow.card.goGame.off": {
+   "id": "flow.card.goGame.off",
+   "kind": "ui",
+   "where_fa": "توضیح مرحلهٔ هنوز نرفته",
+   "context_fa": "بدون نشانهٔ قفل و فشار",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.goGame.off",
+    "text"
+   ],
+   "text": "هنوز به این محیط نرفته‌ای.",
+   "status": "draft"
+  },
+  "flow.card.pending": {
+   "id": "flow.card.pending",
+   "kind": "story",
+   "where_fa": "متن کارتِ طراحی‌نشده",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.pending",
+    "text"
+   ],
+   "text": "این کارت هنوز طراحی نشده است. جایش اینجاست.",
+   "status": "draft"
+  },
+  "flow.box.title": {
+   "id": "flow.box.title",
+   "kind": "title",
+   "where_fa": "عنوان جعبهٔ کارت‌ها",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.title",
+    "text"
+   ],
+   "text": "جعبهٔ کارت‌ها",
+   "status": "draft"
+  },
+  "flow.box.tab.cards": {
+   "id": "flow.box.tab.cards",
+   "kind": "ui",
+   "where_fa": "زبانهٔ کارت‌ها",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.tab.cards",
+    "text"
+   ],
+   "text": "کارت‌ها",
+   "status": "draft"
+  },
+  "flow.box.tab.practice": {
+   "id": "flow.box.tab.practice",
+   "kind": "ui",
+   "where_fa": "زبانهٔ تمرین",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.tab.practice",
+    "text"
+   ],
+   "text": "تمرین",
+   "status": "draft"
+  },
+  "flow.box.unseen": {
+   "id": "flow.box.unseen",
+   "kind": "ui",
+   "where_fa": "برچسب کارت ندیده",
+   "context_fa": "بدون قفل",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.unseen",
+    "text"
+   ],
+   "text": "هنوز ندیده‌ای",
+   "status": "draft"
+  },
+  "flow.practice.lead": {
+   "id": "flow.practice.lead",
+   "kind": "story",
+   "where_fa": "توضیح تمرین",
+   "context_fa": "بدون زمان‌سنج و نمره (D28)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.practice.lead",
+    "text"
+   ],
+   "text": "چند مسئلهٔ کوتاه از کارت‌هایی که دیده‌ای. زمان‌سنج و نمره ندارد.",
+   "status": "draft"
+  },
+  "flow.practice.start": {
+   "id": "flow.practice.start",
+   "kind": "ui",
+   "where_fa": "دکمهٔ شروع تمرین",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.practice.start",
+    "text"
+   ],
+   "text": "شروع تمرین",
+   "status": "draft"
+  },
+  "flow.practice.next": {
+   "id": "flow.practice.next",
+   "kind": "ui",
+   "where_fa": "دکمهٔ مسئلهٔ بعدی",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.practice.next",
+    "text"
+   ],
+   "text": "مسئلهٔ بعدی",
+   "status": "draft"
+  },
+  "flow.practice.end": {
+   "id": "flow.practice.end",
+   "kind": "story",
+   "where_fa": "پایان تمرین",
+   "context_fa": "هر وقت کودک بخواهد برمی‌گردد (B5)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.practice.end",
+    "text"
+   ],
+   "text": "تمرین امروز تمام شد.",
+   "status": "draft"
+  },
+  "flow.gate.title": {
+   "id": "flow.gate.title",
+   "kind": "title",
+   "where_fa": "عنوان ورقهٔ بزرگ‌ترها",
+   "context_fa": "متن موجود در بازی زنده",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.title",
+    "text"
+   ],
+   "text": "بخش بزرگ‌ترها",
+   "status": "draft"
+  },
+  "flow.gate.lead": {
+   "id": "flow.gate.lead",
+   "kind": "ui",
+   "where_fa": "توضیح ورقهٔ بزرگ‌ترها",
+   "context_fa": "متن موجود در بازی زنده",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.lead",
+    "text"
+   ],
+   "text": "این بخش برای والدین و معلم است.",
+   "status": "draft"
+  },
+  "flow.gate.hold": {
+   "id": "flow.gate.hold",
+   "kind": "ui",
+   "where_fa": "دکمهٔ نگه‌داشتن",
+   "context_fa": "متن موجود در بازی زنده",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.hold",
+    "text"
+   ],
+   "text": "برای ورود ۲ ثانیه نگه دارید",
+   "status": "draft"
+  },
+  "flow.gate.tab.report": {
+   "id": "flow.gate.tab.report",
+   "kind": "ui",
+   "where_fa": "زبانهٔ گزارش",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.tab.report",
+    "text"
+   ],
+   "text": "گزارش",
+   "status": "draft"
+  },
+  "flow.gate.tab.guide": {
+   "id": "flow.gate.tab.guide",
+   "kind": "ui",
+   "where_fa": "زبانهٔ راهنمای معلم",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.tab.guide",
+    "text"
+   ],
+   "text": "راهنمای معلم",
+   "status": "draft"
+  },
+  "flow.gate.tab.video": {
+   "id": "flow.gate.tab.video",
+   "kind": "ui",
+   "where_fa": "زبانهٔ ویدیوها",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.tab.video",
+    "text"
+   ],
+   "text": "ویدیوها",
+   "status": "draft"
+  },
+  "flow.gate.tab.code": {
+   "id": "flow.gate.tab.code",
+   "kind": "ui",
+   "where_fa": "زبانهٔ کد پیشرفت",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.tab.code",
+    "text"
+   ],
+   "text": "کد پیشرفت",
+   "status": "draft"
+  },
+  "flow.gate.report.lead": {
+   "id": "flow.gate.report.lead",
+   "kind": "ui",
+   "where_fa": "توضیح گزارش",
+   "context_fa": "بدون ستاره و نمره (B4)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.report.lead",
+    "text"
+   ],
+   "text": "محیط‌هایی که کودک دیده است. ستاره و نمره ندارد.",
+   "status": "draft"
+  },
+  "flow.gate.guide.lead": {
+   "id": "flow.gate.guide.lead",
+   "kind": "ui",
+   "where_fa": "توضیح راهنمای معلم",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.guide.lead",
+    "text"
+   ],
+   "text": "راهنمای مرحلهٔ اسکله. متن هر بخش هنوز نوشته نشده است.",
+   "status": "draft"
+  },
+  "flow.gate.guide.s1": {
+   "id": "flow.gate.guide.s1",
+   "kind": "ui",
+   "where_fa": "بخش هدف",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.guide.s1",
+    "text"
+   ],
+   "text": "هدف مرحله",
+   "status": "draft"
+  },
+  "flow.gate.guide.s2": {
+   "id": "flow.gate.guide.s2",
+   "kind": "ui",
+   "where_fa": "بخش نسبت مکانیک با مفهوم",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.guide.s2",
+    "text"
+   ],
+   "text": "نسبت کارِ دست با مفهوم",
+   "status": "draft"
+  },
+  "flow.gate.guide.s3": {
+   "id": "flow.gate.guide.s3",
+   "kind": "ui",
+   "where_fa": "بخش خطاهای محتمل",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.guide.s3",
+    "text"
+   ],
+   "text": "خطاهای محتمل",
+   "status": "draft"
+  },
+  "flow.gate.guide.s4": {
+   "id": "flow.gate.guide.s4",
+   "kind": "ui",
+   "where_fa": "بخش نشانهٔ فهم",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.guide.s4",
+    "text"
+   ],
+   "text": "نشانهٔ فهم",
+   "status": "draft"
+  },
+  "flow.gate.guide.s5": {
+   "id": "flow.gate.guide.s5",
+   "kind": "ui",
+   "where_fa": "بخش پرسش‌ها",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.guide.s5",
+    "text"
+   ],
+   "text": "پرسش‌ها",
+   "status": "draft"
+  },
+  "flow.gate.video.lead": {
+   "id": "flow.gate.video.lead",
+   "kind": "ui",
+   "where_fa": "توضیح ویدیوها",
+   "context_fa": "فقط مجانی؛ پیوند بیرونی (B37، B38)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.video.lead",
+    "text"
+   ],
+   "text": "ویدیوهای مجانی دربارهٔ قرقره. فقط با اجازهٔ شما باز می‌شوند.",
+   "status": "draft"
+  },
+  "flow.gate.code.lead": {
+   "id": "flow.gate.code.lead",
+   "kind": "ui",
+   "where_fa": "توضیح کد پیشرفت",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.gate.code.lead",
+    "text"
+   ],
+   "text": "کد پیشرفت در بازی واقعی ساخته می‌شود.",
+   "status": "draft"
+  },
+  "flow.card.q3.o1": {
+   "id": "flow.card.q3.o1",
+   "kind": "hint",
+   "where_fa": "گزینهٔ مسئلهٔ پایهٔ ۵ و ۶",
+   "context_fa": "یکای نیرو «نیوتون» (B28)",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q3.o1",
+    "text"
+   ],
+   "text": "۱۲۰ نیوتون",
+   "status": "draft"
+  },
+  "flow.card.q3.o2": {
+   "id": "flow.card.q3.o2",
+   "kind": "hint",
+   "where_fa": "گزینهٔ مسئلهٔ پایهٔ ۵ و ۶",
+   "context_fa": "یکای نیرو «نیوتون» (B28)",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q3.o2",
+    "text"
+   ],
+   "text": "۶۰ نیوتون",
+   "status": "draft"
+  },
+  "flow.card.q3.o3": {
+   "id": "flow.card.q3.o3",
+   "kind": "hint",
+   "where_fa": "گزینهٔ مسئلهٔ پایهٔ ۵ و ۶",
+   "context_fa": "یکای نیرو «نیوتون» (B28)",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.card.q3.o3",
+    "text"
+   ],
+   "text": "۳۰ نیوتون",
+   "status": "draft"
   }
  },
  "meta": {

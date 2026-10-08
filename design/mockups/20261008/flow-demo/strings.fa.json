@@ -1,0 +1,751 @@
+{
+ "flow.nav.toMap": {
+  "text": "برگردیم به نقشه",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بازگشت به نقشه",
+  "context_fa": "برگشتن از صفحهٔ سرزمین، جعبه و مانند آن به نقشه؛ همان واژهٔ کارت مصوب «برگردیم به نقشه»",
+  "band": "همه"
+ },
+ "flow.nav.toLand": {
+  "text": "برگرد به سرزمین",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بازگشت به سرزمین",
+  "context_fa": "بالای صفحهٔ محیط",
+  "band": "همه"
+ },
+ "flow.nav.toEnv": {
+  "text": "برگرد به محیط",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بازگشت به محیط",
+  "context_fa": "بالای صحنهٔ چالش",
+  "band": "همه"
+ },
+ "flow.nav.toGame": {
+  "text": "برگرد به بازی",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بازگشت به بازی",
+  "context_fa": "بالای کارت درس که از صحنه باز شده",
+  "band": "همه"
+ },
+ "flow.nav.toBox": {
+  "text": "برگرد به جعبه",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بازگشت به جعبه",
+  "context_fa": "بالای کارتی که از جعبه باز شده",
+  "band": "همه"
+ },
+ "flow.menu.btn": {
+  "text": "مسیر و راهنما",
+  "kind": "ui",
+  "where_fa": "دکمهٔ «مسیر و راهنما»",
+  "context_fa": "آیکون و واژه، به‌جای باکس تکراری (چیدمان الف، D25)",
+  "band": "همه"
+ },
+ "flow.help.btn": {
+  "text": "کمکم کن",
+  "kind": "ui",
+  "where_fa": "دکمهٔ «کمکم کن»",
+  "context_fa": "آیکون و واژه",
+  "band": "همه"
+ },
+ "flow.lesson.btn": {
+  "text": "کارت درس",
+  "kind": "ui",
+  "where_fa": "دکمهٔ کارت درس",
+  "context_fa": "روی صحنه؛ شرط پیشروی نیست",
+  "band": "همه"
+ },
+ "flow.box.btn": {
+  "text": "جعبهٔ کارت‌ها",
+  "kind": "ui",
+  "where_fa": "دکمهٔ جعبهٔ کارت‌ها",
+  "context_fa": "پایین نقشه و در منو",
+  "band": "همه"
+ },
+ "flow.close": {
+  "text": "بستن",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بستن",
+  "context_fa": "ورقه‌ها",
+  "band": "همه"
+ },
+ "flow.next": {
+  "text": "بعدی",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بعدی",
+  "context_fa": "آموزش بازی",
+  "band": "همه"
+ },
+ "flow.skip": {
+  "text": "ردکن",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ردکردن",
+  "context_fa": "آموزش بازی؛ همیشه دیده می‌شود",
+  "band": "همه"
+ },
+ "flow.done": {
+  "text": "فهمیدم",
+  "kind": "ui",
+  "where_fa": "دکمهٔ پایان آموزش",
+  "context_fa": "آخرین گام آموزش",
+  "band": "همه"
+ },
+ "flow.map.title": {
+  "text": "نقشهٔ علوم",
+  "kind": "title",
+  "where_fa": "عنوان صفحهٔ نقشه",
+  "context_fa": "بالای نقشه",
+  "band": "همه"
+ },
+ "flow.map.here": {
+  "text": "تو اینجایی",
+  "kind": "ui",
+  "where_fa": "نشانهٔ «تو اینجایی»",
+  "context_fa": "روی سرزمینی که کودک در آن است",
+  "band": "همه"
+ },
+ "flow.map.suggested": {
+  "text": "شروع پیشنهادی",
+  "kind": "ui",
+  "where_fa": "نشانهٔ شروع پیشنهادی",
+  "context_fa": "فقط پیشنهاد است، قفل نیست (B4، B18)",
+  "band": "همه"
+ },
+ "flow.map.tap": {
+  "text": "برای ورود بزن",
+  "kind": "ui",
+  "where_fa": "راهنمای لمس سرزمین",
+  "context_fa": "زیر هر سرزمین",
+  "band": "همه"
+ },
+ "flow.land.here": {
+  "text": "تو اینجایی",
+  "kind": "ui",
+  "where_fa": "برچسب محیط فعلی",
+  "context_fa": "روی دایرهٔ محیط",
+  "band": "همه"
+ },
+ "flow.land.visited": {
+  "text": "رفته‌ای",
+  "kind": "ui",
+  "where_fa": "برچسب محیط دیده‌شده",
+  "context_fa": "روی دایرهٔ محیط",
+  "band": "همه"
+ },
+ "flow.land.experimental": {
+  "text": "آزمایشی",
+  "kind": "ui",
+  "where_fa": "برچسب آزمایشی",
+  "context_fa": "محیطی که شاهد کافی ندارد (B31)",
+  "band": "همه"
+ },
+ "flow.land.legend.ring": {
+  "text": "حلقهٔ پر: در کتاب همین پایه",
+  "kind": "ui",
+  "where_fa": "راهنمای حلقهٔ پر",
+  "context_fa": "نشانهٔ کتاب درسی همین پایه (B35)",
+  "band": "همه"
+ },
+ "flow.land.legend.dash": {
+  "text": "خط‌چین: در کتاب پایه‌های قبل",
+  "kind": "ui",
+  "where_fa": "راهنمای حلقهٔ خط‌چین",
+  "context_fa": "نشانهٔ کتاب پایه‌های قبل",
+  "band": "همه"
+ },
+ "flow.peek.enter": {
+  "text": "برویم به این محیط",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ورود به محیط",
+  "context_fa": "ورود فقط با انتخاب کودک (B5)",
+  "band": "همه"
+ },
+ "flow.env.start": {
+  "text": "بزن بریم!",
+  "kind": "ui",
+  "where_fa": "دکمهٔ شروع چالش",
+  "context_fa": "واژهٔ مصوب کارت بندر",
+  "band": "همه"
+ },
+ "flow.env.pending": {
+  "text": "داستان و تصویر این چالش هنوز ساخته نشده است.",
+  "kind": "story",
+  "where_fa": "متن چالشِ طراحی‌نشده",
+  "context_fa": "برای محیط‌هایی که هنوز داستان و تصویر ندارند",
+  "band": "همه"
+ },
+ "flow.tier.core": {
+  "text": "شروع",
+  "kind": "ui",
+  "where_fa": "نام سطح سبز",
+  "context_fa": "برچسب ثابت سختی، جدا از پوستهٔ سرزمین (D3، D11)",
+  "band": "همه"
+ },
+ "flow.tier.challenge": {
+  "text": "چالش",
+  "kind": "ui",
+  "where_fa": "نام سطح نارنجی",
+  "context_fa": "برچسب ثابت سختی",
+  "band": "همه"
+ },
+ "flow.tier.veryhard": {
+  "text": "چالش بزرگ",
+  "kind": "ui",
+  "where_fa": "نام سطح قرمز",
+  "context_fa": "برچسب ثابت سختی",
+  "band": "همه"
+ },
+ "flow.harbor.green.title": {
+  "text": "اسکلهٔ ماهیگیری",
+  "kind": "title",
+  "where_fa": "عنوان چالش سبز بندر",
+  "context_fa": "همان عنوان کارت مصوب",
+  "band": "همه"
+ },
+ "flow.harbor.green.mission": {
+  "text": "تور را با طناب بکش بالا!",
+  "kind": "story",
+  "where_fa": "مأموریت چالش سبز بندر",
+  "context_fa": "همان جملهٔ کارت مصوب",
+  "band": "همه"
+ },
+ "flow.harbor.orange.title": {
+  "text": "اسکلهٔ دزدان دریایی",
+  "kind": "title",
+  "where_fa": "عنوان چالش نارنجی بندر",
+  "context_fa": "پیشنهاد؛ نام مسیر harbor.pirate",
+  "band": "همه"
+ },
+ "flow.harbor.orange.mission": {
+  "text": "صندوق گنج را با طناب بالا ببر!",
+  "kind": "story",
+  "where_fa": "مأموریت چالش نارنجی بندر",
+  "context_fa": "پیشنهاد؛ داستان تأییدنشده",
+  "band": "همه"
+ },
+ "flow.harbor.red.title": {
+  "text": "اسکلهٔ هیولای دریا",
+  "kind": "title",
+  "where_fa": "عنوان چالش قرمز بندر",
+  "context_fa": "پیشنهاد؛ هیولا طبق گفتهٔ مالک",
+  "band": "همه"
+ },
+ "flow.harbor.red.mission": {
+  "text": "چند قرقره را با هم به کار ببر و بار سنگین را بالا بکش!",
+  "kind": "story",
+  "where_fa": "مأموریت چالش قرمز بندر",
+  "context_fa": "پیشنهاد؛ داستان تأییدنشده",
+  "band": "همه"
+ },
+ "flow.scene.mission": {
+  "text": "تور را تا لبهٔ اسکله بالا بیاور!",
+  "kind": "story",
+  "where_fa": "جملهٔ بالای صحنهٔ ماهیگیری",
+  "context_fa": "زیر عنوان صحنه",
+  "band": "همه"
+ },
+ "flow.scene.arr.fixed": {
+  "text": "ثابت",
+  "kind": "ui",
+  "where_fa": "دکمهٔ آرایش ثابت",
+  "context_fa": "انتخاب آرایش قرقره",
+  "band": "همه"
+ },
+ "flow.scene.arr.moving": {
+  "text": "ثابت + متحرک",
+  "kind": "ui",
+  "where_fa": "دکمهٔ آرایش ثابت و متحرک",
+  "context_fa": "انتخاب آرایش قرقره",
+  "band": "همه"
+ },
+ "flow.scene.pull": {
+  "text": "یک‌بار بکش",
+  "kind": "ui",
+  "where_fa": "دکمهٔ یک‌بار بکش",
+  "context_fa": "اقدام اصلی صحنه",
+  "band": "همه"
+ },
+ "flow.scene.pending": {
+  "text": "صحنهٔ این چالش هنوز ساخته نشده است.",
+  "kind": "story",
+  "where_fa": "متن صحنهٔ ساخته‌نشده",
+  "context_fa": "برای چالش‌هایی که هنوز صحنه ندارند",
+  "band": "همه"
+ },
+ "flow.help.title": {
+  "text": "کمکم کن",
+  "kind": "title",
+  "where_fa": "عنوان ورقهٔ کمکم کن",
+  "context_fa": "بالای ورقه",
+  "band": "همه"
+ },
+ "flow.help.h1": {
+  "text": "به طناب نگاه کن: از روی کدام چرخ‌ها رد می‌شود؟",
+  "kind": "hint",
+  "where_fa": "سرنخ اول",
+  "context_fa": "فقط نگاه‌کردن؛ بدون جواب",
+  "band": "همه"
+ },
+ "flow.help.h2": {
+  "text": "بشمار: چند تکه طناب بار را نگه داشته است؟",
+  "kind": "hint",
+  "where_fa": "سرنخ دوم",
+  "context_fa": "شمردن",
+  "band": "همه"
+ },
+ "flow.help.h3": {
+  "text": "مقایسه کن: با چرخِ متحرک، کشیدن سبک‌تر شد یا سنگین‌تر؟",
+  "kind": "hint",
+  "where_fa": "سرنخ سوم",
+  "context_fa": "مقایسه",
+  "band": "همه"
+ },
+ "flow.help.more": {
+  "text": "سرنخ بعدی",
+  "kind": "ui",
+  "where_fa": "دکمهٔ سرنخ بعدی",
+  "context_fa": "ورقهٔ کمکم کن",
+  "band": "همه"
+ },
+ "flow.help.end": {
+  "text": "سرنخ‌ها تمام شد. دوباره بکش و ببین.",
+  "kind": "ui",
+  "where_fa": "پایان سرنخ‌ها",
+  "context_fa": "پس از سومین سرنخ",
+  "band": "همه"
+ },
+ "flow.menu.title": {
+  "text": "مسیر و راهنما",
+  "kind": "title",
+  "where_fa": "عنوان ورقهٔ منو",
+  "context_fa": "بالای ورقه",
+  "band": "همه"
+ },
+ "flow.menu.path": {
+  "text": "مسیر پیشنهادی",
+  "kind": "title",
+  "where_fa": "عنوان بخش مسیر پیشنهادی",
+  "context_fa": "فهرست هشت‌مرحله‌ای (B37)",
+  "band": "همه"
+ },
+ "flow.menu.pathNote": {
+  "text": "فقط پیشنهاد است. هر جا خواستی برو.",
+  "kind": "ui",
+  "where_fa": "توضیح مسیر پیشنهادی",
+  "context_fa": "قفل نیست",
+  "band": "همه"
+ },
+ "flow.menu.legend": {
+  "text": "نشانه‌ها",
+  "kind": "title",
+  "where_fa": "عنوان راهنمای نشانه‌ها",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.menu.legend.lesson": {
+  "text": "کارت درس: خلاصهٔ آنچه دیدی",
+  "kind": "ui",
+  "where_fa": "معنی دکمهٔ کارت درس",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.menu.legend.help": {
+  "text": "کمکم کن: سرنخ، بدون جریمه",
+  "kind": "ui",
+  "where_fa": "معنی دکمهٔ کمکم کن",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.menu.legend.box": {
+  "text": "جعبهٔ کارت‌ها: همهٔ کارت‌هایی که دیده‌ای",
+  "kind": "ui",
+  "where_fa": "معنی دکمهٔ جعبهٔ کارت‌ها",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.menu.replay": {
+  "text": "دیدن آموزش دوباره",
+  "kind": "ui",
+  "where_fa": "دکمهٔ دیدن دوبارهٔ آموزش",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.menu.adults": {
+  "text": "بخش بزرگ‌ترها",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بخش بزرگ‌ترها",
+  "context_fa": "پایین منو",
+  "band": "همه"
+ },
+ "flow.tut.map1": {
+  "text": "این نقشهٔ توست. نشانهٔ «تو اینجایی» جای تو را نشان می‌دهد.",
+  "kind": "ui",
+  "where_fa": "گام اول آموزش نقشه",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.tut.map2": {
+  "text": "یک سرزمین را لمس کن تا واردش شوی.",
+  "kind": "ui",
+  "where_fa": "گام دوم آموزش نقشه",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.tut.map3": {
+  "text": "اینجا جعبهٔ کارت‌هاست و اینجا مسیر و راهنما.",
+  "kind": "ui",
+  "where_fa": "گام سوم آموزش نقشه",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.tut.scene1": {
+  "text": "اول یکی از دو آرایش را انتخاب کن.",
+  "kind": "ui",
+  "where_fa": "گام اول آموزش صحنه",
+  "context_fa": "اولین بار، پیش از نوع بازی «قرقره»",
+  "band": "همه"
+ },
+ "flow.tut.scene2": {
+  "text": "بعد «یک‌بار بکش» را بزن و ببین چه می‌شود.",
+  "kind": "ui",
+  "where_fa": "گام دوم آموزش صحنه",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.tut.scene3": {
+  "text": "گیر کردی؟ «کمکم کن» سرنخ می‌دهد.",
+  "kind": "ui",
+  "where_fa": "گام سوم آموزش صحنه",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.card.title": {
+  "text": "قرقره",
+  "kind": "title",
+  "where_fa": "عنوان کارت آموزشی قرقره",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.card.fixed": {
+  "text": "ثابت",
+  "kind": "ui",
+  "where_fa": "عنوان نمودار ثابت",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.card.moving": {
+  "text": "ثابت + متحرک",
+  "kind": "ui",
+  "where_fa": "عنوان نمودار ثابت و متحرک",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.card.load": {
+  "text": "بار",
+  "kind": "ui",
+  "where_fa": "برچسب بار",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.card.pull": {
+  "text": "کشیدن",
+  "kind": "ui",
+  "where_fa": "برچسب کشیدن",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.card.legend.w": {
+  "text": "وزنِ بار",
+  "kind": "ui",
+  "where_fa": "راهنمای فلش وزن",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.card.legend.f": {
+  "text": "نیروی کشیدن",
+  "kind": "ui",
+  "where_fa": "راهنمای فلش کشیدن",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.card.problem": {
+  "text": "مسئله",
+  "kind": "title",
+  "where_fa": "عنوان بخش مسئله",
+  "context_fa": "هر کارت یک مسئلهٔ شماتیک دارد (B24)",
+  "band": "همه"
+ },
+ "flow.card.q1": {
+  "text": "در کدام تصویر کشیدنِ طناب سبک‌تر است؟",
+  "kind": "hint",
+  "where_fa": "مسئلهٔ کارت قرقره",
+  "context_fa": "فقط از روی نمودار پاسخ‌پذیر",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "flow.card.q1.ok": {
+  "text": "درست است. چرخِ متحرک کشیدن را سبک‌تر می‌کند.",
+  "kind": "hint",
+  "where_fa": "پاسخ درست مسئلهٔ پایهٔ ۱ و ۲",
+  "context_fa": "",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "flow.card.q2": {
+  "text": "بار ۶ است. با چرخِ متحرک، نیروی کشیدن چقدر می‌شود؟",
+  "kind": "hint",
+  "where_fa": "مسئلهٔ کارت قرقره",
+  "context_fa": "عددها بدون یکا (تصمیم یکا برای ۳ و ۴ باز است)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "flow.card.q2.ok": {
+  "text": "درست است. نیروی کشیدن نصف می‌شود: ۶ ÷ ۲ = ۳.",
+  "kind": "hint",
+  "where_fa": "پاسخ درست مسئلهٔ پایهٔ ۳ و ۴",
+  "context_fa": "",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "flow.card.q3": {
+  "text": "وزن بار ۶۰ نیوتون و n برابر ۲ است. نیروی کشیدن F چقدر است؟",
+  "kind": "hint",
+  "where_fa": "مسئلهٔ کارت قرقره",
+  "context_fa": "",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "flow.card.q3.ok": {
+  "text": "درست است. F = W / n = ۶۰ / ۲ = ۳۰ نیوتون.",
+  "kind": "hint",
+  "where_fa": "پاسخ درست مسئلهٔ پایهٔ ۵ و ۶",
+  "context_fa": "",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "flow.card.q.retry": {
+  "text": "هنوز نه. دوباره به نمودار نگاه کن و امتحان کن.",
+  "kind": "hint",
+  "where_fa": "پیام پاسخ نادرست",
+  "context_fa": "بدون جریمه و بدون شمارش خطا",
+  "band": "همه"
+ },
+ "flow.card.related": {
+  "text": "کارت‌های مربوط",
+  "kind": "title",
+  "where_fa": "عنوان کارت‌های مربوط",
+  "context_fa": "از پیوندهای نقشه ساخته می‌شود (B39)",
+  "band": "همه"
+ },
+ "flow.card.video": {
+  "text": "ببین و بیشتر بدان (با بزرگ‌تر)",
+  "kind": "ui",
+  "where_fa": "ردیف ویدیو",
+  "context_fa": "با تأیید بزرگ‌تر (B38)",
+  "band": "همه"
+ },
+ "flow.card.goGame": {
+  "text": "برو به بازی",
+  "kind": "ui",
+  "where_fa": "دکمهٔ برو به بازی",
+  "context_fa": "فقط اگر مرحله باز شده باشد",
+  "band": "همه"
+ },
+ "flow.card.goGame.off": {
+  "text": "هنوز به این محیط نرفته‌ای.",
+  "kind": "ui",
+  "where_fa": "توضیح مرحلهٔ هنوز نرفته",
+  "context_fa": "بدون نشانهٔ قفل و فشار",
+  "band": "همه"
+ },
+ "flow.card.pending": {
+  "text": "این کارت هنوز طراحی نشده است. جایش اینجاست.",
+  "kind": "story",
+  "where_fa": "متن کارتِ طراحی‌نشده",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.box.title": {
+  "text": "جعبهٔ کارت‌ها",
+  "kind": "title",
+  "where_fa": "عنوان جعبهٔ کارت‌ها",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.box.tab.cards": {
+  "text": "کارت‌ها",
+  "kind": "ui",
+  "where_fa": "زبانهٔ کارت‌ها",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.box.tab.practice": {
+  "text": "تمرین",
+  "kind": "ui",
+  "where_fa": "زبانهٔ تمرین",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.box.unseen": {
+  "text": "هنوز ندیده‌ای",
+  "kind": "ui",
+  "where_fa": "برچسب کارت ندیده",
+  "context_fa": "بدون قفل",
+  "band": "همه"
+ },
+ "flow.practice.lead": {
+  "text": "چند مسئلهٔ کوتاه از کارت‌هایی که دیده‌ای. زمان‌سنج و نمره ندارد.",
+  "kind": "story",
+  "where_fa": "توضیح تمرین",
+  "context_fa": "بدون زمان‌سنج و نمره (D28)",
+  "band": "همه"
+ },
+ "flow.practice.start": {
+  "text": "شروع تمرین",
+  "kind": "ui",
+  "where_fa": "دکمهٔ شروع تمرین",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.practice.next": {
+  "text": "مسئلهٔ بعدی",
+  "kind": "ui",
+  "where_fa": "دکمهٔ مسئلهٔ بعدی",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.practice.end": {
+  "text": "تمرین امروز تمام شد.",
+  "kind": "story",
+  "where_fa": "پایان تمرین",
+  "context_fa": "هر وقت کودک بخواهد برمی‌گردد (B5)",
+  "band": "همه"
+ },
+ "flow.gate.title": {
+  "text": "بخش بزرگ‌ترها",
+  "kind": "title",
+  "where_fa": "عنوان ورقهٔ بزرگ‌ترها",
+  "context_fa": "متن موجود در بازی زنده",
+  "band": "همه"
+ },
+ "flow.gate.lead": {
+  "text": "این بخش برای والدین و معلم است.",
+  "kind": "ui",
+  "where_fa": "توضیح ورقهٔ بزرگ‌ترها",
+  "context_fa": "متن موجود در بازی زنده",
+  "band": "همه"
+ },
+ "flow.gate.hold": {
+  "text": "برای ورود ۲ ثانیه نگه دارید",
+  "kind": "ui",
+  "where_fa": "دکمهٔ نگه‌داشتن",
+  "context_fa": "متن موجود در بازی زنده",
+  "band": "همه"
+ },
+ "flow.gate.tab.report": {
+  "text": "گزارش",
+  "kind": "ui",
+  "where_fa": "زبانهٔ گزارش",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.tab.guide": {
+  "text": "راهنمای معلم",
+  "kind": "ui",
+  "where_fa": "زبانهٔ راهنمای معلم",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.tab.video": {
+  "text": "ویدیوها",
+  "kind": "ui",
+  "where_fa": "زبانهٔ ویدیوها",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.tab.code": {
+  "text": "کد پیشرفت",
+  "kind": "ui",
+  "where_fa": "زبانهٔ کد پیشرفت",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.report.lead": {
+  "text": "محیط‌هایی که کودک دیده است. ستاره و نمره ندارد.",
+  "kind": "ui",
+  "where_fa": "توضیح گزارش",
+  "context_fa": "بدون ستاره و نمره (B4)",
+  "band": "همه"
+ },
+ "flow.gate.guide.lead": {
+  "text": "راهنمای مرحلهٔ اسکله. متن هر بخش هنوز نوشته نشده است.",
+  "kind": "ui",
+  "where_fa": "توضیح راهنمای معلم",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.guide.s1": {
+  "text": "هدف مرحله",
+  "kind": "ui",
+  "where_fa": "بخش هدف",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.guide.s2": {
+  "text": "نسبت کارِ دست با مفهوم",
+  "kind": "ui",
+  "where_fa": "بخش نسبت مکانیک با مفهوم",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.guide.s3": {
+  "text": "خطاهای محتمل",
+  "kind": "ui",
+  "where_fa": "بخش خطاهای محتمل",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.guide.s4": {
+  "text": "نشانهٔ فهم",
+  "kind": "ui",
+  "where_fa": "بخش نشانهٔ فهم",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.guide.s5": {
+  "text": "پرسش‌ها",
+  "kind": "ui",
+  "where_fa": "بخش پرسش‌ها",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.gate.video.lead": {
+  "text": "ویدیوهای مجانی دربارهٔ قرقره. فقط با اجازهٔ شما باز می‌شوند.",
+  "kind": "ui",
+  "where_fa": "توضیح ویدیوها",
+  "context_fa": "فقط مجانی؛ پیوند بیرونی (B37، B38)",
+  "band": "همه"
+ },
+ "flow.gate.code.lead": {
+  "text": "کد پیشرفت در بازی واقعی ساخته می‌شود.",
+  "kind": "ui",
+  "where_fa": "توضیح کد پیشرفت",
+  "context_fa": "",
+  "band": "همه"
+ },
+ "flow.card.q3.o1": {
+  "text": "۱۲۰ نیوتون",
+  "kind": "hint",
+  "where_fa": "گزینهٔ مسئلهٔ پایهٔ ۵ و ۶",
+  "context_fa": "یکای نیرو «نیوتون» (B28)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "flow.card.q3.o2": {
+  "text": "۶۰ نیوتون",
+  "kind": "hint",
+  "where_fa": "گزینهٔ مسئلهٔ پایهٔ ۵ و ۶",
+  "context_fa": "یکای نیرو «نیوتون» (B28)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "flow.card.q3.o3": {
+  "text": "۳۰ نیوتون",
+  "kind": "hint",
+  "where_fa": "گزینهٔ مسئلهٔ پایهٔ ۵ و ۶",
+  "context_fa": "یکای نیرو «نیوتون» (B28)",
+  "band": "پایهٔ ۵ و ۶"
+ }
+}
