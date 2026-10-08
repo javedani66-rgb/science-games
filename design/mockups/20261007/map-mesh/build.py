@@ -62,7 +62,7 @@ PATHS = {  # proposal B37/B42: main path from force to simple machines (numbers 
 data = {'paths': PATHS, 'lands': lands, 'nodes': nodes, 'edges': [e for e in D['edges'] if e['from'] in POS and e['to'] in POS], 'height': HEIGHT, 'policy': D['depth_policy_proposal']['table']}
 for n in nodes:
     t = TITLES['nodes'].get(n['id'])
-    if t: n['label_fa'] = t['title']; n['title_status'] = t['status']
+    if t: n['label_fa'] = t['title']; n['concept_fa'] = t.get('subtitle', t['title']); n['title_status'] = t['status']
 for l in lands:
     t = TITLES['lands'].get(l['id'])
     if t: l['label_fa'] = t['title']

@@ -3,8 +3,8 @@
   "title.node.F01": {
    "id": "title.node.F01",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ F01 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: وقتی چیزی را هل می‌دهیم یا می‌کشیم به آن «نیرو» می‌دهیم.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ F01 روی نقشه",
+   "context_fa": "مفهوم: هل دادن و کشیدن. وقتی چیزی را هل می‌دهیم یا می‌کشیم به آن «نیرو» می‌دهیم.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -13,15 +13,15 @@
     "F01",
     "title"
    ],
-   "text": "هل دادن و کشیدن",
+   "text": "زمین فوتبال",
    "status": "draft",
    "applied": true
   },
   "title.node.F02": {
    "id": "title.node.F02",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ F02 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: نیرو می‌تواند چیزی را به حرکت دربیاورد، نگه دارد، تندتر/کندتر کند، جهتش را عوض کند یا شکلش را عوض کند.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ F02 روی نقشه",
+   "context_fa": "مفهوم: اثر نیرو. نیرو می‌تواند چیزی را به حرکت دربیاورد، نگه دارد، تندتر/کندتر کند، جهتش را عوض کند یا شکلش را عوض کند.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -30,15 +30,15 @@
     "F02",
     "title"
    ],
-   "text": "اثر نیرو",
+   "text": "سالن بسکتبال",
    "status": "draft",
    "applied": true
   },
   "title.node.F03": {
    "id": "title.node.F03",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ F03 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: نیرو یک سو دارد و می‌تواند کم یا زیاد باشد؛ فنر یا کش اندازه‌اش را نشان می‌دهد؛ بعدها نیروسنج و نیوتون.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ F03 روی نقشه",
+   "context_fa": "مفهوم: جهت و اندازهٔ نیرو. نیرو یک سو دارد و می‌تواند کم یا زیاد باشد؛ فنر یا کش اندازه‌اش را نشان می‌دهد؛ بعدها نیروسنج و نیوتون.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -47,15 +47,15 @@
     "F03",
     "title"
    ],
-   "text": "جهت و اندازهٔ نیرو",
+   "text": "میدان کمانداری",
    "status": "draft",
    "applied": true
   },
   "title.node.F04": {
    "id": "title.node.F04",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ F04 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: بعضی نیروها با تماس‌اند (دست)، بعضی از دور کار می‌کنند (آهنربا، گرانش).",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ F04 روی نقشه",
+   "context_fa": "مفهوم: نیروی تماسی و نیروی از دور. بعضی نیروها با تماس‌اند (دست)، بعضی از دور کار می‌کنند (آهنربا، گرانش).",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -64,15 +64,15 @@
     "F04",
     "title"
    ],
-   "text": "نیروی تماسی و نیروی از دور",
+   "text": "سالن آزمایش آهنربا",
    "status": "draft",
    "applied": true
   },
   "title.node.F08": {
    "id": "title.node.F08",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ F08 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: چند نیرو هم‌زمان روی یک جسم‌اند؛ اگر برابر و مخالف باشند حرکت عوض نمی‌شود، وگرنه می‌شود.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ F08 روی نقشه",
+   "context_fa": "مفهوم: چند نیرو با هم (برآیند). چند نیرو هم‌زمان روی یک جسم‌اند؛ اگر برابر و مخالف باشند حرکت عوض نمی‌شود، وگرنه می‌شود.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -81,15 +81,15 @@
     "F08",
     "title"
    ],
-   "text": "چند نیرو با هم (برآیند)",
+   "text": "میدان طناب‌کشی",
    "status": "draft",
    "applied": true
   },
   "title.node.F09": {
    "id": "title.node.F09",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ F09 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: وقتی چیزی را هل می‌دهی آن هم تو را هل می‌دهد؛ جسم تا نیرو نباشد حالتش را نگه می‌دارد.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ F09 روی نقشه",
+   "context_fa": "مفهوم: کنش و واکنش و لختی. وقتی چیزی را هل می‌دهی آن هم تو را هل می‌دهد؛ جسم تا نیرو نباشد حالتش را نگه می‌دارد.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -98,15 +98,15 @@
     "F09",
     "title"
    ],
-   "text": "کنش و واکنش و لختی",
+   "text": "پارک اسکیت",
    "status": "draft",
    "applied": true
   },
   "title.node.F05": {
    "id": "title.node.F05",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ F05 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: زمین هر چیز را به سوی خودش می‌کشد؛ برای همین چیزها می‌افتند.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ F05 روی نقشه",
+   "context_fa": "مفهوم: گرانش (کشش زمین). زمین هر چیز را به سوی خودش می‌کشد؛ برای همین چیزها می‌افتند.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -115,15 +115,15 @@
     "F05",
     "title"
    ],
-   "text": "گرانش (کشش زمین)",
+   "text": "سکوی پرتاب",
    "status": "draft",
    "applied": true
   },
   "title.node.W01": {
    "id": "title.node.W01",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ W01 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: مقایسهٔ سنگینی دو چیز با دست یا با ترازو.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ W01 روی نقشه",
+   "context_fa": "مفهوم: سنگین و سبک. مقایسهٔ سنگینی دو چیز با دست یا با ترازو.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -132,15 +132,15 @@
     "W01",
     "title"
    ],
-   "text": "سنگین و سبک",
+   "text": "انبار بار فضایی",
    "status": "draft",
    "applied": true
   },
   "title.node.W02": {
    "id": "title.node.W02",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ W02 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: «مقدار ماده»ی جسم؛ با ترازو و به گرم و کیلوگرم.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ W02 روی نقشه",
+   "context_fa": "مفهوم: جرم. «مقدار ماده»ی جسم؛ با ترازو و به گرم و کیلوگرم.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -149,15 +149,15 @@
     "W02",
     "title"
    ],
-   "text": "جرم",
+   "text": "آزمایشگاه ترازو",
    "status": "draft",
    "applied": true
   },
   "title.node.W03": {
    "id": "title.node.W03",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ W03 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: وزن نیرویی است که زمین به جسم وارد می‌کند؛ با نیروسنج و بر حسب نیوتون.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ W03 روی نقشه",
+   "context_fa": "مفهوم: وزن (نیروی گرانش). وزن نیرویی است که زمین به جسم وارد می‌کند؛ با نیروسنج و بر حسب نیوتون.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -166,15 +166,15 @@
     "W03",
     "title"
    ],
-   "text": "وزن (نیروی گرانش)",
+   "text": "سطح ماه",
    "status": "draft",
    "applied": true
   },
   "title.node.W04": {
    "id": "title.node.W04",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ W04 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: جرم جابه‌جا نمی‌شود، وزن بسته به جا فرق می‌کند؛ یکایشان فرق دارد (kg و N).",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ W04 روی نقشه",
+   "context_fa": "مفهوم: جرم در برابر وزن. جرم جابه‌جا نمی‌شود، وزن بسته به جا فرق می‌کند؛ یکایشان فرق دارد (kg و N).",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -183,15 +183,15 @@
     "W04",
     "title"
    ],
-   "text": "جرم در برابر وزن",
+   "text": "ایستگاه فضایی",
    "status": "draft",
    "applied": true
   },
   "title.node.F06": {
    "id": "title.node.F06",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ F06 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: وقتی دو سطح به هم می‌مالند نیرویی هست که حرکت را کند می‌کند یا نمی‌گذارد چیزی بلغزد؛ هم مزاحم است هم لازم.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ F06 روی نقشه",
+   "context_fa": "مفهوم: اصطکاک. وقتی دو سطح به هم می‌مالند نیرویی هست که حرکت را کند می‌کند یا نمی‌گذارد چیزی بلغزد؛ هم مزاحم است هم لازم.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -200,15 +200,15 @@
     "F06",
     "title"
    ],
-   "text": "اصطکاک",
+   "text": "پیست یخ",
    "status": "draft",
    "applied": true
   },
   "title.node.F07": {
    "id": "title.node.F07",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ F07 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: هوا و آب هم مثل اصطکاک جلوی حرکت را می‌گیرند.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ F07 روی نقشه",
+   "context_fa": "مفهوم: مقاومت هوا و آب. هوا و آب هم مثل اصطکاک جلوی حرکت را می‌گیرند.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -217,15 +217,15 @@
     "F07",
     "title"
    ],
-   "text": "مقاومت هوا و آب",
+   "text": "استخر",
    "status": "draft",
    "applied": true
   },
   "title.node.B01": {
    "id": "title.node.B01",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ B01 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: جسم وقتی می‌ایستد که نقطهٔ تکیه‌اش درست زیر «مرکز وزنش» باشد.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ B01 روی نقشه",
+   "context_fa": "مفهوم: تعادل و مرکز گرانش. جسم وقتی می‌ایستد که نقطهٔ تکیه‌اش درست زیر «مرکز وزنش» باشد.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -234,15 +234,15 @@
     "B01",
     "title"
    ],
-   "text": "تعادل و مرکز گرانش",
+   "text": "داربست",
    "status": "draft",
    "applied": true
   },
   "title.node.B02": {
    "id": "title.node.B02",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ B02 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: ترازوی دوکفه وقتی تعادل دارد که دو طرف یکی باشند؛ برای مقایسهٔ جرم.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ B02 روی نقشه",
+   "context_fa": "مفهوم: ترازو: برابری دو طرف. ترازوی دوکفه وقتی تعادل دارد که دو طرف یکی باشند؛ برای مقایسهٔ جرم.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -251,15 +251,15 @@
     "B02",
     "title"
    ],
-   "text": "ترازو: برابری دو طرف",
+   "text": "انبار مصالح",
    "status": "draft",
    "applied": true
   },
   "title.node.M04": {
    "id": "title.node.M04",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M04 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: میله‌ای که روی یک تکیه‌گاه می‌چرخد؛ سه چیز دارد: بار، تکیه‌گاه، نیروی ما.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M04 روی نقشه",
+   "context_fa": "مفهوم: اهرم. میله‌ای که روی یک تکیه‌گاه می‌چرخد؛ سه چیز دارد: بار، تکیه‌گاه، نیروی ما.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -268,15 +268,15 @@
     "M04",
     "title"
    ],
-   "text": "اهرم",
+   "text": "گودبرداری",
    "status": "draft",
    "applied": true
   },
   "title.node.M05": {
    "id": "title.node.M05",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M05 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: هرچه بار به تکیه‌گاه نزدیک‌تر، نیروی لازم کمتر؛ تعادل به فاصله بستگی دارد نه فقط به وزن.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M05 روی نقشه",
+   "context_fa": "مفهوم: جای تکیه‌گاه. هرچه بار به تکیه‌گاه نزدیک‌تر، نیروی لازم کمتر؛ تعادل به فاصله بستگی دارد نه فقط به وزن.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -285,15 +285,15 @@
     "M05",
     "title"
    ],
-   "text": "جای تکیه‌گاه",
+   "text": "تیرآهن‌ها",
    "status": "draft",
    "applied": true
   },
   "title.node.M06": {
    "id": "title.node.M06",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M06 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: سه چیدمان ممکن از بار، تکیه‌گاه و نیرو (مثل الاکلنگ، فرغون، جارو).",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M06 روی نقشه",
+   "context_fa": "مفهوم: سه نوع اهرم. سه چیدمان ممکن از بار، تکیه‌گاه و نیرو (مثل الاکلنگ، فرغون، جارو).",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -302,15 +302,15 @@
     "M06",
     "title"
    ],
-   "text": "سه نوع اهرم",
+   "text": "ابزارخانه",
    "status": "draft",
    "applied": true
   },
   "title.node.E05": {
    "id": "title.node.E05",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ E05 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: اثر چرخاندنِ نیرو = نیرو × فاصله از محور (فقط «بیشتر بدانیم»).",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ E05 روی نقشه",
+   "context_fa": "مفهوم: گشتاور (اثر چرخاندن). اثر چرخاندنِ نیرو = نیرو × فاصله از محور (فقط «بیشتر بدانیم»).",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -319,15 +319,15 @@
     "E05",
     "title"
    ],
-   "text": "گشتاور (اثر چرخاندن)",
+   "text": "آچارخانه",
    "status": "draft",
    "applied": true
   },
   "title.node.M03": {
    "id": "title.node.M03",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M03 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: بالا بردن روی شیب نیروی کمتری می‌خواهد ولی مسافت بیشتری.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M03 روی نقشه",
+   "context_fa": "مفهوم: سطح شیب‌دار (رمپ). بالا بردن روی شیب نیروی کمتری می‌خواهد ولی مسافت بیشتری.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -336,15 +336,15 @@
     "M03",
     "title"
    ],
-   "text": "سطح شیب‌دار (رمپ)",
+   "text": "رمپ بارگیری",
    "status": "draft",
    "applied": true
   },
   "title.node.M09": {
    "id": "title.node.M09",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M09 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: دو سطح شیب‌دار پشت‌به‌پشت؛ نیروی رو به پایین را به کناری تبدیل می‌کند (برش، شکافتن).",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M09 روی نقشه",
+   "context_fa": "مفهوم: گوه. دو سطح شیب‌دار پشت‌به‌پشت؛ نیروی رو به پایین را به کناری تبدیل می‌کند (برش، شکافتن).",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -353,15 +353,15 @@
     "M09",
     "title"
    ],
-   "text": "گوه",
+   "text": "چوب‌شکافی",
    "status": "draft",
    "applied": true
   },
   "title.node.M10": {
    "id": "title.node.M10",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M10 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: سطح شیب‌داری که دور استوانه پیچیده شده.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M10 روی نقشه",
+   "context_fa": "مفهوم: پیچ. سطح شیب‌داری که دور استوانه پیچیده شده.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -370,15 +370,15 @@
     "M10",
     "title"
    ],
-   "text": "پیچ",
+   "text": "پیچ‌کاری",
    "status": "draft",
    "applied": true
   },
   "title.node.M02": {
    "id": "title.node.M02",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M02 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: چرخ روی میله می‌چرخد؛ غلتیدن آسان‌تر از لغزیدن است؛ دستهٔ بزرگ‌تر چرخاندن را آسان‌تر می‌کند.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M02 روی نقشه",
+   "context_fa": "مفهوم: چرخ و محور. چرخ روی میله می‌چرخد؛ غلتیدن آسان‌تر از لغزیدن است؛ دستهٔ بزرگ‌تر چرخاندن را آسان‌تر می‌کند.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -387,15 +387,15 @@
     "M02",
     "title"
    ],
-   "text": "چرخ و محور",
+   "text": "بارانداز",
    "status": "draft",
    "applied": true
   },
   "title.node.M07": {
    "id": "title.node.M07",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M07 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: چرخ شیاردار با طناب؛ فقط جهت نیرو را عوض می‌کند.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M07 روی نقشه",
+   "context_fa": "مفهوم: قرقرهٔ ثابت. چرخ شیاردار با طناب؛ فقط جهت نیرو را عوض می‌کند.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -404,15 +404,15 @@
     "M07",
     "title"
    ],
-   "text": "قرقرهٔ ثابت",
+   "text": "اسکله",
    "status": "draft",
    "applied": true
   },
   "title.node.M08": {
    "id": "title.node.M08",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M08 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: طناب‌های بیشتر یعنی نیروی کمتر ولی طناب بیشتر باید کشید.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M08 روی نقشه",
+   "context_fa": "مفهوم: قرقرهٔ متحرک و دستگاه قرقره. طناب‌های بیشتر یعنی نیروی کمتر ولی طناب بیشتر باید کشید.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -421,15 +421,15 @@
     "M08",
     "title"
    ],
-   "text": "قرقرهٔ متحرک و دستگاه قرقره",
+   "text": "جرثقیل بندر",
    "status": "draft",
    "applied": true
   },
   "title.node.M11": {
    "id": "title.node.M11",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M11 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: چرخ‌های دندانه‌دار که حرکت و جهت را انتقال می‌دهند؛ شمارش دندانه‌ها و دور.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M11 روی نقشه",
+   "context_fa": "مفهوم: چرخ‌دنده. چرخ‌های دندانه‌دار که حرکت و جهت را انتقال می‌دهند؛ شمارش دندانه‌ها و دور.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -438,15 +438,15 @@
     "M11",
     "title"
    ],
-   "text": "چرخ‌دنده",
+   "text": "لنگرگاه",
    "status": "draft",
    "applied": true
   },
   "title.node.M01": {
    "id": "title.node.M01",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M01 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: وسیله‌ای که کار را آسان می‌کند (نیروی لازم را کم می‌کند، جهت یا سرعت را عوض می‌کند)؛ ساده و مرکب.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M01 روی نقشه",
+   "context_fa": "مفهوم: ماشین چیست. وسیله‌ای که کار را آسان می‌کند (نیروی لازم را کم می‌کند، جهت یا سرعت را عوض می‌کند)؛ ساده و مرکب.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -455,15 +455,15 @@
     "M01",
     "title"
    ],
-   "text": "ماشین چیست",
+   "text": "دروازهٔ شهر",
    "status": "draft",
    "applied": true
   },
   "title.node.E01": {
    "id": "title.node.E01",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ E01 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: انرژی شکل‌های گوناگون دارد و از شکلی به شکل دیگر می‌رود (گرما، حرکت، ذخیره در ارتفاع یا فنر).",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ E01 روی نقشه",
+   "context_fa": "مفهوم: انرژی و تبدیلش. انرژی شکل‌های گوناگون دارد و از شکلی به شکل دیگر می‌رود (گرما، حرکت، ذخیره در ارتفاع یا فنر).",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -472,15 +472,15 @@
     "E01",
     "title"
    ],
-   "text": "انرژی و تبدیلش",
+   "text": "آسیاب بادی",
    "status": "draft",
    "applied": true
   },
   "title.node.E02": {
    "id": "title.node.E02",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ E02 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: وقتی نیرو چیزی را جابه‌جا کند «کار» شده؛ هل دادن دیوار کار نیست. بعداً: نیرو × جابه‌جایی، ژول.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ E02 روی نقشه",
+   "context_fa": "مفهوم: کار (نیرو و جابه‌جایی). وقتی نیرو چیزی را جابه‌جا کند «کار» شده؛ هل دادن دیوار کار نیست. بعداً: نیرو × جابه‌جایی، ژول.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -489,15 +489,15 @@
     "E02",
     "title"
    ],
-   "text": "کار (نیرو و جابه‌جایی)",
+   "text": "گاری‌خانه",
    "status": "draft",
    "applied": true
   },
   "title.node.E03": {
    "id": "title.node.E03",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ E03 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: ماشین نیروی لازم را کم می‌کند، به قیمت مسافت بیشتر.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ E03 روی نقشه",
+   "context_fa": "مفهوم: نیروی کمتر، مسافت بیشتر. ماشین نیروی لازم را کم می‌کند، به قیمت مسافت بیشتر.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -506,15 +506,15 @@
     "E03",
     "title"
    ],
-   "text": "نیروی کمتر، مسافت بیشتر",
+   "text": "انبار الوار",
    "status": "draft",
    "applied": true
   },
   "title.node.E06": {
    "id": "title.node.E06",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ E06 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: کار ورودی و خروجی (در حالت ایده‌آل) برابرند؛ ماشین کار را کم نمی‌کند، فقط نیرو و مسافت را معاوضه می‌کند.",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ E06 روی نقشه",
+   "context_fa": "مفهوم: نیروی کمتر اما زحمت بیشتر. کار ورودی و خروجی (در حالت ایده‌آل) برابرند؛ ماشین کار را کم نمی‌کند، فقط نیرو و مسافت را معاوضه می‌کند.",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -523,15 +523,15 @@
     "E06",
     "title"
    ],
-   "text": "نیروی کمتر اما زحمت بیشتر",
+   "text": "میدان شهر",
    "status": "draft",
    "applied": true
   },
   "title.node.M12": {
    "id": "title.node.M12",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ M12 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: چند ماشین ساده کنار هم (قیچی، چرخ‌دستی، دوچرخه).",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ M12 روی نقشه",
+   "context_fa": "مفهوم: ماشین مرکب. چند ماشین ساده کنار هم (قیچی، چرخ‌دستی، دوچرخه).",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -540,15 +540,15 @@
     "M12",
     "title"
    ],
-   "text": "ماشین مرکب",
+   "text": "کارگاه ماشین مرکب",
    "status": "draft",
    "applied": true
   },
   "title.node.E04": {
    "id": "title.node.E04",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ E04 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: چند برابر شدن نیرو توسط ماشین (نسبت بار به نیرو یا نسبت مسافت‌ها). فقط سال‌های آخر، مسیر «بیشتر بدانیم»/انحرافی مخفی و سخت (B31).",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ E04 روی نقشه",
+   "context_fa": "مفهوم: مزیت مکانیکی. چند برابر شدن نیرو توسط ماشین (نسبت بار به نیرو یا نسبت مسافت‌ها). فقط سال‌های آخر، مسیر «بیشتر بدانیم»/انحرافی مخفی و سخت (B31).",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -557,15 +557,15 @@
     "E04",
     "title"
    ],
-   "text": "مزیت مکانیکی",
+   "text": "برج ساعت",
    "status": "draft",
    "applied": true
   },
   "title.node.E07": {
    "id": "title.node.E07",
    "kind": "title",
-   "where_fa": "عنوان گرهٔ E07 روی نقشه",
-   "context_fa": "محیطی دربارهٔ: سرعت انجام کار؛ وات. فقط سقف «بیشتر بدانیم».",
+   "where_fa": "نام محیط (یک جا) برای گرهٔ E07 روی نقشه",
+   "context_fa": "مفهوم: توان: سرعت انجام کار. سرعت انجام کار؛ وات. فقط سقف «بیشتر بدانیم».",
    "band": "همه",
    "file": "docs/research/world/titles_fa.json",
    "target": "json",
@@ -574,7 +574,7 @@
     "E07",
     "title"
    ],
-   "text": "توان: سرعت انجام کار",
+   "text": "چاه آب",
    "status": "draft",
    "applied": true
   },
@@ -693,7 +693,7 @@
     "Z3",
     "title"
    ],
-   "text": "اسکله: چرخ، قرقره و چرخ‌دنده",
+   "text": "بندر: چرخ، قرقره و چرخ‌دنده",
    "status": "draft",
    "applied": true
   },
@@ -2742,6 +2742,550 @@
    "text": "n = شمار رشته‌های حامل بار؛ با فرضِ طنابِ سبک و بدون اصطکاک",
    "status": "draft",
    "applied": true
+  },
+  "subtitle.node.F01": {
+   "id": "subtitle.node.F01",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط F01؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: زمین فوتبال. وقتی چیزی را هل می‌دهیم یا می‌کشیم به آن «نیرو» می‌دهیم.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F01",
+    "subtitle"
+   ],
+   "text": "هل دادن و کشیدن",
+   "status": "draft"
+  },
+  "subtitle.node.F02": {
+   "id": "subtitle.node.F02",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط F02؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: سالن بسکتبال. نیرو می‌تواند چیزی را به حرکت دربیاورد، نگه دارد، تندتر/کندتر کند، جهتش را عوض کند یا شکلش را عوض کند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F02",
+    "subtitle"
+   ],
+   "text": "اثر نیرو",
+   "status": "draft"
+  },
+  "subtitle.node.F03": {
+   "id": "subtitle.node.F03",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط F03؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: میدان کمانداری. نیرو یک سو دارد و می‌تواند کم یا زیاد باشد؛ فنر یا کش اندازه‌اش را نشان می‌دهد؛ بعدها نیروسنج و نیوتون.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F03",
+    "subtitle"
+   ],
+   "text": "جهت و اندازهٔ نیرو",
+   "status": "draft"
+  },
+  "subtitle.node.F04": {
+   "id": "subtitle.node.F04",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط F04؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: سالن آزمایش آهنربا. بعضی نیروها با تماس‌اند (دست)، بعضی از دور کار می‌کنند (آهنربا، گرانش).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F04",
+    "subtitle"
+   ],
+   "text": "نیروی تماسی و نیروی از دور",
+   "status": "draft"
+  },
+  "subtitle.node.F08": {
+   "id": "subtitle.node.F08",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط F08؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: میدان طناب‌کشی. چند نیرو هم‌زمان روی یک جسم‌اند؛ اگر برابر و مخالف باشند حرکت عوض نمی‌شود، وگرنه می‌شود.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F08",
+    "subtitle"
+   ],
+   "text": "چند نیرو با هم (برآیند)",
+   "status": "draft"
+  },
+  "subtitle.node.F09": {
+   "id": "subtitle.node.F09",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط F09؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: پارک اسکیت. وقتی چیزی را هل می‌دهی آن هم تو را هل می‌دهد؛ جسم تا نیرو نباشد حالتش را نگه می‌دارد.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F09",
+    "subtitle"
+   ],
+   "text": "کنش و واکنش و لختی",
+   "status": "draft"
+  },
+  "subtitle.node.F05": {
+   "id": "subtitle.node.F05",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط F05؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: سکوی پرتاب. زمین هر چیز را به سوی خودش می‌کشد؛ برای همین چیزها می‌افتند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F05",
+    "subtitle"
+   ],
+   "text": "گرانش (کشش زمین)",
+   "status": "draft"
+  },
+  "subtitle.node.W01": {
+   "id": "subtitle.node.W01",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط W01؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: انبار بار فضایی. مقایسهٔ سنگینی دو چیز با دست یا با ترازو.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "W01",
+    "subtitle"
+   ],
+   "text": "سنگین و سبک",
+   "status": "draft"
+  },
+  "subtitle.node.W02": {
+   "id": "subtitle.node.W02",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط W02؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: آزمایشگاه ترازو. «مقدار ماده»ی جسم؛ با ترازو و به گرم و کیلوگرم.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "W02",
+    "subtitle"
+   ],
+   "text": "جرم",
+   "status": "draft"
+  },
+  "subtitle.node.W03": {
+   "id": "subtitle.node.W03",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط W03؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: سطح ماه. وزن نیرویی است که زمین به جسم وارد می‌کند؛ با نیروسنج و بر حسب نیوتون.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "W03",
+    "subtitle"
+   ],
+   "text": "وزن (نیروی گرانش)",
+   "status": "draft"
+  },
+  "subtitle.node.W04": {
+   "id": "subtitle.node.W04",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط W04؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: ایستگاه فضایی. جرم جابه‌جا نمی‌شود، وزن بسته به جا فرق می‌کند؛ یکایشان فرق دارد (kg و N).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "W04",
+    "subtitle"
+   ],
+   "text": "جرم در برابر وزن",
+   "status": "draft"
+  },
+  "subtitle.node.F06": {
+   "id": "subtitle.node.F06",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط F06؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: پیست یخ. وقتی دو سطح به هم می‌مالند نیرویی هست که حرکت را کند می‌کند یا نمی‌گذارد چیزی بلغزد؛ هم مزاحم است هم لازم.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F06",
+    "subtitle"
+   ],
+   "text": "اصطکاک",
+   "status": "draft"
+  },
+  "subtitle.node.F07": {
+   "id": "subtitle.node.F07",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط F07؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: استخر. هوا و آب هم مثل اصطکاک جلوی حرکت را می‌گیرند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "F07",
+    "subtitle"
+   ],
+   "text": "مقاومت هوا و آب",
+   "status": "draft"
+  },
+  "subtitle.node.B01": {
+   "id": "subtitle.node.B01",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط B01؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: داربست. جسم وقتی می‌ایستد که نقطهٔ تکیه‌اش درست زیر «مرکز وزنش» باشد.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "B01",
+    "subtitle"
+   ],
+   "text": "تعادل و مرکز گرانش",
+   "status": "draft"
+  },
+  "subtitle.node.B02": {
+   "id": "subtitle.node.B02",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط B02؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: انبار مصالح. ترازوی دوکفه وقتی تعادل دارد که دو طرف یکی باشند؛ برای مقایسهٔ جرم.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "B02",
+    "subtitle"
+   ],
+   "text": "ترازو: برابری دو طرف",
+   "status": "draft"
+  },
+  "subtitle.node.M04": {
+   "id": "subtitle.node.M04",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M04؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: گودبرداری. میله‌ای که روی یک تکیه‌گاه می‌چرخد؛ سه چیز دارد: بار، تکیه‌گاه، نیروی ما.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M04",
+    "subtitle"
+   ],
+   "text": "اهرم",
+   "status": "draft"
+  },
+  "subtitle.node.M05": {
+   "id": "subtitle.node.M05",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M05؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: تیرآهن‌ها. هرچه بار به تکیه‌گاه نزدیک‌تر، نیروی لازم کمتر؛ تعادل به فاصله بستگی دارد نه فقط به وزن.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M05",
+    "subtitle"
+   ],
+   "text": "جای تکیه‌گاه",
+   "status": "draft"
+  },
+  "subtitle.node.M06": {
+   "id": "subtitle.node.M06",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M06؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: ابزارخانه. سه چیدمان ممکن از بار، تکیه‌گاه و نیرو (مثل الاکلنگ، فرغون، جارو).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M06",
+    "subtitle"
+   ],
+   "text": "سه نوع اهرم",
+   "status": "draft"
+  },
+  "subtitle.node.E05": {
+   "id": "subtitle.node.E05",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط E05؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: آچارخانه. اثر چرخاندنِ نیرو = نیرو × فاصله از محور (فقط «بیشتر بدانیم»).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E05",
+    "subtitle"
+   ],
+   "text": "گشتاور (اثر چرخاندن)",
+   "status": "draft"
+  },
+  "subtitle.node.M03": {
+   "id": "subtitle.node.M03",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M03؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: رمپ بارگیری. بالا بردن روی شیب نیروی کمتری می‌خواهد ولی مسافت بیشتری.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M03",
+    "subtitle"
+   ],
+   "text": "سطح شیب‌دار (رمپ)",
+   "status": "draft"
+  },
+  "subtitle.node.M09": {
+   "id": "subtitle.node.M09",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M09؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: چوب‌شکافی. دو سطح شیب‌دار پشت‌به‌پشت؛ نیروی رو به پایین را به کناری تبدیل می‌کند (برش، شکافتن).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M09",
+    "subtitle"
+   ],
+   "text": "گوه",
+   "status": "draft"
+  },
+  "subtitle.node.M10": {
+   "id": "subtitle.node.M10",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M10؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: پیچ‌کاری. سطح شیب‌داری که دور استوانه پیچیده شده.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M10",
+    "subtitle"
+   ],
+   "text": "پیچ",
+   "status": "draft"
+  },
+  "subtitle.node.M02": {
+   "id": "subtitle.node.M02",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M02؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: بارانداز. چرخ روی میله می‌چرخد؛ غلتیدن آسان‌تر از لغزیدن است؛ دستهٔ بزرگ‌تر چرخاندن را آسان‌تر می‌کند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M02",
+    "subtitle"
+   ],
+   "text": "چرخ و محور",
+   "status": "draft"
+  },
+  "subtitle.node.M07": {
+   "id": "subtitle.node.M07",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M07؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: اسکله. چرخ شیاردار با طناب؛ فقط جهت نیرو را عوض می‌کند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M07",
+    "subtitle"
+   ],
+   "text": "قرقرهٔ ثابت",
+   "status": "draft"
+  },
+  "subtitle.node.M08": {
+   "id": "subtitle.node.M08",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M08؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: جرثقیل بندر. طناب‌های بیشتر یعنی نیروی کمتر ولی طناب بیشتر باید کشید.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M08",
+    "subtitle"
+   ],
+   "text": "قرقرهٔ متحرک و دستگاه قرقره",
+   "status": "draft"
+  },
+  "subtitle.node.M11": {
+   "id": "subtitle.node.M11",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M11؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: لنگرگاه. چرخ‌های دندانه‌دار که حرکت و جهت را انتقال می‌دهند؛ شمارش دندانه‌ها و دور.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M11",
+    "subtitle"
+   ],
+   "text": "چرخ‌دنده",
+   "status": "draft"
+  },
+  "subtitle.node.M01": {
+   "id": "subtitle.node.M01",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M01؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: دروازهٔ شهر. وسیله‌ای که کار را آسان می‌کند (نیروی لازم را کم می‌کند، جهت یا سرعت را عوض می‌کند)؛ ساده و مرکب.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M01",
+    "subtitle"
+   ],
+   "text": "ماشین چیست",
+   "status": "draft"
+  },
+  "subtitle.node.E01": {
+   "id": "subtitle.node.E01",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط E01؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: آسیاب بادی. انرژی شکل‌های گوناگون دارد و از شکلی به شکل دیگر می‌رود (گرما، حرکت، ذخیره در ارتفاع یا فنر).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E01",
+    "subtitle"
+   ],
+   "text": "انرژی و تبدیلش",
+   "status": "draft"
+  },
+  "subtitle.node.E02": {
+   "id": "subtitle.node.E02",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط E02؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: گاری‌خانه. وقتی نیرو چیزی را جابه‌جا کند «کار» شده؛ هل دادن دیوار کار نیست. بعداً: نیرو × جابه‌جایی، ژول.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E02",
+    "subtitle"
+   ],
+   "text": "کار (نیرو و جابه‌جایی)",
+   "status": "draft"
+  },
+  "subtitle.node.E03": {
+   "id": "subtitle.node.E03",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط E03؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: انبار الوار. ماشین نیروی لازم را کم می‌کند، به قیمت مسافت بیشتر.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E03",
+    "subtitle"
+   ],
+   "text": "نیروی کمتر، مسافت بیشتر",
+   "status": "draft"
+  },
+  "subtitle.node.E06": {
+   "id": "subtitle.node.E06",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط E06؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: میدان شهر. کار ورودی و خروجی (در حالت ایده‌آل) برابرند؛ ماشین کار را کم نمی‌کند، فقط نیرو و مسافت را معاوضه می‌کند.",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E06",
+    "subtitle"
+   ],
+   "text": "نیروی کمتر اما زحمت بیشتر",
+   "status": "draft"
+  },
+  "subtitle.node.M12": {
+   "id": "subtitle.node.M12",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط M12؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: کارگاه ماشین مرکب. چند ماشین ساده کنار هم (قیچی، چرخ‌دستی، دوچرخه).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "M12",
+    "subtitle"
+   ],
+   "text": "ماشین مرکب",
+   "status": "draft"
+  },
+  "subtitle.node.E04": {
+   "id": "subtitle.node.E04",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط E04؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: برج ساعت. چند برابر شدن نیرو توسط ماشین (نسبت بار به نیرو یا نسبت مسافت‌ها). فقط سال‌های آخر، مسیر «بیشتر بدانیم»/انحرافی مخفی و سخت (B31).",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E04",
+    "subtitle"
+   ],
+   "text": "مزیت مکانیکی",
+   "status": "draft"
+  },
+  "subtitle.node.E07": {
+   "id": "subtitle.node.E07",
+   "kind": "title",
+   "where_fa": "نام مفهوم (سوتیتر محیط E07؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)",
+   "context_fa": "محیط: چاه آب. سرعت انجام کار؛ وات. فقط سقف «بیشتر بدانیم».",
+   "band": "همه",
+   "file": "docs/research/world/titles_fa.json",
+   "target": "json",
+   "locator": [
+    "nodes",
+    "E07",
+    "subtitle"
+   ],
+   "text": "توان: سرعت انجام کار",
+   "status": "draft"
   }
  },
  "meta": {

@@ -1,141 +1,175 @@
 {
- "_readme_fa": "این فایل تنها جای اصلاح نام‌هاست. فقط مقدار «title» (یا نام مرحله/سرزمین/منطقه) را عوض کن، سپس `python3 design/mockups/20261007/map-mesh/build.py`. وضعیت draft = نام موقت؛ بعد از تأیید مالک approved. هیچ نامی هنوز نهایی نیست (۸ اکتبر).",
+ "_readme_fa": "این فایل تنها جای اصلاح نام‌هاست. فقط مقدار «title» (یا نام مرحله/سرزمین/منطقه) را عوض کن، سپس `python3 design/mockups/20261007/map-mesh/build.py`. وضعیت draft = نام موقت؛ بعد از تأیید مالک approved. هیچ نامی هنوز نهایی نیست (۸ اکتبر). (۸ اکتبر ۰۹:۳۷) «title» هر گره = نام محیط (یک جا)، «subtitle» = نام مفهوم/درس که با رفتن اشاره‌گر یا انگشت روی محیط نشان داده می‌شود.",
  "nodes": {
   "F01": {
-   "title": "هل دادن و کشیدن",
-   "status": "draft"
+   "title": "زمین فوتبال",
+   "status": "draft",
+   "subtitle": "هل دادن و کشیدن"
   },
   "F02": {
-   "title": "اثر نیرو",
-   "status": "draft"
+   "title": "سالن بسکتبال",
+   "status": "draft",
+   "subtitle": "اثر نیرو"
   },
   "F03": {
-   "title": "جهت و اندازهٔ نیرو",
-   "status": "draft"
+   "title": "میدان کمانداری",
+   "status": "draft",
+   "subtitle": "جهت و اندازهٔ نیرو"
   },
   "F04": {
-   "title": "نیروی تماسی و نیروی از دور",
-   "status": "draft"
+   "title": "سالن آزمایش آهنربا",
+   "status": "draft",
+   "subtitle": "نیروی تماسی و نیروی از دور"
   },
   "F08": {
-   "title": "چند نیرو با هم (برآیند)",
-   "status": "draft"
+   "title": "میدان طناب‌کشی",
+   "status": "draft",
+   "subtitle": "چند نیرو با هم (برآیند)"
   },
   "F09": {
-   "title": "کنش و واکنش و لختی",
-   "status": "draft"
+   "title": "پارک اسکیت",
+   "status": "draft",
+   "subtitle": "کنش و واکنش و لختی"
   },
   "F05": {
-   "title": "گرانش (کشش زمین)",
-   "status": "draft"
+   "title": "سکوی پرتاب",
+   "status": "draft",
+   "subtitle": "گرانش (کشش زمین)"
   },
   "W01": {
-   "title": "سنگین و سبک",
-   "status": "draft"
+   "title": "انبار بار فضایی",
+   "status": "draft",
+   "subtitle": "سنگین و سبک"
   },
   "W02": {
-   "title": "جرم",
-   "status": "draft"
+   "title": "آزمایشگاه ترازو",
+   "status": "draft",
+   "subtitle": "جرم"
   },
   "W03": {
-   "title": "وزن (نیروی گرانش)",
-   "status": "draft"
+   "title": "سطح ماه",
+   "status": "draft",
+   "subtitle": "وزن (نیروی گرانش)"
   },
   "W04": {
-   "title": "جرم در برابر وزن",
-   "status": "draft"
+   "title": "ایستگاه فضایی",
+   "status": "draft",
+   "subtitle": "جرم در برابر وزن"
   },
   "F06": {
-   "title": "اصطکاک",
-   "status": "draft"
+   "title": "پیست یخ",
+   "status": "draft",
+   "subtitle": "اصطکاک"
   },
   "F07": {
-   "title": "مقاومت هوا و آب",
-   "status": "draft"
+   "title": "استخر",
+   "status": "draft",
+   "subtitle": "مقاومت هوا و آب"
   },
   "B01": {
-   "title": "تعادل و مرکز گرانش",
-   "status": "draft"
+   "title": "داربست",
+   "status": "draft",
+   "subtitle": "تعادل و مرکز گرانش"
   },
   "B02": {
-   "title": "ترازو: برابری دو طرف",
-   "status": "draft"
+   "title": "انبار مصالح",
+   "status": "draft",
+   "subtitle": "ترازو: برابری دو طرف"
   },
   "M04": {
-   "title": "اهرم",
-   "status": "draft"
+   "title": "گودبرداری",
+   "status": "draft",
+   "subtitle": "اهرم"
   },
   "M05": {
-   "title": "جای تکیه‌گاه",
-   "status": "draft"
+   "title": "تیرآهن‌ها",
+   "status": "draft",
+   "subtitle": "جای تکیه‌گاه"
   },
   "M06": {
-   "title": "سه نوع اهرم",
-   "status": "draft"
+   "title": "ابزارخانه",
+   "status": "draft",
+   "subtitle": "سه نوع اهرم"
   },
   "E05": {
-   "title": "گشتاور (اثر چرخاندن)",
-   "status": "draft"
+   "title": "آچارخانه",
+   "status": "draft",
+   "subtitle": "گشتاور (اثر چرخاندن)"
   },
   "M03": {
-   "title": "سطح شیب‌دار (رمپ)",
-   "status": "draft"
+   "title": "رمپ بارگیری",
+   "status": "draft",
+   "subtitle": "سطح شیب‌دار (رمپ)"
   },
   "M09": {
-   "title": "گوه",
-   "status": "draft"
+   "title": "چوب‌شکافی",
+   "status": "draft",
+   "subtitle": "گوه"
   },
   "M10": {
-   "title": "پیچ",
-   "status": "draft"
+   "title": "پیچ‌کاری",
+   "status": "draft",
+   "subtitle": "پیچ"
   },
   "M02": {
-   "title": "چرخ و محور",
-   "status": "draft"
+   "title": "بارانداز",
+   "status": "draft",
+   "subtitle": "چرخ و محور"
   },
   "M07": {
-   "title": "قرقرهٔ ثابت",
-   "status": "draft"
+   "title": "اسکله",
+   "status": "draft",
+   "subtitle": "قرقرهٔ ثابت"
   },
   "M08": {
-   "title": "قرقرهٔ متحرک و دستگاه قرقره",
-   "status": "draft"
+   "title": "جرثقیل بندر",
+   "status": "draft",
+   "subtitle": "قرقرهٔ متحرک و دستگاه قرقره"
   },
   "M11": {
-   "title": "چرخ‌دنده",
-   "status": "draft"
+   "title": "لنگرگاه",
+   "status": "draft",
+   "subtitle": "چرخ‌دنده"
   },
   "M01": {
-   "title": "ماشین چیست",
-   "status": "draft"
+   "title": "دروازهٔ شهر",
+   "status": "draft",
+   "subtitle": "ماشین چیست"
   },
   "E01": {
-   "title": "انرژی و تبدیلش",
-   "status": "draft"
+   "title": "آسیاب بادی",
+   "status": "draft",
+   "subtitle": "انرژی و تبدیلش"
   },
   "E02": {
-   "title": "کار (نیرو و جابه‌جایی)",
-   "status": "draft"
+   "title": "گاری‌خانه",
+   "status": "draft",
+   "subtitle": "کار (نیرو و جابه‌جایی)"
   },
   "E03": {
-   "title": "نیروی کمتر، مسافت بیشتر",
-   "status": "draft"
+   "title": "انبار الوار",
+   "status": "draft",
+   "subtitle": "نیروی کمتر، مسافت بیشتر"
   },
   "E06": {
-   "title": "نیروی کمتر اما زحمت بیشتر",
-   "status": "draft"
+   "title": "میدان شهر",
+   "status": "draft",
+   "subtitle": "نیروی کمتر اما زحمت بیشتر"
   },
   "M12": {
-   "title": "ماشین مرکب",
-   "status": "draft"
+   "title": "کارگاه ماشین مرکب",
+   "status": "draft",
+   "subtitle": "ماشین مرکب"
   },
   "E04": {
-   "title": "مزیت مکانیکی",
-   "status": "draft"
+   "title": "برج ساعت",
+   "status": "draft",
+   "subtitle": "مزیت مکانیکی"
   },
   "E07": {
-   "title": "توان: سرعت انجام کار",
-   "status": "draft"
+   "title": "چاه آب",
+   "status": "draft",
+   "subtitle": "توان: سرعت انجام کار"
   }
  },
  "lands": {
@@ -166,7 +200,7 @@
    "status": "draft"
   },
   "Z3": {
-   "title": "اسکله: چرخ، قرقره و چرخ‌دنده",
+   "title": "بندر: چرخ، قرقره و چرخ‌دنده",
    "status": "draft"
   }
  },

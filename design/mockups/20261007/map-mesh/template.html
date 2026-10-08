@@ -49,6 +49,8 @@ svg#map{width:100%;min-width:700px;height:auto;display:block}
 .stg text{fill:#fff;font-size:18px;font-weight:800}
 .zone{fill:var(--card);fill-opacity:.55;stroke:var(--border);stroke-width:2}
 .zonelabel{font-size:20px;font-weight:700;fill:var(--fg);opacity:.85}
+.nd .sub{font-size:19px;fill:var(--muted);opacity:0;pointer-events:none;transition:opacity .12s}
+.nd:hover .sub,.nd:focus .sub,.nd.sel .sub{opacity:1}
 .landsub{font-size:15px;fill:var(--muted)}
 .edge{fill:none;stroke:var(--line);stroke-width:2;opacity:.8}
 .edge.cross{opacity:.45}
@@ -196,7 +198,7 @@ function draw(){
       el('rect', {x:34, y:z.y0, width:W-68, height:z.y1-z.y0, rx:22, class:'zone', style:`fill:${dk?zh.hdr:zh.sky};fill-opacity:${dk?.5:.92};stroke:${zh.edge};stroke-width:3`}, svg);
       el('rect', {x:34, y:z.y0, width:W-68, height:58, rx:22, class:'zone', style:`fill:${zh.hdr};fill-opacity:1;stroke:${zh.edge};stroke-width:3`}, svg);
       el('rect', {x:36, y:z.y0+30, width:W-72, height:28, class:'zone', style:`fill:${zh.hdr};fill-opacity:1;stroke:none`}, svg);
-      const zt = el('text', {x:W-58, y:z.y0+38, class:'zonelabel', 'text-anchor':'start', direction:'rtl', style:`fill:${zh.hink};opacity:1`}, svg); zt.textContent = 'منطقه: ' + z.label_fa;
+      const zt = el('text', {x:W-58, y:z.y0+38, class:'zonelabel', 'text-anchor':'start', direction:'rtl', style:`fill:${zh.hink};opacity:1`}, svg); zt.textContent = z.label_fa;
     });
   });
   // arrow marker
@@ -247,6 +249,8 @@ function draw(){
     const lines = wrap(n.label_fa, 15);
     const lab = el('text', {y:R+28, 'text-anchor':'middle', class:'lab', direction:'rtl'}, g);
     lines.forEach((ln,i)=>{ const ts = el('tspan', {x:0, dy: i===0 ? 0 : 24}, lab); ts.textContent = ln; });
+    const sub = el('text', {y:R+28+lines.length*24+4, 'text-anchor':'middle', class:'sub', direction:'rtl'}, g); sub.textContent = n.concept_fa && n.concept_fa!==n.label_fa ? n.concept_fa : '';
+    g.setAttribute('aria-label', n.label_fa + (n.concept_fa ? ' — ' + n.concept_fa : ''));
     const doors = (DOOR[n.id] || []).filter(h=>!state.found.has(h) && !state.teacher);
     if (doors.length){
       const dg = el('g', {class:'door', tabindex:'0', role:'button', 'aria-label':'ورودی مسیر مخفی', transform:`translate(${-R+4},${R-4})`}, g);
@@ -266,6 +270,7 @@ function openNode(id){
   const n = byId[id]; const land = DATA.lands.find(l=>l.id===n.land);
   const sin = $('sin'); sin.textContent = '';
   const h = document.createElement('h2'); h.textContent = n.label_fa; sin.append(h);
+  if (n.concept_fa && n.concept_fa!==n.label_fa){ const cp = document.createElement('p'); cp.className='muted'; cp.textContent = 'درس: ' + n.concept_fa; sin.append(cp); }
   const p = document.createElement('p'); p.textContent = n.plain_fa || ''; p.style.margin = '0 0 4px'; sin.append(p);
   const row = document.createElement('div'); row.className = 'row';
   const add = (t, c)=>{ const s = document.createElement('span'); s.className = 'chip' + (c ? ' '+c : ''); s.textContent = t; row.append(s); };
@@ -313,7 +318,7 @@ function renderStages(){
   box.hidden = false; const from = state.path==='machines' ? DATA.paths.machines.from_stage : 1;
   const h = document.createElement('p'); h.style.cssText = 'font-size:.85rem;color:var(--muted);margin:0 0 6px'; h.textContent = 'فقط راهنما است، نه قفل. کودک هر جا بخواهد می‌تواند برود. محیط‌های مخفی در مسیر نیستند.'; box.append(h);
   const ol = document.createElement('ol'); ol.style.cssText = 'margin:0;padding-inline-start:26px;font-size:.9rem;line-height:1.9';
-  DATA.paths.main.stages.forEach((s,i)=>{ if (i+1<from) return; const li = document.createElement('li'); li.value = i+1; li.textContent = s.t + ' — ' + s.n.map(id=>byId[id].label_fa).join('، '); ol.append(li); });
+  DATA.paths.main.stages.forEach((s,i)=>{ if (i+1<from) return; const li = document.createElement('li'); li.value = i+1; li.textContent = s.t + ' — ' + s.n.map(id=>byId[id].concept_fa||byId[id].label_fa).join('، '); ol.append(li); });
   box.append(ol);
 }
 buildGrades(); draw();

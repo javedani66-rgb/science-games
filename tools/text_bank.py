@@ -44,8 +44,11 @@ def sources():
     names = {n['id']: n for n in N['nodes']}
     for nid, v in T['nodes'].items():
         n = names.get(nid, {})
-        out.append((f'title.node.{nid}', 'title', f'عنوان گرهٔ {nid} روی نقشه', f'محیطی دربارهٔ: {n.get("plain_fa","")}', 'همه',
+        out.append((f'title.node.{nid}', 'title', f'نام محیط (یک جا) برای گرهٔ {nid} روی نقشه', f'مفهوم: {v.get("subtitle","")}. {n.get("plain_fa","")}', 'همه',
                     TITLES, 'json', ['nodes', nid, 'title'], v['title']))
+        if v.get('subtitle'):
+            out.append((f'subtitle.node.{nid}', 'title', f'نام مفهوم (سوتیتر محیط {nid}؛ با رفتن اشاره‌گر یا انگشت دیده می‌شود)', f'محیط: {v["title"]}. {n.get("plain_fa","")}', 'همه',
+                        TITLES, 'json', ['nodes', nid, 'subtitle'], v['subtitle']))
     for lid, v in T['lands'].items():
         out.append((f'title.land.{lid}', 'title', f'نام سرزمین {lid}', '', 'همه', TITLES, 'json', ['lands', lid, 'title'], v['title']))
     for zid, v in T['zones'].items():
@@ -56,7 +59,7 @@ def sources():
     for k, v in T['path_names'].items():
         out.append((f'title.path.{k}', 'title', f'نام مسیر «{k}»', '', 'همه', TITLES, 'json', ['path_names', k, 'title'], v['title']))
     for i, n in enumerate(N['nodes']):
-        lab = T['nodes'].get(n['id'], {}).get('title', n['label_fa'])
+        lab = T['nodes'].get(n['id'], {}).get('subtitle', n['label_fa'])
         if n.get('plain_fa'):
             out.append((f'concept.{n["id"]}.plain', 'explainer', f'توضیح ساده برای معلم و بزرگ‌تر، گرهٔ «{lab}»',
                         'یک یا دو جمله؛ علمی و درست؛ برای بچه‌ها نوشتهٔ ساده‌تر در کارت می‌آید', 'همه', NODES, 'json', ['nodes', str(i), 'plain_fa'], n['plain_fa']))
