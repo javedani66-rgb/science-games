@@ -127,7 +127,7 @@ body.rvopen #rv{display:block}
 .scene{position:relative;flex:1;min-height:0;display:flex;justify-content:center;padding:8px 10px;background:var(--paper)}
 .scene>img{max-width:100%;max-height:100%;object-fit:contain;border-radius:14px;display:block;align-self:center}
 .scene .ph{width:100%;border:3px dashed var(--edge);border-radius:16px;display:grid;place-items:center;text-align:center;padding:20px;font-weight:700;font-size:18px;background:var(--ts)}
-.lb2{position:absolute;inset-inline-start:16px;top:16px;min-height:46px;display:flex;align-items:center;gap:6px;border-radius:999px;border:3px solid var(--edge);background:var(--paper);color:var(--ink);padding:0 12px;font-weight:700;font-size:15px;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.lb2{min-height:48px;position:absolute;inset-inline-start:16px;top:16px;min-height:46px;display:flex;align-items:center;gap:6px;border-radius:999px;border:3px solid var(--edge);background:var(--paper);color:var(--ink);padding:0 12px;font-weight:700;font-size:15px;box-shadow:0 3px 0 rgba(0,0,0,.2)}
 .lb2 svg{width:22px;height:22px}
 .lb2.pulse{animation:pls 1s 2}
 @keyframes pls{50%{transform:scale(1.12);background:#f2c94c}}
@@ -227,8 +227,108 @@ body.rvopen #rv{display:block}
 .coach .cr .st{flex:1;display:flex;gap:5px}
 .coach .cr .st i{width:10px;height:10px;border-radius:50%;background:#ccc}
 .coach .cr .st i.on{background:#211D19}
-.coach button{min-height:46px;padding:0 16px;border-radius:999px;border:3px solid #211D19;font-weight:700;font-size:16px;background:#fff}
+.coach button{min-height:48px;padding:0 16px;border-radius:999px;border:3px solid #211D19;font-weight:700;font-size:16px;background:#fff}
 .coach button.pri{background:var(--btn);color:var(--btnink);border-color:var(--edge)}
+/* ===== v2 overrides: one-piece map, owner cards, card box, simple menu ===== */
+:root{--gold:#dbac54;--gold2:#8a5f1c;--cream:#fff0c9;--teal:#184441;--hs:78px}
+.ib{width:48px;height:48px}
+.chip{min-height:48px}
+.btn,.opt{min-height:50px}
+.cap{min-height:52px}
+.lal{font-family:L,V,system-ui,sans-serif;font-weight:400}
+/* map: one piece, one path */
+.mapwrap{position:relative;padding:12px 10px 28px;display:flex;flex-direction:column;gap:14px}
+#pathsvg{position:absolute;left:0;top:0;pointer-events:none;z-index:1;overflow:visible}
+.ln{position:relative;border-radius:22px;border:3px solid var(--le);background:linear-gradient(var(--ls),var(--lh));box-shadow:0 4px 0 rgba(0,0,0,.15);overflow:hidden;padding-bottom:6px}
+.ln>h2{position:relative;z-index:2;background:var(--lg);color:var(--li);padding:8px 14px;font-size:19px;line-height:1.35}
+.ln>h2 small{display:block;font-size:14px;font-weight:400;opacity:.95}
+.zl{position:relative;z-index:2;margin:10px 10px 0;padding:4px 12px;border-radius:12px;background:var(--zg);color:var(--zi);font-size:15px;font-weight:700}
+.mrow{position:relative;z-index:2;display:flex;justify-content:flex-start;padding:10px 6px 4px}
+.mrow.rev{flex-direction:row-reverse}
+.nd{position:relative;flex:0 0 33.333%;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;color:#211D19;min-width:0;padding:0 2px}
+.nd .nm{font-size:15px;font-weight:700;line-height:1.35}
+.nd .tg{font-size:14px;border-radius:999px;border:2px solid #211D19;padding:0 8px;background:#fff;line-height:1.5}
+.nd .tg.x{border-style:dashed}
+.nd .hb{position:absolute;top:-16px;z-index:3;display:flex;align-items:center;gap:3px;background:#f2c94c;border:2px solid #211D19;border-radius:999px;padding:0 8px;font-size:14px;font-weight:700;line-height:1.55;white-space:nowrap}
+.nd .hb svg{width:16px;height:16px}
+.flagc{display:flex;align-items:center;gap:8px;font-weight:700;font-size:16px;align-self:center;padding:6px 14px;border-radius:999px;background:#fff;border:3px solid #211D19;position:relative;z-index:2}
+.flagc svg{width:22px;height:22px}
+/* env: owner cards */
+.envbar{display:flex;justify-content:center;padding:6px 14px 0}
+.envbar img{width:min(62%,230px);height:auto;display:block;animation:cin .7s var(--ease) backwards}
+.hdeck{position:relative;width:min(calc(100% - 44px),330px);margin:6px auto 12px;padding-top:calc(var(--hs)*2)}
+.hdeck .sp{display:block;width:100%;height:auto;visibility:hidden}
+.hc{position:absolute;inset-inline:0;top:0;transition:top .55s var(--ease),filter .55s var(--ease);animation:cin .7s var(--ease) backwards}
+.hc img{display:block;width:100%;height:auto}
+.hc[data-p="0"]{top:0;z-index:1;filter:saturate(.62) brightness(.82);animation-delay:.35s}
+.hc[data-p="1"]{top:var(--hs);z-index:2;filter:saturate(.62) brightness(.82);animation-delay:.5s}
+.hc[data-p="2"]{top:calc(var(--hs)*2);z-index:3;animation-delay:.65s}
+.rd{position:absolute;left:7%;width:86%;top:76%;height:12.6%;display:none;align-items:center;justify-content:center;background:var(--cream);border-radius:12px;animation:fadein .26s}
+.bar .gobtn{display:none;font-family:L,V,sans-serif;font-size:24px;color:var(--cream);border:3px ridge var(--gold);background:#16734a;animation:fadein .26s}.bar .gobtn.on{display:flex}
+.bar .gobtn.t1{background:#ad5313}.bar .gobtn.t2{background:#98282b}
+.rd .w{font-family:L,V,sans-serif;font-size:20px;line-height:1.2;color:var(--teal);text-align:center;padding:0 6px}
+.rd .go{display:flex;width:68%;min-height:46px;font-family:L,V,sans-serif;font-size:21px;color:var(--cream);border:3px ridge var(--gold);border-radius:13px;background:linear-gradient(#296c58,#194a3e)}
+.hc[data-p="2"].open .rd{display:flex}
+.hc.t1 .rd .go{background:linear-gradient(#9b4818,#72320f)}
+.hc.t2 .rd .go{background:linear-gradient(#92282d,#64191d)}
+.tapnote{text-align:center;font-size:15px;padding:0 16px;color:#5a5a46}
+/* generic (not yet drawn) cards, same language as owner cards */
+.gdeck{position:relative;width:min(calc(100% - 28px),340px);margin:10px auto 12px;height:calc(404px + var(--hs)*2)}
+.gc{position:absolute;inset-inline:0;height:404px;padding:7px;display:flex;flex-direction:column;gap:7px;border:4px ridge var(--gold);border-radius:24px;background:var(--tone);box-shadow:0 11px 15px #0006,inset 0 2px 0 #ffebac99;transition:top .55s var(--ease),filter .55s var(--ease);animation:cin .7s var(--ease) backwards;text-align:center;color:#fff4d4}
+.gc[data-p="0"]{top:0;z-index:1;filter:saturate(.62) brightness(.82)}
+.gc[data-p="1"]{top:var(--hs);z-index:2;filter:saturate(.62) brightness(.82)}
+.gc[data-p="2"]{top:calc(var(--hs)*2);z-index:3}
+.gc .gt{flex:none;min-height:56px;display:flex;align-items:center;justify-content:center;gap:8px;border:3px ridge var(--gold);border-radius:18px;background:var(--tone);box-shadow:inset 0 2px 3px #0007;padding:2px 10px;font-family:L,V,sans-serif;font-size:22px;line-height:1.25;text-shadow:0 2px 2px #0009}
+.gc .ga{flex:1;min-height:0;border:3px ridge var(--gold);border-radius:15px;display:grid;place-items:center;font-size:70px;position:relative;background:repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 14px,rgba(0,0,0,.08) 14px 28px),var(--tone)}
+.gc .gm{flex:none;position:relative;min-height:84px;border:3px ridge var(--gold);border-radius:15px;background:var(--cream);color:var(--teal);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:6px 8px 20px;font-family:L,V,sans-serif;font-size:19px;line-height:1.3}
+.gc .gm .go{display:none;width:70%;min-height:46px;font-family:L,V,sans-serif;font-size:21px;color:var(--cream);border:3px ridge var(--gold);border-radius:13px;background:var(--tone);align-items:center;justify-content:center}
+.gc[data-p="2"].open .gm .go{display:flex}
+.gc .bd{position:absolute;bottom:-22px;left:calc(50% - 22px);width:44px;height:44px;border:4px ridge #e6bd61;border-radius:50%;display:grid;place-items:center;background:var(--tone);font-size:22px;box-shadow:0 4px 5px #0008}
+/* card box */
+.boxgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 10px;padding:14px 12px 18px}
+.tile{position:relative;display:flex;flex-direction:column;align-items:stretch;min-height:176px;padding:28px 5px 6px;border:3px ridge var(--gold);border-radius:16px;background:var(--cream);overflow:visible;text-align:center;box-shadow:0 4px 0 rgba(0,0,0,.18);transition:transform .18s var(--ease)}
+.tile:active{transform:scale(.97)}
+.tile .tface{display:flex;flex-direction:column;align-items:stretch;flex:1;width:100%;text-align:center}
+.tile .tn{flex:none;min-height:50px;display:flex;align-items:center;justify-content:center;background:var(--hdr);color:var(--hink);border-radius:12px;padding:4px 6px 4px 6px;font-family:L,V,sans-serif;font-size:15px;line-height:1.25}
+.tile .ti{flex:1;display:grid;place-items:center;font-size:40px;padding:6px 0 10px}
+.gb{position:absolute;top:-14px;inset-inline-end:-8px;z-index:3;width:48px;height:48px;border-radius:50%;border:3px solid #211D19;background:#f2c94c;display:grid;place-items:center;color:#211D19;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+.gb svg{width:26px;height:26px}
+.gb.off{background:#fff;border-style:dashed;color:#8a8a70}
+.pracbar{padding:10px 12px 0}
+/* big card overlay */
+#cv{position:absolute;inset:0;z-index:50;pointer-events:none}
+#cv .cscrim{position:absolute;inset:0;background:rgba(15,25,20,.55);pointer-events:auto;animation:fadein .25s}
+.cbig{position:absolute;inset:12px 12px 74px;perspective:1400px;pointer-events:auto;transform-origin:0 0}
+.cflip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s var(--ease)}
+.cflip.back{transform:rotateY(180deg)}
+.cface{position:absolute;inset:0;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:5px ridge var(--gold);border-radius:24px;background:var(--cream);box-shadow:0 12px 30px rgba(0,0,0,.45);overflow:hidden}
+.cface.bk{transform:rotateY(180deg)}
+.cface .chd{flex:none;display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--hdr);color:var(--hink);border-bottom:4px ridge var(--gold)}
+.cface .chd h2{flex:1;min-width:0;font-family:L,V,sans-serif;font-weight:400;font-size:22px;line-height:1.25}
+.cface .chd h2 small{display:block;font-family:V,sans-serif;font-size:14px;opacity:.95}
+.cface .chd .gb{position:static;flex:none}
+.cface .chd .ib{border:2px solid currentColor;border-radius:50%}
+.cface .cbd{flex:1;min-height:0;overflow:auto;padding:12px;overscroll-behavior:contain}
+.cface .cbd .sec{margin:14px 0 0}
+.cface .cbd .sec:first-child{margin-top:0}
+.cface .cbd .cardbox{border:0;background:none;padding:0}
+.cface .cbd .cardwrap{padding:0}
+.cface .tagl{display:inline-block;font-size:14px;background:var(--sky);border:1.5px solid var(--hdr);border-radius:999px;padding:1px 12px;margin-bottom:8px}
+.cbar{position:absolute;inset-inline:12px;bottom:12px;display:flex;gap:8px;pointer-events:auto}
+.cbar .cap{min-height:52px;font-size:16px;padding:0 10px}
+.cbar .cap svg{width:22px;height:22px}
+.t2s{position:absolute;inset-inline:24px;bottom:84px;z-index:6;background:#fff;border:3px dashed #211D19;border-radius:14px;padding:10px 12px;font-weight:700;text-align:center;pointer-events:none;animation:fin .25s}
+.vrow{border-style:solid}
+/* menu: four big tiles */
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mg button{min-height:104px;border:3px solid var(--edge);border-radius:18px;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:18px;padding:8px}
+.mg button svg{width:36px;height:36px}
+.mg button.q{background:var(--sky)}
+.mg button:last-child:nth-child(odd){grid-column:span 2;min-height:84px;flex-direction:row;gap:12px}
+.fig svg text{font-size:14px}
+.lb2{min-height:48px!important}.mini{max-width:300px;margin:0 auto 10px}.mini .fig h3{font-size:14px}
+.sheet .gtabs button{min-height:48px}
+
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -236,7 +336,7 @@ body.rvopen #rv{display:block}
 <div id="rvbar"><button id="rvt" type="button"></button><span id="rvb"></span></div>
 <div id="shell">
   <aside id="rv" aria-label="panel"></aside>
-  <main id="phone"><div id="app"></div><div id="ov"></div></main>
+  <main id="phone"><div id="app"></div><div id="cv"></div><div id="ov"></div></main>
 </div>
 <script>
 const D=/*__DATA__*/null;
@@ -248,10 +348,11 @@ const N=Object.fromEntries(D.nodes.map(n=>[n.id,n]));
 const L=Object.fromEntries(D.lands.map(l=>[l.id,l]));
 const BAND={1:[1,2],2:[3,4],3:[5,6]};
 const NEUTRAL={hdr:'#2f6b4a',hink:'#ffffff',paper:'#fffaf0',btn:'#2f6b4a',btnink:'#ffffff',edge:'#2f6b4a',sky:'#e9f2e3',hill:'#c7ddc0',gnd:'#d9c9a3'};
-const TIERS=[{e:'🌱',s:'#B9DB66',ts:'#D8EAA2',is:'#769C3A',k:'flow.tier.core'},{e:'🔥',s:'#F4BE4F',ts:'#F9D994',is:'#BD8922',k:'flow.tier.challenge'},{e:'🌋',s:'#EF7464',ts:'#F6ADA1',is:'#A7443A',k:'flow.tier.veryhard'}];
+const TIERS=[{e:'🌱',tone:'#16734a',k:'flow.tier.core'},{e:'🔥',tone:'#ad5313',k:'flow.tier.challenge'},{e:'🌋',tone:'#98282b',k:'flow.tier.veryhard'}];
 const I=(d,x='')=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}${x}</svg>`;
 const IC={
  back:I('<path d="M4 12h16M14 6l6 6-6 6"/>'),
+ map:I('<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>'),
  menu:I('<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>'),
  help:I('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M5.6 5.6l3.9 3.9M14.5 14.5l3.9 3.9M18.4 5.6l-3.9 3.9M9.5 14.5l-3.9 3.9"/>'),
  box:I('<rect x="3" y="7" width="13" height="13" rx="2"/><path d="M8 4h12a1 1 0 011 1v12"/>'),
@@ -261,12 +362,16 @@ const IC={
  pin:I('<path d="M12 21s-6-5.6-6-10a6 6 0 0112 0c0 4.4-6 10-6 10z"/><circle cx="12" cy="11" r="2"/>'),
  play:I('<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5l5 2.5-5 2.5z"/>'),
  hand:I('<path d="M8 13V6a1.5 1.5 0 013 0v5m0-1V4.5a1.5 1.5 0 013 0V11m0-3a1.5 1.5 0 013 0v6a6 6 0 01-6 6h-1a5 5 0 01-4-2l-2.5-3.5a1.4 1.4 0 012-2L8 14"/>'),
- down:I('<path d="M6 9l6 6 6-6"/>'),
- map:I('<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>')
+ flag:I('<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>'),
+ game:I('<rect x="2.5" y="7" width="19" height="10.5" rx="5"/><path d="M8 10.5v4M6 12.5h4"/><circle cx="15.5" cy="11.5" r=".9" fill="currentColor"/><circle cx="18" cy="13.5" r=".9" fill="currentColor"/>'),
+ flip:I('<path d="M4 8a8 8 0 0114-3l2 2M20 16a8 8 0 01-14 3l-2-2"/><path d="M20 3v4h-4M4 21v-4h4"/>'),
+ lock:I('<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>'),
+ cards:I('<rect x="3" y="5" width="12" height="15" rx="2"/><path d="M8 3h10a3 3 0 013 3v10"/>')
 };
-const st={band:1,scr:'map',land:'LM',node:'M07',tier:0,arr:'fixed',open:true,teacher:false,tutOn:true,tutDone:{map:false,scene:false},boxTab:'cards',nav:[],cardFrom:'scene',overlay:null,peek:null,hint:0,pulled:false,gateOK:false,gateTab:'report',prac:0,tut:null,front:0,reveal:false};
+const st={band:1,scr:'map',node:'M07',tier:0,arr:'fixed',open:true,teacher:false,tutOn:true,tutDone:{map:false,scene:false},boxTab:'cards',nav:[],overlay:null,peek:null,hint:0,pulled:false,gateOK:false,gateTab:'report',gateVia:'menu',prac:0,tut:null,ord:[2,1,0],reveal:false,card:null};
 const visited=new Set(D.visited);
 const $=s=>document.querySelector(s);
+const reduced=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
 let holdT=null;
 
 /* ---------- helpers ---------- */
@@ -275,21 +380,22 @@ const tbLevel=n=>{const [a,b]=BAND[st.band];const ks=Object.keys(n.textbook_grad
 const split=t=>{const i=t.indexOf(':');return i<0?[t,'']:[t.slice(0,i).trim(),t.slice(i+1).trim()]};
 const themeOf=(n)=>{if(!n)return NEUTRAL;const l=L[n.land];if(n.zone){const g=l.groups.find(g=>g.zone===n.zone);if(g&&g.theme)return g.theme}return l.theme};
 function curTheme(){
-  if(st.scr==='land')return L[st.land].theme;
-  if(['env','scene','card'].includes(st.scr))return themeOf(N[st.node]);
+  if(['env','scene'].includes(st.scr))return themeOf(N[st.node]);
+  if(st.scr==='map'&&false)return NEUTRAL;
   return NEUTRAL;
 }
 function applyTheme(){const t=curTheme();const p=$('#phone');['hdr','hink','paper','btn','btnink','edge','sky','hill','gnd'].forEach(k=>p.style.setProperty('--'+k,t[k]))}
 const nb=(id)=>{const s=new Set();D.edges.forEach(e=>{if(e.from===id)s.add(e.to);if(e.to===id)s.add(e.from)});return [...s].filter(i=>vis(N[i]))};
 const isOpen=id=>id==='M07'?st.open:visited.has(id);
-const stageOf=id=>{let r=-1;D.stages.forEach((s,i)=>{if(s.n.includes(id))r=i});return r};
+const ORDER=()=>D.lands.flatMap(l=>l.groups.flatMap(g=>g.ids)).filter(id=>vis(N[id]));
 
 /* ---------- navigation ---------- */
 function go(scr,p={},push=true){
-  if(push)st.nav.push({scr:st.scr,node:st.node,land:st.land,tier:st.tier,cardFrom:st.cardFrom});
-  Object.assign(st,p,{scr});st.overlay=null;st.peek=null;st.hint=0;st.pulled=false;st.reveal=false;st.tut=null;render();
+  if(push)st.nav.push({scr:st.scr,node:st.node,tier:st.tier});
+  if(scr==='env')st.ord=[2,1,0];
+  Object.assign(st,p,{scr});st.overlay=null;st.peek=null;st.hint=0;st.pulled=false;st.reveal=false;st.tut=null;st.card=null;render();
 }
-function back(){const b=st.nav.pop();if(!b){go('map',{},false);return}Object.assign(st,b);st.overlay=null;st.peek=null;st.tut=null;render()}
+function back(){const b=st.nav.pop();if(!b){go('map',{},false);return}Object.assign(st,b);st.overlay=null;st.peek=null;st.tut=null;st.card=null;render()}
 
 /* ---------- screens ---------- */
 const hdr=(left,title,right='',sub='')=>`<div class="top">${left}<h1>${esc(title)}${sub?`<small>${esc(sub)}</small>`:''}</h1>${right}</div>`;
@@ -297,116 +403,175 @@ const backBtn=(k)=>`<button class="ib" data-act="back" aria-label="${esc(S(k))}"
 const menuChip=()=>`<button class="chip" data-act="menu" data-t="menu">${IC.menu}<span>${esc(S('flow.menu.btn'))}</span></button>`;
 const capBtn=(act,k,alt='',extra='')=>`<button class="cap ${alt}" data-act="${act}" ${extra}>${esc(S(k))}</button>`;
 
-function mapScreen(){
-  const here=N[st.node].land;
-  const tiles=D.lands.map((l,i)=>{
-    const [pl,tp]=split(l.label_fa);const ids=l.groups.flatMap(g=>g.ids).filter(id=>vis(N[id]));
-    const t=l.theme;const sty=`--hdr:${t.hdr};--hink:${t.hink};--paper:${t.paper};--sky:${t.sky};--hill:${t.hill};--edge:${t.edge}`;
-    return (i?'<div class="link"><i></i></div>':'')+`<button class="lt" style="${sty}" data-act="land" data-id="${l.id}" ${l.id===here?'data-t="here"':''}>
-      <div class="lh"><b>${esc(pl)}</b>${tp?`<span>${esc(tp)}</span>`:''}</div>
-      <div class="lb"><div class="dots">${ids.map(id=>`<i class="${visited.has(id)?'v':''}"></i>`).join('')}</div>
-      ${l.id===here?`<span class="tagp here">${esc(S('flow.map.here'))}</span>`:''}${i===0&&l.id!==here?`<span class="tagp">${esc(S('flow.map.suggested'))}</span>`:''}
-      <span class="tap">${esc(S('flow.map.tap'))}${IC.back}</span></div></button>`}).join('');
-  return `<div class="scr">${hdr('',S('flow.map.title'))}<div class="body"><div class="mapbody">${tiles}</div></div>
-   <div class="bar" data-t="bar"><button class="cap alt" data-act="box">${IC.box}${esc(S('flow.box.btn'))}</button><button class="cap alt" data-act="menu">${IC.menu}${esc(S('flow.menu.btn'))}</button></div></div>`;
-}
-function disk(n){
+function ndHTML(n){
   const lv=tbLevel(n);const cls='disk'+(lv===2?' tb2':lv===1?' tb1':'');
-  const tags=[];if(n.id===st.node)tags.push(`<span class="tg h">${esc(S('flow.land.here'))}</span>`);
-  if(n.experimental)tags.push(`<span class="tg x">${esc(S('flow.land.experimental'))}</span>`);
-  return `<button class="env" data-act="peek" data-id="${n.id}"><span class="${cls}">${n.emoji}${visited.has(n.id)?`<span class="vchk" title="${esc(S('flow.land.visited'))}">${IC.check}</span>`:''}</span><span class="nm">${esc(n.label_fa)}</span>${tags.join('')}</button>`;
+  const tags=[];if(n.experimental)tags.push(`<span class="tg x">${esc(S('flow.land.experimental'))}</span>`);
+  return `<button class="nd" data-act="peek" data-id="${n.id}" data-n="${n.id}" ${n.id===st.node?'data-t="here"':''}>${n.id===st.node?`<span class="hb">${IC.pin}${esc(S('flow.map.here'))}</span>`:''}<span class="${cls}">${n.emoji}${visited.has(n.id)?`<span class="vchk" title="${esc(S('flow.land.visited'))}">${IC.check}</span>`:''}</span><span class="nm">${esc(n.label_fa)}</span>${tags.join('')}</button>`;
 }
-function landScreen(){
-  const l=L[st.land];const [pl,tp]=split(l.label_fa);
-  const groups=l.groups.map(g=>{
-    const ids=g.ids.filter(id=>vis(N[id]));if(!ids.length)return '';
-    const rows=[];for(let i=0;i<ids.length;i+=3)rows.push(ids.slice(i,i+3));
-    const t=g.theme;const sty=t?`--zh:${t.hdr};--zi:${t.hink};--zp:${t.paper};--zs:${t.sky};--zl:${t.hill}`:'';
-    return `<section class="zone ${g.zone?'':'plain'}" style="${sty}">${g.zone?`<h3>${esc(g.label_fa)}</h3>`:''}<div class="rows">${rows.map((r,i)=>`<div class="row ${i%2?'rev':''}">${r.map(id=>disk(N[id])).join('')}</div>`).join('')}</div></section>`}).join('');
-  return `<div class="scr">${hdr(backBtn('flow.nav.toMap'),pl,'',tp)}<div class="body">
-   <div class="legend"><span><i class="s"></i>${esc(S('flow.land.legend.ring'))}</span><span><i class="d"></i>${esc(S('flow.land.legend.dash'))}</span></div>${groups}<div style="height:10px"></div></div>
-   <div class="bar">${capBtn('toMap','flow.nav.toMap','alt')}</div></div>`;
+function mapScreen(){
+  let row=0;
+  const secs=D.lands.map(l=>{
+    const [pl,tp]=split(l.label_fa);const t=l.theme;
+    const sty=`--le:${t.edge};--ls:${t.sky};--lh:${t.hill};--lg:${t.hdr};--li:${t.hink}`;
+    let inner='';row=0;
+    l.groups.forEach(g=>{
+      const ids=g.ids.filter(id=>vis(N[id]));if(!ids.length)return;
+      if(g.zone){const z=g.theme;inner+=`<div class="zl" style="--zg:${z.hdr};--zi:${z.hink}">${esc(g.label_fa)}</div>`}
+      for(let i=0;i<ids.length;i+=3){inner+=`<div class="mrow ${row%2?'rev':''}">${ids.slice(i,i+3).map(id=>ndHTML(N[id])).join('')}</div>`;row++}
+    });
+    return `<section class="ln" style="${sty}"><h2>${esc(pl)}${tp?`<small>${esc(tp)}</small>`:''}</h2>${inner}</section>`}).join('');
+  return `<div class="scr">${hdr('',S('flow.map.title'))}<div class="body" id="mapbody"><div class="mapwrap" id="mapwrap">
+   <svg id="pathsvg" aria-hidden="true"></svg><div class="flagc">${IC.flag}${esc(S('flow.map.start'))}</div>${secs}<div class="flagc">${IC.flag}${esc(S('flow.map.end'))}</div></div></div>
+   <div class="bar" data-t="bar"><button class="cap alt" data-act="box">${IC.cards}${esc(S('flow.box.btn'))}</button><button class="cap alt" data-act="menu">${IC.menu}${esc(S('flow.menu.btn'))}</button></div></div>`;
+}
+function drawPath(){
+  const w=$('#mapwrap'),svg=$('#pathsvg');if(!w||!svg)return;
+  const wr=w.getBoundingClientRect();svg.setAttribute('width',w.scrollWidth);svg.setAttribute('height',w.scrollHeight);
+  const pts=ORDER().map(id=>{const d=w.querySelector(`[data-n="${id}"] .disk`);if(!d)return null;const r=d.getBoundingClientRect();return{id,x:r.left-wr.left+r.width/2,y:r.top-wr.top+r.height/2}}).filter(Boolean);
+  if(pts.length<2){svg.innerHTML='';return}
+  const seg=(a,b)=>{if(Math.abs(a.y-b.y)<12)return `L${b.x} ${b.y}`;const h=Math.min(46,Math.abs(b.y-a.y)/2);return `C${a.x} ${a.y+h} ${b.x} ${b.y-h} ${b.x} ${b.y}`};
+  let all=`M${pts[0].x} ${pts[0].y}`,done='';
+  for(let i=1;i<pts.length;i++){all+=seg(pts[i-1],pts[i]);if(visited.has(pts[i-1].id)&&visited.has(pts[i].id))done+=`M${pts[i-1].x} ${pts[i-1].y}`+seg(pts[i-1],pts[i])}
+  svg.innerHTML=`<path d="${all}" fill="none" stroke="#211D19" stroke-opacity=".5" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 11"/><path d="${done}" fill="none" stroke="#211D19" stroke-width="7" stroke-linecap="round"/>`;
 }
 function challenges(id){
   const n=N[id];
   if(id==='M07')return [
-   {t:S('flow.harbor.green.title'),m:S('flow.harbor.green.mission'),art:`<img src="${D.img.green}" alt="">`,real:true},
-   {t:S('flow.harbor.orange.title'),m:S('flow.harbor.orange.mission'),art:D.img.pirate,mk:true},
-   {t:S('flow.harbor.red.title'),m:S('flow.harbor.red.mission'),art:null,mk:true}];
-  return TIERS.map(x=>({t:S(x.k)+': '+n.label_fa,m:S('flow.env.pending'),art:null,mk:true}));
+   {t:S('flow.harbor.green.title'),w:S('flow.harbor.green.ready'),img:D.img.c0,art:D.img.a0},
+   {t:S('flow.harbor.orange.title'),w:S('flow.harbor.orange.ready'),img:D.img.c1,art:D.img.a1},
+   {t:S('flow.harbor.red.title'),w:S('flow.harbor.red.ready'),img:D.img.c2,art:D.img.a2}];
+  return TIERS.map(x=>({t:S(x.k)+': '+n.label_fa,w:S('flow.env.pending'),img:null,art:null}));
 }
 function envScreen(){
-  const n=N[st.node];const ch=challenges(st.node);
-  const order=[st.front,...[0,1,2].filter(i=>i!==st.front)];
-  const cards=ch.map((c,i)=>{const T=TIERS[i];const pos=order.indexOf(i);
-    const artIn=c.art?(c.art.startsWith('<img')?c.art:`<div style="width:100%;height:100%;background:${T.is}">${c.art}</div>`):T.e;
-    return `<article class="ch ${pos===0&&st.reveal?'open':''}" data-act="card3" data-i="${i}" data-pos="${pos}" style="--s:${T.s};--ts:${T.ts};--is:${T.is};--cs:${T.ts}" ${pos===0?'data-t="front"':''}>
-     <div class="ct"><span class="medal" aria-hidden="true">${T.e}</span><b>${esc(c.t)}</b><span class="tier">${esc(S(T.k))}</span></div>
-     <div class="art ${c.art?'':'ph'}">${artIn}${c.mk?`<span class="mk">${esc(R['mock.art'])}</span>`:''}</div>
-     <div class="hintv" aria-hidden="true">${IC.down}</div>
-     <div class="ms">${esc(c.m)}</div>
-     <button class="go" data-act="start" data-i="${i}">${esc(S('flow.env.start'))}</button></article>`}).join('');
-  return `<div class="scr">${hdr(backBtn('flow.nav.toLand'),n.label_fa,'',n.concept_fa)}<div class="body"><div class="stack">${cards}</div></div>
-   <div class="bar">${capBtn('back','flow.nav.toLand','alt')}</div></div>`;
+  const n=N[st.node];const ch=challenges(st.node);const harbor=st.node==='M07';
+  const cards=[...st.ord].map((ti,p)=>{
+    const c=ch[ti],T=TIERS[ti],open=p===2&&st.reveal;
+    if(harbor)return `<div class="hc t${ti} ${open?'open':''}" data-act="card3" data-i="${ti}" data-p="${p}" ${p===2?'data-t="front"':''} role="button" aria-label="${esc(c.t)}"><img src="${c.img}" alt="${esc(c.t)}"><div class="rd"><span class="w">${esc(c.w)}</span></div></div>`;
+    return `<article class="gc ${open?'open':''}" data-act="card3" data-i="${ti}" data-p="${p}" style="--tone:${T.tone}" ${p===2?'data-t="front"':''}>
+      <div class="gt">${esc(c.t)}</div><div class="ga">${T.e}</div>
+      <div class="gm"><span>${esc(c.w)}</span><span class="bd" aria-hidden="true">${T.e}</span></div></article>`}).join('');
+  const deck=harbor?`<div class="envbar"><img src="${D.img.head}" alt="${esc(n.label_fa)}"></div><div class="hdeck"><img class="sp" src="${D.img.c0}" alt="">${cards}</div>`
+    :`<div class="gdeck">${cards}</div>`;
+  return `<div class="scr">${hdr(`<button class="ib" data-act="toMap" aria-label="${esc(S('flow.nav.toMap'))}">${IC.back}</button>`,n.label_fa,'',n.concept_fa)}<div class="body">${deck}<p class="tapnote">${esc(S('flow.env.tapnote'))}</p><div style="height:12px"></div></div>
+   <div class="bar"><button class="cap gobtn t${st.ord[2]} ${st.reveal?'on':''}" id="gobar" data-act="start" data-i="${st.ord[2]}">${esc(S('flow.env.start'))}</button>${capBtn('toMap','flow.nav.toMap','alt')}</div></div>`;
 }
 function sceneScreen(){
-  const n=N[st.node];const real=st.node==='M07'&&st.tier===0;const ch=challenges(st.node)[st.tier];const T=TIERS[st.tier];
-  const body=real?`<div class="mission">${esc(S('flow.scene.mission'))}</div><div class="scene"><img src="${D.img.scene}" alt=""><button class="lb2 ${st.pulled?'pulse':''}" data-act="lesson">${IC.info}${esc(S('flow.lesson.btn'))}</button><div class="mkc">${esc(R['mock.scene'])}</div>${st.pulled?`<div class="toast">${esc(R['mock.pull'])}</div>`:''}</div>
+  const n=N[st.node];const harbor=st.node==='M07';const real=harbor&&st.tier===0;const ch=challenges(st.node)[st.tier];
+  let body;
+  if(real)body=`<div class="mission">${esc(S('flow.scene.mission'))}</div><div class="scene"><img src="${D.img.scene}" alt=""><button class="lb2 ${st.pulled?'pulse':''}" data-act="lesson" data-t="lesson">${IC.info}${esc(S('flow.lesson.btn'))}</button><div class="mkc">${esc(R['mock.scene'])}</div>${st.pulled?`<div class="toast">${esc(R['mock.pull'])}</div>`:''}</div>
      <div class="ctl"><button class="btn" aria-pressed="${st.arr==='moving'}" data-act="arr" data-v="moving" data-t="arr">${esc(S('flow.scene.arr.moving'))}</button><button class="btn" aria-pressed="${st.arr==='fixed'}" data-act="arr" data-v="fixed">${esc(S('flow.scene.arr.fixed'))}</button>
-     <button class="btn" data-act="help" data-t="help">${IC.help}${esc(S('flow.help.btn'))}</button><button class="btn main" data-act="pull" data-t="pull">${IC.hand}${esc(S('flow.scene.pull'))}</button></div>`
-   :`<div class="scene"><div class="ph" style="--ts:${T.ts}">${esc(S('flow.scene.pending'))}</div></div>`;
+     <button class="btn" data-act="help" data-t="help">${IC.help}${esc(S('flow.help.btn'))}</button><button class="btn main" data-act="pull" data-t="pull">${IC.hand}${esc(S('flow.scene.pull'))}</button></div>`;
+  else body=`<div class="scene" style="flex-direction:column;gap:10px;align-items:center">${harbor&&ch.art?`<img src="${ch.art}" alt="" style="max-height:60%">`:''}<div class="ph" style="--ts:#f4e7bf">${esc(S('flow.scene.pending'))}</div><button class="lb2" data-act="lesson" data-t="lesson">${IC.info}${esc(S('flow.lesson.btn'))}</button></div>`;
   return `<div class="scr">${hdr(backBtn('flow.nav.toEnv'),ch.t,menuChip())}${body}</div>`;
 }
-/* lesson card figure (from lesson-card-options/card.html) */
+
+/* ---------- lesson card figure (from lesson-card-options/card.html) ---------- */
 function arrow(x,y,len,dir,col,w=4){const ty=y+dir*len,h=7;return `<line x1="${x}" y1="${y}" x2="${x}" y2="${ty-dir*h}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/><polygon points="${x-6},${ty-dir*h} ${x+6},${ty-dir*h} ${x},${ty}" fill="${col}"/>`}
-const lab=(x,y,t,c)=>`<text x="${x}" y="${y}" font-size="11" font-weight="700" text-anchor="middle" fill="${c}">${t}</text>`;
+const lab=(x,y,t,c)=>`<text x="${x}" y="${y}" font-size="14" font-weight="700" text-anchor="middle" fill="${c}">${t}</text>`;
 const wheel=(cx,cy,r)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#f2c94c" stroke="#7a5b10" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="2.5" fill="#7a5b10"/>`;
 const hang=(cx,cy)=>`<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy+10}" stroke="#6b5a3a" stroke-width="4"/>`;
 const RP='stroke="var(--rope)" stroke-width="3" fill="none"';
 const topRope=`<path d="M50 40 A14 14 0 0 1 78 40" ${RP}/><line x1="64" y1="26" x2="110" y2="26" ${RP}/><path d="M96 40 A14 14 0 0 1 124 40" ${RP}/>`;
 function figs(b){
-  const num=b>=2;const ld=S('flow.card.load'),pl=S('flow.card.pull');
-  const fixed=`<svg viewBox="0 0 150 190" role="img"><rect x="20" y="6" width="110" height="6" rx="3" fill="#6b5a3a"/>${hang(64,12)}${hang(110,12)}${wheel(64,40,14)}${wheel(110,40,14)}<line x1="50" y1="40" x2="50" y2="118" ${RP}/>${topRope}<line x1="124" y1="40" x2="124" y2="105" ${RP}/><rect x="37" y="118" width="26" height="22" rx="4" fill="#9db7a0" stroke="#4b6a50" stroke-width="2"/>${arrow(50,144,30,1,'var(--w)')}${arrow(124,105,30,1,'var(--e)')}${lab(50,184,num?ld+' '+fa(4):ld,'var(--w)')}${lab(122,150,num?pl+' '+fa(4):pl,'var(--e)')}</svg>`;
-  const moving=`<svg viewBox="0 0 150 190" role="img"><rect x="10" y="6" width="130" height="6" rx="3" fill="#6b5a3a"/>${hang(64,12)}${hang(110,12)}${wheel(64,40,14)}${wheel(110,40,14)}<line x1="22" y1="12" x2="22" y2="100" ${RP}/>${topRope}<line x1="50" y1="40" x2="50" y2="100" ${RP}/><line x1="124" y1="40" x2="124" y2="105" ${RP}/>${wheel(36,104,14)}<line x1="36" y1="118" x2="36" y2="124" stroke="#6b5a3a" stroke-width="4"/><rect x="23" y="124" width="26" height="22" rx="4" fill="#9db7a0" stroke="#4b6a50" stroke-width="2"/>${arrow(36,150,30,1,'var(--w)')}${arrow(124,105,15,1,'var(--e)')}${arrow(22,84,15,-1,'var(--e)',3)}${arrow(50,84,15,-1,'var(--e)',3)}${lab(36,188,num?ld+' '+fa(4):ld,'var(--w)')}${lab(122,138,num?pl+' '+fa(2):pl,'var(--e)')}</svg>`;
+  const ld=S('flow.card.load'),pl=S('flow.card.pull');
+  const W=b===2?6:60;const num=b>=2;
+  const fixed=`<svg viewBox="0 0 150 196" role="img"><rect x="20" y="6" width="110" height="6" rx="3" fill="#6b5a3a"/>${hang(64,12)}${hang(110,12)}${wheel(64,40,14)}${wheel(110,40,14)}<line x1="50" y1="40" x2="50" y2="118" ${RP}/>${topRope}<line x1="124" y1="40" x2="124" y2="105" ${RP}/><rect x="37" y="118" width="26" height="22" rx="4" fill="#9db7a0" stroke="#4b6a50" stroke-width="2"/>${arrow(50,144,30,1,'var(--w)')}${arrow(124,105,30,1,'var(--e)')}${lab(50,190,num?ld+' '+fa(W):ld,'var(--w)')}${lab(112,156,num?pl+' '+fa(W):pl,'var(--e)')}</svg>`;
+  const moving=`<svg viewBox="0 0 150 196" role="img"><rect x="10" y="6" width="130" height="6" rx="3" fill="#6b5a3a"/>${hang(64,12)}${hang(110,12)}${wheel(64,40,14)}${wheel(110,40,14)}<line x1="22" y1="12" x2="22" y2="100" ${RP}/>${topRope}<line x1="50" y1="40" x2="50" y2="100" ${RP}/><line x1="124" y1="40" x2="124" y2="105" ${RP}/>${wheel(36,104,14)}<line x1="36" y1="118" x2="36" y2="124" stroke="#6b5a3a" stroke-width="4"/><rect x="23" y="124" width="26" height="22" rx="4" fill="#9db7a0" stroke="#4b6a50" stroke-width="2"/>${arrow(36,150,30,1,'var(--w)')}${arrow(124,105,15,1,'var(--e)')}${arrow(22,84,15,-1,'var(--e)',3)}${arrow(50,84,15,-1,'var(--e)',3)}${lab(36,190,num?ld+' '+fa(W):ld,'var(--w)')}${lab(112,138,num?pl+' '+fa(W/2):pl,'var(--e)')}</svg>`;
   return [fixed,moving];
 }
 const PROB={1:{q:'flow.card.q1',ok:'flow.card.q1.ok',o:[[S('flow.card.fixed'),0],[S('flow.card.moving'),1]]},
  2:{q:'flow.card.q2',ok:'flow.card.q2.ok',o:[[fa(3),1],[fa(6),0],[fa(12),0]]},
  3:{q:'flow.card.q3',ok:'flow.card.q3.ok',o:[[S('flow.card.q3.o1'),0],[S('flow.card.q3.o2'),0],[S('flow.card.q3.o3'),1]]}};
-function probHTML(id){const p=PROB[st.band];return `<div class="prob" id="${id}"><p class="q">${esc(S(p.q))}</p><div class="opts">${p.o.map(([t,ok])=>`<button class="opt" data-act="ans" data-ok="${ok}">${esc(t)}</button>`).join('')}</div><div class="fb" aria-live="polite"></div></div>`}
-function cardScreen(){
-  const n=N[st.node];const real=st.node==='M07';const b=st.band;const C=D.card[b];
+function probHTML(id){const p=PROB[st.band];const [f,m]=figs(st.band);return `<div class="prob" id="${id}"><div class="pair mini" style="--w:#b5472f;--e:#2f6b4a;--rope:#a8793f"><div class="fig"><h3>${esc(S('flow.card.fixed'))}</h3>${f}</div><div class="fig"><h3>${esc(S('flow.card.moving'))}</h3>${m}</div></div><p class="q">${esc(S(p.q))}</p><div class="opts">${p.o.map(([t,ok])=>`<button class="opt" data-act="ans" data-ok="${ok}">${esc(t)}</button>`).join('')}</div><div class="fb" aria-live="polite"></div></div>`}
+
+/* ---------- big lesson card (front/back) ---------- */
+const gameBadge=(id,fromScene)=>fromScene?'':`<button class="gb ${isOpen(id)?'':'off'}" data-act="gogame" data-id="${id}" aria-label="${esc(S('flow.card.goGame'))}: ${esc(N[id].label_fa)}">${IC.game}</button>`;
+function cardFront(id){
+  const n=N[id];const real=id==='M07';const b=st.band;const C=D.card[b];
   let body;
   if(real){const [f,m]=figs(b);
-    body=`<div class="cardwrap"><div class="cardbox"><div class="tag"><b>${esc(S('flow.card.title'))}</b><span>${esc(C.band)}</span></div>
+    body=`<div class="cardwrap"><div class="cardbox" style="--w:#b5472f;--e:#2f6b4a;--rope:#a8793f"><span class="tagl">${esc(C.band)}</span>
      <div class="pair"><div class="fig"><h3>${esc(S('flow.card.fixed'))}</h3>${b==3?`<div class="num">n = ${fa(1)}</div>`:''}${f}</div><div class="fig"><h3>${esc(S('flow.card.moving'))}</h3>${b==3?`<div class="num">n = ${fa(2)}</div>`:''}${m}</div></div>
      <div class="lg"><span><i style="background:var(--w)"></i>${esc(S('flow.card.legend.w'))}</span><span><i style="background:var(--e)"></i>${esc(S('flow.card.legend.f'))}</span></div>
-     <div class="say">${C.say}</div>${b==3?`<div class="eq">F = W / n    s = n × h</div>`:''}${C.sub?`<div class="sub">${esc(C.sub)}</div>`:''}</div></div>
-     <div class="sec"><h2>${esc(S('flow.card.problem'))}</h2>${probHTML('pb1')}</div>`;
-  }else{
-    body=`<div class="cardwrap"><div class="cardbox"><div class="tag"><b>${esc(n.label_fa)}</b><span>${esc(D.card[b].band)}</span></div><div class="say">${esc(n.concept_fa)}</div></div></div><div class="pend">${esc(S('flow.card.pending'))}</div>`;
-  }
-  const rel=nb(st.node);
-  const relH=rel.length?`<div class="sec"><h2>${esc(S('flow.card.related'))}</h2><div class="rel">${rel.map(id=>`<button data-act="opencard" data-id="${id}"><b>${N[id].emoji}</b>${esc(N[id].label_fa)}</button>`).join('')}</div></div>`:'';
-  const vid=real?`<div class="sec"><button class="vrow" data-act="gate" data-tab="video">${IC.play}<span>${esc(S('flow.card.video'))}</span></button></div>`:'';
-  let gg='';
-  if(st.cardFrom==='box'){const ok=isOpen(st.node);gg=`<div class="gg">${ok?`<button class="cap" style="width:100%" data-act="gogame">${esc(S('flow.card.goGame'))}</button>`:`<button class="cap dis" style="width:100%" disabled>${esc(S('flow.card.goGame'))}</button><div class="off">${esc(S('flow.card.goGame.off'))}</div>`}</div>`}
-  return `<div class="scr">${hdr(backBtn(st.cardFrom==='box'?'flow.nav.toBox':'flow.nav.toGame'),real?S('flow.card.title'):n.label_fa,'',n.concept_fa)}<div class="body">${body}${relH}${vid}${gg}<div style="height:12px"></div></div>
-   <div class="bar">${capBtn('back',st.cardFrom==='box'?'flow.nav.toBox':'flow.nav.toGame','alt')}</div></div>`;
+     <div class="say">${C.say}</div>${b==3?`<div class="eq">F = W / n    s = n × h</div>`:''}${C.sub?`<div class="sub">${esc(C.sub)}</div>`:''}</div></div>`;
+  }else body=`<div class="cardwrap"><span class="tagl">${esc(C.band)}</span><div class="say">${esc(n.concept_fa)}</div></div><div class="pend">${esc(S('flow.card.pending'))}</div>`;
+  const rel=nb(id);
+  const relH=rel.length?`<div class="sec"><h2>${esc(S('flow.card.related'))}</h2><div class="rel">${rel.map(r=>`<button data-act="swapcard" data-id="${r}"><b>${N[r].emoji}</b>${esc(N[r].label_fa)}</button>`).join('')}</div></div>`:'';
+  return `<div class="cbd">${body}${relH}</div>`;
 }
+function cardBack(id){
+  const real=id==='M07';
+  const prac=real?`<div class="sec"><h2>${esc(S('flow.card.problem'))}</h2>${probHTML('pbk')}</div>`:`<div class="sec"><div class="pend" style="margin:0">${esc(S('flow.card.noPractice'))}</div></div>`;
+  const vid=real?`<div class="sec"><h2>${esc(S('flow.card.video.h'))}</h2><button class="vrow" data-act="gate" data-tab="video" data-via="card">${IC.play}<span>${esc(S('flow.card.video'))}</span></button></div>`:`<div class="sec"><div class="pend" style="margin:0">${esc(S('flow.card.noVideo'))}</div></div>`;
+  return `<div class="cbd">${prac}${vid}</div>`;
+}
+function cardOvHTML(){
+  const c=st.card;const n=N[c.id];const fs=c.from==='scene';const b=D.card[st.band];
+  const ttl=c.id==='M07'?S('flow.card.title'):n.label_fa;
+  const hd=(face)=>`<div class="chd">${face==='f'?`<h2>${esc(ttl)}<small>${esc(n.concept_fa)}</small></h2>`:`<h2>${esc(S('flow.card.back.title'))}<small>${esc(ttl)}</small></h2>`}${gameBadge(c.id,fs)}<button class="ib" data-act="closecard" aria-label="${esc(S('flow.close'))}">${IC.close}</button></div>`;
+  return `<div class="cscrim" data-act="closecard"></div><div class="cbig" id="cbig" role="dialog" aria-modal="true" aria-label="${esc(ttl)}"><div class="cflip ${c.face==='back'?'back':''}" id="cflip">
+    <div class="cface" id="cfr" ${c.face==='back'?'aria-hidden="true"':''}>${hd('f')}${cardFront(c.id)}</div>
+    <div class="cface bk" id="cbk" ${c.face==='front'?'aria-hidden="true"':''}>${hd('b')}${cardBack(c.id)}</div></div></div>
+   <div class="cbar"><button class="cap alt" data-act="closecard">${IC.back}${esc(S(fs?'flow.nav.toGame':'flow.nav.toBox'))}</button><button class="cap" data-act="flip" id="flipbtn">${IC.flip}<span>${esc(S(c.face==='back'?'flow.card.flipBack':'flow.card.flip'))}</span></button></div>`;
+}
+function openCard(id,from,el){
+  st.card={id,face:'front',from,rect:el?el.getBoundingClientRect():null};renderCard(true);
+}
+function renderCard(anim){
+  const cv=$('#cv');
+  if(!st.card){cv.innerHTML='';renderPanel();return}
+  cv.innerHTML=cardOvHTML();
+  const big=$('#cbig');
+  if(anim&&!reduced()){
+    const r=st.card.rect;
+    if(r){const b=big.getBoundingClientRect();big.animate([{transform:`translate(${r.left-b.left}px,${r.top-b.top}px) scale(${r.width/b.width},${r.height/b.height})`,opacity:.4},{transform:'none',opacity:1}],{duration:380,easing:'cubic-bezier(.35,0,.25,1)'})}
+    else big.animate([{opacity:0,transform:'scale(.94)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
+  }
+  const cb=big.querySelector('[data-act=closecard]');if(cb&&anim)cb.focus({preventScroll:true});
+  renderPanel();
+}
+function swapCard(id){
+  const old=$('#cflip');
+  st.card.id=id;st.card.face='front';st.card.rect=null;
+  const done=()=>{const cv=$('#cv');cv.innerHTML=cardOvHTML();if(!reduced())$('#cbig').animate([{opacity:0},{opacity:1}],{duration:240});renderPanel()};
+  if(old&&!reduced())old.animate([{opacity:1},{opacity:0}],{duration:160}).onfinish=done;else done();
+}
+function flipCard(){
+  if(!st.card)return;st.card.face=st.card.face==='front'?'back':'front';
+  const f=$('#cflip');if(!f)return;const back=st.card.face==='back';
+  f.classList.toggle('back',back);
+  $('#cfr').setAttribute('aria-hidden',back?'true':'false');$('#cbk').setAttribute('aria-hidden',back?'false':'true');
+  $('#flipbtn span').textContent=S(back?'flow.card.flipBack':'flow.card.flip');
+  document.querySelectorAll('#cv .cbd').forEach(e=>e.scrollTop=0);
+  renderPanel();
+}
+function closeCard(){
+  const cv=$('#cv');const big=$('#cbig');
+  const done=()=>{st.card=null;cv.innerHTML='';renderPanel()};
+  if(!big||reduced()){done();return}
+  const r=st.card.rect;
+  let a;
+  if(r&&document.body.contains(document.querySelector(`[data-tile="${st.card.id}"]`))){const t=document.querySelector(`[data-tile="${st.card.id}"]`).getBoundingClientRect();const b=big.getBoundingClientRect();
+    a=big.animate([{transform:'none',opacity:1},{transform:`translate(${t.left-b.left}px,${t.top-b.top}px) scale(${t.width/b.width},${t.height/b.height})`,opacity:.3}],{duration:300,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'})}
+  else a=big.animate([{opacity:1,transform:'none'},{opacity:0,transform:'scale(.94)'}],{duration:220,fill:'forwards'});
+  a.onfinish=done;
+}
+function toast2(msg){const cv=$('#cv');const t=document.createElement('div');t.className='t2s';t.textContent=msg;cv.appendChild(t);setTimeout(()=>t.remove(),2200)}
+
+/* ---------- card box ---------- */
 function boxScreen(){
   let inner;
   if(st.boxTab==='cards'){
-    inner=D.lands.map(l=>{const t=l.theme;const ids=l.groups.flatMap(g=>g.ids).filter(id=>vis(N[id]));const [pl]=split(l.label_fa);
-      return `<div class="grp" style="--gh:${t.hdr};--gi:${t.hink};--tb:${t.edge}"><h3>${esc(pl)}</h3><div class="grid">${ids.map(id=>{const n=N[id];const seen=visited.has(id);
-        return `<button class="tile ${seen?'':'un'}" style="--tb:${t.edge}" data-act="opencard" data-id="${id}" data-from="box"><b>${n.emoji}</b><span>${esc(n.label_fa)}</span>${seen?'':`<small>${esc(S('flow.box.unseen'))}</small>`}</button>`}).join('')}</div></div>`}).join('');
+    inner=`<div class="boxgrid">${ORDER().map(id=>{const n=N[id];
+      return `<div class="tile" data-tile="${id}"><button class="gb ${isOpen(id)?'':'off'}" data-act="gogame" data-id="${id}" aria-label="${esc(S('flow.card.goGame'))}: ${esc(n.label_fa)}">${IC.game}</button><button class="tface" data-act="opencard" data-id="${id}" data-from="box"><span class="tn">${esc(n.label_fa)}</span><span class="ti">${n.emoji}</span></button></div>`}).join('')}</div>`;
   }else{
-    inner=st.prac===0?`<div class="prac"><p>${esc(S('flow.practice.lead'))}</p><button class="cap" style="width:100%" data-act="pstart">${esc(S('flow.practice.start'))}</button></div>`
+    inner=`<div class="boxbody" style="margin:12px">`+(st.prac===0?`<div class="prac"><p>${esc(S('flow.practice.lead'))}</p><button class="cap" style="width:100%" data-act="pstart">${esc(S('flow.practice.start'))}</button></div>`
      :st.prac===1?`<div class="prac"><div style="text-align:start">${probHTML('pb2')}</div><div id="pn" style="margin-top:12px;display:none"><button class="cap" style="width:100%" data-act="pnext">${esc(S('flow.practice.next'))}</button></div></div>`
-     :`<div class="prac"><p>${esc(S('flow.practice.end'))}</p><button class="cap alt" style="width:100%" data-act="toMap">${esc(S('flow.nav.toMap'))}</button></div>`;
+     :`<div class="prac"><p>${esc(S('flow.practice.end'))}</p></div>`)+`</div>`;
   }
-  return `<div class="scr">${hdr(backBtn('flow.nav.toMap'),S('flow.box.title'))}<div class="body"><div class="tabs"><button class="${st.boxTab==='cards'?'on':''}" data-act="btab" data-v="cards">${esc(S('flow.box.tab.cards'))}</button><button class="${st.boxTab==='practice'?'on':''}" data-act="btab" data-v="practice">${esc(S('flow.box.tab.practice'))}</button></div><div class="boxbody">${inner}</div></div>
-   <div class="bar">${capBtn('toMap','flow.nav.toMap','alt')}</div></div>`;
+  const other=st.boxTab==='cards'?`<button class="cap alt" data-act="btab" data-v="practice">${esc(S('flow.box.practiceBtn'))}</button>`:`<button class="cap alt" data-act="btab" data-v="cards">${esc(S('flow.box.cardsBtn'))}</button>`;
+  return `<div class="scr">${hdr(backBtn('flow.nav.toMap'),S('flow.box.title'))}<div class="body">${inner}</div>
+   <div class="bar">${other}${capBtn('toMap','flow.nav.toMap','alt')}</div></div>`;
 }
 
 /* ---------- overlays ---------- */
@@ -415,23 +580,23 @@ function ovHTML(){
   if(st.peek){const n=N[st.peek];const tg=[];if(n.id===st.node)tg.push(`<span class="tagp here">${esc(S('flow.land.here'))}</span>`);if(visited.has(n.id))tg.push(`<span class="tagp">${esc(S('flow.land.visited'))}</span>`);if(n.experimental)tg.push(`<span class="tagp" style="border-style:dashed">${esc(S('flow.land.experimental'))}</span>`);
     return sheet(n.label_fa,`<p style="font-size:17px;font-weight:700;margin-bottom:8px">${esc(n.concept_fa)}</p><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">${tg.join('')}</div><button class="cap" style="width:100%" data-act="enter" data-id="${n.id}">${esc(S('flow.peek.enter'))}</button>`);}
   if(st.overlay==='menu'){
-    const cs=stageOf(st.node);
-    const path=D.stages.map((s,i)=>`<li class="${i===cs?'cur':''}"><i>${fa(i+1)}</i><span>${esc(s.t)}${i===cs?' · '+esc(S('flow.map.here')):''}</span></li>`).join('');
-    const showLesson=st.scr==='scene'&&st.node==='M07';
-    return sheet(S('flow.menu.title'),`<div class="btnrow" style="margin-top:0"><button class="cap" data-act="toMap">${IC.map}${esc(S('flow.nav.toMap'))}</button><button class="cap alt" data-act="box">${IC.box}${esc(S('flow.box.btn'))}</button>${showLesson?`<button class="cap alt" data-act="lesson">${IC.info}${esc(S('flow.lesson.btn'))}</button>`:''}<button class="cap alt" data-act="replay">${IC.play}${esc(S('flow.menu.replay'))}</button></div>
-     <h3>${esc(S('flow.menu.path'))}</h3><p style="font-size:14px;margin-bottom:6px">${esc(S('flow.menu.pathNote'))}</p><ol class="pl">${path}</ol>
-     <h3>${esc(S('flow.menu.legend'))}</h3><div class="lgd"><div>${IC.info}${esc(S('flow.menu.legend.lesson'))}</div><div>${IC.help}${esc(S('flow.menu.legend.help'))}</div><div>${IC.box}${esc(S('flow.menu.legend.box'))}</div></div>
-     <div class="btnrow"><button class="cap alt" style="min-height:44px;font-size:15px" data-act="gate" data-tab="report">${esc(S('flow.menu.adults'))}</button></div>`);}
+    const m=[];
+    if(st.scr!=='map')m.push(`<button data-act="toMap">${IC.map||''}<span>${esc(S('flow.menu.t.map'))}</span></button>`);
+    m.push(`<button data-act="box">${IC.cards}<span>${esc(S('flow.box.btn'))}</span></button>`);
+    m.push(`<button data-act="replay">${IC.play}<span>${esc(S('flow.menu.t.tut'))}</span></button>`);
+    m.push(`<button class="q" data-act="gate" data-tab="report" data-via="menu">${IC.lock}<span>${esc(S('flow.menu.t.adults'))}</span></button>`);
+    return sheet(S('flow.menu.title'),`<div class="mg">${m.join('')}</div>`);}
   if(st.overlay==='help'){
     const hs=[S('flow.help.h1'),S('flow.help.h2'),S('flow.help.h3')];
     return sheet(S('flow.help.title'),`${hs.slice(0,st.hint).map(h=>`<div class="hl">${esc(h)}</div>`).join('')}${st.hint<3?`<button class="cap" style="width:100%" data-act="hint">${esc(S('flow.help.more'))}</button>`:`<p style="font-weight:700">${esc(S('flow.help.end'))}</p>`}`);}
   if(st.overlay==='gate'){
+    const viaCard=st.gateVia==='card';
     if(!st.gateOK)return sheet(S('flow.gate.title'),`<p style="font-size:16px;margin-bottom:12px">${esc(S('flow.gate.lead'))}</p><button class="hold" id="hold" aria-label="${esc(S('flow.gate.hold'))}"><i></i><span>${esc(S('flow.gate.hold'))}</span></button>`);
-    const tabs=[['report','flow.gate.tab.report'],['guide','flow.gate.tab.guide'],['video','flow.gate.tab.video'],['code','flow.gate.tab.code']];
+    if(viaCard)return sheet(S('flow.gate.tab.video'),`<p style="margin-bottom:8px">${esc(S('flow.gate.video.lead'))}</p><div class="vl">${D.videos.map(v=>`<div><bdi dir="auto">${esc(v[0])}</bdi><small>${esc(v[1])} · ${esc(R['mock.video'])}</small></div>`).join('')}</div>`);
+    const tabs=[['report','flow.gate.tab.report'],['guide','flow.gate.tab.guide'],['code','flow.gate.tab.code']];
     let c='';
     if(st.gateTab==='report'){c=`<p style="margin-bottom:8px">${esc(S('flow.gate.report.lead'))}</p><div class="vl">${D.lands.map(l=>{const ids=l.groups.flatMap(g=>g.ids).filter(id=>vis(N[id]));const v=ids.filter(id=>visited.has(id));return `<div><b>${esc(split(l.label_fa)[0])}</b> · ${fa(v.length)} / ${fa(ids.length)}<small>${esc(v.map(id=>N[id].label_fa).join('، '))}</small></div>`}).join('')}</div>`}
     if(st.gateTab==='guide'){c=`<p style="margin-bottom:8px">${esc(S('flow.gate.guide.lead'))}</p><div class="acc">${[1,2,3,4,5].map(i=>`<div>${esc(S('flow.gate.guide.s'+i))}</div>`).join('')}</div>`}
-    if(st.gateTab==='video'){c=`<p style="margin-bottom:8px">${esc(S('flow.gate.video.lead'))}</p><div class="vl">${D.videos.map(v=>`<div><bdi dir="auto">${esc(v[0])}</bdi><small>${esc(v[1])} · ${esc(R['mock.video'])}</small></div>`).join('')}</div>`}
     if(st.gateTab==='code'){c=`<p>${esc(S('flow.gate.code.lead'))}</p>`}
     return sheet(S('flow.gate.title'),`<div class="gtabs">${tabs.map(([k,s])=>`<button class="${st.gateTab===k?'on':''}" data-act="gtab" data-v="${k}">${esc(S(s))}</button>`).join('')}</div>${c}`);}
   if(st.tut){
@@ -452,7 +617,7 @@ function wireHold(h){
   h.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat)start(e)});h.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')stop()});
 }
 /* tutorial */
-const TUT={map:[{k:'flow.tut.map1',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map2',sel:'.mapbody .lt',pos:'bottom'},{k:'flow.tut.map3',sel:'[data-t=bar]',pos:'top'}],
+const TUT={map:[{k:'flow.tut.map1',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map.ring',sel:'.disk.tb2',pos:'bottom'},{k:'flow.tut.map2',sel:'.nd',pos:'bottom'},{k:'flow.tut.map3',sel:'[data-t=bar]',pos:'top'}],
  scene:[{k:'flow.tut.scene1',sel:'[data-t=arr]',pos:'top'},{k:'flow.tut.scene2',sel:'[data-t=pull]',pos:'top'},{k:'flow.tut.scene3',sel:'[data-t=help]',pos:'top'}]};
 function startTut(kind){st.overlay=null;st.peek=null;st.tut={kind,steps:TUT[kind],i:0};renderOv()}
 function placeSpot(){
@@ -463,26 +628,27 @@ function placeSpot(){
   const pad=6;sp.style.cssText=`left:${r.left-pr.left-pad}px;top:${r.top-pr.top-pad}px;width:${r.right-r.left+pad*2}px;height:${r.bottom-r.top+pad*2}px`;
 }
 function afterRender(){
+  if(st.scr==='env'){const b=document.querySelector('.body');if(b)b.scrollTop=0}
+  if(st.scr==='map'){drawPath();const h=document.querySelector('[data-t=here]');if(h&&!st.tut)h.scrollIntoView({block:'center'});setTimeout(drawPath,60)}
   if(st.scr==='map'&&st.tutOn&&!st.tutDone.map)setTimeout(()=>{if(st.scr==='map'&&!st.tut&&!st.tutDone.map)startTut('map')},450);
   if(st.scr==='scene'&&st.node==='M07'&&st.tier===0&&st.tutOn&&!st.tutDone.scene)setTimeout(()=>{if(st.scr==='scene'&&!st.tut&&!st.tutDone.scene)startTut('scene')},450);
 }
-
 function updateStack(){
-  const order=[st.front,...[0,1,2].filter(i=>i!==st.front)];
-  document.querySelectorAll('.ch').forEach(el=>{const pos=order.indexOf(+el.dataset.i);el.dataset.pos=pos;el.classList.toggle('open',pos===0&&st.reveal)});
+  document.querySelectorAll('[data-act=card3]').forEach(el=>{const p=st.ord.indexOf(+el.dataset.i);el.dataset.p=p;el.classList.toggle('open',p===2&&st.reveal);if(p===2)el.setAttribute('data-t','front');else el.removeAttribute('data-t')});
+  const gb=$('#gobar');if(gb){gb.className='cap gobtn t'+st.ord[2]+(st.reveal?' on':'');gb.dataset.i=st.ord[2]}
   renderPanel();
 }
 /* ---------- render ---------- */
 function render(){
   applyTheme();
-  const f={map:mapScreen,land:landScreen,env:envScreen,scene:sceneScreen,card:cardScreen,box:boxScreen}[st.scr];
-  $('#app').innerHTML=f();renderOv();afterRender();
+  const f={map:mapScreen,env:envScreen,scene:sceneScreen,box:boxScreen}[st.scr];
+  $('#app').innerHTML=f();renderOv();renderCard(false);afterRender();
 }
 /* ---------- reviewer panel ---------- */
-function noteKey(){if(st.overlay==='gate')return'n.gate';if(st.overlay==='menu'||st.overlay==='help')return'n.menu';if(st.tut)return'n.tut';return {map:'n.map',land:'n.land',env:'n.env',scene:'n.scene',card:'n.card',box:'n.box'}[st.scr]}
+function noteKey(){if(st.card)return'n.card';if(st.overlay==='gate')return'n.gate';if(st.overlay==='menu'||st.overlay==='help')return'n.menu';if(st.tut)return'n.tut';return {map:'n.map',env:'n.env',scene:'n.scene',box:'n.box'}[st.scr]}
 function renderPanel(){
-  const cur=st.overlay==='gate'?'gate':st.overlay==='menu'||st.overlay==='help'?'menu':st.tut?'tut':st.scr;
-  const items=[['map','scr.map'],['land','scr.land'],['env','scr.env'],['scene','scr.scene'],['card','scr.card'],['box','scr.box'],['tut','scr.tut'],['menu','scr.menu'],['gate','scr.gate']];
+  const cur=st.card?'card':st.overlay==='gate'?'gate':st.overlay==='menu'||st.overlay==='help'?'menu':st.tut?'tut':st.scr;
+  const items=[['map','scr.map'],['env','scr.env'],['scene','scr.scene'],['card','scr.card'],['box','scr.box'],['tut','scr.tut'],['menu','scr.menu'],['gate','scr.gate']];
   const n=R[noteKey()];
   $('#rv').innerHTML=`<h2>${esc(R['panel.title'])}</h2><div class="rs">${esc(R['banner'])}</div>
    <h3>${esc(R['panel.screens'])}</h3><div class="lst">${items.map(([k,t])=>`<button class="${cur===k?'on':''}" data-rv="${k}">${esc(R[t])}</button>`).join('')}</div>
@@ -498,56 +664,58 @@ function renderPanel(){
 document.addEventListener('click',e=>{
   const rv=e.target.closest('[data-rv]');
   if(rv){const k=rv.dataset.rv;document.body.classList.remove('rvopen');
-    if(k==='reset'){Object.assign(st,{band:1,open:true,teacher:false,tutOn:true,tutDone:{map:false,scene:false},boxTab:'cards',nav:[],prac:0,front:0,gateOK:false});visited.clear();D.visited.forEach(v=>visited.add(v));go('map',{node:'M07',land:'LM'},false);return}
-    st.nav=[];st.gateOK=false;
+    if(k==='reset'){Object.assign(st,{band:1,open:true,teacher:false,tutOn:true,tutDone:{map:false,scene:false},boxTab:'cards',nav:[],prac:0,ord:[2,1,0],gateOK:false,card:null});visited.clear();D.visited.forEach(v=>visited.add(v));go('map',{node:'M07'},false);return}
+    st.nav=[];st.gateOK=false;st.card=null;
     if(k==='map')go('map',{},false);
-    else if(k==='land')go('land',{land:'LM'},false);
-    else if(k==='env')go('env',{node:'M07',land:'LM',front:0},false);
-    else if(k==='scene')go('scene',{node:'M07',land:'LM',tier:0},false);
-    else if(k==='card')go('card',{node:'M07',land:'LM',cardFrom:'scene'},false);
+    else if(k==='env')go('env',{node:'M07'},false);
+    else if(k==='scene')go('scene',{node:'M07',tier:0},false);
+    else if(k==='card'){go('scene',{node:'M07',tier:0},false);openCard('M07','scene',document.querySelector('[data-t=lesson]'))}
     else if(k==='box')go('box',{boxTab:'cards',prac:0},false);
-    else if(k==='tut'){if(st.scr!=='map'&&st.scr!=='scene')go('scene',{node:'M07',land:'LM',tier:0},false);st.tutDone[st.scr]=false;startTut(st.scr==='map'?'map':'scene')}
-    else if(k==='menu'){if(st.scr==='map'||st.scr==='box'){} ;st.overlay='menu';renderOv()}
-    else if(k==='gate'){st.overlay='gate';st.gateOK=false;st.gateTab='report';renderOv()}
+    else if(k==='tut'){if(st.scr!=='map'&&st.scr!=='scene')go('scene',{node:'M07',tier:0},false);st.tutDone[st.scr]=false;startTut(st.scr==='map'?'map':'scene')}
+    else if(k==='menu'){if(st.scr!=='map'&&st.scr!=='scene')go('map',{},false);st.overlay='menu';renderOv()}
+    else if(k==='gate'){st.overlay='gate';st.gateOK=false;st.gateTab='report';st.gateVia='menu';renderOv()}
     return}
-  const bd=e.target.closest('[data-band]');if(bd){st.band=+bd.dataset.band;render();return}
+  const bd=e.target.closest('[data-band]');if(bd){st.band=+bd.dataset.band;const keep=st.card;render();if(keep){st.card=keep;renderCard(false)}return}
   const t=e.target.closest('#rvt');if(t){document.body.classList.toggle('rvopen');return}
-  const a=e.target.closest('[data-act]');if(!a)return;
+  const a=e.target.closest('[data-act]');
+  if(!a){const cf=e.target.closest('.cface');if(cf)flipCard();return}
   const act=a.dataset.act,id=a.dataset.id;
   switch(act){
    case'back':back();break;
    case'toMap':st.nav=[];go('map',{},false);break;
-   case'land':go('land',{land:id});break;
    case'peek':st.peek=id;renderOv();break;
    case'closeov':st.peek=null;st.overlay=null;st.gateOK=false;renderOv();break;
-   case'enter':{const n=N[id];go('env',{node:id,land:n.land,front:0});break}
-   case'card3':{const i=+a.dataset.i;if(+a.dataset.pos===0){st.reveal=!st.reveal}else{st.front=i;st.reveal=false}updateStack();break}
+   case'enter':go('env',{node:id});break;
+   case'card3':{const i=+a.dataset.i;if(st.ord[2]===i){st.reveal=!st.reveal}else{st.ord=st.ord.filter(x=>x!==i).concat(i);st.reveal=false}updateStack();break}
    case'start':{e.stopPropagation();go('scene',{tier:+a.dataset.i});break}
    case'arr':st.arr=a.dataset.v;render();break;
    case'pull':st.pulled=true;render();break;
-   case'lesson':go('card',{node:st.node,cardFrom:'scene'});break;
+   case'lesson':openCard(st.node,'scene',a);break;
    case'menu':st.overlay='menu';renderOv();break;
    case'help':st.overlay='help';st.hint=0;renderOv();break;
    case'hint':st.hint=Math.min(3,st.hint+1);renderOv();break;
    case'box':st.nav=[];go('box',{boxTab:'cards',prac:0},false);break;
    case'btab':st.boxTab=a.dataset.v;st.prac=0;render();break;
-   case'opencard':{const from=a.dataset.from||'box';go('card',{node:id,cardFrom:from==='box'?'box':st.cardFrom});break}
-   case'gogame':{const n=N[st.node];go('env',{node:st.node,land:n.land,front:0});break}
+   case'opencard':openCard(id,'box',a.closest('.tile')||a);break;
+   case'swapcard':swapCard(id);break;
+   case'flip':flipCard();break;
+   case'closecard':closeCard();break;
+   case'gogame':{e.stopPropagation();if(isOpen(id)){go('env',{node:id})}else{if(st.card)toast2(S('flow.card.goGame.off'));else{const tl=document.querySelector(`[data-tile="${id}"]`);const m=document.createElement('div');m.className='t2s';m.style.cssText='position:absolute;inset-inline:24px;bottom:90px;z-index:55';m.textContent=S('flow.card.goGame.off');$('#phone').appendChild(m);setTimeout(()=>m.remove(),2200)}}break}
    case'ans':{const box=a.closest('.prob');const fb=box.querySelector('.fb');const p=PROB[st.band];
      if(+a.dataset.ok){box.querySelectorAll('.opt').forEach(x=>x.classList.remove('no'));a.classList.add('ok');fb.textContent=S(p.ok);const pn=$('#pn');if(pn)pn.style.display='block'}
      else{a.classList.add('no');fb.textContent=S('flow.card.q.retry')}break}
    case'pstart':st.prac=1;render();break;
    case'pnext':st.prac=2;render();break;
    case'replay':{const k=st.scr==='scene'?'scene':'map';st.tutDone[k]=false;startTut(k);break}
-   case'gate':st.overlay='gate';st.gateOK=false;st.gateTab=a.dataset.tab||'report';renderOv();break;
+   case'gate':st.overlay='gate';st.gateOK=false;st.gateTab=a.dataset.tab||'report';st.gateVia=a.dataset.via||'menu';renderOv();break;
    case'gtab':st.gateTab=a.dataset.v;renderOv();break;
    case'tnext':st.tut.i++;renderOv();break;
    case'tskip':st.tutDone[st.tut.kind]=true;st.tut=null;renderOv();break;
   }
 });
 document.addEventListener('change',e=>{const g=e.target.closest('[data-tg]');if(!g)return;st[g.dataset.tg]=g.checked;if(g.dataset.tg==='teacher')render();else renderPanel()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(st.tut){st.tutDone[st.tut.kind]=true;st.tut=null}else{st.peek=null;st.overlay=null;st.gateOK=false}renderOv()}});
-window.addEventListener('resize',()=>{if(st.tut)placeSpot()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(st.tut){st.tutDone[st.tut.kind]=true;st.tut=null;renderOv()}else if(st.peek||st.overlay){st.peek=null;st.overlay=null;st.gateOK=false;renderOv()}else if(st.card)closeCard()}});
+window.addEventListener('resize',()=>{if(st.tut)placeSpot();if(st.scr==='map')drawPath()});
 $('#rvt').textContent=R['panel.toggle'];$('#rvb').textContent=R['banner'];
 render();
 </script>

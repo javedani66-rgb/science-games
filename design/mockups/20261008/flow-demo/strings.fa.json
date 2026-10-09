@@ -6,13 +6,6 @@
   "context_fa": "برگشتن از صفحهٔ سرزمین، جعبه و مانند آن به نقشه؛ همان واژهٔ کارت مصوب «برگردیم به نقشه»",
   "band": "همه"
  },
- "flow.nav.toLand": {
-  "text": "برگرد به سرزمین",
-  "kind": "ui",
-  "where_fa": "دکمهٔ بازگشت به سرزمین",
-  "context_fa": "بالای صفحهٔ محیط",
-  "band": "همه"
- },
  "flow.nav.toEnv": {
   "text": "برگرد به محیط",
   "kind": "ui",
@@ -104,20 +97,6 @@
   "context_fa": "روی سرزمینی که کودک در آن است",
   "band": "همه"
  },
- "flow.map.suggested": {
-  "text": "شروع پیشنهادی",
-  "kind": "ui",
-  "where_fa": "نشانهٔ شروع پیشنهادی",
-  "context_fa": "فقط پیشنهاد است، قفل نیست (B4، B18)",
-  "band": "همه"
- },
- "flow.map.tap": {
-  "text": "برای ورود بزن",
-  "kind": "ui",
-  "where_fa": "راهنمای لمس سرزمین",
-  "context_fa": "زیر هر سرزمین",
-  "band": "همه"
- },
  "flow.land.here": {
   "text": "تو اینجایی",
   "kind": "ui",
@@ -137,20 +116,6 @@
   "kind": "ui",
   "where_fa": "برچسب آزمایشی",
   "context_fa": "محیطی که شاهد کافی ندارد (B31)",
-  "band": "همه"
- },
- "flow.land.legend.ring": {
-  "text": "حلقهٔ پر: در کتاب همین پایه",
-  "kind": "ui",
-  "where_fa": "راهنمای حلقهٔ پر",
-  "context_fa": "نشانهٔ کتاب درسی همین پایه (B35)",
-  "band": "همه"
- },
- "flow.land.legend.dash": {
-  "text": "خط‌چین: در کتاب پایه‌های قبل",
-  "kind": "ui",
-  "where_fa": "راهنمای حلقهٔ خط‌چین",
-  "context_fa": "نشانهٔ کتاب پایه‌های قبل",
   "band": "همه"
  },
  "flow.peek.enter": {
@@ -199,42 +164,21 @@
   "text": "اسکلهٔ ماهیگیری",
   "kind": "title",
   "where_fa": "عنوان چالش سبز بندر",
-  "context_fa": "همان عنوان کارت مصوب",
-  "band": "همه"
- },
- "flow.harbor.green.mission": {
-  "text": "تور را با طناب بکش بالا!",
-  "kind": "story",
-  "where_fa": "مأموریت چالش سبز بندر",
-  "context_fa": "همان جملهٔ کارت مصوب",
+  "context_fa": "عنوان کارت اسکله؛ عین نوشتهٔ تصویر کارتِ طراحی‌شدهٔ مالک (card-space-full-flow-v1)",
   "band": "همه"
  },
  "flow.harbor.orange.title": {
   "text": "اسکلهٔ دزدان دریایی",
   "kind": "title",
   "where_fa": "عنوان چالش نارنجی بندر",
-  "context_fa": "پیشنهاد؛ نام مسیر harbor.pirate",
-  "band": "همه"
- },
- "flow.harbor.orange.mission": {
-  "text": "صندوق گنج را با طناب بالا ببر!",
-  "kind": "story",
-  "where_fa": "مأموریت چالش نارنجی بندر",
-  "context_fa": "پیشنهاد؛ داستان تأییدنشده",
+  "context_fa": "عنوان کارت اسکله؛ عین نوشتهٔ تصویر کارتِ طراحی‌شدهٔ مالک (card-space-full-flow-v1)",
   "band": "همه"
  },
  "flow.harbor.red.title": {
-  "text": "اسکلهٔ هیولای دریا",
+  "text": "شکار اژدر!",
   "kind": "title",
   "where_fa": "عنوان چالش قرمز بندر",
-  "context_fa": "پیشنهاد؛ هیولا طبق گفتهٔ مالک",
-  "band": "همه"
- },
- "flow.harbor.red.mission": {
-  "text": "چند قرقره را با هم به کار ببر و بار سنگین را بالا بکش!",
-  "kind": "story",
-  "where_fa": "مأموریت چالش قرمز بندر",
-  "context_fa": "پیشنهاد؛ داستان تأییدنشده",
+  "context_fa": "عنوان کارت اسکله؛ عین نوشتهٔ تصویر کارتِ طراحی‌شدهٔ مالک (card-space-full-flow-v1)",
   "band": "همه"
  },
  "flow.scene.mission": {
@@ -321,62 +265,6 @@
   "context_fa": "بالای ورقه",
   "band": "همه"
  },
- "flow.menu.path": {
-  "text": "مسیر پیشنهادی",
-  "kind": "title",
-  "where_fa": "عنوان بخش مسیر پیشنهادی",
-  "context_fa": "فهرست هشت‌مرحله‌ای (B37)",
-  "band": "همه"
- },
- "flow.menu.pathNote": {
-  "text": "فقط پیشنهاد است. هر جا خواستی برو.",
-  "kind": "ui",
-  "where_fa": "توضیح مسیر پیشنهادی",
-  "context_fa": "قفل نیست",
-  "band": "همه"
- },
- "flow.menu.legend": {
-  "text": "نشانه‌ها",
-  "kind": "title",
-  "where_fa": "عنوان راهنمای نشانه‌ها",
-  "context_fa": "",
-  "band": "همه"
- },
- "flow.menu.legend.lesson": {
-  "text": "کارت درس: خلاصهٔ آنچه دیدی",
-  "kind": "ui",
-  "where_fa": "معنی دکمهٔ کارت درس",
-  "context_fa": "",
-  "band": "همه"
- },
- "flow.menu.legend.help": {
-  "text": "کمکم کن: سرنخ، بدون جریمه",
-  "kind": "ui",
-  "where_fa": "معنی دکمهٔ کمکم کن",
-  "context_fa": "",
-  "band": "همه"
- },
- "flow.menu.legend.box": {
-  "text": "جعبهٔ کارت‌ها: همهٔ کارت‌هایی که دیده‌ای",
-  "kind": "ui",
-  "where_fa": "معنی دکمهٔ جعبهٔ کارت‌ها",
-  "context_fa": "",
-  "band": "همه"
- },
- "flow.menu.replay": {
-  "text": "دیدن آموزش دوباره",
-  "kind": "ui",
-  "where_fa": "دکمهٔ دیدن دوبارهٔ آموزش",
-  "context_fa": "",
-  "band": "همه"
- },
- "flow.menu.adults": {
-  "text": "بخش بزرگ‌ترها",
-  "kind": "ui",
-  "where_fa": "دکمهٔ بخش بزرگ‌ترها",
-  "context_fa": "پایین منو",
-  "band": "همه"
- },
  "flow.tut.map1": {
   "text": "این نقشهٔ توست. نشانهٔ «تو اینجایی» جای تو را نشان می‌دهد.",
   "kind": "ui",
@@ -385,7 +273,7 @@
   "band": "همه"
  },
  "flow.tut.map2": {
-  "text": "یک سرزمین را لمس کن تا واردش شوی.",
+  "text": "یک دایره را لمس کن تا واردش شوی.",
   "kind": "ui",
   "where_fa": "گام دوم آموزش نقشه",
   "context_fa": "",
@@ -566,27 +454,6 @@
   "context_fa": "",
   "band": "همه"
  },
- "flow.box.tab.cards": {
-  "text": "کارت‌ها",
-  "kind": "ui",
-  "where_fa": "زبانهٔ کارت‌ها",
-  "context_fa": "",
-  "band": "همه"
- },
- "flow.box.tab.practice": {
-  "text": "تمرین",
-  "kind": "ui",
-  "where_fa": "زبانهٔ تمرین",
-  "context_fa": "",
-  "band": "همه"
- },
- "flow.box.unseen": {
-  "text": "هنوز ندیده‌ای",
-  "kind": "ui",
-  "where_fa": "برچسب کارت ندیده",
-  "context_fa": "بدون قفل",
-  "band": "همه"
- },
  "flow.practice.lead": {
   "text": "چند مسئلهٔ کوتاه از کارت‌هایی که دیده‌ای. زمان‌سنج و نمره ندارد.",
   "kind": "story",
@@ -747,5 +614,131 @@
   "where_fa": "گزینهٔ مسئلهٔ پایهٔ ۵ و ۶",
   "context_fa": "یکای نیرو «نیوتون» (B28)",
   "band": "پایهٔ ۵ و ۶"
+ },
+ "flow.harbor.green.ready": {
+  "text": "تو می‌تونی؛ بزن بریم!",
+  "kind": "ui",
+  "where_fa": "جملهٔ آمادگی روی کارت سبز",
+  "context_fa": "عین متن تعامل تأییدشدهٔ ۳ اکتبر (harbor-interaction-v1)",
+  "band": "همه"
+ },
+ "flow.harbor.orange.ready": {
+  "text": "یه کم سخته؛ پایه‌ای؟!",
+  "kind": "ui",
+  "where_fa": "جملهٔ آمادگی روی کارت نارنجی",
+  "context_fa": "عین متن تعامل تأییدشدهٔ ۳ اکتبر",
+  "band": "همه"
+ },
+ "flow.harbor.red.ready": {
+  "text": "ببینم از پسش برمیای؟!",
+  "kind": "ui",
+  "where_fa": "جملهٔ آمادگی روی کارت قرمز",
+  "context_fa": "عین متن تعامل تأییدشدهٔ ۳ اکتبر",
+  "band": "همه"
+ },
+ "flow.map.start": {
+  "text": "شروع",
+  "kind": "ui",
+  "where_fa": "نشان ابتدای مسیر روی نقشه",
+  "context_fa": "پرچم بالای نقشهٔ یک‌تکه",
+  "band": "همه"
+ },
+ "flow.map.end": {
+  "text": "پایان مسیر",
+  "kind": "ui",
+  "where_fa": "نشان انتهای مسیر روی نقشه",
+  "context_fa": "پرچم پایین نقشه",
+  "band": "همه"
+ },
+ "flow.menu.t.map": {
+  "text": "نقشه",
+  "kind": "ui",
+  "where_fa": "کاشی منو",
+  "context_fa": "برگشت به نقشه",
+  "band": "همه"
+ },
+ "flow.menu.t.tut": {
+  "text": "آموزش",
+  "kind": "ui",
+  "where_fa": "کاشی منو",
+  "context_fa": "دیدن دوبارهٔ آموزش همین صفحه",
+  "band": "همه"
+ },
+ "flow.menu.t.adults": {
+  "text": "بزرگ‌ترها",
+  "kind": "ui",
+  "where_fa": "کاشی منو",
+  "context_fa": "ورود به بخش والدین و معلم (با نگه‌داشتن)",
+  "band": "همه"
+ },
+ "flow.env.tapnote": {
+  "text": "کارت پشتی را بزن تا بیاید جلو. روی کارت جلو بزن تا شروع کنی.",
+  "kind": "ui",
+  "where_fa": "زیر کارت‌های محیط",
+  "context_fa": "راهنمای کوتاه تعامل سه‌کارت",
+  "band": "همه"
+ },
+ "flow.card.flip": {
+  "text": "ورق بزن",
+  "kind": "ui",
+  "where_fa": "دکمهٔ کارت بزرگ",
+  "context_fa": "برگرداندن کارت به پشت (تمرین و فیلم)",
+  "band": "همه"
+ },
+ "flow.card.flipBack": {
+  "text": "برگرد روی کارت",
+  "kind": "ui",
+  "where_fa": "دکمهٔ کارت بزرگ",
+  "context_fa": "برگرداندن کارت به رو",
+  "band": "همه"
+ },
+ "flow.card.back.title": {
+  "text": "تمرین و فیلم",
+  "kind": "ui",
+  "where_fa": "عنوان پشت کارت",
+  "context_fa": "پشت کارت درس",
+  "band": "همه"
+ },
+ "flow.card.video.h": {
+  "text": "فیلم‌ها",
+  "kind": "ui",
+  "where_fa": "بخش پشت کارت",
+  "context_fa": "فیلم‌های مجانی دربارهٔ همین کارت",
+  "band": "همه"
+ },
+ "flow.card.noVideo": {
+  "text": "برای این کارت هنوز فیلمی نیست.",
+  "kind": "ui",
+  "where_fa": "پشت کارت",
+  "context_fa": "جای‌نگه‌دار",
+  "band": "همه"
+ },
+ "flow.card.noPractice": {
+  "text": "تمرین این کارت هنوز ساخته نشده است.",
+  "kind": "ui",
+  "where_fa": "پشت کارت",
+  "context_fa": "جای‌نگه‌دار",
+  "band": "همه"
+ },
+ "flow.box.practiceBtn": {
+  "text": "تمرین",
+  "kind": "ui",
+  "where_fa": "دکمهٔ پایین جعبهٔ کارت",
+  "context_fa": "رفتن به تمرین",
+  "band": "همه"
+ },
+ "flow.box.cardsBtn": {
+  "text": "کارت‌ها",
+  "kind": "ui",
+  "where_fa": "دکمهٔ پایین جعبهٔ کارت",
+  "context_fa": "برگشت به شبکهٔ کارت‌ها",
+  "band": "همه"
+ },
+ "flow.tut.map.ring": {
+  "text": "دور بعضی دایره‌ها حلقه است. حلقهٔ پر یعنی در کتاب همین پایه هست. خط‌چین یعنی در کتاب پایه‌های قبل بوده.",
+  "kind": "ui",
+  "where_fa": "آموزش نقشه",
+  "context_fa": "توضیح حلقه‌های کتاب درسی؛ جایگزین راهنمای نشانه‌ها که از منو برداشته شد",
+  "band": "همه"
  }
 }

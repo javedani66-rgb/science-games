@@ -53,13 +53,27 @@ card = {b: {k: BANK[f'card.pulley.b{b}.{k}']['text'] for k in ('band', 'say', 's
 V = [("SciShow Kids: Need a Lift? Try a Pulley!", "یوتیوب · انگلیسی"), ("SciShow Kids: Solving Problems with Simple Machines", "یوتیوب · انگلیسی")]  # از بازی زنده (content.js)
 
 def b64(b): return base64.b64encode(b).decode()
-im = Image.open(ROOT / 'design/cards/approved/harbor-v1/assets/fishing-dock-art.jpg').convert('RGB')
-im = im.resize((560, round(560 * im.height / im.width)), Image.LANCZOS); buf = io.BytesIO(); im.save(buf, 'WEBP', quality=72)
-img = dict(green='data:image/webp;base64,' + b64(buf.getvalue()),
-           scene='data:image/webp;base64,' + b64((ROOT / 'design/mockups/20261007/mobile-layout-options/scene-v8-crop.webp').read_bytes()),
-           pirate=(ROOT / 'design/routes/scenes/pirate-dock.svg').read_text(encoding='utf-8'))
-fonts = ''.join(f"@font-face{{font-family:V;font-weight:{w};src:url(data:font/woff2;base64,{b64((ROOT / 'assets/fonts' / f).read_bytes())}) format('woff2')}}"
-                for w, f in ((400, 'Vazirmatn-Regular.woff2'), (700, 'Vazirmatn-Bold.woff2')))
+import re
+from PIL import ImageDraw
+def slices(path):
+    s = open(path, encoding='utf-8').read()
+    return [base64.b64decode(m.group(2)) for m in re.finditer(r'data:(image/[a-z+]+);base64,([A-Za-z0-9+/=]{100,})', s)]
+def webp(raw, w, alpha=False, q=78):
+    im = Image.open(io.BytesIO(raw)).convert('RGBA' if alpha else 'RGB')
+    if alpha:  # سفیدی گوشه‌ها را شفاف کن (قاب کارت‌ها گرد است)
+        seeds = [(x, y) for x in range(0, im.width, 16) for y in (0, im.height - 1)] + [(x, y) for y in range(0, im.height, 16) for x in (0, im.width - 1)]
+        for p in seeds:
+            px = im.getpixel(p)
+            if px[3] and min(px[:3]) > 225: ImageDraw.floodfill(im, p, (255, 255, 255, 0), thresh=30)
+    im = im.resize((w, round(w * im.height / im.width)), Image.LANCZOS)
+    buf = io.BytesIO(); im.save(buf, 'WEBP', quality=q); return 'data:image/webp;base64,' + b64(buf.getvalue())
+FLOW = slices(ROOT / 'design/cards/approved/card-space-full-flow-v1/fragment.html')   # 0 عنوان، 1 قرمز، 2 نارنجی، 3 سبز
+INTER = slices(ROOT / 'design/cards/approved/harbor-interaction-v1/fragment.html')    # تصویر صحنهٔ سبز، نارنجی، قرمز
+img = dict(head=webp(FLOW[0], 420, True), c0=webp(FLOW[3], 520, True), c1=webp(FLOW[2], 520, True), c2=webp(FLOW[1], 520, True),
+           a0=webp(INTER[0], 395), a1=webp(INTER[1], 395), a2=webp(INTER[2], 395),
+           scene='data:image/webp;base64,' + b64((ROOT / 'design/mockups/20261007/mobile-layout-options/scene-v8-crop.webp').read_bytes()))
+fonts = ''.join(f"@font-face{{font-family:{fam};font-weight:{w};src:url(data:font/woff2;base64,{b64((ROOT / 'assets/fonts' / f).read_bytes())}) format('woff2')}}"
+                for fam, w, f in (('V', 400, 'Vazirmatn-Regular.woff2'), ('V', 700, 'Vazirmatn-Bold.woff2'), ('L', 400, 'Lalezar-Regular.woff2')))
 stages = [dict(t=TITLES['path_stages'][i]['title'], n=ids) for i, ids in enumerate(STAGES)]
 data = dict(S=S, R=REV, nodes=list(nodes.values()), lands=lands, edges=edges, stages=stages, card=card, videos=V, img=img, visited=VISITED)
 out = (HERE / 'template.html').read_text(encoding='utf-8').replace('/*__FONTS__*/', fonts).replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False))
