@@ -107,13 +107,19 @@
     "opacity": 0.28,
     "dx": 8,
     "dy": 6
+   },
+   "intensity": {
+    "lit_a": 0.5,
+    "shade_a": 0.3,
+    "nlit_a": 0.3,
+    "nshade_a": 0.22
    }
   },
   "dusk": {
    "sky0": "#6a3fa0",
    "sky1": "#e0728a",
    "sky2": "#f2a65a",
-   "water": "#3277a5",
+   "water": "#3679a8",
    "lit": "#ffd48a",
    "shade": "#5b3490",
    "line": "#241a5e",
@@ -125,6 +131,12 @@
     "opacity": 0.35,
     "dx": 14,
     "dy": 7
+   },
+   "intensity": {
+    "lit_a": 0.75,
+    "shade_a": 0.4,
+    "nlit_a": 0.5,
+    "nshade_a": 0.35
    }
   },
   "night": {
@@ -134,7 +146,7 @@
    "water": "#245090",
    "lit": "#d8e6ff",
    "shade": "#190539",
-   "line": "#0d0426",
+   "line": "#aab4f0",
    "windows": "#ffd86b",
    "build": "#aab4f0",
    "pier": "#6f78c8",
@@ -143,6 +155,12 @@
     "opacity": 0.4,
     "dx": 8,
     "dy": 6
+   },
+   "intensity": {
+    "lit_a": 0.5,
+    "shade_a": 0.45,
+    "nlit_a": 0.35,
+    "nshade_a": 0.4
    }
   }
  },
@@ -180,6 +198,8 @@
   "shade sports #5fa13a→#66993b, space #5f44b0→#5c459c, farm #bfb070→#aba16e, city #475c78→#44566c (≥1.5)",
   "ice body #bfe6f5 → #a3d5ea (÷ابر 1.32→1.58)",
   "pink #d9608f/#e0728a → #d070c0 (رنگ‌مایه 337/347→310؛ فاصله از قرمز سختی 20/10→47)",
-  "badge day outline = ui.line_night #0d0426 (قرمز سختی÷خط 2.65→3.2)"
+  "badge day outline = ui.line_night #0d0426 (قرمز سختی÷خط 2.65→3.2)",
+  "dusk water #3277a5 → #3679a8 (خط÷آب مرزی 3.12 → حاشیهٔ بیشتر)",
+  "night line #0d0426 → #aab4f0 (لبهٔ روشن شب؛ خط÷آب 2.46 → بالای 3)"
  ]
 }

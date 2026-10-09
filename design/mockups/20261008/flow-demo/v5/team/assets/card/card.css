@@ -1,0 +1,39 @@
+/* card.css (card-artist v5): چیدمان کارت شب + دکمه‌های کارت. رنگ‌ها از light/tokens.css و ui_tokens.css؛ دکمه‌ها CSS‌اند نه SVG (سند سبک ۳-ت).
+   بودجهٔ ۶۴۰: بالا 64 + کارت جلو 392 + دو نوار 56 + دو فاصلهٔ 8 + پایین 56 = 640. متن مالک هرگز کوتاه نمی‌شود. */
+:root{--cd-zone:#5fa8d6;--cd-bg:#190539;--cd-text-bg:#12243a;--cd-shelf:#2a1f5c;--cd-cream:#fff4d2;--cd-front-h:392px;--cd-strip-h:56px;--cd-gap:8px}
+.cd-stack{display:flex;flex-direction:column;gap:var(--cd-gap);inline-size:min(390px,100%);margin-inline:auto}
+.cd-strip{position:relative;block-size:var(--cd-strip-h);display:flex;align-items:center;gap:8px;padding-inline:26px;cursor:pointer;color:var(--cd-cream);box-sizing:border-box}
+.cd-strip>svg.cd-bg{position:absolute;inset:0;inline-size:100%;block-size:100%;z-index:0}
+.cd-strip>*:not(.cd-bg){position:relative;z-index:1}
+.cd-strip .cd-t{font:400 24px/1.1 'Lalezar','Vazirmatn',sans-serif;flex:1;text-align:center}
+.cd-diff{display:inline-flex;align-items:center;gap:6px;font:700 14px/1 'Vazirmatn',sans-serif;color:var(--cd-cream)}
+.cd-front{position:relative;block-size:var(--cd-front-h);color:var(--cd-cream)}
+.cd-front>.cd-frame{position:absolute;inset:0;inline-size:100%;block-size:100%}
+.cd-front .cd-diff{position:absolute;inset-block-start:10px;inset-inline-start:28px;block-size:30px}
+.cd-front .cd-title{position:absolute;inset-block-start:40px;inset-inline:24px;block-size:46px;display:flex;align-items:center;justify-content:center;font:400 26px/1 'Lalezar','Vazirmatn',sans-serif;color:var(--cd-cream);text-shadow:0 0 10px var(--cd-zone),0 0 3px var(--cd-zone);background:no-repeat center/100% 100%}
+.cd-front .cd-art{position:absolute;inset-block-start:92px;inset-inline:28px;block-size:150px;border-radius:10px;overflow:hidden}
+.cd-front .cd-art svg{display:block;inline-size:100%;block-size:100%}
+.cd-front .cd-ib{position:absolute;inset-block-start:92px;inset-inline-start:28px;inline-size:calc(100% - 56px);block-size:150px;pointer-events:none}
+.cd-front .cd-sentence{position:absolute;inset-block-start:250px;inset-inline:28px;block-size:56px;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 10px;box-sizing:border-box;font:700 16px/1.5 'Vazirmatn',sans-serif;color:var(--cd-cream)}
+.cd-front .cd-go{position:absolute;inset-block-start:314px;inset-inline:28px}
+.cd-front .cd-go .ui-btn{inline-size:100%}
+.cd-guide{position:absolute;inset-block-start:-20px;inset-inline-end:12px;inline-size:64px;block-size:60px;z-index:3;pointer-events:none}
+.cd-btn-practice{min-block-size:56px;font-size:18px;inline-size:100%}
+.cd-btn-film{--bg:#d9608f;--lipc:#a43a64;--ink:#fff;inline-size:100%}
+.cd-btn-film{--ink:#190539}
+.cd-btn-box{--bg:var(--ui-cream,#fff4d2);--lipc:#cdbf93;inline-size:100%}
+.cd-back{position:relative;block-size:var(--cd-front-h);display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:12px 28px 0;box-sizing:border-box}
+.cd-back>.cd-frame{position:absolute;inset:0;inline-size:100%;block-size:100%;z-index:0}
+.cd-back>*:not(.cd-frame){position:relative;z-index:1}
+.cd-back .cd-title{block-size:40px;display:flex;align-items:center;justify-content:center;font:400 24px/1 'Lalezar','Vazirmatn',sans-serif;color:var(--cd-cream);text-shadow:0 0 10px var(--cd-zone)}
+.cd-back .cd-diagram{block-size:150px;display:flex;justify-content:center}
+.cd-back .cd-diagram svg{block-size:150px;inline-size:auto;aspect-ratio:360/200}
+.cd-shelfrow{display:flex;gap:8px;justify-content:center;padding-inline:8px;align-items:flex-end}
+.cd-mini{position:relative;inline-size:80px;block-size:120px;flex:none;color:var(--cd-cream);font:700 14px/1.2 'Vazirmatn',sans-serif;text-align:center}
+.cd-mini>svg{position:absolute;inset:0;inline-size:80px;block-size:120px}
+.cd-mini .cd-th{position:absolute;inset-block-start:10px;inset-inline-start:10px;inline-size:60px;block-size:44px;border-radius:5px;overflow:hidden}
+.cd-mini .cd-lbl{position:absolute;inset-inline:4px;inset-block-end:6px}
+.cd-shelf-svg{display:block;inline-size:min(360px,100%);margin:0 auto}
+@media (prefers-reduced-motion:reduce){.cd-strip,.cd-front{transition:none!important;animation:none!important}}
+.cd-tbar{position:absolute;inset-block-start:33px;inset-inline:15px;inline-size:calc(100% - 30px);block-size:60px;z-index:0}
+.cd-front .cd-title{z-index:1}

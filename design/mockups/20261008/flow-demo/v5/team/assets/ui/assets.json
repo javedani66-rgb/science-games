@@ -1,0 +1,168 @@
+{
+ "sprite": "sprite_ui.svg",
+ "arrow_convention": "ui-ic-next رو به انتهای خط (فیزیکی چپ)؛ «برگرد» = همان با class ui-flip",
+ "assets": {
+  "ui-ic-menu": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-next": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-close": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-map": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-cards": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-practice": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-guide": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-search": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-lock": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-eye": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-box": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-mypos": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-pin": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-flag": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-game": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-flip": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-lesson": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-hint": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-hold": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-ic-skip": {
+   "viewBox": "0 0 48 48",
+   "grid": 48,
+   "stroke": 2.6,
+   "role": "icon"
+  },
+  "ui-badge-easy": {
+   "viewBox": "0 0 56 30",
+   "peaks": 1,
+   "word_key": "difficulty.easy",
+   "role": "hardness"
+  },
+  "ui-badge-mid": {
+   "viewBox": "0 0 56 30",
+   "peaks": 2,
+   "word_key": "difficulty.mid",
+   "role": "hardness"
+  },
+  "ui-badge-hard": {
+   "viewBox": "0 0 56 30",
+   "peaks": 3,
+   "word_key": "difficulty.hard",
+   "role": "hardness"
+  },
+  "ui-lock": {
+   "viewBox": "0 0 32 32",
+   "role": "lock"
+  },
+  "ui-ring": {
+   "viewBox": "0 0 100 100",
+   "vars": [
+    "--ui-ring-ol",
+    "--ui-ring"
+   ],
+   "role": "here-ring"
+  },
+  "ui-check": {
+   "viewBox": "0 0 20 20",
+   "role": "chip-tick"
+  },
+  "ui-gearbtn": {
+   "viewBox": "0 0 48 54",
+   "vars": [
+    "--ui-gear",
+    "--ui-lip"
+   ],
+   "role": "icon-button-base"
+  }
+ }
+}

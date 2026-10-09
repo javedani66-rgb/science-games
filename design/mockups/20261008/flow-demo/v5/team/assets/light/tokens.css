@@ -63,6 +63,7 @@
   --l-line: #241a5e;
   --l-build: #e9e4d6;
   --l-pier: #c6c1b6;
+  --l-lit-a: 0.5; --l-shade-a: 0.3; --l-nlit-a: 0.3; --l-nshade-a: 0.22;
   --l-windows: transparent; --l-windows-opacity: 0;
   --l-shadow-color: #10083a; --l-shadow-opacity: 0.28; --l-shadow-dx: 8px; --l-shadow-dy: 6px;
 }
@@ -78,12 +79,13 @@
   --l-pier: #c6c1b6;
   --l-windows: transparent; --l-windows-opacity: 0;
   --l-shadow-color: #10083a; --l-shadow-opacity: 0.28; --l-shadow-dx: 8px; --l-shadow-dy: 6px;
+  --l-lit-a: 0.5; --l-shade-a: 0.3; --l-nlit-a: 0.3; --l-nshade-a: 0.22;
 }
 [data-light="dusk"]{
   --l-sky0: #6a3fa0;
   --l-sky1: #e0728a;
   --l-sky2: #f2a65a;
-  --l-water: #3277a5;
+  --l-water: #3679a8;
   --l-lit: #ffd48a;
   --l-shade: #5b3490;
   --l-line: #241a5e;
@@ -91,6 +93,7 @@
   --l-pier: #e0a874;
   --l-windows: transparent; --l-windows-opacity: 0;
   --l-shadow-color: #3a1f6a; --l-shadow-opacity: 0.35; --l-shadow-dx: 14px; --l-shadow-dy: 7px;
+  --l-lit-a: 0.75; --l-shade-a: 0.4; --l-nlit-a: 0.5; --l-nshade-a: 0.35;
 }
 [data-light="night"]{
   --l-sky0: #1c1460;
@@ -99,14 +102,18 @@
   --l-water: #245090;
   --l-lit: #d8e6ff;
   --l-shade: #190539;
-  --l-line: #0d0426;
+  --l-line: #aab4f0;
   --l-build: #aab4f0;
   --l-pier: #6f78c8;
   --l-windows: #ffd86b; --l-windows-opacity: 1;
   --l-shadow-color: #0d0426; --l-shadow-opacity: 0.4; --l-shadow-dx: 8px; --l-shadow-dy: 6px;
+  --l-lit-a: 0.5; --l-shade-a: 0.45; --l-nlit-a: 0.35; --l-nshade-a: 0.4;
 }
 /* لایه‌های ثابت انتقال: هر لایه یک id (با پیشوند صفحه) و data-for؛ فقط opacity عوض می‌شود. روز←شب مستقیم 1.2ث. غروب میان‌یابی نیست. */
 .lt-layer{opacity:0;transition:opacity var(--light-transition) ease-in-out}
 [data-light="day"] .lt-layer[data-for~="day"],[data-light="dusk"] .lt-layer[data-for~="dusk"],[data-light="night"] .lt-layer[data-for~="night"]{opacity:1}
 .lt-layer[data-for="windows"]{opacity:0}[data-light="night"] .lt-layer[data-for="windows"]{opacity:1}
 @media (prefers-reduced-motion: reduce){.lt-layer{transition:none}}
+/* شدت rim/سایهٔ بناهای env (کلاس‌های .elit/.esh در node_*.svg مقدار ثابت دارند؛ این‌ها آن‌ها را به نور وصل می‌کنند). شخصیت‌ها خودشان var(--l-lit-a) و var(--l-shade-a) می‌خوانند. */
+[data-light] .elit{opacity:var(--l-nlit-a,.3)}
+[data-light] .esh{opacity:var(--l-nshade-a,.22)}

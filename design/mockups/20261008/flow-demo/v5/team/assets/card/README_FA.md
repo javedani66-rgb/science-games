@@ -1,0 +1,28 @@
+# کارت و صحنهٔ اسکله (card-artist، گام ۳) — فقط واقعیت فنی؛ هیچ ادعای «کودک می‌فهمد/دوست دارد»
+
+مولد: `v5/team/card_gen/` (`python3 gen_card.py && python3 gen_sheet.py --shots && python3 measure.py`). ورودی: `light/zone_tokens.json` (رنگ‌ها، شب بندر #5fa8d6)، `ui/sprite_ui.svg` (قرص سختی)، `character/sprite_char.svg` (b1)، `strings.fa.json`.
+
+## فایل‌ها
+- قاب: `frame_night.svg` 390×392 (باند 6 قلم‌مویی، درخشش ایستا فقط بیرون، خط داخلی 2.6، جای تصویر 334×150، جای جمله، بدون قاب سه‌لایه؛ در صفحه با preserveAspectRatio=none + non-scaling-stroke)، `image_border.svg`، `title_bar.svg` 360×60، `stack_strip.svg` 360×56، `shelf.svg` 360×40، `mini_card_4states.svg` (دیده‌شده/جمع‌شده/خالی/قفل؛ symbol جدا هم هست)، `back_pulley_diagram.svg` 360×200.
+- هنر (360×240، ناحیهٔ امن x20..340 y45..195، لایه‌ها sky/far/sea/mid/front/char): `art_harbor_day|dusk|night.svg`؛ ماجرای ۱ ماهیگیری روز، ۲ دزدان دریایی غروب بنفش-کهربایی، ۳ شکار اژدر شب با موج قرمز.
+- `scene/`: `harbor_scene_green|orange|red.svg` (روز) + `harbor_scene_orange_dusk.svg` + `harbor_scene_red_night.svg` (داستانی) 390×500؛ قطعات `crane.svg`، `pulley_wheel.svg`، `net_rope.svg`، `harbor_env_banner.svg`؛ `diagram_style.json`؛ `sprite_scene.svg`. مبدأ چرخش: `data-origin` روی گروه‌های wheel1/wheel2/rope/net (در assets.json هم هست). غروب = فقط لایهٔ rim (لبهٔ گرم 2.6) + سایهٔ بنفش با opacity، بدون multiply.
+- `sprite_card.svg` (پیشوند cd-)، `assets.json`، `card.css` (چیدمان + کلاس دکمه‌های کارت)، `card_sheet.html` (نماهای #stack #stack2 #stack3 #back #shelf #harbor-scene-*، #all)، `shots/`، `measure_card.md`.
+
+## انحراف از دستور کار
+- **دکمه‌های کارت SVG نیستند** (سند سبک ۳-ت: دکمه = CSS): `btn_card_*.svg` ساخته نشد؛ کلاس‌های `.cd-btn-practice/film/box` در card.css روی `.ui-btn`.
+- b1 با حالت `point` ساخته شد ولی **بدون حاشیهٔ روشن 2px**: silhouette شخصیت (`ch-b1-sil`) شامل یک مستطیل است و حاشیه جعبه می‌شد. نیاز به silhouette درست از character-artist.
+- «بذارش تو جعبه» از `flow.box.put` گرفته شد (در strings همین املاست؛ بریف «توی» نوشته بود)؛ دکمهٔ فیلم متن `flow.card.video.h` («فیلم‌ها») دارد چون کلید «فیلم» نیست.
+- نوار «برگرد»/«منو» در شیت فقط نمونهٔ ui است.
+
+## آزمون‌ها (اجرا شده)
+- ساخت: `python3 v5/build.py --no-write` موفق؛ card 361KB از سقف 500KB؛ بدون id تکراری. هر SVG ≤58KB (sprite)، فایل‌های جدا ≤22KB. `tests/check_build.py`: ۴ شکست (جاگذار ۳ نماد، sprite با ۳ نماد، رندر `<use>`، گرادیان) چون این آزمون‌ها برای حالت «فقط جاگذار» نوشته شده‌اند و اکنون دارایی واقعی دارد؛ بررسی نشد که فقط همین دلیل باشد.
+- ممنوعات: grep روی همهٔ SVGها: بدون `filter`، `mix-blend-mode`، `<text`، `<image`.
+- عکس‌ها (`shots/`): ۳۹۰×۸۰۰ و ۳۶۰×۶۴۰ برای ۵ نمای کارت/قفسه و ۵ صحنه، نسخهٔ خاکستری، و `_rm` (prefers-reduced-motion) برای stack/back؛ اسکرول افقی 0، خطای کنسول 0؛ فونت‌ها بارگذاری شدند.
+- بودجهٔ ۶۴۰ در 360×640: بالا 64 + کارت جلو 392 + دو نوار 56 + دو فاصله 8 + پایین 56 = 640 (ارتفاع‌ها از DOM: 56، 56، 392)؛ تصویر 150؛ متن مالک کوتاه نشده.
+- سطح گرم (رنگ‌مایه 340..50، اشباع>0.5): بیشینه 9.5% (HSL، ناحیهٔ امن روز) و 6.1% (HSV شب) — زیر سقف 15%؛ جدول در `measure_card.md`.
+## چک‌لیست و باز مانده‌ها
+- ضخامت‌ها: خط دور فقط 6/4.5/2.6/1.2؛ ضخامت‌های دیگر در فهرست (5، 8..45) «هستهٔ رنگی لوله» (طناب/گردن اژدر) یا درخشش ایستای قاب‌اند، نه خط دور. دو عدد 4 و 5 برای هستهٔ طناب‌اند.
+- قاب با non-scaling-stroke کشیده می‌شود؛ لبهٔ قلم‌مویی در 360 فقط افقی کمی فشرده است. دیده نشده روی گوشی واقعی.
+- در آزمون خاکستری هنر غروب (آسمان/کشتی) کم‌کنتراست است؛ عدد کنتراست جداگانه سنجیده نشده (کار light-artist فاز ۳).
+- سیلوئت جرثقیل/قایق هنر با `node_12` دقیقاً یکی نیست (هم‌رنگ و هم‌خانواده است: تیل #2fb8a8، اسکلهٔ بتنی)؛ مقایسهٔ سیلوئت انجام نشد.
+- متن‌های قفسه برای «خالی» و «قفل» برچسب ندارند (کلید در strings نیست).

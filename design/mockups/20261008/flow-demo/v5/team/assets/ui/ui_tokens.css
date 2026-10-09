@@ -1,0 +1,68 @@
+/* ui_tokens.css (ui-artist v5). مشخصات CSS دکمه/چیپ/برگه/پلاک؛ رنگ‌ها از light/tokens.css (این فایل پس از آن بیاید).
+   خط: L4.5 دکمه/چیپ/کاشی/برگه، L2.6 پلاک/ورودی/آیکون/قرص، L1.2 تزئین. نور بالا-چپ؛ فشردن = لبه 6←2 بدون جابه‌جایی. بدون filter/blend. */
+:root{
+  --ui-line:#241a5e; --ui-cream:#fff4d2; --ui-violet:#3a2a7a; --ui-teal:#2fb8a8; --ui-pink:#d070c0; --ui-danger:#8a4fd0;
+  --ui-night-bg:#190539; --ui-night-edge:#2fb8a8;
+  --ui-ink-disabled:#4a4268; --ui-disabled-bg:#d9d3e8;
+  --ui-r-big:18px; --ui-r-small:7px; --ui-l45:4.5px; --ui-l26:2.6px; --ui-l12:1.2px; --ui-lip:6px; --ui-lip-pressed:2px;
+  --ui-touch:48px; --ui-gap:8px; --ui-gutter:16px;
+  --ui-font-title:'Lalezar','Vazirmatn',sans-serif; --ui-font:'Vazirmatn',system-ui,sans-serif;
+  --ui-fs-page:28px; --ui-fs-zone:24px; --ui-fs-sheet:22px; --ui-fs-tile:18px; --ui-fs-btn:16px; --ui-fs-body:16px; --ui-fs-small:14px; --ui-lh:1.7;
+}
+.ui-svg{display:inline-block;inline-size:48px;block-size:48px;flex:none}
+.ui-svg--40{inline-size:40px;block-size:40px} .ui-svg--32{inline-size:32px;block-size:32px}
+.ui-flip{transform:scaleX(-1)}
+.ui-badge{display:inline-block;inline-size:56px;block-size:30px;overflow:visible;flex:none}
+.ui-lockbadge{display:inline-block;inline-size:32px;block-size:32px;flex:none}
+.ui-ring{overflow:visible}
+[data-world=night]{--ui-rim:2px;--ui-badge-line:var(--ui-line)}
+/* دکمه («پلاک ماشینی»): گوشهٔ بزرگ بالا-ابتدای خط با ویژگی‌های منطقی */
+.ui-btn{--bg:var(--ui-teal);--lipc:#1f8a7d;--ink:var(--ui-line);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-block-size:var(--ui-touch);min-inline-size:var(--ui-touch);padding:0 20px;margin-block-end:var(--ui-lip);box-sizing:border-box;
+  font:700 var(--ui-fs-btn)/1.2 var(--ui-font);color:var(--ink);background:var(--bg);border:var(--ui-l45) solid var(--ui-line);cursor:pointer;
+  border-start-start-radius:var(--ui-r-big);border-end-end-radius:var(--ui-r-big);border-start-end-radius:var(--ui-r-small);border-end-start-radius:var(--ui-r-small);
+  box-shadow:0 var(--lip,6px) 0 0 var(--lipc),0 var(--lip,6px) 0 var(--ui-l45) var(--ui-line);--lip:6px}
+.ui-btn:active,.ui-btn[data-state=pressed]{--lip:2px}
+.ui-btn--sec{--bg:var(--ui-cream);--lipc:#cdbf93;border-width:var(--ui-l26)}
+.ui-btn--hold{--bg:var(--ui-danger);--lipc:#5f2f99;--ink:#fff}
+.ui-btn--video{--bg:#d9608f;--lipc:#a43a64}
+.ui-btn--s{min-block-size:40px;padding:0 14px}
+.ui-btn--s::after{content:"";position:absolute;inset-block:-4px;inset-inline:-4px}
+.ui-btn:focus-visible,.ui-chip:focus-visible,.ui-tile:focus-visible{outline:3px solid var(--ui-cream);outline-offset:2px;box-shadow:0 var(--lip,6px) 0 0 var(--lipc),0 var(--lip,6px) 0 var(--ui-l45) var(--ui-line),0 0 0 8px var(--ui-violet)}
+.ui-btn:disabled,.ui-btn[aria-disabled=true]{--bg:var(--ui-disabled-bg);--ink:var(--ui-ink-disabled);--lip:0px;border-color:#6d6492;box-shadow:none;margin-block-end:0;cursor:default;
+  background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(74,66,104,.18) 6px 8px)}
+/* دکمهٔ آیکونی: پایهٔ دایرهٔ ۱۲ دندانه از sprite (ui-gearbtn)، آیکون ۴۰ روی آن؛ فشردن = تغییر رنگ، بدون جابه‌جایی */
+.ui-btn--icon{padding:0;border:0;background:none;box-shadow:none;inline-size:48px;block-size:54px;min-block-size:54px;margin:0;--ui-gear:var(--ui-cream)}
+.ui-btn--icon>.ui-gear{position:absolute;inset:0;inline-size:48px;block-size:54px}
+.ui-btn--icon>.ui-ic{position:relative;inline-size:32px;block-size:32px;margin-block-end:6px}
+.ui-btn--icon:active{--ui-gear:#e6d9a8;--ui-lip:#6a5aa8}
+/* چیپ پایه: 96×48، دو سطر «پایه» 14 و «۱ تا ۲» 18 بولد */
+.ui-chips{display:flex;gap:var(--ui-gap);direction:rtl}
+.ui-chip{--bg:var(--ui-violet);--ink:#fff;--lip:2px;--lipc:#2a1f5c;position:relative;flex:1 1 0;min-inline-size:76px;max-inline-size:96px;block-size:48px;margin-block-end:6px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--ui-font);font-weight:700;line-height:1;color:var(--ink);background:var(--bg);border:var(--ui-l26) solid var(--ui-line);cursor:pointer;padding:0;
+  border-start-start-radius:var(--ui-r-big);border-end-end-radius:var(--ui-r-big);border-start-end-radius:var(--ui-r-small);border-end-start-radius:var(--ui-r-small);
+  box-shadow:0 var(--lip) 0 0 var(--lipc),0 var(--lip) 0 var(--ui-l26) var(--ui-line)}
+.ui-chip small{font-size:var(--ui-fs-small);font-weight:700;opacity:1} .ui-chip b{font-size:18px}
+.ui-chip[aria-pressed=true]{--bg:var(--ui-cream);--ink:var(--ui-line);--lip:6px;--lipc:#cdbf93;border-width:var(--ui-l45)}
+.ui-chip .ui-tick{display:none;position:absolute;inset-block-start:-9px;inset-inline-start:-8px;inline-size:20px;block-size:20px}
+.ui-chip[aria-pressed=true] .ui-tick{display:block}
+/* برگه‌ها */
+.ui-sheet{box-sizing:border-box;padding:12px var(--ui-gutter) 20px;background:var(--ui-cream);border:var(--ui-l45) solid var(--ui-line);border-block-end:0;border-radius:28px 28px 0 0 / 22px 22px 0 0;color:var(--ui-line);font:400 var(--ui-fs-body)/var(--ui-lh) var(--ui-font)}
+.ui-sheet::before{content:"";display:block;inline-size:44px;block-size:6px;margin:0 auto 10px;border-radius:3px;background:var(--ui-line);opacity:.35}
+.ui-sheet h2,.ui-sheet-night h2{margin:0 0 6px;font:400 var(--ui-fs-sheet)/1.4 var(--ui-font-title)}
+.ui-sheet-night{box-sizing:border-box;padding:12px var(--ui-gutter) 20px;background:var(--ui-night-bg);color:#fff;border:var(--ui-l26) solid var(--ui-night-edge);border-block-end:0;border-radius:28px 28px 0 0 / 22px 22px 0 0;box-shadow:0 0 14px rgba(47,184,168,.45);font:400 var(--ui-fs-body)/var(--ui-lh) var(--ui-font)}
+.ui-sheet-night::before{content:"";display:block;inline-size:44px;block-size:6px;margin:0 auto 10px;border-radius:3px;background:var(--ui-night-edge);opacity:.7}
+/* پلاک برچسب، «تازه»، ورودی */
+.ui-plate{display:inline-block;padding:2px 12px;min-block-size:28px;box-sizing:border-box;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:10px 4px 10px 4px;font:700 var(--ui-fs-small)/1.6 var(--ui-font)}
+.ui-plate--16{font-size:16px}
+.ui-newdot{display:inline-block;inline-size:16px;block-size:16px;border-radius:50%;background:var(--ui-teal);border:var(--ui-l26) solid var(--ui-line);box-shadow:0 0 0 2px var(--ui-cream)}
+.ui-input{box-sizing:border-box;min-block-size:48px;padding:0 14px;inline-size:100%;background:#fff;color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:12px 5px 12px 5px;font:400 var(--ui-fs-body) var(--ui-font)}
+/* کاشی منو: ≥132 بلند، 160 عرض؛ بنا را env می‌دهد (img/svg داخل .ui-tile-art) و ۱۲px از لبهٔ بالا بیرون می‌زند */
+.ui-tile{--lip:6px;--lipc:#8fb7d9;--bg:#d6ecf7;position:relative;box-sizing:border-box;inline-size:160px;min-block-size:132px;margin-block-end:6px;padding:0 8px 10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  background:var(--bg);border:var(--ui-l45) solid var(--ui-line);color:var(--ui-line);font:700 var(--ui-fs-tile)/1.3 var(--ui-font);cursor:pointer;
+  border-start-start-radius:var(--ui-r-big);border-end-end-radius:var(--ui-r-big);border-start-end-radius:var(--ui-r-small);border-end-start-radius:var(--ui-r-small);
+  box-shadow:0 var(--lip) 0 0 var(--lipc),0 var(--lip) 0 var(--ui-l45) var(--ui-line)}
+.ui-tile .ui-tile-art{position:absolute;inset-block-start:-12px;inset-inline:0;margin:auto;inline-size:100px;block-size:84px}
+.ui-tile:active{--lip:2px}
+.ui-sr{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){.ui-btn,.ui-chip,.ui-tile{transition:none!important;animation:none!important}}

@@ -1,0 +1,20 @@
+/* حالت: <use class="ch-happy"> ؛ ژست (فقط b1): ch-pose-walk1 …؛ اندازه: cs-bust-82 …. متغیرها از مرز <use> رد می‌شوند. */
+.ch-happy{--s-happy:inline;--s-thinking:none;--s-surprised:none;--s-oops:none;--s-calm:none}
+.ch-thinking{--s-happy:none;--s-thinking:inline;--s-surprised:none;--s-oops:none;--s-calm:none}
+.ch-surprised{--s-happy:none;--s-thinking:none;--s-surprised:inline;--s-oops:none;--s-calm:none}
+.ch-oops{--s-happy:none;--s-thinking:none;--s-surprised:none;--s-oops:inline;--s-calm:none}
+.ch-calm{--s-happy:none;--s-thinking:none;--s-surprised:none;--s-oops:none;--s-calm:inline}
+.ch-pose-stand{--p-stand:inline;--p-walk1:none;--p-walk2:none;--p-jump:none;--p-point:none;--p-sit:none;--p-nojump:inline}
+.ch-pose-walk1{--p-stand:none;--p-walk1:inline;--p-walk2:none;--p-jump:none;--p-point:none;--p-sit:none;--p-nojump:inline}
+.ch-pose-walk2{--p-stand:none;--p-walk1:none;--p-walk2:inline;--p-jump:none;--p-point:none;--p-sit:none;--p-nojump:inline}
+.ch-pose-jump{--p-stand:none;--p-walk1:none;--p-walk2:none;--p-jump:inline;--p-point:none;--p-sit:none;--p-nojump:none}
+.ch-pose-point{--p-stand:none;--p-walk1:none;--p-walk2:none;--p-jump:none;--p-point:inline;--p-sit:none;--p-nojump:inline}
+.ch-pose-sit{--p-stand:none;--p-walk1:none;--p-walk2:none;--p-jump:none;--p-point:none;--p-sit:inline;--p-nojump:inline}
+/* اندازه: خط بیرونی/داخلی بر حسب واحد viewBox = px×H/اندازهٔ نمایش (جدول ۲-ج). سرشانه H=100، b1 تمام‌قد H=150 */
+.cs-bust-140{--ow:3.2;--iw:1.9;--ow2:2.6;--bw:2.4}
+.cs-bust-82{--ow:5.5;--iw:3.2;--ow2:3.4;--bw:3.6}
+.cs-bust-64{--ow:5.5;--iw:3.1;--ow2:3.4;--bw:3.6}
+.cs-bust-56{--ow:5.4;--iw:0;--ow2:5.4;--bw:5.4;--det:none}
+.cs-full-140{--ow:4.8;--iw:2.8;--ow2:3.0;--bw:3.0}
+.cs-full-110{--ow:6.1;--iw:3.5;--ow2:3.4;--bw:3.6}
+.cs-full-82{--ow:8.2;--iw:4.7;--ow2:4.4;--bw:4.4}

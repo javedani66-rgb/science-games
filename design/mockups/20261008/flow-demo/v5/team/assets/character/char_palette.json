@@ -1,0 +1,67 @@
+{
+ "b1": {
+  "skin": "#c98a5e",
+  "top": "#2fb8a8",
+  "trim": "#fff4d2",
+  "hair": "#5a2e1a",
+  "brow": "#5a2e1a",
+  "pant": "#3a4a7a",
+  "top_hue_ok": true
+ },
+ "b2": {
+  "skin": "#5e3a28",
+  "top": "#8a4fd0",
+  "trim": "#fff4d2",
+  "hair": "#1b1220",
+  "brow": "#1b1220",
+  "top_hue_ok": true
+ },
+ "b3": {
+  "skin": "#e8b48a",
+  "top": "#9a3a8a",
+  "trim": "#fff4d2",
+  "hair": "#e0782a",
+  "brow": "#b85a14",
+  "top_hue_ok": true
+ },
+ "b4": {
+  "skin": "#8d5a3c",
+  "top": "#2f7bd6",
+  "trim": "#fff4d2",
+  "hair": "#6a4128",
+  "brow": "#4a2c18",
+  "top_hue_ok": true
+ },
+ "b5": {
+  "skin": "#c98a5e",
+  "top": "#d070c0",
+  "trim": "#fff4d2",
+  "hair": "#b9783a",
+  "brow": "#8a5424",
+  "top_hue_ok": true
+ },
+ "b6": {
+  "skin": "#e8b48a",
+  "top": "#fff4d2",
+  "trim": "#1f6f78",
+  "hair": "#e0782a",
+  "brow": "#b85a14",
+  "top_hue_ok": true
+ },
+ "b7": {
+  "skin": "#8d5a3c",
+  "top": "#1f6f78",
+  "trim": "#fff4d2",
+  "hair": "#1b1220",
+  "brow": "#1b1220",
+  "top_hue_ok": true
+ },
+ "b8": {
+  "skin": "#5e3a28",
+  "top": "#fff4d2",
+  "trim": "#2f7bd6",
+  "hair": "#1b1220",
+  "brow": "#1b1220",
+  "top_hue_ok": true
+ }
+}

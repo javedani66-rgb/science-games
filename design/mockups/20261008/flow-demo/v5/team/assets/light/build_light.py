@@ -17,16 +17,19 @@ def block(name, d):
     for k in ('sky0', 'sky1', 'sky2', 'water', 'lit', 'shade', 'line', 'build', 'pier'): o.append(f'  --l-{k}: {d[k]};')
     o.append(f'  --l-windows: {d["windows"] or "transparent"}; --l-windows-opacity: {1 if d["windows"] else 0};')
     s = d['shadow']; o.append(f'  --l-shadow-color: {s["color"]}; --l-shadow-opacity: {s["opacity"]}; --l-shadow-dx: {s["dx"]}px; --l-shadow-dy: {s["dy"]}px;')
+    i = d['intensity']; o.append(f'  --l-lit-a: {i["lit_a"]}; --l-shade-a: {i["shade_a"]}; --l-nlit-a: {i["nlit_a"]}; --l-nshade-a: {i["nshade_a"]};')
     o.append('}'); return o
 c.append('  /* پیش‌فرض = روز */')
 for k in ('sky0', 'sky1', 'sky2', 'water', 'lit', 'shade', 'line', 'build', 'pier'): c.append(f'  --l-{k}: {L["day"][k]};')
-c += ['  --l-windows: transparent; --l-windows-opacity: 0;', f'  --l-shadow-color: {L["day"]["shadow"]["color"]}; --l-shadow-opacity: {L["day"]["shadow"]["opacity"]}; --l-shadow-dx: 8px; --l-shadow-dy: 6px;', '}']
+i0 = L['day']['intensity']
+c += [f'  --l-lit-a: {i0["lit_a"]}; --l-shade-a: {i0["shade_a"]}; --l-nlit-a: {i0["nlit_a"]}; --l-nshade-a: {i0["nshade_a"]};', '  --l-windows: transparent; --l-windows-opacity: 0;', f'  --l-shadow-color: {L["day"]["shadow"]["color"]}; --l-shadow-opacity: {L["day"]["shadow"]["opacity"]}; --l-shadow-dx: 8px; --l-shadow-dy: 6px;', '}']
 for n in ('day', 'dusk', 'night'): c += block(n, L[n])
 c += ['/* لایه‌های ثابت انتقال: هر لایه یک id (با پیشوند صفحه) و data-for؛ فقط opacity عوض می‌شود. روز←شب مستقیم 1.2ث. غروب میان‌یابی نیست. */',
       '.lt-layer{opacity:0;transition:opacity var(--light-transition) ease-in-out}',
       '[data-light="day"] .lt-layer[data-for~="day"],[data-light="dusk"] .lt-layer[data-for~="dusk"],[data-light="night"] .lt-layer[data-for~="night"]{opacity:1}',
       '.lt-layer[data-for="windows"]{opacity:0}[data-light="night"] .lt-layer[data-for="windows"]{opacity:1}',
       '@media (prefers-reduced-motion: reduce){.lt-layer{transition:none}}']
+c += ['/* شدت rim/سایهٔ بناهای env (کلاس‌های .elit/.esh در node_*.svg مقدار ثابت دارند؛ این‌ها آن‌ها را به نور وصل می‌کنند). شخصیت‌ها خودشان var(--l-lit-a) و var(--l-shade-a) می‌خوانند. */', '[data-light] .elit{opacity:var(--l-nlit-a,.3)}', '[data-light] .esh{opacity:var(--l-nshade-a,.22)}']
 open(os.path.join(H, 'tokens.css'), 'w').write('\n'.join(c) + '\n')
 
 # common_defs.svg

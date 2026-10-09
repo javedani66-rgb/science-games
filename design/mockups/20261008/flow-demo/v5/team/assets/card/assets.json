@@ -1,0 +1,341 @@
+{
+ "sprite": "sprite_card.svg",
+ "sprite_scene": "scene/sprite_scene.svg",
+ "prefix": "cd-",
+ "zone_night": "#5fa8d6",
+ "assets": {
+  "cd-frame-night": {
+   "file": "frame_night.svg",
+   "viewBox": "0 0 390 392",
+   "role": "frame",
+   "anchor": "top-start",
+   "layers": [
+    "cd-frame-glow",
+    "cd-frame-band",
+    "cd-frame-inner",
+    "cd-frame-slot",
+    "cd-frame-text"
+   ],
+   "slots": {
+    "badge": "28,10 56x30 (بالا-ابتدا؛ واژه کنارش)",
+    "title": "24,40 342x46",
+    "image": "28,92 334x150",
+    "sentence": "28,250 334x56",
+    "button": "28,314 334x48"
+   },
+   "stretch": "preserveAspectRatio=none + non-scaling-stroke"
+  },
+  "cd-image-border": {
+   "file": "image_border.svg",
+   "viewBox": "0 0 334 150",
+   "role": "overlay",
+   "anchor": "top-start",
+   "layers": [
+    "cd-ib-line"
+   ]
+  },
+  "cd-title-bar": {
+   "file": "title_bar.svg",
+   "viewBox": "0 0 360 60",
+   "role": "title-plaque",
+   "anchor": "top-start",
+   "layers": [
+    "cd-tb-glow",
+    "cd-tb-plaque"
+   ],
+   "text": "Lalezar >=24px، تیتر از strings؛ درخشش متن = text-shadow CSS (غیر از filter)"
+  },
+  "cd-stack-strip": {
+   "file": "stack_strip.svg",
+   "viewBox": "0 0 360 56",
+   "role": "strip",
+   "anchor": "top-start",
+   "layers": [
+    "cd-st-band",
+    "cd-st-line"
+   ],
+   "note": "بی‌درخشش؛ قرص سختی ui + واژه در HTML؛ کل نوار هدف لمس"
+  },
+  "cd-shelf": {
+   "file": "shelf.svg",
+   "viewBox": "0 0 360 40",
+   "role": "shelf",
+   "anchor": "top-start",
+   "layers": [
+    "cd-sh-top",
+    "cd-sh-front",
+    "cd-sh-brackets"
+   ]
+  },
+  "cd-mini-4states": {
+   "file": "mini_card_4states.svg",
+   "viewBox": "0 0 344 120",
+   "role": "mini-card",
+   "anchor": "top-start",
+   "layers": [
+    "cd-mc-seen",
+    "cd-mc-packed",
+    "cd-mc-empty",
+    "cd-mc-locked"
+   ]
+  },
+  "cd-back-pulley-diagram": {
+   "file": "back_pulley_diagram.svg",
+   "viewBox": "0 0 360 200",
+   "role": "diagram",
+   "anchor": "top-start",
+   "layers": [
+    "cd-bd-panel",
+    "cd-bd-beam",
+    "cd-bd-fixed",
+    "cd-bd-moving",
+    "cd-bd-rope",
+    "cd-bd-load",
+    "cd-bd-arrows"
+   ],
+   "note": "بدون متن؛ وزن=صورتی، کشیدن=فیروزه‌ای (همان دو رنگ صحنه)"
+  },
+  "cd-art-harbor-day": {
+   "file": "art_harbor_day.svg",
+   "viewBox": "0 0 360 240",
+   "role": "art",
+   "anchor": "center",
+   "layers": [
+    "cd-ad-sky",
+    "cd-ad-far",
+    "cd-ad-sea",
+    "cd-ad-mid",
+    "cd-ad-front",
+    "cd-ad-char"
+   ],
+   "safe": "x20..340 y45..195",
+   "adventure": 1,
+   "light": "day"
+  },
+  "cd-art-harbor-dusk": {
+   "file": "art_harbor_dusk.svg",
+   "viewBox": "0 0 360 240",
+   "role": "art",
+   "anchor": "center",
+   "layers": [
+    "cd-au-sky",
+    "cd-au-far",
+    "cd-au-sea",
+    "cd-au-mid",
+    "cd-au-front",
+    "cd-au-char"
+   ],
+   "safe": "x20..340 y45..195",
+   "adventure": 2,
+   "light": "dusk"
+  },
+  "cd-art-harbor-night": {
+   "file": "art_harbor_night.svg",
+   "viewBox": "0 0 360 240",
+   "role": "art",
+   "anchor": "center",
+   "layers": [
+    "cd-an-sky",
+    "cd-an-far",
+    "cd-an-sea",
+    "cd-an-mid",
+    "cd-an-front",
+    "cd-an-char"
+   ],
+   "safe": "x20..340 y45..195",
+   "adventure": 3,
+   "light": "night"
+  },
+  "cd-harbor-banner": {
+   "file": "scene/harbor_env_banner.svg",
+   "viewBox": "0 30 360 185",
+   "role": "banner",
+   "anchor": "center",
+   "layers": [
+    "cd-bn-sky",
+    "cd-bn-far",
+    "cd-bn-sea",
+    "cd-bn-mid",
+    "cd-bn-front",
+    "cd-bn-char"
+   ]
+  },
+  "cd-harbor-scene-green": {
+   "file": "scene/harbor_scene_green.svg",
+   "viewBox": "0 0 390 500",
+   "role": "scene",
+   "anchor": "top-start",
+   "layers": [
+    "cd-sg-sky",
+    "cd-sg-far",
+    "cd-sg-sea",
+    "cd-sg-mid",
+    "cd-sg-pier",
+    "cd-sg-hand",
+    "cd-sg-gantry",
+    "cd-sg-wheel1",
+    "cd-sg-wheel2",
+    "cd-sg-rope",
+    "cd-sg-net",
+    "cd-sg-arrows"
+   ],
+   "tone": "day",
+   "background": "lighthouse",
+   "load": "fish",
+   "origins": {
+    "cd-sg-wheel1": "130 76",
+    "cd-sg-wheel2": "222 76",
+    "cd-sg-rope": "104 80",
+    "cd-sg-net": "104 320"
+   }
+  },
+  "cd-crane": {
+   "file": "scene/crane.svg",
+   "viewBox": "90 28 230 128",
+   "role": "part",
+   "anchor": "top-start",
+   "layers": [
+    "cd-cr-gantry",
+    "cd-cr-wheel1",
+    "cd-cr-wheel2"
+   ]
+  },
+  "cd-net-rope": {
+   "file": "scene/net_rope.svg",
+   "viewBox": "60 300 90 110",
+   "role": "part",
+   "anchor": "top-start",
+   "layers": [
+    "cd-nr-rope",
+    "cd-nr-net"
+   ]
+  },
+  "cd-pulley-wheel": {
+   "file": "scene/pulley_wheel.svg",
+   "viewBox": "96 42 68 68",
+   "role": "part",
+   "anchor": "top-start",
+   "layers": [
+    "cd-pw-wheel"
+   ]
+  },
+  "cd-harbor-scene-orange": {
+   "file": "scene/harbor_scene_orange.svg",
+   "viewBox": "0 0 390 500",
+   "role": "scene",
+   "anchor": "top-start",
+   "layers": [
+    "cd-so-sky",
+    "cd-so-far",
+    "cd-so-sea",
+    "cd-so-mid",
+    "cd-so-pier",
+    "cd-so-hand",
+    "cd-so-gantry",
+    "cd-so-wheel1",
+    "cd-so-wheel2",
+    "cd-so-rope",
+    "cd-so-net",
+    "cd-so-arrows"
+   ],
+   "tone": "day",
+   "background": "pirate",
+   "load": "chest",
+   "origins": {
+    "cd-so-wheel1": "130 76",
+    "cd-so-wheel2": "222 76",
+    "cd-so-rope": "104 80",
+    "cd-so-net": "104 320"
+   }
+  },
+  "cd-harbor-scene-orange-dusk": {
+   "file": "scene/harbor_scene_orange_dusk.svg",
+   "viewBox": "0 0 390 500",
+   "role": "scene",
+   "anchor": "top-start",
+   "layers": [
+    "cd-sod-sky",
+    "cd-sod-far",
+    "cd-sod-sea",
+    "cd-sod-mid",
+    "cd-sod-pier",
+    "cd-sod-hand",
+    "cd-sod-gantry",
+    "cd-sod-wheel1",
+    "cd-sod-wheel2",
+    "cd-sod-rope",
+    "cd-sod-net",
+    "cd-sod-arrows",
+    "cd-sod-rim"
+   ],
+   "tone": "dusk",
+   "background": "pirate",
+   "load": "chest",
+   "origins": {
+    "cd-sod-wheel1": "130 76",
+    "cd-sod-wheel2": "222 76",
+    "cd-sod-rope": "104 80",
+    "cd-sod-net": "104 320"
+   }
+  },
+  "cd-harbor-scene-red": {
+   "file": "scene/harbor_scene_red.svg",
+   "viewBox": "0 0 390 500",
+   "role": "scene",
+   "anchor": "top-start",
+   "layers": [
+    "cd-sr-sky",
+    "cd-sr-far",
+    "cd-sr-sea",
+    "cd-sr-mid",
+    "cd-sr-pier",
+    "cd-sr-hand",
+    "cd-sr-gantry",
+    "cd-sr-wheel1",
+    "cd-sr-wheel2",
+    "cd-sr-rope",
+    "cd-sr-net",
+    "cd-sr-arrows"
+   ],
+   "tone": "day",
+   "background": "dragon",
+   "load": "fish",
+   "origins": {
+    "cd-sr-wheel1": "130 76",
+    "cd-sr-wheel2": "222 76",
+    "cd-sr-rope": "104 80",
+    "cd-sr-net": "104 320"
+   }
+  },
+  "cd-harbor-scene-red-night": {
+   "file": "scene/harbor_scene_red_night.svg",
+   "viewBox": "0 0 390 500",
+   "role": "scene",
+   "anchor": "top-start",
+   "layers": [
+    "cd-srn-sky",
+    "cd-srn-far",
+    "cd-srn-sea",
+    "cd-srn-mid",
+    "cd-srn-pier",
+    "cd-srn-hand",
+    "cd-srn-gantry",
+    "cd-srn-wheel1",
+    "cd-srn-wheel2",
+    "cd-srn-rope",
+    "cd-srn-net",
+    "cd-srn-arrows",
+    "cd-srn-rim"
+   ],
+   "tone": "night",
+   "background": "dragon",
+   "load": "fish",
+   "origins": {
+    "cd-srn-wheel1": "130 76",
+    "cd-srn-wheel2": "222 76",
+    "cd-srn-rope": "104 80",
+    "cd-srn-net": "104 320"
+   }
+  }
+ }
+}

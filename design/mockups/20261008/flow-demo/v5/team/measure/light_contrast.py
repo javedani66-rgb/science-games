@@ -52,8 +52,7 @@ for L, d in LI.items():
     add('۴ بنا/زمین', 'بنا ÷ پایهٔ بتنی (دو‌لایه)', L, d['build'], d['pier'], 1.5, '', two=d['line'])
     add('۵ سایه/زمین', 'سایهٔ خودی ÷ سطح روشن بنا', L, d['build'], d['shade'], 1.5)
     add('۵ سایه/زمین', 'rim ÷ سایه (بُعد دیده شود)', L, d['lit'], d['shade'], 3)
-    if L != 'night':
-        add('۴ بنا/زمین', 'خط دور ÷ آب', L, d['line'], d['water'], 3)
+    add('۴ بنا/زمین', 'خط دور (لبهٔ سیلوئت) ÷ آب', L, d['line'], d['water'], 3)
 add('۴ بنا/زمین', 'بنا شب Y≥0.20', 'night', LI['night']['build'], '#000000', 1, f"Y={Y(LI['night']['build']):.2f}")
 for L, mn in (('dusk', .30), ('night', .20)):
     y = Y(LI[L]['build']); rows.append(dict(sec='۴ بنا/زمین', name=f'Y بنا ≥{mn}', light=L, fg=LI[L]['build'], bg='-', min=mn, val=round(y, 2), ok=y >= mn, how='', note=''))
