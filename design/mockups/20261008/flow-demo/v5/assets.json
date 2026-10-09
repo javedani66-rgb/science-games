@@ -1,0 +1,76 @@
+{
+ "page_bytes": 1209316,
+ "page_cap": 2621440,
+ "module_bytes": {
+  "env": 0,
+  "character": 0,
+  "ui": 0,
+  "card": 0,
+  "light": 9733
+ },
+ "module_caps": {
+  "env": 716800,
+  "character": 307200,
+  "ui": 204800,
+  "card": 512000,
+  "light": 51200
+ },
+ "assets": [
+  {
+   "name": "ph-box",
+   "type": "symbol",
+   "file": "_placeholder/ph_box.svg",
+   "module": "_placeholder",
+   "bytes": 493,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "ph-box-g",
+    "ph-box-clip",
+    "ph-box-base",
+    "ph-box-lit"
+   ]
+  },
+  {
+   "name": "ph-icon",
+   "type": "symbol",
+   "file": "_placeholder/ph_icon.svg",
+   "module": "_placeholder",
+   "bytes": 320,
+   "viewBox": "0 0 48 48",
+   "layers": [
+    "ph-icon-g",
+    "ph-icon-disc"
+   ]
+  },
+  {
+   "name": "ph-pill",
+   "type": "symbol",
+   "file": "_placeholder/ph_pill.svg",
+   "module": "_placeholder",
+   "bytes": 202,
+   "viewBox": "0 0 64 28",
+   "layers": [
+    "ph-pill-bg"
+   ]
+  },
+  {
+   "name": "common_defs",
+   "type": "defs",
+   "file": "light/common_defs.svg",
+   "module": "light",
+   "bytes": 2038,
+   "ids": [
+    "lt-brush",
+    "lt-clip-card",
+    "lt-clip-node",
+    "lt-reflect-dusk",
+    "lt-sky-day",
+    "lt-sky-dusk",
+    "lt-sky-night",
+    "lt-water-day",
+    "lt-water-dusk",
+    "lt-water-night"
+   ]
+  }
+ ]
+}

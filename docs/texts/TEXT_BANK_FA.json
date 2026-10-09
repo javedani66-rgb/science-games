@@ -3443,7 +3443,7 @@
    "where_fa": "عنوان صفحهٔ نقشه",
    "context_fa": "بالای نقشه",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.map.title",
@@ -3458,7 +3458,7 @@
    "where_fa": "نشانهٔ «تو اینجایی»",
    "context_fa": "روی سرزمینی که کودک در آن است",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.map.here",
@@ -3503,7 +3503,7 @@
    "where_fa": "برچسب آزمایشی",
    "context_fa": "محیطی که شاهد کافی ندارد (B31)",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.land.experimental",
@@ -4598,7 +4598,7 @@
    "where_fa": "نشان ابتدای مسیر روی نقشه",
    "context_fa": "پرچم بالای نقشهٔ یک‌تکه",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.map.start",
@@ -4613,7 +4613,7 @@
    "where_fa": "نشان انتهای مسیر روی نقشه",
    "context_fa": "پرچم پایین نقشه",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.map.end",
@@ -4733,7 +4733,7 @@
    "where_fa": "دکمهٔ منو (بالای صفحه)",
    "context_fa": "دکمهٔ ثابت با آیکون و برچسب؛ برگهٔ منو را باز می‌کند (UX_SPEC بخش ب)",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.menu.open",
@@ -4748,7 +4748,7 @@
    "where_fa": "کاشی «نقشه» در منو",
    "context_fa": "روی نقشه فقط منو را می‌بندد و به راهنمای روی نقشه می‌رود",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.menu.map",
@@ -4763,7 +4763,7 @@
    "where_fa": "کاشی «کارت‌دان» در منو",
    "context_fa": "همان جعبهٔ کارت‌ها",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.menu.cards",
@@ -4778,7 +4778,7 @@
    "where_fa": "کاشی «تمرین» در منو و عنوان صفحهٔ تمرین",
    "context_fa": "جعبهٔ لایتنر، اختیاری",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.menu.practice",
@@ -4793,7 +4793,7 @@
    "where_fa": "کاشی «راهنما» در منو",
    "context_fa": "آموزش بازی را دوباره نشان می‌دهد",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.menu.guide",
@@ -4808,7 +4808,7 @@
    "where_fa": "دکمهٔ کوچک ته منو",
    "context_fa": "جدا از کاشی‌های کودک؛ با نگه‌داشتن باز می‌شود",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.menu.adults",
@@ -4823,7 +4823,7 @@
    "where_fa": "دکمهٔ بستن برگهٔ منو و برگه‌های پایین",
    "context_fa": "کودک خودش می‌بندد",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.menu.back",
@@ -4838,7 +4838,7 @@
    "where_fa": "دکمهٔ شناور روی نقشه",
    "context_fa": "وقتی راهنما از صفحه بیرون است؛ نقشه را تا جای کودک می‌برد",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.map.me",
@@ -4853,7 +4853,7 @@
    "where_fa": "دلیل قفل روی گره و کارت",
    "context_fa": "{name} نام پیش‌نیاز است (روی نقشه نام محیط، در کارت‌دان نام مفهوم)",
    "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
    "target": "json",
    "locator": [
     "flow.lock.reason",
@@ -5340,6 +5340,576 @@
     "text"
    ],
    "text": "نیروی کمتر یعنی مسافت بیشتر؛ و کنجکاوی برای بیشتر دانستن.",
+   "status": "draft"
+  },
+  "v4.grade.cap": {
+   "id": "v4.grade.cap",
+   "kind": "ui",
+   "where_fa": "عنوان ردیف انتخاب پایه در منو",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.grade.cap",
+    "text"
+   ],
+   "text": "پایهٔ من",
+   "status": "draft"
+  },
+  "v4.grade.1": {
+   "id": "v4.grade.1",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایه (نمایش اعداد)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.grade.1",
+    "text"
+   ],
+   "text": "۱–۲",
+   "status": "draft"
+  },
+  "v4.grade.2": {
+   "id": "v4.grade.2",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایه",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.grade.2",
+    "text"
+   ],
+   "text": "۳–۴",
+   "status": "draft"
+  },
+  "v4.grade.3": {
+   "id": "v4.grade.3",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایه",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.grade.3",
+    "text"
+   ],
+   "text": "۵–۶",
+   "status": "draft"
+  },
+  "v4.grade.aria": {
+   "id": "v4.grade.aria",
+   "kind": "ui",
+   "where_fa": "برچسب خوانندهٔ صفحه برای گروه پایه‌ها",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.grade.aria",
+    "text"
+   ],
+   "text": "انتخاب پایهٔ تحصیلی",
+   "status": "draft"
+  },
+  "v4.land.stadium": {
+   "id": "v4.land.stadium",
+   "kind": "ui",
+   "where_fa": "نام زمین (لوحهٔ قاب)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.land.stadium",
+    "text"
+   ],
+   "text": "ورزشگاه",
+   "status": "draft"
+  },
+  "v4.land.space": {
+   "id": "v4.land.space",
+   "kind": "ui",
+   "where_fa": "نام زمین (لوحهٔ قاب)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.land.space",
+    "text"
+   ],
+   "text": "پایگاه فضایی",
+   "status": "draft"
+  },
+  "v4.land.farm": {
+   "id": "v4.land.farm",
+   "kind": "ui",
+   "where_fa": "نام زمین (لوحهٔ قاب)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.land.farm",
+    "text"
+   ],
+   "text": "مزرعه و آسیاب",
+   "status": "draft"
+  },
+  "v4.land.city": {
+   "id": "v4.land.city",
+   "kind": "ui",
+   "where_fa": "نام زمین (لوحهٔ قاب)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.land.city",
+    "text"
+   ],
+   "text": "شهر صنعتی ماشین‌های ساده",
+   "status": "draft"
+  },
+  "v4.node.F01": {
+   "id": "v4.node.F01",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.F01",
+    "text"
+   ],
+   "text": "زمین فوتبال",
+   "status": "draft"
+  },
+  "v4.node.F02": {
+   "id": "v4.node.F02",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.F02",
+    "text"
+   ],
+   "text": "سالن بسکتبال",
+   "status": "draft"
+  },
+  "v4.node.F03": {
+   "id": "v4.node.F03",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.F03",
+    "text"
+   ],
+   "text": "میدان کمانداری",
+   "status": "draft"
+  },
+  "v4.node.F04": {
+   "id": "v4.node.F04",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.F04",
+    "text"
+   ],
+   "text": "هاکی آهنربایی",
+   "status": "draft"
+  },
+  "v4.node.W01": {
+   "id": "v4.node.W01",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.W01",
+    "text"
+   ],
+   "text": "انبار بار فضایی",
+   "status": "draft"
+  },
+  "v4.node.W02": {
+   "id": "v4.node.W02",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.W02",
+    "text"
+   ],
+   "text": "آزمایشگاه ترازو",
+   "status": "draft"
+  },
+  "v4.node.F05": {
+   "id": "v4.node.F05",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.F05",
+    "text"
+   ],
+   "text": "سکوی پرتاب",
+   "status": "draft"
+  },
+  "v4.node.W03": {
+   "id": "v4.node.W03",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.W03",
+    "text"
+   ],
+   "text": "سطح ماه",
+   "status": "draft"
+  },
+  "v4.node.W04": {
+   "id": "v4.node.W04",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.W04",
+    "text"
+   ],
+   "text": "ایستگاه فضایی",
+   "status": "draft"
+  },
+  "v4.node.E01": {
+   "id": "v4.node.E01",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.E01",
+    "text"
+   ],
+   "text": "آسیاب بادی",
+   "status": "draft"
+  },
+  "v4.node.E02": {
+   "id": "v4.node.E02",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.E02",
+    "text"
+   ],
+   "text": "گاری‌خانه",
+   "status": "draft"
+  },
+  "v4.node.E07": {
+   "id": "v4.node.E07",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.E07",
+    "text"
+   ],
+   "text": "چاه آب",
+   "status": "draft"
+  },
+  "v4.node.M01": {
+   "id": "v4.node.M01",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.M01",
+    "text"
+   ],
+   "text": "دروازهٔ شهر",
+   "status": "draft"
+  },
+  "v4.node.B01": {
+   "id": "v4.node.B01",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.B01",
+    "text"
+   ],
+   "text": "داربست",
+   "status": "draft"
+  },
+  "v4.node.B02": {
+   "id": "v4.node.B02",
+   "kind": "ui",
+   "where_fa": "نام محیط (گره)",
+   "context_fa": "ماکت kit4 (پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v3/kit4/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v4.node.B02",
+    "text"
+   ],
+   "text": "انبار مصالح",
+   "status": "draft"
+  },
+  "v5.build.ok": {
+   "id": "v5.build.ok",
+   "kind": "ui",
+   "where_fa": "پیام موفقیت ساخت v5 (ابزار توسعه)",
+   "context_fa": "فقط در خروجی ترمینال ساخت؛ کودک نمی‌بیند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.ok",
+    "text"
+   ],
+   "text": "ساخت موفق: {kb} کیلوبایت؛ {n} نماد در sprite؛ ماژول‌ها: {mods}",
+   "status": "draft"
+  },
+  "v5.build.fail": {
+   "id": "v5.build.fail",
+   "kind": "ui",
+   "where_fa": "سرتیتر خطاهای ساخت v5",
+   "context_fa": "ابزار توسعه؛ کودک نمی‌بیند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.fail",
+    "text"
+   ],
+   "text": "ساخت شکست خورد؛ {n} خطا:",
+   "status": "draft"
+  },
+  "v5.build.page_over": {
+   "id": "v5.build.page_over",
+   "kind": "ui",
+   "where_fa": "خطای سقف صفحه",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.page_over",
+    "text"
+   ],
+   "text": "حجم صفحهٔ نهایی {kb} کیلوبایت است و از سقف {cap} کیلوبایت بیشتر شده.",
+   "status": "draft"
+  },
+  "v5.build.module_over": {
+   "id": "v5.build.module_over",
+   "kind": "ui",
+   "where_fa": "خطای بودجهٔ پوشهٔ هنرمند",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.module_over",
+    "text"
+   ],
+   "text": "پوشهٔ «{mod}» {kb} کیلوبایت است و از بودجهٔ {cap} کیلوبایت بیشتر شده.",
+   "status": "draft"
+  },
+  "v5.build.svg_over": {
+   "id": "v5.build.svg_over",
+   "kind": "ui",
+   "where_fa": "خطای سقف یک SVG",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.svg_over",
+    "text"
+   ],
+   "text": "فایل {file} {kb} کیلوبایت است و از سقف {cap} کیلوبایت برای هر SVG بیشتر شده.",
+   "status": "draft"
+  },
+  "v5.build.bad_svg": {
+   "id": "v5.build.bad_svg",
+   "kind": "ui",
+   "where_fa": "خطای SVG ناخوانا",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.bad_svg",
+    "text"
+   ],
+   "text": "فایل {file} قابل خواندن نیست: {why}",
+   "status": "draft"
+  },
+  "v5.build.forbidden": {
+   "id": "v5.build.forbidden",
+   "kind": "ui",
+   "where_fa": "خطای محتوای ممنوع در SVG",
+   "context_fa": "اسکریپت یا ارجاع بیرونی",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.forbidden",
+    "text"
+   ],
+   "text": "فایل {file} چیز ممنوع دارد: {what}",
+   "status": "draft"
+  },
+  "v5.build.dup_id": {
+   "id": "v5.build.dup_id",
+   "kind": "ui",
+   "where_fa": "خطای شناسهٔ تکراری",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.dup_id",
+    "text"
+   ],
+   "text": "شناسهٔ تکراری «{id}» در فایل‌های {a} و {b}؛ پیشوند یکتا بگذارید.",
+   "status": "draft"
+  },
+  "v5.build.missing_ref": {
+   "id": "v5.build.missing_ref",
+   "kind": "ui",
+   "where_fa": "خطای ارجاع بی‌مقصد",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.missing_ref",
+    "text"
+   ],
+   "text": "فایل {file} به شناسهٔ «{id}» ارجاع می‌دهد که در همان فایل نیست.",
+   "status": "draft"
+  },
+  "v5.build.no_viewbox": {
+   "id": "v5.build.no_viewbox",
+   "kind": "ui",
+   "where_fa": "خطای نبود viewBox",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.no_viewbox",
+    "text"
+   ],
+   "text": "فایل {file} viewBox ندارد.",
+   "status": "draft"
+  },
+  "v5.build.unknown_module": {
+   "id": "v5.build.unknown_module",
+   "kind": "ui",
+   "where_fa": "هشدار پوشهٔ ناشناس",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.unknown_module",
+    "text"
+   ],
+   "text": "هشدار: پوشهٔ «{mod}» جزو پوشه‌های شناخته‌شده نیست و بودجه ندارد.",
+   "status": "draft"
+  },
+  "v5.build.live_effect": {
+   "id": "v5.build.live_effect",
+   "kind": "ui",
+   "where_fa": "هشدار filter/blend زنده",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.live_effect",
+    "text"
+   ],
+   "text": "هشدار: فایل {file} اثر زندهٔ {what} دارد؛ سند سبک آن را ممنوع کرده (جز پشتیبان ابزار).",
+   "status": "draft"
+  },
+  "v5.build.placeholder": {
+   "id": "v5.build.placeholder",
+   "kind": "ui",
+   "where_fa": "پیام استفاده از جاگذار",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.placeholder",
+    "text"
+   ],
+   "text": "هیچ هنر واقعی نیست؛ جاگذار آزمون در sprite گذاشته شد.",
+   "status": "draft"
+  },
+  "v5.build.no_placeholder_tpl": {
+   "id": "v5.build.no_placeholder_tpl",
+   "kind": "ui",
+   "where_fa": "خطای الگو",
+   "context_fa": "ابزار توسعه",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.build.no_placeholder_tpl",
+    "text"
+   ],
+   "text": "الگوی template.html نشانگر {mark} را ندارد.",
    "status": "draft"
   }
  },

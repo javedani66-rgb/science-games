@@ -1,0 +1,185 @@
+{
+ "_doc": "منبع حقیقت hex (فاز ۰ light). هر عدد را فقط اینجا عوض کن؛ tokens.css و پالت‌ها از روی همین ساخته می‌شوند (measure/light_contrast.py --build). نسخهٔ سند سبک 1.1.",
+ "hardness": {
+  "easy": {
+   "hex": "#28853f",
+   "peaks": 1,
+   "word_key": "difficulty.easy"
+  },
+  "mid": {
+   "hex": "#e08a1e",
+   "peaks": 2,
+   "word_key": "difficulty.mid"
+  },
+  "hard": {
+   "hex": "#c4262e",
+   "peaks": 3,
+   "word_key": "difficulty.hard"
+  }
+ },
+ "ui": {
+  "cream": "#fff4d2",
+  "deep_violet": "#3a2a7a",
+  "line": "#241a5e",
+  "line_night": "#0d0426",
+  "teal": "#2fb8a8",
+  "danger_violet": "#8a4fd0",
+  "pink": "#d070c0",
+  "card_bg": "#190539",
+  "card_text_bg": "#12243a",
+  "shelf": "#2a1f5c",
+  "accent_yellow": "#ffd23f",
+  "white": "#ffffff",
+  "badge_line_day": "#0d0426"
+ },
+ "zones": {
+  "sports": {
+   "base": "#7fbf4a",
+   "shade": "#66993b",
+   "patch": "#a6d86a",
+   "night": "#a6d86a",
+   "ring": "#ffd23f",
+   "ring_outline_px": 4.5
+  },
+  "space": {
+   "base": "#7a5cd0",
+   "shade": "#5c459c",
+   "patch": "#9a7ee0",
+   "night": "#9a7ee0",
+   "ring": "#ffd23f",
+   "ring_outline_px": 4.5
+  },
+  "farm": {
+   "base": "#d6c98a",
+   "shade": "#aba16e",
+   "patch": "#ece2ae",
+   "night": "#ece2ae",
+   "ring": "#ffd23f",
+   "ring_outline_px": 10
+  },
+  "city": {
+   "base": "#5b7390",
+   "shade": "#44566c",
+   "patch": "#7a93ae",
+   "night": "#5fa8d6",
+   "ring": "#ffd23f",
+   "ring_outline_px": 4.5
+  }
+ },
+ "farm_alt": {
+  "base": "#c9c46a",
+  "shade": "#b2ac55",
+  "patch": "#e0dc8f",
+  "night": "#e0dc8f",
+  "_status": "رد شد: ΔL* 12.8 < 15 (فقط گزینهٔ اول مزرعه قبول است)"
+ },
+ "water": {
+  "sea": "#1f87b8",
+  "river": "#3fb6e0",
+  "river_lip": "#1f87b8",
+  "foam": "#ffffff"
+ },
+ "ice": {
+  "rim": "#eaf8ff",
+  "body": "#a3d5ea",
+  "crack": "#6ab7d8",
+  "cloud": "#ffffff"
+ },
+ "path": {
+  "cream": "#fff4d2",
+  "outline": "#241a5e",
+  "boardwalk": "#c98a45"
+ },
+ "lights": {
+  "day": {
+   "sky0": "#9fdcf2",
+   "sky1": "#d6f1ee",
+   "sky2": "#d6f1ee",
+   "water": "#1f87b8",
+   "lit": "#fff4cf",
+   "shade": "#4a3a8c",
+   "line": "#241a5e",
+   "windows": null,
+   "build": "#e9e4d6",
+   "pier": "#c6c1b6",
+   "shadow": {
+    "color": "#10083a",
+    "opacity": 0.28,
+    "dx": 8,
+    "dy": 6
+   }
+  },
+  "dusk": {
+   "sky0": "#6a3fa0",
+   "sky1": "#e0728a",
+   "sky2": "#f2a65a",
+   "water": "#3277a5",
+   "lit": "#ffd48a",
+   "shade": "#5b3490",
+   "line": "#241a5e",
+   "windows": null,
+   "build": "#f3d9c0",
+   "pier": "#e0a874",
+   "shadow": {
+    "color": "#3a1f6a",
+    "opacity": 0.35,
+    "dx": 14,
+    "dy": 7
+   }
+  },
+  "night": {
+   "sky0": "#1c1460",
+   "sky1": "#2a1f7a",
+   "sky2": "#2a1f7a",
+   "water": "#245090",
+   "lit": "#d8e6ff",
+   "shade": "#190539",
+   "line": "#0d0426",
+   "windows": "#ffd86b",
+   "build": "#aab4f0",
+   "pier": "#6f78c8",
+   "shadow": {
+    "color": "#0d0426",
+    "opacity": 0.4,
+    "dx": 8,
+    "dy": 6
+   }
+  }
+ },
+ "costume_allowed": [
+  "#2fb8a8",
+  "#2f7bd6",
+  "#8a4fd0",
+  "#9a3a8a",
+  "#d070c0",
+  "#1f6f78",
+  "#fff4d2"
+ ],
+ "card_art_harbor": {
+  "day": [
+   "#9fdcf2",
+   "#d6f1ee",
+   "#1f87b8"
+  ],
+  "dusk": [
+   "#6a3fa0",
+   "#e0728a",
+   "#f2a65a",
+   "#ffe9a8"
+  ],
+  "night": [
+   "#1c1460",
+   "#2a1f7a",
+   "#c4262e"
+  ]
+ },
+ "_corrections": [
+  "day water/sea #2fa3c4,#2a8fc4 → #1f87b8 (بنا÷آب 2.31→3.17)",
+  "dusk water #2a6f9c → #3277a5 (خط÷آب 2.78→3.12)",
+  "night water #173a7a → #245090 (افق÷آب 1.22→1.67)",
+  "shade sports #5fa13a→#66993b, space #5f44b0→#5c459c, farm #bfb070→#aba16e, city #475c78→#44566c (≥1.5)",
+  "ice body #bfe6f5 → #a3d5ea (÷ابر 1.32→1.58)",
+  "pink #d9608f/#e0728a → #d070c0 (رنگ‌مایه 337/347→310؛ فاصله از قرمز سختی 20/10→47)",
+  "badge day outline = ui.line_night #0d0426 (قرمز سختی÷خط 2.65→3.2)"
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "v5.build.ok": {"text": "ساخت موفق: {kb} کیلوبایت؛ {n} نماد در sprite؛ ماژول‌ها: {mods}", "kind": "ui", "where_fa": "پیام موفقیت ساخت v5 (ابزار توسعه)", "context_fa": "فقط در خروجی ترمینال ساخت؛ کودک نمی‌بیند", "band": "همه"},
+ "v5.build.fail": {"text": "ساخت شکست خورد؛ {n} خطا:", "kind": "ui", "where_fa": "سرتیتر خطاهای ساخت v5", "context_fa": "ابزار توسعه؛ کودک نمی‌بیند", "band": "همه"},
+ "v5.build.page_over": {"text": "حجم صفحهٔ نهایی {kb} کیلوبایت است و از سقف {cap} کیلوبایت بیشتر شده.", "kind": "ui", "where_fa": "خطای سقف صفحه", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.module_over": {"text": "پوشهٔ «{mod}» {kb} کیلوبایت است و از بودجهٔ {cap} کیلوبایت بیشتر شده.", "kind": "ui", "where_fa": "خطای بودجهٔ پوشهٔ هنرمند", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.svg_over": {"text": "فایل {file} {kb} کیلوبایت است و از سقف {cap} کیلوبایت برای هر SVG بیشتر شده.", "kind": "ui", "where_fa": "خطای سقف یک SVG", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.bad_svg": {"text": "فایل {file} قابل خواندن نیست: {why}", "kind": "ui", "where_fa": "خطای SVG ناخوانا", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.forbidden": {"text": "فایل {file} چیز ممنوع دارد: {what}", "kind": "ui", "where_fa": "خطای محتوای ممنوع در SVG", "context_fa": "اسکریپت یا ارجاع بیرونی", "band": "همه"},
+ "v5.build.dup_id": {"text": "شناسهٔ تکراری «{id}» در فایل‌های {a} و {b}؛ پیشوند یکتا بگذارید.", "kind": "ui", "where_fa": "خطای شناسهٔ تکراری", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.missing_ref": {"text": "فایل {file} به شناسهٔ «{id}» ارجاع می‌دهد که در همان فایل نیست.", "kind": "ui", "where_fa": "خطای ارجاع بی‌مقصد", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.no_viewbox": {"text": "فایل {file} viewBox ندارد.", "kind": "ui", "where_fa": "خطای نبود viewBox", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.unknown_module": {"text": "هشدار: پوشهٔ «{mod}» جزو پوشه‌های شناخته‌شده نیست و بودجه ندارد.", "kind": "ui", "where_fa": "هشدار پوشهٔ ناشناس", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.live_effect": {"text": "هشدار: فایل {file} اثر زندهٔ {what} دارد؛ سند سبک آن را ممنوع کرده (جز پشتیبان ابزار).", "kind": "ui", "where_fa": "هشدار filter/blend زنده", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.placeholder": {"text": "هیچ هنر واقعی نیست؛ جاگذار آزمون در sprite گذاشته شد.", "kind": "ui", "where_fa": "پیام استفاده از جاگذار", "context_fa": "ابزار توسعه", "band": "همه"},
+ "v5.build.no_placeholder_tpl": {"text": "الگوی template.html نشانگر {mark} را ندارد.", "kind": "ui", "where_fa": "خطای الگو", "context_fa": "ابزار توسعه", "band": "همه"}
+}

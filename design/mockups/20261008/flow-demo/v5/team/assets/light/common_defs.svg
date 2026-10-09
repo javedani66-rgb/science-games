@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<!-- فقط پشتیبان ابزار ماکت؛ در خروجی نهایی brush در هندسه پخته می‌شود -->
+<filter id="lt-brush" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+<linearGradient id="lt-sky-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fdcf2"/><stop offset=".55" stop-color="#d6f1ee"/><stop offset="1" stop-color="#d6f1ee"/></linearGradient>
+<linearGradient id="lt-water-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f87b8"/><stop offset="1" stop-color="#1f87b8"/></linearGradient>
+<linearGradient id="lt-sky-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a3fa0"/><stop offset=".55" stop-color="#e0728a"/><stop offset="1" stop-color="#f2a65a"/></linearGradient>
+<linearGradient id="lt-water-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3277a5"/><stop offset="1" stop-color="#3277a5"/></linearGradient>
+<linearGradient id="lt-sky-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1460"/><stop offset=".55" stop-color="#2a1f7a"/><stop offset="1" stop-color="#2a1f7a"/></linearGradient>
+<linearGradient id="lt-water-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#245090"/><stop offset="1" stop-color="#245090"/></linearGradient>
+<clipPath id="lt-clip-card"><rect width="360" height="240" rx="12"/></clipPath>
+<clipPath id="lt-clip-node"><rect width="200" height="180"/></clipPath>
+<!-- رگهٔ بازتاب آب غروب: خط‌های افقی نه لکه -->
+<g id="lt-reflect-dusk" fill="#ffb27a" fill-opacity=".4"><rect x="0" y="0" width="120" height="3" rx="1.5"/><rect x="20" y="9" width="90" height="3" rx="1.5"/><rect x="40" y="18" width="60" height="3" rx="1.5"/></g>
+</defs></svg>
