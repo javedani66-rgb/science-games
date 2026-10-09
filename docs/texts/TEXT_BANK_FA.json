@@ -3344,22 +3344,7 @@
     "flow.nav.toBox",
     "text"
    ],
-   "text": "برگرد به جعبه",
-   "status": "draft"
-  },
-  "flow.menu.btn": {
-   "id": "flow.menu.btn",
-   "kind": "ui",
-   "where_fa": "دکمهٔ «مسیر و راهنما»",
-   "context_fa": "آیکون و واژه، به‌جای باکس تکراری (چیدمان الف، D25)",
-   "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "flow.menu.btn",
-    "text"
-   ],
-   "text": "مسیر و راهنما",
+   "text": "برگرد به کارت‌دان",
    "status": "draft"
   },
   "flow.help.btn": {
@@ -3390,21 +3375,6 @@
     "text"
    ],
    "text": "کارت درس",
-   "status": "draft"
-  },
-  "flow.box.btn": {
-   "id": "flow.box.btn",
-   "kind": "ui",
-   "where_fa": "دکمهٔ جعبهٔ کارت‌ها",
-   "context_fa": "پایین نقشه و در منو",
-   "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "flow.box.btn",
-    "text"
-   ],
-   "text": "جعبهٔ کارت‌ها",
    "status": "draft"
   },
   "flow.close": {
@@ -3584,7 +3554,7 @@
     "flow.env.pending",
     "text"
    ],
-   "text": "داستان و تصویر این چالش هنوز ساخته نشده است.",
+   "text": "این چالش داره آماده می‌شه؛ زود برمی‌گردیم!",
    "status": "draft"
   },
   "flow.tier.core": {
@@ -3749,7 +3719,7 @@
     "flow.scene.pending",
     "text"
    ],
-   "text": "صحنهٔ این چالش هنوز ساخته نشده است.",
+   "text": "استاد داره این صحنه را رنگ می‌زنه؛ بعداً بیا!",
    "status": "draft"
   },
   "flow.help.title": {
@@ -3842,21 +3812,6 @@
    "text": "سرنخ‌ها تمام شد. دوباره بکش و ببین.",
    "status": "draft"
   },
-  "flow.menu.title": {
-   "id": "flow.menu.title",
-   "kind": "title",
-   "where_fa": "عنوان ورقهٔ منو",
-   "context_fa": "بالای ورقه",
-   "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "flow.menu.title",
-    "text"
-   ],
-   "text": "مسیر و راهنما",
-   "status": "draft"
-  },
   "flow.tut.map1": {
    "id": "flow.tut.map1",
    "kind": "ui",
@@ -3890,7 +3845,7 @@
   "flow.tut.map3": {
    "id": "flow.tut.map3",
    "kind": "ui",
-   "where_fa": "گام سوم آموزش نقشه",
+   "where_fa": "آموزش نقشه، گام دکمهٔ منو",
    "context_fa": "",
    "band": "همه",
    "file": "design/mockups/20261008/flow-demo/strings.fa.json",
@@ -3899,7 +3854,7 @@
     "flow.tut.map3",
     "text"
    ],
-   "text": "اینجا جعبهٔ کارت‌هاست و اینجا مسیر و راهنما.",
+   "text": "از «منو» کارت‌دان، تمرین و راهنما را باز می‌کنی.",
    "status": "draft"
   },
   "flow.tut.scene1": {
@@ -4217,21 +4172,6 @@
    "text": "برو به بازی",
    "status": "draft"
   },
-  "flow.card.goGame.off": {
-   "id": "flow.card.goGame.off",
-   "kind": "ui",
-   "where_fa": "توضیح مرحلهٔ هنوز نرفته",
-   "context_fa": "بدون نشانهٔ قفل و فشار",
-   "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "flow.card.goGame.off",
-    "text"
-   ],
-   "text": "هنوز به این محیط نرفته‌ای.",
-   "status": "draft"
-  },
   "flow.card.pending": {
    "id": "flow.card.pending",
    "kind": "story",
@@ -4244,13 +4184,13 @@
     "flow.card.pending",
     "text"
    ],
-   "text": "این کارت هنوز طراحی نشده است. جایش اینجاست.",
+   "text": "این کارت داره آماده می‌شه؛ جاش همین‌جاست.",
    "status": "draft"
   },
   "flow.box.title": {
    "id": "flow.box.title",
    "kind": "title",
-   "where_fa": "عنوان جعبهٔ کارت‌ها",
+   "where_fa": "عنوان صفحهٔ کارت‌دان",
    "context_fa": "",
    "band": "همه",
    "file": "design/mockups/20261008/flow-demo/strings.fa.json",
@@ -4259,7 +4199,7 @@
     "flow.box.title",
     "text"
    ],
-   "text": "جعبهٔ کارت‌ها",
+   "text": "کارت‌دان",
    "status": "draft"
   },
   "flow.practice.lead": {
@@ -4682,51 +4622,6 @@
    "text": "پایان مسیر",
    "status": "draft"
   },
-  "flow.menu.t.map": {
-   "id": "flow.menu.t.map",
-   "kind": "ui",
-   "where_fa": "کاشی منو",
-   "context_fa": "برگشت به نقشه",
-   "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "flow.menu.t.map",
-    "text"
-   ],
-   "text": "نقشه",
-   "status": "draft"
-  },
-  "flow.menu.t.tut": {
-   "id": "flow.menu.t.tut",
-   "kind": "ui",
-   "where_fa": "کاشی منو",
-   "context_fa": "دیدن دوبارهٔ آموزش همین صفحه",
-   "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "flow.menu.t.tut",
-    "text"
-   ],
-   "text": "آموزش",
-   "status": "draft"
-  },
-  "flow.menu.t.adults": {
-   "id": "flow.menu.t.adults",
-   "kind": "ui",
-   "where_fa": "کاشی منو",
-   "context_fa": "ورود به بخش والدین و معلم (با نگه‌داشتن)",
-   "band": "همه",
-   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "flow.menu.t.adults",
-    "text"
-   ],
-   "text": "بزرگ‌ترها",
-   "status": "draft"
-  },
   "flow.env.tapnote": {
    "id": "flow.env.tapnote",
    "kind": "ui",
@@ -4832,49 +4727,619 @@
    "text": "تمرین این کارت هنوز ساخته نشده است.",
    "status": "draft"
   },
-  "flow.box.practiceBtn": {
-   "id": "flow.box.practiceBtn",
+  "flow.menu.open": {
+   "id": "flow.menu.open",
    "kind": "ui",
-   "where_fa": "دکمهٔ پایین جعبهٔ کارت",
-   "context_fa": "رفتن به تمرین",
+   "where_fa": "دکمهٔ منو (بالای صفحه)",
+   "context_fa": "دکمهٔ ثابت با آیکون و برچسب؛ برگهٔ منو را باز می‌کند (UX_SPEC بخش ب)",
    "band": "همه",
    "file": "design/mockups/20261008/flow-demo/strings.fa.json",
    "target": "json",
    "locator": [
-    "flow.box.practiceBtn",
+    "flow.menu.open",
+    "text"
+   ],
+   "text": "منو",
+   "status": "draft"
+  },
+  "flow.menu.map": {
+   "id": "flow.menu.map",
+   "kind": "ui",
+   "where_fa": "کاشی «نقشه» در منو",
+   "context_fa": "روی نقشه فقط منو را می‌بندد و به راهنمای روی نقشه می‌رود",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.map",
+    "text"
+   ],
+   "text": "نقشه",
+   "status": "draft"
+  },
+  "flow.menu.cards": {
+   "id": "flow.menu.cards",
+   "kind": "ui",
+   "where_fa": "کاشی «کارت‌دان» در منو",
+   "context_fa": "همان جعبهٔ کارت‌ها",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.cards",
+    "text"
+   ],
+   "text": "کارت‌دان",
+   "status": "draft"
+  },
+  "flow.menu.practice": {
+   "id": "flow.menu.practice",
+   "kind": "ui",
+   "where_fa": "کاشی «تمرین» در منو و عنوان صفحهٔ تمرین",
+   "context_fa": "جعبهٔ لایتنر، اختیاری",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.practice",
     "text"
    ],
    "text": "تمرین",
    "status": "draft"
   },
-  "flow.box.cardsBtn": {
-   "id": "flow.box.cardsBtn",
+  "flow.menu.guide": {
+   "id": "flow.menu.guide",
    "kind": "ui",
-   "where_fa": "دکمهٔ پایین جعبهٔ کارت",
-   "context_fa": "برگشت به شبکهٔ کارت‌ها",
+   "where_fa": "کاشی «راهنما» در منو",
+   "context_fa": "آموزش بازی را دوباره نشان می‌دهد",
    "band": "همه",
    "file": "design/mockups/20261008/flow-demo/strings.fa.json",
    "target": "json",
    "locator": [
-    "flow.box.cardsBtn",
+    "flow.menu.guide",
     "text"
    ],
-   "text": "کارت‌ها",
+   "text": "راهنما",
    "status": "draft"
   },
-  "flow.tut.map.ring": {
-   "id": "flow.tut.map.ring",
+  "flow.menu.adults": {
+   "id": "flow.menu.adults",
    "kind": "ui",
-   "where_fa": "آموزش نقشه",
-   "context_fa": "توضیح حلقه‌های کتاب درسی؛ جایگزین راهنمای نشانه‌ها که از منو برداشته شد",
+   "where_fa": "دکمهٔ کوچک ته منو",
+   "context_fa": "جدا از کاشی‌های کودک؛ با نگه‌داشتن باز می‌شود",
    "band": "همه",
    "file": "design/mockups/20261008/flow-demo/strings.fa.json",
    "target": "json",
    "locator": [
-    "flow.tut.map.ring",
+    "flow.menu.adults",
     "text"
    ],
-   "text": "دور بعضی دایره‌ها حلقه است. حلقهٔ پر یعنی در کتاب همین پایه هست. خط‌چین یعنی در کتاب پایه‌های قبل بوده.",
+   "text": "ویژهٔ بزرگ‌ترها",
+   "status": "draft"
+  },
+  "flow.menu.back": {
+   "id": "flow.menu.back",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بستن برگهٔ منو و برگه‌های پایین",
+   "context_fa": "کودک خودش می‌بندد",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.menu.back",
+    "text"
+   ],
+   "text": "برگرد",
+   "status": "draft"
+  },
+  "flow.map.me": {
+   "id": "flow.map.me",
+   "kind": "ui",
+   "where_fa": "دکمهٔ شناور روی نقشه",
+   "context_fa": "وقتی راهنما از صفحه بیرون است؛ نقشه را تا جای کودک می‌برد",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.map.me",
+    "text"
+   ],
+   "text": "جای من",
+   "status": "draft"
+  },
+  "flow.lock.reason": {
+   "id": "flow.lock.reason",
+   "kind": "ui",
+   "where_fa": "دلیل قفل روی گره و کارت",
+   "context_fa": "{name} نام پیش‌نیاز است (روی نقشه نام محیط، در کارت‌دان نام مفهوم)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.lock.reason",
+    "text"
+   ],
+   "text": "اول: {name}",
+   "status": "draft"
+  },
+  "flow.lock.go": {
+   "id": "flow.lock.go",
+   "kind": "ui",
+   "where_fa": "دکمهٔ برگهٔ قفل",
+   "context_fa": "نقشه را تا پیش‌نیاز می‌برد",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.lock.go",
+    "text"
+   ],
+   "text": "ببرم‌ات آنجا",
+   "status": "draft"
+  },
+  "flow.map.fog.sign": {
+   "id": "flow.map.fog.sign",
+   "kind": "ui",
+   "where_fa": "برچسب تابلوی مه روی گره و عنوان برگهٔ مه",
+   "context_fa": "فقط برای مسیر پنهان کشف‌نشده (E04)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.map.fog.sign",
+    "text"
+   ],
+   "text": "راهی اینجاست",
+   "status": "draft"
+  },
+  "flow.map.fog.body": {
+   "id": "flow.map.fog.body",
+   "kind": "ui",
+   "where_fa": "متن برگهٔ مه روی نقشه",
+   "context_fa": "سرنخ بدون لو دادن جا",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.map.fog.body",
+    "text"
+   ],
+   "text": "یکی از جاهای نزدیک راهی پنهان دارد. دنبالش بگرد.",
+   "status": "draft"
+  },
+  "flow.tut.map.lock": {
+   "id": "flow.tut.map.lock",
+   "kind": "ui",
+   "where_fa": "آموزش نقشه، گام قفل",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.tut.map.lock",
+    "text"
+   ],
+   "text": "هر جای قفل‌دار دلیلش را زیرش نوشته است.",
+   "status": "draft"
+  },
+  "flow.box.new": {
+   "id": "flow.box.new",
+   "kind": "ui",
+   "where_fa": "برچسب روی کارت بازنشدهٔ کارت‌دان",
+   "context_fa": "نشان است، شمارنده نیست",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.new",
+    "text"
+   ],
+   "text": "تازه",
+   "status": "draft"
+  },
+  "flow.box.search": {
+   "id": "flow.box.search",
+   "kind": "ui",
+   "where_fa": "دکمه و کادر جستجوی کارت‌دان",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.search",
+    "text"
+   ],
+   "text": "جستجو",
+   "status": "draft"
+  },
+  "flow.box.seen": {
+   "id": "flow.box.seen",
+   "kind": "ui",
+   "where_fa": "برچسب کارت دیده‌شده",
+   "context_fa": "کودک کارت را باز کرده است",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.seen",
+    "text"
+   ],
+   "text": "دیده‌ای",
+   "status": "draft"
+  },
+  "flow.box.collected": {
+   "id": "flow.box.collected",
+   "kind": "ui",
+   "where_fa": "برچسب کارت جمع‌شده",
+   "context_fa": "کودک خودش «بذارش تو جعبه» زده است",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.collected",
+    "text"
+   ],
+   "text": "توی جعبه",
+   "status": "draft"
+  },
+  "flow.box.put": {
+   "id": "flow.box.put",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پشت کارت",
+   "context_fa": "کارت را وارد تمرین فاصله‌دار می‌کند؛ فقط کودک می‌زند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.put",
+    "text"
+   ],
+   "text": "بذارش تو جعبه",
+   "status": "draft"
+  },
+  "flow.box.fog": {
+   "id": "flow.box.fog",
+   "kind": "ui",
+   "where_fa": "کارت مه‌آلود در کارت‌دان و برگهٔ آن",
+   "context_fa": "کارت مسیر پنهان تا کشف‌نشده",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.fog",
+    "text"
+   ],
+   "text": "جایش را روی نقشه پیدا کن",
+   "status": "draft"
+  },
+  "flow.box.tbd": {
+   "id": "flow.box.tbd",
+   "kind": "ui",
+   "where_fa": "برچسب «موقت» روی کارت‌های هنوز طراحی‌نشده",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.box.tbd",
+    "text"
+   ],
+   "text": "موقت",
+   "status": "draft"
+  },
+  "flow.practice.empty": {
+   "id": "flow.practice.empty",
+   "kind": "ui",
+   "where_fa": "صفحهٔ تمرین بدون کارت جمع‌شده",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.practice.empty",
+    "text"
+   ],
+   "text": "هنوز کارتی توی جعبه نگذاشته‌ای. از «کارت‌دان» کارتی را توی جعبه بگذار.",
+   "status": "draft"
+  },
+  "flow.thread.C01.name": {
+   "id": "flow.thread.C01.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C01 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C01.name",
+    "text"
+   ],
+   "text": "نیرو",
+   "status": "draft"
+  },
+  "flow.thread.C01.line": {
+   "id": "flow.thread.C01.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C01",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C01.line",
+    "text"
+   ],
+   "text": "هل می‌دهیم، می‌کشیم؛ نیرو چیزها را به حرکت درمی‌آورد.",
+   "status": "draft"
+  },
+  "flow.thread.C02.name": {
+   "id": "flow.thread.C02.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C02 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C02.name",
+    "text"
+   ],
+   "text": "اصطکاک",
+   "status": "draft"
+  },
+  "flow.thread.C02.line": {
+   "id": "flow.thread.C02.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C02",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C02.line",
+    "text"
+   ],
+   "text": "چیزهای زبر و صاف حرکت را کم و زیاد می‌کنند.",
+   "status": "draft"
+  },
+  "flow.thread.C03.name": {
+   "id": "flow.thread.C03.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C03 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C03.name",
+    "text"
+   ],
+   "text": "چند نیرو",
+   "status": "draft"
+  },
+  "flow.thread.C03.line": {
+   "id": "flow.thread.C03.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C03",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C03.line",
+    "text"
+   ],
+   "text": "وقتی چند نیرو با هم کار می‌کنند چه می‌شود؟",
+   "status": "draft"
+  },
+  "flow.thread.C04.name": {
+   "id": "flow.thread.C04.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C04 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C04.name",
+    "text"
+   ],
+   "text": "وزن و جرم",
+   "status": "draft"
+  },
+  "flow.thread.C04.line": {
+   "id": "flow.thread.C04.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C04",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C04.line",
+    "text"
+   ],
+   "text": "سنگین و سبک چیست و زمین چطور چیزها را می‌کشد؟",
+   "status": "draft"
+  },
+  "flow.thread.C05.name": {
+   "id": "flow.thread.C05.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C05 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C05.name",
+    "text"
+   ],
+   "text": "کار و انرژی",
+   "status": "draft"
+  },
+  "flow.thread.C05.line": {
+   "id": "flow.thread.C05.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C05",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C05.line",
+    "text"
+   ],
+   "text": "برای کار کردن انرژی لازم است.",
+   "status": "draft"
+  },
+  "flow.thread.C06.name": {
+   "id": "flow.thread.C06.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C06 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C06.name",
+    "text"
+   ],
+   "text": "ماشین و تعادل",
+   "status": "draft"
+  },
+  "flow.thread.C06.line": {
+   "id": "flow.thread.C06.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C06",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C06.line",
+    "text"
+   ],
+   "text": "ماشین کارِ ما را راحت‌تر می‌کند؛ تعادل یعنی دو طرف برابر.",
+   "status": "draft"
+  },
+  "flow.thread.C07.name": {
+   "id": "flow.thread.C07.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C07 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C07.name",
+    "text"
+   ],
+   "text": "اهرم",
+   "status": "draft"
+  },
+  "flow.thread.C07.line": {
+   "id": "flow.thread.C07.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C07",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C07.line",
+    "text"
+   ],
+   "text": "یک میله و یک تکیه‌گاه، بار سنگین را بلند می‌کند.",
+   "status": "draft"
+  },
+  "flow.thread.C08.name": {
+   "id": "flow.thread.C08.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C08 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C08.name",
+    "text"
+   ],
+   "text": "شیب و گوه",
+   "status": "draft"
+  },
+  "flow.thread.C08.line": {
+   "id": "flow.thread.C08.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C08",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C08.line",
+    "text"
+   ],
+   "text": "راه شیب‌دار، گوه و پیچ نیرو را کمتر می‌کنند.",
+   "status": "draft"
+  },
+  "flow.thread.C09.name": {
+   "id": "flow.thread.C09.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C09 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C09.name",
+    "text"
+   ],
+   "text": "چرخ و قرقره",
+   "status": "draft"
+  },
+  "flow.thread.C09.line": {
+   "id": "flow.thread.C09.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C09",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C09.line",
+    "text"
+   ],
+   "text": "چرخ و طناب و دنده بار را راحت‌تر می‌برند.",
+   "status": "draft"
+  },
+  "flow.thread.C10.name": {
+   "id": "flow.thread.C10.name",
+   "kind": "title",
+   "where_fa": "نام قفسهٔ فصل C10 در کارت‌دان",
+   "context_fa": "نام مفهوم؛ از ریسمان درس (thread.json، پیشنهاد)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C10.name",
+    "text"
+   ],
+   "text": "جمع‌بندی",
+   "status": "draft"
+  },
+  "flow.thread.C10.line": {
+   "id": "flow.thread.C10.line",
+   "kind": "explainer",
+   "where_fa": "جملهٔ زیر عنوان قفسهٔ فصل C10",
+   "context_fa": "یک جملهٔ کوتاه برای کودک (draft) (واژهٔ «راه بیشتر» thread.json به «مسافت بیشتر» اصلاح شد، B45)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.thread.C10.line",
+    "text"
+   ],
+   "text": "نیروی کمتر یعنی مسافت بیشتر؛ و کنجکاوی برای بیشتر دانستن.",
    "status": "draft"
   }
  },
