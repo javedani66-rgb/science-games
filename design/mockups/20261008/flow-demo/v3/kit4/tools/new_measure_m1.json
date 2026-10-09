@@ -1,0 +1,536 @@
+{
+ "stadium": {
+  "conf": {
+   "easy": 0.0,
+   "mid": 0.11,
+   "hard": 0.0
+  },
+  "path_done": {
+   "n": 12202,
+   "Lhalo": 0.355,
+   "Ledge": 0.578,
+   "Lfill": 0.576,
+   "Lbg_med": 0.065,
+   "bg_std": 0.075,
+   "pct_halo3": 68.3,
+   "pct_edge3": 86.0,
+   "pct_outer3": 86.0,
+   "pct_fill3": 86.0,
+   "outer_p10": 2.08,
+   "outer_min": 1.33
+  },
+  "path_todo": {
+   "n": 10438,
+   "Lhalo": 0.396,
+   "Ledge": 0.023,
+   "Lfill": 0.902,
+   "Lbg_med": 0.127,
+   "bg_std": 0.069,
+   "pct_halo3": 21.8,
+   "pct_edge3": 36.3,
+   "pct_outer3": 58.1,
+   "pct_fill3": 96.9,
+   "outer_p10": 2.67,
+   "outer_min": 2.48
+  },
+  "nodes": [
+   {
+    "id": "F01",
+    "state": "done",
+    "Lhalo": 0.846,
+    "Ledge": 0.012,
+    "Lpad": 0.088,
+    "Lbg_med": 0.057,
+    "pct_halo3": 100.0,
+    "pct_edge3": 0.0,
+    "pct_outer3": 100.0,
+    "pct_pad3": 0.0,
+    "outer_p10": 7.59,
+    "outer_min": 6.88
+   },
+   {
+    "id": "F02",
+    "state": "done",
+    "Lhalo": 0.845,
+    "Ledge": 0.012,
+    "Lpad": 0.088,
+    "Lbg_med": 0.083,
+    "pct_halo3": 98.6,
+    "pct_edge3": 2.6,
+    "pct_outer3": 100.0,
+    "pct_pad3": 0.6,
+    "outer_p10": 5.8,
+    "outer_min": 3.81
+   },
+   {
+    "id": "F03",
+    "state": "open",
+    "Lhalo": 0.862,
+    "Ledge": 0.012,
+    "Lpad": 0.806,
+    "Lbg_med": 0.216,
+    "pct_halo3": 81.7,
+    "pct_edge3": 69.0,
+    "pct_outer3": 100.0,
+    "pct_pad3": 64.3,
+    "outer_p10": 4.16,
+    "outer_min": 3.86
+   },
+   {
+    "id": "F04",
+    "state": "locked",
+    "Lhalo": 0.854,
+    "Ledge": 0.012,
+    "Lpad": 0.398,
+    "Lbg_med": 0.18,
+    "pct_halo3": 94.4,
+    "pct_edge3": 63.5,
+    "pct_outer3": 100.0,
+    "pct_pad3": 18.4,
+    "outer_p10": 3.84,
+    "outer_min": 3.82
+   }
+  ]
+ },
+ "space": {
+  "conf": {
+   "easy": 0.0,
+   "mid": 0.05,
+   "hard": 0.0
+  },
+  "path_done": {
+   "n": 15359,
+   "Lhalo": 0.267,
+   "Ledge": 0.557,
+   "Lfill": 0.576,
+   "Lbg_med": 0.036,
+   "bg_std": 0.066,
+   "pct_halo3": 72.0,
+   "pct_edge3": 91.6,
+   "pct_outer3": 91.6,
+   "pct_fill3": 91.6,
+   "outer_p10": 3.97,
+   "outer_min": 1.39
+  },
+  "path_todo": {
+   "n": 10466,
+   "Lhalo": 0.232,
+   "Ledge": 0.027,
+   "Lfill": 0.902,
+   "Lbg_med": 0.041,
+   "bg_std": 0.094,
+   "pct_halo3": 57.2,
+   "pct_edge3": 7.3,
+   "pct_outer3": 64.5,
+   "pct_fill3": 94.0,
+   "outer_p10": 2.71,
+   "outer_min": 1.93
+  },
+  "nodes": [
+   {
+    "id": "W01",
+    "state": "done",
+    "Lhalo": 0.834,
+    "Ledge": 0.012,
+    "Lpad": 0.088,
+    "Lbg_med": 0.016,
+    "pct_halo3": 94.7,
+    "pct_edge3": 28.9,
+    "pct_outer3": 100.0,
+    "pct_pad3": 4.8,
+    "outer_p10": 4.15,
+    "outer_min": 3.77
+   },
+   {
+    "id": "W02",
+    "state": "done",
+    "Lhalo": 0.84,
+    "Ledge": 0.012,
+    "Lpad": 0.089,
+    "Lbg_med": 0.033,
+    "pct_halo3": 99.9,
+    "pct_edge3": 4.1,
+    "pct_outer3": 100.0,
+    "pct_pad3": 0.0,
+    "outer_p10": 8.0,
+    "outer_min": 3.8
+   },
+   {
+    "id": "F05",
+    "state": "done",
+    "Lhalo": 0.844,
+    "Ledge": 0.012,
+    "Lpad": 0.089,
+    "Lbg_med": 0.046,
+    "pct_halo3": 100.0,
+    "pct_edge3": 0.1,
+    "pct_outer3": 100.0,
+    "pct_pad3": 0.0,
+    "outer_p10": 7.11,
+    "outer_min": 3.81
+   },
+   {
+    "id": "W03",
+    "state": "open",
+    "Lhalo": 0.842,
+    "Ledge": 0.012,
+    "Lpad": 0.803,
+    "Lbg_med": 0.054,
+    "pct_halo3": 100.0,
+    "pct_edge3": 0.0,
+    "pct_outer3": 100.0,
+    "pct_pad3": 100.0,
+    "outer_p10": 8.08,
+    "outer_min": 7.26
+   },
+   {
+    "id": "W04",
+    "state": "locked",
+    "Lhalo": 0.834,
+    "Ledge": 0.012,
+    "Lpad": 0.398,
+    "Lbg_med": 0.022,
+    "pct_halo3": 100.0,
+    "pct_edge3": 0.0,
+    "pct_outer3": 100.0,
+    "pct_pad3": 100.0,
+    "outer_p10": 9.6,
+    "outer_min": 9.0
+   }
+  ]
+ },
+ "farm": {
+  "conf": {
+   "easy": 0.0,
+   "mid": 0.83,
+   "hard": 0.0
+  },
+  "path_done": {
+   "n": 13451,
+   "Lhalo": 0.465,
+   "Ledge": 0.433,
+   "Lfill": 0.576,
+   "Lbg_med": 0.201,
+   "bg_std": 0.124,
+   "pct_halo3": 8.0,
+   "pct_edge3": 5.5,
+   "pct_outer3": 8.0,
+   "pct_fill3": 25.3,
+   "outer_p10": 1.42,
+   "outer_min": 1.03
+  },
+  "path_todo": {
+   "n": 4843,
+   "Lhalo": 0.539,
+   "Ledge": 0.014,
+   "Lfill": 0.902,
+   "Lbg_med": 0.262,
+   "bg_std": 0.048,
+   "pct_halo3": 0.0,
+   "pct_edge3": 100.0,
+   "pct_outer3": 100.0,
+   "pct_fill3": 53.1,
+   "outer_p10": 3.58,
+   "outer_min": 3.26
+  },
+  "nodes": [
+   {
+    "id": "E01",
+    "state": "done",
+    "Lhalo": 0.876,
+    "Ledge": 0.012,
+    "Lpad": 0.088,
+    "Lbg_med": 0.285,
+    "pct_halo3": 38.8,
+    "pct_edge3": 100.0,
+    "pct_outer3": 100.0,
+    "pct_pad3": 25.5,
+    "outer_p10": 4.08,
+    "outer_min": 3.86
+   },
+   {
+    "id": "E02",
+    "state": "open",
+    "Lhalo": 0.87,
+    "Ledge": 0.012,
+    "Lpad": 0.801,
+    "Lbg_med": 0.288,
+    "pct_halo3": 31.2,
+    "pct_edge3": 100.0,
+    "pct_outer3": 100.0,
+    "pct_pad3": 31.2,
+    "outer_p10": 4.05,
+    "outer_min": 4.05
+   },
+   {
+    "id": "E07",
+    "state": "trial",
+    "Lhalo": 0.852,
+    "Ledge": 0.013,
+    "Lpad": 0.822,
+    "Lbg_med": 0.186,
+    "pct_halo3": 73.9,
+    "pct_edge3": 94.2,
+    "pct_outer3": 100.0,
+    "pct_pad3": 62.8,
+    "outer_p10": 4.29,
+    "outer_min": 3.78
+   }
+  ]
+ },
+ "city": {
+  "conf": {
+   "easy": 0.0,
+   "mid": 1.08,
+   "hard": 0.0
+  },
+  "path_done": {
+   "n": 7526,
+   "Lhalo": 0.303,
+   "Ledge": 0.563,
+   "Lfill": 0.576,
+   "Lbg_med": 0.076,
+   "bg_std": 0.061,
+   "pct_halo3": 40.0,
+   "pct_edge3": 87.9,
+   "pct_outer3": 87.9,
+   "pct_fill3": 89.3,
+   "outer_p10": 2.89,
+   "outer_min": 1.32
+  },
+  "path_todo": {
+   "n": 7423,
+   "Lhalo": 0.289,
+   "Ledge": 0.031,
+   "Lfill": 0.902,
+   "Lbg_med": 0.063,
+   "bg_std": 0.041,
+   "pct_halo3": 49.0,
+   "pct_edge3": 2.6,
+   "pct_outer3": 51.7,
+   "pct_fill3": 100.0,
+   "outer_p10": 2.67,
+   "outer_min": 2.06
+  },
+  "nodes": [
+   {
+    "id": "M01",
+    "state": "done",
+    "Lhalo": 0.848,
+    "Ledge": 0.012,
+    "Lpad": 0.088,
+    "Lbg_med": 0.104,
+    "pct_halo3": 94.7,
+    "pct_edge3": 35.8,
+    "pct_outer3": 100.0,
+    "pct_pad3": 3.7,
+    "outer_p10": 4.08,
+    "outer_min": 3.8
+   },
+   {
+    "id": "B01",
+    "state": "open",
+    "Lhalo": 0.848,
+    "Ledge": 0.012,
+    "Lpad": 0.803,
+    "Lbg_med": 0.076,
+    "pct_halo3": 100.0,
+    "pct_edge3": 0.0,
+    "pct_outer3": 100.0,
+    "pct_pad3": 100.0,
+    "outer_p10": 6.68,
+    "outer_min": 6.65
+   },
+   {
+    "id": "B02",
+    "state": "locked",
+    "Lhalo": 0.841,
+    "Ledge": 0.012,
+    "Lpad": 0.398,
+    "Lbg_med": 0.051,
+    "pct_halo3": 100.0,
+    "pct_edge3": 0.0,
+    "pct_outer3": 100.0,
+    "pct_pad3": 100.0,
+    "outer_p10": 7.87,
+    "outer_min": 6.18
+   }
+  ]
+ },
+ "text": [
+  {
+   "land": "stadium",
+   "t": "ورزشگاه",
+   "fs": 18,
+   "cr": 6.72
+  },
+  {
+   "land": "stadium",
+   "t": "شروع",
+   "fs": 16,
+   "cr": 9.31
+  },
+  {
+   "land": "stadium",
+   "t": "زمین فوتبال",
+   "fs": 16,
+   "cr": 9.24
+  },
+  {
+   "land": "stadium",
+   "t": "سالن بسکتبال",
+   "fs": 16,
+   "cr": 9.23
+  },
+  {
+   "land": "stadium",
+   "t": "میدان کمانداری",
+   "fs": 16,
+   "cr": 9.3
+  },
+  {
+   "land": "stadium",
+   "t": "تو اینجایی",
+   "fs": 16,
+   "cr": 6.05
+  },
+  {
+   "land": "stadium",
+   "t": "هاکی آهنربایی",
+   "fs": 16,
+   "cr": 9.23
+  },
+  {
+   "land": "stadium",
+   "t": "اول: میدان کمانداری",
+   "fs": 14,
+   "cr": 5.25
+  },
+  {
+   "land": "space",
+   "t": "پایگاه فضایی",
+   "fs": 18,
+   "cr": 6.68
+  },
+  {
+   "land": "space",
+   "t": "انبار بار فضایی",
+   "fs": 16,
+   "cr": 9.24
+  },
+  {
+   "land": "space",
+   "t": "آزمایشگاه ترازو",
+   "fs": 16,
+   "cr": 9.14
+  },
+  {
+   "land": "space",
+   "t": "سکوی پرتاب",
+   "fs": 16,
+   "cr": 9.24
+  },
+  {
+   "land": "space",
+   "t": "سطح ماه",
+   "fs": 16,
+   "cr": 9.3
+  },
+  {
+   "land": "space",
+   "t": "تو اینجایی",
+   "fs": 16,
+   "cr": 6.05
+  },
+  {
+   "land": "space",
+   "t": "ایستگاه فضایی",
+   "fs": 16,
+   "cr": 9.14
+  },
+  {
+   "land": "space",
+   "t": "اول: سطح ماه",
+   "fs": 14,
+   "cr": 5.08
+  },
+  {
+   "land": "farm",
+   "t": "مزرعه و آسیاب",
+   "fs": 18,
+   "cr": 6.68
+  },
+  {
+   "land": "farm",
+   "t": "آسیاب بادی",
+   "fs": 16,
+   "cr": 9.23
+  },
+  {
+   "land": "farm",
+   "t": "گاری‌خانه",
+   "fs": 16,
+   "cr": 9.24
+  },
+  {
+   "land": "farm",
+   "t": "تو اینجایی",
+   "fs": 16,
+   "cr": 6.05
+  },
+  {
+   "land": "farm",
+   "t": "چاه آب",
+   "fs": 16,
+   "cr": 9.23
+  },
+  {
+   "land": "farm",
+   "t": "آزمایشی",
+   "fs": 14,
+   "cr": 9.21
+  },
+  {
+   "land": "city",
+   "t": "شهر صنعتی ماشین‌های سا",
+   "fs": 18,
+   "cr": 6.68
+  },
+  {
+   "land": "city",
+   "t": "دروازهٔ شهر",
+   "fs": 16,
+   "cr": 9.23
+  },
+  {
+   "land": "city",
+   "t": "داربست",
+   "fs": 16,
+   "cr": 9.37
+  },
+  {
+   "land": "city",
+   "t": "تو اینجایی",
+   "fs": 16,
+   "cr": 6.05
+  },
+  {
+   "land": "city",
+   "t": "انبار مصالح",
+   "fs": 16,
+   "cr": 9.23
+  },
+  {
+   "land": "city",
+   "t": "اول: داربست",
+   "fs": 14,
+   "cr": 5.14
+  },
+  {
+   "land": "city",
+   "t": "پایان مسیر",
+   "fs": 16,
+   "cr": 9.31
+  }
+ ]
+}

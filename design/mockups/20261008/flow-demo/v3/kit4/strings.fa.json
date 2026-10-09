@@ -1,0 +1,292 @@
+{
+ "flow.map.title": {
+  "text": "نقشهٔ علوم",
+  "kind": "title",
+  "where_fa": "عنوان صفحهٔ نقشه",
+  "context_fa": "بالای نقشه",
+  "band": "همه"
+ },
+ "flow.map.here": {
+  "text": "تو اینجایی",
+  "kind": "ui",
+  "where_fa": "نشانهٔ «تو اینجایی»",
+  "context_fa": "روی سرزمینی که کودک در آن است",
+  "band": "همه"
+ },
+ "flow.land.experimental": {
+  "text": "آزمایشی",
+  "kind": "ui",
+  "where_fa": "برچسب آزمایشی",
+  "context_fa": "محیطی که شاهد کافی ندارد (B31)",
+  "band": "همه"
+ },
+ "flow.map.start": {
+  "text": "شروع",
+  "kind": "ui",
+  "where_fa": "نشان ابتدای مسیر روی نقشه",
+  "context_fa": "پرچم بالای نقشهٔ یک‌تکه",
+  "band": "همه"
+ },
+ "flow.map.end": {
+  "text": "پایان مسیر",
+  "kind": "ui",
+  "where_fa": "نشان انتهای مسیر روی نقشه",
+  "context_fa": "پرچم پایین نقشه",
+  "band": "همه"
+ },
+ "flow.menu.open": {
+  "text": "منو",
+  "kind": "ui",
+  "where_fa": "دکمهٔ منو (بالای صفحه)",
+  "context_fa": "دکمهٔ ثابت با آیکون و برچسب؛ برگهٔ منو را باز می‌کند (UX_SPEC بخش ب)",
+  "band": "همه"
+ },
+ "flow.menu.map": {
+  "text": "نقشه",
+  "kind": "ui",
+  "where_fa": "کاشی «نقشه» در منو",
+  "context_fa": "روی نقشه فقط منو را می‌بندد و به راهنمای روی نقشه می‌رود",
+  "band": "همه"
+ },
+ "flow.menu.cards": {
+  "text": "کارت‌دان",
+  "kind": "ui",
+  "where_fa": "کاشی «کارت‌دان» در منو",
+  "context_fa": "همان جعبهٔ کارت‌ها",
+  "band": "همه"
+ },
+ "flow.menu.practice": {
+  "text": "تمرین",
+  "kind": "ui",
+  "where_fa": "کاشی «تمرین» در منو و عنوان صفحهٔ تمرین",
+  "context_fa": "جعبهٔ لایتنر، اختیاری",
+  "band": "همه"
+ },
+ "flow.menu.guide": {
+  "text": "راهنما",
+  "kind": "ui",
+  "where_fa": "کاشی «راهنما» در منو",
+  "context_fa": "آموزش بازی را دوباره نشان می‌دهد",
+  "band": "همه"
+ },
+ "flow.menu.adults": {
+  "text": "ویژهٔ بزرگ‌ترها",
+  "kind": "ui",
+  "where_fa": "دکمهٔ کوچک ته منو",
+  "context_fa": "جدا از کاشی‌های کودک؛ با نگه‌داشتن باز می‌شود",
+  "band": "همه"
+ },
+ "flow.menu.back": {
+  "text": "برگرد",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بستن برگهٔ منو و برگه‌های پایین",
+  "context_fa": "کودک خودش می‌بندد",
+  "band": "همه"
+ },
+ "flow.map.me": {
+  "text": "جای من",
+  "kind": "ui",
+  "where_fa": "دکمهٔ شناور روی نقشه",
+  "context_fa": "وقتی راهنما از صفحه بیرون است؛ نقشه را تا جای کودک می‌برد",
+  "band": "همه"
+ },
+ "flow.lock.reason": {
+  "text": "اول: {name}",
+  "kind": "ui",
+  "where_fa": "دلیل قفل روی گره و کارت",
+  "context_fa": "{name} نام پیش‌نیاز است (روی نقشه نام محیط، در کارت‌دان نام مفهوم)",
+  "band": "همه"
+ },
+ "v4.grade.cap": {
+  "text": "پایهٔ من",
+  "kind": "ui",
+  "where_fa": "عنوان ردیف انتخاب پایه در منو",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.grade.1": {
+  "text": "۱–۲",
+  "kind": "ui",
+  "where_fa": "دکمهٔ پایه (نمایش اعداد)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.grade.2": {
+  "text": "۳–۴",
+  "kind": "ui",
+  "where_fa": "دکمهٔ پایه",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.grade.3": {
+  "text": "۵–۶",
+  "kind": "ui",
+  "where_fa": "دکمهٔ پایه",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.grade.aria": {
+  "text": "انتخاب پایهٔ تحصیلی",
+  "kind": "ui",
+  "where_fa": "برچسب خوانندهٔ صفحه برای گروه پایه‌ها",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.land.stadium": {
+  "text": "ورزشگاه",
+  "kind": "ui",
+  "where_fa": "نام زمین (لوحهٔ قاب)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.land.space": {
+  "text": "پایگاه فضایی",
+  "kind": "ui",
+  "where_fa": "نام زمین (لوحهٔ قاب)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.land.farm": {
+  "text": "مزرعه و آسیاب",
+  "kind": "ui",
+  "where_fa": "نام زمین (لوحهٔ قاب)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.land.city": {
+  "text": "شهر صنعتی ماشین‌های ساده",
+  "kind": "ui",
+  "where_fa": "نام زمین (لوحهٔ قاب)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.F01": {
+  "text": "زمین فوتبال",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.F02": {
+  "text": "سالن بسکتبال",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.F03": {
+  "text": "میدان کمانداری",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.F04": {
+  "text": "هاکی آهنربایی",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.W01": {
+  "text": "انبار بار فضایی",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.W02": {
+  "text": "آزمایشگاه ترازو",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.F05": {
+  "text": "سکوی پرتاب",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.W03": {
+  "text": "سطح ماه",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.W04": {
+  "text": "ایستگاه فضایی",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.E01": {
+  "text": "آسیاب بادی",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.E02": {
+  "text": "گاری‌خانه",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.E07": {
+  "text": "چاه آب",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.M01": {
+  "text": "دروازهٔ شهر",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.B01": {
+  "text": "داربست",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v4.node.B02": {
+  "text": "انبار مصالح",
+  "kind": "ui",
+  "where_fa": "نام محیط (گره)",
+  "context_fa": "ماکت kit4 (پیش‌نویس)",
+  "band": "همه",
+  "status": "draft"
+ }
+}

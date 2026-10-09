@@ -8,7 +8,7 @@ CH=[ # id, name, main, light, dark
 ('energy','#efbd1f','#ffe48a','#a47a07'),
 ('machine','#e0699c','#f5b0cd','#9c2f62'),
 ('lever','#4a55c4','#9ca3ee','#272f86'),
-('slope','#8d3562','#c47a9f','#54183a'),
+('slope','#9a3fb5','#d09be0','#561f6b'),
 ('wheel','#6a8aa5','#aec3d4','#3a566e'),
 ('summary','#263e6e','#6f89c0','#121f40'),
 ]
@@ -51,17 +51,20 @@ def glyph(k, fg, hi, ln, acc):
                 f'<g transform="translate(26 38) rotate(-34)"><rect x="-9" y="-16" width="18" height="16" rx="2.5" fill="{acc}" {S}/></g>'
                 f'<path d="M44,56 V44 L61,56Z" fill="{hi}" {S}/>')
     if k=='wheel':
-        s=f'<path d="M44,28 V48" stroke="{ln}" stroke-width="2.4"/><rect x="38" y="48" width="12" height="11" rx="2.5" fill="{acc}" {S}/>'
-        s+=f'<circle cx="26" cy="26" r="17" fill="{hi}" {S}/><circle cx="26" cy="26" r="11" fill="{fg}" stroke="{ln}" stroke-width="2"/>'
-        for a in range(0,360,60): s+=f'<path d="M26,26 L{26+11*math.cos(math.radians(a)):.1f},{26+11*math.sin(math.radians(a)):.1f}" stroke="{ln}" stroke-width="1.8"/>'
-        s+=f'<circle cx="26" cy="26" r="3.2" fill="{acc}" stroke="{ln}" stroke-width="1.6"/><path d="M43,26 A17,17 0 0 1 26,43" fill="none" stroke="{ln}" stroke-width="2.4"/>'
-        s+=gear(12,52,9,7,acc,ln=ln,lw=1.8)
+        # قرقره: قلاب بالا، چرخ بزرگ با شیار، طناب چپ با وزنه، طناب راست (کشیدن)
+        s=f'<path d="M32,2 V10" stroke="{ln}" stroke-width="3.4" stroke-linecap="round"/><path d="M26,4 H38" stroke="{ln}" stroke-width="3.4" stroke-linecap="round"/>'
+        s+=f'<path d="M15,27 V47 M49,27 V43" stroke="{ln}" stroke-width="3.6" stroke-linecap="round"/>'
+        s+=f'<circle cx="32" cy="27" r="17" fill="{fg}" {S}/><circle cx="32" cy="27" r="10.5" fill="{hi}" stroke="{ln}" stroke-width="2.4"/><circle cx="32" cy="27" r="4" fill="{acc}" stroke="{ln}" stroke-width="2.2"/>'
+        s+=f'<path d="M21,17 A14,14 0 0 1 32,13" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".7"/>'
+        s+=f'<rect x="5" y="47" width="20" height="14" rx="3" fill="{acc}" {S}/><path d="M9,51 H21" stroke="#fff" stroke-width="2.4" opacity=".6" stroke-linecap="round"/>'
+        s+=f'<path d="M49,43 l-6,9 h12Z" fill="{acc}" {S}/>'
         return s
     if k=='summary':
-        return (f'<path d="M14,58 V30 a18,18 0 0 1 36,0 V58Z" fill="{ln}" {S}/><path d="M18,58 V30 a14,14 0 0 1 28,0 V58Z" fill="{acc}" opacity=".85"/>'
-                f'<path d="M18,58 L32,54 V22 L18,28Z" fill="{fg}" {S}/><circle cx="28" cy="40" r="1.8" fill="{ln}"/>'
-                +star4(32,6,6,hi).replace('/>',f' stroke="{ln}" stroke-width="1.5"/>')+
-                f'<ellipse cx="14" cy="59" rx="12" ry="3.5" fill="{hi}" opacity=".85"/><ellipse cx="48" cy="60" rx="14" ry="3.2" fill="{hi}" opacity=".85"/>')
+        # جمع‌بندی: کتاب باز بزرگ + ستارهٔ درخشان بالای آن
+        return (f'<path d="M4,22 Q18,16 32,24 Q46,16 60,22 V56 Q46,50 32,58 Q18,50 4,56Z" fill="{fg}" {S}/>'
+                f'<path d="M32,24 V58" stroke="{ln}" stroke-width="2.6"/><path d="M9,29 Q18,26 27,31 M9,37 Q18,34 27,39 M37,31 Q46,26 55,29 M37,39 Q46,34 55,37" fill="none" stroke="{hi}" stroke-width="2.8" stroke-linecap="round"/>'
+                +star4(32,9,9,acc).replace('/>',f' stroke="{ln}" stroke-width="2.2" stroke-linejoin="round"/>')+
+                f'<path d="M4,56 Q18,50 32,58 Q46,50 60,56 V60 Q46,54 32,62 Q18,54 4,60Z" fill="{hi}" {S}/>')
 for k,main,light,dark in CH:
     g=glyph(k,main,light,dark,GOLD_L)
     svg(f'glyph-{k}.svg',64,64,g)   # for the cream face of a node / card

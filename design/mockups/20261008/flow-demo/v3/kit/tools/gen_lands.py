@@ -1,156 +1,176 @@
+# gen_lands.py (نسخهٔ ۲): چهار زمین، هر کدام سه لایه (back/mid/front) بر پایهٔ palettes.py
+# اصل شکل–زمینه: پس‌زمینه روشنایی میانی و کم‌اشباع؛ جزئیات تزئینی کم‌نور و دور از ستون‌های مسیر
+# (ستون راست x≈248 و چپ x≈98 در بوم ۳۶۰). هیچ متنی در گرافیک نیست.
 from kitlib import *
-W,H=360,600
-R=random.Random(7)
-
+from palettes import PAL
+W,H=360,720
+_id=[0]
+def uid(p='g'):
+    _id[0]+=1; return f'{p}{_id[0]}'
+def lg(stops,x2=0,y2=1):
+    i=uid('l')
+    return i,f'<linearGradient id="{i}" x1="0" y1="0" x2="{x2}" y2="{y2}">'+''.join(f'<stop offset="{o}" stop-color="{c}"'+(f' stop-opacity="{a}"' if a is not None else '')+'/>' for o,c,*r in stops for a in [r[0] if r else None])+'</linearGradient>'
+def rg(col,a=.6):
+    i=uid('r'); return i,f'<radialGradient id="{i}"><stop offset="0" stop-color="{col}" stop-opacity="{a}"/><stop offset="1" stop-color="{col}" stop-opacity="0"/></radialGradient>'
+def glow(defs,cx,cy,r,col,a=.6):
+    i,d=rg(col,a); defs.append(d); return f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="url(#{i})"/>'
+def vgrad(defs,stops):
+    i,d=lg(stops); defs.append(d); return f'url(#{i})'
+BLUR='<filter id="bl6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter><filter id="bl14" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter><filter id="bl3" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="3"/></filter>'
+def ridge(y,amp,seed,fill,n=7,ex=''):
+    return hills(W,y,amp,seed,fill,ln=None,bottom=H+20,n=n,ex=ex)
+def cloud(cx,cy,s,col,a):
+    return f'<g fill="{col}" opacity="{a}" transform="translate({cx},{cy}) scale({s})"><ellipse rx="40" ry="10"/><ellipse cx="-16" cy="-8" rx="18" ry="11"/><ellipse cx="10" cy="-11" rx="22" ry="14"/></g>'
+def rim(path_d,col,a=.35,w=2):
+    return f'<path d="{path_d}" fill="none" stroke="{col}" stroke-opacity="{a}" stroke-width="{w}"/>'
 def write_land(key, defs, back, mid, front):
+    dd=''.join(defs) if isinstance(defs,list) else defs
     for part,body in (('back',back),('mid',mid),('front',front)):
-        svg(f'land-{key}-{part}.svg',W,H,body,defs)
-    svg(f'land-{key}.svg',W,H,f'<g id="back">{back}</g><g id="mid">{mid}</g><g id="front">{front}</g>',defs)
+        svg(f'land-{key}-{part}.svg',W,H,body,dd+BLUR)
+    svg(f'land-{key}.svg',W,H,f'<g id="back">{back}</g><g id="mid">{mid}</g><g id="front">{front}</g>',dd+BLUR)
 
-# ---------- 1. stadium ----------
-defs=f'''<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4c978"/><stop offset=".55" stop-color="#fbe6b4"/><stop offset="1" stop-color="#fff3d6"/></linearGradient>
-<radialGradient id="sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff6cf"/><stop offset=".5" stop-color="#ffe08a" stop-opacity=".8"/><stop offset="1" stop-color="#ffe08a" stop-opacity="0"/></radialGradient>
-<linearGradient id="grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b7cf8e"/><stop offset="1" stop-color="#8fb27a"/></linearGradient>
-<linearGradient id="trk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d08a5a"/><stop offset="1" stop-color="#b3683f"/></linearGradient>{WOBBLE}'''
-back=f'<rect width="{W}" height="{H}" fill="url(#sky)"/><circle cx="270" cy="70" r="90" fill="url(#sun)"/>'
-# clouds
-for cx,cy,s in ((60,60,1),(200,110,.8),(310,40,.6)):
-    back+=f'<g fill="#fffaf0" opacity=".85" transform="translate({cx},{cy}) scale({s})"><ellipse cx="0" cy="0" rx="34" ry="11"/><ellipse cx="-14" cy="-8" rx="16" ry="12"/><ellipse cx="10" cy="-11" rx="20" ry="14"/></g>'
-# far grandstand with crowd dots
-stand='<g filter="url(#wob)">'
-stand+=f'<path d="M0,215 L0,150 Q180,110 360,150 L360,215Z" fill="#c9733e" stroke="{LINE}" stroke-width="2.5" stroke-opacity=".6"/>'
-for i,c in enumerate(('#e8a85a','#d9944c','#c9733e')):
-    stand+=f'<path d="M0,{175+i*14} Q180,{138+i*14} 360,{175+i*14} L360,{190+i*14} Q180,{153+i*14} 0,{190+i*14}Z" fill="{c}" opacity=".9"/>'
-cols=['#184441','#fff0c9','#8a5bc7','#3f7fd0','#efbd1f','#e0699c']
-for row in range(3):
-    for k in range(34):
-        x=8+k*10.3+R.uniform(-1,1); yb=170+row*14-(abs(x-180)**2)/1500*-1
-        y=148+row*14+ (x-180)**2/ (1500) *0.9+R.uniform(-1,1)
-        stand+=f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.6" fill="{cols[R.randrange(6)]}"/>'
-stand+='</g>'
-back+=stand
-# flag string
-back+=f'<path d="M0,140 Q180,95 360,140" fill="none" stroke="{LINE}" stroke-opacity=".5" stroke-width="1.5"/>'
-for i in range(14):
-    t=(i+.5)/14; x=t*360; y=140-4*0 -( (0.5-abs(t-.5))*2 )*45*0.9*1 + 0
-    y=140-(1-(2*t-1)**2)*45*.98*0.5*2*0.5+0
-    back+=f'<path d="M{x:.1f},{y:.1f} l7,0 l-3.5,10Z" fill="{cols[i%6]}"/>'
-mid=hills(W,235,10,3,'url(#grass)',ln=None,n=5)
-# mown stripes
-mid+='<g opacity=".18">'+''.join(f'<rect x="{i*60}" y="225" width="30" height="400" fill="#fff"/>' for i in range(6))+'</g>'
-# running track curve and field lines
-mid+=f'<path d="M-20,330 Q180,262 380,330 L380,372 Q180,300 -20,372Z" fill="url(#trk)" stroke="{LINE}" stroke-opacity=".35" stroke-width="2"/>'
-for k in (0,1):
-    mid+=f'<path d="M-20,{342+k*10} Q180,{274+k*10} 380,{342+k*10}" fill="none" stroke="#fff0c9" stroke-width="1.6" opacity=".7" stroke-dasharray="1 0"/>'
-# goal posts (far)
-mid+=f'<g transform="translate(62,238)" fill="none" stroke="#fff8e8" stroke-width="4" stroke-linecap="round"><path d="M0,40 V0 H44 V40"/><path d="M6,4 L6,38 M14,4 V38 M22,4 V38 M30,4 V38 M38,4 V38" stroke-width=".8" opacity=".6"/></g>'
-mid+=f'<circle cx="296" cy="262" r="2" fill="none"/>'
-# center circle
-mid+=f'<ellipse cx="260" cy="470" rx="70" ry="22" fill="none" stroke="#fff0c9" stroke-width="3" opacity=".65"/><path d="M-20,540 Q180,500 380,540" fill="none" stroke="#fff0c9" stroke-width="3" opacity=".55"/>'
-front=''
-# bottom bleachers wood steps left/right + cones + ball + rope
-front+=f'<path d="M0,520 L0,600 L60,600 L40,540 Z" fill="#a8672f" stroke="{LINE}" stroke-width="2.5" stroke-opacity=".7"/><path d="M360,505 L360,600 L292,600 L318,530Z" fill="#a8672f" stroke="{LINE}" stroke-width="2.5" stroke-opacity=".7"/>'
-for yy in (545,568,590): front+=f'<path d="M0,{yy} L{40-(yy-540)*0.0+10},{yy}" stroke="#e8b878" stroke-width="3"/>'
-for x,y in ((88,560),(262,580)):
-    front+=f'<path d="M{x-11},{y+12} L{x-6},{y-14} L{x+6},{y-14} L{x+11},{y+12}Z" fill="#fb9b3a" stroke="{LINE}" stroke-width="2"/><rect x="{x-5.5}" y="{y-6}" width="11" height="4" fill="#fff0c9"/><ellipse cx="{x}" cy="{y+13}" rx="14" ry="3.5" fill="{LINE}" opacity=".35"/>'
-front+=f'<circle cx="150" cy="578" r="13" fill="#fff8e8" stroke="{LINE}" stroke-width="2.2"/><path d="M150,570 l6,4 -2,7 h-8 l-2,-7Z" fill="{LINE}"/><ellipse cx="150" cy="592" rx="14" ry="3" fill="{LINE}" opacity=".3"/>'
-front+=f'<rect x="0" y="0" width="{W}" height="{H}" fill="none"/>'
-write_land('stadium',defs,back,mid,front)
+# ===================== ورزشگاه =====================
+def stadium():
+    P=PAL['stadium'];R=random.Random(7);D=[]
+    sky=vgrad(D,[(0,P['sky0']),(.34,P['sky1']),(.58,P['sky2']),(1,P['sky2'])])
+    back=f'<rect width="{W}" height="{H}" fill="{sky}"/>'
+    back+=glow(D,330,190,210,P['glow'],.42)+glow(D,330,190,80,P['glow'],.3)
+    back+=cloud(70,120,1.3,'#e2909a',.22)+cloud(240,80,1.0,'#e2909a',.18)+cloud(330,170,.8,'#f0a874',.2)
+    # تپه‌های دور (مهآلود، کم‌اشباع)
+    back+=ridge(262,10,3,P['far'],ex='opacity=".85"')
+    # چراغ‌های ورزشگاه (فقط حاشیه)
+    for x in (18,342):
+        back+=f'<rect x="{x-3}" y="170" width="6" height="110" fill="#4a2a44"/><rect x="{x-17}" y="150" width="34" height="24" rx="4" fill="#5e3a58"/>'
+        back+=''.join(f'<circle cx="{x-10+j*10}" cy="{157+i*10}" r="3.2" fill="#ffd9a0" opacity=".9"/>' for i in range(2) for j in range(3))+glow(D,x,162,46,P['glow'],.5)
+    # سکوی تماشاگران: دیوار + ردیف تماشاگر کم‌نور
+    back+=f'<path d="M0,300 V252 Q180,228 360,252 V300Z" fill="{P["stand"]}"/>'
+    back+=f'<path d="M0,252 Q180,228 360,252" fill="none" stroke="#c9849a" stroke-opacity=".35" stroke-width="3"/>'
+    cols=['#b5566e','#d79a62','#6a6aa8','#4aa6a0','#c9a24a']
+    for row in range(4):
+        for k in range(36):
+            x=5+k*10+R.uniform(-1.2,1.2); y=262+row*10+ ((x-180)**2)/9000*-1*-1 - 14*(1-((x-180)/180)**2)*0 +R.uniform(-1,1)
+            back+=f'<circle cx="{x:.1f}" cy="{y:.1f}" r="2.8" fill="{cols[R.randrange(5)]}" opacity=".5"/>'
+    back+=f'<path d="M0,300 H360" stroke="#2a1420" stroke-opacity=".45" stroke-width="3"/>'
+    # پرچم‌های ریسه‌ای بالا (کم‌نور)
+    back+=f'<path d="M0,232 Q180,196 360,232" fill="none" stroke="#3a1c30" stroke-opacity=".5" stroke-width="1.6"/>'
+    for i in range(12):
+        t=(i+.5)/12;x=t*360;y=232-(1-(2*t-1)**2)*36
+        back+=f'<path d="M{x:.0f},{y:.0f} l8,0 l-4,11Z" fill="{cols[i%5]}" opacity=".55"/>'
+    # زمین چمن
+    mid=f'<path d="M0,300 H360 V{H} H0Z" fill="{vgrad(D,[(0,P["pitch0"]),(.55,P["pitch1"]),(1,"#35603a")])}"/>'
+    mid+='<g opacity=".07">'+''.join(f'<rect x="{i*60}" y="300" width="30" height="{H}" fill="#fff"/>' for i in range(6))+'</g>'
+    mid+='<g opacity=".06">'+''.join(f'<rect x="{i*60+30}" y="300" width="30" height="{H}" fill="#000"/>' for i in range(6))+'</g>'
+    mid+=glow(D,330,330,170,P['glow'],.12)
+    # خطوط زمین بسیار کم‌نور
+    mid+=f'<g fill="none" stroke="#e8f2d0" stroke-opacity=".13" stroke-width="3"><ellipse cx="180" cy="470" rx="120" ry="52"/><path d="M-10,470 H370"/><rect x="40" y="320" width="280" height="70" rx="4" transform="skewX(0)"/></g>'
+    # دروازهٔ دور: جیب راست (x≈262..340 داخلی) که از مسیر آزاد است
+    mid+=f'<g transform="translate(284,326)" fill="none" stroke="#f0d8b8" stroke-opacity=".45" stroke-width="3.5" stroke-linecap="round"><path d="M0,34 V0 H52 V34"/><path d="M8,4 V32 M17,4 V32 M26,4 V32 M35,4 V32 M44,4 V32" stroke-width=".8" opacity=".6"/></g>'
+    # مسیر دویدن
+    mid+=f'<path d="M-20,650 Q180,600 380,650 V{H} H-20Z" fill="{P["track"]}" opacity=".9"/><path d="M-20,650 Q180,600 380,650" fill="none" stroke="#e8b28a" stroke-opacity=".16" stroke-width="3"/>'
+    mid+=f'<path d="M-20,676 Q180,626 380,676" fill="none" stroke="#e8b28a" stroke-opacity=".12" stroke-width="2"/>'
+    front=f'<path d="M-4,{H} V610 Q50,598 78,{H}Z" fill="{P["front"]}" opacity=".9"/><path d="M364,{H} V620 Q320,606 294,{H}Z" fill="{P["front"]}" opacity=".9"/>'
+    front+=f'<circle cx="30" cy="680" r="12" fill="#d8b896" opacity=".7"/><path d="M30,672 l5,3 -2,6 h-6 l-2,-6Z" fill="#4a2a20" opacity=".6"/>'
+    write_land('stadium',D,back,mid,front)
 
-# ---------- 2. space base ----------
-defs=f'''<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b1442"/><stop offset=".6" stop-color="#34307a"/><stop offset="1" stop-color="#5b4a96"/></linearGradient>
-<radialGradient id="pl" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#ffd7a8"/><stop offset="1" stop-color="#c96a8e"/></radialGradient>
-<radialGradient id="ea" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#9ee0ff"/><stop offset="1" stop-color="#2a6fb5"/></radialGradient>
-<linearGradient id="moon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a08ccf"/><stop offset=".45" stop-color="#7a66ab"/><stop offset="1" stop-color="#43347a"/></linearGradient>
-<linearGradient id="dome" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1ecfa"/><stop offset="1" stop-color="#9d92c4"/></linearGradient>{WOBBLE}'''
-back=f'<rect width="{W}" height="{H}" fill="url(#sky)"/>'
-for i in range(70):
-    x,y=R.uniform(0,W),R.uniform(0,300); r=R.choice((.8,1,1.3,1.8))
-    back+=f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r}" fill="#fff6d8" opacity="{R.uniform(.5,1):.2f}"/>'
-for i in range(5): back+=star4(R.uniform(20,340),R.uniform(15,260),R.choice((5,7,9)),'#fff6d8')
-back+=f'<g transform="rotate(-18 90 90)"><ellipse cx="90" cy="90" rx="62" ry="13" fill="none" stroke="#f0b9d0" stroke-width="7" opacity=".7"/><circle cx="90" cy="90" r="34" fill="url(#pl)" stroke="{LINE}" stroke-opacity=".5" stroke-width="2.5"/><path d="M56,90 a62,13 0 0 0 68,12" fill="none" stroke="#f0b9d0" stroke-width="7" opacity=".9"/></g>'
-back+=f'<circle cx="290" cy="150" r="22" fill="url(#ea)" stroke="{LINE}" stroke-opacity=".5" stroke-width="2"/><path d="M276,146 q8,-8 14,0 q4,6 -4,10 q-8,0 -10,-10Z" fill="#7fc67a" opacity=".85"/><path d="M296,160 q6,-3 12,-8" stroke="#fff" opacity=".6" stroke-width="3" fill="none"/>'
-mid=hills(W,330,16,11,'url(#moon)',ln=LINE,n=6,ex='stroke-opacity=".5"')
-for x,y,rx in ((60,380,28),(230,430,38),(320,372,20),(130,480,26),(300,500,24),(40,470,16)):
-    mid+=f'<ellipse cx="{x}" cy="{y}" rx="{rx}" ry="{rx*.3:.0f}" fill="#4d3c80" opacity=".55"/><path d="M{x-rx},{y} a{rx},{rx*.3:.0f} 0 0 1 {2*rx},0" fill="none" stroke="#d6c9f0" stroke-width="2.5" opacity=".6"/>'
-# dome base
-mid+=f'<g filter="url(#wob)"><rect x="205" y="318" width="110" height="26" rx="5" fill="#8a7cb8" stroke="{LINE}" stroke-width="2.5" stroke-opacity=".7"/><path d="M215,318 a45,45 0 0 1 90,0Z" fill="url(#dome)" stroke="{LINE}" stroke-width="2.5" stroke-opacity=".7"/>'
-for x in (228,250,272,292): mid+=f'<rect x="{x}" y="326" width="9" height="9" rx="2" fill="#ffe08a"/>'
-mid+=f'<path d="M232,309 q6,-18 28,-20" fill="none" stroke="#fff" opacity=".6" stroke-width="3"/><path d="M290,274 V300" stroke="{LINE}" stroke-width="3"/><circle cx="290" cy="272" r="4" fill="#ff7c9a"/><path d="M273,284 q17,-18 34,0" fill="none" stroke="#e8e0f6" stroke-width="3.5"/></g>'
-front=hills(W,545,12,5,'#7a6aa6',ln=LINE,n=5,ex='stroke-opacity=".6"')
-for x,y,r in ((40,575,16),(300,580,22),(180,590,12)):
-    front+=f'<ellipse cx="{x}" cy="{y}" rx="{r}" ry="{r*.32:.1f}" fill="#4a3c78" opacity=".7"/>'
-front+=f'<g transform="translate(14,520)"><circle cx="20" cy="38" r="13" fill="#3b3a4f" stroke="{LINE}" stroke-width="2"/><circle cx="20" cy="38" r="5" fill="#9a93b8"/><circle cx="60" cy="38" r="13" fill="#3b3a4f" stroke="{LINE}" stroke-width="2"/><circle cx="60" cy="38" r="5" fill="#9a93b8"/><rect x="8" y="16" width="64" height="20" rx="7" fill="#efe9fa" stroke="{LINE}" stroke-width="2"/><rect x="44" y="20" width="20" height="9" rx="3" fill="#6bd2c6"/></g>'
-front+=f'<path d="M318,538 l10,-24 l9,24Z" fill="#8f82bd" stroke="{LINE}" stroke-width="2"/>'
-write_land('space',defs,back,mid,front)
+# ===================== پایگاه فضایی =====================
+def space():
+    P=PAL['space'];R=random.Random(11);D=[]
+    sky=vgrad(D,[(0,P['sky0']),(.45,P['sky1']),(.8,P['sky2']),(1,'#5a2f7e')])
+    back=f'<rect width="{W}" height="{H}" fill="{sky}"/>'
+    # سحابی‌های رنگی نرم
+    for cx,cy,rx,ry,c,a in ((70,120,150,90,'#1f8a9a',.28),(300,210,130,100,'#c0448a',.28),(150,330,170,80,'#6a3ab8',.3),(300,420,150,90,'#1f8a9a',.2)):
+        back+=f'<ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="{c}" opacity="{a}" filter="url(#bl14)"/>'
+    for i in range(90):
+        x,y=R.uniform(0,W),R.uniform(0,420);r=R.choice((.7,.9,1.1,1.5))
+        back+=f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r}" fill="#fff0d0" opacity="{R.uniform(.35,.9):.2f}"/>'
+    for i in range(6): back+=star4(R.uniform(20,340),R.uniform(15,300),R.choice((4,5,6)),'#fff0d0').replace('/>',' opacity=".7"/>')
+    # سیارهٔ حلقه‌دار، کم‌نور و دور از مسیر (چپ-بالا زیر لوحه)
+    back+=f'<g transform="rotate(-18 82 168)" opacity=".92"><ellipse cx="82" cy="168" rx="62" ry="13" fill="none" stroke="#b86a9a" stroke-width="7" opacity=".6"/><circle cx="82" cy="168" r="34" fill="{vgrad(D,[(0,"#a8587e"),(1,"#4a2a62")])}"/><path d="M52,160 q30,-10 60,0" stroke="#6a3a7a" stroke-width="5" fill="none" opacity=".5"/><path d="M20,170 q60,24 124,-4" fill="none" stroke="#b86a9a" stroke-width="7" opacity=".6"/></g>'
+    # زمین دور (کم‌اشباع): کرهٔ آبی کوچک راست
+    back+=f'<circle cx="318" cy="300" r="20" fill="{vgrad(D,[(0,"#4a86b8"),(1,"#1c3a78")])}" opacity=".85"/>'
+    mid=ridge(372,16,11,'#4d3380',n=6)
+    mid+=rim('M-10,372 C60,356 120,386 180,370 S300,360 370,372','#b08ae0',.35,2)
+    for x,y,rx in ((300,420,30),(60,470,24),(220,500,34),(330,520,18),(140,560,22)):
+        mid+=f'<ellipse cx="{x}" cy="{y}" rx="{rx}" ry="{rx*.3:.0f}" fill="#2c1a58" opacity=".6"/><path d="M{x-rx},{y} a{rx},{rx*.3:.0f} 0 0 1 {2*rx},0" fill="none" stroke="#a88ae0" stroke-width="2.2" opacity=".3"/>'
+    # گنبد پایگاه (چپ، دور از ستون‌ها)
+    mid+=f'<g transform="translate(14,480)"><rect x="0" y="30" width="80" height="22" rx="4" fill="#5e4c92"/><path d="M8,30 a32,32 0 0 1 64,0Z" fill="{vgrad(D,[(0,"#8c7cc4"),(1,"#4e3e86")])}"/>'
+    mid+=''.join(f'<rect x="{x}" y="36" width="8" height="8" rx="2" fill="#e8b45e" opacity=".6"/>' for x in (10,28,44,60))
+    mid+=f'<path d="M20,18 q6,-12 18,-14" stroke="#e0d0ff" stroke-opacity=".35" stroke-width="3" fill="none"/></g>'
+    front=ridge(612,12,5,'#2c1850',n=5)+rim('M-10,612 C80,600 150,626 230,610 S330,604 370,612','#8a6ad0',.3,2)
+    front+=f'<g transform="translate(276,636)"><circle cx="20" cy="30" r="12" fill="#2c2a4a"/><circle cx="20" cy="30" r="4" fill="#7a74a8"/><circle cx="60" cy="30" r="12" fill="#2c2a4a"/><circle cx="60" cy="30" r="4" fill="#7a74a8"/><rect x="8" y="10" width="64" height="16" rx="5" fill="#5c5496"/></g>'
+    write_land('space',D,back,mid,front)
 
-# ---------- 3. farm & mill ----------
-defs=f'''<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6b58a"/><stop offset=".5" stop-color="#ffd9b0"/><stop offset="1" stop-color="#ffeed6"/></linearGradient>
-<radialGradient id="sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fffbe0"/><stop offset=".4" stop-color="#ffd35c" stop-opacity=".9"/><stop offset="1" stop-color="#ffd35c" stop-opacity="0"/></radialGradient>{WOBBLE}'''
-back=f'<rect width="{W}" height="{H}" fill="url(#sky)"/><circle cx="90" cy="120" r="130" fill="url(#sun)"/><circle cx="90" cy="120" r="30" fill="#fff1b5" stroke="#f1b43c" stroke-width="3"/>'
-back+=''.join(f'<path d="M90,120 L{90+150*math.cos(a):.0f},{120+150*math.sin(a):.0f}" stroke="#ffe08a" stroke-width="6" opacity=".25" stroke-linecap="round"/>' for a in [i*math.pi/6 for i in range(12)])
-for cx,cy,s in ((250,70,1.1),(320,140,.7)): back+=f'<g fill="#fffaf0" opacity=".9" transform="translate({cx},{cy}) scale({s})"><ellipse rx="34" ry="10"/><ellipse cx="-12" cy="-7" rx="15" ry="11"/><ellipse cx="10" cy="-9" rx="18" ry="13"/></g>'
-back+=hills(W,250,14,21,'#e9a67e',n=6)+hills(W,285,12,22,'#d98a6c',n=6)
-mid=hills(W,320,10,23,'#c9726a',ln=None,n=6)
-# windmill
-mid+=f'<g filter="url(#wob)" transform="translate(262,210)"><path d="M-26,118 L-16,26 L16,26 L26,118Z" fill="#f4e0b8" stroke="{LINE}" stroke-width="2.6" stroke-opacity=".75"/><path d="M-16,26 L0,6 L16,26Z" fill="#7a2e4f" stroke="{LINE}" stroke-width="2.6" stroke-opacity=".75"/><rect x="-7" y="92" width="14" height="26" rx="7" fill="#7a2e4f"/><circle cx="0" cy="52" r="7" fill="#7a2e4f"/>'
-for k in range(4):
-    a=k*90+14
-    mid+=f'<g transform="rotate({a} 0 26)"><rect x="-3" y="-60" width="6" height="86" fill="#8a5b30" stroke="{LINE}" stroke-width="1.5"/><rect x="3" y="-56" width="20" height="40" fill="#fff0c9" stroke="{LINE}" stroke-width="2" stroke-opacity=".7"/><path d="M5,-44 H21 M5,-32 H21 M5,-20 H21" stroke="{LINE}" stroke-width="1" opacity=".5"/></g>'
-mid+=f'<circle cx="0" cy="26" r="6" fill="#dbac54" stroke="{LINE}" stroke-width="2"/></g>'
-# water wheel house + stream
-mid+=f'<g transform="translate(40,300)"><rect x="0" y="20" width="58" height="42" fill="#f4e0b8" stroke="{LINE}" stroke-width="2.4" stroke-opacity=".7"/><path d="M-6,22 L29,-6 L64,22Z" fill="#a5473c" stroke="{LINE}" stroke-width="2.4" stroke-opacity=".7"/><rect x="22" y="38" width="14" height="24" fill="#7a2e4f"/><g transform="translate(70,44)"><circle r="22" fill="none" stroke="#8a5b30" stroke-width="4"/><circle r="4" fill="#8a5b30"/>'
-for k in range(8):
-    a=k*45
-    mid+=f'<g transform="rotate({a})"><path d="M0,0 V-22" stroke="#8a5b30" stroke-width="3"/><rect x="-5" y="-27" width="10" height="7" fill="#c9884d" stroke="{LINE}" stroke-width="1.2"/></g>'
-mid+='</g></g>'
-mid+=f'<path d="M-10,420 Q80,380 150,430 T360,420 L360,450 Q250,455 150,462 Q70,420 -10,455Z" fill="#8fd3de" stroke="{LINE}" stroke-opacity=".35" stroke-width="2"/><path d="M20,432 q20,-6 40,0 M180,438 q20,-6 40,0" stroke="#fff" stroke-width="2.5" fill="none" opacity=".7" stroke-linecap="round"/>'
-front=hills(W,520,10,24,'#b9583f',n=5)
-# fence
-for i in range(9):
-    x=10+i*42
-    front+=f'<rect x="{x}" y="{540}" width="9" height="46" rx="2" fill="#c98c52" stroke="{LINE}" stroke-width="2" stroke-opacity=".7"/>'
-front+=f'<rect x="0" y="552" width="{W}" height="6" fill="#d9a064" stroke="{LINE}" stroke-width="1.6" stroke-opacity=".6"/><rect x="0" y="570" width="{W}" height="6" fill="#d9a064" stroke="{LINE}" stroke-width="1.6" stroke-opacity=".6"/>'
-# haystack and wheat
-front+=f'<g transform="translate(300,560)"><path d="M-30,32 Q-30,-14 0,-18 Q30,-14 30,32Z" fill="#f0c15a" stroke="{LINE}" stroke-width="2.4" stroke-opacity=".7"/><path d="M-18,10 q18,-8 36,0 M-22,22 q22,-8 44,0" stroke="#c78d2a" stroke-width="2" fill="none"/></g>'
-for i in range(14):
-    x=R.uniform(6,350);y=592
-    front+=f'<path d="M{x:.0f},{y} q{R.uniform(-4,4):.0f},-18 0,-36" stroke="#e9b63e" stroke-width="2" fill="none"/><ellipse cx="{x:.0f}" cy="{y-38}" rx="3" ry="7" fill="#f4cb5c"/>'
-write_land('farm',defs,back,mid,front)
+# ===================== مزرعه و آسیاب =====================
+def farm():
+    P=PAL['farm'];R=random.Random(21);D=[]
+    sky=vgrad(D,[(0,P['sky0']),(.3,P['sky1']),(.55,P['sky2']),(1,P['sky2'])])
+    back=f'<rect width="{W}" height="{H}" fill="{sky}"/>'
+    back+=glow(D,95,225,230,P['glow'],.5)+glow(D,95,225,80,P['glow'],.35)
+    for cx,cy,s,c,a in ((280,70,1.2,'#d98a9a',.25),(120,60,.9,'#d98a9a',.2),(320,190,.8,'#ffc490',.22)): back+=cloud(cx,cy,s,c,a)
+    # پرتوهای خورشید کم‌نور
+    import math
+    back+=''.join(f'<path d="M95,225 L{95+360*math.cos(a):.0f},{225+360*math.sin(a):.0f}" stroke="#ffd09a" stroke-width="10" opacity=".07" stroke-linecap="round"/>' for a in [-math.pi*i/12 for i in range(1,12)])
+    back+=ridge(268,14,21,'#7b6585',n=6)+ridge(300,12,22,'#8a6a70',n=6)
+    mid=ridge(336,10,23,'#6e7240',n=6)
+    mid+=rim('M-10,336 C60,326 120,344 180,334 S300,330 370,338','#d6c27a',.28,2)
+    # آسیاب بادی: جیب بالا-چپ (زیر لوحه، دور از مسیر)
+    mid+=f'<g transform="translate(95,196)"><path d="M-22,94 L-14,22 L14,22 L22,94Z" fill="#9a6a62"/><path d="M-14,22 L0,6 L14,22Z" fill="#5e2e4a"/><rect x="-4" y="60" width="9" height="34" rx="2" fill="#4a2438"/>'
+    for k in range(4):
+        a=k*90+16
+        mid+=f'<g transform="rotate({a} 0 22)"><rect x="-2.5" y="-46" width="5" height="68" fill="#6a4a3a"/><rect x="2.5" y="-42" width="15" height="30" fill="#c8a48a" opacity=".6"/></g>'
+    mid+=f'<circle cx="0" cy="22" r="5" fill="#c8a24a"/></g>'
+    # خانهٔ کوچک: جیب راست (بین ردیف‌های گره)
+    mid+=f'<g transform="translate(284,360)"><rect x="0" y="20" width="54" height="36" fill="#9a6a62"/><path d="M-6,22 L27,-4 L60,22Z" fill="#5e2e4a"/><rect x="21" y="34" width="13" height="22" fill="#4a2438"/><rect x="40" y="-2" width="7" height="14" fill="#7a4642"/></g>'
+    # جویبار فیروزه‌ای
+    mid+=f'<path d="M-10,470 Q80,440 150,478 T370,462 V500 Q250,504 150,508 Q70,476 -10,502Z" fill="#2f8088"/><path d="M20,484 q20,-6 40,0 M200,484 q20,-6 40,0" stroke="#b6eaea" stroke-width="2.2" fill="none" opacity=".35" stroke-linecap="round"/>'
+    # مزرعه‌های ردیفی کم‌نور پایین
+    mid+=f'<path d="M-10,540 Q180,512 370,540 V{H} H-10Z" fill="#66763a"/>'
+    for i in range(9): mid+=f'<path d="M-10,{556+i*18} Q180,{528+i*18} 370,{556+i*18}" fill="none" stroke="#4e5e2c" stroke-opacity=".5" stroke-width="5"/>'
+    front=f'<path d="M-4,{H} V640 Q60,626 96,{H}Z" fill="#4a5a28"/><path d="M364,{H} V650 Q310,634 280,{H}Z" fill="#4a5a28"/>'
+    for i in range(7):
+        x=R.uniform(4,70);y=700
+        front+=f'<path d="M{x:.0f},{y} q{R.uniform(-3,3):.0f},-14 0,-28" stroke="#c8a850" stroke-width="2" fill="none" opacity=".7"/><ellipse cx="{x:.0f}" cy="{y-30}" rx="2.6" ry="6" fill="#d8b860" opacity=".7"/>'
+    write_land('farm',D,back,mid,front)
 
-# ---------- 4. machine city ----------
-defs=f'''<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9d2dc"/><stop offset="1" stop-color="#eaf5ee"/></linearGradient>
-<linearGradient id="bld" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6f8f96"/><stop offset="1" stop-color="#5b7b86"/></linearGradient>
-<linearGradient id="brk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c0805c"/><stop offset="1" stop-color="#a5694b"/></linearGradient>{WOBBLE}'''
-back=f'<rect width="{W}" height="{H}" fill="url(#sky)"/>'
-for cx,cy,s in ((70,70,1),(250,100,.8),(330,50,.6)): back+=f'<g fill="#fff" opacity=".8" transform="translate({cx},{cy}) scale({s})"><ellipse rx="34" ry="10"/><ellipse cx="-12" cy="-7" rx="15" ry="11"/><ellipse cx="10" cy="-9" rx="18" ry="13"/></g>'
-# far skyline silhouette
-sk='<g fill="#9fbfc4" stroke="#7fa0a8" stroke-width="2">'
-x=0
-while x<W:
-    w=R.randrange(26,50);h=R.randrange(60,150);sk+=f'<rect x="{x}" y="{330-h}" width="{w}" height="{h+60}"/>';x+=w+R.randrange(0,6)
-sk+='</g>'
-back+=sk
-back+=gear(60,200,38,10,'#8fb0b6',ln='#7fa0a8',lw=2)+gear(300,250,28,9,'#8fb0b6',ln='#7fa0a8',lw=2)+gear(100,255,18,8,'#a3c2c6',ln='#7fa0a8',lw=2)
-mid=''
-# chimneys with smoke
-for x in (40,150,312):
-    mid+=f'<g filter="url(#wob)"><rect x="{x}" y="230" width="22" height="110" fill="url(#brk)" stroke="{LINE}" stroke-width="2.4" stroke-opacity=".7"/><rect x="{x-3}" y="226" width="28" height="9" fill="#8a5538" stroke="{LINE}" stroke-width="2" stroke-opacity=".7"/></g>'
-    mid+=f'<g fill="#fff" opacity=".8"><circle cx="{x+14}" cy="206" r="11"/><circle cx="{x+26}" cy="190" r="14"/><circle cx="{x+14}" cy="168" r="16"/></g>'
-# factory body
-mid+=f'<g filter="url(#wob)"><path d="M0,350 V300 H70 V270 L110 296 V270 L150 296 V270 L190 296 V340 H360 V350Z" fill="url(#bld)" stroke="{LINE}" stroke-width="2.6" stroke-opacity=".7"/>'
-for xx in range(14,340,34):
-    if xx<190 or xx>200: mid+=f'<rect x="{xx}" y="{314 if xx>70 else 316}" width="18" height="14" rx="3" fill="#fbe08a" stroke="{LINE}" stroke-width="1.5" stroke-opacity=".6"/>'
-mid+='</g>'
-mid+='<rect x="0" y="350" width="360" height="260" fill="#c9d6c6"/>'
-for yy in range(392,520,22):
-    for xx in range(-20,380,44): mid+=f'<rect x="{xx+(yy%44)}" y="{yy}" width="40" height="18" rx="5" fill="#b6c6b4" opacity=".7"/>'
-# rail
-mid+=f'<rect x="0" y="364" width="{W}" height="9" fill="#7c6b5e"/>'+''.join(f'<rect x="{i*18}" y="372" width="9" height="6" fill="#5b4a3e"/>' for i in range(21))
-front=f'<rect x="0" y="520" width="{W}" height="80" fill="#8e9a9a"/><path d="M0,520 H360" stroke="{LINE}" stroke-width="3" stroke-opacity=".6"/>'
-for i in range(0,360,40): front+=f'<path d="M{i},520 v80" stroke="#7a8686" stroke-width="2"/>'
-front+=gear(40,560,38,10,'#d0a24a',ln=LINE,lw=2.4)+gear(100,590,24,9,'#bd8a3a',ln=LINE,lw=2.2)+gear(330,566,34,10,'#d0a24a',ln=LINE,lw=2.4)
-front+=f'<rect x="150" y="540" width="120" height="14" rx="7" fill="#6f8f96" stroke="{LINE}" stroke-width="2.2"/><rect x="146" y="536" width="12" height="22" rx="4" fill="#5b7b86" stroke="{LINE}" stroke-width="2"/><rect x="262" y="536" width="12" height="22" rx="4" fill="#5b7b86" stroke="{LINE}" stroke-width="2"/>'
-front+=f'<g transform="translate(184,572) rotate(-12)"><rect x="-4" y="-2" width="62" height="7" rx="3" fill="#8a5b30" stroke="{LINE}" stroke-width="1.8"/><rect x="-14" y="-12" width="22" height="16" rx="3" fill="#6f7d84" stroke="{LINE}" stroke-width="1.8"/></g>'
-write_land('city',defs,back,mid,front)
+# ===================== شهر ماشین‌ها =====================
+def city():
+    P=PAL['city'];R=random.Random(33);D=[]
+    sky=vgrad(D,[(0,P['sky0']),(.36,P['sky1']),(.6,P['sky2']),(1,P['sky2'])])
+    back=f'<rect width="{W}" height="{H}" fill="{sky}"/>'
+    back+=glow(D,200,290,240,P['glow'],.42)+glow(D,200,290,80,P['glow'],.3)
+    back+=cloud(80,90,1.2,'#7ab0b8',.22)+cloud(300,60,.9,'#7ab0b8',.2)
+    # خط افق دور
+    sk=''
+    x=0
+    while x<W:
+        w=R.randrange(24,48);h=R.randrange(50,130)
+        sk+=f'<rect x="{x}" y="{300-h}" width="{w}" height="{h+60}" fill="{P["far"]}"/>';x+=w+R.randrange(0,5)
+    back+=f'<g opacity=".9">{sk}</g>'
+    back+=gear(60,200,36,10,'#4a7a88',hole=.3)+gear(318,236,26,9,'#4a7a88',hole=.3)
+    # ساختمان‌های میانی آجری-بنفش
+    mid=''
+    for x,w,h,c in ((6,52,150,'#6e4250'),(66,40,110,'#5c4458'),(238,44,130,'#6e4250'),(292,60,160,'#5c4458')):
+        mid+=f'<rect x="{x}" y="{330-h}" width="{w}" height="{h+30}" fill="{c}"/><rect x="{x}" y="{330-h}" width="{w}" height="4" fill="#a8707a" opacity=".35"/>'
+        for yy in range(int(330-h+14),322,22):
+            for xx in range(x+8,x+w-10,16):
+                if R.random()<.5: mid+=f'<rect x="{xx}" y="{yy}" width="8" height="10" rx="1.5" fill="#e8b45e" opacity=".55"/>'
+    # دودکش‌ها + دود نرم
+    for x in (128,206):
+        mid+=f'<rect x="{x}" y="226" width="20" height="104" fill="#7a4642"/><rect x="{x-3}" y="222" width="26" height="8" fill="#8a524a"/>'
+        mid+=f'<g fill="#9ac0c6" opacity=".25" filter="url(#bl6)"><circle cx="{x+12}" cy="204" r="12"/><circle cx="{x+22}" cy="186" r="15"/><circle cx="{x+10}" cy="164" r="18"/></g>'
+    mid+=f'<rect x="0" y="330" width="{W}" height="{H}" fill="{vgrad(D,[(0,"#4a5c60"),(.4,"#3c5c66"),(1,"#2a3f58")])}"/>'
+    for yy in range(372,700,26):
+        for xx in range(-20,380,48): mid+=f'<rect x="{xx+(yy%48)}" y="{yy}" width="44" height="21" rx="6" fill="#4a6c76" opacity=".35"/>'
+    mid+=f'<rect x="0" y="342" width="{W}" height="8" fill="#5a4a46"/>'+''.join(f'<rect x="{i*18}" y="350" width="9" height="5" fill="#3a2e2c"/>' for i in range(21))
+    mid+=glow(D,200,350,200,P['glow'],.14)
+    # فانوس‌های خیابان: لکه‌های نور گرم در حاشیه‌ها (جیب‌های چپ/راست، دور از ستون مسیر)
+    for x,y in ((16,420),(340,470),(20,600)):
+        mid+=glow(D,x,y,70,P['glow'],.32)+f'<rect x="{x-2}" y="{y-6}" width="4" height="64" fill="#1f343c"/><circle cx="{x}" cy="{y-8}" r="6" fill="#ffd9a0" opacity=".85"/>'
+    # لوله‌های بزرگ و بخار در جیب چپ-پایین
+    mid+=f'<rect x="0" y="520" width="70" height="14" rx="7" fill="#3a5a64"/><rect x="62" y="514" width="12" height="26" rx="4" fill="#4a6c76"/>'
+    front=f'<path d="M-4,{H} V620 Q60,606 96,{H}Z" fill="#243c46"/><path d="M364,{H} V630 Q300,612 270,{H}Z" fill="#243c46"/>'
+    front+=gear(34,690,34,10,'#8a6a3a',hole=.3)+gear(92,716,20,9,'#7a5c34',hole=.3)+gear(334,694,30,10,'#8a6a3a',hole=.3)
+    write_land('city',D,back,mid,front)
+
+stadium();space();farm();city()
 print('lands ok')

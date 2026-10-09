@@ -1,0 +1,100 @@
+/* ==========================================================================
+   map4.css (kit4) — لایه‌های نقشه: کاغذ، قاب زمین (آسمان/پشت/میانه/جلو)، مسیر، گره، دروازه، تابلوی شروع/پایان، منوی پایه.
+   بعد از ../kit/kit.css و tokens.css بارگذاری شود. هیچ متنی در گرافیک نیست.
+   ========================================================================== */
+
+/* ---------- ۱) کاغذ نقشه و قاب‌ها ---------- */
+.map4{position:relative;padding:22px var(--gutter) 44px;direction:rtl;
+  background:radial-gradient(130% 55% at 50% 0,var(--paper-hi) 0,transparent 70%),linear-gradient(180deg,#f2dca4,var(--paper-lo)),url("../kit/svg/map-bg.svg") 0 0/100% auto repeat-y}
+.landwrap{position:relative;z-index:2;width:100%;max-width:358px;margin:0 auto var(--land-gap)}
+.landwrap:last-of-type{margin-bottom:0}
+#gap4{position:absolute;left:0;top:0;z-index:1;pointer-events:none;overflow:visible}
+.map4 .land{position:relative;height:100%;max-width:none;margin:0;--hz:360px;
+  /* آسمان: گرادیان چهار پله تا افق (افق = ۳۶۰px بالای پایین قاب؛ لایهٔ میانه همان‌جا می‌نشیند) */
+  background:linear-gradient(180deg,var(--sky0) 0,var(--sky1) calc((100% - var(--hz))*.42),var(--sky2) calc((100% - var(--hz))*.8),var(--sky3) calc(100% - var(--hz)),var(--sky3) 100%) padding-box,var(--g-gold) border-box}
+.map4 .land__layer{background-repeat:no-repeat}
+.map4 .land__layer--back{background-position:center top;background-size:100% auto}
+.map4 .land__layer--mid,.map4 .land__layer--front{background-position:center bottom;background-size:100% auto}
+.map4 .land[data-land="stadium"] .land__layer--back{background-image:url("svg/land4-stadium-back.svg")}
+.map4 .land[data-land="stadium"] .land__layer--mid{background-image:url("svg/land4-stadium-mid.svg")}
+.map4 .land[data-land="stadium"] .land__layer--front{background-image:url("svg/land4-stadium-front.svg")}
+.map4 .land[data-land="space"] .land__layer--back{background-image:url("svg/land4-space-back.svg")}
+.map4 .land[data-land="space"] .land__layer--mid{background-image:url("svg/land4-space-mid.svg")}
+.map4 .land[data-land="space"] .land__layer--front{background-image:url("svg/land4-space-front.svg")}
+.map4 .land[data-land="farm"] .land__layer--back{background-image:url("svg/land4-farm-back.svg")}
+.map4 .land[data-land="farm"] .land__layer--mid{background-image:url("svg/land4-farm-mid.svg")}
+.map4 .land[data-land="farm"] .land__layer--front{background-image:url("svg/land4-farm-front.svg")}
+.map4 .land[data-land="city"] .land__layer--back{background-image:url("svg/land4-city-back.svg")}
+.map4 .land[data-land="city"] .land__layer--mid{background-image:url("svg/land4-city-mid.svg")}
+.map4 .land[data-land="city"] .land__layer--front{background-image:url("svg/land4-city-front.svg")}
+/* سربرگ زمین: نشان فصل سمت راست، لوحه سمت چپ‌تر؛ ستون چپ برای خط مسیر آزاد می‌ماند */
+.map4 .land__head{left:116px;right:12px;flex-direction:row-reverse;top:8px}
+.map4 .land__head .plate{font-size:18px;line-height:20px;min-height:56px}
+.map4 .land__head .plate span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.map4 .land__sym{width:52px;height:52px}
+
+/* ---------- ۲) مسیر: روبان پنج‌لایه ---------- */
+.map4 .land__path{z-index:6}
+.pt{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.pt-sh{stroke:var(--pt-shadow);stroke-width:var(--pt-w-shadow);transform:translateY(3.5px)}
+.pt-halo{stroke:var(--pt-halo);stroke-width:var(--pt-w-halo);opacity:.92}
+.pt-edge{stroke:var(--pt-edge);stroke-width:var(--pt-w-edge)}
+.pt-fill{stroke-width:var(--pt-w-fill)}
+.pt-fill--done{stroke:var(--pt-done)}
+.pt-fill--todo{stroke:var(--pt-todo)}
+.pt-shine{stroke:var(--pt-done-hi);stroke-width:3.4;opacity:.75;transform:translate(0,-2.6px)}
+.pt-dots{stroke:var(--pt-dot);stroke-width:3.2;stroke-dasharray:.1 15;opacity:.95}
+.pt-todo .pt-sh,.pt-todo .pt-halo,.pt-todo .pt-edge,.pt-todo .pt-fill{stroke-dasharray:var(--pt-stones)}
+.pt-todo .pt-sh{stroke-width:calc(var(--pt-w-shadow) - 2px)}
+.pt-todo .pt-halo{stroke-width:var(--pt-t-halo)}
+.pt-todo .pt-edge{stroke-width:var(--pt-t-edge)}
+.pt-todo .pt-fill{stroke-width:var(--pt-t-fill)}
+
+/* ---------- ۳) گره: قرص زیرین روشن + مدال ---------- */
+.node{position:absolute;z-index:8;width:var(--node);height:var(--node);transform:translate(-50%,-46.7%);background:none;border:0;padding:0;cursor:pointer;font-family:var(--f-body);-webkit-tap-highlight-color:transparent}
+.node .node__disc{position:absolute;inset:0;width:auto;height:auto;background:center/contain no-repeat;filter:none;transition:transform 90ms var(--ease)}
+.node:active .node__disc{transform:translateY(3px) scale(.97)}
+.node[data-state="open"] .node__disc{background-image:url("svg/node4-open.svg")}
+.node[data-state="done"] .node__disc{background-image:url("svg/node4-done.svg")}
+.node[data-state="locked"] .node__disc{background-image:url("svg/node4-locked.svg")}
+.node[data-state="trial"] .node__disc{background-image:url("svg/node4-trial.svg")}
+.node .node__glyph{position:absolute;left:50%;top:46.7%;width:var(--node-glyph);height:var(--node-glyph);transform:translate(-50%,-50%);background:center/contain no-repeat;filter:drop-shadow(0 1.5px 0 rgba(255,255,255,.7))}
+.node[data-state="locked"] .node__glyph{display:none}
+.node .node__ring{position:absolute;left:50%;top:46.7%;width:116%;height:116%;transform:translate(-50%,-50%);background:url("../kit/svg/ring-here.svg") center/contain no-repeat;pointer-events:none}
+.node .node__labels{position:absolute;top:46.7%;transform:translateY(-50%);width:max-content;max-width:calc(var(--fw) * .64 - 62px);display:flex;flex-direction:column;gap:4px;pointer-events:none}
+.node[data-side="L"] .node__labels{left:calc(50% + 52px);align-items:flex-start;text-align:start}
+.node[data-side="R"] .node__labels{right:calc(50% + 52px);align-items:flex-end}
+.node .node__labels .chip{max-width:100%}
+.node .guide{position:absolute;margin:0;transform:none;top:calc(46.7% - 52px);z-index:9}
+.node[data-side="L"] .guide{right:calc(50% + 38px)}
+.node[data-side="R"] .guide{left:calc(50% + 38px)}
+[data-sym="force"]{--sym:url("../kit/svg/glyph-force.svg")}[data-sym="friction"]{--sym:url("../kit/svg/glyph-friction.svg")}[data-sym="multi"]{--sym:url("../kit/svg/glyph-multi.svg")}
+[data-sym="weight"]{--sym:url("../kit/svg/glyph-weight.svg")}[data-sym="energy"]{--sym:url("../kit/svg/glyph-energy.svg")}[data-sym="machine"]{--sym:url("../kit/svg/glyph-machine.svg")}
+[data-sym="lever"]{--sym:url("../kit/svg/glyph-lever.svg")}[data-sym="slope"]{--sym:url("../kit/svg/glyph-slope.svg")}[data-sym="wheel"]{--sym:url("../kit/svg/glyph-wheel.svg")}[data-sym="summary"]{--sym:url("../kit/svg/glyph-summary.svg")}
+.node__glyph[data-sym]{background-image:var(--sym)}
+
+/* ---------- ۴) دروازه (پورتال) و تابلوی شروع/پایان ---------- */
+.portal{position:absolute;z-index:12;width:var(--portal);height:var(--portal);transform:translate(-50%,-50%);background:url("svg/portal4.svg") center/contain no-repeat;pointer-events:none}
+.portal--top{top:0}.portal--bot{top:100%}
+.sign{position:absolute;z-index:9;transform:translate(-50%,-50%);white-space:nowrap;font-size:16px;min-height:40px;padding:4px 14px 4px 14px}
+.sign .ic{width:24px;height:24px}
+
+/* ---------- ۵) نشان پایهٔ تحصیلی در نوار بالا + منوی پایه ---------- */
+.gbadge{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:0 12px 0 10px;border:3px solid transparent;border-radius:var(--r-pill);
+  background:var(--g-cream) padding-box,var(--g-gold) border-box;color:var(--ink);font-family:var(--f-title);font-size:20px;line-height:1;cursor:pointer;
+  box-shadow:0 0 0 2px var(--line),0 4px 0 2px var(--gold-deep),0 8px 12px rgba(20,12,2,.3),var(--sh-inset)}
+.gbadge i{width:30px;height:30px;background:center/contain no-repeat;flex:none}
+.grades{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.grade{position:relative;min-height:var(--grade-h);padding:8px 4px 6px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;
+  font-family:var(--f-title);font-size:24px;line-height:1.1;color:var(--ink);text-align:center;
+  border:4px solid transparent;border-radius:var(--r-card);
+  background:var(--g-cream) padding-box,linear-gradient(150deg,#e3c789,#a97b2c) border-box;
+  box-shadow:0 0 0 2px var(--line),0 4px 0 2px var(--gold-deep),0 8px 12px rgba(20,12,2,.25),inset 0 -3px 0 rgba(120,80,20,.18)}
+.grade i.gi{width:44px;height:44px;background:center/contain no-repeat;filter:drop-shadow(0 2px 0 rgba(58,38,16,.25))}
+.grade[aria-checked="true"]{background:var(--g-gold) padding-box,var(--g-gold) border-box;border-color:#fff3c4;
+  box-shadow:0 0 0 3px var(--line),0 5px 0 3px var(--gold-deep),0 0 0 7px rgba(246,220,146,.55),0 12px 18px rgba(20,12,2,.35),inset 0 2px 0 rgba(255,255,255,.55)}
+.grade[aria-checked="true"]::after{content:"";position:absolute;top:-12px;inset-inline-start:-10px;width:30px;height:30px;background:url("svg/tick4.svg") center/contain no-repeat;filter:drop-shadow(0 2px 0 rgba(58,38,16,.5))}
+.grade[data-g="1"] .gi,.gbadge[data-g="1"] i{background-image:url("svg/grade4-1.svg")}
+.grade[data-g="2"] .gi,.gbadge[data-g="2"] i{background-image:url("svg/grade4-2.svg")}
+.grade[data-g="3"] .gi,.gbadge[data-g="3"] i{background-image:url("svg/grade4-3.svg")}
+.gcap{margin:0 0 8px;font-weight:700;font-size:18px;color:var(--ink)}

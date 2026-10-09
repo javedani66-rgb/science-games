@@ -28,7 +28,7 @@ syms=''.join(f'<figure><i class="sym" data-sym="{s}" style="width:64px;height:64
 glyphs=''.join(f'<figure><span class="node__disc" style="display:block;position:relative;width:72px;height:72px;background-image:url(svg/node-open.svg)"><i class="node__glyph" data-sym="{s}"></i></span><figcaption>{n}</figcaption></figure>' for s,n in zip(SYMS,SYMN))
 sw=lambda n,c,l='',d='':f'<div class="sw"><i style="background:{c}"></i><b>{n}</b><code>{c}</code></div>'
 base=[('طلایی','#dbac54'),('طلایی روشن','#f6dc92'),('طلایی تیره','#a97b2c'),('کرم','#fff0c9'),('کاغذ','#f6e2b0'),('فیروزه‌ای تیره','#184441'),('فیروزه‌ای میانه','#2b6f69'),('قهوه‌ای خط','#3a2610'),('چوب','#a86f35'),('سنگ قفل','#a79c8a')]
-ch=[('نیرو','#3f7fd0'),('اصطکاک','#9a6b43'),('چند نیرو','#8a5bc7'),('وزن و جرم','#17a79f'),('کار و انرژی','#efbd1f'),('ماشین و تعادل','#e0699c'),('اهرم','#4a55c4'),('شیب و گوه','#8d3562'),('چرخ و قرقره','#6a8aa5'),('جمع‌بندی','#263e6e')]
+ch=[('نیرو','#3f7fd0'),('اصطکاک','#9a6b43'),('چند نیرو','#8a5bc7'),('وزن و جرم','#17a79f'),('کار و انرژی','#efbd1f'),('ماشین و تعادل','#e0699c'),('اهرم','#4a55c4'),('شیب و گوه','#9a3fb5'),('چرخ و قرقره','#6a8aa5'),('جمع‌بندی','#263e6e')]
 swatches=''.join(sw(n,c) for n,c in base); chs=''.join(sw(n,c) for n,c in ch)
 icons=''.join(f'<figure><img src="svg/icon-{k}.svg" width="64" height="64" alt=""><figcaption>{n}</figcaption></figure>' for k,n in (('map','نقشه'),('cards','کارت‌دان'),('practice','تمرین'),('guide','راهنما'),('adults','بزرگ‌ترها'),('game','بازی'),('eye','دیده‌ای'),('box','توی جعبه'),('lock','قفل'),('arrow','فلش'),('bolt','جرقه'),('flag','پرچم'),('flask','آزمایشی')))
 icons_lg=''.join(f'<figure><img src="svg/icon-{k}-lg.svg" width="120" height="120" alt=""><figcaption>{n}</figcaption></figure>' for k,n in (('map','نقشه'),('cards','کارت‌دان'),('practice','تمرین'),('guide','راهنما'),('adults','بزرگ‌ترها')))
@@ -123,7 +123,7 @@ menuscreen=(f'<div class="screen" id="s-menu">{topbar("نقشهٔ علوم")}<di
  '<div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:10px"><button class="btn btn--secondary btn--sm"><i class="ic ic-back"></i>برگرد</button><span class="adults" style="color:var(--ink);background:rgba(255,255,255,.35);border-color:rgba(58,38,16,.4)"><i class="ic"></i>ویژهٔ بزرگ‌ترها</span></div></div></div>')
 cardscreen=f'<div class="screen" id="s-cards" style="background:#2a1a08">{topbar("کارت‌دان","map")}<div style="height:736px;overflow:auto">{shelf}</div></div>'
 PH=HEAD.replace('<title>برگ کیت تصویری v3</title>','<title>صفحه‌های نمونه ۳۹۰×۸۰۰</title>').replace('.wrap{max-width:1100px;','.wrap{max-width:none;padding:0!important;')
-open(os.path.join(KIT,'phone.html'),'w').write(PH+'<div style="display:flex;flex-wrap:wrap;gap:0;justify-content:center">'+mapscreen+menuscreen+cardscreen+'</div></div><script src="kit.js"></script></body></html>')
+open(os.path.join(KIT,'phone-r4.html'),'w').write(PH+'<div style="display:flex;flex-wrap:wrap;gap:0;justify-content:center">'+mapscreen+menuscreen+cardscreen+'</div></div><script src="kit.js"></script></body></html>')
 print('phone ok')
 
 # ---------- guide.html ----------
