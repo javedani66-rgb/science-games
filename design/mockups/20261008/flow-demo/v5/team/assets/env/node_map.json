@@ -1,0 +1,424 @@
+{
+ "_doc": "جدول نگاشت ۳۴ گره (۳۳ دیدنی) ← بنای شاخص node_NN یا پروپ prop_NN (روی پایهٔ env_pad_<زمین>). ساخته از team/env_gen/gen_env.py",
+ "canvas": {
+  "width": 390,
+  "height": 5694
+ },
+ "zones": {
+  "city": {
+   "y0": 0,
+   "y1": 3036
+  },
+  "farm": {
+   "y0": 3036,
+   "y1": 3489
+  },
+  "space": {
+   "y0": 3489,
+   "y1": 4290
+  },
+  "sports": {
+   "y0": 4290,
+   "y1": 5694
+  }
+ },
+ "start": {
+  "x": 128,
+  "y": 5569
+ },
+ "landmarks": 12,
+ "props": [
+  "prop_01",
+  "prop_02",
+  "prop_03",
+  "prop_04",
+  "prop_05",
+  "prop_06",
+  "prop_07",
+  "prop_08",
+  "prop_09",
+  "prop_10",
+  "prop_11",
+  "prop_12",
+  "prop_13",
+  "prop_14",
+  "prop_15",
+  "prop_16"
+ ],
+ "nodes": [
+  {
+   "id": "F01",
+   "order": 1,
+   "zone": "sports",
+   "kind": "landmark",
+   "asset": "node_03",
+   "env_title": "زمین فوتبال",
+   "concept": "هل دادن و کشیدن",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "F02",
+   "order": 2,
+   "zone": "sports",
+   "kind": "prop",
+   "asset": "prop_09",
+   "env_title": "سالن بسکتبال",
+   "concept": "اثر نیرو",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "F03",
+   "order": 3,
+   "zone": "sports",
+   "kind": "prop",
+   "asset": "prop_10",
+   "env_title": "میدان کمانداری",
+   "concept": "جهت و اندازهٔ نیرو",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "F04",
+   "order": 4,
+   "zone": "sports",
+   "kind": "prop",
+   "asset": "prop_12",
+   "env_title": "هاکی آهنربایی",
+   "concept": "نیروی تماسی و نیروی از دور",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "F06",
+   "order": 5,
+   "zone": "sports",
+   "kind": "landmark",
+   "asset": "node_02",
+   "env_title": "پیست یخ",
+   "concept": "اصطکاک",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "F07",
+   "order": 6,
+   "zone": "sports",
+   "kind": "prop",
+   "asset": "prop_01",
+   "env_title": "استخر",
+   "concept": "مقاومت هوا و آب",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "F08",
+   "order": 7,
+   "zone": "sports",
+   "kind": "prop",
+   "asset": "prop_06",
+   "env_title": "میدان طناب‌کشی",
+   "concept": "چند نیرو با هم (برآیند)",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "F09",
+   "order": 8,
+   "zone": "sports",
+   "kind": "prop",
+   "asset": "prop_07",
+   "env_title": "پارک اسکیت",
+   "concept": "کنش و واکنش و لختی",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "W01",
+   "order": 9,
+   "zone": "space",
+   "kind": "prop",
+   "asset": "prop_02",
+   "env_title": "انبار بار فضایی",
+   "concept": "سنگین و سبک",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "W02",
+   "order": 10,
+   "zone": "space",
+   "kind": "landmark",
+   "asset": "node_04",
+   "env_title": "آزمایشگاه ترازو",
+   "concept": "جرم",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "F05",
+   "order": 11,
+   "zone": "space",
+   "kind": "landmark",
+   "asset": "node_05",
+   "env_title": "سکوی پرتاب",
+   "concept": "گرانش (کشش زمین)",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "W03",
+   "order": 12,
+   "zone": "space",
+   "kind": "prop",
+   "asset": "prop_08",
+   "env_title": "سطح ماه",
+   "concept": "وزن (نیروی گرانش)",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "W04",
+   "order": 13,
+   "zone": "space",
+   "kind": "landmark",
+   "asset": "node_06",
+   "env_title": "ایستگاه فضایی",
+   "concept": "جرم در برابر وزن",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "E01",
+   "order": 14,
+   "zone": "farm",
+   "kind": "landmark",
+   "asset": "node_08",
+   "env_title": "آسیاب بادی",
+   "concept": "انرژی و تبدیلش",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "E02",
+   "order": 15,
+   "zone": "farm",
+   "kind": "prop",
+   "asset": "prop_05",
+   "env_title": "گاری‌خانه",
+   "concept": "کار (نیرو و جابه‌جایی)",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "E07",
+   "order": 16,
+   "zone": "farm",
+   "kind": "prop",
+   "asset": "prop_11",
+   "env_title": "چاه آب",
+   "concept": "توان: سرعت انجام کار",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M01",
+   "order": 17,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_16",
+   "env_title": "دروازهٔ شهر",
+   "concept": "ماشین چیست",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "B01",
+   "order": 18,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_07",
+   "env_title": "داربست",
+   "concept": "تعادل و مرکز گرانش",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "B02",
+   "order": 19,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_02",
+   "env_title": "انبار مصالح",
+   "concept": "ترازو: برابری دو طرف",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M04",
+   "order": 20,
+   "zone": "city",
+   "kind": "landmark",
+   "asset": "node_07",
+   "env_title": "گودبرداری",
+   "concept": "اهرم",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M05",
+   "order": 21,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_07",
+   "env_title": "تیرآهن‌ها",
+   "concept": "جای تکیه‌گاه",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M06",
+   "order": 22,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_13",
+   "env_title": "ابزارخانه",
+   "concept": "سه نوع اهرم",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "E05",
+   "order": 23,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_13",
+   "env_title": "آچارخانه",
+   "concept": "گشتاور (اثر چرخاندن)",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M03",
+   "order": 24,
+   "zone": "city",
+   "kind": "landmark",
+   "asset": "node_01",
+   "env_title": "رمپ بارگیری",
+   "concept": "سطح شیب‌دار (رمپ)",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M09",
+   "order": 25,
+   "zone": "city",
+   "kind": "landmark",
+   "asset": "node_09",
+   "env_title": "چوب‌شکافی",
+   "concept": "گوه",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M10",
+   "order": 26,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_14",
+   "env_title": "پیچ‌کاری",
+   "concept": "پیچ",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "E03",
+   "order": 27,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_03",
+   "env_title": "انبار الوار",
+   "concept": "نیروی کمتر، مسافت بیشتر",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M02",
+   "order": 28,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_05",
+   "env_title": "بارانداز",
+   "concept": "چرخ و محور",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M07",
+   "order": 29,
+   "zone": "city",
+   "kind": "landmark",
+   "asset": "node_10",
+   "env_title": "اسکله",
+   "concept": "قرقرهٔ ثابت",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M08",
+   "order": 30,
+   "zone": "city",
+   "kind": "landmark",
+   "asset": "node_12",
+   "env_title": "جرثقیل بندر",
+   "concept": "قرقرهٔ متحرک و دستگاه قرقره",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M11",
+   "order": 31,
+   "zone": "city",
+   "kind": "landmark",
+   "asset": "node_11",
+   "env_title": "لنگرگاه",
+   "concept": "چرخ‌دنده",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "E06",
+   "order": 32,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_04",
+   "env_title": "میدان شهر",
+   "concept": "نیروی کمتر اما زحمت بیشتر",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "E04",
+   "order": 33,
+   "zone": "city",
+   "kind": "prop",
+   "asset": "prop_15",
+   "env_title": "برج ساعت",
+   "concept": "مزیت مکانیکی",
+   "visible": true,
+   "note": ""
+  },
+  {
+   "id": "M12",
+   "order": 34,
+   "zone": "city",
+   "kind": "landmark",
+   "asset": "node_11",
+   "env_title": "کارگاه ماشین مرکب",
+   "concept": "ماشین مرکب",
+   "visible": false,
+   "note": "پنهان: همان کارخانه"
+  }
+ ]
+}
