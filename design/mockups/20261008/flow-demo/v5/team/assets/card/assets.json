@@ -12,6 +12,7 @@
    "layers": [
     "cd-frame-glow",
     "cd-frame-band",
+    "cd-frame-neon",
     "cd-frame-inner",
     "cd-frame-slot",
     "cd-frame-text"

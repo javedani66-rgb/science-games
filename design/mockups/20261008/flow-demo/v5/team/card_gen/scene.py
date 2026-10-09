@@ -1,5 +1,6 @@
 # صحنهٔ بازی اسکله 390×500: دکل با دو قرقره، طناب، تور، دست، سکوی اسکله، دریا. قطعات متحرک گروه جدا با data-origin
 from lib import *
+from art import band
 PAL = {
  'day':  dict(sky='#9fdcf2', sky2='#d6f1ee', sea='#2fa3c4', sea2='#1f87b8', conc='#c6c1b6', top='#fff4d2', steel='#2fb8a8', steel2='#1f8a7d', wheel='#3a2a7a', rope='#c98a45', cream='#fff4d2', skin='#c98a5e', sleeve='#2fb8a8', rim=None, shade=None, white='#ffffff', gold='#ffe9a8'),
  'dusk': dict(sky='#6a3fa0', sky2='#e0728a', sea='#3277a5', sea2='#2a5f8a', conc='#5b3490', top='#8a6fb0', steel='#3a2a7a', steel2='#2a1f5c', wheel='#8a4fd0', rope='#c98a45', cream='#fff4d2', skin='#c98a5e', sleeve='#2f7bd6', rim='#f2a65a', shade='#5b3490', white='#ffffff', gold='#ffe9a8'),
@@ -73,10 +74,10 @@ def build(p, tone, bg, load, story_rim=False):
         for x, y, rx, ry in ((60, 120, 36, 10), (88, 112, 22, 12), (330, 220, 38, 9), (180, 190, 26, 8)):
             sky += f'<ellipse cx="{x}" cy="{y}" rx="{rx}" ry="{ry}" fill="{c["white"]}"/>'
     elif tone == 'dusk':
-        sky += f'<rect y="266" width="390" height="30" fill="{c["sky2"]}"/><rect y="296" width="390" height="14" fill="#f2a65a"/><circle cx="340" cy="40" r="16" fill="#ffe9a8"/><circle cx="347" cy="35" r="13" fill="{c["sky"]}"/>'
+        sky += band(262, 316, c['sky2'], 61, 390) + band(290, 316, '#f2a65a', 62, 390, 2) + f'<circle cx="340" cy="40" r="16" fill="#ffe9a8"/><circle cx="347" cy="35" r="13" fill="{c["sky"]}"/>'
         for x, y in ((30, 40), (120, 20), (200, 60), (300, 100), (60, 150)): sky += f'<circle cx="{x}" cy="{y}" r="1.7" fill="#fff"/>'
     else:
-        sky += f'<rect y="200" width="390" height="116" fill="{c["sky2"]}"/><circle cx="60" cy="50" r="22" fill="#d8e6ff"/><circle cx="68" cy="44" r="19" fill="{c["sky"]}"/>'
+        sky += band(200, 316, c['sky2'], 63, 390, 3, 24) + f'<circle cx="60" cy="50" r="22" fill="#d8e6ff"/><circle cx="68" cy="44" r="19" fill="{c["sky"]}"/>'
         for x, y in ((30, 100), (120, 30), (200, 70), (310, 44), (350, 120), (250, 140)): sky += f'<circle cx="{x}" cy="{y}" r="1.7" fill="#fff"/>'
     far = bgfar(p, c, bg)
     sea = f'<rect y="310" width="390" height="190" fill="{c["sea"]}"/>'
@@ -121,7 +122,13 @@ def build(p, tone, bg, load, story_rim=False):
         lights += f'<path d="M{104} 76 a26 26 0 0 1 22 -24" fill="none" stroke="{rm}" stroke-width="2.6" stroke-linecap="round"/>' + f'<path d="M{196} 76 a26 26 0 0 1 22 -24" fill="none" stroke="{rm}" stroke-width="2.6" stroke-linecap="round"/>'
         lights += L([(228, 405), (390, 405)], rm, 2.6) + L([(76, 342), (104, 330)], rm, 2.6)
         sh = c['shade']
-        lights += f'<polygon points="312,404 390,404 390,500 292,500" fill="{sh}" opacity=".35"/><polygon points="300,34 312,34 312,146 300,146" fill="{sh}" opacity=".35"/><polygon points="268,164 276,164 276,410 268,410" fill="{sh}" opacity=".25"/><polygon points="0,440 390,440 390,500 0,500" fill="{sh}" opacity=".18"/>'
+        # سایهٔ بنفش: باند افقیِ پایین هر بنا، با clip به همان سیلوئت (بنا، نه روی هوا)؛ بدون چندضلعی مورب
+        sil = (f'<clipPath id="{p}-shclip"><rect x="226" y="404" width="164" height="100"/><rect x="255" y="162" width="14" height="250"/><rect x="351" y="162" width="14" height="250"/>'
+               f'<rect x="232" y="144" width="158" height="20"/><rect x="296" y="34" width="16" height="112"/><rect x="96" y="32" width="216" height="16"/></clipPath>')
+        bands = (f'<rect x="226" y="470" width="164" height="34" fill="{sh}" opacity=".4"/><rect x="226" y="404" width="164" height="6" fill="{sh}" opacity=".3"/>'
+                 f'<rect x="250" y="360" width="120" height="52" fill="{sh}" opacity=".35"/><rect x="232" y="156" width="158" height="8" fill="{sh}" opacity=".4"/>'
+                 f'<rect x="296" y="124" width="16" height="22" fill="{sh}" opacity=".4"/><rect x="96" y="42" width="216" height="6" fill="{sh}" opacity=".4"/>')
+        lights += sil + f'<g clip-path="url(#{p}-shclip)">{bands}</g>'
     global LAST
     LAST = dict(gantry=gantry, w1=w1, w2=w2, net=net(p, c, load), rope=rope, hand=hand)
     body = (g(f'{p}-sky', sky) + g(f'{p}-far', far) + g(f'{p}-sea', sea) + g(f'{p}-mid', bgdrag(p, c, bg)) + g(f'{p}-pier', plat) + g(f'{p}-hand', hand)

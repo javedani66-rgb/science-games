@@ -27,9 +27,10 @@ def nse(s): return s.replace('<path ', '<path vector-effect="non-scaling-stroke"
 
 # ---- قاب شب 390×392 (کارت جلو) ----
 fr = rr(16, 6, 358, 382, 22, 5)
-glow = ''.join(f'<path d="{pd(brush(fr, 1.5, 7))}" fill="none" stroke="{ZONE}" stroke-width="{w}" stroke-linejoin="round" opacity="{o}"/>' for w, o in ((42, .05), (32, .07), (22, .10), (14, .14)))
+glow = ''.join(f'<path d="{pd(brush(fr, 2.8, 7, 9))}" fill="none" stroke="{ZONE}" stroke-width="{w}" stroke-linejoin="round" opacity="{o}"/>' for w, o in ((44, .06), (34, .09), (24, .13), (15, .2)))
 body = g('cd-frame-glow', glow)
-body += g('cd-frame-band', S(fr, CARD_BG, 6, 7, ZONE))
+body += g('cd-frame-band', S(fr, CARD_BG, 6, 7, ZONE, amp=2.8, step=9))
+body += g('cd-frame-neon', f'<path d="{pd(brush(rr(21, 11, 348, 372, 19, 5), 1.6, 17, 10))}" fill="none" stroke="#d8f0ff" stroke-width="1.2" stroke-linejoin="round" opacity=".85"/>')
 body += g('cd-frame-inner', S(rr(26, 16, 338, 362, 16, 4), 'none', 2.6, 0, ZONE, extra='opacity=".55"'))
 body += g('cd-frame-slot', S(rr(28, 92, 334, 150, 10, 4), LINE, 4.5, 8, LINE))
 body += g('cd-frame-text', S(rr(28, 250, 334, 56, 10, 4), TEXT_BG, 2.6, 0, ZONE, extra='stroke-opacity=".6"'))
@@ -39,11 +40,11 @@ add('image_border', (0, 0, 334, 150), nse(g('cd-ib-line', S(rr(2.25, 2.25, 329.5
 # ---- نوار عنوان 360×60 ----
 tb = rr(14, 9, 332, 42, 12, 4)
 tbody = g('cd-tb-glow', f'<path d="{pd(brush(tb, 1.1, 3))}" fill="none" stroke="{ZONE}" stroke-width="12" stroke-linejoin="round" opacity=".16"/><path d="{pd(brush(tb, 1.1, 3))}" fill="none" stroke="{ZONE}" stroke-width="8" stroke-linejoin="round" opacity=".22"/>')
-tbody += g('cd-tb-plaque', S(tb, SHELF, 4.5, 3, ZONE))
+tbody += g('cd-tb-plaque', S(tb, SHELF, 4.5, 3, ZONE, amp=2.0, step=10))
 add('title_bar', (0, 0, 360, 60), tbody, 'title-plaque', extra_meta=dict(text='Lalezar >=24px، تیتر از strings؛ درخشش متن = text-shadow CSS (غیر از filter)'))
 # ---- نوار عقب 360×56 ----
 sp = rr(8, 6, 344, 44, 12, 4)
-add('stack_strip', (0, 0, 360, 56), g('cd-st-band', S(sp, '#241056', 4.5, 5, '#3d7fa8')) + g('cd-st-line', S(rr(14, 12, 332, 32, 8, 3), 'none', 1.2, 0, '#3d7fa8', extra='opacity=".5"')), 'strip', extra_meta=dict(note='بی‌درخشش؛ قرص سختی ui + واژه در HTML؛ کل نوار هدف لمس'))
+add('stack_strip', (0, 0, 360, 56), g('cd-st-band', S(sp, '#241056', 4.5, 5, '#3d7fa8', amp=2.0, step=10)) + g('cd-st-line', S(rr(14, 12, 332, 32, 8, 3), 'none', 1.2, 0, '#3d7fa8', extra='opacity=".5"')), 'strip', extra_meta=dict(note='بی‌درخشش؛ قرص سختی ui + واژه در HTML؛ کل نوار هدف لمس'))
 # ---- قفسه 360×40 ----
 sh = g('cd-sh-top', S([(0, 8), (360, 8), (350, 19), (10, 19)], '#3a2a7a', 2.6, 0, NLINE)) + L([(10, 9.5), (350, 9.5)], ZONE, 1.2, .8)
 sh += g('cd-sh-front', S(rr(10, 19, 340, 13, 2), SHELF, 2.6, 0, NLINE))

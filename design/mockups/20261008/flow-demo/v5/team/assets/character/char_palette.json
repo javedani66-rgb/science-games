@@ -9,16 +9,17 @@
   "top_hue_ok": true
  },
  "b2": {
-  "skin": "#5e3a28",
-  "top": "#8a4fd0",
+  "skin": "#7a4c34",
+  "top": "#9153da",
   "trim": "#fff4d2",
   "hair": "#1b1220",
   "brow": "#1b1220",
+  "feat": "#0d0426",
   "top_hue_ok": true
  },
  "b3": {
   "skin": "#e8b48a",
-  "top": "#9a3a8a",
+  "top": "#b946a6",
   "trim": "#fff4d2",
   "hair": "#e0782a",
   "brow": "#b85a14",
@@ -30,6 +31,7 @@
   "trim": "#fff4d2",
   "hair": "#6a4128",
   "brow": "#4a2c18",
+  "feat": "#0d0426",
   "top_hue_ok": true
  },
  "b5": {
@@ -50,18 +52,20 @@
  },
  "b7": {
   "skin": "#8d5a3c",
-  "top": "#1f6f78",
+  "top": "#24808a",
   "trim": "#fff4d2",
   "hair": "#1b1220",
   "brow": "#1b1220",
+  "feat": "#0d0426",
   "top_hue_ok": true
  },
  "b8": {
-  "skin": "#5e3a28",
+  "skin": "#7a4c34",
   "top": "#fff4d2",
   "trim": "#2f7bd6",
   "hair": "#1b1220",
   "brow": "#1b1220",
+  "feat": "#0d0426",
   "top_hue_ok": true
  }
 }

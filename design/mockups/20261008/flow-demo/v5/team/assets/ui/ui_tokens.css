@@ -3,7 +3,7 @@
 :root{
   --ui-line:#241a5e; --ui-cream:#fff4d2; --ui-violet:#3a2a7a; --ui-teal:#2fb8a8; --ui-pink:#d070c0; --ui-danger:#8a4fd0;
   --ui-night-bg:#190539; --ui-night-edge:#2fb8a8;
-  --ui-ink-disabled:#4a4268; --ui-disabled-bg:#d9d3e8;
+  --ui-ink-disabled:#4a4268;--ui-pink-lip:#9a4a90; --ui-disabled-bg:#d9d3e8;
   --ui-r-big:18px; --ui-r-small:7px; --ui-l45:4.5px; --ui-l26:2.6px; --ui-l12:1.2px; --ui-lip:6px; --ui-lip-pressed:2px;
   --ui-touch:48px; --ui-gap:8px; --ui-gutter:16px;
   --ui-font-title:'Lalezar','Vazirmatn',sans-serif; --ui-font:'Vazirmatn',system-ui,sans-serif;
@@ -17,33 +17,41 @@
 .ui-ring{overflow:visible}
 [data-world=night]{--ui-rim:2px;--ui-badge-line:var(--ui-line)}
 /* دکمه («پلاک ماشینی»): گوشهٔ بزرگ بالا-ابتدای خط با ویژگی‌های منطقی */
-.ui-btn{--bg:var(--ui-teal);--lipc:#1f8a7d;--ink:var(--ui-line);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+.ui-btn{--bg:var(--ui-teal);--lipc:color-mix(in srgb,var(--bg) 62%,#241a5e);--ink:var(--ui-line);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
   min-block-size:var(--ui-touch);min-inline-size:var(--ui-touch);padding:0 20px;margin-block-end:var(--ui-lip);box-sizing:border-box;
   font:700 var(--ui-fs-btn)/1.2 var(--ui-font);color:var(--ink);background:var(--bg);border:var(--ui-l45) solid var(--ui-line);cursor:pointer;
   border-start-start-radius:var(--ui-r-big);border-end-end-radius:var(--ui-r-big);border-start-end-radius:var(--ui-r-small);border-end-start-radius:var(--ui-r-small);
   box-shadow:0 var(--lip,6px) 0 0 var(--lipc),0 var(--lip,6px) 0 var(--ui-l45) var(--ui-line);--lip:6px}
 .ui-btn:active,.ui-btn[data-state=pressed]{--lip:2px}
-.ui-btn--sec{--bg:var(--ui-cream);--lipc:#cdbf93;border-width:var(--ui-l26)}
-.ui-btn--hold{--bg:var(--ui-danger);--lipc:#5f2f99;--ink:#fff}
-.ui-btn--video{--bg:#d9608f;--lipc:#a43a64}
+.ui-btn--hold{--bg:var(--ui-danger);--lipc:color-mix(in srgb,var(--ui-danger) 62%,#241a5e);--ink:#fff}
+/* ثانویه: شکل دیگر، تخت و بی‌لب، گوشهٔ بُریده (بالا-راست و پایین-چپ؛ RTL)، خط 4.5 دو‌لایه */
+.ui-cut{--cut:10px;--b:4.5px;--cutbg:var(--ui-cream);position:relative;isolation:isolate;border:0;background:var(--ui-line);box-shadow:none;margin-block-end:0;
+  clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
+.ui-cut::before{content:"";position:absolute;inset:var(--b);z-index:-1;background:var(--cutbg);
+  clip-path:polygon(0 0,calc(100% - var(--cut) + var(--b) * .414) 0,100% calc(var(--cut) - var(--b) * .414),100% 100%,calc(var(--cut) - var(--b) * .414) 100%,0 calc(100% - var(--cut) + var(--b) * .414))}
+.ui-btn--sec{--cutbg:var(--ui-cream);border:0;margin-block-end:0;border-radius:0;padding:0 22px}
+.ui-btn--sec:active,.ui-btn--sec[data-state=pressed]{--cutbg:#eadfae}
+.ui-btn--sec:focus-visible,.ui-btn--sec[data-state=focus]{outline:0}
+.ui-btn--sec:focus-visible::before,.ui-btn--sec[data-state=focus]::before{box-shadow:inset 0 0 0 3px var(--ui-violet),inset 0 0 0 5px var(--ui-cream)}
+.ui-btn--video{--bg:var(--ui-pink);--lipc:var(--ui-pink-lip)}
 .ui-btn--s{min-block-size:40px;padding:0 14px}
-.ui-btn--s::after{content:"";position:absolute;inset-block:-4px;inset-inline:-4px}
+.ui-btn--s:not(.ui-btn--sec)::after{content:"";position:absolute;inset-block:-4px;inset-inline:-4px}
 .ui-btn:focus-visible,.ui-chip:focus-visible,.ui-tile:focus-visible{outline:3px solid var(--ui-cream);outline-offset:2px;box-shadow:0 var(--lip,6px) 0 0 var(--lipc),0 var(--lip,6px) 0 var(--ui-l45) var(--ui-line),0 0 0 8px var(--ui-violet)}
-.ui-btn:disabled,.ui-btn[aria-disabled=true]{--bg:var(--ui-disabled-bg);--ink:var(--ui-ink-disabled);--lip:0px;border-color:#6d6492;box-shadow:none;margin-block-end:0;cursor:default;
+.ui-btn:disabled,.ui-btn[aria-disabled=true]{--bg:var(--ui-disabled-bg);--cutbg:var(--ui-disabled-bg);--ink:var(--ui-ink-disabled);--lip:0px;border-color:#6d6492;box-shadow:none;margin-block-end:0;cursor:default;
   background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(74,66,104,.18) 6px 8px)}
 /* دکمهٔ آیکونی: پایهٔ دایرهٔ ۱۲ دندانه از sprite (ui-gearbtn)، آیکون ۴۰ روی آن؛ فشردن = تغییر رنگ، بدون جابه‌جایی */
-.ui-btn--icon{padding:0;border:0;background:none;box-shadow:none;inline-size:48px;block-size:54px;min-block-size:54px;margin:0;--ui-gear:var(--ui-cream)}
+.ui-btn--icon{padding:0;border:0;background:none;box-shadow:none;inline-size:48px;block-size:54px;min-block-size:54px;margin:0;--ui-gear:var(--ui-cream);--ui-gear-lip:#6a5aa8}
 .ui-btn--icon>.ui-gear{position:absolute;inset:0;inline-size:48px;block-size:54px}
 .ui-btn--icon>.ui-ic{position:relative;inline-size:32px;block-size:32px;margin-block-end:6px}
-.ui-btn--icon:active{--ui-gear:#e6d9a8;--ui-lip:#6a5aa8}
+.ui-btn--icon:active,.ui-btn--icon[data-state=pressed]{--ui-gear:#e6d9a8;--ui-gear-lip:#6a5aa8}
 /* چیپ پایه: 96×48، دو سطر «پایه» 14 و «۱ تا ۲» 18 بولد */
 .ui-chips{display:flex;gap:var(--ui-gap);direction:rtl}
-.ui-chip{--bg:var(--ui-violet);--ink:#fff;--lip:2px;--lipc:#2a1f5c;position:relative;flex:1 1 0;min-inline-size:76px;max-inline-size:96px;block-size:48px;margin-block-end:6px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;
+.ui-chip{--bg:var(--ui-violet);--ink:#fff;--lip:6px;--lipc:color-mix(in srgb,var(--bg) 55%,#241a5e);position:relative;flex:1 1 0;min-inline-size:76px;max-inline-size:96px;block-size:48px;margin-block-end:6px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;
   font-family:var(--ui-font);font-weight:700;line-height:1;color:var(--ink);background:var(--bg);border:var(--ui-l26) solid var(--ui-line);cursor:pointer;padding:0;
   border-start-start-radius:var(--ui-r-big);border-end-end-radius:var(--ui-r-big);border-start-end-radius:var(--ui-r-small);border-end-start-radius:var(--ui-r-small);
   box-shadow:0 var(--lip) 0 0 var(--lipc),0 var(--lip) 0 var(--ui-l26) var(--ui-line)}
 .ui-chip small{font-size:var(--ui-fs-small);font-weight:700;opacity:1} .ui-chip b{font-size:18px}
-.ui-chip[aria-pressed=true]{--bg:var(--ui-cream);--ink:var(--ui-line);--lip:6px;--lipc:#cdbf93;border-width:var(--ui-l45)}
+.ui-chip[aria-pressed=true]{--bg:var(--ui-cream);--ink:var(--ui-line);border-width:var(--ui-l45)}
 .ui-chip .ui-tick{display:none;position:absolute;inset-block-start:-9px;inset-inline-start:-8px;inline-size:20px;block-size:20px}
 .ui-chip[aria-pressed=true] .ui-tick{display:block}
 /* برگه‌ها */
@@ -53,12 +61,12 @@
 .ui-sheet-night{box-sizing:border-box;padding:12px var(--ui-gutter) 20px;background:var(--ui-night-bg);color:#fff;border:var(--ui-l26) solid var(--ui-night-edge);border-block-end:0;border-radius:28px 28px 0 0 / 22px 22px 0 0;box-shadow:0 0 14px rgba(47,184,168,.45);font:400 var(--ui-fs-body)/var(--ui-lh) var(--ui-font)}
 .ui-sheet-night::before{content:"";display:block;inline-size:44px;block-size:6px;margin:0 auto 10px;border-radius:3px;background:var(--ui-night-edge);opacity:.7}
 /* پلاک برچسب، «تازه»، ورودی */
-.ui-plate{display:inline-block;padding:2px 12px;min-block-size:28px;box-sizing:border-box;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:10px 4px 10px 4px;font:700 var(--ui-fs-small)/1.6 var(--ui-font)}
+.ui-plate{--cut:7px;--b:2.6px;--cutbg:var(--ui-cream);display:inline-block;padding:2px 14px;min-block-size:28px;box-sizing:border-box;color:var(--ui-line);font:700 var(--ui-fs-small)/1.6 var(--ui-font)}
 .ui-plate--16{font-size:16px}
 .ui-newdot{display:inline-block;inline-size:16px;block-size:16px;border-radius:50%;background:var(--ui-teal);border:var(--ui-l26) solid var(--ui-line);box-shadow:0 0 0 2px var(--ui-cream)}
-.ui-input{box-sizing:border-box;min-block-size:48px;padding:0 14px;inline-size:100%;background:#fff;color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:12px 5px 12px 5px;font:400 var(--ui-fs-body) var(--ui-font)}
+.ui-input{box-sizing:border-box;min-block-size:48px;padding:0 14px;inline-size:100%;background:#fff;color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:3px;font:400 var(--ui-fs-body) var(--ui-font)}
 /* کاشی منو: ≥132 بلند، 160 عرض؛ بنا را env می‌دهد (img/svg داخل .ui-tile-art) و ۱۲px از لبهٔ بالا بیرون می‌زند */
-.ui-tile{--lip:6px;--lipc:#8fb7d9;--bg:#d6ecf7;position:relative;box-sizing:border-box;inline-size:160px;min-block-size:132px;margin-block-end:6px;padding:0 8px 10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+.ui-tile{--lip:6px;--bg:#d6ecf7;--lipc:color-mix(in srgb,var(--bg) 62%,#241a5e);position:relative;box-sizing:border-box;inline-size:160px;min-block-size:132px;margin-block-end:6px;padding:0 8px 10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
   background:var(--bg);border:var(--ui-l45) solid var(--ui-line);color:var(--ui-line);font:700 var(--ui-fs-tile)/1.3 var(--ui-font);cursor:pointer;
   border-start-start-radius:var(--ui-r-big);border-end-end-radius:var(--ui-r-big);border-start-end-radius:var(--ui-r-small);border-end-start-radius:var(--ui-r-small);
   box-shadow:0 var(--lip) 0 0 var(--lipc),0 var(--lip) 0 var(--ui-l45) var(--ui-line)}

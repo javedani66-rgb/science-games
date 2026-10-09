@@ -41,12 +41,23 @@ def strip(zone, y0, y1, top_soft):
         for k in range(int((h - ext) / 24)):
             y = ext + 12 + k * 24
             o.append('<path d="M-10,%s Q100,%s 200,%s T400,%s" fill="none" stroke="%s" stroke-width="5" opacity=".55"/>' % (y, y - 8, y + 4, y - 3, z['patch']))
-    if zone == 'city':       # شبکهٔ خیابان کمرنگ
+    if zone == 'city':       # خیابان‌ها، بلوک‌ها، میدانک‌ها؛ فقط lit/shade/لکه، پایه عوض نمی‌شود
+        ys = []
         for k in range(14):
             y = 520 + k * 190 + r.uniform(-20, 20)
-            if y < h - 40: o.append('<rect x="-4" y="%s" width="398" height="12" fill="%s" opacity=".28"/>' % (f(y), z['shade']))
+            if y < h - 40:
+                ys.append(y); o.append('<rect x="-4" y="%s" width="398" height="12" fill="%s" opacity=".3"/><path d="M-4,%s H394" stroke="#fff4d2" stroke-width="1.2" stroke-dasharray="10 12" opacity=".35"/>' % (f(y), z['shade'], f(y + 6)))
         for x in (36, 354, 195):
-            o.append('<rect x="%s" y="%s" width="12" height="%s" fill="%s" opacity=".22"/>' % (x - 6, 300 if x != 195 else 700, h - 380 if x != 195 else h - 900, z['shade']))
+            y0v, hv = (300, h - 380) if x != 195 else (700, h - 900)
+            o.append('<rect x="%s" y="%s" width="12" height="%s" fill="%s" opacity=".22"/><path d="M%s,%s V%s" stroke="#fff4d2" stroke-width="1.2" stroke-dasharray="10 12" opacity=".3"/>' % (x - 6, y0v, hv, z['shade'], x, y0v, y0v + hv))
+        tints = ['#6a7fa2', '#5f8aa0', '#7a93ae', '#6d7f9a', '#8aa0b8']
+        for k in range(int(h / 150)):          # بلوک‌های شهری: لکهٔ مستطیلی گرد با رنگ‌مایهٔ نزدیک
+            bx = r.choice([62, 150, 250, 320]); by = r.uniform(380, h - 120)
+            o.append('<rect x="%s" y="%s" width="%s" height="%s" rx="10" fill="%s" opacity=".45" stroke="%s" stroke-width="1.2" stroke-opacity=".4"/>' % (f(bx - 38), f(by), r.randint(56, 90), r.randint(40, 70), r.choice(tints), z['shade']))
+        for k in range(int(h / 420)):          # میدانک گرد با سنگ‌فرش نقطه‌ای
+            cx, cy = r.choice([70, 320, 200]), r.uniform(420, h - 160)
+            o.append('<circle cx="%s" cy="%s" r="%s" fill="%s" opacity=".5"/>' % (f(cx), f(cy), r.randint(28, 44), z['patch']))
+            for q in range(14): o.append('<circle cx="%s" cy="%s" r="1.6" fill="%s" opacity=".6"/>' % (f(cx + r.uniform(-30, 30)), f(cy + r.uniform(-24, 24)), z['shade']))
     if zone == 'space':
         for k in range(18): o.append('<circle cx="%s" cy="%s" r="%s" fill="#fff" opacity=".55"/>' % (r.randint(8, 382), ext + r.randint(8, h - ext - 8), r.choice([1, 1.3, 1.8])))
     o.append('</svg>'); return ''.join(o)
@@ -132,14 +143,22 @@ def bay_left(h=1340):
     o.append('</svg>'); return ''.join(o)
 def skyline():
     o = [SVGH % (390, 180), CSS]; r = random.Random(11)
-    cols = ['#6c82a0', '#7a93ae', '#5f7694', '#8aa0b8']
-    x = -6
+    cols = ['#6c82a0', '#7a93ae', '#5f7694', '#8aa0b8', '#6a7fa2']
+    x = -6; kinds = ['flat', 'slant', 'step', 'dome', 'tank', 'spire', 'flat']
     for i in range(7):
-        w = r.randint(44, 66); hgt = r.randint(70, 140); c = cols[i % 4]
-        o.append('<rect x="%s" y="%s" width="%s" height="%s" fill="%s" class="eo" stroke-width="2.6"/>' % (x, 176 - hgt, w, hgt, c))
-        for yy in range(176 - hgt + 12, 160, 18):
+        w = r.randint(44, 66); hgt = r.randint(64, 140); c = cols[i % 5]; k = kinds[i]; top = 176 - hgt
+        body = {'flat': 'M%s,176 V%s H%s V176Z', 'slant': 'M%s,176 V%s L%s,%s V176Z'}
+        if k == 'slant': o.append('<path d="M%s,176 V%s L%s,%s V176Z" fill="%s" class="eo" stroke-width="2.6"/>' % (x, top + 18, x + w, top, c))
+        elif k == 'step': o.append('<path d="M%s,176 V%s H%s V%s H%s V176Z" fill="%s" class="eo" stroke-width="2.6"/>' % (x, top + 24, x + w * .45, top, x + w, c))
+        elif k == 'dome':
+            o.append('<rect x="%s" y="%s" width="%s" height="%s" fill="%s" class="eo" stroke-width="2.6"/><path d="M%s,%s a%s,%s 0 0 1 %s,0z" fill="#a8bdd2" class="eo" stroke-width="2.6"/>' % (x, top, w, hgt, c, x + 4, top, w / 2 - 4, 18, w - 8))
+        elif k == 'tank':
+            o.append('<rect x="%s" y="%s" width="%s" height="%s" fill="%s" class="eo" stroke-width="2.6"/><rect x="%s" y="%s" width="20" height="16" rx="4" fill="#a8bdd2" class="eo" stroke-width="2.6"/><path d="M%s,%s v10 M%s,%s v10" class="eo" stroke-width="1.2"/>' % (x, top, w, hgt, c, x + w / 2 - 10, top - 18, x + w / 2 - 6, top, x + w / 2 + 6, top))
+        elif k == 'spire':
+            o.append('<rect x="%s" y="%s" width="%s" height="%s" fill="%s" class="eo" stroke-width="2.6"/><path d="M%s,%s L%s,%s L%s,%s z" fill="#a8bdd2" class="eo" stroke-width="2.6"/>' % (x, top, w, hgt, c, x + 4, top, x + w / 2, top - 30, x + w - 4, top))
+        else: o.append('<rect x="%s" y="%s" width="%s" height="%s" fill="%s" class="eo" stroke-width="2.6"/>' % (x, top, w, hgt, c))
+        for yy in range(top + 24, 160, 18):
             for xx in range(x + 8, x + w - 10, 14): o.append('<rect x="%s" y="%s" width="6" height="8" fill="#a8bdd2" opacity=".7"/>' % (xx, yy))
-        if i % 3 == 1: o.append('<rect x="%s" y="%s" width="4" height="12" fill="%s" class="eo" stroke-width="1.2"/>' % (x + w / 2 - 2, 176 - hgt - 12, c))
         x += w + r.randint(4, 12)
     o.append('<rect x="-4" y="170" width="398" height="14" fill="#44566c"/></svg>'); return ''.join(o)
 def cloud_edge():

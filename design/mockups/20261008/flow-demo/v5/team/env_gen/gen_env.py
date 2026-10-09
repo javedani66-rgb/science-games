@@ -17,7 +17,8 @@ for n, fn in X.LAND.items():
     s = fn(); put('node_%02d.svg' % n, s); symbol('node_%02d' % n, s)
 # --- پایه‌ها + پروپ‌ها ---
 for z in ('sports', 'space', 'farm', 'city'):
-    b = B('env_pad_' + z); pad(b, z, 38); s = b.svg((120, 100), 60, 78, 38, 12, (-38, -14, 38, 14)); symbol('env_pad_' + z, s)
+    for v, (rx, sd) in enumerate(((38, 1), (44, 5), (34, 9))):
+        b = B('env_pad_%s_%s' % (z, 'abc'[v])); pad(b, z, rx, sd); s = b.svg((120, 100), 60, 78, rx, 12, (-rx, -14, rx, 14)); symbol('env_pad_%s_%s' % (z, 'abc'[v]), s)
 for n, fn in X.PROPS.items():
     s = X.prop(n, fn); put('prop_%02d.svg' % n, s); symbol('prop_%02d' % n, s)
 # --- زمین ---

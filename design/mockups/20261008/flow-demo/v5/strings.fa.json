@@ -243,5 +243,12 @@
   "where_fa": "برچسب حالت دکمه در کیت",
   "context_fa": "draft؛ ماکت کیت رابط v5",
   "band": "همه"
+ },
+ "v5.ui.state.video": {
+  "text": "فیلم",
+  "kind": "ui",
+  "where_fa": "دکمهٔ فیلم پشت کارت (کیت)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
  }
 }

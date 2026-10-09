@@ -71,6 +71,8 @@ o.append('<g id="env_path"><path d="%s" fill="none" stroke="#241a5e" stroke-widt
 o.append('<path d="%s" fill="none" stroke="#fff4d2" stroke-width="22" stroke-linecap="round" opacity=".55"/><path d="%s" fill="none" stroke="#fff4d2" stroke-width="5" stroke-dasharray="3 14" stroke-linecap="round"/>' % (D_ALL, D_ALL))
 Dd = L.path_seg_d(pts, 0, HERE_P + 1)
 o.append('<path d="%s" fill="none" stroke="#fff4d2" stroke-width="22" stroke-linecap="round"/><path d="%s" fill="none" stroke="#ffd23f" stroke-width="3.2" stroke-dasharray="10 12"/></g>' % (Dd, Dd))
+fy0, fy1 = L.ZB['farm'][0] - 20, L.ZB['farm'][1] + 20
+o.append('<clipPath id="env_farmclip"><rect x="0" y="%d" width="390" height="%d"/></clipPath><g clip-path="url(#env_farmclip)"><path d="%s" fill="none" stroke="#241a5e" stroke-width="38" stroke-linecap="round"/><path d="%s" fill="none" stroke="#fff4d2" stroke-width="22" stroke-linecap="round"/><path d="%s" fill="none" stroke="#6b4a22" stroke-width="3.2" stroke-dasharray="10 12"/></g>' % (fy0, fy1 - fy0, D_ALL, D_ALL, D_ALL))
 # پلهٔ چوبی روی یخ (فقط درون چندضلعی یخ)
 ip = ' '.join('%s,%s' % (a + ICEX, b + ICEY) for a, b in T.ice_poly())
 o.append('<clipPath id="env_icemap"><polygon points="%s"/></clipPath><g clip-path="url(#env_icemap)"><path d="%s" fill="none" stroke="#241a5e" stroke-width="34" stroke-linecap="round"/><path d="%s" fill="none" stroke="#c98a45" stroke-width="22" stroke-linecap="round"/><path d="%s" fill="none" stroke="#8f5a2e" stroke-width="22" stroke-dasharray="1.6 11"/></g>' % (ip, D_ALL, D_ALL, D_ALL))
@@ -81,7 +83,7 @@ o.append(use('env_start_gate', sx - 85, sy - 120 + 6, 170, 130))
 slots = L.slots()
 for n in sorted(L.NODES, key=lambda n: n['cy']):
     s = slots[n['id']]; px, py = s['place_at']
-    pad = 'env_pad_' + n['zone']
+    pad = 'env_pad_%s_%s' % (n['zone'], 'abc'[n['p'] % 3])
     if n['kind'] == 'landmark': o.append(use(n['asset'], px, py, 200, 190))
     else: o.append(use(pad, px, py, 120, 100) + use(n['asset'], px, py, 120, 100))
     i = idx[n['id']]; lx, ly = s['lock_done_center']

@@ -11,7 +11,8 @@ POSES = ['stand', 'walk1', 'walk2', 'jump', 'point', 'sit']
 BG = {'grass': '#7fbf4a', 'space': '#7a5cd0', 'night': '#190539'}
 
 def use(cid, st, size, cls='', pose=None):
-    full = cid == 'b1' and pose
+    pose = pose or ('stand' if cid == 'b1' else None)
+    full = cid == 'b1'
     kind = 'full' if full else 'bust'
     H = 150 if full else 100
     w = size * 100 / H if full else size
@@ -31,6 +32,9 @@ for bg, col in BG.items():
 body.append('<h2>b1 poses (110px، حالت happy/thinking)</h2><div class="grid" style="background:#7fbf4a">')
 for p in POSES:
     body.append(card(use('b1', 'happy' if p != 'point' else 'thinking', 110, pose=p), p))
+body.append('</div><h2>night halo (--halo:inline)</h2><div class="row" style="background:#190539">')
+for cid in IDS:
+    body.append('<span style="--halo:inline">' + use(cid, 'happy', 110 if cid == 'b1' else 82) + '</span>')
 body.append('</div><h2>sizes (140 / 82 / 64 / 56) روی چمن و شب</h2>')
 for bg in ('grass', 'night'):
     body.append(f'<div class="row" style="background:{BG[bg]}">')

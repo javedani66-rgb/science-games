@@ -47,21 +47,15 @@ def blob(rx, ry, n=14, a=.06, seed=1):
         p1, p2 = pts[i], pts[(i + 1) % n]; m = ((p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2)
         d += ' Q%s,%s %s,%s' % (f(p1[0]), f(p1[1]), f(m[0]), f(m[1]))
     return d + 'Z'
-# پایه‌های خاص زمین (مرکز پایه = ۰،۰)
-PAD = {'sports': ('#a6d86a', '#66993b'), 'space': ('#d9d3f0', '#a79fcb'), 'farm': ('#c7a56a', '#9b7a48'), 'city': ('#c6c1b6', '#9b968c')}
+# لکهٔ زمینِ هم‌زون زیر بنا (بدون خط، بدون دیسک)؛ سایه با esd در svg()
+PATCH = {'sports': ('#a6d86a', '#66993b', '#7fbf4a'), 'space': ('#9a7ee0', '#5c459c', '#b9a3f0'), 'farm': ('#ece2ae', '#aba16e', '#c7a56a'), 'city': ('#7a93ae', '#44566c', '#9db3c9'), 'dirt': ('#c7a56a', '#9b7a48', '#e0c48a')}
 def pad(b, zone, rx, seed=3):
-    top, side = PAD[zone]; ry = rx * .34; h = 9
-    if zone == 'sports':
-        b.raw('<g transform="translate(0 %s)"><path d="%s" fill="%s" class="eo" stroke-width="4.5"/></g>' % (h, blob(rx, ry, 14, .07, seed), side)); b.clip.append('<path transform="translate(0 %s)" d="%s"/>' % (h, blob(rx, ry, 14, .07, seed)))
-        b.path(blob(rx, ry, 14, .07, seed), top, 4.5)
-        b.line(-rx * .5, 2, -rx * .3, -3, '#7fbf4a', 1.2); b.line(rx * .35, 3, rx * .5, -2, '#7fbf4a', 1.2)
-    elif zone == 'space':
-        b.ell(0, h, rx, ry, side); b.rect(-rx, 0, 2 * rx, h, side, 0, 0); b.ell(0, 0, rx, ry, top)
-        b.line(-rx * .5, 0, -rx * .3, 3, '#a79fcb', 1.2)
-    elif zone == 'farm':
-        b.path('M%s,%s Q%s,%s 0,%s Q%s,%s %s,%s Z' % (f(-rx), f(h), f(-rx * .7), f(-ry * 1.5), f(-ry * 1.4), f(rx * .7), f(-ry * 1.5), f(rx), f(h)), side, 4.5)
-        b.ell(0, 1, rx * .86, ry * .9, top, 4.5)
-        b.line(-rx * .3, 3, -rx * .1, 0, '#9b7a48', 1.2)
-    else:
-        b.rect(-rx, -ry, 2 * rx, 2 * ry + h, side, 4.5, 12); b.rect(-rx, -ry, 2 * rx, 2 * ry, top, 4.5, 12)
-        b.line(-rx * .6, ry * .2, -rx * .1, ry * .2, '#9b968c', 1.2)
+    r = random.Random(seed * 7 + len(zone)); ry = rx * r.uniform(.27, .38); patch, shade, tick = PATCH[zone]; dx = r.uniform(-4, 4)
+    b.raw('<path transform="translate(%s %s)" d="%s" fill="%s" opacity=".75"/>' % (f(dx + 5), f(7), blob(rx * 1.04, ry * 1.04, 13, .1, seed), shade))
+    b.raw('<path transform="translate(%s 0)" d="%s" fill="%s"/>' % (f(dx), blob(rx, ry, 13, .1, seed + 1), patch))
+    for k in range(3):
+        x = r.uniform(-rx * .7, rx * .7); y = r.uniform(-ry * .5, ry * .6)
+        if zone == 'sports': b.raw('<path d="M%s,%sl-2,-6M%s,%sl2,-6" stroke="%s" stroke-width="1.2" stroke-linecap="round" fill="none"/>' % (f(x), f(y), f(x + 3), f(y), shade))
+        elif zone == 'space': b.raw('<ellipse cx="%s" cy="%s" rx="4" ry="1.8" fill="%s"/>' % (f(x), f(y), shade))
+        elif zone in ('farm', 'dirt'): b.raw('<path d="M%s,%sl7,-1" stroke="%s" stroke-width="1.2" stroke-linecap="round"/>' % (f(x), f(y), shade))
+        else: b.raw('<path d="M%s,%sl8,3" stroke="%s" stroke-width="1.2" stroke-linecap="round"/>' % (f(x), f(y), shade))

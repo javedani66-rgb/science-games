@@ -46,13 +46,15 @@ def d_rail(b):
     for x in (-26, -10, 6, 22): b.rect(x, -20, 6, 24, WD, 2.6, 1)
 def d_barrels(b):
     for x, y in ((-12, 0), (12, 0), (0, -18)): b.rect(x - 9, y - 20, 18, 20, BL, 2.6, 5); b.line(x - 9, y - 12, x + 9, y - 12, '#a9cdf2', 1.2)
-def d_truck(b): b.rect(-30, -26, 40, 22, CR, 2.6, 3); b.rect(10, -20, 20, 16, VI, 2.6, 3); b.circ(-18, -4, 6, DV, 2.6); b.circ(20, -4, 6, DV, 2.6); b.window(16, -17, 10, 6)
+def d_truck_box(b): b.rect(-30, -26, 40, 22, CR, 2.6, 3); b.rect(10, -20, 20, 16, VI, 2.6, 3); b.circ(-18, -4, 6, DV, 2.6); b.circ(20, -4, 6, DV, 2.6); b.window(16, -17, 10, 6)
+def d_truck_crane(b): b.rect(-30, -18, 52, 12, WD, 2.6, 2); b.rect(14, -30, 18, 22, TL, 2.6, 3); b.window(18, -26, 10, 7); b.circ(-20, -4, 6, DV, 2.6); b.circ(24, -4, 6, DV, 2.6); b.line(-22, -18, -8, -52, 'var(--l-line,#241a5e)', 6); b.line(-22, -18, -8, -52, PK, 2.6); b.line(-8, -52, -8, -34, 'var(--l-line,#241a5e)', 1.2); b.rect(-13, -34, 10, 8, WD2, 2.6, 1)
+def d_forklift(b): b.rect(-10, -22, 26, 18, '#fff4d2', 2.6, 3); b.rect(-6, -34, 18, 12, BL, 2.6, 3); b.rect(-24, -48, 5, 46, ST2, 2.6, 1); b.rect(-30, -20, 22, 5, ST2, 2.6, 1); b.circ(-2, -4, 5, DV, 2.6); b.circ(12, -4, 5, DV, 2.6)
 def d_tank(b): b.rect(-20, -34, 40, 34, ST, 2.6, 6); b.ell(0, -34, 20, 6, ST2, 2.6); b.line(-20, -20, 20, -20, ST2, 1.2); b.rect(-4, -48, 8, 14, ST2, 2.6, 1)
 SET = {
  'sports': [('cone', d_cone, 34), ('hedge', d_hedge, 40), ('bench', d_bench, 36), ('goal', d_goal, 40), ('hurdle', d_hurdle, 30), ('stand', d_stand, 40), ('lamp', d_lamp, 24), ('flags', d_flags, 30)],
  'space': [('crater', d_crater, 30), ('rock', d_rock, 24), ('rock2', d_rock2, 20), ('anten', d_anten, 22), ('dome', d_dome, 22), ('solar', d_solar, 34), ('star', d_star, 16), ('ufo', d_ufo, 24)],
  'farm': [('wheat', d_wheat, 24), ('fence', d_fence, 38), ('bale', d_bale, 24), ('scare', d_scare, 24), ('haycone', d_haycone, 24), ('trough', d_trough, 30), ('sunf', d_sunf, 14), ('bucket', d_bucket, 14)],
- 'city': [('low', d_low, 30), ('mid', d_mid, 28), ('slamp', d_slamp, 22), ('rail', d_rail, 38), ('barrels', d_barrels, 26), ('truck', d_truck, 36), ('tank', d_tank, 26)],
+ 'city': [('low', d_low, 30), ('mid', d_mid, 28), ('slamp', d_slamp, 22), ('rail', d_rail, 38), ('barrels', d_barrels, 26), ('truck_box', d_truck_box, 36), ('truck_crane', d_truck_crane, 38), ('forklift', d_forklift, 30), ('tank', d_tank, 26)],
 }
 def decor_svgs():
     out = {}
@@ -72,7 +74,7 @@ def start_gate():
     return b.svg((170, 130), 85, 120, 76, 8, (-82, -114, 82, 4))
 # ---------- کاشی‌های منو 160×(≥132) ----------
 def tile_map():
-    b = B('env_tile_map'); b.ell(0, 10, 62, 20, '#a6d86a', 4.5); b.path('M-52,6 Q-26,-46 4,-34 Q30,-30 52,6Z', '#7fbf4a', 4.5)
+    b = B('env_tile_map'); pad(b, 'sports', 66, 20); b.path('M-52,6 Q-26,-46 4,-34 Q30,-30 52,6Z', '#7fbf4a', 4.5)
     b.line(-30, -2, -18, -18, '#66993b', 1.2); b.line(14, -2, 24, -16, '#66993b', 1.2)
     b.rect(-2, -86, 5, 56, ST, 4.5, 2)
     for i in range(3):
@@ -80,17 +82,17 @@ def tile_map():
     b.rect(3, -86, 30, 20, 'none', 2.6, 2)
     return b.svg((160, 140), 80, 100, 62, 20, (-56, -90, 56, 20), False)
 def tile_cards():
-    b = B('env_tile_cards'); b.ell(0, 10, 62, 20, ST2, 4.5)
+    b = B('env_tile_cards'); pad(b, 'city', 66, 21)
     b.rect(-46, -70, 92, 76, WD, 4.5, 4); b.rect(-40, -64, 80, 64, WD2, 2.6, 3); b.line(-40, -32, 40, -32, LN, 2.6)
     for i, c in enumerate((TL, PK, BL)): b.rect(-34 + i * 24, -58, 18, 24, c, 2.6, 3); b.rect(-34 + i * 24, -26, 18, 22, c, 2.6, 3)
     return b.svg((160, 140), 80, 100, 62, 20, (-56, -74, 56, 20), False)
 def tile_practice():
-    b = B('env_tile_practice'); b.ell(0, 10, 62, 20, ST2, 4.5)
+    b = B('env_tile_practice'); pad(b, 'city', 66, 22)
     b.rect(-44, -44, 88, 48, WD, 4.5, 4); b.poly([(-44, -44), (44, -44), (52, -60), (-36, -60)], '#e0b070', 4.5); b.rect(-14, -32, 28, 8, CR, 2.6, 3)
     for i, c in enumerate((TL, PK, BL)): b.rect(-30 + i * 22, -78, 16, 26, c, 2.6, 3, rot=(-8 + i * 8, -22 + i * 22, -52))
     return b.svg((160, 140), 80, 100, 62, 20, (-56, -80, 56, 20), False)
 def tile_guide():
-    b = B('env_tile_guide'); b.ell(0, 10, 62, 20, '#a6d86a', 4.5)
+    b = B('env_tile_guide'); pad(b, 'sports', 66, 23)
     b.rect(-34, -40, 68, 44, CR, 4.5, 4); b.poly([(-42, -40), (42, -40), (0, -80)], VI, 4.5)
     b.path('M-8,4 v-18 a8,8 0 0 1 16,0 v18z', TL, 2.6); b.rect(-28, -30, 14, 12, '#9fdcf2', 2.6, 2); b.rect(14, -30, 14, 12, '#9fdcf2', 2.6, 2)
     b.path('M-14,-62 a14,12 0 0 1 28,0z', CR, 2.6)

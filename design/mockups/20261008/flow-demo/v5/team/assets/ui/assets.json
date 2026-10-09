@@ -160,7 +160,7 @@
    "viewBox": "0 0 48 54",
    "vars": [
     "--ui-gear",
-    "--ui-lip"
+    "--ui-gear-lip"
    ],
    "role": "icon-button-base"
   }

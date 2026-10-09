@@ -3,7 +3,7 @@
   "file": "char_b1.svg",
   "viewBox": "0 0 100 150",
   "anchor": "bottom-center",
-  "bytes": 23269,
+  "bytes": 15080,
   "states": [
    "happy",
    "thinking",
@@ -21,6 +21,7 @@
   "layers": [
    "ch-b1-sil",
    "ch-b1-shadow",
+   "ch-b1-halo",
    "ch-b1-body-back",
    "ch-b1-pose-stand",
    "ch-b1-pose-walk1",
@@ -59,7 +60,7 @@
   "file": "char_b2.svg",
   "viewBox": "0 0 100 100",
   "anchor": "bust-bottom-center",
-  "bytes": 6616,
+  "bytes": 7052,
   "states": [
    "happy",
    "thinking",
@@ -69,6 +70,7 @@
   "poses": [],
   "layers": [
    "ch-b2-sil",
+   "ch-b2-halo",
    "ch-b2-torso",
    "ch-b2-neck",
    "ch-b2-ear",
@@ -98,7 +100,7 @@
   "file": "char_b3.svg",
   "viewBox": "0 0 100 100",
   "anchor": "bust-bottom-center",
-  "bytes": 6621,
+  "bytes": 7093,
   "states": [
    "happy",
    "thinking",
@@ -108,6 +110,7 @@
   "poses": [],
   "layers": [
    "ch-b3-sil",
+   "ch-b3-halo",
    "ch-b3-body-back",
    "ch-b3-torso",
    "ch-b3-neck",
@@ -139,7 +142,7 @@
   "file": "char_b4.svg",
   "viewBox": "0 0 100 100",
   "anchor": "bust-bottom-center",
-  "bytes": 6451,
+  "bytes": 6898,
   "states": [
    "happy",
    "thinking",
@@ -149,6 +152,7 @@
   "poses": [],
   "layers": [
    "ch-b4-sil",
+   "ch-b4-halo",
    "ch-b4-torso",
    "ch-b4-neck",
    "ch-b4-ear",
@@ -179,7 +183,7 @@
   "file": "char_b5.svg",
   "viewBox": "0 0 100 100",
   "anchor": "bust-bottom-center",
-  "bytes": 6262,
+  "bytes": 6788,
   "states": [
    "happy",
    "thinking",
@@ -189,6 +193,7 @@
   "poses": [],
   "layers": [
    "ch-b5-sil",
+   "ch-b5-halo",
    "ch-b5-body-back",
    "ch-b5-torso",
    "ch-b5-neck",
@@ -219,7 +224,7 @@
   "file": "char_b6.svg",
   "viewBox": "0 0 100 100",
   "anchor": "bust-bottom-center",
-  "bytes": 6885,
+  "bytes": 7250,
   "states": [
    "happy",
    "thinking",
@@ -229,6 +234,7 @@
   "poses": [],
   "layers": [
    "ch-b6-sil",
+   "ch-b6-halo",
    "ch-b6-torso",
    "ch-b6-neck",
    "ch-b6-ear",
@@ -259,7 +265,7 @@
   "file": "char_b7.svg",
   "viewBox": "0 0 100 100",
   "anchor": "bust-bottom-center",
-  "bytes": 6876,
+  "bytes": 7482,
   "states": [
    "happy",
    "thinking",
@@ -269,6 +275,7 @@
   "poses": [],
   "layers": [
    "ch-b7-sil",
+   "ch-b7-halo",
    "ch-b7-body-back",
    "ch-b7-torso",
    "ch-b7-neck",
@@ -300,7 +307,7 @@
   "file": "char_b8.svg",
   "viewBox": "0 0 100 100",
   "anchor": "bust-bottom-center",
-  "bytes": 7082,
+  "bytes": 7505,
   "states": [
    "happy",
    "thinking",
@@ -311,6 +318,7 @@
   "poses": [],
   "layers": [
    "ch-b8-sil",
+   "ch-b8-halo",
    "ch-b8-torso",
    "ch-b8-neck",
    "ch-b8-ear",
