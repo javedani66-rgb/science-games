@@ -215,8 +215,53 @@ def build_page(art):
     for mark in ('/*__FONTS__*/', '/*__TOKENS__*/', '/*__DATA__*/null', '<!--__SPRITE__-->'):
         if mark not in tpl: raise SystemExit(msg('v5.build.no_placeholder_tpl', mark=mark))
     data = dict(S=S, R=REV, nodes=nodes, chapters=chapters, edges=edges, entr=ENTR, states=STATES, order=ORDER, card=card, videos=V, map=mp)
+    art['sprite'] = restyle_scenes(soften_pads(art['sprite']))
     return (tpl.replace('/*__FONTS__*/', fonts).replace('/*__TOKENS__*/', art['tokens'])
                .replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False)).replace('<!--__SPRITE__-->', art['sprite']))
+
+def soften_pads(sprite):
+    """دور ۲ نقد: اسلب خاکستری زیر بناهای شهر/فضا ← لکهٔ هم‌زون (بدون خط‌های خراش، سایهٔ کم‌رنگ‌تر).
+    فقط در پردازش build؛ فایل‌های هنرمند دست‌نخورده می‌مانند."""
+    import re
+    tint = {'#7a93ae': '#6a89a8', '#9a7ee0': '#8b69d6'}
+    def fix(m):
+        g = m.group(0)
+        for old, new in tint.items(): g = g.replace(f'fill="{old}"', f'fill="{new}"')
+        g = g.replace('opacity=".75"', 'opacity=".38"', 1)
+        return re.sub(r'<path d="[^"]*" stroke="#(?:44566c|5c459c)" stroke-width="1\.2" stroke-linecap="round"/>', '', g)
+    return re.sub(r'<g id="node_(?:01|04|05|06|07|10|11)_base"[^>]*>.*?(?=<rect|<polygon|<circle|<ellipse|<g )', fix, sprite, flags=re.S)
+
+def restyle_scenes(sprite):
+    """دور ۲ نقد: غروب بی‌ماه با خورشید کم‌ارتفاع و نور گرم؛ شب با لبهٔ نئونی. فقط در build؛ فایل هنرمند دست‌نخورده."""
+    import re
+    # غروب: ماه و ستاره‌ها حذف، خورشید روی افق با هالهٔ گرم، بازتاب نارنجی روی آب، لبهٔ گرم‌تر
+    def dusk_sky(m):
+        g = m.group(0)
+        g = re.sub(r'<circle cx="340" cy="40" r="16" fill="#ffe9a8"/><circle cx="347" cy="35" r="13" fill="#6a3fa0"/>', '', g)
+        g = re.sub(r'<circle cx="\d+" cy="\d+" r="1\.7" fill="#fff"/>', '', g)
+        sun = ('<circle cx="196" cy="300" r="92" fill="#ffb25a" opacity=".22"/><circle cx="196" cy="300" r="62" fill="#ffb25a" opacity=".3"/>'
+               '<circle cx="196" cy="302" r="34" fill="#ffd98a"/>')
+        return g.replace('</g>', sun + '</g>', 1) if g.endswith('</g>') else g
+    sprite = re.sub(r'<g id="cd-sod-sky">.*?</g>', dusk_sky, sprite, flags=re.S)
+    def dusk_sea(m):
+        g = m.group(0)
+        return (g.replace('x="328" y="322" width="24"', 'x="176" y="322" width="40"').replace('x="322" y="336" width="36"', 'x="166" y="336" width="60"')
+                 .replace('x="329" y="354" width="22"', 'x="178" y="354" width="36"').replace('fill="#ffe9a8"', 'fill="#ffb25a"'))
+    sprite = re.sub(r'<g id="cd-sod-sea">.*?</g>', dusk_sea, sprite, flags=re.S)
+    def warm_rim(m):
+        g = m.group(0)
+        g = g.replace('stroke="#f2a65a" stroke-width="2.6"', 'stroke="#ffb25a" stroke-width="4"')
+        return g
+    sprite = re.sub(r'<g id="cd-sod-rim">.*?(?=<clipPath)', warm_rim, sprite, flags=re.S)
+    # شب: لبهٔ نئونی (سه لایهٔ درخشش + خط روشن فیروزه‌ای)
+    def neon_rim(m):
+        g = m.group(0)
+        paths = re.findall(r'<path d="[^"]*" fill="none" stroke="#d8e6ff" stroke-width="2\.6"[^>]*/>', g)
+        glow = ''.join(pp.replace('#d8e6ff', '#4fe3ff').replace('stroke-width="2.6"', f'stroke-width="{w}" opacity="{o}"') for w, o in (('12', '.14'), ('7', '.28')) for pp in paths)
+        g = g.replace('#d8e6ff', '#9ff3ff')
+        return g.replace('<g id="cd-srn-rim">', '<g id="cd-srn-rim">' + glow, 1)
+    sprite = re.sub(r'<g id="cd-srn-rim">.*?(?=<clipPath)', neon_rim, sprite, flags=re.S)
+    return sprite
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
