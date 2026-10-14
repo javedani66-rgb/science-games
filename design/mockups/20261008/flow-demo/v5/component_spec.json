@@ -1,0 +1,1515 @@
+{
+ "_doc": "قالب‌نامهٔ کنترل‌های v5 (ماشین‌خوان). منبع حقیقت برای spec_sample.html و tests/spec_contrast.py. پیشنهاد/ماکت؛ نه تصمیم مالک.",
+ "meta": {
+  "version": "draft-1",
+  "status": "proposal",
+  "date": "2026-10-14",
+  "palette_sources": [
+   "team/assets_r2/light/zone_tokens.json",
+   "team/assets_r2/ui/ui_tokens.css"
+  ],
+  "wcag": {
+   "text_min": 4.5,
+   "large_text_min": 3,
+   "large_px": 24,
+   "large_bold_px": 18.66,
+   "nontext_min": 3
+  },
+  "touch_min_px": 48,
+  "min_gap_px": 8,
+  "min_font_px": 16,
+  "derived_rule": "pressed_fill = mix(fill, edge, 0.12); edge = #120c3a (day) / #190539 (night)"
+ },
+ "palette": {
+  "cream": "#fff3c4",
+  "navy_line": "#241a5e",
+  "night_bg": "#190539",
+  "edge": "#120c3a",
+  "chip_violet": "#4b3b9e",
+  "violet_light": "#7a6af5",
+  "purple_hold": "#8a4fe0",
+  "lilac": "#a99dff",
+  "lilac_pale": "#cdb8ff",
+  "gold": "#ffd23f",
+  "cyan": "#46f0d8",
+  "pink": "#ff7be5",
+  "white": "#ffffff",
+  "card_plate": "#07203a",
+  "empty_fill": "#2a0b60",
+  "locked_fill": "#34145f",
+  "dash": "#9a78e0",
+  "disabled_day_fill": "#d9d3e8",
+  "disabled_day_text": "#4a4268",
+  "disabled_day_rim": "#6d6492",
+  "easy": "#2fa44a",
+  "mid": "#ff9d1c",
+  "hard": "#ff4b4b"
+ },
+ "fonts": {
+  "base": {
+   "family": "Vazirmatn",
+   "weights": [
+    400,
+    700
+   ],
+   "rule": "every readable text: buttons, chips, labels, plates, tabs, tiles, body"
+  },
+  "display": {
+   "family": "Lalezar",
+   "weights": [
+    400
+   ],
+   "rule": "big titles only",
+   "max_words": 3,
+   "min_px": 24,
+   "allowed_rows": [
+    "zone_title"
+   ],
+   "allowed_parts": [
+    "sheet.title",
+    "card.title"
+   ],
+   "fallback": "Vazirmatn 700"
+  }
+ },
+ "radius_scale": {
+  "sm": 10,
+  "md": 16,
+  "lg": 18,
+  "xl": 28,
+  "full": "half of height (chip_simple 24, lock 18)"
+ },
+ "global_rules": {
+  "clip_path": "forbidden",
+  "sharp_corner": "forbidden: every corner of every control has the row radius (no 0, no asymmetric)",
+  "opacity_on_text": "forbidden (use disabled colors)",
+  "difficulty_on_node_sheet": "forbidden: the three difficulty levels appear only in challenge_row (environment) and the mission bar in a scene",
+  "text_on_map_without_plate": "forbidden (map_label plate or zone_title halo only)",
+  "stars_rewards": "forbidden (B4)"
+ },
+ "state_rules": {
+  "pressed": {
+   "shift_px": 2,
+   "lip_px_day": 2,
+   "glow_blur_px_night": 10,
+   "fill": "variant.pressed_fill",
+   "text": "unchanged"
+  },
+  "disabled": {
+   "day": {
+    "fill": "#d9d3e8",
+    "text": "#4a4268",
+    "rim": "#6d6492",
+    "rim_style": "dashed",
+    "stripes": true
+   },
+   "night": {
+    "fill": "#34145f",
+    "text": "#cdb8ff",
+    "rim": "#9a78e0",
+    "rim_style": "dashed",
+    "stripes": true
+   },
+   "shadow": "none",
+   "note": "looks different from normal by dashed rim and stripes; text stays readable (>=4.5); a lock icon is added when locked"
+  },
+  "focus": {
+   "ring_px": 4,
+   "offset_px": 3,
+   "on_light_surface": "#4b3b9e",
+   "on_dark_surface": "#ffd23f",
+   "note": "ring sits outside the control, separated by a 3px gap of surface"
+  }
+ },
+ "rows": [
+  {
+   "id": "btn_primary",
+   "name_key": "spec.row.btn_primary",
+   "desc_key": "spec.desc.btn_primary",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 20,
+    "line_height": 1.4,
+    "max_words": null
+   },
+   "size": {
+    "min_height_px": 56,
+    "min_width_px": 96,
+    "touch_px": 56,
+    "padding_inline_px": 22
+   },
+   "variants": [
+    {
+     "id": "cyan",
+     "day": {
+      "fill": "#46f0d8",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#40d5c5"
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#41d4c5",
+      "glow": "#46f0d8"
+     }
+    },
+    {
+     "id": "gold",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3ba3e"
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#e3b93e",
+      "glow": "#ffd23f"
+     }
+    },
+    {
+     "id": "pink",
+     "day": {
+      "fill": "#ff7be5",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e36ed0"
+     },
+     "night": {
+      "fill": "#ff7be5",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#e36dd0",
+      "glow": "#ff7be5"
+     }
+    },
+    {
+     "id": "violet",
+     "day": {
+      "fill": "#8a4fe0",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#7c47cc"
+     },
+     "night": {
+      "fill": "#8a4fe0",
+      "text": "#ffffff",
+      "rim": "#190539",
+      "pressed_fill": "#7c46cc",
+      "glow": "#8a4fe0"
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "btn_secondary",
+   "name_key": "spec.row.btn_secondary",
+   "desc_key": "spec.desc.btn_secondary",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 20,
+    "line_height": 1.4,
+    "max_words": null
+   },
+   "size": {
+    "min_height_px": 56,
+    "min_width_px": 96,
+    "touch_px": 56,
+    "padding_inline_px": 22
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3d7b3"
+     },
+     "night": {
+      "fill": "#a99dff",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#988be7",
+      "glow": "#a99dff"
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "btn_icon",
+   "name_key": "spec.row.btn_icon",
+   "desc_key": "spec.desc.btn_icon",
+   "interactive": true,
+   "surface": {
+    "day": "#241a5e",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 16,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": null,
+    "weight": null,
+    "size_px": null,
+    "line_height": null,
+    "max_words": 0,
+    "note": "icon only; aria-label from strings"
+   },
+   "size": {
+    "min_height_px": 56,
+    "min_width_px": 56,
+    "touch_px": 56,
+    "icon_px": 32
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3d7b3",
+      "icon": "#241a5e"
+     },
+     "night": {
+      "fill": "#a99dff",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#988be7",
+      "glow": "#a99dff",
+      "icon": "#190539"
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "chip_base",
+   "name_key": "spec.row.chip_base",
+   "desc_key": "spec.desc.chip_base",
+   "interactive": true,
+   "surface": {
+    "day": "#241a5e",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 16,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 16,
+    "size_px_number": 20,
+    "line_height": 1.2,
+    "max_words": 3
+   },
+   "size": {
+    "min_height_px": 60,
+    "min_width_px": 76,
+    "touch_px": 60
+   },
+   "variants": [
+    {
+     "id": "off",
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#fff3c4",
+      "rim": "#a99dff",
+      "pressed_fill": "#443592"
+     },
+     "night": {
+      "fill": "#4b3b9e",
+      "text": "#fff3c4",
+      "rim": "#a99dff",
+      "pressed_fill": "#453592",
+      "glow": "#a99dff"
+     }
+    },
+    {
+     "id": "on",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#241a5e",
+      "rim": "#fff3c4",
+      "pressed_fill": "#e3ba3e",
+      "icon": "#241a5e"
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#190539",
+      "rim": "#fff3c4",
+      "pressed_fill": "#e3b93e",
+      "glow": "#ffd23f",
+      "icon": "#190539"
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "check_badge",
+     "day": {
+      "fill": "#46f0d8",
+      "text": "#190539"
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#190539"
+     },
+     "kind": "icon",
+     "note_key": "spec.part.check_badge"
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "chip_simple",
+   "name_key": "spec.row.chip_simple",
+   "desc_key": "spec.desc.chip_simple",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 24,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 16,
+    "line_height": 1.3,
+    "max_words": 3
+   },
+   "size": {
+    "min_height_px": 48,
+    "min_width_px": 64,
+    "touch_px": 48,
+    "padding_inline_px": 18
+   },
+   "variants": [
+    {
+     "id": "off",
+     "day": {
+      "fill": "#ffffff",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3e2e7"
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#280a5b"
+     }
+    },
+    {
+     "id": "on",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3ba3e",
+      "icon": "#241a5e"
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#e3b93e",
+      "icon": "#190539"
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "challenge_row",
+   "name_key": "spec.row.challenge_row",
+   "desc_key": "spec.desc.challenge_row",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 18,
+    "size_px_badge": 16,
+    "line_height": 1.4,
+    "max_words": 4
+   },
+   "size": {
+    "min_height_px": 64,
+    "min_width_px": 280,
+    "touch_px": 64
+   },
+   "variants": [
+    {
+     "id": "shell",
+     "day": {
+      "fill": "#ffffff",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3e2e7"
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "pressed_fill": "#280a5b",
+      "glow": "#46f0d8"
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "badge_easy",
+     "day": {
+      "fill": "#2fa44a",
+      "text": "#241a5e"
+     },
+     "night": {
+      "fill": "#2fa44a",
+      "text": "#241a5e"
+     },
+     "kind": "text",
+     "note_key": "spec.part.badge"
+    },
+    {
+     "id": "badge_mid",
+     "day": {
+      "fill": "#ff9d1c",
+      "text": "#241a5e"
+     },
+     "night": {
+      "fill": "#ff9d1c",
+      "text": "#241a5e"
+     },
+     "kind": "text",
+     "note_key": "spec.part.badge"
+    },
+    {
+     "id": "badge_hard",
+     "day": {
+      "fill": "#ff4b4b",
+      "text": "#241a5e"
+     },
+     "night": {
+      "fill": "#ff4b4b",
+      "text": "#241a5e"
+     },
+     "kind": "text",
+     "note_key": "spec.part.badge"
+    }
+   ],
+   "badge": {
+    "radius_px": 12,
+    "height_px": 36,
+    "border_px": 2.6,
+    "border_color": "#241a5e",
+    "fixed_colors_day_night": true
+   },
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "map_label",
+   "name_key": "spec.row.map_label",
+   "desc_key": "spec.desc.map_label",
+   "interactive": false,
+   "surface": {
+    "day": "#469d36",
+    "night": "#190539"
+   },
+   "surfaces_extra": {
+    "sports": "#469d36",
+    "space": "#c55535",
+    "farm": "#9d8e16",
+    "city": "#155f77",
+    "sand": "#f0d07e",
+    "ice": "#d7efff"
+   },
+   "shape": {
+    "radius_px": 10,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 3,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 17,
+    "line_height": 1.4,
+    "max_words": 3
+   },
+   "size": {
+    "min_height_px": 32,
+    "min_width_px": 0,
+    "touch_px": null,
+    "note": "not a button; the node itself is the touch target"
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e"
+     },
+     "night": {
+      "fill": "#190539",
+      "text": "#ffffff",
+      "rim": "#46f0d8"
+     }
+    }
+   ],
+   "states_apply": []
+  },
+  {
+   "id": "zone_title",
+   "name_key": "spec.row.zone_title",
+   "desc_key": "spec.desc.zone_title",
+   "interactive": false,
+   "surface": {
+    "day": "#469d36",
+    "night": "#190539"
+   },
+   "surfaces_extra": {
+    "sports": "#469d36",
+    "space": "#c55535",
+    "farm": "#9d8e16",
+    "city": "#155f77",
+    "sand": "#f0d07e",
+    "ice": "#d7efff"
+   },
+   "shape": {
+    "radius_px": null,
+    "corners": "text-only",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 9,
+    "style": "halo",
+    "note": "text-stroke under the fill (paint-order: stroke fill)"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 34,
+    "line_height": 1.2,
+    "max_words": 3,
+    "min_size_px": 24,
+    "fallback": "Vazirmatn 700"
+   },
+   "size": {
+    "min_height_px": 0,
+    "touch_px": null
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#241a5e",
+      "text": "#ffffff",
+      "rim": "#241a5e"
+     },
+     "night": {
+      "fill": "#190539",
+      "text": "#ffffff",
+      "rim": "#190539"
+     }
+    }
+   ],
+   "states_apply": []
+  },
+  {
+   "id": "plate",
+   "name_key": "spec.row.plate",
+   "desc_key": "spec.desc.plate",
+   "interactive": false,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 10,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 16,
+    "line_height": 1.5,
+    "max_words": 4
+   },
+   "size": {
+    "min_height_px": 32,
+    "touch_px": null,
+    "padding_inline_px": 14
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e"
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#9a78e0"
+     }
+    },
+    {
+     "id": "here",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#241a5e",
+      "rim": "#241a5e"
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#190539",
+      "rim": "#190539"
+     }
+    },
+    {
+     "id": "new",
+     "day": {
+      "fill": "#ff7be5",
+      "text": "#241a5e",
+      "rim": "#241a5e"
+     },
+     "night": {
+      "fill": "#ff7be5",
+      "text": "#190539",
+      "rim": "#190539"
+     }
+    }
+   ],
+   "states_apply": []
+  },
+  {
+   "id": "sheet",
+   "name_key": "spec.row.sheet",
+   "desc_key": "spec.desc.sheet",
+   "interactive": false,
+   "surface": {
+    "day": "#7fd4ff",
+    "night": "#190539"
+   },
+   "surface_note": "sheet floats over map/scene; checked against its own rim and text only",
+   "shape": {
+    "radius_px": 28,
+    "corners": "all-equal",
+    "clip_path": "none",
+    "margin_px": 8
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 22,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 400,
+    "size_px": 16,
+    "line_height": 1.7,
+    "max_words": null,
+    "title": {
+     "family": "Lalezar",
+     "weight": 400,
+     "size_px": 28,
+     "max_words": 3,
+     "fallback": "Vazirmatn 700 24"
+    }
+   },
+   "size": {
+    "min_height_px": 0,
+    "touch_px": null
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e"
+     },
+     "night": {
+      "fill": "#190539",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "glow": "#46f0d8"
+     }
+    }
+   ],
+   "states_apply": []
+  },
+  {
+   "id": "tab",
+   "name_key": "spec.row.tab",
+   "desc_key": "spec.desc.tab",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 16,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 17,
+    "line_height": 1.3,
+    "max_words": 2
+   },
+   "size": {
+    "min_height_px": 48,
+    "min_width_px": 88,
+    "touch_px": 48
+   },
+   "variants": [
+    {
+     "id": "off",
+     "day": {
+      "fill": "#ffffff",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3e2e7"
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#280a5b"
+     }
+    },
+    {
+     "id": "on",
+     "day": {
+      "fill": "#241a5e",
+      "text": "#fff3c4",
+      "rim": "#241a5e",
+      "pressed_fill": "#22185a",
+      "icon": "#ffd23f"
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#41d4c5",
+      "glow": "#46f0d8",
+      "icon": "#190539"
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "on_bar",
+     "day": {
+      "fill": "#241a5e",
+      "text": "#ffd23f"
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#190539"
+     },
+     "kind": "icon",
+     "note_key": "spec.part.tab_bar"
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "tile_menu",
+   "name_key": "spec.row.tile_menu",
+   "desc_key": "spec.desc.tile_menu",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 20,
+    "line_height": 1.3,
+    "max_words": 2
+   },
+   "size": {
+    "min_height_px": 132,
+    "min_width_px": 150,
+    "touch_px": 132
+   },
+   "variants": [
+    {
+     "id": "cyan",
+     "day": {
+      "fill": "#46f0d8",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#40d5c5"
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#41d4c5",
+      "glow": "#46f0d8"
+     }
+    },
+    {
+     "id": "violet",
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#fff3c4",
+      "rim": "#241a5e",
+      "pressed_fill": "#443592"
+     },
+     "night": {
+      "fill": "#7a6af5",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#6e5ede",
+      "glow": "#7a6af5"
+     }
+    },
+    {
+     "id": "gold",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3ba3e"
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#e3b93e",
+      "glow": "#ffd23f"
+     }
+    },
+    {
+     "id": "pink",
+     "day": {
+      "fill": "#ff7be5",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e36ed0"
+     },
+     "night": {
+      "fill": "#ff7be5",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#e36dd0",
+      "glow": "#ff7be5"
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "tile_card",
+   "name_key": "spec.row.tile_card",
+   "desc_key": "spec.desc.tile_card",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 16,
+    "line_height": 1.3,
+    "max_words": 3
+   },
+   "size": {
+    "min_height_px": 112,
+    "min_width_px": 96,
+    "touch_px": 112
+   },
+   "name_plate": {
+    "radius_px": 10,
+    "fill": "#07203a",
+    "text": "#ffffff"
+   },
+   "variants": [
+    {
+     "id": "seen",
+     "day": {
+      "fill": "#25cdc0",
+      "text": "#190539",
+      "rim": "#241a5e",
+      "pressed_fill": "#23b6b0",
+      "icon": "#190539"
+     },
+     "night": {
+      "fill": "#25cdc0",
+      "text": "#190539",
+      "rim": "#190539",
+      "pressed_fill": "#24b5b0",
+      "glow": "#25cdc0",
+      "icon": "#190539"
+     }
+    },
+    {
+     "id": "kept",
+     "day": {
+      "fill": "#4a2fb8",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#432ba9",
+      "icon": "#ffffff"
+     },
+     "night": {
+      "fill": "#4a2fb8",
+      "text": "#ffffff",
+      "rim": "#a99dff",
+      "pressed_fill": "#442aa9",
+      "glow": "#a99dff",
+      "icon": "#ffffff"
+     }
+    },
+    {
+     "id": "new",
+     "day": {
+      "fill": "#2a0b60",
+      "text": "#cdb8ff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#270b5b",
+      "icon": "#cdb8ff",
+      "rim_style": "dashed"
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#cdb8ff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#280a5b",
+      "icon": "#cdb8ff",
+      "rim_style": "dashed"
+     }
+    },
+    {
+     "id": "locked",
+     "day": {
+      "fill": "#34145f",
+      "text": "#cdb8ff",
+      "rim": "#cdb8ff",
+      "pressed_fill": "#30135b",
+      "icon": "#cdb8ff"
+     },
+     "night": {
+      "fill": "#34145f",
+      "text": "#cdb8ff",
+      "rim": "#cdb8ff",
+      "pressed_fill": "#31125a",
+      "icon": "#cdb8ff"
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "name_plate",
+     "day": {
+      "fill": "#07203a",
+      "text": "#ffffff"
+     },
+     "night": {
+      "fill": "#07203a",
+      "text": "#ffffff"
+     },
+     "kind": "text",
+     "note_key": "spec.part.name_plate"
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "lock",
+   "name_key": "spec.row.lock",
+   "desc_key": "spec.desc.lock",
+   "interactive": false,
+   "surface": {
+    "day": "#469d36",
+    "night": "#190539"
+   },
+   "surfaces_extra": {
+    "sports": "#469d36",
+    "space": "#c55535",
+    "farm": "#9d8e16",
+    "city": "#155f77",
+    "sand": "#f0d07e",
+    "ice": "#d7efff"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "circle",
+    "size_px": 36,
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": null,
+    "weight": null,
+    "size_px": null,
+    "max_words": 0
+   },
+   "size": {
+    "min_height_px": 36,
+    "min_width_px": 36,
+    "touch_px": null,
+    "note": "inert badge; touch belongs to the parent node/row/tile (>=48)"
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#241a5e",
+      "text": "#fff3c4",
+      "rim": "#fff3c4",
+      "icon": "#fff3c4"
+     },
+     "night": {
+      "fill": "#34145f",
+      "text": "#cdb8ff",
+      "rim": "#cdb8ff",
+      "icon": "#cdb8ff"
+     }
+    }
+   ],
+   "states_apply": []
+  }
+ ],
+ "forbidden_pairs": [
+  {
+   "fg": "#241a5e",
+   "bg": "#4b3b9e",
+   "why_key": "spec.forbid.dark_on_violet"
+  },
+  {
+   "fg": "#241a5e",
+   "bg": "#155f77",
+   "why_key": "spec.forbid.dark_on_sea"
+  },
+  {
+   "fg": "#241a5e",
+   "bg": "#0a86a4",
+   "why_key": "spec.forbid.dark_on_card_blue"
+  },
+  {
+   "fg": "#241a5e",
+   "bg": "#8a4fe0",
+   "why_key": "spec.forbid.dark_on_purple"
+  },
+  {
+   "fg": "#7a6af5",
+   "bg": "#241a5e",
+   "why_key": "spec.forbid.pale_violet_on_navy"
+  },
+  {
+   "fg": "#8a4fe0",
+   "bg": "#190539",
+   "why_key": "spec.forbid.purple_on_night"
+  },
+  {
+   "fg": "#4b3b9e",
+   "bg": "#241a5e",
+   "why_key": "spec.forbid.chip_violet_on_navy"
+  },
+  {
+   "fg": "#4b3b9e",
+   "bg": "#190539",
+   "why_key": "spec.forbid.chip_violet_on_night"
+  },
+  {
+   "fg": "#9a78e0",
+   "bg": "#241a5e",
+   "why_key": "spec.forbid.dash_on_navy"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#46f0d8",
+   "why_key": "spec.forbid.light_on_cyan"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#46f0d8",
+   "why_key": "spec.forbid.light_on_cyan"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#ffd23f",
+   "why_key": "spec.forbid.light_on_gold"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#ffd23f",
+   "why_key": "spec.forbid.light_on_gold"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#ff7be5",
+   "why_key": "spec.forbid.light_on_pink"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#469d36",
+   "why_key": "spec.forbid.cream_on_grass"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#9d8e16",
+   "why_key": "spec.forbid.cream_on_farm"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#2fa44a",
+   "why_key": "spec.forbid.light_on_green"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#ff9d1c",
+   "why_key": "spec.forbid.light_on_orange"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#f0d07e",
+   "why_key": "spec.forbid.cream_on_sand"
+  },
+  {
+   "fg": "#46f0d8",
+   "bg": "#fff3c4",
+   "why_key": "spec.forbid.bright_on_cream"
+  },
+  {
+   "fg": "#ffd23f",
+   "bg": "#fff3c4",
+   "why_key": "spec.forbid.bright_on_cream"
+  },
+  {
+   "fg": "#a99dff",
+   "bg": "#fff3c4",
+   "why_key": "spec.forbid.bright_on_cream"
+  },
+  {
+   "fg": "#4b3b9e",
+   "bg": "#34145f",
+   "why_key": "spec.forbid.violet_on_locked"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#25cdc0",
+   "why_key": "spec.forbid.white_on_card_front"
+  }
+ ],
+ "allowed_text_on_dark": {
+  "on": [
+   "#241a5e",
+   "#190539",
+   "#2a0b60",
+   "#34145f"
+  ],
+  "colors": [
+   "#ffffff",
+   "#fff3c4",
+   "#a99dff",
+   "#cdb8ff",
+   "#46f0d8",
+   "#ffd23f"
+  ]
+ }
+}
