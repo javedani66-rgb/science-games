@@ -51,10 +51,10 @@ def d_truck_crane(b): b.rect(-30, -18, 52, 12, WD, 2.6, 2); b.rect(14, -30, 18, 
 def d_forklift(b): b.rect(-10, -22, 26, 18, '#fff4d2', 2.6, 3); b.rect(-6, -34, 18, 12, BL, 2.6, 3); b.rect(-24, -48, 5, 46, ST2, 2.6, 1); b.rect(-30, -20, 22, 5, ST2, 2.6, 1); b.circ(-2, -4, 5, DV, 2.6); b.circ(12, -4, 5, DV, 2.6)
 def d_tank(b): b.rect(-20, -34, 40, 34, ST, 2.6, 6); b.ell(0, -34, 20, 6, ST2, 2.6); b.line(-20, -20, 20, -20, ST2, 1.2); b.rect(-4, -48, 8, 14, ST2, 2.6, 1)
 SET = {
- 'sports': [('cone', d_cone, 34), ('hedge', d_hedge, 40), ('bench', d_bench, 36), ('goal', d_goal, 40), ('hurdle', d_hurdle, 30), ('stand', d_stand, 40), ('lamp', d_lamp, 24), ('flags', d_flags, 30)],
+ 'sports': [('hedge', d_hedge, 40), ('goal', d_goal, 40), ('hurdle', d_hurdle, 30), ('stand', d_stand, 40), ('lamp', d_lamp, 24), ('flags', d_flags, 30)],
  'space': [('crater', d_crater, 30), ('rock', d_rock, 24), ('rock2', d_rock2, 20), ('anten', d_anten, 22), ('dome', d_dome, 22), ('solar', d_solar, 34), ('star', d_star, 16), ('ufo', d_ufo, 24)],
  'farm': [('wheat', d_wheat, 24), ('fence', d_fence, 38), ('bale', d_bale, 24), ('scare', d_scare, 24), ('haycone', d_haycone, 24), ('trough', d_trough, 30), ('sunf', d_sunf, 14), ('bucket', d_bucket, 14)],
- 'city': [('low', d_low, 30), ('mid', d_mid, 28), ('slamp', d_slamp, 22), ('rail', d_rail, 38), ('barrels', d_barrels, 26), ('truck_box', d_truck_box, 36), ('truck_crane', d_truck_crane, 38), ('forklift', d_forklift, 30), ('tank', d_tank, 26)],
+ 'city': [('low', d_low, 30), ('mid', d_mid, 28), ('slamp', d_slamp, 22), ('rail', d_rail, 38), ('truck_box', d_truck_box, 36), ('truck_crane', d_truck_crane, 38), ('forklift', d_forklift, 30), ('tank', d_tank, 26)],
 }
 def decor_svgs():
     out = {}

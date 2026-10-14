@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""خط تولید v5: index.html خودبسته از template.html + دادهٔ v3 + دارایی هنرمندان (team/assets).
+"""خط تولید v5: index.html خودبسته از template.html + دادهٔ v3 + دارایی هنرمندان (team/assets_r2: دور ۲ بر پایهٔ v4؛ پیش‌فرض)؛ team/assets = دور ۱ بایگانی.
 گام ۰ (EXECUTION_ORDER_FA): sprite خام در DOM با پیشوند id یکتا، ادغام tokens.css/ui_tokens.css،
 assets.json، و خطای سقف حجم. ظاهر همان v3 است (کیت، داده‌ها، فونت‌ها، پنل #rv).
 استفاده:  python3 build.py [--assets DIR] [--out-dir DIR] [--placeholder] [--no-write]
@@ -33,9 +33,26 @@ def _sub_ids(text, mp):
         return m.group(1) + re.sub(r'#([A-Za-z_][\w-]*)', lambda k: '#' + mp.get(k.group(1), k.group(1)), m.group(2)) + m.group(3)
     return re.sub(r'(<style[^>]*>)(.*?)(</style>)', style, text, flags=re.S)
 
+_AR = dict(M=2, L=2, H=1, V=1, C=6, S=4, Q=4, T=2, A=7, Z=0)
+_NUM = re.compile(r'[-+]?(?:\d*\.\d+|\d+\.?)(?:[eE][-+]?\d+)?')
+def _fix_d(m):
+    d = m.group(1)
+    if not re.search(r'[A-Za-z]', d): return m.group(0)
+    out, bad = [], False
+    for c, args in re.findall(r'([A-Za-z])([^A-Za-z]*)', d):
+        nums = _NUM.findall(args); k = _AR.get(c.upper())
+        if k and len(nums) % k:
+            bad = True; nums = nums[:len(nums) - len(nums) % k]
+        out.append(c + ' '.join(nums) if nums else c)
+    return f' d="{" ".join(out)}"' if bad else m.group(0)
+
 def _clean(t):
     t = re.sub(r'<\?xml.*?\?>|<!DOCTYPE[^>]*>', '', t, flags=re.S)
-    return re.sub(r'<!--.*?-->', '', t, flags=re.S).strip()
+    t = re.sub(r'<!--.*?-->', '', t, flags=re.S).strip()
+    # r2: در سوخاری برگ نخل (trees.svg) مختصات «--12.47» آمده که در مرورگر خطای کنسول می‌دهد؛ فقط در build به «-12.47» اصلاح می‌شود
+    t = re.sub(r'(?<=[\s,A-Za-z])--(?=\d)', '-', t)
+    # r2b: node_01 دارای مسیر «l5.6,5.37,-4» با تعداد عدد نامعتبر (خطای کنسول)؛ در build عددهای اضافهٔ آخر حذف می‌شود
+    return re.sub(r'(?<=\s)d="([^"]*)"', _fix_d, t)
 
 def module_of(path, base):
     top = path.relative_to(base).parts[0]
@@ -120,20 +137,25 @@ def _read_svg(p, base, errs, warns, defs_parts, symbols, entries, owner):
         defs_parts.append(''.join(d) if d else inner)
         entries.append(dict(name=p.stem, type='defs', file=rel, module=mod, bytes=len(raw), ids=sorted(mp.values()))); return
     if is_sprite:
+        inner_seen = set()
         outside = re.sub(SYMRE, '', inner)
         d = re.findall(r'<defs>(.*?)</defs>', outside, flags=re.S)
         if d: defs_parts.append(''.join(d))
         for m in re.finditer(SYMRE, inner):
             sa = m.group(1) if m.group(1) is not None else m.group(2)
             sid = re.search(r'\bid="([^"]+)"', sa); vb = re.search(r'viewBox="([^"]+)"', sa)
-            full = m.group(0); n = len(full.encode())
+            full = m.group(0)
             if not sid: continue
+            # r2: شناسهٔ لایهٔ درونی که در دو نماد تکرار شده (مثلاً قاب شب و قاب درس) برای نمادِ بعدی یکتا می‌شود
+            dup = {i: f'{i}-{sid.group(1)}' for i in re.findall(r'\bid="([^"]+)"', m.group(3) or '') if i in inner_seen}
+            if dup: full = _sub_ids(full, dup)
+            inner_seen.update(re.findall(r'\bid="([^"]+)"', full)); n = len(full.encode())
             if not vb: errs.append(msg('v5.build.no_viewbox', file=f'{rel}#{sid.group(1)}'))
             lim = BIG_CAP if BIG_RE.search(sid.group(1)) else SVG_CAP
             if n > lim: errs.append(msg('v5.build.svg_over', file=f'{rel}#{sid.group(1)}', kb=round(n / KB, 1), cap=lim // KB))
             symbols.append((sid.group(1), full))
             reg(sid.group(1), rel)
-            layers = [i for i in re.findall(r'\bid="([^"]+)"', m.group(3) or '')]
+            layers = [i for i in re.findall(r'\bid="([^"]+)"', full) if i != sid.group(1)]
             for i in layers: reg(i, rel)
             entries.append(dict(name=sid.group(1), type='symbol', file=rel, module=mod, bytes=n, viewBox=vb.group(1) if vb else None, layers=layers))
         return
@@ -156,19 +178,21 @@ def b64(b): return base64.b64encode(b).decode()
 MAP_END = '<g opacity=".85"><g transform="translate(0 70) scale(1 -1)">'
 
 def map_layers(sheet):
-    """لایه‌های ایستای نقشه از env_sheet.html (زمین، دریا، رود، یخ، تزئین، مسیر، پل، دروازهٔ شروع) + لبهٔ ابر؛ گره‌ها در الگو رسم می‌شوند."""
+    """r2: لایه‌های ایستای نقشه از env_sheet.html: زمین، رود، یخ، تزئین، مسیر v4 (env_path)، پل، تونل، دروازهٔ شروع (پیش از گره‌ها)
+    + ابرها (پس از گره‌ها). گره‌ها، برچسب‌ها، عنوان زمین‌ها و «تو اینجایی» در الگو و با استایل رابط (.ui-*) رسم می‌شوند، نه از متن‌های ورقهٔ هنرمند."""
     i = sheet.index('<svg class="map"'); j = sheet.index('>', i) + 1
     body = sheet[j:sheet.rindex('</svg>')]
-    k = body.index('<use href="#env_start_gate"'); k = body.index('/>', k) + 2
+    k = body.index('<use href="#env_start_gate"'); k = body.index('</g>', k) + 4
     head = body[:k]
-    t = body.index(MAP_END)
-    tail = body[t:]
+    c = body.index('<g id="env_clouds"')
+    tail = body[c:]
     pads = {}
-    for m in re.finditer(r'<use href="#(env_pad_[a-z]+_[abc])" x="(-?\d+)" y="(-?\d+)"', body):
+    for m in re.finditer(r'<use href="#(env_pad_[a-z]+_[a-z]+)" x="(-?\d+)" y="(-?\d+)"', body):
         pads[(int(m.group(2)), int(m.group(3)))] = m.group(1)
     return head, tail, pads
 
-def build_page(art):
+def build_page(art, ASSETS):
+    if not (ASSETS / 'env/node_map.json').exists(): ASSETS = HERE / 'team/assets_r2'   # پوشهٔ آزمایشی بدون دادهٔ نقشه: دادهٔ نقشه از r2
     """صفحهٔ v5: الگو + دادهٔ جریان v3 (متن/ترتیب/وضعیت) + دارایی هنرمندان (sprite خام در DOM) + نقشهٔ ۳۴ گره از env."""
     J = lambda p: json.load(open(p, encoding='utf-8'))
     TITLES = J(ROOT / 'docs/research/world/titles_fa.json'); NODES = J(ROOT / 'docs/research/world/nodes_v2_draft.json')
@@ -179,7 +203,7 @@ def build_page(art):
     ORDER = [n['id'] for c in THREAD['chapters'] for n in c['nodes']]
     pre = ORDER[:ORDER.index('M07')]
     mid_v = [i for i in pre if i != 'E05']
-    mid_c = ['F01', 'F02', 'F03', 'F06', 'F08', 'W01', 'W02', 'F05', 'E01', 'M01', 'B01', 'M04', 'M05']
+    mid_c = ['F01', 'F03', 'F06', 'F08', 'W01', 'W02', 'F05', 'E01', 'M01', 'B01', 'M04', 'M05']
     mid_s = [i for i in mid_v if i not in mid_c and i not in ('F04', 'E07', 'M02')]
     end_v = [i for i in ORDER if i not in ('E06', 'E04', 'M12')]
     end_c = [i for i in end_v if i not in ('F04', 'F07', 'E07', 'M06', 'M10', 'M11', 'E05')]
@@ -196,76 +220,32 @@ def build_page(art):
     ENTR = sorted({e['from'] for e in NODES['edges'] if e.get('kind') == 'detour_entrance' and e['to'] == 'E04'})
     chapters = [dict(id=c['id'], sym=SYM[c['id']], ids=[n['id'] for n in c['nodes']]) for c in THREAD['chapters']]
     edges = [e for e in NODES['edges'] if e['from'] in tn and e['to'] in tn and not tn[e['from']].get('deferred') and not tn[e['to']].get('deferred')]
-    S = {k: v['text'] for k, v in {**UI, **UI5}.items()}
+    ENVS = J(ASSETS / 'env/strings.fa.json')
+    S = {k: v['text'] for k, v in {**UI, **UI5, **{k: v for k, v in ENVS.items() if not k.startswith('_')}}.items()}
     card = {b: {k: BANK[f'card.pulley.b{b}.{k}']['text'] for k in ('band', 'say', 'sub') if f'card.pulley.b{b}.{k}' in BANK} for b in (1, 2, 3)}
     V = [("SciShow Kids: Need a Lift? Try a Pulley!", "یوتیوب · انگلیسی"), ("SciShow Kids: Solving Problems with Simple Machines", "یوتیوب · انگلیسی")]
     # نقشه: node_map + slots + لایه‌های ایستا
-    EA = HERE / 'team/assets/env'
+    EA = ASSETS / 'env'
     NM = J(EA / 'node_map.json'); SL = J(EA / 'slots.json'); head, tail, pads = map_layers((EA / 'env_sheet.html').read_text(encoding='utf-8'))
     mnodes = []
     for n in NM['nodes']:
         sl = SL['slots'][n['id']]; pa = tuple(sl['place_at'])
         mnodes.append(dict(id=n['id'], zone=n['zone'], kind=n['kind'], asset=n['asset'], visible=n['visible'], pad=pads.get(pa), place=sl['place_at'], base=sl['base_center'],
                            rx=sl['base_rx'], ry=sl['base_ry'], hit=sl['hit_box'], lock=sl['lock_done_center'], foot=sl['b1_foot'], label=sl['label_slot_center'], h=sl['silhouette_h']))
-    ZT = J(HERE / 'team/assets/light/zone_tokens.json')
-    mp = dict(w=NM['canvas']['width'], h=NM['canvas']['height'], head=head, tail=tail, nodes=mnodes, start=NM['start'], zones=NM['zones'])
+        mp = dict(w=NM['canvas']['width'], h=NM['canvas']['height'], head=head, tail=tail, nodes=mnodes, start=NM['start'], zones=NM['zones'], zt=SL['zone_titles'], gate=[43, 5455, 170, 130])
+    for n_, m_ in zip(NM['nodes'], mnodes): m_['pill'] = SL['slots'][n_['id']]['difficulty_pill_center']
     fonts = ''.join(f"@font-face{{font-family:{fam};font-weight:{w};src:url(data:font/woff2;base64,{b64((ROOT / 'assets/fonts' / f).read_bytes())}) format('woff2')}}"
                     for fam, w, f in (('Vazirmatn', 400, 'Vazirmatn-Regular.woff2'), ('Vazirmatn', 700, 'Vazirmatn-Bold.woff2'), ('Lalezar', 400, 'Lalezar-Regular.woff2')))
     tpl = (HERE / 'template.html').read_text(encoding='utf-8')
     for mark in ('/*__FONTS__*/', '/*__TOKENS__*/', '/*__DATA__*/null', '<!--__SPRITE__-->'):
         if mark not in tpl: raise SystemExit(msg('v5.build.no_placeholder_tpl', mark=mark))
     data = dict(S=S, R=REV, nodes=nodes, chapters=chapters, edges=edges, entr=ENTR, states=STATES, order=ORDER, card=card, videos=V, map=mp)
-    art['sprite'] = restyle_scenes(soften_pads(art['sprite']))
     return (tpl.replace('/*__FONTS__*/', fonts).replace('/*__TOKENS__*/', art['tokens'])
                .replace('/*__DATA__*/null', json.dumps(data, ensure_ascii=False)).replace('<!--__SPRITE__-->', art['sprite']))
 
-def soften_pads(sprite):
-    """دور ۲ نقد: اسلب خاکستری زیر بناهای شهر/فضا ← لکهٔ هم‌زون (بدون خط‌های خراش، سایهٔ کم‌رنگ‌تر).
-    فقط در پردازش build؛ فایل‌های هنرمند دست‌نخورده می‌مانند."""
-    import re
-    tint = {'#7a93ae': '#6a89a8', '#9a7ee0': '#8b69d6'}
-    def fix(m):
-        g = m.group(0)
-        for old, new in tint.items(): g = g.replace(f'fill="{old}"', f'fill="{new}"')
-        g = g.replace('opacity=".75"', 'opacity=".38"', 1)
-        return re.sub(r'<path d="[^"]*" stroke="#(?:44566c|5c459c)" stroke-width="1\.2" stroke-linecap="round"/>', '', g)
-    return re.sub(r'<g id="node_(?:01|04|05|06|07|10|11)_base"[^>]*>.*?(?=<rect|<polygon|<circle|<ellipse|<g )', fix, sprite, flags=re.S)
-
-def restyle_scenes(sprite):
-    """دور ۲ نقد: غروب بی‌ماه با خورشید کم‌ارتفاع و نور گرم؛ شب با لبهٔ نئونی. فقط در build؛ فایل هنرمند دست‌نخورده."""
-    import re
-    # غروب: ماه و ستاره‌ها حذف، خورشید روی افق با هالهٔ گرم، بازتاب نارنجی روی آب، لبهٔ گرم‌تر
-    def dusk_sky(m):
-        g = m.group(0)
-        g = re.sub(r'<circle cx="340" cy="40" r="16" fill="#ffe9a8"/><circle cx="347" cy="35" r="13" fill="#6a3fa0"/>', '', g)
-        g = re.sub(r'<circle cx="\d+" cy="\d+" r="1\.7" fill="#fff"/>', '', g)
-        sun = ('<circle cx="196" cy="300" r="92" fill="#ffb25a" opacity=".22"/><circle cx="196" cy="300" r="62" fill="#ffb25a" opacity=".3"/>'
-               '<circle cx="196" cy="302" r="34" fill="#ffd98a"/>')
-        return g.replace('</g>', sun + '</g>', 1) if g.endswith('</g>') else g
-    sprite = re.sub(r'<g id="cd-sod-sky">.*?</g>', dusk_sky, sprite, flags=re.S)
-    def dusk_sea(m):
-        g = m.group(0)
-        return (g.replace('x="328" y="322" width="24"', 'x="176" y="322" width="40"').replace('x="322" y="336" width="36"', 'x="166" y="336" width="60"')
-                 .replace('x="329" y="354" width="22"', 'x="178" y="354" width="36"').replace('fill="#ffe9a8"', 'fill="#ffb25a"'))
-    sprite = re.sub(r'<g id="cd-sod-sea">.*?</g>', dusk_sea, sprite, flags=re.S)
-    def warm_rim(m):
-        g = m.group(0)
-        g = g.replace('stroke="#f2a65a" stroke-width="2.6"', 'stroke="#ffb25a" stroke-width="4"')
-        return g
-    sprite = re.sub(r'<g id="cd-sod-rim">.*?(?=<clipPath)', warm_rim, sprite, flags=re.S)
-    # شب: لبهٔ نئونی (سه لایهٔ درخشش + خط روشن فیروزه‌ای)
-    def neon_rim(m):
-        g = m.group(0)
-        paths = re.findall(r'<path d="[^"]*" fill="none" stroke="#d8e6ff" stroke-width="2\.6"[^>]*/>', g)
-        glow = ''.join(pp.replace('#d8e6ff', '#4fe3ff').replace('stroke-width="2.6"', f'stroke-width="{w}" opacity="{o}"') for w, o in (('12', '.14'), ('7', '.28')) for pp in paths)
-        g = g.replace('#d8e6ff', '#9ff3ff')
-        return g.replace('<g id="cd-srn-rim">', '<g id="cd-srn-rim">' + glow, 1)
-    sprite = re.sub(r'<g id="cd-srn-rim">.*?(?=<clipPath)', neon_rim, sprite, flags=re.S)
-    return sprite
-
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument('--assets', default=str(HERE / 'team/assets')); ap.add_argument('--out-dir', default=str(HERE))
+    ap.add_argument('--assets', default=str(HERE / 'team/assets_r2')); ap.add_argument('--out-dir', default=str(HERE))
     ap.add_argument('--placeholder', action='store_true', help='جاگذار را حتی با هنر واقعی بیاور')
     ap.add_argument('--no-write', action='store_true')
     a = ap.parse_args(argv)
@@ -274,7 +254,7 @@ def main(argv=None):
     if art['placeholder']: print(msg('v5.build.placeholder'))
     out = None
     if not art['errors']:
-        out = build_page(art)
+        out = build_page(art, pathlib.Path(a.assets))
         n = len(out.encode('utf-8'))
         if n > PAGE_CAP: art['errors'].append(msg('v5.build.page_over', kb=round(n / KB, 1), cap=PAGE_CAP // KB))
     if art['errors']:

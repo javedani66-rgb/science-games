@@ -11,12 +11,12 @@ ZC = {
  'sports': dict(base='#3f9a2b', shade='#2f7f21', patch='#56b13e'),
  'space': dict(base='#c4502f', shade='#a63f22', patch='#d9683f'),
  'farm': dict(base='#9a8a10', shade='#7f730c', patch='#b3a31c'),
- 'city': dict(base='#075a73', shade='#06506a', patch='#0a6e8a'),     # دریا (v4: sea)
+ 'city': dict(base='#165f77', shade='#125670', patch='#1c6f8c'),     # دریا (روشن‌تر، مقدار v4 اندازه‌گیری‌شده #165f77)
 }
 SAND, YARD, YARD_D, YARD_L = '#f0cf7a', '#c9a35c', '#a98343', '#dbb872'
 WA = dict(river='#58d8ee', river_hi='#d4f6ff', river_lip='#1f87b8', river_deep='#2aa6c8')
 IC = dict(body='#9fd8f0', rim='#eaf8ff', facet='#c9ecfb', crack='#4a9cc8', shard='#ffffff')
-COAST_Y = 1385        # ساحل: بالا = دریا، پایین = خشکی شهر
+COAST_Y = L.COAST_Y   # ساحل: بالا = دریا، پایین = خشکی شهر (از layout)
 def wavy_pts(y, amp, step, seed, x0=-20, x1=410):
     r = random.Random(seed); pts = []; x = x0
     while x <= x1 + step: pts.append((x, y + r.uniform(-amp, amp))); x += step
@@ -58,7 +58,7 @@ def strip(zone, y0, y1, top_soft):
         for yy in range(ext + 14, h, 26): g.append('<path d="M-10,%s Q100,%s 200,%s T400,%s" fill="none" stroke="#fff" stroke-width="5" opacity=".08"/>' % (yy, yy - 8, yy + 4, yy - 3))
     if zone == 'city':
         sea_h = COAST_Y
-        for k in range(int(sea_h / 95)): g.append(wave_glyph(r.uniform(10, 360), 20 + r.uniform(0, sea_h - 30), 1.1))
+        for k in range(int(sea_h / 38)): g.append(wave_glyph(r.uniform(10, 360), 20 + r.uniform(0, sea_h - 30), 1.1))      # چگالی موج v4 (۱۶ در ۶۰۰px)
         # خشکی شهر: ساحل شنی + حیاط بندری (رنگ‌های شنی v4)
         coast = wavy_pts(COAST_Y, 16, 46, 41)
         d = smooth_d(coast)

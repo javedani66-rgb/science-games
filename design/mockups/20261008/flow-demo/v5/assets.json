@@ -1,12 +1,12 @@
 {
- "page_bytes": 802359,
+ "page_bytes": 859789,
  "page_cap": 2621440,
  "module_bytes": {
-  "env": 513054,
+  "env": 435990,
   "character": 139908,
-  "ui": 28358,
-  "card": 390157,
-  "light": 12808
+  "ui": 31576,
+  "card": 449675,
+  "light": 37913
  },
  "module_caps": {
   "env": 716800,
@@ -21,15 +21,28 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 13146,
+   "bytes": 12972,
    "viewBox": "0 0 390 392",
    "layers": [
     "cd-frame-glow",
     "cd-frame-band",
-    "cd-frame-neon",
-    "cd-frame-inner",
-    "cd-frame-slot",
-    "cd-frame-text"
+    "cd-frame-plate",
+    "cd-frame-trim",
+    "cd-frame-slot"
+   ]
+  },
+  {
+   "name": "cd-frame-lesson",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 11956,
+   "viewBox": "0 0 390 392",
+   "layers": [
+    "cd-frame-glow-cd-frame-lesson",
+    "cd-frame-band-cd-frame-lesson",
+    "cd-frame-plate-cd-frame-lesson",
+    "cd-frame-trim-cd-frame-lesson"
    ]
   },
   {
@@ -37,7 +50,7 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 1067,
+   "bytes": 1415,
    "viewBox": "0 0 334 150",
    "layers": [
     "cd-ib-line"
@@ -48,7 +61,7 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 2474,
+   "bytes": 3298,
    "viewBox": "0 0 360 60",
    "layers": [
     "cd-tb-glow",
@@ -60,9 +73,10 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 1322,
+   "bytes": 3325,
    "viewBox": "0 0 360 56",
    "layers": [
+    "cd-st-glow",
     "cd-st-band",
     "cd-st-line"
    ]
@@ -72,11 +86,12 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 996,
+   "bytes": 2483,
    "viewBox": "0 0 360 40",
    "layers": [
     "cd-sh-top",
     "cd-sh-front",
+    "cd-sh-grain",
     "cd-sh-brackets"
    ]
   },
@@ -85,7 +100,7 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 1189,
+   "bytes": 1908,
    "viewBox": "0 0 80 120",
    "layers": []
   },
@@ -94,7 +109,7 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 1172,
+   "bytes": 1934,
    "viewBox": "0 0 80 120",
    "layers": []
   },
@@ -103,7 +118,7 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 616,
+   "bytes": 954,
    "viewBox": "0 0 80 120",
    "layers": []
   },
@@ -112,22 +127,38 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 1186,
+   "bytes": 2716,
    "viewBox": "0 0 80 120",
-   "layers": []
+   "layers": [
+    "cd-mlk"
+   ]
   },
   {
    "name": "cd-mini-4states",
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 4230,
+   "bytes": 7775,
    "viewBox": "0 0 344 120",
    "layers": [
     "cd-mc-seen",
     "cd-mc-packed",
     "cd-mc-empty",
-    "cd-mc-locked"
+    "cd-mc-locked",
+    "cd-mlk-cd-mini-4states"
+   ]
+  },
+  {
+   "name": "cd-night-bg",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 6796,
+   "viewBox": "0 0 390 800",
+   "layers": [
+    "cd-nb-stars",
+    "cd-nb-sparks",
+    "cd-nb-cogs"
    ]
   },
   {
@@ -168,7 +199,7 @@
    "type": "symbol",
    "file": "card/sprite_card.svg",
    "module": "card",
-   "bytes": 13403,
+   "bytes": 13264,
    "viewBox": "0 0 360 240",
    "layers": [
     "cd-au-sky",
@@ -299,7 +330,7 @@
    "type": "symbol",
    "file": "card/scene/sprite_scene.svg",
    "module": "card",
-   "bytes": 21438,
+   "bytes": 21299,
    "viewBox": "0 0 390 500",
    "layers": [
     "cd-sod-sky",
@@ -697,7 +728,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 2760,
+   "bytes": 3070,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_01_clip",
@@ -712,7 +743,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 4058,
+   "bytes": 3013,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_02_clip",
@@ -728,7 +759,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 4068,
+   "bytes": 3013,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_03_clip",
@@ -744,7 +775,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 3121,
+   "bytes": 3762,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_04_clip",
@@ -759,7 +790,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 2832,
+   "bytes": 3195,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_05_clip",
@@ -774,7 +805,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 3520,
+   "bytes": 4173,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_06_clip",
@@ -790,7 +821,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 2648,
+   "bytes": 2999,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_07_clip",
@@ -805,7 +836,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 3630,
+   "bytes": 3985,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_08_clip",
@@ -821,7 +852,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 2787,
+   "bytes": 3095,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_09_clip",
@@ -836,14 +867,15 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 3256,
+   "bytes": 2790,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_10_clip",
     "node_10_shadow",
     "node_10_base",
     "node_10_lit",
-    "node_10_shade"
+    "node_10_shade",
+    "node_10_windows"
    ]
   },
   {
@@ -851,7 +883,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 4912,
+   "bytes": 5629,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_11_clip",
@@ -867,196 +899,177 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 3710,
+   "bytes": 4641,
    "viewBox": "0 0 200 190",
    "layers": [
     "node_12_clip",
     "node_12_shadow",
     "node_12_base",
     "node_12_lit",
-    "node_12_shade",
-    "node_12_windows"
+    "node_12_shade"
    ]
   },
   {
-   "name": "env_pad_sports_a",
+   "name": "env_pad_any_metal",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1646,
+   "bytes": 2185,
    "viewBox": "0 0 120 100",
    "layers": [
-    "env_pad_sports_a_clip",
-    "env_pad_sports_a_shadow",
-    "env_pad_sports_a_base",
-    "env_pad_sports_a_lit",
-    "env_pad_sports_a_shade"
+    "env_pad_any_metal_clip",
+    "env_pad_any_metal_shadow",
+    "env_pad_any_metal_base",
+    "env_pad_any_metal_lit",
+    "env_pad_any_metal_shade"
    ]
   },
   {
-   "name": "env_pad_sports_b",
+   "name": "env_pad_any_ice",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1633,
+   "bytes": 1819,
    "viewBox": "0 0 120 100",
    "layers": [
-    "env_pad_sports_b_clip",
-    "env_pad_sports_b_shadow",
-    "env_pad_sports_b_base",
-    "env_pad_sports_b_lit",
-    "env_pad_sports_b_shade"
+    "env_pad_any_ice_clip",
+    "env_pad_any_ice_shadow",
+    "env_pad_any_ice_base",
+    "env_pad_any_ice_lit",
+    "env_pad_any_ice_shade"
    ]
   },
   {
-   "name": "env_pad_sports_c",
+   "name": "env_pad_sports_stone",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1645,
+   "bytes": 1945,
    "viewBox": "0 0 120 100",
    "layers": [
-    "env_pad_sports_c_clip",
-    "env_pad_sports_c_shadow",
-    "env_pad_sports_c_base",
-    "env_pad_sports_c_lit",
-    "env_pad_sports_c_shade"
+    "env_pad_sports_stone_clip",
+    "env_pad_sports_stone_shadow",
+    "env_pad_sports_stone_base",
+    "env_pad_sports_stone_lit",
+    "env_pad_sports_stone_shade"
    ]
   },
   {
-   "name": "env_pad_space_a",
+   "name": "env_pad_sports_metal",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1477,
+   "bytes": 141,
+   "viewBox": "0 0 120 100",
+   "layers": []
+  },
+  {
+   "name": "env_pad_sports_ice",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 137,
+   "viewBox": "0 0 120 100",
+   "layers": []
+  },
+  {
+   "name": "env_pad_space_stone",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1937,
    "viewBox": "0 0 120 100",
    "layers": [
-    "env_pad_space_a_clip",
-    "env_pad_space_a_shadow",
-    "env_pad_space_a_base",
-    "env_pad_space_a_lit",
-    "env_pad_space_a_shade"
+    "env_pad_space_stone_clip",
+    "env_pad_space_stone_shadow",
+    "env_pad_space_stone_base",
+    "env_pad_space_stone_lit",
+    "env_pad_space_stone_shade"
    ]
   },
   {
-   "name": "env_pad_space_b",
+   "name": "env_pad_space_metal",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1475,
+   "bytes": 140,
+   "viewBox": "0 0 120 100",
+   "layers": []
+  },
+  {
+   "name": "env_pad_space_ice",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 136,
+   "viewBox": "0 0 120 100",
+   "layers": []
+  },
+  {
+   "name": "env_pad_farm_stone",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1929,
    "viewBox": "0 0 120 100",
    "layers": [
-    "env_pad_space_b_clip",
-    "env_pad_space_b_shadow",
-    "env_pad_space_b_base",
-    "env_pad_space_b_lit",
-    "env_pad_space_b_shade"
+    "env_pad_farm_stone_clip",
+    "env_pad_farm_stone_shadow",
+    "env_pad_farm_stone_base",
+    "env_pad_farm_stone_lit",
+    "env_pad_farm_stone_shade"
    ]
   },
   {
-   "name": "env_pad_space_c",
+   "name": "env_pad_farm_metal",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1479,
+   "bytes": 139,
+   "viewBox": "0 0 120 100",
+   "layers": []
+  },
+  {
+   "name": "env_pad_farm_ice",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 135,
+   "viewBox": "0 0 120 100",
+   "layers": []
+  },
+  {
+   "name": "env_pad_city_stone",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1929,
    "viewBox": "0 0 120 100",
    "layers": [
-    "env_pad_space_c_clip",
-    "env_pad_space_c_shadow",
-    "env_pad_space_c_base",
-    "env_pad_space_c_lit",
-    "env_pad_space_c_shade"
+    "env_pad_city_stone_clip",
+    "env_pad_city_stone_shadow",
+    "env_pad_city_stone_base",
+    "env_pad_city_stone_lit",
+    "env_pad_city_stone_shade"
    ]
   },
   {
-   "name": "env_pad_farm_a",
+   "name": "env_pad_city_metal",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1552,
+   "bytes": 139,
    "viewBox": "0 0 120 100",
-   "layers": [
-    "env_pad_farm_a_clip",
-    "env_pad_farm_a_shadow",
-    "env_pad_farm_a_base",
-    "env_pad_farm_a_lit",
-    "env_pad_farm_a_shade"
-   ]
+   "layers": []
   },
   {
-   "name": "env_pad_farm_b",
+   "name": "env_pad_city_ice",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1550,
+   "bytes": 135,
    "viewBox": "0 0 120 100",
-   "layers": [
-    "env_pad_farm_b_clip",
-    "env_pad_farm_b_shadow",
-    "env_pad_farm_b_base",
-    "env_pad_farm_b_lit",
-    "env_pad_farm_b_shade"
-   ]
-  },
-  {
-   "name": "env_pad_farm_c",
-   "type": "symbol",
-   "file": "env/sprite_env.svg",
-   "module": "env",
-   "bytes": 1535,
-   "viewBox": "0 0 120 100",
-   "layers": [
-    "env_pad_farm_c_clip",
-    "env_pad_farm_c_shadow",
-    "env_pad_farm_c_base",
-    "env_pad_farm_c_lit",
-    "env_pad_farm_c_shade"
-   ]
-  },
-  {
-   "name": "env_pad_city_a",
-   "type": "symbol",
-   "file": "env/sprite_env.svg",
-   "module": "env",
-   "bytes": 1549,
-   "viewBox": "0 0 120 100",
-   "layers": [
-    "env_pad_city_a_clip",
-    "env_pad_city_a_shadow",
-    "env_pad_city_a_base",
-    "env_pad_city_a_lit",
-    "env_pad_city_a_shade"
-   ]
-  },
-  {
-   "name": "env_pad_city_b",
-   "type": "symbol",
-   "file": "env/sprite_env.svg",
-   "module": "env",
-   "bytes": 1547,
-   "viewBox": "0 0 120 100",
-   "layers": [
-    "env_pad_city_b_clip",
-    "env_pad_city_b_shadow",
-    "env_pad_city_b_base",
-    "env_pad_city_b_lit",
-    "env_pad_city_b_shade"
-   ]
-  },
-  {
-   "name": "env_pad_city_c",
-   "type": "symbol",
-   "file": "env/sprite_env.svg",
-   "module": "env",
-   "bytes": 1532,
-   "viewBox": "0 0 120 100",
-   "layers": [
-    "env_pad_city_c_clip",
-    "env_pad_city_c_shadow",
-    "env_pad_city_c_base",
-    "env_pad_city_c_lit",
-    "env_pad_city_c_shade"
-   ]
+   "layers": []
   },
   {
    "name": "prop_01",
@@ -1304,8 +1317,8 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 21812,
-   "viewBox": "0 0 390 3036",
+   "bytes": 22984,
+   "viewBox": "0 0 390 2693",
    "layers": []
   },
   {
@@ -1313,7 +1326,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 5970,
+   "bytes": 6176,
    "viewBox": "0 0 390 543",
    "layers": []
   },
@@ -1322,7 +1335,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 5768,
+   "bytes": 8161,
    "viewBox": "0 0 390 891",
    "layers": []
   },
@@ -1331,7 +1344,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 13364,
+   "bytes": 12376,
    "viewBox": "0 0 390 1494",
    "layers": []
   },
@@ -1340,7 +1353,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 3280,
+   "bytes": 6584,
    "viewBox": "0 0 390 260",
    "layers": [
     "env_river_g"
@@ -1351,7 +1364,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1336,
+   "bytes": 1411,
    "viewBox": "0 0 120 70",
    "layers": []
   },
@@ -1360,57 +1373,37 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1400,
-   "viewBox": "0 0 300 150",
+   "bytes": 2343,
+   "viewBox": "0 0 300 156",
    "layers": [
     "env_ice_clip"
    ]
   },
   {
-   "name": "env_sea_edge",
+   "name": "env_cloud_a",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 3273,
-   "viewBox": "0 0 390 210",
+   "bytes": 649,
+   "viewBox": "0 0 110 56",
    "layers": []
   },
   {
-   "name": "env_bay_left",
+   "name": "env_cloud_b",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 3785,
-   "viewBox": "0 0 110 1340",
+   "bytes": 837,
+   "viewBox": "0 0 110 56",
    "layers": []
   },
   {
-   "name": "env_skyline",
+   "name": "env_cloud_c",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 8501,
-   "viewBox": "0 0 390 180",
-   "layers": []
-  },
-  {
-   "name": "env_cloud_edge",
-   "type": "symbol",
-   "file": "env/sprite_env.svg",
-   "module": "env",
-   "bytes": 1198,
-   "viewBox": "0 0 390 120",
-   "layers": [
-    "env_cl_g"
-   ]
-  },
-  {
-   "name": "env_boardwalk",
-   "type": "symbol",
-   "file": "env/sprite_env.svg",
-   "module": "env",
-   "bytes": 388,
-   "viewBox": "0 0 300 100",
+   "bytes": 555,
+   "viewBox": "0 0 110 56",
    "layers": []
   },
   {
@@ -1418,7 +1411,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1124,
+   "bytes": 1174,
    "viewBox": "0 0 80 100",
    "layers": [
     "env_tree_pine_clip",
@@ -1433,7 +1426,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1015,
+   "bytes": 993,
    "viewBox": "0 0 60 100",
    "layers": [
     "env_tree_pop_clip",
@@ -1444,11 +1437,86 @@
    ]
   },
   {
+   "name": "env_tree_round",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 958,
+   "viewBox": "0 0 70 70",
+   "layers": [
+    "env_tree_round_clip",
+    "env_tree_round_shadow",
+    "env_tree_round_base",
+    "env_tree_round_lit",
+    "env_tree_round_shade"
+   ]
+  },
+  {
+   "name": "env_tree_oak",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1124,
+   "viewBox": "0 0 80 80",
+   "layers": [
+    "env_tree_oak_clip",
+    "env_tree_oak_shadow",
+    "env_tree_oak_base",
+    "env_tree_oak_lit",
+    "env_tree_oak_shade"
+   ]
+  },
+  {
+   "name": "env_tree_birch",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1390,
+   "viewBox": "0 0 60 100",
+   "layers": [
+    "env_tree_birch_clip",
+    "env_tree_birch_shadow",
+    "env_tree_birch_base",
+    "env_tree_birch_lit",
+    "env_tree_birch_shade"
+   ]
+  },
+  {
+   "name": "env_tree_autumn",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 966,
+   "viewBox": "0 0 70 70",
+   "layers": [
+    "env_tree_autumn_clip",
+    "env_tree_autumn_shadow",
+    "env_tree_autumn_base",
+    "env_tree_autumn_lit",
+    "env_tree_autumn_shade"
+   ]
+  },
+  {
+   "name": "env_tree_palm",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2012,
+   "viewBox": "0 0 90 100",
+   "layers": [
+    "env_tree_palm_clip",
+    "env_tree_palm_shadow",
+    "env_tree_palm_base",
+    "env_tree_palm_lit",
+    "env_tree_palm_shade"
+   ]
+  },
+  {
    "name": "env_tree_bush",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 1013,
+   "bytes": 901,
    "viewBox": "0 0 70 60",
    "layers": [
     "env_tree_bush_clip",
@@ -1456,21 +1524,6 @@
     "env_tree_bush_base",
     "env_tree_bush_lit",
     "env_tree_bush_shade"
-   ]
-  },
-  {
-   "name": "env_dec_sports_cone",
-   "type": "symbol",
-   "file": "env/sprite_env.svg",
-   "module": "env",
-   "bytes": 1019,
-   "viewBox": "0 0 120 120",
-   "layers": [
-    "env_dec_sports_cone_clip",
-    "env_dec_sports_cone_shadow",
-    "env_dec_sports_cone_base",
-    "env_dec_sports_cone_lit",
-    "env_dec_sports_cone_shade"
    ]
   },
   {
@@ -1486,21 +1539,6 @@
     "env_dec_sports_hedge_base",
     "env_dec_sports_hedge_lit",
     "env_dec_sports_hedge_shade"
-   ]
-  },
-  {
-   "name": "env_dec_sports_bench",
-   "type": "symbol",
-   "file": "env/sprite_env.svg",
-   "module": "env",
-   "bytes": 1259,
-   "viewBox": "0 0 120 120",
-   "layers": [
-    "env_dec_sports_bench_clip",
-    "env_dec_sports_bench_shadow",
-    "env_dec_sports_bench_base",
-    "env_dec_sports_bench_lit",
-    "env_dec_sports_bench_shade"
    ]
   },
   {
@@ -1884,21 +1922,6 @@
    ]
   },
   {
-   "name": "env_dec_city_barrels",
-   "type": "symbol",
-   "file": "env/sprite_env.svg",
-   "module": "env",
-   "bytes": 1421,
-   "viewBox": "0 0 120 120",
-   "layers": [
-    "env_dec_city_barrels_clip",
-    "env_dec_city_barrels_shadow",
-    "env_dec_city_barrels_base",
-    "env_dec_city_barrels_lit",
-    "env_dec_city_barrels_shade"
-   ]
-  },
-  {
    "name": "env_dec_city_truck_box",
    "type": "symbol",
    "file": "env/sprite_env.svg",
@@ -1961,11 +1984,86 @@
    ]
   },
   {
+   "name": "env_dec_city_buoy",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1226,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_buoy_clip",
+    "env_dec_city_buoy_shadow",
+    "env_dec_city_buoy_base",
+    "env_dec_city_buoy_lit",
+    "env_dec_city_buoy_shade"
+   ]
+  },
+  {
+   "name": "env_dec_city_sail",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1127,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_sail_clip",
+    "env_dec_city_sail_shadow",
+    "env_dec_city_sail_base",
+    "env_dec_city_sail_lit",
+    "env_dec_city_sail_shade"
+   ]
+  },
+  {
+   "name": "env_dec_city_islet",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1086,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_islet_clip",
+    "env_dec_city_islet_shadow",
+    "env_dec_city_islet_base",
+    "env_dec_city_islet_lit",
+    "env_dec_city_islet_shade"
+   ]
+  },
+  {
+   "name": "env_dec_city_lighthouse",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1282,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_lighthouse_clip",
+    "env_dec_city_lighthouse_shadow",
+    "env_dec_city_lighthouse_base",
+    "env_dec_city_lighthouse_lit",
+    "env_dec_city_lighthouse_shade"
+   ]
+  },
+  {
+   "name": "env_dec_city_crate",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1149,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_crate_clip",
+    "env_dec_city_crate_shadow",
+    "env_dec_city_crate_base",
+    "env_dec_city_crate_lit",
+    "env_dec_city_crate_shade"
+   ]
+  },
+  {
    "name": "env_start_gate",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 2847,
+   "bytes": 2085,
    "viewBox": "0 0 170 130",
    "layers": [
     "env_start_gate_clip",
@@ -1980,7 +2078,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 2590,
+   "bytes": 2749,
    "viewBox": "0 0 160 140",
    "layers": [
     "env_tile_map_clip",
@@ -1995,7 +2093,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 2888,
+   "bytes": 3206,
    "viewBox": "0 0 160 140",
    "layers": [
     "env_tile_cards_clip",
@@ -2010,7 +2108,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 2654,
+   "bytes": 3246,
    "viewBox": "0 0 160 140",
    "layers": [
     "env_tile_practice_clip",
@@ -2025,7 +2123,7 @@
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 2465,
+   "bytes": 2657,
    "viewBox": "0 0 160 140",
    "layers": [
     "env_tile_guide_clip",
@@ -2036,19 +2134,33 @@
    ]
   },
   {
+   "name": "env_tunnel",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 4943,
+   "viewBox": "0 0 390 158",
+   "layers": [
+    "env_tunnel_clip",
+    "env_tunnel_shadow",
+    "env_tunnel_base",
+    "env_tunnel_lit",
+    "env_tunnel_shade"
+   ]
+  },
+  {
    "name": "env_dock_banner",
    "type": "symbol",
    "file": "env/sprite_env.svg",
    "module": "env",
-   "bytes": 4221,
+   "bytes": 5162,
    "viewBox": "0 0 390 200",
    "layers": [
     "env_dock_clip",
     "env_dock_shadow",
     "env_dock_base",
     "env_dock_lit",
-    "env_dock_shade",
-    "env_dock_windows"
+    "env_dock_shade"
    ]
   },
   {
@@ -2056,18 +2168,15 @@
    "type": "defs",
    "file": "light/common_defs.svg",
    "module": "light",
-   "bytes": 2038,
+   "bytes": 1585,
    "ids": [
-    "lt-brush",
     "lt-clip-card",
-    "lt-clip-node",
     "lt-reflect-dusk",
     "lt-sky-day",
     "lt-sky-dusk",
     "lt-sky-night",
-    "lt-water-day",
-    "lt-water-dusk",
-    "lt-water-night"
+    "lt-sparkle",
+    "lt-wob"
    ]
   },
   {
@@ -2075,7 +2184,7 @@
    "type": "symbol",
    "file": "ui/sprite_ui.svg",
    "module": "ui",
-   "bytes": 610,
+   "bytes": 616,
    "viewBox": "0 0 48 48",
    "layers": []
   },
@@ -2251,11 +2360,20 @@
    "layers": []
   },
   {
+   "name": "ui-ic-play",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 262,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
    "name": "ui-badge-easy",
    "type": "symbol",
    "file": "ui/sprite_ui.svg",
    "module": "ui",
-   "bytes": 564,
+   "bytes": 484,
    "viewBox": "0 0 56 30",
    "layers": []
   },
@@ -2264,7 +2382,7 @@
    "type": "symbol",
    "file": "ui/sprite_ui.svg",
    "module": "ui",
-   "bytes": 710,
+   "bytes": 602,
    "viewBox": "0 0 56 30",
    "layers": []
   },
@@ -2273,7 +2391,7 @@
    "type": "symbol",
    "file": "ui/sprite_ui.svg",
    "module": "ui",
-   "bytes": 857,
+   "bytes": 721,
    "viewBox": "0 0 56 30",
    "layers": []
   },
@@ -2282,7 +2400,7 @@
    "type": "symbol",
    "file": "ui/sprite_ui.svg",
    "module": "ui",
-   "bytes": 557,
+   "bytes": 721,
    "viewBox": "0 0 32 32",
    "layers": []
   },
@@ -2291,7 +2409,7 @@
    "type": "symbol",
    "file": "ui/sprite_ui.svg",
    "module": "ui",
-   "bytes": 468,
+   "bytes": 377,
    "viewBox": "0 0 100 100",
    "layers": []
   },

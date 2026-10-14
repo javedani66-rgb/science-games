@@ -28,7 +28,7 @@ def errs(files, **kw):
 def has(e, word): return any(word in x for x in e)
 
 # ۱) جاگذار
-r = B.collect_assets(HERE / 'team/assets')
+r = B.collect_assets(HERE / 'team/assets_r2')
 check('جاگذار بدون خطا', not r['errors'], r['errors'])
 check('جاگذار: بیش از ۱۰۰ نماد (هنر واقعی)', sum(1 for e in r['entries'] if e['type'] == 'symbol') > 100)
 # ۲) سقف SVG منفرد
@@ -61,7 +61,7 @@ check('ارجاع بیرونی ممنوع', has(errs({'ui/a.svg': '<svg xmlns="h
 check('ارجاع بی‌مقصد خطا', has(errs({'ui/a.svg': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"><g fill="url(#nope)"/></svg>'}), 'nope'))
 check('بدون viewBox/اندازه خطا', has(errs({'ui/a.svg': '<svg xmlns="http://www.w3.org/2000/svg"><g/></svg>'}), 'viewBox'))
 check('اگر sprite هست فایل‌های جدا دوباره نمی‌آیند', len(B.collect_assets(tree({'ui/sprite_ui.svg': '<svg xmlns="http://www.w3.org/2000/svg"><symbol id="ui-x" viewBox="0 0 1 1"/></svg>', 'ui/x.svg': svg(1)}))['entries']) == 1)
-check('tokens ادغام می‌شود', 'zone' in B.collect_assets(HERE / 'team/assets')['tokens'] or '--c-cream' in B.collect_assets(HERE / 'team/assets')['tokens'])
+check('tokens ادغام می‌شود', 'zone' in B.collect_assets(HERE / 'team/assets_r2')['tokens'] or '--c-cream' in B.collect_assets(HERE / 'team/assets_r2')['tokens'])
 check('بدون tokens.css/ui_tokens.css بی‌خطا', B.collect_assets(tree({'ui/a.svg': svg(1)}))['tokens'] == '')
 # ۴) سقف صفحه: همهٔ پوشه‌ها نزدیک سقف خودشان (جمع 1750KB + پایهٔ v3) باید از 2.5MB بگذرد
 full = {}

@@ -4,7 +4,7 @@ import layout as L
 from playwright.sync_api import sync_playwright
 OUT = L.OUT; sp = (OUT / 'sprite_env.svg').read_text(encoding='utf-8')
 from shapes import SHAPES
-bg = {'sports': '#3f9a2b', 'space': '#c4502f', 'farm': '#9a8a10', 'city': '#075a73'}
+bg = {'sports': '#3f9a2b', 'space': '#c4502f', 'farm': '#9a8a10', 'city': '#165f77'}
 h = '<body style="margin:0;font:12px sans-serif"><div style="position:absolute;width:0;height:0;overflow:hidden">%s</div>' % sp
 for z in bg:
     h += '<div style="display:flex;background:%s">' % bg[z] + ''.join('<svg width="120" height="100"><use href="#env_pad_%s_%s" width="120" height="100"/><use href="#prop_%02d" width="120" height="100"/></svg>' % (z, s, 1 + i * 2) for i, s in enumerate(SHAPES)) + '</div>'

@@ -11,7 +11,7 @@ for i, k in enumerate(ORDER):
 LAND = {'F01':3,'F06':2,'W02':4,'F05':5,'W04':6,'E01':8,'M04':7,'M03':1,'M09':9,'M07':10,'M11':11,'M08':12}
 PROP = {'F02':9,'F03':10,'F04':12,'F07':1,'F08':6,'F09':7,'W01':2,'W03':8,'E02':5,'E07':11,'M01':16,'B01':7,'B02':2,'M05':7,'M06':13,'E05':13,'M10':14,'E03':3,'M02':5,'E06':4,'E04':15}
 # شعاع پایه (rx, ry) و ارتفاع سیلوئت بالای مرکز پایه (h)
-LRX = {1:(70,24,78),2:(80,27,112),3:(84,28,124),4:(56,19,100),5:(58,20,118),6:(76,26,116),7:(64,22,86),8:(66,23,128),9:(52,18,104),10:(54,19,132),11:(82,28,124),12:(84,28,132)}
+LRX = {1:(70,24,78),2:(80,27,112),3:(84,28,124),4:(56,19,100),5:(58,20,118),6:(76,26,116),7:(64,22,86),8:(66,23,128),9:(52,18,104),10:(54,19,100),11:(120,43,205),12:(98,35,152)}
 PRX = {1:(36,12,40),2:(36,12,44),3:(38,13,40),4:(34,12,44),5:(38,13,44),6:(38,13,38),7:(40,13,36),8:(34,12,64),9:(36,12,64),10:(36,12,62),11:(36,12,58),12:(36,12,48),13:(36,12,44),14:(34,12,40),15:(36,12,104),16:(44,14,72)}
 HARD_X = set(range(26, 32))   # گذرگاه بندر: مسیر راست‌گرا
 def build():
@@ -22,13 +22,17 @@ def build():
         else: kind, n = 'landmark', 11; rx, ry, h = LRX[11]; asset = 'node_11'   # M12 پنهان
         nodes.append(dict(id=k, p=p, zone=ZONE[k], kind=kind, n=n, asset=asset, rx=rx, ry=ry, h=h))
     # y از پایین
-    gap = lambda a, b: 190 if (a['kind'] == 'landmark' and b['kind'] == 'landmark' and a['h'] > 110 and b['h'] > 110) else 160 if (a['kind'] == 'landmark' or b['kind'] == 'landmark') and (a['h'] > 90 or b['h'] > 90) else 132
+    def gap(a, b):
+        big = lambda n: n['kind'] == 'landmark' and n['h'] > 150      # کارخانه / جزیرهٔ جرثقیل (r2b): فاصلهٔ بیشتر برای پرچم، دودکش و برچسب
+        if a['kind'] == 'landmark' and b['kind'] == 'landmark' and a['h'] + b['h'] > 300: return 235
+        if big(a) or big(b): return 200
+        return 190 if (a['kind'] == 'landmark' and b['kind'] == 'landmark' and a['h'] > 110 and b['h'] > 110) else 160 if (a['kind'] == 'landmark' or b['kind'] == 'landmark') and (a['h'] > 90 or b['h'] > 90) else 132
     y = None
     for i, nd in enumerate(nodes):
         if i == 0: nd['_y'] = 0
         else: nd['_y'] = nodes[i-1]['_y'] - gap(nodes[i-1], nd)
-    TOP = 470; BOT = 330
-    miny = min(n['_y'] for n in nodes); Hh = int(-miny + TOP + BOT)
+    TOP = 192; BOT = 330      # r2b: بالاترین گرهٔ دیدنی (برج ساعت) با نوک ۹۲px زیر نوار بالا؛ M12 پنهان نقشه را بلند نمی‌کند
+    miny = min(n['_y'] for n in nodes if n['id'] != 'M12'); Hh = int(-miny + TOP + BOT)
     for i, nd in enumerate(nodes):
         nd['cy'] = round(nd['_y'] - miny + TOP)
         left = i % 2 == 0
@@ -38,6 +42,8 @@ def build():
         x = max(nd['rx'] + 26, min(W - nd['rx'] - 26, x))
         nd['cx'] = round(x)
         del nd['_y']
+    for nd in nodes:
+        if nd['id'] == 'M12': nd['cy'] = max(nd['cy'], 60)      # پنهان؛ فقط نباید بیرون بوم بیفتد
     return nodes, Hh
 NODES, H = build()
 START = (NODES[0]['cx'] + 10, NODES[0]['cy'] + 205)
@@ -55,6 +61,8 @@ def zone_bounds():
         bounds[z] = (top, bot); top = bot
     return bounds
 ZB = zone_bounds()
+_cy = {n['id']: n['cy'] for n in NODES}
+COAST_Y = round((_cy['M07'] + _cy['M02']) / 2)     # ساحل: بالای M07 دریا (۵ گرهٔ آخر روی دریا)، پایین خشکی بندری
 # ---- مسیر r2: ردیف‌های افقی از میان گره‌ها + دور‌زدن در لبه‌ها (مثل v4)؛ گره‌ها ثابت ----
 TUNNEL_ROW = 8; TUNNEL_EDGE = 56      # دور‌زدن بعد از این ردیف از داخل تونل می‌گذرد و کمی از لبه فاصله دارد
 XL, XR = 70, 320          # سر ردیف‌ها

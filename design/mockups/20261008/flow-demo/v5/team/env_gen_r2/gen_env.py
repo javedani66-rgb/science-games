@@ -10,18 +10,24 @@ for old in OUT.glob('*.svg'): old.unlink()
 files = {}
 def put(name, svg): files[name] = svg; (OUT / name).write_text(svg, encoding='utf-8')
 SYM = {}
-def symbol(sid, svg, drop_style=True):
+def symbol(sid, svg, drop_style=True, over=False):
     m = re.match(r'<svg[^>]*viewBox="([^"]+)"[^>]*>(.*)</svg>$', svg, re.S); vb, inner = m.group(1), m.group(2)
     if drop_style: inner = re.sub(r'<style>.*?</style>', '', inner, flags=re.S)
-    SYM[sid] = '<symbol id="%s" viewBox="%s">%s</symbol>' % (sid, vb, inner)
+    SYM[sid] = '<symbol id="%s" viewBox="%s"%s>%s</symbol>' % (sid, vb, ' overflow="visible"' if over else '', inner)
 # --- ۱۲ بنا ---
+# ۱۰، ۱۱، ۱۲ (جزیره‌های v4) از جعبهٔ ۲۰۰×۱۹۰ بزرگ‌ترند: symbol با overflow=visible (قالب build.py همان ۲۰۰×۱۹۰ را می‌کشد)؛ فایل مستقل viewBox بزرگ‌تر دارد
+EXT = {10: (-40, -60, 280, 260), 11: (-60, -90, 320, 300), 12: (-70, -70, 340, 270)}
+def ext_vb(s, n): return s.replace('viewBox="0 0 200 190"', 'viewBox="%d %d %d %d"' % EXT[n], 1)
 for n, fn in X.LAND.items():
-    s = fn(); put('node_%02d.svg' % n, s); symbol('node_%02d' % n, s)
-# --- پایه‌ها: ۴ زمین × ۸ شکل (هر گره پایهٔ متفاوت می‌گیرد؛ ایراد ۱ v4) ---
+    s = fn(); symbol('node_%02d' % n, s, over=n in EXT); put('node_%02d.svg' % n, ext_vb(s, n) if n in EXT else s)
+# --- پایه‌ها: سه نوع v4 (سنگ/فلز/یخ) ---
+# سنگ رنگ زمین دارد (۴ نماد)؛ فلز و یخ یک‌بار ساخته می‌شوند و نام هر زمین نمادی کوچک است که به آن ارجاع می‌دهد (حجم)
+PADRX = {'stone': 47, 'metal': 47, 'ice': 49}
+for shp in ('metal', 'ice'):
+    pre = 'env_pad_any_' + shp; b = B(pre); pad(b, 'city', PADRX[shp], 3, shape=shp); symbol(pre, b.svg((120, 100), 60, 78, PADRX[shp], 14, (-PADRX[shp], -14, PADRX[shp], 14)), over=True)
 for z in ('sports', 'space', 'farm', 'city'):
-    for v, shp in enumerate(SHAPES):
-        rx = (38, 42, 40, 44, 42, 40, 40, 38)[v]; pre = 'env_pad_%s_%s' % (z, shp)
-        b = B(pre); pad(b, z, rx, v + 1, shape=shp); s = b.svg((120, 100), 60, 78, rx, 12, (-rx, -14, rx, 14)); symbol(pre, s)
+    pre = 'env_pad_%s_stone' % z; b = B(pre); pad(b, z, PADRX['stone'], 3, shape='stone'); symbol(pre, b.svg((120, 100), 60, 78, 47, 14, (-47, -14, 47, 14)), over=True)
+    for shp in ('metal', 'ice'): SYM['env_pad_%s_%s' % (z, shp)] = '<symbol id="env_pad_%s_%s" viewBox="0 0 120 100" overflow="visible"><use href="#env_pad_any_%s" width="120" height="100"/></symbol>' % (z, shp, shp)
 for n, fn in X.PROPS.items():
     s = X.prop(n, fn); put('prop_%02d.svg' % n, s); symbol('prop_%02d' % n, s)
 # --- زمین ---
@@ -29,11 +35,6 @@ ZB = L.ZB; order = ['city', 'farm', 'space', 'sports']; STRIP_Y = {}
 for z in order:
     y0, y1 = ZB[z]; soft = z != 'city'; ys = y0 - (90 if soft else 0); STRIP_Y[z] = ys
     s = T.strip(z, y0, y1, soft); put('zone_strip_%s.svg' % z, s); symbol('zb_strip_' + z, s)
-bg = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 %d">' % L.H]
-for z in order:
-    s = files['zone_strip_%s.svg' % z]; inner = re.match(r'<svg[^>]*>(.*)</svg>$', s, re.S).group(1)
-    bg.append('<g transform="translate(0 %d)">%s</g>' % (STRIP_Y[z], inner))
-put('zones_bg.svg', ''.join(bg) + '</svg>')
 for name, fn, sid in (('river.svg', T.river, 'env_river'), ('bridge.svg', T.bridge, 'env_bridge'), ('ice_patch.svg', T.ice, 'env_ice')):
     s = fn(); put(name, s); symbol(sid, s)
 # ابرها
@@ -52,10 +53,6 @@ SEA = [('buoy', 18), ('sail', 28), ('islet', 28), ('lighthouse', 28), ('crate', 
 for k, s in dec.items(): symbol('env_' + k, s)
 DEC_SET = {z: [(n, rx) for n, _, rx in items] for z, items in DC.SET.items()}
 DEC_SET['sea'] = SEA
-for z, items in list(DC.SET.items()) + [('sea', [(n, None, rx) for n, rx in SEA])]:
-    zz = 'city' if z == 'sea' else z
-    cells = ''.join('<svg x="%d" width="120" height="120" viewBox="0 0 120 120">%s</svg>' % (i * 124, re.match(r'<svg[^>]*>(.*)</svg>$', dec['dec_%s_%s' % (zz, n)], re.S).group(1)) for i, (n, _, _) in enumerate(items))
-    put('props_%s.svg' % z, '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d 120">%s</svg>' % (124 * len(items), cells))
 sg = DC.start_gate(); put('start_gate.svg', sg); symbol('env_start_gate', sg)
 for nm, fn in (('map', DC.tile_map), ('cards', DC.tile_cards), ('practice', DC.tile_practice), ('guide', DC.tile_guide)):
     s = fn(); put('tile_bldg_%s.svg' % nm, s); symbol('env_tile_' + nm, s)
@@ -68,11 +65,11 @@ svg_t, TH = T.tunnel(hb_abs - TOPY, 26, xm)
 put('tunnel.svg', svg_t); symbol('env_tunnel', svg_t)
 TUN = dict(row_low=TI, row_high=TI + 1, x=0, y=TOPY, w=390, h=TH, portal_x=round(xm, 1), portal_y=round(hb_abs, 1))
 # --- بنر اسکله (دریای v4) ---
-nest = X.n12('env_dock'); inner = re.match(r'<svg[^>]*>(.*)</svg>$', nest, re.S).group(1)
-banner = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 200"><rect width="390" height="200" fill="#075a73"/><rect width="390" height="70" fill="#0a6e8a" opacity=".5"/>'
+nest = X.n12('env_dock'); inner = re.match(r'<svg[^>]*>(.*)</svg>$', nest, re.S).group(1)   # n12 جدید (جزیرهٔ جرثقیل v4)؛ viewBox بزرگ‌تر در بنر
+banner = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 200"><rect width="390" height="200" fill="#165f77"/><rect width="390" height="70" fill="#1c6f8c" opacity=".5"/>'
           '<path d="M10,40 q8,-5 16,0 q8,5 16,0 M250,30 q8,-5 16,0 M330,64 q8,-5 16,0" fill="none" stroke="#aef0f4" stroke-width="2.6" stroke-linecap="round" opacity=".4"/>'
           '<rect x="-4" y="150" width="398" height="52" fill="#c6c1b6"/><rect x="-4" y="150" width="398" height="10" fill="#e9e4d6"/><path d="M-4,150H394" stroke="#241a5e" stroke-width="4.5"/>'
-          '<svg x="40" y="-52" width="300" height="285" viewBox="0 0 200 190">%s</svg></svg>' % inner)
+          '<svg x="30" y="-40" width="330" height="262" viewBox="-70 -70 340 270">%s</svg></svg>' % inner)
 put('dock_env_banner.svg', banner); symbol('env_dock_banner', banner)
 sil = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">']
 for k, n in enumerate(range(1, 13)):
@@ -99,4 +96,4 @@ Nd = Tt['nodes']
 nm = [dict(id=n['id'], order=n['p'] + 1, zone=n['zone'], kind=n['kind'], asset=n['asset'], env_title=Nd.get(n['id'], {}).get('title', ''), concept=Nd.get(n['id'], {}).get('subtitle', ''), visible=n['id'] != 'M12', note=('پنهان: همان کارخانه' if n['id'] == 'M12' else '')) for n in L.NODES]
 json.dump(dict(_doc='جدول نگاشت ۳۴ گره (۳۳ دیدنی) ← بنای شاخص node_NN یا پروپ prop_NN (روی پایهٔ env_pad_<زمین>_<شکل>). r2: همان نگاشت v5؛ ساخته از team/env_gen_r2/gen_env.py', canvas=dict(width=L.W, height=L.H), zones={z: dict(y0=a, y1=b) for z, (a, b) in L.ZB.items()}, start=dict(x=L.START[0], y=L.START[1]), coast_y=T.COAST_Y, tunnel=TUN, landmarks=12, props=sorted({n['asset'] for n in L.NODES if n['kind'] == 'prop'}), nodes=nm), open(OUT / 'node_map.json', 'w'), ensure_ascii=False, indent=1)
 sl = L.slots()
-json.dump(dict(_doc='جای هر گره، بوم 390×%d (بدون تغییر نسبت به v5). base_center = لنگر؛ place_at = گوشهٔ بالا-چپ symbol (بنا 200×190، پروپ 120×100). نشان سختی بالا-ابتدا، قفل/انجام پایین-ابتدا، پای b1 لبهٔ جلوی پایه، برچسب زیر پایه. مسیر r2: ردیف افقی از مرکز هر گره (path_d). عنوان‌های زمین: zone_titles با کلید strings.' % L.H, canvas=[L.W, L.H], path_d=L.path_d(), slots=sl), open(OUT / 'slots.json', 'w'), ensure_ascii=False, indent=1)
+json.dump(dict(_doc='جای هر گره، بوم 390×%d (بدون تغییر نسبت به v5). base_center = لنگر؛ place_at = گوشهٔ بالا-چپ symbol (بنا 200×190، پروپ 120×100). نشان سختی بالا-ابتدا، قفل/انجام پایین-ابتدا، پای b1 لبهٔ جلوی پایه، برچسب زیر پایه. مسیر r2: ردیف افقی از مرکز هر گره (path_d). عنوان‌های زمین: zone_titles با کلید strings.' % L.H, canvas=[L.W, L.H], path_d=L.path_d(), start=dict(x=L.START[0], y=L.START[1], gate=[L.START[0] - 85, L.START[1] - 114, 170, 130]), slots=sl), open(OUT / 'slots.json', 'w'), ensure_ascii=False, separators=(',', ':'))
