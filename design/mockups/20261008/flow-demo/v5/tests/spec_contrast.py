@@ -8,9 +8,10 @@
 
 بررسی‌ها:
  ۱) متن/پر با فرمول WCAG: ≥۴٫۵، یا ≥۳ اگر متن بزرگ (لالهزار ≥۲۴px یا Vazirmatn بولد ≥۱۸٫۶۶px)؛ آیکون/پر ≥۳؛ لبهٔ کنترل به سطح ≥۳.
- ۲) «سنجش مؤثر با سایه» (tests/spec_measure.py): متن در Chromium نقاشی می‌شود؛ نسبت متن به پیکسل‌های حلقهٔ ۱٫۵px دور حروف
-    (که سایه هم در آن است) سنجیده می‌شود؛ صدک ۵ باید ≥۴٫۵ باشد. سایه پر روشن را نجات نمی‌دهد: (۱) و (۲) هر دو باید برقرار باشند.
- ۳) پر تیره‌شده باید از قاعدهٔ derived_colors بازسازی شود؛ سایه = mix(پر، #190539، ۰٫۷)؛ فشرده = mix(پر، لبه، ۰٫۱۲).
+ ۲) «سنجش مؤثر با حاشیه» (tests/spec_measure.py): متن در Chromium نقاشی می‌شود؛ نسبت متن به پیکسل‌های حلقهٔ ۱٫۵px دور حروف
+    (که حاشیهٔ ضخیم و سایه در آن است) سنجیده می‌شود؛ صدک ۵ باید ≥۴٫۵ باشد. (نسخهٔ ۳) پر زنده تیره نمی‌شود؛ روی پر زنده (نسبت خام زیر ۴٫۵)
+    حاشیهٔ هم‌خانواده الزامی است و باید از پر جدا باشد (حاشیه/پر ≥۳). روی پر تیره (خام ≥۴٫۵) حاشیه لازم نیست.
+ ۳) حاشیه/سایه = mix(پر، #190539، ۰٫۸۲)؛ فشرده = mix(پر، لبه، ۰٫۱۲).
  ۴) ساختار: لمس ≥۴۸، شعاع مشخص، بدون clip-path و گوشهٔ تیز، نقش فونت (لالهزار: عنوان/برچسب/دکمه، Vazirmatn: متن توضیحی).
  ۵) ممنوع‌ها واقعاً زیر حد باشند؛ همهٔ کلیدهای متن در spec/strings.fa.json؛ نبودن clip-path در spec_sample.html."""
 import json, re, sys, pathlib, colorsys
@@ -73,6 +74,7 @@ pal = set()
 for f in ['team/assets_r2/light/zone_tokens.json', 'team/assets_r2/ui/ui_tokens.css', 'team/assets_r2/light/tokens.css']:
     pal |= set(h.lower() for h in re.findall(r'#[0-9a-fA-F]{6}\b', (V5 / f).read_text(encoding='utf-8')))
 pal.add('#ffffff')
+pal |= {v.lower() for v in SPEC['palette'].values() if isinstance(v, str) and v.startswith('#')}
 DER = SPEC['derived_colors']
 for k, d in DER.items():
     if d['base'].lower() not in pal: err(f'derived {k}: base {d["base"]} not in approved palette')
@@ -146,34 +148,39 @@ def run(cases, res):
                 if o.get('derive'):
                     if o['derive'] not in DER or o['fill'] != DER[o['derive']]['value']: err(f'{tag}: fill is not derived_colors.{o["derive"]}')
                 if o.get('shadow') and o['shadow'] != sh_of(o['fill']): err(f'{tag}: shadow {o["shadow"]} is not mix(fill, {SH_TOWARD}, {SH_T}) = {sh_of(o["fill"])}')
-                if font.get('family'):
-                    r1 = check(rid, mode, f'{vid}: text/fill', o['text'], o['fill'], need)
-                    # متن روشن (سفید/کرم) روی پر رنگی همیشه حداقل کف ۳ را می‌خواهد (سایه جایگزین تیره‌کردن پر نیست)
-                    if lum(o['text']) > lum(o['fill']) and o.get('shadow'):
-                        check(rid, mode, f'{vid}: floor text/fill', o['text'], o['fill'], W['fill_floor_light_text'])
-                    e = eff(f'{tag}/normal', o['fill'], o['text'], o.get('shadow'), font)
+                if font.get('family') and rid != 'map_label':
+                    sp = TS['stroke_px_title'] if font.get('role') == 'title' else TS['stroke_px']
+                    stk = (sp, o['shadow']) if o.get('outline') else None
+                    if o.get('outline'):
+                        if not o.get('shadow'): err(f'{tag}: outline variant needs a shadow/outline colour')
+                        check(rid, mode, f'{vid}: outline/fill', o['shadow'], o['fill'], W['outline_vs_fill_min'])
+                    else:
+                        check(rid, mode, f'{vid}: text/fill', o['text'], o['fill'], need)
+                    e = eff(f'{tag}/normal', o['fill'], o['text'], o.get('shadow'), font, stroke=stk)
                     e2 = None
                     if 'pressed_fill' in o:
                         if o['pressed_fill'] != mix(o['fill'], EDGE[mode], .12): err(f'{tag}: pressed_fill is not mix(fill, edge, .12)')
-                        check(rid, mode, f'{vid}: pressed text/fill', o['text'], o['pressed_fill'], need)
-                        e2 = eff(f'{tag}/pressed', o['pressed_fill'], o['text'], o.get('shadow'), font)
+                        if not o.get('outline'): check(rid, mode, f'{vid}: pressed text/fill', o['text'], o['pressed_fill'], need)
+                        e2 = eff(f'{tag}/pressed', o['pressed_fill'], o['text'], o.get('shadow'), font, stroke=stk)
                     if res is not None:
                         LOG.append((rid, vid, mode, o['fill'], o['text'], o.get('shadow'), cr(o['text'], o['fill']), res[f'{tag}/normal']['p05'], need))
                 elif 'pressed_fill' in o and o['pressed_fill'] != mix(o['fill'], EDGE[mode], .12):
                     err(f'{tag}: pressed_fill is not mix(fill, edge, .12)')
-                if o.get('icon'):
+                if o.get('outline'):
+                    pass          # آیکون روی پر زنده با همان حاشیهٔ هم‌خانواده؛ سنجشش همان «حاشیه/پر ≥۳» است
+                elif o.get('icon'):
                     check(rid, mode, f'{vid}: icon/fill', o['icon'], o['fill'], W['nontext_min'])
                     if 'pressed_fill' in o: check(rid, mode, f'{vid}: pressed icon/fill', o['icon'], o['pressed_fill'], W['nontext_min'])
                 elif not font.get('family'):
                     check(rid, mode, f'{vid}: icon/fill', o['text'], o['fill'], W['nontext_min'])
                 for s in surfs:
-                    if rid == 'zone_title': continue
+                    if rid in ('zone_title', 'map_label'): continue
                     b = max(cr(o['fill'], s), cr(o['rim'], s))
                     if b < 3: err(f'{rid}/{vid}[{mode}] edge vs surface {s} = {b:.2f} < 3')
                     else:
                         ok()
                         if VERBOSE: print(f'  ok  {rid:15} {mode:5} {vid + ": edge/surface":30} {s}  {b:5.2f}')
-                if rid == 'zone_title':
+                if rid in ('zone_title', 'map_label'):
                     for s in surfs:
                         b = max(cr(o['fill'], s), cr(o['text'], s))
                         if b < 3: err(f'{rid}[{mode}] halo/text vs surface {s} = {b:.2f}')
@@ -195,11 +202,14 @@ def run(cases, res):
                         else: ok()
                     continue
                 need_p = W['nontext_min'] if kind == 'icon' else need_for(pf)
-                check(rid, mode, f'part {p["id"]}', o['text'], o['fill'], need_p)
-                if o.get('shadow') and lum(o['text']) > lum(o['fill']): check(rid, mode, f'part {p["id"]}: floor', o['text'], o['fill'], W['fill_floor_light_text'])
+                if kind == 'text' and o.get('outline'):
+                    check(rid, mode, f'part {p["id"]}: outline/fill', o['shadow'], o['fill'], W['outline_vs_fill_min'])
+                else:
+                    check(rid, mode, f'part {p["id"]}', o['text'], o['fill'], need_p)
                 if kind == 'text':
                     check_font(rid, pf, f'part {p["id"]}')
-                    eff(f'{tag}/normal', o['fill'], o['text'], o.get('shadow'), pf)
+                    sp = TS['stroke_px_title'] if pf.get('role') == 'title' else TS['stroke_px']
+                    eff(f'{tag}/normal', o['fill'], o['text'], o.get('shadow'), pf, stroke=(sp, o['shadow']) if o.get('outline') else None)
                     if res is not None: LOG.append((rid, p['id'], mode, o['fill'], o['text'], o.get('shadow'), cr(o['text'], o['fill']), res[f'{tag}/normal']['p05'], need_p))
             ov = row.get('state_overrides', {})
             if 'pressed' in row.get('states_apply', []) or 'disabled' in row.get('states_apply', []):
@@ -232,7 +242,7 @@ def run(cases, res):
             s = row['stack']
             if s['order'] != ['easy', 'mid', 'hard'] or s['front'] != 'easy': err('challenge_stack: order must be easy (front), mid, hard (behind all)')
             if s['peek_px'] < 20: err('challenge_stack: peek too small')
-            if s.get('strip_touch'): err('challenge_stack: peeking strips must not be touch targets (<48px)')
+            if s.get('strip_touch') and s.get('strip_px', 0) < 48: err('challenge_stack: peeking strips that are touch targets must be >= 48px')
             if {v['id'] for v in row['variants']} != {'easy', 'mid', 'hard'}: err('challenge_stack: three variants easy/mid/hard')
             for v in row['variants']:
                 for m in ('day', 'night'):
@@ -251,6 +261,11 @@ def forbidden(res_f):
         elif sc == 'all' and r >= W['large_text_min']: err(f'forbidden pair {f["fg"]} on {f["bg"]} = {r:.2f}: scope all, but fine for large text (>=3); mark small')
         elif sc == 'small' and r < W['large_text_min']: err(f'forbidden pair {f["fg"]} on {f["bg"]} = {r:.2f}: below 3, so it is banned at every size; mark all')
         else: ok()
+        if f.get('shadow_demo'):
+            e = res_f.get(f'forbid/{f["fg"]}/{f["bg"]}', {}).get('p05', 0)
+            if e < W['effective_min']: err(f'forbidden-bare pair {f["fg"]} on {f["bg"]}: even the outline gives only {e:.2f} (< {W["effective_min"]})')
+            elif sh_of(f['bg']) and cr(sh_of(f['bg']), f['bg']) < W['outline_vs_fill_min']: err(f'outline of {f["bg"]} too close to the fill')
+            else: ok()
         out.append((f, r, res_f.get(f'forbid/{f["fg"]}/{f["bg"]}', {}).get('p05')))
     return out
 
@@ -260,7 +275,7 @@ cases = []
 run(cases, None)
 for f in SPEC['forbidden_pairs']:
     if f.get('shadow_demo'):
-        cases.append(dict(key=f'forbid/{f["fg"]}/{f["bg"]}', fill=f['bg'], text=f['fg'], shadow=sh_of(f['bg']), layers=TS['layers_px'], family='Lalezar', size=24, weight=400, stroke=None))
+        cases.append(dict(key=f'forbid/{f["fg"]}/{f["bg"]}', fill=f['bg'], text=f['fg'], shadow=sh_of(f['bg']), layers=TS['layers_px'], family='Lalezar', size=24, weight=400, stroke=(TS['stroke_px'], sh_of(f['bg']))))
 res = measure(cases, ring_px=W['ring_px'], percentile=W['ring_percentile'])
 errs.clear(); n_ok = 0
 run(cases, res)

@@ -1,10 +1,10 @@
 {
- "page_bytes": 860191,
+ "page_bytes": 893828,
  "page_cap": 2621440,
  "module_bytes": {
   "env": 435990,
   "character": 139908,
-  "ui": 31576,
+  "ui": 35740,
   "card": 449675,
   "light": 37913
  },

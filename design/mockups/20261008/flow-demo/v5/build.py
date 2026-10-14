@@ -197,7 +197,7 @@ def build_page(art, ASSETS):
     J = lambda p: json.load(open(p, encoding='utf-8'))
     TITLES = J(ROOT / 'docs/research/world/titles_fa.json'); NODES = J(ROOT / 'docs/research/world/nodes_v2_draft.json')
     THREAD = J(V3 / 'thread.json'); BANK = J(ROOT / 'docs/texts/TEXT_BANK_FA.json')['entries']
-    UI = J(FLOW / 'strings.fa.json'); UI5 = {k: v for k, v in STR.items() if not k.startswith('v5.build.')}
+    UI = J(FLOW / 'strings.fa.json'); UI.update({k: v for k, v in J(HERE / 'lesson/strings.fa.json').items() if not k.startswith('_')}); UI5 = {k: v for k, v in STR.items() if not k.startswith('v5.build.')}
     REV = J(HERE / 'review.fa.json')
     SYM = dict(C01='force', C02='friction', C03='multi', C04='weight', C05='energy', C06='machine', C07='lever', C08='slope', C09='wheel', C10='summary')
     ORDER = [n['id'] for c in THREAD['chapters'] for n in c['nodes']]
@@ -216,7 +216,7 @@ def build_page(art, ASSETS):
         for n in c['nodes']:
             i = n['id']; t = TITLES['nodes'][i]
             nodes.append(dict(id=i, env=t['title'], concept=t.get('subtitle', ''), ch=c['id'], pre=n['prereq'], hidden=bool(tn[i].get('hidden_detour')),
-                              trial=bool(tn[i].get('experimental')), deferred=bool(tn[i].get('deferred')), fog=(i == 'E04')))
+                              trial=bool(tn[i].get('experimental')), band=tn[i].get('band_entry', ''), deferred=bool(tn[i].get('deferred')), fog=(i == 'E04')))
     ENTR = sorted({e['from'] for e in NODES['edges'] if e.get('kind') == 'detour_entrance' and e['to'] == 'E04'})
     chapters = [dict(id=c['id'], sym=SYM[c['id']], ids=[n['id'] for n in c['nodes']]) for c in THREAD['chapters']]
     edges = [e for e in NODES['edges'] if e['from'] in tn and e['to'] in tn and not tn[e['from']].get('deferred') and not tn[e['to']].get('deferred')]

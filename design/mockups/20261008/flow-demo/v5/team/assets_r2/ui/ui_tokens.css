@@ -1,102 +1,136 @@
-/* ui_tokens.css r2 (ui-artist، بازگشت به v4). رنگ و حس از v4/style/map.html و card-night.html:
-   دکمه/چیپ با خط 3.5px #241a5e و سایهٔ لبهٔ 4px #120c3a؛ چیپ فعال زرد #ffd23f با حلقهٔ کرم؛ بقیهٔ چیپ‌ها بنفش #4b3b9e؛ دکمهٔ منو کرم.
-   اصلی فیروزه‌ای، ثانویه کرم (شکل بُریده)، فیلم صورتی، «نگه‌دار» بنفش، «بذارش…» زرد. شب: درخشش به‌جای لبه (مثل pill های کارت v4). بدون filter/blend. */
+/* ui_tokens.css r3 (ui-designer، ۱۴ اکتبر، قالب‌نامهٔ نسخهٔ ۳: v5/COMPONENT_SPEC_FA.md + component_spec.json).
+   تصمیم مالک (گزینهٔ ب): رنگ پر زندهٔ v4 (فیروزه‌ای #46f0d8، زرد #ffd23f، صورتی #ff7be5، بنفش #8a4fe0، لیلکی #a99dff) هرگز تیره نمی‌شود.
+   خوانایی: نوشتهٔ سفید لالهزار با «حاشیهٔ ضخیم هم‌خانواده» (stroke ۵px + سایهٔ ۳px پایین؛ رنگ = mix(پر، #190539، ۰٫۸۲)).
+   پر کرم/سفید: متن سرمه‌ای بدون حاشیه. همهٔ کنترل‌ها گوشه‌گرد با یک شعاع؛ بدون clip-path. لمس ≥ ۴۸px (دکمه ۵۶).
+   روز: خط دور #241a5e و لبهٔ زیرین ۴px #120c3a. شب: خط دور و درخشش به رنگ روشن همان کنترل. */
 :root{
   --ui-line:#241a5e; --ui-edge:#120c3a; --ui-cream:#fff3c4; --ui-gold:#ffd23f; --ui-chip:#4b3b9e;
-  --ui-cyan:#46f0d8; --ui-pink:#ff7be5; --ui-purple:#8a4fe0; --ui-violet:#4b3b9e;
+  --ui-cyan:#46f0d8; --ui-pink:#ff7be5; --ui-purple:#8a4fe0; --ui-violet:#4b3b9e; --ui-lilac:#a99dff;
   --ui-night-bg:#190539; --ui-night-line:#190539;
-  --ui-ink-disabled:#4a4268; --ui-disabled-bg:#d9d3e8;
-  --ui-r-big:18px; --ui-r-small:8px; --ui-l35:3.5px; --ui-l26:2.6px; --ui-l12:1.2px; --ui-lip:4px; --ui-lip-pressed:2px;
-  --ui-touch:48px; --ui-gap:7px; --ui-gutter:16px;
+  --ui-ink-disabled:#4a4268; --ui-disabled-bg:#d9d3e8; --ui-disabled-rim:#6d6492;
+  --ui-easy:#2fa44a; --ui-mid:#ff9d1c; --ui-hard:#ff4b4b;
+  --ui-r-btn:18px; --ui-r-icon:16px; --ui-r-sm:10px; --ui-r-card:28px; --ui-l35:3.5px; --ui-l26:2.6px; --ui-l12:1.2px; --ui-lip:4px;
+  --ui-touch:48px; --ui-btn-h:56px; --ui-gap:8px; --ui-gutter:16px;
   --ui-font-title:'Lalezar','Vazirmatn',sans-serif; --ui-font:'Vazirmatn',system-ui,sans-serif;
-  --ui-fs-page:28px; --ui-fs-zone:24px; --ui-fs-sheet:24px; --ui-fs-tile:22px; --ui-fs-btn:22px; --ui-fs-body:16px; --ui-fs-small:14px; --ui-lh:1.7;
+  --ui-fs-btn:24px; --ui-fs-body:16px; --ui-fs-small:16px; --ui-lh:1.7;
+  /* حاشیهٔ هم‌خانواده: mix(پر، #190539، ۰٫۸۲) */
+  --tk-cyan:#212f56; --tk-gold:#422a3a; --tk-pink:#421a58; --tk-violet:#2d1257; --tk-lilac:#33205d;
+  --tk-easy:#1d223c; --tk-mid:#422034; --tk-hard:#42123c; --tk-seen:#1b2951;
 }
-[data-world=night]{--ui-line:#190539; --ui-c3:#7a6af5; --ui-edge:#190539}
+[data-world=night]{--ui-line:#190539; --ui-edge:#190539}
 .ui-svg{display:inline-block;inline-size:48px;block-size:48px;flex:none}
 .ui-svg--40{inline-size:40px;block-size:40px} .ui-svg--32{inline-size:32px;block-size:32px}
 .ui-flip{transform:scaleX(-1)}
-.ui-badge{display:inline-block;inline-size:56px;block-size:30px;overflow:visible;flex:none}
-.ui-lockbadge{display:inline-block;inline-size:32px;block-size:32px;flex:none;overflow:visible}
-.ui-ring{overflow:visible} .ui-ring-dash{animation:uispin 14s linear infinite} @keyframes uispin{to{stroke-dashoffset:-260}}
-/* نشان سختی + واژه: پلاک کرم (واژه همیشه تیره روی کرم، ≥14px)؛ واژه از کلید difficulty.* */
-.ui-hard{display:inline-flex;align-items:center;gap:8px;min-block-size:36px;padding:3px 12px 3px 8px;background:var(--ui-cream);border:var(--ui-l26) solid #241a5e;color:#241a5e;font:700 16px/1.2 var(--ui-font);border-radius:4px 14px 4px 14px}
-/* دکمه («پلاک»): شکل v5، رنگ و لبهٔ v4 */
-.ui-btn{--bg:var(--ui-cyan);--glow:rgba(70,240,216,.6);--ink:#241a5e;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-block-size:52px;min-inline-size:var(--ui-touch);padding:0 22px;margin-block-end:var(--ui-lip);box-sizing:border-box;
-  font:400 var(--ui-fs-btn)/1.2 var(--ui-font-title);color:var(--ink);background:var(--bg);border:var(--ui-l35) solid #241a5e;cursor:pointer;
-  border-start-start-radius:var(--ui-r-big);border-end-end-radius:var(--ui-r-big);border-start-end-radius:var(--ui-r-small);border-end-start-radius:var(--ui-r-small);
-  box-shadow:0 var(--lip,4px) 0 0 var(--ui-edge);--lip:4px}
-.ui-btn:active,.ui-btn[data-state=pressed]{--lip:2px;transform:translateY(2px)}
-.ui-btn--gold{--bg:var(--ui-gold);--glow:rgba(255,210,63,.6)}
-.ui-btn--hold{--bg:var(--ui-purple);--glow:rgba(138,79,224,.6);--ink:#fff}
-.ui-btn--video{--bg:var(--ui-pink);--glow:rgba(255,123,229,.6)}
-/* ثانویه: شکل دیگر (تخت، بُریده، بی‌لب)، رنگ کرم */
-.ui-cut{--cut:10px;--b:3.5px;--cutbg:var(--ui-cream);position:relative;isolation:isolate;border:0;background:#241a5e;box-shadow:none;margin-block-end:0;
-  clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
-.ui-cut::before{content:"";position:absolute;inset:var(--b);z-index:-1;background:var(--cutbg);
-  clip-path:polygon(0 0,calc(100% - var(--cut) + var(--b) * .414) 0,100% calc(var(--cut) - var(--b) * .414),100% 100%,calc(var(--cut) - var(--b) * .414) 100%,0 calc(100% - var(--cut) + var(--b) * .414))}
-.ui-btn--sec{--cutbg:var(--ui-cream);border:0;margin-block-end:0;border-radius:0;padding:0 24px}
-.ui-btn--sec:active,.ui-btn--sec[data-state=pressed]{--cutbg:#f0dc8c;transform:none}
-.ui-btn--sec:focus-visible,.ui-btn--sec[data-state=focus]{outline:0}
-.ui-btn--sec:focus-visible::before,.ui-btn--sec[data-state=focus]::before{box-shadow:inset 0 0 0 3px var(--ui-chip),inset 0 0 0 5px var(--ui-cream)}
-.ui-btn--s{min-block-size:44px;padding:0 14px;font-size:18px}
-.ui-btn--s:not(.ui-btn--sec)::after{content:"";position:absolute;inset-block:-4px;inset-inline:-4px}
-.ui-btn:focus-visible,.ui-chip:focus-visible,.ui-tile:focus-visible{outline:3px solid var(--ui-cream);outline-offset:2px;box-shadow:0 var(--lip,4px) 0 0 var(--ui-edge),0 0 0 8px var(--ui-chip)}
-.ui-btn:disabled,.ui-btn[aria-disabled=true]{--bg:var(--ui-disabled-bg);--cutbg:var(--ui-disabled-bg);--ink:var(--ui-ink-disabled);--lip:0px;border-color:#6d6492;box-shadow:none;margin-block-end:0;cursor:default;transform:none;
-  background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(74,66,104,.18) 6px 8px)}
-/* شب (برگهٔ شب/کارت): مثل pill های کارت v4، خط #190539 و درخشش همرنگ به‌جای لبه */
-[data-world=night] .ui-btn:not(.ui-cut){border-color:#190539;box-shadow:0 0 22px var(--glow);margin-block-end:0;transform:none}
-[data-world=night] .ui-btn:not(.ui-cut):active{filter:brightness(.92)}
-[data-world=night] .ui-btn.ui-cut{background:#190539}
-[data-world=night] .ui-btn:disabled{box-shadow:none}
-[data-world=night] .ui-btn .ui-svg{--ui-line:#241a5e;--ui-c3:#4b3b9e}
-/* دکمهٔ آیکونی (v4: دکمهٔ منوی کرم): پایهٔ ۱۲ دندانه، لبهٔ تیره 4px */
-.ui-btn--icon{padding:0;border:0;background:none;box-shadow:none;inline-size:48px;block-size:54px;min-block-size:54px;margin:0;--ui-gear:var(--ui-cream);--ui-gear-lip:var(--ui-edge)}
-[data-world=night] .ui-btn--icon{box-shadow:none}
-.ui-btn--icon>.ui-gear{position:absolute;inset:0;inline-size:48px;block-size:54px}
-.ui-btn--icon>.ui-ic{position:relative;inline-size:32px;block-size:32px;margin-block-end:5px}
-.ui-btn--icon:active,.ui-btn--icon[data-state=pressed]{--ui-gear:#f0dc8c;transform:none}
-/* نوار بالا (v4): سرمه‌ای #241a5e با لبهٔ موج‌دار و خط زردِ کم‌رنگ؛ منو + سه چیپ */
-.ui-topbar{position:relative;display:flex;align-items:center;gap:var(--ui-gap);padding:8px 9px 18px;background:#241a5e;border-radius:0 0 22px 22px / 0 0 14px 14px;color:var(--ui-cream)}
-.ui-topbar::after{content:"";position:absolute;inset-inline:0;inset-block-end:5px;block-size:10px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='10' viewBox='0 0 120 10'%3E%3Cpath d='M0 5 Q15 0 30 5 T60 5 T90 5 T120 5' fill='none' stroke='%23ffd23f' stroke-width='3' opacity='.55'/%3E%3C/svg%3E") repeat-x center/120px 10px}
-.ui-topbar .ui-btn--icon{flex:none;inline-size:58px;block-size:60px;min-block-size:60px;margin-block-end:4px}
-.ui-topbar .ui-btn--icon>.ui-gear{inline-size:58px;block-size:60px}
-/* چیپ پایه (v4): 60px بلند؛ «پایه» Vazirmatn 15 بولد + عدد Lalezar 24؛ فعال = زرد با حلقهٔ کرم؛ بقیه = بنفش #4b3b9e */
-.ui-chips{display:flex;gap:var(--ui-gap);direction:rtl;flex:1}
-.ui-chip{--bg:var(--ui-chip);--ink:var(--ui-cream);--lip:4px;position:relative;flex:1 1 0;min-inline-size:76px;max-inline-size:110px;block-size:60px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
-  font-family:var(--ui-font);font-weight:700;line-height:1.1;color:var(--ink);background:var(--bg);border:var(--ui-l35) solid #241a5e;cursor:pointer;padding:0;
-  border-radius:16px;box-shadow:0 var(--lip) 0 0 #120c3a}
-.ui-chip small{font-size:15px;font-weight:700;opacity:1} .ui-chip b{font:400 24px/1 var(--ui-font-title);display:block}
-.ui-chip[aria-pressed=true]{--bg:var(--ui-gold);--ink:#241a5e;--lip:2px;transform:translateY(2px);box-shadow:0 2px 0 #120c3a,0 0 0 3px var(--ui-cream)}
-.ui-chip .ui-tick{display:none;position:absolute;inset-block-start:-11px;inset-inline-start:-9px;inline-size:22px;block-size:22px}
-.ui-chip[aria-pressed=true] .ui-tick{display:block}
-.ui-chips-solo .ui-chip{block-size:60px}
-/* برگه‌ها */
-.ui-sheet{box-sizing:border-box;padding:12px var(--ui-gutter) 20px;background:var(--ui-cream);border:var(--ui-l35) solid #241a5e;border-block-end:0;border-radius:28px 28px 0 0 / 22px 22px 0 0;color:#241a5e;font:400 var(--ui-fs-body)/var(--ui-lh) var(--ui-font)}
-.ui-sheet::before{content:"";display:block;inline-size:44px;block-size:6px;margin:0 auto 10px;border-radius:3px;background:#241a5e;opacity:.35}
-.ui-sheet h2,.ui-sheet-night h2{margin:0 0 6px;font:400 var(--ui-fs-sheet)/1.4 var(--ui-font-title)}
-.ui-sheet-night{box-sizing:border-box;padding:12px var(--ui-gutter) 20px;background:var(--ui-night-bg);color:#fff;border:3px solid var(--ui-cyan);border-block-end:0;border-radius:28px 28px 0 0 / 22px 22px 0 0;box-shadow:0 0 22px rgba(70,240,216,.6);font:400 var(--ui-fs-body)/var(--ui-lh) var(--ui-font)}
-.ui-sheet-night h2{text-shadow:0 0 14px #ff5ad6}
-.ui-sheet-night::before{content:"";display:block;inline-size:44px;block-size:6px;margin:0 auto 10px;border-radius:3px;background:var(--ui-cyan);opacity:.8}
-/* پلاک برچسب/«تازه»/ورودی */
-.ui-plate{--cut:7px;--b:2.6px;--cutbg:var(--ui-cream);display:inline-block;padding:2px 14px;min-block-size:28px;box-sizing:border-box;color:#241a5e;font:700 var(--ui-fs-small)/1.6 var(--ui-font)}
-.ui-plate--16{font-size:16px}
-.ui-newdot{display:inline-block;inline-size:16px;block-size:16px;border-radius:50%;background:var(--ui-pink);border:var(--ui-l26) solid #241a5e;box-shadow:0 0 0 2px var(--ui-cream)}
-.ui-input{box-sizing:border-box;min-block-size:48px;padding:0 14px;inline-size:100%;background:#fff;color:#241a5e;border:var(--ui-l26) solid #241a5e;border-radius:3px;font:400 var(--ui-fs-body) var(--ui-font)}
-/* برچسب‌های نقشه (v4): کرم با هالهٔ #241a5e؛ عنوان زمین سفید درشت */
-.ui-maplabel{font:400 20px/1.3 var(--ui-font-title);color:var(--ui-cream);-webkit-text-stroke:6px #241a5e;paint-order:stroke fill;stroke-linejoin:round}
-.ui-zonetitle{font:400 34px/1.2 var(--ui-font-title);color:#fff;-webkit-text-stroke:9px #241a5e;paint-order:stroke fill;transform:rotate(-3deg);display:inline-block}
-/* برچسب «اینجایی» (v4): تگ زرد با نشانگر پایین */
-.ui-heretag{position:relative;display:inline-block;padding:6px 18px 8px;background:var(--ui-gold);border:4px solid #241a5e;border-radius:14px;color:#241a5e;font:400 23px/1.2 var(--ui-font-title);margin-block-end:14px}
+.ui-ring{overflow:visible}
+/* ---- الگوی نوشتهٔ روشن روی پر زنده: حاشیهٔ ضخیم + سایهٔ ۳px هم‌رنگ ---- */
+.ui-ol{color:#fff;-webkit-text-stroke:5px var(--tk,#212f56);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 var(--tk,#212f56)}
+.ui-ol6{-webkit-text-stroke-width:6px}
+/* ---- دکمه ---- */
+.ui-btn{--bg:var(--ui-cyan);--tk:var(--tk-cyan);--rimn:var(--ui-cyan);--glow:rgba(70,240,216,.55);--lip:4px;
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-align:center;
+  min-block-size:var(--ui-btn-h);min-inline-size:var(--ui-btn-h);padding:0 22px;margin-block-end:var(--ui-lip);box-sizing:border-box;
+  font:400 var(--ui-fs-btn)/1.2 var(--ui-font-title);cursor:pointer;
+  color:#fff;-webkit-text-stroke:5px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 var(--tk);
+  background:var(--bg);border:var(--ui-l35) solid var(--ui-line);border-radius:var(--ui-r-btn);box-shadow:0 var(--lip) 0 0 var(--ui-edge);
+  -webkit-appearance:none;appearance:none}
+.ui-btn:active,.ui-btn[data-state=pressed]{--lip:2px;transform:translateY(2px);background-color:color-mix(in srgb,var(--bg) 88%,#120c3a)}
+.ui-btn--gold{--bg:var(--ui-gold);--tk:var(--tk-gold);--rimn:var(--ui-gold);--glow:rgba(255,210,63,.55)}
+.ui-btn--pink,.ui-btn--video{--bg:var(--ui-pink);--tk:var(--tk-pink);--rimn:var(--ui-pink);--glow:rgba(255,123,229,.55)}
+.ui-btn--violet,.ui-btn--hold{--bg:var(--ui-purple);--tk:var(--tk-violet);--rimn:var(--ui-lilac);--glow:rgba(169,157,255,.55)}
+/* ثانویه: روز کرم با متن سرمه‌ای؛ شب لیلکیِ زنده با متن سفید و حاشیه */
+.ui-btn--sec{--bg:var(--ui-cream);color:var(--ui-line);-webkit-text-stroke:0;text-shadow:none;padding:0 20px}
+.ui-btn--s{min-block-size:48px;padding:0 14px;font-size:20px}
+.ui-btn:focus-visible,.ui-chip:focus-visible,.ui-tile:focus-visible,.ui-tab:focus-visible{outline:4px solid var(--ui-chip);outline-offset:3px}
+.ui-btn:disabled,.ui-btn[aria-disabled=true]{--bg:var(--ui-disabled-bg);color:var(--ui-ink-disabled);-webkit-text-stroke:0;text-shadow:none;border:var(--ui-l35) dashed var(--ui-disabled-rim);box-shadow:none;cursor:default;transform:none;
+  background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(74,66,104,.16) 6px 8px)}
+[data-world=night] .ui-btn{border-color:var(--rimn);box-shadow:0 0 18px var(--glow);margin-block-end:0;transform:none}
+[data-world=night] .ui-btn:active{background-color:color-mix(in srgb,var(--bg) 88%,#190539);box-shadow:0 0 10px var(--glow)}
+[data-world=night] .ui-btn--sec{--bg:var(--ui-lilac);--tk:var(--tk-lilac);--rimn:var(--ui-lilac);--glow:rgba(169,157,255,.55);color:#fff;-webkit-text-stroke:5px var(--tk);text-shadow:0 3px 0 var(--tk)}
+[data-world=night] .ui-btn:disabled,[data-world=night] .ui-btn[aria-disabled=true]{--bg:#34145f;color:#cdb8ff;-webkit-text-stroke:0;text-shadow:none;border-color:#9a78e0;box-shadow:none}
+[data-world=night] .ui-btn:focus-visible,[data-world=night] .ui-tile:focus-visible,[data-world=night] .ui-tab:focus-visible,[data-world=night] .ui-chip:focus-visible{outline-color:var(--ui-gold)}
+[data-world=night] .ui-btn .ui-svg{--ui-line:#241a5e}
+/* دکمهٔ آیکونی: مربع گرد ۵۶ (روز کرم، شب لیلکی) */
+.ui-btn--icon{--bg:var(--ui-cream);padding:0;inline-size:56px;block-size:56px;min-block-size:56px;border-radius:var(--ui-r-icon);margin-block-end:var(--ui-lip);-webkit-text-stroke:0;text-shadow:none;color:var(--ui-line)}
+[data-world=night] .ui-btn--icon{--bg:var(--ui-lilac);color:#190539}
+.ui-btn--icon .ui-ic{inline-size:32px;block-size:32px}
+/* ---- چیپ ساده (جستن/فیلتر): خاموش سفید، روشن زرد با تیک ---- */
+.ui-chip{--bg:#fff;--tk:var(--tk-gold);position:relative;display:inline-flex;align-items:center;justify-content:center;gap:6px;min-block-size:48px;min-inline-size:48px;padding:0 18px;box-sizing:border-box;
+  font:400 24px/1.2 var(--ui-font-title);color:var(--ui-line);background:var(--bg);border:var(--ui-l26) solid var(--ui-line);border-radius:24px;cursor:pointer}
+.ui-chip[aria-pressed=true],.ui-chip.cur{--bg:var(--ui-gold);color:#fff;-webkit-text-stroke:5px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 var(--tk)}
+.ui-chip .ui-tick{display:none;inline-size:22px;block-size:22px}
+.ui-chip[aria-pressed=true] .ui-tick,.ui-chip.cur .ui-tick{display:block}
+[data-world=night] .ui-chip{--bg:#2a0b60;color:#fff;border-color:#9a78e0}
+[data-world=night] .ui-chip[aria-pressed=true],[data-world=night] .ui-chip.cur{--bg:var(--ui-gold);border-color:var(--ui-cream)}
+/* ---- تب ---- */
+.ui-tab{--bg:#fff;position:relative;display:inline-flex;align-items:center;justify-content:center;flex:1;min-inline-size:0;min-block-size:48px;padding:0 8px;box-sizing:border-box;font:400 24px/1.2 var(--ui-font-title);color:var(--ui-line);background:var(--bg);border:var(--ui-l26) solid var(--ui-line);border-radius:var(--ui-r-icon);cursor:pointer}
+.ui-tab.on{--bg:var(--ui-line);color:var(--ui-cream);padding-block-end:6px}
+.ui-tab.on::after{content:"";position:absolute;inset-inline:16px;inset-block-end:5px;block-size:4px;border-radius:2px;background:var(--ui-gold)}
+[data-world=night] .ui-tab{--bg:#2a0b60;color:#fff;border-color:#9a78e0}
+[data-world=night] .ui-tab.on{--bg:var(--ui-cyan);--tk:var(--tk-cyan);color:#fff;-webkit-text-stroke:5px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 var(--tk);border-color:var(--ui-cyan)}
+[data-world=night] .ui-tab.on::after{background:#190539}
+/* ---- برگه‌ها: همه‌جا گرد، ۸px از لبهٔ صفحه جدا؛ نوار عنوان بنفش گرد جدا ---- */
+.ui-sheet,.ui-sheet-night{box-sizing:border-box;padding:10px 12px 14px;border-radius:var(--ui-r-card);font:400 var(--ui-fs-body)/var(--ui-lh) var(--ui-font)}
+.ui-sheet{background:var(--ui-cream);border:var(--ui-l35) solid var(--ui-line);color:var(--ui-line);box-shadow:0 4px 0 0 var(--ui-edge)}
+.ui-sheet-night{background:var(--ui-night-bg);color:#fff;border:var(--ui-l35) solid var(--ui-cyan);box-shadow:0 0 22px rgba(70,240,216,.55)}
+.ui-sheet::before,.ui-sheet-night::before{content:"";display:block;inline-size:44px;block-size:6px;margin:0 auto 8px;border-radius:3px;background:var(--ui-line);opacity:.35}
+.ui-sheet-night::before{background:var(--ui-cyan);opacity:.8}
+.ui-band{display:flex;align-items:center;justify-content:center;gap:8px;min-block-size:56px;padding:4px 14px 6px;margin:0 0 10px;box-sizing:border-box;background:var(--ui-chip);border:var(--ui-l26) solid var(--ui-line);border-radius:20px;color:#fff;text-align:center}
+.ui-band h2,.ui-band h3{margin:0;font:400 28px/1.3 var(--ui-font-title);color:#fff}
+[data-world=night] .ui-band{border-color:var(--ui-lilac)}
+/* ---- پلاک: لالهزار ۲۰ ---- */
+.ui-plate{--bg:var(--ui-cream);--tk:var(--tk-gold);display:inline-block;padding:0 14px;min-block-size:32px;box-sizing:border-box;background:var(--bg);color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:var(--ui-r-sm);font:400 20px/1.5 var(--ui-font-title)}
+.ui-plate--16{font-size:20px}
+.ui-plate--here,.ui-plate--new{color:#fff;-webkit-text-stroke:4.5px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 2px 0 var(--tk)}
+.ui-plate--here{--bg:var(--ui-gold)}
+.ui-plate--new{--bg:var(--ui-pink);--tk:var(--tk-pink)}
+.ui-plate--lock,.ui-plate--tag{--bg:var(--ui-chip);color:#fff}
+.ui-plate--teal{--bg:var(--ui-cyan);--tk:var(--tk-cyan);color:#fff;-webkit-text-stroke:4.5px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 2px 0 var(--tk)}
+.ui-plate--fogs{--bg:var(--ui-cream)}
+[data-world=night] .ui-plate{--bg:#2a0b60;color:#fff;border-color:#9a78e0}
+[data-world=night] .ui-plate--here{--bg:var(--ui-gold)}
+[data-world=night] .ui-plate--teal{--bg:var(--ui-cyan)}
+.ui-newdot{display:inline-block;inline-size:16px;block-size:16px;border-radius:50%;background:var(--ui-pink);border:var(--ui-l26) solid var(--ui-line);box-shadow:0 0 0 2px var(--ui-cream)}
+.ui-input{box-sizing:border-box;min-block-size:48px;padding:0 14px;inline-size:100%;background:#fff;color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:14px;font:400 var(--ui-fs-body) var(--ui-font)}
+/* ---- نشان سختی (فقط در محیط و نوار مأموریت): رنگ ثابت روز و شب ---- */
+.ui-hard{--bg:var(--ui-easy);--tk:var(--tk-easy);display:inline-flex;align-items:center;gap:6px;min-block-size:36px;padding:0 12px;box-sizing:border-box;background:var(--bg);border:var(--ui-l26) solid #241a5e;border-radius:12px;color:#fff;font:400 20px/1.3 var(--ui-font-title);-webkit-text-stroke:4.5px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 2px 0 var(--tk);flex:none}
+.ui-hard[data-d=mid]{--bg:var(--ui-mid);--tk:var(--tk-mid)}
+.ui-hard[data-d=hard]{--bg:var(--ui-hard);--tk:var(--tk-hard)}
+.ui-hard .pk{inline-size:auto;block-size:18px;flex:none;overflow:visible}
+/* ---- برچسب‌های نقشه (v4): کرم با حاشیهٔ #241a5e؛ عنوان زمین سفید درشت ---- */
+.ui-maplabel{font:400 22px/1.3 var(--ui-font-title);color:var(--ui-cream);-webkit-text-stroke:6px #241a5e;paint-order:stroke fill;stroke-linejoin:round}
+.ui-zonetitle{font:400 34px/1.2 var(--ui-font-title);color:#fff;-webkit-text-stroke:9px #241a5e;paint-order:stroke fill;stroke-linejoin:round;transform:rotate(-3deg);display:inline-block;text-shadow:0 4px 0 #241a5e}
+/* برچسب «تو اینجایی»: تگ زرد زنده با نشانگر پایین؛ متن سفید با حاشیهٔ هم‌خانواده */
+.ui-heretag{position:relative;display:inline-block;padding:4px 18px 8px;background:var(--ui-gold);border:4px solid #241a5e;border-radius:14px;color:#fff;font:400 23px/1.2 var(--ui-font-title);-webkit-text-stroke:5px var(--tk-gold);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 var(--tk-gold);margin-block-end:14px}
 .ui-heretag::after{content:"";position:absolute;inset-inline-start:50%;inset-block-end:-16px;margin-inline-start:-10px;inline-size:0;block-size:0;border-inline:10px solid transparent;border-block-start:14px solid #241a5e}
 .ui-heretag::before{content:"";position:absolute;inset-inline-start:50%;inset-block-end:-9px;margin-inline-start:-6px;inline-size:0;block-size:0;border-inline:6px solid transparent;border-block-start:9px solid var(--ui-gold);z-index:1}
-/* کاشی منو: هر کاشی رنگ خودش (فیروزه‌ای، بنفش، زرد، صورتی)؛ بنا را env می‌دهد */
-.ui-tile{--lip:4px;--bg:var(--ui-cyan);--ink:#241a5e;position:relative;box-sizing:border-box;inline-size:160px;min-block-size:132px;margin-block-end:4px;padding:0 8px 10px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  background:var(--bg);border:var(--ui-l35) solid #241a5e;color:var(--ink);font:400 var(--ui-fs-tile)/1.3 var(--ui-font-title);cursor:pointer;
-  border-start-start-radius:var(--ui-r-big);border-end-end-radius:var(--ui-r-big);border-start-end-radius:var(--ui-r-small);border-end-start-radius:var(--ui-r-small);
-  box-shadow:0 var(--lip) 0 0 #120c3a}
-.ui-tile--violet{--bg:var(--ui-chip);--ink:var(--ui-cream)} .ui-tile--gold{--bg:var(--ui-gold)} .ui-tile--pink{--bg:var(--ui-pink)}
-.ui-tile .ui-tile-art{position:absolute;inset-block-start:-12px;inset-inline:0;margin:auto;inline-size:100px;block-size:84px}
-.ui-tile:active{--lip:2px}
+/* ---- گرهٔ مسیر جانبی اختیاری: دایرهٔ ۵۶ با خط‌چین ---- */
+.ui-side{--bg:var(--ui-cream);position:absolute;inline-size:56px;block-size:56px;border-radius:50%;box-sizing:border-box;background:var(--bg);border:var(--ui-l35) dashed var(--ui-line);color:var(--ui-line);display:grid;place-items:center;padding:0;cursor:pointer;box-shadow:0 4px 0 0 var(--ui-edge)}
+.ui-side svg{inline-size:32px;block-size:32px}
+.ui-side:disabled,.ui-side[aria-disabled=true]{--bg:var(--ui-disabled-bg);background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(74,66,104,.16) 6px 8px);box-shadow:none}
+.ui-side:focus-visible{outline:4px solid var(--ui-cream);outline-offset:0;box-shadow:0 0 0 3px var(--ui-line),0 0 0 7px var(--ui-cream)}
+/* ---- کاشی منو: چهار رنگ زندهٔ v4؛ بنا را env می‌دهد ---- */
+.ui-tile{--bg:var(--ui-cyan);--tk:var(--tk-cyan);--lip:4px;position:relative;box-sizing:border-box;inline-size:100%;max-inline-size:164px;min-block-size:132px;margin-block-end:4px;padding:0 8px 8px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  background:var(--bg);border:var(--ui-l35) solid var(--ui-line);border-radius:var(--ui-r-btn);box-shadow:0 var(--lip) 0 0 var(--ui-edge);cursor:pointer;
+  font:400 24px/1.2 var(--ui-font-title);color:#fff;-webkit-text-stroke:5px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 var(--tk)}
+.ui-tile--violet{--bg:var(--ui-chip);--tk:var(--tk-violet);-webkit-text-stroke:0;text-shadow:none}
+.ui-tile--gold{--bg:var(--ui-gold);--tk:var(--tk-gold)} .ui-tile--pink{--bg:var(--ui-pink);--tk:var(--tk-pink)}
+.ui-tile .ui-tile-art{position:absolute;inset-block-start:-14px;inset-inline:0;margin:auto;inline-size:100px;block-size:84px}
+.ui-tile:active{--lip:2px;transform:translateY(2px)}
 .ui-sr{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip:rect(0 0 0 0)}
-@media (prefers-reduced-motion:reduce){.ui-btn,.ui-chip,.ui-tile{transition:none!important;animation:none!important}.ui-ring-dash{animation:none}}
+@media (prefers-reduced-motion:reduce){.ui-btn,.ui-chip,.ui-tile,.ui-tab{transition:none!important;animation:none!important}}
+/* ---- ردیف منو (انتخاب پایه) و گزینهٔ برگهٔ پایه (قالب‌نامه: base_picker) ---- */
+.ui-row{--bg:var(--ui-chip);display:flex;align-items:center;gap:12px;inline-size:100%;min-block-size:72px;padding:6px 14px 6px 12px;box-sizing:border-box;text-align:start;background:var(--bg);color:#fff;
+  border:var(--ui-l35) solid var(--ui-line);border-radius:var(--ui-r-btn);box-shadow:0 4px 0 0 var(--ui-edge);cursor:pointer;margin-block-end:4px}
+.ui-row .rt{flex:1;display:flex;flex-direction:column;min-inline-size:0}
+.ui-row .rt b{font:400 24px/1.25 var(--ui-font-title);color:#fff}
+.ui-row .rt small{font:700 16px/1.5 var(--ui-font);color:var(--ui-cream)}
+.ui-row .bi{flex:none}
+.ui-row:active{transform:translateY(2px);box-shadow:0 2px 0 0 var(--ui-edge)}
+.ui-opt{--bg:#fff;--tk:var(--tk-gold);display:flex;align-items:center;justify-content:space-between;gap:10px;inline-size:100%;min-block-size:64px;padding:0 18px;box-sizing:border-box;background:var(--bg);color:var(--ui-line);
+  font:400 24px/1.25 var(--ui-font-title);border:var(--ui-l35) solid var(--ui-line);border-radius:var(--ui-r-btn);box-shadow:0 4px 0 0 var(--ui-edge);cursor:pointer;margin-block-end:4px}
+.ui-opt .chk{display:none;place-items:center;inline-size:32px;block-size:32px;border-radius:16px;background:var(--ui-cyan);border:2.6px solid #190539;flex:none;-webkit-text-stroke:0;text-shadow:none}
+.ui-opt .chk svg{inline-size:22px;block-size:22px}
+.ui-opt[aria-pressed=true]{--bg:var(--ui-gold);color:#fff;-webkit-text-stroke:5px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 var(--tk)}
+.ui-opt[aria-pressed=true] .chk{display:grid}
+.ui-opt:active{transform:translateY(2px);box-shadow:0 2px 0 0 var(--ui-edge)}
+.ui-row:focus-visible,.ui-opt:focus-visible{outline:4px solid var(--ui-chip);outline-offset:3px}

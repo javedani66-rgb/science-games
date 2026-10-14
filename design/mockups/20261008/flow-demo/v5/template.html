@@ -7,14 +7,14 @@
 <style>
 /*__FONTS__*/
 /*__TOKENS__*/
-/* ======================= v5: پوستهٔ ماکت + صفحه‌ها (هنر از team/assets؛ کیت v3 حذف شده) ======================= */
-/* r2: سازگاری نام‌های قدیمی با توکن‌های v4 */
-:root{--ui-teal:var(--ui-cyan);--ui-l45:4.5px;--ui-night-edge:#190539}
+/* ======================= v5 دور ۳: پوستهٔ ماکت + صفحه‌ها. کنترل‌ها از قالب‌نامهٔ v3 (ui_tokens.css): پر زندهٔ v4 + حاشیهٔ ضخیم هم‌خانواده؛ همه گرد؛ بدون clip-path ======================= */
+:root{--ui-teal:var(--ui-cyan);--ui-night-edge:#190539;--ease-out:cubic-bezier(.22,.9,.25,1);--ease-in:cubic-bezier(.5,0,.8,.4);--ease-io:cubic-bezier(.45,0,.55,1)}
 html,body{height:100%}
 body{margin:0;font:400 16px/1.6 var(--ui-font);color:var(--ui-line);background:#e7e2d3;display:flex;flex-direction:column;overflow:hidden}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
 svg{display:block}
-:focus-visible{outline:3px solid var(--ui-cream);outline-offset:2px;box-shadow:0 0 0 6px var(--ui-violet)}
+:focus-visible{outline:4px solid var(--ui-chip);outline-offset:3px}
+[data-world=night] :focus-visible,.scn :focus-visible{outline-color:var(--ui-gold)}
 @keyframes v5fade{from{opacity:0}to{opacity:1}}
 @keyframes v5pop{from{transform:scale(.9);opacity:.4}to{transform:none;opacity:1}}
 @keyframes v5sheet{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
@@ -46,7 +46,7 @@ body.rvopen #rv{display:block}
 .appl[data-world=day]{background:var(--ui-cream);color:var(--ui-line)}
 .appl[data-world=night]{background:var(--ui-night-bg);color:var(--ui-cream)}
 .appl[data-world=night]:not(.scn){background-color:#190539;background-image:radial-gradient(ellipse 70% 70% at 20% 15%,rgba(90,20,168,.55),transparent 70%),radial-gradient(ellipse 70% 70% at 85% 85%,rgba(160,25,122,.4),transparent 70%),radial-gradient(circle at 2px 2px,rgba(138,79,224,.28) 1.3px,transparent 1.6px);background-size:auto,auto,9px 9px}
-.appl.fadein{animation:v5xf 1.2s ease-in-out both}
+.appl.fadein{animation:v5xf 1.2s var(--ease-io) both}
 @keyframes v5xf{from{opacity:0}to{opacity:1}}
 .scr{flex:1;min-height:0;display:flex;flex-direction:column;position:relative}
 .body{flex:1;min-height:0;overflow:auto;position:relative;overscroll-behavior:contain;scrollbar-width:none}
@@ -54,20 +54,16 @@ body.rvopen #rv{display:block}
 .bi{inline-size:28px;block-size:28px;flex:none}
 .bi.sm{inline-size:24px;block-size:24px}
 .wide{inline-size:100%}
-/* ---- نوار بالا (≤72px؛ همه‌جا ۶۴) ---- */
-.tb{flex:none;block-size:72px;box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:6px 9px 12px;position:relative;z-index:5;background:#241a5e;border-radius:0 0 22px 22px / 0 0 14px 14px;color:var(--ui-cream)}
+/* ---- نوار بالا (۷۲px؛ همه‌جا) ---- */
+.tb{flex:none;block-size:72px;box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:4px 10px 12px;position:relative;z-index:5;background:#241a5e;border-radius:0 0 22px 22px / 0 0 14px 14px;color:var(--ui-cream)}
 .tb::after{content:"";position:absolute;inset-inline:0;inset-block-end:3px;block-size:10px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='10' viewBox='0 0 120 10'%3E%3Cpath d='M0 5 Q15 0 30 5 T60 5 T90 5 T120 5' fill='none' stroke='%23ffd23f' stroke-width='3' opacity='.55'/%3E%3C/svg%3E") repeat-x center/120px 10px}
 .tb h1{margin:0;flex:1;min-inline-size:0;text-align:center;font:400 26px/1.1 var(--ui-font-title);color:var(--ui-cream);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 [data-world=night] .tb h1,.scn .tb h1{color:#fff;text-shadow:0 0 12px #ff7be5,0 0 3px #ff7be5}
 .tbsp{flex:1}
-.tb .ui-btn{margin-block-end:0;padding:0 12px;gap:6px;flex:none;min-block-size:48px}
-.tb .ui-btn--sec{padding:0 14px}
-.tb .ui-btn--icon{inline-size:56px;block-size:58px;min-block-size:58px;padding:0}
-.tb .ui-btn--icon>.ui-gear{inline-size:56px;block-size:58px}
-.tb .ui-chips{flex:1;min-inline-size:0;gap:7px}
-.tb .ui-chip{min-inline-size:66px;block-size:56px;margin-block-end:0}
-.tb .ui-chip small{font-size:14px}
-.tb .ui-chip b{font-size:22px}
+.tb .ui-btn{margin-block-end:0;flex:none;padding:0 14px}
+.tb .ui-btn--icon{padding:0}
+.tb .ui-btn--icon,.tb .ui-btn{min-block-size:52px}
+.tb .ui-btn--icon{inline-size:52px;block-size:52px}
 /* ---- نقشه ---- */
 .mapbody{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;position:relative;overscroll-behavior:contain;scrollbar-width:none;background:var(--z-sports-base)}
 .mapbody::-webkit-scrollbar{display:none}
@@ -77,146 +73,168 @@ body.rvopen #rv{display:block}
 .mn{position:absolute;pointer-events:auto;background:transparent;border-radius:14px;min-inline-size:48px;min-block-size:48px}
 .mn:focus-visible{outline:4px solid var(--ui-cream);box-shadow:0 0 0 8px var(--ui-violet)}
 .ml{translate:var(--dx,0px) var(--dy,0px);position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none;inline-size:max-content;max-inline-size:176px;z-index:2}
-.zt{position:absolute;transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;z-index:1}
+.ml.sidel{transform:none;margin:0;translate:none}
+.zt{position:absolute;transform:translate(-50%,-50%);translate:var(--dx,0px) var(--dy,0px);pointer-events:none;white-space:nowrap;z-index:1}
 .ml .ui-maplabel{text-align:center;line-height:1.25;text-wrap:balance}
-.ml .ui-maplabel{font-size:21px;-webkit-text-stroke-width:5.5px}
 .ml .ui-maplabel.onbanner{color:#241a5e;-webkit-text-stroke:0;font-size:24px}
-.guide .ui-heretag{position:absolute;left:50%;inset-block-end:calc(100% + 14px);transform:translateX(-50%);margin:0;white-space:nowrap;font-size:20px;padding:3px 14px 5px;border-width:3.5px}
-.ml .ui-plate{white-space:normal;text-align:center;line-height:1.35;min-block-size:28px;padding:2px 12px}
+.guide .ui-heretag{position:absolute;left:50%;inset-block-end:calc(100% + 14px);transform:translateX(-50%);translate:var(--tx,0px) 0;margin:0;white-space:nowrap;font-size:20px;padding:3px 14px 5px;border-width:3.5px}
+.ml .ui-plate{white-space:normal;text-align:center;line-height:1.3;min-block-size:30px;padding:0 8px}
 .pi{display:inline-block;inline-size:20px;block-size:20px;vertical-align:-5px;margin-inline-end:4px}
-.ui-plate--lock{--cutbg:var(--ui-violet);color:var(--ui-cream);font-size:15px}
-.ui-plate--here{--cutbg:var(--ui-cream);font-size:16px}
-.ui-plate--fogs{--cutbg:var(--ui-cream)}
-.ui-plate--teal{--cutbg:var(--ui-teal)}
 .guide{position:absolute;inline-size:56px;block-size:82px;margin-inline-start:-28px;pointer-events:none;z-index:4}
 .guide svg{inline-size:56px;block-size:82px;overflow:visible}
-.mestrip{flex:none;block-size:68px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;position:relative;z-index:4;background:#241a5e;border-radius:0 0 22px 22px / 0 0 14px 14px;margin-block-start:-14px;padding-block-start:14px;padding-block-end:6px}
-.tb.nowave::after{display:none}
-.mestrip::after{content:"";position:absolute;inset-inline:0;inset-block-end:3px;block-size:10px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='10' viewBox='0 0 120 10'%3E%3Cpath d='M0 5 Q15 0 30 5 T60 5 T90 5 T120 5' fill='none' stroke='%23ffd23f' stroke-width='3' opacity='.55'/%3E%3C/svg%3E") repeat-x center/120px 10px}
-.me{min-block-size:48px;margin-block-end:0;filter:none}
-.me.off{opacity:.55}
+.me.off{opacity:1}
 .mn.flash{animation:v5pop .6s 1}
 .pend{margin:0;padding:12px 14px;text-align:center;font-weight:700;font-size:17px}
-/* ---- محیط (شب) ---- */
+/* مسیر جانبی اختیاری: گرهٔ دایره‌ای ۵۶ با خط‌چین + جادهٔ نقطه‌چین */
+.ui-side[data-state=locked]{--bg:var(--ui-disabled-bg);background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(74,66,104,.16) 6px 8px);box-shadow:none}
+.ui-side.mn{pointer-events:auto;min-inline-size:56px;min-block-size:56px;border-radius:50%;background:var(--bg)}
+.ui-side .sdone,.ui-side .slock{position:absolute;inset-block-end:-8px;inset-inline-start:-8px;inline-size:28px;block-size:28px}
+.ui-side .slock{inline-size:26px;block-size:26px}
+.ui-side.flash{animation:v5pop .6s 1}
+/* ---- محیط (شب): پشتهٔ سه کارت چالش (سبز جلو، نارنجی پشتش، قرمز پشت همه) ---- */
 .envbody{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:center;scrollbar-width:none}
 .envbody::-webkit-scrollbar{display:none}
-.envbanner{display:none;flex:none;inline-size:100%;block-size:112px;overflow:hidden;margin-block-end:8px;border-block-end:var(--ui-l26) solid var(--ui-night-edge)}
+.envbanner{display:none;flex:none;inline-size:100%;block-size:96px;overflow:hidden;margin-block-end:6px;border-block-end:var(--ui-l35) solid var(--ui-night-edge)}
 @media(min-height:760px){.envbanner{display:block}}
 .envbanner svg{inline-size:100%;block-size:100%}
-.cd-top{display:none}
-.cd-bot{flex:none;block-size:56px;display:flex;align-items:center;padding:0 16px;box-sizing:border-box;inline-size:100%}
-.cd-bot .ui-btn{inline-size:100%}
-.cd-stack{padding-block-start:0}
-:root{--cd-front-h:404px}
-.cd-front .cd-sentence{inset-inline-start:28px;inset-inline-end:134px;block-size:70px;inset-block-start:250px}
-.cd-front .cd-go{inset-block-start:330px;inset-inline-start:28px;inset-inline-end:134px}
-.cd-bot .ui-btn{white-space:nowrap}
-@media(max-height:700px){.cd-front .cd-guide{inline-size:80px;block-size:120px;inset-inline-end:18px}:root{--cd-front-h:386px}.cd-front .cd-sentence{inset-block-start:246px;block-size:66px}.cd-front .cd-go{inset-block-start:318px}}
-.cd-front .cd-guide{inset-block-start:auto;inset-block-end:14px;inset-inline-end:22px;inline-size:100px;block-size:150px;z-index:3}
-.cd-strip:focus-visible,.cd-front:focus-visible{outline-offset:-4px}
-.cd-art-ph{display:block;inline-size:100%;block-size:100%}
-.tapnote{margin:4px 16px 0;text-align:center;font-weight:700;font-size:14px;color:var(--ui-cream);opacity:.9}
+.cd-bot{flex:none;block-size:68px;display:flex;align-items:center;padding:0 16px 4px;box-sizing:border-box;inline-size:100%}
+.cd-bot .ui-btn{inline-size:100%;margin-block-end:0}
+.chs{--bar:52px;--chf-h:372px;position:relative;flex:none;inline-size:min(366px,calc(100% - 24px));block-size:calc(var(--bar)*2 + var(--chf-h) + 8px);margin:8px auto 0}
+@media(max-height:700px){.chs{--chf-h:350px}}
+.chc{--ty:0px;--z:1;position:absolute;inset-inline:0;inset-block-start:0;block-size:var(--chf-h);transform:translateY(var(--ty));transition:transform .28s var(--ease-out);z-index:var(--z);pointer-events:none;
+  --c:var(--ui-easy);--tk:var(--tk-easy);--rimn:#a6f0b4;--glow:rgba(47,164,74,.6)}
+.chc[data-d=mid]{--c:var(--ui-mid);--tk:var(--tk-mid);--rimn:#ffd29a;--glow:rgba(255,157,28,.6)}
+.chc[data-d=hard]{--c:var(--ui-hard);--tk:var(--tk-hard);--rimn:#ffb0b0;--glow:rgba(255,75,75,.6)}
+.chc[data-pos="0"]{--ty:calc(var(--bar)*2);--z:3}
+.chc[data-pos="1"]{--ty:var(--bar);--z:2}
+.chc[data-pos="2"]{--ty:0px;--z:1}
+.chc .face{position:absolute;box-sizing:border-box;background:var(--c);border:var(--ui-l35) solid var(--rimn);border-radius:var(--ui-r-card);box-shadow:0 0 18px var(--glow);color:#fff;opacity:0;pointer-events:none}
+.chc .face.full{inset:0;display:flex;flex-direction:column;gap:8px;padding:10px 14px 12px;text-align:center;overflow:visible;transition:opacity .08s linear}
+.chc[data-pos="0"] .face.full{opacity:1;pointer-events:auto;transition:opacity .2s linear .07s}
+.chc .face.bar{inset-block-start:0;block-size:calc(var(--bar) + 28px);padding:0 16px 28px;display:flex;align-items:center;gap:10px;text-align:start;cursor:pointer;transition:opacity .14s linear .07s}
+.chc .face.bar.b1{inset-inline:14px}
+.chc .face.bar.b2{inset-inline:28px}
+.chc[data-pos="1"] .face.b1,.chc[data-pos="2"] .face.b2{opacity:1;pointer-events:auto}
+.chc .face.bar .t{flex:1;min-inline-size:0;font:400 24px/1.1 var(--ui-font-title);color:#fff;-webkit-text-stroke:5px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 var(--tk);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:21px;line-height:1.15}
+.chc .face.bar:focus-visible{outline-color:var(--ui-gold)}
+.chc .fh{display:flex;align-items:center;justify-content:center;gap:10px;min-block-size:46px;padding-inline-start:100px}
+.chc .fh .ui-hard{position:absolute;inset-block-start:10px;inset-inline-start:14px}
+.chc .ft{margin:0;font:400 25px/1.15 var(--ui-font-title);text-wrap:balance;color:#fff;-webkit-text-stroke:6px var(--tk);paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 var(--tk);padding:0 4px}
+@media(max-width:380px){.chc .ft{font-size:22px}.chc .fh{padding-inline-start:94px}}
+.chc .fart{flex:none;position:relative;block-size:128px;border-radius:14px;overflow:hidden;border:var(--ui-l35) solid #190539;background:#2a1f5c}
+.chc .fart svg{inline-size:100%;block-size:100%}
+.chc .fsay{flex:1;display:flex;align-items:center;justify-content:center;min-block-size:50px;padding:6px 12px 6px 92px;background:#2a0b60;border-radius:var(--ui-r-icon);font:700 16px/1.5 var(--ui-font);color:#fff;text-align:center}
+.chc .fgo{flex:none}
+.chc .fgo .ui-btn{inline-size:100%;margin-block-end:0}
+.chc .fguide{position:absolute;inset-block-end:50px;inset-inline-end:-6px;inline-size:92px;block-size:138px;z-index:3;pointer-events:none;overflow:visible}
+@keyframes chIn{from{transform:translateY(calc(var(--ty) + 20px));opacity:0}to{transform:translateY(var(--ty));opacity:1}}
+.chs.enter .chc{animation:chIn .24s var(--ease-out) backwards}
+.chs.enter .chc[data-pos="2"]{animation-delay:.7s}
+.chs.enter .chc[data-pos="1"]{animation-delay:.77s}
+.chs.enter .chc[data-pos="0"]{animation-delay:.84s}
+/* ---- نشان سختی؛ در نوار پشتی ---- */
+.ui-hard .pk{block-size:16px}
 /* ---- صحنه ---- */
 .scn .mission{background:var(--ui-night-bg);color:var(--ui-cream);border-block-end:var(--ui-l26) solid var(--ui-night-edge)}
-.mission .ui-hard{flex:none;margin-inline-end:10px;min-block-size:34px}.mission .mt{flex:1;min-inline-size:0}
-.mission{flex:none;padding:6px 12px;gap:0;text-align:center;font-weight:700;font-size:17px;line-height:1.5;background:var(--ui-cream);border-block-end:var(--ui-l26) solid var(--ui-line);min-block-size:44px;display:flex;align-items:center;justify-content:center}
+.mission .mt{flex:1;min-inline-size:0}
+.mission{flex:none;padding:6px 12px;gap:10px;text-align:center;font-weight:700;font-size:17px;line-height:1.5;min-block-size:48px;display:flex;align-items:center;justify-content:center}
 .scenebox{position:relative;flex:1;min-height:0;background:#d6f1ee}
 .scenebox>svg{position:absolute;inset:0;inline-size:100%;block-size:100%}
-.scenebox .ph{position:absolute;inset-inline:16px;bottom:14px;background:var(--ui-cream);border:var(--ui-l26) solid var(--ui-line);border-radius:10px;font-weight:700;font-size:16px;text-align:center;padding:8px 10px}
-.mkc{position:absolute;inset-inline:12px;top:10px;z-index:3;font-size:14px;background:rgba(255,244,210,.95);border:var(--ui-l26) dashed var(--ui-line);border-radius:8px;padding:3px 8px;line-height:1.5;text-align:center}
-.toast{position:absolute;inset-inline:24px;top:42%;background:var(--ui-cream);border:var(--ui-l45) dashed var(--ui-line);border-radius:14px;padding:10px 12px;font-weight:700;text-align:center;z-index:5;animation:v5fade .25s}
-.ssheet{flex:none;border-radius:0;padding:10px 12px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;border-inline:0}
-.ssheet::before{display:none}
-.ssheet .ui-btn{margin-block-end:0;min-inline-size:0;padding:0 8px;font-size:16px;inline-size:100%}
-.ssheet .ui-btn[aria-pressed=true]{--cutbg:var(--ui-teal)}
-.ssheet .ui-btn.pull{grid-column:1/-1;margin-block-end:6px;inline-size:100%;font-size:24px}
+.scenebox .ph{position:absolute;inset-inline:16px;bottom:14px;background:var(--ui-cream);border:var(--ui-l26) solid var(--ui-line);border-radius:14px;font-weight:700;font-size:16px;text-align:center;padding:8px 10px}
+.mkc{position:absolute;inset-inline:12px;top:10px;z-index:3;font-size:14px;background:rgba(255,244,210,.95);border:var(--ui-l26) dashed var(--ui-line);border-radius:10px;padding:3px 8px;line-height:1.5;text-align:center}
+.toast{position:absolute;inset-inline:24px;top:42%;background:var(--ui-cream);border:var(--ui-l35) dashed var(--ui-line);border-radius:18px;padding:10px 12px;font-weight:700;text-align:center;z-index:5;animation:v5fade .25s}
+.sdock{flex:none;padding:8px 12px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;background:var(--ui-night-bg);border-block-start:var(--ui-l26) solid var(--ui-cyan)}
+.sdock .ui-btn{margin-block-end:0;min-inline-size:0;padding:0 8px;inline-size:100%;font-size:22px;line-height:1.15;min-block-size:56px}
+.sdock .ui-btn[aria-pressed=true]{--bg:var(--ui-cyan);--tk:var(--tk-cyan);--rimn:var(--ui-gold)}
+.sdock .ui-btn.pull{grid-column:1/-1;font-size:26px}
+.sdock .row3{grid-column:1/-1;display:flex;gap:8px}
+.sdock .row3 .ui-btn{flex:1;padding:0 4px;gap:4px;font-size:19px;white-space:nowrap}
+@media(max-width:380px){.sdock .row3 .ui-btn{font-size:17px}.sdock .row3 .bi.sm{display:none}}
+@media(max-height:700px){.sdock{padding:6px 10px 8px;gap:6px}.sdock .ui-btn{min-block-size:52px}}
 /* ---- کارت درس (شب) ---- */
 #cv{position:absolute;inset:0;z-index:50;pointer-events:none}
 #cv .cscrim{position:absolute;inset:0;background-color:#190539;background-image:radial-gradient(ellipse 70% 70% at 20% 15%,rgba(90,20,168,.55),transparent 70%),radial-gradient(ellipse 70% 70% at 85% 85%,rgba(160,25,122,.4),transparent 70%),radial-gradient(circle at 2px 2px,rgba(138,79,224,.28) 1.3px,transparent 1.6px);background-size:auto,auto,9px 9px;pointer-events:auto;animation:v5fade .25s both}
 #cv .cscrim svg{position:absolute;inset:0;inline-size:100%;block-size:100%;pointer-events:none}
-.cbig{position:absolute;inset:8px 10px 96px;perspective:1400px;pointer-events:auto;transform-origin:0 0;color:var(--ui-cream)}
-.cflip{position:relative;inline-size:100%;block-size:100%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.35,0,.25,1)}
+.cbig{position:absolute;inset:8px 10px 84px;perspective:1400px;pointer-events:auto;transform-origin:0 0;color:var(--ui-cream)}
+.cflip{position:relative;inline-size:100%;block-size:100%;transform-style:preserve-3d;transition:transform .4s cubic-bezier(.35,0,.25,1)}
 .cflip.back{transform:rotateY(180deg)}
 .cface{position:absolute;inset:0;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--ui-night-bg);border-radius:20px}
 .cface.bk{transform:rotateY(180deg)}
-.cflip.back .cface:not(.bk){visibility:hidden;transition:visibility 0s .25s}
-.cflip:not(.back) .cface.bk{visibility:hidden;transition:visibility 0s .25s}
+.cflip.back .cface:not(.bk){visibility:hidden;transition:visibility 0s .2s}
+.cflip:not(.back) .cface.bk{visibility:hidden;transition:visibility 0s .2s}
 .cface>.cd-frame{position:absolute;inset:0;inline-size:100%;block-size:100%;z-index:0}
 .cface>*:not(.cd-frame){position:relative;z-index:1}
-.chd{flex:none;margin:26px 22px 0;block-size:64px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
+.chd{flex:none;margin:22px 22px 0;block-size:76px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
 .chd>svg{position:absolute;inset:0;inline-size:100%;block-size:100%;z-index:0}
 .chd .tt{position:relative;z-index:1;padding:0 12px;line-height:1.05}
-.chd h2{margin:0;font:400 30px/1.05 var(--ui-font-title);color:#fff;text-shadow:0 0 12px #ff7be5,0 0 3px #ff7be5}
-.chd small{display:block;font:700 18px/1.2 var(--ui-font);color:#fff;margin-block-start:2px}
-.cbd{flex:1;min-block-size:0;overflow:auto;padding:12px 24px 8px;overscroll-behavior:contain;scrollbar-width:none}
+.chd h2{margin:0;font:400 36px/1.05 var(--ui-font-title);color:#fff;-webkit-text-stroke:6px #2d1257;paint-order:stroke fill;stroke-linejoin:round;text-shadow:0 3px 0 #2d1257}
+.chd small{display:block;font:700 16px/1.2 var(--ui-font);color:#fff;margin-block-start:2px}
+@media(max-height:700px){.chd{block-size:66px;margin-block-start:18px}.chd h2{font-size:30px}}
+.cbd{flex:1;min-block-size:0;overflow:auto;padding:12px 30px 10px;overscroll-behavior:contain;scrollbar-width:none}
 .cbd::-webkit-scrollbar{display:none}
-.cfoot{flex:none;padding:6px 24px 22px;display:flex;justify-content:center}
-.cfoot .ui-btn{inline-size:100%}
-.cbar{position:absolute;inset-inline:0;bottom:0;display:flex;gap:10px;padding:12px 12px 16px;box-sizing:border-box;background:var(--ui-night-bg);border-block-start:var(--ui-l26) solid var(--ui-night-edge);pointer-events:auto;z-index:2}
-#cd-frame-inner,#cd-frame-neon{display:none}
-.cbar .ui-btn{flex:1;min-inline-size:0;padding:0 8px;margin-block-end:0;font-size:16px;white-space:nowrap;gap:6px}
-.cbar .ui-btn.ui-btn--sec{margin-block-end:0}
-.tagl{display:inline-block;font-size:14px;font-weight:700;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:999px;padding:1px 12px;margin-block-end:8px}
+.cfoot{flex:none;padding:6px 30px 22px;display:flex;align-items:center;gap:8px}
+.cfoot:empty{display:none}
+.cfoot .ui-btn{flex:1;min-inline-size:0;margin-block-end:0}
+.cfoot .cfb{flex:none;inline-size:64px;block-size:64px;overflow:visible;pointer-events:none}
+.cbar{position:absolute;inset-inline:0;bottom:0;display:flex;gap:10px;padding:10px 12px 12px;box-sizing:border-box;background:var(--ui-night-bg);border-block-start:var(--ui-l26) solid var(--ui-cyan);pointer-events:auto;z-index:2}
+.cbar .ui-btn{flex:1;min-inline-size:0;padding:0 8px;margin-block-end:0;font-size:22px;white-space:nowrap;gap:6px}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.fig{background:#d6f1ee;border:var(--ui-l45) solid var(--ui-line);border-radius:12px;padding:4px 2px 6px;text-align:center;color:var(--ui-line)}
-.fig h3{margin:0;font:700 15px/1.3 var(--ui-font)}
-.fig svg{inline-size:100%;block-size:auto}
-.figl{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:0 4px}
-.figl .ui-plate{min-block-size:26px;padding:0 8px;font-size:14px}
-.pl-w{--cutbg:var(--ui-pink);color:var(--ui-line)}
-.pl-f{--cutbg:var(--ui-teal);color:var(--ui-line)}
-.lg{display:flex;gap:14px;justify-content:center;margin:8px 0 2px;font-size:14px;flex-wrap:wrap;color:var(--ui-cream)}
-.lg i{display:inline-block;inline-size:16px;block-size:10px;border-radius:2px;vertical-align:middle;margin-inline-end:4px;border:var(--ui-l12) solid var(--ui-line)}
-.say{margin-block-start:8px;background:var(--cd-text-bg);border:var(--ui-l26) solid var(--ui-night-edge);border-radius:10px;padding:8px 10px;font-weight:700;font-size:16px;text-align:center;line-height:1.7;color:var(--ui-cream)}
-.sub{font-size:14px;text-align:center;margin-block-start:6px;color:var(--ui-cream);opacity:.92;font-weight:700}
-.eq{direction:ltr;unicode-bidi:isolate;font-size:19px;text-align:center;margin:6px 0 2px;letter-spacing:.5px;white-space:pre;font-weight:700}
-.num{font-weight:700;font-size:15px}
-.sec{margin:14px 0 0}.sec h2{font:400 20px/1.3 var(--ui-font-title);margin:0 0 6px;color:var(--ui-cream)}
+.fig{background:#d6f1ee;border:var(--ui-l35) solid var(--ui-line);border-radius:16px;padding:6px 4px 6px;text-align:center;color:var(--ui-line)}
+.fig h3{margin:0;font:700 16px/1.3 var(--ui-font)}
+.fig svg{inline-size:100%;block-size:auto;max-block-size:176px}
+.fig.one svg{margin-inline:auto;max-inline-size:240px}
+@media(max-height:700px){.cface:not(.bk) .fig svg{max-block-size:120px}}
+.figl{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:4px 4px 0}
+.lg{display:flex;gap:14px;justify-content:center;margin:8px 0 2px;font-size:16px;font-weight:700;flex-wrap:wrap;color:var(--ui-cream)}
+.lg i{display:inline-block;inline-size:18px;block-size:12px;border-radius:6px;vertical-align:middle;margin-inline-end:6px;border:var(--ui-l12) solid var(--ui-line)}
+.say{margin-block-start:10px;background:#07203a;border:var(--ui-l26) solid var(--ui-cyan);border-radius:16px;padding:8px 12px;font-weight:700;font-size:16px;text-align:center;line-height:1.7;color:#fff}
+.sub{font-size:16px;text-align:center;margin-block-start:6px;color:var(--ui-cream);font-weight:700}
+.eq{direction:ltr;unicode-bidi:isolate;font-size:20px;text-align:center;margin:8px 0 2px;letter-spacing:.5px;white-space:pre;font-weight:700;color:#fff}
+.sec{margin:14px 0 0}.sec h2{font:400 22px/1.3 var(--ui-font-title);margin:0 0 6px;color:var(--ui-cream)}
 .cbd .sec:first-child{margin-block-start:0}
-.prob{background:var(--cd-text-bg);border:var(--ui-l26) solid var(--ui-night-edge);border-radius:12px;padding:10px}
-.prob p.q{font-weight:700;font-size:16px;line-height:1.7;margin:10px 0 0}
-.mini{max-inline-size:300px;margin:0 auto}
+.prob{background:#07203a;border:var(--ui-l26) solid var(--ui-cyan);border-radius:16px;padding:10px}
+.prob p.q{font-weight:700;font-size:16px;line-height:1.7;margin:10px 0 0;color:#fff;text-align:center}
+.prob p.hint{margin:6px 0 0;font-size:16px;font-weight:700;color:var(--ui-cream);text-align:center;opacity:1}
 .opts{display:flex;flex-direction:column;gap:8px;margin-block-start:10px}
-.opts .ui-btn{margin-block-end:0;inline-size:100%;justify-content:center}
-.opts .ui-btn.ok{--cutbg:var(--ui-teal)}
-.opts .ui-btn.no{--cutbg:#d9d3e8;background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(74,66,104,.18) 6px 8px)}
-.fb{margin-block-start:10px;font-weight:700;font-size:16px;min-block-size:26px}
-.rel{display:flex;flex-direction:column;gap:16px;padding-block-end:10px}
-.rel .ui-btn{min-block-size:52px;padding:6px 14px;font-size:16px;margin-block-end:0;inline-size:100%;justify-content:center;text-align:center;line-height:1.3}
-.cdiag{display:flex;justify-content:center;padding:4px 0}
-.cdiag svg{block-size:130px;inline-size:auto;aspect-ratio:360/200}
-.t2s{position:absolute;inset-inline:24px;bottom:90px;z-index:6;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l45) dashed var(--ui-line);border-radius:14px;padding:10px 12px;font-weight:700;text-align:center;pointer-events:none;animation:v5fade .25s}
-.pendbox{border:var(--ui-l26) dashed var(--ui-night-edge);border-radius:12px;padding:16px 12px;text-align:center;font-weight:700;font-size:16px;margin-block-start:10px}
+.opts .ui-btn{margin-block-end:0;inline-size:100%;justify-content:center;font-size:22px}
+.opts .ui-btn.ok{--bg:var(--ui-cyan);--tk:var(--tk-cyan);--rimn:var(--ui-gold)}
+.opts .ui-btn.no{--bg:#34145f;color:#cdb8ff;-webkit-text-stroke:0;text-shadow:none;border-color:#9a78e0;box-shadow:none;background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(205,184,255,.14) 6px 8px)}
+.fb{margin-block-start:10px;font-weight:700;font-size:16px;min-block-size:26px;color:#fff;text-align:center}
+.rel{display:flex;flex-direction:column;gap:10px;padding-block-end:6px}
+.rel .ui-btn{min-block-size:56px;padding:4px 14px;font-size:22px;margin-block-end:0;inline-size:100%;justify-content:center;text-align:center;line-height:1.2}
+.cface.bk .fig svg{max-block-size:148px}
+.cface.bk .sec{margin-block-start:10px}
+.pendbox{border:var(--ui-l26) dashed #9a78e0;border-radius:16px;padding:16px 12px;text-align:center;font-weight:700;font-size:16px;margin-block-start:10px;color:#fff}
+.t2s{position:absolute;inset-inline:24px;bottom:96px;z-index:6;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l35) dashed var(--ui-line);border-radius:18px;padding:10px 12px;font-weight:700;text-align:center;pointer-events:none;animation:v5fade .25s}
 /* ---- کارت‌دان (شب) ---- */
-.jump{flex:none;display:flex;gap:8px;overflow-x:auto;padding:8px 12px 10px;scrollbar-width:none;background:var(--ui-night-bg);position:relative;z-index:4}
+.jump{flex:none;display:flex;gap:8px;overflow-x:auto;padding:6px 12px 10px;scrollbar-width:none;background:var(--ui-night-bg);position:relative;z-index:4}
 .jump::-webkit-scrollbar{display:none}
-.jump .ui-btn{flex:none;min-inline-size:48px;padding:0 10px;margin-block-end:0;font-size:18px}
-.jump .ui-btn.cur{--cutbg:var(--ui-teal)}
+.jump .ui-chip{flex:none;min-inline-size:48px;padding:0 12px;font-size:22px}
 .shelf{padding:0 12px 84px;min-block-size:100%}
 .shelf__sec{padding-block-start:6px}
 .shelf__head{display:flex;align-items:center;gap:8px;padding:4px 0 2px}
-.shelf__head .no{flex:none;display:grid;place-items:center;inline-size:36px;block-size:36px;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);font:400 20px/1 var(--ui-font-title);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
-.shelf__head .t-h{flex:1;min-inline-size:0;font:400 22px/1.25 var(--ui-font-title);color:var(--ui-cream);text-shadow:0 0 10px var(--cd-zone)}
+.shelf__head .no{flex:none;display:grid;place-items:center;inline-size:40px;block-size:40px;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:14px;font:400 22px/1 var(--ui-font-title)}
+.shelf__head .t-h{flex:1;min-inline-size:0;font:400 24px/1.25 var(--ui-font-title);color:var(--ui-cream);text-shadow:0 0 10px var(--cd-zone)}
 .shelf__dots{display:flex;gap:4px;flex:none}
 .dot{inline-size:12px;block-size:12px;border-radius:50%;border:2px solid var(--ui-cream);box-sizing:border-box;opacity:.7}
 .dot--seen{background:var(--ui-violet);opacity:1}
 .dot--got{background:var(--ui-teal);opacity:1}
-.shelf__line{margin:0 2px 10px;font-size:14px;line-height:1.5;color:var(--ui-cream);opacity:.95}
+.shelf__line{margin:0 2px 10px;font-size:16px;line-height:1.5;color:var(--ui-cream);opacity:.95}
 .shelf__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-block-end:6px}
 .shelf__plank{display:block;inline-size:100%;block-size:auto;margin-block-end:14px}
-.mc{position:relative;display:flex;flex-direction:column;align-items:stretch;inline-size:100%;min-block-size:196px;padding:8px 9px 10px;box-sizing:border-box;text-align:center;color:#fff;font:700 14px/1.25 var(--ui-font)}
+.mc{position:relative;display:flex;flex-direction:column;align-items:stretch;inline-size:100%;min-block-size:196px;padding:8px 9px 10px;box-sizing:border-box;text-align:center;color:#fff;font:700 16px/1.25 var(--ui-font)}
 .mc>.bg{position:absolute;inset:0;inline-size:100%;block-size:100%}
 .mc>*:not(.bg){position:relative}
 .mc .mic{display:flex;justify-content:center;block-size:26px}
 .mc .mi{inline-size:26px;block-size:26px;filter:drop-shadow(0 1px 0 #190539)}
-.mc .th{display:block;inline-size:calc(100% - 8px);margin:3px auto 4px;aspect-ratio:60/40;border:2.6px solid #190539;box-sizing:border-box;border-radius:6px;overflow:hidden;background:var(--cd-zonebg,#2a1f5c)}
+.mc .th{display:block;inline-size:calc(100% - 8px);margin:3px auto 4px;aspect-ratio:60/40;border:2.6px solid #190539;box-sizing:border-box;border-radius:8px;overflow:hidden;background:var(--cd-zonebg,#2a1f5c)}
 .mc .th svg{inline-size:100%;block-size:100%}
-.mc .nm{flex:1;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1.25;padding:3px 4px 0;margin:0;color:#fff;background:#07203a;border-radius:8px 8px 0 0}
-.mc .stt{display:block;padding:1px 4px 4px;font-size:14px;color:#46f0d8;background:#07203a;border-radius:0 0 8px 8px;min-block-size:22px}
+.mc .nm{flex:1;display:flex;align-items:center;justify-content:center;font:400 20px/1.2 var(--ui-font-title);padding:3px 4px 0;margin:0;color:#fff;background:#07203a;border-radius:10px 10px 0 0}
+.mc .stt{display:block;padding:1px 4px 4px;font:700 16px/1.3 var(--ui-font);color:#46f0d8;background:#07203a;border-radius:0 0 10px 10px;min-block-size:24px}
 .mc[data-s=packed] .stt{color:#c9c0ff}
-.mc .stt .ui-plate{min-block-size:24px;padding:0 4px;font-size:14px;white-space:nowrap}
+.mc .stt .ui-plate{min-block-size:26px;padding:0 4px;font-size:16px;white-space:nowrap}
 .mc[data-s=empty] .nm,.mc[data-s=empty] .stt,.mc[data-s=locked] .nm,.mc[data-s=locked] .stt{background:transparent}
-.mc[data-s=empty] .nm,.mc[data-s=locked] .nm{flex:0 0 37%;align-items:flex-start;padding-block-start:6px;font-size:14px}
+.mc[data-s=empty] .nm,.mc[data-s=locked] .nm{flex:0 0 37%;align-items:flex-start;padding-block-start:6px}
 .mc[data-s=empty] .stt,.mc[data-s=locked] .stt{margin-block-start:auto;flex:none}
 .mc[data-s=empty] .stt{color:#ffb3f0}
 .mc[data-s=locked] .nm{color:#d9ccff}
@@ -227,57 +245,55 @@ body.rvopen #rv{display:block}
 @media(max-width:400px){.mc .stt .ui-plate .pi{display:none}}
 .mc .newdot{display:inline-flex;align-items:center;justify-content:center;gap:6px}
 .search{display:flex;gap:8px;padding:8px 12px;background:var(--ui-night-bg);position:relative;z-index:4}
-.search input{flex:1;min-block-size:48px;border-radius:3px;border:var(--ui-l26) solid var(--ui-line);background:#fff;font:700 16px var(--ui-font);padding:0 12px;color:var(--ui-line)}
+.search input{flex:1;min-block-size:48px;border-radius:14px;border:var(--ui-l26) solid var(--ui-line);background:#fff;font:700 16px var(--ui-font);padding:0 12px;color:var(--ui-line)}
 .shelf__empty{padding:24px 8px;text-align:center;font-weight:700}
 /* ---- تمرین (شب) ---- */
 .prac{padding:16px;text-align:center}
 .prac p{font-size:18px;font-weight:700;margin:6px 0 16px;line-height:1.7;color:var(--ui-cream)}
 .prac .prob{text-align:start}
-.dock{flex:none;padding:8px 12px 12px;display:flex;gap:10px}
+.dock{flex:none;padding:8px 12px 12px;display:flex;gap:10px;align-items:flex-end}
 .dock .ui-btn{flex:1;min-inline-size:0;margin-block-end:0}
+.dkb{flex:none;inline-size:84px;block-size:77px;margin-block-start:-34px;margin-block-end:-6px;overflow:visible;pointer-events:none}
 /* ---- برگه‌ها و روکش‌ها ---- */
 #ov{position:absolute;inset:0;pointer-events:none;z-index:60}
 #ov .scrim{position:absolute;inset:0;pointer-events:auto;background:rgba(36,26,94,.55);animation:v5fade .2s both}
-#ov .sheet{position:absolute;inset-inline:0;bottom:0;max-block-size:92%;overflow:auto;pointer-events:auto;animation:v5sheet .25s ease-out both;scrollbar-width:none}
+#ov .sheet{position:absolute;inset-inline:8px;bottom:8px;max-block-size:calc(100% - 24px);overflow:auto;pointer-events:auto;animation:v5sheet .25s var(--ease-out) both;scrollbar-width:none}
 #ov .sheet::-webkit-scrollbar{display:none}
-.sheet h3.st{margin:0 0 4px;font:400 26px/1.3 var(--ui-font-title)}
-.sheet .ssub{margin:0 0 8px;font-size:16px;font-weight:700}
-.sheet .srow{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 10px}
+.sheet .ssub{margin:0 0 8px;font-size:18px;font-weight:700;text-align:center}
+.sheet .srow{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:4px 0 10px}
 .sheet .btnrow{display:flex;gap:10px;margin-block-start:8px}
-.sheet .btnrow .ui-btn{flex:1;min-inline-size:0;padding:0 12px;margin-block-end:6px}
-.sheet .btnrow .ui-btn--sec{margin-block-end:0;align-self:flex-start}
-.sheet .why{font-size:17px;font-weight:700;margin:4px 0 14px;line-height:1.6}
-.diffrow{display:flex;gap:6px;justify-content:space-between;margin:8px 0 12px}
-.diffrow .ui-hard{flex:1;min-inline-size:0;flex-direction:column;gap:2px;padding:4px 4px 4px;justify-content:center;font-size:15px;border-radius:4px 12px 4px 12px}
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:22px 12px;margin:18px 0 14px}
-.tiles .ui-tile{inline-size:100%;max-inline-size:164px;justify-self:center;min-block-size:132px}
+.sheet .btnrow .ui-btn:not(.ui-btn--sec){flex:1.7}
+.sheet .btnrow .ui-btn{flex:1;min-inline-size:0;padding:0 12px;margin-block-end:4px}
+.sheet .why{font-size:17px;font-weight:700;margin:4px 0 14px;line-height:1.6;text-align:center}
+.sheet .story{margin:0 0 10px;padding:8px 12px;border-radius:16px;background:#fff;border:var(--ui-l26) dashed #4b3b9e;font-weight:700;font-size:16px;line-height:1.7;text-align:center}
+.sheet .lead{margin:0 0 6px;font-size:16px;font-weight:700;color:#4b3b9e;text-align:center}
+.sheet .opts3{display:flex;flex-direction:column;gap:8px;margin:2px 0 10px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:22px 12px;margin:20px 0 12px}
+.tiles .ui-tile{justify-self:center;padding-block-start:70px}
 .tiles .ui-tile .ui-tile-art svg{inline-size:100%;block-size:100%}
-.tiles .ui-tile{padding-block-start:70px}
 .tiles .ui-newdot{position:absolute;inset-block-start:8px;inset-inline-start:8px}
 .mrow{display:flex;gap:10px;margin-block-start:8px}
-.mrow .ui-btn{flex:1;min-inline-size:0;padding:0 10px;margin-block-end:0}
-.adults{display:flex;align-items:center;justify-content:center;gap:8px;inline-size:100%;margin-block-start:10px;min-block-size:48px;font-weight:700;font-size:16px;color:var(--ui-line)}
-.hl{padding:8px 12px;border:var(--ui-l26) solid var(--ui-line);background:#fff;margin-block-end:8px;font-weight:700;font-size:16px;line-height:1.6;animation:v5fade .25s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
-.hold{position:relative;inline-size:100%;overflow:hidden;touch-action:none;user-select:none;min-block-size:56px;font-size:17px;margin-block-end:6px}
+.mrow .ui-btn{flex:1;min-inline-size:0;padding:0 10px;margin-block-end:4px}
+.adults{display:flex;align-items:center;justify-content:center;gap:8px;inline-size:100%;margin-block-start:8px;min-block-size:48px;font-size:20px}
+.hl{padding:8px 12px;border:var(--ui-l26) solid var(--ui-line);background:#fff;margin-block-end:8px;font-weight:700;font-size:16px;line-height:1.6;animation:v5fade .25s;border-radius:16px}
+.hold{position:relative;inline-size:100%;overflow:hidden;touch-action:none;user-select:none;min-block-size:56px;font-size:22px;margin-block-end:6px}
 .hold i{position:absolute;inset:0;background:rgba(255,255,255,.35);transform:scaleX(0);transform-origin:right;transition:transform 0s}
 .hold.on i{transform:scaleX(1);transition:transform 2s linear}
 .hold span{position:relative}
 .vl{display:flex;flex-direction:column;gap:8px}
-.vl div{border:var(--ui-l26) solid var(--ui-line);padding:8px 12px;background:#fff;font-size:15px;font-weight:700}
-.vl small{display:block;font-size:14px;font-weight:400;opacity:.9}
+.vl div{border:var(--ui-l26) solid var(--ui-line);padding:8px 12px;background:#fff;font-size:16px;font-weight:700;border-radius:14px}
+.vl small{display:block;font-size:16px;font-weight:400;opacity:.9}
 .gtabs{display:flex;gap:6px;margin-block-end:10px}
-.gtabs .ui-btn{flex:1;min-inline-size:0;padding:0 4px;font-size:15px;margin-block-end:0}
-.gtabs .ui-btn.on{--cutbg:var(--ui-teal)}
 .acc{display:flex;flex-direction:column;gap:6px}
-.acc div{border:var(--ui-l26) solid var(--ui-line);padding:8px 12px;background:#fff;font-weight:700}
-.sres{display:flex;flex-direction:column;gap:6px;max-block-size:230px;overflow:auto;margin-block-start:8px}
-.sres .ui-btn{justify-content:flex-start;margin-block-end:0;text-align:start;inline-size:100%}
-.sres .ui-btn small{display:block;font-weight:400;font-size:14px}
+.acc div{border:var(--ui-l26) solid var(--ui-line);padding:8px 12px;background:#fff;font-weight:700;border-radius:14px}
+.sres{display:flex;flex-direction:column;gap:8px;max-block-size:230px;overflow:auto;margin-block-start:8px}
+.sres .ui-btn{justify-content:flex-start;margin-block-end:0;text-align:start;inline-size:100%;font-size:22px;padding:4px 16px}
+.sres .ui-btn small{display:block;font:700 16px/1.3 var(--ui-font);-webkit-text-stroke:0;text-shadow:none}
 .ui-input{margin-block-end:0}
 /* ---- آموزش ---- */
 .tmask{position:absolute;inset:0;pointer-events:auto}
-.spot{position:absolute;border-radius:18px;box-shadow:0 0 0 2000px rgba(36,26,94,.62);border:var(--ui-l45) solid var(--ui-cream);pointer-events:none;transition:all .3s ease}
-.coach{position:absolute;inset-inline:12px;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l45) solid var(--ui-line);border-radius:18px 7px 18px 7px;padding:10px 12px 10px 12px;pointer-events:auto;box-shadow:0 6px 0 0 var(--ui-line);animation:v5fade .25s both;display:flex;gap:10px;align-items:flex-start}
+.spot{position:absolute;border-radius:18px;box-shadow:0 0 0 2000px rgba(36,26,94,.62);border:var(--ui-l35) solid var(--ui-cream);pointer-events:none}
+.coach{position:absolute;inset-inline:12px;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l35) solid var(--ui-line);border-radius:22px;padding:10px 12px;pointer-events:auto;box-shadow:0 4px 0 0 var(--ui-edge);animation:v5fade .25s both;display:flex;gap:10px;align-items:flex-start}
 .coach .cg{flex:none;inline-size:64px;block-size:64px}
 .coach .cg svg{inline-size:64px;block-size:64px}
 .coach .cm{flex:1;min-inline-size:0}
@@ -286,28 +302,8 @@ body.rvopen #rv{display:block}
 .coach .cr .st{flex:1;display:flex;gap:5px}
 .coach .cr .st i{inline-size:10px;block-size:10px;border-radius:50%;background:#cfc7e4}
 .coach .cr .st i.on{background:var(--ui-line)}
-.coach .ui-btn{min-block-size:48px;padding:0 14px;font-size:16px;margin-block-end:0}
-/* ---- دور ۳: رنگ کلیدها و ماسکوت ---- */
-.cface .rel .ui-btn--sec{--cutbg:#a99dff;color:#190539}
-.cface .cfoot .ui-btn--sec{--cutbg:#46f0d8;color:#190539}
-.cface .opts .ui-btn--sec:not(.ok):not(.no){--cutbg:#a99dff;color:#190539}
-.cface .cfoot--f{align-items:flex-end;gap:8px;padding:0 20px 14px}
-.cface .cfoot--f .ui-btn{flex:1;inline-size:auto;min-inline-size:0}
-.cfb{flex:none;inline-size:84px;block-size:77px;margin-block-start:-30px;overflow:visible;pointer-events:none}
-.dock--b{align-items:flex-end}
-.dkb{flex:none;inline-size:84px;block-size:77px;margin-block-start:-34px;margin-block-end:-6px;overflow:visible;pointer-events:none}
-.cface.bk .cdiag svg{block-size:88px}
-.cface.bk .sec{margin-block-start:8px}.cface.bk .sec h2{font-size:18px;margin-block-end:4px}
-.cface.bk .prob{padding:8px}
-.cface.bk .fig svg{inline-size:auto;block-size:108px;margin-inline:auto}
-.cface.bk .prob p.q{margin-block-start:6px}
-.cface.bk .opts{margin-block-start:6px}
-.cface.bk .cfoot{padding:4px 24px 14px}
-@media(max-height:700px){.cface.bk .cdiag{display:none}.cface.bk .fig svg{block-size:92px}.cface .cfoot--f{padding-bottom:10px}}
-/* شب: کلیدهای ثانویه لیلکی v4 (نه کرم) */
-.appl[data-world=night] .ui-btn--sec,.ssheet .ui-btn--sec,.ui-sheet-night .ui-btn--sec{--cutbg:#a99dff;color:#190539}
-.appl[data-world=night] .jump .ui-btn.cur,.ui-sheet-night .gtabs .ui-btn.on{--cutbg:#46f0d8}
-/* ---- کاهش حرکت (تنظیم سیستم یا کلید بازبین) ---- */
+.coach .ui-btn{padding:0 14px;font-size:22px;margin-block-end:0;min-block-size:52px}
+/* ---- کاهش حرکت (تنظیم سیستم یا کلید بازبین): برش مستقیم ---- */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 </style>
@@ -326,6 +322,7 @@ body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition
 <script>
 const D=/*__DATA__*/null;
 const S=id=>D.S[id]!==undefined?D.S[id]:'⟦'+id+'⟧';
+const SO=id=>D.S[id];
 const R=D.R;
 const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -333,29 +330,38 @@ const N=Object.fromEntries(D.nodes.map(n=>[n.id,n]));
 const CH=Object.fromEntries(D.chapters.map(c=>[c.id,c]));
 const MN=Object.fromEntries(D.map.nodes.map(n=>[n.id,n]));
 const BANDK={1:'v5.ui.base.b12',2:'v5.ui.base.b34',3:'v5.ui.base.b56'};
-const TIERS=[{k:'flow.tier.core',d:'easy',key:'green'},{k:'flow.tier.challenge',d:'mid',key:'orange'},{k:'flow.tier.veryhard',d:'hard',key:'red'}];
+const BK=()=>['b12','b34','b56'][st.band-1];
+const TIERS=[{k:'flow.tier.core',d:'easy',key:'green',n:1},{k:'flow.tier.challenge',d:'mid',key:'orange',n:2},{k:'flow.tier.veryhard',d:'hard',key:'red',n:3}];
 const $=s=>document.querySelector(s);
 const A=s=>{const a=$('#app');return a?a.querySelector(s):null};
 const rm=()=>matchMedia('(prefers-reduced-motion: reduce)').matches||document.body.classList.contains('rm');
 const ic=(c,cls='')=>`<svg class="bi ${cls}" aria-hidden="true"><use href="#ui-ic-${c}"/></svg>`;
 const icBack=()=>ic('next','ui-flip');
 let holdT=null;
-const st={band:1,scr:'map',cur:'M07',tier:0,sample:'mid',visited:new Set(),seen:new Set(),coll:new Set(),here:'M07',arrive:null,
+/* نمایشی: حافظهٔ موقت ماکت؛ پایهٔ پیش‌فرض ۳–۴ (مثل v4) */
+const st={band:2,scr:'map',cur:'M07',tier:0,sample:'mid',visited:new Set(),seen:new Set(),coll:new Set(),here:'M07',arrive:null,
   teacher:false,fogClear:false,tutOn:true,tutDone:{map:false,scene:false},nav:[],overlay:null,peek:null,lock:null,storyLight:false,
-  arr:'fixed',hint:0,pulled:false,gateOK:false,gateTab:'report',gateVia:'menu',prac:0,tut:null,ord:[2,1,0],card:null,boxTop:0,mapTop:null,search:false,q:'',mq:'',pos:null};
+  arr:'fixed',hint:0,pulled:false,gateOK:false,gateTab:'report',gateVia:'menu',prac:0,tut:null,ord:[2,1,0],card:null,boxTop:0,mapTop:null,search:false,q:'',mq:'',pos:null,envEnter:false};
 function loadSample(k){const s=D.states[k];st.sample=k;st.visited=new Set(s.visited);st.seen=new Set(s.seen);st.coll=new Set(s.coll);st.here=s.here;st.arrive=null;st.fogClear=false}
 loadSample('mid');
+
+/* ---------- مسیر جانبی اختیاری: مرحله‌ای که برای پایهٔ کودک نیست (نمایشی: پایهٔ ورودی از nodes_v2.band_entry) ---------- */
+const entryBand=id=>({'1-2':1,'3-4':2,'5-6':3})[N[id].band]||0;
+const isSide=id=>{const e=entryBand(id);return e>st.band&&!N[id].fog};
+const SIDEC=D.nodes.filter(n=>entryBand(n.id)>0&&!n.fog).map(n=>n.id);
+const effNodes=()=>D.map.nodes;
 
 /* ---------- منطق گره ---------- */
 const fogOpen=()=>st.teacher||st.fogClear;
 const listed=id=>!N[id].deferred||st.teacher;
 const vis=id=>MN[id]&&MN[id].visible&&listed(id);
+const preOk=p=>st.visited.has(p)||isSide(p);
 const nodeSt=id=>{const n=N[id];if(n.fog&&!fogOpen())return'fog';if(st.visited.has(id))return'done';
-  if(!n.pre.every(p=>st.visited.has(p)))return'locked';return n.trial?'trial':'open'};
-const firstMissing=id=>N[id].pre.find(p=>!st.visited.has(p));
+  if(!n.pre.every(preOk))return'locked';return n.trial?'trial':'open'};
+const firstMissing=id=>N[id].pre.find(p=>!preOk(p));
 const lockText=(id,kind)=>{const p=firstMissing(id);return S('flow.lock.reason').replace('{name}',p?(kind==='concept'?N[p].concept:N[p].env):'')};
 const cardSt=id=>{const s=nodeSt(id);if(s==='fog'||s==='locked')return s;if(st.coll.has(id))return'collected';if(st.seen.has(id))return'seen';return'unseen'};
-const plate=(cls,inner)=>`<span class="ui-plate ui-cut ${cls}">${inner}</span>`;
+const plate=(cls,inner)=>`<span class="ui-plate ${cls}">${inner}</span>`;
 const pico=n=>`<svg class="pi" aria-hidden="true"><use href="#ui-ic-${n}"/></svg>`;
 const lightOf=()=>{if(st.scr==='scene')return st.storyLight&&st.cur==='M07'?(st.tier===1?'dusk':st.tier===2?'night':'day'):'day';return st.scr==='map'?'day':'night'};
 const worldOf=()=>(st.scr==='map'||st.scr==='scene')?'day':'night';
@@ -363,62 +369,71 @@ const worldOf=()=>(st.scr==='map'||st.scr==='scene')?'day':'night';
 /* ---------- ناوبری ---------- */
 function go(scr,p={},push=true,fade=true){
   if(push)st.nav.push({scr:st.scr,cur:st.cur,tier:st.tier});
-  if(scr==='env')st.ord=[2,1,0];
+  if(scr==='env'){st.ord=[2,1,0];st.envEnter=true}
   Object.assign(st,p,{scr});st.overlay=null;st.peek=null;st.lock=null;st.hint=0;st.pulled=false;st.tut=null;st.card=null;render({fade});
 }
 function back(){const b=st.nav.pop();if(!b){go('map',{},false);return}Object.assign(st,b);st.overlay=null;st.peek=null;st.lock=null;st.tut=null;st.card=null;render({fade:true})}
 
 /* ---------- اجزای مشترک ---------- */
-const menuBtn=()=>`<button class="ui-btn ui-btn--icon" data-act="menu" data-t="menu" aria-label="${esc(S('flow.menu.open'))}"><svg class="ui-gear" aria-hidden="true"><use href="#ui-gearbtn"/></svg><svg class="ui-ic" aria-hidden="true"><use href="#ui-ic-menu"/></svg></button>`;
+const menuIcon='<svg class="ui-ic" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"><path d="M6 9h20M6 16h20M6 23h20"/></svg>';
+const menuBtn=()=>`<button class="ui-btn ui-btn--icon" data-act="menu" data-t="menu" aria-label="${esc(S('flow.menu.open'))}">${menuIcon}</button>`;
 const tb=(first,mid,last)=>`<div class="tb">${first}${mid}${last}</div>`;
 const titleOf=t=>`<h1>${esc(t)}</h1>`;
 const spacer='<span class="tbsp" style="flex:none;inline-size:8px"></span>';
-const bandChips=()=>`<div class="ui-chips" role="group" aria-label="${esc(S('v5.ui.base.label'))}" data-t="base">${[1,2,3].map(b=>`<button class="ui-chip" aria-pressed="${st.band===b}" data-band="${b}"><svg class="ui-tick" aria-hidden="true"><use href="#ui-check"/></svg><small>${esc(S('v5.ui.base.label'))}</small><b><bdi dir="rtl">${esc(S(BANDK[b]))}</bdi></b></button>`).join('')}</div>`;
-const secBtn=(act,inner,extra='',cls='')=>`<button class="ui-btn ui-btn--sec ui-cut ${cls}" data-act="${act}" ${extra}>${inner}</button>`;
+const flexsp='<span class="tbsp"></span>';
+const secBtn=(act,inner,extra='',cls='')=>`<button class="ui-btn ui-btn--sec ${cls}" data-act="${act}" ${extra}>${inner}</button>`;
 const priBtn=(act,inner,extra='',cls='')=>`<button class="ui-btn ${cls}" data-act="${act}" ${extra}>${inner}</button>`;
-const diffBadge=d=>`<svg class="ui-badge" aria-hidden="true"><use href="#ui-badge-${d}"/></svg>`;
+const peaks=n=>`<svg class="pk" viewBox="0 0 ${2+13*n} 20" width="${2+13*n}" height="18" aria-hidden="true">${Array.from({length:n},(_,i)=>`<path d="M${1+i*13} 17l6-11 6 11z" fill="#fff" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/>`).join('')}</svg>`;
+const diffBadge=(d,word=true)=>{const n={easy:1,mid:2,hard:3}[d];return `<span class="ui-hard" data-d="${d}">${peaks(n)}${word?`<span>${esc(S('difficulty.'+d))}</span>`:''}</span>`};
 const diffWord=d=>S('difficulty.'+d);
+const bandName=b=>S(BANDK[b]);
+const forkIc='<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2.6"/><circle cx="6" cy="19" r="2.6"/><circle cx="18" cy="8" r="2.6"/><path d="M6 7.6v8.8M18 10.6c0 4.4-6 3.4-12 5.8"/></svg>';
 
 /* ---------- نقشه (۳۴ گره روی یک بوم بلند) ---------- */
 const doneBadge=(x,y)=>`<use href="#ui-check" x="${x-16}" y="${y-16}" width="32" height="32"/>`;
 const lockBadge=(x,y)=>`<use href="#ui-lock" x="${x-16}" y="${y-16}" width="32" height="32"/>`;
 function mapSVG(){
-  const m=D.map;let g='',rings='',fogs='';
-  const ns=m.nodes.filter(n=>vis(n.id)).sort((a,b)=>a.base[1]-b.base[1]);
+  const m=D.map;let g='',rings='',fogs='',side='';
+  const all=effNodes();
+  all.filter(n=>isSide(n.id)&&vis(n.id)).forEach(n=>{side+=`<g class="sideg" data-for="${n.id}"><path class="sidep" d="" fill="none" stroke="#241a5e" stroke-width="11" stroke-linecap="round" stroke-dasharray="0.1 13"/><path d="" fill="none" stroke="#fff3c4" stroke-width="7" stroke-linecap="round" stroke-dasharray="0.1 13"/></g>`});
+  const ns=all.filter(n=>vis(n.id)&&!isSide(n.id)).sort((a,b)=>a.base[1]-b.base[1]);
   ns.forEach(n=>{
     const s=nodeSt(n.id),big=n.asset.indexOf('node_')===0,w=big?200:120,h=big?190:100;
     const op=s==='fog'?' opacity=".3"':s==='locked'?' opacity=".6"':'';
     g+=`<g class="mnd" data-n="${n.id}"${op}>${n.pad?`<use href="#${n.pad}" x="${n.place[0]}" y="${n.place[1]}" width="120" height="100"/>`:''}<use href="#${n.asset}" x="${n.place[0]}" y="${n.place[1]}" width="${w}" height="${h}"/></g>`;
     if(s==='done')g+=doneBadge(n.lock[0],n.lock[1]);
     else if(s==='locked')g+=lockBadge(n.lock[0],n.lock[1]);
-    if(n.id===st.here&&s!=='fog'){/* حلقهٔ v4: خط تیرهٔ ۱۰ + خط‌چین زردِ ۵٫۵ که می‌چرخد (با reduced-motion ثابت) */
+    if(n.id===st.here&&s!=='fog'){
       rings+=`<g class="hring"><ellipse cx="${n.base[0]}" cy="${n.base[1]}" rx="${n.rx+8}" ry="${n.ry+6}" fill="none" stroke="#241a5e" stroke-width="10"/><ellipse class="ui-ring-dash" cx="${n.base[0]}" cy="${n.base[1]}" rx="${n.rx+8}" ry="${n.ry+6}" fill="none" stroke="#ffd23f" stroke-width="5.5" stroke-dasharray="16 10" stroke-linecap="round"/></g>`}
     if(D.entr.includes(n.id)&&!fogOpen()){const dir=n.base[0]<195?1:-1;g+=`<use class="fsign" href="#x-fogsign" x="${n.base[0]+dir*(n.rx*.55+22)-18}" y="${n.base[1]-58}" width="36" height="47"/>`}
   });
   const e4=MN.E04;
   if(e4&&!fogOpen()){const [bx,by]=e4.base;fogs=`<g class="fogg" data-fog><use href="#x-fog" x="${bx-100}" y="${by-110}" width="200" height="130"/><use href="#x-fog" x="${bx-70}" y="${by-70}" width="150" height="98" opacity=".9"/><use class="fsign" href="#x-fogsign" x="${bx-18}" y="${by-62}" width="36" height="47"/></g>`}
-  return `<svg class="mapart" viewBox="0 0 ${m.w} ${m.h}" preserveAspectRatio="xMidYMin meet" aria-hidden="true">${m.head}${g}${rings}${fogs}${m.tail}</svg>`;
+  return `<svg class="mapart" viewBox="0 0 ${m.w} ${m.h}" preserveAspectRatio="xMidYMin meet" aria-hidden="true">${m.head}${side}${g}${rings}${fogs}${m.tail}</svg>`;
 }
 const posStyle=(x,y,extra='')=>`left:clamp(92px,calc(var(--s)*${x}px),calc(100% - 92px));top:calc(var(--s)*${y}px - 12px);${extra}`;
 function mapOverlay(){
   let h='';
-  const ns=D.map.nodes.filter(n=>vis(n.id));
+  const ns=effNodes().filter(n=>vis(n.id));
   ns.forEach(n=>{
     const s=nodeSt(n.id),here=n.id===st.here&&s!=='fog',nd=N[n.id];
     const [hx,hy,hw,hh]=n.hit;
+    if(isSide(n.id)){
+      const lk=s==='locked',dn=s==='done';
+      h+=`<button class="mn ui-side" data-act="node" data-id="${n.id}" data-n="${n.id}" data-state="${s}" style="left:0;top:0" aria-label="${esc(nd.env+' · '+S('v5.side.tag'))}">${forkIc}${dn?'<svg class="sdone" aria-hidden="true"><use href="#ui-check"/></svg>':lk?'<svg class="slock" aria-hidden="true"><use href="#ui-lock"/></svg>':''}</button>`;
+      const lab=[`<span class="ui-maplabel">${esc(nd.env)}</span>`,plate('ui-plate--tag',esc(S('v5.side.tag')))];
+      h+=`<div class="ml sidel" data-for="${n.id}" data-side="1" style="left:0;top:0">${lab.join('')}</div>`;
+      return;
+    }
     h+=`<button class="mn" data-act="node" data-id="${n.id}" data-n="${n.id}" data-state="${s==='fog'?'locked':s}" ${here?'data-t="here"':''} style="left:calc(var(--s)*${hx}px);top:calc(var(--s)*${hy}px);width:calc(var(--s)*${hw}px);height:calc(var(--s)*${hh}px)" aria-label="${esc(s==='fog'?S('flow.map.fog.sign'):nd.env)}"></button>`;
     if(s==='fog')return;
     const lab=[`<span class="ui-maplabel">${esc(nd.env)}</span>`];
     const ent=D.entr.includes(n.id)&&!fogOpen();
-    if(!here&&s==='locked'&&ent)lab.push(plate('ui-plate--lock',pico('pin')+esc(S('flow.map.fog.sign'))+'<br>'+esc(lockText(n.id,'env'))));
-    else{
-      if(!here&&s==='locked')lab.push(plate('ui-plate--lock',esc(lockText(n.id,'env'))));
-      if(ent)lab.push(plate('ui-plate--fogs',pico('pin')+esc(S('flow.map.fog.sign'))));
-    }
+    if(!here&&s==='locked')lab.push(plate('ui-plate--lock',esc(lockText(n.id,'env'))));
+    if(ent)lab.push(plate('ui-plate--fogs',pico('pin')+esc(S('flow.map.fog.sign'))));
     if(s==='trial')lab.push(plate('ui-plate--fogs',esc(S('flow.land.experimental'))));
     h+=`<div class="ml" data-for="${n.id}" style="${posStyle(n.label[0],n.label[1])}">${lab.join('')}</div>`;
   });
-  /* عنوان بزرگ زمین‌ها (.ui-zonetitle؛ متن از strings) */
   Object.values(D.map.zt).forEach(z=>{h+=`<div class="zt" style="left:calc(var(--s)*${z.x}px);top:calc(var(--s)*${z.y-z.size*.32}px)"><span class="ui-zonetitle" style="font-size:calc(var(--s)*${z.size}px)">${esc(S(z.string_key))}</span></div>`});
   const sg=D.map.start;
   h+=`<div class="ml mlg" style="${posStyle(sg.x,sg.y-82)}"><span class="ui-maplabel onbanner">${esc(S('flow.map.start'))}</span></div>`;
@@ -428,24 +443,24 @@ function mapOverlay(){
   return `<div class="mov" id="mov">${h}</div>`;
 }
 function mapScreen(){
-  return `<div class="scr">${tb(menuBtn(),bandChips(),'').replace('class="tb"','class="tb nowave"')}
-   <div class="mestrip"><button class="ui-btn me off" id="mebtn" data-act="me">${ic('mypos')}<span>${esc(S('flow.map.me'))}</span></button></div>
+  const me=`<button class="ui-btn ui-btn--sec me off" id="mebtn" data-act="me" aria-disabled="true">${ic('mypos')}<span>${esc(S('flow.map.me'))}</span></button>`;
+  return `<div class="scr">${tb(menuBtn(),flexsp,me)}
    <div class="mapbody" id="mapbody"><div class="map" id="map">${mapSVG()}${mapOverlay()}</div></div></div>`;
 }
 function layoutMap(){
   const m=A('#map');if(!m)return;
   const s=m.clientWidth/D.map.w;m.style.setProperty('--s',s);
   const pos={};
-  D.map.nodes.forEach(n=>{pos[n.id]={ax:n.foot[0]*s,ay:n.foot[1]*s,hx:(n.hit[0]+n.hit[2]/2)*s,hy:(n.hit[1]+n.hit[3]/2)*s}});
+  effNodes().forEach(n=>{pos[n.id]={ax:n.foot[0]*s,ay:n.foot[1]*s,hx:(n.hit[0]+n.hit[2]/2)*s,hy:(n.hit[1]+n.hit[3]/2)*s}});
   st.pos=pos;
-  nudgeLabels(m,s);
+  const doNudge=()=>{const G=mapGeo(m,s);nudgeLabels(m,s,G);nudgeZones(m,s,G);placeSide(m,s,G,pos);nudgeTag(m)};
   const g=A('#guide'),hp=pos[st.here];
   if(g&&hp&&nodeSt(st.here)!=='fog'&&vis(st.here)){
     const put=(x,y)=>{g.style.left=x+'px';g.style.top=(y-82+6)+'px'};
-    put(hp.ax,hp.ay);
+    put(hp.ax,hp.ay);doNudge();
     if(st.arrive&&!rm()){
       const a=st.arrive;st.arrive=null;
-      const ids=D.order.filter(i=>pos[i]&&vis(i));const i0=ids.indexOf(a.from),i1=ids.indexOf(st.here);
+      const ids=D.order.filter(i=>pos[i]&&vis(i)&&!isSide(i));const i0=ids.indexOf(a.from),i1=ids.indexOf(st.here);
       let route=i0>=0&&i1>i0?ids.slice(i0,i1+1):[a.from,st.here].filter(i=>pos[i]);
       if(route.length>5)route=[route[0],...route.slice(-4)];
       if(route.length>1){
@@ -456,39 +471,114 @@ function layoutMap(){
       }
     }
     st.arrive=null;
-  }else if(g)g.style.display='none';
+  }else{if(g)g.style.display='none';doNudge()}
   updateMe();
 }
 function guideBox(gd){const a=gd.getBoundingClientRect(),t=gd.querySelector('.ui-heretag');if(!t)return a;const b=t.getBoundingClientRect();
   return {left:Math.min(a.left,b.left),right:Math.max(a.right,b.right),top:Math.min(a.top,b.top),bottom:Math.max(a.bottom,b.bottom),width:Math.max(a.right,b.right)-Math.min(a.left,b.left),height:Math.max(a.bottom,b.bottom)-Math.min(a.top,b.top)}}
-function nudgeLabels(m,s){
-  const ps=[...m.querySelectorAll('#env_path path')].filter(x=>x.getTotalLength);if(!ps.length)return;
+/* نقطه‌های جادهٔ اصلی (پیکسل نسبت به نقشه) */
+function mapGeo(m,s){
   const mr=m.getBoundingClientRect(),pts=[];
-  ps.forEach(path=>{const L=path.getTotalLength(),sp=path.getScreenCTM();
+  m.querySelectorAll('#env_path path').forEach(path=>{if(!path.getTotalLength)return;const L=path.getTotalLength(),sp=path.getScreenCTM();
     for(let l=0;l<=L;l+=8){const q=path.getPointAtLength(l),z=new DOMPoint(q.x,q.y).matrixTransform(sp);pts.push([z.x-mr.left,z.y-mr.top])}});
-  /* مانع‌ها: تزئین‌های نقشه، بنای دیگر گره‌ها، آواتار */
-  const rel=r=>({l:r.left-mr.left,t:r.top-mr.top,w:r.width,h:r.height});
-  const obs=[];
-  m.querySelectorAll('.mapart use').forEach(u=>{const h=u.getAttribute('href')||'';if(/#env_(dec|tree)_/.test(h)){const r=rel(u.getBoundingClientRect());if(r.w>4)obs.push({...r,k:'dec'})}});
-  D.map.nodes.forEach(n=>{if(!vis(n.id))return;obs.push({l:n.hit[0]*s,t:n.hit[1]*s,w:n.hit[2]*s,h:n.hit[3]*s,k:'node',id:n.id})});
-  D.map.zt&&Object.values(D.map.zt).forEach(z=>{obs.push({l:(z.x-Math.max(60,z.size*2.6))*s,t:(z.y-z.size*.9)*s,w:Math.max(120,z.size*5.2)*s,h:z.size*1.5*s,k:'node',id:'zt'})});
+  return {mr,pts};
+}
+function mapObs(m,s,G){
+  const mr=G.mr,rel=r=>({l:r.left-mr.left,t:r.top-mr.top,w:r.width,h:r.height}),obs=[];
+  m.querySelectorAll('.mapart use').forEach(u=>{const h=u.getAttribute('href')||'';if(/#env_(dec|tree)_/.test(h)){const r=rel(u.getBoundingClientRect());if(r.w>4)obs.push({...r,k:'dec',h2:h})}});
+  effNodes().forEach(n=>{if(!vis(n.id)||isSide(n.id))return;obs.push({l:n.hit[0]*s,t:n.hit[1]*s,w:n.hit[2]*s,h:n.hit[3]*s,k:'node',id:n.id})});
+  m.querySelectorAll('.mapart g.mnd').forEach(g=>{const r=rel(g.getBoundingClientRect());if(r.w>4)obs.push({...r,k:'bldg',id:g.dataset.n})});
+  m.querySelectorAll('.zt .ui-zonetitle').forEach(z=>{const r=rel(z.getBoundingClientRect());obs.push({...r,k:'zt',id:'zt'})});
   const gd=m.querySelector('#guide');if(gd&&gd.style.display!=='none'){const r=rel(guideBox(gd));obs.push({...r,k:'guide'})}
+  return obs;
+}
+function nudgeLabels(m,s,G){
+  const mr=G.mr,pts=G.pts;if(!pts.length)return;
+  const obs=mapObs(m,s,G);
   const CL=22,MG=10,placed=[];
   const ov=(a,b,g)=>a.l<b.l+b.w+g&&a.l+a.w+g>b.l&&a.t<b.t+b.h+g&&a.t+a.h+g>b.t;
-  m.querySelectorAll('.ml').forEach(el=>{
+  m.querySelectorAll('.ml:not([data-side])').forEach(el=>{
     el.style.setProperty('--dx','0px');el.style.setProperty('--dy','0px');
     const r=el.getBoundingClientRect(),b={l:r.left-mr.left,t:r.top-mr.top,w:r.width,h:r.height},own=el.dataset.for;
     const cost=(dx,dy)=>{const q={l:b.l+dx,t:b.t+dy,w:b.w,h:b.h};
       if(q.l<4||q.l+q.w>mr.width-4||q.t<2)return 1e9;
       let c=Math.abs(dx)*2.2+Math.abs(dy)*3.2;
       if(pts.some(p=>p[0]>q.l-CL&&p[0]<q.l+q.w+CL&&p[1]>q.t-CL&&p[1]<q.t+q.h+CL))c+=1e6;
-      for(const o of obs){if(o.k==='node'&&o.id===own)continue;if(ov(q,o,o.k==='guide'?6:MG))c+=o.k==="dec"?1500:5000}
-      for(const o of placed)if(ov(q,o,6))c+=4000;
+      for(const o of obs){if((o.k==='node'||o.k==='bldg')&&o.id===own)continue;if(o.k==='zt')continue;if(ov(q,o,o.k==='guide'?6:MG))c+=o.k==="dec"?(/truck/.test(o.h2||"")?4e4:1500):o.k==='guide'?4e5:5e4}
+      for(const o of placed)if(ov(q,o,6))c+=2e5;
       return c};
     let best={c:cost(0,0),dx:0,dy:0};
-    if(best.c>0)for(const dy of [0,-20,20,-40,40,-60,60,-84,84,-110,110,-140,140,-170,170,-205,205])for(const dx of [0,-24,24,-48,48,-72,72,-100,100,-130,130,-160,160,-195,195]){const c=cost(dx,dy);if(c<best.c)best={c,dx,dy}}
+    if(best.c>0)for(const dy of [0,-20,20,-40,40,-60,60,-84,84,-110,110,-140,140,-170,170])for(const dx of [0,-24,24,-48,48,-72,72,-100,100,-130,130,-160,160]){const c=cost(dx,dy);if(c<best.c)best={c,dx,dy}}
     el.style.setProperty('--dx',best.dx+'px');el.style.setProperty('--dy',best.dy+'px');
     placed.push({l:b.l+best.dx,t:b.t+best.dy,w:b.w,h:b.h});
+  });
+}
+/* «تو اینجایی» اگر روی برچسب دیگری افتاد، کمی به پهلو می‌رود */
+function nudgeTag(m){
+  const t=m.querySelector('.guide .ui-heretag'),g=m.querySelector('#guide');if(!t||g.style.display==='none')return;
+  t.style.setProperty('--tx','0px');
+  const labs=[...m.querySelectorAll('.ml,.zt .ui-zonetitle,.ui-side')].map(e=>e.getBoundingClientRect());
+  const hit=d=>{t.style.setProperty('--tx',d+'px');const r=t.getBoundingClientRect(),mr=m.getBoundingClientRect();
+    if(r.left<mr.left+4||r.right>mr.right-4)return 1e6;return labs.filter(b=>r.left<b.right+4&&r.right>b.left-4&&r.top<b.bottom+2&&r.bottom>b.top-2).length};
+  let best=0,bc=hit(0);for(const d of [-30,30,-60,60,-90,90,-120,120]){if(bc===0)break;const c=hit(d);if(c<bc){bc=c;best=d}}
+  t.style.setProperty('--tx',best+'px');
+}
+/* عنوان منطقه (بزرگ) جابه‌جا می‌شود تا روی برچسب‌ها و ساختمان‌ها نیفتد؛ برچسب‌ها جابه‌جا نمی‌شوند */
+function nudgeZones(m,s,G){
+  const mr=G.mr,rel=r=>({l:r.left-mr.left,t:r.top-mr.top,r:r.right-mr.left,b:r.bottom-mr.top});
+  const ob=mapObs(m,s,G).filter(o=>o.k!=='zt'&&o.k!=='dec').map(o=>({l:o.l,t:o.t,r:o.l+o.w,b:o.t+o.h,k:o.k}));
+  m.querySelectorAll('.ml:not([data-side])').forEach(e=>ob.push({...rel(e.getBoundingClientRect()),k:'lab'}));
+  const ovr=(a,b,g)=>a.l<b.r+g&&a.r>b.l-g&&a.t<b.b+g&&a.b>b.t-g;
+  m.querySelectorAll('.zt').forEach(z=>{
+    z.style.setProperty('--dx','0px');z.style.setProperty('--dy','0px');
+    const r0=rel(z.querySelector('.ui-zonetitle').getBoundingClientRect());let best=null;
+    for(const dy of [0,-26,26,-52,52,-80,80,-110,110,-150,150])for(const dx of [0,-30,30,-60,60,-95,95,-130,130]){
+      const u={l:r0.l+dx,r:r0.r+dx,t:r0.t+dy,b:r0.b+dy};let c=Math.abs(dx)*.8+Math.abs(dy)*1.2;
+      if(u.l<4||u.r>mr.width-4)c+=1e9;
+      for(const o of ob)if(ovr(u,o,6))c+=o.k==='lab'?1e5:o.k==='guide'?5e4:3e3;
+      if(!best||c<best.c)best={c,dx,dy};
+    }
+    z.style.setProperty('--dx',best.dx+'px');z.style.setProperty('--dy',best.dy+'px');
+  });
+}
+/* مسیر جانبیِ اختیاری: گره + برچسبش یک واحد است؛ کنار جاده (دور از ساختمان‌ها، برچسب‌ها و عنوان منطقه) جا می‌گیرد و جادهٔ نقطه‌چین به جادهٔ اصلی برمی‌گردد */
+function placeSide(m,s,G,pos){
+  const mr=G.mr,pts=G.pts,ST=8;
+  const units=[...m.querySelectorAll('.ml[data-side]')];if(!units.length||!pts.length)return;
+  const ob=mapObs(m,s,G).map(o=>({l:o.l,t:o.t,r:o.l+o.w,b:o.t+o.h,k:o.k}));
+  m.querySelectorAll('.ml:not([data-side])').forEach(e=>{const r=e.getBoundingClientRect();ob.push({l:r.left-mr.left,t:r.top-mr.top,r:r.right-mr.left,b:r.bottom-mr.top,k:'lab'})});
+  const ovr=(a,b,g)=>a.l<b.r+g&&a.r>b.l-g&&a.t<b.b+g&&a.b>b.t-g;
+  const near=(x,y)=>{let bi=0,bd=1e12;pts.forEach((q,i)=>{const d=(q[0]-x)**2+(q[1]-y)**2;if(d<bd){bd=d;bi=i}});return bi};
+  const k=Math.max(5,Math.round(80*s/ST)),placed=[];
+  units.map(u=>u.dataset.for).sort((a,b)=>MN[a].base[1]-MN[b].base[1]).forEach(id=>{
+    const lab=m.querySelector(`.ml[data-side][data-for="${id}"]`),nb=m.querySelector(`.ui-side[data-n="${id}"]`),g=m.querySelector(`.sideg[data-for="${id}"]`);
+    const lw=lab.offsetWidth,lh=lab.offsetHeight,i00=near(MN[id].base[0]*s,MN[id].base[1]*s),W=Math.max(60,lw);
+    let best=null;
+    for(const sh of [0,-40,40,-80,80,-120,120,-180,180,-250,250,-330,330,-420,420])for(const sgn of [1,-1])for(const d of [84,104,126,150,180,215]){
+      const i0=Math.min(pts.length-1-k,Math.max(k,i00+Math.round(sh/ST)));
+      const a=pts[i0-3],b=pts[i0+3];let tx=b[0]-a[0],ty=b[1]-a[1];const tl=Math.hypot(tx,ty)||1;tx/=tl;ty/=tl;
+      const nx=-ty*sgn,ny=tx*sgn,dd=d*Math.max(.9,s),cx=pts[i0][0]+nx*dd,cy=pts[i0][1]+ny*dd,up=ny<0;
+      const u={l:cx-W/2,r:cx+W/2,t:up?cy-28-4-lh:cy-28,b:up?cy+28:cy+28+4+lh};
+      let c=dd*.5+Math.abs(sh)*.8+(up?8:0);
+      if(u.l<4||u.r>mr.width-4||u.t<6)c+=1e7;
+      for(const o of ob)if(ovr(u,o,6))c+=o.k==='dec'?3000:o.k==='bldg'?2e5:1e6;
+      for(const o of placed)if(ovr(u,o,6))c+=1e6;
+      if(pts.some(p=>p[0]>u.l-8&&p[0]<u.r+8&&p[1]>u.t-8&&p[1]<u.b+8))c+=2e5;
+      const P0=pts[i0-k],P1=pts[i0+k];
+      const c1=[P0[0]+nx*dd*.55,P0[1]+ny*dd*.55],c2=[cx-tx*44,cy-ty*44],c3=[cx+tx*44,cy+ty*44],c4=[P1[0]+nx*dd*.55,P1[1]+ny*dd*.55];
+      const bz=(p,q,r,t2,t)=>{const m1=1-t;return [m1**3*p[0]+3*m1*m1*t*q[0]+3*m1*t*t*r[0]+t**3*t2[0],m1**3*p[1]+3*m1*m1*t*q[1]+3*m1*t*t*r[1]+t**3*t2[1]]};
+      const leg=[];for(let t=.1;t<=.9;t+=.1){leg.push(bz(P0,c1,c2,[cx,cy],t));leg.push(bz([cx,cy],c3,c4,P1,t))}
+      for(const o of ob){if(o.k==='dec')continue;if(leg.some(q=>q[0]>o.l-4&&q[0]<o.r+4&&q[1]>o.t-4&&q[1]<o.b+4)){c+=4e4;break}}
+      if(!best||c<best.c)best={c,cx,cy,up,u,P0,P1,c1,c2,c3,c4};
+    }
+    const B=best,f=v=>(v/s).toFixed(1),q=p=>f(p[0])+' '+f(p[1]);
+    const d=`M${q(B.P0)} C${q(B.c1)} ${q(B.c2)} ${q([B.cx,B.cy])} C${q(B.c3)} ${q(B.c4)} ${q(B.P1)}`;
+    g.querySelectorAll('path').forEach(pp=>pp.setAttribute('d',d));
+    nb.style.left=(B.cx-28)+'px';nb.style.top=(B.cy-28)+'px';
+    lab.style.left=(B.cx-lw/2)+'px';lab.style.top=B.u[B.up?'t':'t']+(B.up?0:28+4)+'px';
+    if(!B.up)lab.style.top=(B.cy+28+4)+'px';else lab.style.top=(B.cy-28-4-lh)+'px';
+    placed.push(B.u);
+    pos[id]={ax:B.cx,ay:B.cy+28,hx:B.cx,hy:B.cy};
   });
 }
 function updateMe(){
@@ -501,7 +591,7 @@ function scrollMapTo(id,smooth=true){
   b.scrollTo({top:Math.max(0,p.hy-b.clientHeight*.42),behavior:smooth&&!rm()?'smooth':'auto'});
 }
 
-/* ---------- محیط (شب): پشتهٔ سه کارت چالش ---------- */
+/* ---------- محیط (شب): پشتهٔ سه کارت چالش؛ سبز جلو، نارنجی پشتش، قرمز پشت همه ---------- */
 function challenges(id){
   const n=N[id];
   if(id==='M07')return [
@@ -519,28 +609,36 @@ function artSVG(c,id){
   if(c.art)return `<svg viewBox="0 0 360 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#${c.art}"/></svg>`;
   return buildingSVG(id);
 }
-function cdStrip(c,ti,p){
-  const d=TIERS[ti].d;
-  return `<div class="cd-strip" role="button" tabindex="0" data-act="card3" data-i="${ti}" data-p="${p}" data-world="night" aria-label="${esc(c.t)}"><svg class="cd-bg" viewBox="0 0 360 56" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-stack-strip"/></svg><span class="cd-diff">${diffBadge(d)}<span>${esc(diffWord(d))}</span></span><span class="cd-t">${esc(c.t)}</span></div>`;
-}
-function cdFront(c,ti,id){
-  const d=TIERS[ti].d;
-  return `<section class="cd-front" data-p="2" data-t="front" aria-label="${esc(c.t)}"><svg class="cd-frame" viewBox="0 0 390 392" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-frame-night"/></svg><svg class="cd-tbar" viewBox="0 0 360 60" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-title-bar"/></svg>
-   <span class="cd-diff">${diffBadge(d)}<span>${esc(diffWord(d))}</span></span><div class="cd-title">${esc(c.t)}</div><div class="cd-art">${artSVG(c,id)}</div>
-   <svg class="cd-ib" viewBox="0 0 334 150" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-image-border"/></svg><div class="cd-sentence">${esc(c.w)}</div>
-   <div class="cd-go"><button class="ui-btn cd-btn-practice" data-act="start" data-i="${ti}">${esc(S('flow.env.start'))}</button></div>
-   <svg class="cd-guide" viewBox="0 0 100 150" aria-hidden="true"><g class="cs-full-82 ch-pose-point"><use class="ch-happy" href="#ch-b1"/></g></svg></section>`;
+const stackPos=ti=>st.ord[2]===ti?0:st.ord[1]===ti?1:2;
+function stackCard(c,ti,id){
+  const d=TIERS[ti].d,pos=stackPos(ti);
+  const bar=(cls)=>`<button class="face bar ${cls}" type="button" data-act="card3" data-i="${ti}" aria-label="${esc(S('v5.env.bar.aria').replace('{name}',c.t))}">${diffBadge(d)}<span class="t">${esc(c.t)}</span></button>`;
+  return `<div class="chc" data-ti="${ti}" data-d="${d}" data-pos="${pos}">
+   <section class="face full" data-t="${pos===0?'front':''}" aria-label="${esc(c.t)}"><div class="fh">${diffBadge(d)}<h2 class="ft">${esc(c.t)}</h2></div>
+    <div class="fart">${artSVG(c,id)}</div><div class="fsay">${esc(c.w)}</div>
+    <div class="fgo"><button class="ui-btn" type="button" data-act="start" data-i="${ti}">${esc(S('flow.env.start'))}</button></div>
+    <svg class="fguide" viewBox="0 0 100 150" aria-hidden="true"><g class="cs-full-82 ch-pose-point"><use class="ch-happy" href="#ch-b1"/></g></svg></section>
+   ${bar('b1')}${bar('b2')}</div>`;
 }
 function envScreen(){
   const id=st.cur,n=N[id];const ch=challenges(id);
-  const order=[st.ord[2],st.ord[1],st.ord[0]];
-  const items=order.map((ti,k)=>k===0?cdFront(ch[ti],ti,id):cdStrip(ch[ti],ti,k)).join('');
+  const enter=st.envEnter&&!rm();
+  const cards=[0,1,2].map(ti=>stackCard(ch[ti],ti,id)).join('');
   return `<div class="scr">${tb(menuBtn(),titleOf(n.env),spacer)}
-   <div class="envbody"><div class="envbanner" aria-hidden="true"><svg viewBox="0 0 390 200" preserveAspectRatio="xMidYMid slice"><use href="#env_dock_banner"/></svg></div><div class="cd-stack" id="cdstack">${items}</div></div>
+   <div class="envbody"><div class="envbanner" aria-hidden="true"><svg viewBox="0 0 390 200" preserveAspectRatio="xMidYMid slice"><use href="#env_dock_banner"/></svg></div><div class="chs${enter?' enter':''}" id="chs">${cards}</div></div>
    <div class="cd-bot">${secBtn('toMap',icBack()+esc(S('flow.nav.toMap')))}</div></div>`;
 }
-function updateStack(){const st0=$('#cdstack');if(!st0)return;const id=st.cur,ch=challenges(id);const order=[st.ord[2],st.ord[1],st.ord[0]];
-  st0.innerHTML=order.map((ti,k)=>k===0?cdFront(ch[ti],ti,id):cdStrip(ch[ti],ti,k)).join('');renderPanel()}
+function syncStack(){
+  const c=$('#chs');if(!c)return;
+  c.querySelectorAll('.chc').forEach(el=>{
+    const pos=stackPos(+el.dataset.ti);el.dataset.pos=pos;
+    const full=el.querySelector('.face.full'),b1=el.querySelector('.face.b1'),b2=el.querySelector('.face.b2');
+    full.inert=pos!==0;b1.inert=pos!==1;b2.inert=pos!==2;
+    full.setAttribute('aria-hidden',String(pos!==0));b1.setAttribute('aria-hidden',String(pos!==1));b2.setAttribute('aria-hidden',String(pos!==2));
+    full.dataset.t=pos===0?'front':'';
+  });
+}
+function updateStack(){syncStack();renderPanel()}
 
 /* ---------- صحنه ---------- */
 function sceneScreen(){
@@ -549,77 +647,126 @@ function sceneScreen(){
   const sym=real?(st.storyLight&&ch.sceneStory?ch.sceneStory:ch.scene):null;
   const art=real?`<svg viewBox="0 0 390 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#${sym}"/></svg>`:buildingSVG(st.cur).replace('class="cd-art-ph"','style="position:absolute;inset:0;width:100%;height:100%;background:var(--z-'+MN[st.cur].zone+'-base)" class="cd-art-ph"');
   const mk=real?(st.teacher?`<div class="mkc">${esc(R['mock.scene'])}</div>`:'')+(st.pulled&&st.teacher?`<div class="toast">${esc(R['mock.pull'])}</div>`:''):`<div class="ph">${esc(S('flow.scene.pending'))}</div>`;
-  const ctl=`<div class="ui-sheet-night ssheet">
-    <button class="ui-btn ui-btn--sec ui-cut" aria-pressed="${st.arr==='fixed'}" data-act="arr" data-v="fixed" data-t="arr">${esc(S('flow.scene.arr.fixed'))}</button>
-    <button class="ui-btn ui-btn--sec ui-cut" aria-pressed="${st.arr==='moving'}" data-act="arr" data-v="moving">${esc(S('flow.scene.arr.moving'))}</button>
-    <div style="grid-column:1/-1;display:flex;gap:8px"><button class="ui-btn ui-btn--sec ui-cut" style="flex:1;padding:0 6px" data-act="help" data-t="help">${ic('hint','sm')}<span>${esc(S('flow.help.btn'))}</span></button><button class="ui-btn ui-btn--sec ui-cut" style="flex:1;padding:0 6px" data-act="lesson" data-t="lesson">${ic('lesson','sm')}<span>${esc(S('flow.lesson.btn'))}</span></button><button class="ui-btn ui-btn--sec ui-cut" style="flex:1;padding:0 6px" data-act="back">${icBack().replace('bi','bi sm')}<span>${esc(S('flow.menu.back'))}</span></button></div>
-    <button class="ui-btn pull" data-act="pull" data-t="pull">${esc(S('flow.scene.pull'))}</button></div>`;
-  return `<div class="scr scn" data-world="night">${tb(menuBtn(),titleOf(ch.t),spacer)}<div class="mission"><span class="ui-hard ui-hard--s">${diffBadge(TIERS[st.tier].d)}<span>${esc(diffWord(TIERS[st.tier].d))}</span></span><span class="mt">${esc(S('flow.scene.mission'))}</span></div>
+  const ctl=`<div class="sdock">
+    <button class="ui-btn ui-btn--sec" aria-pressed="${st.arr==='fixed'}" data-act="arr" data-v="fixed" data-t="arr">${esc(S('flow.scene.arr.fixed'))}</button>
+    <button class="ui-btn ui-btn--sec" aria-pressed="${st.arr==='moving'}" data-act="arr" data-v="moving">${esc(S('flow.scene.arr.moving'))}</button>
+    <button class="ui-btn pull" data-act="pull" data-t="pull">${esc(S('flow.scene.pull'))}</button>
+    <div class="row3"><button class="ui-btn ui-btn--sec" data-act="help" data-t="help">${ic('hint','sm')}<span>${esc(S('flow.help.btn'))}</span></button><button class="ui-btn ui-btn--sec" data-act="lesson" data-t="lesson">${ic('lesson','sm')}<span>${esc(S('flow.lesson.btn'))}</span></button><button class="ui-btn ui-btn--sec" data-act="back">${icBack().replace('bi','bi sm')}<span>${esc(S('flow.menu.back'))}</span></button></div></div>`;
+  return `<div class="scr scn" data-world="night">${tb(menuBtn(),titleOf(ch.t),spacer)}<div class="mission">${diffBadge(TIERS[st.tier].d)}<span class="mt">${esc(S('flow.scene.mission'))}</span></div>
    <div class="scenebox">${art}${mk}</div>${ctl}</div>`;
 }
 
-/* ---------- نمودار کارت درس (به سبک جدید: diagram_style.json؛ بدون متن روی نمودار) ---------- */
-const K={line:'#241a5e',cream:'#fff4d2',violet:'#3a2a7a',rope:'#c98a45',pull:'#2fb8a8',weight:'#d070c0'};
+/* ---------- نمودارهای کارت درس (شماتیک وضعیت بازی؛ بدون متن روی نمودار؛ فلش‌ها هم‌مقیاس) ---------- */
+const K={line:'#241a5e',cream:'#fff4d2',violet:'#3a2a7a',rope:'#c98a45',pull:'#2fb8a8',weight:'#d070c0',wood:'#d9a05a',rock:'#8f86c8',bead:'#ffd23f',ground:'#7bbf6a'};
 function arrow(x,y,len,dir,col){const ty=y+dir*len,hh=20*dir;
   return `<polygon class="farr" points="${x-4},${y} ${x+4},${y} ${x+4},${ty-hh} ${x+11},${ty-hh} ${x},${ty} ${x-11},${ty-hh} ${x-4},${ty-hh}" fill="${col}" stroke="${K.line}" stroke-width="2.6" stroke-linejoin="round"/>`}
 const wheel=(cx,cy,r)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${K.cream}" stroke="${K.line}" stroke-width="4.5"/><circle cx="${cx}" cy="${cy}" r="3.5" fill="${K.violet}" stroke="${K.line}" stroke-width="1.2"/>`;
 const hang=(cx,y0,y1)=>`<line x1="${cx}" y1="${y0}" x2="${cx}" y2="${y1}" stroke="${K.line}" stroke-width="4.5" stroke-linecap="round"/>`;
 const rope=d=>`<path d="${d}" fill="none" stroke="${K.line}" stroke-width="7.6" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${K.rope}" stroke-width="4" stroke-linecap="round"/>`;
-const beam=(x,w)=>`<rect x="${x}" y="6" width="${w}" height="9" rx="2.5" fill="${K.violet}" stroke="${K.line}" stroke-width="4.5"/>`;
-const loadBox=(x,y)=>`<rect x="${x}" y="${y}" width="28" height="24" rx="3" fill="${K.rope}" stroke="${K.line}" stroke-width="4.5"/>`;
-const topRope='M50 40 A14 14 0 0 1 78 40 M64 26 L110 26 M96 40 A14 14 0 0 1 124 40';
-function figs(){
-  const fixed=`<svg viewBox="0 0 150 196" role="img" aria-hidden="true"><rect x="0" y="0" width="150" height="196" fill="#d6f1ee"/>${beam(20,110)}${hang(64,15,27)}${hang(110,15,27)}${rope(topRope+' M50 40 V116 M124 40 V104')}${wheel(64,40,14)}${wheel(110,40,14)}${loadBox(36,116)}${arrow(50,144,40,1,K.weight)}${arrow(124,106,40,1,K.pull)}</svg>`;
-  const moving=`<svg viewBox="0 0 150 196" role="img" aria-hidden="true"><rect x="0" y="0" width="150" height="196" fill="#d6f1ee"/>${beam(10,130)}${hang(64,15,27)}${hang(110,15,27)}${hang(22,15,100)}${rope(topRope+' M50 40 V100 M124 40 V104 M22 15 V100')}${wheel(64,40,14)}${wheel(110,40,14)}${wheel(36,104,14)}${hang(36,118,124)}${loadBox(22,124)}${arrow(36,152,40,1,K.weight)}${arrow(124,106,20,1,K.pull)}${arrow(22,80,20,-1,K.pull)}${arrow(50,80,20,-1,K.pull)}</svg>`;
-  return [fixed,moving];
+const beam=(x,w)=>`<rect x="${x}" y="6" width="${w}" height="9" rx="4" fill="${K.violet}" stroke="${K.line}" stroke-width="4.5"/>`;
+const loadBox=(x,y)=>`<rect x="${x}" y="${y}" width="28" height="24" rx="5" fill="${K.rope}" stroke="${K.line}" stroke-width="4.5"/>`;
+const svgWrap=(vb,inner)=>`<svg viewBox="${vb}" role="img" aria-hidden="true"><rect x="-10" y="-10" width="400" height="400" fill="#d6f1ee"/>${inner}</svg>`;
+function figPulley(effort){
+  return svgWrap('0 0 160 196',`${beam(30,100)}${hang(80,15,27)}${rope('M66 118 V40 A14 14 0 0 1 94 40 V110')}${wheel(80,40,14)}${loadBox(52,118)}${arrow(66,146,40,1,K.weight)}${effort?arrow(94,114,40,1,K.pull):''}`);
 }
-/* برچسب‌ها بیرون از نمودار (متن روی نمودار نیست) */
-function figLabels(kind){
-  /* فقط برچسب بار؛ برچسب «کشیدن» جوابِ پرسش است و نشان داده نمی‌شود (A2؛ تأیید مالک) */
-  const b=st.band,num=b>=2;const W=b===2?6:60;
-  const w=num?S('flow.card.load')+' '+fa(W):S('flow.card.load');
-  return `<div class="figl"><span class="ui-plate ui-cut pl-w">${esc(w)}</span></div>`;
+function figPulleyMoving(){
+  const topRope='M50 40 A14 14 0 0 1 78 40 M64 26 L110 26 M96 40 A14 14 0 0 1 124 40';
+  return svgWrap('0 0 150 196',`${beam(10,130)}${hang(64,15,27)}${hang(110,15,27)}${hang(22,15,100)}${rope(topRope+' M50 40 V100 M124 40 V104 M22 15 V100')}${wheel(64,40,14)}${wheel(110,40,14)}${wheel(36,104,14)}${hang(36,118,124)}${loadBox(22,124)}${arrow(36,152,40,1,K.weight)}${arrow(124,106,20,1,K.pull)}${arrow(22,80,20,-1,K.pull)}${arrow(50,80,20,-1,K.pull)}`);
 }
-const PROB={1:{q:'flow.card.q1',ok:'flow.card.q1.ok',o:[[S('flow.card.fixed'),0],[S('flow.card.moving'),1]]},
- 2:{q:'flow.card.q2',ok:'flow.card.q2.ok',o:[[fa(3),1],[fa(6),0],[fa(12),0]]},
- 3:{q:'flow.card.q3',ok:'flow.card.q3.ok',o:[[S('flow.card.q3.o1'),0],[S('flow.card.q3.o2'),0],[S('flow.card.q3.o3'),1]]}};
-function probHTML(id){const p=PROB[st.band];const [f,m]=figs();
-  return `<div class="prob" id="${id}"><div class="pair mini"><div class="fig"><h3>${esc(S('flow.card.fixed'))}</h3>${f}${figLabels('fixed')}</div><div class="fig"><h3>${esc(S('flow.card.moving'))}</h3>${m}${figLabels('moving')}</div></div><p class="q">${esc(S(p.q))}</p><div class="opts">${p.o.map(([t,ok])=>`<button class="ui-btn ui-btn--sec ui-cut" data-act="ans" data-ok="${ok}">${esc(t)}</button>`).join('')}</div><div class="fb" aria-live="polite"></div></div>`}
+const beamBar=(x0,x1,y)=>`<rect x="${x0}" y="${y}" width="${x1-x0}" height="11" rx="5.5" fill="${K.wood}" stroke="${K.line}" stroke-width="4.5"/>`;
+const fulcrum=(x,y)=>`<polygon points="${x-16},${y+36} ${x+16},${y+36} ${x},${y+4}" fill="${K.violet}" stroke="${K.line}" stroke-width="4.5" stroke-linejoin="round"/><rect x="${x-34}" y="${y+34}" width="68" height="8" rx="4" fill="${K.ground}" stroke="${K.line}" stroke-width="3.5"/>`;
+const rockAt=(x,y)=>`<path d="M${x-15} ${y} Q${x-17} ${y-14} ${x-5} ${y-19} Q${x+8} ${y-24} ${x+15} ${y-9} Q${x+17} ${y-2} ${x+13} ${y} Z" fill="${K.rock}" stroke="${K.line}" stroke-width="4" stroke-linejoin="round"/>`;
+const beadAt=(x,y)=>`<circle cx="${x}" cy="${y}" r="8" fill="${K.bead}" stroke="${K.line}" stroke-width="3.5"/>`;
+const slotAt=(x,y)=>`<circle cx="${x}" cy="${y}" r="8" fill="none" stroke="${K.line}" stroke-width="3" stroke-dasharray="4 4"/>`;
+const marker=(x)=>`<polygon points="${x-8},50 ${x+8},50 ${x},64" fill="${K.cream}" stroke="${K.line}" stroke-width="3" stroke-linejoin="round"/>`;
+function figLever(mode){
+  const b=st.band,front=mode==='front';
+  if(b===2){
+    const cells=[20,40,60,80,120,140,160,180].map(x=>`<line x1="${x}" y1="98" x2="${x}" y2="108" stroke="${K.line}" stroke-width="3" stroke-linecap="round"/>`).join('');
+    const stack=(x,n)=>Array.from({length:n},(_,i)=>beadAt(x,86-i*17)).join('');
+    const inner=front?stack(60,3)+stack(160,2):stack(80,4)+slotAt(140,86)+slotAt(140,69);
+    return svgWrap('0 0 200 150',`${beamBar(10,190,92)}${cells}${fulcrum(100,100)}${inner}`);
+  }
+  if(b===1){
+    return svgWrap('0 0 200 150',`${beamBar(10,190,92)}${fulcrum(100,100)}${rockAt(36,92)}${front?arrow(172,34,36,1,K.pull):marker(118)+marker(170)+`<text x="118" y="44" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="22" fill="${K.line}">${esc(S('lesson.fig.near'))}</text><text x="170" y="44" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="22" fill="${K.line}">${esc(S('lesson.fig.far'))}</text>`}`);
+  }
+  return svgWrap('0 0 200 150',`${beamBar(10,190,92)}${fulcrum(70,100)}${rockAt(40,92)}${arrow(40,30,40,1,K.weight)}${front?arrow(160,50,13,1,K.pull):marker(160)}`);
+}
+const ramp=(x0,y0,L,h,t=.55,eff=false)=>{
+  const th=Math.atan2(h,L)*180/Math.PI,px=x0+L*t,py=y0-h*t;
+  return `<polygon points="${x0},${y0} ${x0+L},${y0} ${x0+L},${y0-h}" fill="${K.wood}" stroke="${K.line}" stroke-width="4.5" stroke-linejoin="round"/>
+   <g transform="translate(${px} ${py}) rotate(${-th})"><rect x="-13" y="-22" width="26" height="22" rx="5" fill="${K.rope}" stroke="${K.line}" stroke-width="4"/></g>
+   ${arrow(px,py-14,34,1,K.weight)}${eff?`<g transform="translate(${px} ${py}) rotate(${-th}) translate(0 -42) rotate(90)">${arrow(0,0,Math.min(60,L*.28),-1,K.pull)}</g>`:''}`};
+function figSlope(mode){
+  const b=st.band,front=mode==='front';
+  if(b===3){
+    return svgWrap('0 0 220 150',`${ramp(16,118,180,46,.6,front)}<line x1="16" y1="134" x2="196" y2="134" stroke="${K.line}" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="129" x2="16" y2="139" stroke="${K.line}" stroke-width="3" stroke-linecap="round"/><line x1="196" y1="129" x2="196" y2="139" stroke="${K.line}" stroke-width="3" stroke-linecap="round"/><line x1="206" y1="118" x2="206" y2="72" stroke="${K.line}" stroke-width="3" stroke-linecap="round"/><line x1="201" y1="118" x2="211" y2="118" stroke="${K.line}" stroke-width="3" stroke-linecap="round"/><line x1="201" y1="72" x2="211" y2="72" stroke="${K.line}" stroke-width="3" stroke-linecap="round"/>`);
+  }
+  return svgWrap('0 0 250 150',`${ramp(8,130,64,76,.55,front)}${ramp(98,130,142,40,.55,front)}`);
+}
+const LES={M07:'pulley',M04:'lever',M03:'slope'};
+const LS=(id,k)=>S(`lesson.${id}.${BK()}.${k}`);
+function lessonFig(id,mode){
+  const k=LES[id];
+  if(k==='pulley')return figPulley(mode==='front');
+  if(k==='lever')return figLever(mode);
+  return figSlope(mode);
+}
+function figPlates(id){
+  const k=LES[id];let pl='';
+  if(k==='pulley'&&st.band>=2&&SO(`lesson.fig.M07.${BK()}`))pl+=`<span class="ui-plate pl-w">${esc(S(`lesson.fig.M07.${BK()}`))}</span>`;
+  if(k==='lever'&&st.band===1)pl+=`<span class="ui-plate">${esc(S('lesson.fig.fulcrum'))}</span>`;
+  return pl?`<div class="figl">${pl}</div>`:'';
+}
+function figLegend(id){
+  const k=LES[id];
+  const a=k==='pulley'?S('flow.card.legend.w'):S('lesson.fig.legend.load');
+  const f=k==='pulley'?S('flow.card.legend.f'):k==='lever'?S('lesson.fig.legend.hand'):S('lesson.fig.legend.push');
+  /* راهنما فقط برای فلشی که در شکل هست: اهرم پایهٔ ۱–۲ فقط فلش دست دارد؛ اهرم پایهٔ ۳–۴ مهره دارد نه فلش */
+  const showA=!(k==='lever'&&st.band<3),showF=!(k==='lever'&&st.band===2);
+  if(!showA&&!showF)return'';
+  return `<div class="lg">${showA?`<span><i style="background:var(--ui-pink)"></i>${esc(a)}</span>`:''}${showF?`<span><i style="background:var(--ui-teal)"></i>${esc(f)}</span>`:''}</div>`;
+}
+function probLesson(id,domId){
+  const opts=[1,2,3].filter(i=>SO(`lesson.${id}.${BK()}.o${i}`)).map(i=>[S(`lesson.${id}.${BK()}.o${i}`),i]);
+  const ans=+S(`lesson.${id}.${BK()}.answer`);
+  return `<div class="prob" id="${domId}" data-id="${id}"><div class="fig one">${lessonFig(id,'back')}${figPlates(id)}</div><p class="q">${esc(LS(id,'q'))}</p><p class="hint">${esc(LS(id,'reminder'))}</p><div class="opts">${opts.map(([t,i])=>`<button class="ui-btn ui-btn--sec" data-act="ans" data-ok="${i===ans?1:0}">${esc(t)}</button>`).join('')}</div><div class="fb" aria-live="polite"></div></div>`;
+}
 
 /* ---------- کارت درس بزرگ (جلو/پشت) ---------- */
 const nb=id=>{const s=new Set();D.edges.forEach(e=>{if(e.from===id)s.add(e.to);if(e.to===id)s.add(e.from)});return[...s].filter(i=>N[i]&&listed(i)&&nodeSt(i)!=='fog')};
 function cardFront(id){
-  const n=N[id];const real=id==='M07';const b=st.band;const C=D.card[b];
-  let body;
-  if(real){const [f,m]=figs();
-    body=`<span class="tagl">${esc(C.band)}</span>
-     <div class="pair"><div class="fig"><h3>${esc(S('flow.card.fixed'))}</h3>${b==3?`<div class="num">n = ${fa(1)}</div>`:''}${f}${figLabels('fixed')}</div><div class="fig"><h3>${esc(S('flow.card.moving'))}</h3>${b==3?`<div class="num">n = ${fa(2)}</div>`:''}${m}${figLabels('moving')}</div></div>
-     <div class="lg"><span><i style="background:var(--ui-pink)"></i>${esc(S('flow.card.legend.w'))}</span><span><i style="background:var(--ui-teal)"></i>${esc(S('flow.card.legend.f'))}</span></div>
-     <div class="say">${C.say}</div>${b==3?`<div class="eq">F = W / n    s = n × h</div>`:''}${C.sub?`<div class="sub">${esc(C.sub)}</div>`:''}`;
-  }else body=`<span class="tagl">${esc(C.band)}</span><div class="say">${esc(n.concept)}</div><div style="margin-top:10px">${plate('ui-plate--fogs',esc(S('flow.box.tbd')))}</div><div class="pendbox">${esc(S('flow.card.pending'))}</div>`;
-  const rel=nb(id);
-  const relH=rel.length?`<div class="sec"><h2>${esc(S('flow.card.related'))}</h2><div class="rel">${rel.map(r=>`<button class="ui-btn ui-btn--sec ui-cut" data-act="swapcard" data-id="${r}">${esc(N[r].concept)}</button>`).join('')}</div></div>`:'';
+  const n=N[id];let body;
+  if(LES[id]){
+    body=`<div class="fig one">${lessonFig(id,'front')}${figPlates(id)}</div>${figLegend(id)}
+     <div class="say">${esc(LS(id,'say'))}</div>${SO(`lesson.${id}.${BK()}.eq`)?`<div class="eq">${esc(LS(id,'eq'))}</div>`:''}${SO(`lesson.${id}.${BK()}.assume`)?`<div class="sub">${esc(LS(id,'assume'))}</div>`:''}`;
+  }else body=`<div class="say">${esc(n.concept)}</div><div style="margin-top:10px;text-align:center">${plate('ui-plate--fogs',esc(S('flow.box.tbd')))}</div><div class="pendbox">${esc(S('flow.card.pending'))}</div>`;
+  const rel=nb(id).slice(0,3);
+  const relH=rel.length?`<div class="sec"><h2>${esc(S('flow.card.related'))}</h2><div class="rel">${rel.map(r=>`<button class="ui-btn ui-btn--sec" data-act="swapcard" data-id="${r}">${esc(N[r].concept)}</button>`).join('')}</div></div>`:'';
   return `<div class="cbd">${body}${relH}</div>`;
 }
 function cardBack(id){
-  const real=id==='M07';
-  const prac=real?`<div class="cdiag"><svg viewBox="0 0 360 200" aria-hidden="true"><use href="#cd-back-pulley-diagram"/></svg></div><div class="sec"><h2>${esc(S('flow.card.problem'))}</h2>${probHTML('pbk')}</div>`:`<div class="pendbox">${esc(S('flow.card.noPractice'))}</div>`;
+  const real=!!LES[id];
+  const prac=real?`<div class="sec"><h2>${esc(S('flow.card.problem'))}</h2>${probLesson(id,'pbk')}</div>`:`<div class="pendbox">${esc(S('flow.card.noPractice'))}</div>`;
   const vid=real?`<div class="sec"><h2>${esc(S('flow.card.video.h'))}</h2><button class="ui-btn ui-btn--video wide" data-act="gate" data-tab="video" data-via="card">${ic('game')}<span>${esc(S('flow.card.video'))}</span></button></div>`:`<div class="pendbox">${esc(S('flow.card.noVideo'))}</div>`;
-  const put=st.coll.has(id)?`<div class="cfoot">${plate('ui-plate--16 ui-plate--teal',pico('box')+esc(S('flow.box.collected')))}</div>`:`<div class="cfoot"><button class="ui-btn cd-btn-box" data-act="put" data-id="${id}">${ic('box')}${esc(S('flow.box.put'))}</button></div>`;
-  return `<div class="cbd">${prac}${vid}</div>${put}`;
+  const put=st.coll.has(id)?plate('ui-plate--16 ui-plate--teal',pico('box')+esc(S('flow.box.collected'))):'';
+  return `<div class="cbd">${prac}${vid}</div><div class="cfoot" id="bkfoot">${put}</div>`;
 }
+const putBtn=id=>`<button class="ui-btn ui-btn--gold" data-act="put" data-id="${id}">${ic('box')}<span>${esc(S('flow.box.put'))}</span></button>`;
 function cardOvHTML(){
-  const c=st.card;const n=N[c.id];const fs=c.from==='scene';const z=MN[c.id].zone;
-  const ttl=c.id==='M07'?S('flow.card.title'):n.concept;
-  const hd=face=>`<div class="chd"><svg viewBox="0 0 360 60" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-title-bar"/></svg><div class="tt">${face==='f'?`<h2>${esc(ttl)}</h2><small>${esc(n.env)}</small>`:`<h2>${esc(S('flow.card.back.title'))}</h2><small>${esc(ttl)}</small>`}</div></div>`;
+  const c=st.card;const n=N[c.id];const fs=c.from==='scene';
+  const ttl=LES[c.id]?LS(c.id,'title'):n.concept;
+  const norm=x=>x.replace(/[\u200c\u0654\u06c0\u0647]/g,'');
+  const sub=norm(n.concept).includes(norm(ttl))||norm(ttl).includes(norm(n.concept))?n.env:n.concept;
+  const hd=face=>`<div class="chd"><svg viewBox="0 0 360 60" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-title-bar"/></svg><div class="tt">${face==='f'?`<h2>${esc(ttl)}</h2><small>${esc(sub)}</small>`:`<h2>${esc(S('flow.card.back.title'))}</h2><small>${esc(ttl)}</small>`}</div></div>`;
   const frame=`<svg class="cd-frame" viewBox="0 0 390 392" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-frame-lesson"/></svg>`;
-  const goBtn=fs?'':`<div style="padding:0 24px 0"><button class="ui-btn ui-btn--sec ui-cut wide" data-act="gogame" data-id="${c.id}" style="min-block-size:48px">${ic('game')}<span>${esc(S('flow.card.goGame'))}: ${esc(n.env)}</span></button></div>`;
+  const open=nodeSt(c.id)!=='locked'&&nodeSt(c.id)!=='fog';
+  const foot=(!fs&&open)?`<div class="cfoot"><button class="ui-btn ui-btn--sec" data-act="gogame" data-id="${c.id}">${ic('game')}<span>${esc(S('flow.card.goGame'))}</span></button><svg class="cfb" viewBox="0 0 100 92" aria-hidden="true"><g class="cs-bust-64 ch-pose-point"><use class="ch-happy" href="#ch-b1"/></g></svg></div>`:'';
   return `<div class="cscrim" data-act="closecard"><svg viewBox="0 0 390 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#cd-night-bg"/></svg></div><div class="cbig" id="cbig" role="dialog" aria-modal="true" aria-label="${esc(ttl)}" data-world="night" data-light="night" style="--cd-zone:#46f0d8"><div class="cflip ${c.face==='back'?'back':''}" id="cflip">
-    <div class="cface" id="cfr" ${c.face==='back'?'aria-hidden="true"':''}>${frame}${hd('f')}${cardFront(c.id)}<div class="cfoot cfoot--f"><svg class="cfb" viewBox="0 0 100 92" aria-hidden="true"><g class="cs-bust-64 ch-pose-point"><use class="ch-happy" href="#ch-b1"/></g></svg>${fs?'':secBtnWide(c.id,n)}</div></div>
+    <div class="cface" id="cfr" ${c.face==='back'?'aria-hidden="true"':''}>${frame}${hd('f')}${cardFront(c.id)}${foot}</div>
     <div class="cface bk" id="cbk" ${c.face==='front'?'aria-hidden="true"':''}>${frame}${hd('b')}${cardBack(c.id)}</div></div></div>
-   <div class="cbar"><button class="ui-btn ui-btn--sec ui-cut" data-act="closecard">${icBack()}<span>${esc(S(fs?'flow.nav.toGame':'flow.nav.toBox'))}</span></button><button class="ui-btn ${c.face==='back'?'ui-btn--sec ui-cut':''}" data-act="flip" id="flipbtn">${ic('flip')}<span>${esc(S(c.face==='back'?'flow.card.flipBack':'flow.card.flip'))}</span></button></div>`;
+   <div class="cbar"><button class="ui-btn ui-btn--sec" data-act="closecard">${icBack()}<span>${esc(S(fs?'flow.nav.toGame':'flow.nav.toBox'))}</span></button><button class="ui-btn ${c.face==='back'?'ui-btn--sec':''}" data-act="flip" id="flipbtn">${ic('flip')}<span>${esc(S(c.face==='back'?'flow.card.flipBack':'flow.card.flip'))}</span></button></div>`;
 }
-const secBtnWide=(id,n)=>`<button class="ui-btn ui-btn--sec ui-cut wide" data-act="gogame" data-id="${id}">${ic('game')}<span>${esc(S('flow.card.goGame'))}</span></button>`;
 function openCard(id,from,el){
   if(nodeSt(id)==='locked'||nodeSt(id)==='fog'){st.lock=id;renderOv();return}
   if(!st.coll.has(id))st.seen.add(id);
@@ -651,7 +798,7 @@ function flipCard(){
   f.classList.toggle('back',back);
   $('#cfr').setAttribute('aria-hidden',back?'true':'false');$('#cbk').setAttribute('aria-hidden',back?'false':'true');
   const fb=$('#flipbtn');fb.querySelector('span').textContent=S(back?'flow.card.flipBack':'flow.card.flip');
-  fb.className='ui-btn '+(back?'ui-btn--sec ui-cut':'');
+  fb.className='ui-btn '+(back?'ui-btn--sec':'');
   document.querySelectorAll('#cv .cbd').forEach(e=>e.scrollTop=0);
   renderPanel();
 }
@@ -685,7 +832,7 @@ function miniHTML(id){
 }
 function boxScreen(){
   const q=st.q.trim();
-  const jump=D.chapters.map((c,i)=>`<button class="ui-btn ui-btn--sec ui-cut" data-act="jump" data-ch="${c.id}" data-n="${c.id}" aria-label="${esc(S('flow.thread.'+c.id+'.name'))}">${fa(i+1)}</button>`).join('');
+  const jump=D.chapters.map((c,i)=>`<button class="ui-chip" data-act="jump" data-ch="${c.id}" data-n="${c.id}" aria-label="${esc(S('flow.thread.'+c.id+'.name'))}"><svg class="ui-tick" aria-hidden="true"><use href="#ui-check"/></svg>${fa(i+1)}</button>`).join('');
   let shelves='';
   if(st.search&&q){
     const ids=D.order.filter(i=>listed(i)&&nodeSt(i)!=='fog'&&(N[i].concept.includes(q)||N[i].env.includes(q)));
@@ -695,7 +842,7 @@ function boxScreen(){
     const dots=ids.map(x=>{const s=cardSt(x);return `<i class="dot ${s==='collected'?'dot--got':s==='seen'?'dot--seen':''}"></i>`}).join('');
     const rows=[];for(let k=0;k<ids.length;k+=3)rows.push(`<div class="shelf__grid">${ids.slice(k,k+3).map(miniHTML).join('')}</div><svg class="shelf__plank" viewBox="0 0 360 40" aria-hidden="true"><use href="#cd-shelf"/></svg>`);
     return `<div class="shelf__sec" id="sh-${c.id}" data-ch="${c.id}"><div class="shelf__head"><span class="no">${fa(i+1)}</span><span class="t-h">${esc(S('flow.thread.'+c.id+'.name'))}</span><span class="shelf__dots" aria-hidden="true">${dots}</span></div><p class="shelf__line">${esc(S('flow.thread.'+c.id+'.line'))}</p>${rows.join('')}</div>`}).join('');
-  const sbtn=`<button class="ui-btn ui-btn--sec ui-cut" data-act="search" aria-pressed="${st.search}">${ic('search')}<span>${esc(S('flow.box.search'))}</span></button>`;
+  const sbtn=`<button class="ui-btn ui-btn--sec" data-act="search" aria-pressed="${st.search}">${ic('search')}<span>${esc(S('flow.box.search'))}</span></button>`;
   return `<div class="scr">${tb(menuBtn(),titleOf(S('flow.box.title')),sbtn)}
    ${st.search?`<div class="search"><input id="q" type="search" placeholder="${esc(S('flow.box.search'))}" value="${esc(st.q)}" aria-label="${esc(S('flow.box.search'))}"></div>`:''}
    <div class="jump" id="jump">${jump}</div>
@@ -716,56 +863,63 @@ function updateJump(){
 }
 
 /* ---------- تمرین (شب) ---------- */
+const pracId=()=>[...st.coll].find(i=>LES[i])||[...st.coll][0];
 function pracScreen(){
-  const has=st.coll.size>0;let inner;
+  const has=st.coll.size>0,pid=pracId();let inner;
   if(!has)inner=`<div class="prac"><p>${esc(S('flow.practice.empty'))}</p></div>`;
   else if(st.prac===0)inner=`<div class="prac"><p>${esc(S('flow.practice.lead'))}</p>${priBtn('pstart',esc(S('flow.practice.start')),'','wide')}</div>`;
-  else if(st.prac===1)inner=`<div class="prac">${probHTML('pb2')}<div id="pn" style="margin-top:12px;display:none">${priBtn('pnext',esc(S('flow.practice.next')),'','wide')}</div></div>`;
+  else if(st.prac===1)inner=`<div class="prac"><h2 class="sec" style="margin:0 0 8px;font:400 22px/1.3 var(--ui-font-title);color:var(--ui-cream)">${esc(LES[pid]?LS(pid,'title'):N[pid].concept)}</h2>${LES[pid]?probLesson(pid,'pb2'):`<div class="pendbox">${esc(S('flow.card.noPractice'))}</div>`}<div id="pn" style="margin-top:12px;${LES[pid]?'display:none':''}">${priBtn('pnext',esc(S('flow.practice.next')),'','wide')}</div></div>`;
   else inner=`<div class="prac"><p>${esc(S('flow.practice.end'))}</p></div>`;
   return `<div class="scr">${tb(menuBtn(),titleOf(S('flow.menu.practice')),spacer)}<div class="body">${inner}</div><div class="dock">${secBtn('toMap',ic('map')+esc(S('flow.nav.toMap')))}</div></div>`;
 }
 
 /* ---------- برگه‌ها و روکش‌ها ---------- */
+const band=t=>`<div class="ui-band"><h3>${esc(t)}</h3></div>`;
 function sheet(inner,label,cls=''){const night=worldOf()==='night';return `<div class="scrim" data-act="closeov"></div><div class="sheet ${night?'ui-sheet-night':'ui-sheet'} ${cls}" role="dialog" aria-label="${esc(label)}">${inner}</div>`}
 const backRow=(extra='')=>`<div class="btnrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${extra}</div>`;
 function lockSheet(id){
   const p=firstMissing(id);const n=N[id];const kind=st.scr==='box'?'concept':'env';
-  if(nodeSt(id)==='fog')return sheet(`<h3 class="st">${esc(S('flow.map.fog.sign'))}</h3><p class="why">${esc(S(st.scr==='box'?'flow.box.fog':'flow.map.fog.body'))}</p>${backRow(st.scr==='box'?priBtn('lockgo',esc(S('flow.lock.go')),`data-id="${D.entr[0]}"`):'')}`,S('flow.map.fog.sign'));
-  return sheet(`<h3 class="st">${esc(kind==='concept'?n.concept:n.env)}</h3><p class="ssub">${esc(kind==='concept'?n.env:n.concept)}</p><div class="srow">${plate('ui-plate--lock',pico('lock')+esc(lockText(id,kind)))}</div>${backRow(priBtn('lockgo',esc(S('flow.lock.go')),`data-id="${p}"`))}`,n.env);
+  if(nodeSt(id)==='fog')return sheet(`${band(S('flow.map.fog.sign'))}<p class="why">${esc(S(st.scr==='box'?'flow.box.fog':'flow.map.fog.body'))}</p>${backRow(st.scr==='box'?priBtn('lockgo',esc(S('flow.lock.go')),`data-id="${D.entr[0]}"`):'')}`,S('flow.map.fog.sign'));
+  return sheet(`${band(kind==='concept'?n.concept:n.env)}<p class="ssub">${esc(kind==='concept'?n.env:n.concept)}</p><div class="srow">${plate('ui-plate--lock',pico('lock')+esc(lockText(id,kind)))}</div>${backRow(priBtn('lockgo',esc(S('flow.lock.go')),`data-id="${p}"`))}`,n.env);
 }
 function searchRes(){
   const q=st.mq.trim();if(!q)return `<p class="ssub" style="margin-top:8px">${esc(S('v5.flow.search.hint'))}</p>`;
   const ids=D.order.filter(i=>vis(i)&&nodeSt(i)!=='fog'&&(N[i].concept.includes(q)||N[i].env.includes(q)));
   if(!ids.length)return `<p class="ssub" style="margin-top:8px">${esc(S('v5.flow.search.none'))}</p>`;
-  return `<div class="sres">${ids.map(i=>`<button class="ui-btn ui-btn--sec ui-cut" data-act="mapfind" data-id="${i}"><span>${esc(N[i].env)}<small>${esc(N[i].concept)}</small></span></button>`).join('')}</div>`;
+  return `<div class="sres">${ids.map(i=>`<button class="ui-btn ui-btn--sec" data-act="mapfind" data-id="${i}"><span>${esc(N[i].env)}<small>${esc(N[i].concept)}</small></span></button>`).join('')}</div>`;
 }
 function ovHTML(){
   if(st.lock)return lockSheet(st.lock);
-  if(st.peek){const n=N[st.peek];const tg=[];
+  if(st.peek){const n=N[st.peek];const tg=[];const side=isSide(n.id);
     if(n.id===st.here)tg.push(plate('ui-plate--here',pico('pin')+esc(S('flow.land.here'))));
     if(st.visited.has(n.id))tg.push(plate('ui-plate--fogs',pico('eye')+esc(S('flow.land.visited'))));
     if(n.trial)tg.push(plate('ui-plate--fogs',esc(S('flow.land.experimental'))));
     if(D.entr.includes(n.id)&&!fogOpen())tg.push(plate('ui-plate--fogs',pico('pin')+esc(S('flow.map.fog.sign'))));
-    const dr=['easy','mid','hard'].map(d=>`<span class="ui-hard">${diffBadge(d)}<span>${esc(diffWord(d))}</span></span>`).join('');
-    return sheet(`<h3 class="st">${esc(n.env)}</h3><p class="ssub">${esc(n.concept)}</p>${tg.length?`<div class="srow">${tg.join('')}</div>`:''}<div class="diffrow">${dr}</div><div class="btnrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${priBtn('enter',esc(S('flow.peek.enter')),`data-id="${n.id}"`)}</div>`,n.env);}
+    if(side)tg.push(plate('ui-plate--tag',esc(S('v5.side.tag'))));
+    const story=side&&SO(`v5.side.${n.id}.story`)?`<p class="lead">${esc(S('v5.side.lead'))}</p><p class="story">${esc(S(`v5.side.${n.id}.story`))}</p>`:'';
+    return sheet(`${band(n.env)}<p class="ssub">${esc(n.concept)}</p>${tg.length?`<div class="srow">${tg.join('')}</div>`:''}${story}<div class="btnrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${priBtn('enter',esc(S('flow.peek.enter')),`data-id="${n.id}"`)}</div>`,n.env);}
   if(st.overlay==='menu'){
     const tile=(act,art,key,dot)=>`<button class="ui-tile ${{map:'',cards:'ui-tile--violet',practice:'ui-tile--gold',guide:'ui-tile--pink'}[art]}" data-act="${act}">${dot?'<i class="ui-newdot"></i>':''}<svg class="ui-tile-art" viewBox="0 0 160 140" aria-hidden="true"><use href="#env_tile_${art}"/></svg>${esc(S(key))}</button>`;
     const t=[tile(st.scr==='map'?'menumap':'toMap','map','flow.menu.map'),tile('box','cards','flow.menu.cards'),tile('prac','practice','flow.menu.practice',st.coll.size>0),tile('replay','guide','flow.menu.guide')];
-    return sheet(`${bandChips()}<div class="tiles">${t.join('')}</div><div class="mrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${secBtn('srch',ic('search')+esc(S('flow.box.search')))}</div>${secBtn('gate',ic('eye')+esc(S('flow.menu.adults')),'data-tab="report" data-via="menu"','adults')}`,S('flow.menu.open'));}
-  if(st.overlay==='search')return sheet(`<h3 class="st">${esc(S('flow.box.search'))}</h3><input class="ui-input" id="mq" type="search" placeholder="${esc(S('v5.flow.search.ph'))}" value="${esc(st.mq)}" aria-label="${esc(S('flow.box.search'))}"><div id="sresw">${searchRes()}</div>${backRow()}`,S('flow.box.search'));
+    const baseRow=`<button class="ui-row" data-act="basesheet" data-t="base"><span class="rt"><b>${esc(S('v5.ui.base.row').replace('{b}',bandName(st.band)))}</b><small>${esc(S('v5.ui.base.row.sub'))}</small></span><svg class="bi ui-flip" aria-hidden="true"><use href="#ui-ic-next"/></svg></button>`;
+    return sheet(`${baseRow}<div class="tiles">${t.join('')}</div><div class="mrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${secBtn('srch',ic('search')+esc(S('flow.box.search')))}</div>${secBtn('gate',ic('eye')+esc(S('flow.menu.adults')),'data-tab="report" data-via="menu"','adults')}`,S('flow.menu.open'));}
+  if(st.overlay==='base'){
+    const opt=b=>`<button class="ui-opt" data-act="setband" data-b="${b}" aria-pressed="${st.band===b}"><span>${esc(S('v5.ui.base.label'))}: <bdi dir="rtl">${esc(bandName(b))}</bdi></span><i class="chk"><svg aria-hidden="true"><use href="#ui-check"/></svg></i></button>`;
+    return sheet(`${band(S('v5.ui.base.sheet.title'))}<div class="opts3">${[1,2,3].map(opt).join('')}</div><div class="btnrow">${secBtn('basemenu',icBack()+esc(S('flow.menu.back')))}</div>`,S('v5.ui.base.sheet.title'));}
+  if(st.overlay==='search')return sheet(`${band(S('flow.box.search'))}<input class="ui-input" id="mq" type="search" placeholder="${esc(S('v5.flow.search.ph'))}" value="${esc(st.mq)}" aria-label="${esc(S('flow.box.search'))}"><div id="sresw">${searchRes()}</div>${backRow()}`,S('flow.box.search'));
   if(st.overlay==='help'){
     const hs=[S('flow.help.h1'),S('flow.help.h2'),S('flow.help.h3')];
-    return sheet(`<h3 class="st">${esc(S('flow.help.title'))}</h3>${hs.slice(0,st.hint).map(h=>`<div class="hl">${esc(h)}</div>`).join('')}${st.hint<3?`<div class="btnrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${priBtn('hint',ic('hint')+esc(S('flow.help.more')))}</div>`:`<p style="font-weight:700">${esc(S('flow.help.end'))}</p>${backRow()}`}`,S('flow.help.title'));}
+    return sheet(`${band(S('flow.help.title'))}${hs.slice(0,st.hint).map(h=>`<div class="hl">${esc(h)}</div>`).join('')}${st.hint<3?`<div class="btnrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${priBtn('hint',ic('hint')+esc(S('flow.help.more')))}</div>`:`<p class="why">${esc(S('flow.help.end'))}</p>${backRow()}`}`,S('flow.help.title'));}
   if(st.overlay==='gate'){
     const viaCard=st.gateVia==='card';
-    if(!st.gateOK)return sheet(`<h3 class="st">${esc(S('flow.gate.title'))}</h3><p class="why" style="font-weight:400">${esc(S('flow.gate.lead'))}</p><button class="ui-btn ui-btn--hold hold" id="hold" aria-label="${esc(S('flow.gate.hold'))}"><i></i>${ic('hold')}<span>${esc(S('flow.gate.hold'))}</span></button>${backRow()}`,S('flow.gate.title'));
-    if(viaCard)return sheet(`<h3 class="st">${esc(S('flow.gate.tab.video'))}</h3><p style="margin:0 0 8px">${esc(S('flow.gate.video.lead'))}</p><div class="vl">${D.videos.map(v=>`<div><bdi dir="auto">${esc(v[0])}</bdi><small>${esc(v[1])} · ${esc(R['mock.video'])}</small></div>`).join('')}</div>${backRow()}`,S('flow.gate.tab.video'));
+    if(!st.gateOK)return sheet(`${band(S('flow.gate.title'))}<p class="why" style="font-weight:400">${esc(S('flow.gate.lead'))}</p><button class="ui-btn ui-btn--hold hold" id="hold" aria-label="${esc(S('flow.gate.hold'))}"><i></i>${ic('hold')}<span>${esc(S('flow.gate.hold'))}</span></button>${backRow()}`,S('flow.gate.title'));
+    if(viaCard)return sheet(`${band(S('flow.gate.tab.video'))}<p style="margin:0 0 8px">${esc(S('flow.gate.video.lead'))}</p><div class="vl">${D.videos.map(v=>`<div><bdi dir="auto">${esc(v[0])}</bdi><small>${esc(v[1])} · ${esc(R['mock.video'])}</small></div>`).join('')}</div>${backRow()}`,S('flow.gate.tab.video'));
     const tabs=[['report','flow.gate.tab.report'],['guide','flow.gate.tab.guide'],['code','flow.gate.tab.code']];
     let c='';
     if(st.gateTab==='report'){c=`<p style="margin:0 0 8px">${esc(S('flow.gate.report.lead'))}</p><div class="vl">${D.chapters.map(ch=>{const ids=ch.ids.filter(listed);const v=ids.filter(id=>st.visited.has(id));return `<div><b>${esc(S('flow.thread.'+ch.id+'.name'))}</b> · ${fa(v.length)} / ${fa(ids.length)}<small>${esc(v.map(id=>N[id].env).join('، '))}</small></div>`}).join('')}</div>`}
-    if(st.gateTab==='guide'){c=`<p style="margin:0 0 8px">${esc(S('flow.gate.guide.lead'))}</p><div class="acc">${[1,2,3,4,5].map(i=>`<div>${esc(S('flow.gate.guide.s'+i))}</div>`).join('')}</div>`}
+    if(st.gateTab==='guide'){c=`<p style="margin:0 0 8px">${esc(S('flow.gate.guide.lead'))}</p><div class="acc">${[1,2,3,4,5].map(i=>`<div>${esc(S('flow.gate.guide.s'+i))}</div>`).join('')}</div><h2 class="sec" style="font:400 22px/1.3 var(--ui-font-title);margin:12px 0 6px">${esc(S('lesson.teacher.h'))}</h2><div class="acc">${Object.keys(LES).map(i=>`<div><b>${esc(LS(i,'title'))}</b><br>${esc(S('lesson.teacher.mistake'))}: ${esc(LS(i,'mistake'))}<br>${esc(S('lesson.teacher.book'))}: ${esc(LS(i,'book'))}</div>`).join('')}</div>`}
     if(st.gateTab==='code'){c=`<p>${esc(S('flow.gate.code.lead'))}</p>`}
-    return sheet(`<h3 class="st">${esc(S('flow.gate.title'))}</h3><div class="gtabs">${tabs.map(([k,s])=>`<button class="ui-btn ui-btn--sec ui-cut ${st.gateTab===k?'on':''}" data-act="gtab" data-v="${k}">${esc(S(s))}</button>`).join('')}</div>${c}${backRow()}`,S('flow.gate.title'));}
+    return sheet(`${band(S('flow.gate.title'))}<div class="gtabs">${tabs.map(([k,s])=>`<button class="ui-tab ${st.gateTab===k?'on':''}" data-act="gtab" data-v="${k}">${esc(S(s))}</button>`).join('')}</div>${c}${backRow()}`,S('flow.gate.title'));}
   if(st.tut){
     const t=st.tut;const step=t.steps[t.i];const last=t.i===t.steps.length-1;
     return `<div class="tmask" data-act="noop"></div><div class="spot" id="spot"></div><div class="coach" id="coach" style="${step.pos==='top'?'top:72px':'bottom:12px'}"><div class="cg"><svg viewBox="0 0 100 92" aria-hidden="true"><g class="cs-bust-64 ch-pose-point"><use class="ch-happy" href="#ch-b1"/></g></svg></div><div class="cm"><p>${esc(S(step.k))}</p><div class="cr"><div class="st">${t.steps.map((_,j)=>`<i class="${j===t.i?'on':''}"></i>`).join('')}</div>${secBtn('tskip',esc(S('flow.skip')))}${priBtn(last?'tskip':'tnext',esc(S(last?'flow.done':'flow.next')))}</div></div></div>`}
@@ -786,7 +940,7 @@ function wireHold(h){
 }
 /* آموزش */
 function tutSteps(kind){
-  if(kind==='map')return[{k:'flow.tut.map1',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map2',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map.lock',sel:'.mn[data-state=locked]',pos:'bottom'},{k:'v5.flow.tut.base',sel:'[data-t=base]',pos:'bottom'},{k:'flow.tut.map3',sel:'[data-t=menu]',pos:'bottom'}].filter(s=>$('#app').querySelector(s.sel));
+  if(kind==='map')return[{k:'flow.tut.map1',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map2',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map.lock',sel:'.mn:not(.ui-side)[data-state=locked]',pos:'bottom'},{k:'flow.tut.map3',sel:'[data-t=menu]',pos:'bottom'}].filter(s=>$('#app').querySelector(s.sel));
   return[{k:'flow.tut.scene1',sel:'[data-t=arr]',pos:'top'},{k:'flow.tut.scene2',sel:'[data-t=pull]',pos:'top'},{k:'flow.tut.scene3',sel:'[data-t=help]',pos:'top'}];
 }
 function startTut(kind){st.overlay=null;st.peek=null;st.lock=null;st.tut={kind,steps:tutSteps(kind),i:0};renderOv()}
@@ -804,7 +958,7 @@ function placeSpot(){
   const pad=6;sp.style.cssText=`left:${r.left-pr.left-pad}px;top:${r.top-pr.top-pad}px;width:${r.right-r.left+pad*2}px;height:${r.bottom-r.top+pad*2}px`;
 }
 function afterRender(){
-  if(st.scr==='env'){const b=A('.envbody');if(b)b.scrollTop=0}
+  if(st.scr==='env'){const b=A('.envbody');if(b)b.scrollTop=0;syncStack();if(st.envEnter){st.envEnter=false;setTimeout(()=>{const c=$('#chs');if(c)c.classList.remove('enter')},1500)}}
   if(st.scr==='map'){
     layoutMap();const b=A('#mapbody');
     if(st.mapTop!==null){b.scrollTop=st.mapTop;st.mapTop=null}
@@ -836,16 +990,16 @@ function render(opts={}){
 }
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(st.scr==='map')layoutMap()});
 /* ---------- پنل بازبینی ---------- */
-function noteKey(){if(st.card)return'n.card';if(st.lock)return'n.lock';if(st.overlay==='gate')return'n.gate';if(st.overlay==='menu')return'n.menu';if(st.overlay==='help')return'n.help';if(st.overlay==='search')return'n.search';if(st.peek)return'n.peek';if(st.tut)return'n.tut';return{map:'n.map',env:'n.env',scene:'n.scene',box:'n.box',prac:'n.prac'}[st.scr]}
+function noteKey(){if(st.card)return'n.card';if(st.lock)return'n.lock';if(st.overlay==='gate')return'n.gate';if(st.overlay==='menu')return'n.menu';if(st.overlay==='base')return'n.base';if(st.overlay==='help')return'n.help';if(st.overlay==='search')return'n.search';if(st.peek)return'n.peek';if(st.tut)return'n.tut';return{map:'n.map',env:'n.env',scene:'n.scene',box:'n.box',prac:'n.prac'}[st.scr]}
 function renderPanel(){
-  const cur=st.card?'card':st.lock?'lock':st.overlay==='gate'?'gate':st.overlay==='menu'?'menu':st.overlay==='help'?'help':st.overlay==='search'?'search':st.peek?'peek':st.tut?'tut':st.scr;
-  const items=[['map','scr.map'],['peek','scr.peek'],['lock','scr.lock'],['env','scr.env'],['scene','scr.scene'],['card','scr.card'],['box','scr.box'],['prac','scr.prac'],['tut','scr.tut'],['menu','scr.menu'],['search','scr.search'],['help','scr.help'],['gate','scr.gate']];
+  const cur=st.card?'card':st.lock?'lock':st.overlay==='gate'?'gate':st.overlay==='menu'?'menu':st.overlay==='base'?'base':st.overlay==='help'?'help':st.overlay==='search'?'search':st.peek?'peek':st.tut?'tut':st.scr;
+  const items=[['map','scr.map'],['peek','scr.peek'],['lock','scr.lock'],['env','scr.env'],['scene','scr.scene'],['card','scr.card'],['box','scr.box'],['prac','scr.prac'],['tut','scr.tut'],['menu','scr.menu'],['base','scr.base'],['search','scr.search'],['help','scr.help'],['gate','scr.gate']];
   const n=R[noteKey()]||{what:'',real:'',ask:''};
   $('#rv').innerHTML=`<h2>${esc(R['panel.title'])}</h2><div class="rs">${esc(R['banner'])}</div>
-   <h3>${esc(R['panel.screens'])}</h3><div class="lst">${items.map(([k,t])=>`<button class="${cur===k?'on':''}" data-rv="${k}">${esc(R[t])}</button>`).join('')}</div>
+   <h3>${esc(R['panel.screens'])}</h3><div class="lst">${items.map(([k,t])=>`<button class="${cur===k?'on':''}" data-rv="${k}">${esc(R[t]||t)}</button>`).join('')}</div>
    <h3>${esc(R['panel.sample'])}</h3><div class="seg">${['start','mid','end'].map(k=>`<button class="${st.sample===k?'on':''}" data-sample="${k}">${esc(R['sample.'+k])}</button>`).join('')}</div>
    <div class="lst" style="margin-top:6px"><button data-rv="advance">${esc(R['panel.advance'])}</button></div>
-   <h3>${esc(R['panel.band'])}</h3><div class="seg">${[1,2,3].map(b=>`<button class="${st.band===b?'on':''}" data-band="${b}">${esc(D.card[b].band)}</button>`).join('')}</div>
+   <h3>${esc(R['panel.band'])}</h3><div class="seg">${[1,2,3].map(b=>`<button class="${st.band===b?'on':''}" data-band="${b}">${esc(bandName(b))}</button>`).join('')}</div>
    <h3>${esc(R['panel.settings'])}</h3>
    <label class="tg"><input type="checkbox" data-tg="fogClear" ${st.fogClear?'checked':''}>${esc(R['panel.fog'])}</label>
    <label class="tg"><input type="checkbox" data-tg="teacher" ${st.teacher?'checked':''}>${esc(R['panel.teacher'])}</label>
@@ -855,18 +1009,18 @@ function renderPanel(){
    <div class="lst" style="margin-top:6px"><button data-rv="reset">${esc(R['panel.reset'])}</button></div>
    <div class="note"><b>${esc(R['panel.what'])}</b><p>${esc(n.what)}</p><b>${esc(R['panel.real'])}</b><p>${esc(n.real)}</p><b>${esc(R['panel.ask'])}</b><p>${esc(n.ask)}</p></div>`;
 }
-/* advance: کودک محیط را تمام کرد؛ راهنما به گام بعد می‌رود */
+/* advance: کودک محیط را تمام کرد؛ راهنما به گام بعد می‌رود (مسیر جانبی اختیاری را نمی‌گیرد) */
 function advance(){
   const from=st.here;if(!st.visited.has(from))st.visited.add(from);
   st.seen.add(from);
-  const next=D.order.find(i=>vis(i)&&nodeSt(i)!=='fog'&&nodeSt(i)!=='locked'&&!st.visited.has(i)&&!(N[i].trial));
+  const next=D.order.find(i=>vis(i)&&!isSide(i)&&nodeSt(i)!=='fog'&&nodeSt(i)!=='locked'&&!st.visited.has(i)&&!(N[i].trial));
   st.here=next||from;st.arrive={from};st.nav=[];st.card=null;go('map',{},false,false);
 }
 /* ---------- رویدادها ---------- */
 document.addEventListener('click',e=>{
   const rv=e.target.closest('[data-rv]');
   if(rv){const k=rv.dataset.rv;document.body.classList.remove('rvopen');
-    if(k==='reset'){Object.assign(st,{band:1,teacher:false,storyLight:false,tutOn:true,tutDone:{map:false,scene:false},nav:[],prac:0,ord:[2,1,0],gateOK:false,card:null,boxTop:0,search:false,q:'',mq:''});loadSample('mid');st.cur='M07';go('map',{},false,false);return}
+    if(k==='reset'){Object.assign(st,{band:2,teacher:false,storyLight:false,tutOn:true,tutDone:{map:false,scene:false},nav:[],prac:0,ord:[2,1,0],gateOK:false,card:null,boxTop:0,search:false,q:'',mq:''});loadSample('mid');st.cur='M07';go('map',{},false,false);return}
     if(k==='advance'){advance();return}
     st.nav=[];st.gateOK=false;st.card=null;st.peek=null;st.lock=null;st.overlay=null;st.tut=null;
     const G=(s,p)=>go(s,p||{},false,false);
@@ -880,6 +1034,7 @@ document.addEventListener('click',e=>{
     else if(k==='prac')G('prac',{prac:0});
     else if(k==='tut'){if(st.scr!=='map'&&st.scr!=='scene')G('map');st.tutDone[st.scr]=false;startTut(st.scr==='map'?'map':'scene')}
     else if(k==='menu'){if(st.scr!=='map'&&st.scr!=='scene')G('map');st.overlay='menu';renderOv()}
+    else if(k==='base'){if(st.scr!=='map'&&st.scr!=='scene')G('map');st.overlay='base';renderOv()}
     else if(k==='search'){if(st.scr!=='map'&&st.scr!=='scene')G('map');st.overlay='search';st.mq='';renderOv()}
     else if(k==='help'){G('scene',{cur:'M07',tier:0});st.overlay='help';st.hint=1;renderOv()}
     else if(k==='gate'){st.overlay='gate';st.gateOK=false;st.gateTab='report';st.gateVia='menu';renderOv()}
@@ -896,6 +1051,9 @@ document.addEventListener('click',e=>{
    case'node':{const s=nodeSt(id);if(s==='locked'||s==='fog'){st.lock=id;st.peek=null;renderOv()}else{st.peek=id;st.lock=null;renderOv()}break}
    case'cardlock':st.lock=id;renderOv();break;
    case'closeov':st.peek=null;st.lock=null;st.overlay=null;st.gateOK=false;renderOv();break;
+   case'basesheet':st.overlay='base';renderOv();break;
+   case'basemenu':st.overlay='menu';renderOv();break;
+   case'setband':{st.band=+a.dataset.b;st.keepMap=true;render();break}
    case'lockgo':{st.lock=null;st.overlay=null;st.peek=null;if(st.scr!=='map'){st.nav=[];st.mapTop=null;go('map',{},false)}else renderOv();
      setTimeout(()=>{scrollMapTo(id,true);const nd=A(`.mn[data-n="${id}"]`);if(nd&&!rm()){nd.classList.add('flash');setTimeout(()=>nd.classList.remove('flash'),900)}},60);break}
    case'mapfind':{st.overlay=null;if(st.scr!=='map'){st.nav=[];st.mapTop=null;go('map',{},false)}else renderOv();
@@ -920,11 +1078,14 @@ document.addEventListener('click',e=>{
    case'swapcard':if(nodeSt(id)==='locked'){st.lock=id;renderOv()}else swapCard(id);break;
    case'flip':flipCard();break;
    case'closecard':closeCard();break;
-   case'put':{st.coll.add(id);st.seen.add(id);const f=$('#cbk .cfoot');if(f)f.innerHTML=plate('ui-plate--16 ui-plate--teal',pico('box')+esc(S('flow.box.collected')));if(!rm()&&f)f.animate([{transform:'scale(.9)',opacity:.4},{transform:'none',opacity:1}],{duration:260});refreshBox();break}
-   case'gogame':{e.stopPropagation();if(nodeSt(id)==='locked'){st.lock=id;renderOv()}else{st.card=null;$('#cv').innerHTML='';go('env',{cur:id})}break}
-   case'ans':{const box=a.closest('.prob');const fb=box.querySelector('.fb');const p=PROB[st.band];
-     if(+a.dataset.ok){box.querySelectorAll('.opts .ui-btn').forEach(x=>x.classList.remove('no'));a.classList.add('ok');fb.textContent=S(p.ok);const pn=$('#pn');if(pn)pn.style.display='block'}
-     else{a.classList.add('no');fb.textContent=S('flow.card.q.retry')}break}
+   case'put':{st.coll.add(id);st.seen.add(id);const f=$('#bkfoot')||$('#cbk .cfoot');if(f)f.innerHTML=plate('ui-plate--16 ui-plate--teal',pico('box')+esc(S('flow.box.collected')));if(!rm()&&f)f.animate([{transform:'scale(.9)',opacity:.4},{transform:'none',opacity:1}],{duration:260});refreshBox();break}
+   case'gogame':{e.stopPropagation();if(nodeSt(id)==='locked'){st.lock=id;renderOv()}else{/* ← برگهٔ مرحلهٔ همان موضوع، نه ورود مستقیم (UX: کارت‌دان) */
+       st.card=null;$('#cv').innerHTML='';st.nav=[];st.mapTop=null;st.peek=id;go('map',{},false,false);st.peek=id;renderOv();scrollMapTo(id,false)}break}
+   case'ans':{const box=a.closest('.prob');const fb=box.querySelector('.fb');const pid=box.dataset.id;
+     if(+a.dataset.ok){box.querySelectorAll('.opts .ui-btn').forEach(x=>x.classList.remove('no'));a.classList.add('ok');fb.textContent=LS(pid,'ok');
+       const pn=$('#pn');if(pn)pn.style.display='block';
+       const bf=$('#bkfoot');if(bf&&box.id==='pbk'&&!st.coll.has(pid)){bf.innerHTML=putBtn(pid);if(!rm())bf.animate([{transform:'translateY(8px)',opacity:0},{transform:'none',opacity:1}],{duration:240})}}
+     else{a.classList.add('no');a.setAttribute('aria-disabled','true');fb.textContent=S('flow.card.q.retry')}break}
    case'pstart':st.prac=1;render();break;
    case'pnext':st.prac=2;render();break;
    case'replay':{const k=st.scr==='scene'?'scene':'map';if(st.scr!=='map'&&st.scr!=='scene'){st.nav=[];go('map',{},false)}st.tutDone[k]=false;st.overlay=null;startTut(k);break}
@@ -939,7 +1100,6 @@ document.addEventListener('input',e=>{
   if(e.target.id==='mq'){st.mq=e.target.value;const w=$('#sresw');if(w)w.innerHTML=searchRes()}
 });
 document.addEventListener('keydown',e=>{
-  if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.cd-strip')){e.preventDefault();e.target.click();return}
   if(e.key==='Escape'){if(st.tut){st.tutDone[st.tut.kind]=true;st.tut=null;renderOv()}else if(st.peek||st.overlay||st.lock){st.peek=null;st.lock=null;st.overlay=null;st.gateOK=false;renderOv()}else if(st.card)closeCard()}});
 document.addEventListener('change',e=>{const g=e.target.closest('[data-tg]');if(!g)return;const k=g.dataset.tg;
   if(k==='rm'){document.body.classList.toggle('rm',g.checked);renderPanel();return}

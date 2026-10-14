@@ -3674,7 +3674,7 @@
     "flow.scene.arr.fixed",
     "text"
    ],
-   "text": "ثابت",
+   "text": "قرقرهٔ ثابت",
    "status": "draft"
   },
   "flow.scene.arr.moving": {
@@ -3689,7 +3689,7 @@
     "flow.scene.arr.moving",
     "text"
    ],
-   "text": "ثابت + متحرک",
+   "text": "قرقرهٔ ثابت و متحرک",
    "status": "draft"
   },
   "flow.scene.pull": {
@@ -3749,7 +3749,7 @@
     "flow.help.h1",
     "text"
    ],
-   "text": "به طناب نگاه کن: از روی کدام چرخ‌ها رد می‌شود؟",
+   "text": "به طناب نگاه کن: از روی کدام قرقره‌ها رد می‌شود؟",
    "status": "draft"
   },
   "flow.help.h2": {
@@ -3779,7 +3779,7 @@
     "flow.help.h3",
     "text"
    ],
-   "text": "مقایسه کن: با چرخِ متحرک، کشیدن آسان‌تر شد یا سخت‌تر؟",
+   "text": "مقایسه کن: با قرقرهٔ متحرک، کشیدن آسان‌تر شد یا سخت‌تر؟",
    "status": "draft"
   },
   "flow.help.more": {
@@ -3929,7 +3929,7 @@
     "flow.card.fixed",
     "text"
    ],
-   "text": "ثابت",
+   "text": "قرقرهٔ ثابت",
    "status": "draft"
   },
   "flow.card.moving": {
@@ -3944,7 +3944,7 @@
     "flow.card.moving",
     "text"
    ],
-   "text": "ثابت + متحرک",
+   "text": "قرقرهٔ ثابت و متحرک",
    "status": "draft"
   },
   "flow.card.load": {
@@ -4049,7 +4049,7 @@
     "flow.card.q1.ok",
     "text"
    ],
-   "text": "درست است. چرخِ متحرک کشیدن را آسان‌تر می‌کند.",
+   "text": "درست است. قرقرهٔ متحرک کشیدن را آسان‌تر می‌کند.",
    "status": "draft"
   },
   "flow.card.q2": {
@@ -4064,7 +4064,7 @@
     "flow.card.q2",
     "text"
    ],
-   "text": "بار ۶ است. با چرخِ متحرک، نیروی کشیدن چقدر می‌شود؟",
+   "text": "بار ۶ واحد است. با قرقرهٔ متحرک، نیروی کشیدن چند واحد می‌شود؟",
    "status": "draft"
   },
   "flow.card.q2.ok": {
@@ -6301,10 +6301,4255 @@
    ],
    "text": "اینجا پایهٔ خودت را انتخاب می‌کنی؛ نوشتهٔ کارت‌ها با آن عوض می‌شود.",
    "status": "draft"
+  },
+  "lesson.M07.b12.title": {
+   "id": "lesson.M07.b12.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت قرقرهٔ ثابت",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.title",
+    "text"
+   ],
+   "text": "قرقرهٔ ثابت",
+   "status": "draft"
+  },
+  "lesson.M07.b12.say": {
+   "id": "lesson.M07.b12.say",
+   "kind": "card",
+   "where_fa": "قرقرهٔ ثابت: say",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.say",
+    "text"
+   ],
+   "text": "قرقره چرخی است که طناب از رویش رد می‌شود. طناب را پایین می‌کشیم و بار بالا می‌رود. قرقرهٔ ثابت فقط جهت کشیدن را عوض می‌کند.",
+   "status": "draft"
+  },
+  "lesson.M07.b12.reminder": {
+   "id": "lesson.M07.b12.reminder",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: reminder",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.reminder",
+    "text"
+   ],
+   "text": "قرقرهٔ ثابت جهت کشیدن را عوض می‌کند.",
+   "status": "draft"
+  },
+  "lesson.M07.b12.q": {
+   "id": "lesson.M07.b12.q",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: q",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.q",
+    "text"
+   ],
+   "text": "با قرقرهٔ ثابت، دست طناب را به کدام طرف می‌کشد؟",
+   "status": "draft"
+  },
+  "lesson.M07.b12.ok": {
+   "id": "lesson.M07.b12.ok",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: ok",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.ok",
+    "text"
+   ],
+   "text": "درست است. دست پایین می‌کشد و بار بالا می‌رود.",
+   "status": "draft"
+  },
+  "lesson.M07.b12.mistake": {
+   "id": "lesson.M07.b12.mistake",
+   "kind": "explainer",
+   "where_fa": "قرقرهٔ ثابت: mistake",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.mistake",
+    "text"
+   ],
+   "text": "فرضِ ما (بدون مشاهدهٔ کودک): ممکن است فکر کند قرقره بار را سبک می‌کند. قرقرهٔ ثابت فقط جهت را عوض می‌کند. در پایهٔ ۲ «قرقره» یعنی چرخ ماشین بادکنکی؛ تصویر چرخِ شیاردار با طناب لازم است.",
+   "status": "draft"
+  },
+  "lesson.M07.b12.book": {
+   "id": "lesson.M07.b12.book",
+   "kind": "label",
+   "where_fa": "قرقرهٔ ثابت: book",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.book",
+    "text"
+   ],
+   "text": "پایهٔ ۵، درس ۹ (فقط کاربرد). در پایهٔ ۱ و ۲ نیست؛ هماهنگ است، نه مطابق (B۲۴).",
+   "status": "draft"
+  },
+  "lesson.M07.b12.o1": {
+   "id": "lesson.M07.b12.o1",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: گزینهٔ 1",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.o1",
+    "text"
+   ],
+   "text": "پایین ↓",
+   "status": "draft"
+  },
+  "lesson.M07.b12.o2": {
+   "id": "lesson.M07.b12.o2",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: گزینهٔ 2",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.o2",
+    "text"
+   ],
+   "text": "بالا ↑",
+   "status": "draft"
+  },
+  "lesson.M07.b12.answer": {
+   "id": "lesson.M07.b12.answer",
+   "kind": "meta",
+   "where_fa": "شمارهٔ گزینهٔ درست (از ۱)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b12.answer",
+    "text"
+   ],
+   "text": "1",
+   "status": "draft"
+  },
+  "lesson.M07.b34.title": {
+   "id": "lesson.M07.b34.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت قرقرهٔ ثابت",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.title",
+    "text"
+   ],
+   "text": "قرقرهٔ ثابت",
+   "status": "draft"
+  },
+  "lesson.M07.b34.say": {
+   "id": "lesson.M07.b34.say",
+   "kind": "card",
+   "where_fa": "قرقرهٔ ثابت: say",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.say",
+    "text"
+   ],
+   "text": "قرقره چرخی شیاردار است که طناب از رویش رد می‌شود. قرقرهٔ ثابت به سقف یا تیر وصل است. نیروی کشیدن کم نمی‌شود؛ فقط جهتش عوض می‌شود.",
+   "status": "draft"
+  },
+  "lesson.M07.b34.reminder": {
+   "id": "lesson.M07.b34.reminder",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: reminder",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.reminder",
+    "text"
+   ],
+   "text": "قرقرهٔ ثابت اندازهٔ نیرو را عوض نمی‌کند.",
+   "status": "draft"
+  },
+  "lesson.M07.b34.q": {
+   "id": "lesson.M07.b34.q",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: q",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.q",
+    "text"
+   ],
+   "text": "فلشِ بار ۶ واحد است. با قرقرهٔ ثابت، فلشِ کشیدن چند واحد است؟",
+   "status": "draft"
+  },
+  "lesson.M07.b34.ok": {
+   "id": "lesson.M07.b34.ok",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: ok",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.ok",
+    "text"
+   ],
+   "text": "درست است. اندازهٔ نیرو همان ۶ است؛ فقط جهتش پایین شد.",
+   "status": "draft"
+  },
+  "lesson.M07.b34.mistake": {
+   "id": "lesson.M07.b34.mistake",
+   "kind": "explainer",
+   "where_fa": "قرقرهٔ ثابت: mistake",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.mistake",
+    "text"
+   ],
+   "text": "فرضِ ما: «چرخ بیشتر یعنی نیروی کمتر». دو قرقرهٔ ثابت هم نیرو را کم نمی‌کنند.",
+   "status": "draft"
+  },
+  "lesson.M07.b34.book": {
+   "id": "lesson.M07.b34.book",
+   "kind": "label",
+   "where_fa": "قرقرهٔ ثابت: book",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.book",
+    "text"
+   ],
+   "text": "پایهٔ ۵، درس ۹ (فقط کاربرد). عدد و «واحد» ابتکار بازی است، نه کتاب.",
+   "status": "draft"
+  },
+  "lesson.M07.b34.o1": {
+   "id": "lesson.M07.b34.o1",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: گزینهٔ 1",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.o1",
+    "text"
+   ],
+   "text": "۳",
+   "status": "draft"
+  },
+  "lesson.M07.b34.o2": {
+   "id": "lesson.M07.b34.o2",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: گزینهٔ 2",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.o2",
+    "text"
+   ],
+   "text": "۶",
+   "status": "draft"
+  },
+  "lesson.M07.b34.o3": {
+   "id": "lesson.M07.b34.o3",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: گزینهٔ 3",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.o3",
+    "text"
+   ],
+   "text": "۱۲",
+   "status": "draft"
+  },
+  "lesson.M07.b34.answer": {
+   "id": "lesson.M07.b34.answer",
+   "kind": "meta",
+   "where_fa": "شمارهٔ گزینهٔ درست (از ۱)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b34.answer",
+    "text"
+   ],
+   "text": "2",
+   "status": "draft"
+  },
+  "lesson.M07.b56.title": {
+   "id": "lesson.M07.b56.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت قرقرهٔ ثابت",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.title",
+    "text"
+   ],
+   "text": "قرقرهٔ ثابت",
+   "status": "draft"
+  },
+  "lesson.M07.b56.say": {
+   "id": "lesson.M07.b56.say",
+   "kind": "card",
+   "where_fa": "قرقرهٔ ثابت: say",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.say",
+    "text"
+   ],
+   "text": "قرقرهٔ ثابت جهت نیرو را عوض می‌کند، نه اندازه‌اش را. طنابِ کشیده‌شده به‌اندازهٔ بالا رفتنِ بار پایین می‌آید.",
+   "status": "draft"
+  },
+  "lesson.M07.b56.eq": {
+   "id": "lesson.M07.b56.eq",
+   "kind": "label",
+   "where_fa": "قرقرهٔ ثابت: eq",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.eq",
+    "text"
+   ],
+   "text": "F = W     s = h",
+   "status": "draft"
+  },
+  "lesson.M07.b56.assume": {
+   "id": "lesson.M07.b56.assume",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: assume",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.assume",
+    "text"
+   ],
+   "text": "فرض: طناب و قرقره سبک‌اند و اصطکاک نداریم. F نیرویی است که بار را فقط نگه می‌دارد.",
+   "status": "draft"
+  },
+  "lesson.M07.b56.reminder": {
+   "id": "lesson.M07.b56.reminder",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: reminder",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.reminder",
+    "text"
+   ],
+   "text": "F = W؛ قرقرهٔ ثابت نیرو را کم نمی‌کند.",
+   "status": "draft"
+  },
+  "lesson.M07.b56.q": {
+   "id": "lesson.M07.b56.q",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: q",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.q",
+    "text"
+   ],
+   "text": "وزن بار ۶۰ نیوتون است. با یک قرقرهٔ ثابت، نیروی کشیدن F چند نیوتون است؟",
+   "status": "draft"
+  },
+  "lesson.M07.b56.ok": {
+   "id": "lesson.M07.b56.ok",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: ok",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.ok",
+    "text"
+   ],
+   "text": "درست است. F = W = ۶۰ نیوتون.",
+   "status": "draft"
+  },
+  "lesson.M07.b56.mistake": {
+   "id": "lesson.M07.b56.mistake",
+   "kind": "explainer",
+   "where_fa": "قرقرهٔ ثابت: mistake",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.mistake",
+    "text"
+   ],
+   "text": "فرضِ ما: ۳۰ را به‌خاطر «نصف شدن» انتخاب کند؛ نصف‌شدن فقط با قرقرهٔ متحرک است (کارت جرثقیل بندر).",
+   "status": "draft"
+  },
+  "lesson.M07.b56.book": {
+   "id": "lesson.M07.b56.book",
+   "kind": "label",
+   "where_fa": "قرقرهٔ ثابت: book",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.book",
+    "text"
+   ],
+   "text": "پایهٔ ۵، درس ۹ (فقط کاربرد)؛ پایهٔ ۶ نیوتون را دارد (درس ۷). رابطه از بیرون کتاب است.",
+   "status": "draft"
+  },
+  "lesson.M07.b56.o1": {
+   "id": "lesson.M07.b56.o1",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: گزینهٔ 1",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.o1",
+    "text"
+   ],
+   "text": "۳۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.M07.b56.o2": {
+   "id": "lesson.M07.b56.o2",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: گزینهٔ 2",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.o2",
+    "text"
+   ],
+   "text": "۶۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.M07.b56.o3": {
+   "id": "lesson.M07.b56.o3",
+   "kind": "hint",
+   "where_fa": "قرقرهٔ ثابت: گزینهٔ 3",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.o3",
+    "text"
+   ],
+   "text": "۱۲۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.M07.b56.answer": {
+   "id": "lesson.M07.b56.answer",
+   "kind": "meta",
+   "where_fa": "شمارهٔ گزینهٔ درست (از ۱)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M07.b56.answer",
+    "text"
+   ],
+   "text": "2",
+   "status": "draft"
+  },
+  "lesson.M04.b12.title": {
+   "id": "lesson.M04.b12.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت اهرم",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.title",
+    "text"
+   ],
+   "text": "اهرم",
+   "status": "draft"
+  },
+  "lesson.M04.b12.say": {
+   "id": "lesson.M04.b12.say",
+   "kind": "card",
+   "where_fa": "اهرم: say",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.say",
+    "text"
+   ],
+   "text": "اهرم میله‌ای است که روی تکیه‌گاه می‌چرخد. یک طرف را پایین می‌دهیم، طرف دیگر بالا می‌رود. اگر دورتر از تکیه‌گاه فشار بدهیم، بار آسان‌تر بلند می‌شود.",
+   "status": "draft"
+  },
+  "lesson.M04.b12.reminder": {
+   "id": "lesson.M04.b12.reminder",
+   "kind": "hint",
+   "where_fa": "اهرم: reminder",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.reminder",
+    "text"
+   ],
+   "text": "دور از تکیه‌گاه فشار بده؛ بلند کردن آسان‌تر است.",
+   "status": "draft"
+  },
+  "lesson.M04.b12.q": {
+   "id": "lesson.M04.b12.q",
+   "kind": "hint",
+   "where_fa": "اهرم: q",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.q",
+    "text"
+   ],
+   "text": "کجا فشار بدهیم تا سنگ آسان‌تر بلند شود؟",
+   "status": "draft"
+  },
+  "lesson.M04.b12.ok": {
+   "id": "lesson.M04.b12.ok",
+   "kind": "hint",
+   "where_fa": "اهرم: ok",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.ok",
+    "text"
+   ],
+   "text": "درست است. دور از تکیه‌گاه نیروی کمتری لازم است.",
+   "status": "draft"
+  },
+  "lesson.M04.b12.mistake": {
+   "id": "lesson.M04.b12.mistake",
+   "kind": "explainer",
+   "where_fa": "اهرم: mistake",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.mistake",
+    "text"
+   ],
+   "text": "فرضِ ما: ممکن است فکر کند اهرم بار را سبک می‌کند. بار همان است؛ نیرویی که ما می‌دهیم کمتر می‌شود.",
+   "status": "draft"
+  },
+  "lesson.M04.b12.book": {
+   "id": "lesson.M04.b12.book",
+   "kind": "label",
+   "where_fa": "اهرم: book",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.book",
+    "text"
+   ],
+   "text": "پایهٔ ۳، درس ۱۰ (تخته و تکیه‌گاه) و پایهٔ ۵، درس ۸.",
+   "status": "draft"
+  },
+  "lesson.M04.b12.o1": {
+   "id": "lesson.M04.b12.o1",
+   "kind": "hint",
+   "where_fa": "اهرم: گزینهٔ 1",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.o1",
+    "text"
+   ],
+   "text": "نزدیک تکیه‌گاه",
+   "status": "draft"
+  },
+  "lesson.M04.b12.o2": {
+   "id": "lesson.M04.b12.o2",
+   "kind": "hint",
+   "where_fa": "اهرم: گزینهٔ 2",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.o2",
+    "text"
+   ],
+   "text": "دور از تکیه‌گاه",
+   "status": "draft"
+  },
+  "lesson.M04.b12.answer": {
+   "id": "lesson.M04.b12.answer",
+   "kind": "meta",
+   "where_fa": "شمارهٔ گزینهٔ درست (از ۱)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b12.answer",
+    "text"
+   ],
+   "text": "2",
+   "status": "draft"
+  },
+  "lesson.M04.b34.title": {
+   "id": "lesson.M04.b34.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت اهرم",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.title",
+    "text"
+   ],
+   "text": "اهرم",
+   "status": "draft"
+  },
+  "lesson.M04.b34.say": {
+   "id": "lesson.M04.b34.say",
+   "kind": "card",
+   "where_fa": "اهرم: say",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.say",
+    "text"
+   ],
+   "text": "اهرم میله‌ای است که دور تکیه‌گاه می‌چرخد. هرچه فاصلهٔ دست ما تا تکیه‌گاه بیشتر باشد، نیروی کمتری لازم است. ولی دست ما مسافت بیشتری می‌رود.",
+   "status": "draft"
+  },
+  "lesson.M04.b34.reminder": {
+   "id": "lesson.M04.b34.reminder",
+   "kind": "hint",
+   "where_fa": "اهرم: reminder",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.reminder",
+    "text"
+   ],
+   "text": "دو برابر دورتر از تکیه‌گاه، نصفِ مهره کافی است.",
+   "status": "draft"
+  },
+  "lesson.M04.b34.q": {
+   "id": "lesson.M04.b34.q",
+   "kind": "hint",
+   "where_fa": "اهرم: q",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.q",
+    "text"
+   ],
+   "text": "سمت چپ ۴ مهره است و ۱ خانه از تکیه‌گاه فاصله دارد. سمت راست ۲ خانه از تکیه‌گاه فاصله دارد. چند مهره بگذاریم تا اهرم صاف بماند؟",
+   "status": "draft"
+  },
+  "lesson.M04.b34.ok": {
+   "id": "lesson.M04.b34.ok",
+   "kind": "hint",
+   "where_fa": "اهرم: ok",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.ok",
+    "text"
+   ],
+   "text": "درست است. ۲ مهره در ۲ خانه، با ۴ مهره در ۱ خانه برابر است.",
+   "status": "draft"
+  },
+  "lesson.M04.b34.mistake": {
+   "id": "lesson.M04.b34.mistake",
+   "kind": "explainer",
+   "where_fa": "اهرم: mistake",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.mistake",
+    "text"
+   ],
+   "text": "فرضِ ما: «دو طرف باید مهرهٔ برابر داشته باشند». این فقط وقتی درست است که فاصله‌ها برابر باشند.",
+   "status": "draft"
+  },
+  "lesson.M04.b34.book": {
+   "id": "lesson.M04.b34.book",
+   "kind": "label",
+   "where_fa": "اهرم: book",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.book",
+    "text"
+   ],
+   "text": "پایهٔ ۳، درس ۱۰ و پایهٔ ۵، درس ۸ (کیفی). «نصف در فاصلهٔ دو برابر» در کتاب‌های دبستان نیست؛ نیاز به تأیید مالک.",
+   "status": "draft"
+  },
+  "lesson.M04.b34.o1": {
+   "id": "lesson.M04.b34.o1",
+   "kind": "hint",
+   "where_fa": "اهرم: گزینهٔ 1",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.o1",
+    "text"
+   ],
+   "text": "۱",
+   "status": "draft"
+  },
+  "lesson.M04.b34.o2": {
+   "id": "lesson.M04.b34.o2",
+   "kind": "hint",
+   "where_fa": "اهرم: گزینهٔ 2",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.o2",
+    "text"
+   ],
+   "text": "۲",
+   "status": "draft"
+  },
+  "lesson.M04.b34.o3": {
+   "id": "lesson.M04.b34.o3",
+   "kind": "hint",
+   "where_fa": "اهرم: گزینهٔ 3",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.o3",
+    "text"
+   ],
+   "text": "۴",
+   "status": "draft"
+  },
+  "lesson.M04.b34.answer": {
+   "id": "lesson.M04.b34.answer",
+   "kind": "meta",
+   "where_fa": "شمارهٔ گزینهٔ درست (از ۱)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b34.answer",
+    "text"
+   ],
+   "text": "2",
+   "status": "draft"
+  },
+  "lesson.M04.b56.title": {
+   "id": "lesson.M04.b56.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت اهرم",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.title",
+    "text"
+   ],
+   "text": "اهرم",
+   "status": "draft"
+  },
+  "lesson.M04.b56.say": {
+   "id": "lesson.M04.b56.say",
+   "kind": "card",
+   "where_fa": "اهرم: say",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.say",
+    "text"
+   ],
+   "text": "اهرم وقتی صاف می‌ماند که «نیرو × فاصله تا تکیه‌گاه» در دو طرف برابر باشد. فاصلهٔ بیشتر یعنی نیروی کمتر، ولی دست مسافت بیشتری می‌رود.",
+   "status": "draft"
+  },
+  "lesson.M04.b56.eq": {
+   "id": "lesson.M04.b56.eq",
+   "kind": "label",
+   "where_fa": "اهرم: eq",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.eq",
+    "text"
+   ],
+   "text": "F × d۱ = W × d۲",
+   "status": "draft"
+  },
+  "lesson.M04.b56.assume": {
+   "id": "lesson.M04.b56.assume",
+   "kind": "hint",
+   "where_fa": "اهرم: assume",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.assume",
+    "text"
+   ],
+   "text": "فرض: اهرم سبک است، اصطکاک نداریم و نیرو بر اهرم عمود است. F نیروی دست، W وزن بار.",
+   "status": "draft"
+  },
+  "lesson.M04.b56.reminder": {
+   "id": "lesson.M04.b56.reminder",
+   "kind": "hint",
+   "where_fa": "اهرم: reminder",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.reminder",
+    "text"
+   ],
+   "text": "F × d۱ = W × d۲",
+   "status": "draft"
+  },
+  "lesson.M04.b56.q": {
+   "id": "lesson.M04.b56.q",
+   "kind": "hint",
+   "where_fa": "اهرم: q",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.q",
+    "text"
+   ],
+   "text": "وزن بار ۶۰ نیوتون است و ۵۰ سانتی‌متر از تکیه‌گاه فاصله دارد. دست ما ۱۵۰ سانتی‌متر از تکیه‌گاه فاصله دارد. نیروی لازم F چند نیوتون است؟",
+   "status": "draft"
+  },
+  "lesson.M04.b56.ok": {
+   "id": "lesson.M04.b56.ok",
+   "kind": "hint",
+   "where_fa": "اهرم: ok",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.ok",
+    "text"
+   ],
+   "text": "درست است. F × ۱۵۰ = ۶۰ × ۵۰، پس F = ۲۰ نیوتون.",
+   "status": "draft"
+  },
+  "lesson.M04.b56.mistake": {
+   "id": "lesson.M04.b56.mistake",
+   "kind": "explainer",
+   "where_fa": "اهرم: mistake",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.mistake",
+    "text"
+   ],
+   "text": "فرضِ ما: ضرب‌کردن در جای تقسیم (۱۸۰) یا فراموش‌کردن فاصله (۶۰).",
+   "status": "draft"
+  },
+  "lesson.M04.b56.book": {
+   "id": "lesson.M04.b56.book",
+   "kind": "label",
+   "where_fa": "اهرم: book",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.book",
+    "text"
+   ],
+   "text": "پایهٔ ۵، درس ۸ (بدون فرمول). رابطه از بیرون کتاب (علوم نهم)؛ برچسب «بیرون از کتاب» لازم است.",
+   "status": "draft"
+  },
+  "lesson.M04.b56.o1": {
+   "id": "lesson.M04.b56.o1",
+   "kind": "hint",
+   "where_fa": "اهرم: گزینهٔ 1",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.o1",
+    "text"
+   ],
+   "text": "۲۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.M04.b56.o2": {
+   "id": "lesson.M04.b56.o2",
+   "kind": "hint",
+   "where_fa": "اهرم: گزینهٔ 2",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.o2",
+    "text"
+   ],
+   "text": "۶۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.M04.b56.o3": {
+   "id": "lesson.M04.b56.o3",
+   "kind": "hint",
+   "where_fa": "اهرم: گزینهٔ 3",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.o3",
+    "text"
+   ],
+   "text": "۱۸۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.M04.b56.answer": {
+   "id": "lesson.M04.b56.answer",
+   "kind": "meta",
+   "where_fa": "شمارهٔ گزینهٔ درست (از ۱)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M04.b56.answer",
+    "text"
+   ],
+   "text": "1",
+   "status": "draft"
+  },
+  "lesson.M03.b12.title": {
+   "id": "lesson.M03.b12.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت سطح شیب‌دار",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.title",
+    "text"
+   ],
+   "text": "سطح شیب‌دار",
+   "status": "draft"
+  },
+  "lesson.M03.b12.say": {
+   "id": "lesson.M03.b12.say",
+   "kind": "card",
+   "where_fa": "سطح شیب‌دار: say",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.say",
+    "text"
+   ],
+   "text": "سطح شیب‌دار راهی کج برای بالا بردن بار است. بار را رویش هل می‌دهیم. سطح کم‌شیب درازتر است، ولی هل دادن آسان‌تر است.",
+   "status": "draft"
+  },
+  "lesson.M03.b12.reminder": {
+   "id": "lesson.M03.b12.reminder",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: reminder",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.reminder",
+    "text"
+   ],
+   "text": "سطح کم‌شیب درازتر است؛ هل دادن آسان‌تر است.",
+   "status": "draft"
+  },
+  "lesson.M03.b12.q": {
+   "id": "lesson.M03.b12.q",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: q",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.q",
+    "text"
+   ],
+   "text": "روی کدام سطح هل دادن جعبه آسان‌تر است؟",
+   "status": "draft"
+  },
+  "lesson.M03.b12.ok": {
+   "id": "lesson.M03.b12.ok",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: ok",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.ok",
+    "text"
+   ],
+   "text": "درست است. سطح دراز و کم‌شیب هل دادن را آسان‌تر می‌کند.",
+   "status": "draft"
+  },
+  "lesson.M03.b12.mistake": {
+   "id": "lesson.M03.b12.mistake",
+   "kind": "explainer",
+   "where_fa": "سطح شیب‌دار: mistake",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.mistake",
+    "text"
+   ],
+   "text": "فرضِ ما: «راهِ کوتاه همیشه بهتر است». آسان‌تر بودن بهایش درازتر شدن راه است.",
+   "status": "draft"
+  },
+  "lesson.M03.b12.book": {
+   "id": "lesson.M03.b12.book",
+   "kind": "label",
+   "where_fa": "سطح شیب‌دار: book",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.book",
+    "text"
+   ],
+   "text": "پایهٔ ۵، درس ۹. در پایهٔ ۱ فقط «جادهٔ شیب‌دار» روزمره (درس ۱۲).",
+   "status": "draft"
+  },
+  "lesson.M03.b12.o1": {
+   "id": "lesson.M03.b12.o1",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: گزینهٔ 1",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.o1",
+    "text"
+   ],
+   "text": "کوتاه و پرشیب",
+   "status": "draft"
+  },
+  "lesson.M03.b12.o2": {
+   "id": "lesson.M03.b12.o2",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: گزینهٔ 2",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.o2",
+    "text"
+   ],
+   "text": "دراز و کم‌شیب",
+   "status": "draft"
+  },
+  "lesson.M03.b12.answer": {
+   "id": "lesson.M03.b12.answer",
+   "kind": "meta",
+   "where_fa": "شمارهٔ گزینهٔ درست (از ۱)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b12.answer",
+    "text"
+   ],
+   "text": "2",
+   "status": "draft"
+  },
+  "lesson.M03.b34.title": {
+   "id": "lesson.M03.b34.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت سطح شیب‌دار",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.title",
+    "text"
+   ],
+   "text": "سطح شیب‌دار",
+   "status": "draft"
+  },
+  "lesson.M03.b34.say": {
+   "id": "lesson.M03.b34.say",
+   "kind": "card",
+   "where_fa": "سطح شیب‌دار: say",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.say",
+    "text"
+   ],
+   "text": "سطح شیب‌دار بار را بالا می‌برد. هرچه کم‌شیب‌تر و درازتر باشد، نیروی کمتری لازم است. ولی مسافت بیشتر می‌شود.",
+   "status": "draft"
+  },
+  "lesson.M03.b34.reminder": {
+   "id": "lesson.M03.b34.reminder",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: reminder",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.reminder",
+    "text"
+   ],
+   "text": "کشِ کمتر کشیده‌شده یعنی نیروی کمتر.",
+   "status": "draft"
+  },
+  "lesson.M03.b34.q": {
+   "id": "lesson.M03.b34.q",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: q",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.q",
+    "text"
+   ],
+   "text": "کش روی سطح دراز ۳ سانتی‌متر و روی سطح کوتاه ۵ سانتی‌متر کشیده شد. کدام سطح نیروی کمتری می‌خواهد؟",
+   "status": "draft"
+  },
+  "lesson.M03.b34.ok": {
+   "id": "lesson.M03.b34.ok",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: ok",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.ok",
+    "text"
+   ],
+   "text": "درست است. کش کمتر کشیده شد، پس نیرو کمتر است.",
+   "status": "draft"
+  },
+  "lesson.M03.b34.mistake": {
+   "id": "lesson.M03.b34.mistake",
+   "kind": "explainer",
+   "where_fa": "سطح شیب‌دار: mistake",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.mistake",
+    "text"
+   ],
+   "text": "فرضِ ما: عددِ بزرگ‌تر را «بهتر» می‌داند. اینجا عدد بزرگ‌تر یعنی نیروی بیشتر.",
+   "status": "draft"
+  },
+  "lesson.M03.b34.book": {
+   "id": "lesson.M03.b34.book",
+   "kind": "label",
+   "where_fa": "سطح شیب‌دار: book",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.book",
+    "text"
+   ],
+   "text": "پایهٔ ۵، درس ۹ (آزمایش کش و طول کش). عددها نمونه‌اند، نتیجهٔ آزمایش واقعی نیستند.",
+   "status": "draft"
+  },
+  "lesson.M03.b34.o1": {
+   "id": "lesson.M03.b34.o1",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: گزینهٔ 1",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.o1",
+    "text"
+   ],
+   "text": "دراز",
+   "status": "draft"
+  },
+  "lesson.M03.b34.o2": {
+   "id": "lesson.M03.b34.o2",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: گزینهٔ 2",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.o2",
+    "text"
+   ],
+   "text": "کوتاه",
+   "status": "draft"
+  },
+  "lesson.M03.b34.o3": {
+   "id": "lesson.M03.b34.o3",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: گزینهٔ 3",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.o3",
+    "text"
+   ],
+   "text": "فرقی ندارند",
+   "status": "draft"
+  },
+  "lesson.M03.b34.answer": {
+   "id": "lesson.M03.b34.answer",
+   "kind": "meta",
+   "where_fa": "شمارهٔ گزینهٔ درست (از ۱)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b34.answer",
+    "text"
+   ],
+   "text": "1",
+   "status": "draft"
+  },
+  "lesson.M03.b56.title": {
+   "id": "lesson.M03.b56.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت سطح شیب‌دار",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.title",
+    "text"
+   ],
+   "text": "سطح شیب‌دار",
+   "status": "draft"
+  },
+  "lesson.M03.b56.say": {
+   "id": "lesson.M03.b56.say",
+   "kind": "card",
+   "where_fa": "سطح شیب‌دار: say",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.say",
+    "text"
+   ],
+   "text": "سطح شیب‌دار نیروی لازم را کم می‌کند و مسافت را بیشتر.",
+   "status": "draft"
+  },
+  "lesson.M03.b56.eq": {
+   "id": "lesson.M03.b56.eq",
+   "kind": "label",
+   "where_fa": "سطح شیب‌دار: eq",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.eq",
+    "text"
+   ],
+   "text": "F × L = W × h",
+   "status": "draft"
+  },
+  "lesson.M03.b56.assume": {
+   "id": "lesson.M03.b56.assume",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: assume",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.assume",
+    "text"
+   ],
+   "text": "فرض: اصطکاک نداریم و نیرو موازی سطح است. در واقعیت اصطکاک کمی نیروی بیشتری می‌خواهد.",
+   "status": "draft"
+  },
+  "lesson.M03.b56.reminder": {
+   "id": "lesson.M03.b56.reminder",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: reminder",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.reminder",
+    "text"
+   ],
+   "text": "F × L = W × h",
+   "status": "draft"
+  },
+  "lesson.M03.b56.q": {
+   "id": "lesson.M03.b56.q",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: q",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.q",
+    "text"
+   ],
+   "text": "وزن جعبه ۱۲۰ نیوتون است. ارتفاع ۱ متر و طول سطح ۴ متر است. نیروی لازم F چند نیوتون است؟",
+   "status": "draft"
+  },
+  "lesson.M03.b56.ok": {
+   "id": "lesson.M03.b56.ok",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: ok",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.ok",
+    "text"
+   ],
+   "text": "درست است. F × ۴ = ۱۲۰ × ۱، پس F = ۳۰ نیوتون.",
+   "status": "draft"
+  },
+  "lesson.M03.b56.mistake": {
+   "id": "lesson.M03.b56.mistake",
+   "kind": "explainer",
+   "where_fa": "سطح شیب‌دار: mistake",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.mistake",
+    "text"
+   ],
+   "text": "فرضِ ما: ۱۲۰ را بدون تغییر نگه می‌دارد، یا ۴ را در ۱۲۰ ضرب می‌کند (۴۸۰).",
+   "status": "draft"
+  },
+  "lesson.M03.b56.book": {
+   "id": "lesson.M03.b56.book",
+   "kind": "label",
+   "where_fa": "سطح شیب‌دار: book",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.book",
+    "text"
+   ],
+   "text": "پایهٔ ۵، درس ۹ (کیفی). رابطه از بیرون کتاب؛ عمداً از «کار» (نیرو × جابه‌جایی) حرفی نزدم چون در هیچ کتاب دبستان نیست.",
+   "status": "draft"
+  },
+  "lesson.M03.b56.o1": {
+   "id": "lesson.M03.b56.o1",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: گزینهٔ 1",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.o1",
+    "text"
+   ],
+   "text": "۳۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.M03.b56.o2": {
+   "id": "lesson.M03.b56.o2",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: گزینهٔ 2",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.o2",
+    "text"
+   ],
+   "text": "۱۲۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.M03.b56.o3": {
+   "id": "lesson.M03.b56.o3",
+   "kind": "hint",
+   "where_fa": "سطح شیب‌دار: گزینهٔ 3",
+   "context_fa": "draft؛ دبیر علمی",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.o3",
+    "text"
+   ],
+   "text": "۴۸۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.M03.b56.answer": {
+   "id": "lesson.M03.b56.answer",
+   "kind": "meta",
+   "where_fa": "شمارهٔ گزینهٔ درست (از ۱)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.M03.b56.answer",
+    "text"
+   ],
+   "text": "1",
+   "status": "draft"
+  },
+  "lesson.fig.fulcrum": {
+   "id": "lesson.fig.fulcrum",
+   "kind": "card",
+   "where_fa": "برچسب نمودار اهرم",
+   "context_fa": "پلاک زیر نمودار؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.fulcrum",
+    "text"
+   ],
+   "text": "تکیه‌گاه",
+   "status": "draft"
+  },
+  "lesson.fig.legend.hand": {
+   "id": "lesson.fig.legend.hand",
+   "kind": "card",
+   "where_fa": "برچسب فلش نیرو در نمودار اهرم",
+   "context_fa": "راهنمای رنگ زیر نمودار؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.legend.hand",
+    "text"
+   ],
+   "text": "نیروی دست",
+   "status": "draft"
+  },
+  "lesson.fig.legend.push": {
+   "id": "lesson.fig.legend.push",
+   "kind": "card",
+   "where_fa": "برچسب فلش نیرو در نمودار سطح شیب‌دار",
+   "context_fa": "راهنمای رنگ زیر نمودار؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.legend.push",
+    "text"
+   ],
+   "text": "نیروی هل دادن",
+   "status": "draft"
+  },
+  "lesson.fig.legend.load": {
+   "id": "lesson.fig.legend.load",
+   "kind": "card",
+   "where_fa": "برچسب فلش بار در نمودار",
+   "context_fa": "راهنمای رنگ زیر نمودار؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.legend.load",
+    "text"
+   ],
+   "text": "بار",
+   "status": "draft"
+  },
+  "lesson.fig.M07.b34": {
+   "id": "lesson.fig.M07.b34",
+   "kind": "card",
+   "where_fa": "پلاک بار در نمودار قرقره (۳ و ۴)",
+   "context_fa": "«واحد» برای ۳ و ۴؛ draft",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.M07.b34",
+    "text"
+   ],
+   "text": "بار ۶ واحد",
+   "status": "draft"
+  },
+  "lesson.fig.M07.b56": {
+   "id": "lesson.fig.M07.b56",
+   "kind": "card",
+   "where_fa": "پلاک بار در نمودار قرقره (۵ و ۶)",
+   "context_fa": "draft",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.M07.b56",
+    "text"
+   ],
+   "text": "وزن بار ۶۰ نیوتون",
+   "status": "draft"
+  },
+  "lesson.fig.short": {
+   "id": "lesson.fig.short",
+   "kind": "card",
+   "where_fa": "برچسب سطح شیب‌دار کوتاه",
+   "context_fa": "نمودار سطح شیب‌دار؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.short",
+    "text"
+   ],
+   "text": "کوتاه و پرشیب",
+   "status": "draft"
+  },
+  "lesson.fig.long": {
+   "id": "lesson.fig.long",
+   "kind": "card",
+   "where_fa": "برچسب سطح شیب‌دار دراز",
+   "context_fa": "نمودار سطح شیب‌دار؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.long",
+    "text"
+   ],
+   "text": "دراز و کم‌شیب",
+   "status": "draft"
+  },
+  "lesson.fig.near": {
+   "id": "lesson.fig.near",
+   "kind": "card",
+   "where_fa": "برچسب نقطهٔ نزدیک به تکیه‌گاه",
+   "context_fa": "نمودار اهرم ۱ و ۲؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.near",
+    "text"
+   ],
+   "text": "نزدیک",
+   "status": "draft"
+  },
+  "lesson.fig.far": {
+   "id": "lesson.fig.far",
+   "kind": "card",
+   "where_fa": "برچسب نقطهٔ دور از تکیه‌گاه",
+   "context_fa": "نمودار اهرم ۱ و ۲؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.fig.far",
+    "text"
+   ],
+   "text": "دور",
+   "status": "draft"
+  },
+  "lesson.back.hint.h": {
+   "id": "lesson.back.hint.h",
+   "kind": "card",
+   "where_fa": "سرتیتر یادآوری زیر پرسش",
+   "context_fa": "پشت کارت؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.back.hint.h",
+    "text"
+   ],
+   "text": "یادآوری",
+   "status": "draft"
+  },
+  "lesson.teacher.h": {
+   "id": "lesson.teacher.h",
+   "kind": "card",
+   "where_fa": "سرتیتر بخش معلم",
+   "context_fa": "تب «راهنمای معلم»؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.teacher.h",
+    "text"
+   ],
+   "text": "کارت‌های نمونه: اشتباه محتمل و پیوند با کتاب",
+   "status": "draft"
+  },
+  "lesson.teacher.mistake": {
+   "id": "lesson.teacher.mistake",
+   "kind": "card",
+   "where_fa": "برچسب اشتباه محتمل",
+   "context_fa": "تب «راهنمای معلم»؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.teacher.mistake",
+    "text"
+   ],
+   "text": "اشتباه محتمل",
+   "status": "draft"
+  },
+  "lesson.teacher.book": {
+   "id": "lesson.teacher.book",
+   "kind": "card",
+   "where_fa": "برچسب پیوند با کتاب",
+   "context_fa": "تب «راهنمای معلم»؛ draft",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/lesson/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "lesson.teacher.book",
+    "text"
+   ],
+   "text": "پیوند با کتاب",
+   "status": "draft"
+  },
+  "spec.row.btn_primary": {
+   "id": "spec.row.btn_primary",
+   "kind": "ui",
+   "where_fa": "نام ردیف دکمهٔ اصلی در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.btn_primary",
+    "text"
+   ],
+   "text": "دکمهٔ اصلی",
+   "status": "draft"
+  },
+  "spec.desc.btn_primary": {
+   "id": "spec.desc.btn_primary",
+   "kind": "ui",
+   "where_fa": "spec.desc.btn_primary",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.btn_primary",
+    "text"
+   ],
+   "text": "کار اصلی هر صفحه (برویم، تمرین، بذارش توی جعبه). رنگ پر زندهٔ v4 (فیروزه‌ای، زرد، صورتی، بنفش)؛ متن سفید لالهزار با حاشیهٔ ضخیم هم‌خانواده.",
+   "status": "draft"
+  },
+  "spec.row.btn_secondary": {
+   "id": "spec.row.btn_secondary",
+   "kind": "ui",
+   "where_fa": "نام ردیف دکمهٔ ثانویه در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.btn_secondary",
+    "text"
+   ],
+   "text": "دکمهٔ ثانویه",
+   "status": "draft"
+  },
+  "spec.desc.btn_secondary": {
+   "id": "spec.desc.btn_secondary",
+   "kind": "ui",
+   "where_fa": "spec.desc.btn_secondary",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.btn_secondary",
+    "text"
+   ],
+   "text": "کار دوم (برگرد، جستجو). هم‌شکل دکمهٔ اصلی؛ روز کرمی با متن سرمه‌ای، شب لیلکیِ زنده با متن سفید و حاشیه.",
+   "status": "draft"
+  },
+  "spec.row.btn_icon": {
+   "id": "spec.row.btn_icon",
+   "kind": "ui",
+   "where_fa": "نام ردیف دکمهٔ آیکونی در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.btn_icon",
+    "text"
+   ],
+   "text": "دکمهٔ آیکونی",
+   "status": "draft"
+  },
+  "spec.desc.btn_icon": {
+   "id": "spec.desc.btn_icon",
+   "kind": "ui",
+   "where_fa": "spec.desc.btn_icon",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.btn_icon",
+    "text"
+   ],
+   "text": "فقط آیکون، مثل دکمهٔ منو. مربع گرد ۵۶ پیکسل؛ نامش برای صفحه‌خوان از متن می‌آید.",
+   "status": "draft"
+  },
+  "spec.row.chip_simple": {
+   "id": "spec.row.chip_simple",
+   "kind": "ui",
+   "where_fa": "نام ردیف چیپ ساده در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.chip_simple",
+    "text"
+   ],
+   "text": "چیپ ساده",
+   "status": "draft"
+  },
+  "spec.desc.chip_simple": {
+   "id": "spec.desc.chip_simple",
+   "kind": "ui",
+   "where_fa": "spec.desc.chip_simple",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.chip_simple",
+    "text"
+   ],
+   "text": "برچسب انتخاب کوچک، مثل «همه» و «دیده‌شده». خاموش سفید (شب بنفش تیره) با متن لالهزار؛ انتخاب‌شده زردِ زنده با تیک و متن سفید با حاشیه.",
+   "status": "draft"
+  },
+  "spec.row.challenge_row": {
+   "id": "spec.row.challenge_row",
+   "kind": "ui",
+   "where_fa": "نام ردیف ردیف چالش در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.challenge_row",
+    "text"
+   ],
+   "text": "ردیف چالش",
+   "status": "draft"
+  },
+  "spec.desc.challenge_row": {
+   "id": "spec.desc.challenge_row",
+   "kind": "ui",
+   "where_fa": "spec.desc.challenge_row",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.challenge_row",
+    "text"
+   ],
+   "text": "ردیف هر چالش در فهرست. نشان سختی (سبز، نارنجی، قرمز زنده) رنگ ثابت دارد و فقط اینجا، در پشتهٔ چالش و در نوار مأموریت می‌آید، نه روی برگهٔ مرحله.",
+   "status": "draft"
+  },
+  "spec.row.map_label": {
+   "id": "spec.row.map_label",
+   "kind": "ui",
+   "where_fa": "نام ردیف برچسب نقشه در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.map_label",
+    "text"
+   ],
+   "text": "برچسب نقشه",
+   "status": "draft"
+  },
+  "spec.desc.map_label": {
+   "id": "spec.desc.map_label",
+   "kind": "ui",
+   "where_fa": "spec.desc.map_label",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.map_label",
+    "text"
+   ],
+   "text": "اسم گره روی نقشه: لالهزار روی پلاک کرم با متن سرمه‌ای. نوشتهٔ لخت روی نقشه ممنوع.",
+   "status": "draft"
+  },
+  "spec.row.zone_title": {
+   "id": "spec.row.zone_title",
+   "kind": "ui",
+   "where_fa": "نام ردیف عنوان زمین در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.zone_title",
+    "text"
+   ],
+   "text": "عنوان زمین",
+   "status": "draft"
+  },
+  "spec.desc.zone_title": {
+   "id": "spec.desc.zone_title",
+   "kind": "ui",
+   "where_fa": "spec.desc.zone_title",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.zone_title",
+    "text"
+   ],
+   "text": "عنوان بزرگ زمین، حداکثر سه کلمه: لالهزار سفید با حاشیهٔ سرمه‌ای و سایهٔ پایین. روی نقشه فقط اینجا نوشتهٔ بدون پلاک می‌آید.",
+   "status": "draft"
+  },
+  "spec.row.plate": {
+   "id": "spec.row.plate",
+   "kind": "ui",
+   "where_fa": "نام ردیف پلاک در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.plate",
+    "text"
+   ],
+   "text": "پلاک",
+   "status": "draft"
+  },
+  "spec.desc.plate": {
+   "id": "spec.desc.plate",
+   "kind": "ui",
+   "where_fa": "spec.desc.plate",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.plate",
+    "text"
+   ],
+   "text": "برچسب کوچک لالهزار (تو اینجایی، اول: …، تازه). دکمه نیست. «تو اینجایی» و «تازه» روی پر زرد و صورتی زنده با متن سفید و حاشیه.",
+   "status": "draft"
+  },
+  "spec.row.sheet": {
+   "id": "spec.row.sheet",
+   "kind": "ui",
+   "where_fa": "نام ردیف برگه در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.sheet",
+    "text"
+   ],
+   "text": "برگه",
+   "status": "draft"
+  },
+  "spec.desc.sheet": {
+   "id": "spec.desc.sheet",
+   "kind": "ui",
+   "where_fa": "spec.desc.sheet",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.sheet",
+    "text"
+   ],
+   "text": "برگهٔ پایین صفحه، همهٔ گوشه‌ها گرد و ۸ پیکسل از لبهٔ صفحه جدا. نوار عنوان بنفش با عنوان لالهزار سفید؛ متن توضیحی Vazirmatn روی کرم.",
+   "status": "draft"
+  },
+  "spec.row.tab": {
+   "id": "spec.row.tab",
+   "kind": "ui",
+   "where_fa": "نام ردیف تب در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.tab",
+    "text"
+   ],
+   "text": "تب",
+   "status": "draft"
+  },
+  "spec.desc.tab": {
+   "id": "spec.desc.tab",
+   "kind": "ui",
+   "where_fa": "spec.desc.tab",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.tab",
+    "text"
+   ],
+   "text": "تب‌های صفحهٔ بزرگ‌ترها و مانند آن، متن لالهزار. تب روشن روز سرمه‌ای با نوار زرد (شب: فیروزه‌ای زنده با متن سفید و حاشیه).",
+   "status": "draft"
+  },
+  "spec.row.tile_menu": {
+   "id": "spec.row.tile_menu",
+   "kind": "ui",
+   "where_fa": "نام ردیف کاشی منو در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.tile_menu",
+    "text"
+   ],
+   "text": "کاشی منو",
+   "status": "draft"
+  },
+  "spec.desc.tile_menu": {
+   "id": "spec.desc.tile_menu",
+   "kind": "ui",
+   "where_fa": "spec.desc.tile_menu",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.tile_menu",
+    "text"
+   ],
+   "text": "کاشی‌های بزرگ منو؛ چهار رنگ زندهٔ v4؛ نام لالهزار سفید با حاشیه زیر تصویر.",
+   "status": "draft"
+  },
+  "spec.row.tile_card": {
+   "id": "spec.row.tile_card",
+   "kind": "ui",
+   "where_fa": "نام ردیف کاشی کارت‌دان در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.tile_card",
+    "text"
+   ],
+   "text": "کاشی کارت‌دان",
+   "status": "draft"
+  },
+  "spec.desc.tile_card": {
+   "id": "spec.desc.tile_card",
+   "kind": "ui",
+   "where_fa": "spec.desc.tile_card",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.tile_card",
+    "text"
+   ],
+   "text": "کارت‌های کارت‌دان؛ چهار حالت (دیده‌شده، جمع‌شده، تازه، قفل)؛ نام لالهزار روی پلاک تیره.",
+   "status": "draft"
+  },
+  "spec.row.lock": {
+   "id": "spec.row.lock",
+   "kind": "ui",
+   "where_fa": "نام ردیف قفل در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.lock",
+    "text"
+   ],
+   "text": "قفل",
+   "status": "draft"
+  },
+  "spec.desc.lock": {
+   "id": "spec.desc.lock",
+   "kind": "ui",
+   "where_fa": "توضیح ردیف قفل",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.lock",
+    "text"
+   ],
+   "text": "نشان قفل ۳۶ پیکسل؛ خودش دکمه نیست. دکمه همان گره، ردیف یا کاشی است.",
+   "status": "draft"
+  },
+  "spec.part.badge": {
+   "id": "spec.part.badge",
+   "kind": "ui",
+   "where_fa": "spec.part.badge",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.badge",
+    "text"
+   ],
+   "text": "نشان سختی: لالهزار سفید با حاشیه روی رنگ ثابتِ زنده",
+   "status": "draft"
+  },
+  "spec.part.check_badge": {
+   "id": "spec.part.check_badge",
+   "kind": "ui",
+   "where_fa": "spec.part.check_badge",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.check_badge",
+    "text"
+   ],
+   "text": "تیک روی گزینهٔ انتخاب‌شده",
+   "status": "draft"
+  },
+  "spec.part.name_plate": {
+   "id": "spec.part.name_plate",
+   "kind": "ui",
+   "where_fa": "توضیح بخش درونی",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.name_plate",
+    "text"
+   ],
+   "text": "پلاک نام کارت",
+   "status": "draft"
+  },
+  "spec.part.tab_bar": {
+   "id": "spec.part.tab_bar",
+   "kind": "ui",
+   "where_fa": "توضیح بخش درونی",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.tab_bar",
+    "text"
+   ],
+   "text": "نوار زیر تب فعال",
+   "status": "draft"
+  },
+  "spec.forbid.dark_on_violet": {
+   "id": "spec.forbid.dark_on_violet",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.dark_on_violet",
+    "text"
+   ],
+   "text": "متن تیره روی بنفش چیپ",
+   "status": "draft"
+  },
+  "spec.forbid.dark_on_sea": {
+   "id": "spec.forbid.dark_on_sea",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.dark_on_sea",
+    "text"
+   ],
+   "text": "متن تیره روی آبی دریا",
+   "status": "draft"
+  },
+  "spec.forbid.dark_on_card_blue": {
+   "id": "spec.forbid.dark_on_card_blue",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.dark_on_card_blue",
+    "text"
+   ],
+   "text": "متن تیره روی آبی-فیروزه‌ای جلوی کارت",
+   "status": "draft"
+  },
+  "spec.forbid.dark_on_purple": {
+   "id": "spec.forbid.dark_on_purple",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.dark_on_purple",
+    "text"
+   ],
+   "text": "متن تیره روی بنفش «نگه‌دار»",
+   "status": "draft"
+  },
+  "spec.forbid.pale_violet_on_navy": {
+   "id": "spec.forbid.pale_violet_on_navy",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.pale_violet_on_navy",
+    "text"
+   ],
+   "text": "عنوان بنفش کم‌رنگ روی سرمه‌ای",
+   "status": "draft"
+  },
+  "spec.forbid.purple_on_night": {
+   "id": "spec.forbid.purple_on_night",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.purple_on_night",
+    "text"
+   ],
+   "text": "متن بنفش روشن روی شب",
+   "status": "draft"
+  },
+  "spec.forbid.chip_violet_on_navy": {
+   "id": "spec.forbid.chip_violet_on_navy",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.chip_violet_on_navy",
+    "text"
+   ],
+   "text": "بنفش چیپ به‌عنوان نوشته روی سرمه‌ای",
+   "status": "draft"
+  },
+  "spec.forbid.chip_violet_on_night": {
+   "id": "spec.forbid.chip_violet_on_night",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.chip_violet_on_night",
+    "text"
+   ],
+   "text": "بنفش چیپ به‌عنوان نوشته روی شب",
+   "status": "draft"
+  },
+  "spec.forbid.dash_on_navy": {
+   "id": "spec.forbid.dash_on_navy",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.dash_on_navy",
+    "text"
+   ],
+   "text": "بنفش خط‌چین روی سرمه‌ای",
+   "status": "draft"
+  },
+  "spec.forbid.cream_on_grass": {
+   "id": "spec.forbid.cream_on_grass",
+   "kind": "ui",
+   "where_fa": "spec.forbid.cream_on_grass",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.cream_on_grass",
+    "text"
+   ],
+   "text": "کرم لخت روی چمن (بدون حاشیه یا پلاک ممنوع؛ با حاشیهٔ ۶px سرمه‌ای مجاز)",
+   "status": "draft"
+  },
+  "spec.forbid.cream_on_farm": {
+   "id": "spec.forbid.cream_on_farm",
+   "kind": "ui",
+   "where_fa": "spec.forbid.cream_on_farm",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.cream_on_farm",
+    "text"
+   ],
+   "text": "کرم لخت روی مزرعه (بدون حاشیه یا پلاک ممنوع؛ با حاشیهٔ ۶px سرمه‌ای مجاز)",
+   "status": "draft"
+  },
+  "spec.forbid.cream_on_sand": {
+   "id": "spec.forbid.cream_on_sand",
+   "kind": "ui",
+   "where_fa": "spec.forbid.cream_on_sand",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.cream_on_sand",
+    "text"
+   ],
+   "text": "کرم لخت روی شن (بدون حاشیه یا پلاک ممنوع؛ با حاشیهٔ ۶px سرمه‌ای مجاز)",
+   "status": "draft"
+  },
+  "spec.forbid.bright_on_cream": {
+   "id": "spec.forbid.bright_on_cream",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.bright_on_cream",
+    "text"
+   ],
+   "text": "رنگ روشن (فیروزه‌ای، زرد، لیلکی) به‌عنوان نوشته روی کرم",
+   "status": "draft"
+  },
+  "spec.forbid.violet_on_locked": {
+   "id": "spec.forbid.violet_on_locked",
+   "kind": "ui",
+   "where_fa": "علت جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.violet_on_locked",
+    "text"
+   ],
+   "text": "بنفش روی زمینهٔ قفل",
+   "status": "draft"
+  },
+  "spec.title": {
+   "id": "spec.title",
+   "kind": "ui",
+   "where_fa": "عنوان صفحهٔ نمونه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.title",
+    "text"
+   ],
+   "text": "قالب‌نامهٔ کنترل‌ها",
+   "status": "draft"
+  },
+  "spec.sub": {
+   "id": "spec.sub",
+   "kind": "ui",
+   "where_fa": "زیرعنوان صفحهٔ نمونه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.sub",
+    "text"
+   ],
+   "text": "همهٔ دکمه‌ها، چیپ‌ها و پلاک‌ها یک‌دست، در روز و شب",
+   "status": "draft"
+  },
+  "spec.mode.day": {
+   "id": "spec.mode.day",
+   "kind": "ui",
+   "where_fa": "برچسب حالت روز",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.mode.day",
+    "text"
+   ],
+   "text": "روز",
+   "status": "draft"
+  },
+  "spec.mode.night": {
+   "id": "spec.mode.night",
+   "kind": "ui",
+   "where_fa": "برچسب حالت شب",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.mode.night",
+    "text"
+   ],
+   "text": "شب",
+   "status": "draft"
+  },
+  "spec.state.normal": {
+   "id": "spec.state.normal",
+   "kind": "ui",
+   "where_fa": "برچسب حالت",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.state.normal",
+    "text"
+   ],
+   "text": "عادی",
+   "status": "draft"
+  },
+  "spec.state.pressed": {
+   "id": "spec.state.pressed",
+   "kind": "ui",
+   "where_fa": "برچسب حالت",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.state.pressed",
+    "text"
+   ],
+   "text": "فشرده",
+   "status": "draft"
+  },
+  "spec.state.disabled": {
+   "id": "spec.state.disabled",
+   "kind": "ui",
+   "where_fa": "برچسب حالت",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.state.disabled",
+    "text"
+   ],
+   "text": "غیرفعال",
+   "status": "draft"
+  },
+  "spec.state.focus": {
+   "id": "spec.state.focus",
+   "kind": "ui",
+   "where_fa": "برچسب حالت",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.state.focus",
+    "text"
+   ],
+   "text": "فوکوس",
+   "status": "draft"
+  },
+  "spec.cap.fmt": {
+   "id": "spec.cap.fmt",
+   "kind": "ui",
+   "where_fa": "سطر مشخصات زیر هر ردیف",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.cap.fmt",
+    "text"
+   ],
+   "text": "شعاع {r} · {font} {size} · لمس {touch}",
+   "status": "draft"
+  },
+  "spec.cap.fmt.nobtn": {
+   "id": "spec.cap.fmt.nobtn",
+   "kind": "ui",
+   "where_fa": "سطر مشخصات ردیف غیردکمه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.cap.fmt.nobtn",
+    "text"
+   ],
+   "text": "شعاع {r} · {font} {size} · دکمه نیست",
+   "status": "draft"
+  },
+  "spec.cap.fmt.text": {
+   "id": "spec.cap.fmt.text",
+   "kind": "ui",
+   "where_fa": "سطر مشخصات عنوان زمین",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.cap.fmt.text",
+    "text"
+   ],
+   "text": "{font} {size} · حاشیه {halo}",
+   "status": "draft"
+  },
+  "spec.sec.forbid": {
+   "id": "spec.sec.forbid",
+   "kind": "ui",
+   "where_fa": "عنوان بخش",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.sec.forbid",
+    "text"
+   ],
+   "text": "جفت‌های ممنوع",
+   "status": "draft"
+  },
+  "spec.sec.forbid.intro": {
+   "id": "spec.sec.forbid.intro",
+   "kind": "ui",
+   "where_fa": "spec.sec.forbid.intro",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.sec.forbid.intro",
+    "text"
+   ],
+   "text": "عدد، نسبت کنتراست خام متن به پر است. «هر اندازه» یعنی حتی برای متن بزرگ ناخوان است (زیر ۳)؛ «زیر ۲۴px» یعنی فقط برای لالهزار ۲۴ به بالا می‌شود (۳ تا ۴٫۵). ستون «با حاشیه» سنجش پیکسلی دور حروف است: پر زنده تیره نمی‌شود؛ نوشتهٔ روشن روی آن فقط با حاشیهٔ ضخیم هم‌خانواده (سنجش مؤثر ≥۴٫۵) مجاز است.",
+   "status": "draft"
+  },
+  "spec.forbid.tag": {
+   "id": "spec.forbid.tag",
+   "kind": "ui",
+   "where_fa": "برچسب نمونهٔ ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.tag",
+    "text"
+   ],
+   "text": "ممنوع",
+   "status": "draft"
+  },
+  "spec.forbid.sample": {
+   "id": "spec.forbid.sample",
+   "kind": "ui",
+   "where_fa": "نوشتهٔ نمونه روی جفت ممنوع",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.sample",
+    "text"
+   ],
+   "text": "نمونه",
+   "status": "draft"
+  },
+  "spec.sec.allowed": {
+   "id": "spec.sec.allowed",
+   "kind": "ui",
+   "where_fa": "عنوان بخش",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.sec.allowed",
+    "text"
+   ],
+   "text": "رنگ نوشتهٔ مجاز روی تیره",
+   "status": "draft"
+  },
+  "spec.sec.allowed.intro": {
+   "id": "spec.sec.allowed.intro",
+   "kind": "ui",
+   "where_fa": "توضیح بخش",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.sec.allowed.intro",
+    "text"
+   ],
+   "text": "عنوان و متن روی سرمه‌ای یا شب فقط با این رنگ‌ها.",
+   "status": "draft"
+  },
+  "spec.s.go": {
+   "id": "spec.s.go",
+   "kind": "ui",
+   "where_fa": "نمونهٔ دکمه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.go",
+    "text"
+   ],
+   "text": "برویم به این محیط",
+   "status": "draft"
+  },
+  "spec.s.video": {
+   "id": "spec.s.video",
+   "kind": "ui",
+   "where_fa": "نمونهٔ دکمه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.video",
+    "text"
+   ],
+   "text": "فیلم",
+   "status": "draft"
+  },
+  "spec.s.box": {
+   "id": "spec.s.box",
+   "kind": "ui",
+   "where_fa": "نمونهٔ دکمه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.box",
+    "text"
+   ],
+   "text": "بذارش توی جعبه",
+   "status": "draft"
+  },
+  "spec.s.hold": {
+   "id": "spec.s.hold",
+   "kind": "ui",
+   "where_fa": "نمونهٔ دکمه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.hold",
+    "text"
+   ],
+   "text": "نگه‌دار",
+   "status": "draft"
+  },
+  "spec.s.back": {
+   "id": "spec.s.back",
+   "kind": "ui",
+   "where_fa": "نمونهٔ دکمه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.back",
+    "text"
+   ],
+   "text": "برگرد",
+   "status": "draft"
+  },
+  "spec.s.search": {
+   "id": "spec.s.search",
+   "kind": "ui",
+   "where_fa": "نمونهٔ دکمه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.search",
+    "text"
+   ],
+   "text": "جستجو",
+   "status": "draft"
+  },
+  "spec.s.menu": {
+   "id": "spec.s.menu",
+   "kind": "ui",
+   "where_fa": "نام آیکون منو",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.menu",
+    "text"
+   ],
+   "text": "منو",
+   "status": "draft"
+  },
+  "spec.s.base": {
+   "id": "spec.s.base",
+   "kind": "ui",
+   "where_fa": "نمونهٔ چیپ پایه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.base",
+    "text"
+   ],
+   "text": "پایه",
+   "status": "draft"
+  },
+  "spec.s.b12": {
+   "id": "spec.s.b12",
+   "kind": "ui",
+   "where_fa": "نمونهٔ چیپ پایه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.b12",
+    "text"
+   ],
+   "text": "۱ تا ۲",
+   "status": "draft"
+  },
+  "spec.s.b34": {
+   "id": "spec.s.b34",
+   "kind": "ui",
+   "where_fa": "نمونهٔ چیپ پایه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.b34",
+    "text"
+   ],
+   "text": "۳ تا ۴",
+   "status": "draft"
+  },
+  "spec.s.b56": {
+   "id": "spec.s.b56",
+   "kind": "ui",
+   "where_fa": "نمونهٔ چیپ پایه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.b56",
+    "text"
+   ],
+   "text": "۵ تا ۶",
+   "status": "draft"
+  },
+  "spec.s.all": {
+   "id": "spec.s.all",
+   "kind": "ui",
+   "where_fa": "نمونهٔ چیپ ساده",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.all",
+    "text"
+   ],
+   "text": "همه",
+   "status": "draft"
+  },
+  "spec.s.seen": {
+   "id": "spec.s.seen",
+   "kind": "ui",
+   "where_fa": "نمونهٔ چیپ ساده",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.seen",
+    "text"
+   ],
+   "text": "دیده‌شده",
+   "status": "draft"
+  },
+  "spec.s.kept": {
+   "id": "spec.s.kept",
+   "kind": "ui",
+   "where_fa": "نمونهٔ چیپ ساده",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.kept",
+    "text"
+   ],
+   "text": "جمع‌شده",
+   "status": "draft"
+  },
+  "spec.s.ch1": {
+   "id": "spec.s.ch1",
+   "kind": "ui",
+   "where_fa": "نمونهٔ ردیف چالش",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.ch1",
+    "text"
+   ],
+   "text": "اسکلهٔ ماهیگیری",
+   "status": "draft"
+  },
+  "spec.s.ch2": {
+   "id": "spec.s.ch2",
+   "kind": "ui",
+   "where_fa": "نمونهٔ ردیف چالش",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.ch2",
+    "text"
+   ],
+   "text": "اسکلهٔ دزدان دریایی",
+   "status": "draft"
+  },
+  "spec.s.ch3": {
+   "id": "spec.s.ch3",
+   "kind": "ui",
+   "where_fa": "نمونهٔ ردیف چالش",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.ch3",
+    "text"
+   ],
+   "text": "شکار اژدر",
+   "status": "draft"
+  },
+  "spec.s.easy": {
+   "id": "spec.s.easy",
+   "kind": "ui",
+   "where_fa": "واژهٔ سختی",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.easy",
+    "text"
+   ],
+   "text": "آسان",
+   "status": "draft"
+  },
+  "spec.s.mid": {
+   "id": "spec.s.mid",
+   "kind": "ui",
+   "where_fa": "واژهٔ سختی",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.mid",
+    "text"
+   ],
+   "text": "متوسط",
+   "status": "draft"
+  },
+  "spec.s.hard": {
+   "id": "spec.s.hard",
+   "kind": "ui",
+   "where_fa": "واژهٔ سختی",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.hard",
+    "text"
+   ],
+   "text": "سخت",
+   "status": "draft"
+  },
+  "spec.s.lbl1": {
+   "id": "spec.s.lbl1",
+   "kind": "ui",
+   "where_fa": "نمونهٔ برچسب نقشه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.lbl1",
+    "text"
+   ],
+   "text": "جرثقیل بندر",
+   "status": "draft"
+  },
+  "spec.s.lbl2": {
+   "id": "spec.s.lbl2",
+   "kind": "ui",
+   "where_fa": "نمونهٔ برچسب نقشه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.lbl2",
+    "text"
+   ],
+   "text": "لنگرگاه",
+   "status": "draft"
+  },
+  "spec.s.z_sports": {
+   "id": "spec.s.z_sports",
+   "kind": "ui",
+   "where_fa": "نمونهٔ عنوان زمین",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.z_sports",
+    "text"
+   ],
+   "text": "ورزشگاه",
+   "status": "draft"
+  },
+  "spec.s.z_space": {
+   "id": "spec.s.z_space",
+   "kind": "ui",
+   "where_fa": "نمونهٔ عنوان زمین",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.z_space",
+    "text"
+   ],
+   "text": "پایگاه فضایی",
+   "status": "draft"
+  },
+  "spec.s.z_farm": {
+   "id": "spec.s.z_farm",
+   "kind": "ui",
+   "where_fa": "نمونهٔ عنوان زمین",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.z_farm",
+    "text"
+   ],
+   "text": "مزرعه و آسیاب",
+   "status": "draft"
+  },
+  "spec.s.z_city": {
+   "id": "spec.s.z_city",
+   "kind": "ui",
+   "where_fa": "نمونهٔ عنوان زمین",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.z_city",
+    "text"
+   ],
+   "text": "شهر صنعتی",
+   "status": "draft"
+  },
+  "spec.s.z_sand": {
+   "id": "spec.s.z_sand",
+   "kind": "ui",
+   "where_fa": "نمونهٔ عنوان زمین",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.z_sand",
+    "text"
+   ],
+   "text": "ساحل",
+   "status": "draft"
+  },
+  "spec.s.z_ice": {
+   "id": "spec.s.z_ice",
+   "kind": "ui",
+   "where_fa": "نمونهٔ عنوان زمین",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.z_ice",
+    "text"
+   ],
+   "text": "یخ‌چال",
+   "status": "draft"
+  },
+  "spec.s.here": {
+   "id": "spec.s.here",
+   "kind": "ui",
+   "where_fa": "نمونهٔ پلاک",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.here",
+    "text"
+   ],
+   "text": "تو اینجایی",
+   "status": "draft"
+  },
+  "spec.s.first": {
+   "id": "spec.s.first",
+   "kind": "ui",
+   "where_fa": "نمونهٔ پلاک",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.first",
+    "text"
+   ],
+   "text": "اول: اسکله",
+   "status": "draft"
+  },
+  "spec.s.newp": {
+   "id": "spec.s.newp",
+   "kind": "ui",
+   "where_fa": "نمونهٔ پلاک",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.newp",
+    "text"
+   ],
+   "text": "تازه",
+   "status": "draft"
+  },
+  "spec.s.sheet_title": {
+   "id": "spec.s.sheet_title",
+   "kind": "ui",
+   "where_fa": "نمونهٔ عنوان برگه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.sheet_title",
+    "text"
+   ],
+   "text": "اسکله",
+   "status": "draft"
+  },
+  "spec.s.sheet_long": {
+   "id": "spec.s.sheet_long",
+   "kind": "ui",
+   "where_fa": "spec.s.sheet_long",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.sheet_long",
+    "text"
+   ],
+   "text": "اسکلهٔ بزرگ ماهیگیری",
+   "status": "draft"
+  },
+  "spec.s.sheet_body": {
+   "id": "spec.s.sheet_body",
+   "kind": "ui",
+   "where_fa": "نمونهٔ متن برگه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.sheet_body",
+    "text"
+   ],
+   "text": "قرقرهٔ ثابت؛ نیرو را از بالا می‌کشیم.",
+   "status": "draft"
+  },
+  "spec.s.tab1": {
+   "id": "spec.s.tab1",
+   "kind": "ui",
+   "where_fa": "نمونهٔ تب",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.tab1",
+    "text"
+   ],
+   "text": "گزارش",
+   "status": "draft"
+  },
+  "spec.s.tab2": {
+   "id": "spec.s.tab2",
+   "kind": "ui",
+   "where_fa": "نمونهٔ تب",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.tab2",
+    "text"
+   ],
+   "text": "تنظیم‌ها",
+   "status": "draft"
+  },
+  "spec.s.tab3": {
+   "id": "spec.s.tab3",
+   "kind": "ui",
+   "where_fa": "نمونهٔ تب",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.tab3",
+    "text"
+   ],
+   "text": "راهنما",
+   "status": "draft"
+  },
+  "spec.s.t_map": {
+   "id": "spec.s.t_map",
+   "kind": "ui",
+   "where_fa": "نمونهٔ کاشی منو",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.t_map",
+    "text"
+   ],
+   "text": "نقشه",
+   "status": "draft"
+  },
+  "spec.s.t_cards": {
+   "id": "spec.s.t_cards",
+   "kind": "ui",
+   "where_fa": "نمونهٔ کاشی منو",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.t_cards",
+    "text"
+   ],
+   "text": "کارت‌دان",
+   "status": "draft"
+  },
+  "spec.s.t_prac": {
+   "id": "spec.s.t_prac",
+   "kind": "ui",
+   "where_fa": "نمونهٔ کاشی منو",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.t_prac",
+    "text"
+   ],
+   "text": "تمرین",
+   "status": "draft"
+  },
+  "spec.s.t_guide": {
+   "id": "spec.s.t_guide",
+   "kind": "ui",
+   "where_fa": "نمونهٔ کاشی منو",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.t_guide",
+    "text"
+   ],
+   "text": "راهنما",
+   "status": "draft"
+  },
+  "spec.s.cn1": {
+   "id": "spec.s.cn1",
+   "kind": "ui",
+   "where_fa": "نمونهٔ نام کارت",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.cn1",
+    "text"
+   ],
+   "text": "قرقرهٔ ثابت",
+   "status": "draft"
+  },
+  "spec.s.cn2": {
+   "id": "spec.s.cn2",
+   "kind": "ui",
+   "where_fa": "نمونهٔ نام کارت",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.cn2",
+    "text"
+   ],
+   "text": "اهرم",
+   "status": "draft"
+  },
+  "spec.s.cn3": {
+   "id": "spec.s.cn3",
+   "kind": "ui",
+   "where_fa": "نمونهٔ نام کارت",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.cn3",
+    "text"
+   ],
+   "text": "گوه",
+   "status": "draft"
+  },
+  "spec.s.cn4": {
+   "id": "spec.s.cn4",
+   "kind": "ui",
+   "where_fa": "نمونهٔ نام کارت",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.cn4",
+    "text"
+   ],
+   "text": "چرخ‌دنده",
+   "status": "draft"
+  },
+  "spec.s.st_locked": {
+   "id": "spec.s.st_locked",
+   "kind": "ui",
+   "where_fa": "نام نشان قفل",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.st_locked",
+    "text"
+   ],
+   "text": "قفل",
+   "status": "draft"
+  },
+  "spec.cap.fmt.iconbtn": {
+   "id": "spec.cap.fmt.iconbtn",
+   "kind": "ui",
+   "where_fa": "سطر مشخصات دکمهٔ آیکونی",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.cap.fmt.iconbtn",
+    "text"
+   ],
+   "text": "شعاع {r} · آیکون {icon} · لمس {touch}",
+   "status": "draft"
+  },
+  "spec.cap.fmt.icon": {
+   "id": "spec.cap.fmt.icon",
+   "kind": "ui",
+   "where_fa": "سطر مشخصات قفل",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.cap.fmt.icon",
+    "text"
+   ],
+   "text": "دایره {size} · دکمه نیست",
+   "status": "draft"
+  },
+  "spec.row.base_picker": {
+   "id": "spec.row.base_picker",
+   "kind": "ui",
+   "where_fa": "نام ردیف انتخاب پایه در قالب‌نامه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.base_picker",
+    "text"
+   ],
+   "text": "انتخاب پایه",
+   "status": "draft"
+  },
+  "spec.desc.base_picker": {
+   "id": "spec.desc.base_picker",
+   "kind": "ui",
+   "where_fa": "توضیح ردیف انتخاب پایه",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.base_picker",
+    "text"
+   ],
+   "text": "انتخابگر پایه یک ردیف در «منو» است، نه چیپ دائم بالای نقشه. ردیف پایهٔ فعلی را نشان می‌دهد و با لمس برگهٔ انتخاب (۱ تا ۲، ۳ تا ۴، ۵ تا ۶) باز می‌شود. گزینهٔ انتخاب‌شده زردِ زنده با تیک است.",
+   "status": "draft"
+  },
+  "spec.row.challenge_stack": {
+   "id": "spec.row.challenge_stack",
+   "kind": "ui",
+   "where_fa": "نام ردیف پشتهٔ چالش",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.challenge_stack",
+    "text"
+   ],
+   "text": "پشتهٔ کارت چالش",
+   "status": "draft"
+  },
+  "spec.desc.challenge_stack": {
+   "id": "spec.desc.challenge_stack",
+   "kind": "ui",
+   "where_fa": "توضیح پشتهٔ چالش",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.challenge_stack",
+    "text"
+   ],
+   "text": "سه چالش بعد از ورود به محیط: سبز جلو، نارنجی پشتش، قرمز پشت همه. اینجا فقط شکل ایستاست؛ حرکتش را طراح حرکت می‌نویسد. نوارهای پشت دکمه نیستند؛ لمس از آنِ کارت جلوست.",
+   "status": "draft"
+  },
+  "spec.row.side_path": {
+   "id": "spec.row.side_path",
+   "kind": "ui",
+   "where_fa": "نام ردیف مسیر جانبی",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.row.side_path",
+    "text"
+   ],
+   "text": "مسیر جانبی اختیاری",
+   "status": "draft"
+  },
+  "spec.desc.side_path": {
+   "id": "spec.desc.side_path",
+   "kind": "ui",
+   "where_fa": "توضیح مسیر جانبی",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.desc.side_path",
+    "text"
+   ],
+   "text": "مرحله‌ای که برای پایهٔ کودک نیست، روی نقشه یک جادهٔ فرعی نقطه‌چین است با گرهٔ لبه‌خط‌چین و پلاک «اختیاری». راه اصلی ممتد است؛ فرعی نقطه‌چین. خودِ گره دکمه است (۵۶ پیکسل).",
+   "status": "draft"
+  },
+  "spec.part.row_sub": {
+   "id": "spec.part.row_sub",
+   "kind": "ui",
+   "where_fa": "spec.part.row_sub",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.row_sub",
+    "text"
+   ],
+   "text": "جملهٔ کوتاه زیر عنوان ردیف (Vazirmatn کرم روی بنفش)",
+   "status": "draft"
+  },
+  "spec.part.sheet_band": {
+   "id": "spec.part.sheet_band",
+   "kind": "ui",
+   "where_fa": "spec.part.sheet_band",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.sheet_band",
+    "text"
+   ],
+   "text": "نوار عنوان برگه (لالهزار سفید روی بنفش)",
+   "status": "draft"
+  },
+  "spec.part.side_dots": {
+   "id": "spec.part.side_dots",
+   "kind": "ui",
+   "where_fa": "spec.part.side_dots",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.side_dots",
+    "text"
+   ],
+   "text": "نقطه‌چین مسیر جانبی (کرم با لبهٔ سرمه‌ای)",
+   "status": "draft"
+  },
+  "spec.part.side_label": {
+   "id": "spec.part.side_label",
+   "kind": "ui",
+   "where_fa": "spec.part.side_label",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.side_label",
+    "text"
+   ],
+   "text": "برچسب گرهٔ جانبی",
+   "status": "draft"
+  },
+  "spec.part.side_tag": {
+   "id": "spec.part.side_tag",
+   "kind": "ui",
+   "where_fa": "spec.part.side_tag",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.side_tag",
+    "text"
+   ],
+   "text": "پلاک «اختیاری»",
+   "status": "draft"
+  },
+  "spec.part.stack_sub": {
+   "id": "spec.part.stack_sub",
+   "kind": "ui",
+   "where_fa": "spec.part.stack_sub",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.part.stack_sub",
+    "text"
+   ],
+   "text": "جملهٔ کوتاه روی پلاک تیره (Vazirmatn)",
+   "status": "draft"
+  },
+  "spec.forbid.col.shadow": {
+   "id": "spec.forbid.col.shadow",
+   "kind": "ui",
+   "where_fa": "spec.forbid.col.shadow",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.col.shadow",
+    "text"
+   ],
+   "text": "با حاشیه",
+   "status": "draft"
+  },
+  "spec.forbid.scope.all": {
+   "id": "spec.forbid.scope.all",
+   "kind": "ui",
+   "where_fa": "spec.forbid.scope.all",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.scope.all",
+    "text"
+   ],
+   "text": "هر اندازه",
+   "status": "draft"
+  },
+  "spec.forbid.scope.small": {
+   "id": "spec.forbid.scope.small",
+   "kind": "ui",
+   "where_fa": "spec.forbid.scope.small",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.scope.small",
+    "text"
+   ],
+   "text": "زیر ۲۴px",
+   "status": "draft"
+  },
+  "spec.s.base_title": {
+   "id": "spec.s.base_title",
+   "kind": "ui",
+   "where_fa": "spec.s.base_title",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.base_title",
+    "text"
+   ],
+   "text": "پایه‌ات کدام است؟",
+   "status": "draft"
+  },
+  "spec.s.base_row": {
+   "id": "spec.s.base_row",
+   "kind": "ui",
+   "where_fa": "spec.s.base_row",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.base_row",
+    "text"
+   ],
+   "text": "پایه: ۳ تا ۴",
+   "status": "draft"
+  },
+  "spec.s.base_row_sub": {
+   "id": "spec.s.base_row_sub",
+   "kind": "ui",
+   "where_fa": "spec.s.base_row_sub",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.base_row_sub",
+    "text"
+   ],
+   "text": "برای عوض‌کردن بزن",
+   "status": "draft"
+  },
+  "spec.s.stack_sub": {
+   "id": "spec.s.stack_sub",
+   "kind": "ui",
+   "where_fa": "spec.s.stack_sub",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.stack_sub",
+    "text"
+   ],
+   "text": "اول این را بساز",
+   "status": "draft"
+  },
+  "spec.s.side_label": {
+   "id": "spec.s.side_label",
+   "kind": "ui",
+   "where_fa": "spec.s.side_label",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.side_label",
+    "text"
+   ],
+   "text": "چرخ و محور",
+   "status": "draft"
+  },
+  "spec.s.side_tag": {
+   "id": "spec.s.side_tag",
+   "kind": "ui",
+   "where_fa": "spec.s.side_tag",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.side_tag",
+    "text"
+   ],
+   "text": "اختیاری",
+   "status": "draft"
+  },
+  "spec.s.main_lbl": {
+   "id": "spec.s.main_lbl",
+   "kind": "ui",
+   "where_fa": "spec.s.main_lbl",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.main_lbl",
+    "text"
+   ],
+   "text": "راه اصلی",
+   "status": "draft"
+  },
+  "spec.s.side_lbl": {
+   "id": "spec.s.side_lbl",
+   "kind": "ui",
+   "where_fa": "spec.s.side_lbl",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.s.side_lbl",
+    "text"
+   ],
+   "text": "راه فرعی",
+   "status": "draft"
+  },
+  "spec.cap.fmt.stack": {
+   "id": "spec.cap.fmt.stack",
+   "kind": "ui",
+   "where_fa": "spec.cap.fmt.stack",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.cap.fmt.stack",
+    "text"
+   ],
+   "text": "شعاع {r} · {font} {size} · لمس {touch} · نوار پشت {peek}",
+   "status": "draft"
+  },
+  "spec.cap.fmt.nodebtn": {
+   "id": "spec.cap.fmt.nodebtn",
+   "kind": "ui",
+   "where_fa": "spec.cap.fmt.nodebtn",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.cap.fmt.nodebtn",
+    "text"
+   ],
+   "text": "گره دایره {size} · {font} {fsize} · لمس {touch}",
+   "status": "draft"
+  },
+  "spec.cap.row_in_menu": {
+   "id": "spec.cap.row_in_menu",
+   "kind": "ui",
+   "where_fa": "spec.cap.row_in_menu",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.cap.row_in_menu",
+    "text"
+   ],
+   "text": "ردیف در منو (با لمس برگهٔ زیر باز می‌شود)",
+   "status": "draft"
+  },
+  "spec.cap.stack_order": {
+   "id": "spec.cap.stack_order",
+   "kind": "ui",
+   "where_fa": "spec.cap.stack_order",
+   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.cap.stack_order",
+    "text"
+   ],
+   "text": "سبز جلو، نارنجی پشتش، قرمز پشت همه",
+   "status": "draft"
+  },
+  "spec.forbid.bare_on_vivid": {
+   "id": "spec.forbid.bare_on_vivid",
+   "kind": "ui",
+   "where_fa": "قالب‌نامهٔ کنترل‌ها",
+   "context_fa": "توضیح ممنوع/مجاز",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/spec/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "spec.forbid.bare_on_vivid",
+    "text"
+   ],
+   "text": "نوشتهٔ روشن (سفید یا کرم) روی پر زندهٔ v4 بدون حاشیه ممنوع است؛ با حاشیهٔ ضخیم هم‌خانواده مجاز (ستون «با حاشیه»)",
+   "status": "draft"
+  },
+  "motion.demo.node": {
+   "id": "motion.demo.node",
+   "kind": "ui",
+   "where_fa": "نام گرهٔ نمونه روی نقشه و عنوان محیط در نمونهٔ حرکت",
+   "context_fa": "draft؛ جای‌نگهدار نام مرحله (stage.place)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motion.demo.node",
+    "text"
+   ],
+   "text": "اسکله",
+   "status": "draft"
+  },
+  "motion.demo.topic": {
+   "id": "motion.demo.topic",
+   "kind": "ui",
+   "where_fa": "موضوع علمی نمونه زیر نام گره در برگهٔ مرحله",
+   "context_fa": "draft؛ جای‌نگهدار stage.topic",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motion.demo.topic",
+    "text"
+   ],
+   "text": "قرقره",
+   "status": "draft"
+  },
+  "motion.demo.enter": {
+   "id": "motion.demo.enter",
+   "kind": "ui",
+   "where_fa": "دکمهٔ ورود در برگهٔ مرحلهٔ نمونهٔ حرکت",
+   "context_fa": "draft؛ همان «برو داخل» سند جریان v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motion.demo.enter",
+    "text"
+   ],
+   "text": "برو داخل",
+   "status": "draft"
+  },
+  "motion.demo.reset": {
+   "id": "motion.demo.reset",
+   "kind": "ui",
+   "where_fa": "دکمهٔ ابزار: برگرداندن نمونه به نقشه",
+   "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motion.demo.reset",
+    "text"
+   ],
+   "text": "از اول",
+   "status": "draft"
+  },
+  "motion.demo.rm": {
+   "id": "motion.demo.rm",
+   "kind": "ui",
+   "where_fa": "دکمهٔ ابزار: شبیه‌سازی prefers-reduced-motion",
+   "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motion.demo.rm",
+    "text"
+   ],
+   "text": "کاهش حرکت",
+   "status": "draft"
+  },
+  "motion.demo.fast": {
+   "id": "motion.demo.fast",
+   "kind": "ui",
+   "where_fa": "دکمهٔ ابزار: نسخهٔ سقف ۱۵۰ms (سند STYLE_BIBLE) برای تعویض کارت",
+   "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motion.demo.fast",
+    "text"
+   ],
+   "text": "تعویض سریع ۱۵۰ میلی‌ثانیه",
+   "status": "draft"
+  },
+  "motion.demo.hint": {
+   "id": "motion.demo.hint",
+   "kind": "ui",
+   "where_fa": "راهنمای کوتاه زیر نمونه (ابزار)",
+   "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motion.demo.hint",
+    "text"
+   ],
+   "text": "کارت پشتی را بزن؛ دوباره نوار کارت قبلی را بزن تا برگردد.",
+   "status": "draft"
+  },
+  "v5.ui.base.row": {
+   "id": "v5.ui.base.row",
+   "kind": "ui",
+   "where_fa": "ردیف انتخاب پایه در منو",
+   "context_fa": "فقط در منو؛ {b} از v5.ui.base.b12/b34/b56 می‌آید",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.base.row",
+    "text"
+   ],
+   "text": "پایه: {b}",
+   "status": "draft"
+  },
+  "v5.ui.base.row.sub": {
+   "id": "v5.ui.base.row.sub",
+   "kind": "ui",
+   "where_fa": "جملهٔ زیر ردیف پایه در منو",
+   "context_fa": "Vazirmatn ۱۶",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.base.row.sub",
+    "text"
+   ],
+   "text": "برای عوض‌کردن بزن",
+   "status": "draft"
+  },
+  "v5.ui.base.sheet.title": {
+   "id": "v5.ui.base.sheet.title",
+   "kind": "ui",
+   "where_fa": "عنوان برگهٔ انتخاب پایه",
+   "context_fa": "نوار عنوان بنفش گرد",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.base.sheet.title",
+    "text"
+   ],
+   "text": "پایهٔ من",
+   "status": "draft"
+  },
+  "v5.side.tag": {
+   "id": "v5.side.tag",
+   "kind": "ui",
+   "where_fa": "پلاک بنفش زیر گرهٔ مسیر جانبی",
+   "context_fa": "مسیر جانبی اختیاری (D70)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.tag",
+    "text"
+   ],
+   "text": "اختیاری",
+   "status": "draft"
+  },
+  "v5.side.lead": {
+   "id": "v5.side.lead",
+   "kind": "ui",
+   "where_fa": "جملهٔ برگهٔ مرحلهٔ جانبی",
+   "context_fa": "پیش از داستان مرحله",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.lead",
+    "text"
+   ],
+   "text": "راه فرعی؛ اگر دوست داشتی.",
+   "status": "draft"
+  },
+  "v5.side.F04.story": {
+   "id": "v5.side.F04.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی F04",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.F04.story",
+    "text"
+   ],
+   "text": "یک آهنربای شیطون پشت میز قایم شده! ببین از دور هم می‌شود چیزی را کشید.",
+   "status": "draft"
+  },
+  "v5.side.F07.story": {
+   "id": "v5.side.F07.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی F07",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.F07.story",
+    "text"
+   ],
+   "text": "امروز استخر شلوغ است. دست‌وپا زدن توی آب سخت‌تر است یا توی هوا؟",
+   "status": "draft"
+  },
+  "v5.side.F05.story": {
+   "id": "v5.side.F05.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی F05",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.F05.story",
+    "text"
+   ],
+   "text": "توپ را بالا می‌اندازی و دوباره پایین می‌آید. زمین چه کار می‌کند؟",
+   "status": "draft"
+  },
+  "v5.side.W02.story": {
+   "id": "v5.side.W02.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی W02",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.W02.story",
+    "text"
+   ],
+   "text": "ترازوی آزمایشگاه منتظر توست. هر چیز چقدر ماده دارد؟",
+   "status": "draft"
+  },
+  "v5.side.E01.story": {
+   "id": "v5.side.E01.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی E01",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.E01.story",
+    "text"
+   ],
+   "text": "باد می‌وزد و پره‌ها می‌چرخند. انرژی از کجا می‌آید و به کجا می‌رود؟",
+   "status": "draft"
+  },
+  "v5.side.B02.story": {
+   "id": "v5.side.B02.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی B02",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.B02.story",
+    "text"
+   ],
+   "text": "دو کفهٔ ترازو باید برابر شوند تا انبار مرتب شود.",
+   "status": "draft"
+  },
+  "v5.side.F08.story": {
+   "id": "v5.side.F08.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی F08",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.F08.story",
+    "text"
+   ],
+   "text": "دو تیم طناب را می‌کشند. طناب کِی از جایش تکان نمی‌خورد؟",
+   "status": "draft"
+  },
+  "v5.side.W03.story": {
+   "id": "v5.side.W03.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی W03",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.W03.story",
+    "text"
+   ],
+   "text": "اینجا سطح ماه است. نیروسنج را بردار و وزن را بسنج.",
+   "status": "draft"
+  },
+  "v5.side.W04.story": {
+   "id": "v5.side.W04.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی W04",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.W04.story",
+    "text"
+   ],
+   "text": "در ایستگاه فضایی همه‌چیز شناور است. جرم و وزن یکی‌اند؟",
+   "status": "draft"
+  },
+  "v5.side.M06.story": {
+   "id": "v5.side.M06.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی M06",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.M06.story",
+    "text"
+   ],
+   "text": "ابزارخانه پر از اهرم است. هر کدام را جور دیگری می‌شود به کار برد.",
+   "status": "draft"
+  },
+  "v5.side.M08.story": {
+   "id": "v5.side.M08.story",
+   "kind": "card",
+   "where_fa": "داستان مسیر جانبی M08",
+   "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.side.M08.story",
+    "text"
+   ],
+   "text": "جرثقیل بزرگ بندر قرقره‌های بیشتری دارد. با آن کشیدن چطور می‌شود؟",
+   "status": "draft"
+  },
+  "v5.env.bar.aria": {
+   "id": "v5.env.bar.aria",
+   "kind": "ui",
+   "where_fa": "نام دسترس‌پذیر نوار چالش پشتی",
+   "context_fa": "برای صفحه‌خوان",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.env.bar.aria",
+    "text"
+   ],
+   "text": "چالش دیگر: {name}",
+   "status": "draft"
+  },
+  "env.zone_title.sports": {
+   "id": "env.zone_title.sports",
+   "kind": "card",
+   "where_fa": "env.zone_title.sports",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/team/assets_r2/env/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "env.zone_title.sports",
+    "text"
+   ],
+   "text": "ورزشگاه",
+   "status": "draft"
+  },
+  "env.zone_title.space": {
+   "id": "env.zone_title.space",
+   "kind": "card",
+   "where_fa": "env.zone_title.space",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/team/assets_r2/env/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "env.zone_title.space",
+    "text"
+   ],
+   "text": "پایگاه فضایی",
+   "status": "draft"
+  },
+  "env.zone_title.farm": {
+   "id": "env.zone_title.farm",
+   "kind": "card",
+   "where_fa": "env.zone_title.farm",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/team/assets_r2/env/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "env.zone_title.farm",
+    "text"
+   ],
+   "text": "مزرعه و آسیاب",
+   "status": "draft"
+  },
+  "env.zone_title.city": {
+   "id": "env.zone_title.city",
+   "kind": "card",
+   "where_fa": "env.zone_title.city",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/team/assets_r2/env/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "env.zone_title.city",
+    "text"
+   ],
+   "text": "شهر صنعتی",
+   "status": "draft"
+  },
+  "env.start.label": {
+   "id": "env.start.label",
+   "kind": "card",
+   "where_fa": "env.start.label",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/team/assets_r2/env/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "env.start.label",
+    "text"
+   ],
+   "text": "شروع",
+   "status": "draft"
+  },
+  "env.here.label": {
+   "id": "env.here.label",
+   "kind": "card",
+   "where_fa": "env.here.label",
+   "context_fa": "",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/team/assets_r2/env/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "env.here.label",
+    "text"
+   ],
+   "text": "تو اینجایی",
+   "status": "draft"
   }
  },
  "meta": {
-  "updated": "2026-10-09",
+  "updated": "2026-10-14",
   "glossary": {
    "نیرو": "نه «زور»",
    "جرم": "مقدار ماده؛ ترازو، گرم و کیلوگرم",
