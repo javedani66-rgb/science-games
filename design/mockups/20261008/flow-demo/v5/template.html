@@ -570,15 +570,15 @@ const loadBox=(x,y)=>`<rect x="${x}" y="${y}" width="28" height="24" rx="3" fill
 const topRope='M50 40 A14 14 0 0 1 78 40 M64 26 L110 26 M96 40 A14 14 0 0 1 124 40';
 function figs(){
   const fixed=`<svg viewBox="0 0 150 196" role="img" aria-hidden="true"><rect x="0" y="0" width="150" height="196" fill="#d6f1ee"/>${beam(20,110)}${hang(64,15,27)}${hang(110,15,27)}${rope(topRope+' M50 40 V116 M124 40 V104')}${wheel(64,40,14)}${wheel(110,40,14)}${loadBox(36,116)}${arrow(50,144,40,1,K.weight)}${arrow(124,106,40,1,K.pull)}</svg>`;
-  const moving=`<svg viewBox="0 0 150 196" role="img" aria-hidden="true"><rect x="0" y="0" width="150" height="196" fill="#d6f1ee"/>${beam(10,130)}${hang(64,15,27)}${hang(110,15,27)}${hang(22,15,100)}${rope(topRope+' M50 40 V100 M124 40 V104 M22 15 V100')}${wheel(64,40,14)}${wheel(110,40,14)}${wheel(36,104,14)}${hang(36,118,124)}${loadBox(22,124)}${arrow(36,152,40,1,K.weight)}${arrow(124,106,24,1,K.pull)}${arrow(22,80,24,-1,K.pull)}${arrow(50,80,24,-1,K.pull)}</svg>`;
+  const moving=`<svg viewBox="0 0 150 196" role="img" aria-hidden="true"><rect x="0" y="0" width="150" height="196" fill="#d6f1ee"/>${beam(10,130)}${hang(64,15,27)}${hang(110,15,27)}${hang(22,15,100)}${rope(topRope+' M50 40 V100 M124 40 V104 M22 15 V100')}${wheel(64,40,14)}${wheel(110,40,14)}${wheel(36,104,14)}${hang(36,118,124)}${loadBox(22,124)}${arrow(36,152,40,1,K.weight)}${arrow(124,106,20,1,K.pull)}${arrow(22,80,20,-1,K.pull)}${arrow(50,80,20,-1,K.pull)}</svg>`;
   return [fixed,moving];
 }
 /* برچسب‌ها بیرون از نمودار (متن روی نمودار نیست) */
 function figLabels(kind){
+  /* فقط برچسب بار؛ برچسب «کشیدن» جوابِ پرسش است و نشان داده نمی‌شود (A2؛ تأیید مالک) */
   const b=st.band,num=b>=2;const W=b===2?6:60;
   const w=num?S('flow.card.load')+' '+fa(W):S('flow.card.load');
-  const f=num?S('flow.card.pull')+' '+fa(kind==='moving'?W/2:W):S('flow.card.pull');
-  return `<div class="figl"><span class="ui-plate ui-cut pl-w">${esc(w)}</span><span class="ui-plate ui-cut pl-f">${esc(f)}</span></div>`;
+  return `<div class="figl"><span class="ui-plate ui-cut pl-w">${esc(w)}</span></div>`;
 }
 const PROB={1:{q:'flow.card.q1',ok:'flow.card.q1.ok',o:[[S('flow.card.fixed'),0],[S('flow.card.moving'),1]]},
  2:{q:'flow.card.q2',ok:'flow.card.q2.ok',o:[[fa(3),1],[fa(6),0],[fa(12),0]]},
