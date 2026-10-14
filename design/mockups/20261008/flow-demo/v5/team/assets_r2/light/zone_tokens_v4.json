@@ -1,0 +1,326 @@
+{
+ "ground.sports": {
+  "hex": "#469d36",
+  "src": "عکس v4/style/shots/r10_map_y1900.png: میانهٔ 143085 پیکسل نزدیک به کد Z[grass]=#3f9a2b در gen_head.py"
+ },
+ "ground.sports.code": {
+  "hex": "#3f9a2b",
+  "src": "gen_head.py خط Z = dict(...) کلید grass"
+ },
+ "ground.space": {
+  "hex": "#c55535",
+  "src": "عکس v4/style/shots/r10_map_y1450.png: میانهٔ 74668 پیکسل نزدیک به کد Z[space]=#c4502f در gen_head.py"
+ },
+ "ground.space.code": {
+  "hex": "#c4502f",
+  "src": "gen_head.py خط Z = dict(...) کلید space"
+ },
+ "ground.farm": {
+  "hex": "#9d8e16",
+  "src": "عکس v4/style/shots/r11_map_y0.png: میانهٔ 26417 پیکسل نزدیک به کد Z[farm]=#9a8a10 در gen_head.py"
+ },
+ "ground.farm.code": {
+  "hex": "#9a8a10",
+  "src": "gen_head.py خط Z = dict(...) کلید farm"
+ },
+ "ground.city": {
+  "hex": "#155f77",
+  "src": "عکس v4/style/shots/r11_map_y0.png: میانهٔ 159404 پیکسل نزدیک به کد Z[sea]=#075a73 در gen_head.py"
+ },
+ "ground.city.code": {
+  "hex": "#075a73",
+  "src": "gen_head.py خط Z = dict(...) کلید sea"
+ },
+ "ground.ice": {
+  "hex": "#d7efff",
+  "src": "عکس r10_map_y1450: پیکسل‌های نزدیک Z[ice]=#d4efff (لکهٔ یخ پیست)"
+ },
+ "ground.sand": {
+  "hex": "#f0d07e",
+  "src": "عکس r11_map_y0: ساحل شنی نزدیک #f0cf7a (gen_map.py: wavy_top 700 fill #f0cf7a)"
+ },
+ "ground.sand.code": {
+  "hex": "#f0cf7a",
+  "src": "gen_map.py خط ساحل شنی"
+ },
+ "path.cream": {
+  "hex": "#fff3c4",
+  "src": "gen_head.py CREAM"
+ },
+ "path.outline": {
+  "hex": "#241a5e",
+  "src": "common.py OUT"
+ },
+ "path.river_fill": {
+  "hex": "#58d8ee",
+  "src": "gen_map.py رود pth(...,'#58d8ee',31)"
+ },
+ "path.river_foam": {
+  "hex": "#d4f6ff",
+  "src": "gen_map.py خط‌چین رود"
+ },
+ "path.done_dash": {
+  "hex": "#f0b429",
+  "src": "gen_map.py D_DONE خط‌چین طلایی"
+ },
+ "path.boardwalk": {
+  "hex": "#c98a45",
+  "src": "gen_map.py تابلو/اسکله #c98a45"
+ },
+ "path.done_seen": {
+  "hex": "#fff3c5",
+  "src": "عکس r10_map_y1900: پیکسل‌های نزدیک کرم (26292)"
+ },
+ "path.rest_calc": {
+  "hex": "#6e6481",
+  "src": "محاسبه: کرم با opacity .34 روی خط دور (gen_map.py D_REST)"
+ },
+ "path.rest_seen": {
+  "hex": "#726884",
+  "src": "عکس r11_map_y0: پیکسل‌های نزدیک رنگ محاسبه‌ای (11928)"
+ },
+ "ui.bar": {
+  "hex": "#241a5e",
+  "src": "gen_map.py #bar path fill"
+ },
+ "ui.bar_seen": {
+  "hex": "#221c5f",
+  "src": "عکس r11_map_y0 گوشهٔ بالا-چپ (ویگنت v4)"
+ },
+ "ui.chip": {
+  "hex": "#4b3b9e",
+  "src": "gen_map.py css .chip background"
+ },
+ "ui.chip_seen": {
+  "hex": "#4b3b9e",
+  "src": "عکس r11_map_y0 چیپ غیرفعال"
+ },
+ "ui.chip_text": {
+  "hex": "#fff3c4",
+  "src": "gen_map.py css .chip color"
+ },
+ "ui.chip_on": {
+  "hex": "#ffd23f",
+  "src": "gen_map.py .chip.on"
+ },
+ "ui.chip_on_seen": {
+  "hex": "#ffd23f",
+  "src": "عکس r11_map_y0 چیپ فعال"
+ },
+ "ui.chip_shadow": {
+  "hex": "#120c3a",
+  "src": "gen_map.py box-shadow چیپ"
+ },
+ "ui.menu": {
+  "hex": "#fff3c4",
+  "src": "gen_map.py .menu"
+ },
+ "ui.label_fill": {
+  "hex": "#fff3c4",
+  "src": "gen_map.py برچسب گره"
+ },
+ "ui.zone_title_fill": {
+  "hex": "#ffffff",
+  "src": "gen_map.py ZS عنوان زمین؛ stroke #241a5e 9"
+ },
+ "ui.here_ring": {
+  "hex": "#ffd23f",
+  "src": "gen_map.py حلقهٔ اینجایی"
+ },
+ "ui.here_bubble": {
+  "hex": "#ffd23f",
+  "src": "gen_map.py حباب اینجایی"
+ },
+ "ui.start_sign": {
+  "hex": "#ffd23f",
+  "src": "gen_map.py تابلوی شروع"
+ },
+ "card.bg": {
+  "hex": "#190539",
+  "src": "gen_card.py BG"
+ },
+ "card.bg_seen": {
+  "hex": "#320b64",
+  "src": "عکس r10_card-night_vfront گوشه (گرادیان n1 رویش)"
+ },
+ "card.front_top": {
+  "hex": "#25cdc0",
+  "src": "gen_card.py front card_svg c1"
+ },
+ "card.front_bottom": {
+  "hex": "#0a86a4",
+  "src": "gen_card.py c2"
+ },
+ "card.front_top_seen": {
+  "hex": "#22cabf",
+  "src": "عکس r10_card-night_vfront بالای کارت"
+ },
+ "card.glow": {
+  "hex": "#46f0d8",
+  "src": "gen_card.py glow"
+ },
+ "card.plate": {
+  "hex": "#07203a",
+  "src": "gen_card.py plate"
+ },
+ "card.plate_seen": {
+  "hex": "#0d223b",
+  "src": "عکس r10_card-night_vfront صفحهٔ متن"
+ },
+ "card.frame_gold": {
+  "hex": "#ffd23f",
+  "src": "gen_card.py قاب طلایی"
+ },
+ "card.frame_cream": {
+  "hex": "#fff3c4",
+  "src": "gen_card.py قاب نقطه‌چین"
+ },
+ "card.edge": {
+  "hex": "#190539",
+  "src": "gen_card.py لبهٔ کارت stroke BG"
+ },
+ "card.pill_cyan": {
+  "hex": "#46f0d8",
+  "src": "gen_card.py .pill.cyan"
+ },
+ "card.pill_pink": {
+  "hex": "#ff7be5",
+  "src": "gen_card.py .pill.pink"
+ },
+ "card.pill_gold": {
+  "hex": "#ffd23f",
+  "src": "gen_card.py .pill.gold"
+ },
+ "card.pill_text": {
+  "hex": "#190539",
+  "src": "gen_card.py .pill color"
+ },
+ "card.title_fill": {
+  "hex": "#ffffff",
+  "src": "gen_card.py .title؛ stroke #190539"
+ },
+ "card.title_glow": {
+  "hex": "#ff5ad6",
+  "src": "gen_card.py text-shadow عنوان"
+ },
+ "card.body_text": {
+  "hex": "#ffffff",
+  "src": "gen_card.py .body"
+ },
+ "card.kept_top": {
+  "hex": "#7a6af5",
+  "src": "gen_card.py slot kept"
+ },
+ "card.kept_bottom": {
+  "hex": "#4a2fb8",
+  "src": "gen_card.py slot kept"
+ },
+ "card.kept_glow": {
+  "hex": "#a99dff",
+  "src": "gen_card.py slot kept"
+ },
+ "card.empty_fill": {
+  "hex": "#2a0b60",
+  "src": "gen_card.py slot empty"
+ },
+ "card.empty_dash": {
+  "hex": "#9a78e0",
+  "src": "gen_card.py ico_plus/dash"
+ },
+ "card.locked": {
+  "hex": "#34145f",
+  "src": "gen_card.py slot locked"
+ },
+ "card.locked_icon": {
+  "hex": "#cdb8ff",
+  "src": "gen_card.py ico_lock"
+ },
+ "card.plank_top": {
+  "hex": "#d9a05a",
+  "src": "gen_card.py plank"
+ },
+ "card.plank_side": {
+  "hex": "#8a5a2e",
+  "src": "gen_card.py plank"
+ },
+ "card.nebula1": {
+  "hex": "#5a14a8",
+  "src": "gen_card.py n1"
+ },
+ "card.nebula2": {
+  "hex": "#a0197a",
+  "src": "gen_card.py n2"
+ },
+ "card.star": {
+  "hex": "#e9dcff",
+  "src": "gen_card.py ستاره"
+ },
+ "detail.tree": {
+  "hex": "#2f8a2b",
+  "src": "gen_head.py tree()"
+ },
+ "detail.tree_hi": {
+  "hex": "#6fcf5e",
+  "src": "gen_head.py tree()"
+ },
+ "detail.pine": {
+  "hex": "#2a8a58",
+  "src": "gen_head.py pinet()"
+ },
+ "detail.crater": {
+  "hex": "#8e2c1a",
+  "src": "gen_head.py crater()"
+ },
+ "detail.crater_rim": {
+  "hex": "#ffb08a",
+  "src": "gen_head.py crater()"
+ },
+ "detail.hay": {
+  "hex": "#e9c24a",
+  "src": "gen_map.py کاه‌بسته"
+ },
+ "detail.wave": {
+  "hex": "#aef0f4",
+  "src": "gen_map.py wave"
+ },
+ "detail.cloud": {
+  "hex": "#ffffff",
+  "src": "gen_head.py cloud()"
+ },
+ "hard.easy": {
+  "hex": "#2fa44a",
+  "src": "gen_head.py s_grav ساقهٔ سیب سبز #2fa44a (سبز روشن‌ترِ v4)"
+ },
+ "hard.mid": {
+  "hex": "#ff9d1c",
+  "src": "gen_head.py b_harbor منقار #ff9d1c"
+ },
+ "hard.hard": {
+  "hex": "#ff4b4b",
+  "src": "gen_head.py موشک/سیب #ff4b4b"
+ },
+ "night.overlay_top": {
+  "hex": "#6a55d8",
+  "src": "gen_transition.py .night gradient"
+ },
+ "night.overlay_bottom": {
+  "hex": "#3a1c90",
+  "src": "gen_transition.py .night gradient"
+ },
+ "night.overlay_opacity": {
+  "hex": "0.8",
+  "src": "gen_transition.py .night opacity"
+ },
+ "night.moon": {
+  "hex": "#fff6c8",
+  "src": "gen_transition.py .moon"
+ },
+ "night.window": {
+  "hex": "#fff3a8",
+  "src": "gen_transition.py .lights"
+ },
+ "dusk_v4.overlay": {
+  "hex": "#ff7a3d>#c2379a>#5a2a9a",
+  "src": "gen_transition.py .dusk (multiply .72) - رد‌شده"
+ }
+}
