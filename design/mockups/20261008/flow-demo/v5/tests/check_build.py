@@ -30,7 +30,7 @@ def has(e, word): return any(word in x for x in e)
 # ۱) جاگذار
 r = B.collect_assets(HERE / 'team/assets')
 check('جاگذار بدون خطا', not r['errors'], r['errors'])
-check('جاگذار: ۳ نماد', sum(1 for e in r['entries'] if e['type'] == 'symbol') == 3)
+check('جاگذار: بیش از ۱۰۰ نماد (هنر واقعی)', sum(1 for e in r['entries'] if e['type'] == 'symbol') > 100)
 # ۲) سقف SVG منفرد
 check('SVG 39KB می‌گذرد', not errs({'ui/a.svg': svg(39)}))
 check('SVG 41KB خطا', has(errs({'ui/a.svg': svg(41)}), 'سقف 40'))
@@ -70,7 +70,9 @@ for mod, cap in (('env', 700), ('character', 300), ('ui', 200), ('card', 500), (
 d = tree(full); out = tempfile.mkdtemp(prefix='v5out_')
 import contextlib
 buf = io.StringIO()
+_cap = B.PAGE_CAP; B.PAGE_CAP = 1800 * KB  # صفحهٔ v5 اکنون کوچک است؛ سقف را موقتاً پایین می‌آوریم تا شاخهٔ خطا آزموده شود
 with contextlib.redirect_stdout(buf): rc = B.main(['--assets', str(d), '--out-dir', out])
+B.PAGE_CAP = _cap
 check('صفحهٔ بیش از 2.5MB: build شکست می‌خورد', rc == 1 and 'حجم صفحهٔ نهایی' in buf.getvalue() and not (pathlib.Path(out) / 'index.html').exists(), buf.getvalue()[-300:])
 shutil.rmtree(d)
 # ۵) ساخت واقعی + مرورگر
@@ -97,29 +99,17 @@ try:
         check('کنسول بدون خطا/هشدار', not logs, logs)
         pg.screenshot(path=str(pathlib.Path(out) / 'v5.png'))
         r = pg.evaluate("""()=>{const s=document.querySelector('body>svg');const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);
-          const d=document.createElementNS('http://www.w3.org/2000/svg','svg');d.setAttribute('width','60');d.setAttribute('height','50');d.style.cssText='position:fixed;left:0;top:0;z-index:99999';
-          d.innerHTML='<use href="#ph-box"/>';document.body.appendChild(d);
+          const d=document.createElementNS('http://www.w3.org/2000/svg','svg');d.setAttribute('width','60');d.setAttribute('height','50');d.style.cssText='position:fixed;left:0;top:0;z-index:99999;background:#fff';
+          d.innerHTML='<use href="#cd-shelf"/>';document.body.appendChild(d);
           return {sym:s?s.querySelectorAll('symbol').length:-1,dups:ids.length-new Set(ids).size,hasRv:!!document.getElementById('rv'),box:d.firstChild.getBBox().width}}""")
-        check('sprite در DOM با ۳ نماد', r['sym'] == 3, r); check('بدون id تکراری در DOM', r['dups'] == 0, r); check('پنل #rv هست', r['hasRv'])
+        check('sprite در DOM با >100 نماد', r['sym'] > 100, r); check('بدون id تکراری در DOM', r['dups'] == 0, r); check('پنل #rv هست', r['hasRv'])
         check('<use> نماد را می‌کشد', r['box'] > 50, r)
         pg.wait_for_timeout(200)
         cl = pg.screenshot(clip={'x': 0, 'y': 0, 'width': 60, 'height': 50}); 
         from PIL import Image
         im = Image.open(io.BytesIO(cl)).convert('RGB'); px = im.getpixel((30, 40))
-        check('گرادیانِ داخل sprite رندر می‌شود (سبز)', px[1] > px[0] and px[1] > 90, px)
-        # ظاهر v3: همان صفحه بدون sprite/tokens با v3 مقایسه می‌شود (اگر v3/index.html هست)
-        # ظاهر v3: v3/build.py تازه (بدون دست‌زدن به v3/index.html قدیمی) با خروجی v5 مقایسه می‌شود
-        v3dir = HERE.parent / 'v3'
-        src = (v3dir / 'build.py').read_text(encoding='utf-8')
-        v3out = pathlib.Path(out) / 'v3fresh.html'
-        src = src.replace("(HERE / 'index.html').write_text(out, encoding='utf-8')", f"pathlib.Path({str(v3out)!r}).write_text(out, encoding='utf-8')")
-        with contextlib.redirect_stdout(io.StringIO()): exec(compile(src, str(v3dir / 'build.py'), 'exec'), {'__file__': str(v3dir / 'build.py'), '__name__': 'v3build'})
-        from PIL import Image, ImageChops
-        for (w, h) in ((390, 800), (360, 640)):
-            ia = Image.open(io.BytesIO(shoot(v3out, w, h)[0].screenshot())).convert('RGB')
-            ib = Image.open(io.BytesIO(shoot(page, w, h)[0].screenshot())).convert('RGB')
-            diff = ImageChops.difference(ia, ib).getbbox()
-            check(f'ظاهر {w}×{h} برابر v3 (ساخت تازه)', diff is None, diff)
+        bg = im.getpixel((59, 49)); check('نمادِ sprite رنگ‌آمیزی می‌شود (نه شفاف)', len(set(im.getdata())) > 3, px)
+        # (مقایسهٔ پیکسلی با v3 حذف شد: ظاهر v5 عمداً با v3 فرق دارد)
         br.close()
 except Exception as ex:
     check('Playwright', False, repr(ex))

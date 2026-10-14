@@ -1,12 +1,12 @@
 {
- "page_bytes": 1209316,
+ "page_bytes": 798801,
  "page_cap": 2621440,
  "module_bytes": {
-  "env": 0,
-  "character": 0,
-  "ui": 0,
-  "card": 0,
-  "light": 9733
+  "env": 513054,
+  "character": 139908,
+  "ui": 28358,
+  "card": 390157,
+  "light": 12808
  },
  "module_caps": {
   "env": 716800,
@@ -17,40 +17,2038 @@
  },
  "assets": [
   {
-   "name": "ph-box",
+   "name": "cd-frame-night",
    "type": "symbol",
-   "file": "_placeholder/ph_box.svg",
-   "module": "_placeholder",
-   "bytes": 493,
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 13146,
+   "viewBox": "0 0 390 392",
+   "layers": [
+    "cd-frame-glow",
+    "cd-frame-band",
+    "cd-frame-neon",
+    "cd-frame-inner",
+    "cd-frame-slot",
+    "cd-frame-text"
+   ]
+  },
+  {
+   "name": "cd-image-border",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 1067,
+   "viewBox": "0 0 334 150",
+   "layers": [
+    "cd-ib-line"
+   ]
+  },
+  {
+   "name": "cd-title-bar",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 2474,
+   "viewBox": "0 0 360 60",
+   "layers": [
+    "cd-tb-glow",
+    "cd-tb-plaque"
+   ]
+  },
+  {
+   "name": "cd-stack-strip",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 1322,
+   "viewBox": "0 0 360 56",
+   "layers": [
+    "cd-st-band",
+    "cd-st-line"
+   ]
+  },
+  {
+   "name": "cd-shelf",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 996,
+   "viewBox": "0 0 360 40",
+   "layers": [
+    "cd-sh-top",
+    "cd-sh-front",
+    "cd-sh-brackets"
+   ]
+  },
+  {
+   "name": "cd-mini-seen",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 1189,
+   "viewBox": "0 0 80 120",
+   "layers": []
+  },
+  {
+   "name": "cd-mini-packed",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 1172,
+   "viewBox": "0 0 80 120",
+   "layers": []
+  },
+  {
+   "name": "cd-mini-empty",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 616,
+   "viewBox": "0 0 80 120",
+   "layers": []
+  },
+  {
+   "name": "cd-mini-locked",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 1186,
+   "viewBox": "0 0 80 120",
+   "layers": []
+  },
+  {
+   "name": "cd-mini-4states",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 4230,
+   "viewBox": "0 0 344 120",
+   "layers": [
+    "cd-mc-seen",
+    "cd-mc-packed",
+    "cd-mc-empty",
+    "cd-mc-locked"
+   ]
+  },
+  {
+   "name": "cd-back-pulley-diagram",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 4620,
+   "viewBox": "0 0 360 200",
+   "layers": [
+    "cd-bd-panel",
+    "cd-bd-beam",
+    "cd-bd-fixed",
+    "cd-bd-moving",
+    "cd-bd-rope",
+    "cd-bd-load",
+    "cd-bd-arrows"
+   ]
+  },
+  {
+   "name": "cd-art-harbor-day",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 12444,
+   "viewBox": "0 0 360 240",
+   "layers": [
+    "cd-ad-sky",
+    "cd-ad-far",
+    "cd-ad-sea",
+    "cd-ad-mid",
+    "cd-ad-front",
+    "cd-ad-char"
+   ]
+  },
+  {
+   "name": "cd-art-harbor-dusk",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 13403,
+   "viewBox": "0 0 360 240",
+   "layers": [
+    "cd-au-sky",
+    "cd-au-far",
+    "cd-au-sea",
+    "cd-au-mid",
+    "cd-au-front",
+    "cd-au-char"
+   ]
+  },
+  {
+   "name": "cd-art-harbor-night",
+   "type": "symbol",
+   "file": "card/sprite_card.svg",
+   "module": "card",
+   "bytes": 9196,
+   "viewBox": "0 0 360 240",
+   "layers": [
+    "cd-an-sky",
+    "cd-an-far",
+    "cd-an-sea",
+    "cd-an-mid",
+    "cd-an-front",
+    "cd-an-char"
+   ]
+  },
+  {
+   "name": "cd-harbor-banner",
+   "type": "symbol",
+   "file": "card/scene/sprite_scene.svg",
+   "module": "card",
+   "bytes": 12444,
+   "viewBox": "0 30 360 185",
+   "layers": [
+    "cd-bn-sky",
+    "cd-bn-far",
+    "cd-bn-sea",
+    "cd-bn-mid",
+    "cd-bn-front",
+    "cd-bn-char"
+   ]
+  },
+  {
+   "name": "cd-harbor-scene-green",
+   "type": "symbol",
+   "file": "card/scene/sprite_scene.svg",
+   "module": "card",
+   "bytes": 17834,
+   "viewBox": "0 0 390 500",
+   "layers": [
+    "cd-sg-sky",
+    "cd-sg-far",
+    "cd-sg-sea",
+    "cd-sg-mid",
+    "cd-sg-pier",
+    "cd-sg-hand",
+    "cd-sg-gantry",
+    "cd-sg-wheel1",
+    "cd-sg-wheel2",
+    "cd-sg-rope",
+    "cd-sg-net",
+    "cd-sg-netclip",
+    "cd-sg-arrows"
+   ]
+  },
+  {
+   "name": "cd-crane",
+   "type": "symbol",
+   "file": "card/scene/sprite_scene.svg",
+   "module": "card",
+   "bytes": 4671,
+   "viewBox": "90 28 230 128",
+   "layers": [
+    "cd-cr-gantry",
+    "cd-cr-wheel1",
+    "cd-cr-wheel2"
+   ]
+  },
+  {
+   "name": "cd-net-rope",
+   "type": "symbol",
+   "file": "card/scene/sprite_scene.svg",
+   "module": "card",
+   "bytes": 5158,
+   "viewBox": "60 300 90 110",
+   "layers": [
+    "cd-nr-rope",
+    "cd-nr-net",
+    "cd-nr-netclip"
+   ]
+  },
+  {
+   "name": "cd-pulley-wheel",
+   "type": "symbol",
+   "file": "card/scene/sprite_scene.svg",
+   "module": "card",
+   "bytes": 1654,
+   "viewBox": "96 42 68 68",
+   "layers": [
+    "cd-pw-wheel"
+   ]
+  },
+  {
+   "name": "cd-harbor-scene-orange",
+   "type": "symbol",
+   "file": "card/scene/sprite_scene.svg",
+   "module": "card",
+   "bytes": 18667,
+   "viewBox": "0 0 390 500",
+   "layers": [
+    "cd-so-sky",
+    "cd-so-far",
+    "cd-so-sea",
+    "cd-so-mid",
+    "cd-so-pier",
+    "cd-so-hand",
+    "cd-so-gantry",
+    "cd-so-wheel1",
+    "cd-so-wheel2",
+    "cd-so-rope",
+    "cd-so-net",
+    "cd-so-netclip",
+    "cd-so-arrows"
+   ]
+  },
+  {
+   "name": "cd-harbor-scene-orange-dusk",
+   "type": "symbol",
+   "file": "card/scene/sprite_scene.svg",
+   "module": "card",
+   "bytes": 21438,
+   "viewBox": "0 0 390 500",
+   "layers": [
+    "cd-sod-sky",
+    "cd-sod-far",
+    "cd-sod-sea",
+    "cd-sod-mid",
+    "cd-sod-pier",
+    "cd-sod-hand",
+    "cd-sod-gantry",
+    "cd-sod-wheel1",
+    "cd-sod-wheel2",
+    "cd-sod-rope",
+    "cd-sod-net",
+    "cd-sod-netclip",
+    "cd-sod-arrows",
+    "cd-sod-rim",
+    "cd-sod-shclip"
+   ]
+  },
+  {
+   "name": "cd-harbor-scene-red",
+   "type": "symbol",
+   "file": "card/scene/sprite_scene.svg",
+   "module": "card",
+   "bytes": 19892,
+   "viewBox": "0 0 390 500",
+   "layers": [
+    "cd-sr-sky",
+    "cd-sr-far",
+    "cd-sr-sea",
+    "cd-sr-mid",
+    "cd-sr-pier",
+    "cd-sr-hand",
+    "cd-sr-gantry",
+    "cd-sr-wheel1",
+    "cd-sr-wheel2",
+    "cd-sr-rope",
+    "cd-sr-net",
+    "cd-sr-netclip",
+    "cd-sr-arrows"
+   ]
+  },
+  {
+   "name": "cd-harbor-scene-red-night",
+   "type": "symbol",
+   "file": "card/scene/sprite_scene.svg",
+   "module": "card",
+   "bytes": 22353,
+   "viewBox": "0 0 390 500",
+   "layers": [
+    "cd-srn-sky",
+    "cd-srn-far",
+    "cd-srn-sea",
+    "cd-srn-mid",
+    "cd-srn-pier",
+    "cd-srn-hand",
+    "cd-srn-gantry",
+    "cd-srn-wheel1",
+    "cd-srn-wheel2",
+    "cd-srn-rope",
+    "cd-srn-net",
+    "cd-srn-netclip",
+    "cd-srn-arrows",
+    "cd-srn-rim",
+    "cd-srn-shclip"
+   ]
+  },
+  {
+   "name": "ch-b1",
+   "type": "symbol",
+   "file": "character/sprite_char.svg",
+   "module": "character",
+   "bytes": 15062,
+   "viewBox": "0 0 100 150",
+   "layers": [
+    "ch-b1-hclip",
+    "ch-b1-sil",
+    "ch-b1-mshade",
+    "ch-b1-mrim",
+    "ch-b1-shadow",
+    "ch-b1-halo",
+    "ch-b1-body-back",
+    "ch-b1-pose-stand",
+    "ch-b1-pose-walk1",
+    "ch-b1-pose-walk2",
+    "ch-b1-pose-jump",
+    "ch-b1-pose-point",
+    "ch-b1-pose-sit",
+    "ch-b1-torso",
+    "ch-b1-neck",
+    "ch-b1-ear",
+    "ch-b1-head",
+    "ch-b1-face-shade",
+    "ch-b1-eyes-happy",
+    "ch-b1-brows-happy",
+    "ch-b1-mouth-happy",
+    "ch-b1-eyes-thinking",
+    "ch-b1-brows-thinking",
+    "ch-b1-mouth-thinking",
+    "ch-b1-eyes-surprised",
+    "ch-b1-brows-surprised",
+    "ch-b1-mouth-surprised",
+    "ch-b1-eyes-oops",
+    "ch-b1-brows-oops",
+    "ch-b1-mouth-oops",
+    "ch-b1-sweat",
+    "ch-b1-cheeks",
+    "ch-b1-nose",
+    "ch-b1-hair-front",
+    "ch-b1-hat",
+    "ch-b1-prop",
+    "ch-b1-shade",
+    "ch-b1-lit"
+   ]
+  },
+  {
+   "name": "ch-b2",
+   "type": "symbol",
+   "file": "character/sprite_char.svg",
+   "module": "character",
+   "bytes": 7034,
+   "viewBox": "0 0 100 100",
+   "layers": [
+    "ch-b2-hclip",
+    "ch-b2-sil",
+    "ch-b2-mshade",
+    "ch-b2-mrim",
+    "ch-b2-halo",
+    "ch-b2-torso",
+    "ch-b2-neck",
+    "ch-b2-ear",
+    "ch-b2-head",
+    "ch-b2-face-shade",
+    "ch-b2-eyes-happy",
+    "ch-b2-brows-happy",
+    "ch-b2-mouth-happy",
+    "ch-b2-eyes-thinking",
+    "ch-b2-brows-thinking",
+    "ch-b2-mouth-thinking",
+    "ch-b2-eyes-surprised",
+    "ch-b2-brows-surprised",
+    "ch-b2-mouth-surprised",
+    "ch-b2-eyes-oops",
+    "ch-b2-brows-oops",
+    "ch-b2-mouth-oops",
+    "ch-b2-sweat",
+    "ch-b2-cheeks",
+    "ch-b2-nose",
+    "ch-b2-hair-front",
+    "ch-b2-shade",
+    "ch-b2-lit"
+   ]
+  },
+  {
+   "name": "ch-b3",
+   "type": "symbol",
+   "file": "character/sprite_char.svg",
+   "module": "character",
+   "bytes": 7075,
+   "viewBox": "0 0 100 100",
+   "layers": [
+    "ch-b3-hclip",
+    "ch-b3-sil",
+    "ch-b3-mshade",
+    "ch-b3-mrim",
+    "ch-b3-halo",
+    "ch-b3-body-back",
+    "ch-b3-torso",
+    "ch-b3-neck",
+    "ch-b3-ear",
+    "ch-b3-head",
+    "ch-b3-face-shade",
+    "ch-b3-eyes-happy",
+    "ch-b3-brows-happy",
+    "ch-b3-mouth-happy",
+    "ch-b3-eyes-thinking",
+    "ch-b3-brows-thinking",
+    "ch-b3-mouth-thinking",
+    "ch-b3-eyes-surprised",
+    "ch-b3-brows-surprised",
+    "ch-b3-mouth-surprised",
+    "ch-b3-eyes-oops",
+    "ch-b3-brows-oops",
+    "ch-b3-mouth-oops",
+    "ch-b3-sweat",
+    "ch-b3-cheeks",
+    "ch-b3-nose",
+    "ch-b3-hair-front",
+    "ch-b3-hat",
+    "ch-b3-shade",
+    "ch-b3-lit"
+   ]
+  },
+  {
+   "name": "ch-b4",
+   "type": "symbol",
+   "file": "character/sprite_char.svg",
+   "module": "character",
+   "bytes": 6880,
+   "viewBox": "0 0 100 100",
+   "layers": [
+    "ch-b4-hclip",
+    "ch-b4-sil",
+    "ch-b4-mshade",
+    "ch-b4-mrim",
+    "ch-b4-halo",
+    "ch-b4-torso",
+    "ch-b4-neck",
+    "ch-b4-ear",
+    "ch-b4-head",
+    "ch-b4-face-shade",
+    "ch-b4-eyes-happy",
+    "ch-b4-brows-happy",
+    "ch-b4-mouth-happy",
+    "ch-b4-eyes-thinking",
+    "ch-b4-brows-thinking",
+    "ch-b4-mouth-thinking",
+    "ch-b4-eyes-surprised",
+    "ch-b4-brows-surprised",
+    "ch-b4-mouth-surprised",
+    "ch-b4-eyes-oops",
+    "ch-b4-brows-oops",
+    "ch-b4-mouth-oops",
+    "ch-b4-sweat",
+    "ch-b4-cheeks",
+    "ch-b4-nose",
+    "ch-b4-hair-front",
+    "ch-b4-hat",
+    "ch-b4-shade",
+    "ch-b4-lit"
+   ]
+  },
+  {
+   "name": "ch-b5",
+   "type": "symbol",
+   "file": "character/sprite_char.svg",
+   "module": "character",
+   "bytes": 6770,
+   "viewBox": "0 0 100 100",
+   "layers": [
+    "ch-b5-hclip",
+    "ch-b5-sil",
+    "ch-b5-mshade",
+    "ch-b5-mrim",
+    "ch-b5-halo",
+    "ch-b5-body-back",
+    "ch-b5-torso",
+    "ch-b5-neck",
+    "ch-b5-ear",
+    "ch-b5-head",
+    "ch-b5-face-shade",
+    "ch-b5-eyes-happy",
+    "ch-b5-brows-happy",
+    "ch-b5-mouth-happy",
+    "ch-b5-eyes-thinking",
+    "ch-b5-brows-thinking",
+    "ch-b5-mouth-thinking",
+    "ch-b5-eyes-surprised",
+    "ch-b5-brows-surprised",
+    "ch-b5-mouth-surprised",
+    "ch-b5-eyes-oops",
+    "ch-b5-brows-oops",
+    "ch-b5-mouth-oops",
+    "ch-b5-sweat",
+    "ch-b5-cheeks",
+    "ch-b5-nose",
+    "ch-b5-hair-front",
+    "ch-b5-shade",
+    "ch-b5-lit"
+   ]
+  },
+  {
+   "name": "ch-b6",
+   "type": "symbol",
+   "file": "character/sprite_char.svg",
+   "module": "character",
+   "bytes": 7232,
+   "viewBox": "0 0 100 100",
+   "layers": [
+    "ch-b6-hclip",
+    "ch-b6-sil",
+    "ch-b6-mshade",
+    "ch-b6-mrim",
+    "ch-b6-halo",
+    "ch-b6-torso",
+    "ch-b6-neck",
+    "ch-b6-ear",
+    "ch-b6-head",
+    "ch-b6-face-shade",
+    "ch-b6-eyes-happy",
+    "ch-b6-brows-happy",
+    "ch-b6-mouth-happy",
+    "ch-b6-eyes-thinking",
+    "ch-b6-brows-thinking",
+    "ch-b6-mouth-thinking",
+    "ch-b6-eyes-surprised",
+    "ch-b6-brows-surprised",
+    "ch-b6-mouth-surprised",
+    "ch-b6-eyes-oops",
+    "ch-b6-brows-oops",
+    "ch-b6-mouth-oops",
+    "ch-b6-sweat",
+    "ch-b6-cheeks",
+    "ch-b6-nose",
+    "ch-b6-hair-front",
+    "ch-b6-hat",
+    "ch-b6-shade",
+    "ch-b6-lit"
+   ]
+  },
+  {
+   "name": "ch-b7",
+   "type": "symbol",
+   "file": "character/sprite_char.svg",
+   "module": "character",
+   "bytes": 7464,
+   "viewBox": "0 0 100 100",
+   "layers": [
+    "ch-b7-hclip",
+    "ch-b7-sil",
+    "ch-b7-mshade",
+    "ch-b7-mrim",
+    "ch-b7-halo",
+    "ch-b7-body-back",
+    "ch-b7-torso",
+    "ch-b7-neck",
+    "ch-b7-ear",
+    "ch-b7-head",
+    "ch-b7-face-shade",
+    "ch-b7-eyes-happy",
+    "ch-b7-brows-happy",
+    "ch-b7-mouth-happy",
+    "ch-b7-eyes-thinking",
+    "ch-b7-brows-thinking",
+    "ch-b7-mouth-thinking",
+    "ch-b7-eyes-surprised",
+    "ch-b7-brows-surprised",
+    "ch-b7-mouth-surprised",
+    "ch-b7-eyes-oops",
+    "ch-b7-brows-oops",
+    "ch-b7-mouth-oops",
+    "ch-b7-sweat",
+    "ch-b7-cheeks",
+    "ch-b7-nose",
+    "ch-b7-hair-front",
+    "ch-b7-hat",
+    "ch-b7-shade",
+    "ch-b7-lit"
+   ]
+  },
+  {
+   "name": "ch-b8",
+   "type": "symbol",
+   "file": "character/sprite_char.svg",
+   "module": "character",
+   "bytes": 7487,
+   "viewBox": "0 0 100 100",
+   "layers": [
+    "ch-b8-hclip",
+    "ch-b8-sil",
+    "ch-b8-mshade",
+    "ch-b8-mrim",
+    "ch-b8-halo",
+    "ch-b8-torso",
+    "ch-b8-neck",
+    "ch-b8-ear",
+    "ch-b8-head",
+    "ch-b8-face-shade",
+    "ch-b8-eyes-happy",
+    "ch-b8-brows-happy",
+    "ch-b8-mouth-happy",
+    "ch-b8-eyes-thinking",
+    "ch-b8-brows-thinking",
+    "ch-b8-mouth-thinking",
+    "ch-b8-eyes-surprised",
+    "ch-b8-brows-surprised",
+    "ch-b8-mouth-surprised",
+    "ch-b8-eyes-oops",
+    "ch-b8-brows-oops",
+    "ch-b8-mouth-oops",
+    "ch-b8-eyes-calm",
+    "ch-b8-brows-calm",
+    "ch-b8-mouth-calm",
+    "ch-b8-sweat",
+    "ch-b8-cheeks",
+    "ch-b8-nose",
+    "ch-b8-hair-front",
+    "ch-b8-hat",
+    "ch-b8-shade",
+    "ch-b8-lit"
+   ]
+  },
+  {
+   "name": "node_01",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2760,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_01_clip",
+    "node_01_shadow",
+    "node_01_base",
+    "node_01_lit",
+    "node_01_shade"
+   ]
+  },
+  {
+   "name": "node_02",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 4058,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_02_clip",
+    "node_02_shadow",
+    "node_02_base",
+    "node_02_lit",
+    "node_02_shade",
+    "node_02_windows"
+   ]
+  },
+  {
+   "name": "node_03",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 4068,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_03_clip",
+    "node_03_shadow",
+    "node_03_base",
+    "node_03_lit",
+    "node_03_shade",
+    "node_03_windows"
+   ]
+  },
+  {
+   "name": "node_04",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 3121,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_04_clip",
+    "node_04_shadow",
+    "node_04_base",
+    "node_04_lit",
+    "node_04_shade"
+   ]
+  },
+  {
+   "name": "node_05",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2832,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_05_clip",
+    "node_05_shadow",
+    "node_05_base",
+    "node_05_lit",
+    "node_05_shade"
+   ]
+  },
+  {
+   "name": "node_06",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 3520,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_06_clip",
+    "node_06_shadow",
+    "node_06_base",
+    "node_06_lit",
+    "node_06_shade",
+    "node_06_windows"
+   ]
+  },
+  {
+   "name": "node_07",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2648,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_07_clip",
+    "node_07_shadow",
+    "node_07_base",
+    "node_07_lit",
+    "node_07_shade"
+   ]
+  },
+  {
+   "name": "node_08",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 3630,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_08_clip",
+    "node_08_shadow",
+    "node_08_base",
+    "node_08_lit",
+    "node_08_shade",
+    "node_08_windows"
+   ]
+  },
+  {
+   "name": "node_09",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2787,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_09_clip",
+    "node_09_shadow",
+    "node_09_base",
+    "node_09_lit",
+    "node_09_shade"
+   ]
+  },
+  {
+   "name": "node_10",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 3256,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_10_clip",
+    "node_10_shadow",
+    "node_10_base",
+    "node_10_lit",
+    "node_10_shade"
+   ]
+  },
+  {
+   "name": "node_11",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 4912,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_11_clip",
+    "node_11_shadow",
+    "node_11_base",
+    "node_11_lit",
+    "node_11_shade",
+    "node_11_windows"
+   ]
+  },
+  {
+   "name": "node_12",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 3710,
+   "viewBox": "0 0 200 190",
+   "layers": [
+    "node_12_clip",
+    "node_12_shadow",
+    "node_12_base",
+    "node_12_lit",
+    "node_12_shade",
+    "node_12_windows"
+   ]
+  },
+  {
+   "name": "env_pad_sports_a",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1646,
    "viewBox": "0 0 120 100",
    "layers": [
-    "ph-box-g",
-    "ph-box-clip",
-    "ph-box-base",
-    "ph-box-lit"
+    "env_pad_sports_a_clip",
+    "env_pad_sports_a_shadow",
+    "env_pad_sports_a_base",
+    "env_pad_sports_a_lit",
+    "env_pad_sports_a_shade"
    ]
   },
   {
-   "name": "ph-icon",
+   "name": "env_pad_sports_b",
    "type": "symbol",
-   "file": "_placeholder/ph_icon.svg",
-   "module": "_placeholder",
-   "bytes": 320,
-   "viewBox": "0 0 48 48",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1633,
+   "viewBox": "0 0 120 100",
    "layers": [
-    "ph-icon-g",
-    "ph-icon-disc"
+    "env_pad_sports_b_clip",
+    "env_pad_sports_b_shadow",
+    "env_pad_sports_b_base",
+    "env_pad_sports_b_lit",
+    "env_pad_sports_b_shade"
    ]
   },
   {
-   "name": "ph-pill",
+   "name": "env_pad_sports_c",
    "type": "symbol",
-   "file": "_placeholder/ph_pill.svg",
-   "module": "_placeholder",
-   "bytes": 202,
-   "viewBox": "0 0 64 28",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1645,
+   "viewBox": "0 0 120 100",
    "layers": [
-    "ph-pill-bg"
+    "env_pad_sports_c_clip",
+    "env_pad_sports_c_shadow",
+    "env_pad_sports_c_base",
+    "env_pad_sports_c_lit",
+    "env_pad_sports_c_shade"
+   ]
+  },
+  {
+   "name": "env_pad_space_a",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1477,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "env_pad_space_a_clip",
+    "env_pad_space_a_shadow",
+    "env_pad_space_a_base",
+    "env_pad_space_a_lit",
+    "env_pad_space_a_shade"
+   ]
+  },
+  {
+   "name": "env_pad_space_b",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1475,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "env_pad_space_b_clip",
+    "env_pad_space_b_shadow",
+    "env_pad_space_b_base",
+    "env_pad_space_b_lit",
+    "env_pad_space_b_shade"
+   ]
+  },
+  {
+   "name": "env_pad_space_c",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1479,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "env_pad_space_c_clip",
+    "env_pad_space_c_shadow",
+    "env_pad_space_c_base",
+    "env_pad_space_c_lit",
+    "env_pad_space_c_shade"
+   ]
+  },
+  {
+   "name": "env_pad_farm_a",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1552,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "env_pad_farm_a_clip",
+    "env_pad_farm_a_shadow",
+    "env_pad_farm_a_base",
+    "env_pad_farm_a_lit",
+    "env_pad_farm_a_shade"
+   ]
+  },
+  {
+   "name": "env_pad_farm_b",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1550,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "env_pad_farm_b_clip",
+    "env_pad_farm_b_shadow",
+    "env_pad_farm_b_base",
+    "env_pad_farm_b_lit",
+    "env_pad_farm_b_shade"
+   ]
+  },
+  {
+   "name": "env_pad_farm_c",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1535,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "env_pad_farm_c_clip",
+    "env_pad_farm_c_shadow",
+    "env_pad_farm_c_base",
+    "env_pad_farm_c_lit",
+    "env_pad_farm_c_shade"
+   ]
+  },
+  {
+   "name": "env_pad_city_a",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1549,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "env_pad_city_a_clip",
+    "env_pad_city_a_shadow",
+    "env_pad_city_a_base",
+    "env_pad_city_a_lit",
+    "env_pad_city_a_shade"
+   ]
+  },
+  {
+   "name": "env_pad_city_b",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1547,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "env_pad_city_b_clip",
+    "env_pad_city_b_shadow",
+    "env_pad_city_b_base",
+    "env_pad_city_b_lit",
+    "env_pad_city_b_shade"
+   ]
+  },
+  {
+   "name": "env_pad_city_c",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1532,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "env_pad_city_c_clip",
+    "env_pad_city_c_shadow",
+    "env_pad_city_c_base",
+    "env_pad_city_c_lit",
+    "env_pad_city_c_shade"
+   ]
+  },
+  {
+   "name": "prop_01",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 817,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_01_clip",
+    "prop_01_shadow",
+    "prop_01_base",
+    "prop_01_lit",
+    "prop_01_shade"
+   ]
+  },
+  {
+   "name": "prop_02",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1061,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_02_clip",
+    "prop_02_shadow",
+    "prop_02_base",
+    "prop_02_lit",
+    "prop_02_shade"
+   ]
+  },
+  {
+   "name": "prop_03",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1126,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_03_clip",
+    "prop_03_shadow",
+    "prop_03_base",
+    "prop_03_lit",
+    "prop_03_shade"
+   ]
+  },
+  {
+   "name": "prop_04",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1102,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_04_clip",
+    "prop_04_shadow",
+    "prop_04_base",
+    "prop_04_lit",
+    "prop_04_shade"
+   ]
+  },
+  {
+   "name": "prop_05",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1200,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_05_clip",
+    "prop_05_shadow",
+    "prop_05_base",
+    "prop_05_lit",
+    "prop_05_shade"
+   ]
+  },
+  {
+   "name": "prop_06",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1016,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_06_clip",
+    "prop_06_shadow",
+    "prop_06_base",
+    "prop_06_lit",
+    "prop_06_shade"
+   ]
+  },
+  {
+   "name": "prop_07",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1068,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_07_clip",
+    "prop_07_shadow",
+    "prop_07_base",
+    "prop_07_lit",
+    "prop_07_shade"
+   ]
+  },
+  {
+   "name": "prop_08",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 917,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_08_clip",
+    "prop_08_shadow",
+    "prop_08_base",
+    "prop_08_lit",
+    "prop_08_shade"
+   ]
+  },
+  {
+   "name": "prop_09",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1024,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_09_clip",
+    "prop_09_shadow",
+    "prop_09_base",
+    "prop_09_lit",
+    "prop_09_shade"
+   ]
+  },
+  {
+   "name": "prop_10",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1162,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_10_clip",
+    "prop_10_shadow",
+    "prop_10_base",
+    "prop_10_lit",
+    "prop_10_shade"
+   ]
+  },
+  {
+   "name": "prop_11",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1417,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_11_clip",
+    "prop_11_shadow",
+    "prop_11_base",
+    "prop_11_lit",
+    "prop_11_shade"
+   ]
+  },
+  {
+   "name": "prop_12",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1053,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_12_clip",
+    "prop_12_shadow",
+    "prop_12_base",
+    "prop_12_lit",
+    "prop_12_shade"
+   ]
+  },
+  {
+   "name": "prop_13",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1215,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_13_clip",
+    "prop_13_shadow",
+    "prop_13_base",
+    "prop_13_lit",
+    "prop_13_shade"
+   ]
+  },
+  {
+   "name": "prop_14",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1154,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_14_clip",
+    "prop_14_shadow",
+    "prop_14_base",
+    "prop_14_lit",
+    "prop_14_shade"
+   ]
+  },
+  {
+   "name": "prop_15",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1511,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_15_clip",
+    "prop_15_shadow",
+    "prop_15_base",
+    "prop_15_lit",
+    "prop_15_shade",
+    "prop_15_windows"
+   ]
+  },
+  {
+   "name": "prop_16",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1206,
+   "viewBox": "0 0 120 100",
+   "layers": [
+    "prop_16_clip",
+    "prop_16_shadow",
+    "prop_16_base",
+    "prop_16_lit",
+    "prop_16_shade"
+   ]
+  },
+  {
+   "name": "zb_strip_city",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 21812,
+   "viewBox": "0 0 390 3036",
+   "layers": []
+  },
+  {
+   "name": "zb_strip_farm",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 5970,
+   "viewBox": "0 0 390 543",
+   "layers": []
+  },
+  {
+   "name": "zb_strip_space",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 5768,
+   "viewBox": "0 0 390 891",
+   "layers": []
+  },
+  {
+   "name": "zb_strip_sports",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 13364,
+   "viewBox": "0 0 390 1494",
+   "layers": []
+  },
+  {
+   "name": "env_river",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 3280,
+   "viewBox": "0 0 390 260",
+   "layers": [
+    "env_river_g"
+   ]
+  },
+  {
+   "name": "env_bridge",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1336,
+   "viewBox": "0 0 120 70",
+   "layers": []
+  },
+  {
+   "name": "env_ice",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1400,
+   "viewBox": "0 0 300 150",
+   "layers": [
+    "env_ice_clip"
+   ]
+  },
+  {
+   "name": "env_sea_edge",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 3273,
+   "viewBox": "0 0 390 210",
+   "layers": []
+  },
+  {
+   "name": "env_bay_left",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 3785,
+   "viewBox": "0 0 110 1340",
+   "layers": []
+  },
+  {
+   "name": "env_skyline",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 8501,
+   "viewBox": "0 0 390 180",
+   "layers": []
+  },
+  {
+   "name": "env_cloud_edge",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1198,
+   "viewBox": "0 0 390 120",
+   "layers": [
+    "env_cl_g"
+   ]
+  },
+  {
+   "name": "env_boardwalk",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 388,
+   "viewBox": "0 0 300 100",
+   "layers": []
+  },
+  {
+   "name": "env_tree_pine",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1124,
+   "viewBox": "0 0 80 100",
+   "layers": [
+    "env_tree_pine_clip",
+    "env_tree_pine_shadow",
+    "env_tree_pine_base",
+    "env_tree_pine_lit",
+    "env_tree_pine_shade"
+   ]
+  },
+  {
+   "name": "env_tree_pop",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1015,
+   "viewBox": "0 0 60 100",
+   "layers": [
+    "env_tree_pop_clip",
+    "env_tree_pop_shadow",
+    "env_tree_pop_base",
+    "env_tree_pop_lit",
+    "env_tree_pop_shade"
+   ]
+  },
+  {
+   "name": "env_tree_bush",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1013,
+   "viewBox": "0 0 70 60",
+   "layers": [
+    "env_tree_bush_clip",
+    "env_tree_bush_shadow",
+    "env_tree_bush_base",
+    "env_tree_bush_lit",
+    "env_tree_bush_shade"
+   ]
+  },
+  {
+   "name": "env_dec_sports_cone",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1019,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_sports_cone_clip",
+    "env_dec_sports_cone_shadow",
+    "env_dec_sports_cone_base",
+    "env_dec_sports_cone_lit",
+    "env_dec_sports_cone_shade"
+   ]
+  },
+  {
+   "name": "env_dec_sports_hedge",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 973,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_sports_hedge_clip",
+    "env_dec_sports_hedge_shadow",
+    "env_dec_sports_hedge_base",
+    "env_dec_sports_hedge_lit",
+    "env_dec_sports_hedge_shade"
+   ]
+  },
+  {
+   "name": "env_dec_sports_bench",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1259,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_sports_bench_clip",
+    "env_dec_sports_bench_shadow",
+    "env_dec_sports_bench_base",
+    "env_dec_sports_bench_lit",
+    "env_dec_sports_bench_shade"
+   ]
+  },
+  {
+   "name": "env_dec_sports_goal",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1230,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_sports_goal_clip",
+    "env_dec_sports_goal_shadow",
+    "env_dec_sports_goal_base",
+    "env_dec_sports_goal_lit",
+    "env_dec_sports_goal_shade"
+   ]
+  },
+  {
+   "name": "env_dec_sports_hurdle",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1234,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_sports_hurdle_clip",
+    "env_dec_sports_hurdle_shadow",
+    "env_dec_sports_hurdle_base",
+    "env_dec_sports_hurdle_lit",
+    "env_dec_sports_hurdle_shade"
+   ]
+  },
+  {
+   "name": "env_dec_sports_stand",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1118,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_sports_stand_clip",
+    "env_dec_sports_stand_shadow",
+    "env_dec_sports_stand_base",
+    "env_dec_sports_stand_lit",
+    "env_dec_sports_stand_shade"
+   ]
+  },
+  {
+   "name": "env_dec_sports_lamp",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1088,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_sports_lamp_clip",
+    "env_dec_sports_lamp_shadow",
+    "env_dec_sports_lamp_base",
+    "env_dec_sports_lamp_lit",
+    "env_dec_sports_lamp_shade",
+    "env_dec_sports_lamp_windows"
+   ]
+  },
+  {
+   "name": "env_dec_sports_flags",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1231,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_sports_flags_clip",
+    "env_dec_sports_flags_shadow",
+    "env_dec_sports_flags_base",
+    "env_dec_sports_flags_lit",
+    "env_dec_sports_flags_shade"
+   ]
+  },
+  {
+   "name": "env_dec_space_crater",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 952,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_space_crater_clip",
+    "env_dec_space_crater_shadow",
+    "env_dec_space_crater_base",
+    "env_dec_space_crater_lit",
+    "env_dec_space_crater_shade"
+   ]
+  },
+  {
+   "name": "env_dec_space_rock",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 998,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_space_rock_clip",
+    "env_dec_space_rock_shadow",
+    "env_dec_space_rock_base",
+    "env_dec_space_rock_lit",
+    "env_dec_space_rock_shade"
+   ]
+  },
+  {
+   "name": "env_dec_space_rock2",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 887,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_space_rock2_clip",
+    "env_dec_space_rock2_shadow",
+    "env_dec_space_rock2_base",
+    "env_dec_space_rock2_lit",
+    "env_dec_space_rock2_shade"
+   ]
+  },
+  {
+   "name": "env_dec_space_anten",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1223,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_space_anten_clip",
+    "env_dec_space_anten_shadow",
+    "env_dec_space_anten_base",
+    "env_dec_space_anten_lit",
+    "env_dec_space_anten_shade"
+   ]
+  },
+  {
+   "name": "env_dec_space_dome",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 986,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_space_dome_clip",
+    "env_dec_space_dome_shadow",
+    "env_dec_space_dome_base",
+    "env_dec_space_dome_lit",
+    "env_dec_space_dome_shade",
+    "env_dec_space_dome_windows"
+   ]
+  },
+  {
+   "name": "env_dec_space_solar",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1220,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_space_solar_clip",
+    "env_dec_space_solar_shadow",
+    "env_dec_space_solar_base",
+    "env_dec_space_solar_lit",
+    "env_dec_space_solar_shade"
+   ]
+  },
+  {
+   "name": "env_dec_space_star",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 783,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_space_star_clip",
+    "env_dec_space_star_shadow",
+    "env_dec_space_star_base",
+    "env_dec_space_star_lit",
+    "env_dec_space_star_shade"
+   ]
+  },
+  {
+   "name": "env_dec_space_ufo",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 891,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_space_ufo_clip",
+    "env_dec_space_ufo_shadow",
+    "env_dec_space_ufo_base",
+    "env_dec_space_ufo_lit",
+    "env_dec_space_ufo_shade"
+   ]
+  },
+  {
+   "name": "env_dec_farm_wheat",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1805,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_farm_wheat_clip",
+    "env_dec_farm_wheat_shadow",
+    "env_dec_farm_wheat_base",
+    "env_dec_farm_wheat_lit",
+    "env_dec_farm_wheat_shade"
+   ]
+  },
+  {
+   "name": "env_dec_farm_fence",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1539,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_farm_fence_clip",
+    "env_dec_farm_fence_shadow",
+    "env_dec_farm_fence_base",
+    "env_dec_farm_fence_lit",
+    "env_dec_farm_fence_shade"
+   ]
+  },
+  {
+   "name": "env_dec_farm_bale",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1198,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_farm_bale_clip",
+    "env_dec_farm_bale_shadow",
+    "env_dec_farm_bale_base",
+    "env_dec_farm_bale_lit",
+    "env_dec_farm_bale_shade"
+   ]
+  },
+  {
+   "name": "env_dec_farm_scare",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1233,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_farm_scare_clip",
+    "env_dec_farm_scare_shadow",
+    "env_dec_farm_scare_base",
+    "env_dec_farm_scare_lit",
+    "env_dec_farm_scare_shade"
+   ]
+  },
+  {
+   "name": "env_dec_farm_haycone",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 988,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_farm_haycone_clip",
+    "env_dec_farm_haycone_shadow",
+    "env_dec_farm_haycone_base",
+    "env_dec_farm_haycone_lit",
+    "env_dec_farm_haycone_shade"
+   ]
+  },
+  {
+   "name": "env_dec_farm_trough",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 935,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_farm_trough_clip",
+    "env_dec_farm_trough_shadow",
+    "env_dec_farm_trough_base",
+    "env_dec_farm_trough_lit",
+    "env_dec_farm_trough_shade"
+   ]
+  },
+  {
+   "name": "env_dec_farm_sunf",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 922,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_farm_sunf_clip",
+    "env_dec_farm_sunf_shadow",
+    "env_dec_farm_sunf_base",
+    "env_dec_farm_sunf_lit",
+    "env_dec_farm_sunf_shade"
+   ]
+  },
+  {
+   "name": "env_dec_farm_bucket",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 860,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_farm_bucket_clip",
+    "env_dec_farm_bucket_shadow",
+    "env_dec_farm_bucket_base",
+    "env_dec_farm_bucket_lit",
+    "env_dec_farm_bucket_shade"
+   ]
+  },
+  {
+   "name": "env_dec_city_low",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1271,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_low_clip",
+    "env_dec_city_low_shadow",
+    "env_dec_city_low_base",
+    "env_dec_city_low_lit",
+    "env_dec_city_low_shade",
+    "env_dec_city_low_windows"
+   ]
+  },
+  {
+   "name": "env_dec_city_mid",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1368,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_mid_clip",
+    "env_dec_city_mid_shadow",
+    "env_dec_city_mid_base",
+    "env_dec_city_mid_lit",
+    "env_dec_city_mid_shade",
+    "env_dec_city_mid_windows"
+   ]
+  },
+  {
+   "name": "env_dec_city_slamp",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1055,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_slamp_clip",
+    "env_dec_city_slamp_shadow",
+    "env_dec_city_slamp_base",
+    "env_dec_city_slamp_lit",
+    "env_dec_city_slamp_shade",
+    "env_dec_city_slamp_windows"
+   ]
+  },
+  {
+   "name": "env_dec_city_rail",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1529,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_rail_clip",
+    "env_dec_city_rail_shadow",
+    "env_dec_city_rail_base",
+    "env_dec_city_rail_lit",
+    "env_dec_city_rail_shade"
+   ]
+  },
+  {
+   "name": "env_dec_city_barrels",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1421,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_barrels_clip",
+    "env_dec_city_barrels_shadow",
+    "env_dec_city_barrels_base",
+    "env_dec_city_barrels_lit",
+    "env_dec_city_barrels_shade"
+   ]
+  },
+  {
+   "name": "env_dec_city_truck_box",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1332,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_truck_box_clip",
+    "env_dec_city_truck_box_shadow",
+    "env_dec_city_truck_box_base",
+    "env_dec_city_truck_box_lit",
+    "env_dec_city_truck_box_shade",
+    "env_dec_city_truck_box_windows"
+   ]
+  },
+  {
+   "name": "env_dec_city_truck_crane",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1838,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_truck_crane_clip",
+    "env_dec_city_truck_crane_shadow",
+    "env_dec_city_truck_crane_base",
+    "env_dec_city_truck_crane_lit",
+    "env_dec_city_truck_crane_shade",
+    "env_dec_city_truck_crane_windows"
+   ]
+  },
+  {
+   "name": "env_dec_city_forklift",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1485,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_forklift_clip",
+    "env_dec_city_forklift_shadow",
+    "env_dec_city_forklift_base",
+    "env_dec_city_forklift_lit",
+    "env_dec_city_forklift_shade"
+   ]
+  },
+  {
+   "name": "env_dec_city_tank",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 1171,
+   "viewBox": "0 0 120 120",
+   "layers": [
+    "env_dec_city_tank_clip",
+    "env_dec_city_tank_shadow",
+    "env_dec_city_tank_base",
+    "env_dec_city_tank_lit",
+    "env_dec_city_tank_shade"
+   ]
+  },
+  {
+   "name": "env_start_gate",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2847,
+   "viewBox": "0 0 170 130",
+   "layers": [
+    "env_start_gate_clip",
+    "env_start_gate_shadow",
+    "env_start_gate_base",
+    "env_start_gate_lit",
+    "env_start_gate_shade"
+   ]
+  },
+  {
+   "name": "env_tile_map",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2590,
+   "viewBox": "0 0 160 140",
+   "layers": [
+    "env_tile_map_clip",
+    "env_tile_map_shadow",
+    "env_tile_map_base",
+    "env_tile_map_lit",
+    "env_tile_map_shade"
+   ]
+  },
+  {
+   "name": "env_tile_cards",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2888,
+   "viewBox": "0 0 160 140",
+   "layers": [
+    "env_tile_cards_clip",
+    "env_tile_cards_shadow",
+    "env_tile_cards_base",
+    "env_tile_cards_lit",
+    "env_tile_cards_shade"
+   ]
+  },
+  {
+   "name": "env_tile_practice",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2654,
+   "viewBox": "0 0 160 140",
+   "layers": [
+    "env_tile_practice_clip",
+    "env_tile_practice_shadow",
+    "env_tile_practice_base",
+    "env_tile_practice_lit",
+    "env_tile_practice_shade"
+   ]
+  },
+  {
+   "name": "env_tile_guide",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 2465,
+   "viewBox": "0 0 160 140",
+   "layers": [
+    "env_tile_guide_clip",
+    "env_tile_guide_shadow",
+    "env_tile_guide_base",
+    "env_tile_guide_lit",
+    "env_tile_guide_shade"
+   ]
+  },
+  {
+   "name": "env_dock_banner",
+   "type": "symbol",
+   "file": "env/sprite_env.svg",
+   "module": "env",
+   "bytes": 4221,
+   "viewBox": "0 0 390 200",
+   "layers": [
+    "env_dock_clip",
+    "env_dock_shadow",
+    "env_dock_base",
+    "env_dock_lit",
+    "env_dock_shade",
+    "env_dock_windows"
    ]
   },
   {
@@ -71,6 +2069,249 @@
     "lt-water-dusk",
     "lt-water-night"
    ]
+  },
+  {
+   "name": "ui-ic-menu",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 610,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-next",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 288,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-close",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 325,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-map",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 543,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-cards",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 702,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-practice",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 768,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-guide",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 732,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-search",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 522,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-lock",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 844,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-eye",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 497,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-box",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 570,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-mypos",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 267,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-pin",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 411,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-flag",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 537,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-game",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 694,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-flip",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 506,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-lesson",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 770,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-hint",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 727,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-hold",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 450,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-ic-skip",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 432,
+   "viewBox": "0 0 48 48",
+   "layers": []
+  },
+  {
+   "name": "ui-badge-easy",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 564,
+   "viewBox": "0 0 56 30",
+   "layers": []
+  },
+  {
+   "name": "ui-badge-mid",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 710,
+   "viewBox": "0 0 56 30",
+   "layers": []
+  },
+  {
+   "name": "ui-badge-hard",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 857,
+   "viewBox": "0 0 56 30",
+   "layers": []
+  },
+  {
+   "name": "ui-lock",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 557,
+   "viewBox": "0 0 32 32",
+   "layers": []
+  },
+  {
+   "name": "ui-ring",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 468,
+   "viewBox": "0 0 100 100",
+   "layers": []
+  },
+  {
+   "name": "ui-check",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 361,
+   "viewBox": "0 0 20 20",
+   "layers": []
+  },
+  {
+   "name": "ui-gearbtn",
+   "type": "symbol",
+   "file": "ui/sprite_ui.svg",
+   "module": "ui",
+   "bytes": 1333,
+   "viewBox": "0 0 48 54",
+   "layers": []
   }
  ]
 }

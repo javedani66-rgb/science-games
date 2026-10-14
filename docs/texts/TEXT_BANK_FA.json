@@ -5911,6 +5911,396 @@
    ],
    "text": "الگوی template.html نشانگر {mark} را ندارد.",
    "status": "draft"
+  },
+  "difficulty.easy": {
+   "id": "difficulty.easy",
+   "kind": "ui",
+   "where_fa": "واژهٔ سختی کنار قرص سبز",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "difficulty.easy",
+    "text"
+   ],
+   "text": "آسان",
+   "status": "draft"
+  },
+  "difficulty.mid": {
+   "id": "difficulty.mid",
+   "kind": "ui",
+   "where_fa": "واژهٔ سختی کنار قرص نارنجی",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "difficulty.mid",
+    "text"
+   ],
+   "text": "متوسط",
+   "status": "draft"
+  },
+  "difficulty.hard": {
+   "id": "difficulty.hard",
+   "kind": "ui",
+   "where_fa": "واژهٔ سختی کنار قرص قرمز",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "difficulty.hard",
+    "text"
+   ],
+   "text": "سخت",
+   "status": "draft"
+  },
+  "v5.ui.base.label": {
+   "id": "v5.ui.base.label",
+   "kind": "ui",
+   "where_fa": "برچسب بالای چیپ پایه",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.base.label",
+    "text"
+   ],
+   "text": "پایه",
+   "status": "draft"
+  },
+  "v5.ui.base.b12": {
+   "id": "v5.ui.base.b12",
+   "kind": "ui",
+   "where_fa": "چیپ پایه ۱ تا ۲",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.base.b12",
+    "text"
+   ],
+   "text": "۱ تا ۲",
+   "status": "draft"
+  },
+  "v5.ui.base.b34": {
+   "id": "v5.ui.base.b34",
+   "kind": "ui",
+   "where_fa": "چیپ پایه ۳ تا ۴",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.base.b34",
+    "text"
+   ],
+   "text": "۳ تا ۴",
+   "status": "draft"
+  },
+  "v5.ui.base.b56": {
+   "id": "v5.ui.base.b56",
+   "kind": "ui",
+   "where_fa": "چیپ پایه ۵ تا ۶",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.base.b56",
+    "text"
+   ],
+   "text": "۵ تا ۶",
+   "status": "draft"
+  },
+  "v5.ui.kit.title": {
+   "id": "v5.ui.kit.title",
+   "kind": "ui",
+   "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.kit.title",
+    "text"
+   ],
+   "text": "کیت رابط",
+   "status": "draft"
+  },
+  "v5.ui.kit.s_buttons": {
+   "id": "v5.ui.kit.s_buttons",
+   "kind": "ui",
+   "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.kit.s_buttons",
+    "text"
+   ],
+   "text": "دکمه‌ها",
+   "status": "draft"
+  },
+  "v5.ui.kit.s_base": {
+   "id": "v5.ui.kit.s_base",
+   "kind": "ui",
+   "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.kit.s_base",
+    "text"
+   ],
+   "text": "انتخاب‌گر پایه",
+   "status": "draft"
+  },
+  "v5.ui.kit.s_icons": {
+   "id": "v5.ui.kit.s_icons",
+   "kind": "ui",
+   "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.kit.s_icons",
+    "text"
+   ],
+   "text": "آیکون‌ها",
+   "status": "draft"
+  },
+  "v5.ui.kit.s_badges": {
+   "id": "v5.ui.kit.s_badges",
+   "kind": "ui",
+   "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.kit.s_badges",
+    "text"
+   ],
+   "text": "نشان سختی",
+   "status": "draft"
+  },
+  "v5.ui.kit.s_lock": {
+   "id": "v5.ui.kit.s_lock",
+   "kind": "ui",
+   "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.kit.s_lock",
+    "text"
+   ],
+   "text": "قفل و برچسب",
+   "status": "draft"
+  },
+  "v5.ui.kit.s_ring": {
+   "id": "v5.ui.kit.s_ring",
+   "kind": "ui",
+   "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.kit.s_ring",
+    "text"
+   ],
+   "text": "حلقهٔ اینجایی",
+   "status": "draft"
+  },
+  "v5.ui.kit.s_sheets": {
+   "id": "v5.ui.kit.s_sheets",
+   "kind": "ui",
+   "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.kit.s_sheets",
+    "text"
+   ],
+   "text": "برگه‌ها",
+   "status": "draft"
+  },
+  "v5.ui.kit.s_type": {
+   "id": "v5.ui.kit.s_type",
+   "kind": "ui",
+   "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.kit.s_type",
+    "text"
+   ],
+   "text": "اندازهٔ نوشته",
+   "status": "draft"
+  },
+  "v5.ui.state.pressed": {
+   "id": "v5.ui.state.pressed",
+   "kind": "ui",
+   "where_fa": "برچسب حالت دکمه در کیت",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.state.pressed",
+    "text"
+   ],
+   "text": "فشرده",
+   "status": "draft"
+  },
+  "v5.ui.state.disabled": {
+   "id": "v5.ui.state.disabled",
+   "kind": "ui",
+   "where_fa": "برچسب حالت دکمه در کیت",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.state.disabled",
+    "text"
+   ],
+   "text": "غیرفعال",
+   "status": "draft"
+  },
+  "v5.ui.state.focus": {
+   "id": "v5.ui.state.focus",
+   "kind": "ui",
+   "where_fa": "برچسب حالت دکمه در کیت",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.state.focus",
+    "text"
+   ],
+   "text": "فوکوس",
+   "status": "draft"
+  },
+  "v5.ui.state.compact": {
+   "id": "v5.ui.state.compact",
+   "kind": "ui",
+   "where_fa": "برچسب حالت دکمه در کیت",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.state.compact",
+    "text"
+   ],
+   "text": "کوچک",
+   "status": "draft"
+  },
+  "v5.ui.state.search": {
+   "id": "v5.ui.state.search",
+   "kind": "ui",
+   "where_fa": "برچسب حالت دکمه در کیت",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.state.search",
+    "text"
+   ],
+   "text": "جستجو",
+   "status": "draft"
+  },
+  "v5.ui.state.video": {
+   "id": "v5.ui.state.video",
+   "kind": "ui",
+   "where_fa": "دکمهٔ فیلم پشت کارت (کیت)",
+   "context_fa": "draft؛ ماکت کیت رابط v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.ui.state.video",
+    "text"
+   ],
+   "text": "فیلم",
+   "status": "draft"
+  },
+  "v5.flow.search.none": {
+   "id": "v5.flow.search.none",
+   "kind": "ui",
+   "where_fa": "نتیجهٔ خالی جست‌وجو",
+   "context_fa": "draft؛ ماکت v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.flow.search.none",
+    "text"
+   ],
+   "text": "چیزی پیدا نشد.",
+   "status": "draft"
+  },
+  "v5.flow.search.hint": {
+   "id": "v5.flow.search.hint",
+   "kind": "ui",
+   "where_fa": "راهنمای کادر جست‌وجوی نقشه",
+   "context_fa": "draft؛ ماکت v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.flow.search.hint",
+    "text"
+   ],
+   "text": "اسم یک جا یا یک درس را بنویس.",
+   "status": "draft"
+  },
+  "v5.flow.search.ph": {
+   "id": "v5.flow.search.ph",
+   "kind": "ui",
+   "where_fa": "متن جایگزین کادر جست‌وجو",
+   "context_fa": "draft؛ ماکت v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.flow.search.ph",
+    "text"
+   ],
+   "text": "اسم جا یا درس",
+   "status": "draft"
+  },
+  "v5.flow.tut.base": {
+   "id": "v5.flow.tut.base",
+   "kind": "ui",
+   "where_fa": "آموزش نقشه، گام چیپ پایه",
+   "context_fa": "draft؛ ماکت v5",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/v5/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "v5.flow.tut.base",
+    "text"
+   ],
+   "text": "اینجا پایهٔ خودت را انتخاب می‌کنی؛ نوشتهٔ کارت‌ها با آن عوض می‌شود.",
+   "status": "draft"
   }
  },
  "meta": {

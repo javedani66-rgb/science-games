@@ -3,23 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ماکت جریان کامل v3</title>
+<title>ماکت جریان کامل v5</title>
 <style>
 /*__FONTS__*/
 /*__TOKENS__*/
-/*__KIT__*/
-/* ======================= v3 mockup shell + screens ======================= */
+/* ======================= v5: پوستهٔ ماکت + صفحه‌ها (هنر از team/assets؛ کیت v3 حذف شده) ======================= */
 html,body{height:100%}
-body{margin:0;font:16px/1.55 var(--f-body);color:var(--ink);background:#e7e2d3;display:flex;flex-direction:column;overflow:hidden}
+body{margin:0;font:400 16px/1.6 var(--ui-font);color:var(--ui-line);background:#e7e2d3;display:flex;flex-direction:column;overflow:hidden}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
 svg{display:block}
-:focus-visible{outline:4px solid #8db8ee;outline-offset:2px}
-/* ---- reviewer chrome (not part of the child UI) ---- */
+:focus-visible{outline:3px solid var(--ui-cream);outline-offset:2px;box-shadow:0 0 0 6px var(--ui-violet)}
+@keyframes v5fade{from{opacity:0}to{opacity:1}}
+@keyframes v5pop{from{transform:scale(.9);opacity:.4}to{transform:none;opacity:1}}
+@keyframes v5sheet{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+/* ---- ابزار بازبین (بخشی از رابط کودک نیست) ---- */
 #rvbar{flex:none;height:40px;background:#2b3a2b;color:#fff;display:flex;align-items:center;gap:10px;padding:0 10px;font-size:14px}
 #rvbar span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #rvbar button{background:#fff;color:#2b3a2b;border-radius:999px;padding:0 14px;height:30px;font-size:14px;font-weight:700}
 #shell{flex:1;min-height:0;display:flex;position:relative}
-#rv{display:none;position:absolute;inset:0;z-index:200;background:#fffdf6;overflow:auto;padding:14px;font-size:14px}
+#rv{display:none;position:absolute;inset:0;z-index:200;background:#fffdf6;overflow:auto;padding:14px;font-size:14px;color:#241a5e}
 body.rvopen #rv{display:block}
 #rv h2{font-size:17px;margin:0 0 8px}
 #rv h3{font-size:14px;margin:14px 0 6px;color:#5a5a46}
@@ -34,225 +36,238 @@ body.rvopen #rv{display:block}
 #rv .note p{margin:0}#rv .note p+b{margin-top:10px}
 #rv .rs{margin-top:12px;background:#eee8d4;border-radius:10px;padding:8px 12px;min-height:40px;font-weight:700}
 @media(min-width:1000px){#rv{display:block;position:static;flex:0 0 400px;border-inline-end:1px solid #d9c9a3}#rvbar button{display:none}}
-/* ---- phone ---- */
-#phone{position:relative;flex:1;min-width:0;background:var(--parchment);overflow:hidden;display:flex;flex-direction:column}
+/* ---- گوشی ---- */
+#phone{position:relative;flex:1;min-width:0;background:var(--ui-cream);overflow:hidden}
 @media(min-width:700px){#phone{flex:0 1 420px;margin:14px auto;border-radius:28px;border:6px solid #1d1d1d;box-shadow:0 14px 40px rgba(0,0,0,.3);max-height:880px}}
 @media(min-width:1000px){#shell{justify-content:center}#phone{margin:14px 30px}}
-#app{flex:1;min-height:0;display:flex;flex-direction:column}
-.scr{flex:1;min-height:0;display:flex;flex-direction:column;position:relative;animation:kit-fade .25s ease both}
+.appl{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden}
+.appl[data-world=day]{background:var(--ui-cream);color:var(--ui-line)}
+.appl[data-world=night]{background:var(--ui-night-bg);color:var(--ui-cream)}
+.appl.fadein{animation:v5xf 1.2s ease-in-out both}
+@keyframes v5xf{from{opacity:0}to{opacity:1}}
+.scr{flex:1;min-height:0;display:flex;flex-direction:column;position:relative}
 .body{flex:1;min-height:0;overflow:auto;position:relative;overscroll-behavior:contain;scrollbar-width:none}
 .body::-webkit-scrollbar{display:none}
-.topbar{flex:none}
-.topbar h1.t-title{margin:0;flex:1;min-width:0;font-size:24px;line-height:1.2;text-align:center;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.topbar .mbtn{flex:none;min-height:48px;padding:0 12px;gap:6px;font-size:15px}
-.topbar .mbtn .ic{width:26px;height:26px}
-.dock{flex:none;padding:10px 12px 14px;display:flex;gap:10px;background:linear-gradient(180deg,rgba(246,226,176,0),var(--parchment) 30%)}
-.dock .btn{flex:1;padding:0 12px;min-width:0}
-.dock .btn.hide{display:none}
-/* ---- map ---- */
-.map{position:relative;padding:20px var(--gutter) 40px;min-height:100%}
-#gapsvg{position:absolute;left:0;top:0;z-index:0;pointer-events:none;overflow:visible}
-#fx{position:absolute;inset:0;z-index:40;pointer-events:none}
-.flagc{position:relative;z-index:2;width:max-content;max-width:100%;margin:0 auto 22px;min-height:40px;font-size:16px}
-.flagc.end{margin:22px auto 0}
-.flagc .ic{width:24px;height:24px}
-.chip .ic-flag{background-image:url("svg/icon-flag.svg")}
-.land{--node:84px;--lw:160px;margin-bottom:52px}
-.land:last-of-type{margin-bottom:0}
-@media(max-width:350px){.land{--lw:140px}.map{padding-inline:12px}.pocket__cap .chip .ic{display:none}.topbar h1.t-title{font-size:20px;line-height:1.15}}
-.land .plate{font-size:19px}
-.node{z-index:8}
-.node.fogged{z-index:6}
-.node .node__labels{width:var(--lw)}
-.node .node__labels .chip{max-width:100%}
-.node .chip--lock,.node .chip--fog,.node .chip--here,.node .chip--trial{font-size:14px;min-height:30px}
-.node.flash .node__disc{animation:kit-pop 600ms var(--ease) 1}
-.fogsign{position:absolute;z-index:9;width:36px;height:47px;background:url("svg/fog-sign.svg") center/contain no-repeat;filter:drop-shadow(0 2px 0 rgba(58,38,16,.4));pointer-events:none}
-.scr>.me-btn{position:absolute;bottom:auto;height:48px;z-index:15;left:50%;transform:translateX(-50%);top:68px;min-height:48px;padding:0 16px;gap:6px;font-size:15px;width:max-content;box-shadow:0 6px 16px rgba(0,0,0,.4)}
-.me-btn.off{visibility:hidden}
-/* ---- environment ---- */
-.envroot{flex:1;min-height:0;position:relative}
-.envland{position:absolute!important;inset:0;height:auto!important;max-width:none!important;margin:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}
-.envroot .body{position:absolute;inset:0;background:none}
-.envname{display:flex;justify-content:center;padding:12px 16px 0}
-.envbar{display:flex;justify-content:center;padding:8px 14px 0}
-.envbar img{width:min(62%,230px);height:auto;display:block;animation:kit-pop .5s var(--ease) backwards}
-:root{--hs:78px}
-.hdeck{position:relative;width:min(calc(100% - 44px),330px);margin:6px auto 12px;padding-top:calc(var(--hs)*2)}
-.hdeck .sp{display:block;width:100%;height:auto;visibility:hidden}
-.hc{position:absolute;inset-inline:0;top:0;transition:top .55s var(--ease),filter .55s var(--ease);animation:kit-pop .7s var(--ease) backwards;cursor:pointer}
-.hc img{display:block;width:100%;height:auto;pointer-events:none}
-.hc[data-p="0"]{top:0;z-index:1;filter:saturate(.62) brightness(.82);animation-delay:.2s}
-.hc[data-p="1"]{top:var(--hs);z-index:2;filter:saturate(.62) brightness(.82);animation-delay:.35s}
-.hc[data-p="2"]{top:calc(var(--hs)*2);z-index:3;animation-delay:.5s}
-.rd{position:absolute;left:7%;width:86%;top:76%;height:12.6%;display:none;align-items:center;justify-content:center;background:var(--cream);border-radius:12px;animation:kit-fade .26s}
-.rd .w{font-family:var(--f-title);font-size:20px;line-height:1.2;color:var(--ink);text-align:center;padding:0 6px}
-.hc[data-p="2"].open .rd{display:flex}
-.btn.tier0{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0) 45%) padding-box,linear-gradient(180deg,#2e9a52,#16734a) padding-box,var(--g-gold) border-box}
-.btn.tier1{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0) 45%) padding-box,linear-gradient(180deg,#e98a1f,#ad5313) padding-box,var(--g-gold) border-box}
-.btn.tier2{background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,0) 45%) padding-box,linear-gradient(180deg,#c8352f,#98282b) padding-box,var(--g-gold) border-box}
-.tapnote{text-align:center;font-size:15px;padding:0 20px 12px;color:var(--cream);text-shadow:0 1px 2px rgba(0,0,0,.7);font-weight:700}
-.gdeck{position:relative;width:min(calc(100% - 28px),340px);margin:10px auto 12px;height:calc(404px + var(--hs)*2)}
-.gc{position:absolute;inset-inline:0;height:404px;padding:7px;display:flex;flex-direction:column;gap:7px;border:4px ridge var(--gold);border-radius:24px;background:var(--tone);box-shadow:0 11px 15px #0006,inset 0 2px 0 #ffebac99;transition:top .55s var(--ease),filter .55s var(--ease);animation:kit-pop .7s var(--ease) backwards;text-align:center;color:#fff4d4;cursor:pointer}
-.gc[data-p="0"]{top:0;z-index:1;filter:saturate(.62) brightness(.82)}
-.gc[data-p="1"]{top:var(--hs);z-index:2;filter:saturate(.62) brightness(.82)}
-.gc[data-p="2"]{top:calc(var(--hs)*2);z-index:3}
-.gc .gt{flex:none;min-height:56px;display:flex;align-items:center;justify-content:center;border:3px ridge var(--gold);border-radius:18px;background:var(--tone);box-shadow:inset 0 2px 3px #0007;padding:2px 10px;font-family:var(--f-title);font-size:22px;line-height:1.25;text-shadow:0 2px 2px #0009}
-.gc .ga{flex:1;min-height:0;border:3px ridge var(--gold);border-radius:15px;display:grid;place-items:center;background:repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 14px,rgba(0,0,0,.08) 14px 28px),var(--tone)}
-.gc .ga .sym{width:110px;height:110px}
-.gc .gm{flex:none;min-height:84px;border:3px ridge var(--gold);border-radius:15px;background:var(--cream);color:var(--ink);display:flex;align-items:center;justify-content:center;padding:6px 8px;font-family:var(--f-title);font-size:19px;line-height:1.3}
-/* ---- scene ---- */
-.mission{flex:none;padding:8px 12px;text-align:center;font-weight:700;font-size:17px;color:var(--ink);background:var(--g-cream);border-bottom:3px solid var(--gold-dark);line-height:1.5}
-.scene{position:relative;flex:1;min-height:0;display:flex;justify-content:center;padding:8px 10px;background:var(--parchment)}
-.scene>img{max-width:100%;max-height:100%;object-fit:contain;border-radius:14px;display:block;align-self:center;border:4px solid var(--gold-dark)}
-.scene .ph{width:100%;border:3px dashed var(--gold-dark);border-radius:16px;display:grid;place-items:center;text-align:center;padding:20px;font-weight:700;font-size:18px;background:var(--g-cream)}
-.scenebar{flex:none;display:flex;justify-content:flex-end;padding:6px 12px 0;background:var(--parchment)}
-.mkc{position:absolute;inset-inline:16px;bottom:14px;font-size:14px;background:rgba(255,255,255,.94);border:1.5px dashed var(--line);border-radius:8px;padding:3px 8px;line-height:1.5;text-align:center}
-.toast{position:absolute;inset-inline:24px;top:46%;background:#fff;border:3px dashed var(--line);border-radius:14px;padding:10px 12px;font-weight:700;text-align:center;z-index:5;animation:kit-fade .25s}
-.ctl{flex:none;padding:10px 12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;background:var(--parchment)}
-.ctl .btn{padding:0 8px;font-size:16px;min-width:0}
-.ctl .btn[aria-pressed="true"]{background:var(--g-teal) padding-box,var(--g-gold) border-box;color:var(--cream)}
-/* ---- lesson-card figure ---- */
-.cardbox{--w:#b5472f;--e:#2e7d4a;--rope:#a8793f}
+.bi{inline-size:28px;block-size:28px;flex:none}
+.bi.sm{inline-size:24px;block-size:24px}
+.wide{inline-size:100%}
+/* ---- نوار بالا (≤72px؛ همه‌جا ۶۴) ---- */
+.tb{flex:none;block-size:64px;box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:0 10px;position:relative;z-index:5}
+[data-world=day] .tb{background:var(--ui-cream);border-block-end:var(--ui-l45) solid var(--ui-line)}
+[data-world=night] .tb{background:var(--ui-night-bg);border-block-end:var(--ui-l26) solid var(--ui-night-edge)}
+.tb h1{margin:0;flex:1;min-inline-size:0;text-align:center;font:400 24px/1.15 var(--ui-font-title);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+[data-world=night] .tb h1{color:var(--ui-cream);text-shadow:0 0 10px rgba(95,168,214,.7)}
+.tbsp{flex:1}
+.tb .ui-btn{margin-block-end:0;padding:0 12px;gap:6px;flex:none;min-block-size:48px}
+.tb .ui-btn--sec{padding:0 14px}
+.tb .ui-chips{flex:1;min-inline-size:0;gap:6px}
+.tb .ui-chip{margin-block-end:6px;min-inline-size:70px;border-width:var(--ui-l26)}
+.tb .ui-chip[aria-pressed=true]{border-width:var(--ui-l45)}
+/* ---- نقشه ---- */
+.mapbody{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;position:relative;overscroll-behavior:contain;scrollbar-width:none;background:var(--z-sports-base)}
+.mapbody::-webkit-scrollbar{display:none}
+.map{position:relative;--s:1}
+.mapart{display:block;inline-size:100%;block-size:auto}
+.mov{position:absolute;inset:0;pointer-events:none}
+.mn{position:absolute;pointer-events:auto;background:transparent;border-radius:14px;min-inline-size:48px;min-block-size:48px}
+.mn:focus-visible{outline:4px solid var(--ui-cream);box-shadow:0 0 0 8px var(--ui-violet)}
+.ml{translate:var(--dx,0px) var(--dy,0px);position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none;inline-size:max-content;max-inline-size:176px;z-index:2}
+.ml .ui-plate{white-space:normal;text-align:center;line-height:1.35;min-block-size:28px;padding:2px 12px}
+.pi{display:inline-block;inline-size:20px;block-size:20px;vertical-align:-5px;margin-inline-end:4px}
+.ui-plate--lock{--cutbg:var(--ui-violet);color:var(--ui-cream);font-size:15px}
+.ui-plate--here{--cutbg:var(--ui-cream);font-size:16px}
+.ui-plate--fogs{--cutbg:var(--ui-cream)}
+.ui-plate--teal{--cutbg:var(--ui-teal)}
+.guide{position:absolute;inline-size:56px;block-size:82px;margin-inline-start:-28px;pointer-events:none;z-index:4}
+.guide svg{inline-size:56px;block-size:82px;overflow:visible}
+.me{position:absolute;z-index:15;inset-inline:0;margin-inline:auto;inline-size:max-content;top:74px;min-block-size:48px;filter:none}
+.me.off{visibility:hidden}
+.mn.flash{animation:v5pop .6s 1}
+.pend{margin:0;padding:12px 14px;text-align:center;font-weight:700;font-size:17px}
+/* ---- محیط (شب) ---- */
+.envbody{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;align-items:center;scrollbar-width:none}
+.envbody::-webkit-scrollbar{display:none}
+.envbanner{display:none;flex:none;inline-size:100%;block-size:112px;overflow:hidden;margin-block-end:8px;border-block-end:var(--ui-l26) solid var(--ui-night-edge)}
+@media(min-height:760px){.envbanner{display:block}}
+.envbanner svg{inline-size:100%;block-size:100%}
+.cd-top{display:none}
+.cd-bot{flex:none;block-size:56px;display:flex;align-items:center;padding:0 16px;box-sizing:border-box;inline-size:100%}
+.cd-bot .ui-btn{inline-size:100%}
+.cd-stack{padding-block-start:0}
+.cd-strip:focus-visible,.cd-front:focus-visible{outline-offset:-4px}
+.cd-art-ph{display:block;inline-size:100%;block-size:100%}
+.tapnote{margin:4px 16px 0;text-align:center;font-weight:700;font-size:14px;color:var(--ui-cream);opacity:.9}
+/* ---- صحنه ---- */
+.mission{flex:none;padding:6px 12px;text-align:center;font-weight:700;font-size:17px;line-height:1.5;background:var(--ui-cream);border-block-end:var(--ui-l26) solid var(--ui-line);min-block-size:44px;display:flex;align-items:center;justify-content:center}
+.scenebox{position:relative;flex:1;min-height:0;background:#d6f1ee}
+.scenebox>svg{position:absolute;inset:0;inline-size:100%;block-size:100%}
+.scenebox .ph{position:absolute;inset-inline:16px;bottom:14px;background:var(--ui-cream);border:var(--ui-l26) solid var(--ui-line);border-radius:10px;font-weight:700;font-size:16px;text-align:center;padding:8px 10px}
+.mkc{position:absolute;inset-inline:12px;top:10px;z-index:3;font-size:14px;background:rgba(255,244,210,.95);border:var(--ui-l26) dashed var(--ui-line);border-radius:8px;padding:3px 8px;line-height:1.5;text-align:center}
+.toast{position:absolute;inset-inline:24px;top:42%;background:var(--ui-cream);border:var(--ui-l45) dashed var(--ui-line);border-radius:14px;padding:10px 12px;font-weight:700;text-align:center;z-index:5;animation:v5fade .25s}
+.ssheet{flex:none;border-radius:0;padding:10px 12px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;border-inline:0}
+.ssheet::before{display:none}
+.ssheet .ui-btn{margin-block-end:0;min-inline-size:0;padding:0 8px;font-size:16px;inline-size:100%}
+.ssheet .ui-btn[aria-pressed=true]{--cutbg:var(--ui-teal)}
+.ssheet .ui-btn.pull{grid-column:1/-1;margin-block-end:6px;inline-size:100%}
+/* ---- کارت درس (شب) ---- */
+#cv{position:absolute;inset:0;z-index:50;pointer-events:none}
+#cv .cscrim{position:absolute;inset:0;background:rgba(13,4,38,.8);pointer-events:auto;animation:v5fade .25s both}
+.cbig{position:absolute;inset:8px 8px 72px;perspective:1400px;pointer-events:auto;transform-origin:0 0;color:var(--ui-cream)}
+.cflip{position:relative;inline-size:100%;block-size:100%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.35,0,.25,1)}
+.cflip.back{transform:rotateY(180deg)}
+.cface{position:absolute;inset:0;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--ui-night-bg);border-radius:20px}
+.cface.bk{transform:rotateY(180deg)}
+.cflip.back .cface:not(.bk){visibility:hidden;transition:visibility 0s .25s}
+.cflip:not(.back) .cface.bk{visibility:hidden;transition:visibility 0s .25s}
+.cface>.cd-frame{position:absolute;inset:0;inline-size:100%;block-size:100%;z-index:0}
+.cface>*:not(.cd-frame){position:relative;z-index:1}
+.chd{flex:none;margin:26px 22px 0;block-size:60px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
+.chd>svg{position:absolute;inset:0;inline-size:100%;block-size:100%;z-index:0}
+.chd .tt{position:relative;z-index:1;padding:0 12px;line-height:1.05}
+.chd h2{margin:0;font:400 24px/1.05 var(--ui-font-title);color:var(--ui-cream);text-shadow:0 0 10px var(--cd-zone),0 0 3px var(--cd-zone)}
+.chd small{display:block;font:700 14px/1.2 var(--ui-font);color:var(--ui-cream);margin-block-start:2px}
+.cbd{flex:1;min-block-size:0;overflow:auto;padding:12px 24px 8px;overscroll-behavior:contain;scrollbar-width:none}
+.cbd::-webkit-scrollbar{display:none}
+.cfoot{flex:none;padding:6px 24px 22px;display:flex;justify-content:center}
+.cfoot .ui-btn{inline-size:100%}
+.cbar{position:absolute;inset-inline:8px;bottom:8px;display:flex;gap:10px;pointer-events:auto}
+.cbar .ui-btn{flex:1;min-inline-size:0;padding:0 10px;margin-block-end:0}
+.cbar .ui-btn.ui-btn--sec{margin-block-end:0}
+.tagl{display:inline-block;font-size:14px;font-weight:700;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);border-radius:999px;padding:1px 12px;margin-block-end:8px}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.fig{background:#fff;border:2px solid var(--gold-dark);border-radius:12px;padding:4px 2px 6px;text-align:center}
-.fig h3{font-size:15px;color:var(--ink);margin:0}
-.fig svg{width:100%;height:auto}
-.fig svg text{font-size:14px;font-family:var(--f-body)}
-.lg{display:flex;gap:14px;justify-content:center;margin:8px 0 2px;font-size:14px;flex-wrap:wrap}
-.lg i{display:inline-block;width:14px;height:4px;border-radius:2px;vertical-align:middle;margin-inline-end:4px}
-.say{margin-top:8px;font-weight:700;font-size:17px;text-align:center;line-height:1.7}
-.sub{font-size:15px;text-align:center;color:var(--ink-mid);margin-top:4px}
-.eq{direction:ltr;unicode-bidi:isolate;font-size:19px;text-align:center;margin:6px 0 2px;letter-spacing:.5px;white-space:pre}
+.fig{background:#d6f1ee;border:var(--ui-l45) solid var(--ui-line);border-radius:12px;padding:4px 2px 6px;text-align:center;color:var(--ui-line)}
+.fig h3{margin:0;font:700 15px/1.3 var(--ui-font)}
+.fig svg{inline-size:100%;block-size:auto}
+.figl{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;padding:0 4px}
+.figl .ui-plate{min-block-size:26px;padding:0 8px;font-size:14px}
+.pl-w{--cutbg:var(--ui-pink);color:var(--ui-line)}
+.pl-f{--cutbg:var(--ui-teal);color:var(--ui-line)}
+.lg{display:flex;gap:14px;justify-content:center;margin:8px 0 2px;font-size:14px;flex-wrap:wrap;color:var(--ui-cream)}
+.lg i{display:inline-block;inline-size:16px;block-size:10px;border-radius:2px;vertical-align:middle;margin-inline-end:4px;border:var(--ui-l12) solid var(--ui-line)}
+.say{margin-block-start:8px;background:var(--cd-text-bg);border:var(--ui-l26) solid var(--ui-night-edge);border-radius:10px;padding:8px 10px;font-weight:700;font-size:16px;text-align:center;line-height:1.7;color:var(--ui-cream)}
+.sub{font-size:14px;text-align:center;margin-block-start:6px;color:var(--ui-cream);opacity:.92;font-weight:700}
+.eq{direction:ltr;unicode-bidi:isolate;font-size:19px;text-align:center;margin:6px 0 2px;letter-spacing:.5px;white-space:pre;font-weight:700}
 .num{font-weight:700;font-size:15px}
-.sec{margin:14px 0 0}.sec h2{font-size:17px;margin:0 0 6px}
-.prob{background:#fff;border:3px solid var(--gold-dark);border-radius:16px;padding:12px}
-.prob p.q{font-weight:700;font-size:17px;line-height:1.7;margin:10px 0 0}
-.mini{max-width:300px;margin:0 auto}
-.opts{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.opt{min-height:52px;border:3px solid var(--gold-dark);border-radius:14px;background:var(--cream-hi);font-weight:700;font-size:17px;padding:0 12px}
-.opt.ok{background:#d9efc9;border-color:#2e7d4a}
-.opt.no{background:#fbe0d8;border-style:dashed}
-.fb{margin-top:10px;font-weight:700;font-size:16px;min-height:26px}
+.sec{margin:14px 0 0}.sec h2{font:400 20px/1.3 var(--ui-font-title);margin:0 0 6px;color:var(--ui-cream)}
+.cbd .sec:first-child{margin-block-start:0}
+.prob{background:var(--cd-text-bg);border:var(--ui-l26) solid var(--ui-night-edge);border-radius:12px;padding:10px}
+.prob p.q{font-weight:700;font-size:16px;line-height:1.7;margin:10px 0 0}
+.mini{max-inline-size:300px;margin:0 auto}
+.opts{display:flex;flex-direction:column;gap:8px;margin-block-start:10px}
+.opts .ui-btn{margin-block-end:0;inline-size:100%;justify-content:center}
+.opts .ui-btn.ok{--cutbg:var(--ui-teal)}
+.opts .ui-btn.no{--cutbg:#d9d3e8;background-image:repeating-linear-gradient(135deg,transparent 0 6px,rgba(74,66,104,.18) 6px 8px)}
+.fb{margin-block-start:10px;font-weight:700;font-size:16px;min-block-size:26px}
 .rel{display:flex;gap:8px;flex-wrap:wrap}
-.rel .chip{min-height:48px;padding:4px 14px;font-size:15px}
-.rel .chip .sym{width:30px;height:30px}
-.vrow{display:flex;align-items:center;gap:10px;width:100%;min-height:56px;border:3px solid var(--gold-dark);border-radius:14px;padding:0 12px;font-weight:700;font-size:16px;background:#fff;text-align:start}
-.vrow .ic{width:28px;height:28px;background-image:url("svg/icon-game.svg")}
-.pend{margin:0;border:3px dashed var(--gold-dark);border-radius:16px;padding:20px 14px;text-align:center;font-weight:700;font-size:17px;background:repeating-linear-gradient(135deg,#fff 0 14px,#f7f1de 14px 28px)}
-/* ---- card box (کارت‌دان) ---- */
-.jump{flex:none;position:relative;z-index:5}
-.jump button.sym{border-radius:50%;flex:none;transition:transform .15s var(--ease)}
-.jump button.sym:focus-visible{outline-color:var(--gold-light)}
-.shelf{padding-bottom:84px;min-height:100%}
-.tile__dot{width:18px!important;height:18px!important;top:-6px!important;inset-inline-start:-6px!important;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe9a0,#e0a526 70%)!important;border:2px solid #7a4a10;filter:none!important}
-.chip--new .ic{background:radial-gradient(circle at 35% 30%,#ffe9a0,#e0a526 70%)!important;border-radius:50%;width:14px!important;height:14px!important;border:1.5px solid #7a4a10}
-.chip--lock{color:#2a2118!important;font-weight:800!important;background:linear-gradient(180deg,#ece6d8,#d4cbb8) padding-box,linear-gradient(150deg,#cfc6b6,#7a705f) border-box!important}
-.node .chip--lock{font-size:14px!important;white-space:normal!important;height:auto!important;min-height:30px;line-height:1.25;text-align:center;border-radius:16px;padding-block:3px}
-.pocket .chip{font-size:15px!important}
-@media(max-width:350px){.pocket .chip{font-size:14px!important}}
-.shelf__sec{padding-top:6px;scroll-margin-top:0}
-.shelf__head{padding:6px 10px;border-radius:16px;background:linear-gradient(90deg,var(--cc-d),rgba(0,0,0,.35));border:2px solid var(--cc);margin-bottom:6px}
-.shelf__head .sym{width:48px;height:48px;flex:none}
-.shelf__head .t-h{font-size:24px;line-height:1.2}
-.shelf__line{margin:0 4px 14px;color:var(--cream);font-size:14px;line-height:1.5;opacity:.92}
-.dot{border-color:var(--gold-light);flex:none}
-.pk{position:relative;width:100%;max-width:168px;justify-self:center}
-.pk .pocket{max-width:none;display:block}
-.pk .pocket__game{z-index:4;padding:0;cursor:pointer}
-.pocket__art.pa{display:grid;place-items:center;background:linear-gradient(160deg,var(--cl),var(--cc))}
-.pocket__art.pa .sym{width:62%;height:auto;aspect-ratio:1}
-.pocket__ln{position:absolute;inset-inline:8px;top:10px;z-index:2;text-align:center;font-weight:700;font-size:14px;line-height:1.3;color:#d8cdb6;text-shadow:0 1px 0 rgba(0,0,0,.6)}
-.pocket[data-state="locked"]::before{top:46%}
-.pocket__newchip{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:3;white-space:nowrap}
-.pocket[data-state="empty"] .pocket__ghost{top:50%}
-.pocket[data-state="fog"]{background-image:url("svg/card-slot-empty.svg");cursor:pointer}
-.pocket[data-state="fog"]::before{content:"";position:absolute;inset:-6px;background:url("svg/fog.svg") center/160% 100% no-repeat;z-index:2}
-.pocket[data-state="fog"]::after{content:"؟";position:absolute;z-index:3;left:0;right:0;top:34%;text-align:center;font-family:var(--f-title);font-size:64px;line-height:1;color:var(--ink-mid);text-shadow:0 2px 0 rgba(255,255,255,.7)}
-.pocket[data-state="fog"] .pocket__name{z-index:4}
-.pocket .pocket__badge{pointer-events:none}
-.pocket__badge.nw{background:var(--g-gold)}.pocket__badge.nw::after{background-image:url("svg/badge-new.svg")}
-.pocket__title{font-size:14px;line-height:1.04}
-.pocket__cap .chip{max-width:100%}
-.search{display:flex;gap:8px;padding:8px var(--gutter);background:linear-gradient(180deg,#4b2f15,#3a2610)}
-.search input{flex:1;min-height:48px;border-radius:14px;border:3px solid var(--gold);background:var(--cream-hi);font:700 16px var(--f-body);padding:0 12px;color:var(--ink)}
-/* ---- practice ---- */
-.sheet .adults{color:var(--ink);background:rgba(255,255,255,.35);border-color:rgba(58,38,16,.4);font-family:var(--f-body)}
-.sheet .adults .ic{background-image:url("svg/icon-adults.svg")}
-.sheet .adults .ic{width:26px;height:26px}
+.rel .ui-btn{min-block-size:48px;padding:0 12px;font-size:15px;margin-block-end:0}
+.cdiag{display:flex;justify-content:center;padding:4px 0}
+.cdiag svg{block-size:130px;inline-size:auto;aspect-ratio:360/200}
+.t2s{position:absolute;inset-inline:24px;bottom:90px;z-index:6;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l45) dashed var(--ui-line);border-radius:14px;padding:10px 12px;font-weight:700;text-align:center;pointer-events:none;animation:v5fade .25s}
+.pendbox{border:var(--ui-l26) dashed var(--ui-night-edge);border-radius:12px;padding:16px 12px;text-align:center;font-weight:700;font-size:16px;margin-block-start:10px}
+/* ---- کارت‌دان (شب) ---- */
+.jump{flex:none;display:flex;gap:8px;overflow-x:auto;padding:8px 12px 10px;scrollbar-width:none;background:var(--ui-night-bg);position:relative;z-index:4}
+.jump::-webkit-scrollbar{display:none}
+.jump .ui-btn{flex:none;min-inline-size:48px;padding:0 10px;margin-block-end:0;font-size:18px}
+.jump .ui-btn.cur{--cutbg:var(--ui-teal)}
+.shelf{padding:0 12px 84px;min-block-size:100%}
+.shelf__sec{padding-block-start:6px}
+.shelf__head{display:flex;align-items:center;gap:8px;padding:4px 0 2px}
+.shelf__head .no{flex:none;display:grid;place-items:center;inline-size:36px;block-size:36px;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l26) solid var(--ui-line);font:400 20px/1 var(--ui-font-title);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.shelf__head .t-h{flex:1;min-inline-size:0;font:400 22px/1.25 var(--ui-font-title);color:var(--ui-cream);text-shadow:0 0 10px var(--cd-zone)}
+.shelf__dots{display:flex;gap:4px;flex:none}
+.dot{inline-size:12px;block-size:12px;border-radius:50%;border:2px solid var(--ui-cream);box-sizing:border-box;opacity:.7}
+.dot--seen{background:var(--ui-violet);opacity:1}
+.dot--got{background:var(--ui-teal);opacity:1}
+.shelf__line{margin:0 2px 10px;font-size:14px;line-height:1.5;color:var(--ui-cream);opacity:.95}
+.shelf__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-block-end:6px}
+.shelf__plank{display:block;inline-size:100%;block-size:auto;margin-block-end:14px}
+.mc{position:relative;display:flex;flex-direction:column;inline-size:100%;min-block-size:176px;padding:10px 8px 10px;box-sizing:border-box;text-align:center;color:var(--ui-cream);font:700 14px/1.25 var(--ui-font);--mcbg:#190539}
+.mc[data-s=seen]{--mcbg:#2fb8a8;color:#241a5e}.mc[data-s=packed]{--mcbg:#8a4fd0}.mc[data-s=locked]{--mcbg:#241056}
+.mc>.bg{position:absolute;inset:0;inline-size:100%;block-size:100%}
+.mc>*:not(.bg){position:relative}
+.mc .th{display:block;inline-size:calc(100% - 10px);margin:2px auto 4px;aspect-ratio:60/44;border-radius:5px;overflow:hidden;background:var(--cd-zonebg,#2a1f5c)}
+.mc .th svg{inline-size:100%;block-size:100%}
+.mc .nm{flex:1;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1.25;padding:2px 4px;margin:2px 2px;background:var(--mcbg);border-radius:6px}
+.mc .stt{display:block;margin-block-start:2px;font-size:14px;background:var(--mcbg);border-radius:6px}
+.mc .stt .ui-plate{min-block-size:24px;padding:0 4px;font-size:14px;white-space:nowrap}
+.mc .newdot{display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.mc .lk{display:block;margin:4px auto 0}
+.search{display:flex;gap:8px;padding:8px 12px;background:var(--ui-night-bg);position:relative;z-index:4}
+.search input{flex:1;min-block-size:48px;border-radius:3px;border:var(--ui-l26) solid var(--ui-line);background:#fff;font:700 16px var(--ui-font);padding:0 12px;color:var(--ui-line)}
+.shelf__empty{padding:24px 8px;text-align:center;font-weight:700}
+/* ---- تمرین (شب) ---- */
 .prac{padding:16px;text-align:center}
-.prac p{font-size:18px;font-weight:700;margin:6px 0 16px;line-height:1.7}
-/* ---- overlays ---- */
+.prac p{font-size:18px;font-weight:700;margin:6px 0 16px;line-height:1.7;color:var(--ui-cream)}
+.prac .prob{text-align:start}
+.dock{flex:none;padding:8px 12px 12px;display:flex;gap:10px}
+.dock .ui-btn{flex:1;min-inline-size:0;margin-block-end:0}
+/* ---- برگه‌ها و روکش‌ها ---- */
 #ov{position:absolute;inset:0;pointer-events:none;z-index:60}
-#ov .scrim{position:absolute;inset:0;pointer-events:auto;animation:kit-fade .2s both}
-#ov .sheet{position:absolute;inset-inline:0;bottom:0;max-height:90%;overflow:auto;pointer-events:auto;animation:kit-sheet-up var(--t-sheet) var(--ease) both}
-.sheet .shx{position:absolute;top:14px;inset-inline-end:12px;width:48px;height:48px;min-height:48px}
-.sheet .sheet__title{padding-inline-end:56px;font-size:26px}
-.sheet h3.t-h{margin:14px 0 6px;color:var(--ink)}
-.sheet .btnrow{display:flex;gap:10px;margin-top:6px}
-.sheet .btnrow .btn{flex:1;min-width:0;padding:0 12px}
-.sheet__sub{margin-top:0}
-.tiles .tile{min-height:116px}
-.mfoot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:10px}
-.mfoot .adults{cursor:pointer}
-.mfoot .btn{padding:0 18px}
+#ov .scrim{position:absolute;inset:0;pointer-events:auto;background:rgba(36,26,94,.55);animation:v5fade .2s both}
+#ov .sheet{position:absolute;inset-inline:0;bottom:0;max-block-size:92%;overflow:auto;pointer-events:auto;animation:v5sheet .25s ease-out both;scrollbar-width:none}
+#ov .sheet::-webkit-scrollbar{display:none}
+.sheet h3.st{margin:0 0 4px;font:400 26px/1.3 var(--ui-font-title)}
+.sheet .ssub{margin:0 0 8px;font-size:16px;font-weight:700}
+.sheet .srow{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 10px}
+.sheet .btnrow{display:flex;gap:10px;margin-block-start:8px}
+.sheet .btnrow .ui-btn{flex:1;min-inline-size:0;padding:0 12px;margin-block-end:6px}
+.sheet .btnrow .ui-btn--sec{margin-block-end:0;align-self:flex-start}
 .sheet .why{font-size:17px;font-weight:700;margin:4px 0 14px;line-height:1.6}
-.pl{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0;margin:0}
-.hl{padding:10px 12px;border-radius:12px;border:2px solid var(--gold-dark);background:#fff;margin-bottom:8px;font-weight:700;font-size:16px;line-height:1.6;animation:kit-fade .25s}
-.hold{position:relative;width:100%;min-height:62px;border-radius:999px;border:4px solid var(--gold-dark);background:#fff;overflow:hidden;font-weight:700;font-size:17px;display:grid;place-items:center;touch-action:none;user-select:none}
-.hold i{position:absolute;inset:0;background:var(--paper-dark);transform:scaleX(0);transform-origin:right;transition:transform 0s}
+.diffrow{display:flex;gap:8px;justify-content:space-between;margin:8px 0 12px}
+.diffrow span{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:700;font-size:14px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:22px 12px;margin:18px 0 14px}
+.tiles .ui-tile{inline-size:100%;max-inline-size:164px;justify-self:center;min-block-size:132px}
+.tiles .ui-tile .ui-tile-art svg{inline-size:100%;block-size:100%}
+.tiles .ui-tile{padding-block-start:70px}
+.tiles .ui-newdot{position:absolute;inset-block-start:8px;inset-inline-start:8px}
+.mrow{display:flex;gap:10px;margin-block-start:8px}
+.mrow .ui-btn{flex:1;min-inline-size:0;padding:0 10px;margin-block-end:0}
+.adults{display:flex;align-items:center;justify-content:center;gap:8px;inline-size:100%;margin-block-start:10px;min-block-size:48px;font-weight:700;font-size:16px;color:var(--ui-line)}
+.hl{padding:8px 12px;border:var(--ui-l26) solid var(--ui-line);background:#fff;margin-block-end:8px;font-weight:700;font-size:16px;line-height:1.6;animation:v5fade .25s;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.hold{position:relative;inline-size:100%;overflow:hidden;touch-action:none;user-select:none;min-block-size:56px;font-size:17px;margin-block-end:6px}
+.hold i{position:absolute;inset:0;background:rgba(255,255,255,.35);transform:scaleX(0);transform-origin:right;transition:transform 0s}
 .hold.on i{transform:scaleX(1);transition:transform 2s linear}
 .hold span{position:relative}
 .vl{display:flex;flex-direction:column;gap:8px}
-.vl div{border:2px solid var(--gold-dark);border-radius:12px;padding:8px 12px;background:#fff;font-size:15px}
-.vl small{display:block;color:var(--ink-mid);font-size:14px}
-.gtabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
-.gtabs button{flex:1;min-width:70px;min-height:48px;border-radius:12px;border:3px solid var(--gold-dark);font-weight:700;font-size:15px;background:#fff}
-.gtabs button.on{background:var(--paper-dark)}
+.vl div{border:var(--ui-l26) solid var(--ui-line);padding:8px 12px;background:#fff;font-size:15px;font-weight:700}
+.vl small{display:block;font-size:14px;font-weight:400;opacity:.9}
+.gtabs{display:flex;gap:6px;margin-block-end:10px}
+.gtabs .ui-btn{flex:1;min-inline-size:0;padding:0 4px;font-size:15px;margin-block-end:0}
+.gtabs .ui-btn.on{--cutbg:var(--ui-teal)}
 .acc{display:flex;flex-direction:column;gap:6px}
-.acc div{border:2px solid var(--gold-dark);border-radius:12px;padding:8px 12px;background:#fff;font-weight:700}
-/* ---- big lesson card ---- */
-#cv{position:absolute;inset:0;z-index:50;pointer-events:none}
-#cv .cscrim{position:absolute;inset:0;background:rgba(15,30,28,.6);pointer-events:auto;animation:kit-fade .25s both}
-.cbig{position:absolute;inset:12px 12px 76px;perspective:1400px;pointer-events:auto;transform-origin:0 0}
-.cflip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s var(--ease)}
-.cflip.back{transform:rotateY(180deg)}
-.cface{position:absolute;inset:0;display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:5px solid transparent;border-radius:var(--r-card);background:var(--tex-paper) padding-box,var(--g-gold) border-box;background-size:160px,auto;box-shadow:0 0 0 2px var(--line),0 12px 30px rgba(0,0,0,.45);overflow:hidden}
-.cface.bk{transform:rotateY(180deg)}
-.chd{flex:none;display:flex;align-items:center;gap:8px;padding:8px 10px;background:linear-gradient(180deg,var(--cc),var(--cc-d));color:#fff8e0;border-bottom:4px solid var(--gold)}
-.chd .sym{width:46px;height:46px;flex:none}
-.chd h2{flex:1;min-width:0;margin:0;font-family:var(--f-title);font-weight:400;font-size:21px;line-height:1.25;text-shadow:0 2px 0 rgba(0,0,0,.35)}
-.chd h2 small{display:block;font-family:var(--f-body);font-size:14px;opacity:.95;text-shadow:none}
-.chd .btn--icon{width:48px;height:48px;min-height:48px;flex:none}
-.cbd{flex:1;min-height:0;overflow:auto;padding:12px;overscroll-behavior:contain}
-.cbd .sec:first-child{margin-top:0}
-.cbd .tagl{display:inline-block;font-size:14px;background:var(--cream-hi);border:2px solid var(--gold-dark);border-radius:999px;padding:1px 12px;margin-bottom:8px}
-.cfoot{flex:none;padding:10px 12px;border-top:3px solid var(--gold-dark);background:var(--g-cream);display:flex;justify-content:center}
-.cfoot .btn{width:100%}
-.cbar{position:absolute;inset-inline:12px;bottom:12px;display:flex;gap:10px;pointer-events:auto}
-.cbar .btn{flex:1;min-width:0;padding:0 10px;font-size:16px}
-.t2s{position:absolute;inset-inline:24px;bottom:90px;z-index:6;background:#fff;border:3px dashed var(--line);border-radius:14px;padding:10px 12px;font-weight:700;text-align:center;pointer-events:none;animation:kit-fade .25s}
-/* ---- tutorial ---- */
+.acc div{border:var(--ui-l26) solid var(--ui-line);padding:8px 12px;background:#fff;font-weight:700}
+.sres{display:flex;flex-direction:column;gap:6px;max-block-size:230px;overflow:auto;margin-block-start:8px}
+.sres .ui-btn{justify-content:flex-start;margin-block-end:0;text-align:start;inline-size:100%}
+.sres .ui-btn small{display:block;font-weight:400;font-size:14px}
+.ui-input{margin-block-end:0}
+/* ---- آموزش ---- */
 .tmask{position:absolute;inset:0;pointer-events:auto}
-.spot{position:absolute;border-radius:18px;box-shadow:0 0 0 2000px rgba(15,30,28,.6);border:4px solid var(--gold-light);pointer-events:none;transition:all .3s var(--ease)}
-.coach{position:absolute;inset-inline:14px;background:var(--cream-hi);border:4px solid var(--gold);border-radius:20px;padding:12px 14px;pointer-events:auto;box-shadow:0 0 0 2px var(--line),0 8px 24px rgba(0,0,0,.35);animation:kit-fade .25s both}
+.spot{position:absolute;border-radius:18px;box-shadow:0 0 0 2000px rgba(36,26,94,.62);border:var(--ui-l45) solid var(--ui-cream);pointer-events:none;transition:all .3s ease}
+.coach{position:absolute;inset-inline:12px;background:var(--ui-cream);color:var(--ui-line);border:var(--ui-l45) solid var(--ui-line);border-radius:18px 7px 18px 7px;padding:10px 12px 10px 12px;pointer-events:auto;box-shadow:0 6px 0 0 var(--ui-line);animation:v5fade .25s both;display:flex;gap:10px;align-items:flex-start}
+.coach .cg{flex:none;inline-size:64px;block-size:64px}
+.coach .cg svg{inline-size:64px;block-size:64px}
+.coach .cm{flex:1;min-inline-size:0}
 .coach p{font-weight:700;font-size:17px;line-height:1.7;margin:0}
-.coach .cr{display:flex;gap:8px;margin-top:10px;align-items:center}
+.coach .cr{display:flex;gap:8px;margin-block-start:8px;align-items:center}
 .coach .cr .st{flex:1;display:flex;gap:5px}
-.coach .cr .st i{width:10px;height:10px;border-radius:50%;background:#ccc}
-.coach .cr .st i.on{background:var(--ink)}
-.coach .btn{min-height:48px;padding:0 16px;font-size:16px}
-/* ---- reduced motion (system setting OR the reviewer switch) ---- */
+.coach .cr .st i{inline-size:10px;block-size:10px;border-radius:50%;background:#cfc7e4}
+.coach .cr .st i.on{background:var(--ui-line)}
+.coach .ui-btn{min-block-size:48px;padding:0 14px;font-size:16px;margin-block-end:0}
+/* ---- کاهش حرکت (تنظیم سیستم یا کلید بازبین) ---- */
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 body.rm *,body.rm *::before,body.rm *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 </style>
 </head>
 <body>
 <!--__SPRITE__-->
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><defs>
+<symbol id="x-fogsign" viewBox="0 0 36 47"><rect x="15.5" y="12" width="6" height="33" rx="1.5" fill="#c98a45" stroke="#241a5e" stroke-width="2.6" stroke-linejoin="round"/><path d="M3 4H27L34 13L27 22H3Z" fill="#fff4d2" stroke="#241a5e" stroke-width="2.6" stroke-linejoin="round"/><path d="M9 13H24M20 9L24 13L20 17" fill="none" stroke="#241a5e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="x-fog" viewBox="0 0 200 130"><g fill="#fff" fill-opacity=".85"><ellipse cx="100" cy="68" rx="92" ry="48"/><circle cx="46" cy="58" r="34"/><circle cx="92" cy="38" r="40"/><circle cx="144" cy="52" r="36"/><circle cx="62" cy="88" r="34"/><circle cx="132" cy="90" r="32"/></g><g fill="none" stroke="#ffffff" stroke-opacity=".6" stroke-width="1.2" stroke-linecap="round"><path d="M40 70Q62 62 84 70"/><path d="M110 82Q134 74 158 82"/></g></symbol>
+</defs></svg>
 <div id="rvbar"><button id="rvt" type="button"></button><span id="rvb"></span></div>
 <div id="shell">
   <aside id="rv" aria-label="panel"></aside>
-  <main id="phone"><div id="app"></div><div id="cv"></div><div id="ov"></div></main>
+  <main id="phone"><div id="app" class="appl" data-world="day" data-light="day"></div><div id="cv" data-world="night" data-light="night"></div><div id="ov"></div></main>
 </div>
 <script>
 const D=/*__DATA__*/null;
@@ -262,236 +277,277 @@ const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const N=Object.fromEntries(D.nodes.map(n=>[n.id,n]));
 const CH=Object.fromEntries(D.chapters.map(c=>[c.id,c]));
-const SYMVAR={force:'force',friction:'friction',multi:'multi',weight:'weight',energy:'energy',machine:'machine',lever:'lever',slope:'slope',wheel:'wheel',summary:'summary'};
-const cvars=ch=>{const s=SYMVAR[CH[ch].sym];return `--cc:var(--c-${s});--cc-d:var(--c-${s}-d);--cl:var(--c-${s}-l)`};
-const BAND={1:[1,2],2:[3,4],3:[5,6]};
-const TIERS=[{k:'flow.tier.core'},{k:'flow.tier.challenge'},{k:'flow.tier.veryhard'}];
-const TONES=['#16734a','#ad5313','#98282b'];
+const MN=Object.fromEntries(D.map.nodes.map(n=>[n.id,n]));
+const BANDK={1:'v5.ui.base.b12',2:'v5.ui.base.b34',3:'v5.ui.base.b56'};
+const TIERS=[{k:'flow.tier.core',d:'easy',key:'green'},{k:'flow.tier.challenge',d:'mid',key:'orange'},{k:'flow.tier.veryhard',d:'hard',key:'red'}];
 const $=s=>document.querySelector(s);
+const A=s=>{const a=$('#app');return a?a.querySelector(s):null};
 const rm=()=>matchMedia('(prefers-reduced-motion: reduce)').matches||document.body.classList.contains('rm');
-const ic=(c)=>`<i class="ic ic-${c}"></i>`;
+const ic=(c,cls='')=>`<svg class="bi ${cls}" aria-hidden="true"><use href="#ui-ic-${c}"/></svg>`;
+const icBack=()=>ic('next','ui-flip');
 let holdT=null;
 const st={band:1,scr:'map',cur:'M07',tier:0,sample:'mid',visited:new Set(),seen:new Set(),coll:new Set(),here:'M07',arrive:null,
-  teacher:false,fogClear:false,tutOn:true,tutDone:{map:false,scene:false},nav:[],overlay:null,peek:null,lock:null,
-  arr:'fixed',hint:0,pulled:false,gateOK:false,gateTab:'report',gateVia:'menu',prac:0,tut:null,ord:[2,1,0],reveal:false,card:null,boxTop:0,mapTop:null,search:false,q:'',boxScroll:null};
+  teacher:false,fogClear:false,tutOn:true,tutDone:{map:false,scene:false},nav:[],overlay:null,peek:null,lock:null,storyLight:false,
+  arr:'fixed',hint:0,pulled:false,gateOK:false,gateTab:'report',gateVia:'menu',prac:0,tut:null,ord:[2,1,0],card:null,boxTop:0,mapTop:null,search:false,q:'',mq:'',pos:null};
 function loadSample(k){const s=D.states[k];st.sample=k;st.visited=new Set(s.visited);st.seen=new Set(s.seen);st.coll=new Set(s.coll);st.here=s.here;st.arrive=null;st.fogClear=false}
 loadSample('mid');
 
-/* ---------- node logic ---------- */
+/* ---------- منطق گره ---------- */
 const fogOpen=()=>st.teacher||st.fogClear;
 const listed=id=>!N[id].deferred||st.teacher;
+const vis=id=>MN[id]&&MN[id].visible&&listed(id);
 const nodeSt=id=>{const n=N[id];if(n.fog&&!fogOpen())return'fog';if(st.visited.has(id))return'done';
   if(!n.pre.every(p=>st.visited.has(p)))return'locked';return n.trial?'trial':'open'};
 const firstMissing=id=>N[id].pre.find(p=>!st.visited.has(p));
 const lockText=(id,kind)=>{const p=firstMissing(id);return S('flow.lock.reason').replace('{name}',p?(kind==='concept'?N[p].concept:N[p].env):'')};
 const cardSt=id=>{const s=nodeSt(id);if(s==='fog'||s==='locked')return s;if(st.coll.has(id))return'collected';if(st.seen.has(id))return'seen';return'unseen'};
-const tag=(cls,icon,t)=>`<span class="chip chip--${cls}">${icon?`<i class="ic"></i>`:''}${esc(t)}</span>`;
+const plate=(cls,inner)=>`<span class="ui-plate ui-cut ${cls}">${inner}</span>`;
+const pico=n=>`<svg class="pi" aria-hidden="true"><use href="#ui-ic-${n}"/></svg>`;
+const lightOf=()=>{if(st.scr==='scene')return st.storyLight&&st.cur==='M07'?(st.tier===1?'dusk':st.tier===2?'night':'day'):'day';return st.scr==='map'?'day':'night'};
+const worldOf=()=>(st.scr==='map'||st.scr==='scene')?'day':'night';
 
-/* ---------- navigation ---------- */
-function go(scr,p={},push=true){
+/* ---------- ناوبری ---------- */
+function go(scr,p={},push=true,fade=true){
   if(push)st.nav.push({scr:st.scr,cur:st.cur,tier:st.tier});
   if(scr==='env')st.ord=[2,1,0];
-  Object.assign(st,p,{scr});st.overlay=null;st.peek=null;st.lock=null;st.hint=0;st.pulled=false;st.reveal=false;st.tut=null;st.card=null;render();
+  Object.assign(st,p,{scr});st.overlay=null;st.peek=null;st.lock=null;st.hint=0;st.pulled=false;st.tut=null;st.card=null;render({fade});
 }
-function back(){const b=st.nav.pop();if(!b){go('map',{},false);return}Object.assign(st,b);st.overlay=null;st.peek=null;st.lock=null;st.tut=null;st.card=null;render()}
+function back(){const b=st.nav.pop();if(!b){go('map',{},false);return}Object.assign(st,b);st.overlay=null;st.peek=null;st.lock=null;st.tut=null;st.card=null;render({fade:true})}
 
-/* ---------- common chrome ---------- */
-const menuBtn=()=>`<button class="btn btn--secondary btn--sm mbtn" data-act="menu" data-t="menu">${ic('menu')}<span>${esc(S('flow.menu.open'))}</span></button>`;
-const topbar=(left,title,right)=>`<div class="topbar">${left}<h1 class="t-title">${esc(title)}</h1>${right}</div>`;
-const backIcon=(act,k)=>`<button class="btn btn--icon" data-act="${act}" aria-label="${esc(S(k))}">${ic('back')}</button>`;
-const spacer='<span class="spacer"></span>';
+/* ---------- اجزای مشترک ---------- */
+const menuBtn=()=>`<button class="ui-btn ui-btn--sec ui-cut" data-act="menu" data-t="menu">${ic('menu')}<span>${esc(S('flow.menu.open'))}</span></button>`;
+const tb=(first,mid,last)=>`<div class="tb">${first}${mid}${last}</div>`;
+const titleOf=t=>`<h1>${esc(t)}</h1>`;
+const spacer='<span class="tbsp" style="flex:none;inline-size:8px"></span>';
+const bandChips=()=>`<div class="ui-chips" role="group" aria-label="${esc(S('v5.ui.base.label'))}" data-t="base">${[1,2,3].map(b=>`<button class="ui-chip" aria-pressed="${st.band===b}" data-band="${b}"><svg class="ui-tick" aria-hidden="true"><use href="#ui-check"/></svg><small>${esc(S('v5.ui.base.label'))}</small><b><bdi dir="rtl">${esc(S(BANDK[b]))}</bdi></b></button>`).join('')}</div>`;
+const secBtn=(act,inner,extra='',cls='')=>`<button class="ui-btn ui-btn--sec ui-cut ${cls}" data-act="${act}" ${extra}>${inner}</button>`;
+const priBtn=(act,inner,extra='',cls='')=>`<button class="ui-btn ${cls}" data-act="${act}" ${extra}>${inner}</button>`;
+const diffBadge=d=>`<svg class="ui-badge" aria-hidden="true"><use href="#ui-badge-${d}"/></svg>`;
+const diffWord=d=>S('difficulty.'+d);
 
-/* ---------- MAP ---------- */
-const XF=[.72,.28], Y0=190, DY=136;
-function frameHTML(f,fi){
-  const ids=f.ids.filter(listed);const H=Y0+(ids.length-1)*DY+132;
-  const sym=CH[N[ids[0]].ch].sym;
-  const nodes=ids.map((id,i)=>{
-    const n=N[id],s=nodeSt(id),here=id===st.here&&s!=='fog',x=XF[i%2]*100,y=Y0+i*DY;
-    const fogged=s==='fog';
-    const lab=[];
-    if(!fogged){lab.push(`<span class="chip chip--label">${esc(n.env)}</span>`);
-      if(here)lab.push(tag('here',1,S('flow.map.here')));
-      else if(s==='locked')lab.push(tag('lock',1,lockText(id,'env')));
-      if(s==='trial')lab.push(tag('trial',1,S('flow.land.experimental')));
-      if(D.entr.includes(id)&&!fogOpen())lab.push(tag('fog',1,S('flow.map.fog.sign')));}
-    const state=fogged?'locked':s;
-    const sign=(D.entr.includes(id)&&!fogOpen())?`<i class="fogsign" style="left:calc(${x}% + ${i%2?-22-36:22}px);top:${y-48}px"></i>`:'';
-    return `${sign}<button class="node ${fogged?'fogged':''}" data-act="node" data-id="${id}" data-n="${id}" data-state="${state}" ${here?'data-t="here"':''} style="left:${x}%;top:${y}px" aria-label="${esc(fogged?S('flow.map.fog.sign'):n.env)}">${here?'<i class="node__ring"></i>':''}<span class="node__disc"><i class="node__glyph" data-sym="${CH[n.ch].sym}"></i></span>${fogged?'':`<span class="node__labels">${lab.join('')}</span>`}</button>`;
-  }).join('');
-  const fogI=ids.indexOf('E04');
-  const fog=(fogI>=0&&!fogOpen())?`<i class="fog-patch" data-fog style="left:calc(${XF[fogI%2]*100}% - 100px);top:${Y0+fogI*DY-58}px;width:200px;height:116px"></i><i class="fogsign" style="left:calc(${XF[fogI%2]*100}% - 18px);top:${Y0+fogI*DY-30}px;z-index:8"></i>`:'';
-  return `<section class="land" data-land="${f.skin}" data-fi="${fi}" style="height:${H}px"><div class="land__layer land__layer--back"></div><div class="land__layer land__layer--mid"></div><div class="land__layer land__layer--front"></div>
-   <div class="land__head"><div class="plate">${esc(f.plate)}</div><i class="sym land__sym" data-sym="${sym}"></i></div><svg class="land__path" aria-hidden="true"></svg>${nodes}${fog}</section>`;
+/* ---------- نقشه (۳۴ گره روی یک بوم بلند) ---------- */
+const doneBadge=(x,y)=>`<g transform="translate(${x} ${y})"><circle r="14" fill="#fff4d2" stroke="#241a5e" stroke-width="2.6"/><path d="M-6,0 l4,5 l8,-10" fill="none" stroke="#3a2a7a" stroke-width="3" stroke-linecap="round"/></g>`;
+const lockBadge=(x,y)=>`<use href="#ui-lock" x="${x-16}" y="${y-16}" width="32" height="32"/>`;
+function mapSVG(){
+  const m=D.map;let g='',rings='',fogs='';
+  const ns=m.nodes.filter(n=>vis(n.id)).sort((a,b)=>a.base[1]-b.base[1]);
+  ns.forEach(n=>{
+    const s=nodeSt(n.id),big=n.asset.indexOf('node_')===0,w=big?200:120,h=big?190:100;
+    const op=s==='fog'?' opacity=".3"':s==='locked'?' opacity=".6"':'';
+    g+=`<g class="mnd" data-n="${n.id}"${op}>${n.pad?`<use href="#${n.pad}" x="${n.place[0]}" y="${n.place[1]}" width="120" height="100"/>`:''}<use href="#${n.asset}" x="${n.place[0]}" y="${n.place[1]}" width="${w}" height="${h}"/></g>`;
+    if(s==='done')g+=doneBadge(n.lock[0],n.lock[1]);
+    else if(s==='locked')g+=lockBadge(n.lock[0],n.lock[1]);
+    if(n.id===st.here&&s!=='fog'){const ol=n.zone==='farm'?10:4.5;
+      rings+=`<g class="hring"><ellipse cx="${n.base[0]}" cy="${n.base[1]}" rx="${n.rx+8}" ry="${n.ry+6}" fill="none" stroke="#241a5e" stroke-width="${8+2*ol}"/><ellipse cx="${n.base[0]}" cy="${n.base[1]}" rx="${n.rx+8}" ry="${n.ry+6}" fill="none" stroke="#ffd23f" stroke-width="8"/></g>`}
+    if(D.entr.includes(n.id)&&!fogOpen()){const dir=n.base[0]<195?1:-1;g+=`<use class="fsign" href="#x-fogsign" x="${n.base[0]+dir*(n.rx*.55+22)-18}" y="${n.base[1]-58}" width="36" height="47"/>`}
+  });
+  const e4=MN.E04;
+  if(e4&&!fogOpen()){const [bx,by]=e4.base;fogs=`<g class="fogg" data-fog><use href="#x-fog" x="${bx-100}" y="${by-110}" width="200" height="130"/><use href="#x-fog" x="${bx-70}" y="${by-70}" width="150" height="98" opacity=".9"/><use class="fsign" href="#x-fogsign" x="${bx-18}" y="${by-62}" width="36" height="47"/></g>`}
+  return `<svg class="mapart" viewBox="0 0 ${m.w} ${m.h}" preserveAspectRatio="xMidYMin meet" aria-hidden="true">${m.head}${g}${rings}${fogs}${m.tail}</svg>`;
+}
+const posStyle=(x,y,extra='')=>`left:clamp(92px,calc(var(--s)*${x}px),calc(100% - 92px));top:calc(var(--s)*${y}px - 12px);${extra}`;
+function mapOverlay(){
+  let h='';
+  const ns=D.map.nodes.filter(n=>vis(n.id));
+  ns.forEach(n=>{
+    const s=nodeSt(n.id),here=n.id===st.here&&s!=='fog',nd=N[n.id];
+    const [hx,hy,hw,hh]=n.hit;
+    h+=`<button class="mn" data-act="node" data-id="${n.id}" data-n="${n.id}" data-state="${s==='fog'?'locked':s}" ${here?'data-t="here"':''} style="left:calc(var(--s)*${hx}px);top:calc(var(--s)*${hy}px);width:calc(var(--s)*${hw}px);height:calc(var(--s)*${hh}px)" aria-label="${esc(s==='fog'?S('flow.map.fog.sign'):nd.env)}"></button>`;
+    if(s==='fog')return;
+    const lab=[plate('ui-plate--16',esc(nd.env))];
+    if(here)lab.push(plate('ui-plate--here',pico('pin')+esc(S('flow.map.here'))));
+    else if(s==='locked')lab.push(plate('ui-plate--lock',esc(lockText(n.id,'env'))));
+    if(s==='trial')lab.push(plate('ui-plate--fogs',esc(S('flow.land.experimental'))));
+    if(D.entr.includes(n.id)&&!fogOpen())lab.push(plate('ui-plate--fogs',pico('pin')+esc(S('flow.map.fog.sign'))));
+    h+=`<div class="ml" data-for="${n.id}" style="${posStyle(n.label[0],n.label[1])}">${lab.join('')}</div>`;
+  });
+  const sg=D.map.start;
+  h+=`<div class="ml" style="${posStyle(sg.x,sg.y+44)}">${plate('ui-plate--16',pico('flag')+esc(S('flow.map.start')))}</div>`;
+  const e4=MN.E04;
+  h+=`<div class="ml" id="endl" style="${posStyle(e4?e4.base[0]:118,(e4?e4.base[1]:630)-128)}">${plate('ui-plate--16',pico('flag')+esc(S('flow.map.end')))}</div>`;
+  h+=`<div class="guide" id="guide"><svg viewBox="0 0 100 150" class="cs-full-82 ch-pose-stand" id="gsvg" aria-hidden="true"><use class="ch-happy" href="#ch-b1"/></svg></div>`;
+  return `<div class="mov" id="mov">${h}</div>`;
 }
 function mapScreen(){
-  return `<div class="scr">${topbar(spacer,S('flow.map.title'),menuBtn())}<button class="btn btn--primary btn--sm me-btn off" id="mebtn" data-act="me" tabindex="-1">${ic('here')}<span>${esc(S('flow.map.me'))}</span></button>
-   <div class="body" id="mapbody"><div class="map" id="map"><svg id="gapsvg" aria-hidden="true"></svg>
-   <div class="flagc chip chip--label" id="flag0">${ic('flag')}${esc(S('flow.map.start'))}</div>
-   ${D.frames.map(frameHTML).join('')}
-   <div class="flagc end chip chip--label" id="flag1">${ic('flag')}${esc(S('flow.map.end'))}</div><div id="fx"><i class="guide" id="guide" data-state="thinking"></i></div></div></div>
-</div>`;
+  return `<div class="scr">${tb(menuBtn(),bandChips(),'')}
+   <button class="ui-btn me off" id="mebtn" data-act="me" tabindex="-1">${ic('mypos')}<span>${esc(S('flow.map.me'))}</span></button>
+   <div class="mapbody" id="mapbody"><div class="map" id="map">${mapSVG()}${mapOverlay()}</div></div></div>`;
 }
-/* geometry: positions of all nodes in map coordinates; builds in-frame paths, gap connectors, footprints, guide */
 function layoutMap(){
-  const m=$('#map');if(!m)return;
-  const mr=m.getBoundingClientRect(),gsvg=$('#gapsvg');
-  m.querySelectorAll('.foot').forEach(e=>e.remove());
-  const lands=[...m.querySelectorAll('.land')];
-  const reached=id=>st.visited.has(id)||id===st.here;
-  const P=[];const pos={};
-  const f0=$('#flag0').getBoundingClientRect(),f1=$('#flag1').getBoundingClientRect();
-  P.push({flag:0,ax:f0.left-mr.left+f0.width/2,ay:f0.bottom-mr.top,reach:true});
-  const fr=lands.map(l=>{const r=l.getBoundingClientRect();return{l,left:r.left-mr.left+l.clientLeft,top:r.top-mr.top+l.clientTop,W:l.clientWidth,H:l.clientHeight,ot:r.top-mr.top,ob:r.bottom-mr.top}});
-  lands.forEach((l,fi)=>{[...l.querySelectorAll('.node')].forEach(nd=>{
-    const lf=parseFloat(nd.style.left)/100*fr[fi].W,tp=parseFloat(nd.style.top);
-    const p={id:nd.dataset.n,fi,x:lf,y:tp,ax:fr[fi].left+lf,ay:fr[fi].top+tp,reach:reached(nd.dataset.n)};P.push(p);pos[p.id]=p})});
-  const lastReach=reached(P[P.length-1].id);
-  P.push({flag:1,ax:f1.left-mr.left+f1.width/2,ay:f1.top-mr.top,reach:lastReach});
-  const acc=fr.map(()=>({done:'',todo:'',foot:[]}));
-  let gdone='',gtodo='';
-  const bez=(x1,y1,x2,y2)=>{const dy=y2-y1,k=.17;return `C${x2+(x1-x2)*k} ${y1+dy*.06} ${x1+(x2-x1)*k} ${y2-dy*.06} ${x2} ${y2}`};
-  for(let i=0;i<P.length-1;i++){
-    const a=P[i],b=P[i+1],dn=a.reach&&b.reach;
-    const add=(fi,d,foot)=>{const o=acc[fi];if(dn){o.done+=d;if(foot)o.foot.push(d)}else o.todo+=d};
-    if(a.fi!==undefined&&a.fi===b.fi){add(a.fi,`M${a.x} ${a.y}${bez(a.x,a.y,b.x,b.y)}`,true);continue}
-    // across frames / flags: out-stub, gap, in-stub
-    let gy1=a.ay,gx1=a.ax,gy2=b.ay,gx2=b.ax;
-    if(a.fi!==undefined){const F=fr[a.fi];add(a.fi,`M${a.x} ${a.y}C${a.x} ${a.y+60} ${a.x} ${F.H-36} ${a.x} ${F.H}`,false);gx1=F.left+a.x;gy1=F.top+F.H}
-    if(b.fi!==undefined){const F=fr[b.fi];add(b.fi,`M${b.x} 0C${b.x} 50 ${b.x} ${b.y-60} ${b.x} ${b.y}`,false);gx2=F.left+b.x;gy2=F.top}
-    const g=gy2-gy1;const d=`M${gx1} ${gy1}C${gx1} ${gy1+g*.6} ${gx2} ${gy2-g*.6} ${gx2} ${gy2}`;
-    if(dn)gdone+=d;else gtodo+=d;
-  }
-  const full=(d,k)=>d?(k==='done'?`<path class="path-done" vector-effect="non-scaling-stroke" d="${d}"/><path class="path-done--top" vector-effect="non-scaling-stroke" d="${d}"/>`:`<path class="path-todo--shade" vector-effect="non-scaling-stroke" d="${d}"/><path class="path-todo" vector-effect="non-scaling-stroke" d="${d}"/>`):'';
-  lands.forEach((l,fi)=>{const F=fr[fi],svg=l.querySelector('.land__path');svg.setAttribute('viewBox',`0 0 ${F.W} ${F.H}`);svg.setAttribute('preserveAspectRatio','none');
-    svg.innerHTML=full(acc[fi].todo,'todo')+full(acc[fi].done,'done');
-    // footprints on done in-frame segments
-    const tmp=document.createElementNS('http://www.w3.org/2000/svg','path');svg.appendChild(tmp);
-    acc[fi].foot.forEach(d=>{tmp.setAttribute('d',d);const L=tmp.getTotalLength();let side=1;
-      for(let s=26;s<L-26;s+=30,side=-side){const p=tmp.getPointAtLength(s),q=tmp.getPointAtLength(s+2),an=Math.atan2(q.y-p.y,q.x-p.x);
-        const x=p.x+Math.cos(an+Math.PI/2)*3.2*side,y=p.y+Math.sin(an+Math.PI/2)*3.2*side;
-        const e=document.createElement('i');e.className='foot';e.style.left=x+'px';e.style.top=y+'px';e.style.transform=`translate(-50%,-50%) rotate(${an*180/Math.PI+90}deg)`;l.appendChild(e)}});
-    tmp.remove()});
-  gsvg.setAttribute('width',m.scrollWidth);gsvg.setAttribute('height',m.scrollHeight);gsvg.setAttribute('viewBox',`0 0 ${m.scrollWidth} ${m.scrollHeight}`);
-  gsvg.innerHTML=full(gtodo,'todo')+full(gdone,'done');
-  // guide
-  const g=$('#guide'),hp=pos[st.here];
-  if(g&&hp&&nodeSt(st.here)!=='fog'){
-    g.style.left=hp.ax+'px';g.style.top=hp.ay+'px';
-    if(st.arrive&&!rm()){const a=st.arrive;st.arrive=null;
-      const ids=D.order.filter(i=>pos[i]);const i0=ids.indexOf(a.from),i1=ids.indexOf(st.here);
+  const m=A('#map');if(!m)return;
+  const s=m.clientWidth/D.map.w;m.style.setProperty('--s',s);
+  const pos={};
+  D.map.nodes.forEach(n=>{pos[n.id]={ax:n.foot[0]*s,ay:n.foot[1]*s,hx:(n.hit[0]+n.hit[2]/2)*s,hy:(n.hit[1]+n.hit[3]/2)*s}});
+  st.pos=pos;
+  nudgeLabels(m,s);
+  const g=A('#guide'),hp=pos[st.here];
+  if(g&&hp&&nodeSt(st.here)!=='fog'&&vis(st.here)){
+    const put=(x,y)=>{g.style.left=x+'px';g.style.top=(y-82+6)+'px'};
+    put(hp.ax,hp.ay);
+    if(st.arrive&&!rm()){
+      const a=st.arrive;st.arrive=null;
+      const ids=D.order.filter(i=>pos[i]&&vis(i));const i0=ids.indexOf(a.from),i1=ids.indexOf(st.here);
       let route=i0>=0&&i1>i0?ids.slice(i0,i1+1):[a.from,st.here].filter(i=>pos[i]);
       if(route.length>5)route=[route[0],...route.slice(-4)];
-      if(route.length>1){g.dataset.state='happy';
-        const kf=route.map(i=>({left:pos[i].ax+'px',top:pos[i].ay+'px'}));
-        g.animate(kf,{duration:Math.min(1000,260*route.length),easing:'ease-in-out'}).onfinish=()=>{g.dataset.state='thinking'};}
+      if(route.length>1){
+        const gs=A('#gsvg');let k=0;const walk=setInterval(()=>{k++;gs.setAttribute('class','cs-full-82 ch-pose-walk'+(k%2?1:2))},170);
+        const kf=route.map(i=>({left:pos[i].ax+'px',top:(pos[i].ay-76)+'px'}));
+        const an=g.animate(kf,{duration:Math.min(1100,280*route.length),easing:'ease-in-out'});
+        an.onfinish=()=>{clearInterval(walk);gs.setAttribute('class','cs-full-82 ch-pose-stand')};
+      }
     }
     st.arrive=null;
   }else if(g)g.style.display='none';
-  st.pos=pos;
   updateMe();
 }
+function nudgeLabels(m,s){
+  const ps=[...m.querySelectorAll('#env_path path')].filter(x=>x.getTotalLength);if(!ps.length)return;
+  const mr=m.getBoundingClientRect(),pts=[];
+  ps.forEach(path=>{const L=path.getTotalLength(),sp=path.getScreenCTM();
+    for(let l=0;l<=L;l+=8){const q=path.getPointAtLength(l),z=new DOMPoint(q.x,q.y).matrixTransform(sp);pts.push([z.x-mr.left,z.y-mr.top])}});
+  const CL=22,placed=[];
+  m.querySelectorAll('.ml').forEach(el=>{
+    el.style.setProperty('--dx','0px');el.style.setProperty('--dy','0px');
+    const r=el.getBoundingClientRect(),b={l:r.left-mr.left,t:r.top-mr.top,w:r.width,h:r.height};
+    const hit=(dx,dy)=>{const l=b.l+dx,t=b.t+dy;if(l<4||l+b.w>mr.width-4||t<0)return true;
+      if(pts.some(q=>q[0]>l-CL&&q[0]<l+b.w+CL&&q[1]>t-CL&&q[1]<t+b.h+CL))return true;
+      return placed.some(o=>l<o.l+o.w+4&&l+b.w+4>o.l&&t<o.t+o.h+4&&t+b.h+4>o.t)};
+    let best=null;
+    for(const dy of [0,-24,24,-48,48,-72,72,-96,96])for(const dx of [0,-36,36,-72,72,-110,110,-150,150]){
+      const c=Math.abs(dx)+Math.abs(dy)*1.2;if(hit(dx,dy))continue;if(!best||c<best.c)best={c,dx,dy}}
+    if(best){el.style.setProperty('--dx',best.dx+'px');el.style.setProperty('--dy',best.dy+'px');placed.push({l:b.l+best.dx,t:b.t+best.dy,w:b.w,h:b.h})}
+    else placed.push(b);
+  });
+}
 function updateMe(){
-  const b=$('#mapbody'),me=$('#mebtn'),h=st.pos&&st.pos[st.here];if(!b||!me||!h)return;
-  const m=$('#map').getBoundingClientRect(),br=b.getBoundingClientRect();
-  const y=m.top+h.ay-br.top;const tb=document.querySelector('#app .topbar');if(tb)me.style.top=(tb.offsetHeight+8)+'px';const away=(y<40||y>br.height-30);me.classList.toggle('off',!away);me.tabIndex=away?0:-1;
+  const b=A('#mapbody'),me=A('#mebtn'),h=st.pos&&st.pos[st.here];if(!b||!me||!h)return;
+  const y=h.ay-b.scrollTop;const away=(y<20||y>b.clientHeight-20);
+  me.classList.toggle('off',!away);me.tabIndex=away?0:-1;
 }
 function scrollMapTo(id,smooth=true){
-  const b=$('#mapbody'),p=st.pos&&st.pos[id];if(!b||!p)return;
-  b.scrollTo({top:Math.max(0,p.ay-b.clientHeight*.45),behavior:smooth&&!rm()?'smooth':'auto'});
+  const b=A('#mapbody'),p=st.pos&&st.pos[id];if(!b||!p)return;
+  b.scrollTo({top:Math.max(0,p.hy-b.clientHeight*.42),behavior:smooth&&!rm()?'smooth':'auto'});
 }
 
-/* ---------- ENVIRONMENT ---------- */
+/* ---------- محیط (شب): پشتهٔ سه کارت چالش ---------- */
 function challenges(id){
   const n=N[id];
   if(id==='M07')return [
-   {t:S('flow.harbor.green.title'),w:S('flow.harbor.green.ready'),img:D.img.c0,art:D.img.a0},
-   {t:S('flow.harbor.orange.title'),w:S('flow.harbor.orange.ready'),img:D.img.c1,art:D.img.a1},
-   {t:S('flow.harbor.red.title'),w:S('flow.harbor.red.ready'),img:D.img.c2,art:D.img.a2}];
-  return TIERS.map(x=>({t:S(x.k)+': '+n.env,w:S('flow.env.pending'),img:null,art:null}));
+   {t:S('flow.harbor.green.title'),w:S('flow.harbor.green.ready'),art:'cd-art-harbor-day',scene:'cd-harbor-scene-green'},
+   {t:S('flow.harbor.orange.title'),w:S('flow.harbor.orange.ready'),art:'cd-art-harbor-dusk',scene:'cd-harbor-scene-orange',sceneStory:'cd-harbor-scene-orange-dusk'},
+   {t:S('flow.harbor.red.title'),w:S('flow.harbor.red.ready'),art:'cd-art-harbor-night',scene:'cd-harbor-scene-red',sceneStory:'cd-harbor-scene-red-night'}];
+  return TIERS.map(x=>({t:S(x.k)+': '+n.env,w:S('flow.env.pending'),art:null,scene:null}));
 }
-const skinOf=id=>{for(const f of D.frames)if(f.ids.includes(id))return f.skin;return'city'};
+function buildingSVG(id,cls='cd-art-ph'){
+  const n=MN[id];if(!n)return'';const big=n.asset.indexOf('node_')===0;const z=n.zone;
+  const vb=big?'0 20 200 170':'0 0 120 100';
+  return `<svg class="${cls}" viewBox="${vb}" preserveAspectRatio="xMidYMid meet" style="background:var(--z-${z}-base)" aria-hidden="true">${n.pad?`<use href="#${n.pad}" width="120" height="100"/>`:''}<use href="#${n.asset}" width="${big?200:120}" height="${big?190:100}"/></svg>`;
+}
+function artSVG(c,id){
+  if(c.art)return `<svg viewBox="0 0 360 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#${c.art}"/></svg>`;
+  return buildingSVG(id);
+}
+function cdStrip(c,ti,p){
+  const d=TIERS[ti].d;
+  return `<div class="cd-strip" role="button" tabindex="0" data-act="card3" data-i="${ti}" data-p="${p}" data-world="night" aria-label="${esc(c.t)}"><svg class="cd-bg" viewBox="0 0 360 56" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-stack-strip"/></svg><span class="cd-diff">${diffBadge(d)}<span>${esc(diffWord(d))}</span></span><span class="cd-t">${esc(c.t)}</span></div>`;
+}
+function cdFront(c,ti,id){
+  const d=TIERS[ti].d;
+  return `<section class="cd-front" data-p="2" data-t="front" aria-label="${esc(c.t)}"><svg class="cd-frame" viewBox="0 0 390 392" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-frame-night"/></svg><svg class="cd-tbar" viewBox="0 0 360 60" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-title-bar"/></svg>
+   <span class="cd-diff">${diffBadge(d)}<span>${esc(diffWord(d))}</span></span><div class="cd-title">${esc(c.t)}</div><div class="cd-art">${artSVG(c,id)}</div>
+   <svg class="cd-ib" viewBox="0 0 334 150" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-image-border"/></svg><div class="cd-sentence">${esc(c.w)}</div>
+   <div class="cd-go"><button class="ui-btn cd-btn-practice" data-act="start" data-i="${ti}">${esc(S('flow.env.start'))}</button></div>
+   <svg class="cd-guide" viewBox="0 0 100 92" aria-hidden="true"><g class="cs-bust-64 ch-pose-point"><use class="ch-happy" href="#ch-b1"/></g></svg></section>`;
+}
 function envScreen(){
-  const n=N[st.cur];const ch=challenges(st.cur);const harbor=st.cur==='M07';const sym=CH[n.ch].sym;
-  const cards=[...st.ord].map((ti,p)=>{
-    const c=ch[ti],open=p===2&&st.reveal;
-    if(harbor)return `<div class="hc t${ti} ${open?'open':''}" data-act="card3" data-i="${ti}" data-p="${p}" ${p===2?'data-t="front"':''} role="button" aria-label="${esc(c.t)}"><img src="${c.img}" alt="${esc(c.t)}"><div class="rd"><span class="w">${esc(c.w)}</span></div></div>`;
-    return `<article class="gc ${open?'open':''}" data-act="card3" data-i="${ti}" data-p="${p}" style="--tone:${TONES[ti]}" ${p===2?'data-t="front"':''}>
-      <div class="gt">${esc(c.t)}</div><div class="ga"><i class="sym" data-sym="${sym}"></i></div><div class="gm"><span>${esc(c.w)}</span></div></article>`}).join('');
-  const deck=harbor?`<div class="envbar"><img src="${D.img.head}" alt=""></div><div class="hdeck"><img class="sp" src="${D.img.c0}" alt="">${cards}</div>`:`<div class="envname"><span class="chip chip--label">${esc(n.concept)}</span></div><div class="gdeck">${cards}</div>`;
-  return `<div class="scr">${topbar(spacer,n.env,menuBtn())}
-   <div class="envroot"><div class="land envland" data-land="${skinOf(st.cur)}"><div class="land__layer land__layer--back"></div><div class="land__layer land__layer--mid"></div></div>
-   <div class="body">${deck}<p class="tapnote">${esc(S('flow.env.tapnote'))}</p></div></div>
-   <div class="dock"><button class="btn btn--secondary" data-act="toMap">${ic('back')}${esc(S('flow.nav.toMap'))}</button><button class="btn btn--primary tier${st.ord[2]} ${st.reveal?'':'hide'}" id="gobar" data-act="start" data-i="${st.ord[2]}">${esc(S('flow.env.start'))}</button></div></div>`;
+  const id=st.cur,n=N[id];const ch=challenges(id);
+  const order=[st.ord[2],st.ord[1],st.ord[0]];
+  const items=order.map((ti,k)=>k===0?cdFront(ch[ti],ti,id):cdStrip(ch[ti],ti,k)).join('');
+  return `<div class="scr">${tb(menuBtn(),titleOf(n.env),spacer)}
+   <div class="envbody"><div class="envbanner" aria-hidden="true"><svg viewBox="0 0 390 200" preserveAspectRatio="xMidYMid slice"><use href="#env_dock_banner"/></svg></div><div class="cd-stack" id="cdstack">${items}</div></div>
+   <div class="cd-bot">${secBtn('toMap',icBack()+esc(S('flow.nav.toMap')))}</div></div>`;
 }
-function updateStack(){
-  document.querySelectorAll('[data-act=card3]').forEach(el=>{const p=st.ord.indexOf(+el.dataset.i);el.dataset.p=p;el.classList.toggle('open',p===2&&st.reveal);if(p===2)el.setAttribute('data-t','front');else el.removeAttribute('data-t')});
-  const gb=$('#gobar');if(gb){gb.className='btn btn--primary tier'+st.ord[2]+(st.reveal?'':' hide');gb.dataset.i=st.ord[2]}
-  renderPanel();
-}
+function updateStack(){const st0=$('#cdstack');if(!st0)return;const id=st.cur,ch=challenges(id);const order=[st.ord[2],st.ord[1],st.ord[0]];
+  st0.innerHTML=order.map((ti,k)=>k===0?cdFront(ch[ti],ti,id):cdStrip(ch[ti],ti,k)).join('');renderPanel()}
 
-/* ---------- SCENE ---------- */
+/* ---------- صحنه ---------- */
 function sceneScreen(){
-  const n=N[st.cur];const harbor=st.cur==='M07';const real=harbor&&st.tier===0;const ch=challenges(st.cur)[st.tier];
-  const lessonBtn=`<div class="scenebar"><button class="btn btn--secondary btn--sm lb2" data-act="lesson" data-t="lesson">${ic('cards')}${esc(S('flow.lesson.btn'))}</button></div>`;
-  let body;
-  if(real)body=`<div class="mission">${esc(S('flow.scene.mission'))}</div>${lessonBtn}<div class="scene"><img src="${D.img.scene}" alt="">${st.teacher?`<div class="mkc">${esc(R['mock.scene'])}</div>`:''}${st.pulled&&st.teacher?`<div class="toast">${esc(R['mock.pull'])}</div>`:''}</div>
-     <div class="ctl"><button class="btn btn--secondary" aria-pressed="${st.arr==='moving'}" data-act="arr" data-v="moving" data-t="arr">${esc(S('flow.scene.arr.moving'))}</button><button class="btn btn--secondary" aria-pressed="${st.arr==='fixed'}" data-act="arr" data-v="fixed">${esc(S('flow.scene.arr.fixed'))}</button>
-     <button class="btn btn--secondary" data-act="help" data-t="help">${ic('guide')}${esc(S('flow.help.btn'))}</button><button class="btn btn--primary" data-act="pull" data-t="pull">${esc(S('flow.scene.pull'))}</button></div>`;
-  else body=`${lessonBtn}<div class="scene" style="flex-direction:column;gap:10px;align-items:center">${harbor&&ch.art?`<img src="${ch.art}" alt="" style="max-height:55%">`:''}<div class="ph">${esc(S('flow.scene.pending'))}</div></div>`;
-  return `<div class="scr">${topbar(`<button class="btn btn--secondary btn--sm mbtn" data-act="back">${ic('back')}<span>${esc(S('flow.menu.back'))}</span></button>`,ch.t,menuBtn())}${body}</div>`;
+  const n=N[st.cur];const harbor=st.cur==='M07';const ch=challenges(st.cur)[st.tier];
+  const real=harbor&&ch.scene;
+  const sym=real?(st.storyLight&&ch.sceneStory?ch.sceneStory:ch.scene):null;
+  const art=real?`<svg viewBox="0 0 390 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#${sym}"/></svg>`:buildingSVG(st.cur).replace('class="cd-art-ph"','style="position:absolute;inset:0;width:100%;height:100%;background:var(--z-'+MN[st.cur].zone+'-base)" class="cd-art-ph"');
+  const mk=real?(st.teacher?`<div class="mkc">${esc(R['mock.scene'])}</div>`:'')+(st.pulled&&st.teacher?`<div class="toast">${esc(R['mock.pull'])}</div>`:''):`<div class="ph">${esc(S('flow.scene.pending'))}</div>`;
+  const ctl=`<div class="ui-sheet ssheet">
+    <button class="ui-btn ui-btn--sec ui-cut" aria-pressed="${st.arr==='fixed'}" data-act="arr" data-v="fixed" data-t="arr">${esc(S('flow.scene.arr.fixed'))}</button>
+    <button class="ui-btn ui-btn--sec ui-cut" aria-pressed="${st.arr==='moving'}" data-act="arr" data-v="moving">${esc(S('flow.scene.arr.moving'))}</button>
+    <div style="grid-column:1/-1;display:flex;gap:8px"><button class="ui-btn ui-btn--sec ui-cut" style="flex:1;padding:0 6px" data-act="help" data-t="help">${ic('hint','sm')}<span>${esc(S('flow.help.btn'))}</span></button><button class="ui-btn ui-btn--sec ui-cut" style="flex:1;padding:0 6px" data-act="lesson" data-t="lesson">${ic('lesson','sm')}<span>${esc(S('flow.lesson.btn'))}</span></button><button class="ui-btn ui-btn--sec ui-cut" style="flex:1;padding:0 6px" data-act="back">${icBack().replace('bi','bi sm')}<span>${esc(S('flow.menu.back'))}</span></button></div>
+    <button class="ui-btn pull" data-act="pull" data-t="pull">${esc(S('flow.scene.pull'))}</button></div>`;
+  return `<div class="scr">${tb(menuBtn(),titleOf(ch.t),spacer)}<div class="mission">${esc(S('flow.scene.mission'))}</div>
+   <div class="scenebox">${art}${mk}</div>${ctl}</div>`;
 }
 
-/* ---------- lesson card figure (from lesson-card-options/card.html) ---------- */
-function arrow(x,y,len,dir,col,w=4){const ty=y+dir*len,h=7;return `<line x1="${x}" y1="${y}" x2="${x}" y2="${ty-dir*h}" stroke="${col}" stroke-width="${w}" stroke-linecap="round"/><polygon points="${x-6},${ty-dir*h} ${x+6},${ty-dir*h} ${x},${ty}" fill="${col}"/>`}
-const lab=(x,y,t,c)=>`<text x="${x}" y="${y}" font-size="14" font-weight="700" text-anchor="middle" fill="${c}">${t}</text>`;
-const wheel=(cx,cy,r)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#f2c94c" stroke="#7a5b10" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="2.5" fill="#7a5b10"/>`;
-const hang=(cx,cy)=>`<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy+10}" stroke="#6b5a3a" stroke-width="4"/>`;
-const RP='stroke="var(--rope)" stroke-width="3" fill="none"';
-const topRope=`<path d="M50 40 A14 14 0 0 1 78 40" ${RP}/><line x1="64" y1="26" x2="110" y2="26" ${RP}/><path d="M96 40 A14 14 0 0 1 124 40" ${RP}/>`;
-function figs(b){
-  const ld=S('flow.card.load'),pl=S('flow.card.pull');
-  const W=b===2?6:60;const num=b>=2;
-  const fixed=`<svg viewBox="0 0 150 196" role="img"><rect x="20" y="6" width="110" height="6" rx="3" fill="#6b5a3a"/>${hang(64,12)}${hang(110,12)}${wheel(64,40,14)}${wheel(110,40,14)}<line x1="50" y1="40" x2="50" y2="118" ${RP}/>${topRope}<line x1="124" y1="40" x2="124" y2="105" ${RP}/><rect x="37" y="118" width="26" height="22" rx="4" fill="#9db7a0" stroke="#4b6a50" stroke-width="2"/>${arrow(50,144,30,1,'var(--w)')}${arrow(124,105,30,1,'var(--e)')}${lab(50,190,num?ld+' '+fa(W):ld,'var(--w)')}${lab(112,156,num?pl+' '+fa(W):pl,'var(--e)')}</svg>`;
-  const moving=`<svg viewBox="0 0 150 196" role="img"><rect x="10" y="6" width="130" height="6" rx="3" fill="#6b5a3a"/>${hang(64,12)}${hang(110,12)}${wheel(64,40,14)}${wheel(110,40,14)}<line x1="22" y1="12" x2="22" y2="100" ${RP}/>${topRope}<line x1="50" y1="40" x2="50" y2="100" ${RP}/><line x1="124" y1="40" x2="124" y2="105" ${RP}/>${wheel(36,104,14)}<line x1="36" y1="118" x2="36" y2="124" stroke="#6b5a3a" stroke-width="4"/><rect x="23" y="124" width="26" height="22" rx="4" fill="#9db7a0" stroke="#4b6a50" stroke-width="2"/>${arrow(36,150,30,1,'var(--w)')}${arrow(124,105,15,1,'var(--e)')}${arrow(22,84,15,-1,'var(--e)',3)}${arrow(50,84,15,-1,'var(--e)',3)}${lab(36,190,num?ld+' '+fa(W):ld,'var(--w)')}${lab(112,138,num?pl+' '+fa(W/2):pl,'var(--e)')}</svg>`;
+/* ---------- نمودار کارت درس (به سبک جدید: diagram_style.json؛ بدون متن روی نمودار) ---------- */
+const K={line:'#241a5e',cream:'#fff4d2',violet:'#3a2a7a',rope:'#c98a45',pull:'#2fb8a8',weight:'#d070c0'};
+function arrow(x,y,len,dir,col){const ty=y+dir*len,hh=20*dir;
+  return `<polygon class="farr" points="${x-4},${y} ${x+4},${y} ${x+4},${ty-hh} ${x+11},${ty-hh} ${x},${ty} ${x-11},${ty-hh} ${x-4},${ty-hh}" fill="${col}" stroke="${K.line}" stroke-width="2.6" stroke-linejoin="round"/>`}
+const wheel=(cx,cy,r)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${K.cream}" stroke="${K.line}" stroke-width="4.5"/><circle cx="${cx}" cy="${cy}" r="3.5" fill="${K.violet}" stroke="${K.line}" stroke-width="1.2"/>`;
+const hang=(cx,y0,y1)=>`<line x1="${cx}" y1="${y0}" x2="${cx}" y2="${y1}" stroke="${K.line}" stroke-width="4.5" stroke-linecap="round"/>`;
+const rope=d=>`<path d="${d}" fill="none" stroke="${K.line}" stroke-width="7.6" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${K.rope}" stroke-width="4" stroke-linecap="round"/>`;
+const beam=(x,w)=>`<rect x="${x}" y="6" width="${w}" height="9" rx="2.5" fill="${K.violet}" stroke="${K.line}" stroke-width="4.5"/>`;
+const loadBox=(x,y)=>`<rect x="${x}" y="${y}" width="28" height="24" rx="3" fill="${K.rope}" stroke="${K.line}" stroke-width="4.5"/>`;
+const topRope='M50 40 A14 14 0 0 1 78 40 M64 26 L110 26 M96 40 A14 14 0 0 1 124 40';
+function figs(){
+  const fixed=`<svg viewBox="0 0 150 196" role="img" aria-hidden="true"><rect x="0" y="0" width="150" height="196" fill="#d6f1ee"/>${beam(20,110)}${hang(64,15,27)}${hang(110,15,27)}${rope(topRope+' M50 40 V116 M124 40 V104')}${wheel(64,40,14)}${wheel(110,40,14)}${loadBox(36,116)}${arrow(50,144,40,1,K.weight)}${arrow(124,106,40,1,K.pull)}</svg>`;
+  const moving=`<svg viewBox="0 0 150 196" role="img" aria-hidden="true"><rect x="0" y="0" width="150" height="196" fill="#d6f1ee"/>${beam(10,130)}${hang(64,15,27)}${hang(110,15,27)}${hang(22,15,100)}${rope(topRope+' M50 40 V100 M124 40 V104 M22 15 V100')}${wheel(64,40,14)}${wheel(110,40,14)}${wheel(36,104,14)}${hang(36,118,124)}${loadBox(22,124)}${arrow(36,152,40,1,K.weight)}${arrow(124,106,24,1,K.pull)}${arrow(22,80,24,-1,K.pull)}${arrow(50,80,24,-1,K.pull)}</svg>`;
   return [fixed,moving];
+}
+/* برچسب‌ها بیرون از نمودار (متن روی نمودار نیست) */
+function figLabels(kind){
+  const b=st.band,num=b>=2;const W=b===2?6:60;
+  const w=num?S('flow.card.load')+' '+fa(W):S('flow.card.load');
+  const f=num?S('flow.card.pull')+' '+fa(kind==='moving'?W/2:W):S('flow.card.pull');
+  return `<div class="figl"><span class="ui-plate ui-cut pl-w">${esc(w)}</span><span class="ui-plate ui-cut pl-f">${esc(f)}</span></div>`;
 }
 const PROB={1:{q:'flow.card.q1',ok:'flow.card.q1.ok',o:[[S('flow.card.fixed'),0],[S('flow.card.moving'),1]]},
  2:{q:'flow.card.q2',ok:'flow.card.q2.ok',o:[[fa(3),1],[fa(6),0],[fa(12),0]]},
  3:{q:'flow.card.q3',ok:'flow.card.q3.ok',o:[[S('flow.card.q3.o1'),0],[S('flow.card.q3.o2'),0],[S('flow.card.q3.o3'),1]]}};
-function probHTML(id){const p=PROB[st.band];const [f,m]=figs(st.band);return `<div class="prob cardbox" id="${id}"><div class="pair mini"><div class="fig"><h3>${esc(S('flow.card.fixed'))}</h3>${f}</div><div class="fig"><h3>${esc(S('flow.card.moving'))}</h3>${m}</div></div><p class="q">${esc(S(p.q))}</p><div class="opts">${p.o.map(([t,ok])=>`<button class="opt" data-act="ans" data-ok="${ok}">${esc(t)}</button>`).join('')}</div><div class="fb" aria-live="polite"></div></div>`}
+function probHTML(id){const p=PROB[st.band];const [f,m]=figs();
+  return `<div class="prob" id="${id}"><div class="pair mini"><div class="fig"><h3>${esc(S('flow.card.fixed'))}</h3>${f}${figLabels('fixed')}</div><div class="fig"><h3>${esc(S('flow.card.moving'))}</h3>${m}${figLabels('moving')}</div></div><p class="q">${esc(S(p.q))}</p><div class="opts">${p.o.map(([t,ok])=>`<button class="ui-btn ui-btn--sec ui-cut" data-act="ans" data-ok="${ok}">${esc(t)}</button>`).join('')}</div><div class="fb" aria-live="polite"></div></div>`}
 
-/* ---------- big lesson card (front/back) ---------- */
+/* ---------- کارت درس بزرگ (جلو/پشت) ---------- */
 const nb=id=>{const s=new Set();D.edges.forEach(e=>{if(e.from===id)s.add(e.to);if(e.to===id)s.add(e.from)});return[...s].filter(i=>N[i]&&listed(i)&&nodeSt(i)!=='fog')};
 function cardFront(id){
   const n=N[id];const real=id==='M07';const b=st.band;const C=D.card[b];
   let body;
-  if(real){const [f,m]=figs(b);
-    body=`<div class="cardbox"><span class="tagl">${esc(C.band)}</span>
-     <div class="pair"><div class="fig"><h3>${esc(S('flow.card.fixed'))}</h3>${b==3?`<div class="num">n = ${fa(1)}</div>`:''}${f}</div><div class="fig"><h3>${esc(S('flow.card.moving'))}</h3>${b==3?`<div class="num">n = ${fa(2)}</div>`:''}${m}</div></div>
-     <div class="lg"><span><i style="background:var(--w)"></i>${esc(S('flow.card.legend.w'))}</span><span><i style="background:var(--e)"></i>${esc(S('flow.card.legend.f'))}</span></div>
-     <div class="say">${C.say}</div>${b==3?`<div class="eq">F = W / n    s = n × h</div>`:''}${C.sub?`<div class="sub">${esc(C.sub)}</div>`:''}</div>`;
-  }else body=`<span class="tagl">${esc(C.band)}</span><div class="say">${esc(n.concept)}</div><div style="margin-top:12px"><span class="chip chip--tbd" style="color:var(--ink);border-color:var(--gold-dark)">${esc(S('flow.box.tbd'))}</span></div><div class="pend" style="margin-top:12px">${esc(S('flow.card.pending'))}</div>`;
+  if(real){const [f,m]=figs();
+    body=`<span class="tagl">${esc(C.band)}</span>
+     <div class="pair"><div class="fig"><h3>${esc(S('flow.card.fixed'))}</h3>${b==3?`<div class="num">n = ${fa(1)}</div>`:''}${f}${figLabels('fixed')}</div><div class="fig"><h3>${esc(S('flow.card.moving'))}</h3>${b==3?`<div class="num">n = ${fa(2)}</div>`:''}${m}${figLabels('moving')}</div></div>
+     <div class="lg"><span><i style="background:var(--ui-pink)"></i>${esc(S('flow.card.legend.w'))}</span><span><i style="background:var(--ui-teal)"></i>${esc(S('flow.card.legend.f'))}</span></div>
+     <div class="say">${C.say}</div>${b==3?`<div class="eq">F = W / n    s = n × h</div>`:''}${C.sub?`<div class="sub">${esc(C.sub)}</div>`:''}`;
+  }else body=`<span class="tagl">${esc(C.band)}</span><div class="say">${esc(n.concept)}</div><div style="margin-top:10px">${plate('ui-plate--fogs',esc(S('flow.box.tbd')))}</div><div class="pendbox">${esc(S('flow.card.pending'))}</div>`;
   const rel=nb(id);
-  const relH=rel.length?`<div class="sec"><h2>${esc(S('flow.card.related'))}</h2><div class="rel">${rel.map(r=>`<button class="chip" data-act="swapcard" data-id="${r}"><i class="sym" data-sym="${CH[N[r].ch].sym}"></i>${esc(N[r].concept)}</button>`).join('')}</div></div>`:'';
+  const relH=rel.length?`<div class="sec"><h2>${esc(S('flow.card.related'))}</h2><div class="rel">${rel.map(r=>`<button class="ui-btn ui-btn--sec ui-cut" data-act="swapcard" data-id="${r}">${esc(N[r].concept)}</button>`).join('')}</div></div>`:'';
   return `<div class="cbd">${body}${relH}</div>`;
 }
 function cardBack(id){
   const real=id==='M07';
-  const prac=real?`<div class="sec"><h2>${esc(S('flow.card.problem'))}</h2>${probHTML('pbk')}</div>`:`<div class="sec"><div class="pend">${esc(S('flow.card.noPractice'))}</div></div>`;
-  const vid=real?`<div class="sec"><h2>${esc(S('flow.card.video.h'))}</h2><button class="vrow" data-act="gate" data-tab="video" data-via="card">${ic('game')}<span>${esc(S('flow.card.video'))}</span></button></div>`:`<div class="sec"><div class="pend">${esc(S('flow.card.noVideo'))}</div></div>`;
-  const put=st.coll.has(id)?`<div class="cfoot">${tag('box',1,S('flow.box.collected'))}</div>`:`<div class="cfoot"><button class="btn btn--primary" data-act="put" data-id="${id}">${ic('box')}${esc(S('flow.box.put'))}</button></div>`;
-  return `<div class="cbd" style="padding-bottom:12px">${prac}${vid}</div>${put}`;
+  const prac=real?`<div class="cdiag"><svg viewBox="0 0 360 200" aria-hidden="true"><use href="#cd-back-pulley-diagram"/></svg></div><div class="sec"><h2>${esc(S('flow.card.problem'))}</h2>${probHTML('pbk')}</div>`:`<div class="pendbox">${esc(S('flow.card.noPractice'))}</div>`;
+  const vid=real?`<div class="sec"><h2>${esc(S('flow.card.video.h'))}</h2><button class="ui-btn ui-btn--video wide" data-act="gate" data-tab="video" data-via="card">${ic('game')}<span>${esc(S('flow.card.video'))}</span></button></div>`:`<div class="pendbox">${esc(S('flow.card.noVideo'))}</div>`;
+  const put=st.coll.has(id)?`<div class="cfoot">${plate('ui-plate--16 ui-plate--teal',pico('box')+esc(S('flow.box.collected')))}</div>`:`<div class="cfoot"><button class="ui-btn cd-btn-box" data-act="put" data-id="${id}">${ic('box')}${esc(S('flow.box.put'))}</button></div>`;
+  return `<div class="cbd">${prac}${vid}</div>${put}`;
 }
 function cardOvHTML(){
-  const c=st.card;const n=N[c.id];const fs=c.from==='scene';
+  const c=st.card;const n=N[c.id];const fs=c.from==='scene';const z=MN[c.id].zone;
   const ttl=c.id==='M07'?S('flow.card.title'):n.concept;
-  const hd=face=>{const gm=(fs||face==='b')?'':`<button class="btn btn--icon" data-act="gogame" data-id="${c.id}" aria-label="${esc(S('flow.card.goGame'))}: ${esc(n.env)}">${ic('game')}</button>`;return `<div class="chd"><i class="sym" data-sym="${CH[n.ch].sym}"></i>${face==='f'?`<h2>${esc(ttl)}<small>${esc(n.env)}</small></h2>`:`<h2>${esc(S('flow.card.back.title'))}<small>${esc(ttl)}</small></h2>`}${gm}</div>`};
-  return `<div class="cscrim" data-act="closecard"></div><div class="cbig" id="cbig" role="dialog" aria-modal="true" aria-label="${esc(ttl)}" style="${cvars(n.ch)}"><div class="cflip ${c.face==='back'?'back':''}" id="cflip">
-    <div class="cface" id="cfr" ${c.face==='back'?'aria-hidden="true"':''}>${hd('f')}${cardFront(c.id)}</div>
-    <div class="cface bk" id="cbk" ${c.face==='front'?'aria-hidden="true"':''}>${hd('b')}${cardBack(c.id)}</div></div></div>
-   <div class="cbar"><button class="btn btn--secondary" data-act="closecard">${ic('back')}${esc(S(fs?'flow.nav.toGame':'flow.nav.toBox'))}</button><button class="btn ${c.face==='back'?'btn--secondary':'btn--primary'}" data-act="flip" id="flipbtn">${ic('cards')}<span>${esc(S(c.face==='back'?'flow.card.flipBack':'flow.card.flip'))}</span></button></div>`;
+  const hd=face=>`<div class="chd"><svg viewBox="0 0 360 60" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-title-bar"/></svg><div class="tt">${face==='f'?`<h2>${esc(ttl)}</h2><small>${esc(n.env)}</small>`:`<h2>${esc(S('flow.card.back.title'))}</h2><small>${esc(ttl)}</small>`}</div></div>`;
+  const frame=`<svg class="cd-frame" viewBox="0 0 390 392" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-frame-night"/></svg>`;
+  const goBtn=fs?'':`<div style="padding:0 24px 0"><button class="ui-btn ui-btn--sec ui-cut wide" data-act="gogame" data-id="${c.id}" style="min-block-size:48px">${ic('game')}<span>${esc(S('flow.card.goGame'))}: ${esc(n.env)}</span></button></div>`;
+  return `<div class="cscrim" data-act="closecard"></div><div class="cbig" id="cbig" role="dialog" aria-modal="true" aria-label="${esc(ttl)}" data-world="night" data-light="night" style="--cd-zone:var(--z-${z}-night)"><div class="cflip ${c.face==='back'?'back':''}" id="cflip">
+    <div class="cface" id="cfr" ${c.face==='back'?'aria-hidden="true"':''}>${frame}${hd('f')}${cardFront(c.id)}${fs?'':`<div class="cfoot" style="padding-block-start:0">${secBtnWide(c.id,n)}</div>`}</div>
+    <div class="cface bk" id="cbk" ${c.face==='front'?'aria-hidden="true"':''}>${frame}${hd('b')}${cardBack(c.id)}</div></div></div>
+   <div class="cbar"><button class="ui-btn ui-btn--sec ui-cut" data-act="closecard">${icBack()}<span>${esc(S(fs?'flow.nav.toGame':'flow.nav.toBox'))}</span></button><button class="ui-btn ${c.face==='back'?'ui-btn--sec ui-cut':''}" data-act="flip" id="flipbtn">${ic('flip')}<span>${esc(S(c.face==='back'?'flow.card.flipBack':'flow.card.flip'))}</span></button></div>`;
 }
+const secBtnWide=(id,n)=>`<button class="ui-btn ui-btn--sec ui-cut wide" data-act="gogame" data-id="${id}">${ic('game')}<span>${esc(S('flow.card.goGame'))}</span></button>`;
 function openCard(id,from,el){
   if(nodeSt(id)==='locked'||nodeSt(id)==='fog'){st.lock=id;renderOv();return}
   if(!st.coll.has(id))st.seen.add(id);
@@ -507,7 +563,7 @@ function renderCard(anim){
     if(r){const b=big.getBoundingClientRect();big.animate([{transform:`translate(${r.left-b.left}px,${r.top-b.top}px) scale(${r.width/b.width},${r.height/b.height})`,opacity:.4},{transform:'none',opacity:1}],{duration:380,easing:'cubic-bezier(.35,0,.25,1)'})}
     else big.animate([{opacity:0,transform:'scale(.94)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
   }
-  const cb=big.querySelector('[data-act=closecard]');if(cb&&anim)cb.focus({preventScroll:true});
+  const cb=big.parentElement.querySelector('.cbar [data-act=closecard]');if(cb&&anim)cb.focus({preventScroll:true});
   renderPanel();
 }
 function swapCard(id){
@@ -522,7 +578,8 @@ function flipCard(){
   const f=$('#cflip');if(!f)return;const back=st.card.face==='back';
   f.classList.toggle('back',back);
   $('#cfr').setAttribute('aria-hidden',back?'true':'false');$('#cbk').setAttribute('aria-hidden',back?'false':'true');
-  $('#flipbtn span').textContent=S(back?'flow.card.flipBack':'flow.card.flip');
+  const fb=$('#flipbtn');fb.querySelector('span').textContent=S(back?'flow.card.flipBack':'flow.card.flip');
+  fb.className='ui-btn '+(back?'ui-btn--sec ui-cut':'');
   document.querySelectorAll('#cv .cbd').forEach(e=>e.scrollTop=0);
   renderPanel();
 }
@@ -530,7 +587,7 @@ function closeCard(){
   const cv=$('#cv');const big=$('#cbig');
   const done=()=>{st.card=null;cv.innerHTML='';renderPanel()};
   if(!big||rm()){done();return}
-  const r=st.card.rect;const tile=document.querySelector(`[data-pk="${st.card.id}"]`);
+  const r=st.card.rect;const tile=A(`[data-pk="${st.card.id}"]`);
   let a;
   if(r&&tile){const t=tile.getBoundingClientRect();const b=big.getBoundingClientRect();
     a=big.animate([{transform:'none',opacity:1},{transform:`translate(${t.left-b.left}px,${t.top-b.top}px) scale(${t.width/b.width},${t.height/b.height})`,opacity:.3}],{duration:300,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'})}
@@ -539,103 +596,106 @@ function closeCard(){
 }
 function toast2(msg){const cv=$('#cv');const t=document.createElement('div');t.className='t2s';t.textContent=msg;cv.appendChild(t);setTimeout(()=>t.remove(),2200)}
 
-/* ---------- CARD BOX (کارت‌دان) ---------- */
-function pocketHTML(id){
-  const n=N[id],s=cardSt(id),ch=CH[n.ch],sym=ch.sym,name=esc(n.concept);
-  const seal=`<i class="pocket__seal sym" data-sym="${sym}" style="width:34px;height:34px"></i>`;
-  const game=(s==='locked'||s==='fog')?'':`<button class="pocket__game" data-act="gogame" data-id="${id}" aria-label="${esc(S('flow.card.goGame'))}: ${esc(n.env)}"></button>`;
-  let inner,state=s;
-  if(s==='locked')inner=`<span class="pocket__ln">${name}</span><span class="pocket__name">${tag('lock',1,lockText(id,'concept')).replace('class="chip','style="width:100%;justify-content:center" class="chip')}</span>`;
-  else if(s==='fog')inner=`<span class="pocket__name">${tag('fog',1,S('flow.box.fog')).replace('class="chip','style="width:100%;justify-content:center" class="chip')}</span>`;
-  else if(s==='unseen'){state='empty';inner=`<span class="pocket__ghost sym" data-sym="${sym}"></span><span class="pocket__newchip chip chip--new"><i class="ic"></i>${esc(S('flow.box.new'))}</span><span class="pocket__name"><span class="chip chip--tbd" style="width:100%;justify-content:center">${name}</span></span>`}
-  else{
-    const art=id==='M07'?`<span class="pocket__art" style="background-image:url(${D.img.a0})"></span>`:`<span class="pocket__art pa" style="${cvars(n.ch)}">${`<i class="sym" data-sym="${sym}"></i>`}</span>`;
-    inner=`${art}<span class="pocket__frame"></span><span class="pocket__title">${name}</span>${seal}<span class="pocket__badge"></span><span class="pocket__cap">${s==='seen'?tag('seen',1,S('flow.box.seen')):tag('box',1,S('flow.box.collected'))}</span>`;
-  }
-  const lab=`${n.concept}`;
-  return `<div class="pk" data-pk="${id}"><button class="pocket" data-state="${state}" data-act="${s==='locked'||s==='fog'?'cardlock':'opencard'}" data-id="${id}" data-from="box" aria-label="${esc(lab)}">${inner}</button>${game}</div>`;
+/* ---------- کارت‌دان (شب) ---------- */
+function thumbHTML(id){
+  if(id==='M07')return `<span class="th" style="--cd-zonebg:#2a1f5c"><svg viewBox="0 0 360 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#cd-art-harbor-day"/></svg></span>`;
+  return `<span class="th" style="--cd-zonebg:var(--z-${MN[id].zone}-base)">${buildingSVG(id,'')}</span>`;
+}
+function miniHTML(id){
+  const n=N[id],s=cardSt(id),name=esc(n.concept);
+  let sym='empty',inner,aria=n.concept;
+  if(s==='locked'){sym='locked';inner=`<span class="nm">${name}</span><span class="stt">${plate('ui-plate--lock',pico('lock')+esc(lockText(id,'concept')))}</span>`}
+  else if(s==='fog'){sym='locked';inner=`<span class="nm">${esc(S('flow.box.fog'))}</span>`;aria=S('flow.box.fog')}
+  else if(s==='unseen'){sym='empty';inner=`<span class="nm">${name}</span><span class="stt newdot"><i class="ui-newdot"></i>${esc(S('flow.box.new'))}</span>`}
+  else{sym=s==='seen'?'seen':'packed';inner=`${thumbHTML(id)}<span class="nm">${name}</span><span class="stt">${s==='seen'?plate('ui-plate--fogs',pico('eye')+esc(S('flow.box.seen'))):plate('ui-plate--teal',pico('box')+esc(S('flow.box.collected')))}</span>`}
+  return `<button class="mc" data-pk="${id}" data-s="${sym}" data-state="${s}" data-act="${s==='locked'||s==='fog'?'cardlock':'opencard'}" data-id="${id}" data-from="box" aria-label="${esc(aria)}"><svg class="bg" viewBox="0 0 80 120" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-mini-${sym}"/></svg>${inner}</button>`;
 }
 function boxScreen(){
   const q=st.q.trim();
-  const jump=D.chapters.map(c=>`<button class="sym" data-sym="${c.sym}" data-act="jump" data-ch="${c.id}" aria-label="${esc(S('flow.thread.'+c.id+'.name'))}"></button>`).join('');
+  const jump=D.chapters.map((c,i)=>`<button class="ui-btn ui-btn--sec ui-cut" data-act="jump" data-ch="${c.id}" data-n="${c.id}" aria-label="${esc(S('flow.thread.'+c.id+'.name'))}">${fa(i+1)}</button>`).join('');
   let shelves='';
   if(st.search&&q){
     const ids=D.order.filter(i=>listed(i)&&nodeSt(i)!=='fog'&&(N[i].concept.includes(q)||N[i].env.includes(q)));
-    shelves=`<div class="shelf__sec"><div class="shelf__row">${ids.map(pocketHTML).join('')||''}</div></div>`;
-  }else shelves=D.chapters.map(c=>{
+    shelves=ids.length?`<div class="shelf__sec"><div class="shelf__grid">${ids.map(miniHTML).join('')}</div></div>`:`<div class="shelf__empty">${esc(S('v5.flow.search.none'))}</div>`;
+  }else shelves=D.chapters.map((c,i)=>{
     const ids=c.ids.filter(listed);
-    const dots=ids.map(i=>{const s=cardSt(i);return `<i class="dot ${s==='collected'?'dot--got':s==='seen'?'dot--seen':''}"></i>`}).join('');
-    const rows=[];for(let i=0;i<ids.length;i+=2)rows.push(`<div class="shelf__row">${ids.slice(i,i+2).map(pocketHTML).join('')}</div>`);
-    return `<div class="shelf__sec" id="sh-${c.id}" data-ch="${c.id}" style="${cvars(c.id)}"><div class="shelf__head"><i class="sym" data-sym="${c.sym}"></i><span class="t-h">${esc(S('flow.thread.'+c.id+'.name'))}</span><span class="shelf__dots" aria-hidden="true">${dots}</span></div><p class="shelf__line">${esc(S('flow.thread.'+c.id+'.line'))}</p>${rows.join('')}</div>`}).join('');
-  return `<div class="scr">${topbar(spacer,S('flow.box.title'),`<button class="btn btn--icon" data-act="search" aria-label="${esc(S('flow.box.search'))}" aria-pressed="${st.search}">${ic('search')}</button>${menuBtn()}`)}
+    const dots=ids.map(x=>{const s=cardSt(x);return `<i class="dot ${s==='collected'?'dot--got':s==='seen'?'dot--seen':''}"></i>`}).join('');
+    const rows=[];for(let k=0;k<ids.length;k+=3)rows.push(`<div class="shelf__grid">${ids.slice(k,k+3).map(miniHTML).join('')}</div><svg class="shelf__plank" viewBox="0 0 360 40" aria-hidden="true"><use href="#cd-shelf"/></svg>`);
+    return `<div class="shelf__sec" id="sh-${c.id}" data-ch="${c.id}"><div class="shelf__head"><span class="no">${fa(i+1)}</span><span class="t-h">${esc(S('flow.thread.'+c.id+'.name'))}</span><span class="shelf__dots" aria-hidden="true">${dots}</span></div><p class="shelf__line">${esc(S('flow.thread.'+c.id+'.line'))}</p>${rows.join('')}</div>`}).join('');
+  const sbtn=`<button class="ui-btn ui-btn--sec ui-cut" data-act="search" aria-pressed="${st.search}">${ic('search')}<span>${esc(S('flow.box.search'))}</span></button>`;
+  return `<div class="scr">${tb(menuBtn(),titleOf(S('flow.box.title')),sbtn)}
    ${st.search?`<div class="search"><input id="q" type="search" placeholder="${esc(S('flow.box.search'))}" value="${esc(st.q)}" aria-label="${esc(S('flow.box.search'))}"></div>`:''}
    <div class="jump" id="jump">${jump}</div>
    <div class="body" id="boxbody"><div class="shelf">${shelves}</div></div>
-   <div class="dock"><button class="btn btn--secondary" data-act="toMap">${ic('map')}${esc(S('flow.nav.toMap'))}</button></div></div>`;
+   <div class="dock">${secBtn('toMap',ic('map')+esc(S('flow.nav.toMap')))}</div></div>`;
 }
 function refreshBox(){
-  const b=$('#boxbody');if(!b||st.scr!=='box')return;const top=b.scrollTop,jp=$('#jump').scrollLeft;
-  const keep=document.activeElement&&document.activeElement.id==='q';
+  const b=A('#boxbody');if(!b||st.scr!=='box')return;const top=b.scrollTop,jp=A('#jump').scrollLeft;
   const tmp=document.createElement('div');tmp.innerHTML=boxScreen();
-  b.innerHTML=tmp.querySelector('#boxbody').innerHTML;b.scrollTop=top;$('#jump').scrollLeft=jp;
+  b.innerHTML=tmp.querySelector('#boxbody').innerHTML;b.scrollTop=top;A('#jump').scrollLeft=jp;
   updateJump();
 }
 function updateJump(){
-  const b=$('#boxbody');if(!b)return;let cur=null;const t=b.getBoundingClientRect().top;
+  const b=A('#boxbody');if(!b)return;let cur=null;const t=b.getBoundingClientRect().top;
   b.querySelectorAll('.shelf__sec[data-ch]').forEach(s=>{if(s.getBoundingClientRect().top-t<80)cur=s.dataset.ch});
-  const jp=$('#jump');document.querySelectorAll('#jump .sym').forEach(e=>{const on=e.dataset.ch===cur;e.classList.toggle('is-cur',on);
+  const jp=A('#jump');jp.querySelectorAll('[data-ch]').forEach(e=>{const on=e.dataset.ch===cur;e.classList.toggle('cur',on);
     if(on&&jp.dataset.cur!==cur){jp.dataset.cur=cur;const jr=jp.getBoundingClientRect(),er=e.getBoundingClientRect();jp.scrollLeft+=er.left+er.width/2-(jr.left+jr.width/2)}});
 }
 
-/* ---------- PRACTICE ---------- */
+/* ---------- تمرین (شب) ---------- */
 function pracScreen(){
   const has=st.coll.size>0;let inner;
   if(!has)inner=`<div class="prac"><p>${esc(S('flow.practice.empty'))}</p></div>`;
-  else if(st.prac===0)inner=`<div class="prac"><p>${esc(S('flow.practice.lead'))}</p><button class="btn btn--primary btn--wide" data-act="pstart">${esc(S('flow.practice.start'))}</button></div>`;
-  else if(st.prac===1)inner=`<div class="prac"><div style="text-align:start">${probHTML('pb2')}</div><div id="pn" style="margin-top:12px;display:none"><button class="btn btn--primary btn--wide" data-act="pnext">${esc(S('flow.practice.next'))}</button></div></div>`;
+  else if(st.prac===0)inner=`<div class="prac"><p>${esc(S('flow.practice.lead'))}</p>${priBtn('pstart',esc(S('flow.practice.start')),'','wide')}</div>`;
+  else if(st.prac===1)inner=`<div class="prac">${probHTML('pb2')}<div id="pn" style="margin-top:12px;display:none">${priBtn('pnext',esc(S('flow.practice.next')),'','wide')}</div></div>`;
   else inner=`<div class="prac"><p>${esc(S('flow.practice.end'))}</p></div>`;
-  return `<div class="scr">${topbar(spacer,S('flow.menu.practice'),menuBtn())}<div class="body">${inner}</div><div class="dock"><button class="btn btn--secondary" data-act="toMap">${ic('map')}${esc(S('flow.nav.toMap'))}</button></div></div>`;
+  return `<div class="scr">${tb(menuBtn(),titleOf(S('flow.menu.practice')),spacer)}<div class="body">${inner}</div><div class="dock">${secBtn('toMap',ic('map')+esc(S('flow.nav.toMap')))}</div></div>`;
 }
 
-/* ---------- overlays ---------- */
-function sheet(inner,label,cls=''){return `<div class="scrim" data-act="closeov"></div><div class="sheet ${cls}" role="dialog" aria-label="${esc(label)}">${inner}</div>`}
-const shx=()=>`<button class="btn btn--icon btn--sm shx" data-act="closeov" aria-label="${esc(S('flow.close'))}">${ic('x')}</button>`;
+/* ---------- برگه‌ها و روکش‌ها ---------- */
+function sheet(inner,label,cls=''){const night=worldOf()==='night';return `<div class="scrim" data-act="closeov"></div><div class="sheet ${night?'ui-sheet-night':'ui-sheet'} ${cls}" role="dialog" aria-label="${esc(label)}">${inner}</div>`}
+const backRow=(extra='')=>`<div class="btnrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${extra}</div>`;
 function lockSheet(id){
   const p=firstMissing(id);const n=N[id];const kind=st.scr==='box'?'concept':'env';
-  if(nodeSt(id)==='fog')return sheet(`${shx()}<h3 class="t-title sheet__title">${esc(S('flow.map.fog.sign'))}</h3><p class="why">${esc(S(st.scr==='box'?'flow.box.fog':'flow.map.fog.body'))}</p><div class="btnrow"><button class="btn btn--secondary" data-act="closeov">${ic('back')}${esc(S('flow.menu.back'))}</button>${st.scr==='box'?`<button class="btn btn--primary" data-act="lockgo" data-id="${D.entr[0]}">${ic('go')}${esc(S('flow.lock.go'))}</button>`:''}</div>`,S('flow.map.fog.sign'));
-  return sheet(`${shx()}<h3 class="t-title sheet__title">${esc(kind==='concept'?n.concept:n.env)}</h3><p class="sheet__sub">${esc(kind==='concept'?n.env:n.concept)}</p><div class="sheet__row">${tag('lock',1,lockText(id,kind))}</div><div class="btnrow"><button class="btn btn--secondary" data-act="closeov">${ic('back')}${esc(S('flow.menu.back'))}</button><button class="btn btn--primary" data-act="lockgo" data-id="${p}">${ic('go')}${esc(S('flow.lock.go'))}</button></div>`,n.env,'anim-shake0');
+  if(nodeSt(id)==='fog')return sheet(`<h3 class="st">${esc(S('flow.map.fog.sign'))}</h3><p class="why">${esc(S(st.scr==='box'?'flow.box.fog':'flow.map.fog.body'))}</p>${backRow(st.scr==='box'?priBtn('lockgo',esc(S('flow.lock.go')),`data-id="${D.entr[0]}"`):'')}`,S('flow.map.fog.sign'));
+  return sheet(`<h3 class="st">${esc(kind==='concept'?n.concept:n.env)}</h3><p class="ssub">${esc(kind==='concept'?n.env:n.concept)}</p><div class="srow">${plate('ui-plate--lock',pico('lock')+esc(lockText(id,kind)))}</div>${backRow(priBtn('lockgo',esc(S('flow.lock.go')),`data-id="${p}"`))}`,n.env);
+}
+function searchRes(){
+  const q=st.mq.trim();if(!q)return `<p class="ssub" style="margin-top:8px">${esc(S('v5.flow.search.hint'))}</p>`;
+  const ids=D.order.filter(i=>vis(i)&&nodeSt(i)!=='fog'&&(N[i].concept.includes(q)||N[i].env.includes(q)));
+  if(!ids.length)return `<p class="ssub" style="margin-top:8px">${esc(S('v5.flow.search.none'))}</p>`;
+  return `<div class="sres">${ids.map(i=>`<button class="ui-btn ui-btn--sec ui-cut" data-act="mapfind" data-id="${i}"><span>${esc(N[i].env)}<small>${esc(N[i].concept)}</small></span></button>`).join('')}</div>`;
 }
 function ovHTML(){
   if(st.lock)return lockSheet(st.lock);
   if(st.peek){const n=N[st.peek];const tg=[];
-    if(n.id===st.here)tg.push(tag('here',1,S('flow.land.here')));
-    if(st.visited.has(n.id))tg.push(tag('seen',1,S('flow.land.visited')));
-    if(n.trial)tg.push(tag('trial',1,S('flow.land.experimental')));
-    if(D.entr.includes(n.id)&&!fogOpen())tg.push(tag('fog',1,S('flow.map.fog.sign')));
-    return sheet(`${shx()}<h3 class="t-title sheet__title">${esc(n.env)}</h3><p class="sheet__sub">${esc(n.concept)}</p><div class="sheet__row">${tg.join('')}</div><button class="btn btn--primary btn--wide" data-act="enter" data-id="${n.id}">${ic('go')}${esc(S('flow.peek.enter'))}</button>`,n.env);}
+    if(n.id===st.here)tg.push(plate('ui-plate--here',pico('pin')+esc(S('flow.land.here'))));
+    if(st.visited.has(n.id))tg.push(plate('ui-plate--fogs',pico('eye')+esc(S('flow.land.visited'))));
+    if(n.trial)tg.push(plate('ui-plate--fogs',esc(S('flow.land.experimental'))));
+    if(D.entr.includes(n.id)&&!fogOpen())tg.push(plate('ui-plate--fogs',pico('pin')+esc(S('flow.map.fog.sign'))));
+    const dr=['easy','mid','hard'].map(d=>`<span>${diffBadge(d)}<span>${esc(diffWord(d))}</span></span>`).join('');
+    return sheet(`<h3 class="st">${esc(n.env)}</h3><p class="ssub">${esc(n.concept)}</p>${tg.length?`<div class="srow">${tg.join('')}</div>`:''}<div class="diffrow">${dr}</div><div class="btnrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${priBtn('enter',esc(S('flow.peek.enter')),`data-id="${n.id}"`)}</div>`,n.env);}
   if(st.overlay==='menu'){
-    const t=[];
-    t.push(`<button class="tile tile--map" data-act="${st.scr==='map'?'menumap':'toMap'}"><i class="tile__ic"></i>${esc(S('flow.menu.map'))}</button>`);
-    t.push(`<button class="tile tile--cards" data-act="box"><i class="tile__ic"></i>${esc(S('flow.menu.cards'))}</button>`);
-    t.push(`<button class="tile tile--practice" data-act="prac">${st.coll.size?'<i class="tile__dot"></i>':''}<i class="tile__ic"></i>${esc(S('flow.menu.practice'))}</button>`);
-    t.push(`<button class="tile tile--guide" data-act="replay"><i class="tile__ic"></i>${esc(S('flow.menu.guide'))}</button>`);
-    return sheet(`<div class="tiles">${t.join('')}</div><div class="mfoot"><button class="btn btn--secondary btn--sm" data-act="closeov">${ic('back')}${esc(S('flow.menu.back'))}</button><button class="adults" data-act="gate" data-tab="report" data-via="menu"><i class="ic"></i>${esc(S('flow.menu.adults'))}</button></div>`,S('flow.menu.open'));}
+    const tile=(act,art,key,dot)=>`<button class="ui-tile" data-act="${act}">${dot?'<i class="ui-newdot"></i>':''}<svg class="ui-tile-art" viewBox="0 0 160 140" aria-hidden="true"><use href="#env_tile_${art}"/></svg>${esc(S(key))}</button>`;
+    const t=[tile(st.scr==='map'?'menumap':'toMap','map','flow.menu.map'),tile('box','cards','flow.menu.cards'),tile('prac','practice','flow.menu.practice',st.coll.size>0),tile('replay','guide','flow.menu.guide')];
+    return sheet(`${bandChips()}<div class="tiles">${t.join('')}</div><div class="mrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${secBtn('srch',ic('search')+esc(S('flow.box.search')))}</div>${secBtn('gate',ic('eye')+esc(S('flow.menu.adults')),'data-tab="report" data-via="menu"','adults')}`,S('flow.menu.open'));}
+  if(st.overlay==='search')return sheet(`<h3 class="st">${esc(S('flow.box.search'))}</h3><input class="ui-input" id="mq" type="search" placeholder="${esc(S('v5.flow.search.ph'))}" value="${esc(st.mq)}" aria-label="${esc(S('flow.box.search'))}"><div id="sresw">${searchRes()}</div>${backRow()}`,S('flow.box.search'));
   if(st.overlay==='help'){
     const hs=[S('flow.help.h1'),S('flow.help.h2'),S('flow.help.h3')];
-    return sheet(`${shx()}<h3 class="t-title sheet__title">${esc(S('flow.help.title'))}</h3>${hs.slice(0,st.hint).map(h=>`<div class="hl">${esc(h)}</div>`).join('')}${st.hint<3?`<button class="btn btn--primary btn--wide" data-act="hint">${esc(S('flow.help.more'))}</button>`:`<p style="font-weight:700">${esc(S('flow.help.end'))}</p>`}`,S('flow.help.title'));}
+    return sheet(`<h3 class="st">${esc(S('flow.help.title'))}</h3>${hs.slice(0,st.hint).map(h=>`<div class="hl">${esc(h)}</div>`).join('')}${st.hint<3?`<div class="btnrow">${secBtn('closeov',icBack()+esc(S('flow.menu.back')))}${priBtn('hint',ic('hint')+esc(S('flow.help.more')))}</div>`:`<p style="font-weight:700">${esc(S('flow.help.end'))}</p>${backRow()}`}`,S('flow.help.title'));}
   if(st.overlay==='gate'){
     const viaCard=st.gateVia==='card';
-    if(!st.gateOK)return sheet(`${shx()}<h3 class="t-title sheet__title">${esc(S('flow.gate.title'))}</h3><p class="why" style="font-weight:400">${esc(S('flow.gate.lead'))}</p><button class="hold" id="hold" aria-label="${esc(S('flow.gate.hold'))}"><i></i><span>${esc(S('flow.gate.hold'))}</span></button>`,S('flow.gate.title'));
-    if(viaCard)return sheet(`${shx()}<h3 class="t-title sheet__title">${esc(S('flow.gate.tab.video'))}</h3><p style="margin:0 0 8px">${esc(S('flow.gate.video.lead'))}</p><div class="vl">${D.videos.map(v=>`<div><bdi dir="auto">${esc(v[0])}</bdi><small>${esc(v[1])} · ${esc(R['mock.video'])}</small></div>`).join('')}</div>`,S('flow.gate.tab.video'));
+    if(!st.gateOK)return sheet(`<h3 class="st">${esc(S('flow.gate.title'))}</h3><p class="why" style="font-weight:400">${esc(S('flow.gate.lead'))}</p><button class="ui-btn ui-btn--hold hold" id="hold" aria-label="${esc(S('flow.gate.hold'))}"><i></i>${ic('hold')}<span>${esc(S('flow.gate.hold'))}</span></button>${backRow()}`,S('flow.gate.title'));
+    if(viaCard)return sheet(`<h3 class="st">${esc(S('flow.gate.tab.video'))}</h3><p style="margin:0 0 8px">${esc(S('flow.gate.video.lead'))}</p><div class="vl">${D.videos.map(v=>`<div><bdi dir="auto">${esc(v[0])}</bdi><small>${esc(v[1])} · ${esc(R['mock.video'])}</small></div>`).join('')}</div>${backRow()}`,S('flow.gate.tab.video'));
     const tabs=[['report','flow.gate.tab.report'],['guide','flow.gate.tab.guide'],['code','flow.gate.tab.code']];
     let c='';
     if(st.gateTab==='report'){c=`<p style="margin:0 0 8px">${esc(S('flow.gate.report.lead'))}</p><div class="vl">${D.chapters.map(ch=>{const ids=ch.ids.filter(listed);const v=ids.filter(id=>st.visited.has(id));return `<div><b>${esc(S('flow.thread.'+ch.id+'.name'))}</b> · ${fa(v.length)} / ${fa(ids.length)}<small>${esc(v.map(id=>N[id].env).join('، '))}</small></div>`}).join('')}</div>`}
     if(st.gateTab==='guide'){c=`<p style="margin:0 0 8px">${esc(S('flow.gate.guide.lead'))}</p><div class="acc">${[1,2,3,4,5].map(i=>`<div>${esc(S('flow.gate.guide.s'+i))}</div>`).join('')}</div>`}
     if(st.gateTab==='code'){c=`<p>${esc(S('flow.gate.code.lead'))}</p>`}
-    return sheet(`${shx()}<h3 class="t-title sheet__title">${esc(S('flow.gate.title'))}</h3><div class="gtabs">${tabs.map(([k,s])=>`<button class="${st.gateTab===k?'on':''}" data-act="gtab" data-v="${k}">${esc(S(s))}</button>`).join('')}</div>${c}`,S('flow.gate.title'));}
+    return sheet(`<h3 class="st">${esc(S('flow.gate.title'))}</h3><div class="gtabs">${tabs.map(([k,s])=>`<button class="ui-btn ui-btn--sec ui-cut ${st.gateTab===k?'on':''}" data-act="gtab" data-v="${k}">${esc(S(s))}</button>`).join('')}</div>${c}${backRow()}`,S('flow.gate.title'));}
   if(st.tut){
     const t=st.tut;const step=t.steps[t.i];const last=t.i===t.steps.length-1;
-    return `<div class="tmask" data-act="noop"></div><div class="spot" id="spot"></div><div class="coach" id="coach" style="${step.pos==='top'?'top:76px':'bottom:14px'}"><p>${esc(S(step.k))}</p><div class="cr"><div class="st">${t.steps.map((_,j)=>`<i class="${j===t.i?'on':''}"></i>`).join('')}</div><button class="btn btn--secondary btn--sm" data-act="tskip">${esc(S('flow.skip'))}</button><button class="btn btn--primary btn--sm" data-act="${last?'tskip':'tnext'}">${esc(S(last?'flow.done':'flow.next'))}</button></div></div>`}
+    return `<div class="tmask" data-act="noop"></div><div class="spot" id="spot"></div><div class="coach" id="coach" style="${step.pos==='top'?'top:72px':'bottom:12px'}"><div class="cg"><svg viewBox="0 0 100 92" aria-hidden="true"><g class="cs-bust-64 ch-pose-point"><use class="ch-happy" href="#ch-b1"/></g></svg></div><div class="cm"><p>${esc(S(step.k))}</p><div class="cr"><div class="st">${t.steps.map((_,j)=>`<i class="${j===t.i?'on':''}"></i>`).join('')}</div>${secBtn('tskip',esc(S('flow.skip')))}${priBtn(last?'tskip':'tnext',esc(S(last?'flow.done':'flow.next')))}</div></div></div>`}
   return '';
 }
 function renderOv(){
@@ -651,48 +711,62 @@ function wireHold(h){
   h.addEventListener('pointerdown',start);['pointerup','pointerleave','pointercancel'].forEach(ev=>h.addEventListener(ev,stop));
   h.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat)start(e)});h.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')stop()});
 }
-/* tutorial */
+/* آموزش */
 function tutSteps(kind){
-  if(kind==='map')return[{k:'flow.tut.map1',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map2',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map.lock',sel:'.node[data-state=locked]:not(.fogged)',pos:'bottom'},{k:'flow.tut.map3',sel:'[data-t=menu]',pos:'bottom'}].filter(s=>$('#app').querySelector(s.sel));
+  if(kind==='map')return[{k:'flow.tut.map1',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map2',sel:'[data-t=here]',pos:'bottom'},{k:'flow.tut.map.lock',sel:'.mn[data-state=locked]',pos:'bottom'},{k:'v5.flow.tut.base',sel:'[data-t=base]',pos:'bottom'},{k:'flow.tut.map3',sel:'[data-t=menu]',pos:'bottom'}].filter(s=>$('#app').querySelector(s.sel));
   return[{k:'flow.tut.scene1',sel:'[data-t=arr]',pos:'top'},{k:'flow.tut.scene2',sel:'[data-t=pull]',pos:'top'},{k:'flow.tut.scene3',sel:'[data-t=help]',pos:'top'}];
 }
 function startTut(kind){st.overlay=null;st.peek=null;st.lock=null;st.tut={kind,steps:tutSteps(kind),i:0};renderOv()}
 function placeSpot(){
   const step=st.tut.steps[st.tut.i];const el=$('#app').querySelector(step.sel);const sp=$('#spot');if(!el||!sp)return;
-  const body=el.closest('.body');
-  if(body&&el.closest('.map')){const p=st.pos&&st.pos[el.dataset.n];if(p&&step.sel.indexOf('menu')<0)body.scrollTop=Math.max(0,p.ay-body.clientHeight*.3)}
+  const body=el.closest('.mapbody');
+  if(body&&el.classList.contains('mn')){const p=st.pos&&st.pos[el.dataset.n];if(p)body.scrollTop=Math.max(0,p.hy-body.clientHeight*.3)}
   const pr=$('#phone').getBoundingClientRect();let r=el.getBoundingClientRect();
-  if(el.classList.contains('node')){const d=el.querySelector('.node__disc').getBoundingClientRect();const l=el.querySelector('.node__labels');const lr=l?l.getBoundingClientRect():d;r={left:Math.min(d.left,lr.left),right:Math.max(d.right,lr.right),top:d.top,bottom:Math.max(d.bottom,lr.bottom)};const gd=el.dataset.t==='here'?document.querySelector('#fx .guide'):null;if(gd){const g=gd.getBoundingClientRect();r={left:Math.min(r.left,g.left),right:Math.max(r.right,g.right),top:Math.min(r.top,g.top),bottom:Math.max(r.bottom,g.bottom)}}}
+  if(el.classList.contains('mn')){
+    const lb=A(`.ml[data-for="${el.dataset.n}"]`);const U=[r];if(lb)U.push(lb.getBoundingClientRect());
+    if(el.dataset.t==='here'){const gd=A('#guide');if(gd)U.push(gd.getBoundingClientRect())}
+    r={left:Math.min(...U.map(x=>x.left)),right:Math.max(...U.map(x=>x.right)),top:Math.min(...U.map(x=>x.top)),bottom:Math.max(...U.map(x=>x.bottom))};
+  }
   if(step.sel==='[data-t=arr]'){const ar=[...$('#app').querySelectorAll('[data-t=arr],[data-act=arr]')].map(x=>x.getBoundingClientRect());r={left:Math.min(...ar.map(x=>x.left)),right:Math.max(...ar.map(x=>x.right)),top:Math.min(...ar.map(x=>x.top)),bottom:Math.max(...ar.map(x=>x.bottom))}}
   const pad=6;sp.style.cssText=`left:${r.left-pr.left-pad}px;top:${r.top-pr.top-pad}px;width:${r.right-r.left+pad*2}px;height:${r.bottom-r.top+pad*2}px`;
 }
 function afterRender(){
-  if(st.scr==='env'){const b=document.querySelector('.envroot .body');if(b)b.scrollTop=0}
+  if(st.scr==='env'){const b=A('.envbody');if(b)b.scrollTop=0}
   if(st.scr==='map'){
-    layoutMap();const b=$('#mapbody');
+    layoutMap();const b=A('#mapbody');
     if(st.mapTop!==null){b.scrollTop=st.mapTop;st.mapTop=null}
-    else if(!st.tut){scrollMapTo(st.here,true)}
+    else if(!st.tut){scrollMapTo(st.here,false)}
     b.addEventListener('scroll',updateMe,{passive:true});
-    setTimeout(layoutMap,80);
+    updateMe();
     if(st.tutOn&&!st.tutDone.map)setTimeout(()=>{if(st.scr==='map'&&!st.tut&&!st.tutDone.map&&!st.overlay)startTut('map')},900);
   }
-  if(st.scr==='box'){const b=$('#boxbody');b.scrollTop=st.boxTop||0;b.addEventListener('scroll',()=>{st.boxTop=b.scrollTop;updateJump()},{passive:true});updateJump()}
+  if(st.scr==='box'){const b=A('#boxbody');b.scrollTop=st.boxTop||0;b.addEventListener('scroll',()=>{st.boxTop=b.scrollTop;updateJump()},{passive:true});updateJump()}
   if(st.scr==='scene'&&st.cur==='M07'&&st.tier===0&&st.tutOn&&!st.tutDone.scene)setTimeout(()=>{if(st.scr==='scene'&&!st.tut&&!st.tutDone.scene)startTut('scene')},450);
 }
-/* ---------- render ---------- */
-function render(){
-  const keepTop=st.scr==='map'&&$('#mapbody')?$('#mapbody').scrollTop:null;
+/* ---------- رندر (با انتقال نور روز↔شب ۱٫۲ث فقط با انتخاب کودک؛ هر دو صفحه در DOM می‌مانند) ---------- */
+let xfT=null;
+function render(opts={}){
+  const keepTop=st.scr==='map'&&A('#mapbody')?A('#mapbody').scrollTop:null;
   const f={map:mapScreen,env:envScreen,scene:sceneScreen,box:boxScreen,prac:pracScreen}[st.scr];
-  $('#app').innerHTML=f();
+  const nl=lightOf(),nw=worldOf();
+  const old0=$('#appold');if(old0){old0.remove();clearTimeout(xfT)}
+  let app=$('#app');
+  const changed=app.dataset.light!==nl||app.dataset.world!==nw;
+  if(opts.fade&&changed&&!rm()&&app.innerHTML.trim()){
+    app.id='appold';app.style.pointerEvents='none';
+    const nu=document.createElement('div');nu.id='app';nu.className='appl fadein';nu.dataset.world=nw;nu.dataset.light=nl;
+    $('#phone').insertBefore(nu,$('#cv'));nu.innerHTML=f();
+    xfT=setTimeout(()=>{const o=$('#appold');if(o)o.remove();nu.classList.remove('fadein')},1250);
+  }else{app.dataset.world=nw;app.dataset.light=nl;app.innerHTML=f()}
   if(keepTop!==null&&st.keepMap){st.mapTop=keepTop;st.keepMap=false}
   renderOv();renderCard(false);afterRender();
 }
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(st.scr==='map')layoutMap()});
-/* ---------- reviewer panel ---------- */
-function noteKey(){if(st.card)return'n.card';if(st.lock)return'n.lock';if(st.overlay==='gate')return'n.gate';if(st.overlay==='menu'||st.overlay==='help')return'n.menu';if(st.peek)return'n.peek';if(st.tut)return'n.tut';return{map:'n.map',env:'n.env',scene:'n.scene',box:'n.box',prac:'n.prac'}[st.scr]}
+/* ---------- پنل بازبینی ---------- */
+function noteKey(){if(st.card)return'n.card';if(st.lock)return'n.lock';if(st.overlay==='gate')return'n.gate';if(st.overlay==='menu')return'n.menu';if(st.overlay==='help')return'n.help';if(st.overlay==='search')return'n.search';if(st.peek)return'n.peek';if(st.tut)return'n.tut';return{map:'n.map',env:'n.env',scene:'n.scene',box:'n.box',prac:'n.prac'}[st.scr]}
 function renderPanel(){
-  const cur=st.card?'card':st.lock?'lock':st.overlay==='gate'?'gate':st.overlay==='menu'||st.overlay==='help'?'menu':st.peek?'peek':st.tut?'tut':st.scr;
-  const items=[['map','scr.map'],['peek','scr.peek'],['lock','scr.lock'],['env','scr.env'],['scene','scr.scene'],['card','scr.card'],['box','scr.box'],['prac','scr.prac'],['tut','scr.tut'],['menu','scr.menu'],['gate','scr.gate']];
+  const cur=st.card?'card':st.lock?'lock':st.overlay==='gate'?'gate':st.overlay==='menu'?'menu':st.overlay==='help'?'help':st.overlay==='search'?'search':st.peek?'peek':st.tut?'tut':st.scr;
+  const items=[['map','scr.map'],['peek','scr.peek'],['lock','scr.lock'],['env','scr.env'],['scene','scr.scene'],['card','scr.card'],['box','scr.box'],['prac','scr.prac'],['tut','scr.tut'],['menu','scr.menu'],['search','scr.search'],['help','scr.help'],['gate','scr.gate']];
   const n=R[noteKey()]||{what:'',real:'',ask:''};
   $('#rv').innerHTML=`<h2>${esc(R['panel.title'])}</h2><div class="rs">${esc(R['banner'])}</div>
    <h3>${esc(R['panel.screens'])}</h3><div class="lst">${items.map(([k,t])=>`<button class="${cur===k?'on':''}" data-rv="${k}">${esc(R[t])}</button>`).join('')}</div>
@@ -702,42 +776,46 @@ function renderPanel(){
    <h3>${esc(R['panel.settings'])}</h3>
    <label class="tg"><input type="checkbox" data-tg="fogClear" ${st.fogClear?'checked':''}>${esc(R['panel.fog'])}</label>
    <label class="tg"><input type="checkbox" data-tg="teacher" ${st.teacher?'checked':''}>${esc(R['panel.teacher'])}</label>
+   <label class="tg"><input type="checkbox" data-tg="storyLight" ${st.storyLight?'checked':''}>${esc(R['panel.story'])}</label>
    <label class="tg"><input type="checkbox" data-tg="tutOn" ${st.tutOn?'checked':''}>${esc(R['panel.tut'])}</label>
    <label class="tg"><input type="checkbox" data-tg="rm" ${document.body.classList.contains('rm')?'checked':''}>${esc(R['panel.rm'])}</label>
    <div class="lst" style="margin-top:6px"><button data-rv="reset">${esc(R['panel.reset'])}</button></div>
    <div class="note"><b>${esc(R['panel.what'])}</b><p>${esc(n.what)}</p><b>${esc(R['panel.real'])}</b><p>${esc(n.real)}</p><b>${esc(R['panel.ask'])}</b><p>${esc(n.ask)}</p></div>`;
 }
-/* advance: the child finished the current place; guide walks to the next one */
+/* advance: کودک محیط را تمام کرد؛ راهنما به گام بعد می‌رود */
 function advance(){
   const from=st.here;if(!st.visited.has(from))st.visited.add(from);
   st.seen.add(from);
-  const next=D.order.find(i=>listed(i)&&nodeSt(i)!=='fog'&&nodeSt(i)!=='locked'&&!st.visited.has(i)&&!(N[i].trial));
-  st.here=next||from;st.arrive={from};st.nav=[];st.card=null;go('map',{},false);
+  const next=D.order.find(i=>vis(i)&&nodeSt(i)!=='fog'&&nodeSt(i)!=='locked'&&!st.visited.has(i)&&!(N[i].trial));
+  st.here=next||from;st.arrive={from};st.nav=[];st.card=null;go('map',{},false,false);
 }
-/* ---------- events ---------- */
+/* ---------- رویدادها ---------- */
 document.addEventListener('click',e=>{
   const rv=e.target.closest('[data-rv]');
   if(rv){const k=rv.dataset.rv;document.body.classList.remove('rvopen');
-    if(k==='reset'){Object.assign(st,{band:1,teacher:false,tutOn:true,tutDone:{map:false,scene:false},nav:[],prac:0,ord:[2,1,0],gateOK:false,card:null,boxTop:0,search:false,q:''});loadSample('mid');st.cur='M07';go('map',{},false);return}
+    if(k==='reset'){Object.assign(st,{band:1,teacher:false,storyLight:false,tutOn:true,tutDone:{map:false,scene:false},nav:[],prac:0,ord:[2,1,0],gateOK:false,card:null,boxTop:0,search:false,q:'',mq:''});loadSample('mid');st.cur='M07';go('map',{},false,false);return}
     if(k==='advance'){advance();return}
     st.nav=[];st.gateOK=false;st.card=null;st.peek=null;st.lock=null;st.overlay=null;st.tut=null;
-    if(k==='map')go('map',{},false);
-    else if(k==='peek'){go('map',{},false);st.peek=st.here;renderOv()}
-    else if(k==='lock'){go('map',{},false);const id=D.order.find(i=>listed(i)&&nodeSt(i)==='locked');if(id){st.lock=id;renderOv();scrollMapTo(id,false)}}
-    else if(k==='env')go('env',{cur:'M07'},false);
-    else if(k==='scene')go('scene',{cur:'M07',tier:0},false);
-    else if(k==='card'){go('scene',{cur:'M07',tier:0},false);openCard('M07','scene',document.querySelector('[data-t=lesson]'))}
-    else if(k==='box')go('box',{boxTop:0},false);
-    else if(k==='prac')go('prac',{prac:0},false);
-    else if(k==='tut'){if(st.scr!=='map'&&st.scr!=='scene')go('map',{},false);st.tutDone[st.scr]=false;startTut(st.scr==='map'?'map':'scene')}
-    else if(k==='menu'){if(st.scr!=='map'&&st.scr!=='scene')go('map',{},false);st.overlay='menu';renderOv()}
+    const G=(s,p)=>go(s,p||{},false,false);
+    if(k==='map')G('map');
+    else if(k==='peek'){G('map');st.peek=st.here;renderOv()}
+    else if(k==='lock'){G('map');const id=D.order.find(i=>vis(i)&&nodeSt(i)==='locked');if(id){st.lock=id;renderOv();scrollMapTo(id,false)}}
+    else if(k==='env')G('env',{cur:'M07'});
+    else if(k==='scene')G('scene',{cur:'M07',tier:0});
+    else if(k==='card'){G('scene',{cur:'M07',tier:0});openCard('M07','scene',document.querySelector('[data-t=lesson]'))}
+    else if(k==='box')G('box',{boxTop:0});
+    else if(k==='prac')G('prac',{prac:0});
+    else if(k==='tut'){if(st.scr!=='map'&&st.scr!=='scene')G('map');st.tutDone[st.scr]=false;startTut(st.scr==='map'?'map':'scene')}
+    else if(k==='menu'){if(st.scr!=='map'&&st.scr!=='scene')G('map');st.overlay='menu';renderOv()}
+    else if(k==='search'){if(st.scr!=='map'&&st.scr!=='scene')G('map');st.overlay='search';st.mq='';renderOv()}
+    else if(k==='help'){G('scene',{cur:'M07',tier:0});st.overlay='help';st.hint=1;renderOv()}
     else if(k==='gate'){st.overlay='gate';st.gateOK=false;st.gateTab='report';st.gateVia='menu';renderOv()}
     return}
-  const smp=e.target.closest('[data-sample]');if(smp){loadSample(smp.dataset.sample);st.nav=[];go('map',{},false);return}
+  const smp=e.target.closest('[data-sample]');if(smp){loadSample(smp.dataset.sample);st.nav=[];go('map',{},false,false);return}
   const bd=e.target.closest('[data-band]');if(bd){st.band=+bd.dataset.band;const keep=st.card;st.keepMap=true;render();if(keep){st.card=keep;renderCard(false)}return}
   const t=e.target.closest('#rvt');if(t){document.body.classList.toggle('rvopen');return}
   const a=e.target.closest('[data-act]');
-  if(!a){const cf=e.target.closest('.cface');if(cf)flipCard();return}
+  if(!a){const cf=e.target.closest('.cface');if(cf&&!e.target.closest('button,.prob,.cbd'))flipCard();return}
   const act=a.dataset.act,id=a.dataset.id;
   switch(act){
    case'back':back();break;
@@ -745,12 +823,15 @@ document.addEventListener('click',e=>{
    case'node':{const s=nodeSt(id);if(s==='locked'||s==='fog'){st.lock=id;st.peek=null;renderOv()}else{st.peek=id;st.lock=null;renderOv()}break}
    case'cardlock':st.lock=id;renderOv();break;
    case'closeov':st.peek=null;st.lock=null;st.overlay=null;st.gateOK=false;renderOv();break;
-   case'lockgo':{const wasBox=st.scr==='box';st.lock=null;st.overlay=null;st.peek=null;if(st.scr!=='map'){st.nav=[];st.mapTop=null;go('map',{},false)}else renderOv();
-     setTimeout(()=>{scrollMapTo(id,true);const nd=document.querySelector(`.node[data-n="${id}"]`);if(nd&&!rm()){nd.classList.add('flash');setTimeout(()=>nd.classList.remove('flash'),900)}},60);break}
+   case'lockgo':{st.lock=null;st.overlay=null;st.peek=null;if(st.scr!=='map'){st.nav=[];st.mapTop=null;go('map',{},false)}else renderOv();
+     setTimeout(()=>{scrollMapTo(id,true);const nd=A(`.mn[data-n="${id}"]`);if(nd&&!rm()){nd.classList.add('flash');setTimeout(()=>nd.classList.remove('flash'),900)}},60);break}
+   case'mapfind':{st.overlay=null;if(st.scr!=='map'){st.nav=[];st.mapTop=null;go('map',{},false)}else renderOv();
+     setTimeout(()=>{scrollMapTo(id,true);const nd=A(`.mn[data-n="${id}"]`);if(nd&&!rm()){nd.classList.add('flash');setTimeout(()=>nd.classList.remove('flash'),900)}},60);break}
+   case'srch':st.overlay='search';st.mq='';renderOv();{const q=$('#mq');if(q)q.focus()}break;
    case'me':scrollMapTo(st.here,true);break;
    case'menumap':st.overlay=null;renderOv();scrollMapTo(st.here,true);break;
    case'enter':go('env',{cur:id});break;
-   case'card3':{const i=+a.dataset.i;if(st.ord[2]===i){st.reveal=!st.reveal}else{st.ord=st.ord.filter(x=>x!==i).concat(i);st.reveal=false}updateStack();break}
+   case'card3':{const i=+a.dataset.i;st.ord=st.ord.filter(x=>x!==i).concat(i);updateStack();break}
    case'start':{e.stopPropagation();go('scene',{tier:+a.dataset.i});break}
    case'arr':st.arr=a.dataset.v;render();break;
    case'pull':st.pulled=true;render();break;
@@ -760,16 +841,16 @@ document.addEventListener('click',e=>{
    case'hint':st.hint=Math.min(3,st.hint+1);renderOv();break;
    case'box':st.nav=[];st.overlay=null;go('box',{boxTop:0},false);break;
    case'prac':st.nav=[];st.overlay=null;go('prac',{prac:0},false);break;
-   case'jump':{const s=document.getElementById('sh-'+a.dataset.ch);const b=$('#boxbody');if(s&&b){b.scrollTo({top:s.offsetTop-6,behavior:rm()?'auto':'smooth'})}break}
-   case'search':st.search=!st.search;if(!st.search)st.q='';{const bt=st.boxTop;render();$('#boxbody').scrollTop=bt;if(st.search){const q=$('#q');if(q)q.focus()}}break;
-   case'opencard':openCard(id,'box',a.closest('.pk')||a);break;
+   case'jump':{const s=document.getElementById('sh-'+a.dataset.ch);const b=A('#boxbody');if(s&&b){b.scrollTo({top:s.offsetTop-6,behavior:rm()?'auto':'smooth'})}break}
+   case'search':st.search=!st.search;if(!st.search)st.q='';{const bt=st.boxTop;render();A('#boxbody').scrollTop=bt;if(st.search){const q=A('#q');if(q)q.focus()}}break;
+   case'opencard':openCard(id,'box',a);break;
    case'swapcard':if(nodeSt(id)==='locked'){st.lock=id;renderOv()}else swapCard(id);break;
    case'flip':flipCard();break;
    case'closecard':closeCard();break;
-   case'put':{st.coll.add(id);st.seen.add(id);const f=$('#cbk .cfoot');if(f)f.innerHTML=tag('box',1,S('flow.box.collected'));if(!rm()&&f)f.animate([{transform:'scale(.9)',opacity:.4},{transform:'none',opacity:1}],{duration:260});refreshBox();break}
+   case'put':{st.coll.add(id);st.seen.add(id);const f=$('#cbk .cfoot');if(f)f.innerHTML=plate('ui-plate--16 ui-plate--teal',pico('box')+esc(S('flow.box.collected')));if(!rm()&&f)f.animate([{transform:'scale(.9)',opacity:.4},{transform:'none',opacity:1}],{duration:260});refreshBox();break}
    case'gogame':{e.stopPropagation();if(nodeSt(id)==='locked'){st.lock=id;renderOv()}else{st.card=null;$('#cv').innerHTML='';go('env',{cur:id})}break}
    case'ans':{const box=a.closest('.prob');const fb=box.querySelector('.fb');const p=PROB[st.band];
-     if(+a.dataset.ok){box.querySelectorAll('.opt').forEach(x=>x.classList.remove('no'));a.classList.add('ok');fb.textContent=S(p.ok);const pn=$('#pn');if(pn)pn.style.display='block'}
+     if(+a.dataset.ok){box.querySelectorAll('.opts .ui-btn').forEach(x=>x.classList.remove('no'));a.classList.add('ok');fb.textContent=S(p.ok);const pn=$('#pn');if(pn)pn.style.display='block'}
      else{a.classList.add('no');fb.textContent=S('flow.card.q.retry')}break}
    case'pstart':st.prac=1;render();break;
    case'pnext':st.prac=2;render();break;
@@ -780,13 +861,18 @@ document.addEventListener('click',e=>{
    case'tskip':st.tutDone[st.tut.kind]=true;st.tut=null;renderOv();break;
   }
 });
-document.addEventListener('input',e=>{if(e.target.id==='q'){st.q=e.target.value;refreshBox()}});
+document.addEventListener('input',e=>{
+  if(e.target.id==='q'){st.q=e.target.value;refreshBox()}
+  if(e.target.id==='mq'){st.mq=e.target.value;const w=$('#sresw');if(w)w.innerHTML=searchRes()}
+});
+document.addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.cd-strip')){e.preventDefault();e.target.click();return}
+  if(e.key==='Escape'){if(st.tut){st.tutDone[st.tut.kind]=true;st.tut=null;renderOv()}else if(st.peek||st.overlay||st.lock){st.peek=null;st.lock=null;st.overlay=null;st.gateOK=false;renderOv()}else if(st.card)closeCard()}});
 document.addEventListener('change',e=>{const g=e.target.closest('[data-tg]');if(!g)return;const k=g.dataset.tg;
   if(k==='rm'){document.body.classList.toggle('rm',g.checked);renderPanel();return}
   st[k]=g.checked;
-  if(k==='fogClear'&&g.checked&&st.scr==='map'&&!rm()){const f=document.querySelector('[data-fog]');if(f){f.classList.add('anim-fog-clear');setTimeout(()=>{st.keepMap=true;render()},600);return}}
-  if(k==='teacher'||k==='fogClear'){st.keepMap=true;render()}else renderPanel()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(st.tut){st.tutDone[st.tut.kind]=true;st.tut=null;renderOv()}else if(st.peek||st.overlay||st.lock){st.peek=null;st.lock=null;st.overlay=null;st.gateOK=false;renderOv()}else if(st.card)closeCard()}});
+  if(k==='fogClear'&&g.checked&&st.scr==='map'&&!rm()){const f=document.querySelector('[data-fog]');if(f){f.style.transition='opacity .6s';f.style.opacity=0;setTimeout(()=>{st.keepMap=true;render()},600);return}}
+  if(k==='teacher'||k==='fogClear'||k==='storyLight'){st.keepMap=true;render()}else renderPanel()});
 window.addEventListener('resize',()=>{if(st.tut)placeSpot();if(st.scr==='map')layoutMap()});
 $('#rvt').textContent=R['panel.toggle'];$('#rvb').textContent=R['banner'];
 render();

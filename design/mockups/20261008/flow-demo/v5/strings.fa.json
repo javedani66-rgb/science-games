@@ -250,5 +250,33 @@
   "where_fa": "دکمهٔ فیلم پشت کارت (کیت)",
   "context_fa": "draft؛ ماکت کیت رابط v5",
   "band": "همه"
+ },
+ "v5.flow.search.none": {
+  "text": "چیزی پیدا نشد.",
+  "kind": "ui",
+  "where_fa": "نتیجهٔ خالی جست‌وجو",
+  "context_fa": "draft؛ ماکت v5",
+  "band": "همه"
+ },
+ "v5.flow.search.hint": {
+  "text": "اسم یک جا یا یک درس را بنویس.",
+  "kind": "ui",
+  "where_fa": "راهنمای کادر جست‌وجوی نقشه",
+  "context_fa": "draft؛ ماکت v5",
+  "band": "همه"
+ },
+ "v5.flow.search.ph": {
+  "text": "اسم جا یا درس",
+  "kind": "ui",
+  "where_fa": "متن جایگزین کادر جست‌وجو",
+  "context_fa": "draft؛ ماکت v5",
+  "band": "همه"
+ },
+ "v5.flow.tut.base": {
+  "text": "اینجا پایهٔ خودت را انتخاب می‌کنی؛ نوشتهٔ کارت‌ها با آن عوض می‌شود.",
+  "kind": "ui",
+  "where_fa": "آموزش نقشه، گام چیپ پایه",
+  "context_fa": "draft؛ ماکت v5",
+  "band": "همه"
  }
 }
