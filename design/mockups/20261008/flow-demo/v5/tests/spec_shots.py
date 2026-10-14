@@ -18,6 +18,15 @@ with sync_playwright() as pw:
         # عناصر تعاملی کوچک‌تر از ۴۸
         small = pg.evaluate("""[...document.querySelectorAll('.k:not(.is-disabled)')].filter(e=>{const r=e.getBoundingClientRect();return r.height<47.5||r.width<47.5}).map(e=>e.className+' '+Math.round(e.getBoundingClientRect().width)+'x'+Math.round(e.getBoundingClientRect().height))""")
         if small: errs.append((w, 'small targets', small))
+        bad = pg.evaluate('''() => {
+          const out = [], fam = e => getComputedStyle(e).fontFamily;
+          document.querySelectorAll('.k:not(.r-btn_icon):not(.r-tile_card), h1, h2, h3, .badge, .pl, .ml, .np, .zt, .num').forEach(e => { if (!/^"?Lalezar/.test(fam(e))) out.push('not Lalezar: ' + e.className + ' ' + fam(e)); });
+          document.querySelectorAll('.desc, .cap, .sheet p, .rt small, .sp, figcaption').forEach(e => { if (!/^"?Vazirmatn/.test(fam(e))) out.push('not Vazirmatn: ' + e.className + ' ' + fam(e)); });
+          document.querySelectorAll('*').forEach(e => { const c = getComputedStyle(e); if (c.clipPath !== 'none') out.push('clip-path on ' + e.className);
+            if (e.matches('.k, .pane, .sheet, .band, .pl, .ml, .badge, .sc, .np, .tg, .lbp, .zn, .lkb, .chk')) { const r = [c.borderTopLeftRadius, c.borderTopRightRadius, c.borderBottomLeftRadius, c.borderBottomRightRadius]; if (r.some(x => parseFloat(x) === 0) || new Set(r).size > 1) out.push('corner radii ' + r.join('/') + ' on ' + e.className); } });
+          return [...new Set(out)];
+        }''')
+        if bad: errs.append((w, 'font/shape', bad))
         n = 0
         for y in range(0, H, CH):
             n += 1; pg.screenshot(path=str(OUT / f'spec_{w}_{n:02d}.png'), full_page=True, clip={'x': 0, 'y': y, 'width': w, 'height': min(CH, H - y)})

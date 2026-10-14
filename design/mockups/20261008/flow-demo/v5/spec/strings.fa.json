@@ -7,9 +7,9 @@
   "band": "همه"
  },
  "spec.desc.btn_primary": {
-  "text": "کار اصلی هر صفحه (برویم، تمرین، بذارش توی جعبه). متن تیره روی رنگ روشن؛ فقط «نگه‌دار» سفید روی بنفش.",
+  "text": "کار اصلی هر صفحه (برویم، تمرین، بذارش توی جعبه). متن سفید لالهزار با سایهٔ همرنگ روی پر تیره‌شده.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف دکمهٔ اصلی",
+  "where_fa": "spec.desc.btn_primary",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -21,9 +21,9 @@
   "band": "همه"
  },
  "spec.desc.btn_secondary": {
-  "text": "کار دوم (برگرد، جستجو). هم‌شکل دکمهٔ اصلی ولی کرمی؛ در شب لیلکی.",
+  "text": "کار دوم (برگرد، جستجو). هم‌شکل دکمهٔ اصلی؛ روز کرمی با متن سرمه‌ای، شب لیلکیِ تیره‌شده با متن سفید و سایه.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف دکمهٔ ثانویه",
+  "where_fa": "spec.desc.btn_secondary",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -37,21 +37,7 @@
  "spec.desc.btn_icon": {
   "text": "فقط آیکون، مثل دکمهٔ منو. مربع گرد ۵۶ پیکسل؛ نامش برای صفحه‌خوان از متن می‌آید.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف دکمهٔ آیکونی",
-  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
-  "band": "همه"
- },
- "spec.row.chip_base": {
-  "text": "چیپ پایه",
-  "kind": "ui",
-  "where_fa": "نام ردیف چیپ پایه در قالب‌نامه",
-  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
-  "band": "همه"
- },
- "spec.desc.chip_base": {
-  "text": "انتخاب پایه (۱ تا ۲، ۳ تا ۴، ۵ تا ۶) در نوار بالا. انتخاب‌شده زرد با تیک؛ بقیه بنفش با لبهٔ لیلکی.",
-  "kind": "ui",
-  "where_fa": "توضیح ردیف چیپ پایه",
+  "where_fa": "spec.desc.btn_icon",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -63,9 +49,9 @@
   "band": "همه"
  },
  "spec.desc.chip_simple": {
-  "text": "برچسب انتخاب کوچک، مثل «همه» و «دیده‌شده». روشن یا تیره؛ زرد وقتی انتخاب شده.",
+  "text": "برچسب انتخاب کوچک، مثل «همه» و «دیده‌شده». خاموش سفید (شب بنفش تیره) با متن لالهزار؛ انتخاب‌شده زرد تیره‌شده با تیک و متن سفید.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف چیپ ساده",
+  "where_fa": "spec.desc.chip_simple",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -77,9 +63,9 @@
   "band": "همه"
  },
  "spec.desc.challenge_row": {
-  "text": "ردیف هر چالش در محیط. نشان سختی (سبز، نارنجی، قرمز) رنگ ثابت دارد و فقط اینجا و در نوار مأموریت می‌آید، نه روی برگهٔ مرحله.",
+  "text": "ردیف هر چالش در فهرست. نشان سختی (سبز، نارنجی، قرمز تیره‌شده) رنگ ثابت دارد و فقط اینجا، در پشتهٔ چالش و در نوار مأموریت می‌آید، نه روی برگهٔ مرحله.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف ردیف چالش",
+  "where_fa": "spec.desc.challenge_row",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -91,9 +77,9 @@
   "band": "همه"
  },
  "spec.desc.map_label": {
-  "text": "اسم گره روی نقشه. همیشه روی پلاک کرم با متن تیره؛ نوشتهٔ لخت روی نقشه ممنوع.",
+  "text": "اسم گره روی نقشه: لالهزار روی پلاک کرم با متن سرمه‌ای. نوشتهٔ لخت روی نقشه ممنوع.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف برچسب نقشه",
+  "where_fa": "spec.desc.map_label",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -105,9 +91,9 @@
   "band": "همه"
  },
  "spec.desc.zone_title": {
-  "text": "عنوان بزرگ زمین، حداکثر سه کلمه: لالهزار سفید با حاشیهٔ سرمه‌ای. تنها جایی که لالهزار روی نقشه می‌آید.",
+  "text": "عنوان بزرگ زمین، حداکثر سه کلمه: لالهزار سفید با حاشیهٔ سرمه‌ای و سایهٔ پایین. روی نقشه فقط اینجا نوشتهٔ بدون پلاک می‌آید.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف عنوان زمین",
+  "where_fa": "spec.desc.zone_title",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -119,9 +105,9 @@
   "band": "همه"
  },
  "spec.desc.plate": {
-  "text": "برچسب کوچک (تو اینجایی، اول: …، تازه). دکمه نیست.",
+  "text": "برچسب کوچک لالهزار (تو اینجایی، اول: …، تازه). دکمه نیست. «تو اینجایی» و «تازه» روی پر زردِ تیره‌تر و صورتیِ تیره‌تر با متن سفید.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف پلاک",
+  "where_fa": "spec.desc.plate",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -133,9 +119,9 @@
   "band": "همه"
  },
  "spec.desc.sheet": {
-  "text": "برگهٔ پایین صفحه. همهٔ گوشه‌ها گرد و ۸ پیکسل از لبهٔ صفحه جدا. عنوان لالهزار تا سه کلمه؛ بیشتر از آن Vazirmatn.",
+  "text": "برگهٔ پایین صفحه، همهٔ گوشه‌ها گرد و ۸ پیکسل از لبهٔ صفحه جدا. نوار عنوان بنفش با عنوان لالهزار سفید؛ متن توضیحی Vazirmatn روی کرم.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف برگه",
+  "where_fa": "spec.desc.sheet",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -147,9 +133,9 @@
   "band": "همه"
  },
  "spec.desc.tab": {
-  "text": "تب‌های صفحهٔ بزرگ‌ترها و مانند آن. تب روشن سرمه‌ای با نوار زرد (شب: فیروزه‌ای).",
+  "text": "تب‌های صفحهٔ بزرگ‌ترها و مانند آن، متن لالهزار. تب روشن سرمه‌ای با نوار زرد (شب: فیروزه‌ای تیره‌شده با متن سفید).",
   "kind": "ui",
-  "where_fa": "توضیح ردیف تب",
+  "where_fa": "spec.desc.tab",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -161,9 +147,9 @@
   "band": "همه"
  },
  "spec.desc.tile_menu": {
-  "text": "کاشی‌های بزرگ منو؛ چهار رنگ ثابت؛ نام زیر تصویر.",
+  "text": "کاشی‌های بزرگ منو؛ چهار رنگ تیره‌شده؛ نام لالهزار سفید با سایه زیر تصویر.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف کاشی منو",
+  "where_fa": "spec.desc.tile_menu",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -175,9 +161,9 @@
   "band": "همه"
  },
  "spec.desc.tile_card": {
-  "text": "کارت‌های کارت‌دان؛ چهار حالت (دیده‌شده، جمع‌شده، تازه، قفل)؛ نام روی پلاک تیره.",
+  "text": "کارت‌های کارت‌دان؛ چهار حالت (دیده‌شده، جمع‌شده، تازه، قفل)؛ نام لالهزار روی پلاک تیره.",
   "kind": "ui",
-  "where_fa": "توضیح ردیف کاشی کارت‌دان",
+  "where_fa": "spec.desc.tile_card",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -196,16 +182,16 @@
   "band": "همه"
  },
  "spec.part.badge": {
-  "text": "نشان سختی: متن تیره روی رنگ ثابتش",
+  "text": "نشان سختی: لالهزار سفید با سایه روی رنگ ثابتِ تیره‌شده",
   "kind": "ui",
-  "where_fa": "توضیح بخش درونی",
+  "where_fa": "spec.part.badge",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
  "spec.part.check_badge": {
-  "text": "تیک روی چیپ انتخاب‌شده",
+  "text": "تیک روی گزینهٔ انتخاب‌شده",
   "kind": "ui",
-  "where_fa": "توضیح بخش درونی",
+  "where_fa": "spec.part.check_badge",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -287,58 +273,58 @@
   "band": "همه"
  },
  "spec.forbid.light_on_cyan": {
-  "text": "کرم یا سفید روی فیروزه‌ای",
+  "text": "کرم یا سفید روی فیروزه‌ای روشن (با سایه هم نه؛ پر را تیره کن)",
   "kind": "ui",
-  "where_fa": "علت جفت ممنوع",
+  "where_fa": "spec.forbid.light_on_cyan",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
  "spec.forbid.light_on_gold": {
-  "text": "کرم یا سفید روی زرد",
+  "text": "کرم یا سفید روی زرد روشن (با سایه هم نه؛ پر را تیره کن)",
   "kind": "ui",
-  "where_fa": "علت جفت ممنوع",
+  "where_fa": "spec.forbid.light_on_gold",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
  "spec.forbid.light_on_pink": {
-  "text": "سفید روی صورتی",
+  "text": "سفید روی صورتی روشن (با سایه هم نه؛ پر را تیره کن)",
   "kind": "ui",
-  "where_fa": "علت جفت ممنوع",
+  "where_fa": "spec.forbid.light_on_pink",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
  "spec.forbid.cream_on_grass": {
-  "text": "کرم روی چمن",
+  "text": "کرم لخت روی چمن (پلاک لازم است)",
   "kind": "ui",
-  "where_fa": "علت جفت ممنوع",
+  "where_fa": "spec.forbid.cream_on_grass",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
  "spec.forbid.cream_on_farm": {
-  "text": "کرم روی مزرعه",
+  "text": "کرم لخت روی مزرعه (پلاک لازم است)",
   "kind": "ui",
-  "where_fa": "علت جفت ممنوع",
+  "where_fa": "spec.forbid.cream_on_farm",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
  "spec.forbid.light_on_green": {
-  "text": "سفید روی سبز سختی",
+  "text": "سفید روی سبز سختیِ روشن (با سایه هم نه)",
   "kind": "ui",
-  "where_fa": "علت جفت ممنوع",
+  "where_fa": "spec.forbid.light_on_green",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
  "spec.forbid.light_on_orange": {
-  "text": "سفید روی نارنجی",
+  "text": "سفید روی نارنجی روشن (با سایه هم نه)",
   "kind": "ui",
-  "where_fa": "علت جفت ممنوع",
+  "where_fa": "spec.forbid.light_on_orange",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
  "spec.forbid.cream_on_sand": {
-  "text": "کرم روی شن",
+  "text": "کرم لخت روی شن (پلاک لازم است)",
   "kind": "ui",
-  "where_fa": "علت جفت ممنوع",
+  "where_fa": "spec.forbid.cream_on_sand",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -357,9 +343,9 @@
   "band": "همه"
  },
  "spec.forbid.white_on_card_front": {
-  "text": "سفید روی جلوی فیروزه‌ای کارت",
+  "text": "سفید روی جلوی فیروزه‌ای روشن کارت (با سایه هم نه)",
   "kind": "ui",
-  "where_fa": "علت جفت ممنوع",
+  "where_fa": "spec.forbid.white_on_card_front",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -448,9 +434,9 @@
   "band": "همه"
  },
  "spec.sec.forbid.intro": {
-  "text": "این جفت‌ها خوانا نیستند و هیچ‌جا نباید بیایند. عدد، نسبت کنتراست است (حداقل ۴٫۵).",
+  "text": "عدد، نسبت کنتراست متن به پر است. «هر اندازه» یعنی حتی برای متن بزرگ ناخوان است (زیر ۳)؛ «زیر ۲۴px» یعنی فقط برای لالهزار ۲۴ به بالا می‌شود (۳ تا ۴٫۵). ستون «با سایه» سنجش پیکسلی است: سایه پر روشن را نجات نمی‌دهد و پر باید تیره شود.",
   "kind": "ui",
-  "where_fa": "توضیح بخش",
+  "where_fa": "spec.sec.forbid.intro",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -707,9 +693,9 @@
   "band": "همه"
  },
  "spec.s.sheet_long": {
-  "text": "اسکلهٔ بزرگ ماهیگیری دریایی",
+  "text": "اسکلهٔ بزرگ ماهیگیری",
   "kind": "ui",
-  "where_fa": "نمونهٔ عنوان بلند برگه (بیش از سه کلمه)",
+  "where_fa": "spec.s.sheet_long",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  },
@@ -815,6 +801,216 @@
   "text": "دایره {size} · دکمه نیست",
   "kind": "ui",
   "where_fa": "سطر مشخصات قفل",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.row.base_picker": {
+  "text": "انتخاب پایه",
+  "kind": "ui",
+  "where_fa": "نام ردیف انتخاب پایه در قالب‌نامه",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.desc.base_picker": {
+  "text": "انتخابگر پایه یک ردیف در «منو» است، نه چیپ دائم بالای نقشه. ردیف پایهٔ فعلی را نشان می‌دهد و با لمس برگهٔ انتخاب (۱ تا ۲، ۳ تا ۴، ۵ تا ۶) باز می‌شود. گزینهٔ انتخاب‌شده زرد تیره‌شده با تیک است.",
+  "kind": "ui",
+  "where_fa": "توضیح ردیف انتخاب پایه",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.row.challenge_stack": {
+  "text": "پشتهٔ کارت چالش",
+  "kind": "ui",
+  "where_fa": "نام ردیف پشتهٔ چالش",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.desc.challenge_stack": {
+  "text": "سه چالش بعد از ورود به محیط: سبز جلو، نارنجی پشتش، قرمز پشت همه. اینجا فقط شکل ایستاست؛ حرکتش را طراح حرکت می‌نویسد. نوارهای پشت دکمه نیستند؛ لمس از آنِ کارت جلوست.",
+  "kind": "ui",
+  "where_fa": "توضیح پشتهٔ چالش",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.row.side_path": {
+  "text": "مسیر جانبی اختیاری",
+  "kind": "ui",
+  "where_fa": "نام ردیف مسیر جانبی",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.desc.side_path": {
+  "text": "مرحله‌ای که برای پایهٔ کودک نیست، روی نقشه یک جادهٔ فرعی نقطه‌چین است با گرهٔ لبه‌خط‌چین و پلاک «اختیاری». راه اصلی ممتد است؛ فرعی نقطه‌چین. خودِ گره دکمه است (۵۶ پیکسل).",
+  "kind": "ui",
+  "where_fa": "توضیح مسیر جانبی",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.part.row_sub": {
+  "text": "جملهٔ کوتاه زیر عنوان ردیف (Vazirmatn کرم روی بنفش)",
+  "kind": "ui",
+  "where_fa": "spec.part.row_sub",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.part.sheet_band": {
+  "text": "نوار عنوان برگه (لالهزار سفید روی بنفش)",
+  "kind": "ui",
+  "where_fa": "spec.part.sheet_band",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.part.side_dots": {
+  "text": "نقطه‌چین مسیر جانبی (کرم با لبهٔ سرمه‌ای)",
+  "kind": "ui",
+  "where_fa": "spec.part.side_dots",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.part.side_label": {
+  "text": "برچسب گرهٔ جانبی",
+  "kind": "ui",
+  "where_fa": "spec.part.side_label",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.part.side_tag": {
+  "text": "پلاک «اختیاری»",
+  "kind": "ui",
+  "where_fa": "spec.part.side_tag",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.part.stack_sub": {
+  "text": "جملهٔ کوتاه روی پلاک تیره (Vazirmatn)",
+  "kind": "ui",
+  "where_fa": "spec.part.stack_sub",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.forbid.small_on_deep": {
+  "text": "متن سفید کوچک (زیر ۲۴px) روی پر تیره‌شده",
+  "kind": "ui",
+  "where_fa": "spec.forbid.small_on_deep",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.forbid.cream_on_deep": {
+  "text": "کرم روی پر تیره‌شده؛ روی این پرها فقط سفید",
+  "kind": "ui",
+  "where_fa": "spec.forbid.cream_on_deep",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.forbid.navy_on_deep": {
+  "text": "متن سرمه‌ای روی پر تیره‌شده",
+  "kind": "ui",
+  "where_fa": "spec.forbid.navy_on_deep",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.forbid.col.shadow": {
+  "text": "با سایه",
+  "kind": "ui",
+  "where_fa": "spec.forbid.col.shadow",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.forbid.scope.all": {
+  "text": "هر اندازه",
+  "kind": "ui",
+  "where_fa": "spec.forbid.scope.all",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.forbid.scope.small": {
+  "text": "زیر ۲۴px",
+  "kind": "ui",
+  "where_fa": "spec.forbid.scope.small",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.s.base_title": {
+  "text": "پایه‌ات کدام است؟",
+  "kind": "ui",
+  "where_fa": "spec.s.base_title",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.s.base_row": {
+  "text": "پایه: ۳ تا ۴",
+  "kind": "ui",
+  "where_fa": "spec.s.base_row",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.s.base_row_sub": {
+  "text": "برای عوض‌کردن بزن",
+  "kind": "ui",
+  "where_fa": "spec.s.base_row_sub",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.s.stack_sub": {
+  "text": "اول این را بساز",
+  "kind": "ui",
+  "where_fa": "spec.s.stack_sub",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.s.side_label": {
+  "text": "چرخ و محور",
+  "kind": "ui",
+  "where_fa": "spec.s.side_label",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.s.side_tag": {
+  "text": "اختیاری",
+  "kind": "ui",
+  "where_fa": "spec.s.side_tag",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.s.main_lbl": {
+  "text": "راه اصلی",
+  "kind": "ui",
+  "where_fa": "spec.s.main_lbl",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.s.side_lbl": {
+  "text": "راه فرعی",
+  "kind": "ui",
+  "where_fa": "spec.s.side_lbl",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.cap.fmt.stack": {
+  "text": "شعاع {r} · {font} {size} · لمس {touch} · نوار پشت {peek}",
+  "kind": "ui",
+  "where_fa": "spec.cap.fmt.stack",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.cap.fmt.nodebtn": {
+  "text": "گره دایره {size} · {font} {fsize} · لمس {touch}",
+  "kind": "ui",
+  "where_fa": "spec.cap.fmt.nodebtn",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.cap.row_in_menu": {
+  "text": "ردیف در منو (با لمس برگهٔ زیر باز می‌شود)",
+  "kind": "ui",
+  "where_fa": "spec.cap.row_in_menu",
+  "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
+  "band": "همه"
+ },
+ "spec.cap.stack_order": {
+  "text": "سبز جلو، نارنجی پشتش، قرمز پشت همه",
+  "kind": "ui",
+  "where_fa": "spec.cap.stack_order",
   "context_fa": "draft؛ قالب‌نامهٔ کنترل‌های v5 (فقط نمونه و سند)",
   "band": "همه"
  }

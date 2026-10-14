@@ -1,7 +1,7 @@
 {
- "_doc": "قالب‌نامهٔ کنترل‌های v5 (ماشین‌خوان). منبع حقیقت برای spec_sample.html و tests/spec_contrast.py. پیشنهاد/ماکت؛ نه تصمیم مالک.",
+ "_doc": "قالب‌نامهٔ کنترل‌های v5 (ماشین‌خوان، نسخهٔ ۲). منبع حقیقت برای spec_sample.html و tests/spec_contrast.py. پیشنهاد/ماکت؛ نه تصمیم مالک.",
  "meta": {
-  "version": "draft-1",
+  "version": "draft-2",
   "status": "proposal",
   "date": "2026-10-14",
   "palette_sources": [
@@ -13,12 +13,16 @@
    "large_text_min": 3,
    "large_px": 24,
    "large_bold_px": 18.66,
-   "nontext_min": 3
+   "nontext_min": 3,
+   "fill_floor_light_text": 3.0,
+   "effective_min": 4.5,
+   "ring_px": 1.5,
+   "ring_percentile": 5
   },
   "touch_min_px": 48,
   "min_gap_px": 8,
   "min_font_px": 16,
-  "derived_rule": "pressed_fill = mix(fill, edge, 0.12); edge = #120c3a (day) / #190539 (night)"
+  "derived_rule": "pressed_fill = mix(fill, edge, 0.12); edge = #120c3a (day) / #190539 (night). shadow = mix(fill, #190539, 0.7). deep fills: see derived_colors"
  },
  "palette": {
   "cream": "#fff3c4",
@@ -43,33 +47,38 @@
   "disabled_day_rim": "#6d6492",
   "easy": "#2fa44a",
   "mid": "#ff9d1c",
-  "hard": "#ff4b4b"
+  "hard": "#ff4b4b",
+  "gold_deep": "#b88300",
+  "cyan_deep": "#0d9c87"
  },
  "fonts": {
+  "display": {
+   "family": "Lalezar",
+   "weights": [
+    400
+   ],
+   "roles": [
+    "title",
+    "button_label",
+    "icon_label"
+   ],
+   "rule": "titles (sheet title too), text on buttons, icon labels and plates",
+   "max_words": 4,
+   "min_px": 20,
+   "large_min_px": 24,
+   "note": "Lalezar has one weight (400), so WCAG large text starts at 24px; on a fill whose ratio is below 4.5 the size must be >= 24px"
+  },
   "base": {
    "family": "Vazirmatn",
    "weights": [
     400,
     700
    ],
-   "rule": "every readable text: buttons, chips, labels, plates, tabs, tiles, body"
-  },
-  "display": {
-   "family": "Lalezar",
-   "weights": [
-    400
+   "roles": [
+    "body",
+    "long_text"
    ],
-   "rule": "big titles only",
-   "max_words": 3,
-   "min_px": 24,
-   "allowed_rows": [
-    "zone_title"
-   ],
-   "allowed_parts": [
-    "sheet.title",
-    "card.title"
-   ],
-   "fallback": "Vazirmatn 700"
+   "rule": "explanatory and long reading text: sheet body, descriptions, captions, sub-lines"
   }
  },
  "radius_scale": {
@@ -83,8 +92,12 @@
   "clip_path": "forbidden",
   "sharp_corner": "forbidden: every corner of every control has the row radius (no 0, no asymmetric)",
   "opacity_on_text": "forbidden (use disabled colors)",
-  "difficulty_on_node_sheet": "forbidden: the three difficulty levels appear only in challenge_row (environment) and the mission bar in a scene",
+  "difficulty_on_node_sheet": "forbidden: the three difficulty levels appear only in challenge_row, challenge_stack (environment) and the mission bar in a scene",
   "text_on_map_without_plate": "forbidden (map_label plate or zone_title halo only)",
+  "text_pattern": "light text (white) with a same-family shadow on a coloured fill that is darkened until white >= 3.3 (24px Lalezar). Light fills (cream/white) keep navy text, no shadow",
+  "shadow_cannot_rescue": "a bright fill is never rescued by shadow: fill-floor (text/fill >= 3, or 4.5 below 24px) AND effective ratio with shadow >= 4.5 must both hold",
+  "darken_fill_not_text": "if a ratio fails, darken the fill; never make the text paler",
+  "base_picker": "the base choice is a row in the menu plus a sheet; no permanent chips on the map",
   "stars_rewards": "forbidden (B4)"
  },
  "state_rules": {
@@ -153,11 +166,12 @@
     }
    },
    "font": {
-    "family": "Vazirmatn",
-    "weight": 700,
-    "size_px": 20,
-    "line_height": 1.4,
-    "max_words": null
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.3,
+    "max_words": 4,
+    "role": "button_label"
    },
    "size": {
     "min_height_px": 56,
@@ -169,49 +183,61 @@
     {
      "id": "cyan",
      "day": {
-      "fill": "#46f0d8",
-      "text": "#241a5e",
+      "fill": "#0d9c87",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#40d5c5"
+      "pressed_fill": "#0e8b7e",
+      "shadow": "#153250",
+      "derive": "cyan"
      },
      "night": {
-      "fill": "#46f0d8",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#41d4c5",
-      "glow": "#46f0d8"
+      "fill": "#0d9c87",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "pressed_fill": "#0e8a7e",
+      "glow": "#46f0d8",
+      "shadow": "#153250",
+      "derive": "cyan"
      }
     },
     {
      "id": "gold",
      "day": {
-      "fill": "#ffd23f",
-      "text": "#241a5e",
+      "fill": "#b88300",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#e3ba3e"
+      "pressed_fill": "#a47507",
+      "shadow": "#492b28",
+      "derive": "gold"
      },
      "night": {
-      "fill": "#ffd23f",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#e3b93e",
-      "glow": "#ffd23f"
+      "fill": "#b88300",
+      "text": "#ffffff",
+      "rim": "#ffd23f",
+      "pressed_fill": "#a57407",
+      "glow": "#ffd23f",
+      "shadow": "#492b28",
+      "derive": "gold"
      }
     },
     {
      "id": "pink",
      "day": {
-      "fill": "#ff7be5",
-      "text": "#241a5e",
+      "fill": "#eb47ca",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#e36ed0"
+      "pressed_fill": "#d140b9",
+      "shadow": "#581964",
+      "derive": "pink"
      },
      "night": {
-      "fill": "#ff7be5",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#e36dd0",
-      "glow": "#ff7be5"
+      "fill": "#eb47ca",
+      "text": "#ffffff",
+      "rim": "#ff7be5",
+      "pressed_fill": "#d23fb9",
+      "glow": "#ff7be5",
+      "shadow": "#581964",
+      "derive": "pink"
      }
     },
     {
@@ -220,14 +246,16 @@
       "fill": "#8a4fe0",
       "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#7c47cc"
+      "pressed_fill": "#7c47cc",
+      "shadow": "#3b1b6b"
      },
      "night": {
       "fill": "#8a4fe0",
       "text": "#ffffff",
-      "rim": "#190539",
+      "rim": "#a99dff",
       "pressed_fill": "#7c46cc",
-      "glow": "#8a4fe0"
+      "glow": "#a99dff",
+      "shadow": "#3b1b6b"
      }
     }
    ],
@@ -269,11 +297,12 @@
     }
    },
    "font": {
-    "family": "Vazirmatn",
-    "weight": 700,
-    "size_px": 20,
-    "line_height": 1.4,
-    "max_words": null
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.3,
+    "max_words": 4,
+    "role": "button_label"
    },
    "size": {
     "min_height_px": 56,
@@ -291,11 +320,13 @@
       "pressed_fill": "#e3d7b3"
      },
      "night": {
-      "fill": "#a99dff",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#988be7",
-      "glow": "#a99dff"
+      "fill": "#8b7aff",
+      "text": "#ffffff",
+      "rim": "#a99dff",
+      "pressed_fill": "#7d6ce7",
+      "glow": "#a99dff",
+      "shadow": "#3b2874",
+      "derive": "lilac"
      }
     }
    ],
@@ -361,12 +392,14 @@
       "icon": "#241a5e"
      },
      "night": {
-      "fill": "#a99dff",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#988be7",
+      "fill": "#8b7aff",
+      "text": "#ffffff",
+      "rim": "#a99dff",
+      "pressed_fill": "#7d6ce7",
       "glow": "#a99dff",
-      "icon": "#190539"
+      "shadow": "#3b2874",
+      "icon": "#ffffff",
+      "derive": "lilac"
      }
     }
    ],
@@ -378,21 +411,21 @@
    ]
   },
   {
-   "id": "chip_base",
-   "name_key": "spec.row.chip_base",
-   "desc_key": "spec.desc.chip_base",
+   "id": "base_picker",
+   "name_key": "spec.row.base_picker",
+   "desc_key": "spec.desc.base_picker",
    "interactive": true,
    "surface": {
-    "day": "#241a5e",
+    "day": "#fff3c4",
     "night": "#190539"
    },
    "shape": {
-    "radius_px": 16,
+    "radius_px": 18,
     "corners": "all-equal",
     "clip_path": "none"
    },
    "border": {
-    "width_px": 2.6,
+    "width_px": 3.5,
     "style": "solid"
    },
    "depth": {
@@ -408,57 +441,89 @@
     }
    },
    "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.25,
+    "max_words": 3,
+    "role": "button_label"
+   },
+   "font_sub": {
     "family": "Vazirmatn",
-    "weight": 700,
+    "weight": 400,
     "size_px": 16,
-    "size_px_number": 20,
-    "line_height": 1.2,
-    "max_words": 3
+    "line_height": 1.5,
+    "max_words": null,
+    "role": "body"
    },
    "size": {
-    "min_height_px": 60,
-    "min_width_px": 76,
-    "touch_px": 60
+    "min_height_px": 72,
+    "min_width_px": 280,
+    "touch_px": 72,
+    "option_height_px": 64
    },
    "variants": [
     {
-     "id": "off",
+     "id": "row",
      "day": {
       "fill": "#4b3b9e",
-      "text": "#fff3c4",
-      "rim": "#a99dff",
-      "pressed_fill": "#443592"
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#443592",
+      "shadow": "#281557"
      },
      "night": {
       "fill": "#4b3b9e",
-      "text": "#fff3c4",
+      "text": "#ffffff",
       "rim": "#a99dff",
       "pressed_fill": "#453592",
-      "glow": "#a99dff"
+      "glow": "#a99dff",
+      "shadow": "#281557"
      }
     },
     {
-     "id": "on",
+     "id": "opt_off",
      "day": {
-      "fill": "#ffd23f",
+      "fill": "#ffffff",
       "text": "#241a5e",
-      "rim": "#fff3c4",
-      "pressed_fill": "#e3ba3e",
-      "icon": "#241a5e"
+      "rim": "#241a5e",
+      "pressed_fill": "#e3e2e7"
      },
      "night": {
-      "fill": "#ffd23f",
-      "text": "#190539",
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#280a5b"
+     }
+    },
+    {
+     "id": "opt_on",
+     "day": {
+      "fill": "#b88300",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#a47507",
+      "shadow": "#492b28",
+      "icon": "#ffffff",
+      "derive": "gold"
+     },
+     "night": {
+      "fill": "#b88300",
+      "text": "#ffffff",
       "rim": "#fff3c4",
-      "pressed_fill": "#e3b93e",
-      "glow": "#ffd23f",
-      "icon": "#190539"
+      "pressed_fill": "#a57407",
+      "glow": "#fff3c4",
+      "shadow": "#492b28",
+      "icon": "#ffffff",
+      "derive": "gold"
      }
     }
    ],
    "parts": [
     {
      "id": "check_badge",
+     "kind": "icon",
+     "note_key": "spec.part.check_badge",
      "day": {
       "fill": "#46f0d8",
       "text": "#190539"
@@ -466,9 +531,28 @@
      "night": {
       "fill": "#46f0d8",
       "text": "#190539"
+     }
+    },
+    {
+     "id": "row_sub",
+     "kind": "text",
+     "note_key": "spec.part.row_sub",
+     "font": {
+      "family": "Vazirmatn",
+      "weight": 700,
+      "size_px": 16,
+      "line_height": 1.5,
+      "max_words": null,
+      "role": "body"
      },
-     "kind": "icon",
-     "note_key": "spec.part.check_badge"
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#fff3c4"
+     },
+     "night": {
+      "fill": "#4b3b9e",
+      "text": "#fff3c4"
+     }
     }
    ],
    "states_apply": [
@@ -505,11 +589,12 @@
     }
    },
    "font": {
-    "family": "Vazirmatn",
-    "weight": 700,
-    "size_px": 16,
-    "line_height": 1.3,
-    "max_words": 3
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.2,
+    "max_words": 3,
+    "role": "button_label"
    },
    "size": {
     "min_height_px": 48,
@@ -536,18 +621,22 @@
     {
      "id": "on",
      "day": {
-      "fill": "#ffd23f",
-      "text": "#241a5e",
+      "fill": "#b88300",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#e3ba3e",
-      "icon": "#241a5e"
+      "pressed_fill": "#a47507",
+      "shadow": "#492b28",
+      "icon": "#ffffff",
+      "derive": "gold"
      },
      "night": {
-      "fill": "#ffd23f",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#e3b93e",
-      "icon": "#190539"
+      "fill": "#b88300",
+      "text": "#ffffff",
+      "rim": "#fff3c4",
+      "pressed_fill": "#a57407",
+      "shadow": "#492b28",
+      "icon": "#ffffff",
+      "derive": "gold"
      }
     }
    ],
@@ -589,84 +678,277 @@
     }
    },
    "font": {
-    "family": "Vazirmatn",
-    "weight": 700,
-    "size_px": 18,
-    "size_px_badge": 16,
-    "line_height": 1.4,
-    "max_words": 4
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.2,
+    "max_words": 4,
+    "role": "button_label"
    },
    "size": {
-    "min_height_px": 64,
+    "min_height_px": 72,
     "min_width_px": 280,
-    "touch_px": 64
+    "touch_px": 72
    },
    "variants": [
     {
      "id": "shell",
      "day": {
-      "fill": "#ffffff",
-      "text": "#241a5e",
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#e3e2e7"
+      "pressed_fill": "#443592",
+      "shadow": "#281557"
      },
      "night": {
       "fill": "#2a0b60",
       "text": "#ffffff",
       "rim": "#46f0d8",
       "pressed_fill": "#280a5b",
-      "glow": "#46f0d8"
+      "glow": "#46f0d8",
+      "shadow": "#1e0745"
      }
     }
    ],
    "parts": [
     {
      "id": "badge_easy",
+     "kind": "text",
+     "note_key": "spec.part.badge",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 24,
+      "line_height": 1.1,
+      "max_words": 1,
+      "role": "icon_label"
+     },
      "day": {
-      "fill": "#2fa44a",
-      "text": "#241a5e"
+      "fill": "#2d9f48",
+      "text": "#ffffff",
+      "shadow": "#1f333e",
+      "derive": "easy"
      },
      "night": {
-      "fill": "#2fa44a",
-      "text": "#241a5e"
-     },
-     "kind": "text",
-     "note_key": "spec.part.badge"
+      "fill": "#2d9f48",
+      "text": "#ffffff",
+      "shadow": "#1f333e",
+      "derive": "easy"
+     }
     },
     {
      "id": "badge_mid",
+     "kind": "text",
+     "note_key": "spec.part.badge",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 24,
+      "line_height": 1.1,
+      "max_words": 1,
+      "role": "icon_label"
+     },
      "day": {
-      "fill": "#ff9d1c",
-      "text": "#241a5e"
+      "fill": "#d17700",
+      "text": "#ffffff",
+      "shadow": "#502728",
+      "derive": "mid"
      },
      "night": {
-      "fill": "#ff9d1c",
-      "text": "#241a5e"
-     },
-     "kind": "text",
-     "note_key": "spec.part.badge"
+      "fill": "#d17700",
+      "text": "#ffffff",
+      "shadow": "#502728",
+      "derive": "mid"
+     }
     },
     {
      "id": "badge_hard",
+     "kind": "text",
+     "note_key": "spec.part.badge",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 24,
+      "line_height": 1.1,
+      "max_words": 1,
+      "role": "icon_label"
+     },
      "day": {
-      "fill": "#ff4b4b",
-      "text": "#241a5e"
+      "fill": "#ff4747",
+      "text": "#ffffff",
+      "shadow": "#5e193d",
+      "derive": "hard"
      },
      "night": {
-      "fill": "#ff4b4b",
-      "text": "#241a5e"
-     },
-     "kind": "text",
-     "note_key": "spec.part.badge"
+      "fill": "#ff4747",
+      "text": "#ffffff",
+      "shadow": "#5e193d",
+      "derive": "hard"
+     }
     }
    ],
    "badge": {
     "radius_px": 12,
-    "height_px": 36,
+    "height_px": 40,
     "border_px": 2.6,
     "border_color": "#241a5e",
     "fixed_colors_day_night": true
    },
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "challenge_stack",
+   "name_key": "spec.row.challenge_stack",
+   "desc_key": "spec.desc.challenge_stack",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 28,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.25,
+    "max_words": 4,
+    "role": "title"
+   },
+   "font_sub": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 16,
+    "line_height": 1.5,
+    "max_words": null,
+    "role": "body"
+   },
+   "size": {
+    "min_height_px": 112,
+    "min_width_px": 280,
+    "touch_px": 112
+   },
+   "stack": {
+    "front": "easy",
+    "order": [
+     "easy",
+     "mid",
+     "hard"
+    ],
+    "peek_px": 28,
+    "inset_px_per_step": 14,
+    "strip_touch": false,
+    "motion": "by motion-designer; this row defines only the static shape"
+   },
+   "variants": [
+    {
+     "id": "easy",
+     "day": {
+      "fill": "#2d9f48",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#2a8d46",
+      "shadow": "#1f333e",
+      "derive": "easy"
+     },
+     "night": {
+      "fill": "#2d9f48",
+      "text": "#ffffff",
+      "rim": "#2fa44a",
+      "pressed_fill": "#2b8d46",
+      "glow": "#2fa44a",
+      "shadow": "#1f333e",
+      "derive": "easy"
+     }
+    },
+    {
+     "id": "mid",
+     "day": {
+      "fill": "#d17700",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#ba6a07",
+      "shadow": "#502728",
+      "derive": "mid"
+     },
+     "night": {
+      "fill": "#d17700",
+      "text": "#ffffff",
+      "rim": "#ff9d1c",
+      "pressed_fill": "#bb6907",
+      "glow": "#ff9d1c",
+      "shadow": "#502728",
+      "derive": "mid"
+     }
+    },
+    {
+     "id": "hard",
+     "day": {
+      "fill": "#ff4747",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#e34045",
+      "shadow": "#5e193d",
+      "derive": "hard"
+     },
+     "night": {
+      "fill": "#ff4747",
+      "text": "#ffffff",
+      "rim": "#ff4b4b",
+      "pressed_fill": "#e33f45",
+      "glow": "#ff4b4b",
+      "shadow": "#5e193d",
+      "derive": "hard"
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "sub_plate",
+     "kind": "text",
+     "note_key": "spec.part.stack_sub",
+     "font": {
+      "family": "Vazirmatn",
+      "weight": 700,
+      "size_px": 16,
+      "line_height": 1.5,
+      "max_words": null,
+      "role": "body"
+     },
+     "day": {
+      "fill": "#2a0b60",
+      "text": "#ffffff"
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff"
+     }
+    }
+   ],
    "states_apply": [
     "normal",
     "pressed",
@@ -711,11 +993,12 @@
     }
    },
    "font": {
-    "family": "Vazirmatn",
-    "weight": 700,
-    "size_px": 17,
-    "line_height": 1.4,
-    "max_words": 3
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 20,
+    "line_height": 1.35,
+    "max_words": 3,
+    "role": "icon_label"
    },
    "size": {
     "min_height_px": 32,
@@ -739,6 +1022,171 @@
     }
    ],
    "states_apply": []
+  },
+  {
+   "id": "side_path",
+   "name_key": "spec.row.side_path",
+   "desc_key": "spec.desc.side_path",
+   "interactive": true,
+   "surface": {
+    "day": "#469d36",
+    "night": "#190539"
+   },
+   "surfaces_extra": {
+    "sports": "#469d36",
+    "space": "#c55535",
+    "farm": "#9d8e16",
+    "city": "#155f77",
+    "sand": "#f0d07e",
+    "ice": "#d7efff"
+   },
+   "shape": {
+    "radius_px": 28,
+    "corners": "circle",
+    "size_px": 56,
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "dashed"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 20,
+    "line_height": 1.35,
+    "max_words": 3,
+    "role": "icon_label"
+   },
+   "size": {
+    "min_height_px": 56,
+    "min_width_px": 56,
+    "touch_px": 56,
+    "icon_px": 32
+   },
+   "path": {
+    "main": {
+     "style": "solid",
+     "width_px": 8
+    },
+    "side": {
+     "style": "dotted",
+     "width_px": 7,
+     "dash_px": [
+      1,
+      13
+     ],
+     "linecap": "round"
+    },
+    "casing_px": 4
+   },
+   "variants": [
+    {
+     "id": "node",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "icon": "#241a5e",
+      "pressed_fill": "#e3d7b3"
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#cdb8ff",
+      "icon": "#ffffff",
+      "pressed_fill": "#280a5b"
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "dots",
+     "kind": "line",
+     "note_key": "spec.part.side_dots",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e"
+     },
+     "night": {
+      "fill": "#fff3c4",
+      "text": "#190539"
+     }
+    },
+    {
+     "id": "tag",
+     "kind": "text",
+     "note_key": "spec.part.side_tag",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 20,
+      "line_height": 1.3,
+      "max_words": 2,
+      "role": "icon_label"
+     },
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff"
+     },
+     "night": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff"
+     }
+    },
+    {
+     "id": "label",
+     "kind": "text",
+     "note_key": "spec.part.side_label",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 20,
+      "line_height": 1.35,
+      "max_words": 3,
+      "role": "icon_label"
+     },
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e"
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff"
+     }
+    }
+   ],
+   "state_overrides": {
+    "disabled": {
+     "day": {
+      "fill": "#d9d3e8",
+      "text": "#4a4268",
+      "rim": "#241a5e",
+      "rim_style": "dashed"
+     }
+    },
+    "focus": {
+     "ring": "#fff3c4",
+     "outline": "#241a5e",
+     "note": "two-tone ring (navy 3px next to the node, cream 4px outside) so it shows on every map colour"
+    }
+   },
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
   },
   {
    "id": "zone_title",
@@ -780,9 +1228,10 @@
     "weight": 400,
     "size_px": 34,
     "line_height": 1.2,
-    "max_words": 3,
+    "max_words": 4,
     "min_size_px": 24,
-    "fallback": "Vazirmatn 700"
+    "fallback": "Vazirmatn 700",
+    "role": "title"
    },
    "size": {
     "min_height_px": 0,
@@ -803,7 +1252,11 @@
      }
     }
    ],
-   "states_apply": []
+   "states_apply": [],
+   "drop": {
+    "px": 4,
+    "color": "#241a5e"
+   }
   },
   {
    "id": "plate",
@@ -832,11 +1285,12 @@
     }
    },
    "font": {
-    "family": "Vazirmatn",
-    "weight": 700,
-    "size_px": 16,
-    "line_height": 1.5,
-    "max_words": 4
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 20,
+    "line_height": 1.4,
+    "max_words": 4,
+    "role": "icon_label"
    },
    "size": {
     "min_height_px": 32,
@@ -860,27 +1314,35 @@
     {
      "id": "here",
      "day": {
-      "fill": "#ffd23f",
-      "text": "#241a5e",
-      "rim": "#241a5e"
+      "fill": "#996d00",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "shadow": "#3f2428",
+      "derive": "gold_s"
      },
      "night": {
-      "fill": "#ffd23f",
-      "text": "#190539",
-      "rim": "#190539"
+      "fill": "#996d00",
+      "text": "#ffffff",
+      "rim": "#fff3c4",
+      "shadow": "#3f2428",
+      "derive": "gold_s"
      }
     },
     {
      "id": "new",
      "day": {
-      "fill": "#ff7be5",
-      "text": "#241a5e",
-      "rim": "#241a5e"
+      "fill": "#d317ae",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "shadow": "#510a5c",
+      "derive": "pink_s"
      },
      "night": {
-      "fill": "#ff7be5",
-      "text": "#190539",
-      "rim": "#190539"
+      "fill": "#d317ae",
+      "text": "#ffffff",
+      "rim": "#fff3c4",
+      "shadow": "#510a5c",
+      "derive": "pink_s"
      }
     }
    ],
@@ -924,12 +1386,14 @@
     "size_px": 16,
     "line_height": 1.7,
     "max_words": null,
+    "role": "body",
     "title": {
      "family": "Lalezar",
      "weight": 400,
      "size_px": 28,
-     "max_words": 3,
-     "fallback": "Vazirmatn 700 24"
+     "line_height": 1.3,
+     "max_words": 4,
+     "role": "title"
     }
    },
    "size": {
@@ -952,7 +1416,32 @@
      }
     }
    ],
-   "states_apply": []
+   "states_apply": [],
+   "parts": [
+    {
+     "id": "title_band",
+     "kind": "text",
+     "note_key": "spec.part.sheet_band",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 28,
+      "line_height": 1.3,
+      "max_words": 4,
+      "role": "title"
+     },
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "shadow": "#281557"
+     },
+     "night": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "shadow": "#281557"
+     }
+    }
+   ]
   },
   {
    "id": "tab",
@@ -981,11 +1470,12 @@
     }
    },
    "font": {
-    "family": "Vazirmatn",
-    "weight": 700,
-    "size_px": 17,
-    "line_height": 1.3,
-    "max_words": 2
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.2,
+    "max_words": 2,
+    "role": "button_label"
    },
    "size": {
     "min_height_px": 48,
@@ -1018,28 +1508,30 @@
       "icon": "#ffd23f"
      },
      "night": {
-      "fill": "#46f0d8",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#41d4c5",
+      "fill": "#0d9c87",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "pressed_fill": "#0e8a7e",
       "glow": "#46f0d8",
-      "icon": "#190539"
+      "shadow": "#153250",
+      "icon": "#ffffff",
+      "derive": "cyan"
      }
     }
    ],
    "parts": [
     {
      "id": "on_bar",
+     "kind": "icon",
+     "note_key": "spec.part.tab_bar",
      "day": {
       "fill": "#241a5e",
       "text": "#ffd23f"
      },
      "night": {
-      "fill": "#46f0d8",
-      "text": "#190539"
-     },
-     "kind": "icon",
-     "note_key": "spec.part.tab_bar"
+      "fill": "#0d9c87",
+      "text": "#ffffff"
+     }
     }
    ],
    "states_apply": [
@@ -1080,11 +1572,12 @@
     }
    },
    "font": {
-    "family": "Vazirmatn",
-    "weight": 700,
-    "size_px": 20,
-    "line_height": 1.3,
-    "max_words": 2
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.25,
+    "max_words": 2,
+    "role": "icon_label"
    },
    "size": {
     "min_height_px": 132,
@@ -1095,65 +1588,87 @@
     {
      "id": "cyan",
      "day": {
-      "fill": "#46f0d8",
-      "text": "#241a5e",
+      "fill": "#0d9c87",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#40d5c5"
+      "pressed_fill": "#0e8b7e",
+      "shadow": "#153250",
+      "icon": "#ffffff",
+      "derive": "cyan"
      },
      "night": {
-      "fill": "#46f0d8",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#41d4c5",
-      "glow": "#46f0d8"
+      "fill": "#0d9c87",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "pressed_fill": "#0e8a7e",
+      "glow": "#46f0d8",
+      "shadow": "#153250",
+      "icon": "#ffffff",
+      "derive": "cyan"
      }
     },
     {
      "id": "violet",
      "day": {
       "fill": "#4b3b9e",
-      "text": "#fff3c4",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#443592"
+      "pressed_fill": "#443592",
+      "shadow": "#281557",
+      "icon": "#ffffff"
      },
      "night": {
-      "fill": "#7a6af5",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#6e5ede",
-      "glow": "#7a6af5"
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "rim": "#a99dff",
+      "pressed_fill": "#453592",
+      "glow": "#a99dff",
+      "shadow": "#281557",
+      "icon": "#ffffff"
      }
     },
     {
      "id": "gold",
      "day": {
-      "fill": "#ffd23f",
-      "text": "#241a5e",
+      "fill": "#b88300",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#e3ba3e"
+      "pressed_fill": "#a47507",
+      "shadow": "#492b28",
+      "icon": "#ffffff",
+      "derive": "gold"
      },
      "night": {
-      "fill": "#ffd23f",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#e3b93e",
-      "glow": "#ffd23f"
+      "fill": "#b88300",
+      "text": "#ffffff",
+      "rim": "#ffd23f",
+      "pressed_fill": "#a57407",
+      "glow": "#ffd23f",
+      "shadow": "#492b28",
+      "icon": "#ffffff",
+      "derive": "gold"
      }
     },
     {
      "id": "pink",
      "day": {
-      "fill": "#ff7be5",
-      "text": "#241a5e",
+      "fill": "#eb47ca",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#e36ed0"
+      "pressed_fill": "#d140b9",
+      "shadow": "#581964",
+      "icon": "#ffffff",
+      "derive": "pink"
      },
      "night": {
-      "fill": "#ff7be5",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#e36dd0",
-      "glow": "#ff7be5"
+      "fill": "#eb47ca",
+      "text": "#ffffff",
+      "rim": "#ff7be5",
+      "pressed_fill": "#d23fb9",
+      "glow": "#ff7be5",
+      "shadow": "#581964",
+      "icon": "#ffffff",
+      "derive": "pink"
      }
     }
    ],
@@ -1195,11 +1710,12 @@
     }
    },
    "font": {
-    "family": "Vazirmatn",
-    "weight": 700,
-    "size_px": 16,
-    "line_height": 1.3,
-    "max_words": 3
+    "family": null,
+    "weight": null,
+    "size_px": null,
+    "line_height": null,
+    "max_words": 0,
+    "note": "icon only; the name sits on the plate part"
    },
    "size": {
     "min_height_px": 112,
@@ -1215,19 +1731,23 @@
     {
      "id": "seen",
      "day": {
-      "fill": "#25cdc0",
-      "text": "#190539",
+      "fill": "#1c9c92",
+      "text": "#ffffff",
       "rim": "#241a5e",
-      "pressed_fill": "#23b6b0",
-      "icon": "#190539"
+      "pressed_fill": "#1b8b87",
+      "shadow": "#1a3254",
+      "icon": "#ffffff",
+      "derive": "seen"
      },
      "night": {
-      "fill": "#25cdc0",
-      "text": "#190539",
-      "rim": "#190539",
-      "pressed_fill": "#24b5b0",
+      "fill": "#1c9c92",
+      "text": "#ffffff",
+      "rim": "#25cdc0",
+      "pressed_fill": "#1c8a87",
       "glow": "#25cdc0",
-      "icon": "#190539"
+      "shadow": "#1a3254",
+      "icon": "#ffffff",
+      "derive": "seen"
      }
     },
     {
@@ -1297,7 +1817,15 @@
       "text": "#ffffff"
      },
      "kind": "text",
-     "note_key": "spec.part.name_plate"
+     "note_key": "spec.part.name_plate",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 20,
+      "line_height": 1.3,
+      "max_words": 3,
+      "role": "icon_label"
+     }
     }
    ],
    "states_apply": [
@@ -1376,124 +1904,261 @@
  ],
  "forbidden_pairs": [
   {
+   "fg": "#ffffff",
+   "bg": "#0d9c87",
+   "why_key": "spec.forbid.small_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#b88300",
+   "why_key": "spec.forbid.small_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#eb47ca",
+   "why_key": "spec.forbid.small_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#8b7aff",
+   "why_key": "spec.forbid.small_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#2d9f48",
+   "why_key": "spec.forbid.small_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#d17700",
+   "why_key": "spec.forbid.small_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#ff4747",
+   "why_key": "spec.forbid.small_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#1c9c92",
+   "why_key": "spec.forbid.small_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#0d9c87",
+   "why_key": "spec.forbid.cream_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#b88300",
+   "why_key": "spec.forbid.cream_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#eb47ca",
+   "why_key": "spec.forbid.cream_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#8b7aff",
+   "why_key": "spec.forbid.cream_on_deep",
+   "scope": "all"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#2d9f48",
+   "why_key": "spec.forbid.cream_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#d17700",
+   "why_key": "spec.forbid.cream_on_deep",
+   "scope": "all"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#ff4747",
+   "why_key": "spec.forbid.cream_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#1c9c92",
+   "why_key": "spec.forbid.cream_on_deep",
+   "scope": "small"
+  },
+  {
+   "fg": "#241a5e",
+   "bg": "#0d9c87",
+   "why_key": "spec.forbid.navy_on_deep",
+   "scope": "small"
+  },
+  {
    "fg": "#241a5e",
    "bg": "#4b3b9e",
-   "why_key": "spec.forbid.dark_on_violet"
+   "why_key": "spec.forbid.dark_on_violet",
+   "scope": "all"
   },
   {
    "fg": "#241a5e",
    "bg": "#155f77",
-   "why_key": "spec.forbid.dark_on_sea"
+   "why_key": "spec.forbid.dark_on_sea",
+   "scope": "all"
   },
   {
    "fg": "#241a5e",
    "bg": "#0a86a4",
-   "why_key": "spec.forbid.dark_on_card_blue"
+   "why_key": "spec.forbid.dark_on_card_blue",
+   "scope": "small"
   },
   {
    "fg": "#241a5e",
    "bg": "#8a4fe0",
-   "why_key": "spec.forbid.dark_on_purple"
+   "why_key": "spec.forbid.dark_on_purple",
+   "scope": "small"
   },
   {
    "fg": "#7a6af5",
    "bg": "#241a5e",
-   "why_key": "spec.forbid.pale_violet_on_navy"
+   "why_key": "spec.forbid.pale_violet_on_navy",
+   "scope": "small"
   },
   {
    "fg": "#8a4fe0",
    "bg": "#190539",
-   "why_key": "spec.forbid.purple_on_night"
+   "why_key": "spec.forbid.purple_on_night",
+   "scope": "small"
   },
   {
    "fg": "#4b3b9e",
    "bg": "#241a5e",
-   "why_key": "spec.forbid.chip_violet_on_navy"
+   "why_key": "spec.forbid.chip_violet_on_navy",
+   "scope": "all"
   },
   {
    "fg": "#4b3b9e",
    "bg": "#190539",
-   "why_key": "spec.forbid.chip_violet_on_night"
+   "why_key": "spec.forbid.chip_violet_on_night",
+   "scope": "all"
   },
   {
    "fg": "#9a78e0",
    "bg": "#241a5e",
-   "why_key": "spec.forbid.dash_on_navy"
+   "why_key": "spec.forbid.dash_on_navy",
+   "scope": "small"
   },
   {
    "fg": "#fff3c4",
    "bg": "#46f0d8",
-   "why_key": "spec.forbid.light_on_cyan"
+   "why_key": "spec.forbid.light_on_cyan",
+   "scope": "all",
+   "shadow_demo": true
   },
   {
    "fg": "#ffffff",
    "bg": "#46f0d8",
-   "why_key": "spec.forbid.light_on_cyan"
+   "why_key": "spec.forbid.light_on_cyan",
+   "scope": "all",
+   "shadow_demo": true
   },
   {
    "fg": "#fff3c4",
    "bg": "#ffd23f",
-   "why_key": "spec.forbid.light_on_gold"
+   "why_key": "spec.forbid.light_on_gold",
+   "scope": "all",
+   "shadow_demo": true
   },
   {
    "fg": "#ffffff",
    "bg": "#ffd23f",
-   "why_key": "spec.forbid.light_on_gold"
+   "why_key": "spec.forbid.light_on_gold",
+   "scope": "all",
+   "shadow_demo": true
   },
   {
    "fg": "#ffffff",
    "bg": "#ff7be5",
-   "why_key": "spec.forbid.light_on_pink"
+   "why_key": "spec.forbid.light_on_pink",
+   "scope": "all",
+   "shadow_demo": true
   },
   {
    "fg": "#fff3c4",
    "bg": "#469d36",
-   "why_key": "spec.forbid.cream_on_grass"
+   "why_key": "spec.forbid.cream_on_grass",
+   "scope": "small",
+   "shadow_demo": true
   },
   {
    "fg": "#fff3c4",
    "bg": "#9d8e16",
-   "why_key": "spec.forbid.cream_on_farm"
+   "why_key": "spec.forbid.cream_on_farm",
+   "scope": "all",
+   "shadow_demo": true
   },
   {
    "fg": "#ffffff",
    "bg": "#2fa44a",
-   "why_key": "spec.forbid.light_on_green"
+   "why_key": "spec.forbid.light_on_green",
+   "scope": "small",
+   "shadow_demo": true
   },
   {
    "fg": "#ffffff",
    "bg": "#ff9d1c",
-   "why_key": "spec.forbid.light_on_orange"
+   "why_key": "spec.forbid.light_on_orange",
+   "scope": "all",
+   "shadow_demo": true
   },
   {
    "fg": "#fff3c4",
    "bg": "#f0d07e",
-   "why_key": "spec.forbid.cream_on_sand"
+   "why_key": "spec.forbid.cream_on_sand",
+   "scope": "all",
+   "shadow_demo": true
   },
   {
    "fg": "#46f0d8",
    "bg": "#fff3c4",
-   "why_key": "spec.forbid.bright_on_cream"
+   "why_key": "spec.forbid.bright_on_cream",
+   "scope": "all"
   },
   {
    "fg": "#ffd23f",
    "bg": "#fff3c4",
-   "why_key": "spec.forbid.bright_on_cream"
+   "why_key": "spec.forbid.bright_on_cream",
+   "scope": "all"
   },
   {
    "fg": "#a99dff",
    "bg": "#fff3c4",
-   "why_key": "spec.forbid.bright_on_cream"
+   "why_key": "spec.forbid.bright_on_cream",
+   "scope": "all"
   },
   {
    "fg": "#4b3b9e",
    "bg": "#34145f",
-   "why_key": "spec.forbid.violet_on_locked"
+   "why_key": "spec.forbid.violet_on_locked",
+   "scope": "all"
   },
   {
    "fg": "#ffffff",
    "bg": "#25cdc0",
-   "why_key": "spec.forbid.white_on_card_front"
+   "why_key": "spec.forbid.white_on_card_front",
+   "scope": "all",
+   "shadow_demo": true
   }
  ],
  "allowed_text_on_dark": {
@@ -1511,5 +2176,117 @@
    "#46f0d8",
    "#ffd23f"
   ]
+ },
+ "derived_colors": {
+  "cyan": {
+   "base": "#46f0d8",
+   "h_shift": 0,
+   "s_scale": 1,
+   "min_white": 3.3,
+   "value": "#0d9c87"
+  },
+  "gold": {
+   "base": "#ffd23f",
+   "h_shift": -3,
+   "s_scale": 1,
+   "min_white": 3.3,
+   "value": "#b88300"
+  },
+  "pink": {
+   "base": "#ff7be5",
+   "h_shift": 0,
+   "s_scale": 0.8,
+   "min_white": 3.3,
+   "value": "#eb47ca"
+  },
+  "lilac": {
+   "base": "#a99dff",
+   "h_shift": 0,
+   "s_scale": 1,
+   "min_white": 3.3,
+   "value": "#8b7aff"
+  },
+  "easy": {
+   "base": "#2fa44a",
+   "h_shift": 0,
+   "s_scale": 1,
+   "min_white": 3.3,
+   "value": "#2d9f48"
+  },
+  "mid": {
+   "base": "#ff9d1c",
+   "h_shift": 0,
+   "s_scale": 1,
+   "min_white": 3.3,
+   "value": "#d17700"
+  },
+  "hard": {
+   "base": "#ff4b4b",
+   "h_shift": 0,
+   "s_scale": 1,
+   "min_white": 3.3,
+   "value": "#ff4747"
+  },
+  "seen": {
+   "base": "#25cdc0",
+   "h_shift": 0,
+   "s_scale": 1,
+   "min_white": 3.3,
+   "value": "#1c9c92"
+  },
+  "gold_s": {
+   "base": "#ffd23f",
+   "h_shift": -3,
+   "s_scale": 1,
+   "min_white": 4.6,
+   "value": "#996d00"
+  },
+  "pink_s": {
+   "base": "#ff7be5",
+   "h_shift": 0,
+   "s_scale": 0.8,
+   "min_white": 4.6,
+   "value": "#d317ae"
+  }
+ },
+ "text_shadow": {
+  "rule": "text-shadow in the family of the fill: colour = mix(fill, #190539, 0.7); hard layers (no blur) wrap the glyph and drop 3px below",
+  "mix_toward": "#190539",
+  "mix_t": 0.7,
+  "layers_px": [
+   [
+    0,
+    3
+   ],
+   [
+    0,
+    -2
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    -2,
+    0
+   ],
+   [
+    1.5,
+    1.5
+   ],
+   [
+    -1.5,
+    1.5
+   ],
+   [
+    1.5,
+    -1.5
+   ],
+   [
+    -1.5,
+    -1.5
+   ]
+  ],
+  "applies_to": "light text (white) on a coloured fill; not on cream/white fills and not on dark plates"
  }
 }

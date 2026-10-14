@@ -278,5 +278,61 @@
   "where_fa": "آموزش نقشه، گام چیپ پایه",
   "context_fa": "draft؛ ماکت v5",
   "band": "همه"
+ },
+ "motion.demo.node": {
+  "text": "اسکله",
+  "kind": "ui",
+  "where_fa": "نام گرهٔ نمونه روی نقشه و عنوان محیط در نمونهٔ حرکت",
+  "context_fa": "draft؛ جای‌نگهدار نام مرحله (stage.place)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.topic": {
+  "text": "قرقره",
+  "kind": "ui",
+  "where_fa": "موضوع علمی نمونه زیر نام گره در برگهٔ مرحله",
+  "context_fa": "draft؛ جای‌نگهدار stage.topic",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.enter": {
+  "text": "برو داخل",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ورود در برگهٔ مرحلهٔ نمونهٔ حرکت",
+  "context_fa": "draft؛ همان «برو داخل» سند جریان v5",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.reset": {
+  "text": "از اول",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ابزار: برگرداندن نمونه به نقشه",
+  "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.rm": {
+  "text": "کاهش حرکت",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ابزار: شبیه‌سازی prefers-reduced-motion",
+  "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.fast": {
+  "text": "تعویض سریع ۱۵۰ میلی‌ثانیه",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ابزار: نسخهٔ سقف ۱۵۰ms (سند STYLE_BIBLE) برای تعویض کارت",
+  "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.hint": {
+  "text": "کارت پشتی را بزن؛ دوباره نوار کارت قبلی را بزن تا برگردد.",
+  "kind": "ui",
+  "where_fa": "راهنمای کوتاه زیر نمونه (ابزار)",
+  "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+  "band": "همه",
+  "status": "draft"
  }
 }
