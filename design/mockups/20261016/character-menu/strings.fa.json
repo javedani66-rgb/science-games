@@ -31,56 +31,8 @@
   "band": "همه",
   "status": "draft"
  },
- "charmenu.name.nima": {
-  "text": "نیما",
-  "kind": "ui",
-  "where_fa": "نام کاراکتر",
-  "context_fa": "زیر کارت نیما؛ نام موقت",
-  "band": "همه",
-  "status": "draft"
- },
- "charmenu.name.roya": {
-  "text": "رویا",
-  "kind": "ui",
-  "where_fa": "نام کاراکتر",
-  "context_fa": "زیر کارت رویا؛ نام موقت",
-  "band": "همه",
-  "status": "draft"
- },
- "charmenu.name.sam": {
-  "text": "سام",
-  "kind": "ui",
-  "where_fa": "نام کاراکتر",
-  "context_fa": "زیر کارت سام؛ نام موقت",
-  "band": "همه",
-  "status": "draft"
- },
- "charmenu.name.tara": {
-  "text": "تارا",
-  "kind": "ui",
-  "where_fa": "نام کاراکتر",
-  "context_fa": "زیر کارت تارا؛ نام موقت",
-  "band": "همه",
-  "status": "draft"
- },
- "charmenu.name.mani": {
-  "text": "مانی",
-  "kind": "ui",
-  "where_fa": "نام کاراکتر",
-  "context_fa": "زیر کارت مانی؛ نام موقت",
-  "band": "همه",
-  "status": "draft"
- },
- "charmenu.name.goli": {
-  "text": "گلی",
-  "kind": "ui",
-  "where_fa": "نام کاراکتر",
-  "context_fa": "زیر کارت گلی؛ نام موقت",
-  "band": "همه",
-  "status": "draft"
- },
  "charmenu.color.title": {
-  "text": "رنگ تو",
+  "text": "رنگ لباست",
   "kind": "ui",
   "where_fa": "تیتر بخش انتخاب رنگ",
   "context_fa": "بالای پنج دایرهٔ رنگی؛ پیش‌نویس",
@@ -252,6 +204,54 @@
   "kind": "ui",
   "where_fa": "برچسب برای فناوری کمکی",
   "context_fa": "برچسب خوانندهٔ صفحه روی کارت کاراکتر؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "charmenu.myname.title": {
+  "text": "اسم تو",
+  "kind": "ui",
+  "where_fa": "عنوان کادر اسم",
+  "context_fa": "کودک اسم خودش را می‌نویسد؛ از فهرست انتخاب نمی‌کند (D77)؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "charmenu.myname.placeholder": {
+  "text": "اسمت را بنویس",
+  "kind": "ui",
+  "where_fa": "متن راهنمای داخل کادر اسم",
+  "context_fa": "تا وقتی چیزی نوشته نشده؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "charmenu.myname.hint": {
+  "text": "هر اسمی که دوست داری.",
+  "kind": "ui",
+  "where_fa": "زیر کادر اسم",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "charmenu.myname.need": {
+  "text": "اول اسمت را بنویس.",
+  "kind": "ui",
+  "where_fa": "توضیح کنار دکمهٔ غیرفعال",
+  "context_fa": "وقتی شخصیت انتخاب شده ولی اسم خالی است؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "charmenu.myname.plate": {
+  "text": "اسم تو",
+  "kind": "ui",
+  "where_fa": "نام روی کتیبهٔ پیش‌نمایش",
+  "context_fa": "تا وقتی اسمی نوشته نشده؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "charmenu.color.original": {
+  "text": "اصلی",
+  "kind": "ui",
+  "where_fa": "نام گزینهٔ بدون تغییر رنگ",
+  "context_fa": "رنگ لباس؛ پیش‌نویس",
   "band": "همه",
   "status": "draft"
  }

@@ -10709,7 +10709,7 @@
     "charmenu.color.title",
     "text"
    ],
-   "text": "رنگ تو",
+   "text": "رنگ لباست",
    "status": "draft"
   },
   "charmenu.color.blue": {
@@ -11025,6 +11025,96 @@
     "text"
    ],
    "text": "انتخاب",
+   "status": "draft"
+  },
+  "charmenu.myname.title": {
+   "id": "charmenu.myname.title",
+   "kind": "ui",
+   "where_fa": "عنوان کادر اسم",
+   "context_fa": "کودک اسم خودش را می‌نویسد؛ از فهرست انتخاب نمی‌کند (D77)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.myname.title",
+    "text"
+   ],
+   "text": "اسم تو",
+   "status": "draft"
+  },
+  "charmenu.myname.placeholder": {
+   "id": "charmenu.myname.placeholder",
+   "kind": "ui",
+   "where_fa": "متن راهنمای داخل کادر اسم",
+   "context_fa": "تا وقتی چیزی نوشته نشده؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.myname.placeholder",
+    "text"
+   ],
+   "text": "اسمت را بنویس",
+   "status": "draft"
+  },
+  "charmenu.myname.hint": {
+   "id": "charmenu.myname.hint",
+   "kind": "ui",
+   "where_fa": "زیر کادر اسم",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.myname.hint",
+    "text"
+   ],
+   "text": "هر اسمی که دوست داری.",
+   "status": "draft"
+  },
+  "charmenu.myname.need": {
+   "id": "charmenu.myname.need",
+   "kind": "ui",
+   "where_fa": "توضیح کنار دکمهٔ غیرفعال",
+   "context_fa": "وقتی شخصیت انتخاب شده ولی اسم خالی است؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.myname.need",
+    "text"
+   ],
+   "text": "اول اسمت را بنویس.",
+   "status": "draft"
+  },
+  "charmenu.myname.plate": {
+   "id": "charmenu.myname.plate",
+   "kind": "ui",
+   "where_fa": "نام روی کتیبهٔ پیش‌نمایش",
+   "context_fa": "تا وقتی اسمی نوشته نشده؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.myname.plate",
+    "text"
+   ],
+   "text": "اسم تو",
+   "status": "draft"
+  },
+  "charmenu.color.original": {
+   "id": "charmenu.color.original",
+   "kind": "ui",
+   "where_fa": "نام گزینهٔ بدون تغییر رنگ",
+   "context_fa": "رنگ لباس؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.color.original",
+    "text"
+   ],
+   "text": "اصلی",
    "status": "draft"
   }
  },

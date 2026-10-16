@@ -37,6 +37,11 @@ def head_crop(im):
     return Image.fromarray(a, 'RGBA')
 
 
+def enc_mask(p):
+    b = io.BytesIO(); Image.open(p).convert('L').save(b, 'PNG', optimize=True)
+    return 'data:image/png;base64,' + base64.b64encode(b.getvalue()).decode()
+
+
 def scaled(im, h):
     return im.resize((max(1, round(im.width * h / im.height)), h), Image.LANCZOS)
 
@@ -44,11 +49,12 @@ def scaled(im, h):
 def images():
     ensure_cache()
     load = lambda o, n: Image.open(CACHE / o / f'{n}.webp').convert('RGBA')
-    out = dict(head={}, big={}, thumbc={}, thumb={}, mini={})
+    out = dict(head={}, big={}, thumbc={}, thumb={}, mini={}, mask={})
     for n in NAMES:
         b = load('base', n)
         out['head'][n] = enc(scaled(head_crop(b), 190))
         out['mini'][n] = enc(scaled(b, 180))
+        out['mask'][n] = {o: enc_mask(ROOT / 'design/characters/recolor-masks' / o / f'{n}.png') for o in OUTFITS}
         out['big'][n] = {o: enc(load(o, n), 80) for o in OUTFITS}
         out['thumbc'][n] = {o: enc(scaled(load(o, n), 150)) for o in OUTFITS}
     out['thumb'] = out['thumbc']['nima']

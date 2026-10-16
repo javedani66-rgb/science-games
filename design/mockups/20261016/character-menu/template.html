@@ -26,11 +26,15 @@ h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-ser
 .card{background:var(--cream);border:3.5px solid var(--navy);border-radius:28px;box-shadow:0 4px 0 var(--edge);padding:14px 12px}
 .sec{margin-top:16px}
 .chars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.char{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--cream);border:3.5px solid var(--navy);border-radius:18px;box-shadow:0 4px 0 var(--edge);padding:8px 4px;min-height:136px;transition:transform .15s var(--ease)}
+.char{display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--cream);border:3.5px solid var(--navy);border-radius:18px;box-shadow:0 4px 0 var(--edge);padding:8px 4px;min-height:116px;transition:transform .15s var(--ease)}
 .char:active{transform:translateY(2px);box-shadow:0 2px 0 var(--edge)}
 .char .hd{width:100%;height:88px;display:flex;align-items:flex-end;justify-content:center}
 .char .hd img{max-height:100%;width:auto;object-fit:contain}
-.char .nm{display:flex;align-items:center;gap:5px;font:400 22px/1.3 Lalezar,Vazirmatn,sans-serif;min-height:32px}
+.char .nm{display:flex;align-items:center;justify-content:center;min-height:26px}
+.name input{display:block;width:100%;height:60px;box-sizing:border-box;border:3.5px solid var(--navy);border-radius:18px;background:#fffaf0;padding:0 16px;font:700 22px/1 Vazirmatn,sans-serif;color:var(--navy);text-align:center}
+.name input::placeholder{color:#6a6490;font-weight:400}
+.name input:focus{outline:4px solid var(--pc);outline-offset:2px}
+.name .sub{margin:10px auto 0}
 .char .tk{display:none;flex:none;width:22px;height:22px}
 .char[aria-checked=true]{background:color-mix(in srgb,var(--pc) 30%,var(--cream));outline:5px solid var(--pc);outline-offset:2px}
 .char[aria-checked=true] .tk{display:block}
@@ -80,6 +84,7 @@ h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-ser
  <h1 class="title" id="ttl"></h1>
  <span class="sub" id="sub"></span>
  <div class="chars" id="chars" role="radiogroup"></div>
+ <section class="card sec name" id="namesec"><h2 id="nmh"></h2><input id="nm" type="text" maxlength="14" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-labelledby="nmh"><span class="sub" id="nmsub"></span></section>
  <section class="card sec" id="colsec"><h2 id="colh"></h2><div class="colors" id="colors" role="radiogroup"></div></section>
  <section class="card sec" id="prev"><div class="empty" id="empty"></div>
   <div class="stage" id="stage"><div class="fig"><div class="plat"></div><img id="big" alt=""></div><div class="plate" id="pname"></div><div class="cap" id="pcap"></div></div></section>
@@ -90,28 +95,55 @@ h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-ser
 <script>
 const S={{STRINGS}};const R={{REVIEW}};const IMG={{IMAGES}};
 const CHARS=['nima','roya','sam','tara','mani','goli'];
-const COLORS=[['blue','#3d7be8','circle'],['teal','#1bb5b0','square'],['violet','#8a4fe0','triangle'],['magenta','#c14fd0','diamond'],['gray','#6b7490','hexagon']];
+const COLORS=[['original','#fff3c4','ring',null],['blue','#3d7be8','circle',215],['teal','#1bb5b0','square',180],['violet','#8a4fe0','triangle',275],['magenta','#c14fd0','diamond',315],['gray','#6b7490','hexagon','gray']];
 const OUTFITS=['base','sports','winter','astronaut','farmer','construction','carpenter','sailor'];
-const SH={circle:'<circle cx="12" cy="12" r="7"/>',square:'<rect x="5" y="5" width="14" height="14" rx="2"/>',triangle:'<path d="M12 4 21 20H3z" stroke-linejoin="round"/>',diamond:'<path d="M12 3 21 12 12 21 3 12z" stroke-linejoin="round"/>',hexagon:'<path d="M12 3 20 7.5v9L12 21 4 16.5v-9z" stroke-linejoin="round"/>'};
+const SH={ring:'<circle cx="12" cy="12" r="7" fill="none"/>',circle:'<circle cx="12" cy="12" r="7"/>',square:'<rect x="5" y="5" width="14" height="14" rx="2"/>',triangle:'<path d="M12 4 21 20H3z" stroke-linejoin="round"/>',diamond:'<path d="M12 3 21 12 12 21 3 12z" stroke-linejoin="round"/>',hexagon:'<path d="M12 3 20 7.5v9L12 21 4 16.5v-9z" stroke-linejoin="round"/>'};
 const TICK='<svg class="tk" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#241a5e"/><path d="M6 11.5l3.4 3.4L16 8" fill="none" stroke="#fff3c4" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const st={ch:null,color:0,outfit:'base',mode:'first'};
+const st={ch:null,color:0,outfit:'base',mode:'first',name:''};
 const $=id=>document.getElementById(id);
 const T=k=>S[k].text;
-function css(){document.documentElement.style.setProperty('--pc',COLORS[st.color][1])}
+function css(){document.documentElement.style.setProperty('--pc',st.color?COLORS[st.color][1]:'#3d7be8')}
 function build(){
- $('chars').innerHTML=CHARS.map(c=>`<button class="char" role="radio" aria-checked="false" data-c="${c}" aria-label="${T('charmenu.pick')}: ${T('charmenu.name.'+c)}"><span class="hd"><img src="${IMG.head[c]}" alt=""></span><span class="nm">${TICK}<span>${T('charmenu.name.'+c)}</span></span></button>`).join('');
+ $('chars').innerHTML=CHARS.map((c,i)=>`<button class="char" role="radio" aria-checked="false" data-c="${c}" aria-label="${T('charmenu.pick')} ${i+1}"><span class="hd"><img src="${IMG.head[c]}" alt=""></span><span class="nm">${TICK}</span></button>`).join('');
  $('colors').innerHTML=COLORS.map((c,i)=>`<button class="sw" role="radio" aria-checked="false" data-i="${i}"><span class="dot" style="background:${c[1]}"><svg viewBox="0 0 24 24" fill="#fff3c4" stroke="#241a5e" stroke-width="2.2" aria-hidden="true">${SH[c[2]]}</svg><svg class="ok" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#241a5e"/><path d="M6 11.5l3.4 3.4L16 8" fill="none" stroke="#fff3c4" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nm">${T('charmenu.color.'+c[0])}</span></button>`).join('');
  $('outfits').innerHTML=OUTFITS.map(o=>`<button class="of" role="radio" aria-checked="false" data-o="${o}"><span class="th"><img src="${IMG.thumb[o]}" alt="" data-o="${o}"></span><span class="lb">${T('charmenu.outfit.'+o)}</span></button>`).join('');
- $('colh').textContent=T('charmenu.color.title');$('ofh').textContent=T('charmenu.outfits.title');$('ofs').textContent=T('charmenu.outfits.sub');
+ $('colh').textContent=T('charmenu.color.title');$('nmh').textContent=T('charmenu.myname.title');$('nm').placeholder=T('charmenu.myname.placeholder');$('ofh').textContent=T('charmenu.outfits.title');$('ofs').textContent=T('charmenu.outfits.sub');
  $('mph').textContent=T('charmenu.map.title');$('mpl').textContent=T('charmenu.map.here');$('empty').textContent=T('charmenu.empty');
  $('rvl').textContent=R['mode.label'];$('m1').textContent=R['mode.first'];$('m2').textContent=R['mode.menu'];$('rvt').textContent=R.banner;
  $('chars').onclick=e=>{const b=e.target.closest('.char');if(!b)return;st.ch=b.dataset.c;st.outfit='base';render()};
  $('colors').onclick=e=>{const b=e.target.closest('.sw');if(!b)return;st.color=+b.dataset.i;render()};
  $('outfits').onclick=e=>{const b=e.target.closest('.of');if(!b||!st.ch)return;st.outfit=b.dataset.o;render()};
- $('m1').onclick=()=>{st.mode='first';st.ch=null;st.outfit='base';render()};
- $('m2').onclick=()=>{st.mode='menu';st.ch='goli';st.outfit='base';render()};
- $('go').onclick=()=>{if(!st.ch)return;const t=$('toast');t.textContent=st.mode==='first'?R.pressed:R.saved;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2400)};
+ $('nm').oninput=e=>{st.name=e.target.value;render()};
+ $('m1').onclick=()=>{st.mode='first';st.ch=null;st.outfit='base';st.name='';$('nm').value='';render()};
+ $('m2').onclick=()=>{st.mode='menu';st.ch='goli';st.outfit='base';st.name='سارا';$('nm').value=st.name;render()};
+ $('go').onclick=()=>{if(!st.ch||!st.name.trim())return;const t=$('toast');t.textContent=st.mode==='first'?R.pressed:R.saved;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2400)};
 }
+const cache=new Map(),load=u=>new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.src=u});
+// تغییر رنگ لباس: فام بخش ماسک‌شده به فام هدف می‌چرخد (D76)؛ ماسک‌ها از design/characters/recolor-masks
+async function tint(ch,o,src,tgt){
+ const key=ch+o+src.length+tgt;if(cache.has(key))return cache.get(key);
+ const [im,mk]=await Promise.all([load(src),load(IMG.mask[ch][o])]);
+ const w=im.naturalWidth,h=im.naturalHeight,c=document.createElement('canvas');c.width=w;c.height=h;
+ const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(im,0,0);const d=x.getImageData(0,0,w,h),p=d.data;
+ const c2=document.createElement('canvas');c2.width=w;c2.height=h;const x2=c2.getContext('2d',{willReadFrequently:true});x2.drawImage(mk,0,0,w,h);const m=x2.getImageData(0,0,w,h).data;
+ const hs=new Float32Array(w*h),ss=new Float32Array(w*h),vs=new Float32Array(w*h);let cs=0,sn=0;
+ for(let k=0,q=0;k<p.length;k+=4,q++){if(m[k]<128||p[k+3]<128)continue;
+  const r=p[k]/255,g=p[k+1]/255,b=p[k+2]/255,mx=Math.max(r,g,b),mn=Math.min(r,g,b),dd=mx-mn;let hh=0;
+  if(dd>0){hh=mx===r?((g-b)/dd)%6:mx===g?(b-r)/dd+2:(r-g)/dd+4;hh*=60;if(hh<0)hh+=360}
+  const s=mx?dd/mx:0;hs[q]=hh;ss[q]=s;vs[q]=mx;const wgt=s*mx;cs+=Math.cos(hh*Math.PI/180)*wgt;sn+=Math.sin(hh*Math.PI/180)*wgt}
+ const mean=(Math.atan2(sn,cs)*180/Math.PI+360)%360;
+ for(let k=0,q=0;k<p.length;k+=4,q++){if(m[k]<128||p[k+3]<128)continue;
+  let hh=tgt==='gray'?hs[q]:(hs[q]+tgt-mean+720)%360,s=tgt==='gray'?ss[q]*.1:ss[q],v=vs[q];
+  const cc=v*s,xx=cc*(1-Math.abs((hh/60)%2-1)),mm=v-cc,i=Math.floor(hh/60)%6;
+  const rgb=[[cc,xx,0],[xx,cc,0],[0,cc,xx],[0,xx,cc],[xx,0,cc],[cc,0,xx]][i];
+  p[k]=(rgb[0]+mm)*255;p[k+1]=(rgb[1]+mm)*255;p[k+2]=(rgb[2]+mm)*255}
+ x.putImageData(d,0,0);const u=c.toDataURL('image/png');cache.set(key,u);return u}
+let tok=0;
+async function paint(){
+ const my=++tok,tgt=COLORS[st.color][3],ch=st.ch;if(!ch)return;
+ const set=async(el,src,o)=>{const u=tgt===null?src:await tint(ch,o,src,tgt);if(my===tok)el.src=u};
+ await Promise.all([set($('big'),IMG.big[ch][st.outfit],st.outfit),set($('mini'),IMG.mini[ch],'base'),
+  ...[...document.querySelectorAll('.of img')].map(im=>set(im,IMG.thumbc[ch][im.dataset.o],im.dataset.o))])}
 function render(){
  css();const m=st.mode;
  $('ttl').textContent=T('charmenu.title.'+m);$('sub').textContent=T('charmenu.sub.'+m);$('go').textContent=T('charmenu.go.'+m);
@@ -119,9 +151,10 @@ function render(){
  document.querySelectorAll('.char').forEach(b=>b.setAttribute('aria-checked',b.dataset.c===st.ch));
  document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-checked',+b.dataset.i===st.color));
  document.querySelectorAll('.of').forEach(b=>{b.setAttribute('aria-checked',b.dataset.o===st.outfit);const im=b.querySelector('img');im.src=st.ch?IMG.thumbc[st.ch][b.dataset.o]:IMG.thumb[b.dataset.o]});
- const has=!!st.ch;$('go').disabled=!has;$('empty').style.display=has?'none':'block';$('stage').classList.toggle('on',has);
+ const has=!!st.ch,named=!!st.name.trim();$('go').disabled=!(has&&named);$('empty').style.display=has?'none':'block';$('stage').classList.toggle('on',has);
+ $('nmsub').textContent=T(has&&!named?'charmenu.myname.need':'charmenu.myname.hint');
  $('ofsec').style.display=has?'block':'none';$('mapsec').style.display=has?'block':'none';
- if(has){$('big').src=IMG.big[st.ch][st.outfit];$('mini').src=IMG.mini[st.ch];$('pname').textContent=T('charmenu.name.'+st.ch);$('pcap').textContent=T('charmenu.outfit.'+st.outfit)}
+ if(has){$('big').src=IMG.big[st.ch][st.outfit];$('mini').src=IMG.mini[st.ch];$('pname').textContent=st.name.trim()||T('charmenu.myname.plate');$('pcap').textContent=T('charmenu.outfit.'+st.outfit);paint()}
 }
 build();render();
 </script>
