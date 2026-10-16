@@ -1,251 +1,251 @@
 {
- "_readme_fa": "این فایل تنها جای اصلاح نام‌هاست. فقط مقدار «title» (یا نام مرحله/سرزمین/منطقه) را عوض کن، سپس `python3 design/mockups/20261007/map-mesh/build.py`. وضعیت draft = نام موقت؛ بعد از تأیید مالک approved. هیچ نامی هنوز نهایی نیست (۸ اکتبر). (۸ اکتبر ۰۹:۳۷) «title» هر گره = نام محیط (یک جا)، «subtitle» = نام مفهوم/درس که با رفتن اشاره‌گر یا انگشت روی محیط نشان داده می‌شود.",
- "nodes": {
-  "F01": {
-   "title": "زمین فوتبال",
-   "status": "draft",
-   "subtitle": "هل دادن و کشیدن"
+  "_readme_fa": "این فایل تنها جای اصلاح نام‌هاست. فقط مقدار «title» (یا نام مرحله/سرزمین/منطقه) را عوض کن، سپس `python3 design/mockups/20261007/map-mesh/build.py`. وضعیت draft = نام موقت؛ بعد از تأیید مالک approved. هیچ نامی هنوز نهایی نیست (۸ اکتبر). (۸ اکتبر ۰۹:۳۷) «title» هر گره = نام محیط (یک جا)، «subtitle» = نام مفهوم/درس که با رفتن اشاره‌گر یا انگشت روی محیط نشان داده می‌شود.",
+  "nodes": {
+    "F01": {
+      "title": "زمین فوتبال",
+      "status": "draft",
+      "subtitle": "هل دادن و کشیدن"
+    },
+    "F02": {
+      "title": "سالن بسکتبال",
+      "status": "draft",
+      "subtitle": "اثر نیرو"
+    },
+    "F03": {
+      "title": "میدان کمان‌کِشی",
+      "status": "draft",
+      "subtitle": "جهت و اندازهٔ نیرو"
+    },
+    "F04": {
+      "title": "هاکی آهنربایی",
+      "status": "draft",
+      "subtitle": "نیروی تماسی و نیروی از دور"
+    },
+    "F08": {
+      "title": "میدان طناب‌کشی",
+      "status": "draft",
+      "subtitle": "چند نیرو با هم (برآیند)"
+    },
+    "F09": {
+      "title": "زمین اسکیت",
+      "status": "draft",
+      "subtitle": "کنش و واکنش و لختی"
+    },
+    "F05": {
+      "title": "سکوی پرتاب",
+      "status": "draft",
+      "subtitle": "گرانش (کشش زمین)"
+    },
+    "W01": {
+      "title": "ایستگاه بارگیری فضایی",
+      "status": "draft",
+      "subtitle": "سنگین و سبک"
+    },
+    "W02": {
+      "title": "آزمایشگاه ترازو",
+      "status": "draft",
+      "subtitle": "جرم"
+    },
+    "W03": {
+      "title": "کرهٔ ماه",
+      "status": "draft",
+      "subtitle": "وزن (نیروی گرانش)"
+    },
+    "W04": {
+      "title": "ایستگاه فضایی",
+      "status": "draft",
+      "subtitle": "جرم در برابر وزن"
+    },
+    "F06": {
+      "title": "پیست یخ",
+      "status": "draft",
+      "subtitle": "اصطکاک"
+    },
+    "F07": {
+      "title": "استخر",
+      "status": "draft",
+      "subtitle": "مقاومت هوا و آب"
+    },
+    "B01": {
+      "title": "داربست",
+      "status": "draft",
+      "subtitle": "تعادل و مرکز گرانش"
+    },
+    "B02": {
+      "title": "انبار مصالح",
+      "status": "draft",
+      "subtitle": "ترازو: برابری دو طرف"
+    },
+    "M04": {
+      "title": "گودبرداری",
+      "status": "draft",
+      "subtitle": "اهرم"
+    },
+    "M05": {
+      "title": "انبار تیرآهن",
+      "status": "draft",
+      "subtitle": "جای تکیه‌گاه"
+    },
+    "M06": {
+      "title": "اتاق ابزار",
+      "status": "draft",
+      "subtitle": "سه نوع اهرم"
+    },
+    "E05": {
+      "title": "اتاق مخصوص آچارها",
+      "status": "draft",
+      "subtitle": "گشتاور (اثر چرخاندن)"
+    },
+    "M03": {
+      "title": "رمپ بارگیری",
+      "status": "draft",
+      "subtitle": "سطح شیب‌دار (رمپ)"
+    },
+    "M09": {
+      "title": "چوب‌شکافی",
+      "status": "draft",
+      "subtitle": "گوه"
+    },
+    "M10": {
+      "title": "پیچ‌کاری",
+      "status": "draft",
+      "subtitle": "پیچ"
+    },
+    "M02": {
+      "title": "بارانداز",
+      "status": "draft",
+      "subtitle": "چرخ و محور"
+    },
+    "M07": {
+      "title": "اسکله",
+      "status": "draft",
+      "subtitle": "قرقرهٔ ثابت"
+    },
+    "M08": {
+      "title": "جرثقیل بندر",
+      "status": "draft",
+      "subtitle": "قرقرهٔ متحرک و دستگاه قرقره"
+    },
+    "M11": {
+      "title": "لنگرگاه",
+      "status": "draft",
+      "subtitle": "چرخ‌دنده"
+    },
+    "M01": {
+      "title": "دروازهٔ شهر",
+      "status": "draft",
+      "subtitle": "ماشین چیست"
+    },
+    "E01": {
+      "title": "آسیاب بادی",
+      "status": "draft",
+      "subtitle": "انرژی و تبدیلش"
+    },
+    "E02": {
+      "title": "ایستگاه گاری‌ها",
+      "status": "draft",
+      "subtitle": "کار (نیرو و جابه‌جایی)"
+    },
+    "E03": {
+      "title": "انبار الوار",
+      "status": "draft",
+      "subtitle": "نیروی کمتر، مسافت بیشتر"
+    },
+    "E06": {
+      "title": "میدان شهر",
+      "status": "draft",
+      "subtitle": "نیروی کمتر اما زحمت بیشتر"
+    },
+    "M12": {
+      "title": "مخفی‌گاه هیولای مخترع",
+      "status": "draft",
+      "subtitle": "ماشین مرکب"
+    },
+    "E04": {
+      "title": "برج ساعت",
+      "status": "draft",
+      "subtitle": "مزیت مکانیکی"
+    },
+    "E07": {
+      "title": "چاه آب",
+      "status": "draft",
+      "subtitle": "توان: سرعت انجام کار"
+    }
   },
-  "F02": {
-   "title": "سالن بسکتبال",
-   "status": "draft",
-   "subtitle": "اثر نیرو"
+  "lands": {
+    "L1": {
+      "title": "ورزشگاه: نیرو، حرکت و اصطکاک",
+      "status": "draft"
+    },
+    "L2": {
+      "title": "پایگاه فضایی: جرم، وزن و گرانش",
+      "status": "draft"
+    },
+    "LW": {
+      "title": "مزرعه و آسیاب: کار و انرژی",
+      "status": "draft"
+    },
+    "LM": {
+      "title": "شهر صنعتیِ ماشین‌های ساده",
+      "status": "draft"
+    }
   },
-  "F03": {
-   "title": "میدان کمانداری",
-   "status": "draft",
-   "subtitle": "جهت و اندازهٔ نیرو"
+  "zones": {
+    "Z1": {
+      "title": "کارگاه ساختمانی: اهرم و تعادل",
+      "status": "draft"
+    },
+    "Z2": {
+      "title": "کارخانهٔ نجاری: سطح شیب‌دار، گوه و پیچ",
+      "status": "draft"
+    },
+    "Z3": {
+      "title": "بندر: چرخ، قرقره و چرخ‌دنده",
+      "status": "draft"
+    }
   },
-  "F04": {
-   "title": "هاکی آهنربایی",
-   "status": "draft",
-   "subtitle": "نیروی تماسی و نیروی از دور"
-  },
-  "F08": {
-   "title": "میدان طناب‌کشی",
-   "status": "draft",
-   "subtitle": "چند نیرو با هم (برآیند)"
-  },
-  "F09": {
-   "title": "پارک اسکیت",
-   "status": "draft",
-   "subtitle": "کنش و واکنش و لختی"
-  },
-  "F05": {
-   "title": "سکوی پرتاب",
-   "status": "draft",
-   "subtitle": "گرانش (کشش زمین)"
-  },
-  "W01": {
-   "title": "انبار بار فضایی",
-   "status": "draft",
-   "subtitle": "سنگین و سبک"
-  },
-  "W02": {
-   "title": "آزمایشگاه ترازو",
-   "status": "draft",
-   "subtitle": "جرم"
-  },
-  "W03": {
-   "title": "سطح ماه",
-   "status": "draft",
-   "subtitle": "وزن (نیروی گرانش)"
-  },
-  "W04": {
-   "title": "ایستگاه فضایی",
-   "status": "draft",
-   "subtitle": "جرم در برابر وزن"
-  },
-  "F06": {
-   "title": "پیست یخ",
-   "status": "draft",
-   "subtitle": "اصطکاک"
-  },
-  "F07": {
-   "title": "استخر",
-   "status": "draft",
-   "subtitle": "مقاومت هوا و آب"
-  },
-  "B01": {
-   "title": "داربست",
-   "status": "draft",
-   "subtitle": "تعادل و مرکز گرانش"
-  },
-  "B02": {
-   "title": "انبار مصالح",
-   "status": "draft",
-   "subtitle": "ترازو: برابری دو طرف"
-  },
-  "M04": {
-   "title": "گودبرداری",
-   "status": "draft",
-   "subtitle": "اهرم"
-  },
-  "M05": {
-   "title": "تیرآهن‌ها",
-   "status": "draft",
-   "subtitle": "جای تکیه‌گاه"
-  },
-  "M06": {
-   "title": "ابزارخانه",
-   "status": "draft",
-   "subtitle": "سه نوع اهرم"
-  },
-  "E05": {
-   "title": "آچارخانه",
-   "status": "draft",
-   "subtitle": "گشتاور (اثر چرخاندن)"
-  },
-  "M03": {
-   "title": "رمپ بارگیری",
-   "status": "draft",
-   "subtitle": "سطح شیب‌دار (رمپ)"
-  },
-  "M09": {
-   "title": "چوب‌شکافی",
-   "status": "draft",
-   "subtitle": "گوه"
-  },
-  "M10": {
-   "title": "پیچ‌کاری",
-   "status": "draft",
-   "subtitle": "پیچ"
-  },
-  "M02": {
-   "title": "بارانداز",
-   "status": "draft",
-   "subtitle": "چرخ و محور"
-  },
-  "M07": {
-   "title": "اسکله",
-   "status": "draft",
-   "subtitle": "قرقرهٔ ثابت"
-  },
-  "M08": {
-   "title": "جرثقیل بندر",
-   "status": "draft",
-   "subtitle": "قرقرهٔ متحرک و دستگاه قرقره"
-  },
-  "M11": {
-   "title": "لنگرگاه",
-   "status": "draft",
-   "subtitle": "چرخ‌دنده"
-  },
-  "M01": {
-   "title": "دروازهٔ شهر",
-   "status": "draft",
-   "subtitle": "ماشین چیست"
-  },
-  "E01": {
-   "title": "آسیاب بادی",
-   "status": "draft",
-   "subtitle": "انرژی و تبدیلش"
-  },
-  "E02": {
-   "title": "گاری‌خانه",
-   "status": "draft",
-   "subtitle": "کار (نیرو و جابه‌جایی)"
-  },
-  "E03": {
-   "title": "انبار الوار",
-   "status": "draft",
-   "subtitle": "نیروی کمتر، مسافت بیشتر"
-  },
-  "E06": {
-   "title": "میدان شهر",
-   "status": "draft",
-   "subtitle": "نیروی کمتر اما زحمت بیشتر"
-  },
-  "M12": {
-   "title": "کارگاه ماشین مرکب",
-   "status": "draft",
-   "subtitle": "ماشین مرکب"
-  },
-  "E04": {
-   "title": "برج ساعت",
-   "status": "draft",
-   "subtitle": "مزیت مکانیکی"
-  },
-  "E07": {
-   "title": "چاه آب",
-   "status": "draft",
-   "subtitle": "توان: سرعت انجام کار"
+  "path_stages": [
+    {
+      "title": "نیرو",
+      "status": "draft"
+    },
+    {
+      "title": "نیرو و حرکت (کار خیلی ساده معرفی می‌شود)",
+      "status": "draft"
+    },
+    {
+      "title": "جرم، وزن و گرانش",
+      "status": "draft"
+    },
+    {
+      "title": "کار و انرژی",
+      "status": "draft"
+    },
+    {
+      "title": "ماشین چیست و تعادل",
+      "status": "draft"
+    },
+    {
+      "title": "اهرم",
+      "status": "draft"
+    },
+    {
+      "title": "سطح شیب‌دار، گوه و پیچ",
+      "status": "draft"
+    },
+    {
+      "title": "چرخ، قرقره و چرخ‌دنده (پایان: نیروی کمتر اما زحمت بیشتر)",
+      "status": "draft"
+    }
+  ],
+  "path_names": {
+    "main": {
+      "title": "مسیر بزرگ: از نیرو تا ماشین‌های ساده",
+      "status": "draft"
+    },
+    "machines": {
+      "title": "میانبر: فقط ماشین‌ها (مراحل ۵ تا ۸)",
+      "status": "draft"
+    }
   }
- },
- "lands": {
-  "L1": {
-   "title": "ورزشگاه: نیرو، حرکت و اصطکاک",
-   "status": "draft"
-  },
-  "L2": {
-   "title": "پایگاه فضایی: جرم، وزن و گرانش",
-   "status": "draft"
-  },
-  "LW": {
-   "title": "مزرعه و آسیاب: کار و انرژی",
-   "status": "draft"
-  },
-  "LM": {
-   "title": "شهر صنعتیِ ماشین‌های ساده",
-   "status": "draft"
-  }
- },
- "zones": {
-  "Z1": {
-   "title": "کارگاه ساختمانی: اهرم و تعادل",
-   "status": "draft"
-  },
-  "Z2": {
-   "title": "کارخانهٔ نجاری: سطح شیب‌دار، گوه و پیچ",
-   "status": "draft"
-  },
-  "Z3": {
-   "title": "بندر: چرخ، قرقره و چرخ‌دنده",
-   "status": "draft"
-  }
- },
- "path_stages": [
-  {
-   "title": "نیرو",
-   "status": "draft"
-  },
-  {
-   "title": "نیرو و حرکت (کار خیلی ساده معرفی می‌شود)",
-   "status": "draft"
-  },
-  {
-   "title": "جرم، وزن و گرانش",
-   "status": "draft"
-  },
-  {
-   "title": "کار و انرژی",
-   "status": "draft"
-  },
-  {
-   "title": "ماشین چیست و تعادل",
-   "status": "draft"
-  },
-  {
-   "title": "اهرم",
-   "status": "draft"
-  },
-  {
-   "title": "سطح شیب‌دار، گوه و پیچ",
-   "status": "draft"
-  },
-  {
-   "title": "چرخ، قرقره و چرخ‌دنده (پایان: نیروی کمتر اما زحمت بیشتر)",
-   "status": "draft"
-  }
- ],
- "path_names": {
-  "main": {
-   "title": "مسیر بزرگ: از نیرو تا ماشین‌های ساده",
-   "status": "draft"
-  },
-  "machines": {
-   "title": "میانبر: فقط ماشین‌ها (مراحل ۵ تا ۸)",
-   "status": "draft"
-  }
- }
 }
