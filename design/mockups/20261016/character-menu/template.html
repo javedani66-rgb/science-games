@@ -132,8 +132,11 @@ async function tint(ch,o,src,tgt){
   if(dd>0){hh=mx===r?((g-b)/dd)%6:mx===g?(b-r)/dd+2:(r-g)/dd+4;hh*=60;if(hh<0)hh+=360}
   const s=mx?dd/mx:0;hs[q]=hh;ss[q]=s;vs[q]=mx;const wgt=s*mx;cs+=Math.cos(hh*Math.PI/180)*wgt;sn+=Math.sin(hh*Math.PI/180)*wgt}
  const mean=(Math.atan2(sn,cs)*180/Math.PI+360)%360;
+ // درخشان‌سازی: میانگین سیری و روشنی بخش رنگ‌شده به هدف می‌رسد، سایه‌روشن نسبی حفظ می‌شود
+ let sS=0,sV=0,nn=0;for(let q=0;q<hs.length;q++){if(vs[q]>0||ss[q]>0){sS+=ss[q];sV+=vs[q];nn++}}
+ const mv=nn?sV/nn:0,kS=nn?Math.min(2,Math.max(1,.85/(sS/nn))):1,kV=nn?Math.min(2,Math.max(1,.88/(sV/nn))):1;
  for(let k=0,q=0;k<p.length;k+=4,q++){if(m[k]<128||p[k+3]<128)continue;
-  let hh=tgt==='gray'?hs[q]:(hs[q]+tgt-mean+720)%360,s=tgt==='gray'?ss[q]*.1:ss[q],v=vs[q];
+  let hh=tgt==='gray'?hs[q]:(hs[q]+tgt-mean+720)%360,s=tgt==='gray'?ss[q]*.1:Math.min(1,ss[q]*kS),v=tgt==='gray'?vs[q]:Math.min(1,(mv+(vs[q]-mv)*.6)*kV);
   const cc=v*s,xx=cc*(1-Math.abs((hh/60)%2-1)),mm=v-cc,i=Math.floor(hh/60)%6;
   const rgb=[[cc,xx,0],[xx,cc,0],[0,cc,xx],[0,xx,cc],[xx,0,cc],[cc,0,xx]][i];
   p[k]=(rgb[0]+mm)*255;p[k+1]=(rgb[1]+mm)*255;p[k+2]=(rgb[2]+mm)*255}
