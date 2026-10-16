@@ -12,9 +12,9 @@ CFG = {
  'base':        dict(y=(.30,.56), hue=[(0,360)], s=.35, v=.30, note='بالاتنه'),
  'sports':      dict(y=(.28,.74), hue=[(200,260)], s=.45, v=.30, note='پیراهن و شورت آبی'),
  'winter':      dict(y=(.26,.58), hue=[(150,235)], s=.30, v=.25, note='ژاکت'),
- 'construction':dict(y=(.28,.60), hue=[(15,60)], s=.60, v=.65, note='جلیقهٔ نارنجی'),
+ 'construction':dict(y=(.28,.66), hue=[(10,70)], s=.45, v=.45, note='جلیقهٔ نارنجی'),
  'carpenter':   dict(y=(.34,.68), hue=[(15,45)], s=.45, v=.25, note='پیشبند چرمی'),
- 'farmer':      dict(y=(.30,.82), hue=[(185,245)], s=.12, v=.30, note='سرتاسری جین'),
+ 'farmer':      dict(y=(.22,.90), hue=[(185,245)], s=.08, v=.18, note='سرتاسری جین'),
  'astronaut':   dict(y=(.26,.90), hue=[(165,235)], s=.12, v=.50, note='نوارها و نشان‌های رنگی'),
  'sailor':      dict(y=(.30,.62), hue=[(5,50)], s=.65, v=.55, note='جلیقهٔ نجات'),
 }
@@ -45,6 +45,23 @@ OV[('astronaut','nima')] = dict(y=(.26,.80), hue=[(150,240)], s=.08)
 OV[('base','mani')] = dict(y=(.30,.70), hue=[(45,160)], s=.25, v=.15, minfrac=.008)
 OV[('carpenter','nima')] = dict(y=(.34,.72), hue=[(12,32)])
 
+# دور سوم (بازبینی از خروجی واقعی، ۱۶ اکتبر ۱۵:۱۹)
+for _n in ['nima','roya','sam','tara','goli']:
+    OV[('winter',_n)] = dict(y=(.26,.66), hue=[(140,235)], s=.25, v=.32, exclude=[(.30,.24,.70,.38)])
+OV[('winter','mani')] = dict(y=(.26,.70), hue=[(130,250)], s=.10, v=.12, exclude=[(.30,.24,.70,.38)])
+OV[('winter','sam')] = dict(y=(.26,.66), hue=[(140,235)], s=.20, v=.30, exclude=[(.30,.24,.70,.38)])
+OV[('base','nima')] = dict(y=(.28,.64), hue=[(80,170)], s=.20, v=.18, minfrac=.004)
+OV[('base','goli')] = {**OV[('base','goli')], 's': .25, 'v': .15}
+OV[('base','mani')] = dict(y=(.30,.70), hue=[(40,170)], s=.15, v=.15, minfrac=.008)
+OV[('sports','mani')] = dict(y=(.28,.80))
+OV[('construction','mani')] = dict(y=(.28,.68))
+OV[('construction','roya')] = dict(y=(.36,.62))
+OV[('carpenter','nima')] = dict(y=(.34,.72), hue=[(10,40)], v=.15)
+OV[('carpenter','mani')] = {**OV[('carpenter','mani')], 'exclude': [(.66,.64,.76,.80), (0,.38,.08,.62)]}
+OV[('sailor','mani')] = dict(y=(.26,.62), hue=[(0,55)], v=.35)
+for _n in ['nima','roya','sam','tara','goli']:
+    OV[('sailor',_n)] = {**OV.get(('sailor',_n), {}), 'v': .35}
+
 def hsv(a):
     a = a / 255.; mx = a.max(2); mn = a.min(2); d = mx - mn + 1e-9
     r, g, b = a[..., 0], a[..., 1], a[..., 2]
@@ -56,6 +73,13 @@ def skin_color(a, alpha, h, s, v):
     box = np.zeros_like(alpha); box[int(H * .07):int(H * .22), int(W * .3):int(W * .7)] = True
     sel = box & alpha & (h > 5) & (h < 40) & (s > .25) & (s < .75) & (v > .35)
     return np.median(a[sel][:, :3], axis=0) if sel.sum() > 50 else np.array([200., 140., 100.])
+
+def near_skin_all(a, sk): return np.sqrt(((a[..., :3] - sk) ** 2).sum(2)) < 38
+
+def hue_wide(h, cfg):
+    r = np.zeros(h.shape, bool)
+    for lo, hi in cfg['hue']: r |= (h >= lo - 15) & (h <= hi + 15)
+    return r
 
 def mask(im, cfg, debug=False):
     """v2: مؤلفه‌های متصلِ رنگ لباس که خط دور تیره از هم جدایشان می‌کند؛ پوست را مؤلفه‌به‌مؤلفه کنار می‌گذارد."""
@@ -87,6 +111,10 @@ def mask(im, cfg, debug=False):
         if debug: print('  comp', i, int(z), 'dist-skin %.0f' % d, 'sat %.2f' % ms, 'SKIN' if is_skin else 'ok')
         if not is_skin: keep.append(i)
     m = ndi.binary_dilation(np.isin(lab, keep), iterations=2) & cand
+    grow = ndi.binary_dilation(m, iterations=2) & alpha & band & xr & ~ink & (s >= cfg['s'] * .5) & (v >= cfg['v'] * .6)
+    if not cfg.get('noskin'): grow &= ~(near_skin_all(a, sk) & (s < .70))
+    m = m | (grow & hue_wide(h, cfg))
+    m = m | (ndi.binary_closing(m, iterations=2) & alpha & band & xr & ~ink)
     for x0, y0, x1, y1 in cfg.get('exclude', []):  # مستطیل‌های ممنوع (دستهٔ چکش و …)
         m[int(a.shape[0] * y0):int(a.shape[0] * y1), int(a.shape[1] * x0):int(a.shape[1] * x1)] = False
     # حفره‌های ریز (نقطهٔ سفید دانه‌بندی) پر شوند؛ جزئیات بزرگ (ستاره، نشان) نه
