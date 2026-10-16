@@ -25,3 +25,25 @@
 
 ## برنامه (هنوز اجرا نشده)
 کشاورزی (کلاه حصیری، لباس کار جین، چکمهٔ لاستیکی)، فضانوردی (لباس سفید-آبی، دستکش، بدون کلاه کامل). برای موی حجیم (رویا، تارا) در صورت ناجور بودن کلاه: گوش‌گرم‌کن یا هدبند.
+
+## هیولای مخترع (M12؛ پرامپت نوشته شد، هنوز اجرا نشده، ۱۶ اکتبر)
+مشخصات مالک (D90): هیولای گندهٔ پشمالوی بنفش، خنده‌دار و بامزه، روپوش آزمایشگاه، هدلایت، در آزمایشگاهی پر از ابزار. ضمیمه: یک تصویر از `base-standing/` (مثلاً sam.jpg) فقط برای سبک خط و رنگ.
+
+**۱) خود هیولا (یک تصویر ضمیمه: نمونهٔ سبک)**
+```
+Use the attached image ONLY as a style reference (hand-drawn lively look, thick black outline, cheerful flat colors with slight shading). Do NOT copy its face, hair or body.
+Draw a NEW character: a big, round, fluffy purple monster inventor, full body, standing, front view, friendly and funny, for children aged 6-11. Very tall and wide with a soft pear-shaped body covered in shaggy purple fur (two tones of purple), short thick legs and big furry feet, small round ears, one big goofy grin with two small teeth, two big round eyes of different sizes behind small round safety goggles pushed up on the forehead, a little tuft of fur sticking up on top. He wears a white lab coat that is too small for him (buttons straining, sleeves ending above his wrists), with pockets full of tools: a screwdriver, a wrench handle and a pencil sticking out. On his head a yellow headlamp on an elastic strap, lamp turned on with a small warm glow. One hand waves, the other holds a big wrench. Not scary: soft rounded shapes, no sharp claws, no sharp teeth, no dark shadows.
+Same style, line weight and proportions of the attached sample. Fully transparent background, no text, no ground shadow. Single character, centered, full body visible.
+```
+
+**۲) سه حالت سر** (همان قاعدهٔ گلی: شاد، متفکر، شگفت‌زده؛ فقط سر، شفاف، همان اندازه و جا):
+```
+Edit, do not redraw: keep the monster's fur, face shape, goggles, headlamp and line style exactly the same. Output only the head and shoulders, transparent background, three versions: happy, thinking (one eyebrow raised, finger on chin not visible), surprised (mouth open round, eyes wide, fur puffed). Same size and position in all three.
+```
+
+**۳) محیط (تصویر دوم، بعد از پذیرفتن هیولا)** — هیولا را ضمیمه کن:
+```
+Edit the monster into a scene, do not redraw him. Wide cozy inventor's laboratory seen from the front, same hand-drawn thick-outline style. Workbench with a lever, a pulley with rope, a gear train, a ramp, a screw and a wedge; shelves full of tools; blueprints on the wall; a half-built funny machine with big gears in the middle; warm lamp light and the glow of the monster's headlamp. Cluttered but readable, bright cheerful colors, no text anywhere, no scary elements. Keep the center of the image clear for a game character to stand.
+```
+
+**اگر خراب شد:** «scarier» شد ← «make him rounder, softer, with a bigger smile»؛ سبک عوض شد ← «redraw in exactly the style of the attached image»؛ سر نمونه کپی شد ← تصویر نمونه را فقط تن بدون سر بده و بنویس «the attached image is the style source only».
