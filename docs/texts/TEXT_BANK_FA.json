@@ -11026,6 +11026,36 @@
    ],
    "text": "اصلی",
    "status": "draft"
+  },
+  "charmenu.color.red": {
+   "id": "charmenu.color.red",
+   "kind": "ui",
+   "where_fa": "نام رنگ لباس",
+   "context_fa": "زیر دایرهٔ رنگ؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.color.red",
+    "text"
+   ],
+   "text": "قرمز",
+   "status": "draft"
+  },
+  "charmenu.color.yellow": {
+   "id": "charmenu.color.yellow",
+   "kind": "ui",
+   "where_fa": "نام رنگ لباس",
+   "context_fa": "زیر دایرهٔ رنگ؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.color.yellow",
+    "text"
+   ],
+   "text": "زرد",
+   "status": "draft"
   }
  },
  "meta": {

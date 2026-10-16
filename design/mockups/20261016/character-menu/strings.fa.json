@@ -254,5 +254,21 @@
   "context_fa": "رنگ لباس؛ پیش‌نویس",
   "band": "همه",
   "status": "draft"
+ },
+ "charmenu.color.red": {
+  "text": "قرمز",
+  "kind": "ui",
+  "where_fa": "نام رنگ لباس",
+  "context_fa": "زیر دایرهٔ رنگ؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "charmenu.color.yellow": {
+  "text": "زرد",
+  "kind": "ui",
+  "where_fa": "نام رنگ لباس",
+  "context_fa": "زیر دایرهٔ رنگ؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
  }
 }

@@ -28,13 +28,8 @@ def enc(im, q=78):
 
 
 def head_crop(im):
-    # سر تا گردن/یقه؛ پایین برش با محو شدن آلفا نرم می‌شود (نه لبهٔ تیز)
-    import numpy as np
-    c = im.crop((0, 0, im.width, round(im.height * .40)))
-    a = np.asarray(c).copy(); h = a.shape[0]; f0 = int(h * .72)
-    ramp = np.clip((h - np.arange(h)) / (h - f0), 0, 1)[:, None]
-    a[:, :, 3] = (a[:, :, 3] * ramp).astype('uint8')
-    return Image.fromarray(a, 'RGBA')
+    # سر تا گردن و یقه؛ بدون محو. پایین برش دقیقاً روی لبهٔ پایین کارت می‌نشیند (کاراکتر از پشت لبه سر می‌زند)
+    return im.crop((0, 0, im.width, round(im.height * .42)))
 
 
 def enc_mask(p):
