@@ -11219,7 +11219,7 @@
     "motionetude.status.0",
     "text"
    ],
-   "text": "روی خشکی هستی. بزن تا به اسکله بروی.",
+   "text": "روی خشکی هستی. بزن تا به بندر بروی.",
    "status": "draft"
   },
   "motionetude.status.1": {
@@ -11264,7 +11264,7 @@
     "motionetude.status.3",
     "text"
    ],
-   "text": "رسیدی.",
+   "text": "به بندر رسیدی.",
    "status": "draft"
   },
   "motionetude.status.moving": {
@@ -11280,6 +11280,21 @@
     "text"
    ],
    "text": "در راه…",
+   "status": "draft"
+  },
+  "motionetude.btn.go": {
+   "id": "motionetude.btn.go",
+   "kind": "ui",
+   "where_fa": "دکمهٔ اصلی ماکت حرکت",
+   "context_fa": "یک لمس: قدم زدن، سوار شدن، سفر و پیاده شدن خودکار؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.btn.go",
+    "text"
+   ],
+   "text": "برو به بندر",
    "status": "draft"
   }
  },

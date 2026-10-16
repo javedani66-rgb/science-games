@@ -7,30 +7,6 @@
   "band": "همه",
   "status": "draft"
  },
- "motionetude.btn.walk1": {
-  "text": "قدم بزن تا اسکله",
-  "kind": "ui",
-  "where_fa": "دکمهٔ اصلی مرحلهٔ اول",
-  "context_fa": "کاراکتر با تلوتلوی عروسکی به اسکله می‌رود؛ پیش‌نویس",
-  "band": "همه",
-  "status": "draft"
- },
- "motionetude.btn.board": {
-  "text": "سوار قایق شو",
-  "kind": "ui",
-  "where_fa": "دکمهٔ اصلی مرحلهٔ دوم",
-  "context_fa": "پرش به قایق و سفر روی آب؛ پیش‌نویس",
-  "band": "همه",
-  "status": "draft"
- },
- "motionetude.btn.walk2": {
-  "text": "برو به خشکی",
-  "kind": "ui",
-  "where_fa": "دکمهٔ اصلی مرحلهٔ سوم",
-  "context_fa": "قدم زدن از اسکلهٔ آن‌سو به خشکی؛ پیش‌نویس",
-  "band": "همه",
-  "status": "draft"
- },
  "motionetude.btn.again": {
   "text": "از اول",
   "kind": "ui",
@@ -80,31 +56,15 @@
   "status": "draft"
  },
  "motionetude.status.0": {
-  "text": "روی خشکی هستی. بزن تا به اسکله بروی.",
+  "text": "روی خشکی هستی. بزن تا به بندر بروی.",
   "kind": "ui",
   "where_fa": "وضعیت مرحلهٔ ۰",
   "context_fa": "زیر صحنه؛ پیش‌نویس",
   "band": "همه",
   "status": "draft"
  },
- "motionetude.status.1": {
-  "text": "سر اسکله‌ای. قایق منتظر است.",
-  "kind": "ui",
-  "where_fa": "وضعیت مرحلهٔ ۱",
-  "context_fa": "زیر صحنه؛ پیش‌نویس",
-  "band": "همه",
-  "status": "draft"
- },
- "motionetude.status.2": {
-  "text": "آن‌سوی آب رسیدی. بزن تا به خشکی بروی.",
-  "kind": "ui",
-  "where_fa": "وضعیت مرحلهٔ ۲",
-  "context_fa": "زیر صحنه؛ پیش‌نویس",
-  "band": "همه",
-  "status": "draft"
- },
  "motionetude.status.3": {
-  "text": "رسیدی.",
+  "text": "به بندر رسیدی.",
   "kind": "ui",
   "where_fa": "وضعیت مرحلهٔ ۳",
   "context_fa": "زیر صحنه؛ پیش‌نویس",
@@ -116,6 +76,14 @@
   "kind": "ui",
   "where_fa": "وضعیت هنگام حرکت",
   "context_fa": "زیر صحنه؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.btn.go": {
+  "text": "برو به بندر",
+  "kind": "ui",
+  "where_fa": "دکمهٔ اصلی ماکت حرکت",
+  "context_fa": "یک لمس: قدم زدن، سوار شدن، سفر و پیاده شدن خودکار؛ پیش‌نویس",
   "band": "همه",
   "status": "draft"
  }

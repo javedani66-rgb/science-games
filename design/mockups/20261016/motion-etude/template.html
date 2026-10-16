@@ -97,7 +97,7 @@ const hist=[];
 const scaleAt=y=>Math.min(1,.88+.12*(y-120)/360);
 function placeFig(x,y){fig.style.transform='translate('+x+'px,'+y+'px) scale('+scaleAt(y)+') translate(-50%,-100%)'}
 function placeBoat(x,y,rot){boat.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-50%) rotate('+rot+'deg)'}
-const BOAT0={x:285,y:405},SEAT={x:0,y:34};
+const BOAT0={x:272,y:400},SEAT={x:0,y:34};
 function setTilt(rot,bob,sq){tilt.style.transform='rotate('+rot+'deg) translateY('+bob+'px)';fimg.style.transform='scaleY('+(sq||1)+')'}
 const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
 function tween(ms,fn,e){return new Promise(res=>{if(reduce||skip){fn(1);res();return}
@@ -114,7 +114,7 @@ async function hop(a,b,h){await tween(400,p=>{placeFig(a[0]+(b[0]-a[0])*p,a[1]+(
 const boatPos={x:BOAT0.x,y:BOAT0.y,r:0};
 async function dip(){await tween(420,p=>{const k=Math.exp(-4*p)*Math.sin(p*Math.PI*3);placeBoat(boatPos.x,boatPos.y+3.5*k,boatPos.r+2.5*k)})}
 const bez=(p,a,b,c,d)=>{const q=1-p;return[q*q*q*a[0]+3*q*q*p*b[0]+3*q*p*p*c[0]+p*p*p*d[0],q*q*q*a[1]+3*q*q*p*b[1]+3*q*p*p*c[1]+p*p*p*d[1]]};
-const BOAT1={x:72,y:262};
+const BOAT1={x:132,y:200};
 async function sail(){const P0=[BOAT0.x,BOAT0.y],P1=[335,320],P2=[150,330],P3=[BOAT1.x,BOAT1.y];hist.length=0;
  await tween(4200,p=>{const [x,y]=bez(p,P0,P1,P2,P3);
   const env=Math.min(1,p*6,(1-p)*6),roll=2.6*Math.sin(p*Math.PI*6)*env,bob=1.8*Math.sin(p*Math.PI*9)*env;
@@ -123,17 +123,18 @@ async function sail(){const P0=[BOAT0.x,BOAT0.y],P1=[335,320],P2=[150,330],P3=[B
   hist.push([x,y+62]);if(hist.length>60)hist.shift();
   foams.forEach((f,i)=>{const h=hist[hist.length-1-i*6];if(!h){f.style.opacity=0;return}f.style.opacity=Math.max(0,.75-i*.1)*env;f.style.transform='translate('+h[0]+'px,'+h[1]+'px) scale('+(1+i*.12)+')'})},ease);
  foams.forEach(f=>f.style.opacity=0);setTilt(0,0)}
-const POS={start:[38,545],pier:[178,424],pad2:[118,204],end:[224,190]};
+const POS={start:[38,545],pier:[198,424],pad2:[168,206],end:[226,190]};
 async function run(fn){if(busy)return;busy=true;skip=false;$('go').hidden=true;$('skip').hidden=reduce;$('status').textContent=T('status.moving');
  try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('go').hidden=false}}
 const STEPS=[
  ()=>walk([POS.start,[95,505],[145,478],POS.pier]),
  async()=>{const s=[BOAT0.x+SEAT.x,BOAT0.y+SEAT.y];await hop(POS.pier,s,24);boatPos.x=BOAT0.x;boatPos.y=BOAT0.y;await dip();await sail();await dip();await hop([boatPos.x,boatPos.y+SEAT.y],POS.pad2,24)},
- ()=>walk([POS.pad2,[170,200],POS.end]),
+ ()=>walk([POS.pad2,[200,198],POS.end]),
  async()=>{reset()}];
+const AUTO=async()=>{await STEPS[0]();await STEPS[1]();await STEPS[2]()};
 function reset(){placeFig(POS.start[0],POS.start[1]);setTilt(0,0);boatPos.x=BOAT0.x;boatPos.y=BOAT0.y;boatPos.r=0;placeBoat(BOAT0.x,BOAT0.y,0);foams.forEach(f=>f.style.opacity=0)}
-function ui(){const L=['btn.walk1','btn.board','btn.walk2','btn.again'];$('go').textContent=T(L[stage]);$('status').textContent=T('status.'+stage)}
-$('go').onclick=async()=>{if(busy)return;await run(STEPS[stage]);stage=(stage+1)%4;ui()};
+function ui(){$('go').textContent=T(stage?'btn.again':'btn.go');$('status').textContent=T(stage?'status.3':'status.0')}
+$('go').onclick=async()=>{if(busy)return;await run(stage?STEPS[3]:AUTO);stage=stage?0:1;ui()};
 $('skip').textContent=T('btn.skip');$('skip').onclick=()=>{skip=true};
 function redUi(){$('red').textContent=T(reduce?'btn.reduce.on':'btn.reduce.off');$('red').setAttribute('aria-pressed',reduce);document.documentElement.classList.toggle('reduce',reduce)}
 $('red').onclick=()=>{reduce=!reduce;if(busy){skip=true;$('skip').hidden=true}redUi()};
