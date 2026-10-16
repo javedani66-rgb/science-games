@@ -2,19 +2,17 @@
 <ellipse cx="8" cy="24" rx="104" ry="32" fill="#10083a" opacity=".3"/>
 <path d="M-94,0 v14 a94,32 0 0 0 188,0 v-14 z" fill="#9c8660" class="eo" stroke-width="5.5"/>
 <ellipse cx="0" cy="0" rx="94" ry="32" fill="#e8d6aa" class="eo" stroke-width="5.5"/>
-<path d="M-60,2 L72,2" stroke="#241a5e" stroke-width="2.5" opacity=".35" stroke-linecap="round"/>
 <g class="eo" stroke-width="4.5">
 <rect x="-84" y="-52" width="70" height="46" fill="#c8553d"/>
 <path d="M-90,-52 L-49,-82 L-8,-52 Z" fill="#8d3b2e"/>
 <path d="M-62,-6 v-22 a13,13 0 0 1 26,0 v22 z" fill="#2a1b4a"/>
-<rect x="-30" y="-40" width="12" height="12" fill="#fff3c4"/>
+<rect x="-32" y="-42" width="16" height="16" fill="#fff3c4"/>
 </g>
-<g class="eo" stroke-width="4.5">
+<g class="eo" stroke-width="5">
 <rect x="22" y="-96" width="50" height="90" fill="#dfe6f2"/>
 <ellipse cx="47" cy="-96" rx="30" ry="9" fill="#f4f7fc"/>
-<path d="M30,-98 L64,-94" stroke-width="4" fill="none"/>
 </g>
-<g stroke="#3f4a8a" stroke-width="4" fill="none" stroke-linecap="round"><path d="M22,-82 L72,-68 M22,-62 L72,-48 M22,-42 L72,-28 M22,-22 L72,-8"/></g>
-<g stroke="#fff3c4" stroke-width="2" fill="none" stroke-linecap="round" opacity=".8"><path d="M26,-86 L68,-74 M26,-66 L68,-54 M26,-46 L68,-34"/></g>
+<g stroke="#3f4a8a" stroke-width="8" fill="none" stroke-linecap="butt"><path d="M24,-76 L70,-62 M24,-50 L70,-36 M24,-24 L70,-10"/></g>
+<g class="eo" stroke-width="5" fill="none"><rect x="22" y="-96" width="50" height="90"/></g>
 </g>
 </symbol>

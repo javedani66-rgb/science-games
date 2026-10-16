@@ -81,12 +81,11 @@ const prints=document.createElementNS(NS,'g');prints.id='prints';(svgMap.querySe
 /* ردپا فقط پس از گذر از هر مرحله، از همان ایستگاه (روی سطح آن) تا ایستگاه بعد حک می‌شود (D99) */
 /* اسکلهٔ چوبی ساحل: پیوند خشکی و آب؛ راه از روی تخته‌هایش به دریا می‌رسد */
 const jet=document.createElementNS(NS,'g');jet.id='jetty';jet.setAttribute('filter','url(#env_wob)');
-(function(){const q=[[340,1058],[372,1058],[352,950],[320,950]];const lerp=(a,b,u)=>[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];
+(function(){const q=[[340,1046],[372,1046],[352,950],[320,950]];const lerp=(a,b,u)=>[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];
  let h='<path d="M'+q.map(p=>p.join(',')).join(' L')+' Z" fill="#c98f52" stroke="#241a5e" stroke-width="5" stroke-linejoin="round"/>';
- for(let y=1048;y>958;y-=11){const u=(1058-y)/108,l=lerp(q[0],q[3],u),r=lerp(q[1],q[2],u);h+='<path d="M'+(l[0]+3)+','+y+' L'+(r[0]-3)+','+y+'" stroke="#8a5a30" stroke-width="2.4" stroke-linecap="round"/>'}
- h+='<path d="M340,1058 L320,950 M372,1058 L352,950" stroke="#7a4a28" stroke-width="5" fill="none"/>';
- [[321,956],[351,956],[340,1032],[371,1032]].forEach(p=>{h+='<rect x="'+(p[0]-5)+'" y="'+(p[1]-8)+'" width="10" height="14" rx="3" fill="#7a4a28" stroke="#241a5e" stroke-width="3.5"/>'});
- jet.innerHTML=h;
+ for(let y=1037;y>958;y-=11){const u=(1046-y)/96,l=lerp(q[0],q[3],u),r=lerp(q[1],q[2],u);h+='<path d="M'+(l[0]+3)+','+y+' L'+(r[0]-3)+','+y+'" stroke="#8a5a30" stroke-width="2.4" stroke-linecap="round"/>'}
+ h+='<path d="M340,1046 L320,950 M372,1046 L352,950" stroke="#7a4a28" stroke-width="5" fill="none"/>';
+ [[321,956],[351,956]].forEach(p=>{h+='<rect x="'+(p[0]-5)+'" y="'+(p[1]-8)+'" width="10" height="14" rx="3" fill="#7a4a28" stroke="#241a5e" stroke-width="3.5"/>'});
 jet.innerHTML=h})();
 (svgMap.querySelector('#env_labels')||svgMap.lastElementChild).before(jet);
 /* ردپا (D99/D100/D101): هر ایستگاه یک سکوی بالا آمده است. ردپا از پهلوی سکو (جایی که دیواره باریک دیده می‌شود) روی سطح بالایی می‌رود،
@@ -94,7 +93,7 @@ jet.innerHTML=h})();
 const pd=n=>({rx:n.pad[0],ry:n.pad[1],w:n.pad[2],bh:n.pad[3]});
 const inOuter=(n,x,y)=>{const q=pd(n),dx=x-n.x,dy=y-n.y-q.w/2;return (dx/(q.rx+14))**2+(dy/(q.ry+q.w/2+12))**2<1};
 const inBuild=(x,y)=>Object.values(NODES).some(n=>{const q=pd(n);return Math.abs(x-n.x)<q.rx*.72&&y<n.y-q.ry*.5&&y>n.y-q.bh-q.ry});
-const onJetty=(x,y)=>{if(y<958||y>1052)return false;const u=(1058-y)/108,l=340-20*u,r=372-20*u;return x>l+4&&x<r-4};
+const onJetty=(x,y)=>{if(y<958||y>1036)return false;const u=(1046-y)/96,l=340-20*u,r=372-20*u;return x>l+4&&x<r-4};
 function legPoly(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],sB=B.s;
  // فقط راهِ بیرون از سکوها؛ ردپا روی ایستگاه نمی‌افتد (D102)
  const pts=[];let i=samp.findIndex(p=>p[2]>=A.s);
