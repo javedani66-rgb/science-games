@@ -266,22 +266,18 @@ const jet=document.createElementNS(NS,'g');jet.id='jetty';jet.setAttribute('filt
 const pd=n=>({rx:n.pad[0],ry:n.pad[1],w:n.pad[2],bh:n.pad[3]});
 const inOuter=(n,x,y)=>{const q=pd(n),dx=x-n.x,dy=y-n.y-q.w/2;return (dx/(q.rx+14))**2+(dy/(q.ry+q.w/2+12))**2<1};
 const inBuild=(x,y)=>Object.values(NODES).some(n=>{const q=pd(n);return Math.abs(x-n.x)<q.rx*.72&&y<n.y-q.ry*.5&&y>n.y-q.bh-q.ry});
-const onTop=(x,y)=>(x>344&&x<368&&y>984&&y<1052)||Object.values(NODES).some(n=>{const q=pd(n);return ((x-n.x)/q.rx)**2+((y-n.y)/q.ry)**2<.9});
-function legPoly(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],sA=A.s,sB=B.s,qa=pd(A),qb=pd(B);
- const pts=[];let i0=samp.findIndex(p=>p[2]>=sA);
- // خروج از سکوی A: اولین نمونه بیرون سکو
- let i=i0;while(i<samp.length&&inOuter(A,samp[i][0],samp[i][1]))i++;
- const sx=(samp[i]?Math.sign(samp[i][0]-A.x):1)||1;
- pts.push([A.x,A.y+5],[A.x+sx*(qa.rx-10),A.y+5],[A.x+sx*(qa.rx+10),A.y+qa.w/2+2]);
- let j=i;while(j<samp.length&&samp[j][2]<sB&&!inOuter(B,samp[j][0],samp[j][1])){pts.push([samp[j][0],samp[j][1]]);j++}
- const ex=(samp[j]?Math.sign(samp[j][0]-B.x):-1)||-1;
- pts.push([B.x+ex*(qb.rx+10),B.y+qb.w/2+2],[B.x+ex*(qb.rx-10),B.y+5],[B.x+ex*26,B.y+5]);
+const onJetty=(x,y)=>x>344&&x<368&&y>984&&y<1052;
+function legPoly(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],sB=B.s;
+ // فقط راهِ بیرون از سکوها؛ ردپا روی ایستگاه نمی‌افتد (D102)
+ const pts=[];let i=samp.findIndex(p=>p[2]>=A.s);
+ while(i<samp.length&&inOuter(A,samp[i][0],samp[i][1]))i++;
+ for(;i<samp.length&&samp[i][2]<sB&&!inOuter(B,samp[i][0],samp[i][1]);i++)pts.push([samp[i][0],samp[i][1]]);
  return pts}
 (function(){
  for(let k=0;k<ORDER.length-1;k++){const P=legPoly(k);let acc=0,side=1,need=0;
   for(let m=1;m<P.length;m++){const [x0,y0]=P[m-1],[x1,y1]=P[m],L=Math.hypot(x1-x0,y1-y0);if(!L)continue;const ang=Math.atan2(y1-y0,x1-x0);
    while(need<=L){const x=x0+(x1-x0)*need/L,y=y0+(y1-y0)*need/L;need+=26;
-    if(!(y>=COAST+14||onTop(x,y))||y>1620-8||inBuild(x,y))continue;
+    if(!(y>=COAST+14||onJetty(x,y))||y>1620-8||inBuild(x,y)||Object.values(NODES).some(n=>inOuter(n,x,y)))continue;
     const g=document.createElementNS(NS,'g');g.dataset.leg=k;g.dataset.s=k*100000+acc+need;g.style.display='none';
     g.setAttribute('transform','translate('+(x-Math.sin(ang)*6*side).toFixed(1)+' '+(y+Math.cos(ang)*6*side).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
     g.innerHTML='<g class="pr"><g fill="#f1dcff" stroke="#2a0f5e" stroke-width="2"><ellipse cx="0" cy="2.5" rx="5.2" ry="7"/><circle cx="-4.6" cy="-5.6" r="2.4"/><circle cx="0" cy="-8.4" r="2.5"/><circle cx="4.6" cy="-5.6" r="2.4"/></g></g>';
