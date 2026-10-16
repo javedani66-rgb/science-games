@@ -27,6 +27,16 @@ def enc(im, q=78):
     return 'data:image/webp;base64,' + base64.b64encode(b.getvalue()).decode()
 
 
+def head_crop(im):
+    # سر تا گردن/یقه؛ پایین برش با محو شدن آلفا نرم می‌شود (نه لبهٔ تیز)
+    import numpy as np
+    c = im.crop((0, 0, im.width, round(im.height * .40)))
+    a = np.asarray(c).copy(); h = a.shape[0]; f0 = int(h * .72)
+    ramp = np.clip((h - np.arange(h)) / (h - f0), 0, 1)[:, None]
+    a[:, :, 3] = (a[:, :, 3] * ramp).astype('uint8')
+    return Image.fromarray(a, 'RGBA')
+
+
 def scaled(im, h):
     return im.resize((max(1, round(im.width * h / im.height)), h), Image.LANCZOS)
 
@@ -37,7 +47,7 @@ def images():
     out = dict(head={}, big={}, thumbc={}, thumb={}, mini={})
     for n in NAMES:
         b = load('base', n)
-        out['head'][n] = enc(scaled(b.crop((0, 0, b.width, round(b.height * .36))), 190))
+        out['head'][n] = enc(scaled(head_crop(b), 190))
         out['mini'][n] = enc(scaled(b, 180))
         out['big'][n] = {o: enc(load(o, n), 80) for o in OUTFITS}
         out['thumbc'][n] = {o: enc(scaled(load(o, n), 150)) for o in OUTFITS}

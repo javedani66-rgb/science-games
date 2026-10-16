@@ -20,7 +20,7 @@ img{display:block;max-width:100%}
 #rv button{background:#fff;color:#2b3a2b;border-radius:999px;padding:0 12px;height:30px;font-size:14px;font-weight:700}
 #rv button[aria-pressed=true]{background:var(--gold)}
 #app{max-width:430px;margin:0 auto;background:var(--sky);min-height:calc(100vh - 40px);padding:18px 16px 112px;position:relative}
-.title{margin:4px 0 6px;text-align:center;font:400 32px/1.3 Lalezar,Vazirmatn,sans-serif;color:var(--cream);-webkit-text-stroke:6px var(--navy);paint-order:stroke fill;text-shadow:0 3px 0 var(--edge)}
+.title{margin:4px 0 6px;text-align:center;font:400 32px/1.3 Lalezar,Vazirmatn,sans-serif;color:var(--cream);-webkit-text-stroke:5px var(--navy);paint-order:stroke fill;text-shadow:0 3px 0 var(--edge);word-spacing:.22em}
 .sub{display:block;width:fit-content;max-width:100%;margin:0 auto 16px;text-align:center;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:4px 16px;font-size:16px}
 h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-serif;color:var(--navy)}
 .card{background:var(--cream);border:3.5px solid var(--navy);border-radius:28px;box-shadow:0 4px 0 var(--edge);padding:14px 12px}
@@ -58,10 +58,10 @@ h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-ser
 .of[aria-checked=true]{background:color-mix(in srgb,var(--pc) 26%,var(--cream2));outline:4px solid var(--pc);outline-offset:1px}
 .map{position:relative;height:188px;border:3.5px solid var(--navy);border-radius:28px;background:#7fbf4a;overflow:hidden;box-shadow:0 4px 0 var(--edge)}
 .road{position:absolute;inset-inline:-10px;top:112px;height:34px;background:var(--cream);border-block:6px solid var(--navy)}
-.map .who{position:absolute;inset-inline-start:50%;transform:translateX(50%);bottom:34px;width:110px;display:flex;flex-direction:column;align-items:center}
+.map .who{position:absolute;inset-inline-start:50%;transform:translateX(50%);bottom:30px;width:110px;display:flex;flex-direction:column;align-items:center}
 [dir=rtl] .map .who{transform:translateX(50%)}
 .ring{position:absolute;bottom:-12px;width:104px;height:30px;border-radius:50%;border:8px solid var(--gold);box-shadow:0 0 0 3px var(--navy),inset 0 0 0 3px var(--navy)}
-.map .who img{position:relative;z-index:1;height:86px;width:auto;margin-bottom:6px}
+.map .who img{position:relative;z-index:1;height:104px;width:auto;margin-bottom:6px;filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))}
 .pl{position:absolute;inset-inline-end:14px;top:12px;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:0 12px 0 10px;display:flex;align-items:center;gap:6px;font:400 20px/1.5 Lalezar,Vazirmatn,sans-serif}
 .pl i{width:16px;height:16px;border-radius:50%;background:var(--pc);border:2.6px solid var(--navy)}
 .bar{position:fixed;inset-inline:0;bottom:0;z-index:5;display:flex;justify-content:center;padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--sky) 38%)}
