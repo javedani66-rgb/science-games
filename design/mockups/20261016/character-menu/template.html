@@ -65,7 +65,7 @@ h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-ser
 .map .who{position:absolute;inset-inline-start:50%;transform:translateX(50%);bottom:30px;width:110px;display:flex;flex-direction:column;align-items:center}
 [dir=rtl] .map .who{transform:translateX(50%)}
 .ring{position:absolute;bottom:-12px;width:104px;height:30px;border-radius:50%;border:8px solid var(--gold);box-shadow:0 0 0 3px var(--navy),inset 0 0 0 3px var(--navy)}
-.map .who img{position:relative;z-index:1;height:104px;width:auto;margin-bottom:6px;filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))}
+.map .who img{position:relative;z-index:1;height:104px;width:auto;margin-bottom:6px;filter:drop-shadow(2px 0px 0 var(--cream)) drop-shadow(-2px 0px 0 var(--cream)) drop-shadow(0px 2px 0 var(--cream)) drop-shadow(0px -2px 0 var(--cream)) drop-shadow(1.5px 1.5px 0 var(--cream)) drop-shadow(-1.5px 1.5px 0 var(--cream)) drop-shadow(1.5px -1.5px 0 var(--cream)) drop-shadow(-1.5px -1.5px 0 var(--cream)) drop-shadow(1.4px 0px 0 var(--navy)) drop-shadow(-1.4px 0px 0 var(--navy)) drop-shadow(0px 1.4px 0 var(--navy)) drop-shadow(0px -1.4px 0 var(--navy)) drop-shadow(1px 1px 0 var(--navy)) drop-shadow(-1px 1px 0 var(--navy)) drop-shadow(1px -1px 0 var(--navy)) drop-shadow(-1px -1px 0 var(--navy))}
 .pl{position:absolute;inset-inline-end:14px;top:12px;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:0 12px 0 10px;display:flex;align-items:center;gap:6px;font:400 20px/1.5 Lalezar,Vazirmatn,sans-serif}
 .pl i{width:16px;height:16px;border-radius:50%;background:var(--pc);border:2.6px solid var(--navy)}
 .bar{position:fixed;inset-inline:0;bottom:0;z-index:5;display:flex;justify-content:center;padding:14px 16px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--sky) 38%)}
@@ -78,7 +78,7 @@ h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-ser
 </style>
 </head>
 <body>
-<div id="rv"><span class="t" id="rvt"></span><span id="rvl"></span><button id="m1" aria-pressed="true"></button><button id="m2" aria-pressed="false"></button></div>
+<div id="rv"><span class="t" id="rvt"></span><span id="rvl"></span><button id="m1" aria-pressed="true"></button><button id="m2" aria-pressed="false"></button><button id="m3"></button></div>
 <div class="toast" id="toast" role="status"></div>
 <main id="app">
  <h1 class="title" id="ttl"></h1>
@@ -99,7 +99,8 @@ const COLORS=[['original','#fff3c4','ring',null],['blue','#3d7be8','circle',215]
 const OUTFITS=['base','sports','winter','astronaut','farmer','construction','carpenter','sailor'];
 const SH={cross:'<path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z" stroke-linejoin="round"/>',pent:'<path d="M12 3 21 10l-3.5 11h-11L3 10z" stroke-linejoin="round"/>',ring:'<circle cx="12" cy="12" r="7" fill="none"/>',circle:'<circle cx="12" cy="12" r="7"/>',square:'<rect x="5" y="5" width="14" height="14" rx="2"/>',triangle:'<path d="M12 4 21 20H3z" stroke-linejoin="round"/>',diamond:'<path d="M12 3 21 12 12 21 3 12z" stroke-linejoin="round"/>',hexagon:'<path d="M12 3 20 7.5v9L12 21 4 16.5v-9z" stroke-linejoin="round"/>'};
 const TICK='<svg class="tk" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="10" fill="#241a5e"/><path d="M6 11.5l3.4 3.4L16 8" fill="none" stroke="#fff3c4" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const st={ch:null,color:0,outfit:'base',mode:'first',name:''};
+const BGS=['#7fbf4a','#2b3a66','#4aa3d9','#e8d9a8','#c9c9d6','#b3472f'];
+const st={bg:0,ch:null,color:0,outfit:'base',mode:'first',name:''};
 const $=id=>document.getElementById(id);
 const T=k=>S[k].text;
 function css(){document.documentElement.style.setProperty('--pc',(st.color&&COLORS[st.color][0]!=='red'&&COLORS[st.color][0]!=='yellow')?COLORS[st.color][1]:'#3d7be8')}
@@ -115,6 +116,7 @@ function build(){
  $('outfits').onclick=e=>{const b=e.target.closest('.of');if(!b||!st.ch)return;st.outfit=b.dataset.o;render()};
  $('nm').oninput=e=>{st.name=e.target.value;render()};
  $('m1').onclick=()=>{st.mode='first';st.ch=null;st.outfit='base';st.name='';$('nm').value='';render()};
+ $('m3').onclick=()=>{st.bg=(st.bg+1)%BGS.length;render()};
  $('m2').onclick=()=>{st.mode='menu';st.ch='goli';st.outfit='base';st.name='سارا';$('nm').value=st.name;render()};
  $('go').onclick=()=>{if(!st.ch||!st.name.trim())return;const t=$('toast');t.textContent=st.mode==='first'?R.pressed:R.saved;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2400)};
 }
@@ -148,7 +150,7 @@ async function paint(){
  await Promise.all([set($('big'),IMG.big[ch][st.outfit],st.outfit),set($('mini'),IMG.mini[ch],'base'),
   ...[...document.querySelectorAll('.of img')].map(im=>set(im,IMG.thumbc[ch][im.dataset.o],im.dataset.o))])}
 function render(){
- css();const m=st.mode;
+ css();const m=st.mode;$('map').style.background=BGS[st.bg];$('m3').textContent=R['bg.label'];
  $('ttl').textContent=T('charmenu.title.'+m);$('sub').textContent=T('charmenu.sub.'+m);$('go').textContent=T('charmenu.go.'+m);
  $('m1').setAttribute('aria-pressed',m==='first');$('m2').setAttribute('aria-pressed',m==='menu');
  document.querySelectorAll('.char').forEach(b=>b.setAttribute('aria-checked',b.dataset.c===st.ch));

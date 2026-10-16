@@ -14,7 +14,7 @@ CFG = {
  'winter':      dict(y=(.26,.58), hue=[(150,235)], s=.30, v=.25, note='ژاکت'),
  'construction':dict(y=(.28,.66), hue=[(10,70)], s=.45, v=.45, note='جلیقهٔ نارنجی'),
  'carpenter':   dict(y=(.34,.68), hue=[(15,45)], s=.45, v=.25, note='پیشبند چرمی'),
- 'farmer':      dict(y=(.22,.90), hue=[(185,245)], s=.08, v=.18, note='سرتاسری جین'),
+ 'farmer':      dict(y=(.22,.90), hue=[(180,250)], s=.05, v=.15, note='سرتاسری جین'),
  'astronaut':   dict(y=(.26,.90), hue=[(165,235)], s=.12, v=.50, note='نوارها و نشان‌های رنگی'),
  'sailor':      dict(y=(.30,.62), hue=[(5,50)], s=.65, v=.55, note='جلیقهٔ نجات'),
 }
@@ -61,6 +61,12 @@ OV[('carpenter','mani')] = {**OV[('carpenter','mani')], 'exclude': [(.66,.64,.76
 OV[('sailor','mani')] = dict(y=(.26,.62), hue=[(0,55)], v=.35)
 for _n in ['nima','roya','sam','tara','goli']:
     OV[('sailor',_n)] = {**OV.get(('sailor',_n), {}), 'v': .35}
+
+# دور چهارم (۱۶ اکتبر ۱۷:۲۰): شال تارا/مانی، لگن نیما/گلی/سام
+for _n in ['tara','mani']:
+    OV[('winter',_n)] = {**OV[('winter',_n)], 'exclude': [(.25,.22,.75,.40)]}
+for _n in ['nima','goli','sam']:
+    OV[('winter',_n)] = {**OV[('winter',_n)], 'y': (.26,.63)}
 
 def hsv(a):
     a = a / 255.; mx = a.max(2); mn = a.min(2); d = mx - mn + 1e-9
