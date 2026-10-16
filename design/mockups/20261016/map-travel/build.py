@@ -53,6 +53,7 @@ def map_parts():
     body = body.replace(old, '<use href="#node_screw_workshop" x="216" y="1281" width="136" height="129" />')
     # مالک (D97/D98): ماشین‌لیفتِ دکور روی پیچ‌کاری حذف؛ حالت «قفل» نرم‌تر تا رنگ‌ها گل‌آلود نشوند
     body = re.sub(r'<use href="#env_dec_city_forklift"[^>]*/>', '', body)
+    body = re.sub(r'<use href="#env_dec_city_mid"[^>]*/>', '', body)   # بلوک‌های خاکستری نامفهوم
     body = body.replace('filter:grayscale(.8) brightness(.9)', 'filter:grayscale(.3) brightness(1)')
     for old, key in (('میدان شهر', 'E06'), ('لنگرگاه', 'M11')):
         body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
@@ -72,6 +73,10 @@ def main():
     nodes = {k: dict(x=v['base_center'][0], y=v['base_center'][1], hit=v['hit_box'], title=(STR['maptravel.node.' + k]['text'] if ('maptravel.node.' + k) in STR else nm[k]['env_title']))
              for k, v in d['slots'].items() if v['base_center'][1] < H - 60}
     nodes['E06']['hit'] = [215, 196, 170, 161]; nodes['M10']['hit'] = [216, 1281, 136, 129]
+    # شکل سکوی هر ایستگاه برای مسیر ردپا: [نیم‌پهنا، نیم‌ارتفاع بیضی، ارتفاع دیواره، ارتفاع ساختمان]
+    PAD = {'M09': (94, 32, 14, 120), 'M07': (94, 32, 14, 120), 'M08': (94, 32, 14, 120), 'M11': (94, 32, 14, 120), 'M12': (94, 32, 14, 120),
+           'M10': (64, 22, 10, 90), 'E06': (80, 27, 12, 100), 'E03': (48, 17, 14, 55), 'M02': (48, 17, 14, 55), 'E04': (48, 17, 14, 90)}
+    for k, v in nodes.items(): v['pad'] = list(PAD.get(k, (48, 17, 14, 55)))
     im = {}
     for o in ['sailor', 'construction']:
         im[o] = enc(scaled(Image.open(CACHE / o / 'nima.webp').convert('RGBA'), 200))

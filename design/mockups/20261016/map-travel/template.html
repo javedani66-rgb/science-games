@@ -79,22 +79,41 @@ const svgMap=document.querySelector('svg.map');
 const landG=svgMap.querySelector('g[clip-path="url(#cl_land)"]'),seaG=svgMap.querySelector('g[clip-path="url(#cl_sea)"]');
 const prints=document.createElementNS(NS,'g');prints.id='prints';(svgMap.querySelector('#env_labels')||svgMap.lastElementChild).before(prints);
 /* ردپا فقط پس از گذر از هر مرحله، از همان ایستگاه (روی سطح آن) تا ایستگاه بعد حک می‌شود (D99) */
-/* سطح بالایی سکو (بیضی) و سطح‌های عمودی (دیوارهٔ سکو و بدنهٔ ساختمان). ردپا فقط روی سطح افقی است (D100) */
-const padR=n=>.42*n.hit[2];
-const onPad=(x,y)=>Object.values(NODES).some(n=>((x-n.x)/padR(n))**2+((y-n.y)/(padR(n)*.34))**2<1);
-const onWall=(x,y)=>Object.values(NODES).some(n=>{const rx=padR(n),ry=rx*.34,dx=x-n.x,dy=y-n.y;
- const out=(dx/rx)**2+(dy/ry)**2>=1;
- return (out&&dy>=0&&dy<ry+16&&Math.abs(dx)<rx+6)||(Math.abs(dx)<rx*.75&&dy<-3&&dy>-rx*1.1)});
-(function(){let last=-1e9,side=1;
- for(let i=3;i<samp.length-3;i++){const p=samp[i];if(p[2]-last<26)continue;
-  if(!(p[1]>=COAST+14||onPad(p[0],p[1]))||p[1]>{{H}}-8||onWall(p[0],p[1]))continue;
-  let k=-1;for(let j=0;j<ORDER.length-1;j++)if(p[2]>=NODES[ORDER[j]].s&&p[2]<NODES[ORDER[j+1]].s-22){k=j;break}
-  if(k<0)continue;last=p[2];
-  const a=samp[i-3],b=samp[i+3],ang=Math.atan2(b[1]-a[1],b[0]-a[0]);
-  const g=document.createElementNS(NS,'g');g.dataset.leg=k;g.dataset.s=p[2];g.style.display='none';
-  g.setAttribute('transform','translate('+(p[0]-Math.sin(ang)*6*side).toFixed(1)+' '+(p[1]+Math.cos(ang)*6*side).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
-  g.innerHTML='<g class="pr"><g fill="#f1dcff" stroke="#2a0f5e" stroke-width="2"><ellipse cx="0" cy="2.5" rx="5.2" ry="7"/><circle cx="-4.6" cy="-5.6" r="2.4"/><circle cx="0" cy="-8.4" r="2.5"/><circle cx="4.6" cy="-5.6" r="2.4"/></g></g>';
-  side=-side;prints.appendChild(g)}})();
+/* اسکلهٔ چوبی ساحل: پیوند خشکی و آب؛ راه از روی تخته‌هایش به دریا می‌رسد */
+const jet=document.createElementNS(NS,'g');jet.id='jetty';jet.setAttribute('filter','url(#env_wob)');
+(function(){let h='<path d="M340,1058 L372,1058 L370,980 L342,980 Z" fill="#c98f52" stroke="#241a5e" stroke-width="5" stroke-linejoin="round"/>';
+ for(let y=988;y<1056;y+=11)h+='<path d="M343,'+y+' H369" stroke="#8a5a30" stroke-width="2.4" stroke-linecap="round"/>';
+ h+='<path d="M340,1058 L342,980 M372,1058 L370,980" stroke="#7a4a28" stroke-width="5" fill="none"/>';
+ [[341,984],[371,984],[341,1030],[371,1030]].forEach(p=>{h+='<rect x="'+(p[0]-5)+'" y="'+(p[1]-8)+'" width="10" height="14" rx="3" fill="#7a4a28" stroke="#241a5e" stroke-width="3.5"/>'});
+ h+='<path d="M341,986 Q356,1000 371,986" fill="none" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"/>';
+ jet.innerHTML=h})();
+(svgMap.querySelector('#env_labels')||svgMap.lastElementChild).before(jet);
+/* ردپا (D99/D100/D101): هر ایستگاه یک سکوی بالا آمده است. ردپا از پهلوی سکو (جایی که دیواره باریک دیده می‌شود) روی سطح بالایی می‌رود،
+   از بدنهٔ ساختمان نمی‌گذرد و بیرون سکو روی زمین راه را دنبال می‌کند. */
+const pd=n=>({rx:n.pad[0],ry:n.pad[1],w:n.pad[2],bh:n.pad[3]});
+const inOuter=(n,x,y)=>{const q=pd(n),dx=x-n.x,dy=y-n.y-q.w/2;return (dx/(q.rx+14))**2+(dy/(q.ry+q.w/2+12))**2<1};
+const inBuild=(x,y)=>Object.values(NODES).some(n=>{const q=pd(n);return Math.abs(x-n.x)<q.rx*.72&&y<n.y-q.ry*.5&&y>n.y-q.bh-q.ry});
+const onTop=(x,y)=>(x>344&&x<368&&y>984&&y<1052)||Object.values(NODES).some(n=>{const q=pd(n);return ((x-n.x)/q.rx)**2+((y-n.y)/q.ry)**2<.9});
+function legPoly(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],sA=A.s,sB=B.s,qa=pd(A),qb=pd(B);
+ const pts=[];let i0=samp.findIndex(p=>p[2]>=sA);
+ // خروج از سکوی A: اولین نمونه بیرون سکو
+ let i=i0;while(i<samp.length&&inOuter(A,samp[i][0],samp[i][1]))i++;
+ const sx=(samp[i]?Math.sign(samp[i][0]-A.x):1)||1;
+ pts.push([A.x,A.y+5],[A.x+sx*(qa.rx-10),A.y+5],[A.x+sx*(qa.rx+10),A.y+qa.w/2+2]);
+ let j=i;while(j<samp.length&&samp[j][2]<sB&&!inOuter(B,samp[j][0],samp[j][1])){pts.push([samp[j][0],samp[j][1]]);j++}
+ const ex=(samp[j]?Math.sign(samp[j][0]-B.x):-1)||-1;
+ pts.push([B.x+ex*(qb.rx+10),B.y+qb.w/2+2],[B.x+ex*(qb.rx-10),B.y+5],[B.x+ex*26,B.y+5]);
+ return pts}
+(function(){
+ for(let k=0;k<ORDER.length-1;k++){const P=legPoly(k);let acc=0,side=1,need=0;
+  for(let m=1;m<P.length;m++){const [x0,y0]=P[m-1],[x1,y1]=P[m],L=Math.hypot(x1-x0,y1-y0);if(!L)continue;const ang=Math.atan2(y1-y0,x1-x0);
+   while(need<=L){const x=x0+(x1-x0)*need/L,y=y0+(y1-y0)*need/L;need+=26;
+    if(!(y>=COAST+14||onTop(x,y))||y>{{H}}-8||inBuild(x,y))continue;
+    const g=document.createElementNS(NS,'g');g.dataset.leg=k;g.dataset.s=k*100000+acc+need;g.style.display='none';
+    g.setAttribute('transform','translate('+(x-Math.sin(ang)*6*side).toFixed(1)+' '+(y+Math.cos(ang)*6*side).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
+    g.innerHTML='<g class="pr"><g fill="#f1dcff" stroke="#2a0f5e" stroke-width="2"><ellipse cx="0" cy="2.5" rx="5.2" ry="7"/><circle cx="-4.6" cy="-5.6" r="2.4"/><circle cx="0" cy="-8.4" r="2.5"/><circle cx="4.6" cy="-5.6" r="2.4"/></g></g>';
+    side=-side;prints.appendChild(g)}
+   need-=L;acc+=L}}})();
 /* animate=true: ردپاهای تازه یکی‌یکی (از ایستگاه به سمت بعد) حک می‌شوند */
 function showPrints(animate){const fresh=[];prints.childNodes.forEach(g=>{const vis=visited.has(ORDER[+g.dataset.leg]);if(!vis){g.style.display='none';g.dataset.on='';return}
   if(g.dataset.on)return;g.dataset.on='1';g.style.display='';fresh.push(g)});
@@ -159,7 +178,7 @@ async function go(id){if(busy||id===here)return;const up=nextUp();
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
-function refreshRing(){const n=NODES[here];ring.style.left=(n.x-52)+'px';ring.style.top=(n.y-22)+'px';ring.style.width='104px';ring.style.height='44px'}
+function refreshRing(){const n=NODES[here],q=pd(n),rx=q.rx+7,ry=q.ry+q.w/2+5;ring.style.left=(n.x-rx)+'px';ring.style.top=(n.y+q.w/2+2-ry)+'px';ring.style.width=(2*rx)+'px';ring.style.height=(2*ry)+'px';ring.style.clipPath='inset(50% -6px -6px -6px)';ring.style.borderWidth='3.5px';ring.style.boxShadow='0 0 0 2.5px #241a5e'}
 ids.forEach(i=>{const n=NODES[i],h=n.hit;const b=document.createElement('button');b.className='hit';b.dataset.id=i;b.setAttribute('aria-label',T('node.label').replace('%s',n.title||i));
  b.style.cssText='left:'+h[0]+'px;top:'+h[1]+'px;width:'+Math.max(48,h[2])+'px;height:'+Math.max(48,h[3])+'px';b.onclick=()=>go(i);world.appendChild(b)});
 $('skip').onclick=()=>{skip=true};
