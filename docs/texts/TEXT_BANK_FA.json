@@ -11326,10 +11326,25 @@
    ],
    "text": "کارخانهٔ کشتی‌سازی",
    "status": "draft"
+  },
+  "maptravel.node.M12": {
+   "id": "maptravel.node.M12",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای M12 (ایستگاه نهایی)",
+   "context_fa": "ایستگاه نهایی؛ نام موقت و draft",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.M12",
+    "text"
+   ],
+   "text": "کارگاه ماشین مرکب",
+   "status": "draft"
   }
  },
  "meta": {
-  "updated": "2026-10-16",
+  "updated": "2026-10-17",
   "glossary": {
    "نیرو": "نه «زور»",
    "جرم": "مقدار ماده؛ ترازو، گرم و کیلوگرم",

@@ -32,6 +32,7 @@ def map_parts():
     orig = body[i:e]
     rest = body[e:j]
     d = json.load(open(EA / 'slots.json', encoding='utf-8'))
+    d['path_d'] += ' C52,182.5 30,158 30,125 C30,80 60,40 120,34 C170,28 225,52 272,96'   # راه دریایی تا ایستگاه نهایی (M12)
     new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, COAST + 40)
            + '<g clip-path="url(#cl_land)">' + orig + '</g>'
            + '<g clip-path="url(#cl_sea)" filter="url(#env_wob)"><path d="%s" fill="none" stroke="#241a5e" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 17" opacity=".35"/>'
@@ -42,6 +43,27 @@ def map_parts():
     body = body.replace('<use href="#env_pad_city_metal" x="58" y="114" width="120" height="100" /><use href="#prop_15" x="58" y="114" width="120" height="100" />',
                         '<use href="#env_pad_city_stone" x="58" y="114" width="120" height="100" /><use href="#env_dec_city_lighthouse" x="53" y="74" width="130" height="130" />')
     assert 'prop_15' not in body, 'E04'
+    # اصلاح بصری (flags.json ۱۶ اکتبر)
+    body = body.replace('<use href="#env_pad_city_stone" x="58" y="114" width="120" height="100" /><use href="#env_dec_city_lighthouse" x="53" y="74" width="130" height="130" />',
+                        '<use href="#node_lighthouse" x="18" y="42" width="200" height="190" />')
+    assert 'node_lighthouse' in body, 'E04b'
+    body = body.replace('<use href="#env_pad_city_metal" x="98" y="1173" width="120" height="100" /><use href="#prop_03" x="98" y="1173" width="120" height="100" />',
+                        '<use href="#node_lumber" x="58" y="1101" width="200" height="190" />')
+    assert 'node_lumber' in body, 'E03'
+    body = body.replace('<use href="#env_pad_city_stone" x="242" y="1041" width="120" height="100" /><use href="#prop_05" x="242" y="1041" width="120" height="100" />',
+                        '<use href="#node_wheel_dock" x="202" y="969" width="200" height="190" />')
+    assert 'node_wheel_dock' in body, 'M02'
+    body = body.replace('<use href="#node_12"', '<use href="#node_harbor_crane"')
+    body = body.replace('<use href="#env_dec_city_buoy"', '<use href="#dec_buoy"')
+    body = re.sub(r'<use href="#env_dec_city_(crate|sail|low)"[^>]*/>', '', body)      # جعبه و بادبان بی‌معنا بالای نقشه، خانهٔ خاکستری کنار راه
+    body = body.replace('<use href="#env_dec_city_islet" x="-28"', '<use href="#env_dec_city_islet" x="-8"')
+    body = body.replace('stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".34"', 'stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".6"')
+    # ایستگاه نهایی M12 (کارگاه ماشین مرکب): در قاب، با قفل و برچسب
+    m12 = ('<g style="filter:grayscale(.3) brightness(1)"><g class="node" data-id="M12" filter="url(#env_wob)"><use href="#node_final_workshop" x="192" y="-25" width="160" height="152" /></g></g>'
+           '<g transform="translate(298 113)"><circle r="10" fill="#fff3c4" stroke="#241a5e" stroke-width="3"/><path d="M-3.6,-1 v-2.4 a3.6,3.6 0 0 1 7.2,0 v2.4" fill="none" stroke="#241a5e" stroke-width="2.4"/><rect x="-5.6" y="-1" width="11.2" height="8" rx="2" fill="#241a5e"/></g>')
+    m12lab = '<text x="272" y="158" text-anchor="middle" font-family="Lalezar" font-size="20" fill="#fff3c4" stroke="#241a5e" stroke-width="6" paint-order="stroke" stroke-linejoin="round">%s</text>' % STR['maptravel.node.M12']['text']
+    body = body.replace('<g id="env_zone_titles"', m12lab + '<g id="env_zone_titles"', 1)
+    body = body.replace('<g id="env_labels"', m12 + '<g id="env_labels"', 1)
     # کارخانهٔ صنعتی ← کارخانهٔ کشتی‌سازی؛ میدان شهر ← بازارچهٔ شناور (دارایی‌های assets/)
     body = body.replace('<use href="#node_11"', '<use href="#node_shipyard"')
     body = body.replace('<use href="#env_pad_city_ice" x="240" y="246" width="120" height="100" /><use href="#prop_04" x="240" y="246" width="120" height="100" />',
@@ -57,6 +79,7 @@ def map_parts():
     body = body.replace('filter:grayscale(.8) brightness(.9)', 'filter:grayscale(.3) brightness(1)')
     for old, key in (('میدان شهر', 'E06'), ('لنگرگاه', 'M11')):
         body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
+    body = body.replace('translate(143 210)', 'translate(140 199)').replace('translate(248 570)', 'translate(236 541)')
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
 
@@ -72,9 +95,9 @@ def main():
     nm = {n['id']: n for n in json.load(open(EA / 'node_map.json', encoding='utf-8'))['nodes']}
     nodes = {k: dict(x=v['base_center'][0], y=v['base_center'][1], hit=v['hit_box'], title=(STR['maptravel.node.' + k]['text'] if ('maptravel.node.' + k) in STR else nm[k]['env_title']))
              for k, v in d['slots'].items() if v['base_center'][1] < H - 60}
-    nodes['E06']['hit'] = [215, 196, 170, 161]; nodes['M10']['hit'] = [216, 1281, 136, 129]
+    nodes['M12'].update(x=272, y=96, hit=[196, 8, 150, 128]); nodes['E06']['hit'] = [215, 196, 170, 161]; nodes['M10']['hit'] = [216, 1281, 136, 129]
     # شکل سکوی هر ایستگاه برای مسیر ردپا: [نیم‌پهنا، نیم‌ارتفاع بیضی، ارتفاع دیواره، ارتفاع ساختمان]
-    PAD = {'M09': (52, 19, 14, 60), 'M07': (54, 19, 12, 100), 'M08': (97, 35, 14, 120), 'M11': (94, 32, 14, 120), 'M12': (120, 43, 17, 120),
+    PAD = {'M09': (52, 19, 14, 60), 'M07': (54, 19, 12, 100), 'M08': (97, 35, 14, 120), 'M11': (94, 32, 14, 120), 'M12': (75, 26, 11, 90),
            'M10': (64, 22, 10, 90), 'E06': (80, 27, 12, 100), 'E03': (48, 17, 14, 55), 'M02': (48, 17, 14, 55), 'E04': (48, 17, 14, 90)}
     for k, v in nodes.items(): v['pad'] = list(PAD.get(k, (48, 17, 14, 55)))
     im = {}
