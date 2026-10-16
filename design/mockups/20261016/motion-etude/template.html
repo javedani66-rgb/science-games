@@ -61,9 +61,10 @@ html.reduce .wv,html.reduce .bob{animation:none!important}
  <use href="#node_12" x="70" y="18" width="220" height="209"/>
  <path d="M0 560V476C60 458 110 484 170 472C230 460 290 486 360 468V560Z" fill="#f0cf7a"/>
  <path d="M0 476C60 458 110 484 170 472C230 460 290 486 360 468" fill="none" stroke="#f9e6a8" stroke-width="7" opacity=".7"/>
- <path id="road" d="M30 560C60 526 100 506 145 480L170 442" fill="none" stroke="#241a5e" stroke-width="34" stroke-linecap="round"/>
- <path d="M30 560C60 526 100 506 145 480L170 442" fill="none" stroke="#736985" stroke-width="26" stroke-linecap="round"/>
- <path d="M30 560C60 526 100 506 145 480L170 442" fill="none" stroke="#fff3c4" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 13" opacity=".8"/>
+ <g id="jetty"><rect x="166" y="430" width="32" height="50" fill="#d9a45b" stroke="#241a5e" stroke-width="3.5" stroke-linejoin="round"/><g stroke="#241a5e" stroke-width="2" opacity=".55"><line x1="166" x2="198" y1="442" y2="442"/><line x1="166" x2="198" y1="454" y2="454"/><line x1="166" x2="198" y1="466" y2="466"/></g></g>
+ <path id="road" d="M30 560C60 526 100 506 145 484L172 474" fill="none" stroke="#241a5e" stroke-width="34" stroke-linecap="round"/>
+ <path d="M30 560C60 526 100 506 145 484L172 474" fill="none" stroke="#736985" stroke-width="26" stroke-linecap="round"/>
+ <path d="M30 560C60 526 100 506 145 484L172 474" fill="none" stroke="#fff3c4" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 13" opacity=".8"/>
  <use href="#node_10" x="85" y="293" width="170" height="161"/>
 </svg>
 <div id="foams"></div>
@@ -126,7 +127,7 @@ const POS={start:[38,545],pier:[198,424],pad2:[168,206],end:[226,190]};
 async function run(fn){if(busy)return;busy=true;skip=false;$('go').hidden=true;$('skip').hidden=reduce;$('status').textContent=T('status.moving');
  try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('go').hidden=false}}
 const STEPS=[
- ()=>walk([POS.start,[95,505],[145,478],POS.pier]),
+ ()=>walk([POS.start,[95,505],[145,484],[182,474],[190,440],POS.pier]),
  async()=>{const s=[BOAT0.x+SEAT.x,BOAT0.y+SEAT.y];await hop(POS.pier,s,24);boatPos.x=BOAT0.x;boatPos.y=BOAT0.y;await dip();await sail();await dip();await hop([boatPos.x,boatPos.y+SEAT.y],POS.pad2,24)},
  ()=>walk([POS.pad2,[200,198],POS.end]),
  async()=>{reset()}];
