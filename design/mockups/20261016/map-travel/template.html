@@ -77,16 +77,29 @@ function nextUp(){const vs=ORDER.filter(i=>visited.has(i));if(!vs.length)return 
 /* ردپا و نقطه‌چین بنفش (B76/D94/D95): خشکی و اسکله = ردپا روی کل راه؛ دریا = نقطه‌چین بنفش تا گرهٔ بعدی */
 const svgMap=document.querySelector('svg.map');
 const landG=svgMap.querySelector('g[clip-path="url(#cl_land)"]'),seaG=svgMap.querySelector('g[clip-path="url(#cl_sea)"]');
-const prints=document.createElementNS(NS,'g');prints.id='prints';landG.parentNode.insertBefore(prints,landG.nextSibling);
-(function(){let last=-1e9,side=1;const pr=[];
- for(let i=3;i<samp.length-3;i++){const p=samp[i];if(p[1]<COAST+14||p[1]>{{H}}-8||p[2]-last<26)continue;last=p[2];
+const prints=document.createElementNS(NS,'g');prints.id='prints';(svgMap.querySelector('#env_labels')||svgMap.lastElementChild).before(prints);
+/* ردپا فقط پس از گذر از هر مرحله، از همان ایستگاه (روی سطح آن) تا ایستگاه بعد حک می‌شود (D99) */
+/* سطح بالایی سکو (بیضی) و سطح‌های عمودی (دیوارهٔ سکو و بدنهٔ ساختمان). ردپا فقط روی سطح افقی است (D100) */
+const padR=n=>.42*n.hit[2];
+const onPad=(x,y)=>Object.values(NODES).some(n=>((x-n.x)/padR(n))**2+((y-n.y)/(padR(n)*.34))**2<1);
+const onWall=(x,y)=>Object.values(NODES).some(n=>{const rx=padR(n),ry=rx*.34,dx=x-n.x,dy=y-n.y;
+ const out=(dx/rx)**2+(dy/ry)**2>=1;
+ return (out&&dy>=0&&dy<ry+16&&Math.abs(dx)<rx+6)||(Math.abs(dx)<rx*.75&&dy<-3&&dy>-rx*1.1)});
+(function(){let last=-1e9,side=1;
+ for(let i=3;i<samp.length-3;i++){const p=samp[i];if(p[2]-last<26)continue;
+  if(!(p[1]>=COAST+14||onPad(p[0],p[1]))||p[1]>{{H}}-8||onWall(p[0],p[1]))continue;
+  let k=-1;for(let j=0;j<ORDER.length-1;j++)if(p[2]>=NODES[ORDER[j]].s&&p[2]<NODES[ORDER[j+1]].s-22){k=j;break}
+  if(k<0)continue;last=p[2];
   const a=samp[i-3],b=samp[i+3],ang=Math.atan2(b[1]-a[1],b[0]-a[0]);
-  pr.push([p[0]-Math.sin(ang)*6*side,p[1]+Math.cos(ang)*6*side,ang*180/Math.PI-90,p[1]]);side=-side}
- pr.sort((u,v)=>v[3]-u[3]);
- pr.forEach((q,n)=>{const g=document.createElementNS(NS,'g');g.setAttribute('transform','translate('+q[0].toFixed(1)+' '+q[1].toFixed(1)+') rotate('+q[2].toFixed(0)+')');
-  g.innerHTML='<g class="pr" style="animation-delay:'+(n*45)+'ms"><g fill="#9a5bdc" stroke="#3b1d6e" stroke-width="1.5"><ellipse cx="0" cy="2.5" rx="4.6" ry="6.2"/><circle cx="-4" cy="-5" r="2"/><circle cx="0" cy="-7.5" r="2.1"/><circle cx="4" cy="-5" r="2"/></g></g>';
-  prints.appendChild(g)})})();
-function replayPrints(){prints.querySelectorAll('.pr').forEach(el=>{el.style.animation='none';void el.getBoundingClientRect();el.style.animation=''})}
+  const g=document.createElementNS(NS,'g');g.dataset.leg=k;g.dataset.s=p[2];g.style.display='none';
+  g.setAttribute('transform','translate('+(p[0]-Math.sin(ang)*6*side).toFixed(1)+' '+(p[1]+Math.cos(ang)*6*side).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
+  g.innerHTML='<g class="pr"><g fill="#f1dcff" stroke="#2a0f5e" stroke-width="2"><ellipse cx="0" cy="2.5" rx="5.2" ry="7"/><circle cx="-4.6" cy="-5.6" r="2.4"/><circle cx="0" cy="-8.4" r="2.5"/><circle cx="4.6" cy="-5.6" r="2.4"/></g></g>';
+  side=-side;prints.appendChild(g)}})();
+/* animate=true: ردپاهای تازه یکی‌یکی (از ایستگاه به سمت بعد) حک می‌شوند */
+function showPrints(animate){const fresh=[];prints.childNodes.forEach(g=>{const vis=visited.has(ORDER[+g.dataset.leg]);if(!vis){g.style.display='none';g.dataset.on='';return}
+  if(g.dataset.on)return;g.dataset.on='1';g.style.display='';fresh.push(g)});
+ fresh.sort((u,v)=>u.dataset.s-v.dataset.s).forEach((g,n)=>{const e=g.firstChild;e.style.animation='none';void e.getBoundingClientRect();e.style.animationDelay=animate?(n*55)+'ms':'0ms';e.style.animation=animate?'':'none'})}
+function resetPrints(){prints.childNodes.forEach(g=>{g.style.display='none';g.dataset.on=''})}
 const trail=document.createElementNS(NS,'g');trail.id='trail';trail.setAttribute('filter','url(#env_wob)');seaG.parentNode.insertBefore(trail,seaG.nextSibling);
 function updateTrail(){trail.innerHTML='';const b=nextUp();if(!b)return;const a=ORDER[ORDER.indexOf(b)-1]||here;let s0=NODES[a].s,s1=NODES[b].s;if(s0>s1)[s0,s1]=[s1,s0];
  let d='',gap=true;for(let s=s0;s<=s1;s+=4){const p=pth.getPointAtLength(s);if(p.y>=COAST){gap=true;continue}d+=(gap?'M':'L')+p.x.toFixed(1)+' '+p.y.toFixed(1);gap=false}
@@ -142,7 +155,7 @@ async function run(fn){if(busy)return;busy=true;skip=false;$('skip').hidden=redu
 function status(){$('st').textContent=T('here').replace('%s',NODES[here].title||'')||T('hint')}
 async function go(id){if(busy||id===here)return;const up=nextUp();
  if(visited.has(id)){await run(()=>dramatic(here,id));here=id}
- else if(id===up){await run(()=>travel(here,id));visited.add(id);here=id}
+ else if(id===up){await run(()=>travel(here,id));visited.add(id);here=id;showPrints(true)}
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
@@ -150,8 +163,8 @@ function refreshRing(){const n=NODES[here];ring.style.left=(n.x-52)+'px';ring.st
 ids.forEach(i=>{const n=NODES[i],h=n.hit;const b=document.createElement('button');b.className='hit';b.dataset.id=i;b.setAttribute('aria-label',T('node.label').replace('%s',n.title||i));
  b.style.cssText='left:'+h[0]+'px;top:'+h[1]+'px;width:'+Math.max(48,h[2])+'px;height:'+Math.max(48,h[3])+'px';b.onclick=()=>go(i);world.appendChild(b)});
 $('skip').onclick=()=>{skip=true};
-$('again').onclick=()=>{if(busy)return;visited.clear();ORDER.filter(i=>NODES[i].y>=1200).forEach(i=>visited.add(i));here='E03';putAt(here);status();refreshRing();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55);updateTrail();replayPrints()};
-fit();putAt(here);status();refreshRing();updateTrail();addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
+$('again').onclick=()=>{if(busy)return;visited.clear();ORDER.filter(i=>NODES[i].y>=1200).forEach(i=>visited.add(i));here='E03';putAt(here);status();refreshRing();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55);updateTrail();resetPrints();showPrints(true)};
+fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
 </script>
 </body>
 </html>

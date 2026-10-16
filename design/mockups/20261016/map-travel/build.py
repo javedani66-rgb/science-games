@@ -50,7 +50,10 @@ def map_parts():
     # نمونهٔ ساختمانی (B77): پیچ‌کاری (M10) ساختمان با برج پیچ
     old = '<use href="#env_pad_city_stone" x="224" y="1305" width="120" height="100" /><use href="#prop_14" x="224" y="1305" width="120" height="100" />'
     assert old in body, 'M10'
-    body = body.replace(old, '<use href="#node_screw_workshop" x="199" y="1255.5" width="170" height="161" />')
+    body = body.replace(old, '<use href="#node_screw_workshop" x="216" y="1281" width="136" height="129" />')
+    # مالک (D97/D98): ماشین‌لیفتِ دکور روی پیچ‌کاری حذف؛ حالت «قفل» نرم‌تر تا رنگ‌ها گل‌آلود نشوند
+    body = re.sub(r'<use href="#env_dec_city_forklift"[^>]*/>', '', body)
+    body = body.replace('filter:grayscale(.8) brightness(.9)', 'filter:grayscale(.3) brightness(1)')
     for old, key in (('میدان شهر', 'E06'), ('لنگرگاه', 'M11')):
         body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
@@ -68,7 +71,7 @@ def main():
     nm = {n['id']: n for n in json.load(open(EA / 'node_map.json', encoding='utf-8'))['nodes']}
     nodes = {k: dict(x=v['base_center'][0], y=v['base_center'][1], hit=v['hit_box'], title=(STR['maptravel.node.' + k]['text'] if ('maptravel.node.' + k) in STR else nm[k]['env_title']))
              for k, v in d['slots'].items() if v['base_center'][1] < H - 60}
-    nodes['E06']['hit'] = [215, 196, 170, 161]; nodes['M10']['hit'] = [199, 1255, 170, 161]
+    nodes['E06']['hit'] = [215, 196, 170, 161]; nodes['M10']['hit'] = [216, 1281, 136, 129]
     im = {}
     for o in ['sailor', 'construction']:
         im[o] = enc(scaled(Image.open(CACHE / o / 'nima.webp').convert('RGBA'), 200))
