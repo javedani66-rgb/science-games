@@ -47,3 +47,5 @@ Edit the monster into a scene, do not redraw him. Wide cozy inventor's laborator
 ```
 
 **اگر خراب شد:** «scarier» شد ← «make him rounder, softer, with a bigger smile»؛ سبک عوض شد ← «redraw in exactly the style of the attached image»؛ سر نمونه کپی شد ← تصویر نمونه را فقط تن بدون سر بده و بنویس «the attached image is the style source only».
+
+**نتیجهٔ اجرای اول (۱۶ اکتبر ۱۹:۴۱، `monster/`):** هیولا و آزمایشگاه پذیرفتنی‌اند. ایرادها: پس‌زمینهٔ هیولا و سرها سفید است (JPG، نه شفاف)؛ در سه سر، حالت «متفکر» شبیه شک و پوزخند است، گوش‌های «شگفت‌زده» با دو تای دیگر فرق دارد و اندازه و جای سرها یکسان نیست؛ آزمایشگاه هیولا را توی خودش دارد (برای بازی صحنهٔ خالی لازم است) و رنگ‌آمیزی‌اش قهوه‌ای و بافت‌دارتر از سبک نقشه است.
