@@ -11,7 +11,7 @@
 | `GAME_STRUCTURE_FA.md` | ساختار بازی و ارتباط بخش‌ها |
 | `PROJECT_OVERVIEW_FA.md` | معرفی مشترک پروژه (از زبان مالک) |
 | `FUTURE_TASKS_FA.md` | کارهای آینده |
-| `MODULARITY.md`، `voice.md` | قاعدهٔ ماژولار؛ لحن استاد |
+| `MODULARITY.md`، `voice.md` | قاعدهٔ ماژولار؛ لحن هیولای مخترع |
 | `ARCHIVE_MANIFEST.md` | فایل‌های بیرون از گیت (Drive) |
 
 ## زیرپوشه‌ها
