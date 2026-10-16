@@ -11281,6 +11281,21 @@
    ],
    "text": "از اول",
    "status": "draft"
+  },
+  "maptravel.node.E04": {
+   "id": "maptravel.node.E04",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای E04 روی نقشه (جای «برج ساعت»)",
+   "context_fa": "مالک ۱۶ اکتبر ۱۸:۱۹: برج ساعت باید فانوس دریایی شود؛ نام موقت و draft",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.E04",
+    "text"
+   ],
+   "text": "فانوس دریایی",
+   "status": "draft"
   }
  },
  "meta": {

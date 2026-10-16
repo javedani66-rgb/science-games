@@ -16,6 +16,8 @@ def enc(im, q=80):
 def scaled(im, h):
     return im.resize((max(1, round(im.width * h / im.height)), h), Image.LANCZOS)
 
+STR = json.load(open(HERE / 'strings.fa.json', encoding='utf-8'))
+
 def map_parts():
     s = (EA / 'env_sheet.html').read_text(encoding='utf-8')
     style = re.search(r'<style>(.*?)</style>', s, re.S).group(1)
@@ -35,6 +37,12 @@ def map_parts():
            + '<g clip-path="url(#cl_sea)" filter="url(#env_wob)"><path d="%s" fill="none" stroke="#241a5e" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 17" opacity=".35"/>'
              '<path d="%s" fill="none" stroke="#e8f6f8" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 17" opacity=".85"/></g>' % (d['path_d'], d['path_d']))
     body = body[:i] + new + rest + body[j:]
+    # مالک (۱۶ اکتبر ۱۸:۱۹): فانوس تزئینی آخر صحنه حذف؛ «برج ساعت» (E04) فانوس دریایی روی صخره می‌شود
+    body = re.sub(r'<use href="#env_dec_city_lighthouse" x="185" y="39"[^>]*/>', '', body)
+    body = body.replace('<use href="#env_pad_city_metal" x="58" y="114" width="120" height="100" /><use href="#prop_15" x="58" y="114" width="120" height="100" />',
+                        '<use href="#env_pad_city_stone" x="58" y="114" width="120" height="100" /><use href="#env_dec_city_lighthouse" x="53" y="74" width="130" height="130" />')
+    assert 'prop_15' not in body, 'E04'
+    body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
 
 def main():
@@ -42,7 +50,7 @@ def main():
     review = json.load(open(HERE / 'review.fa.json', encoding='utf-8'))
     style, sprite, mapsvg, d = map_parts()
     nm = {n['id']: n for n in json.load(open(EA / 'node_map.json', encoding='utf-8'))['nodes']}
-    nodes = {k: dict(x=v['base_center'][0], y=v['base_center'][1], hit=v['hit_box'], title=nm[k]['env_title'])
+    nodes = {k: dict(x=v['base_center'][0], y=v['base_center'][1], hit=v['hit_box'], title=(STR['maptravel.node.E04']['text'] if k == 'E04' else nm[k]['env_title']))
              for k, v in d['slots'].items() if v['base_center'][1] < H - 60}
     im = {}
     for o in ['sailor', 'construction']:
