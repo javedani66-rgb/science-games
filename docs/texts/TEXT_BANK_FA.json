@@ -11072,51 +11072,6 @@
    "text": "اسکله و حرکت",
    "status": "draft"
   },
-  "motionetude.btn.walk1": {
-   "id": "motionetude.btn.walk1",
-   "kind": "ui",
-   "where_fa": "دکمهٔ اصلی مرحلهٔ اول",
-   "context_fa": "کاراکتر با تلوتلوی عروسکی به اسکله می‌رود؛ پیش‌نویس",
-   "band": "همه",
-   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "motionetude.btn.walk1",
-    "text"
-   ],
-   "text": "قدم بزن تا اسکله",
-   "status": "draft"
-  },
-  "motionetude.btn.board": {
-   "id": "motionetude.btn.board",
-   "kind": "ui",
-   "where_fa": "دکمهٔ اصلی مرحلهٔ دوم",
-   "context_fa": "پرش به قایق و سفر روی آب؛ پیش‌نویس",
-   "band": "همه",
-   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "motionetude.btn.board",
-    "text"
-   ],
-   "text": "سوار قایق شو",
-   "status": "draft"
-  },
-  "motionetude.btn.walk2": {
-   "id": "motionetude.btn.walk2",
-   "kind": "ui",
-   "where_fa": "دکمهٔ اصلی مرحلهٔ سوم",
-   "context_fa": "قدم زدن از اسکلهٔ آن‌سو به خشکی؛ پیش‌نویس",
-   "band": "همه",
-   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "motionetude.btn.walk2",
-    "text"
-   ],
-   "text": "برو به خشکی",
-   "status": "draft"
-  },
   "motionetude.btn.again": {
    "id": "motionetude.btn.again",
    "kind": "ui",
@@ -11220,36 +11175,6 @@
     "text"
    ],
    "text": "روی خشکی هستی. بزن تا به بندر بروی.",
-   "status": "draft"
-  },
-  "motionetude.status.1": {
-   "id": "motionetude.status.1",
-   "kind": "ui",
-   "where_fa": "وضعیت مرحلهٔ ۱",
-   "context_fa": "زیر صحنه؛ پیش‌نویس",
-   "band": "همه",
-   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "motionetude.status.1",
-    "text"
-   ],
-   "text": "سر اسکله‌ای. قایق منتظر است.",
-   "status": "draft"
-  },
-  "motionetude.status.2": {
-   "id": "motionetude.status.2",
-   "kind": "ui",
-   "where_fa": "وضعیت مرحلهٔ ۲",
-   "context_fa": "زیر صحنه؛ پیش‌نویس",
-   "band": "همه",
-   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "motionetude.status.2",
-    "text"
-   ],
-   "text": "آن‌سوی آب رسیدی. بزن تا به خشکی بروی.",
    "status": "draft"
   },
   "motionetude.status.3": {
