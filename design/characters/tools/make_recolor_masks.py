@@ -26,7 +26,7 @@ OV = {
  ('base','mani'): dict(y=(.30,.64), hue=[(45,160)], minfrac=.008), ('base','goli'): dict(y=(.30,.66), hue=[(0,45),(335,360)], s=.35, v=.2, minfrac=.004, poly=[(0.379, 0.311), (0.609, 0.311), (0.679, 0.371), (0.878, 0.462), (0.938, 0.541), (0.878, 0.597), (0.788, 0.637), (0.679, 0.613), (0.319, 0.613), (0.2, 0.637), (0.1, 0.621), (0.05, 0.541), (0.12, 0.462), (0.319, 0.371)]),
  ('sports','mani'): dict(y=(.28,.78)),
  ('carpenter','roya'): dict(y=(.34,.74)), ('carpenter','sam'): dict(y=(.34,.74)),
- ('carpenter','tara'): dict(y=(.38,.78), hue=[(12,32)], s=.25, noskin=True, poly=[(.30,.40),(.50,.40),(.52,.52),(.60,.60),(.62,.73),(.18,.73),(.19,.62),(.27,.52)]), ('carpenter','goli'): dict(y=(.38,.74), xr=(.2,.8)), ('carpenter','mani'): dict(y=(.42,.74), hue=[(10,50)], s=.30, noskin=True, xr=(.03,.80)),
+ ('carpenter','tara'): dict(y=(.38,.80), hue=[(12,32)], s=.25, noskin=True, poly=[(.30,.40),(.50,.40),(.52,.52),(.60,.60),(.62,.77),(.18,.77),(.19,.62),(.27,.52)]), ('carpenter','goli'): dict(y=(.38,.74), xr=(.2,.8)), ('carpenter','mani'): dict(y=(.42,.82), hue=[(10,50)], s=.30, noskin=True, xr=(.03,.80), exclude=[(.66,.64,.76,.80)]),
 }
 for _n in NAMES:
     OV[('winter',_n)] = dict(y=(.26,.66), hue=[(140,240)], s=.18)
@@ -87,6 +87,8 @@ def mask(im, cfg, debug=False):
         if debug: print('  comp', i, int(z), 'dist-skin %.0f' % d, 'sat %.2f' % ms, 'SKIN' if is_skin else 'ok')
         if not is_skin: keep.append(i)
     m = ndi.binary_dilation(np.isin(lab, keep), iterations=2) & cand
+    for x0, y0, x1, y1 in cfg.get('exclude', []):  # مستطیل‌های ممنوع (دستهٔ چکش و …)
+        m[int(a.shape[0] * y0):int(a.shape[0] * y1), int(a.shape[1] * x0):int(a.shape[1] * x1)] = False
     # حفره‌های ریز (نقطهٔ سفید دانه‌بندی) پر شوند؛ جزئیات بزرگ (ستاره، نشان) نه
     holes = ndi.binary_fill_holes(m) & ~m; hl, hn = ndi.label(holes)
     for k in range(1, hn + 1):
