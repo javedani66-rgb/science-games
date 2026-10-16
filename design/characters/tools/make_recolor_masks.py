@@ -42,7 +42,7 @@ OV[('construction','roya')] = dict(y=(.36,.60))
 OV[('sailor','roya')] = dict(y=(.36,.62))
 OV[('astronaut','roya')] = dict(y=(.40,.90), hue=[(150,240)], s=.08)
 OV[('astronaut','nima')] = dict(y=(.26,.80), hue=[(150,240)], s=.08)
-OV[('base','mani')] = dict(y=(.30,.64), hue=[(45,160)], s=.25, v=.15, minfrac=.008)
+OV[('base','mani')] = dict(y=(.30,.70), hue=[(45,160)], s=.25, v=.15, minfrac=.008)
 OV[('carpenter','nima')] = dict(y=(.34,.72), hue=[(12,32)])
 
 def hsv(a):
