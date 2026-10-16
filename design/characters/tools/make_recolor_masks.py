@@ -21,18 +21,29 @@ CFG = {
 
 # اصلاح‌های هر کاراکتر (بازبینی ۱۶ اکتبر): (لباس، نام) -> بازنویسی بخشی از CFG
 OV = {
- ('base','nima'): dict(y=(.30,.60)), ('base','roya'): dict(y=(.34,.62)), ('base','sam'): dict(y=(.36,.60)),
- ('base','tara'): dict(y=(.30,.58)), ('base','mani'): dict(y=(.30,.62), hue=[(45,160)]),
+ ('base','nima'): dict(y=(.30,.64), hue=[(80,170)], minfrac=.008), ('base','roya'): dict(y=(.34,.64), hue=[(15,65)], minfrac=.008),
+ ('base','sam'): dict(y=(.36,.66), hue=[(0,30)], minfrac=.008), ('base','tara'): dict(y=(.30,.60), hue=[(255,305)], minfrac=.008),
+ ('base','mani'): dict(y=(.30,.64), hue=[(45,160)], minfrac=.008), ('base','goli'): dict(y=(.30,.62), hue=[(0,30),(340,360)], minfrac=.008),
  ('sports','mani'): dict(y=(.28,.78)),
  ('carpenter','roya'): dict(y=(.34,.74)), ('carpenter','sam'): dict(y=(.34,.74)),
- ('carpenter','tara'): dict(y=(.30,.78), hue=[(10,50)], s=.25, noskin=True), ('carpenter','mani'): dict(y=(.38,.74), hue=[(10,50)], s=.30, noskin=True),
+ ('carpenter','tara'): dict(y=(.38,.78), hue=[(12,32)], s=.25, noskin=True, poly=[(.30,.40),(.50,.40),(.52,.52),(.60,.60),(.62,.73),(.18,.73),(.19,.62),(.27,.52)]), ('carpenter','goli'): dict(y=(.38,.74), xr=(.2,.8)), ('carpenter','mani'): dict(y=(.42,.74), hue=[(10,50)], s=.30, noskin=True, xr=(.03,.80)),
 }
 for _n in NAMES:
-    OV[('winter',_n)] = dict(y=(.26,.60), hue=[(140,240)], s=.18)
+    OV[('winter',_n)] = dict(y=(.26,.66), hue=[(140,240)], s=.18)
     OV[('astronaut',_n)] = dict(hue=[(150,240)], s=.08)
-OV[('winter','sam')] = dict(y=(.26,.60), hue=[(130,250)], s=.10, v=.12)
+OV[('winter','sam')] = dict(y=(.26,.66), hue=[(130,250)], s=.10, v=.12)
 OV[('winter','mani')] = dict(y=(.26,.62), hue=[(130,250)], s=.10, v=.12)
 OV[('astronaut','mani')] = dict(y=(.36,.90), hue=[(150,240)], s=.08)
+# دور دوم بازبینی (ایجنت mask-reviewer، ۱۶ اکتبر)
+OV[('winter','nima')] = dict(y=(.26,.58), hue=[(140,240)], s=.18)
+OV[('winter','goli')] = dict(y=(.26,.58), hue=[(140,240)], s=.18)
+OV[('winter','mani')] = dict(y=(.26,.67), hue=[(130,250)], s=.10, v=.12)
+OV[('construction','roya')] = dict(y=(.36,.60))
+OV[('sailor','roya')] = dict(y=(.36,.62))
+OV[('astronaut','roya')] = dict(y=(.40,.90), hue=[(150,240)], s=.08)
+OV[('astronaut','nima')] = dict(y=(.26,.80), hue=[(150,240)], s=.08)
+OV[('base','mani')] = dict(y=(.30,.64), hue=[(45,160)], s=.25, v=.15, minfrac=.008)
+OV[('carpenter','nima')] = dict(y=(.34,.72), hue=[(12,32)])
 
 def hsv(a):
     a = a / 255.; mx = a.max(2); mn = a.min(2); d = mx - mn + 1e-9
@@ -46,24 +57,41 @@ def skin_color(a, alpha, h, s, v):
     sel = box & alpha & (h > 5) & (h < 40) & (s > .25) & (s < .75) & (v > .35)
     return np.median(a[sel][:, :3], axis=0) if sel.sum() > 50 else np.array([200., 140., 100.])
 
-def mask(im, cfg):
+def mask(im, cfg, debug=False):
+    """v2: مؤلفه‌های متصلِ رنگ لباس که خط دور تیره از هم جدایشان می‌کند؛ پوست را مؤلفه‌به‌مؤلفه کنار می‌گذارد."""
     a = np.asarray(im).astype(float); alpha = a[..., 3] > 200
     h, s, v = hsv(a[..., :3]); H = a.shape[0]
+    lum = a[..., 0] * .299 + a[..., 1] * .587 + a[..., 2] * .114
+    ink = lum < cfg.get('ink', 58)
     band = np.zeros_like(alpha); band[int(H * cfg['y'][0]):int(H * cfg['y'][1])] = True
     hue = np.zeros_like(alpha)
     for lo, hi in cfg['hue']: hue |= (h >= lo) & (h <= hi)
-    m = alpha & band & hue & (s >= cfg['s']) & (v >= cfg['v'])
+    xr = np.ones_like(alpha)
+    if 'xr' in cfg:
+        W = a.shape[1]; xr[:] = False; xr[:, int(W * cfg['xr'][0]):int(W * cfg['xr'][1])] = True
+    if 'poly' in cfg:
+        from PIL import ImageDraw
+        pm = Image.new('L', (a.shape[1], a.shape[0]), 0); ImageDraw.Draw(pm).polygon([(x * a.shape[1], y * a.shape[0]) for x, y in cfg['poly']], fill=255)
+        xr = np.asarray(pm) > 0
+    cand = xr & alpha & band & hue & ~ink & (s >= cfg['s']) & (v >= cfg['v'])
     sk = skin_color(a, alpha, h, s, v)
-    near_skin = np.sqrt(((a[..., :3] - sk) ** 2).sum(2)) < 38
-    # پوست فقط وقتی کنار می‌رود که رنگ لباس با پوست نزدیک نباشد (جلیقهٔ نارنجی پررنگ‌تر از پوست است)
-    if not cfg.get('noskin'): m &= ~(near_skin & (s < .70))
-    core = ndi.binary_erosion(m, iterations=2)
-    lab, n = ndi.label(core)
-    if n:
-        sz = ndi.sum(core, lab, range(1, n + 1)); keep = [i + 1 for i, z in enumerate(sz) if z >= .10 * max(sz)]
-        core = np.isin(lab, keep)
-    m = ndi.binary_dilation(core, iterations=3) & (alpha & band & hue & (s >= cfg['s'] * .7) & (v >= cfg['v'] * .8))
-    return ndi.binary_fill_holes(ndi.binary_closing(m, iterations=2)) & alpha & band
+    seg = ndi.binary_erosion(cand, iterations=1)
+    lab, n = ndi.label(seg)
+    if n == 0: return np.zeros_like(alpha)
+    ids = list(range(1, n + 1)); sz = np.array(ndi.sum(seg, lab, ids))
+    keep = []
+    for i, z in zip(ids, sz):
+        if z < cfg.get('minfrac', .02) * sz.max(): continue
+        sel = lab == i; mc = a[sel][:, :3].mean(0); d = float(np.sqrt(((mc - sk) ** 2).sum())); ms = float(s[sel].mean())
+        is_skin = d < cfg.get('skind', 30) and ms < .72 and not cfg.get('noskin')
+        if debug: print('  comp', i, int(z), 'dist-skin %.0f' % d, 'sat %.2f' % ms, 'SKIN' if is_skin else 'ok')
+        if not is_skin: keep.append(i)
+    m = ndi.binary_dilation(np.isin(lab, keep), iterations=2) & cand
+    # حفره‌های ریز (نقطهٔ سفید دانه‌بندی) پر شوند؛ جزئیات بزرگ (ستاره، نشان) نه
+    holes = ndi.binary_fill_holes(m) & ~m; hl, hn = ndi.label(holes)
+    for k in range(1, hn + 1):
+        if (hl == k).sum() < 25: m |= hl == k
+    return m & alpha & band
 
 def shifted(im, m, deg):
     a = np.asarray(im).astype(float); h, s, v = hsv(a[..., :3])
@@ -79,7 +107,7 @@ def main():
         Hh = 300; W = 150; cols = 4
         sheet = Image.new('RGB', (W * cols, Hh * len(NAMES)), (255, 243, 196))
         for r, n in enumerate(NAMES):
-            im = Image.open(cache / o / f'{n}.webp').convert('RGBA'); m = mask(im, {**CFG[o], **OV.get((o, n), {})})
+            im = Image.open(cache / o / f'{n}.webp').convert('RGBA'); m = mask(im, {**CFG[o], **OV.get((o, n), {})}, debug=bool(__import__('os').environ.get('MDBG')) and (o, n) in [('carpenter','mani'),('winter','sam')])
             Image.fromarray((m * 255).astype('uint8')).save(out / 'masks' / o / f'{n}.png')
             ov = np.asarray(im).copy(); ov[m, :3] = (ov[m, :3] * .3 + np.array([255, 0, 255]) * .7).astype('uint8')
             tiles = [im, Image.fromarray(ov), shifted(im, m, 140), shifted(im, m, 260)]
