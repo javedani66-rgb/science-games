@@ -1,0 +1,50 @@
+{
+ "maptravel.title": {
+  "text": "نقشه و سفر",
+  "kind": "ui",
+  "where_fa": "تیتر ماکت سفر روی نقشه",
+  "context_fa": "تیتر ماکت سفر روی نقشه؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.hint": {
+  "text": "روی یکی از جاهای باز نقشه بزن.",
+  "kind": "ui",
+  "where_fa": "راهنمای زیر نقشه",
+  "context_fa": "راهنمای زیر نقشه؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.here": {
+  "text": "اینجایی: %s",
+  "kind": "ui",
+  "where_fa": "نام جای فعلی کاراکتر",
+  "context_fa": "نام جای فعلی کاراکتر؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.skip": {
+  "text": "رد کن",
+  "kind": "ui",
+  "where_fa": "دکمهٔ رد کردن حرکت",
+  "context_fa": "دکمهٔ رد کردن حرکت؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.label": {
+  "text": "%s",
+  "kind": "ui",
+  "where_fa": "برچسب دسترس‌پذیری هر جا",
+  "context_fa": "برچسب دسترس‌پذیری هر جا؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.again": {
+  "text": "از اول",
+  "kind": "ui",
+  "where_fa": "برگشت ماکت به وضع اول",
+  "context_fa": "برگشت ماکت به وضع اول؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ }
+}

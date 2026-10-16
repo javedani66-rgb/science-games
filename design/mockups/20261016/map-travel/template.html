@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>نقشه و سفر</title>
+<style>
+@font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
+@font-face{font-family:Vazirmatn;font-weight:700;src:url(data:font/woff2;base64,{{FONT_VB}}) format("woff2")}
+@font-face{font-family:Lalezar;font-weight:400;src:url(data:font/woff2;base64,{{FONT_L}}) format("woff2")}
+{{LIGHTCSS}}
+:root{--navy:#241a5e;--edge:#120c3a;--cream:#fff3c4;--gold:#ffd23f;color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;display:flex;flex-direction:column;background:#10083a;color:var(--navy);font:400 16px/1.6 Vazirmatn,system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+:focus-visible{outline:4px solid var(--cream);outline-offset:2px}
+#rv{min-height:40px;background:#2b3a2b;color:#fff;display:flex;align-items:center;padding:6px 16px;font-size:14px;gap:8px;flex-wrap:wrap}
+#rv span{flex:1;min-width:0}
+#page{display:flex;flex-direction:column;flex:1;min-height:0}
+#sc{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;position:relative;background:#16788c;scrollbar-width:none}
+#sc::-webkit-scrollbar{display:none}
+#world{position:relative;width:390px;height:{{H}}px;transform-origin:0 0}
+#world svg.map{position:absolute;left:0;top:0;display:block}
+.hit{position:absolute;border-radius:24px;min-width:48px;min-height:48px}
+.hit:focus-visible{outline:4px solid var(--gold)}
+.hit.shake{animation:sh .35s}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+#boat{position:absolute;left:0;top:0;width:130px;height:130px;display:none;pointer-events:none}
+#boat svg{display:block}
+.foam{position:absolute;left:0;top:0;width:26px;height:10px;margin:-5px 0 0 -13px;border-radius:50%;background:var(--cream);opacity:0;pointer-events:none}
+#fig{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
+#tilt{transform-origin:50% 58%}
+#fimg{height:56px;width:auto;max-width:none;display:block;transform-origin:50% 100%;
+ filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))}
+#bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;align-items:center;gap:10px;min-height:76px}
+#st{flex:1;min-width:0;margin:0;text-align:center;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:4px 14px;min-height:48px;display:flex;align-items:center;justify-content:center}
+.btn{min-height:56px;min-width:96px;border:3.5px solid var(--navy);border-radius:18px;background:var(--gold);box-shadow:0 4px 0 var(--edge);font-weight:700;font-size:16px;padding:6px 12px}
+.btn[hidden]{display:none}
+.btn.sec{background:var(--cream)}
+</style>
+</head>
+<body data-light="day">
+{{SPRITE}}
+<div id="rv"><span id="rvt"></span><span id="rvl"></span></div>
+<div id="page">
+<div id="sc"><div id="world">{{MAPSVG}}
+<div id="foams"></div>
+<div id="boat"><svg width="130" height="130" viewBox="0 0 120 120" aria-hidden="true"><use href="#env_dec_city_sail" width="120" height="120"/></svg></div>
+<div id="fig"><div id="tilt"><img id="fimg" alt=""></div></div>
+</div></div>
+<div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn sec" id="again"></button></div>
+</div>
+<script>
+const S={{STRINGS}};const REV={{REVIEW}};const NODES={{NODES}};const IM={{IMAGES}};const PATHD={{PATHD}};const COAST={{COAST}};
+const T=k=>S['maptravel.'+k].text;const $=id=>document.getElementById(id);
+$('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let skip=false,busy=false;
+const sc=$('sc'),world=$('world'),fig=$('fig'),tilt=$('tilt'),fimg=$('fimg'),boat=$('boat');
+let k=1;
+function fit(){k=Math.min(1.2,sc.clientWidth/390);world.style.transform='scale('+k+')';world.style.marginBottom=(({{H}}*k)-{{H}})+'px';world.style.width='390px'}
+addEventListener('resize',fit);
+/* هندسهٔ مسیر */
+const NS='http://www.w3.org/2000/svg';const pth=document.createElementNS(NS,'path');pth.setAttribute('d',PATHD);document.querySelector('svg.map').appendChild(pth);pth.setAttribute('fill','none');pth.style.display='none';
+const L=pth.getTotalLength(),samp=[];for(let s=0;s<=L;s+=2){const p=pth.getPointAtLength(s);samp.push([p.x,p.y,s])}
+function sOf(n){let best=1e9,bs=0;for(const p of samp){const d=(p[0]-n.x)**2+(p[1]-n.y)**2;if(d<best){best=d;bs=p[2]}}return bs}
+const ids=Object.keys(NODES);ids.forEach(i=>NODES[i].s=sOf(NODES[i]));
+const ORDER=ids.sort((a,b)=>NODES[a].s-NODES[b].s);
+const isSea=y=>y<COAST;
+function leg(a,b){const pts=[];const s0=NODES[a].s,s1=NODES[b].s,dir=s1>s0?1:-1;for(let s=s0;dir>0?s<=s1:s>=s1;s+=3*dir){const p=pth.getPointAtLength(s);pts.push([p.x,p.y])}const e=NODES[b];pts.push([e.x,e.y]);return pts}
+/* وضعیت */
+let here='E03';const visited=new Set(ORDER.filter(i=>NODES[i].y>=1200));
+const NEXT=()=>ORDER.slice().reverse().find(i=>!visited.has(i)&&true);
+function nextId(){const r=ORDER.filter(i=>!visited.has(i));return r.length?r.reduce((m,i)=>NODES[i].s>NODES[m].s?i:m,r[0]):null} // اولین ناانجام در راه (از پایین)
+function nextUp(){const vs=ORDER.filter(i=>visited.has(i));if(!vs.length)return ORDER[0];const top=vs.reduce((m,i)=>NODES[i].s>NODES[m].s?i:m,vs[0]);const idx=ORDER.indexOf(top);return ORDER[idx+1]||null}
+/* کاراکتر و قایق */
+const SEAT=27,FH=56;
+const scaleAt=()=>1;
+function setOutfit(sea){fimg.src=sea?IM.sailor:IM.construction}
+function placeFig(x,y){fig.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-100%)'}
+function placeBoat(x,y,r){boat.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-50%) rotate('+r+'deg)'}
+function setTilt(rot,bob,sq){tilt.style.transform='rotate('+rot+'deg) translateY('+bob+'px)';fimg.style.transform='scaleY('+(sq||1)+')'}
+function showBoat(v){boat.style.display=v?'block':'none'}
+function putAt(id){const n=NODES[id],sea=isSea(n.y);setOutfit(sea);showBoat(sea);if(sea){placeBoat(n.x,n.y-SEAT-4,0);placeFig(n.x,n.y-4)}else placeFig(n.x,n.y);setTilt(0,0)}
+const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+function follow(y){if(skip||reduce)return;const t=y*k-sc.clientHeight*.55;sc.scrollTop=Math.max(0,t)}
+function tween(ms,fn,e){return new Promise(res=>{if(reduce||skip){fn(1);res();return}const t0=performance.now();(function f(t){if(skip){fn(1);res();return}const p=Math.min(1,Math.max(0,(t-t0)/ms));fn(e?e(p):p);p<1?requestAnimationFrame(f):res()})(t0)})}
+function cum(pts){const c=[0];for(let i=1;i<pts.length;i++)c.push(c[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));return c}
+function at(pts,c,d){let i=0;while(i<c.length-2&&d>c[i+1])i++;const u=c[i+1]>c[i]?Math.min(1,(d-c[i])/(c[i+1]-c[i])):1;return[pts[i][0]+(pts[i+1][0]-pts[i][0])*u,pts[i][1]+(pts[i+1][1]-pts[i][1])*u]}
+/* تلوتلوی عروسکی روی خشکی */
+async function walk(pts){if(pts.length<2)return;const c=cum(pts),tot=c[c.length-1],SPD=130,STEP=40,A=5.5;
+ await tween(tot/SPD*1000,p=>{const d=p*tot,[x,y]=at(pts,c,d);const env=Math.min(1,d/14,(tot-d)/18),ph=d/STEP*Math.PI,sn=Math.abs(Math.sin(ph));placeFig(x,y);setTilt(A*Math.sin(ph)*env,-2.5*sn*env,1-.03*(1-sn)*env);follow(y)});
+ setTilt(0,0);const l=pts[pts.length-1];placeFig(l[0],l[1])}
+/* قایق */
+const foams=[];for(let i=0;i<8;i++){const d=document.createElement('div');d.className='foam';$('foams').appendChild(d);foams.push(d)}
+const hist=[];
+async function sail(pts){if(pts.length<2)return;const c=cum(pts),tot=c[c.length-1];hist.length=0;
+ await tween(Math.max(1500,tot/95*1000),p=>{const [x,y]=at(pts,c,p*tot);const env=Math.min(1,p*6,(1-p)*6),roll=2.6*Math.sin(p*Math.PI*Math.max(2,tot/45))*env,bob=1.4*Math.sin(p*Math.PI*Math.max(3,tot/30))*env;
+  placeBoat(x,y-SEAT-4+bob,roll);placeFig(x,y-4+bob);setTilt(-roll*.7,0);hist.push([x,y+6]);if(hist.length>70)hist.shift();
+  foams.forEach((f,i)=>{const h=hist[hist.length-1-i*5];if(!h){f.style.opacity=0;return}f.style.opacity=Math.max(0,.75-i*.1)*env;f.style.transform='translate('+h[0]+'px,'+h[1]+'px) scale('+(1+i*.12)+')'});follow(y)},ease);
+ foams.forEach(f=>f.style.opacity=0);setTilt(0,0)}
+async function hopTo(a,b,h){await tween(380,p=>{placeFig(a[0]+(b[0]-a[0])*p,a[1]+(b[1]-a[1])*p-4*h*p*(1-p));setTilt(6*Math.sin(p*Math.PI)*(b[0]>a[0]?1:-1),0,1+.05*Math.sin(p*Math.PI))});
+ await tween(150,p=>{setTilt(0,0,1-.07*Math.sin(p*Math.PI))});setTilt(0,0,1)}
+/* سفر عادی به گرهٔ تازه: پاها روی خشکی، قایق روی دریا؛ در ساحل پرش */
+async function travel(a,b){const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=isSea(pts[0][1]);
+ for(let t=1;t<pts.length;t++){const mt=isSea(pts[t][1]);cur.push(pts[t]);if(mt!==m){runs.push({m,pts:cur});cur=[pts[t]];m=mt}}
+ runs.push({m,pts:cur});let sea=runs[0].m;
+ for(const r of runs){
+  if(r.m!==sea){const p0=r.pts[0];
+   if(r.m){setOutfit(true);showBoat(true);placeBoat(p0[0],p0[1]-SEAT-4,0);await hopTo(p0,[p0[0],p0[1]-4],18)}
+   else{await hopTo([p0[0],p0[1]-4],p0,18);setOutfit(false);showBoat(false)}
+   sea=r.m}
+  if(r.m)await sail(r.pts);else await walk(r.pts)}
+ const e=NODES[b];if(!isSea(e.y)){setOutfit(false);showBoat(false)}
+ placeFig(e.x,isSea(e.y)?e.y-4:e.y)}
+/* پرش دراماتیک به جای قبلاً‌رفته (D86): یک پرش بلند با چرخش و له‌شدن؛ حدود نیم‌ثانیه */
+async function dramatic(a,b){const A=NODES[a],B=NODES[b],seaB=isSea(B.y),dist=Math.hypot(B.x-A.x,B.y-A.y),hgt=Math.min(260,90+dist*.18);
+ const y0=isSea(A.y)?A.y-4:A.y,y1=seaB?B.y-4:B.y;
+ await tween(150,p=>{setTilt(0,0,1-.18*Math.sin(p*Math.PI/2))});
+ await tween(520,p=>{const x=A.x+(B.x-A.x)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);if(boat.style.display==='block')placeBoat(x,y-SEAT,0);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
+ setOutfit(seaB);showBoat(seaB);if(seaB)placeBoat(B.x,B.y-SEAT-4,0);
+ await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(B.x,y1)}
+async function run(fn){if(busy)return;busy=true;skip=false;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}
+function status(){$('st').textContent=T('here').replace('%s',NODES[here].title||'')||T('hint')}
+async function go(id){if(busy||id===here)return;const up=nextUp();
+ if(visited.has(id)){await run(()=>dramatic(here,id));here=id}
+ else if(id===up){await run(()=>travel(here,id));visited.add(id);here=id}
+ else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
+ status();refreshRing()}
+const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
+function refreshRing(){const n=NODES[here];ring.style.left=(n.x-52)+'px';ring.style.top=(n.y-22)+'px';ring.style.width='104px';ring.style.height='44px'}
+ids.forEach(i=>{const n=NODES[i],h=n.hit;const b=document.createElement('button');b.className='hit';b.dataset.id=i;b.setAttribute('aria-label',T('node.label').replace('%s',n.title||i));
+ b.style.cssText='left:'+h[0]+'px;top:'+h[1]+'px;width:'+Math.max(48,h[2])+'px;height:'+Math.max(48,h[3])+'px';b.onclick=()=>go(i);world.appendChild(b)});
+$('skip').onclick=()=>{skip=true};
+$('again').onclick=()=>{if(busy)return;visited.clear();ORDER.filter(i=>NODES[i].y>=1200).forEach(i=>visited.add(i));here='E03';putAt(here);status();refreshRing();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)};
+fit();putAt(here);status();refreshRing();addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
+</script>
+</body>
+</html>

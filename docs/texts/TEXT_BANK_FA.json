@@ -11191,6 +11191,96 @@
    ],
    "text": "برو به بندر",
    "status": "draft"
+  },
+  "maptravel.title": {
+   "id": "maptravel.title",
+   "kind": "ui",
+   "where_fa": "تیتر ماکت سفر روی نقشه",
+   "context_fa": "تیتر ماکت سفر روی نقشه؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.title",
+    "text"
+   ],
+   "text": "نقشه و سفر",
+   "status": "draft"
+  },
+  "maptravel.hint": {
+   "id": "maptravel.hint",
+   "kind": "ui",
+   "where_fa": "راهنمای زیر نقشه",
+   "context_fa": "راهنمای زیر نقشه؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hint",
+    "text"
+   ],
+   "text": "روی یکی از جاهای باز نقشه بزن.",
+   "status": "draft"
+  },
+  "maptravel.here": {
+   "id": "maptravel.here",
+   "kind": "ui",
+   "where_fa": "نام جای فعلی کاراکتر",
+   "context_fa": "نام جای فعلی کاراکتر؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.here",
+    "text"
+   ],
+   "text": "اینجایی: %s",
+   "status": "draft"
+  },
+  "maptravel.skip": {
+   "id": "maptravel.skip",
+   "kind": "ui",
+   "where_fa": "دکمهٔ رد کردن حرکت",
+   "context_fa": "دکمهٔ رد کردن حرکت؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.skip",
+    "text"
+   ],
+   "text": "رد کن",
+   "status": "draft"
+  },
+  "maptravel.node.label": {
+   "id": "maptravel.node.label",
+   "kind": "ui",
+   "where_fa": "برچسب دسترس‌پذیری هر جا",
+   "context_fa": "برچسب دسترس‌پذیری هر جا؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.label",
+    "text"
+   ],
+   "text": "%s",
+   "status": "draft"
+  },
+  "maptravel.again": {
+   "id": "maptravel.again",
+   "kind": "ui",
+   "where_fa": "برگشت ماکت به وضع اول",
+   "context_fa": "برگشت ماکت به وضع اول؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.again",
+    "text"
+   ],
+   "text": "از اول",
+   "status": "draft"
   }
  },
  "meta": {
