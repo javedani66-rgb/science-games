@@ -23,22 +23,6 @@
   "band": "همه",
   "status": "draft"
  },
- "motionetude.btn.reduce.on": {
-  "text": "کاهش حرکت: روشن",
-  "kind": "ui",
-  "where_fa": "دکمهٔ کاهش حرکت",
-  "context_fa": "وقتی روشن است همه‌چیز بدون حرکت جابه‌جا می‌شود؛ پیش‌نویس",
-  "band": "همه",
-  "status": "draft"
- },
- "motionetude.btn.reduce.off": {
-  "text": "کاهش حرکت: خاموش",
-  "kind": "ui",
-  "where_fa": "دکمهٔ کاهش حرکت",
-  "context_fa": "حالت عادی با حرکت؛ پیش‌نویس",
-  "band": "همه",
-  "status": "draft"
- },
  "motionetude.stage.label": {
   "text": "صحنهٔ اسکله",
   "kind": "ui",

@@ -70,7 +70,6 @@ html.reduce .wv,html.reduce .bob{animation:none!important}
 <div id="boat"><svg width="160" height="160" viewBox="0 0 120 120" aria-hidden="true"><use href="#env_dec_city_sail" width="120" height="120"/></svg></div>
 <div id="fig"><div id="tilt"><img id="fimg" alt=""></div></div>
 </div></div>
-<div class="row"><button class="btn sec" id="red" aria-pressed="false" style="flex:1"></button></div>
 <div class="chips" id="chips"></div>
 <p class="note" id="note"></p>
 <div id="bar"><p id="status" aria-live="polite"></p><div class="row"><button class="btn" id="go"></button><button class="btn sec" id="skip" hidden></button></div></div>
@@ -136,8 +135,7 @@ function reset(){placeFig(POS.start[0],POS.start[1]);setTilt(0,0);boatPos.x=BOAT
 function ui(){$('go').textContent=T(stage?'btn.again':'btn.go');$('status').textContent=T(stage?'status.3':'status.0')}
 $('go').onclick=async()=>{if(busy)return;await run(stage?STEPS[3]:AUTO);stage=stage?0:1;ui()};
 $('skip').textContent=T('btn.skip');$('skip').onclick=()=>{skip=true};
-function redUi(){$('red').textContent=T(reduce?'btn.reduce.on':'btn.reduce.off');$('red').setAttribute('aria-pressed',reduce);document.documentElement.classList.toggle('reduce',reduce)}
-$('red').onclick=()=>{reduce=!reduce;if(busy){skip=true;$('skip').hidden=true}redUi()};
+function redUi(){document.documentElement.classList.toggle('reduce',reduce)}
 NAMES.forEach((n,i)=>{const b=document.createElement('button');b.className='chip';b.setAttribute('aria-label',T('chip.label').replace('%d',i+1));
  b.setAttribute('aria-pressed',i===0);b.innerHTML='<img alt="" src="'+IM[n].thumb+'">';b.onclick=()=>{if(busy)return;ch=i;pick()};$('chips').appendChild(b)});
 function pick(){fimg.src=IM[NAMES[ch]].big;[...$('chips').children].forEach((c,i)=>c.setAttribute('aria-pressed',i===ch))}
