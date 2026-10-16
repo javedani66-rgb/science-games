@@ -138,7 +138,7 @@ async function tint(ch,o,src,tgt){
  let sS=0,sV=0,nn=0;for(let q=0;q<hs.length;q++){if(vs[q]>0||ss[q]>0){sS+=ss[q];sV+=vs[q];nn++}}
  const mv=nn?sV/nn:0,kS=nn?Math.min(2,Math.max(1,.85/(sS/nn))):1,kV=nn?Math.min(2,Math.max(1,.88/(sV/nn))):1;
  for(let k=0,q=0;k<p.length;k+=4,q++){if(m[k]<128||p[k+3]<128)continue;
-  let off=((hs[q]-mean+540)%360)-180,hh=tgt==='gray'?hs[q]:(tgt+off*.3+720)%360,s=tgt==='gray'?ss[q]*.1:Math.min(1,ss[q]*kS),v=tgt==='gray'?vs[q]:Math.min(1,(mv+(vs[q]-mv)*.6)*kV);
+  let off=((hs[q]-mean+540)%360)-180,hh=tgt==='gray'?hs[q]:(tgt+(Math.abs(off)>60?0:off*.3)+720)%360,s=tgt==='gray'?ss[q]*.1:Math.min(1,ss[q]*kS),v=tgt==='gray'?vs[q]:Math.min(1,(mv+(vs[q]-mv)*.6)*kV);
   const cc=v*s,xx=cc*(1-Math.abs((hh/60)%2-1)),mm=v-cc,i=Math.floor(hh/60)%6;
   const rgb=[[cc,xx,0],[xx,cc,0],[0,cc,xx],[0,xx,cc],[xx,0,cc],[cc,0,xx]][i];
   p[k]=(rgb[0]+mm)*255;p[k+1]=(rgb[1]+mm)*255;p[k+2]=(rgb[2]+mm)*255}
