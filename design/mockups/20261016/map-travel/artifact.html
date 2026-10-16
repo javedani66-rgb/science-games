@@ -300,7 +300,10 @@ function placeFig(x,y){fig.style.transform='translate('+x+'px,'+y+'px) translate
 function placeBoat(x,y,r){boat.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-50%) rotate('+r+'deg)'}
 function setTilt(rot,bob,sq){tilt.style.transform='rotate('+rot+'deg) translateY('+bob+'px)';fimg.style.transform='scaleY('+(sq||1)+')'}
 function showBoat(v){boat.style.display=v?'block':'none'}
-function putAt(id){const n=NODES[id],sea=isSea(n.y);setOutfit(sea);showBoat(sea);if(sea){placeBoat(n.x,n.y-SEAT-4,0);placeFig(n.x,n.y-4)}else placeFig(n.x,n.y);setTilt(0,0)}
+/* قایق کنار سکو در آب پهلو می‌گیرد؛ کودک روی سکو می‌ایستد (D104) */
+const dock=n=>{const q=pd(n),s=n.x<195?1:-1;return[n.x+s*(q.rx+30),n.y+q.w/2+6]};
+const padFig=n=>[n.x,n.y+3];
+function putAt(id){const n=NODES[id],sea=isSea(n.y);setOutfit(sea);showBoat(sea);if(sea){const d=dock(n);placeBoat(d[0],d[1]-SEAT-4,0);const f=padFig(n);placeFig(f[0],f[1])}else placeFig(n.x,n.y);setTilt(0,0)}
 const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
 function follow(y){if(skip||reduce)return;const t=y*k-sc.clientHeight*.55;sc.scrollTop=Math.max(0,t)}
 function tween(ms,fn,e){return new Promise(res=>{if(reduce||skip){fn(1);res();return}const t0=performance.now();(function f(t){if(skip){fn(1);res();return}const p=Math.min(1,Math.max(0,(t-t0)/ms));fn(e?e(p):p);p<1?requestAnimationFrame(f):res()})(t0)})}
@@ -324,20 +327,23 @@ async function hopTo(a,b,h){await tween(380,p=>{placeFig(a[0]+(b[0]-a[0])*p,a[1]
 async function travel(a,b){const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=isSea(pts[0][1]);
  for(let t=1;t<pts.length;t++){const mt=isSea(pts[t][1]);cur.push(pts[t]);if(mt!==m){runs.push({m,pts:cur});cur=[pts[t]];m=mt}}
  runs.push({m,pts:cur});let sea=runs[0].m;
+ const NA=NODES[a],NB=NODES[b],seaA=isSea(NA.y),seaB=isSea(NB.y);
+ if(seaA){const d=dock(NA),r0=runs[0];r0.pts=[d,...r0.pts.filter(p=>!inOuter(NA,p[0],p[1]))];const f=padFig(NA);await hopTo(f,[d[0],d[1]-4],16)}
+ if(seaB){const rl=runs[runs.length-1];if(rl.m)rl.pts=[...rl.pts.filter(p=>!inOuter(NB,p[0],p[1])),dock(NB)]}
  for(const r of runs){
   if(r.m!==sea){const p0=r.pts[0];
    if(r.m){setOutfit(true);showBoat(true);placeBoat(p0[0],p0[1]-SEAT-4,0);await hopTo(p0,[p0[0],p0[1]-4],18)}
    else{await hopTo([p0[0],p0[1]-4],p0,18);setOutfit(false);showBoat(false)}
    sea=r.m}
   if(r.m)await sail(r.pts);else await walk(r.pts)}
- const e=NODES[b];if(!isSea(e.y)){setOutfit(false);showBoat(false)}
- placeFig(e.x,isSea(e.y)?e.y-4:e.y)}
+ const e=NODES[b];if(!isSea(e.y)){setOutfit(false);showBoat(false);placeFig(e.x,e.y)}
+ else{const d=dock(e),f=padFig(e);placeBoat(d[0],d[1]-SEAT-4,0);await hopTo([d[0],d[1]-4],f,16);placeFig(f[0],f[1])}}
 /* پرش دراماتیک به جای قبلاً‌رفته (D86): یک پرش بلند با چرخش و له‌شدن؛ حدود نیم‌ثانیه */
 async function dramatic(a,b){const A=NODES[a],B=NODES[b],seaB=isSea(B.y),dist=Math.hypot(B.x-A.x,B.y-A.y),hgt=Math.min(260,90+dist*.18);
- const y0=isSea(A.y)?A.y-4:A.y,y1=seaB?B.y-4:B.y;
+ const y0=isSea(A.y)?padFig(A)[1]:A.y,y1=seaB?padFig(B)[1]:B.y;
  await tween(150,p=>{setTilt(0,0,1-.18*Math.sin(p*Math.PI/2))});
- await tween(520,p=>{const x=A.x+(B.x-A.x)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);if(boat.style.display==='block')placeBoat(x,y-SEAT,0);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
- setOutfit(seaB);showBoat(seaB);if(seaB)placeBoat(B.x,B.y-SEAT-4,0);
+ await tween(520,p=>{const x=A.x+(B.x-A.x)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
+ setOutfit(seaB);showBoat(seaB);if(seaB){const d=dock(B);placeBoat(d[0],d[1]-SEAT-4,0)}
  await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(B.x,y1)}
 async function run(fn){if(busy)return;busy=true;skip=false;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}
 function status(){$('st').textContent=T('here').replace('%s',NODES[here].title||'')||T('hint')}
