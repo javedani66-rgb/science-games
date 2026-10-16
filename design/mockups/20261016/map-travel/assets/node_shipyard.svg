@@ -1,0 +1,20 @@
+<symbol id="node_shipyard" viewBox="0 0 200 190" overflow="visible"><g id="node_shipyard_shadow" transform="translate(100 150)"><ellipse cx="8" cy="6" rx="102" ry="32" class="esd"/></g><g id="node_shipyard_base" transform="translate(100 150)">
+<ellipse cx="8" cy="24" rx="104" ry="32" fill="#10083a" opacity=".3"/>
+<path d="M-94,0 v14 a94,32 0 0 0 188,0 v-14 z" fill="#8a8aa6" class="eo" stroke-width="5.5"/>
+<ellipse cx="0" cy="0" rx="94" ry="32" fill="#d3d0e2" class="eo" stroke-width="5.5"/>
+<path d="M-60,2 L72,2" stroke="#241a5e" stroke-width="2.5" opacity=".35" stroke-linecap="round"/>
+<g class="eo" stroke-width="4.5">
+<rect x="-86" y="-60" width="64" height="52" fill="#c8553d"/>
+<path d="M-92,-60 Q-54,-100 -16,-60 Z" fill="#8d3b2e"/>
+<path d="M-64,-8 v-24 a10,12 0 0 1 20,0 v24 z" fill="#2a1b4a"/>
+</g>
+<g fill="none" stroke="#fff3c4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="-54" cy="-62" r="3"/><path d="M-54,-59 v14 M-61,-54 h14 M-62,-48 q8,10 16,0"/></g>
+<g class="eo" stroke-width="4.5">
+<path d="M8,-30 L78,-30 Q74,-4 54,0 L26,0 Q12,-6 8,-30 Z" fill="#2f6fb5"/>
+<path d="M10,-22 L77,-22" stroke="#e7455c" stroke-width="6"/>
+<rect x="34" y="-44" width="26" height="14" fill="#fff3c4"/>
+</g>
+<g stroke="#241a5e" stroke-width="3" stroke-linecap="round" fill="none"><path d="M16,-30 V-64 M44,-30 V-70 M72,-30 V-62 M12,-62 H78 M16,-48 H72"/></g>
+<g stroke="#4f9a3a" stroke-width="1.8" fill="none" opacity=".9"><path d="M16,-64 L44,-48 L72,-62 M16,-48 L44,-70"/></g>
+</g>
+<g id="node_shipyard_lit" transform="translate(100 150)"><ellipse cx="-30" cy="-6" rx="52" ry="14" class="elit"/></g></symbol>

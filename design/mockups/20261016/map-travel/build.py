@@ -42,15 +42,27 @@ def map_parts():
     body = body.replace('<use href="#env_pad_city_metal" x="58" y="114" width="120" height="100" /><use href="#prop_15" x="58" y="114" width="120" height="100" />',
                         '<use href="#env_pad_city_stone" x="58" y="114" width="120" height="100" /><use href="#env_dec_city_lighthouse" x="53" y="74" width="130" height="130" />')
     assert 'prop_15' not in body, 'E04'
+    # کارخانهٔ صنعتی ← کارخانهٔ کشتی‌سازی؛ میدان شهر ← بازارچهٔ شناور (دارایی‌های assets/)
+    body = body.replace('<use href="#node_11"', '<use href="#node_shipyard"')
+    body = body.replace('<use href="#env_pad_city_ice" x="240" y="246" width="120" height="100" /><use href="#prop_04" x="240" y="246" width="120" height="100" />',
+                        '<use href="#prop_floating_market" x="240" y="246" width="120" height="100" />')
+    assert 'prop_04' not in body, 'E06'
+    for old, key in (('میدان شهر', 'E06'), ('لنگرگاه', 'M11')):
+        body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
+
+def add_assets(sprite):
+    extra = ''.join((HERE / 'assets' / f).read_text(encoding='utf-8') for f in sorted(p.name for p in (HERE / 'assets').glob('*.svg')))
+    i = sprite.rindex('</svg>')
+    return sprite[:i] + '<defs>' + extra + '</defs>' + sprite[i:]
 
 def main():
     strings = json.load(open(HERE / 'strings.fa.json', encoding='utf-8'))
     review = json.load(open(HERE / 'review.fa.json', encoding='utf-8'))
     style, sprite, mapsvg, d = map_parts()
     nm = {n['id']: n for n in json.load(open(EA / 'node_map.json', encoding='utf-8'))['nodes']}
-    nodes = {k: dict(x=v['base_center'][0], y=v['base_center'][1], hit=v['hit_box'], title=(STR['maptravel.node.E04']['text'] if k == 'E04' else nm[k]['env_title']))
+    nodes = {k: dict(x=v['base_center'][0], y=v['base_center'][1], hit=v['hit_box'], title=(STR['maptravel.node.' + k]['text'] if ('maptravel.node.' + k) in STR else nm[k]['env_title']))
              for k, v in d['slots'].items() if v['base_center'][1] < H - 60}
     im = {}
     for o in ['sailor', 'construction']:
@@ -59,7 +71,7 @@ def main():
     t = open(HERE / 'template.html', encoding='utf-8').read()
     sym = re.search(r'<symbol id="env_dec_city_sail".*?</symbol>', (EA / 'sprite_env.svg').read_text(encoding='utf-8'), re.S).group(0)
     for k, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
-                     LIGHTCSS=style, SPRITE=sprite if 'env_dec_city_sail' in sprite else sprite.replace('</defs>', sym + '</defs>', 1), MAPSVG=mapsvg,
+                     LIGHTCSS=style, SPRITE=add_assets(sprite if 'env_dec_city_sail' in sprite else sprite.replace('</defs>', sym + '</defs>', 1)), MAPSVG=mapsvg,
                      STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False),
                      NODES=json.dumps(nodes, ensure_ascii=False), PATHD=json.dumps(d['path_d']), IMAGES=json.dumps(im), H=str(H), COAST=str(COAST)).items():
         t = t.replace('{{%s}}' % k, v)

@@ -11296,6 +11296,36 @@
    ],
    "text": "فانوس دریایی",
    "status": "draft"
+  },
+  "maptravel.node.E06": {
+   "id": "maptravel.node.E06",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای E06 (جای «میدان شهر»)",
+   "context_fa": "مالک ۱۶ اکتبر ۱۸:۲۱: همه‌چیز در دریا باید با تم بندر بخواند؛ نام موقت و draft",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.E06",
+    "text"
+   ],
+   "text": "بازارچهٔ شناور",
+   "status": "draft"
+  },
+  "maptravel.node.M11": {
+   "id": "maptravel.node.M11",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای M11 (جای «لنگرگاه»؛ کارخانهٔ صنعتی)",
+   "context_fa": "مالک ۱۶ اکتبر ۱۸:۲۱: همه‌چیز در دریا باید با تم بندر بخواند؛ نام موقت و draft",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.M11",
+    "text"
+   ],
+   "text": "کارخانهٔ کشتی‌سازی",
+   "status": "draft"
   }
  },
  "meta": {
