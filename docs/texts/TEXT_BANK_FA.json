@@ -10546,10 +10546,490 @@
    ],
    "text": "تو اینجایی",
    "status": "draft"
+  },
+  "charmenu.title.first": {
+   "id": "charmenu.title.first",
+   "kind": "ui",
+   "where_fa": "تیتر صفحهٔ انتخاب کاراکتر (اولین بار)",
+   "context_fa": "بالای شش کارت کاراکتر؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.title.first",
+    "text"
+   ],
+   "text": "ماجراجو را انتخاب کن",
+   "status": "draft"
+  },
+  "charmenu.title.menu": {
+   "id": "charmenu.title.menu",
+   "kind": "ui",
+   "where_fa": "تیتر صفحهٔ انتخاب کاراکتر (از منوی بازی)",
+   "context_fa": "وقتی کودک بعداً از منو می‌آید؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.title.menu",
+    "text"
+   ],
+   "text": "کاراکتر من",
+   "status": "draft"
+  },
+  "charmenu.sub.first": {
+   "id": "charmenu.sub.first",
+   "kind": "ui",
+   "where_fa": "زیرتیتر صفحهٔ انتخاب کاراکتر",
+   "context_fa": "زیر تیتر؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.sub.first",
+    "text"
+   ],
+   "text": "او همه‌جا با تو می‌آید.",
+   "status": "draft"
+  },
+  "charmenu.sub.menu": {
+   "id": "charmenu.sub.menu",
+   "kind": "ui",
+   "where_fa": "زیرتیتر صفحهٔ انتخاب کاراکتر از منو",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.sub.menu",
+    "text"
+   ],
+   "text": "هر وقت خواستی عوضش کن.",
+   "status": "draft"
+  },
+  "charmenu.name.nima": {
+   "id": "charmenu.name.nima",
+   "kind": "ui",
+   "where_fa": "نام کاراکتر",
+   "context_fa": "زیر کارت نیما؛ نام موقت",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.name.nima",
+    "text"
+   ],
+   "text": "نیما",
+   "status": "draft"
+  },
+  "charmenu.name.roya": {
+   "id": "charmenu.name.roya",
+   "kind": "ui",
+   "where_fa": "نام کاراکتر",
+   "context_fa": "زیر کارت رویا؛ نام موقت",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.name.roya",
+    "text"
+   ],
+   "text": "رویا",
+   "status": "draft"
+  },
+  "charmenu.name.sam": {
+   "id": "charmenu.name.sam",
+   "kind": "ui",
+   "where_fa": "نام کاراکتر",
+   "context_fa": "زیر کارت سام؛ نام موقت",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.name.sam",
+    "text"
+   ],
+   "text": "سام",
+   "status": "draft"
+  },
+  "charmenu.name.tara": {
+   "id": "charmenu.name.tara",
+   "kind": "ui",
+   "where_fa": "نام کاراکتر",
+   "context_fa": "زیر کارت تارا؛ نام موقت",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.name.tara",
+    "text"
+   ],
+   "text": "تارا",
+   "status": "draft"
+  },
+  "charmenu.name.mani": {
+   "id": "charmenu.name.mani",
+   "kind": "ui",
+   "where_fa": "نام کاراکتر",
+   "context_fa": "زیر کارت مانی؛ نام موقت",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.name.mani",
+    "text"
+   ],
+   "text": "مانی",
+   "status": "draft"
+  },
+  "charmenu.name.goli": {
+   "id": "charmenu.name.goli",
+   "kind": "ui",
+   "where_fa": "نام کاراکتر",
+   "context_fa": "زیر کارت گلی؛ نام موقت",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.name.goli",
+    "text"
+   ],
+   "text": "گلی",
+   "status": "draft"
+  },
+  "charmenu.color.title": {
+   "id": "charmenu.color.title",
+   "kind": "ui",
+   "where_fa": "تیتر بخش انتخاب رنگ",
+   "context_fa": "بالای پنج دایرهٔ رنگی؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.color.title",
+    "text"
+   ],
+   "text": "رنگ تو",
+   "status": "draft"
+  },
+  "charmenu.color.blue": {
+   "id": "charmenu.color.blue",
+   "kind": "ui",
+   "where_fa": "نام رنگ",
+   "context_fa": "زیر دایرهٔ رنگ آبی",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.color.blue",
+    "text"
+   ],
+   "text": "آبی",
+   "status": "draft"
+  },
+  "charmenu.color.teal": {
+   "id": "charmenu.color.teal",
+   "kind": "ui",
+   "where_fa": "نام رنگ",
+   "context_fa": "زیر دایرهٔ رنگ فیروزه‌ای",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.color.teal",
+    "text"
+   ],
+   "text": "فیروزه‌ای",
+   "status": "draft"
+  },
+  "charmenu.color.violet": {
+   "id": "charmenu.color.violet",
+   "kind": "ui",
+   "where_fa": "نام رنگ",
+   "context_fa": "زیر دایرهٔ رنگ بنفش",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.color.violet",
+    "text"
+   ],
+   "text": "بنفش",
+   "status": "draft"
+  },
+  "charmenu.color.magenta": {
+   "id": "charmenu.color.magenta",
+   "kind": "ui",
+   "where_fa": "نام رنگ",
+   "context_fa": "زیر دایرهٔ رنگ ارغوانی",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.color.magenta",
+    "text"
+   ],
+   "text": "ارغوانی",
+   "status": "draft"
+  },
+  "charmenu.color.gray": {
+   "id": "charmenu.color.gray",
+   "kind": "ui",
+   "where_fa": "نام رنگ",
+   "context_fa": "زیر دایرهٔ رنگ خاکستری",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.color.gray",
+    "text"
+   ],
+   "text": "خاکستری",
+   "status": "draft"
+  },
+  "charmenu.outfits.title": {
+   "id": "charmenu.outfits.title",
+   "kind": "ui",
+   "where_fa": "تیتر بخش لباس‌ها",
+   "context_fa": "بالای شبکهٔ لباس‌ها؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfits.title",
+    "text"
+   ],
+   "text": "هر جا یک لباس",
+   "status": "draft"
+  },
+  "charmenu.outfits.sub": {
+   "id": "charmenu.outfits.sub",
+   "kind": "ui",
+   "where_fa": "زیرتیتر بخش لباس‌ها",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfits.sub",
+    "text"
+   ],
+   "text": "هر جا بروی، لباسش عوض می‌شود.",
+   "status": "draft"
+  },
+  "charmenu.outfit.base": {
+   "id": "charmenu.outfit.base",
+   "kind": "ui",
+   "where_fa": "نام لباس/جا",
+   "context_fa": "زیر کوچک‌شدهٔ لباس base؛ نام جا موقت (titles_fa.json)",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfit.base",
+    "text"
+   ],
+   "text": "خودش",
+   "status": "draft"
+  },
+  "charmenu.outfit.sports": {
+   "id": "charmenu.outfit.sports",
+   "kind": "ui",
+   "where_fa": "نام لباس/جا",
+   "context_fa": "زیر کوچک‌شدهٔ لباس sports؛ نام جا موقت (titles_fa.json)",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfit.sports",
+    "text"
+   ],
+   "text": "ورزشگاه",
+   "status": "draft"
+  },
+  "charmenu.outfit.winter": {
+   "id": "charmenu.outfit.winter",
+   "kind": "ui",
+   "where_fa": "نام لباس/جا",
+   "context_fa": "زیر کوچک‌شدهٔ لباس winter؛ نام جا موقت (titles_fa.json)",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfit.winter",
+    "text"
+   ],
+   "text": "پیست یخ",
+   "status": "draft"
+  },
+  "charmenu.outfit.astronaut": {
+   "id": "charmenu.outfit.astronaut",
+   "kind": "ui",
+   "where_fa": "نام لباس/جا",
+   "context_fa": "زیر کوچک‌شدهٔ لباس astronaut؛ نام جا موقت (titles_fa.json)",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfit.astronaut",
+    "text"
+   ],
+   "text": "پایگاه فضایی",
+   "status": "draft"
+  },
+  "charmenu.outfit.farmer": {
+   "id": "charmenu.outfit.farmer",
+   "kind": "ui",
+   "where_fa": "نام لباس/جا",
+   "context_fa": "زیر کوچک‌شدهٔ لباس farmer؛ نام جا موقت (titles_fa.json)",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfit.farmer",
+    "text"
+   ],
+   "text": "مزرعه و آسیاب",
+   "status": "draft"
+  },
+  "charmenu.outfit.construction": {
+   "id": "charmenu.outfit.construction",
+   "kind": "ui",
+   "where_fa": "نام لباس/جا",
+   "context_fa": "زیر کوچک‌شدهٔ لباس construction؛ نام جا موقت (titles_fa.json)",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfit.construction",
+    "text"
+   ],
+   "text": "کارگاه ساختمانی",
+   "status": "draft"
+  },
+  "charmenu.outfit.carpenter": {
+   "id": "charmenu.outfit.carpenter",
+   "kind": "ui",
+   "where_fa": "نام لباس/جا",
+   "context_fa": "زیر کوچک‌شدهٔ لباس carpenter؛ نام جا موقت (titles_fa.json)",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfit.carpenter",
+    "text"
+   ],
+   "text": "کارخانهٔ نجاری",
+   "status": "draft"
+  },
+  "charmenu.outfit.sailor": {
+   "id": "charmenu.outfit.sailor",
+   "kind": "ui",
+   "where_fa": "نام لباس/جا",
+   "context_fa": "زیر کوچک‌شدهٔ لباس sailor؛ نام جا موقت (titles_fa.json)",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.outfit.sailor",
+    "text"
+   ],
+   "text": "اسکله",
+   "status": "draft"
+  },
+  "charmenu.map.title": {
+   "id": "charmenu.map.title",
+   "kind": "ui",
+   "where_fa": "تیتر نمونهٔ نقشه",
+   "context_fa": "بالای تصویر کوچک نقشه؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.map.title",
+    "text"
+   ],
+   "text": "روی نقشه این‌طور دیده می‌شوی",
+   "status": "draft"
+  },
+  "charmenu.map.here": {
+   "id": "charmenu.map.here",
+   "kind": "ui",
+   "where_fa": "پلاک روی نقشه",
+   "context_fa": "کنار حلقهٔ زرد؛ همان واژهٔ مصوب «اینجایی»",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.map.here",
+    "text"
+   ],
+   "text": "اینجایی",
+   "status": "draft"
+  },
+  "charmenu.empty": {
+   "id": "charmenu.empty",
+   "kind": "ui",
+   "where_fa": "پیام قبل از انتخاب",
+   "context_fa": "جای پیش‌نمایش وقتی هنوز کسی انتخاب نشده؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.empty",
+    "text"
+   ],
+   "text": "اول یک نفر را انتخاب کن.",
+   "status": "draft"
+  },
+  "charmenu.go.first": {
+   "id": "charmenu.go.first",
+   "kind": "ui",
+   "where_fa": "دکمهٔ شروع",
+   "context_fa": "ته صفحه؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.go.first",
+    "text"
+   ],
+   "text": "بریم!",
+   "status": "draft"
+  },
+  "charmenu.go.menu": {
+   "id": "charmenu.go.menu",
+   "kind": "ui",
+   "where_fa": "دکمهٔ ذخیره",
+   "context_fa": "ته صفحه وقتی از منو آمده؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.go.menu",
+    "text"
+   ],
+   "text": "ذخیره",
+   "status": "draft"
+  },
+  "charmenu.pick": {
+   "id": "charmenu.pick",
+   "kind": "ui",
+   "where_fa": "برچسب برای فناوری کمکی",
+   "context_fa": "برچسب خوانندهٔ صفحه روی کارت کاراکتر؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/character-menu/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "charmenu.pick",
+    "text"
+   ],
+   "text": "انتخاب",
+   "status": "draft"
   }
  },
  "meta": {
-  "updated": "2026-10-14",
+  "updated": "2026-10-16",
   "glossary": {
    "نیرو": "نه «زور»",
    "جرم": "مقدار ماده؛ ترازو، گرم و کیلوگرم",
