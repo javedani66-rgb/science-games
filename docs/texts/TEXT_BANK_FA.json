@@ -11056,6 +11056,231 @@
    ],
    "text": "زرد",
    "status": "draft"
+  },
+  "motionetude.title": {
+   "id": "motionetude.title",
+   "kind": "ui",
+   "where_fa": "تیتر صفحهٔ ماکت حرکت",
+   "context_fa": "بالای صحنه؛ پیش‌نویس؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.title",
+    "text"
+   ],
+   "text": "اسکله و حرکت",
+   "status": "draft"
+  },
+  "motionetude.btn.walk1": {
+   "id": "motionetude.btn.walk1",
+   "kind": "ui",
+   "where_fa": "دکمهٔ اصلی مرحلهٔ اول",
+   "context_fa": "کاراکتر با تلوتلوی عروسکی به اسکله می‌رود؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.btn.walk1",
+    "text"
+   ],
+   "text": "قدم بزن تا اسکله",
+   "status": "draft"
+  },
+  "motionetude.btn.board": {
+   "id": "motionetude.btn.board",
+   "kind": "ui",
+   "where_fa": "دکمهٔ اصلی مرحلهٔ دوم",
+   "context_fa": "پرش به قایق و سفر روی آب؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.btn.board",
+    "text"
+   ],
+   "text": "سوار قایق شو",
+   "status": "draft"
+  },
+  "motionetude.btn.walk2": {
+   "id": "motionetude.btn.walk2",
+   "kind": "ui",
+   "where_fa": "دکمهٔ اصلی مرحلهٔ سوم",
+   "context_fa": "قدم زدن از اسکلهٔ آن‌سو به خشکی؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.btn.walk2",
+    "text"
+   ],
+   "text": "برو به خشکی",
+   "status": "draft"
+  },
+  "motionetude.btn.again": {
+   "id": "motionetude.btn.again",
+   "kind": "ui",
+   "where_fa": "دکمهٔ اصلی مرحلهٔ آخر",
+   "context_fa": "برگشت به شروع ماکت؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.btn.again",
+    "text"
+   ],
+   "text": "از اول",
+   "status": "draft"
+  },
+  "motionetude.btn.skip": {
+   "id": "motionetude.btn.skip",
+   "kind": "ui",
+   "where_fa": "دکمهٔ رد کردن حرکت",
+   "context_fa": "فقط وسط حرکت دیده می‌شود؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.btn.skip",
+    "text"
+   ],
+   "text": "رد کن",
+   "status": "draft"
+  },
+  "motionetude.btn.reduce.on": {
+   "id": "motionetude.btn.reduce.on",
+   "kind": "ui",
+   "where_fa": "دکمهٔ کاهش حرکت",
+   "context_fa": "وقتی روشن است همه‌چیز بدون حرکت جابه‌جا می‌شود؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.btn.reduce.on",
+    "text"
+   ],
+   "text": "کاهش حرکت: روشن",
+   "status": "draft"
+  },
+  "motionetude.btn.reduce.off": {
+   "id": "motionetude.btn.reduce.off",
+   "kind": "ui",
+   "where_fa": "دکمهٔ کاهش حرکت",
+   "context_fa": "حالت عادی با حرکت؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.btn.reduce.off",
+    "text"
+   ],
+   "text": "کاهش حرکت: خاموش",
+   "status": "draft"
+  },
+  "motionetude.stage.label": {
+   "id": "motionetude.stage.label",
+   "kind": "ui",
+   "where_fa": "برچسب دسترس‌پذیری صحنه",
+   "context_fa": "برای صفحه‌خوان؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.stage.label",
+    "text"
+   ],
+   "text": "صحنهٔ اسکله",
+   "status": "draft"
+  },
+  "motionetude.chip.label": {
+   "id": "motionetude.chip.label",
+   "kind": "ui",
+   "where_fa": "برچسب دکمهٔ انتخاب شخصیت",
+   "context_fa": "شمارهٔ شخصیت جای نام؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.chip.label",
+    "text"
+   ],
+   "text": "شخصیت %d",
+   "status": "draft"
+  },
+  "motionetude.status.0": {
+   "id": "motionetude.status.0",
+   "kind": "ui",
+   "where_fa": "وضعیت مرحلهٔ ۰",
+   "context_fa": "زیر صحنه؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.status.0",
+    "text"
+   ],
+   "text": "روی خشکی هستی. بزن تا به اسکله بروی.",
+   "status": "draft"
+  },
+  "motionetude.status.1": {
+   "id": "motionetude.status.1",
+   "kind": "ui",
+   "where_fa": "وضعیت مرحلهٔ ۱",
+   "context_fa": "زیر صحنه؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.status.1",
+    "text"
+   ],
+   "text": "سر اسکله‌ای. قایق منتظر است.",
+   "status": "draft"
+  },
+  "motionetude.status.2": {
+   "id": "motionetude.status.2",
+   "kind": "ui",
+   "where_fa": "وضعیت مرحلهٔ ۲",
+   "context_fa": "زیر صحنه؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.status.2",
+    "text"
+   ],
+   "text": "آن‌سوی آب رسیدی. بزن تا به خشکی بروی.",
+   "status": "draft"
+  },
+  "motionetude.status.3": {
+   "id": "motionetude.status.3",
+   "kind": "ui",
+   "where_fa": "وضعیت مرحلهٔ ۳",
+   "context_fa": "زیر صحنه؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.status.3",
+    "text"
+   ],
+   "text": "رسیدی.",
+   "status": "draft"
+  },
+  "motionetude.status.moving": {
+   "id": "motionetude.status.moving",
+   "kind": "ui",
+   "where_fa": "وضعیت هنگام حرکت",
+   "context_fa": "زیر صحنه؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/motion-etude/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "motionetude.status.moving",
+    "text"
+   ],
+   "text": "در راه…",
+   "status": "draft"
   }
  },
  "meta": {

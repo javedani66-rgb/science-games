@@ -1,0 +1,122 @@
+{
+ "motionetude.title": {
+  "text": "اسکله و حرکت",
+  "kind": "ui",
+  "where_fa": "تیتر صفحهٔ ماکت حرکت",
+  "context_fa": "بالای صحنه؛ پیش‌نویس؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.btn.walk1": {
+  "text": "قدم بزن تا اسکله",
+  "kind": "ui",
+  "where_fa": "دکمهٔ اصلی مرحلهٔ اول",
+  "context_fa": "کاراکتر با تلوتلوی عروسکی به اسکله می‌رود؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.btn.board": {
+  "text": "سوار قایق شو",
+  "kind": "ui",
+  "where_fa": "دکمهٔ اصلی مرحلهٔ دوم",
+  "context_fa": "پرش به قایق و سفر روی آب؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.btn.walk2": {
+  "text": "برو به خشکی",
+  "kind": "ui",
+  "where_fa": "دکمهٔ اصلی مرحلهٔ سوم",
+  "context_fa": "قدم زدن از اسکلهٔ آن‌سو به خشکی؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.btn.again": {
+  "text": "از اول",
+  "kind": "ui",
+  "where_fa": "دکمهٔ اصلی مرحلهٔ آخر",
+  "context_fa": "برگشت به شروع ماکت؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.btn.skip": {
+  "text": "رد کن",
+  "kind": "ui",
+  "where_fa": "دکمهٔ رد کردن حرکت",
+  "context_fa": "فقط وسط حرکت دیده می‌شود؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.btn.reduce.on": {
+  "text": "کاهش حرکت: روشن",
+  "kind": "ui",
+  "where_fa": "دکمهٔ کاهش حرکت",
+  "context_fa": "وقتی روشن است همه‌چیز بدون حرکت جابه‌جا می‌شود؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.btn.reduce.off": {
+  "text": "کاهش حرکت: خاموش",
+  "kind": "ui",
+  "where_fa": "دکمهٔ کاهش حرکت",
+  "context_fa": "حالت عادی با حرکت؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.stage.label": {
+  "text": "صحنهٔ اسکله",
+  "kind": "ui",
+  "where_fa": "برچسب دسترس‌پذیری صحنه",
+  "context_fa": "برای صفحه‌خوان؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.chip.label": {
+  "text": "شخصیت %d",
+  "kind": "ui",
+  "where_fa": "برچسب دکمهٔ انتخاب شخصیت",
+  "context_fa": "شمارهٔ شخصیت جای نام؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.status.0": {
+  "text": "روی خشکی هستی. بزن تا به اسکله بروی.",
+  "kind": "ui",
+  "where_fa": "وضعیت مرحلهٔ ۰",
+  "context_fa": "زیر صحنه؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.status.1": {
+  "text": "سر اسکله‌ای. قایق منتظر است.",
+  "kind": "ui",
+  "where_fa": "وضعیت مرحلهٔ ۱",
+  "context_fa": "زیر صحنه؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.status.2": {
+  "text": "آن‌سوی آب رسیدی. بزن تا به خشکی بروی.",
+  "kind": "ui",
+  "where_fa": "وضعیت مرحلهٔ ۲",
+  "context_fa": "زیر صحنه؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.status.3": {
+  "text": "رسیدی.",
+  "kind": "ui",
+  "where_fa": "وضعیت مرحلهٔ ۳",
+  "context_fa": "زیر صحنه؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motionetude.status.moving": {
+  "text": "در راه…",
+  "kind": "ui",
+  "where_fa": "وضعیت هنگام حرکت",
+  "context_fa": "زیر صحنه؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ }
+}
