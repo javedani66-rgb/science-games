@@ -88,9 +88,16 @@ def map_parts():
     a = '<use href="#env_tree_round" x="13" y="1262" width="70.0" height="70.0" />'
     assert a in body, 'tree'
     body = body.replace(a, '<use href="#env_tree_round" x="1" y="1262" width="70.0" height="70.0" />')
+    # D115: ایستگاه‌های بازسازی‌شده با کیت (etudes/stations/out): مرکز سکو = مرکز گره؛ نماد برداری بدون فیلتر رستری
+    for sid, nid in KIT_NODES.items():
+        pat = r'<g class="node" data-id="%s"(?: filter="url\(#env_wob\)")?><use href="#[^"]+"[^>]*/></g>' % nid
+        assert re.search(pat, body), nid
+        body = re.sub(pat, lambda m, sid=sid, nid=nid: '<g class="node" data-id="%s"><use href="#node_%s" x="%s" y="%s" width="144" height="137" /></g>' % (nid, sid, KIT_XY[nid][0] - 72, KIT_XY[nid][1] - 108), body)
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
 
+KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pier': 'M07'}
+KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (154, 959)}   # مرکز سکو = مرکز گره
 M09_SH = '<ellipse cx=\"0\" cy=\"21\" rx=\"51\" ry=\"19.5\" fill=\"#10083a\" opacity=\".3\"/>'
 E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
 
@@ -125,6 +132,11 @@ def main():
     # جای ایستادن فیگور [dx, dy] از مرکز سکو (D112 دور دوم): کنار بنا روی بیضی سکو، نه روی کنده/چوب
     STAND = {'E03': (31, 6), 'M09': (39.5, 4), 'M10': (34, 9)}
     RING = {"M10": (0, 0, 0), 'M09': (0, 0, -1)}      # [افزایش rx، افزایش ry، جابه‌جایی مرکز x]
+    for sid, nid in KIT_NODES.items():      # مشخصات هر ایستگاهِ کیت (etudes/stations/out/<id>.json) جایگزین مقدارهای دستی
+        sp = json.load(open(HERE / 'etudes' / 'stations' / 'out' / (sid + '.json'), encoding='utf-8'))
+        PAD[nid] = tuple(sp['pad']); STAND[nid] = tuple(sp['stand']); RING[nid] = tuple(sp['ring'])
+        cx, cy = KIT_XY[nid]; nodes[nid]['hit'] = [cx - 72, cy - 108, 144, 137]
+        nodes[nid]['x'], nodes[nid]['y'] = cx, cy
     for k, v in STAND.items(): nodes[k]['st'] = list(v)
     for k, v in RING.items(): nodes[k]['rg'] = list(v)
     for k, v in nodes.items(): v['pad'] = list(PAD.get(k, (48, 17, 14, 55)))
