@@ -36,8 +36,8 @@ def build(out=HERE / 'out'):
     return p, symbol(p, 'lumber', ['marks'], out=out), ty
 
 
-STAND = (-38, 4)
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch1/lumber'
+STAND = None     # خودکار: find_stand
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/lumber'
 
 if __name__ == '__main__':
     p, sym, ty = build()

@@ -17,8 +17,29 @@ from contextlib import contextmanager
 
 HERE = pathlib.Path(__file__).resolve().parent
 K = .72                                   # مقیاس نماد روی نقشه (144px از 200)
-OUT, PART, INNER = 5.5, 4.5, 3.7         # ضخامت اسمی: دور سکو/بنا، جزء، داخلی (≈4 / 3.2 / 2.7px نقشه)
+OUT, PART, INNER = 7.6, 5.8, 3.9         # ضخامت اسمی (واحد symbol)؛ ×۰٫۷۲ ⇒ روی نقشه ≈ 5.5 / 4.2 / 2.8px (هم‌قطر مرجع M09 و راه، D113)
 SEAM = INNER                              # درز ریز هم‌اندازهٔ داخلی (حداقل 2.5px نقشه)
+SHADOW_SX = .96                           # کمی باریک‌تر تا نوک‌های چپ و راست بیرون نزنند
+SHADOW_DY = 6                             # جابه‌جایی سایهٔ بیرونی سکو (واحد symbol) ⇒ ≈4.3px هلال پایین
+FIG_H, FIG_HALO = 56, 2.75               # فیگور روی نقشه: ارتفاع 56px + هالهٔ سفید ≈2.75px (⇒ ≈61px، مثل template #fimg)
+# سیلوئت واقعی فیگور (اجتماع «ملوان» و «کارگر»)، هر ردیف 2px از بالا به پایین: (xmin, xmax) نسبت به مرکز پایین
+FIG_ROWS = [(-5.8, 6.2), (-7.2, 7.2), (-7.8, 8.2), (-7.8, 8.2), (-8.5, 8.0), (-8.5, 7.0), (-7.5, 6.0), (-6.8, 6.0), (-6.2, 4.8), (-4.0, 3.5),
+            (-5.2, 2.5), (-5.8, 3.0), (-6.0, 3.2), (-6.5, 4.0), (-7.0, 4.2), (-6.8, 4.2), (-6.2, 4.8), (-6.2, 5.0), (-6.5, 5.0), (-6.5, 4.8),
+            (-5.5, 4.2), (-4.0, 3.5), (-4.0, 3.2), (-4.2, 3.8), (-4.2, 4.5), (-4.2, 5.2), (-7.0, 8.5), (-7.2, 8.5)]
+FIG_FEET = (-10, 0, 11)                   # نقطه‌های کف (با هاله) برای فاصله از لبهٔ رویه
+
+
+def fig_footprint(dsf):
+    """پوشهٔ فیگور (با هاله) به‌صورت آرایهٔ بولی؛ لنگر = وسط ردیف آخر (کف). برمی‌گرداند (آرایه، ردیف_لنگر، ستون_لنگر)."""
+    import numpy as np
+    from scipy.ndimage import distance_transform_edt as edt
+    h = int(round(2 * dsf)); halo = int(math.ceil(FIG_HALO * dsf)) + 2
+    R = len(FIG_ROWS) * h; Wd = int(40 * dsf) | 1
+    raw = np.zeros((R + 2 * halo, Wd + 2 * halo), bool); c = raw.shape[1] // 2
+    for i, (a, b) in enumerate(FIG_ROWS):
+        raw[halo + i * h: halo + (i + 1) * h, c + int(math.floor(a * dsf)): c + int(math.ceil(b * dsf))] = True
+    fp = edt(~raw) <= FIG_HALO * dsf
+    return fp, halo + R - 1, c
 MIN_PX = 2.5                              # کمینهٔ قطر خط روی نقشه
 NAVY = '#241a5e'
 CREAM = '#fff3c4'
@@ -26,7 +47,7 @@ CREAM = '#fff3c4'
 # پالت سکو. «زمینی» = کرم/زیتونی (سکوی چوب‌شکافی)؛ «دریایی» = آبی روشن/آبی تیره (رنگ‌های node_wheel_dock).
 PALETTES = {
     'land': dict(top='#f4e6a0', wall='#8a7a2a', line='#d4c26a', tri='#8f8bd6', dot='#8a7a2a'),
-    'sea': dict(top='#a6bde8', wall='#4d6fb0', line='#d6e8ff', tri='#7b8fe0', dot='#4d6fb0'),
+    'sea': dict(top='#a6bde8', wall='6c8fd6', line='#d6e8ff', tri='#7b8fe0', dot='#4d6fb0'),
 }
 STYLE = ('.eo{stroke:#241a5e;stroke-linejoin:round;stroke-linecap:round}.elit{fill:#fff4cf;opacity:.3}'
          '.esh{fill:#4a3a8c;opacity:.22}.esd{fill:#10083a;opacity:.28}')
@@ -153,7 +174,7 @@ def pad(pen, kind=None, rx=None, ry=None, wall=None, line=None, tri=(), dot=None
     pal = PALETTES[pen.kind]
     pen.shape(_wall_pts(pen), pal['wall'], OUT); pen.ntop = len(pen.o)
     pen.shape(pen.padtop, pal['top'], OUT)
-    pen.probes.append(('خط دور سکو', OUT, (-pen.rx, pen.wall * .5), (1, 0), NAVY))
+    pen.probes.append(('خط دور سکو (لبهٔ پایین دیواره)', OUT, (-12 * pen.rx / 52.8, 19.9 * pen.ry / 19.4 + pen.wall), (0, 1), NAVY))
     if line: pen.ln(line[0], line[1], INNER, pal['line'], j=.15, probe='خط داخلی (خط روشن سکو)')
     for (x, y) in tri:
         pen.shape([(x - 7, y + 5), (x + 7, y + 5), (x, y - 7)], pal['tri'], INNER, j=.2, step=99, clip=False)
@@ -169,10 +190,13 @@ def symbol(pen, name, motion_layers=(), out=None, legacy_shadow=False):
     for m in motion_layers:
         assert m in pen.layers, 'لایهٔ متحرک %r در Pen ساخته نشده' % m
     sid = 'node_' + name; RX, RY, W = pen.rx, pen.ry, pen.wall
-    shadow = '<ellipse cx="2" cy="5" rx="%s" ry="%s" class="esd"/>' % (RX - 7 if not legacy_shadow else RX - 1, RY - 3)
+    # سایهٔ بیرونی کوچک و هم‌شکل سکو (D113): رویه+دیواره، ۶ واحد پایین‌تر؛ فقط هلال پایین دیده می‌شود (مثل M09)
+    sh = hd(_wall_pts(pen), True, 1, 0, 999) + hd([(x, y) for x, y in pen.padtop], True, 1, 0, 999)
+    shadow = '<path d="%s" transform="translate(0 %s) scale(%s 1)" class="esd"/>' % (sh, SHADOW_DY, SHADOW_SX) if not legacy_shadow else \
+        '<ellipse cx="2" cy="5" rx="%s" ry="%s" class="esd"/>' % (RX - 1, RY - 3)
     if legacy_shadow:
         under = '<ellipse cx="0" cy="%s" rx="%s" ry="%s" fill="#10083a" opacity=".3"/>' % (RY * 1.05 + 1, RX - 2, RY * 1.0)
-    else:   # D112: سایه کاملاً درون سیلوئت سکو (رویه+دیواره) می‌ماند و روی راه نمی‌افتد
+    else:   # زیرسایهٔ داخلی زیر قهرمان، درون سیلوئت سکو
         under = '<ellipse cx="2" cy="%s" rx="%s" ry="%s" fill="#10083a" opacity=".3"/>' % (W * .6, RX - 4, RY * .9 + W * .4 - 1)
     under = '<g class="under">%s</g>' % under
     cid = sid + '_clip'
@@ -214,6 +238,19 @@ def spec(id, pad_px, stand, motion, kind='land', ring=(0, 0, 0), out=None):
 
 
 # ---------------- رندر و سنجش ----------------
+_PW = {}
+
+
+def _browser():
+    """یک مرورگر برای همهٔ شات‌های سنجش (سریع‌تر از راه‌اندازی دوباره)."""
+    if 'b' not in _PW:
+        import atexit
+        from playwright.sync_api import sync_playwright
+        _PW['p'] = sync_playwright().start(); _PW['b'] = _PW['p'].chromium.launch()
+        atexit.register(lambda: (_PW['b'].close(), _PW['p'].stop()))
+    return _PW['b']
+
+
 def _shot(body, dsf=4, bg=None, w=144, h=160):
     """body: محتوای svg (سطر بالا مثل symbol؛ پایین بلندتر تا دیوارهٔ سکو بریده نشود) → آرایهٔ RGBA. هر px نقشه = dsf پیکسل."""
     import numpy as np, io
@@ -221,13 +258,21 @@ def _shot(body, dsf=4, bg=None, w=144, h=160):
     from playwright.sync_api import sync_playwright
     html = ('<body style="margin:0;background:%s"><svg xmlns="http://www.w3.org/2000/svg" width="%s" height="%s" viewBox="0 0 200 %.1f">'
             '<style>%s</style><g transform="translate(100 150)">%s</g></svg>') % (bg or 'transparent', w, h, h / K, STYLE, body)
-    with sync_playwright() as p:
-        b = p.chromium.launch(); pg = b.new_page(device_scale_factor=dsf, viewport={'width': w, 'height': h})
-        pg.set_content(html); png = pg.screenshot(omit_background=bg is None); b.close()
+    b = _browser(); pg = b.new_page(device_scale_factor=dsf, viewport={'width': w, 'height': h})
+    pg.set_content(html); png = pg.screenshot(omit_background=bg is None); pg.close()
     return np.array(Image.open(io.BytesIO(png)).convert('RGBA'))
 
 
 def _poly(pts): return '<path d="%s" fill="#000"/>' % hd(pts, True, 1, 0, 999)
+
+
+def _place_fig(shape, sx, sy, dsf):
+    import numpy as np
+    fp, ar, ac = fig_footprint(dsf); out = np.zeros(shape, bool)
+    y0, x0 = int(round(sy)) - ar, int(round(sx)) - ac
+    ya, xa = max(y0, 0), max(x0, 0); yb, xb = min(y0 + fp.shape[0], shape[0]), min(x0 + fp.shape[1], shape[1])
+    if yb > ya and xb > xa: out[ya:yb, xa:xb] = fp[ya - y0:yb - y0, xa - x0:xb - x0]
+    return out
 
 
 def margin_check(pen, stand=None, dsf=4, min_margin=8, min_stand=10, save=None, legacy_shadow=False):
@@ -256,13 +301,14 @@ def margin_check(pen, stand=None, dsf=4, min_margin=8, min_stand=10, save=None, 
         res['foot_margin'] = round(float(d[foot].min()) / dsf, 1) if foot.any() else None
     # سایه روی راه: سایه‌های _shadow و under را جدا رندر کن
     res['shadow_on_road_px'] = _shadow_leak(pen, sil, dsf, legacy_shadow)
-    if stand:
+    if stand:   # فیگور = سیلوئت واقعی با هاله، کف در نقطهٔ stand (مثل template.placeFig)
         sx, sy = (100 * K + stand[0]) * dsf, (150 * K + stand[1]) * dsf
-        yy, xx = np.mgrid[0:top.shape[0], 0:top.shape[1]]
-        near = np.hypot(xx - sx, yy - sy)
-        res['stand_to_hero'] = round(float(near[hero].min()) / dsf, 1)
-        res['stand_to_pad_edge'] = round(float(edt(top)[int(sy), int(sx)]) / dsf, 1)
-        res['stand_on_pad'] = bool(top[int(sy), int(sx)])
+        fig = _place_fig(top.shape, sx, sy, dsf)
+        res['stand_to_hero'] = round(float(edt(~fig)[hero].min()) / dsf, 1) if hero.any() else 99
+        dtop = edt(top)
+        pts = [(int(sy), int(sx + k * dsf)) for k in FIG_FEET]
+        res['stand_to_pad_edge'] = round(min(float(dtop[a, b]) for a, b in pts) / dsf, 1)
+        res['stand_on_pad'] = all(bool(top[a, b]) for a, b in pts)
     ok = res['out_px'] == 0 and (res['x_margin'] or 0) >= min_margin and res['shadow_on_road_px'] == 0
     if 'foot_margin' in res: ok = ok and (res['foot_margin'] or 0) >= min_margin
     if stand: ok = ok and res['stand_on_pad'] and res['stand_to_hero'] >= min_stand and res['stand_to_pad_edge'] >= min_stand
@@ -280,7 +326,48 @@ def _shadow_leak(pen, sil, dsf, legacy=False):
     parts = re.findall(r'<g id="node_x_probe_shadow"[^>]*>(.*?)</g>', s) + re.findall(r'<g class="under">(.*?)</g>', s)
     im = _shot(''.join(parts), dsf)
     from scipy.ndimage import binary_dilation
-    return round(float(((im[..., 3] > 10) & ~binary_dilation(sil, iterations=2)).sum()) / dsf ** 2, 1)   # 2 پیکسل رندر = تحمل لبهٔ نرم
+    out = (im[..., 3] > 10) & ~binary_dilation(sil, iterations=2)       # 2 پیکسل رندر = تحمل لبهٔ نرم
+    if not legacy:   # سایهٔ بیرونی مجاز است؛ فقط در نوار راه (±۱۴px دور خط مرکز سکو) شمرده می‌شود
+        cy = int(150 * K * dsf); out[:cy - 14 * dsf] = False; out[cy + 14 * dsf:] = False
+    return round(float(out.sum()) / dsf ** 2, 1)
+
+
+def find_stand(pen, motion=None, dsf=2, gmax=24):
+    """بهترین جای فیگور (stand) روی سکو: بزرگ‌ترین g که مستطیل فیگور (FIG_W×FIG_H، کف در نقطه) ≥g از قهرمان (و همهٔ
+    وضعیت‌های متحرک) باشد و سه نقطهٔ کف ≥g از لبهٔ رویه. بین بهترین‌ها نزدیک‌ترین به جلوی مرکز (0، ۰٫۶ ry). برمی‌گرداند ((dx,dy) px نقشه، g)."""
+    import numpy as np
+    from scipy.ndimage import distance_transform_edt as edt, minimum_filter
+    A = lambda im: im[..., 3] > 128
+    top = A(_shot(_poly(pen.padtop), dsf))
+    hero = A(_shot(''.join(pen.o[pen.npad:]), dsf))
+    for part, kw in (motion or {}).items():
+        i, j = pen.layers[part]; body = ''.join(pen.o[i:j])
+        ts = ['rotate(%s %s %s)' % (a * 360 / 12, kw['rotate'][0], kw['rotate'][1]) for a in range(12)] if kw.get('rotate') else []
+        ts += ['translate(%s %s)' % tuple(o) for o in kw.get('offsets', [])]
+        for t in ts: hero |= A(_shot('<g transform="%s">%s</g>' % (t, body), dsf))
+    Dh = edt(~hero) / dsf; Dt = edt(top) / dsf
+    fp, ar, ac = fig_footprint(dsf); best = None
+    rows, cols = top.shape
+    pref = (100 * K * dsf, (150 * K + pen.ry * K * .6) * dsf)
+    g = float(gmax)
+    while g >= 0 and best is None:
+        R = minimum_filter((Dh >= g).astype(np.uint8), footprint=fp, mode='constant', cval=0).astype(bool)   # فیگور با لنگر وسط footprint
+        # footprint با مرکز هندسی‌اش کار می‌کند؛ جابه‌جایی تا لنگر = کف
+        sh = ar - fp.shape[0] // 2
+        Rs = np.zeros_like(R)
+        if sh > 0: Rs[sh:] = R[:rows - sh]
+        elif sh < 0: Rs[:sh] = R[-sh:]
+        else: Rs = R
+        F = np.ones_like(R)
+        for k in FIG_FEET:
+            Fk = (Dt >= g); sh_ = -int(k * dsf)
+            F &= np.roll(Fk, sh_, axis=1)
+        ok = Rs & F
+        if ok.any():
+            ys, xs = np.nonzero(ok); d = np.hypot(xs - pref[0], ys - pref[1]); k2 = int(d.argmin())
+            best = ((round(xs[k2] / dsf - 100 * K, 1), round(ys[k2] / dsf - 150 * K, 1)), g)
+        g -= .5
+    return best if best else ((0, 0), -1)
 
 
 def motion_check(pen, part, rotate=None, offsets=(), steps=12, stand=None, dsf=4, min_margin=8, min_stand=10):
@@ -304,7 +391,9 @@ def motion_check(pen, part, rotate=None, offsets=(), steps=12, stand=None, dsf=4
     if stand:
         sx, sy = (100 * K + stand[0]) * dsf, (150 * K + stand[1]) * dsf
         yy, xx = np.mgrid[0:U.shape[0], 0:U.shape[1]]
-        r['stand_to_motion'] = round(float(np.hypot(xx - sx, yy - sy)[U].min()) / dsf, 1); ok = ok and r['stand_to_motion'] >= min_stand
+        from scipy.ndimage import distance_transform_edt as edt
+        fig = _place_fig(U.shape, sx, sy, dsf)
+        r['stand_to_motion'] = round(float(edt(~fig)[U].min()) / dsf, 1); ok = ok and r['stand_to_motion'] >= min_stand
     r['ok'] = bool(ok); return r
 
 
@@ -344,6 +433,9 @@ def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), 
     """همهٔ مراحل پایانی یک ایستگاه: symbol → سنجش حاشیه → سنجش قاب حرکت → سنجش قطر خط → spec json → شات.
     motion = {'gear': dict(rotate=(x, y))} یا {'door': dict(offsets=[(0,0),(0,-10)])}. برمی‌گرداند dict همهٔ اعداد."""
     motion = motion or {}
+    auto = None
+    if stand is None:
+        stand, auto = find_stand(pen, motion)
     sym = symbol(pen, name, list(motion), out=out, legacy_shadow=legacy_shadow)
     m = margin_check(pen, stand=stand)
     mo = [motion_check(pen, part, stand=stand, **kw) for part, kw in motion.items()]
@@ -359,4 +451,6 @@ def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), 
                 pg.set_content(('<body style="margin:0;background:#c9a35c">' + preview(sym, name, 144 * (3 if tag == 'big' else 1), tall=True)))
                 pg.screenshot(path=str(shots / ('%s_%s.png' % (name, tag)))); pg.close()
             b.close()
-    return dict(name=name, kind=pen.kind, margin=m, motion=mo, widths=w, spec=sp, ok=bool(m['ok'] and all(x['ok'] for x in mo) and all(x['ok'] for x in w)))
+    r = dict(name=name, kind=pen.kind, margin=m, motion=mo, widths=w, spec=sp, ok=bool(m['ok'] and all(x['ok'] for x in mo) and all(x['ok'] for x in w)))
+    print('CHECK ' + json.dumps(dict(name=name, ok=r['ok'], stand=list(stand), auto_gap=auto, margin=m, motion=mo, widths=[(x['label'], x['nominal'], x['measured_px'], x['ok']) for x in w]), ensure_ascii=False))
+    return r

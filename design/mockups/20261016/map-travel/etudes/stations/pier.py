@@ -10,7 +10,7 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch2/pier'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/pier'
 
 WOOD = '#ffd84d'; WOOD_D = '#d9961c'; PILE = '#e8892b'; WHEEL = '#ef6a4a'; BOX = '#a4e07a'; BOX_D = '#5fae44'
 
@@ -90,11 +90,11 @@ def build_b(out=None):
 
 def run(variant):
     if variant == 'a':
-        p = build_a(); STAND = (0, 17)
+        p = build_a(); STAND = None
         motion = {'load': dict(offsets=[(0, -UP * k / 4) for k in range(5)]), 'wheel': dict(rotate=(CX, CY))}
         out, shots, name = OUTD, SHOTS, 'pier'
     else:
-        p = build_b(); STAND = (0, 17)
+        p = build_b(); STAND = None
         motion = {'rope': dict(offsets=[(0, -UP * k / 4) for k in range(5)])}
         out, shots, name = pathlib.Path(SHOTS) / 'etude_b', SHOTS, 'pier_b'
     r = finish(p, name, STAND, motion=motion, out=out, shots=shots)

@@ -90,8 +90,8 @@ def build(out=HERE, legacy_shadow=False):
     return p, symbol(p, 'screw_workshop', ['nut_back', 'nut_front'], out=out, legacy_shadow=legacy_shadow)
 
 
-STAND = (38, 6)     # px نقشه از مرکز سکو
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch1/screw_workshop'
+STAND = None     # خودکار: find_stand
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/screw_workshop'
 OUTD = HERE / 'out'
 
 

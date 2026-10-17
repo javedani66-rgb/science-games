@@ -42,7 +42,7 @@ def cap(p):
     p.ln((CX - 22, CY - 24), (CX - 30, CY - 12), INNER, CREAM, j=.1, probe='خط داخلی (درخشش)') if False else None
 
 
-def build(out=HERE, legacy_shadow=False):
+def build(out=None, legacy_shadow=False):
     p = Pen('wheel_dock', 'sea'); pad(p, line=((-60, 13), (-42, 18)), tri=((-58, -8), (61, 12)), dot=(56, -14))
     p.tipshadow(CX, FOOT - 6, 24); p.foot_tip(CX, FOOT - 6, 14)
     post(p)
@@ -52,10 +52,11 @@ def build(out=HERE, legacy_shadow=False):
     return p, symbol(p, 'wheel_dock', ['wheel'], out=out, legacy_shadow=legacy_shadow), (CX, CY)
 
 
-STAND = (42, 2)
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch1/wheel_dock'
+STAND = None     # خودکار: find_stand
+OUTD = HERE / 'out'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/wheel_dock'
 
 if __name__ == '__main__':
     p, sym, c = build()
-    r = finish(p, 'wheel_dock', STAND, motion={'wheel': dict(rotate=c)}, out=HERE, shots=SHOTS)
+    r = finish(p, 'wheel_dock', STAND, motion={'wheel': dict(rotate=c)}, out=OUTD, shots=SHOTS)
     print(json.dumps({k: r[k] for k in ('ok',)} | {'margin': r['margin'], 'motion': r['motion'], 'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

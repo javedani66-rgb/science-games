@@ -7,7 +7,7 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch2/shipyard'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/shipyard'
 WOOD = '#ffd84d'; WOOD_D = '#d9961c'; HULL = '#ef6a4a'; BAND = '#ffd84d'; FLAG = '#7bd35a'; MAST = '#8a5f0c'
 A = (-58, -6); B = (38, 22); FLOORY = 22
 ANG = math.degrees(math.atan2(B[1] - A[1], B[0] - A[0]))
@@ -42,7 +42,7 @@ def build(out=OUTD):
     return p
 
 
-STAND = (40, 2)
+STAND = None     # خودکار: find_stand
 if __name__ == '__main__':
     p = build()
     offs = [(SLIDE * k / 3 * UX, SLIDE * k / 3 * UY) for k in range(4)]

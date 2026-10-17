@@ -8,7 +8,7 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch2/floating_market'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/floating_market'
 HULL = '#c98a4a'; HULL_D = '#8a5a2a'; RED = '#ef6a4a'; WH = '#fff8e0'; WOOD = '#ffd84d'
 ORG = '#ff9b2f'; GRN = '#8bd45a'; BLU = '#5fa8f0'
 BOB = 3
@@ -45,7 +45,7 @@ def build(out=OUTD):
     with layer(p, 'boat'): boat(p)
     return p
 
-STAND = (40, -2)
+STAND = None     # خودکار: find_stand
 
 if __name__ == '__main__':
     p = build()

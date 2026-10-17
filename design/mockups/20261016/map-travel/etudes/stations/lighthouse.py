@@ -8,7 +8,7 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch2/lighthouse'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/lighthouse'
 RED = '#ef6a4a'; WHITE = '#fffaf0'; GLASS = '#ffd84d'; GLASS_D = '#d9961c'; ROOF = '#ef6a4a'; BEAM = '#fff1a0'
 YB, YT = 10, -56           # پای برج، بالای برج
 WB, WT = 19, 12           # نیم‌پهنای پایین/بالا
@@ -45,7 +45,7 @@ def build(out=OUTD):
     return p
 
 
-STAND = (40, 8)
+STAND = None     # خودکار: find_stand
 
 if __name__ == '__main__':
     p = build()

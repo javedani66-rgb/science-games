@@ -36,11 +36,11 @@ def gear_pts(cx, cy, rp, n, ph):
 def gear(p, g, top, low, hub, probe=False, peg=False):
     cx, cy, rp, n, ph = g
     p.shape(gear_pts(cx, cy, rp, n, ph), top, PART, j=.25, step=99)
-    p.shape(ell(cx, cy, rp * .58, rp * .58, 0, 360, 32), low, SEAM*.75, j=.2, step=99, clip=False)
+    p.shape(ell(cx, cy, rp * .58, rp * .58, 0, 360, 32), low, SEAM, j=.2, step=99, clip=False)
     t = math.radians(ph + 90)
     p.ln((cx + 4.5 * math.cos(t), cy + 6 * math.sin(t)), (cx + rp * .62 * math.cos(t), cy + rp * .62 * math.sin(t)),
          PART, hub, j=.1, probe=('نشانهٔ چرخش (جزء)' if probe else None))
-    p.shape(ell(cx, cy, 4.5, 4.5, 0, 360, 20), top, SEAM*.75, j=.2, clip=False)
+    p.shape(ell(cx, cy, 4.5, 4.5, 0, 360, 20), top, SEAM, j=.2, clip=False)
 
 
 def build(out=HERE, legacy_shadow=False):
@@ -55,8 +55,8 @@ def build(out=HERE, legacy_shadow=False):
     return p, symbol(p, 'final_workshop', ['gear_big', 'gear_small'], out=out, legacy_shadow=legacy_shadow)
 
 
-STAND = (42, 6)
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch2/final_workshop'
+STAND = None     # خودکار: find_stand
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/final_workshop'
 OUTD = HERE / 'out'
 
 if __name__ == '__main__':

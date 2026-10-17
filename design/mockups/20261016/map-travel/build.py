@@ -18,6 +18,9 @@ def scaled(im, h):
 
 STR = json.load(open(HERE / 'strings.fa.json', encoding='utf-8'))
 
+OLD_J = 'C330.0,1106.4 362.0,1065.8 362.0,1038.8 C362.0,1011.7 337.8,969.8 320.0,957.7'
+NEW_J = 'C333.0,1108.0 343.0,1080.0 343.0,1050.0 L343.0,966.0 C343.0,959.0 332.0,957.7 320.0,957.7'
+
 def map_parts():
     s = (EA / 'env_sheet.html').read_text(encoding='utf-8')
     style = re.search(r'<style>(.*?)</style>', s, re.S).group(1)
@@ -30,11 +33,12 @@ def map_parts():
     i = body.index('<g id="env_path"'); j = body.index('<g id="env_labels"')
     e = body.index('</g>', i) + 4
     orig = body[i:e]
+    orig = orig.replace(OLD_J, NEW_J)   # D118 v2: راه خشکی هم تا اسکلهٔ x=340
     rest = body[e:j]
     d = json.load(open(EA / 'slots.json', encoding='utf-8'))
-    d['path_d'] = d['path_d'].replace('C362.0,1011.7 337.8,969.8 320.0,957.7', 'L362.0,984.0 C362.0,968.0 346.0,958.0 320.0,957.7')   # D118: راه تا انتهای اسکله عمودی
+    d['path_d'] = d['path_d'].replace(OLD_J, NEW_J)   # D118 v2: اسکله عمودی در x=340، نوک ۹۵۶؛ نقطه‌چین از نوک
     d['path_d'] += ' C52,182.5 30,158 30,125 C30,80 60,40 120,34 C170,28 225,52 272,96'   # راه دریایی تا ایستگاه نهایی (M12)
-    new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 968 + 40)
+    new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 966 + 40)
            + '<g clip-path="url(#cl_land)">' + orig + '</g>'
            + '<g clip-path="url(#cl_sea)" filter="url(#env_wob)"><path d="%s" fill="none" stroke="#241a5e" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 17" opacity=".35"/>'
              '<path d="%s" fill="none" stroke="#e8f6f8" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 17" opacity=".85"/></g>' % (d['path_d'], d['path_d']))

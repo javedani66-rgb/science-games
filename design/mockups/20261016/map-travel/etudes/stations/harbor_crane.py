@@ -60,8 +60,8 @@ def build(out=HERE):
     return p
 
 
-STAND = (40, -2)
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch2/harbor_crane'
+STAND = None     # خودکار: find_stand
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/harbor_crane'
 
 if __name__ == '__main__':
     p = build()
