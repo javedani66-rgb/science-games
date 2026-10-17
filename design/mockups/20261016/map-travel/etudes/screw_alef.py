@@ -45,7 +45,7 @@ def curve(x0, x1, y0, drop, wob, n=14, seed=0, hook=0):
         x, y = pts[-1]; pts += [(x + 2.5, y + 2.6), (x + 3.6, y + hook)]
     return pts
 
-PADRX, PADRY, WALL = 64, 22, 12
+PADRX, PADRY, WALL = 64, 26, 12
 PAD_TOP = '#ecdca8'; PAD_WALL = '#b08a52'; SEAM = '#b49a62'
 
 def ln(p, a, b, sw, col, op=1, j=.3):
@@ -68,8 +68,8 @@ def pad(p):
     for x in (-44, -22, 0, 22, 44):        # وجه‌های دیواره
         yy = PADRY * math.sqrt(1 - (x / PADRX) ** 2)
         ln(p, (x, yy + 4), (x, yy + WALL - 5), 2.4, '#8a6a3a', .6, .1)
-    ln(p, (-44, 7), (-24, 9), 4.0, '#fff3c4', .9, .2)     # تنها خط روشن روی سطح
-    for x, y in ((-54, -1), (50, 1)):                      # دو نشانهٔ ریز لبه
+    ln(p, (-50, 10), (-40, 11), 4.0, '#fff3c4', .9, .2)     # تنها خط روشن روی سطح
+    for x, y in ((-12, 19),):                      # دو نشانهٔ ریز لبه
         p.shape([(x - 3.5, y + 3), (x, y - 4), (x + 3.5, y + 3)], '#c9ad6a', 2.2)
 
 def house(p):
@@ -130,19 +130,21 @@ def screw(p):
     p.shape(sl, NAVY, 2.2)
     ln(p, (SX - 29, -98), (SX - 28.5, -90), 3.0, CREAM)     # تنها درخشش
 
-CS = .8      # مقیاس بناها نسبت به سکو
+HS = .66; HX = -56 + 78 * HS; HY = 3 + 4 * HS     # خانه: پای چپ x=-56، کف y=3
+SS = .76; TIPX = 36; TIPYB = 8                       # پیچ: نوک در (38,8)
 def build():
     p = Pen(False, 1.0); p.sw = 5.5
     pad(p)
-    p.raw('<path d="M34,6 L62,1 L56,13 L30,15 Z" fill="#10083a" opacity=".2"/>')      # سایهٔ افتادهٔ پیچ
-    p.raw('<g transform="scale(%s)"><g transform="translate(-6 0)">' % CS); house(p); p.raw('</g>')
-    p.raw('<g transform="translate(43 12) scale(1.15) translate(-52 -12)">'); screw(p); p.raw('</g></g>')
-    nut = [(4 + 10 * math.cos(math.radians(a + 15)), 12 + 5.6 * math.sin(math.radians(a + 15))) for a in range(0, 360, 60)]
-    p.shape(nut, '#f2c94c', 3.6); p.o.append('<ellipse cx="4" cy="12" rx="3.4" ry="1.8" fill="%s" stroke="#a8832e" stroke-width="1.6"/>' % PAD_TOP)
+    # D112: همهٔ بنا داخل بیضی سکو؛ جای ایستادن فیگور بین خانه و پیچ (x از حدود ۰ تا ۱۲)
+    p.raw('<path d="M34,9 L54,6 L50,14 L32,15 Z" fill="#10083a" opacity=".2"/>')      # سایهٔ افتادهٔ پیچ
+    p.raw('<g transform="translate(%.1f %.1f) scale(%s)">' % (HX, HY, HS)); house(p); p.raw('</g>')
+    p.raw('<g transform="translate(%.1f %.1f) scale(%s) translate(-52 -12)">' % (TIPX, TIPYB, SS)); screw(p); p.raw('</g>')
+    nut = [(-30 + 10 * math.cos(math.radians(a + 15)), 15 + 5.6 * math.sin(math.radians(a + 15))) for a in range(0, 360, 60)]
+    p.shape(nut, '#f2c94c', 3.6); p.o.append('<ellipse cx="-30" cy="15" rx="3.4" ry="1.8" fill="%s" stroke="#a8832e" stroke-width="1.6"/>' % PAD_TOP)
     return p
 
 def symbol(p):
     return ('<symbol id="node_screw_workshop" viewBox="0 0 200 190" overflow="visible">'
-            '<g id="node_screw_workshop_shadow" transform="translate(100 150)"><ellipse cx="7" cy="6" rx="68" ry="22" fill="#10083a" opacity=".25"/></g>'
+            '<g id="node_screw_workshop_shadow" transform="translate(100 150)"><ellipse cx="0" cy="14" rx="64" ry="26" fill="#10083a" opacity=".25"/></g>'
             '<g id="node_screw_workshop_base" transform="translate(100 150)">' + p.svg() + '</g>'
             '<g id="node_screw_workshop_lit" transform="translate(100 150)"><path d="M%d,-92 L%d,-94" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none" opacity=".9"/></g></symbol>' % (SX - 24, SX - 14))
