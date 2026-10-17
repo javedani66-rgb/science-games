@@ -175,7 +175,7 @@ def etude_b():
     yn = -60                                         # مرکز رویهٔ مهره
     f = rot(0, 8, 0)
     screw(p, f, w=w, Lb=Lb, hw=33, hh=17, bottom='tip', head=False, probe=False)
-    nut(p, 0, 8 + yn, 34, 22, hole=w + 7, ground=False, probe=True)
+    p.raw('<g class="nutlayer" id="NUTLAYER">'); nut(p, 0, 8 + yn, 34, 22, hole=w + 7, ground=False, probe=True); p.raw('</g>')
     screw(p, f, w=w, Lb=Lb, hw=33, hh=17, bottom='arc', y0=yn, head=True, shade=False)
     return p
 
