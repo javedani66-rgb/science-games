@@ -1,0 +1,26 @@
+{
+ "id": "lighthouse",
+ "kind": "sea",
+ "pad": [
+  54.7,
+  27.4,
+  11.5,
+  75
+ ],
+ "stand": [
+  40,
+  8
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_lighthouse_light"
+ ],
+ "motion_spec": {
+  "kind": "blink",
+  "note": "پرتوها با opacity روشن/خاموش؛ بدنه و اتاقک ثابت"
+ }
+}

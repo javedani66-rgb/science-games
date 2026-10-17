@@ -1,58 +1,113 @@
 #!/usr/bin/env python3
-"""ایستگاه «اسکله» (M07): الاکلنگ/اهرم روی سکوی دریایی. تکیه‌گاه ثابت؛ تخته+صندوق = لایهٔ متحرک node_pier_lever (چرخش ±۱۲° حول تکیه‌گاه)."""
+"""ایستگاه «اسکله» (M07، D118): اسکلهٔ واقعی با قرقره روی سکوی دریایی.
+اتود الف (انتخاب‌شده) = عرشهٔ چوبی (۳ تخته + ۲ شمع) + دکل و بازوی چوبی + قرقره + طناب + جعبه.
+  لایه‌های متحرک: node_pier_load (جعبه+طناب، بالا/پایین ۰ تا ۸- در مختصات symbol) و node_pier_wheel (چرخش قرقره).
+  بدنهٔ ثابت: شمع‌ها، عرشه، دکل، بازو، پایه‌ی قرقره. طناب پشت قرقره می‌رود (قرقره جلوی طناب).
+اتود ب (VARIANT='b') = بولارد + طناب روی عرشه؛ سر طناب آویزان (لایهٔ node_pier_b_rope). فقط برای مقایسه."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
-import station_kit as K_
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch1/pier'
-WOOD = '#ffd84d'; WOOD_D = '#d9961c'; RED = '#ef6a4a'; BOX = '#a4e07a'
-PX, PY = 0, -52          # تکیه‌گاه
-HALF = 52                # نیم‌طول تخته
-ANG = 12
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch2/pier'
+
+WOOD = '#ffd84d'; WOOD_D = '#d9961c'; PILE = '#e8892b'; WHEEL = '#ef6a4a'; BOX = '#a4e07a'; BOX_D = '#5fae44'
+
+# ---- هندسهٔ مشترک عرشه ----
+DX, DT, DB = 56, -14, 2            # نیم‌پهنای عرشه، y رویه، y کف
+# ---- قرقره ----
+CX, CY, R = -26, -64, 18
+RO = 12                            # فاصلهٔ طناب از محور (درون دیسک؛ بالای طناب پشت قرقره پنهان می‌ماند)
+BX = CX - RO                       # محور افقی طناب و جعبه
+BW, BH = 20, 18                    # جعبه
+UP = 8                             # بازهٔ حرکت جعبه (بالا)
 
 
-def build(out=OUTD):
+def deck(p):
+    for x in (-41, 41):            # شمع‌ها: زیر عرشه
+        p.shape([(x - 5, DB - 1), (x + 5, DB - 1), (x + 5, DB + 7), (x - 5, DB + 7)], PILE, PART, j=.2, step=5)
+    p.shape([(-DX, DT), (DX, DT), (DX, DB), (-DX, DB)], WOOD, OUT, j=.25, step=6)
+    h = (DB - DT) / 3
+    p.ln((-DX + 6, DT + h), (DX - 6, DT + h), INNER, WOOD_D, j=.1, probe='درز تخته (داخلی)')
+    p.ln((-DX + 6, DT + 2 * h), (DX - 6, DT + 2 * h), INNER, WOOD_D, j=.1)
+
+
+def frame(p):
+    """دکل راست + بازوی افقی + مهار مورب؛ پایه‌ی قرقره زیر بازو."""
+    p.ln((26, -50), (6, -72), PART, WOOD_D, j=.1, probe='مهار مورب (جزء)')
+    p.shape([(26, DT), (38, DT), (38, -100), (26, -100)], WOOD, OUT, j=.2, step=6)
+    p.shape([(-40, -100), (40, -100), (40, -88), (-40, -88)], WOOD, OUT, j=.2, step=6)
+    p.shape([(CX - 3, -90), (CX + 3, -90), (CX + 3, CY), (CX - 3, CY)], WOOD_D, PART, j=.1, step=5, clip=False)
+
+
+def load(p):
+    """جعبه + طناب. طناب از مرکز قرقره تا جعبه؛ بالای آن پشت دیسک قرقره پنهان است (در بازهٔ حرکت)."""
+    top = DT - BH                  # جعبه روی عرشه (وضعیت پایین)
+    p.ln((BX, CY), (BX, top), PART, NAVY, j=.1, probe='طناب (جزء)')
+    p.shape([(BX - BW / 2, top), (BX + BW / 2, top), (BX + BW / 2, DT), (BX - BW / 2, DT)], BOX, PART, j=.2, step=5)
+    p.ln((BX - BW / 2 + 4, top + BH / 2), (BX + BW / 2 - 4, top + BH / 2), INNER, BOX_D, j=.1, probe='نوار جعبه (داخلی)')
+
+
+def wheel(p):
+    p.shape(ell(CX, CY, R, R, 0, 360, 36), WHEEL, OUT, j=.3, step=99, clip=False)
+    for k in range(3):
+        t = math.radians(-90 + 120 * k)
+        p.ln((CX + 4 * math.cos(t), CY + 4 * math.sin(t)), (CX + (R - 5) * math.cos(t), CY + (R - 5) * math.sin(t)), INNER, CREAM, j=.05,
+             probe='پرهٔ قرقره (داخلی)' if k == 0 else None)
+    p.shape(ell(CX, CY, 3.5, 3.5, 0, 360, 14), NAVY, INNER, j=0, step=99, clip=False)
+
+
+def build_a(out=OUTD):
     p = Pen('pier', 'sea'); pad(p, line=((-62, 14), (-44, 19)), tri=((-60, -8), (62, 12)), dot=(58, -15))
-    # تکیه‌گاه ثابت (زیر تخته، کامل و پیوسته)
-    p.tipshadow(0, 5, 24); p.foot_tip(0, 5, 12)
-    p.shape([(-22, 6), (22, 6), (7, PY), (-7, PY)], RED, OUT, j=.2, step=5)
-    p.ln((-9, -2), (-4, -26), INNER, CREAM, j=.1, probe='خط داخلی (درخشش تکیه‌گاه)')
-    with layer(p, 'lever'):
-        p.shape([(-HALF, PY - 7), (HALF, PY - 7), (HALF, PY + 7), (-HALF, PY + 7)], WOOD, OUT, j=.2, step=5)
-        p.ln((14, PY), (HALF - 8, PY), INNER, WOOD_D, j=.1, probe='خط داخلی (تختهٔ اهرم)')
-        p.shape([(-HALF + 6, PY - 7 - 20), (-HALF + 26, PY - 7 - 20), (-HALF + 26, PY - 7), (-HALF + 6, PY - 7)], BOX, PART, j=.2, step=5)
-        p.shape(ell(PX, PY, 5, 5, 0, 360, 20), NAVY, INNER, j=0, clip=False)
+    p.tipshadow(0, DB + 6, 46); p.foot_tip(-41, DB + 7, 8); p.foot_tip(41, DB + 7, 8)
+    deck(p); frame(p)
+    with layer(p, 'load'): load(p)
+    with layer(p, 'wheel'): wheel(p)
     return p
 
 
-def lever_motion(p, stand, dsf=4):
-    import numpy as np
-    A = lambda im: im[..., 3] > 128
-    i, j = p.layers['lever']; body = ''.join(p.o[i:j])
-    top = A(K_._shot(K_._poly(p.padtop), dsf)); sil = top | A(K_._shot(K_._poly(K_._wall_pts(p)), dsf))
-    cols = sil.any(0); low = np.where(cols, sil.shape[0] - 1 - np.argmax(sil[::-1], 0), -1)
-    allowed = cols[None, :] & (np.arange(sil.shape[0])[:, None] <= low[None, :])
-    U = np.zeros_like(sil); angs = [-ANG, -ANG / 2, 0, ANG / 2, ANG]
-    for a in angs: U |= A(K_._shot('<g transform="rotate(%s %s %s)">%s</g>' % (a, PX, PY, body), dsf))
-    xs = np.where(U.any(0))[0]; px = np.where(top.any(0))[0]
-    sx, sy = (100 * K + stand[0]) * dsf, (150 * K + stand[1]) * dsf
-    yy, xx = np.mgrid[0:U.shape[0], 0:U.shape[1]]
-    r = dict(part='lever', angles=angs, out_px=round(float((U & ~allowed).sum()) / dsf ** 2, 1),
-             x_margin=round(float(min(xs.min() - px.min(), px.max() - xs.max())) / dsf, 1),
-             stand_to_motion=round(float(np.hypot(xx - sx, yy - sy)[U].min()) / dsf, 1))
-    r['ok'] = r['out_px'] == 0 and r['x_margin'] >= 8 and r['stand_to_motion'] >= 10
+# ---------------- اتود ب: بولارد + طناب ----------------
+BOL = (0, DT)
+
+
+def build_b(out=None):
+    p = Pen('pier_b', 'sea'); pad(p, line=((-62, 14), (-44, 19)), tri=((-60, -8), (62, 12)), dot=(58, -15))
+    p.tipshadow(0, DB + 6, 46); p.foot_tip(-41, DB + 7, 8); p.foot_tip(41, DB + 7, 8)
+    deck(p)
+    # بولارد: تنه + سر پهن
+    p.shape([(-9, DT), (9, DT), (7, -44), (-7, -44)], '#6f7fd6', OUT, j=.2, step=6)
+    p.shape([(-17, -44), (17, -44), (17, -56), (-17, -56)], '#6f7fd6', OUT, j=.2, step=6)
+    p.ln((-5, -22), (-4, -38), INNER, CREAM, j=.05, probe='خط داخلی (درخشش)')
+    with layer(p, 'rope'):
+        p.ln((-12, -50), (12, -50), PART, WOOD_D, j=.05)
+        p.ln((24, DT - 2), (24, -30), PART, NAVY, j=.1, probe='طناب (جزء)')
+        p.shape([(18, -30), (30, -30), (30, -18), (18, -18)], BOX, PART, j=.2, step=5)
+    return p
+
+
+def run(variant):
+    if variant == 'a':
+        p = build_a(); STAND = (0, 17)
+        motion = {'load': dict(offsets=[(0, -UP * k / 4) for k in range(5)]), 'wheel': dict(rotate=(CX, CY))}
+        out, shots, name = OUTD, SHOTS, 'pier'
+    else:
+        p = build_b(); STAND = (0, 17)
+        motion = {'rope': dict(offsets=[(0, -UP * k / 4) for k in range(5)])}
+        out, shots, name = pathlib.Path(SHOTS) / 'etude_b', SHOTS, 'pier_b'
+    r = finish(p, name, STAND, motion=motion, out=out, shots=shots)
+    sp = r['spec']
+    if variant == 'a':
+        sp['motion_spec'] = {
+            'node_pier_load': dict(translate_y=[-UP, 0], unit='symbol', note='جعبه+طناب بالا/پایین؛ پایین = جعبه روی عرشه'),
+            'node_pier_wheel': dict(rotate=[CX, CY], note='قرقره حول محور؛ جهت با حرکت جعبه هماهنگ: جعبه بالا = پادساعتگرد (طناب سمت چپ بالا می‌رود)'),
+            'fixed': 'شمع‌ها، عرشه، دکل، بازو، پایهٔ قرقره'}
+        (OUTD / 'pier.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     return r
 
 
-STAND = (0, 17)
-
 if __name__ == '__main__':
-    p = build()
-    r = finish(p, 'pier', STAND, motion={}, out=OUTD, shots=SHOTS)
-    m = lever_motion(p, STAND); r['motion'] = [m]; r['ok'] = bool(r['ok'] and m['ok'])
-    sp = r['spec']; sp['motion'] = ['node_pier_lever']; sp['motion_spec'] = dict(rotate=[PX, PY], range_deg=[-ANG, ANG], note='تخته+صندوق حول تکیه‌گاه؛ تکیه‌گاه ثابت')
-    (OUTD / 'pier.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
-    print(json.dumps(r, ensure_ascii=False, indent=1))
+    for v in (sys.argv[1:] or ['a', 'b']):
+        r = run(v)
+        print(v, json.dumps({'ok': r['ok'], 'margin': r['margin'], 'motion': r['motion'],
+                             'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

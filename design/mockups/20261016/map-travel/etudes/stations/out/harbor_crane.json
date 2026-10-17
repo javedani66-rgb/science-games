@@ -1,0 +1,22 @@
+{
+ "id": "harbor_crane",
+ "kind": "sea",
+ "pad": [
+  54.7,
+  27.4,
+  11.5,
+  73
+ ],
+ "stand": [
+  40,
+  -2
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_harbor_crane_hook"
+ ]
+}

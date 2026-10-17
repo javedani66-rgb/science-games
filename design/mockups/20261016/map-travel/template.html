@@ -67,7 +67,7 @@ const L=pth.getTotalLength(),samp=[];for(let s=0;s<=L;s+=2){const p=pth.getPoint
 function sOf(n){let best=1e9,bs=0;for(const p of samp){const d=(p[0]-n.x)**2+(p[1]-n.y)**2;if(d<best){best=d;bs=p[2]}}return bs}
 const ids=Object.keys(NODES);ids.forEach(i=>NODES[i].s=sOf(NODES[i]));
 const ORDER=ids.sort((a,b)=>NODES[a].s-NODES[b].s);
-const isSea=y=>y<COAST;
+const isSea=y=>y<JTIP;
 function leg(a,b){const pts=[];const s0=NODES[a].s,s1=NODES[b].s,dir=s1>s0?1:-1;for(let s=s0;dir>0?s<=s1:s>=s1;s+=3*dir){const p=pth.getPointAtLength(s);pts.push([p.x,p.y])}pts.unshift(stand(NODES[a]));pts.push(stand(NODES[b]));return pts}
 /* وضعیت */
 let here='E03';const visited=new Set(ORDER.filter(i=>NODES[i].y>=1200));
@@ -79,21 +79,27 @@ const svgMap=document.querySelector('svg.map');
 const landG=svgMap.querySelector('g[clip-path="url(#cl_land)"]'),seaG=svgMap.querySelector('g[clip-path="url(#cl_sea)"]');
 const prints=document.createElementNS(NS,'g');prints.id='prints';(svgMap.querySelector('#env_labels')||svgMap.lastElementChild).before(prints);
 /* ردپا فقط پس از گذر از هر مرحله، از همان ایستگاه (روی سطح آن) تا ایستگاه بعد حک می‌شود (D99) */
-/* اسکلهٔ چوبی ساحل: پیوند خشکی و آب؛ راه از روی تخته‌هایش به دریا می‌رسد */
+/* D118: سکوی فرود (سنگی، هم‌سبک سکوها) + اسکلهٔ چوبی در امتداد راه (عمودی در x=362)؛ خط دور یک‌پارچه:
+   اول همهٔ شکل‌ها با خط دور تیره، بعد همه با رنگ پر بدون خط (درز ندارد) */
+const JX=362,JTIP=992,JDOT=975,BERTH=[330,1003];
 const jet=document.createElementNS(NS,'g');jet.id='jetty';jet.setAttribute('filter','url(#env_wob)');
-(function(){const q=[[340,1046],[372,1046],[352,950],[320,950]];const lerp=(a,b,u)=>[a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u];
- let h='<path d="M'+q.map(p=>p.join(',')).join(' L')+' Z" fill="#c98f52" stroke="#241a5e" stroke-width="5" stroke-linejoin="round"/>';
- for(let y=1037;y>958;y-=11){const u=(1046-y)/96,l=lerp(q[0],q[3],u),r=lerp(q[1],q[2],u);h+='<path d="M'+(l[0]+3)+','+y+' L'+(r[0]-3)+','+y+'" stroke="#8a5a30" stroke-width="2.4" stroke-linecap="round"/>'}
- h+='<path d="M340,1046 L320,950 M372,1046 L352,950" stroke="#7a4a28" stroke-width="5" fill="none"/>';
- [[321,956],[351,956]].forEach(p=>{h+='<rect x="'+(p[0]-5)+'" y="'+(p[1]-8)+'" width="10" height="14" rx="3" fill="#7a4a28" stroke="#241a5e" stroke-width="3.5"/>'});
+(function(){const R=(x,y,w,h,r)=>'x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+r+'"';
+ const shapes=[[336,1040,52,26,11],[336,1030,52,26,11],[348,JTIP,28,48,5]];
+ let h='<g fill="#241a5e" stroke="#241a5e" stroke-width="11" stroke-linejoin="round">'+shapes.map(s=>'<rect '+R(...s)+'/>').join('')+'</g>';
+ h+='<rect '+R(336,1040,52,26,11)+' fill="#6e72a8"/><rect '+R(348,JTIP,28,48,5)+' fill="#c98f52"/><rect '+R(336,1030,52,26,11)+' fill="#cfd3e2"/>';
+ for(let y=JTIP+7;y<1022;y+=10)h+='<path d="M351,'+y+' L373,'+y+'" stroke="#8a5a30" stroke-width="2.4" stroke-linecap="round"/>';
+ h+='<rect x="348" y="1023" width="28" height="6" fill="#7a4a28"/>';
+ h+='<path d="M343,1043 l9,3 M372,1048 l9,-3" stroke="#9a9fc6" stroke-width="2.6" stroke-linecap="round"/>';
+ [[347,JTIP+3],[377,JTIP+3]].forEach(p=>{h+='<rect x="'+(p[0]-5)+'" y="'+(p[1]-8)+'" width="10" height="14" rx="3" fill="#7a4a28" stroke="#241a5e" stroke-width="3.5"/>'});
 jet.innerHTML=h})();
-(svgMap.querySelector('#env_labels')||svgMap.lastElementChild).before(jet);
+prints.before(jet);
 /* ردپا (D99/D100/D101): هر ایستگاه یک سکوی بالا آمده است. ردپا از پهلوی سکو (جایی که دیواره باریک دیده می‌شود) روی سطح بالایی می‌رود،
    از بدنهٔ ساختمان نمی‌گذرد و بیرون سکو روی زمین راه را دنبال می‌کند. */
 const pd=n=>({rx:n.pad[0],ry:n.pad[1],w:n.pad[2],bh:n.pad[3]});
 const inOuter=(n,x,y)=>{const q=pd(n),dx=x-n.x,dy=y-n.y-q.w/2;return (dx/(q.rx+14))**2+(dy/(q.ry+q.w/2+12))**2<1};
 const inBuild=(x,y)=>Object.values(NODES).some(n=>{const q=pd(n);return Math.abs(x-n.x)<q.rx*.72&&y<n.y-q.ry*.5&&y>n.y-q.bh-q.ry});
-const onJetty=(x,y)=>{if(y<958||y>1036)return false;const u=(1046-y)/96,l=340-20*u,r=372-20*u;return x>l+4&&x<r-4};
+const onJetty=(x,y)=>x>JX-10&&x<JX+10&&y>JTIP+10&&y<1054; /* جاده روی اسکله و سکوی فرود؛ دیوارهٔ سکو (۱۰۵۶ تا ۱۰۷۲) ردپا ندارد */
+const onWall=(x,y)=>x>334&&y>1054&&y<1074;
 function legPoly(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],sB=B.s;
  // فقط راهِ بیرون از سکوها؛ ردپا روی ایستگاه نمی‌افتد (D102)
  const pts=[];let i=samp.findIndex(p=>p[2]>=A.s);
@@ -115,7 +121,7 @@ const nearStn=(x,y)=>EXC.some(b=>{const dx=Math.max(b[0]-x,0,x-b[2]),dy=Math.max
  for(let k=0;k<ORDER.length-1;k++){const P=legPoly(k);let acc=0,side=1,need=0;
   for(let m=1;m<P.length;m++){const [x0,y0]=P[m-1],[x1,y1]=P[m],L=Math.hypot(x1-x0,y1-y0);if(!L)continue;const ang=Math.atan2(y1-y0,x1-x0);
    while(need<=L){const x=x0+(x1-x0)*need/L,y=y0+(y1-y0)*need/L;need+=26;
-    if(!(y>=COAST+14||onJetty(x,y))||y>{{H}}-8||inBuild(x,y)||Object.values(NODES).some(n=>inOuter(n,x,y))||nearStn(x-Math.sin(ang)*6*side,y+Math.cos(ang)*6*side))continue;
+    if(!(y>=COAST+14||onJetty(x,y))||onWall(x,y)||y>{{H}}-8||inBuild(x,y)||Object.values(NODES).some(n=>inOuter(n,x,y))||nearStn(x-Math.sin(ang)*6*side,y+Math.cos(ang)*6*side))continue;
     const g=document.createElementNS(NS,'g');g.dataset.leg=k;g.dataset.s=k*100000+acc+need;g.style.display='none';
     g.setAttribute('transform','translate('+(x-Math.sin(ang)*6*side).toFixed(1)+' '+(y+Math.cos(ang)*6*side).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
     g.innerHTML='<g class="pr"><g fill="#f1dcff" stroke="#2a0f5e" stroke-width="2"><ellipse cx="0" cy="2.5" rx="5.2" ry="7"/><circle cx="-4.6" cy="-5.6" r="2.4"/><circle cx="0" cy="-8.4" r="2.5"/><circle cx="4.6" cy="-5.6" r="2.4"/></g></g>';
@@ -128,7 +134,7 @@ function showPrints(animate){const fresh=[];prints.childNodes.forEach(g=>{const 
 function resetPrints(){prints.childNodes.forEach(g=>{g.style.display='none';g.dataset.on=''})}
 const trail=document.createElementNS(NS,'g');trail.id='trail';trail.setAttribute('filter','url(#env_wob)');seaG.parentNode.insertBefore(trail,seaG.nextSibling);
 function updateTrail(){trail.innerHTML='';const b=nextUp();if(!b)return;const a=ORDER[ORDER.indexOf(b)-1]||here;let s0=NODES[a].s,s1=NODES[b].s;if(s0>s1)[s0,s1]=[s1,s0];
- let d='',gap=true;for(let s=s0;s<=s1;s+=4){const p=pth.getPointAtLength(s);if(p.y>=COAST){gap=true;continue}d+=(gap?'M':'L')+p.x.toFixed(1)+' '+p.y.toFixed(1);gap=false}
+ let d='',gap=true;for(let s=s0;s<=s1;s+=4){const p=pth.getPointAtLength(s);if(p.y>=JDOT){gap=true;continue}d+=(gap?'M':'L')+p.x.toFixed(1)+' '+p.y.toFixed(1);gap=false}
  if(!d)return;trail.innerHTML='<path d="'+d+'" fill="none" stroke="#241a5e" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 17"/><path d="'+d+'" fill="none" stroke="#b07af0" stroke-width="6" stroke-linecap="round" stroke-dasharray="1 17"/>'}
 /* کاراکتر و قایق */
 const SEAT=27,FH=56;
@@ -163,6 +169,7 @@ async function sail(pts){if(pts.length<2)return;const c=cum(pts),tot=c[c.length-
 async function hopTo(a,b,h){await tween(380,p=>{placeFig(a[0]+(b[0]-a[0])*p,a[1]+(b[1]-a[1])*p-4*h*p*(1-p));setTilt(6*Math.sin(p*Math.PI)*(b[0]>a[0]?1:-1),0,1+.05*Math.sin(p*Math.PI))});
  await tween(150,p=>{setTilt(0,0,1-.07*Math.sin(p*Math.PI))});setTilt(0,0,1)}
 /* سفر عادی به گرهٔ تازه: پاها روی خشکی، قایق روی دریا؛ در ساحل پرش */
+const pts_last_land=(runs,r)=>{const i=runs.indexOf(r),q=runs[i-1];return q?q.pts[q.pts.length-1]:[JX,JTIP]};
 async function travel(a,b){const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=isSea(pts[0][1]);
  for(let t=1;t<pts.length;t++){const mt=isSea(pts[t][1]);cur.push(pts[t]);if(mt!==m){runs.push({m,pts:cur});cur=[pts[t]];m=mt}}
  runs.push({m,pts:cur});let sea=runs[0].m;
@@ -171,7 +178,7 @@ async function travel(a,b){const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=i
  if(seaB){const rl=runs[runs.length-1];if(rl.m)rl.pts=[...rl.pts.filter(p=>!inOuter(NB,p[0],p[1])),dock(NB)]}
  for(const r of runs){
   if(r.m!==sea){const p0=r.pts[0];
-   if(r.m){setOutfit(true);showBoat(true);placeBoat(p0[0],p0[1]-SEAT-4,0);await hopTo(p0,[p0[0],p0[1]-4],18)}
+   if(r.m){const f0=pts_last_land(runs,r);setOutfit(true);showBoat(true);placeBoat(BERTH[0],BERTH[1]-SEAT-4,0);await hopTo(f0,[BERTH[0],BERTH[1]-4],18);r.pts=[BERTH,...r.pts.filter(p=>p[1]<962)]}
    else{await hopTo([p0[0],p0[1]-4],p0,18);setOutfit(false);showBoat(false)}
    sea=r.m}
   if(r.m)await sail(r.pts);else await walk(r.pts)}

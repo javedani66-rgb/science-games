@@ -32,8 +32,9 @@ def map_parts():
     orig = body[i:e]
     rest = body[e:j]
     d = json.load(open(EA / 'slots.json', encoding='utf-8'))
+    d['path_d'] = d['path_d'].replace('C362.0,1011.7 337.8,969.8 320.0,957.7', 'L362.0,996.0 C362.0,976.0 346.0,958.5 320.0,957.7')   # D118: راه تا انتهای اسکله عمودی
     d['path_d'] += ' C52,182.5 30,158 30,125 C30,80 60,40 120,34 C170,28 225,52 272,96'   # راه دریایی تا ایستگاه نهایی (M12)
-    new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, COAST + 40)
+    new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 975 + 40)
            + '<g clip-path="url(#cl_land)">' + orig + '</g>'
            + '<g clip-path="url(#cl_sea)" filter="url(#env_wob)"><path d="%s" fill="none" stroke="#241a5e" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 17" opacity=".35"/>'
              '<path d="%s" fill="none" stroke="#e8f6f8" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 17" opacity=".85"/></g>' % (d['path_d'], d['path_d']))

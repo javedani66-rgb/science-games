@@ -1,0 +1,30 @@
+{
+ "id": "shipyard",
+ "kind": "sea",
+ "pad": [
+  54.7,
+  27.4,
+  11.5,
+  39
+ ],
+ "stand": [
+  40,
+  2
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_shipyard_hull"
+ ],
+ "motion_spec": {
+  "layer": "node_shipyard_hull",
+  "translate_along_slope": [
+   17.3,
+   5.0
+  ],
+  "note": "بدنه روی لغزگاه تا ۱۸ واحد به پایین می‌لغزد و برمی‌گردد؛ لغزگاه ثابت و پیوسته"
+ }
+}
