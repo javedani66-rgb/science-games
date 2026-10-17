@@ -18,31 +18,31 @@ def bez(p0, c, p1, n=14):
             for t in [i / n for i in range(n + 1)]]
 
 
-DY = -8
+DY = -12
 
 
 def cradle(p):
     """دو پایهٔ چوبی مستطیلی (نه گوه): از کف تا زیر بدنه."""
-    for x in (-46, -18):
-        p.tipshadow(x, 18, 12); p.foot_tip(x, 16, 8)
-        p.shape([(x - 9, -4), (x + 9, -4), (x + 9, 18), (x - 9, 18)], WOOD, PART, j=.2, step=6)
-        p.ln((x - 2, 6), (x - 2, 12), INNER, WOOD_D, j=.1)
+    for x in (-44, -16):
+        p.tipshadow(x, 13, 12); p.foot_tip(x, 11, 5)
+        p.shape([(x - 10, -4), (x + 10, -4), (x + 10, 13), (x - 10, 13)], WOOD, INNER, j=.2, step=6)
+        p.ln((x - 4, 6), (x + 4, 6), INNER, WOOD_D, j=.1)
 
 
 def boat(p):
     Y = lambda pts: [(x, y + DY) for x, y in pts]
     # بادبان، بعد دکل روی لبهٔ چپ آن (دکل کامل دیده می‌شود)، بعد بدنه؛ پایهٔ دکل زیر بدنه پنهان است
-    p.shape(Y([(-34, -68), (-34, -30), (-4, -32)]), SAIL, INNER, j=.1, step=4, clip=False)
+    p.shape(Y([(-34, -70), (-34, -34), (-6, -36)]), SAIL, INNER, j=.1, step=4, clip=False)
     p.ln((-34, -74 + DY), (-34, -12 + DY), PART, MAST, j=.1, probe='دکل (جزء)')
     top = bez((-62, -18), (-32, -10), (2, -30))
     stem = bez((2, -30), (2, -12), (-10, 2))
     keel = bez((-10, 2), (-32, 18), (-54, 0))
-    p.shape(Y(top + stem[1:] + keel[1:]), HULL, OUT, j=.15, step=99)
+    p.shape(Y(top + stem[1:] + keel[1:]), HULL, PART, j=.15, step=99)
 
 
 def build(out=OUTD):
     p = Pen('shipyard', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
-    p.xf = (.92, 2.0, 2.0)
+    p.xf = (.92, 4.0, 9.0)
     cradle(p)
     with layer(p, 'hull'): boat(p)
     return p

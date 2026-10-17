@@ -37,6 +37,7 @@ def map_parts():
     rest = body[e:j]
     d = json.load(open(EA / 'slots.json', encoding='utf-8'))
     d['path_d'] = d['path_d'].replace(OLD_J, NEW_J)   # D118 v2: اسکله عمودی در x=340، نوک ۹۵۶؛ نقطه‌چین از نوک
+    d['path_d'] = d['path_d'].replace('C302.2,945.6 275.8,964.9 255.0,966.1 C234.2,967.3 211.8,965.9 195.0,964.7 C178.2,963.5 164.0,960.5 154.0,959.0 C144.0,957.5 149.0,957.6 135.0,955.9 C121.0,954.2 87.8,965.2 70.0,948.9', 'C346,938 346,911 320,906 C285,900 215,901 196,925 C184,941 196,962 180,964 C160,966 140,962 120,960 C110,959 105,959 100,959 C90,958 80,955 70.0,948.9')   # مسیر دریایی بلندتر: قوس لنگرگاه بین اسکلهٔ ساحل و M07
     d['path_d'] += ' C52,182.5 30,158 30,125 C30,80 60,40 120,34 C170,28 225,52 272,96'   # راه دریایی تا ایستگاه نهایی (M12)
     new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 966 + 40)
            + '<g clip-path="url(#cl_land)">' + orig + '</g>'
@@ -69,6 +70,7 @@ def map_parts():
     m12lab = '<text x="272" y="158" text-anchor="middle" font-family="Lalezar" font-size="20" fill="#fff3c4" stroke="#241a5e" stroke-width="6" paint-order="stroke" stroke-linejoin="round">%s</text>' % STR['maptravel.node.M12']['text']
     body = body.replace('<g id="env_zone_titles"', m12lab + '<g id="env_zone_titles"', 1)
     body = body.replace('<g id="env_labels"', m12 + '<g id="env_labels"', 1)
+    body = body.replace('<text x="154" y="1016"', '<text x="100" y="1016"')   # برچسب M07 همراه سکو
     # کارخانهٔ صنعتی ← کارخانهٔ کشتی‌سازی؛ میدان شهر ← بازارچهٔ شناور (دارایی‌های assets/)
     body = body.replace('<use href="#node_11"', '<use href="#node_shipyard"')
     body = body.replace('<use href="#env_pad_city_ice" x="240" y="246" width="120" height="100" /><use href="#prop_04" x="240" y="246" width="120" height="100" />',
@@ -102,7 +104,7 @@ def map_parts():
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
 
 KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pier': 'M07', 'harbor_crane': 'M08', 'shipyard': 'M11', 'floating_market': 'E06', 'lighthouse': 'E04', 'final_workshop': 'M12'}
-KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (154, 959), 'M08': (266, 759), 'M11': (162, 524), 'E06': (300, 324), 'E04': (118, 192), 'M12': (272, 96)}   # مرکز سکو = مرکز گره
+KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (100, 959), 'M08': (266, 759), 'M11': (162, 524), 'E06': (300, 324), 'E04': (118, 192), 'M12': (272, 96)}   # مرکز سکو = مرکز گره
 M09_SH = '<ellipse cx=\"0\" cy=\"21\" rx=\"51\" ry=\"19.5\" fill=\"#10083a\" opacity=\".3\"/>'
 E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
 
