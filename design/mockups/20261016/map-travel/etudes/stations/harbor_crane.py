@@ -17,13 +17,17 @@ FOOT = 18
 BX = 18             # محور طناب/جعبه
 
 
+def flat(p, pts, col):
+    p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in pts), col))
+
+
 def base_and_mast(p):
     # پایهٔ چهارگوش
     p.shape([(MX - 20, FOOT - 14), (MX + 20, FOOT - 14), (MX + 20, FOOT), (MX - 20, FOOT)], C_L, OUT, j=.3, step=5)
-    p.fill([(MX + 2, FOOT - 14), (MX + 20, FOOT - 14), (MX + 20, FOOT), (MX + 2, FOOT)], C_D)
+    flat(p, [(MX + 2, FOOT - 14), (MX + 20, FOOT - 14), (MX + 20, FOOT), (MX + 2, FOOT)], C_D)
     # دکل پیوسته، دو رنگ
     p.shape([(MX - 8, J), (MX + 8, J), (MX + 8, FOOT - 14), (MX - 8, FOOT - 14)], C_T, OUT, j=.3, step=5)
-    p.fill([(MX + 1, J), (MX + 8, J), (MX + 8, FOOT - 14), (MX + 1, FOOT - 14)], C_L)
+    flat(p, [(MX + 1, J), (MX + 8, J), (MX + 8, FOOT - 14), (MX + 1, FOOT - 14)], C_L)
     for y in (-8, -34, -58):
         p.ln((MX - 8, y), (MX + 8, y), INNER, C_D, j=.1, probe='بند دکل (داخلی)' if y == -8 else None)
 
@@ -40,7 +44,7 @@ def hook(p):
 def jib(p):
     # بازوی افقی (جلوی طناب) با دم کوتاه و وزنه
     p.shape([(MX - 30, J - 7), (BX + 22, J - 7), (BX + 22, J + 7), (MX - 30, J + 7)], C_T, OUT, j=.3, step=5)
-    p.fill([(MX - 30, J + 1), (BX + 22, J + 1), (BX + 22, J + 7), (MX - 30, J + 7)], C_L)
+    flat(p, [(MX - 30, J + 1), (BX + 22, J + 1), (BX + 22, J + 7), (MX - 30, J + 7)], C_L)
     p.shape([(MX - 34, J - 4), (MX - 22, J - 4), (MX - 22, J + 18), (MX - 34, J + 18)], CW, PART, j=.3, step=5, clip=False)
     # کابین/تکیه‌گاه: مثلث راست بالای دکل
     p.shape([(MX - 8, J - 7), (MX + 8, J - 7), (MX, J - 24)], C_L, PART, j=.3, step=5, clip=False)

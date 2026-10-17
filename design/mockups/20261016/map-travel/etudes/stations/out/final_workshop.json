@@ -8,8 +8,8 @@
   55
  ],
  "stand": [
-  44,
-  8
+  41,
+  4
  ],
  "ring": [
   0,
@@ -23,7 +23,7 @@
  "motion_spec": {
   "node_final_workshop_gear_big": {
    "center": [
-    -30,
+    -25,
     -44
    ],
    "deg_per_turn": 360,
@@ -31,7 +31,7 @@
   },
   "node_final_workshop_gear_small": {
    "center": [
-    13,
+    18,
     -44
    ],
    "ratio": -1.5,

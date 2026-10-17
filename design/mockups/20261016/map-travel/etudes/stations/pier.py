@@ -15,9 +15,12 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 WOOD = '#ffd84d'; WOOD_D = '#d9961c'; PILE = '#e8892b'; WHEEL = '#ef6a4a'; BOX = '#a4e07a'; BOX_D = '#5fae44'
 
 # ---- هندسهٔ مشترک عرشه ----
-DX, DT, DB = 56, -14, 2            # نیم‌پهنای عرشه، y رویه، y کف
+DX = 56                            # نیم‌پهنای عرشه
+DBK, DT, DB = -26, -8, 2           # پشت رویه، لبهٔ جلوی رویه (= بالای وجه جلو)، کف
+FL = -12                           # خط ایستادن اجسام روی رویهٔ عرشه
+WOOD_F = '#f0b43a'                 # وجه جلوی عرشه
 # ---- قرقره ----
-CX, CY, R = -26, -64, 18
+CX, CY, R = -26, -70, 18
 RO = 12                            # فاصلهٔ طناب از محور (درون دیسک؛ بالای طناب پشت قرقره پنهان می‌ماند)
 BX = CX - RO                       # محور افقی طناب و جعبه
 BW, BH = 20, 18                    # جعبه
@@ -27,25 +30,25 @@ UP = 8                             # بازهٔ حرکت جعبه (بالا)
 def deck(p):
     for x in (-41, 41):            # شمع‌ها: زیر عرشه
         p.shape([(x - 5, DB - 1), (x + 5, DB - 1), (x + 5, DB + 7), (x - 5, DB + 7)], PILE, PART, j=.2, step=5)
-    p.shape([(-DX, DT), (DX, DT), (DX, DB), (-DX, DB)], WOOD, OUT, j=.25, step=6)
-    h = (DB - DT) / 3
-    p.ln((-DX + 6, DT + h), (DX - 6, DT + h), INNER, WOOD_D, j=.1, probe='درز تخته (داخلی)')
-    p.ln((-DX + 6, DT + 2 * h), (DX - 6, DT + 2 * h), INNER, WOOD_D, j=.1)
+    p.shape([(-DX, DBK), (DX, DBK), (DX, DB), (-DX, DB)], WOOD, OUT, j=.25, step=6)         # رویه: ۳ تخته
+    h = (DT - DBK) / 3
+    p.ln((-DX + 6, DBK + h), (DX - 6, DBK + h), INNER, WOOD_D, j=.1, probe='درز تخته (داخلی)')
+    p.ln((-DX + 6, DBK + 2 * h), (DX - 6, DBK + 2 * h), INNER, WOOD_D, j=.1)
+    p.fill([(-DX + 3, DT + 1), (DX - 3, DT + 1), (DX - 3, DB - 2), (-DX + 3, DB - 2)], WOOD_F)  # وجه جلو (کمی تیره‌تر)
 
 
 def frame(p):
-    """دکل راست + بازوی افقی + مهار مورب؛ پایه‌ی قرقره زیر بازو."""
-    p.ln((26, -50), (6, -72), PART, WOOD_D, j=.1, probe='مهار مورب (جزء)')
-    p.shape([(26, DT), (38, DT), (38, -100), (26, -100)], WOOD, OUT, j=.2, step=6)
+    """دکل راست + بازوی افقی + مهار مورب؛ قرقره مستقیم زیر بازو آویزان است."""
+    p.ln((26, -56), (12, -87), PART, NAVY, j=.1, probe='مهار (جزء)')
+    p.shape([(26, FL), (38, FL), (38, -100), (26, -100)], WOOD, OUT, j=.2, step=6)
     p.shape([(-40, -100), (40, -100), (40, -88), (-40, -88)], WOOD, OUT, j=.2, step=6)
-    p.shape([(CX - 3, -90), (CX + 3, -90), (CX + 3, CY), (CX - 3, CY)], WOOD_D, PART, j=.1, step=5, clip=False)
 
 
 def load(p):
     """جعبه + طناب. طناب از مرکز قرقره تا جعبه؛ بالای آن پشت دیسک قرقره پنهان است (در بازهٔ حرکت)."""
-    top = DT - BH                  # جعبه روی عرشه (وضعیت پایین)
-    p.ln((BX, CY), (BX, top), PART, NAVY, j=.1, probe='طناب (جزء)')
-    p.shape([(BX - BW / 2, top), (BX + BW / 2, top), (BX + BW / 2, DT), (BX - BW / 2, DT)], BOX, PART, j=.2, step=5)
+    top = FL - BH                  # جعبه روی عرشه (وضعیت پایین)
+    p.ln((BX, CY), (BX, top), PART, NAVY, j=.1)
+    p.shape([(BX - BW / 2, top), (BX + BW / 2, top), (BX + BW / 2, FL), (BX - BW / 2, FL)], BOX, PART, j=.2, step=5)
     p.ln((BX - BW / 2 + 4, top + BH / 2), (BX + BW / 2 - 4, top + BH / 2), INNER, BOX_D, j=.1, probe='نوار جعبه (داخلی)')
 
 
@@ -68,7 +71,6 @@ def build_a(out=OUTD):
 
 
 # ---------------- اتود ب: بولارد + طناب ----------------
-BOL = (0, DT)
 
 
 def build_b(out=None):
@@ -76,13 +78,13 @@ def build_b(out=None):
     p.tipshadow(0, DB + 6, 46); p.foot_tip(-41, DB + 7, 8); p.foot_tip(41, DB + 7, 8)
     deck(p)
     # بولارد: تنه + سر پهن
-    p.shape([(-9, DT), (9, DT), (7, -44), (-7, -44)], '#6f7fd6', OUT, j=.2, step=6)
-    p.shape([(-17, -44), (17, -44), (17, -56), (-17, -56)], '#6f7fd6', OUT, j=.2, step=6)
-    p.ln((-5, -22), (-4, -38), INNER, CREAM, j=.05, probe='خط داخلی (درخشش)')
+    p.shape([(-9, FL), (9, FL), (7, -50), (-7, -50)], '#6f7fd6', OUT, j=.2, step=6)
+    p.shape([(-17, -50), (17, -50), (17, -62), (-17, -62)], '#6f7fd6', OUT, j=.2, step=6)
+    p.ln((-5, -26), (-4, -42), INNER, CREAM, j=.05, probe='خط داخلی (درخشش)')
     with layer(p, 'rope'):
-        p.ln((-12, -50), (12, -50), PART, WOOD_D, j=.05)
-        p.ln((24, DT - 2), (24, -30), PART, NAVY, j=.1, probe='طناب (جزء)')
-        p.shape([(18, -30), (30, -30), (30, -18), (18, -18)], BOX, PART, j=.2, step=5)
+        p.ln((-12, -56), (12, -56), PART, WOOD_D, j=.05)
+        p.ln((30, FL - 2), (30, -36), PART, NAVY, j=.1, probe='طناب (جزء)')
+        p.shape([(24, -36), (36, -36), (36, -24), (24, -24)], BOX, PART, j=.2, step=5)
     return p
 
 

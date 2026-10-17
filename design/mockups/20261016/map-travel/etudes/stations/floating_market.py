@@ -16,19 +16,19 @@ BOB = 3
 
 def boat(p):
     # بدنهٔ قایق (ذوزنقه)، یک خط روشن
-    p.shape([(-58, 8), (26, 8), (14, 26), (-46, 26)], HULL, OUT, j=.25, step=4)
+    p.shape([(-58, 8), (36, 8), (24, 26), (-46, 26)], HULL, OUT, j=.25, step=4)
     p.ln((-40, 18), (6, 18), INNER, HULL_D, j=.1, probe='خط داخلی (تختهٔ قایق)')
     # دو ستون غرفه
     for x in (-42, 10):
-        p.shape([(x - 3, -34), (x + 3, -34), (x + 3, 8), (x - 3, 8)], WOOD, PART, j=.15, step=4)
+        p.shape([(x - 4, -34), (x + 4, -34), (x + 4, 8), (x - 4, 8)], WOOD, PART, j=.15, step=4)
     # پیشخوان
     p.shape([(-46, -4), (14, -4), (14, 8), (-46, 8)], WH, PART, j=.2, step=4)
     # میوه روی پیشخوان
     for x, c in ((-30, ORG), (-16, GRN), (-2, ORG)):
         p.shape(ell(x, -10, 6, 6, 0, 360, 16), c, INNER, j=.1, step=99, clip=False)
     # جعبهٔ میوه کنار غرفه
-    p.shape([(16, -8), (36, -8), (36, 8), (16, 8)], BLU, PART, j=.15, step=4)
-    p.shape(ell(26, -10, 5, 5, 0, 360, 14), RED, INNER, j=.1, step=99, clip=False)
+    p.shape([(17, -8), (33, -8), (33, 8), (17, 8)], BLU, PART, j=.15, step=4)
+    p.shape(ell(25, -10, 4.5, 4.5, 0, 360, 14), RED, INNER, j=.1, step=99, clip=False)
     # سایبان راه‌راه: چهار نوار
     xs = [-52, -36, -20, -4, 12]; xt = [-46, -32, -18, -4, 10]
     for i in range(4):

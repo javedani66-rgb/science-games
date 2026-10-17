@@ -26,11 +26,13 @@ def ramp(p):
 def hull(p):
     f = rot(A[0] + S0 * UX, A[1] + S0 * UY, ANG)
     T = lambda pts: [f(q) for q in pts]
-    body = [(0, -4), (40, -4), (54, -17), (60, -27), (0, -27)]
+    for x0 in (6, 34):
+        p.shape(T([(x0, 0), (x0 + 15, 0), (x0 + 15, -14), (x0, -14)]), WOOD_D, PART, j=.1, step=99, clip=False)
+    body = [(0, -11), (44, -11), (60, -24), (66, -40), (0, -40)]
     p.shape(T(body), HULL, OUT, j=.2, step=8)
-    p.ln(f((7, -18)), f((50, -18)), INNER, CREAM, j=.1, probe='خط داخلی (کمربند بدنه)')
-    p.ln(f((24, -27)), f((24, -50)), PART, MAST, j=.1, probe='دکل (جزء)')
-    p.shape(T([(24, -50), (42, -45), (24, -40)]), FLAG, INNER, j=.1, step=99, clip=False)
+    p.ln(f((7, -26)), f((54, -26)), INNER, CREAM, j=.1, probe='خط داخلی (کمربند بدنه)')
+    p.ln(f((24, -40)), f((24, -70)), PART, MAST, j=.1, probe='دکل (جزء)')
+    p.shape(T([(24, -70), (42, -65), (24, -60)]), FLAG, INNER, j=.1, step=99, clip=False)
 
 
 def build(out=OUTD):
