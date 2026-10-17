@@ -1,0 +1,22 @@
+{
+ "id": "lumber",
+ "kind": "land",
+ "pad": [
+  54.7,
+  27.4,
+  11.5,
+  58
+ ],
+ "stand": [
+  -38,
+  4
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_lumber_marks"
+ ]
+}

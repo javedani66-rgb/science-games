@@ -1,49 +1,63 @@
 #!/usr/bin/env python3
-"""ایستگاه «بارانداز» (M02) با station_kit: چرخ‌دندهٔ بزرگ روی سکوی آبی-سنگی (پالت دریایی). چرخ‌دنده = لایهٔ متحرک node_wheel_dock_gear."""
+"""ایستگاه «بارانداز» (M02): قهرمان = چرخ و محور (چرخ پره‌دار روی پایهٔ ثابت)، سکوی دریایی.
+لایهٔ متحرک node_wheel_dock_wheel = چرخ (چرخش حول محور). پایه (پشت) و سرِ محور (جلو) ثابت‌اند.
+VARIANT='gear' اتود الف (چرخ‌دندهٔ تنها، طرح قبلی)؛ 'wheel' اتود ب (انتخاب‌شده)."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from station_kit import *
-HERE = pathlib.Path(__file__).resolve().parent     # station_kit.HERE (etudes/) را نپوشاند
+HERE = pathlib.Path(__file__).resolve().parent
 
-BR_T = '#ffd84d'; BR_L = '#f2b92c'; BR_R = '#d9961c'; BR_H = '#8a5f0c'
-
-
-def gear_pts(cx, cy, R, n=8, depth=13):
-    """چرخ‌دندهٔ n دندانه (ذوزنقه): شعاع بیرون R، ته دندانه R-depth. دندانه‌ها درشت تا لای دندانه زیر خط دور گم نشود."""
-    pts = []; a = 360 / n
-    for i in range(n):
-        c = i * a
-        for off, r in ((-a * .26, R - depth), (-a * .15, R), (a * .15, R), (a * .26, R - depth)):
-            t = math.radians(c + off - 90); pts.append((cx + r * math.cos(t), cy + r * math.sin(t)))
-    return pts
+Y_T = '#ffd84d'; Y_L = '#f2b92c'; Y_H = '#8a5f0c'
+POST_L = '#8fb5f2'; POST_R = '#8f8bd6'
+CX, CY, R = -8, -48, 42
+FOOT = 26                          # y تماس پایه با سکو
 
 
-def gear(pen, cx, cy, R):
-    """چرخ‌دندهٔ ایستادهٔ روبه‌رو: بدنه + حلقهٔ داخلی + چهار پرهٔ راست + توپی + یک خط درخشش."""
-    pen.shape(gear_pts(cx, cy, R), BR_T, OUT, j=.4, step=99)
-    pen.shape(ell(cx, cy, R * .62, R * .62, 0, 360, 36), BR_L, INNER, j=.3, clip=False)
-    for k, a in enumerate((0, 90, 180, 270)):
-        t = math.radians(a); c, sn = math.cos(t), math.sin(t)
-        pen.ln((cx + 14 * c, cy + 14 * sn), (cx + R * .55 * c, cy + R * .55 * sn), PART, BR_H, j=.1, probe='پرهٔ چرخ‌دنده (جزء)' if a == 0 else None)
-    pen.shape(ell(cx, cy, 13, 13, 0, 360, 24), BR_H, INNER, j=.3, clip=False)
-    pts = [(cx + R * .47 * math.cos(math.radians(t)), cy + R * .47 * math.sin(math.radians(t))) for t in (205, 245)]
-    pen.ln(pts[0], pts[1], INNER, CREAM, j=.1, probe='خط داخلی (درخشش)')
+def post(p):
+    """پایهٔ ثابت: ستون راست و پیوسته از سکو تا محور (پشت چرخ)، دو رنگ مثل دیوارهٔ سکو."""
+    w = 10
+    L = [(CX - w, CY), (CX - w, FOOT - 6)]; Rr = [(CX + w, FOOT - 6), (CX + w, CY)]
+    base = ell(CX, FOOT - 6, w, 4, 0, 180, 10)
+    p.shape([(CX - w, CY)] + [(x, y) for x, y in base[::-1]] + [(CX + w, CY)], POST_L, OUT, j=.3, step=99)
+    p.fill([(CX + 1, CY), (CX + w, CY)] + [(x, y) for x, y in base if x >= CX + 1][::-1], POST_R)
+    # پایهٔ پهن زیر ستون
+    p.shape(ell(CX, FOOT - 6, w + 14, 6, 0, 360, 24), POST_R, PART, j=.3, clip=False)
+
+
+def wheel(p):
+    """چرخ: رینگ، دیسک، شش پره (خط راست)، توپی. هر زاویهٔ چرخش ایمن است (دایره)."""
+    p.shape(ell(CX, CY, R, R, 0, 360, 48), Y_T, OUT, j=.4, step=99)
+    p.shape(ell(CX, CY, R * .70, R * .70, 0, 360, 36), Y_L, INNER, j=.3, step=99, clip=False)
+    for k in range(6):
+        t = math.radians(30 + 60 * k)
+        p.ln((CX + 12 * math.cos(t), CY + 12 * math.sin(t)), (CX + R * .70 * math.cos(t), CY + R * .70 * math.sin(t)),
+             PART, Y_H, j=.1, probe='پرهٔ چرخ (جزء)' if k == 0 else None)
+    # یک پیچ روی رینگ تا چرخش دیده شود
+    p.shape(ell(CX + R * .85 * math.cos(math.radians(-60)), CY + R * .85 * math.sin(math.radians(-60)), 4.5, 4.5, 0, 360, 12), Y_H, INNER, j=.1, clip=False)
+    p.shape(ell(CX, CY, 13, 13, 0, 360, 24), Y_T, INNER, j=.3, clip=False)
+
+
+def cap(p):
+    """سرِ محور: ثابت، جلوی چرخ."""
+    p.shape(ell(CX, CY, 7, 7, 0, 360, 16), Y_H, INNER, j=.2, clip=False)
+    p.ln((CX - 22, CY - 24), (CX - 30, CY - 12), INNER, CREAM, j=.1, probe='خط داخلی (درخشش)') if False else None
 
 
 def build(out=HERE, legacy_shadow=False):
     p = Pen('wheel_dock', 'sea'); pad(p, line=((-60, 13), (-42, 18)), tri=((-58, -8), (61, 12)), dot=(56, -14))
-    R = 46; cx, cy = -6, -42
-    p.tipshadow(cx, cy + R - 1, 14); p.foot_tip(cx, cy + R - 1, 10)
-    with layer(p, 'gear'): gear(p, cx, cy, R)
-    return p, symbol(p, 'wheel_dock', ['gear'], out=out), (cx, cy)
+    p.tipshadow(CX, FOOT - 6, 24); p.foot_tip(CX, FOOT - 6, 14)
+    post(p)
+    with layer(p, 'wheel'): wheel(p)
+    cap(p)
+    p.ln((CX - 24, CY - 22), (CX - 14, CY - 32), INNER, CREAM, j=.1, probe='خط داخلی (درخشش)') if False else None
+    return p, symbol(p, 'wheel_dock', ['wheel'], out=out, legacy_shadow=legacy_shadow), (CX, CY)
 
 
-STAND = (40, 6)     # px نقشه از مرکز سکو
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit'
-
+STAND = (42, 2)
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch1/wheel_dock'
 
 if __name__ == '__main__':
     p, sym, c = build()
-    r = finish(p, 'wheel_dock', STAND, motion={'gear': dict(rotate=c)}, out=HERE, shots=SHOTS)
-    print(json.dumps(r, ensure_ascii=False, indent=1))
+    r = finish(p, 'wheel_dock', STAND, motion={'wheel': dict(rotate=c)}, out=HERE, shots=SHOTS)
+    print(json.dumps({k: r[k] for k in ('ok',)} | {'margin': r['margin'], 'motion': r['motion'], 'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

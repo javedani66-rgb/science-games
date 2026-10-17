@@ -10,10 +10,10 @@ BLUE = '#8fb5f2'; PURP = '#8f8bd6'; HEAD_S = '#d6e8ff'; HEAD_T = '#f1f8ff'; THRE
 NUT_T = '#ffd84d'; NUT_L = '#f2b92c'; NUT_R = '#d9961c'; NUT_H = '#8a5f0c'
 
 
-def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=16, d=4, bottom='tip', y0=0, probe=True, head=True, body=True):
+def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=16, d=4, bottom='tip', y0=0, probe=True, head=True, body=True, lim=None):
     """پیچ در مختصات محلی (نوک در (0,0)، سر بالا). f: تبدیل نقاط."""
     ys = []; y = -Lb + 12
-    lim = (-26 if bottom == 'tip' else y0 - 12)
+    lim = lim if lim is not None else (-26 if bottom == 'tip' else y0 - 12)
     while y + P / 2 + 3 < lim: ys.append(y); y += P
     L = [(-w, -Lb)]; R = [(w, -Lb)]
     for yk in ys:
@@ -52,34 +52,51 @@ def hexv(cx, cy, R, k=.4):
     return [(cx + R, cy), (cx + R / 2, cy + h), (cx - R / 2, cy + h), (cx - R, cy), (cx - R / 2, cy - h), (cx + R / 2, cy - h)]
 
 
-def nut(pen, cx, cy, R, h, hole=None, probe=False):
+def nut_back(pen, cx, cy, R, h, hole):
+    """لایهٔ پشت مهره: کل پیکره (وجه‌ها، رویه، سوراخ تیره)؛ بدنهٔ پیچ روی آن می‌آید."""
     v = hexv(cx, cy, R); lo = [(x, y + h) for x, y in v]
     pen.fill([v[0], v[1], lo[1], lo[0]], NUT_R); pen.fill([v[1], v[2], lo[2], lo[1]], NUT_L); pen.fill([v[2], v[3], lo[3], lo[2]], '#e8a51f')
     sil = [v[3], v[4], v[5], v[0], lo[0], lo[1], lo[2], lo[3]]
-    pen.shape(sil, 'none', OUT, step=5, j=.4); pen.clip.append(hd(sil, True, 5, 0, 999))
-    for a, b in ((v[1], lo[1]), (v[2], lo[2])): pen.ln(a, b, SEAM, NAVY, j=.1, probe='درز ریز (مهره)' if (probe and a is v[1]) else None)
+    pen.shape(sil, 'none', OUT, step=5, j=.4)
     pen.shape(v, NUT_T, OUT, step=5, j=.4)
-    pen.shape(ell(cx, cy, hole or R * .38, (hole or R * .38) * (.4 if hole else .4), 0, 360, 24), NUT_H, SEAM, j=.3, clip=False)
+    pen.shape(ell(cx, cy, hole, hole * .4, 0, 360, 24), NUT_H, SEAM, j=.3, clip=False)
+
+
+def nut_front(pen, cx, cy, R, h, hole, probe=False):
+    """لایهٔ جلوی مهره: وجه‌های جلو + هلال جلوی رویه (زیر سوراخ)؛ پیچ از سوراخ رد می‌شود و پشت این لایه می‌رود."""
+    v = hexv(cx, cy, R); lo = [(x, y + h) for x, y in v]
+    pen.fill([v[0], v[1], lo[1], lo[0]], NUT_R); pen.fill([v[1], v[2], lo[2], lo[1]], NUT_L); pen.fill([v[2], v[3], lo[3], lo[2]], '#e8a51f')
+    arc = ell(cx, cy, hole, hole * .4, 180, 0, 24)
+    cres = [v[0], v[1], v[2], v[3]] + arc
+    pen.fill(cres, NUT_T)
+    front = [v[3], v[2], v[1], v[0], lo[0], lo[1], lo[2], lo[3]]
+    pen.stroke(front, OUT, j=.4, step=5); pen.clip.append(hd(front, True, 5, 0, 999)); pen.clip.append(hd(cres, True, 5, 0, 999))
+    for a, b in ((v[1], lo[1]), (v[2], lo[2])): pen.ln(a, b, SEAM, NAVY, j=.1, probe='درز ریز (مهره)' if (probe and a is v[1]) else None)
+    pen.raw('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (hd(arc, False, 6, .3, 5), SEAM))
     pen.ln((cx - R + 7, cy + .4 * R * .5 + 4), (cx - R + 7, cy + h - 3), INNER, '#fff3c4', j=.1)
+
+
+NUT_C = -64; RANGE = 22     # مرکز مهره (مختصات symbol) و بازهٔ حرکت ±۲۲
 
 
 def build(out=HERE, legacy_shadow=False):
     p = Pen('screw_workshop', 'land'); pad(p, line=((-62, 12), (-44, 17)), tri=((-60, -6), (61, 13)), dot=(56, -12))
     p.tipshadow(0, 8); p.foot_tip(0, 8, 10)
-    w, Lb, yn = 18, 116, -60
+    w, Lb, R, h, hole = 13, 132, 40, 20, 28
     f = rot(0, 8, 0)
-    screw(p, f, w=w, Lb=Lb, hw=33, hh=17, bottom='tip', head=False, probe=False)
-    with layer(p, 'nut'): nut(p, 0, 8 + yn, 34, 22, hole=w + 7, probe=True)
-    screw(p, f, w=w, Lb=Lb, hw=33, hh=17, bottom='arc', y0=yn, head=True)
-    return p, symbol(p, 'screw_workshop', ['nut'], out=out, legacy_shadow=legacy_shadow)
+    with layer(p, 'nut_back'): nut_back(p, 0, NUT_C, R, h, hole)
+    screw(p, f, w=w, Lb=Lb, hw=28, hh=16, bottom='tip', head=True, lim=-20)       # بدنهٔ پیوسته + سر
+    with layer(p, 'nut_front'): nut_front(p, 0, NUT_C, R, h, hole, probe=True)
+    return p, symbol(p, 'screw_workshop', ['nut_back', 'nut_front'], out=out, legacy_shadow=legacy_shadow)
 
 
 STAND = (38, 6)     # px نقشه از مرکز سکو
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch1/screw_workshop'
+OUTD = HERE / 'out'
 
 
 if __name__ == '__main__':
-    p, sym = build()
-    # مهره روی رزوه بالا/پایین می‌رود (موشن «رسیدن»): حرکت عمودی ±۱۲ در مختصات symbol
-    r = finish(p, 'screw_workshop', STAND, motion={'nut': dict(offsets=[(0, -14), (0, 0), (0, 14)])}, out=HERE, shots=SHOTS)
+    p, sym = build(out=OUTD)
+    offs = [(0, -RANGE), (0, -RANGE / 2), (0, 0), (0, RANGE / 2), (0, RANGE)]
+    r = finish(p, 'screw_workshop', STAND, motion={'nut_back': dict(offsets=offs), 'nut_front': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
     print(json.dumps(r, ensure_ascii=False, indent=1))

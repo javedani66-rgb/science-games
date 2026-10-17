@@ -5,10 +5,10 @@
   54.7,
   27.4,
   11.5,
-  65
+  67
  ],
  "stand": [
-  40,
+  44,
   6
  ],
  "ring": [
@@ -17,6 +17,6 @@
   0
  ],
  "motion": [
-  "node_wheel_dock_gear"
+  "node_wheel_dock_wheel"
  ]
 }
