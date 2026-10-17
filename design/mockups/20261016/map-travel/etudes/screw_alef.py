@@ -49,15 +49,13 @@ PADRX, PADRY, WALL = 84, 28, 14
 def pad(p):
     # لبهٔ زیر دو لایه
     base = ell(0, WALL, PADRX, PADRY, 0, 180, 24) + [(-PADRX, 0)] + ell(0, 0, PADRX, PADRY, 180, 360, 24)
+    jj = p.j; p.j = .45
     p.shape(base, '#8a6f46', 5.2)
-    low = ell(0, WALL, PADRX - 2, PADRY - 1, 0, 180, 24)
-    low = [(x, y) for x, y in low]
-    p.shape([(-PADRX + 2, WALL * .5)] + [(x, y) for x, y in ell(0, WALL, PADRX - 2, PADRY - 1, 0, 180, 24)] + [(PADRX - 2, WALL * .5)] + [(x, WALL * .5 + (y - WALL * .5) * 0) for x, y in [(0, WALL * .5)]][:0] +
-            [(PADRX - 2, WALL * .5 + .5)], '#6b5233', 2)
+    p.shape(ell(0, WALL - .5, PADRX - 1.5, PADRY - .5, 0, 180, 24) + ell(0, WALL * .45, PADRX - 1.5, PADRY - .5, 180, 0, 24), '#6b5233', 2)
     for x, h in ((-58, .9), (-12, .95), (36, .9)):
         yy = PADRY * math.sqrt(1 - (x / PADRX) ** 2)
         p.line([(x, yy + 1), (x + 1.5, yy + WALL * h - 1)], 3.0, '#33240f', .85)
-    p.shape(ell(0, 0, PADRX, PADRY), '#d9bd84', 5.2)
+    p.shape(ell(0, 0, PADRX, PADRY), '#d9bd84', 5.2); p.j = jj
     # سنگ‌فرش درشت: ردیف‌های ناهم‌اندازه
     SEAM = '#8a6a36'
     rows = [(-18, [(-60, -34), (-20, 8), (30, 56)]), (-4, [(-72, -44), (-6, 34), (60, 70)]),
@@ -69,11 +67,8 @@ def pad(p):
     for (x, y0, y1) in ((-34, -18, -4), (8, -18, -4), (-44, -4, 11), (34, -4, 11), (-22, 11, 21), (12, 11, 21), (60, -4, 6), (-58, -18, -6)):
         p.line([(x, y0), (x + 1.4, y1)], 2.6, SEAM, .95)
     # سنگی که بیرون زده
-    p.shape([(44, 6), (58, 4), (60, 11), (47, 14)], '#e8cf94', 3.4)
-    p.shape([(47, 14), (60, 11), (60, 15), (48, 18)], '#8a6f46', 3.0)
-    # پلهٔ سنگی کوچک (سمت راست پایین)
-    p.shape([(72, 17), (82, 13), (88, 17), (78, 22)], '#e8cf94', 3.4)
-    p.shape([(78, 22), (88, 17), (88, 21), (78, 26)], '#8a6f46', 3.0)
+    p.shape([(12, 6), (26, 4), (28, 11), (15, 14)], '#e8cf94', 3.4)
+    p.shape([(15, 14), (28, 11), (28, 15), (16, 18)], '#8a6f46', 3.0)
 
 def house(p):
     # سایهٔ خانه روی سکو
@@ -117,11 +112,11 @@ TOP = -83; TIPY = -16; TIP = 12
 
 def shaft_pts(teeth):
     left = [(L, TOP)]
-    for y in teeth: left += [(L, y), (L - 3.2, y + 3.5), (L + .5, y + 8)]
-    left += [(L, TIPY), (SX - 3, TIP - 4), (SX, TIP)]
+    for y in teeth: left += [(L, y), (L - 4.6, y + 4), (L + .5, y + 8)]
+    left += [(L, TIPY), (SX, TIP)]
     right = [(R, TOP)]
-    for y in teeth: right += [(R, y + 5), (R + 3.2, y + 9), (R - .5, y + 13)]
-    right += [(R, TIPY), (SX + 3, TIP - 4)]
+    for y in teeth: right += [(R, y + 5), (R + 4.6, y + 9.5), (R - .5, y + 13)]
+    right += [(R, TIPY)]
     # ترتیب: چپ از بالا به نوک، سپس راست از نوک به بالا
     return left + right[::-1]
 
@@ -142,9 +137,9 @@ def screw(p):
     # سایهٔ نیلی زیر هر رزوه و خود رزوه (ضخامت متغیر، منحنی S)
     for i, y0 in enumerate(gaps):
         drop = 11 + (1.5 if i % 2 else -.5)
-        wob = 2.4 if i != 1 else 3.6
-        x0, x1 = (L - 3, R + 1) if i < 3 else (L - 3, R - 8)
-        cl = curve(x0, x1, y0, drop, wob, 16, seed=i * 2 + 1, hook=4 if i < 3 else 0)
+        wob = 1.5 if i != 1 else 2.4
+        x0, x1 = (L - 3, R + 3) if i < 3 else (L - 3, R - 8)
+        cl = curve(x0, x1, y0, drop, wob, 16, seed=i * 2 + 1, hook=0)
         wf = lambda t: 1.6 + 3.7 * math.sin(math.pi * min(1, t / .96)) ** .6 if t < .96 else 1.6
         sh_cl = [(x, y + 4.6) for x, y in cl]
         p.raw('<g clip-path="url(#%s)">' % cid)
@@ -172,11 +167,12 @@ def build():
     p = Pen(False, 1.0); p.sw = 4.8
     pad(p)
     # سایهٔ افتادهٔ پیچ روی سکو (سمت راست)
-    p.raw('<path d="M%d,2 L%d,-1 L%d,10 L%d,15 L%d,18 L%d,14 Z" fill="#10083a" opacity=".24"/>' % (SX + 10, SX + 36, SX + 33, SX + 12, SX - 6, SX + 4))
+    p.raw('<path d="M%d,2 L%d,-1 L%d,10 L%d,15 L%d,18 L%d,14 Z" fill="#10083a" opacity=".24"/>' % (SX + 4, SX + 34, SX + 30, SX + 6, SX - 12, SX - 2))
     # مهرهٔ کنار در
     nut = [(-4 + 6 * math.cos(math.radians(a + 15)), 17 + 3.2 * math.sin(math.radians(a + 15))) for a in range(0, 360, 60)]
     p.shape(nut, '#f2c94c', 3.2); p.shape(ell(-4, 17, 2.1, 1.1, 0, 360, 10), '#d9bd84', 2)
-    house(p); screw(p)
+    p.raw('<g transform="translate(-6 0)">'); house(p); p.raw('</g>')
+    p.raw('<g transform="translate(46 12) scale(1.15) translate(-52 -12)">'); screw(p); p.raw('</g>')
     return p
 
 def symbol(p):
