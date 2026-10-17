@@ -47,7 +47,7 @@ CREAM = '#fff3c4'
 # پالت سکو. «زمینی» = کرم/زیتونی (سکوی چوب‌شکافی)؛ «دریایی» = آبی روشن/آبی تیره (رنگ‌های node_wheel_dock).
 PALETTES = {
     'land': dict(top='#f4e6a0', wall='#8a7a2a', line='#d4c26a', tri='#8f8bd6', dot='#8a7a2a'),
-    'sea': dict(top='#a6bde8', wall='6c8fd6', line='#d6e8ff', tri='#7b8fe0', dot='#4d6fb0'),
+    'sea': dict(top='#a6bde8', wall='#6c8fd6', line='#d6e8ff', tri='#7b8fe0', dot='#4d6fb0'),
 }
 STYLE = ('.eo{stroke:#241a5e;stroke-linejoin:round;stroke-linecap:round}.elit{fill:#fff4cf;opacity:.3}'
          '.esh{fill:#4a3a8c;opacity:.22}.esd{fill:#10083a;opacity:.28}')

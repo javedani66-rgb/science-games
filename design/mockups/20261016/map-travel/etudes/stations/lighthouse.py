@@ -9,7 +9,7 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/lighthouse'
-XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
+XF = (.68, -25.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 RED = '#ef6a4a'; WHITE = '#fffaf0'; GLASS = '#ffd84d'; GLASS_D = '#d9961c'; ROOF = '#ef6a4a'; BEAM = '#fff1a0'
 YB, YT = 10, -56           # پای برج، بالای برج
 WB, WT = 19, 12           # نیم‌پهنای پایین/بالا
@@ -20,7 +20,7 @@ def hw(y): return WB + (WT - WB) * (y - YB) / (YT - YB)
 
 
 def build(out=OUTD):
-    p = Pen('lighthouse', 'sea'); pad(p, line=((-62, 14), (-44, 19)), tri=((-60, -8), (62, 12)), dot=(58, -15))
+    p = Pen('lighthouse', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
     p.tipshadow(0, YB - 2, 26); p.foot_tip(0, YB - 2, 14)
     # پرتوها (لایهٔ متحرک): دو گوهٔ ساده پشت اتاقک؛ بیرون از سکو نمی‌زنند

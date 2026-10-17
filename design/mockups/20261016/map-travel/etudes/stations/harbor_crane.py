@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""ایستگاه «جرثقیل بندر» (M08): قهرمان = جرثقیل بندری ساده (پایه، دکل، بازوی افقی، طناب و جعبه)، سکوی دریایی.
-لایهٔ متحرک node_harbor_crane_hook = طناب+قلاب+جعبه، فقط بالا/پایین (۰ تا +12). بالای طناب پشت بازوی ثابت پنهان است
-و بازو جلوی آن کشیده می‌شود، پس بدنهٔ ثابت (پایه، دکل، بازو) همیشه کامل و پیوسته است."""
+"""ایستگاه «جرثقیل بندر» (M08): قهرمان = جرثقیل بندری ساده (پایه، دکل، بازوی افقی با وزنه، طناب و جعبه)، سکوی دریایی.
+لایهٔ متحرک node_harbor_crane_hook = طناب+جعبه، فقط بالا/پایین (۰ تا +۱۲). بالای طناب پشت بازوی ثابت پنهان است
+و بازو جلوی آن کشیده می‌شود، پس بدنهٔ ثابت (پایه، دکل، بازو) همیشه کامل و پیوسته است.
+طراحی دوباره برای خط ضخیم‌تر (D113، D110): دکل و بازو پهن‌تر، بدون بندهای ریز؛ سایهٔ دکل رنگ تخت."""
 import sys, pathlib, json
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
@@ -12,10 +13,11 @@ XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، 
 C_T = '#ff8a5c'; C_L = '#e0553a'; C_D = '#9c2f1c'      # جرثقیل: مرجانی روشن/تیره
 B_T = '#ffd84d'; B_H = '#8a5f0c'                        # جعبه
 CW = '#8f8bd6'
-MX = -22            # محور دکل
-J = -80             # خط وسط بازو
-FOOT = 18
-BX = 18             # محور طناب/جعبه
+MX0, MX1 = -42, -24            # دکل
+J0, J1 = -100, -84             # بازو (بالا، پایین)
+JX0, JX1 = -58, 0              # بازو (چپ، راست)
+FOOT = 16
+BX = -9                        # محور طناب/جعبه
 
 
 def flat(p, pts, col):
@@ -23,39 +25,30 @@ def flat(p, pts, col):
 
 
 def base_and_mast(p):
-    # پایهٔ چهارگوش
-    p.shape([(MX - 20, FOOT - 14), (MX + 20, FOOT - 14), (MX + 20, FOOT), (MX - 20, FOOT)], C_L, OUT, j=.3, step=5)
-    flat(p, [(MX + 3, FOOT - 11), (MX + 17, FOOT - 11), (MX + 17, FOOT - 3), (MX + 3, FOOT - 3)], C_D)
-    # دکل پیوسته، دو رنگ
-    p.shape([(MX - 8, J), (MX + 8, J), (MX + 8, FOOT - 14), (MX - 8, FOOT - 14)], C_T, OUT, j=.3, step=5)
-    flat(p, [(MX + 1, J + 4), (MX + 6, J + 4), (MX + 6, FOOT - 17), (MX + 1, FOOT - 17)], C_L)
-    for y in (-8, -34, -58):
-        p.ln((MX - 8, y), (MX + 8, y), INNER, C_D, j=.1, probe='بند دکل (داخلی)' if y == -8 else None)
+    p.shape([(MX0 - 12, 0), (MX1 + 12, 0), (MX1 + 12, FOOT), (MX0 - 12, FOOT)], C_L, OUT, j=.3, step=5)
+    p.shape([(MX0, J1), (MX1, J1), (MX1, 0), (MX0, 0)], C_T, OUT, j=.3, step=5)
+    flat(p, [(MX0 + 9, J1 + 5), (MX1 - 4, J1 + 5), (MX1 - 4, -4), (MX0 + 9, -4)], C_L)       # نیمهٔ سایهٔ دکل (تخت)
 
 
 def hook(p):
-    """بخش متحرک: طناب (از داخل بازو)، قلاب، جعبه."""
-    top = J - 6; bt = -14
-    p.ln((BX, top), (BX, bt - 6), PART, B_H, j=0, probe='طناب (جزء)')
-    p.shape(ell(BX, bt - 4, 4.5, 4.5, 0, 360, 14), B_T, INNER, j=.1, step=5, clip=False)
-    p.shape([(BX - 14, bt), (BX + 14, bt), (BX + 14, bt + 22), (BX - 14, bt + 22)], B_T, PART, j=.3, step=5, clip=False)
-    p.ln((BX - 14, bt + 11), (BX + 14, bt + 11), INNER, B_H, j=0, probe='تختهٔ جعبه (داخلی)')
+    """بخش متحرک: طناب (از داخل بازو) و جعبه."""
+    top = -44
+    p.ln((BX, J1 - 4), (BX, top), PART, B_H, j=0)
+    p.probes.append(('طناب (جزء)', PART, p.X((BX, (J1 + top) / 2)), (1, 0), B_H))
+    p.shape([(BX - 12, top), (BX + 12, top), (BX + 12, top + 24), (BX - 12, top + 24)], B_T, PART, j=.3, step=5, clip=False)
+    p.ln((BX - 12, top + 12), (BX + 12, top + 12), INNER, B_H, j=0, probe='تختهٔ جعبه (داخلی)')
 
 
 def jib(p):
-    # بازوی افقی (جلوی طناب) با دم کوتاه و وزنه
-    p.shape([(MX - 30, J - 7), (BX + 22, J - 7), (BX + 22, J + 7), (MX - 30, J + 7)], C_T, OUT, j=.3, step=5)
-    flat(p, [(MX - 26, J + 1), (BX + 18, J + 1), (BX + 18, J + 4), (MX - 26, J + 4)], C_L)
-    p.shape([(MX - 34, J - 4), (MX - 22, J - 4), (MX - 22, J + 18), (MX - 34, J + 18)], CW, PART, j=.3, step=5, clip=False)
-    # کابین/تکیه‌گاه: مثلث راست بالای دکل
-    p.shape([(MX - 8, J - 7), (MX + 8, J - 7), (MX, J - 24)], C_L, PART, j=.3, step=5, clip=False)
+    p.shape([(JX0, J0), (JX1, J0), (JX1, J1), (JX0, J1)], C_T, OUT, j=.3, step=5)
+    flat(p, [(JX0 + 5, J1 - 5), (JX1 - 4, J1 - 5), (JX1 - 4, J1 - 2), (JX0 + 5, J1 - 2)], C_L)
+    p.shape([(JX0, J1), (JX0 + 14, J1), (JX0 + 14, J1 + 20), (JX0, J1 + 20)], CW, PART, j=.3, step=5, clip=False)   # وزنهٔ تعادل
 
 
-def build(out=HERE):
-    p = Pen('harbor_crane', 'sea'); pad(p, line=((34, 22), (54, 18)), tri=((54, -14), (-58, -14)), dot=(-56, 12))
+def build(out=None):
+    p = Pen('harbor_crane', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow(MX, FOOT, 24); p.foot_tip(MX, FOOT - 2, 18)
-    p.tipshadow(BX, FOOT + 1, 20)
+    p.tipshadow((MX0 + MX1) / 2, FOOT, 30); p.foot_tip((MX0 + MX1) / 2, FOOT - 2, 14)
     base_and_mast(p)
     with layer(p, 'hook'): hook(p)
     jib(p)

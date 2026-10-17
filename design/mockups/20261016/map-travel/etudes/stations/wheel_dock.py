@@ -8,7 +8,7 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 
-XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
+XF = (.78, -19.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 Y_T = '#ffd84d'; Y_L = '#f2b92c'; Y_H = '#8a5f0c'
 POST_L = '#8fb5f2'; POST_R = '#8f8bd6'
 CX, CY, R = -8, -48, 42
@@ -44,7 +44,7 @@ def cap(p):
 
 
 def build(out=None, legacy_shadow=False):
-    p = Pen('wheel_dock', 'sea'); pad(p, line=((-60, 13), (-42, 18)), tri=((-58, -8), (61, 12)), dot=(56, -14))
+    p = Pen('wheel_dock', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
     p.tipshadow(CX, FOOT - 6, 24); p.foot_tip(CX, FOOT - 6, 14)
     post(p)

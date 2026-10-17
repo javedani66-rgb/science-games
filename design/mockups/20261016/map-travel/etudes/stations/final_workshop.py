@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""ایستگاه «کارگاه ماشین مرکب» (M12): قهرمان = دو چرخ‌دندهٔ درگیر (۱۰ و ۶ دندانه) روی دو پایهٔ ثابت.
+"""ایستگاه «کارگاه ماشین مرکب» (M12): قهرمان = دو چرخ‌دندهٔ درگیر (۸ و ۶ دندانه) روی یک صفحهٔ پشتی عمودی (بزرگ پایین، کوچک بالا).
 لایه‌های متحرک: node_final_workshop_gear_big (ساعتگرد) و node_final_workshop_gear_small (پاددوری).
-نسبت سرعت: کوچک = -(10/6) × بزرگ. فاز دندانه‌ها طوری است که دندانه در شکاف می‌نشیند."""
+نسبت سرعت: کوچک = -(8/6) × بزرگ. فاز دندانه‌ها طوری است که دندانه در شکاف می‌نشیند.
+طراحی دوباره برای خط ضخیم‌تر (D113، D110): دندانه‌های درشت‌تر و کم‌تر، دو چرخ روی هم (کم‌عرض)، رنگ تخت بدون خط دور کوچک."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
@@ -12,48 +13,47 @@ XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، 
 Y_T = '#ffd84d'; Y_L = '#f2b92c'; Y_H = '#8a5f0c'
 G_T = '#7fd36b'; G_L = '#4fae4a'; G_H = '#1f6b2e'      # چرخ‌دندهٔ دوم سبز تا دو ماشین جدا خوانده شوند
 POST_L = '#8fb5f2'; POST_R = '#8f8bd6'
-B = (-22, -46, 30, 10, 0)       # cx, cy, r گام، تعداد دندانه، فاز
-S = (28, -46, 20, 6, 30)
+PITCH = 21.0                                            # گام دندانه (طول کمان) برابر در هر دو چرخ ⇒ درگیری درست
+CXG = -26
+B = (CXG, -32, 8 * PITCH / (2 * math.pi), 8, 0)         # cx, cy, r گام، تعداد دندانه، فاز
+S = (CXG, -32 - (8 + 6) * PITCH / (2 * math.pi), 6 * PITCH / (2 * math.pi), 6, 0)
 FOOT = 26
 
 
-def post(p, cx, cy):
-    w = 8; yb = FOOT - 6
-    base = ell(cx, yb, w, 4, 0, 180, 10)
-    p.shape([(cx - w, cy)] + base[::-1] + [(cx + w, cy)], POST_L, OUT, j=.3, step=99)
-    p.fill([(cx + 1, cy), (cx + w, cy)] + [q for q in base if q[0] >= cx + 1][::-1], POST_R)
-    p.shape(ell(cx, yb, w + 10, 5, 0, 360, 24), POST_R, PART, j=.3, clip=False)
+def plate(p):
+    """صفحهٔ پشتی عمودی از پایه تا محور چرخ کوچک، دو رنگ مثل دیوارهٔ سکو؛ پایهٔ پهن زیر آن."""
+    w = 9; yb = FOOT - 6; top = S[1]
+    base = ell(CXG, yb, w, 4, 0, 180, 10)
+    p.shape([(CXG - w, top)] + base[::-1] + [(CXG + w, top)], POST_L, OUT, j=.3, step=99)
+    p.fill([(CXG + 1, top), (CXG + w, top)] + [q for q in base if q[0] >= CXG + 1][::-1], POST_R)
+    p.shape(ell(CXG, yb, w + 12, 5, 0, 360, 24), POST_R, PART, j=.3, clip=False)
 
 
 def gear_pts(cx, cy, rp, n, ph):
     pt = 360.0 / n; out = []
     for k in range(n):
         a = ph + k * pt
-        for da, r in ((-.28, rp - 5), (-.17, rp + 4), (.17, rp + 4), (.28, rp - 5)):
+        for da, r in ((-.31, rp - 4), (-.2, rp + 4), (.2, rp + 4), (.31, rp - 4)):
             t = math.radians(a + da * pt); out.append((cx + r * math.cos(t), cy + r * math.sin(t)))
     return out
 
 
-def gear(p, g, top, low, hub, probe=False, peg=False):
+def gear(p, g, top, low, hub, probe=False):
     cx, cy, rp, n, ph = g
     p.shape(gear_pts(cx, cy, rp, n, ph), top, PART, j=.25, step=99)
-    p.shape(ell(cx, cy, rp * .58, rp * .58, 0, 360, 32), low, SEAM, j=.2, step=99, clip=False)
-    t = math.radians(ph + 90)
-    p.ln((cx + 4.5 * math.cos(t), cy + 6 * math.sin(t)), (cx + rp * .62 * math.cos(t), cy + rp * .62 * math.sin(t)),
-         PART, hub, j=.1, probe=('نشانهٔ چرخش (جزء)' if probe else None))
-    p.shape(ell(cx, cy, 4.5, 4.5, 0, 360, 20), top, SEAM, j=.2, clip=False)
+    p.fill(ell(cx, cy, rp * .55, rp * .55, 0, 360, 32), low)
+    t = math.radians(ph - 90)
+    p.ln((cx, cy), (cx + rp * .55 * math.cos(t), cy + rp * .55 * math.sin(t)), PART, hub, j=.1, probe=('نشانهٔ چرخش (جزء)' if probe else None))
+    mx, my = p.X((cx, cy)); p.raw('<circle cx="%s" cy="%s" r="%s" fill="%s"/>' % (mx, my, 4.2 * p.xf[0], hub))
 
 
-def build(out=HERE, legacy_shadow=False):
-    p = Pen('final_workshop', 'land'); pad(p, line=((-62, 12), (-44, 17)), tri=((-60, -6), (61, 13)), dot=(56, -12))
+def build(out=None, legacy_shadow=False):
+    p = Pen('final_workshop', 'land'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    for g in (B, S):
-        p.tipshadow(g[0], FOOT - 6, 18); p.foot_tip(g[0], FOOT - 6, 12)
-    post(p, B[0], B[1]); post(p, S[0], S[1])
+    p.tipshadow(CXG, FOOT - 6, 22); p.foot_tip(CXG, FOOT - 6, 12)
+    plate(p)
     with layer(p, 'gear_big'): gear(p, B, Y_T, Y_L, Y_H, probe=True)
     with layer(p, 'gear_small'): gear(p, S, G_T, G_L, G_H)
-    for g, c in ((B, Y_H), (S, G_H)):
-        p.shape(ell(g[0], g[1], 1.6, 1.6, 0, 360, 12), c, INNER, j=.1, clip=False)
     return p, symbol(p, 'final_workshop', ['gear_big', 'gear_small'], out=out, legacy_shadow=legacy_shadow)
 
 
@@ -66,6 +66,6 @@ if __name__ == '__main__':
     r = finish(p, 'final_workshop', STAND, motion={'gear_big': dict(rotate=p.X((B[0], B[1]))), 'gear_small': dict(rotate=p.X((S[0], S[1])))}, out=OUTD, shots=SHOTS)
     sp = json.loads((OUTD / 'final_workshop.json').read_text())
     sp['motion_spec'] = {'node_final_workshop_gear_big': dict(center=list(p.X((B[0], B[1]))), deg_per_turn=360, dir='cw'),
-                         'node_final_workshop_gear_small': dict(center=list(p.X((S[0], S[1]))), ratio=-10/6, dir='ccw', note='کوچک=-(10/6)×بزرگ')}
+                         'node_final_workshop_gear_small': dict(center=list(p.X((S[0], S[1]))), ratio=-8 / 6, dir='ccw', note='کوچک=-(8/6)×بزرگ؛ چرخ بالا، چرخ پایین')}
     (OUTD / 'final_workshop.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False, indent=1))
