@@ -72,7 +72,7 @@ def map_parts():
     # نمونهٔ ساختمانی (B77): پیچ‌کاری (M10) ساختمان با برج پیچ
     old = '<use href="#env_pad_city_stone" x="224" y="1305" width="120" height="100" /><use href="#prop_14" x="224" y="1305" width="120" height="100" />'
     assert old in body, 'M10'
-    body = body.replace(old, '<use href="#node_screw_workshop" x="215" y="1297" width="118" height="112" />')
+    body = body.replace(old, '<use href="#node_screw_workshop" x="209" y="1297" width="118" height="112" />')
     # مالک (D97/D98): ماشین‌لیفتِ دکور روی پیچ‌کاری حذف؛ حالت «قفل» نرم‌تر تا رنگ‌ها گل‌آلود نشوند
     body = re.sub(r'<use href="#env_dec_city_forklift"[^>]*/>', '', body)
     body = re.sub(r'<use href="#env_dec_city_mid"[^>]*/>', '', body)   # بلوک‌های خاکستری نامفهوم
@@ -97,10 +97,10 @@ def main():
     nm = {n['id']: n for n in json.load(open(EA / 'node_map.json', encoding='utf-8'))['nodes']}
     nodes = {k: dict(x=v['base_center'][0], y=v['base_center'][1], hit=v['hit_box'], title=(STR['maptravel.node.' + k]['text'] if ('maptravel.node.' + k) in STR else nm[k]['env_title']))
              for k, v in d['slots'].items() if v['base_center'][1] < H - 60}
-    nodes['M12'].update(x=272, y=96, hit=[196, 8, 150, 128]); nodes['E06']['hit'] = [215, 196, 170, 161]; nodes["M10"]["hit"] = [215, 1297, 118, 112]
+    nodes['M12'].update(x=272, y=96, hit=[196, 8, 150, 128]); nodes['E06']['hit'] = [215, 196, 170, 161]; nodes["M10"]["hit"] = [209, 1297, 118, 112]
     # شکل سکوی هر ایستگاه برای مسیر ردپا: [نیم‌پهنا، نیم‌ارتفاع بیضی، ارتفاع دیواره، ارتفاع ساختمان]
     PAD = {'M09': (52, 19, 14, 60), 'M07': (54, 19, 12, 100), 'M08': (97, 35, 14, 120), 'M11': (94, 32, 14, 120), 'M12': (75, 26, 11, 90),
-           "M10": (56, 19, 10, 90), 'E06': (80, 27, 12, 100), 'E03': (48, 17, 14, 55), 'M02': (48, 17, 14, 55), 'E04': (48, 17, 14, 90)}
+           "M10": (50, 17, 10, 90), 'E06': (80, 27, 12, 100), 'E03': (48, 17, 14, 55), 'M02': (48, 17, 14, 55), 'E04': (48, 17, 14, 90)}
     for k, v in nodes.items(): v['pad'] = list(PAD.get(k, (48, 17, 14, 55)))
     im = {}
     for o in ['sailor', 'construction']:

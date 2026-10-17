@@ -110,12 +110,16 @@ def main():
          ('ب) دندانهٔ مورب نامتقارن لبه + هاشور سایه', build(True, False, True, False, False)),
          ('ج) دندانهٔ مورب + مارپیچ کرم (طرح نقد)', build(True, True, True, False, False)),
          ('د) ج + دود حلزونی، مهره و پیچ و آچار کنار در', build(True, True, True, True, True))]
+    from screw_alef import build as bA, symbol as symA
+    V[0] = (V[0][0], bA())
     html = '''<!doctype html><meta charset=utf-8><title>اتودهای ۲ پیچ‌کاری</title><style>
 body{margin:0;background:#e9c57e;font-family:Vazirmatn,system-ui,sans-serif;direction:rtl;color:#241a5e;display:grid;grid-template-columns:repeat(2,auto);width:max-content}
 .c{padding:10px 14px}.r{display:flex;gap:14px;align-items:flex-end}h3{margin:6px 0;font-size:16px}</style>''' + ''.join(cell(t, p.svg()) for t, p in V)
     (HERE / 'etudes2.html').write_text(html, encoding='utf-8')
     ch = sys.argv[1] if len(sys.argv) > 1 else 'د'
     p = dict((t[0], q) for t, q in V)[ch]
+    if ch == 'ا':
+        (HERE.parent / 'assets' / 'node_screw_workshop.svg').write_text(symA(p), encoding='utf-8'); return
     hl = [SF(q) for q in ((24, -84), (24, -92))]
     sym = ('<symbol id="node_screw_workshop" viewBox="0 0 200 190" overflow="visible">'
            '<g id="node_screw_workshop_shadow" transform="translate(100 150)"><ellipse cx="8" cy="6" rx="102" ry="32" fill="#10083a" opacity=".25"/></g>'
