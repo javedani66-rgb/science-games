@@ -81,12 +81,12 @@ const prints=document.createElementNS(NS,'g');prints.id='prints';(svgMap.querySe
 /* ردپا فقط پس از گذر از هر مرحله، از همان ایستگاه (روی سطح آن) تا ایستگاه بعد حک می‌شود (D99) */
 /* D118: سکوی فرود (سنگی، هم‌سبک سکوها) + اسکلهٔ چوبی در امتداد راه (عمودی در x=362)؛ خط دور یک‌پارچه:
    اول همهٔ شکل‌ها با خط دور تیره، بعد همه با رنگ پر بدون خط (درز ندارد) */
-const JX=362,JTIP=992,JDOT=975,BERTH=[330,1003];
+const JX=362,JTIP=972,JDOT=968,BERTH=[321,986];
 const jet=document.createElementNS(NS,'g');jet.id='jetty';jet.setAttribute('filter','url(#env_wob)');
 (function(){const R=(x,y,w,h,r)=>'x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+r+'"';
- const shapes=[[336,1040,52,26,11],[336,1030,52,26,11],[348,JTIP,28,48,5]];
+ const shapes=[[336,1040,52,26,11],[336,1030,52,26,11],[348,JTIP,28,68,5]];
  let h='<g fill="#241a5e" stroke="#241a5e" stroke-width="11" stroke-linejoin="round">'+shapes.map(s=>'<rect '+R(...s)+'/>').join('')+'</g>';
- h+='<rect '+R(336,1040,52,26,11)+' fill="#6e72a8"/><rect '+R(348,JTIP,28,48,5)+' fill="#c98f52"/><rect '+R(336,1030,52,26,11)+' fill="#cfd3e2"/>';
+ h+='<rect '+R(336,1040,52,26,11)+' fill="#6e72a8"/><rect '+R(348,JTIP,28,68,5)+' fill="#c98f52"/><rect '+R(336,1030,52,26,11)+' fill="#cfd3e2"/>';
  for(let y=JTIP+7;y<1022;y+=10)h+='<path d="M351,'+y+' L373,'+y+'" stroke="#8a5a30" stroke-width="2.4" stroke-linecap="round"/>';
  h+='<rect x="348" y="1023" width="28" height="6" fill="#7a4a28"/>';
  h+='<path d="M343,1043 l9,3 M372,1048 l9,-3" stroke="#9a9fc6" stroke-width="2.6" stroke-linecap="round"/>';
@@ -178,7 +178,7 @@ async function travel(a,b){const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=i
  if(seaB){const rl=runs[runs.length-1];if(rl.m)rl.pts=[...rl.pts.filter(p=>!inOuter(NB,p[0],p[1])),dock(NB)]}
  for(const r of runs){
   if(r.m!==sea){const p0=r.pts[0];
-   if(r.m){const f0=pts_last_land(runs,r);setOutfit(true);showBoat(true);placeBoat(BERTH[0],BERTH[1]-SEAT-4,0);await hopTo(f0,[BERTH[0],BERTH[1]-4],18);r.pts=[BERTH,...r.pts.filter(p=>p[1]<962)]}
+   if(r.m){const f0=pts_last_land(runs,r);setOutfit(true);showBoat(true);placeBoat(BERTH[0],BERTH[1]-SEAT-4,0);await hopTo(f0,[BERTH[0],BERTH[1]-4],18);r.pts=[BERTH,...r.pts.filter(p=>p[1]<JDOT)]}
    else{await hopTo([p0[0],p0[1]-4],p0,18);setOutfit(false);showBoat(false)}
    sea=r.m}
   if(r.m)await sail(r.pts);else await walk(r.pts)}

@@ -34,7 +34,7 @@ def deck(p):
     h = (DT - DBK) / 3
     p.ln((-DX + 6, DBK + h), (DX - 6, DBK + h), INNER, WOOD_D, j=.1, probe='درز تخته (داخلی)')
     p.ln((-DX + 6, DBK + 2 * h), (DX - 6, DBK + 2 * h), INNER, WOOD_D, j=.1)
-    p.fill([(-DX + 3, DT + 1), (DX - 3, DT + 1), (DX - 3, DB - 2), (-DX + 3, DB - 2)], WOOD_F)  # وجه جلو (کمی تیره‌تر)
+    p.raw('<polygon points="%d,%d %d,%d %d,%d %d,%d" fill="%s"/>' % (-DX + 5, DT + 1, DX - 5, DT + 1, DX - 5, DB - 4, -DX + 5, DB - 4, WOOD_F))  # وجه جلو (کمی تیره‌تر)
 
 
 def frame(p):

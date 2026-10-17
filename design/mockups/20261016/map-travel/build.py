@@ -32,9 +32,9 @@ def map_parts():
     orig = body[i:e]
     rest = body[e:j]
     d = json.load(open(EA / 'slots.json', encoding='utf-8'))
-    d['path_d'] = d['path_d'].replace('C362.0,1011.7 337.8,969.8 320.0,957.7', 'L362.0,996.0 C362.0,976.0 346.0,958.5 320.0,957.7')   # D118: راه تا انتهای اسکله عمودی
+    d['path_d'] = d['path_d'].replace('C362.0,1011.7 337.8,969.8 320.0,957.7', 'L362.0,984.0 C362.0,968.0 346.0,958.0 320.0,957.7')   # D118: راه تا انتهای اسکله عمودی
     d['path_d'] += ' C52,182.5 30,158 30,125 C30,80 60,40 120,34 C170,28 225,52 272,96'   # راه دریایی تا ایستگاه نهایی (M12)
-    new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 975 + 40)
+    new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 968 + 40)
            + '<g clip-path="url(#cl_land)">' + orig + '</g>'
            + '<g clip-path="url(#cl_sea)" filter="url(#env_wob)"><path d="%s" fill="none" stroke="#241a5e" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 17" opacity=".35"/>'
              '<path d="%s" fill="none" stroke="#e8f6f8" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 17" opacity=".85"/></g>' % (d['path_d'], d['path_d']))
@@ -97,8 +97,8 @@ def map_parts():
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
 
-KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pier': 'M07'}
-KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (154, 959)}   # مرکز سکو = مرکز گره
+KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pier': 'M07', 'harbor_crane': 'M08', 'shipyard': 'M11', 'floating_market': 'E06', 'lighthouse': 'E04', 'final_workshop': 'M12'}
+KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (154, 959), 'M08': (266, 759), 'M11': (162, 524), 'E06': (300, 324), 'E04': (118, 192), 'M12': (272, 96)}   # مرکز سکو = مرکز گره
 M09_SH = '<ellipse cx=\"0\" cy=\"21\" rx=\"51\" ry=\"19.5\" fill=\"#10083a\" opacity=\".3\"/>'
 E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
 
