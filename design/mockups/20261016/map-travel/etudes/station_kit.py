@@ -104,11 +104,22 @@ class Pen:
         assert kind in PALETTES, 'kind باید land یا sea باشد'
         s.id = s.uid = station_id; s.kind = kind; s.rx, s.ry, s.wall = rx, ry, wall
         s.ntop = s.npad = 0; s.o = []; s.clip = []; s.k = 0; s.probes = []; s.foot = []; s.layers = {}
-        s.padtop = _padtop(rx, ry)
+        s.padtop = _padtop(rx, ry); s.xf = (1.0, 0.0, 0.0)
+
+    def X(s, p):
+        """قاب قهرمان: هندسه (نه ضخامت خط) با مقیاس و جابه‌جایی pen.xf=(مقیاس، dx، dy) نقطه‌به‌نقطه تبدیل می‌شود؛
+        ضخامت‌های OUT/PART/INNER دست‌نخورده می‌مانند (D113). p نقطه یا فهرست نقطه. pad() قبل از xf اجرا می‌شود."""
+        k, dx, dy = s.xf
+        if p and isinstance(p[0], (tuple, list)): return [(x * k + dx, y * k + dy) for x, y in p]
+        return (p[0] * k + dx, p[1] * k + dy)
+
+    def V(s, v):
+        """بردار جابه‌جایی (مثل offsets حرکت) در قاب قهرمان."""
+        return (v[0] * s.xf[0], v[1] * s.xf[0])
 
     def _d(s, pts, j, step):
         s.k += 1
-        return hd(pts, True, s.k * 7 + 3, j, step)
+        return hd(s.X(pts), True, s.k * 7 + 3, j, step)
 
     def shape(s, pts, fill, sw=OUT, j=.7, step=11, clip=True):
         d = s._d(pts, j, step)
@@ -117,14 +128,14 @@ class Pen:
         return d
 
     def fill(s, pts, fill, op=1):
-        s.o.append('<path d="%s" fill="%s"%s/>' % (hd(pts, True, 1, 0, 999), fill, '' if op == 1 else ' opacity="%s"' % op))
+        s.o.append('<path d="%s" fill="%s"%s/>' % (hd(s.X(pts), True, 1, 0, 999), fill, '' if op == 1 else ' opacity="%s"' % op))
 
     def stroke(s, pts, sw=OUT, j=.7, step=11):
         s.o.append('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (s._d(pts, j, step), sw))
 
     def ln(s, a, b, sw, col, op=1, j=.2, probe=None):
         """خط راست. probe='برچسب' آن را برای width_check ثبت می‌کند."""
-        s.k += 1
+        s.k += 1; a, b = s.X(a), s.X(b)
         r = random.Random(s.k * 13)
         s.o.append('<path d="M%.1f,%.1f L%.1f,%.1f" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round"%s%s/>' % (
             a[0] + r.uniform(-j, j), a[1] + r.uniform(-j, j), b[0] + r.uniform(-j, j), b[1] + r.uniform(-j, j), col, sw,
@@ -139,10 +150,12 @@ class Pen:
 
     def tipshadow(s, x, y, r=11):
         """سایهٔ کوچک زیر نقطهٔ تماس (روی سکو)."""
+        x, y = s.X((x, y)); r *= s.xf[0]
         s.raw('<ellipse cx="%s" cy="%s" rx="%s" ry="%s" fill="#10083a" opacity=".2"/>' % (x + 2, y + 1, r, r * .34))
 
     def foot_tip(s, x, y, r=8):
         """ردپای تماس با سکو؛ margin_check فاصلهٔ آن تا لبهٔ سکو را می‌سنجد."""
+        x, y = s.X((x, y)); r *= s.xf[0]
         s.foot.append(ell(x, y, r, r * .4, 0, 360, 12))
 
 
@@ -346,27 +359,31 @@ def find_stand(pen, motion=None, dsf=2, gmax=24):
         ts += ['translate(%s %s)' % tuple(o) for o in kw.get('offsets', [])]
         for t in ts: hero |= A(_shot('<g transform="%s">%s</g>' % (t, body), dsf))
     Dh = edt(~hero) / dsf; Dt = edt(top) / dsf
-    fp, ar, ac = fig_footprint(dsf); best = None
-    rows, cols = top.shape
+    from scipy.signal import fftconvolve
+    fp, ar, ac = fig_footprint(dsf)
+    if fp.shape[0] % 2 == 0: fp = np.vstack([fp, np.zeros((1, fp.shape[1]), bool)])
+    if fp.shape[1] % 2 == 0: fp = np.hstack([fp, np.zeros((fp.shape[0], 1), bool)])
+    rows, cols = top.shape; fr = fp[::-1, ::-1].astype(float); sh = ar - fp.shape[0] // 2
     pref = (100 * K * dsf, (150 * K + pen.ry * K * .6) * dsf)
-    g = float(gmax)
-    while g >= 0 and best is None:
-        R = minimum_filter((Dh >= g).astype(np.uint8), footprint=fp, mode='constant', cval=0).astype(bool)   # فیگور با لنگر وسط footprint
-        # footprint با مرکز هندسی‌اش کار می‌کند؛ جابه‌جایی تا لنگر = کف
-        sh = ar - fp.shape[0] // 2
-        Rs = np.zeros_like(R)
-        if sh > 0: Rs[sh:] = R[:rows - sh]
-        elif sh < 0: Rs[:sh] = R[-sh:]
-        else: Rs = R
-        F = np.ones_like(R)
-        for k in FIG_FEET:
-            Fk = (Dt >= g); sh_ = -int(k * dsf)
-            F &= np.roll(Fk, sh_, axis=1)
-        ok = Rs & F
-        if ok.any():
-            ys, xs = np.nonzero(ok); d = np.hypot(xs - pref[0], ys - pref[1]); k2 = int(d.argmin())
-            best = ((round(xs[k2] / dsf - 100 * K, 1), round(ys[k2] / dsf - 150 * K, 1)), g)
-        g -= .5
+
+    def feasible(g):
+        bad = (Dh < g).astype(float)
+        C = fftconvolve(bad, fr, mode='same') < .5          # فیگور با مرکز هندسی‌اش روی هر پیکسل
+        Rs = np.zeros_like(C)
+        if sh > 0: Rs[sh:] = C[:rows - sh]
+        elif sh < 0: Rs[:sh] = C[-sh:]
+        else: Rs = C
+        F = np.ones_like(Rs)
+        for k in FIG_FEET: F &= np.roll(Dt >= g, -int(k * dsf), axis=1)
+        return Rs & F
+    best = None; lo, hi = 0.0, float(gmax)
+    if not feasible(0).any(): return ((0, 0), -1)
+    while hi - lo > .25:
+        mid = (lo + hi) / 2
+        if feasible(mid).any(): lo = mid
+        else: hi = mid
+    ok = feasible(lo); ys, xs = np.nonzero(ok); d = np.hypot(xs - pref[0], ys - pref[1]); k2 = int(d.argmin())
+    best = ((round(xs[k2] / dsf - 100 * K, 1), round(ys[k2] / dsf - 150 * K, 1)), round(lo, 2))
     return best if best else ((0, 0), -1)
 
 
@@ -442,15 +459,12 @@ def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), 
     w = width_check(pen)
     sp = spec(name, pad_px(pen, m['bh']), stand, ['node_%s_%s' % (name, x) for x in motion], kind=pen.kind, ring=ring, out=out)
     if shots:
-        from playwright.sync_api import sync_playwright
         shots = pathlib.Path(shots); shots.mkdir(parents=True, exist_ok=True)
-        with sync_playwright() as p:
-            b = p.chromium.launch()
-            for tag, scale in (('map', 1), ('big', 4)):
-                pg = b.new_page(device_scale_factor=4 if tag == 'big' else 2, viewport={'width': 144 * (3 if tag == 'big' else 1), 'height': 160 * (3 if tag == 'big' else 1)})
-                pg.set_content(('<body style="margin:0;background:#c9a35c">' + preview(sym, name, 144 * (3 if tag == 'big' else 1), tall=True)))
-                pg.screenshot(path=str(shots / ('%s_%s.png' % (name, tag)))); pg.close()
-            b.close()
+        b = _browser()
+        for tag in ('map', 'big'):
+            pg = b.new_page(device_scale_factor=4 if tag == 'big' else 2, viewport={'width': 144 * (3 if tag == 'big' else 1), 'height': 160 * (3 if tag == 'big' else 1)})
+            pg.set_content(('<body style="margin:0;background:#c9a35c">' + preview(sym, name, 144 * (3 if tag == 'big' else 1), tall=True)))
+            pg.screenshot(path=str(shots / ('%s_%s.png' % (name, tag)))); pg.close()
     r = dict(name=name, kind=pen.kind, margin=m, motion=mo, widths=w, spec=sp, ok=bool(m['ok'] and all(x['ok'] for x in mo) and all(x['ok'] for x in w)))
     print('CHECK ' + json.dumps(dict(name=name, ok=r['ok'], stand=list(stand), auto_gap=auto, margin=m, motion=mo, widths=[(x['label'], x['nominal'], x['measured_px'], x['ok']) for x in w]), ensure_ascii=False))
     return r

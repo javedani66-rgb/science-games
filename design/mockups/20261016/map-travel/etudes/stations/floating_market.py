@@ -9,6 +9,7 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/floating_market'
+XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 HULL = '#c98a4a'; HULL_D = '#8a5a2a'; RED = '#ef6a4a'; WH = '#fff8e0'; WOOD = '#ffd84d'
 ORG = '#ff9b2f'; GRN = '#8bd45a'; BLU = '#5fa8f0'
 BOB = 3
@@ -41,6 +42,7 @@ def boat(p):
 
 def build(out=OUTD):
     p = Pen('floating_market', 'sea'); pad(p, line=((34, 24), (52, 19)), tri=((-62, -14), (62, 16)), dot=(42, -26))
+    p.xf = XF
     p.tipshadow(-16, 22, 30); p.foot_tip(-16, 20, 16)
     with layer(p, 'boat'): boat(p)
     return p
@@ -49,7 +51,7 @@ STAND = None     # خودکار: find_stand
 
 if __name__ == '__main__':
     p = build()
-    offs = [(0, -BOB), (0, 0), (0, BOB)]
+    offs = [p.V(o) for o in [(0, -BOB), (0, 0), (0, BOB)]]
     r = finish(p, 'floating_market', STAND, motion={'boat': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
     sp = r['spec']; sp['motion_spec'] = dict(offsets=offs, note='کل قایق و غرفه روی موج بالا و پایین؛ سکو ثابت؛ سایهٔ تماس ثابت')
     (OUTD / 'floating_market.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

@@ -6,6 +6,7 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent     # station_kit.HERE (etudes/) را نپوشاند
 
+XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 BLUE = '#8fb5f2'; PURP = '#8f8bd6'; HEAD_S = '#d6e8ff'; HEAD_T = '#f1f8ff'; THREAD = '#ffe08a'
 NUT_T = '#ffd84d'; NUT_L = '#f2b92c'; NUT_R = '#d9961c'; NUT_H = '#8a5f0c'
 
@@ -31,7 +32,7 @@ def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=16, d=4, bottom='tip', y0=0, pro
         cid = '%s_c%d' % (pen.uid, pen.k)
         strip = [(w * .3, -Lb - 2), (w + d + 3, -Lb - 2), (w + d + 3, y0 + 4), (w * .3, y0 + 4)]
         pen.raw('<path d="%s" fill="%s"/><clipPath id="%s"><path d="%s"/></clipPath><path d="%s" fill="%s" clip-path="url(#%s)"/>' % (
-            dd, BLUE, cid, dd, hd(TP(f, strip), True, 2, 0, 999), PURP, cid))
+            dd, BLUE, cid, dd, hd(pen.X(TP(f, strip)), True, 2, 0, 999), PURP, cid))
         for i, yk in enumerate(ys):
             pen.ln(f((-w + 2, yk)), f((w - 2, yk + P / 2)), PART, THREAD, j=.1, probe='رزوه (جزء)' if (probe and i == 1) else None)
         pen.raw('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (dd, OUT))
@@ -43,7 +44,7 @@ def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=16, d=4, bottom='tip', y0=0, pro
         a = (-.6 * hw * math.cos(ph), -.6 * ry * math.sin(ph) + top); b = (.6 * hw * math.cos(ph), .6 * ry * math.sin(ph) + top)
         pen.ln(f(a), f(b), PART, NAVY, j=.1, probe='شیار سر پیچ (جزء)' if probe else None)
         pen.ln(f((-hw + 8, top + 5)), f((-hw + 8, -Lb - 3)), INNER, CREAM, j=.1, probe='خط داخلی (درخشش)' if probe else None)
-        if probe: pen.probes.append(('خط دور پیچ (لبهٔ سر)', OUT, f((-hw, top + hh * .5)), (1, 0), NAVY))
+        if probe: pen.probes.append(('خط دور پیچ (لبهٔ سر)', OUT, pen.X(f((-hw, top + hh * .7))), (1, 0), NAVY))
     return poly
 
 
@@ -72,7 +73,7 @@ def nut_front(pen, cx, cy, R, h, hole, probe=False):
     front = [v[3], v[2], v[1], v[0], lo[0], lo[1], lo[2], lo[3]]
     pen.stroke(front, OUT, j=.4, step=5)
     for a, b in ((v[1], lo[1]), (v[2], lo[2])): pen.ln(a, b, SEAM, NAVY, j=.1, probe='درز ریز (مهره)' if (probe and a is v[1]) else None)
-    pen.raw('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (hd(arc, False, 6, .3, 5), SEAM))
+    pen.raw('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (hd(pen.X(arc), False, 6, .3, 5), SEAM))
     pen.ln((cx - R + 7, cy + .4 * R * .5 + 4), (cx - R + 7, cy + h - 3), INNER, '#fff3c4', j=.1)
 
 
@@ -81,6 +82,7 @@ NUT_C = -64; RANGE = 22     # مرکز مهره (مختصات symbol) و باز�
 
 def build(out=HERE, legacy_shadow=False):
     p = Pen('screw_workshop', 'land'); pad(p, line=((-62, 12), (-44, 17)), tri=((-60, -6), (61, 13)), dot=(56, -12))
+    p.xf = XF
     p.tipshadow(0, 8); p.foot_tip(0, 8, 10)
     w, Lb, R, h, hole = 13, 132, 40, 20, 28
     f = rot(0, 8, 0)
@@ -97,6 +99,6 @@ OUTD = HERE / 'out'
 
 if __name__ == '__main__':
     p, sym = build(out=OUTD)
-    offs = [(0, -RANGE), (0, -RANGE / 2), (0, 0), (0, RANGE / 2), (0, RANGE)]
+    offs = [p.V(o) for o in [(0, -RANGE), (0, -RANGE / 2), (0, 0), (0, RANGE / 2), (0, RANGE)]]
     r = finish(p, 'screw_workshop', STAND, motion={'nut_back': dict(offsets=offs), 'nut_front': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
     print(json.dumps(r, ensure_ascii=False, indent=1))

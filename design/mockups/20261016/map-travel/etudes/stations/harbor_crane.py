@@ -8,6 +8,7 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 
+XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 C_T = '#ff8a5c'; C_L = '#e0553a'; C_D = '#9c2f1c'      # جرثقیل: مرجانی روشن/تیره
 B_T = '#ffd84d'; B_H = '#8a5f0c'                        # جعبه
 CW = '#8f8bd6'
@@ -18,7 +19,7 @@ BX = 18             # محور طناب/جعبه
 
 
 def flat(p, pts, col):
-    p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in pts), col))
+    p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col))
 
 
 def base_and_mast(p):
@@ -52,6 +53,7 @@ def jib(p):
 
 def build(out=HERE):
     p = Pen('harbor_crane', 'sea'); pad(p, line=((34, 22), (54, 18)), tri=((54, -14), (-58, -14)), dot=(-56, 12))
+    p.xf = XF
     p.tipshadow(MX, FOOT, 24); p.foot_tip(MX, FOOT - 2, 18)
     p.tipshadow(BX, FOOT + 1, 20)
     base_and_mast(p)
@@ -65,5 +67,5 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 
 if __name__ == '__main__':
     p = build()
-    r = finish(p, 'harbor_crane', STAND, motion={'hook': dict(offsets=[(0, 0), (0, 4), (0, 8), (0, 12)])}, out=HERE / 'out', shots=SHOTS)
+    r = finish(p, 'harbor_crane', STAND, motion={'hook': dict(offsets=[p.V(o) for o in [(0, 0), (0, 4), (0, 8), (0, 12)]])}, out=HERE / 'out', shots=SHOTS)
     print(json.dumps({'ok': r['ok'], 'margin': r['margin'], 'motion': r['motion'], 'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

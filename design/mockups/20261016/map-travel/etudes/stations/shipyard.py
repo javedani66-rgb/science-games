@@ -8,6 +8,7 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/shipyard'
+XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 WOOD = '#ffd84d'; WOOD_D = '#d9961c'; HULL = '#ef6a4a'; BAND = '#ffd84d'; FLAG = '#7bd35a'; MAST = '#8a5f0c'
 A = (-58, -6); B = (38, 22); FLOORY = 22
 ANG = math.degrees(math.atan2(B[1] - A[1], B[0] - A[0]))
@@ -37,6 +38,7 @@ def hull(p):
 
 def build(out=OUTD):
     p = Pen('shipyard', 'sea'); pad(p, line=((20, 29), (36, 27)), tri=((-54, -12), (54, 14)), dot=(56, -15))
+    p.xf = XF
     ramp(p)
     with layer(p, 'hull'): hull(p)
     return p
@@ -45,7 +47,7 @@ def build(out=OUTD):
 STAND = None     # خودکار: find_stand
 if __name__ == '__main__':
     p = build()
-    offs = [(SLIDE * k / 3 * UX, SLIDE * k / 3 * UY) for k in range(4)]
+    offs = [p.V((SLIDE * k / 3 * UX, SLIDE * k / 3 * UY)) for k in range(4)]
     r = finish(p, 'shipyard', STAND, motion={'hull': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
     sp = r['spec']; sp['motion_spec'] = dict(layer='node_shipyard_hull', translate_along_slope=[round(UX * SLIDE, 1), round(UY * SLIDE, 1)], note='بدنه روی لغزگاه تا ۱۸ واحد به پایین می‌لغزد و برمی‌گردد؛ لغزگاه ثابت و پیوسته')
     (OUTD / 'shipyard.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

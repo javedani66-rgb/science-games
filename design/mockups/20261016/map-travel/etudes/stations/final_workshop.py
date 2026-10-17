@@ -8,6 +8,7 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 
+XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 Y_T = '#ffd84d'; Y_L = '#f2b92c'; Y_H = '#8a5f0c'
 G_T = '#7fd36b'; G_L = '#4fae4a'; G_H = '#1f6b2e'      # چرخ‌دندهٔ دوم سبز تا دو ماشین جدا خوانده شوند
 POST_L = '#8fb5f2'; POST_R = '#8f8bd6'
@@ -45,6 +46,7 @@ def gear(p, g, top, low, hub, probe=False, peg=False):
 
 def build(out=HERE, legacy_shadow=False):
     p = Pen('final_workshop', 'land'); pad(p, line=((-62, 12), (-44, 17)), tri=((-60, -6), (61, 13)), dot=(56, -12))
+    p.xf = XF
     for g in (B, S):
         p.tipshadow(g[0], FOOT - 6, 18); p.foot_tip(g[0], FOOT - 6, 12)
     post(p, B[0], B[1]); post(p, S[0], S[1])
@@ -61,9 +63,9 @@ OUTD = HERE / 'out'
 
 if __name__ == '__main__':
     p, sym = build(out=OUTD)
-    r = finish(p, 'final_workshop', STAND, motion={'gear_big': dict(rotate=(B[0], B[1])), 'gear_small': dict(rotate=(S[0], S[1]))}, out=OUTD, shots=SHOTS)
+    r = finish(p, 'final_workshop', STAND, motion={'gear_big': dict(rotate=p.X((B[0], B[1]))), 'gear_small': dict(rotate=p.X((S[0], S[1])))}, out=OUTD, shots=SHOTS)
     sp = json.loads((OUTD / 'final_workshop.json').read_text())
-    sp['motion_spec'] = {'node_final_workshop_gear_big': dict(center=[B[0], B[1]], deg_per_turn=360, dir='cw'),
-                         'node_final_workshop_gear_small': dict(center=[S[0], S[1]], ratio=-10/6, dir='ccw', note='کوچک=-(10/6)×بزرگ')}
+    sp['motion_spec'] = {'node_final_workshop_gear_big': dict(center=list(p.X((B[0], B[1]))), deg_per_turn=360, dir='cw'),
+                         'node_final_workshop_gear_small': dict(center=list(p.X((S[0], S[1]))), ratio=-10/6, dir='ccw', note='کوچک=-(10/6)×بزرگ')}
     (OUTD / 'final_workshop.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False, indent=1))

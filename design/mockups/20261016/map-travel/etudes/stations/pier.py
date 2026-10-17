@@ -12,6 +12,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/pier'
 
+XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 WOOD = '#ffd84d'; WOOD_D = '#d9961c'; PILE = '#e8892b'; WHEEL = '#ef6a4a'; BOX = '#a4e07a'; BOX_D = '#5fae44'
 
 # ---- هندسهٔ مشترک عرشه ----
@@ -34,7 +35,7 @@ def deck(p):
     h = (DT - DBK) / 3
     p.ln((-DX + 6, DBK + h), (DX - 6, DBK + h), INNER, WOOD_D, j=.1, probe='درز تخته (داخلی)')
     p.ln((-DX + 6, DBK + 2 * h), (DX - 6, DBK + 2 * h), INNER, WOOD_D, j=.1)
-    p.raw('<polygon points="%d,%d %d,%d %d,%d %d,%d" fill="%s"/>' % (-DX + 5, DT + 1, DX - 5, DT + 1, DX - 5, DB - 4, -DX + 5, DB - 4, WOOD_F))  # وجه جلو (کمی تیره‌تر)
+    p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X([(-DX + 5, DT + 1), (DX - 5, DT + 1), (DX - 5, DB - 4), (-DX + 5, DB - 4)])), WOOD_F))  # وجه جلو (کمی تیره‌تر)
 
 
 def frame(p):
@@ -62,7 +63,7 @@ def wheel(p):
 
 
 def build_a(out=OUTD):
-    p = Pen('pier', 'sea'); pad(p, line=((-62, 14), (-44, 19)), tri=((-60, -8), (62, 12)), dot=(58, -15))
+    p = Pen('pier', 'sea'); pad(p, line=((-62, 14), (-44, 19)), tri=((-60, -8), (62, 12)), dot=(58, -15)); p.xf = XF
     p.tipshadow(0, DB + 6, 46); p.foot_tip(-41, DB + 7, 8); p.foot_tip(41, DB + 7, 8)
     deck(p); frame(p)
     with layer(p, 'load'): load(p)
@@ -91,7 +92,7 @@ def build_b(out=None):
 def run(variant):
     if variant == 'a':
         p = build_a(); STAND = None
-        motion = {'load': dict(offsets=[(0, -UP * k / 4) for k in range(5)]), 'wheel': dict(rotate=(CX, CY))}
+        motion = {'load': dict(offsets=[p.V((0, -UP * k / 4)) for k in range(5)]), 'wheel': dict(rotate=p.X((CX, CY)))}
         out, shots, name = OUTD, SHOTS, 'pier'
     else:
         p = build_b(); STAND = None
