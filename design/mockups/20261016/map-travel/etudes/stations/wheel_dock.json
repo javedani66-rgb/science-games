@@ -1,0 +1,22 @@
+{
+ "id": "wheel_dock",
+ "kind": "sea",
+ "pad": [
+  54.7,
+  27.4,
+  11.5,
+  65
+ ],
+ "stand": [
+  40,
+  6
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_wheel_dock_gear"
+ ]
+}
