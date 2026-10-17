@@ -5,11 +5,11 @@
   54.7,
   27.4,
   11.5,
-  33
+  34
  ],
  "stand": [
-  29.5,
-  3.5
+  30.0,
+  5.0
  ],
  "ring": [
   0,
@@ -24,16 +24,16 @@
   "wheel": {
    "layer": "node_wheel_dock_wheel",
    "rotate_about": [
-    -11.2,
-    12.5
+    -9.3,
+    10.6
    ],
    "note": "چرخ راست؛ id قدیمی حفظ شد"
   },
   "wheel_back": {
    "layer": "node_wheel_dock_wheel_back",
    "rotate_about": [
-    -39.7,
-    12.5
+    -37.8,
+    10.6
    ],
    "note": "چرخ چپ، لایهٔ جدید"
   }
