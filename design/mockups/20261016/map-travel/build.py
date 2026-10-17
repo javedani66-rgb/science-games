@@ -82,7 +82,7 @@ def map_parts():
         body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
     body = body.replace('translate(143 210)', 'translate(140 199)').replace('translate(248 570)', 'translate(236 541)')
     # D112 (گزارش بازبین flags_m10): برچسب‌ها زیر مرکز سکو و دور از لبه؛ درخت کنار E03 از راه دور
-    for a, b in (('<text x="284" y="1435"', '<text x="256" y="1445"'), ('<text x="118" y="1599"', '<text x="118" y="1605"'), ('<text x="158" y="1304"', '<text x="158" y="1311.5"')):
+    for a, b in (('<text x="284" y="1435"', '<text x="256" y="1445.5"'), ('<text x="118" y="1599"', '<text x="118" y="1608"'), ('<text x="158" y="1304"', '<text x="158" y="1314"')):
         assert a in body, a
         body = body.replace(a, b)
     a = '<use href="#env_tree_round" x="13" y="1262" width="70.0" height="70.0" />'
@@ -91,8 +91,8 @@ def map_parts():
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
 
-M09_SH = '<ellipse cx="4" cy="21" rx="54" ry="20" fill="#10083a" opacity=".3"/>'
-E03_SH = '<ellipse cx="4" cy="21" rx="49" ry="19" fill="#10083a" opacity=".3"/>'
+M09_SH = '<ellipse cx=\"0\" cy=\"21\" rx=\"51\" ry=\"19.5\" fill=\"#10083a\" opacity=\".3\"/>'
+E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
 
 def add_assets(sprite):
     extra = ''.join((HERE / 'assets' / f).read_text(encoding='utf-8') for f in sorted(p.name for p in (HERE / 'assets').glob('*.svg')))
