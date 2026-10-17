@@ -57,8 +57,8 @@ def nut_back(pen, cx, cy, R, h, hole):
     v = hexv(cx, cy, R); lo = [(x, y + h) for x, y in v]
     pen.fill([v[0], v[1], lo[1], lo[0]], NUT_R); pen.fill([v[1], v[2], lo[2], lo[1]], NUT_L); pen.fill([v[2], v[3], lo[3], lo[2]], '#e8a51f')
     sil = [v[3], v[4], v[5], v[0], lo[0], lo[1], lo[2], lo[3]]
-    pen.shape(sil, 'none', OUT, step=5, j=.4)
-    pen.shape(v, NUT_T, OUT, step=5, j=.4)
+    pen.shape(sil, 'none', OUT, step=5, j=.4, clip=False)
+    pen.shape(v, NUT_T, OUT, step=5, j=.4, clip=False)
     pen.shape(ell(cx, cy, hole, hole * .4, 0, 360, 24), NUT_H, SEAM, j=.3, clip=False)
 
 
@@ -70,7 +70,7 @@ def nut_front(pen, cx, cy, R, h, hole, probe=False):
     cres = [v[0], v[1], v[2], v[3]] + arc
     pen.fill(cres, NUT_T)
     front = [v[3], v[2], v[1], v[0], lo[0], lo[1], lo[2], lo[3]]
-    pen.stroke(front, OUT, j=.4, step=5); pen.clip.append(hd(front, True, 5, 0, 999)); pen.clip.append(hd(cres, True, 5, 0, 999))
+    pen.stroke(front, OUT, j=.4, step=5)
     for a, b in ((v[1], lo[1]), (v[2], lo[2])): pen.ln(a, b, SEAM, NAVY, j=.1, probe='درز ریز (مهره)' if (probe and a is v[1]) else None)
     pen.raw('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (hd(arc, False, 6, .3, 5), SEAM))
     pen.ln((cx - R + 7, cy + .4 * R * .5 + 4), (cx - R + 7, cy + h - 3), INNER, '#fff3c4', j=.1)

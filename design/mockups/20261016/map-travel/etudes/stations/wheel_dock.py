@@ -16,7 +16,7 @@ FOOT = 26                          # y تماس پایه با سکو
 
 def post(p):
     """پایهٔ ثابت: ستون راست و پیوسته از سکو تا محور (پشت چرخ)، دو رنگ مثل دیوارهٔ سکو."""
-    w = 10
+    w = 12
     L = [(CX - w, CY), (CX - w, FOOT - 6)]; Rr = [(CX + w, FOOT - 6), (CX + w, CY)]
     base = ell(CX, FOOT - 6, w, 4, 0, 180, 10)
     p.shape([(CX - w, CY)] + [(x, y) for x, y in base[::-1]] + [(CX + w, CY)], POST_L, OUT, j=.3, step=99)
@@ -33,8 +33,6 @@ def wheel(p):
         t = math.radians(30 + 60 * k)
         p.ln((CX + 12 * math.cos(t), CY + 12 * math.sin(t)), (CX + R * .70 * math.cos(t), CY + R * .70 * math.sin(t)),
              PART, Y_H, j=.1, probe='پرهٔ چرخ (جزء)' if k == 0 else None)
-    # یک پیچ روی رینگ تا چرخش دیده شود
-    p.shape(ell(CX + R * .85 * math.cos(math.radians(-60)), CY + R * .85 * math.sin(math.radians(-60)), 4.5, 4.5, 0, 360, 12), Y_H, INNER, j=.1, clip=False)
     p.shape(ell(CX, CY, 13, 13, 0, 360, 24), Y_T, INNER, j=.3, clip=False)
 
 

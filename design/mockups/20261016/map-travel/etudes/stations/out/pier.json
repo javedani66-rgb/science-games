@@ -16,5 +16,18 @@
   0,
   0
  ],
- "motion": []
+ "motion": [
+  "node_pier_lever"
+ ],
+ "motion_spec": {
+  "rotate": [
+   0,
+   -52
+  ],
+  "range_deg": [
+   -12,
+   12
+  ],
+  "note": "تخته+صندوق حول تکیه‌گاه؛ تکیه‌گاه ثابت"
+ }
 }
