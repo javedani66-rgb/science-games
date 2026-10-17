@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-"""ایستگاه «جرثقیل بندر» (M08): قهرمان = جرثقیل بندری ساده (پایه، دکل، بازوی افقی با وزنه، طناب و جعبه)، سکوی دریایی.
-لایهٔ متحرک node_harbor_crane_hook = طناب+جعبه، فقط بالا/پایین (۰ تا +۱۲). بالای طناب پشت بازوی ثابت پنهان است
-و بازو جلوی آن کشیده می‌شود، پس بدنهٔ ثابت (پایه، دکل، بازو) همیشه کامل و پیوسته است.
-طراحی دوباره برای خط ضخیم‌تر (D113، D110): دکل و بازو پهن‌تر، بدون بندهای ریز؛ سایهٔ دکل رنگ تخت."""
-import sys, pathlib, json
+"""ایستگاه «جرثقیل بندر» (M08): قهرمان = جرثقیل بندری روی سکوی دریایی: ماشین‌خانه، بازوی مورب، قلاب با طناب و کانتینر کوچک.
+لایهٔ متحرک node_harbor_crane_hook = طناب+قلاب+کانتینر (بالا/پایین ۰ تا +۱۲)؛ بالای طناب پشت بازوی ثابت است."""
+import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from station_kit import *
@@ -13,50 +11,52 @@ XF = (1.0, 0.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، 
 C_T = '#ff8a5c'; C_L = '#e0553a'; C_D = '#9c2f1c'      # جرثقیل: مرجانی روشن/تیره
 B_T = '#ffd84d'; B_H = '#8a5f0c'                        # جعبه
 CW = '#8f8bd6'
-MX0, MX1 = -42, -24            # دکل
-J0, J1 = -100, -84             # بازو (بالا، پایین)
-JX0, JX1 = -58, 0              # بازو (چپ، راست)
-FOOT = 16
-BX = -9                        # محور طناب/جعبه
+BX0, BX1, BT, BB = -58, -24, -12, 12     # بدنهٔ جرثقیل (ماشین‌خانه): چپ، راست، بالا، پایین
+TIP = (-2, -58)                          # نوک بازو
+PIV = (-43, -12)                         # لولای بازو
+BX = -2
+CT, CH, CWD = -22, 18, 22                # کانتینر: بالا، ارتفاع، پهنا
+CNT = '#4fae4a'; CNT_D = '#1f6b2e'
+HW = 9                                   # نیم‌پهنای بازو
 
 
 def flat(p, pts, col):
     p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col))
 
 
-def base_and_mast(p):
-    p.shape([(MX0 - 12, 0), (MX1 + 12, 0), (MX1 + 12, FOOT), (MX0 - 12, FOOT)], C_L, OUT, j=.3, step=5)
-    p.shape([(MX0, J1), (MX1, J1), (MX1, 0), (MX0, 0)], C_T, OUT, j=.3, step=5)
-    flat(p, [(MX0 + 9, J1 + 5), (MX1 - 4, J1 + 5), (MX1 - 4, -4), (MX0 + 9, -4)], C_L)       # نیمهٔ سایهٔ دکل (تخت)
+def machine(p):
+    p.shape([(BX0, BT), (BX1, BT), (BX1, BB), (BX0, BB)], C_L, OUT, j=.3, step=5)
+    flat(p, [(BX0 + 5, BB - 12), (BX1 - 5, BB - 12), (BX1 - 5, BB - 5), (BX0 + 5, BB - 5)], C_D)      # نوار تیره پایین
+    flat(p, [(BX0 + 7, BT + 5), (BX0 + 21, BT + 5), (BX0 + 21, BT + 13), (BX0 + 7, BT + 13)], '#cfeaff')  # پنجرهٔ اتاقک
 
 
 def hook(p):
-    """بخش متحرک: طناب (از داخل بازو) و جعبه."""
-    top = -44
-    p.ln((BX, J1 - 4), (BX, top), PART, B_H, j=0)
-    p.probes.append(('طناب (جزء)', PART, p.X((BX, (J1 + top) / 2)), (1, 0), B_H))
-    p.shape([(BX - 12, top), (BX + 12, top), (BX + 12, top + 24), (BX - 12, top + 24)], B_T, PART, j=.3, step=5, clip=False)
-    p.ln((BX - 12, top + 12), (BX + 12, top + 12), INNER, B_H, j=0, probe='تختهٔ جعبه (داخلی)')
+    """بخش متحرک: طناب، قلاب و کانتینر (بالا/پایین)."""
+    p.ln((BX, TIP[1]), (BX, CT - 5), PART, '#8a5f0c', j=0)
+    p.probes.append(('طناب (جزء)', PART, p.X((BX, (TIP[1] + CT) / 2 + 8)), (1, 0), '#8a5f0c'))
+    p.shape([(BX - 5, CT - 6), (BX + 5, CT - 6), (BX + 5, CT), (BX - 5, CT)], C_D, PART, j=.1, step=5, clip=False)     # قلاب
+    p.shape([(BX - CWD / 2, CT), (BX + CWD / 2, CT), (BX + CWD / 2, CT + CH), (BX - CWD / 2, CT + CH)], CNT, PART, j=.3, step=5, clip=False)
+    p.ln((BX, CT + 5), (BX, CT + CH - 4), INNER, CNT_D, j=0, probe='تختهٔ کانتینر (داخلی)')
 
 
 def jib(p):
-    p.shape([(JX0, J0), (JX1, J0), (JX1, J1), (JX0, J1)], C_T, OUT, j=.3, step=5)
-    flat(p, [(JX0 + 5, J1 - 5), (JX1 - 4, J1 - 5), (JX1 - 4, J1 - 2), (JX0 + 5, J1 - 2)], C_L)
-    p.shape([(JX0, J1), (JX0 + 14, J1), (JX0 + 14, J1 + 20), (JX0, J1 + 20)], CW, PART, j=.3, step=5, clip=False)   # وزنهٔ تعادل
+    dx, dy = TIP[0] - PIV[0], TIP[1] - PIV[1]; L = math.hypot(dx, dy); nx, ny = -dy / L * HW, dx / L * HW
+    p.shape([(PIV[0] + nx, PIV[1] + ny), (TIP[0] + nx, TIP[1] + ny), (TIP[0] - nx, TIP[1] - ny), (PIV[0] - nx, PIV[1] - ny)], C_T, OUT, j=.3, step=7)
+    p.shape(ell(PIV[0], PIV[1], 6, 6, 0, 360, 16), C_D, PART, j=.1, step=99, clip=False)      # لولا
 
 
 def build(out=None):
     p = Pen('harbor_crane', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow((MX0 + MX1) / 2, FOOT, 30); p.foot_tip((MX0 + MX1) / 2, FOOT - 2, 14)
-    base_and_mast(p)
+    p.tipshadow(-40, BB, 30); p.foot_tip(-40, BB - 6, 12)
+    machine(p)
     with layer(p, 'hook'): hook(p)
     jib(p)
     return p
 
 
 STAND = None     # خودکار: find_stand
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/harbor_crane'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/harbor_crane'
 
 if __name__ == '__main__':
     p = build()

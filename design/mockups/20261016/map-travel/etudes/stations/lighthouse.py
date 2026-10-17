@@ -8,11 +8,11 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/lighthouse'
-XF = (.68, -25.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
-RED = '#ef6a4a'; WHITE = '#fffaf0'; GLASS = '#ffd84d'; GLASS_D = '#d9961c'; ROOF = '#ef6a4a'; BEAM = '#fff1a0'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/lighthouse'
+XF = (.84, -26.0, 4.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
+RED = '#ef6a4a'; WHITE = '#fffaf0'; GLASS = '#ffd84d'; GLASS_D = '#d9961c'; ROOF = '#ef6a4a'; BEAM = '#ffe45c'
 YB, YT = 10, -56           # پای برج، بالای برج
-WB, WT = 19, 12           # نیم‌پهنای پایین/بالا
+WB, WT = 17, 11           # نیم‌پهنای پایین/بالا
 LY = -77                  # ارتفاع مرکز چراغ
 
 
@@ -26,14 +26,10 @@ def build(out=OUTD):
     # پرتوها (لایهٔ متحرک): دو گوهٔ ساده پشت اتاقک؛ بیرون از سکو نمی‌زنند
     with layer(p, 'light'):
         for s in (-1, 1):
-            p.raw('<polygon points="%s" fill="%s" opacity=".92"/>' % (' '.join('%.1f,%.1f' % q for q in p.X([(s * 9, LY - 2), (s * 54, LY - 12), (s * 54, LY + 12), (s * 9, LY + 2)])), BEAM))
+            p.raw('<polygon points="%s" fill="%s" opacity=".95"/>' % (' '.join('%.1f,%.1f' % q for q in p.X([(s * 9, LY - 1), (s * 40, LY - 14), (s * 40, LY + 14), (s * 9, LY + 1)])), BEAM))
     # برج
     body = [(-WB, YB), (WB, YB), (WT, YT), (-WT, YT)]
     p.shape(body, WHITE, OUT, j=.2, step=5)
-    for y0, y1 in ((YB - 38, YB - 20), (YB - 74, YB - 56)):      # دو نوار قرمز (برش‌های ذوزنقه‌ای)
-        pass
-    for y0, y1 in ((-8, -26), (-30, -48)):
-        pass
     for a, b in ((0, -16), (-24, -40)):                           # نوارهای قرمز، به‌اندازهٔ دیوارهٔ برج
         p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X([(-hw(a), a), (hw(a), a), (hw(b), b), (-hw(b), b)])), RED))
     p.stroke(body, OUT, j=.2, step=5)

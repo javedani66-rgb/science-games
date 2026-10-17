@@ -9,20 +9,20 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/wheel_dock'
-XF = (.95, 4.0, 3.0)
+XF = (.95, 4.0, -7.0)
 BED = '#c98a3a'; CRATE_A = '#ffd84d'; CRATE_B = '#f59a3a'; DARK = '#8a5f0c'; WH = '#7b8fe0'; WH_D = '#241a5e'
-R = 14; WY = 8; WX = (-44, -14)
+R = 12; WY = 15; WX = (-48, -14)
 
 
 def cart(p):
     # دستهٔ ایستادهٔ چرخ‌دستی در انتهای چپ (عقب)، بعد بدنه و دو جعبه
-    p.ln((-62, -6), (-62, -50), PART, DARK, j=.1, probe='دستهٔ چرخ‌دستی (جزء)')
-    p.ln((-62, -50), (-50, -50), PART, DARK, j=.1)
-    p.shape([(-66, -10), (4, -10), (4, 4), (-66, 4)], BED, PART, j=.2, step=6)
-    p.shape([(-54, -42), (-29, -42), (-29, -7), (-54, -7)], CRATE_A, PART, j=.2, step=6)
-    p.ln((-48, -26), (-35, -26), INNER, '#d9961c', j=.1)
-    p.shape([(-26, -36), (0, -36), (0, -7), (-26, -7)], CRATE_B, PART, j=.2, step=6)
-    p.ln((-20, -22), (-6, -22), INNER, '#c9701c', j=.1)
+    p.ln((-61, -4), (-61, -44), PART, DARK, j=.1, probe='دستهٔ چرخ‌دستی (جزء)')
+    p.ln((-61, -44), (-50, -44), PART, DARK, j=.1)
+    p.shape([(-66, -10), (4, -10), (4, 8), (-66, 8)], BED, PART, j=.2, step=6)
+    p.shape([(-53, -36), (-29, -36), (-29, -7), (-53, -7)], CRATE_A, PART, j=.2, step=6)
+    p.ln((-47, -22), (-35, -22), INNER, '#d9961c', j=.1)
+    p.shape([(-25, -32), (-1, -32), (-1, -7), (-25, -7)], CRATE_B, PART, j=.2, step=6)
+    p.ln((-19, -20), (-7, -20), INNER, '#c9701c', j=.1)
 
 
 def wheel(p, cx):

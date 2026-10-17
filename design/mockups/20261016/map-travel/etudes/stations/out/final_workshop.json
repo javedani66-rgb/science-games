@@ -5,10 +5,10 @@
   54.7,
   27.4,
   11.5,
-  74
+  33
  ],
  "stand": [
-  28.5,
+  32.5,
   4.0
  ],
  "ring": [
@@ -23,16 +23,16 @@
  "motion_spec": {
   "node_final_workshop_gear_big": {
    "center": [
-    -26.0,
-    -32.0
+    -32.0,
+    1.0
    ],
    "deg_per_turn": 360,
    "dir": "cw"
   },
   "node_final_workshop_gear_small": {
    "center": [
-    -26.0,
-    -78.79155326901723
+    -4.678435173777139,
+    -23.600447466076677
    ],
    "ratio": -1.3333333333333333,
    "dir": "ccw",

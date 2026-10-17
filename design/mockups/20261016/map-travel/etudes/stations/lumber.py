@@ -1,49 +1,58 @@
 #!/usr/bin/env python3
-"""ایستگاه «انبار الوار» (E03): پشتهٔ سه کنده (نمای مقطع). لایهٔ متحرک: نقش مقطع کندهٔ بالا (node_lumber_marks) که می‌چرخد.
-طراحی دوباره برای خط ضخیم‌تر (D113): کنده‌ها بزرگ‌تر و ساده‌تر؛ رویهٔ مقطع بدون خط دور، فقط یک حلقه و یک مغز."""
+"""ایستگاه «انبار الوار» (بازطراحی ۱۷ اکتبر): پشتهٔ سه کندهٔ افقی از کنار (دو پایین، یکی بالا) با پوست قهوه‌ای؛
+سرِ بریده (حلقهٔ سالیانه) فقط در سمت چپ هر کنده؛ دو طناب دور پشته. سکوی زمینی.
+لایهٔ متحرک node_lumber_marks = حلقهٔ سالیانهٔ سرِ کندهٔ بالا (کمان باز که حول مرکز سر می‌چرخد). حلقه‌های کنده‌های پایین ثابت‌اند."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
-
-XF = (1.0, -24.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
-BARK = '#a8672f'; FACE = '#f2cf8e'; RING = '#c98f4a'; PITH = '#8a4f1f'
-CX = 0; R = 17; BY = -4
-FACE_R = 10.5
-
-
-def log(pen, cx, cy, marks=False):
-    if not marks:
-        pen.shape(ell(cx, cy, R, R, 0, 360, 28), BARK, PART, j=.5)
-        pen.fill(ell(cx, cy, FACE_R, FACE_R, 0, 360, 24), FACE)
-    else:
-        # حلقهٔ سالانه (کمی خارج از مرکز) + مغز
-        pts = ell(cx + 2, cy, 5.5, 5.5, 0, 360, 20)
-        pen.raw('<path d="M%s Z" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round"/>' % (
-            'L'.join('%.1f,%.1f' % q for q in pen.X(pts)), RING, INNER))
-        mx, my = pen.X((cx + 2, cy))
-        pen.raw('<circle cx="%s" cy="%s" r="%s" fill="%s"/>' % (mx, my, 2.4 * pen.xf[0], PITH))
+OUTD = HERE / 'out'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/lumber'
+XF = (1.0, 5.0, -1.0)
+BARK = '#a8672f'; BARK_D = '#7a4a1f'; FACE = '#f2cf8e'; RING = '#c98f4a'; PITH = '#8a4f1f'; ROPE = '#fff3c4'
+R = 12; FX = 9; FY = R - 2.9       # نیم‌پهنای بیضی سر، و نیم‌ارتفاع درونی آن
+TOP = (-46, -4, -12)              # (x چپ، x راست، y مرکز)
+LOW = [(-54, -27, 10), (-25, 2, 10)]
 
 
-def build(out=HERE / 'out'):
+def body(p, x0, x1, cy):
+    pts = ell(x1, cy, 4, R, -90, 90, 10) + ell(x0, cy, FX, R, 90, 270, 14)
+    p.shape(pts, BARK, PART, j=.3, step=99)
+    p.fill(ell(x0, cy, FX - 2.9, FY, 0, 360, 24), FACE)                  # سرِ بریده (بیضی کامل)
+    p.ln((x0 + 12, cy + 6), (x0 + 22, cy + 6), INNER, BARK_D, j=.1)       # خط پوست
+
+
+def rings(p, x0, cy, arc=False):
+    x, y = p.X((x0, cy))
+    if not arc:
+        p.raw('<circle cx="%.1f" cy="%.1f" r="2.2" fill="%s"/>' % (x, y, PITH)); return
+    r = 3.8; a0, a1 = math.radians(40), math.radians(310)
+    d = 'M%.1f,%.1f A%s,%s 0 1 1 %.1f,%.1f' % (x + r * math.cos(a0), y + r * math.sin(a0), r, r, x + r * math.cos(a1), y + r * math.sin(a1))
+    p.raw('<path d="%s" fill="none" stroke="%s" stroke-width="3.5" stroke-linecap="round"/>' % (d, RING))
+
+
+def build(out=OUTD):
     p = Pen('lumber', 'land'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    for dx in (-R, R):
-        p.tipshadow(CX + dx, BY + R - 2, 12); p.foot_tip(CX + dx, BY + R - 2, 8)
-    ty = BY - math.sqrt((2 * R) ** 2 - R ** 2)
-    log(p, CX - R, BY); log(p, CX + R, BY)
-    p.probes.append(('خط دور کنده (جزء)', PART, p.X((CX - 2 * R, BY)), (1, 0), NAVY))
-    log(p, CX, ty)
-    with layer(p, 'marks'): log(p, CX, ty, marks=True)
-    for dx in (-R, R): log(p, CX + dx, BY, marks=True)   # نقش ثابت کنده‌های پایین (بیرون از لایهٔ متحرک)
-    return p, symbol(p, 'lumber', ['marks'], out=out), ty
+    for x0, x1, cy in LOW:
+        c = (x0 + x1) / 2; p.tipshadow(c, cy + R - 1, 13); p.foot_tip(c, cy + R - 2, 7)
+    for x0, x1, cy in LOW: body(p, x0, x1, cy)
+    body(p, *TOP)
+    p.probes.append(('خط دور کنده (جزء)', PART, p.X((-40, LOW[0][2] + R)), (0, 1), NAVY))
+    for x0, x1, cy in LOW: rings(p, x0, cy)
+    rings(p, TOP[0], TOP[2])
+    for xr in (-14,):   # طناب دور پشته
+        p.ln((xr, -21), (xr, 19), INNER, ROPE, j=.1)
+    with layer(p, 'marks'): rings(p, TOP[0], TOP[2], arc=True)
+    return p
 
 
-STAND = None     # خودکار: find_stand
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit2/after/lumber'
-
+STAND = None
 if __name__ == '__main__':
-    p, sym, ty = build()
-    r = finish(p, 'lumber', STAND, motion={'marks': dict(rotate=p.X((CX, ty)))}, out=HERE / 'out', shots=SHOTS)
+    p = build()
+    r = finish(p, 'lumber', STAND, motion={'marks': dict(rotate=p.X((TOP[0], TOP[2])))}, out=OUTD, shots=SHOTS)
+    sp = r['spec']; sp['motion_spec'] = dict(marks=dict(layer='node_lumber_marks', rotate_about=[round(v, 1) for v in p.X((TOP[0], TOP[2]))],
+                                                         note='کمان حلقهٔ سالیانهٔ سرِ کندهٔ بالا (سمت چپ) می‌چرخد؛ id قدیمی حفظ شد، محتوا تغییر کرد'))
+    (OUTD / 'lumber.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'motion')}, ensure_ascii=False))

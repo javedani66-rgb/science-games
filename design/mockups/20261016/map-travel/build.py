@@ -71,6 +71,7 @@ def map_parts():
     body = body.replace('<g id="env_zone_titles"', m12lab + '<g id="env_zone_titles"', 1)
     body = body.replace('<g id="env_labels"', m12 + '<g id="env_labels"', 1)
     body = body.replace('<text x="154" y="1016"', '<text x="100" y="1016"')   # برچسب M07 همراه سکو
+    body = re.sub(r'(<text[^>]*?)>(انبار الوار|جرثقیل بندر)</text>', r'\1 word-spacing="9">\2</text>', body)   # D119: فاصلهٔ کلمات برچسب دیده شود
     # کارخانهٔ صنعتی ← کارخانهٔ کشتی‌سازی؛ میدان شهر ← بازارچهٔ شناور (دارایی‌های assets/)
     body = body.replace('<use href="#node_11"', '<use href="#node_shipyard"')
     body = body.replace('<use href="#env_pad_city_ice" x="240" y="246" width="120" height="100" /><use href="#prop_04" x="240" y="246" width="120" height="100" />',
