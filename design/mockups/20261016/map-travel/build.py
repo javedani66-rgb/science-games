@@ -88,7 +88,7 @@ def map_parts():
     body = body.replace('filter:grayscale(.8) brightness(.9)', 'filter:grayscale(.3) brightness(1)')
     for old, key in (('میدان شهر', 'E06'), ('لنگرگاه', 'M11')):
         body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
-    body = body.replace('translate(143 210)', 'translate(140 199)').replace('translate(248 570)', 'translate(236 541)')
+    body = body.replace('translate(143 210)', 'translate(140 199)').replace('translate(248 570)', 'translate(205 536)')
     # D112 (گزارش بازبین flags_m10): برچسب‌ها زیر مرکز سکو و دور از لبه؛ درخت کنار E03 از راه دور
     for a, b in (('<text x="284" y="1435"', '<text x="256" y="1445.5"'), ('<text x="118" y="1599"', '<text x="118" y="1608"'), ('<text x="158" y="1304"', '<text x="158" y="1314"')):
         assert a in body, a
