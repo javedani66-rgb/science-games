@@ -140,7 +140,7 @@ function setTilt(rot,bob,sq){tilt.style.transform='rotate('+rot+'deg) translateY
 function showBoat(v){boat.style.display=v?'block':'none'}
 /* قایق کنار سکو در آب پهلو می‌گیرد؛ کودک روی سکو می‌ایستد (D104) */
 const dock=n=>{const q=pd(n),s=n.x<195?1:-1;return[n.x+s*(q.rx+30),n.y+q.w/2+6]};
-const stand=n=>[n.x,n.y+pd(n).ry*.6]; /* جای ایستادن: جلوی سکو، پایین مرکز بیضی بالایی (جلوی بنا) */
+const stand=n=>n.st?[n.x+n.st[0],n.y+n.st[1]]:[n.x,n.y+pd(n).ry*.6]; /* جای ایستادن: جلوی سکو، پایین مرکز بیضی بالایی (جلوی بنا) */
 const padFig=stand;
 function putAt(id){const n=NODES[id],sea=isSea(n.y);setOutfit(sea);showBoat(sea);if(sea){const d=dock(n);placeBoat(d[0],d[1]-SEAT-4,0);const f=padFig(n);placeFig(f[0],f[1])}else{const f=stand(n);placeFig(f[0],f[1])}setTilt(0,0)}
 const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
@@ -183,7 +183,7 @@ async function dramatic(a,b){const A=NODES[a],B=NODES[b],seaB=isSea(B.y),dist=Ma
  await tween(150,p=>{setTilt(0,0,1-.18*Math.sin(p*Math.PI/2))});
  await tween(520,p=>{const x=A.x+(B.x-A.x)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
  setOutfit(seaB);showBoat(seaB);if(seaB){const d=dock(B);placeBoat(d[0],d[1]-SEAT-4,0)}
- await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(B.x,y1)}
+ await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(stand(B)[0],y1)}
 async function run(fn){if(busy)return;busy=true;skip=false;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}
 function status(){$('st').textContent=T('here').replace('%s',NODES[here].title||'')||T('hint')}
 async function go(id){if(busy||id===here)return;const up=nextUp();
@@ -192,7 +192,7 @@ async function go(id){if(busy||id===here)return;const up=nextUp();
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
-function refreshRing(){const n=NODES[here],q=pd(n),rx=q.rx+4,ry=q.ry+q.w/2+3;ring.style.left=(n.x-rx)+'px';ring.style.top=(n.y+q.w/2+2-ry)+'px';ring.style.width=(2*rx)+'px';ring.style.height=(2*ry)+'px';ring.style.clipPath='inset(50% -6px -6px -6px)';ring.style.borderWidth='3.5px';ring.style.boxShadow='0 0 0 2.5px #241a5e'}
+function refreshRing(){const n=NODES[here],q=pd(n),g=n.rg||[0,0,0],rx=q.rx+4+g[0],ry=q.ry+q.w/2+3+g[1];ring.style.left=(n.x+g[2]-rx)+'px';ring.style.top=(n.y+q.w/2+2-ry)+'px';ring.style.width=(2*rx)+'px';ring.style.height=(2*ry)+'px';ring.style.clipPath='inset(50% -6px -6px -6px)';ring.style.borderWidth='3.5px';ring.style.boxShadow='0 0 0 2.5px #241a5e'}
 ids.forEach(i=>{const n=NODES[i],h=n.hit;const b=document.createElement('button');b.className='hit';b.dataset.id=i;b.setAttribute('aria-label',T('node.label').replace('%s',n.title||i));
  b.style.cssText='left:'+h[0]+'px;top:'+h[1]+'px;width:'+Math.max(48,h[2])+'px;height:'+Math.max(48,h[3])+'px';b.onclick=()=>go(i);world.appendChild(b)});
 $('skip').onclick=()=>{skip=true};

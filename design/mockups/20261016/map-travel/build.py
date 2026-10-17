@@ -82,7 +82,7 @@ def map_parts():
         body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
     body = body.replace('translate(143 210)', 'translate(140 199)').replace('translate(248 570)', 'translate(236 541)')
     # D112 (گزارش بازبین flags_m10): برچسب‌ها زیر مرکز سکو و دور از لبه؛ درخت کنار E03 از راه دور
-    for a, b in (('<text x="284" y="1435"', '<text x="256" y="1442"'), ('<text x="118" y="1599"', '<text x="118" y="1604"')):
+    for a, b in (('<text x="284" y="1435"', '<text x="256" y="1445"'), ('<text x="118" y="1599"', '<text x="118" y="1605"'), ('<text x="158" y="1304"', '<text x="158" y="1311.5"')):
         assert a in body, a
         body = body.replace(a, b)
     a = '<use href="#env_tree_round" x="13" y="1262" width="70.0" height="70.0" />'
@@ -90,6 +90,9 @@ def map_parts():
     body = body.replace(a, '<use href="#env_tree_round" x="1" y="1262" width="70.0" height="70.0" />')
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
+
+M09_SH = '<ellipse cx="4" cy="21" rx="54" ry="20" fill="#10083a" opacity=".3"/>'
+E03_SH = '<ellipse cx="4" cy="21" rx="49" ry="19" fill="#10083a" opacity=".3"/>'
 
 def add_assets(sprite):
     extra = ''.join((HERE / 'assets' / f).read_text(encoding='utf-8') for f in sorted(p.name for p in (HERE / 'assets').glob('*.svg')))
@@ -99,6 +102,11 @@ def add_assets(sprite):
     sprite = sprite.replace('<ellipse cx="8" cy="6" rx="58" ry="20" class="esd"/>', '<ellipse cx="2" cy="5" rx="52" ry="17" class="esd"/>')
     sprite = sprite.replace('<ellipse cx="7" cy="21" rx="55" ry="20.9" fill="#10083a" opacity=".3"/>', '<ellipse cx="3" cy="19" rx="50" ry="18" fill="#10083a" opacity=".3"/>')
     extra = extra.replace('<ellipse cx="7" cy="6" rx="68" ry="22" fill="#10083a" opacity=".25"/>', '<ellipse cx="2" cy="5" rx="60" ry="19" fill="#10083a" opacity=".25"/>')
+    # D112 دور دوم: سایهٔ تیرهٔ M09 و E03 روی راه نیفتد (هنوز کمی بیرون سکو دیده شود)
+    sprite = sprite.replace('<ellipse cx="7" cy="21" rx="60" ry="22.8" fill="#10083a" opacity=".3"/>', M09_SH)
+    extra = extra.replace('<ellipse cx="7" cy="21" rx="55" ry="20.9" fill="#10083a" opacity=".3"/>', E03_SH)
+    # E03: چوب‌ها ۸px به چپ تا جای ایستادن فیگور کنار آن‌ها روی سکو بماند
+    extra = extra.replace('<use href="#prop_03" x="40" y="72" width="120" height="100"/>', '<use href="#prop_03" x="32" y="72" width="120" height="100"/>')
     i = sprite.rindex('</svg>')
     return sprite[:i] + '<defs>' + extra + '</defs>' + sprite[i:]
 
@@ -114,6 +122,11 @@ def main():
     # شکل سکوی هر ایستگاه برای مسیر ردپا: [نیم‌پهنا، نیم‌ارتفاع بیضی، ارتفاع دیواره، ارتفاع ساختمان]
     PAD = {'M09': (52, 19, 14, 60), 'M07': (54, 19, 12, 100), 'M08': (97, 35, 14, 120), 'M11': (94, 32, 14, 120), 'M12': (75, 26, 11, 90),
            "M10": (46, 16, 9, 85), 'E06': (80, 27, 12, 100), 'E03': (48, 17, 14, 55), 'M02': (48, 17, 14, 55), 'E04': (48, 17, 14, 90)}
+    # جای ایستادن فیگور [dx, dy] از مرکز سکو (D112 دور دوم): کنار بنا روی بیضی سکو، نه روی کنده/چوب
+    STAND = {'E03': (31, 6), 'M09': (39.5, 4)}
+    RING = {'M10': (3, 3, 0), 'M09': (0, 0, -1)}      # [افزایش rx، افزایش ry، جابه‌جایی مرکز x]
+    for k, v in STAND.items(): nodes[k]['st'] = list(v)
+    for k, v in RING.items(): nodes[k]['rg'] = list(v)
     for k, v in nodes.items(): v['pad'] = list(PAD.get(k, (48, 17, 14, 55)))
     im = {}
     for o in ['sailor', 'construction']:
