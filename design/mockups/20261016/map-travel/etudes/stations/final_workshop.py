@@ -11,8 +11,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 Y_T = '#ffd84d'; Y_L = '#f2b92c'; Y_H = '#8a5f0c'
 G_T = '#7fd36b'; G_L = '#4fae4a'; G_H = '#1f6b2e'      # چرخ‌دندهٔ دوم سبز تا دو ماشین جدا خوانده شوند
 POST_L = '#8fb5f2'; POST_R = '#8f8bd6'
-B = (-26, -46, 30, 10, 0)       # cx, cy, r گام، تعداد دندانه، فاز
-S = (24, -46, 20, 7, 180/7)
+B = (-22, -46, 30, 10, 0)       # cx, cy, r گام، تعداد دندانه، فاز
+S = (28, -46, 20, 7, 180/7)
 FOOT = 26
 
 
@@ -55,7 +55,7 @@ def build(out=HERE, legacy_shadow=False):
     return p, symbol(p, 'final_workshop', ['gear_big', 'gear_small'], out=out, legacy_shadow=legacy_shadow)
 
 
-STAND = (41, 4)
+STAND = (42, 6)
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/batch2/final_workshop'
 OUTD = HERE / 'out'
 
