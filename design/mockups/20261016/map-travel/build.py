@@ -81,6 +81,13 @@ def map_parts():
     for old, key in (('میدان شهر', 'E06'), ('لنگرگاه', 'M11')):
         body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
     body = body.replace('translate(143 210)', 'translate(140 199)').replace('translate(248 570)', 'translate(236 541)')
+    # D112 (گزارش بازبین flags_m10): برچسب‌ها زیر مرکز سکو و دور از لبه؛ درخت کنار E03 از راه دور
+    for a, b in (('<text x="284" y="1435"', '<text x="256" y="1442"'), ('<text x="118" y="1599"', '<text x="118" y="1604"')):
+        assert a in body, a
+        body = body.replace(a, b)
+    a = '<use href="#env_tree_round" x="13" y="1262" width="70.0" height="70.0" />'
+    assert a in body, 'tree'
+    body = body.replace(a, '<use href="#env_tree_round" x="1" y="1262" width="70.0" height="70.0" />')
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
 
@@ -88,6 +95,10 @@ def add_assets(sprite):
     extra = ''.join((HERE / 'assets' / f).read_text(encoding='utf-8') for f in sorted(p.name for p in (HERE / 'assets').glob('*.svg')))
     sprite = re.sub(r'<path d="M-5\.2,10\.9l4\.2,45\.2,-3"[^>]*/>', '', sprite)   # مسیر خراب در node_09 (خط نازک زیر چوب‌شکافی)
     sprite = sprite.replace('in2="n" scale="3.4"', 'in2="n" scale="2"').replace('baseFrequency=".045"', 'baseFrequency=".03"')   # D106: لرزش کمتر
+    # D112: سایهٔ سکو نباید بیرون سکو روی راه بیفتد (کوچک‌تر و هم‌مرکز با سکو)
+    sprite = sprite.replace('<ellipse cx="8" cy="6" rx="58" ry="20" class="esd"/>', '<ellipse cx="2" cy="5" rx="52" ry="17" class="esd"/>')
+    sprite = sprite.replace('<ellipse cx="7" cy="21" rx="55" ry="20.9" fill="#10083a" opacity=".3"/>', '<ellipse cx="3" cy="19" rx="50" ry="18" fill="#10083a" opacity=".3"/>')
+    extra = extra.replace('<ellipse cx="7" cy="6" rx="68" ry="22" fill="#10083a" opacity=".25"/>', '<ellipse cx="2" cy="5" rx="60" ry="19" fill="#10083a" opacity=".25"/>')
     i = sprite.rindex('</svg>')
     return sprite[:i] + '<defs>' + extra + '</defs>' + sprite[i:]
 
@@ -99,6 +110,7 @@ def main():
     nodes = {k: dict(x=v['base_center'][0], y=v['base_center'][1], hit=v['hit_box'], title=(STR['maptravel.node.' + k]['text'] if ('maptravel.node.' + k) in STR else nm[k]['env_title']))
              for k, v in d['slots'].items() if v['base_center'][1] < H - 60}
     nodes['M12'].update(x=272, y=96, hit=[196, 8, 150, 128]); nodes['E06']['hit'] = [215, 196, 170, 161]; nodes["M10"]["hit"] = [184, 1277, 144, 137]
+    nodes['M10'].update(x=256, y=1385)    # مرکز سکوی کشیده‌شده: use x=184 + 100*0.72
     # شکل سکوی هر ایستگاه برای مسیر ردپا: [نیم‌پهنا، نیم‌ارتفاع بیضی، ارتفاع دیواره، ارتفاع ساختمان]
     PAD = {'M09': (52, 19, 14, 60), 'M07': (54, 19, 12, 100), 'M08': (97, 35, 14, 120), 'M11': (94, 32, 14, 120), 'M12': (75, 26, 11, 90),
            "M10": (46, 16, 9, 85), 'E06': (80, 27, 12, 100), 'E03': (48, 17, 14, 55), 'M02': (48, 17, 14, 55), 'E04': (48, 17, 14, 90)}
