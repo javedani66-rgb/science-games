@@ -97,4 +97,4 @@ body{margin:0;background:#e9c57e;font-family:Vazirmatn,system-ui,sans-serif;dire
 <svg width="0" height="0" style="position:absolute"><filter id="w34" filterUnits="userSpaceOnUse" x="-200" y="-200" width="600" height="600"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4"/></filter></svg>
 ''' + ''.join(out)
     (HERE / 'etudes.html').write_text(html, encoding='utf-8')
-main()
+if __name__ == "__main__": main()
