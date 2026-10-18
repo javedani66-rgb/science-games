@@ -456,11 +456,11 @@ def _split_layers(pen):
     return ''.join(fixed), moving
 
 
-def inside_check(pen, motion=None, dsf=4, min_margin=4, strict=False):
+def inside_check(pen, motion=None, dsf=4, min_margin=4):
     """بالازدگی (D112): کل قهرمان (بخش ثابت + همهٔ وضعیت‌های لایه‌های متحرک، با خط دور) باید درون رویهٔ سکو باشد.
     motion مثل finish: {'لایه': dict(rotate=(x,y)) یا dict(offsets=[...])}. برمی‌گرداند dict(min_margin_px، bbox_px، ok)؛ ok اگر کمینهٔ فاصله تا لبهٔ رویه ≥ min_margin px نقشه.
-    strict=True: کل قهرمان باید درون بیضی رویه باشد (قهرمان کوتاه: غرفه، جرثقیل). strict=False (پیش‌فرض): قهرمان بلند می‌تواند از بالای رویه بالا برود
-    (برج، پیچ)، ولی از چپ، راست و پایین باید ≥ min_margin از لبهٔ رویه فاصله داشته باشد (ناحیه = هر ستون رویه از بالای تصویر تا پایین‌ترین نقطهٔ رویه)."""
+    D122: قهرمان از بالا آزاد است (مثل تبر روی کنده) ولی از چپ، راست و پایین باید ≥ min_margin از لبهٔ رویه فاصله داشته باشد
+    (ناحیه = هر ستون رویه از بالای تصویر تا پایین‌ترین نقطهٔ رویه) و پایه‌اش (۸px پایین قهرمان) کامل روی رویه بنشیند. حالت strict حذف شد."""
     import numpy as np
     from scipy.ndimage import distance_transform_edt as edt
     A = lambda im: im[..., 3] > 128
@@ -472,16 +472,16 @@ def inside_check(pen, motion=None, dsf=4, min_margin=4, strict=False):
         ts = ['rotate(%s %s %s)' % (a * 30, kw['rotate'][0], kw['rotate'][1]) for a in range(12)] if kw.get('rotate') else []
         ts += ['translate(%s %s)' % tuple(o) for o in kw.get('offsets', [])] or ([] if ts else ['translate(0 0)'])
         for t in ts: hero |= A(_shot('<g transform="%s">%s</g>' % (t, body), dsf))
-    if strict: reg = top
-    else:
-        cols = top.any(0); low = np.where(cols, top.shape[0] - 1 - np.argmax(top[::-1], 0), -1)
-        reg = cols[None, :] & (np.arange(top.shape[0])[:, None] <= low[None, :])
+    cols = top.any(0); low = np.where(cols, top.shape[0] - 1 - np.argmax(top[::-1], 0), -1)
+    reg = cols[None, :] & (np.arange(top.shape[0])[:, None] <= low[None, :])
     d = edt(reg) / dsf; ys, xs = np.where(hero)
     mm = round(float(d[hero].min()), 1)
-    return dict(min_margin_px=mm, strict=strict, bbox_px=[round(float(xs.min() / dsf), 1), round(float(ys.min() / dsf), 1), round(float(xs.max() / dsf), 1), round(float(ys.max() / dsf), 1)], ok=bool(mm >= min_margin))
+    ys0 = ys.max(); band = hero.copy(); band[:max(0, ys0 - 8 * dsf)] = False
+    base_ok = bool((top | ~band).all())
+    return dict(min_margin_px=mm, base_on_pad=base_ok, height_px=round(float((ys.max() - ys.min()) / dsf), 1), bbox_px=[round(float(xs.min() / dsf), 1), round(float(ys.min() / dsf), 1), round(float(xs.max() / dsf), 1), round(float(ys.max() / dsf), 1)], ok=bool(mm >= min_margin and base_ok))
 
 
-def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), legacy_shadow=False, strict=False):
+def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), legacy_shadow=False):
     """همهٔ مراحل پایانی یک ایستگاه: symbol → سنجش حاشیه → سنجش قاب حرکت → سنجش قطر خط → spec json → شات.
     motion = {'gear': dict(rotate=(x, y))} یا {'door': dict(offsets=[(0,0),(0,-10)])}. برمی‌گرداند dict همهٔ اعداد."""
     motion = motion or {}
@@ -492,7 +492,7 @@ def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), 
     m = margin_check(pen, stand=stand)
     mo = [motion_check(pen, part, stand=stand, **kw) for part, kw in motion.items()]
     w = width_check(pen)
-    ic = inside_check(pen, motion, strict=strict)
+    ic = inside_check(pen, motion)
     sp = spec(name, pad_px(pen, m['bh']), stand, ['node_%s_%s' % (name, x) for x in motion], kind=pen.kind, ring=ring, out=out)
     if shots:
         shots = pathlib.Path(shots); shots.mkdir(parents=True, exist_ok=True)

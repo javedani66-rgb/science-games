@@ -46,7 +46,7 @@ STAND = None
 if __name__ == '__main__':
     p = build()
     mo = {'wheel': dict(rotate=p.X((WX[1], WY))), 'wheel_back': dict(rotate=p.X((WX[0], WY)))}
-    r = finish(p, 'wheel_dock', STAND, motion=mo, out=OUTD, shots=SHOTS, strict=True)
+    r = finish(p, 'wheel_dock', STAND, motion=mo, out=OUTD, shots=SHOTS)
     sp = r['spec']; sp['motion_spec'] = dict(wheel=dict(layer='node_wheel_dock_wheel', rotate_about=[round(v, 1) for v in p.X((WX[1], WY))], note='چرخ راست؛ id قدیمی حفظ شد'),
                                              wheel_back=dict(layer='node_wheel_dock_wheel_back', rotate_about=[round(v, 1) for v in p.X((WX[0], WY))], note='چرخ چپ، لایهٔ جدید'))
     (OUTD / 'wheel_dock.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

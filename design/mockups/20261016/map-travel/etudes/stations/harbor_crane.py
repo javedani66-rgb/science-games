@@ -61,7 +61,7 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 
 if __name__ == '__main__':
     p = build()
-    r = finish(p, 'harbor_crane', STAND, motion={'hook': dict(offsets=[p.V(o) for o in [(0, 0), (0, 2), (0, 4), (0, 6)]])}, out=HERE / 'out', shots=SHOTS, strict=True)
+    r = finish(p, 'harbor_crane', STAND, motion={'hook': dict(offsets=[p.V(o) for o in [(0, 0), (0, 2), (0, 4), (0, 6)]])}, out=HERE / 'out', shots=SHOTS)
     offs = [p.V(o) for o in [(0, 0), (0, 2), (0, 4), (0, 6)]]
     sp = r['spec']; sp['motion_spec'] = dict(offsets=offs, note='طناب+قلاب+کانتینر بالا/پایین ۰ تا +۶؛ بالای طناب پشت بازوی ثابت')
     (HERE / 'out' / 'harbor_crane.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
