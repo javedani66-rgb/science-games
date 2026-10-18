@@ -13,20 +13,19 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 FUR = '#a477e8'; FUR_D = '#7c52c9'; FUR_L = '#c9a8f5'
 HOLE = '#2b1d5e'; GLOW = '#ffd84d'; WOOD = '#c98f4a'; WOOD_D = '#8a5a26'
 BRICK = '#e0674c'; SMOKE = '#f3eefc'; GEAR = '#ffd84d'; GEAR_D = '#e0a020'
-CX, BASE, HW, HH = -29, 12, 34, 56       # مرکز تپه، خط کف، نیم‌پهنا، ارتفاع
-DX, DY = -27, -1                         # مرکز در
-GX, GY = -52, -23                        # مرکز چرخ‌دنده
+CX, BASE, HW, HH = -26, 14, 33, 52       # مرکز تپه، خط کف، نیم‌پهنا، ارتفاع
+DX, DY = -26, -1                         # مرکز در
+GX, GY = -44, -20                        # مرکز چرخ‌دنده
 
 
 def hill():
     pts = []
-    n = 34
-    for i in range(n + 1):                       # گنبد پشمالو: نوک‌های ریز یک‌درمیان
+    n = 72
+    for i in range(n + 1):                       # گنبد پشمالو: برآمدگی‌های گرد با شکاف تیز (پشم)
         t = math.pi * i / n
-        k = 4.2 if i % 2 else 0
-        r = 1 + k / 44
+        r = 1 + .075 * abs(math.sin(t * 5.5)) - .03
         pts.append((CX + HW * math.cos(t) * r, BASE - HH * math.sin(t) * r))
-    pts += [(CX - HW + 2, BASE + 3), (CX - 14, BASE + 6), (CX + 10, BASE + 6), (CX + HW - 2, BASE + 3)]
+    pts += [(CX - HW + 1, BASE + 3), (CX - 14, BASE + 5), (CX + 10, BASE + 5), (CX + HW - 1, BASE + 3)]
     return pts[::-1]
 
 
@@ -43,27 +42,25 @@ def build(out=OUTD):
     p = Pen('final_workshop', 'land'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.tipshadow(CX + 2, BASE + 6, 38)
     p.shape(hill(), FUR, OUT, j=.5, step=99)
-    # دودکش (پشت لامپ، سمت راست بالا) و دود
-    p.shape([(-12, -40), (-1, -40), (-1, -62), (-12, -62)], BRICK, PART, j=.3, step=99)
-    p.shape(ell(CX + 2, BASE - HH * .6, 1, 1, 0, 360, 4), FUR, OUT, j=0, step=99) if False else None
-    p.fill(ell(-6, -72, 6, 5, 0, 360, 16), SMOKE); p.fill(ell(2, -83, 7, 6, 0, 360, 16), SMOKE); p.fill(ell(-3, -96, 8.5, 6.5, 0, 360, 16), SMOKE)
-    # خط‌های پشم داخل تپه (راست و موازی)
-    for (a, b) in (((-52, 2), (-45, -2)), ((-9, 2), (-2, -2)), ((-12, -22), (-5, -26))):
-        p.ln(a, b, INNER, FUR_D, j=.1)
+    # دودکش (راست بالا) و دود
+    p.shape([(-1, -30), (13, -30), (12, -52), (0, -52)], BRICK, PART, j=.3, step=99)
+    p.fill([(-3, -57), (15, -57), (15, -52), (-3, -52)], FUR_D)
+    p.fill(ell(8, -66, 6, 5, 0, 360, 16), SMOKE); p.fill(ell(16, -77, 7, 6, 0, 360, 16), SMOKE); p.fill(ell(10, -90, 8.5, 6.5, 0, 360, 16), SMOKE)
+    p.shape(hill(), FUR, OUT, j=.4, step=99)
     # در: دهانهٔ تیره + درون گرم + لنگهٔ چوبی نیمه‌باز
-    p.shape(ell(DX, DY, 15, 16, 0, 360, 28), HOLE, PART, j=.3, step=99)
-    p.fill(ell(DX - 2, DY + 4, 8, 9, 0, 360, 20), GLOW)
-    p.shape(ell(DX + 12, DY, 6, 16, 0, 360, 20), WOOD, PART, j=.2, step=99)
-    p.ln((DX + 12, DY - 11), (DX + 12, DY + 11), INNER, WOOD_D, j=.05)
-    # لامپ بالای در
-    p.ln((DX, DY - 17), (DX, DY - 24), PART, NAVY, j=.1)
-    p.shape(ell(DX, DY - 31, 8, 8, 0, 360, 20), GLOW, PART, j=.2, step=99)
+    p.shape(ell(DX, DY, 15, 14, 0, 360, 28), HOLE, PART, j=.2, step=99)
+    p.fill(ell(DX - 3, DY + 3, 9, 8, 0, 360, 20), GLOW)
+    p.shape(ell(DX + 13, DY, 6, 14, 0, 360, 20), WOOD, PART, j=.2, step=99)
+    # لامپ: هدلایت روی تپه (مثل هیولا)
+    p.shape(ell(CX, BASE - HH - 4, 7.5, 7.5, 0, 360, 20), GLOW, PART, j=.2, step=99)
+    for a in (-70, -90, -110):
+        t = math.radians(a)
+        p.ln((CX + 13 * math.cos(t), BASE - HH - 4 + 13 * math.sin(t)), (CX + 19 * math.cos(t), BASE - HH - 4 + 19 * math.sin(t)), INNER, GLOW, j=.05)
     # تابلو: چرخ‌دندهٔ کوچک (لایهٔ متحرک)
     with layer(p, 'gear'):
         p.fill(gear_poly(GX, GY, 10, 15), GEAR)
         p.fill(ell(GX, GY, 4.2, 4.2, 0, 360, 16), FUR_D)
-        p.fill(gear_poly(GX, GY, 10, 15)[:3], GEAR_D)
-    return p
+            return p
 
 
 STAND = None
