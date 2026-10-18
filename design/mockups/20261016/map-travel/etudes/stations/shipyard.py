@@ -32,77 +32,67 @@ def poly(p, pts, col):
     p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col))
 
 
-# بدنه (قاب باز): کف منحنی b(x) و لبهٔ بالا s(x) (واحد symbol)
-HX0, HX1 = -64, 8
-def b_(x):
-    t = (x - HX0) / (HX1 - HX0); return 2 + 8 * (2 * t - 1) ** 2                  # کف: 2 در وسط تا 10 در دو سر
-def s_(x):
-    t = (x - HX0) / (HX1 - HX0); return -42 - 4 * (1 - t) + 6 * (2 * t - 1) ** 2 * .0   # لبهٔ بالا: دماغهٔ چپ کمی بالاتر
-def hull_pts(x0, x1, f0, f1, n=8):
-    """ناحیهٔ بین دو منحنی (کسر f0 تا f1 از کف تا لبهٔ بالا) در بازهٔ x0..x1."""
-    xs = [x0 + (x1 - x0) * i / n for i in range(n + 1)]
-    lo = [(x, b_(x) + (s_(x) - b_(x)) * f0) for x in xs]; hi = [(x, b_(x) + (s_(x) - b_(x)) * f1) for x in xs]
-    return lo + hi[::-1]
-
-
-RIBX = (-56, -45, -34, -23, -12, -1)
-SEAM_C = '#d9702a'
+# بدنه (قاب باز): هلال با دماغه/عقب مایل. پارامتر u از 0 (دماغهٔ چپ) تا 1 (عقب): کف از (-50..-12) و لبهٔ بالا از (-58..-4)
+TX0, TX1, BX0, BX1 = -62, 0, -52, -10
+def _t(u): return 2 * u - 1
+def bot_(u): return (BX0 + (BX1 - BX0) * u, 16 - 3 * _t(u) ** 2)
+def top_(u): return (TX0 + (TX1 - TX0) * u, -18 - 12 * _t(u) ** 2 - 4 * (1 - u))
+def at(u, f):
+    (x0, y0), (x1, y1) = bot_(u), top_(u); return (x0 + (x1 - x0) * f, y0 + (y1 - y0) * f)
+def us_(a, b, n=10): return [a + (b - a) * i / n for i in range(n + 1)]
+PLANK2 = '#f7b36a'; SEAM_C = '#c9692a'
 
 
 def boat(p):
-    """بدنهٔ نیمه‌ساخته: کیل (تیر کف)، شش دندهٔ باز، تخته‌کاری فقط در سمت چپ (چهار ردیف پله‌ای)، دکل لخت."""
-    # دکل لخت (پشت دنده‌ها)
-    p.ln((-30, -86), (-30, -18), PART, MAST, j=.1, probe='دکل (جزء)')
-    p.shape([(-30, -86), (-14, -82), (-30, -78)], FLAG, INNER, j=.1, step=99, clip=False)
-    # دنده‌های باز: هر دنده کمی خمیده، رنگ تخت
-    for x in RIBX:
-        poly(p, [(x - 3.6, b_(x) - 2), (x + 3.6, b_(x) - 2), (x + 3.6 + 1, s_(x)), (x - 3.6 + 1, s_(x))], RIB)
-    # تخته‌های نصب‌شده: چهار ردیف، سمت چپ کامل و به راست کوتاه‌تر
-    ext = [-6, -22, -36, -50]      # آخرین x هر ردیف، از پایین به بالا
-    for k, xe in enumerate(ext):
-        p.shape(hull_pts(HX0 + 1, xe, k / 4, (k + 1) / 4), PLANK if k % 2 == 0 else '#f7b36a', INNER, j=.1, step=99, clip=False)
-    # کیل
-    p.shape([(HX0 - 2, b_(HX0) + 2), (HX1 + 2, b_(HX1) + 2), (HX1 - 6, b_(HX1) + 9), (HX0 + 6, b_(HX0) + 9)], DARK, INNER, j=.1, step=99, clip=False)
-    # تیر لبهٔ بالا (فقط روی دنده‌ها، ادامهٔ نیمه‌کاره)
-    p.ln((HX0 + 2, s_(HX0) - 1), (HX1 - 2, s_(HX1) - 1), PART, WOOD_D, j=.1)
-    # میخ
-    for (x, f) in ((-58, .5), (-47, .5), (-36, .25)):
-        p.raw('<circle cx="%.1f" cy="%.1f" r="2" fill="%s"/>' % (*p.X((x, b_(x) + (s_(x) - b_(x)) * f)), DARK))
+    """بدنهٔ نیمه‌ساخته (هلال): درونِ تیره، چهار دندهٔ باز، چهار ردیف تختهٔ نصب‌شده فقط سمت چپ (پله‌ای)، کیل، دکل لخت."""
+    p.ln((-34, -76), (-34, -20), PART, MAST, j=.1, probe='دکل (جزء)')                  # دکل لخت (پشت بدنه)
+    p.shape([(-34, -76), (-22, -72), (-34, -68)], FLAG, INNER, j=.1, step=99, clip=False)
+    sil = [at(u, 0) for u in us_(0, 1)] + [at(u, 1) for u in us_(1, 0)]
+    p.shape(sil, DARK, PART, j=.15, step=99, clip=False)                              # بدنهٔ هلالی، درون تیره
+    for u in (.14, .34, .54, .74, .91):                                                     # دنده‌های باز
+        (xa, ya), (xb, yb) = at(u, -.04), at(u, 1.04)
+        poly(p, [(xa - 3, ya), (xa + 3, ya), (xb + 3, yb), (xb - 3, yb)], RIB)
+    ext = [.84, .62, .42, .22]                                                          # تخته‌های نصب‌شده، پله‌ای
+    for k, ue in enumerate(ext):
+        f0, f1 = k / 4, (k + 1) / 4
+        pts = [at(u, f0) for u in us_(.02, ue, 8)] + [at(u, f1) for u in us_(ue, .02, 8)]
+        poly(p, pts, PLANK if k % 2 == 0 else PLANK2)
+        if k: p.ln(at(.04, f0), at(ue, f0), INNER, SEAM_C, j=.05)
+    p.shape(sil, 'none', PART, j=.15, step=99, clip=False)                             # لبهٔ بیرونی روی همه
+    for (u, f) in ((.06, .5), (.17, .22), (.3, .22)):
+        p.raw('<circle cx="%.1f" cy="%.1f" r="1.8" fill="%s"/>' % (*p.X(at(u, f)), DARK))
+    kp = [at(u, 0) for u in us_(.08, .92)]                                             # کیل: تیر زیر کف
+    p.shape([(x, y + 1) for x, y in kp] + [(x, y + 8) for x, y in kp[::-1]], WOOD_D, INNER, j=.1, step=99, clip=False)
 
 
 def slip(p):
-    """سکوی ساخت: دو تیر زیر کیل روی پایه‌های کوتاه."""
-    for x in (-52, -4):
-        p.tipshadow(x + 5, 16, 11)
-        p.shape([(x - 8, 11), (x + 10, 11), (x + 10, 18), (x - 8, 18)], WOOD, INNER, j=.2, step=8, clip=False)
+    """سکوی ساخت: دو تیر پشتیبان زیر کیل."""
+    for x in (-44, -20):
+        p.tipshadow(x, 19, 9)
+        p.shape([(x - 7, 16), (x + 7, 16), (x + 7, 21), (x - 7, 21)], WOOD, INNER, j=.2, step=8, clip=False)
 
 
 def scaffold(p):
-    """داربست چوبی: دو ستون، یک کف‌تخته‌ای بالا، نردبان تکیه‌داده؛ چکش روی کف و چند تختهٔ آماده روی زمین."""
-    X0, X1, PY = 18, 44, -30
+    """داربست پشتِ بدنه: دو ستون بلند تا بالای بدنه، کف‌تختهٔ بالا، نردبان میانی (پایینش پشت بدنه)؛ روی کف: دو تخته و چکش."""
+    X0, X1, PY = -10, 10, -44
     for x in (X0, X1):
-        rect(p, x - 3.5, PY - 16, x + 3.5, 16, WOOD); rect(p, x - 3.5, PY - 16, x - 1.2, 16, WOOD_L)
-    p.ln((X0 + 3, 12), (X1 - 3, PY + 6), INNER, WOOD, j=0)                       # بادبند ضربدری
-    p.ln((X0 + 3, PY + 6), (X1 - 3, 12), INNER, WOOD, j=0)
-    p.shape([(X0 - 8, PY), (X1 + 8, PY), (X1 + 8, PY + 7), (X0 - 8, PY + 7)], '#f0b25a', INNER, j=.1, step=8, clip=False)   # کف‌تخته
-    p.ln((X0 - 2, PY + 3.5), (X0 + 6, PY + 3.5), INNER * .7, WOOD_D, j=0)
-    # نردبان: تکیه‌داده به لبهٔ کف، پایین سمت چپ
-    lx0, lx1 = 6, 14
-    p.ln((lx0, 14), (X0 - 4, PY + 7), INNER, WOOD, j=0); p.ln((lx0 + 9, 14), (X0 + 5, PY + 7), INNER, WOOD, j=0)
-    for t in (.28, .52, .76):
-        a = (lx0 + (X0 - 4 - lx0) * t, 14 + (PY + 7 - 14) * t); b = (lx0 + 9 + (X0 + 5 - lx0 - 9) * t, a[1])
-        p.ln(a, b, INNER, WOOD_L, j=0)
-    # تخته‌های آماده روی زمین
-    for k, y in enumerate((8, 2)):
-        p.shape([(26 + 2 * k, y), (50 + 2 * k, y), (50 + 2 * k, y + 6), (26 + 2 * k, y + 6)], '#f7b36a', INNER, j=.1, step=99, clip=False)
-    p.tipshadow(38, 15, 14)
+        rect(p, x - 3.5, PY - 12, x + 3.5, 14, WOOD); rect(p, x - 3.5, PY - 12, x - 1.2, 14, WOOD_L)
+    for x in (X0 + 6, X1 - 6): p.ln((x, PY + 7), (x, 6), INNER, WOOD_D, j=0)                              # ریل نردبان
+    for y in (-32, -22, -12): p.ln((X0 + 6, y), (X1 - 6, y), INNER, WOOD_D, j=0)
+    p.shape([(X0 - 8, PY), (X1 + 3, PY), (X1 + 3, PY + 7), (X0 - 8, PY + 7)], '#f0b25a', INNER, j=.1, step=8, clip=False)     # کف‌تخته
+    p.tipshadow(0, 17, 12)
 
 
 def hammer(p):
-    """چکش روی کف داربست: دستهٔ چوبی و سر آبی‌خاکستری."""
-    HXc, HYc = 34, -33
-    p.ln((HXc - 12, HYc - 1), (HXc + 8, HYc - 1), PART, WOOD_D, j=0)
-    p.shape([(HXc + 5, HYc - 12), (HXc + 17, HYc - 12), (HXc + 17, HYc + 7), (HXc + 5, HYc + 7)], '#aab3d9', INNER, j=.1, step=99, clip=False)
+    """چکش ایستاده روی کف داربست: دستهٔ چوبی راست، سر افقی آبی‌خاکستری (شکل T)."""
+    p.ln((5, -46), (5, -62), PART, WOOD_D, j=0)
+    p.shape([(-3, -72), (14, -72), (14, -61), (-3, -61)], '#aab3d9', INNER, j=.1, step=99, clip=False)
+
+
+def boards(p):
+    """دو تختهٔ آمادهٔ روی کف داربست (سمت چپ): رنگ تخت، بدون خط دور."""
+    for y in (-49, -55):
+        rect(p, -17, y - 2.6, -4, y + 2.6, PLANK2); rect(p, -17, y + 1, -4, y + 2.6, SEAM_C)
 
 
 def build(out=OUTD):
@@ -110,12 +100,13 @@ def build(out=OUTD):
     p.xf = XF
     slip(p)
     scaffold(p)
-    boat(p)
+    boards(p)
     with layer(p, 'hammer'): hammer(p)
+    boat(p)
     return p
 
 
-XF = (1.0, -2.0, 0.0)
+XF = (1.04, -1.0, -6.0)
 HAMMER_LIFT = 5
 
 STAND = None
