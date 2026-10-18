@@ -5,11 +5,11 @@
   54.7,
   27.4,
   11.5,
-  86
+  64
  ],
  "stand": [
-  31.5,
-  -1.0
+  0.0,
+  16.5
  ],
  "ring": [
   0,
@@ -17,26 +17,30 @@
   0
  ],
  "motion": [
-  "node_shipyard_hull"
+  "node_shipyard_hammer"
  ],
  "inside_pad": {
-  "min_margin_px": 5.2,
-  "base_on_pad": true,
-  "height_px": 104.8,
+  "min_margin_px": 0.0,
+  "base_on_pad": false,
+  "height_px": 78.8,
   "bbox_px": [
-   24.2,
-   19.5,
-   91.0,
-   124.2
+   23.8,
+   44.0,
+   109.2,
+   122.8
   ],
-  "ok": true
+  "ok": false
  },
  "motion_spec": {
-  "layer": "node_shipyard_hull",
-  "translate": [
-   0,
-   -3
-  ],
-  "note": "بدنه+دکل+بادبان کمی بالا و پایین می‌رود؛ دو پایهٔ چوبی ثابت و تا زیر بدنه کامل‌اند"
+  "node_shipyard_hammer": {
+   "translate_y": [
+    0,
+    -5
+   ],
+   "rotate_about": "ته دسته (پیشنهادی ±15°)",
+   "cycle_s": 1.2,
+   "note": "چکش بلند می‌شود و می‌کوبد؛ بدنهٔ نیمه‌ساخته، داربست و تخته‌ها ثابت و کامل‌اند."
+  },
+  "reduced_motion": "چکش ثابت"
  }
 }
