@@ -5,11 +5,11 @@
   54.7,
   27.4,
   11.5,
-  44
+  77
  ],
  "stand": [
-  30.0,
-  2.0
+  31.0,
+  5.0
  ],
  "ring": [
   0,
@@ -17,18 +17,30 @@
   0
  ],
  "motion": [
-  "node_pier_load"
+  "node_pier_load",
+  "node_pier_pulley"
  ],
  "motion_spec": {
-  "node_pier_load": {
-   "translate_y": [
-    -6,
-    0
+  "node_pier_pulley": {
+   "rotate_deg": [
+    0,
+    360
+   ],
+   "center": [
+    -35,
+    -84
    ],
    "unit": "symbol",
-   "note": "جعبه آرام بالا/پایین (موج)"
+   "note": "قرقره می‌چرخد"
   },
-  "fixed": "پایه‌ها، عرشه، بولارد و طناب",
-  "note": "قرقره در این نسخه نیست؛ بعدا روی بولارد"
+  "node_pier_load": {
+   "translate_y": [
+    0,
+    -6
+   ],
+   "unit": "symbol",
+   "note": "جعبه با طناب بالا/پایین؛ سر طناب پشت قرقره است"
+  },
+  "fixed": "پایه‌ها، آب، عرشه، دکل، تیر و آویز"
  }
 }

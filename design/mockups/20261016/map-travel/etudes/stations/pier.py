@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ایستگاه «اسکله» (M07): اسکلهٔ واقعی روی سکوی دریایی = عرشهٔ تخته‌ای کوتاه (نمای سه‌چهارم) روی سه پایهٔ چوبی،
+"""ایستگاه «اسکله» (M07، بازطراحی با قرقره): اسکلهٔ واقعی روی سکوی دریایی = عرشهٔ تخته‌ای کوتاه (نمای سه‌چهارم) روی سه پایهٔ چوبی،
 یک بولارد (دکل بستن) با طناب حلقه‌شده، و یک جعبهٔ کوچک کنار آن. اولویت خوانایی اسکله است؛ قرقره (مفهوم علمی ایستگاه) در اتود بعدی.
   لایهٔ متحرک: node_pier_load = جعبه (بالا/پایین ۰ تا ۶- در مختصات symbol، مثل موج). بقیه ثابت."""
 import sys, pathlib, json, math
@@ -10,38 +10,51 @@ HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/pier'
 XF = (1.0, 0.0, 0.0)
-PL = '#ffd84d'; PL_D = '#e0a22a'; PILE = '#c9772a'; BOX = '#a4e07a'; BOX_D = '#5fae44'; ROPE = '#f2e2b0'; BOL = '#ef6a4a'
+DECK='#e9a65b'; DECK_D='#b8682a'; PILE='#c9772a'; WOOD_D='#8a4a1c'; MAST='#d98f45'; WATER='#6fc3f0'; WATER_L='#d6f0ff'
+BOX='#ffd84d'; BOX_D='#c9892a'; ROPE='#7a4a1c'; IRON='#c9d3ea'
 UP = 6
-DT, DB, DL, DR = -26, -6, -56, 8          # عرشه (نمای کنار): بالا، پایین، چپ، راست
+DT, DB, DL, DR = -32, -10, -58, 10          # عرشه: بالا، پایین، چپ، راست
+MX, MW = 4, 6                              # دکل: محور، نیم‌پهنا
+JT, JB, JL = -104, -93, -46                 # تیر افقی: بالا، پایین، چپ
+PX, PY, PR = -35, -84, 12                  # قرقره
+WT, WB = 4, 18                             # آب
 
 
 def build():
     p = Pen('pier', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
-    p.tipshadow(-24, 12, 34); p.foot_tip(-44, 9, 8); p.foot_tip(-4, 9, 8)
-    for x in (-44, -24, -4):                       # سه پایهٔ چوبی
-        p.shape([(x - 6, DB - 2), (x + 6, DB - 2), (x + 6, 10), (x - 6, 10)], PILE, PART, j=.2, step=6)
-    p.shape([(DL, DT), (DR, DT), (DR, DB), (DL, DB)], PL, OUT, j=.25, step=8)                          # عرشه
-    p.ln((DL + 8, (DT + DB) / 2), (DR - 8, (DT + DB) / 2), INNER, PL_D, j=.05, probe='درز تخته (داخلی)')
-    # بولارد: تنهٔ باریک‌شونده + کلاهک + طناب حلقه‌شده
-    bx = -42
-    p.shape([(bx - 9, DT), (bx + 9, DT), (bx + 6, DT - 24), (bx - 6, DT - 24)], BOL, PART, j=.2, step=6)
-    p.shape([(bx - 12, DT - 24), (bx + 12, DT - 24), (bx + 12, DT - 33), (bx - 12, DT - 33)], BOL, PART, j=.2, step=6)
-    p.ln((bx - 8, DT - 8), (bx + 8, DT - 8), PART, ROPE, j=.05)
-    p.ln((bx - 7, DT - 17), (bx + 7, DT - 17), PART, ROPE, j=.05)
-    with layer(p, 'load'):                         # جعبه
-        cx = -10
-        p.shape([(cx - 12, DT - 22), (cx + 12, DT - 22), (cx + 12, DT), (cx - 12, DT)], BOX, PART, j=.2, step=6)
-        p.ln((cx - 12, DT - 11), (cx + 12, DT - 11), INNER, BOX_D, j=.05, probe='تختهٔ جعبه (داخلی)')
+    p.tipshadow(-24, 14, 34); p.foot_tip(-44, 10, 8); p.foot_tip(-6, 10, 8)
+    for x in (-51, -24, 3):                        # سه پایهٔ ضخیم تا آب
+        p.shape([(x - 7, DB - 2), (x + 7, DB - 2), (x + 7, 16), (x - 7, 16)], PILE, PART, j=.2, step=6)
+        p.ln((x, DB + 3), (x, 3), INNER, WOOD_D, j=.05)                    # رگهٔ چوب
+    p.raw('<path d="%s" fill="%s"/>' % (hd([(-60, WT), (14, WT), (14, WB), (-60, WB)], True, 1, .3, 6), WATER))              # آب جلوی پایه‌ها
+    p.ln((-52, WT + 6), (-32, WT + 6), INNER, WATER_L, j=.05, probe='موج آب (داخلی)')
+    p.ln((-14, WT + 6), (6, WT + 6), INNER, WATER_L, j=.05)
+    p.shape([(DL, DT), (DR, DT), (DR, DB), (DL, DB)], DECK, OUT, j=.25, step=8)             # عرشه
+    p.ln((DL + 8, (DT + DB) / 2), (DR - 14, (DT + DB) / 2), INNER, DECK_D, j=.05, probe='درز تخته (داخلی)')
+    # دکل + تیر افقی (یک تکهٔ L)
+    p.shape([(MX - MW, DT), (MX - MW, JB), (JL, JB), (JL, JT), (MX + MW, JT), (MX + MW, DT)], MAST, PART, j=.2, step=6)
+    p.ln((MX, DT - 4), (MX, JB + 8), INNER, WOOD_D, j=.05)
+    with layer(p, 'load'):                         # طناب + جعبه
+        p.ln((PX, PY), (PX, -54), PART, ROPE, j=0); p.probes.append(('طناب (جزء)', PART, (PX, -64), (1, 0), ROPE))
+        p.shape([(PX - 12, -56), (PX + 12, -56), (PX + 12, -40), (PX - 12, -40)], BOX, PART, j=.2, step=6, clip=False)
+        p.ln((PX - 8, -48), (PX + 8, -48), INNER, BOX_D, j=.05, probe='تختهٔ جعبه (داخلی)')
+    with layer(p, 'pulley'):                       # قرقرهٔ درشت
+        p.shape(ell(PX, PY, PR, PR, 0, 360, 24), IRON, PART, j=.1, step=99, clip=False)
+        for a in range(3):
+            c, sn = math.cos(math.radians(a * 120 + 30)), math.sin(math.radians(a * 120 + 30))
+            p.ln((PX, PY), (PX + (PR - 3) * c, PY + (PR - 3) * sn), INNER, WOOD_D, j=0)
+        p.raw('<circle cx="%s" cy="%s" r="3.6" fill="%s" class="eo" stroke-width="3"/>' % (PX, PY, WOOD_D))
     return p
 
 
 def run():
     p = build()
-    motion = {'load': dict(offsets=[p.V((0, -UP * k / 3)) for k in range(4)])}
+    motion = {'load': dict(offsets=[p.V((0, -UP * k / 3)) for k in range(4)]), 'pulley': dict(rotate=(PX, PY))}
     r = finish(p, 'pier', None, motion=motion, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_pier_load': dict(translate_y=[-UP, 0], unit='symbol', note='جعبه آرام بالا/پایین (موج)'),
-                         'fixed': 'پایه‌ها، عرشه، بولارد و طناب', 'note': 'قرقره در این نسخه نیست؛ بعدا روی بولارد'}
+    sp['motion_spec'] = {'node_pier_pulley': dict(rotate_deg=[0, 360], center=[PX, PY], unit='symbol', note='قرقره می‌چرخد'),
+                         'node_pier_load': dict(translate_y=[0, -UP], unit='symbol', note='جعبه با طناب بالا/پایین؛ سر طناب پشت قرقره است'),
+                         'fixed': 'پایه‌ها، آب، عرشه، دکل، تیر و آویز'}
     (OUTD / 'pier.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     return r
 

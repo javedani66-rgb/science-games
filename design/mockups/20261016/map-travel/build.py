@@ -7,7 +7,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 EA = ROOT / 'design/mockups/20261008/flow-demo/v5/team/assets_r2/env'
 CACHE = ROOT / 'design/mockups/20261016/character-menu/_cache'
-H, COAST = 1620, 1039
+H, COAST = 1650, 1039   # H=1650: برچسب چوب‌شکافی از لبهٔ پایین دور شود (R17-18)
 
 def enc(im, q=80):
     b = io.BytesIO(); im.save(b, 'WEBP', quality=q, method=4)
@@ -20,6 +20,8 @@ STR = json.load(open(HERE / 'strings.fa.json', encoding='utf-8'))
 
 OLD_J = 'C330.0,1106.4 362.0,1065.8 362.0,1038.8 C362.0,1011.7 337.8,969.8 320.0,957.7'
 NEW_J = 'C333.0,1108.0 343.0,1080.0 343.0,1050.0 L343.0,966.0 C343.0,959.0 332.0,957.7 320.0,957.7'
+
+PATHD = ['']
 
 def map_parts():
     s = (EA / 'env_sheet.html').read_text(encoding='utf-8')
@@ -39,6 +41,7 @@ def map_parts():
     d['path_d'] = d['path_d'].replace(OLD_J, NEW_J)   # D118 v2: اسکله عمودی در x=340، نوک ۹۵۶؛ نقطه‌چین از نوک
     d['path_d'] = d['path_d'].replace('C302.2,945.6 275.8,964.9 255.0,966.1 C234.2,967.3 211.8,965.9 195.0,964.7 C178.2,963.5 164.0,960.5 154.0,959.0 C144.0,957.5 149.0,957.6 135.0,955.9 C121.0,954.2 87.8,965.2 70.0,948.9', 'C346,938 346,911 320,906 C285,900 215,901 196,925 C184,941 196,962 180,964 C160,966 140,962 120,960 C110,959 105,959 100,959 C90,958 80,955 70.0,948.9')   # مسیر دریایی بلندتر: قوس لنگرگاه بین اسکلهٔ ساحل و M07
     d['path_d'] += ' C52,182.5 30,158 30,125 C30,80 60,40 120,34 C170,28 225,52 272,96'   # راه دریایی تا ایستگاه نهایی (M12)
+    PATHD[:] = [d['path_d']]
     new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 966 + 40)
            + '<g clip-path="url(#cl_land)">' + orig + '</g>'
            + '<g clip-path="url(#cl_sea)" filter="url(#env_wob)"><path d="%s" fill="none" stroke="#241a5e" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 17" opacity=".35"/>'
@@ -60,12 +63,13 @@ def map_parts():
                         '<use href="#node_wheel_dock" x="202" y="969" width="200" height="190" />')
     assert 'node_wheel_dock' in body, 'M02'
     body = body.replace('<use href="#node_12"', '<use href="#node_harbor_crane"')
-    body = body.replace('<use href="#env_dec_city_buoy"', '<use href="#dec_buoy"')
+    body = re.sub(r'<use href="#env_dec_city_buoy"[^>]*/>', '', body)      # R17: بویه و صخرهٔ بی‌ربط کنار کشتی‌سازی حذف
+    body = re.sub(r'<use href="#env_dec_city_islet"[^>]*/>', '', body)
+    body = body.replace('<use href="#env_tree_round" x="316.8" y="1457.6"', '<use href="#env_tree_round" x="298" y="1457.6"')   # سایهٔ درخت راست بریده نشود
     body = re.sub(r'<use href="#env_dec_city_(crate|sail|low)"[^>]*/>', '', body)      # جعبه و بادبان بی‌معنا بالای نقشه، خانهٔ خاکستری کنار راه
-    body = body.replace('<use href="#env_dec_city_islet" x="-28"', '<use href="#env_dec_city_islet" x="-8"')
     body = body.replace('stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".34"', 'stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".6"')
     # ایستگاه نهایی M12 (کارگاه ماشین مرکب): در قاب، با قفل و برچسب
-    m12 = ('<g style="filter:grayscale(.3) brightness(1)"><g class="node" data-id="M12" filter="url(#env_wob)"><use href="#node_final_workshop" x="192" y="-25" width="160" height="152" /></g></g>'
+    m12 = ('<g style="filter:saturate(1.6) brightness(1.1)"><g class="node" data-id="M12" filter="url(#env_wob)"><use href="#node_final_workshop" x="192" y="-25" width="160" height="152" /></g></g>'
            '<g transform="translate(298 113)"><circle r="10" fill="#fff3c4" stroke="#241a5e" stroke-width="3"/><path d="M-3.6,-1 v-2.4 a3.6,3.6 0 0 1 7.2,0 v2.4" fill="none" stroke="#241a5e" stroke-width="2.4"/><rect x="-5.6" y="-1" width="11.2" height="8" rx="2" fill="#241a5e"/></g>')
     m12lab = '<text x="272" y="158" text-anchor="middle" font-family="Lalezar" font-size="20" fill="#fff3c4" stroke="#241a5e" stroke-width="6" paint-order="stroke" stroke-linejoin="round">%s</text>' % STR['maptravel.node.M12']['text']
     body = body.replace('<g id="env_zone_titles"', m12lab + '<g id="env_zone_titles"', 1)
@@ -85,7 +89,7 @@ def map_parts():
     body = re.sub(r'<use href="#env_dec_city_forklift"[^>]*/>', '', body)
     body = re.sub(r'<use href="#env_dec_city_mid"[^>]*/>', '', body)   # بلوک‌های خاکستری نامفهوم
     body = body.replace('data-id="M10" filter="url(#env_wob)"', 'data-id="M10"')   # M10-nofilter: D107، نماد خط دستیِ برداری بدون فیلتر رستری
-    body = body.replace('filter:grayscale(.8) brightness(.9)', 'filter:grayscale(.3) brightness(1)')
+    body = body.replace('filter:grayscale(.8) brightness(.9)', 'filter:saturate(1.6) brightness(1.1)')
     for old, key in (('میدان شهر', 'E06'), ('لنگرگاه', 'M11')):
         body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
     body = body.replace('translate(143 210)', 'translate(140 199)').replace('translate(248 570)', 'translate(205 536)')
@@ -96,11 +100,18 @@ def map_parts():
     a = '<use href="#env_tree_round" x="13" y="1262" width="70.0" height="70.0" />'
     assert a in body, 'tree'
     body = body.replace(a, '<use href="#env_tree_round" x="1" y="1262" width="70.0" height="70.0" />')
+    # R17-16: جزیرهٔ چوب‌شکافی روی ماسه گم نشود: هالهٔ روشن زیرش
+    m9 = '<g class="node" data-id="M09" filter="url(#env_wob)">'
+    assert m9 in body, 'M09'
+    body = body.replace(m9, '<ellipse cx="118" cy="1556" rx="66" ry="31" fill="#fff6d0" opacity=".62"/>' + m9)
     # D115: ایستگاه‌های بازسازی‌شده با کیت (etudes/stations/out): مرکز سکو = مرکز گره؛ نماد برداری بدون فیلتر رستری
     for sid, nid in KIT_NODES.items():
         pat = r'<g class="node" data-id="%s"(?: filter="url\(#env_wob\)")?><use href="#[^"]+"[^>]*/></g>' % nid
         assert re.search(pat, body), nid
         body = re.sub(pat, lambda m, sid=sid, nid=nid: '<g class="node" data-id="%s"><use href="#node_%s" x="%s" y="%s" width="144" height="137" /></g>' % (nid, sid, KIT_XY[nid][0] - 72, KIT_XY[nid][1] - 108), body)
+    for a, b in (('<text x="118" y="244"', '<text x="118" y="256"'), ('<text x="300" y="376"', '<text x="300" y="388"'), ('<text x="162" y="605"', '<text x="162" y="591"'), ('<text x="266" y="832"', '<text x="266" y="836"')):   # R17-05/21/23: فاصلهٔ برچسب تا جزیره ≥ ۷
+        assert a in body, a
+        body = body.replace(a, b)
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
 
@@ -108,6 +119,28 @@ KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pie
 KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (100, 959), 'M08': (266, 759), 'M11': (162, 524), 'E06': (300, 324), 'E04': (118, 192), 'M12': (272, 96)}   # مرکز سکو = مرکز گره
 M09_SH = '<ellipse cx=\"0\" cy=\"21\" rx=\"51\" ry=\"19.5\" fill=\"#10083a\" opacity=\".3\"/>'
 E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
+
+def drop_waves(sprite):
+    # R17: موج‌های مویی که روی نقطه‌چین مسیر دریایی می‌افتند حذف شوند
+    d = PATHD[0]
+    toks = re.findall(r'[MLC]|-?\d+\.?\d*', d); pts = []; i = 0; cur = None
+    while i < len(toks):
+        c = toks[i]; i += 1
+        n = {'M': 1, 'L': 1, 'C': 3}[c]
+        while i < len(toks) and toks[i] not in 'MLC':
+            q = [(float(toks[i + 2 * k]), float(toks[i + 2 * k + 1])) for k in range(n)]; i += 2 * n
+            if c == 'C':
+                for t in range(1, 11):
+                    u = t / 10; a, b, c2, e = cur, q[0], q[1], q[2]
+                    pts.append(tuple((1-u)**3*a[j] + 3*(1-u)**2*u*b[j] + 3*(1-u)*u*u*c2[j] + u**3*e[j] for j in (0, 1)))
+            else: pts.append(q[0])
+            cur = q[-1]
+    extra = [(346, 938), (320, 906), (196, 925), (70, 949)]   # قوس لنگرگاه و بقیه (تقریب؛ فاصلهٔ ۲۲ کافی است)
+    def bad(m):
+        x, y = float(m.group(1)), float(m.group(2))
+        if y > 1000 or y < 0: return m.group(0)
+        return '' if any(min(abs(x + dx - px) ** 2 + (y - 3 - py) ** 2 for px, py in pts) < 20 ** 2 for dx in (0, 13, 26, 40)) else m.group(0)
+    return re.sub(r'<path d="M([\d.]+),([\d.]+) q6\.6,-7\.7 13\.2,0 t13\.2,0 t13\.2,0"[^>]*/>', bad, sprite)
 
 def add_assets(sprite):
     extra = ''.join((HERE / 'assets' / f).read_text(encoding='utf-8') for f in sorted(p.name for p in (HERE / 'assets').glob('*.svg')))
@@ -122,6 +155,11 @@ def add_assets(sprite):
     extra = extra.replace('<ellipse cx="7" cy="21" rx="55" ry="20.9" fill="#10083a" opacity=".3"/>', E03_SH)
     # E03: چوب‌ها ۸px به چپ تا جای ایستادن فیگور کنار آن‌ها روی سکو بماند
     extra = extra.replace('<use href="#prop_03" x="40" y="72" width="120" height="100"/>', '<use href="#prop_03" x="32" y="72" width="120" height="100"/>')
+    a = sprite.index('id="node_09"'); b = sprite.index('</symbol>', a)
+    seg = sprite[a:b].replace('fill="#f4e6a0"', 'fill="#fff6cf"').replace('fill="#8a7a2a" class="eo"', 'fill="#5e4e14" class="eo"')
+    sprite = sprite[:a] + seg + sprite[b:]
+    sprite = re.sub(r'<rect x="[\d.]+" y="[\d.]+" width="[\d.]+" height="[\d.]+" rx="8" fill="#a98343" opacity="\.5"/>', '', sprite)   # R17: لکه‌های مستطیلی روی ماسه
+    sprite = drop_waves(sprite)
     i = sprite.rindex('</svg>')
     return sprite[:i] + '<defs>' + extra + '</defs>' + sprite[i:]
 
