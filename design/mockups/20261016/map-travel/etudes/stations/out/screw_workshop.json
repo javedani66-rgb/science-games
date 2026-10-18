@@ -5,11 +5,11 @@
   54.7,
   27.4,
   11.5,
-  74
+  91
  ],
  "stand": [
-  29.5,
-  2.0
+  32.5,
+  -0.5
  ],
  "ring": [
   0,
@@ -21,14 +21,14 @@
   "node_screw_workshop_nut_front"
  ],
  "inside_pad": {
-  "min_margin_px": 9.8,
+  "min_margin_px": 4.5,
   "base_on_pad": true,
-  "height_px": 79.0,
+  "height_px": 97.5,
   "bbox_px": [
-   28.8,
-   34.5,
-   77.5,
-   113.5
+   23.5,
+   17.2,
+   84.0,
+   114.8
   ],
   "ok": true
  }

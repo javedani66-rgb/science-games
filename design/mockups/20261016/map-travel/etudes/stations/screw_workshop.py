@@ -6,14 +6,16 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent     # station_kit.HERE (etudes/) را نپوشاند
 
-XF = (1.0, -26.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
+import functools, station_kit as _k   # D122/D123: حاشیهٔ چپ/راست ≥۴px (بدون دست‌زدن به کیت)
+_k.margin_check = functools.partial(_k.margin_check, min_margin=4); _k.motion_check = functools.partial(_k.motion_check, min_margin=4)
+XF = (1.0, -25.2, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 BLUE = '#8fb5f2'; PURP = '#8f8bd6'; HEAD_S = '#d6e8ff'; HEAD_T = '#f1f8ff'; THREAD = '#ffe08a'
 NUT_T = '#ffd84d'; NUT_L = '#f2b92c'; NUT_R = '#d9961c'; NUT_H = '#8a5f0c'
 
 
-def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=26, d=0, bottom='tip', y0=0, probe=True, head=True, body=True, lim=None):
+def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=19, d=0, bottom='tip', y0=0, probe=True, head=True, body=True, lim=None):
     """پیچ در مختصات محلی (نوک در (0,0)، سر بالا). f: تبدیل نقاط."""
-    ys = []; y = -Lb + 12
+    ys = []; y = -Lb + .34 * hw + 12
     lim = lim if lim is not None else (-26 if bottom == 'tip' else y0 - 12)
     while y + P / 2 + 3 < lim: ys.append(y); y += P
     L = [(-w, -Lb)]; R = [(w, -Lb)]
@@ -36,6 +38,7 @@ def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=26, d=0, bottom='tip', y0=0, pro
         for i, yk in enumerate(ys):
             pen.ln(f((-w + 2, yk)), f((w - 2, yk + P / 2)), PART, THREAD, j=.1, probe='رزوه (جزء)' if (probe and i == 0) else None)
         pen.raw('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (dd, OUT))
+    if body: pen.ln(f((-w + 6, -Lb + 16)), f((-w + 6, y0 - 22)), INNER, HEAD_T, op=.85, j=.1)
     if head:
         ry = .34 * hw; top = -Lb - hh
         pen.shape(TP(f, ell(0, -Lb, hw, ry, 0, 180, 18) + [(-hw, top), (hw, top)]), HEAD_S, OUT)
@@ -43,7 +46,7 @@ def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=26, d=0, bottom='tip', y0=0, pro
         ph = math.radians(24)
         a = (-.6 * hw * math.cos(ph), -.6 * ry * math.sin(ph) + top); b = (.6 * hw * math.cos(ph), .6 * ry * math.sin(ph) + top)
         pen.ln(f(a), f(b), PART, NAVY, j=.1, probe='شیار سر پیچ (جزء)' if probe else None)
-        if probe: pen.probes.append(('خط دور پیچ (لبهٔ بدنه)', OUT, pen.X(f((-w, -70))), (1, 0), NAVY))
+        if probe: pen.probes.append(('خط دور پیچ (لبهٔ بدنه)', OUT, pen.X(f((-w, -(Lb - 24)))), (1, 0), NAVY))
     return poly
 
 
@@ -66,6 +69,8 @@ def nut_front(pen, cx, cy, R, h, hole, probe=False):
     """لایهٔ جلوی مهره: وجه‌های جلو + هلال جلوی رویه (زیر سوراخ)؛ پیچ از سوراخ رد می‌شود و پشت این لایه می‌رود."""
     v = hexv(cx, cy, R); lo = [(x, y + h) for x, y in v]
     pen.fill([v[0], v[1], lo[1], lo[0]], NUT_R); pen.fill([v[1], v[2], lo[2], lo[1]], NUT_L); pen.fill([v[2], v[3], lo[3], lo[2]], '#e8a51f')
+    for a, b in ((v[0], v[1]), (v[1], v[2]), (v[2], v[3])):
+        pen.fill([a, b, (b[0], b[1] + 5), (a[0], a[1] + 5)], '#ffe9a0')
     arc = ell(cx, cy, hole, hole * .4, 180, 0, 24)
     cres = [v[0], v[1], v[2], v[3]] + arc
     pen.fill(cres, NUT_T)
@@ -81,11 +86,11 @@ NUT_C = -44; RANGE = 14     # مرکز مهره (مختصات symbol) و باز�
 def build(out=None, legacy_shadow=False):
     p = Pen('screw_workshop', 'land'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow(0, 8); p.foot_tip(0, 8, 10)
-    w, Lb, R, h, hole = 14, 86, 30, 16, 20
+    p.tipshadow(0, 8, 20); p.foot_tip(0, 8, 12)
+    w, Lb, R, h, hole = 19, 104, 38, 20, 23
     f = rot(0, 8, 0)
     with layer(p, 'nut_back'): nut_back(p, 0, NUT_C, R, h, hole)
-    screw(p, f, w=w, Lb=Lb, hw=26, hh=12, bottom='tip', head=True, lim=-20)       # بدنهٔ پیوسته + سر
+    screw(p, f, w=w, Lb=Lb, hw=36, hh=14, bottom='tip', head=True, lim=-20)       # بدنهٔ پیوسته + سر
     with layer(p, 'nut_front'): nut_front(p, 0, NUT_C, R, h, hole, probe=True)
     return p, symbol(p, 'screw_workshop', ['nut_back', 'nut_front'], out=out, legacy_shadow=legacy_shadow)
 

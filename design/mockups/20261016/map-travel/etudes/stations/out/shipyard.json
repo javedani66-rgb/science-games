@@ -5,11 +5,11 @@
   54.7,
   27.4,
   11.5,
-  77
+  86
  ],
  "stand": [
-  32.0,
-  4.5
+  31.5,
+  -1.0
  ],
  "ring": [
   0,
@@ -20,14 +20,14 @@
   "node_shipyard_hull"
  ],
  "inside_pad": {
-  "min_margin_px": 7.6,
+  "min_margin_px": 5.2,
   "base_on_pad": true,
-  "height_px": 89.8,
+  "height_px": 104.8,
   "bbox_px": [
-   27.2,
-   29.0,
-   83.8,
-   118.8
+   24.2,
+   19.5,
+   91.0,
+   124.2
   ],
   "ok": true
  },

@@ -5,11 +5,11 @@
   54.7,
   27.4,
   11.5,
-  39
+  85
  ],
  "stand": [
-  32.0,
-  4.5
+  31.5,
+  4.0
  ],
  "ring": [
   0,
@@ -21,14 +21,14 @@
   "node_wheel_dock_wheel_back"
  ],
  "inside_pad": {
-  "min_margin_px": 8.2,
+  "min_margin_px": 5.0,
   "base_on_pad": true,
-  "height_px": 56.0,
+  "height_px": 91.2,
   "bbox_px": [
-   31.0,
-   69.2,
-   83.2,
-   125.2
+   24.0,
+   23.0,
+   99.8,
+   114.2
   ],
   "ok": true
  },
@@ -36,16 +36,16 @@
   "wheel": {
    "layer": "node_wheel_dock_wheel",
    "rotate_about": [
-    1.0,
-    11.0
+    -2.0,
+    -6.0
    ],
    "note": "چرخ راست؛ id قدیمی حفظ شد"
   },
   "wheel_back": {
    "layer": "node_wheel_dock_wheel_back",
    "rotate_about": [
-    -29.0,
-    11.0
+    -38.0,
+    -6.0
    ],
    "note": "چرخ چپ، لایهٔ جدید"
   }

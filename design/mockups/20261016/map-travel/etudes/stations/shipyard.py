@@ -18,31 +18,52 @@ def bez(p0, c, p1, n=14):
             for t in [i / n for i in range(n + 1)]]
 
 
-DY = -10
+import functools, station_kit as _k   # D122/D123: حاشیهٔ چپ/راست ≥۴px (بدون دست‌زدن به کیت)
+_k.margin_check = functools.partial(_k.margin_check, min_margin=4); _k.motion_check = functools.partial(_k.motion_check, min_margin=4)
+DARK = '#7a3a12'; PLANK = '#f09a52'; RIB = '#ffd84d'; FLAG = '#ef6a4a'
 
 
 def cradle(p):
-    """دو پایهٔ چوبی مستطیلی (نه گوه): از کف تا زیر بدنه."""
-    for x in (-46, -14):
-        p.tipshadow(x, 13, 12); p.foot_tip(x, 11, 5)
-        p.shape([(x - 10, -4), (x + 10, -4), (x + 10, 13), (x - 10, 13)], WOOD, INNER, j=.2, step=6)
-        p.ln((x - 4, 6), (x + 4, 6), INNER, WOOD_D, j=.1)
+    """لنگرگاه: دو پایهٔ چوبی بلند + یک تخته که کنارشان افتاده؛ ثابت و تا زیر بدنه کامل (حتی با بالا‌رفتن بدنه)."""
+    for x in (-44, -4):
+        p.tipshadow(x, 15, 15); p.foot_tip(x, 13, 7)
+        p.shape([(x - 8, -12), (x + 8, -12), (x + 8, 15), (x - 8, 15)], WOOD, INNER, j=.2, step=6)
+        p.ln((x - 3, 0), (x + 3, 0), INNER, WOOD_D, j=.1); p.ln((x - 3, 8), (x + 3, 8), INNER, WOOD_D, j=.1)
+    p.shape([(-30, 15), (-14, 15), (-14, 21), (-30, 21)], WOOD, INNER, j=.2, step=8, clip=False)      # تختهٔ افتاده
+    p.ln((-26, 18), (-18, 18), INNER, WOOD_D, j=.1)
+
+
+OY = -9
 
 
 def boat(p):
-    """قایق بادبانی با بدنهٔ کشیده: بدنهٔ نیم‌تخت با دماغهٔ تیز و پاشنهٔ بلند (نه کاسه)، یک دکل راست، یک بادبان بزرگ مثلثی و پرچم کوچک."""
-    Y = lambda pts: [(x, y + DY) for x, y in pts]
-    # بادبان بزرگ، بعد دکل روی لبهٔ چپ آن، بعد بدنه؛ پایهٔ دکل زیر بدنه پنهان است
-    p.shape(Y([(-27, -90), (-27, -34), (8, -36)]), SAIL, INNER, j=.1, step=4, clip=False)
-    p.shape(Y([(-52, -62), (-52, -34), (-33, -36)]), SAIL_B, INNER, j=.1, step=4, clip=False)      # بادبان کوچک جلو (کنار دکل)
-    p.ln((-27, -94 + DY), (-27, -14 + DY), PART, MAST, j=.1, probe='دکل (جزء)')
-    p.shape(Y([(-66, -28), (-36, -25), (-8, -26), (12, -33), (2, -2), (-10, 10), (-56, 10), (-62, -6)]), HULL, PART, j=.15, step=99)   # بدنهٔ کشیده با دماغهٔ بالا
-    p.ln((-52, -14), (-10, -14), INNER, HULL_L, j=.05)                                  # یک خط روشن موازی لبهٔ بدنه
+    """کشتی چوبی نیمه‌ساز: بدنه با دنده‌های باز (بالا، جداره‌ها نیمه‌کاره) و تخته‌کاری کامل (پایین) با پنجرهٔ گرد؛
+    تیر لبهٔ بالایی؛ دکل، بادبان بزرگ، بادبان جلو، پرچم. همه یک لایهٔ متحرک."""
+    Y = lambda pts: [(x, y + OY) for x, y in pts]
+    p.shape(Y([(-24, -90), (-24, -48), (-60, -45)]), SAIL, INNER, j=.1, step=4, clip=False)           # بادبان بزرگ
+    p.shape(Y([(-18, -84), (-18, -50), (10, -48)]), SAIL_B, INNER, j=.1, step=4, clip=False)          # بادبان جلو
+    p.shape(Y([(-25, -106), (-25, -92), (26, -100), (13, -99)]), FLAG, INNER, j=.1, step=4, clip=False)            # پرچم
+    A_, B_, C_ = (-24, -90), (-24, -48), (-60, -45)
+    lerp = lambda u, v, t: (u[0] + (v[0] - u[0]) * t, u[1] + (v[1] - u[1]) * t + OY)
+    for t in (.4, .65): p.ln(lerp(A_, B_, t), lerp(A_, C_, t), INNER, '#e8c970', j=.05)       # درز بادبان
+    p.ln((-21, -108 + OY), (-21, -22 + OY), PART, MAST, j=.1, probe='دکل (جزء)')
+    hull = [(-66, -37), (-60, -12), (-48, 2), (-8, 3), (6, -8), (14, -45), (-6, -39), (-42, -38)]
+    p.shape(Y(hull), DARK, PART, j=.15, step=99)
+    for x in (-54, -41, -28, -15, -2):                                                                  # دنده‌های باز: رنگ تخت
+        t = -35 + (-6 if x > -10 else 0)
+        p.fill(Y([(x - 4, t), (x + 4, t), (x + 4, -10), (x - 4, -10)]), RIB)
+    p.shape(Y([(-62, -22), (12, -22), (6, -8), (-8, 3), (-48, 2)]), PLANK, PART, j=.15, step=99)       # تخته‌کاری
+    p.ln((-58, -13 + OY), (4, -13 + OY), INNER, HULL_D, j=.1)
+    p.ln((-50, -4 + OY), (-6, -4 + OY), INNER, HULL_D, j=.1)
+    for x in (-52, -2):
+        p.raw('<circle cx="%.1f" cy="%.1f" r="2.2" fill="%s"/>' % (x, -18 + OY, HULL_D))                 # میخ
+    p.shape(ell(-27, -8 + OY, 5.2, 5.2, 0, 360, 18), '#9ad4ff', INNER, j=.1, step=99, clip=False)      # پنجرهٔ گرد
+    p.ln((-62, -38 + OY), (11, -46 + OY), PART, WOOD, j=.1)                                              # تیر لبهٔ بالا
 
 
 def build(out=OUTD):
     p = Pen('shipyard', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
-    p.xf = (1.0, 5.0, 0.0)
+    p.xf = (1.0, 0.0, 0.0)
     cradle(p)
     with layer(p, 'hull'): boat(p)
     return p
