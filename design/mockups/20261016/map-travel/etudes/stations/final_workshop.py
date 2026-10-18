@@ -15,6 +15,7 @@ HOLE = '#2b1d5e'; GLOW = '#ffd84d'; WOOD = '#c98f4a'; WOOD_D = '#8a5a26'
 BRICK = '#e0674c'; BRICK_D = '#b8432f'; SMOKE = '#f3eefc'; GEAR = '#ffd84d'; GEAR_D = '#e0a020'
 CX, BASE, HW, HH = -24, 16, 32, 60       # مرکز تپه، خط کف، نیم‌پهنا، ارتفاع
 DX, DY = -24, 2                         # مرکز در
+XF = (.9, 1.0, 2.0)
 GX, GY = -33, -27                        # مرکز چرخ‌دنده
 
 
@@ -41,6 +42,7 @@ def gear_poly(cx, cy, ri, ro, n=8, w=.36):
 
 def build(out=OUTD):
     p = Pen('final_workshop', 'land'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
+    p.xf = XF
     p.tipshadow(CX + 2, BASE + 6, 38)
     # دودکش (راست بالا) و دود
     p.shape([(-6, -20), (10, -20), (10, -46), (-6, -46)], BRICK, PART, j=.3, step=99)

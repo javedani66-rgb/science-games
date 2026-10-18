@@ -9,28 +9,26 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/wheel_dock'
-XF = (.95, 4.0, -7.0)
-BED = '#c98a3a'; CRATE_A = '#ffd84d'; CRATE_B = '#f59a3a'; DARK = '#8a5f0c'; WH = '#7b8fe0'; WH_D = '#241a5e'
-R = 12; WY = 15; WX = (-48, -14)
+XF = (.83, 12.0, -1.0)
+BED = '#c98a3a'; CRATE_A = '#ffd84d'; CRATE_B = '#f59a3a'; DARK = '#8a5f0c'; WOOD_H = '#ffd84d'; WH = '#7b8fe0'; WH_D = '#241a5e'
+R = 11; WY = 14; WX = (-44, -10)
 
 
 def cart(p):
-    # دستهٔ ایستادهٔ چرخ‌دستی در انتهای چپ (عقب)، بعد بدنه و دو جعبه
-    p.ln((-61, -4), (-61, -44), PART, DARK, j=.1, probe='دستهٔ چرخ‌دستی (جزء)')
-    p.ln((-61, -44), (-50, -44), PART, DARK, j=.1)
-    p.shape([(-66, -10), (4, -10), (4, 8), (-66, 8)], BED, PART, j=.2, step=6)
-    p.shape([(-53, -36), (-29, -36), (-29, -7), (-53, -7)], CRATE_A, PART, j=.2, step=6)
-    p.ln((-47, -22), (-35, -22), INNER, '#d9961c', j=.1)
-    p.shape([(-25, -32), (-1, -32), (-1, -7), (-25, -7)], CRATE_B, PART, j=.2, step=6)
-    p.ln((-19, -20), (-7, -20), INNER, '#c9701c', j=.1)
+    """چرخ‌دستی بارکش (واگن دستی) از کنار: کف تخت، دستهٔ کوتاه با دستگیرهٔ T (روشن، با خط دور)، دو جعبه. همه درون رویهٔ سکو."""
+    p.ln((-52, -1), (-64, -10), PART + 2 * INNER, NAVY, j=.05); p.ln((-52, -1), (-64, -10), PART, WOOD_H, j=.05)      # دستهٔ بکسل
+    p.ln((-65, -19), (-65, -4), PART + 2 * INNER, NAVY, j=.05); p.ln((-65, -19), (-65, -4), PART, WOOD_H, j=.05)      # دستگیرهٔ T
+    p.shape([(-56, -8), (2, -8), (2, 6), (-56, 6)], BED, PART, j=.2, step=6)
+    p.shape([(-46, -28), (-26, -28), (-26, -7), (-46, -7)], CRATE_A, PART, j=.2, step=6)
+    p.ln((-42, -18), (-30, -18), INNER, '#d9961c', j=.1)
+    p.shape([(-22, -23), (-2, -23), (-2, -7), (-22, -7)], CRATE_B, PART, j=.2, step=6)
 
 
 def wheel(p, cx):
     p.shape(ell(cx, WY, R, R, 0, 360, 40), WH, INNER, j=.3, step=99, clip=False)
-    for k in range(2):
-        t = math.radians(45 + 90 * k)
-        p.ln((cx - 8 * math.cos(t), WY - 8 * math.sin(t)), (cx + 8 * math.cos(t), WY + 8 * math.sin(t)), INNER, '#fff3c4', j=.05)
-    p.raw('<circle cx="%.1f" cy="%.1f" r="3.2" fill="%s"/>' % (*p.X((cx, WY)), WH_D))
+    t = math.radians(40)
+    p.ln((cx - 6.5 * math.cos(t), WY - 6.5 * math.sin(t)), (cx + 6.5 * math.cos(t), WY + 6.5 * math.sin(t)), INNER, '#fff3c4', j=.05)      # یک پرهٔ روشن (چرخش دیده شود)
+    p.raw('<circle cx="%.1f" cy="%.1f" r="3" fill="%s"/>' % (*p.X((cx, WY)), WH_D))
 
 
 def build(out=None):
@@ -48,7 +46,7 @@ STAND = None
 if __name__ == '__main__':
     p = build()
     mo = {'wheel': dict(rotate=p.X((WX[1], WY))), 'wheel_back': dict(rotate=p.X((WX[0], WY)))}
-    r = finish(p, 'wheel_dock', STAND, motion=mo, out=OUTD, shots=SHOTS)
+    r = finish(p, 'wheel_dock', STAND, motion=mo, out=OUTD, shots=SHOTS, strict=True)
     sp = r['spec']; sp['motion_spec'] = dict(wheel=dict(layer='node_wheel_dock_wheel', rotate_about=[round(v, 1) for v in p.X((WX[1], WY))], note='چرخ راست؛ id قدیمی حفظ شد'),
                                              wheel_back=dict(layer='node_wheel_dock_wheel_back', rotate_about=[round(v, 1) for v in p.X((WX[0], WY))], note='چرخ چپ، لایهٔ جدید'))
     (OUTD / 'wheel_dock.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

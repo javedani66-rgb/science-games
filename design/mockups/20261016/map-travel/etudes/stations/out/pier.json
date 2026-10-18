@@ -5,11 +5,11 @@
   54.7,
   27.4,
   11.5,
-  77
+  75
  ],
  "stand": [
-  31.5,
-  4.0
+  32.0,
+  4.5
  ],
  "ring": [
   0,
@@ -20,6 +20,17 @@
   "node_pier_load",
   "node_pier_pulley"
  ],
+ "inside_pad": {
+  "min_margin_px": 5.3,
+  "strict": false,
+  "bbox_px": [
+   30.0,
+   33.2,
+   83.0,
+   118.2
+  ],
+  "ok": true
+ },
  "motion_spec": {
   "node_pier_pulley": {
    "rotate_deg": [
@@ -27,8 +38,8 @@
     360
    ],
    "center": [
-    -35,
-    -84
+    -31.9,
+    -81.5
    ],
    "unit": "symbol",
    "note": "قرقره می‌چرخد"

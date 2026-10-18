@@ -11,7 +11,7 @@ BLUE = '#8fb5f2'; PURP = '#8f8bd6'; HEAD_S = '#d6e8ff'; HEAD_T = '#f1f8ff'; THRE
 NUT_T = '#ffd84d'; NUT_L = '#f2b92c'; NUT_R = '#d9961c'; NUT_H = '#8a5f0c'
 
 
-def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=20, d=0, bottom='tip', y0=0, probe=True, head=True, body=True, lim=None):
+def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=26, d=0, bottom='tip', y0=0, probe=True, head=True, body=True, lim=None):
     """پیچ در مختصات محلی (نوک در (0,0)، سر بالا). f: تبدیل نقاط."""
     ys = []; y = -Lb + 12
     lim = lim if lim is not None else (-26 if bottom == 'tip' else y0 - 12)
@@ -34,7 +34,7 @@ def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=20, d=0, bottom='tip', y0=0, pro
         pen.raw('<path d="%s" fill="%s"/><clipPath id="%s"><path d="%s"/></clipPath><path d="%s" fill="%s" clip-path="url(#%s)"/>' % (
             dd, BLUE, cid, dd, hd(pen.X(TP(f, strip)), True, 2, 0, 999), PURP, cid))
         for i, yk in enumerate(ys):
-            pen.ln(f((-w + 2, yk)), f((w - 2, yk + P / 2)), PART, THREAD, j=.1, probe='رزوه (جزء)' if (probe and i == 1) else None)
+            pen.ln(f((-w + 2, yk)), f((w - 2, yk + P / 2)), PART, THREAD, j=.1, probe='رزوه (جزء)' if (probe and i == 0) else None)
         pen.raw('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (dd, OUT))
     if head:
         ry = .34 * hw; top = -Lb - hh
@@ -43,7 +43,7 @@ def screw(pen, f, w=15, Lb=100, hw=28, hh=14, P=20, d=0, bottom='tip', y0=0, pro
         ph = math.radians(24)
         a = (-.6 * hw * math.cos(ph), -.6 * ry * math.sin(ph) + top); b = (.6 * hw * math.cos(ph), .6 * ry * math.sin(ph) + top)
         pen.ln(f(a), f(b), PART, NAVY, j=.1, probe='شیار سر پیچ (جزء)' if probe else None)
-        if probe: pen.probes.append(('خط دور پیچ (لبهٔ سر)', OUT, pen.X(f((-hw, top + hh * .7))), (1, 0), NAVY))
+        if probe: pen.probes.append(('خط دور پیچ (لبهٔ بدنه)', OUT, pen.X(f((-w, -70))), (1, 0), NAVY))
     return poly
 
 
@@ -75,17 +75,17 @@ def nut_front(pen, cx, cy, R, h, hole, probe=False):
     pen.raw('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (hd(pen.X(arc), False, 6, .3, 5), SEAM))
 
 
-NUT_C = -58; RANGE = 20     # مرکز مهره (مختصات symbol) و بازهٔ حرکت ±۲۲
+NUT_C = -44; RANGE = 14     # مرکز مهره (مختصات symbol) و بازهٔ حرکت ±۲۲
 
 
 def build(out=None, legacy_shadow=False):
     p = Pen('screw_workshop', 'land'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
     p.tipshadow(0, 8); p.foot_tip(0, 8, 10)
-    w, Lb, R, h, hole = 14, 112, 32, 18, 21
+    w, Lb, R, h, hole = 14, 86, 30, 16, 20
     f = rot(0, 8, 0)
     with layer(p, 'nut_back'): nut_back(p, 0, NUT_C, R, h, hole)
-    screw(p, f, w=w, Lb=Lb, hw=27, hh=14, bottom='tip', head=True, lim=-20)       # بدنهٔ پیوسته + سر
+    screw(p, f, w=w, Lb=Lb, hw=26, hh=12, bottom='tip', head=True, lim=-20)       # بدنهٔ پیوسته + سر
     with layer(p, 'nut_front'): nut_front(p, 0, NUT_C, R, h, hole, probe=True)
     return p, symbol(p, 'screw_workshop', ['nut_back', 'nut_front'], out=out, legacy_shadow=legacy_shadow)
 

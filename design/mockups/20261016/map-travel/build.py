@@ -39,13 +39,12 @@ def map_parts():
     rest = body[e:j]
     d = json.load(open(EA / 'slots.json', encoding='utf-8'))
     d['path_d'] = d['path_d'].replace(OLD_J, NEW_J)   # D118 v2: اسکله عمودی در x=340، نوک ۹۵۶؛ نقطه‌چین از نوک
-    d['path_d'] = d['path_d'].replace('C302.2,945.6 275.8,964.9 255.0,966.1 C234.2,967.3 211.8,965.9 195.0,964.7 C178.2,963.5 164.0,960.5 154.0,959.0 C144.0,957.5 149.0,957.6 135.0,955.9 C121.0,954.2 87.8,965.2 70.0,948.9', 'C346,938 346,911 320,906 C285,900 215,901 196,925 C184,941 196,962 180,964 C160,966 140,962 120,960 C110,959 105,959 100,959 C90,958 80,955 70.0,948.9')   # مسیر دریایی بلندتر: قوس لنگرگاه بین اسکلهٔ ساحل و M07
+    d['path_d'] = d['path_d'].replace('C302.2,945.6 275.8,964.9 255.0,966.1 C234.2,967.3 211.8,965.9 195.0,964.7 C178.2,963.5 164.0,960.5 154.0,959.0 C144.0,957.5 149.0,957.6 135.0,955.9 C121.0,954.2 87.8,965.2 70.0,948.9', 'C300,957.7 296,925 282,909 C262,898 215,899 196,925 C184,941 196,962 180,964 C160,966 140,962 120,960 C110,959 105,959 100,959 C90,958 80,955 70.0,948.9')   # مسیر دریایی بلندتر: قوس لنگرگاه بین اسکلهٔ ساحل و M07
     d['path_d'] += ' C52,182.5 30,158 30,125 C30,80 60,40 120,34 C170,28 225,52 272,96'   # راه دریایی تا ایستگاه نهایی (M12)
     PATHD[:] = [d['path_d']]
     new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 966 + 40)
            + '<g clip-path="url(#cl_land)">' + orig + '</g>'
-           + '<g clip-path="url(#cl_sea)" filter="url(#env_wob)"><path d="%s" fill="none" stroke="#241a5e" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 17" opacity=".35"/>'
-             '<path d="%s" fill="none" stroke="#e8f6f8" stroke-width="5" stroke-linecap="round" stroke-dasharray="1 17" opacity=".85"/></g>' % (d['path_d'], d['path_d']))
+           + '<g id="seadots" filter="url(#env_wob)"></g>')
     body = body[:i] + new + rest + body[j:]
     # مالک (۱۶ اکتبر ۱۸:۱۹): فانوس تزئینی آخر صحنه حذف؛ «برج ساعت» (E04) فانوس دریایی روی صخره می‌شود
     body = re.sub(r'<use href="#env_dec_city_lighthouse" x="185" y="39"[^>]*/>', '', body)

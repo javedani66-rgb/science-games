@@ -20,13 +20,15 @@
   "node_floating_market_boat"
  ],
  "inside_pad": {
-  "min_margin_px": 6.6,
+  "min_margin_px": 6.2,
+  "strict": true,
   "bbox_px": [
    37.2,
    88.8,
    82.2,
-   122.0
-  ]
+   126.2
+  ],
+  "ok": true
  },
  "motion_spec": {
   "offsets": [

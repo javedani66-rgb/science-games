@@ -21,12 +21,14 @@
  ],
  "inside_pad": {
   "min_margin_px": 5.0,
+  "strict": true,
   "bbox_px": [
    33.2,
    85.8,
    83.2,
    126.5
-  ]
+  ],
+  "ok": true
  },
  "motion_spec": {
   "offsets": [

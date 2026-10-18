@@ -53,22 +53,6 @@ def boat(p):
         fruit(p, x, y, r, col)
 
 
-def inside_check(p, part, offs, dsf=4):
-    """بالازدگی: کل قهرمان (همهٔ وضعیت‌های موشن، با خط دور) باید درون رویهٔ سکو باشد؛ کمینهٔ فاصله تا لبهٔ رویه به px نقشه (رندر ۴×)."""
-    import numpy as np
-    from scipy.ndimage import distance_transform_edt as edt
-    A = lambda im: im[..., 3] > 128
-    top = A(_shot(_poly(p.padtop), dsf)); i, j = p.layers[part]
-    fixed = ''.join(p.o[p.npad:i]) + ''.join(p.o[j + 1:])
-    moving = ''.join(p.o[i + 1:j])
-    hero = A(_shot(fixed, dsf))
-    for o in offs: hero |= A(_shot('<g transform="translate(%s %s)">%s</g>' % (o[0], o[1], moving), dsf))
-    d = edt(top) / dsf
-    ys, xs = np.where(hero)
-    return dict(min_margin_px=round(float(d[hero].min()), 1), bbox_px=[round(float(xs.min() / dsf), 1), round(float(ys.min() / dsf), 1), round(float(xs.max() / dsf), 1), round(float(ys.max() / dsf), 1)])
-
-
-
 def build(out=OUTD):
     p = Pen('floating_market', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
@@ -82,8 +66,7 @@ STAND = None     # خودکار: find_stand
 if __name__ == '__main__':
     p = build()
     offs = [p.V(o) for o in [(0, -BOB), (0, 0), (0, BOB)]]
-    r = finish(p, 'floating_market', STAND, motion={'boat': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
-    ic = inside_check(p, 'boat', offs); print('INSIDE', ic)
-    sp = r['spec']; sp['inside_pad'] = ic; sp['motion_spec'] = dict(offsets=offs, note='کل قایق و غرفه روی موج بالا و پایین؛ سکو ثابت؛ سایهٔ تماس ثابت')
+    r = finish(p, 'floating_market', STAND, motion={'boat': dict(offsets=offs)}, out=OUTD, shots=SHOTS, strict=True)
+    sp = r['spec']; sp['motion_spec'] = dict(offsets=offs, note='کل قایق و غرفه روی موج بالا و پایین؛ سکو ثابت؛ سایهٔ تماس ثابت')
     (OUTD / 'floating_market.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({'ok': r['ok'], 'margin': r['margin'], 'motion': r['motion'], 'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

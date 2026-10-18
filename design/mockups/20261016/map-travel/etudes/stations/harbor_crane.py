@@ -46,21 +46,6 @@ def jib(p):
     p.shape(ell(PIV[0], PIV[1], 6, 6, 0, 360, 16), C_D, PART, j=.1, step=99, clip=False)      # لولا
 
 
-def inside_check(p, part, offs, dsf=4):
-    """بالازدگی: کل قهرمان (همهٔ وضعیت‌های موشن، با خط دور) باید درون رویهٔ سکو باشد؛ کمینهٔ فاصله تا لبهٔ رویه به px نقشه (رندر ۴×)."""
-    import numpy as np
-    from scipy.ndimage import distance_transform_edt as edt
-    A = lambda im: im[..., 3] > 128
-    top = A(_shot(_poly(p.padtop), dsf)); i, j = p.layers[part]
-    fixed = ''.join(p.o[p.npad:i]) + ''.join(p.o[j + 1:])
-    moving = ''.join(p.o[i + 1:j])
-    hero = A(_shot(fixed, dsf))
-    for o in offs: hero |= A(_shot('<g transform="translate(%s %s)">%s</g>' % (o[0], o[1], moving), dsf))
-    d = edt(top) / dsf
-    ys, xs = np.where(hero)
-    return dict(min_margin_px=round(float(d[hero].min()), 1), bbox_px=[round(float(xs.min() / dsf), 1), round(float(ys.min() / dsf), 1), round(float(xs.max() / dsf), 1), round(float(ys.max() / dsf), 1)])
-
-
 def build(out=None):
     p = Pen('harbor_crane', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
@@ -76,9 +61,8 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 
 if __name__ == '__main__':
     p = build()
-    r = finish(p, 'harbor_crane', STAND, motion={'hook': dict(offsets=[p.V(o) for o in [(0, 0), (0, 2), (0, 4), (0, 6)]])}, out=HERE / 'out', shots=SHOTS)
+    r = finish(p, 'harbor_crane', STAND, motion={'hook': dict(offsets=[p.V(o) for o in [(0, 0), (0, 2), (0, 4), (0, 6)]])}, out=HERE / 'out', shots=SHOTS, strict=True)
     offs = [p.V(o) for o in [(0, 0), (0, 2), (0, 4), (0, 6)]]
-    ic = inside_check(p, 'hook', offs); print('INSIDE', ic)
-    sp = r['spec']; sp['inside_pad'] = ic; sp['motion_spec'] = dict(offsets=offs, note='طناب+قلاب+کانتینر بالا/پایین ۰ تا +۶؛ بالای طناب پشت بازوی ثابت')
+    sp = r['spec']; sp['motion_spec'] = dict(offsets=offs, note='طناب+قلاب+کانتینر بالا/پایین ۰ تا +۶؛ بالای طناب پشت بازوی ثابت')
     (HERE / 'out' / 'harbor_crane.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({'ok': r['ok'], 'margin': r['margin'], 'motion': r['motion'], 'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

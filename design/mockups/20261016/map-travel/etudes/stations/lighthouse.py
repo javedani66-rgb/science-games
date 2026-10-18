@@ -48,6 +48,9 @@ STAND = None     # خودکار: find_stand
 if __name__ == '__main__':
     p = build()
     r = finish(p, 'lighthouse', STAND, motion={'light': dict(offsets=[(0, 0)])}, out=OUTD, shots=SHOTS)
-    sp = r['spec']; sp['motion_spec'] = dict(kind='blink', note='پرتوها با opacity روشن/خاموش؛ بدنه و اتاقک ثابت')
+    ax = p.X((0, 0))[0]; xl = p.X((-40, 0))[0]; xr = p.X((40, 0))[0]       # تقارن پرتوها حول محور برج
+    sym_err = round(abs((ax - xl) - (xr - ax)), 3)
+    sp = r['spec']; sp['motion_spec'] = dict(kind='blink', note='پرتوها با opacity روشن/خاموش؛ بدنه و اتاقک ثابت', beams_symmetry_error=sym_err)
+    assert sym_err < .01
     (OUTD / 'lighthouse.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps(r, ensure_ascii=False, indent=1))

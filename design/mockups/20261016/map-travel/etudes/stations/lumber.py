@@ -9,7 +9,7 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/lumber'
-XF = (1.0, 5.0, -1.0)
+XF = (.92, 6.0, 0.0)
 BARK = '#a8672f'; BARK_D = '#7a4a1f'; FACE = '#f2cf8e'; RING = '#c98f4a'; PITH = '#8a4f1f'; ROPE = '#fff3c4'
 R = 12; FX = 9; FY = R - 2.9       # نیم‌پهنای بیضی سر، و نیم‌ارتفاع درونی آن
 TOP = (-46, -4, -12)              # (x چپ، x راست، y مرکز)

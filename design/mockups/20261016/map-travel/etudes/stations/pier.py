@@ -9,7 +9,7 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/pier'
-XF = (1.0, 0.0, 0.0)
+XF = (.97, 2.0, 0.0)
 DECK='#e9a65b'; DECK_D='#b8682a'; PILE='#c9772a'; WOOD_D='#8a4a1c'; MAST='#d98f45'; WATER='#6fc3f0'; WATER_L='#d6f0ff'
 BOX='#ffd84d'; BOX_D='#c9892a'; ROPE='#7a4a1c'; IRON='#c9d3ea'
 UP = 6
@@ -49,10 +49,10 @@ def build():
 
 def run():
     p = build()
-    motion = {'load': dict(offsets=[p.V((0, -UP * k / 3)) for k in range(4)]), 'pulley': dict(rotate=(PX, PY))}
+    motion = {'load': dict(offsets=[p.V((0, -UP * k / 3)) for k in range(4)]), 'pulley': dict(rotate=p.X((PX, PY)))}
     r = finish(p, 'pier', None, motion=motion, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_pier_pulley': dict(rotate_deg=[0, 360], center=[PX, PY], unit='symbol', note='قرقره می‌چرخد'),
+    sp['motion_spec'] = {'node_pier_pulley': dict(rotate_deg=[0, 360], center=[round(v, 1) for v in p.X((PX, PY))], unit='symbol', note='قرقره می‌چرخد'),
                          'node_pier_load': dict(translate_y=[0, -UP], unit='symbol', note='جعبه با طناب بالا/پایین؛ سر طناب پشت قرقره است'),
                          'fixed': 'پایه‌ها، عرشه، دکل، تیر و آویز'}
     (OUTD / 'pier.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

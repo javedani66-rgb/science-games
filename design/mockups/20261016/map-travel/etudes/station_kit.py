@@ -446,7 +446,42 @@ def width_check(pen, dsf=8, tol=.6):
     return out
 
 
-def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), legacy_shadow=False):
+def _split_layers(pen):
+    """(ثابت، {لایه: محتوا}) از pen.o بعد از سکو؛ ثابت = هرچه بیرون از هر with layer است."""
+    spans = sorted((i - 1, j, name) for name, (i, j) in pen.layers.items())
+    fixed = []; moving = {}; k = pen.npad
+    for a, b, name in spans:
+        fixed += pen.o[k:a]; moving[name] = ''.join(pen.o[a + 1:b]); k = b + 1
+    fixed += pen.o[k:]
+    return ''.join(fixed), moving
+
+
+def inside_check(pen, motion=None, dsf=4, min_margin=4, strict=False):
+    """بالازدگی (D112): کل قهرمان (بخش ثابت + همهٔ وضعیت‌های لایه‌های متحرک، با خط دور) باید درون رویهٔ سکو باشد.
+    motion مثل finish: {'لایه': dict(rotate=(x,y)) یا dict(offsets=[...])}. برمی‌گرداند dict(min_margin_px، bbox_px، ok)؛ ok اگر کمینهٔ فاصله تا لبهٔ رویه ≥ min_margin px نقشه.
+    strict=True: کل قهرمان باید درون بیضی رویه باشد (قهرمان کوتاه: غرفه، جرثقیل). strict=False (پیش‌فرض): قهرمان بلند می‌تواند از بالای رویه بالا برود
+    (برج، پیچ)، ولی از چپ، راست و پایین باید ≥ min_margin از لبهٔ رویه فاصله داشته باشد (ناحیه = هر ستون رویه از بالای تصویر تا پایین‌ترین نقطهٔ رویه)."""
+    import numpy as np
+    from scipy.ndimage import distance_transform_edt as edt
+    A = lambda im: im[..., 3] > 128
+    top = A(_shot(_poly(pen.padtop), dsf))
+    fixed, moving = _split_layers(pen)
+    hero = A(_shot(fixed, dsf))
+    for name, body in moving.items():
+        kw = (motion or {}).get(name, {})
+        ts = ['rotate(%s %s %s)' % (a * 30, kw['rotate'][0], kw['rotate'][1]) for a in range(12)] if kw.get('rotate') else []
+        ts += ['translate(%s %s)' % tuple(o) for o in kw.get('offsets', [])] or ([] if ts else ['translate(0 0)'])
+        for t in ts: hero |= A(_shot('<g transform="%s">%s</g>' % (t, body), dsf))
+    if strict: reg = top
+    else:
+        cols = top.any(0); low = np.where(cols, top.shape[0] - 1 - np.argmax(top[::-1], 0), -1)
+        reg = cols[None, :] & (np.arange(top.shape[0])[:, None] <= low[None, :])
+    d = edt(reg) / dsf; ys, xs = np.where(hero)
+    mm = round(float(d[hero].min()), 1)
+    return dict(min_margin_px=mm, strict=strict, bbox_px=[round(float(xs.min() / dsf), 1), round(float(ys.min() / dsf), 1), round(float(xs.max() / dsf), 1), round(float(ys.max() / dsf), 1)], ok=bool(mm >= min_margin))
+
+
+def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), legacy_shadow=False, strict=False):
     """همهٔ مراحل پایانی یک ایستگاه: symbol → سنجش حاشیه → سنجش قاب حرکت → سنجش قطر خط → spec json → شات.
     motion = {'gear': dict(rotate=(x, y))} یا {'door': dict(offsets=[(0,0),(0,-10)])}. برمی‌گرداند dict همهٔ اعداد."""
     motion = motion or {}
@@ -457,6 +492,7 @@ def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), 
     m = margin_check(pen, stand=stand)
     mo = [motion_check(pen, part, stand=stand, **kw) for part, kw in motion.items()]
     w = width_check(pen)
+    ic = inside_check(pen, motion, strict=strict)
     sp = spec(name, pad_px(pen, m['bh']), stand, ['node_%s_%s' % (name, x) for x in motion], kind=pen.kind, ring=ring, out=out)
     if shots:
         shots = pathlib.Path(shots); shots.mkdir(parents=True, exist_ok=True)
@@ -465,6 +501,7 @@ def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), 
             pg = b.new_page(device_scale_factor=4 if tag == 'big' else 2, viewport={'width': 144 * (3 if tag == 'big' else 1), 'height': 160 * (3 if tag == 'big' else 1)})
             pg.set_content(('<body style="margin:0;background:#c9a35c">' + preview(sym, name, 144 * (3 if tag == 'big' else 1), tall=True)))
             pg.screenshot(path=str(shots / ('%s_%s.png' % (name, tag)))); pg.close()
-    r = dict(name=name, kind=pen.kind, margin=m, motion=mo, widths=w, spec=sp, ok=bool(m['ok'] and all(x['ok'] for x in mo) and all(x['ok'] for x in w)))
-    print('CHECK ' + json.dumps(dict(name=name, ok=r['ok'], stand=list(stand), auto_gap=auto, margin=m, motion=mo, widths=[(x['label'], x['nominal'], x['measured_px'], x['ok']) for x in w]), ensure_ascii=False))
+    sp['inside_pad'] = ic; (pathlib.Path(out) if out else HERE / 'stations').joinpath('%s.json' % name).write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
+    r = dict(name=name, kind=pen.kind, margin=m, motion=mo, widths=w, inside=ic, spec=sp, ok=bool(m['ok'] and ic['ok'] and all(x['ok'] for x in mo) and all(x['ok'] for x in w)))
+    print('CHECK ' + json.dumps(dict(name=name, ok=r['ok'], stand=list(stand), auto_gap=auto, margin=m, inside=ic, motion=mo, widths=[(x['label'], x['nominal'], x['measured_px'], x['ok']) for x in w]), ensure_ascii=False))
     return r

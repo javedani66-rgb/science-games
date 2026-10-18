@@ -5,11 +5,11 @@
   54.7,
   27.4,
   11.5,
-  94
+  74
  ],
  "stand": [
-  30.0,
-  5.0
+  29.5,
+  2.0
  ],
  "ring": [
   0,
@@ -19,5 +19,16 @@
  "motion": [
   "node_screw_workshop_nut_back",
   "node_screw_workshop_nut_front"
- ]
+ ],
+ "inside_pad": {
+  "min_margin_px": 9.8,
+  "strict": false,
+  "bbox_px": [
+   28.8,
+   34.5,
+   77.5,
+   113.5
+  ],
+  "ok": true
+ }
 }
