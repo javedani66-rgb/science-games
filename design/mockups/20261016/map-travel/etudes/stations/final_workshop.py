@@ -15,7 +15,7 @@ HOLE = '#2b1d5e'; GLOW = '#ffd84d'; WOOD = '#c98f4a'; WOOD_D = '#8a5a26'
 BRICK = '#e0674c'; BRICK_D = '#b8432f'; SMOKE = '#f3eefc'; GEAR = '#ffd84d'; GEAR_D = '#e0a020'
 CX, BASE, HW, HH = -24, 16, 32, 60       # مرکز تپه، خط کف، نیم‌پهنا، ارتفاع
 DX, DY = -24, 2                         # مرکز در
-XF = (.9, 1.0, 2.0)
+XF = (1.0, 0.0, -9.0)
 GX, GY = -33, -27                        # مرکز چرخ‌دنده
 
 

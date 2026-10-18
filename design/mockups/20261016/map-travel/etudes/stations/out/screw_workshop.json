@@ -22,7 +22,8 @@
  ],
  "inside_pad": {
   "min_margin_px": 9.8,
-  "strict": false,
+  "base_on_pad": true,
+  "height_px": 79.0,
   "bbox_px": [
    28.8,
    34.5,

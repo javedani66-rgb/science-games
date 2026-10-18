@@ -5,7 +5,7 @@
   54.7,
   27.4,
   11.5,
-  22
+  83
  ],
  "stand": [
   32.0,
@@ -20,13 +20,14 @@
   "node_harbor_crane_hook"
  ],
  "inside_pad": {
-  "min_margin_px": 5.0,
-  "strict": true,
+  "min_margin_px": 4.1,
+  "base_on_pad": true,
+  "height_px": 95.2,
   "bbox_px": [
-   33.2,
-   85.8,
+   27.2,
+   24.8,
    83.2,
-   126.5
+   120.0
   ],
   "ok": true
  },

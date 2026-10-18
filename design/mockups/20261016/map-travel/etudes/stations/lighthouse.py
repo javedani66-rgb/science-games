@@ -9,7 +9,7 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/lighthouse'
-XF = (.84, -26.0, 4.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
+XF = (0.96, -23.0, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 RED = '#ef6a4a'; WHITE = '#fffaf0'; GLASS = '#ffd84d'; GLASS_D = '#d9961c'; ROOF = '#ef6a4a'; BEAM = '#ffe45c'
 YB, YT = 10, -56           # پای برج، بالای برج
 WB, WT = 17, 11           # نیم‌پهنای پایین/بالا

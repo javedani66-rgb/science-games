@@ -9,7 +9,7 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/pier'
-XF = (.97, 2.0, 0.0)
+XF = (1.0, 2.0, 0.0)
 DECK='#e9a65b'; DECK_D='#b8682a'; PILE='#c9772a'; WOOD_D='#8a4a1c'; MAST='#d98f45'; WATER='#6fc3f0'; WATER_L='#d6f0ff'
 BOX='#ffd84d'; BOX_D='#c9892a'; ROPE='#7a4a1c'; IRON='#c9d3ea'
 UP = 6

@@ -8,17 +8,17 @@ from station_kit import *
 from station_kit import _shot, _poly
 HERE = pathlib.Path(__file__).resolve().parent
 
-XF = (1.0, 7.0, 1.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
+XF = (1.0, 6.0, -6.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 C_T = '#ff8a5c'; C_L = '#e0553a'; C_D = '#9c2f1c'      # جرثقیل: مرجانی روشن/تیره
-B_T = '#ffd84d'; B_H = '#8a5f0c'                        # جعبه
 CW = '#8f8bd6'
-BX0, BX1, BT, BB = -58, -30, -10, 12       # بدنهٔ جرثقیل (ماشین‌خانه): چپ، راست، بالا، پایین (کوتاه‌تر تا همه‌چیز درون رویهٔ سکو بماند)
-TIP = (-4, -25)                         # نوک بازو (پایین‌تر از لبهٔ بالای سکو)
-PIV = (-40, -10)                           # لولای بازو
+BX0, BX1, BT, BB = -64, -26, -4, 16        # ماشین‌خانهٔ پایین (D122: از بالای سکو بالا می‌زند، اندازهٔ طبیعی)
+MX0, MX1, MTOP = -57, -43, -86            # دکل بلند
+TIP = (-4, -102)                         # نوک بازوی بلند
+PIV = (-50, -84)                           # لولای بازو روی دکل
 BX = -4
-CT, CH, CWD = 2, 14, 20                 # کانتینر: بالا، ارتفاع، پهنا
+CT, CH, CWD = -2, 16, 22                 # کانتینر: بالا، ارتفاع، پهنا
 CNT = '#4fae4a'; CNT_D = '#1f6b2e'
-HW = 5.5                                   # نیم‌پهنای بازو
+HW = 6                                   # نیم‌پهنای بازو
 
 
 def flat(p, pts, col):
@@ -26,9 +26,11 @@ def flat(p, pts, col):
 
 
 def machine(p):
-    p.shape([(BX0, BT), (BX1, BT), (BX1, BB), (BX0, BB)], C_L, PART, j=.3, step=5)
+    p.shape([(MX0, MTOP), (MX1, MTOP), (MX1, BT + 2), (MX0, BT + 2)], C_T, PART, j=.3, step=7)               # دکل
+    p.shape([(BX0, BT), (BX1, BT), (BX1, BB), (BX0, BB)], C_L, PART, j=.3, step=5)                            # ماشین‌خانه
     flat(p, [(BX0 + 5, BB - 8), (BX1 - 5, BB - 8), (BX1 - 5, BB - 4), (BX0 + 5, BB - 4)], C_D)      # نوار تیره پایین
-    flat(p, [(BX0 + 6, BT + 8), (BX0 + 16, BT + 8), (BX0 + 16, BT + 14), (BX0 + 6, BT + 14)], '#cfeaff')  # پنجرهٔ اتاقک
+    flat(p, [(BX0 + 6, BT + 6), (BX0 + 17, BT + 6), (BX0 + 17, BT + 13), (BX0 + 6, BT + 13)], '#cfeaff')  # پنجرهٔ اتاقک
+    p.shape([(MX0 - 8, MTOP - 6), (MX0 + 2, MTOP - 6), (MX0 + 2, MTOP + 14), (MX0 - 8, MTOP + 14)], C_D, PART, j=.2, step=6, clip=False)    # وزنهٔ تعادل
 
 
 def hook(p):
@@ -37,7 +39,7 @@ def hook(p):
     p.probes.append(('طناب (جزء)', PART, p.X((BX, -11.5)), (1, 0), '#8a5f0c'))
     p.shape([(BX - 5, CT - 6), (BX + 5, CT - 6), (BX + 5, CT), (BX - 5, CT)], C_D, PART, j=.1, step=5, clip=False)     # قلاب
     p.shape([(BX - CWD / 2, CT), (BX + CWD / 2, CT), (BX + CWD / 2, CT + CH), (BX - CWD / 2, CT + CH)], CNT, PART, j=.3, step=5, clip=False)
-    p.ln((BX, CT + 5), (BX, CT + CH - 4), INNER, CNT_D, j=0, probe='تختهٔ کانتینر (داخلی)')
+    p.ln((BX, CT + 4), (BX, CT + CH - 4), INNER, CNT_D, j=0, probe='تختهٔ کانتینر (داخلی)')
 
 
 def jib(p):
@@ -49,7 +51,7 @@ def jib(p):
 def build(out=None):
     p = Pen('harbor_crane', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow(-40, BB, 26); p.foot_tip(-40, 8, 12)
+    p.tipshadow(-45, BB, 28); p.foot_tip(-45, 10, 12)
     machine(p)
     with layer(p, 'hook'): hook(p)
     jib(p)

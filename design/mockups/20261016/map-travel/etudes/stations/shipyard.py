@@ -42,7 +42,7 @@ def boat(p):
 
 def build(out=OUTD):
     p = Pen('shipyard', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
-    p.xf = (.9, 1.0, 8.0)
+    p.xf = (1.0, 5.0, 0.0)
     cradle(p)
     with layer(p, 'hull'): boat(p)
     return p

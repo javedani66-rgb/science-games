@@ -9,11 +9,11 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/lumber'
-XF = (.92, 6.0, 0.0)
+XF = (1.0, 10.0, -4.0)
 BARK = '#a8672f'; BARK_D = '#7a4a1f'; FACE = '#f2cf8e'; RING = '#c98f4a'; PITH = '#8a4f1f'; ROPE = '#fff3c4'
 R = 12; FX = 9; FY = R - 2.9       # نیم‌پهنای بیضی سر، و نیم‌ارتفاع درونی آن
-TOP = (-46, -4, -12)              # (x چپ، x راست، y مرکز)
-LOW = [(-54, -27, 10), (-25, 2, 10)]
+TOP = (-38, -13, -42)              # (x چپ، x راست، y مرکز) — کندهٔ بالا (D122: پشتهٔ بلندتر، سه ردیف)
+LOW = [(-52, -27, 14), (-25, 0, 14), (-52, -27, -14), (-25, 0, -14)]
 
 
 def body(p, x0, x1, cy):
@@ -35,7 +35,7 @@ def rings(p, x0, cy, arc=False):
 def build(out=OUTD):
     p = Pen('lumber', 'land'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    for x0, x1, cy in LOW:
+    for x0, x1, cy in LOW[:2]:
         c = (x0 + x1) / 2; p.tipshadow(c, cy + R - 1, 13); p.foot_tip(c, cy + R - 2, 7)
     for x0, x1, cy in LOW: body(p, x0, x1, cy)
     body(p, *TOP)
@@ -43,7 +43,7 @@ def build(out=OUTD):
     for x0, x1, cy in LOW: rings(p, x0, cy)
     rings(p, TOP[0], TOP[2])
     for xr in (-14,):   # طناب دور پشته
-        p.ln((xr, -21), (xr, 19), INNER, ROPE, j=.1)
+        p.ln((xr, -52), (xr, 24), INNER, ROPE, j=.1)
     with layer(p, 'marks'): rings(p, TOP[0], TOP[2], arc=True)
     return p
 

@@ -9,19 +9,21 @@ from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/wheel_dock'
-XF = (.83, 12.0, -1.0)
+XF = (1.0, 15.0, -3.0)
 BED = '#c98a3a'; CRATE_A = '#ffd84d'; CRATE_B = '#f59a3a'; DARK = '#8a5f0c'; WOOD_H = '#ffd84d'; WH = '#7b8fe0'; WH_D = '#241a5e'
-R = 11; WY = 14; WX = (-44, -10)
+R = 11; WY = 14; WX = (-44, -14)
 
 
 def cart(p):
     """چرخ‌دستی بارکش (واگن دستی) از کنار: کف تخت، دستهٔ کوتاه با دستگیرهٔ T (روشن، با خط دور)، دو جعبه. همه درون رویهٔ سکو."""
     p.ln((-52, -1), (-64, -10), PART + 2 * INNER, NAVY, j=.05); p.ln((-52, -1), (-64, -10), PART, WOOD_H, j=.05)      # دستهٔ بکسل
-    p.ln((-65, -19), (-65, -4), PART + 2 * INNER, NAVY, j=.05); p.ln((-65, -19), (-65, -4), PART, WOOD_H, j=.05)      # دستگیرهٔ T
-    p.shape([(-56, -8), (2, -8), (2, 6), (-56, 6)], BED, PART, j=.2, step=6)
+    p.ln((-65, -22), (-65, -4), PART + 2 * INNER, NAVY, j=.05); p.ln((-65, -22), (-65, -4), PART, WOOD_H, j=.05)      # دستگیرهٔ T
+    p.shape([(-56, -8), (-2, -8), (-2, 6), (-56, 6)], BED, PART, j=.2, step=6)
     p.shape([(-46, -28), (-26, -28), (-26, -7), (-46, -7)], CRATE_A, PART, j=.2, step=6)
     p.ln((-42, -18), (-30, -18), INNER, '#d9961c', j=.1)
-    p.shape([(-22, -23), (-2, -23), (-2, -7), (-22, -7)], CRATE_B, PART, j=.2, step=6)
+    p.shape([(-24, -23), (-6, -23), (-6, -7), (-24, -7)], CRATE_B, PART, j=.2, step=6)
+    p.shape([(-42, -48), (-28, -48), (-28, -27), (-42, -27)], CRATE_B, PART, j=.2, step=6)      # جعبهٔ سوم بالای اول (D122: بار بلندتر)
+    p.ln((-38, -40), (-32, -40), INNER, '#c9761c', j=.1)
 
 
 def wheel(p, cx):
