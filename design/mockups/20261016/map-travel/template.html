@@ -32,7 +32,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 #fig{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
 #tilt{transform-origin:50% 58%}
 #fimg{height:56px;width:auto;max-width:none;display:block;transform-origin:50% 100%;
- filter:drop-shadow(3px 0 0 var(--navy)) drop-shadow(-3px 0 0 var(--navy)) drop-shadow(0 3px 0 var(--navy)) drop-shadow(0 -3px 0 var(--navy))} /* R17-12: خط دور تیرهٔ کلفت هم‌سبک بقیه */
+ filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))} /* D81: فقط هالهٔ کرم */
 #bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;align-items:center;gap:10px;min-height:76px}
 #st{flex:1;min-width:0;margin:0;text-align:center;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:4px 14px;min-height:48px;display:flex;align-items:center;justify-content:center}
 .btn{min-height:56px;min-width:96px;border:3.5px solid var(--navy);border-radius:18px;background:var(--gold);box-shadow:0 4px 0 var(--edge);font-weight:700;font-size:16px;padding:6px 12px}
@@ -215,7 +215,13 @@ async function go(id){if(busy||id===here)return;const up=nextUp();
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
-function refreshRing(){const n=NODES[here],q=pd(n),g=n.rg||[0,0,0],rx=q.rx+4+g[0],ry=q.ry+q.w/2+3+g[1];ring.style.left=(n.x+g[2]-rx)+'px';ring.style.top=(n.y+q.w/2+2-ry)+'px';ring.style.width=(2*rx)+'px';ring.style.height=(2*ry)+'px';ring.style.clipPath='inset('+Math.max(0,ry-q.w/2-2)+'px -6px -6px -6px)';ring.style.borderWidth='3.5px';ring.style.boxShadow='0 0 0 2.5px #241a5e'}
+function refreshRing(){ring.style.display='none';const old=document.getElementById('ringG');if(old)old.remove();
+ const n=NODES[here],q=pd(n),g=n.rg||[0,0,0],rx=q.rx+5+g[0],ry=q.ry+q.w/2+3+g[1],cx=n.x+g[2],cy=n.y+q.w/2+2;
+ const nd=svgMap.querySelector('.node[data-id="'+here+'"]');if(!nd)return;
+ const G=document.createElementNS('http://www.w3.org/2000/svg','g');G.id='ringG';
+ const mk=(w,c)=>{const e=document.createElementNS('http://www.w3.org/2000/svg','ellipse');e.setAttribute('cx',cx);e.setAttribute('cy',cy);e.setAttribute('rx',rx);e.setAttribute('ry',ry);e.setAttribute('fill','none');e.setAttribute('stroke',c);e.setAttribute('stroke-width',w);return e};
+ G.appendChild(mk(9.5,'#241a5e'));G.appendChild(mk(4,'#ffd23f'));
+ nd.parentNode.insertBefore(G,nd)}
 ids.forEach(i=>{const n=NODES[i],h=n.hit;const b=document.createElement('button');b.className='hit';b.dataset.id=i;b.setAttribute('aria-label',T('node.label').replace('%s',n.title||i));
  b.style.cssText='left:'+h[0]+'px;top:'+h[1]+'px;width:'+Math.max(48,h[2])+'px;height:'+Math.max(48,h[3])+'px';b.onclick=()=>go(i);world.appendChild(b)});
 $('skip').onclick=()=>{skip=true};
