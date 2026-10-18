@@ -5,11 +5,11 @@
   54.7,
   27.4,
   11.5,
-  33
+  74
  ],
  "stand": [
-  32.5,
-  4.0
+  30.0,
+  0.5
  ],
  "ring": [
   0,
@@ -17,26 +17,16 @@
   0
  ],
  "motion": [
-  "node_final_workshop_gear_big",
-  "node_final_workshop_gear_small"
+  "node_final_workshop_gear"
  ],
  "motion_spec": {
-  "node_final_workshop_gear_big": {
+  "node_final_workshop_gear": {
    "center": [
-    -32.0,
-    1.0
+    -52.0,
+    -23.0
    ],
-   "deg_per_turn": 360,
-   "dir": "cw"
-  },
-  "node_final_workshop_gear_small": {
-   "center": [
-    -4.678435173777139,
-    -23.600447466076677
-   ],
-   "ratio": -1.3333333333333333,
-   "dir": "ccw",
-   "note": "کوچک=-(8/6)×بزرگ؛ چرخ بالا، چرخ پایین"
+   "dir": "cw",
+   "note": "چرخ‌دندهٔ تابلو؛ ۸ دنده، چرخش آهسته. لامپ ثابت."
   }
  }
 }

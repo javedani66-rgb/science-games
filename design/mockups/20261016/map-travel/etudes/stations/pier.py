@@ -17,18 +17,18 @@ DT, DB, DL, DR = -32, -10, -58, 10          # عرشه: بالا، پایین، 
 MX, MW = 4, 6                              # دکل: محور، نیم‌پهنا
 JT, JB, JL = -104, -93, -46                 # تیر افقی: بالا، پایین، چپ
 PX, PY, PR = -35, -84, 12                  # قرقره
-WT, WB = 4, 18                             # آب
+PB = 10                                    # کف پایه‌ها روی سکو
 
 
 def build():
     p = Pen('pier', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
-    p.tipshadow(-24, 14, 34); p.foot_tip(-44, 10, 8); p.foot_tip(-6, 10, 8)
-    for x in (-51, -24, 3):                        # سه پایهٔ ضخیم تا آب
-        p.shape([(x - 7, DB - 2), (x + 7, DB - 2), (x + 7, 16), (x - 7, 16)], PILE, PART, j=.2, step=6)
-        p.ln((x, DB + 3), (x, 3), INNER, WOOD_D, j=.05)                    # رگهٔ چوب
-    p.raw('<path d="%s" fill="%s"/>' % (hd([(-60, WT), (14, WT), (14, WB), (-60, WB)], True, 1, .3, 6), WATER))              # آب جلوی پایه‌ها
-    p.ln((-52, WT + 6), (-32, WT + 6), INNER, WATER_L, j=.05, probe='موج آب (داخلی)')
-    p.ln((-14, WT + 6), (6, WT + 6), INNER, WATER_L, j=.05)
+    for x in (-51, -24, 3):                        # سه پایه روی رویهٔ سکو، با کف کوچک و سایهٔ تماس
+        p.tipshadow(x, PB + 1, 11)
+    p.foot_tip(-44, PB, 8); p.foot_tip(-6, PB, 8)
+    for x in (-51, -24, 3):
+        p.shape([(x - 7, DB - 2), (x + 7, DB - 2), (x + 7, PB), (x - 7, PB)], PILE, PART, j=.2, step=6)
+        p.ln((x, DB + 3), (x, PB - 4), INNER, WOOD_D, j=.05)                    # رگهٔ چوب
+        p.shape([(x - 8, PB - 3), (x + 8, PB - 3), (x + 8, PB + 2), (x - 8, PB + 2)], WOOD_D, PART, j=.1, step=99, clip=False)   # کف کوچک
     p.shape([(DL, DT), (DR, DT), (DR, DB), (DL, DB)], DECK, OUT, j=.25, step=8)             # عرشه
     p.ln((DL + 8, (DT + DB) / 2), (DR - 14, (DT + DB) / 2), INNER, DECK_D, j=.05, probe='درز تخته (داخلی)')
     # دکل + تیر افقی (یک تکهٔ L)
@@ -54,7 +54,7 @@ def run():
     sp = r['spec']
     sp['motion_spec'] = {'node_pier_pulley': dict(rotate_deg=[0, 360], center=[PX, PY], unit='symbol', note='قرقره می‌چرخد'),
                          'node_pier_load': dict(translate_y=[0, -UP], unit='symbol', note='جعبه با طناب بالا/پایین؛ سر طناب پشت قرقره است'),
-                         'fixed': 'پایه‌ها، آب، عرشه، دکل، تیر و آویز'}
+                         'fixed': 'پایه‌ها، عرشه، دکل، تیر و آویز'}
     (OUTD / 'pier.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     return r
 
