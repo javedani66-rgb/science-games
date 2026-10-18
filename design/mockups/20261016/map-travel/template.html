@@ -32,7 +32,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 #fig{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
 #tilt{transform-origin:50% 58%}
 #fimg{height:56px;width:auto;max-width:none;display:block;transform-origin:50% 100%;
- filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))}
+ filter:drop-shadow(3px 0 0 var(--navy)) drop-shadow(-3px 0 0 var(--navy)) drop-shadow(0 3px 0 var(--navy)) drop-shadow(0 -3px 0 var(--navy))} /* R17-12: خط دور تیرهٔ کلفت هم‌سبک بقیه */
 #bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;align-items:center;gap:10px;min-height:76px}
 #st{flex:1;min-width:0;margin:0;text-align:center;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:4px 14px;min-height:48px;display:flex;align-items:center;justify-content:center}
 .btn{min-height:56px;min-width:96px;border:3.5px solid var(--navy);border-radius:18px;background:var(--gold);box-shadow:0 4px 0 var(--edge);font-weight:700;font-size:16px;padding:6px 12px}
@@ -114,7 +114,7 @@ function legPoly(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],sB=B.s;
  for(;i<samp.length&&samp[i][2]<sB&&!inOuter(B,samp[i][0],samp[i][1]);i++)pts.push([samp[i][0],samp[i][1]]);
  return pts}
 /* حریم ردپا (D112): جعبهٔ هر بخش از ایستگاه (سکو، بنا، پیچ، ...؛ بدون سایه) + حاشیه؛ ردپا باید از همهٔ آن‌ها ≥ ۱۵px (لبهٔ ردپا) فاصله داشته باشد */
-const EXC=[],PRINT_R=10,GAP=15;
+const EXC=[],PRINT_R=10,GAP=15,POFF=5.2,PSC=.95; /* R17-10: ردپا کوچک‌تر و نزدیک‌تر به محور تا کاملاً داخل پر راه (۲۲ واحد) بماند */
 (function(){const mr=svgMap.getBoundingClientRect(),kk=mr.width/390;
  svgMap.querySelectorAll('g.node').forEach(g=>{const u=g.querySelector('use');if(!u)return;const sym=document.querySelector(u.getAttribute('href'));if(!sym)return;
   const vb=(sym.getAttribute('viewBox')||'0 0 200 190').split(/\s+/).map(Number);
@@ -129,10 +129,10 @@ const PLACED=[];
  for(let k=0;k<ORDER.length-1;k++){const P=legPoly(k);let acc=0,side=1,need=0;
   for(let m=1;m<P.length;m++){const [x0,y0]=P[m-1],[x1,y1]=P[m],L=Math.hypot(x1-x0,y1-y0);if(!L)continue;const ang=Math.atan2(y1-y0,x1-x0);
    while(need<=L){const x=x0+(x1-x0)*need/L,y=y0+(y1-y0)*need/L;need+=26;
-    if(!(y>=COAST+14||onJetty(x,y))||onWall(x,y)||y>{{H}}-8||inBuild(x,y)||Object.values(NODES).some(n=>inOuter(n,x,y))||nearStn(x-Math.sin(ang)*7*side,y+Math.cos(ang)*7*side)||PLACED.some(q=>Math.hypot(q[0]-x,q[1]-y)<19))continue;PLACED.push([x,y]);
+    if(!(y>=COAST+14||onJetty(x,y))||onWall(x,y)||y>{{H}}-8||inBuild(x,y)||Object.values(NODES).some(n=>inOuter(n,x,y))||nearStn(x-Math.sin(ang)*POFF*side,y+Math.cos(ang)*POFF*side)||PLACED.some(q=>Math.hypot(q[0]-x,q[1]-y)<19))continue;PLACED.push([x,y]);
     const g=document.createElementNS(NS,'g');g.dataset.leg=k;g.dataset.s=k*100000+acc+need;g.style.display='none';
-    g.setAttribute('transform','translate('+(x-Math.sin(ang)*7*side).toFixed(1)+' '+(y+Math.cos(ang)*7*side).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
-    g.innerHTML='<g class="pr"><g transform="scale('+(1.25*side)+' 1.25)" fill="#f1dcff" stroke="#2a0f5e" stroke-width="1.3" stroke-linejoin="round"><path d="M-2.4,-3 C-3.2,-0.5 -1.9,3 -1.5,5 C-1.7,7.2 -0.6,8.2 0.9,8.2 C2.3,8.2 2.8,6.8 2.5,5 C2.3,2.5 3.2,-0.5 2.6,-3 C1.8,-4.8 -1.5,-4.8 -2.4,-3Z"/><circle cx="-2.1" cy="-6.6" r="1.25"/><circle cx="-0.3" cy="-7.4" r="1"/><circle cx="1.3" cy="-7.1" r=".9"/><circle cx="2.6" cy="-6.2" r=".85"/><circle cx="3.4" cy="-4.9" r=".75"/></g></g>';
+    g.setAttribute('transform','translate('+(x-Math.sin(ang)*POFF*side).toFixed(1)+' '+(y+Math.cos(ang)*POFF*side).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
+    g.innerHTML='<g class="pr"><g transform="scale('+(PSC*side)+' '+PSC+')" fill="#f1dcff" stroke="#2a0f5e" stroke-width="1.3" stroke-linejoin="round"><path d="M-2.4,-3 C-3.2,-0.5 -1.9,3 -1.5,5 C-1.7,7.2 -0.6,8.2 0.9,8.2 C2.3,8.2 2.8,6.8 2.5,5 C2.3,2.5 3.2,-0.5 2.6,-3 C1.8,-4.8 -1.5,-4.8 -2.4,-3Z"/><circle cx="-2.1" cy="-6.6" r="1.25"/><circle cx="-0.3" cy="-7.4" r="1"/><circle cx="1.3" cy="-7.1" r=".9"/><circle cx="2.6" cy="-6.2" r=".85"/><circle cx="3.4" cy="-4.9" r=".75"/></g></g>';
     side=-side;prints.appendChild(g)}
    need-=L;acc+=L}}})();
 /* animate=true: ردپاهای تازه یکی‌یکی (از ایستگاه به سمت بعد) حک می‌شوند */

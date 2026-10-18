@@ -24,7 +24,7 @@ SETUP = r"""
   +'svg.map{visibility:hidden}#world > div,#world > button,#fig,#boat{visibility:hidden}';
  document.head.appendChild(st);
  window.__vis=[];
- window.__show=(els,hid)=>{window.__vis.forEach(e=>e.style.visibility='');window.__vis=[];els.forEach(e=>{e.style.visibility='visible';window.__vis.push(e)});(hid||[]).forEach(e=>{e.style.visibility='hidden';window.__vis.push(e)})};
+ window.__show=(els,hid)=>{(window.__hid||[]).forEach(e=>e.style.display='');window.__hid=[];document.querySelector('svg.map').style.visibility='';window.__vis.forEach(e=>e.style.visibility='');window.__vis=[];els.forEach(e=>{e.style.visibility='visible';window.__vis.push(e)});(hid||[]).forEach(e=>{e.style.visibility='hidden';window.__vis.push(e)})};
  window.__layer=(id,mode)=>{ // کپی بنای ایستگاه بدون سایه/نور (مثل EXC در template)
   const svg=document.querySelector('svg.map'),g=svg.querySelector('g.node[data-id="'+id+'"]'),u=g.querySelector('use');
   const sym=document.querySelector(u.getAttribute('href')),vb=(sym.getAttribute('viewBox')||'0 0 200 190').split(/\s+/).map(Number);
@@ -37,6 +37,12 @@ SETUP = r"""
     if(mode==='pad'){if(!/_base$/.test(c.id))return;const eo=[...cl.querySelectorAll(':scope > path.eo')].slice(0,2);cl.innerHTML='';eo.forEach(p=>cl.appendChild(p))}
     tg.appendChild(cl)});
   svg.appendChild(tg);return tg};
+ window.__hid=[];
+ window.__only=(targets)=>{window.__show([]);
+  const keep=new Set(['defs','clipPath','filter','linearGradient','radialGradient','mask','style','symbol','pattern']);
+  const walk=(n)=>{[...n.children].forEach(c=>{if(keep.has(c.tagName))return;const hit=targets.some(t=>c===t||c.contains(t)),is=targets.includes(c);
+    if(is){return}if(hit){walk(c)}else{c.style.display='none';window.__hid.push(c)}})};
+  document.querySelector('svg.map').style.visibility='visible';walk(document.querySelector('svg.map'))};
  window.__clean=()=>document.querySelectorAll('[data-m=tmp]').forEach(x=>x.remove());
 }
 """
@@ -90,7 +96,7 @@ def main():
         pg.evaluate('()=>{__clean();const pr=document.getElementById("prints");[...pr.childNodes].forEach(g=>{g.style.display="";g.dataset.on="1";const e=g.firstChild;if(e)e.style.animation="none"})}')
         pg.evaluate('()=>__show([document.getElementById("prints")])'); mp = png(pg)
         # راه: فقط پر راه (چهارمین مسیر env_path)  + اسکله
-        pg.evaluate('()=>{const g=document.getElementById("env_path"),p=[...g.children];__show([g],p.filter((x,i)=>i!==3))}'); road = png(pg)
+        pg.evaluate('()=>{const g=document.getElementById("env_path");__only([g.children[1],g.children[3]])}'); road = png(pg)
         pg.evaluate('()=>{const jt=document.getElementById("jetty");__show([jt])}'); jet = png(pg)
         walk = road | jet
         dedge = ndi.distance_transform_edt(walk) / SC        # فاصلهٔ هر پیکسل راه تا نزدیک‌ترین پیکسل غیرراه
@@ -110,19 +116,18 @@ def main():
         if rep['prints']['bad_node']: rep['viol'].append('prints near node: %d' % len(rep['prints']['bad_node']))
         if rep['prints']['bad_road']: rep['viol'].append('prints outside road: %d' % len(rep['prints']['bad_road']))
         # ---- قفل‌ها
-        locks = pg.evaluate('''()=>[...document.querySelectorAll('svg.map g[transform]')].filter(g=>g.firstElementChild&&g.firstElementChild.tagName==='circle'&&g.firstElementChild.getAttribute('r')==='10').map(g=>{
-          const m=/translate\\(([-\\d.]+) ([-\\d.]+)\\)/.exec(g.getAttribute('transform'));const c=g.firstElementChild;return {x:+m[1],y:+m[2],fill:c.getAttribute('fill'),stroke:c.getAttribute('stroke'),sw:c.getAttribute('stroke-width'),filter:!!g.closest('[style*=filter]')}})''')
-        locks = [l for l in locks if l['y'] < H and any(abs(l['x']-pg.evaluate('NODES["%s"].x' % i))<60 and abs(l['y']-pg.evaluate('NODES["%s"].y' % i))<60 for i in LOCKED)]
-        for lk in locks:
-            nid = min(ids, key=lambda i: np.hypot(lk['x'] - pg.evaluate('NODES["%s"].x' % i), lk['y'] - pg.evaluate('NODES["%s"].y' % i)))
-            n = pg.evaluate('NODES["%s"]' % nid)
+        locks = pg.evaluate("""()=>[...document.querySelectorAll('svg.map g.lock')].map(g=>{const m=/translate\\(([-\\d.]+) ([-\\d.]+)\\)/.exec(g.getAttribute('transform'));const c=g.firstElementChild;
+          return {node:g.dataset.lock,x:+m[1],y:+m[2],fill:c.getAttribute('fill'),stroke:c.getAttribute('stroke'),sw:c.getAttribute('stroke-width')}})""")
+        for k, lk in enumerate(locks):
+            nid = lk['node']; n = pg.evaluate('NODES["%s"]' % nid)
             pg.evaluate('(i)=>{__clean();__show([__layer(i,"pad")])}', nid); pad = png(pg)
-            pg.evaluate('()=>{__clean();const g=[...document.querySelectorAll("svg.map g[transform]")].filter(g=>g.firstElementChild&&g.firstElementChild.tagName==="circle"&&g.firstElementChild.getAttribute("r")==="10");window.__lk=g}')
-            lk['node'] = nid; lk['dx'] = round(lk['x'] - n['x'], 1); lk['dy'] = round(lk['y'] - n['y'], 1)
-            pg.evaluate('(xy)=>{const g=__lk.find(g=>g.getAttribute("transform").includes("translate("+xy[0]+" "+xy[1]+")"));__show([g,...g.querySelectorAll("*")])}', [lk['x'], lk['y']]); lm = png(pg)
-            lk['off_pad_px'] = int((lm & ~ndi.binary_dilation(pad, iterations=0)).sum()); lk['edge_margin'] = round(float((ndi.distance_transform_edt(pad) / SC)[lm].min()), 1) if lm.any() else None
+            pg.evaluate('(k)=>{__clean();__show([document.querySelectorAll("svg.map g.lock")[k]])}', k); lm = png(pg)
+            lk['dx'] = round(lk['x'] - n['x'], 1); lk['dy'] = round(lk['y'] - n['y'], 1)
+            lk['off_pad_px'] = int((lm & ~pad).sum()); lk['edge_margin'] = round(float((ndi.distance_transform_edt(pad) / SC)[lm].min()), 1) if lm.any() else None
             lk['pad_colors'] = pg.evaluate('(i)=>{const g=document.querySelector(\'g.node[data-id="\'+i+\'"]\');const u=g.querySelector("use");const s=document.querySelector(u.getAttribute("href"));const b=s.querySelector("[id$=_base]");return [...b.querySelectorAll(":scope > path.eo")].slice(0,2).map(p=>p.getAttribute("fill"))}', nid)
             rep['locks'].append(lk)
+            if lk['off_pad_px'] > 0: rep['viol'].append('lock %s not fully on pad (%dpx)' % (nid, lk['off_pad_px']))
+        if len({(l['dx'], l['dy']) for l in rep['locks']}) > 1 or len({(l['fill'], l['stroke'], l['sw']) for l in rep['locks']}) > 1 or len({tuple(l['pad_colors']) for l in rep['locks']}) > 1: rep['viol'].append('locks/pad colors not uniform')
         if a.png:
             d = pathlib.Path(a.png); d.mkdir(exist_ok=True, parents=True)
             Image.fromarray((np.stack([allnode, mp, road], -1) * 255).astype('uint8')).save(d / 'masks.png')

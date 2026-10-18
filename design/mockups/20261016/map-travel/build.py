@@ -69,11 +69,15 @@ def map_parts():
     body = re.sub(r'<use href="#env_dec_city_(crate|sail|low)"[^>]*/>', '', body)      # جعبه و بادبان بی‌معنا بالای نقشه، خانهٔ خاکستری کنار راه
     body = body.replace('stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".34"', 'stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".6"')
     # ایستگاه نهایی M12 (کارگاه ماشین مرکب): در قاب، با قفل و برچسب
-    m12 = ('<g style="filter:saturate(1.6) brightness(1.1)"><g class="node" data-id="M12" filter="url(#env_wob)"><use href="#node_final_workshop" x="192" y="-25" width="160" height="152" /></g></g>'
-           '<g transform="translate(298 113)"><circle r="10" fill="#fff3c4" stroke="#241a5e" stroke-width="3"/><path d="M-3.6,-1 v-2.4 a3.6,3.6 0 0 1 7.2,0 v2.4" fill="none" stroke="#241a5e" stroke-width="2.4"/><rect x="-5.6" y="-1" width="11.2" height="8" rx="2" fill="#241a5e"/></g>')
-    m12lab = '<text x="272" y="158" text-anchor="middle" font-family="Lalezar" font-size="20" fill="#fff3c4" stroke="#241a5e" stroke-width="6" paint-order="stroke" stroke-linejoin="round">%s</text>' % STR['maptravel.node.M12']['text']
+    m12 = '<g style="filter:saturate(1.6) brightness(1.1)"><g class="node" data-id="M12" filter="url(#env_wob)"><use href="#node_final_workshop" x="192" y="-25" width="160" height="152" /></g></g>'
+    m12lab = '<text x="272" y="%.1f" text-anchor="middle" font-family="Lalezar" font-size="20" fill="#fff3c4" stroke="#241a5e" stroke-width="6" paint-order="stroke" stroke-linejoin="round">%s</text>' % (158 + LABEL_DY.get('M12', 0), STR['maptravel.node.M12']['text'])
     body = body.replace('<g id="env_zone_titles"', m12lab + '<g id="env_zone_titles"', 1)
     body = body.replace('<g id="env_labels"', m12 + '<g id="env_labels"', 1)
+    # قفل یکدست (مالک ۱۸ اکتبر): همهٔ قفل‌ها یک شکل، یک رنگ، یک جای نسبی روی لبهٔ راست-پایین سکو، کاملاً روی سکو
+    body, nlk = re.subn(r'<g transform="translate\([\d.]+ [\d.]+\)"><circle r="10" fill="#fff3c4"[^>]*/><path d="M-3\.6[^>]*/><rect x="-5\.6"[^>]*/></g>', '', body)
+    assert nlk == 3, nlk      # E04 E06 M11 از env_sheet
+    lk = ''.join('<g class="lock" data-lock="%s" transform="translate(%.1f %.1f)"><circle r="10" fill="#fff3c4" stroke="#241a5e" stroke-width="3"/><path d="M-3.6,-1 v-2.4 a3.6,3.6 0 0 1 7.2,0 v2.4" fill="none" stroke="#241a5e" stroke-width="2.4"/><rect x="-5.6" y="-1" width="11.2" height="8" rx="2" fill="#241a5e"/></g>' % (n, KIT_XY[n][0] + LOCK_DXY[0], KIT_XY[n][1] + LOCK_DXY[1]) for n in LOCKED)
+    body = body.replace('<g id="env_labels"', lk + '<g id="env_labels"', 1)
     body = body.replace('<text x="154" y="1016"', '<text x="100" y="1016"')   # برچسب M07 همراه سکو
     body = re.sub(r'(<text[^>]*?)>(انبار الوار|جرثقیل بندر)</text>', r'\1 word-spacing="9">\2</text>', body)   # D119: فاصلهٔ کلمات برچسب دیده شود
     # کارخانهٔ صنعتی ← کارخانهٔ کشتی‌سازی؛ میدان شهر ← بازارچهٔ شناور (دارایی‌های assets/)
@@ -113,12 +117,29 @@ def map_parts():
         assert a in body, a
         body = body.replace(a, b)
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
+    for nid, dy in LABEL_DY.items():
+        if nid == 'M12': continue
+        t = re.escape(STR['maptravel.node.' + nid]['text'] if ('maptravel.node.' + nid) in STR else LABEL_TITLE[nid])
+        body, c = re.subn(r'(<text x="[\d.]+" y=")([\d.]+)("[^>]*>%s</text>)' % t, lambda m: m.group(1) + ('%.1f' % (float(m.group(2)) + dy)) + m.group(3), body)
+        assert c == 1, (nid, c)
+    WAVE_AVOID[:] = [(x - 75, y - 50, x + 75, y + 38) for x, y in KIT_XY.values()] + [(346 - 30, 940, 380, 1040)]   # سکوها + اسکله
+    for m in re.finditer(r'<text x="([\d.]+)" y="([\d.]+)"[^>]*>([^<]+)</text>', body):
+        t = m.group(3)
+        if t in set(v['text'] for k, v in STR.items() if k.startswith('maptravel.node.') and k != 'maptravel.node.label') | set(LABEL_TITLE.values()):
+            cx, ly, w = float(m.group(1)), float(m.group(2)), 5.5 * len(t) + 14
+            WAVE_AVOID.append((cx - w, ly - 26, cx + w, ly + 12))
     return style, sprite, '<svg class="map" xmlns="http://www.w3.org/2000/svg" width="390" height="%d" viewBox="0 0 390 %d">%s</svg>' % (H, H, body), d
 
+LOCKED = ['E04', 'E06', 'M11', 'M12']
+LOCK_DXY = (42, 14)   # جای قفل نسبت به مرکز سکو
+LABEL_DY = {'E04': 2.5, 'E06': 7.5, 'M11': 2.5, 'M07': 11.5, 'M02': 15.0, 'E03': 5.0, 'M10': 8.0, 'M12': 5.5}   # جابه‌جایی عمودی برچسب هر ایستگاه (تنظیم با tools/measure_map.py؛ حداقل ۷px تا سکو/حلقه)
+LABEL_TITLE = {'M07': 'اسکله', 'M02': 'بارانداز', 'M08': 'جرثقیل بندر', 'E03': 'انبار الوار', 'M10': 'پیچ‌کاری', 'M09': 'چوب‌شکافی'}
 KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pier': 'M07', 'harbor_crane': 'M08', 'shipyard': 'M11', 'floating_market': 'E06', 'lighthouse': 'E04', 'final_workshop': 'M12'}
 KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (100, 959), 'M08': (266, 759), 'M11': (162, 524), 'E06': (300, 324), 'E04': (118, 192), 'M12': (272, 96)}   # مرکز سکو = مرکز گره
 M09_SH = '<ellipse cx=\"0\" cy=\"21\" rx=\"51\" ry=\"19.5\" fill=\"#10083a\" opacity=\".3\"/>'
 E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
+
+WAVE_AVOID = []
 
 def drop_waves(sprite):
     # R17: موج‌های مویی که روی نقطه‌چین مسیر دریایی می‌افتند حذف شوند
@@ -138,7 +159,9 @@ def drop_waves(sprite):
     extra = [(346, 938), (320, 906), (196, 925), (70, 949)]   # قوس لنگرگاه و بقیه (تقریب؛ فاصلهٔ ۲۲ کافی است)
     def bad(m):
         x, y = float(m.group(1)), float(m.group(2))
-        if y > 1000 or y < 0: return m.group(0)
+        if y < 0: return m.group(0)
+        if any(l[0] - 8 < x + 48 and x - 8 < l[2] and l[1] - 14 < y + 4 and y - 14 < l[3] for l in WAVE_AVOID): return ''   # R17-28: موج روی برچسب/سکو/اسکله نیفتد
+        if y > 1000: return m.group(0)
         return '' if any(min(abs(x + dx - px) ** 2 + (y - 3 - py) ** 2 for px, py in pts) < 20 ** 2 for dx in (0, 13, 26, 40)) else m.group(0)
     return re.sub(r'<path d="M([\d.]+),([\d.]+) q6\.6,-7\.7 13\.2,0 t13\.2,0 t13\.2,0"[^>]*/>', bad, sprite)
 
@@ -153,12 +176,21 @@ def add_assets(sprite):
     # D112 دور دوم: سایهٔ تیرهٔ M09 و E03 روی راه نیفتد (هنوز کمی بیرون سکو دیده شود)
     sprite = sprite.replace('<ellipse cx="7" cy="21" rx="60" ry="22.8" fill="#10083a" opacity=".3"/>', M09_SH)
     extra = extra.replace('<ellipse cx="7" cy="21" rx="55" ry="20.9" fill="#10083a" opacity=".3"/>', E03_SH)
+    a = extra.index('id="node_final_workshop"'); b2 = extra.index('</symbol>', a)
+    seg = extra[a:b2]
+    for o, n in (('fill="#8a7a2a" class="eo"', 'fill="#6c8fd6" class="eo"'), ('fill="#f4e6a0" class="eo"', 'fill="#a6bde8" class="eo"'), ('stroke="#d4c26a"', 'stroke="#d6e8ff"'), ('fill="#8f8bd6"', 'fill="#7b8fe0"'), ('<circle cx="58" cy="-16" r="3.5" fill="#8a7a2a"/>', '<circle cx="58" cy="-16" r="3.5" fill="#4d6fb0"/>')):
+        seg = seg.replace(o, n)
+    extra = extra[:a] + seg + extra[b2:]   # R17-25: جزیرهٔ قفل M12 هم‌رنگ بقیهٔ جزیره‌های قفل
+    # R17-15: مثلث‌ها و نقطهٔ ریز روی سکوها (سنگ‌ریزه) حذف
+    extra, npb = re.subn(r'<path d="M(?:14\.3,-23\.2|58\.6,5\.0)Q[^"]*"[^>]*/>|<circle cx="58" cy="-16" r="3\.5"[^>]*/>', '', extra)
+    print('pebbles removed', npb)
     # E03: چوب‌ها ۸px به چپ تا جای ایستادن فیگور کنار آن‌ها روی سکو بماند
     extra = extra.replace('<use href="#prop_03" x="40" y="72" width="120" height="100"/>', '<use href="#prop_03" x="32" y="72" width="120" height="100"/>')
     a = sprite.index('id="node_09"'); b = sprite.index('</symbol>', a)
     seg = sprite[a:b].replace('fill="#f4e6a0"', 'fill="#fff6cf"').replace('fill="#8a7a2a" class="eo"', 'fill="#5e4e14" class="eo"')
     sprite = sprite[:a] + seg + sprite[b:]
     sprite = re.sub(r'<rect x="[\d.]+" y="[\d.]+" width="[\d.]+" height="[\d.]+" rx="8" fill="#a98343" opacity="\.5"/>', '', sprite)   # R17: لکه‌های مستطیلی روی ماسه
+    sprite = re.sub(r'<polygon points="(?:34,-6 42,-2 38,-10|-40,-4 -33,0 -36,-8)" fill="#c98a45"[^>]*/>', '', sprite)   # R17-15/17: مثلث‌های ریز کنار کنده
     sprite = drop_waves(sprite)
     i = sprite.rindex('</svg>')
     return sprite[:i] + '<defs>' + extra + '</defs>' + sprite[i:]
