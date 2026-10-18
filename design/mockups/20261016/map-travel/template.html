@@ -26,8 +26,10 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .hit:focus-visible{outline:4px solid var(--gold)}
 .hit.shake{animation:sh .35s}
 @keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-#boat{position:absolute;left:0;top:0;width:130px;height:130px;display:none;pointer-events:none}
-#boat svg{display:block}
+#boat{position:absolute;left:0;top:0;width:130px;height:130px;display:block;pointer-events:none}
+#boat svg{display:block;animation:bob 4.2s ease-in-out infinite;transform-origin:50% 80%}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-2px) rotate(.8deg)}}
+@media (prefers-reduced-motion:reduce){#boat svg{animation:none}}
 .foam{position:absolute;left:0;top:0;width:26px;height:10px;margin:-5px 0 0 -13px;border-radius:50%;background:var(--cream);opacity:0;pointer-events:none}
 #fig{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
 #tilt{transform-origin:50% 58%}
@@ -81,21 +83,22 @@ const prints=document.createElementNS(NS,'g');prints.id='prints';(svgMap.querySe
 /* ردپا فقط پس از گذر از هر مرحله، از همان ایستگاه (روی سطح آن) تا ایستگاه بعد حک می‌شود (D99) */
 /* R17-09: اسکلهٔ چوبی از شن شروع می‌شود (y≈۱۰۶۸) و روی آب تا نوک ۹۵۶ می‌رود؛ پایه‌ها در آب؛ سکوی سنگی حذف شد. راه ساحلی زیر انتهای اسکله به آن می‌رسد.
    R17-07: پلهٔ سنگی کوچک (آپرون) راهِ بالای بارانداز را به لبهٔ سکوی M02 می‌چسباند. خط دور یک‌پارچه: اول همهٔ شکل‌ها با خط دور، بعد پر. */
-const JX=343,JTIP=956,JDOT=964,JEND=1070,BERTH=[314,964];
+const JX=343,JTIP=956,JDOT=964,JEND=1070,BERTH=[298,964];
 const jet=document.createElementNS(NS,'g');jet.id='jetty';jet.setAttribute('filter','url(#env_wob)');
 (function(){const Q=(x,y,w,h,r,f,sw)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+r+'" fill="'+f+'" stroke="#241a5e" stroke-width="'+sw+'" stroke-linejoin="round"/>';
- const x0=JX-13,w=26;let h='';
- /* پلهٔ سنگی بارانداز: دو پله، از راه (بالا) تا سطح سکو (پایین) */
- h+='<path d="M331,1066 L354,1066 C354,1080 357,1094 353,1105 C347,1112 326,1112 319,1105 C325,1094 331,1080 331,1066Z" fill="#cdbfc0" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round"/>';
- h+='<path d="M327,1086 Q342,1089 356,1086 M322,1097 Q338,1100 355,1097" stroke="#8c7d82" stroke-width="2.4" stroke-linecap="round" fill="none"/>';
- /* پایه‌های اسکله در آب (زیر عرشه) و سایهٔ روی آب */
- h+='<rect x="'+(x0+4)+'" y="962" width="'+(w)+'" height="84" rx="6" fill="#0c0838" opacity=".28"/>';
- [962,990,1018].forEach(y=>{[x0-3,x0+w+3].forEach(px=>{h+=Q(px-3.5,y-5,7,15,3,'#7a4a28',3)})});
- /* عرشه: از نوک تا شن */
- h+=Q(x0,JTIP,w,JEND-JTIP,5,'#c98f52',5.5);
- for(let y=JTIP+8;y<JEND-4;y+=9)h+='<path d="M'+(x0+3)+','+y+' H'+(x0+w-3)+'" stroke="#8a5a30" stroke-width="2.2" stroke-linecap="round"/>';
- /* دو تیرک کنار انتهای شنی و دو تیرک نوک */
- [[x0-3,1052],[x0+w+3,1052]].forEach(p=>{h+=Q(p[0]-3.5,p[1]-5,7,13,3,'#7a4a28',3)});
+ const x0=JX-13.5,w=27,DECK_END=1056;let h='';
+ /* R18: عرض عرشه = عرض راه (۳۳ با خط دور)؛ راه از زیر پله‌های ورودی ادامه می‌یابد و خط دورِ سرمه‌ای‌شان یکی است؛ پلهٔ سنگی حذف شد */
+ /* سایهٔ روی آب و پایه‌های کوچک چسبیده به لبهٔ عرشه */
+ h+='<rect x="'+(x0+3)+'" y="962" width="'+w+'" height="76" rx="6" fill="#0c0838" opacity=".28"/>';
+ [966,1004,1034].forEach(y=>{[x0-2,x0+w+2].forEach(px=>{h+=Q(px-3,y-5,6,11,3,'#7a4a28',2.6)})});
+ /* عرشه: از نوک تا ساحل */
+ h+=Q(x0,JTIP,w,DECK_END-JTIP,5,'#c98f52',5.5);
+ for(let y=JTIP+8;y<DECK_END-4;y+=9)h+='<path d="M'+(x0+3)+','+y+' H'+(x0+w-3)+'" stroke="#8a5a30" stroke-width="2.2" stroke-linecap="round"/>';
+ /* دو پلهٔ چوبی ورودی روی شن (رنگ روشن‌تر)، سپس راهِ سنگی ادامه دارد */
+ h+=Q(x0-.5,1050,w+1,12,4,'#d9a468',4.5)+Q(x0-.5,1060,w+1,12,4,'#e2b479',4.5);
+ /* پلکان کوچک چوبی هم‌رنگ اسکله در لبهٔ سکوی M02 (جهت راه: ۲۰ درجه) */
+ h+='<g transform="translate(339 1094) rotate(20)">'+Q(-14.5,-13,29,10,4,'#d9a468',4.5)+Q(-14.5,-4,29,10,4,'#c98f52',4.5)+'</g>';
+ /* ردپا روی عرشه فقط داخل عرض عرشه */
  jet.innerHTML=h})();
 prints.before(jet);
 /* ردپا (D99/D100/D101): هر ایستگاه یک سکوی بالا آمده است. ردپا از پهلوی سکو (جایی که دیواره باریک دیده می‌شود) روی سطح بالایی می‌رود،
@@ -103,7 +106,7 @@ prints.before(jet);
 const pd=n=>({rx:n.pad[0],ry:n.pad[1],w:n.pad[2],bh:n.pad[3]});
 const inOuter=(n,x,y)=>{const q=pd(n),dx=x-n.x,dy=y-n.y-q.w/2;return (dx/(q.rx+14))**2+(dy/(q.ry+q.w/2+12))**2<1};
 const inBuild=(x,y)=>Object.values(NODES).some(n=>{const q=pd(n);return Math.abs(x-n.x)<q.rx*.72&&y<n.y-q.ry*.5&&y>n.y-q.bh-q.ry});
-const onJetty=(x,y)=>x>JX-8&&x<JX+8&&y>JTIP+10&&y<JEND-10; /* جاده روی اسکله و سکوی فرود؛ دیوارهٔ سکو (۱۰۵۶ تا ۱۰۷۲) ردپا ندارد */
+const onJetty=(x,y)=>x>JX-7&&x<JX+7&&y>JTIP+12&&y<1052; /* جاده روی اسکله و سکوی فرود؛ دیوارهٔ سکو (۱۰۵۶ تا ۱۰۷۲) ردپا ندارد */
 const onWall=()=>false;
 function legPoly(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],sB=B.s;
  // فقط راهِ بیرون از سکوها؛ ردپا روی ایستگاه نمی‌افتد (D102)
@@ -157,14 +160,20 @@ const SEAT=27,FH=56;
 const scaleAt=()=>1;
 function setOutfit(sea){fimg.src=sea?IM.sailor:IM.construction}
 function placeFig(x,y){fig.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-100%)'}
-function placeBoat(x,y,r){boat.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-50%) rotate('+r+'deg)'}
+let boatAt=[0,0];
+function placeBoat(x,y,r){boatAt=[x,y];boat.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-50%) rotate('+r+'deg)'}
 function setTilt(rot,bob,sq){tilt.style.transform='rotate('+rot+'deg) translateY('+bob+'px)';fimg.style.transform='scaleY('+(sq||1)+')'}
-function showBoat(v){boat.style.display=v?'block':'none'}
+function showBoat(){boat.style.display='block'} /* R18: قایق همیشه دیده می‌شود؛ هیچ ظاهر/ناپدیدشدن ناگهانی */
+const berthPos=()=>[BERTH[0],BERTH[1]-SEAT-4];
+function boatTarget(id){const n=NODES[id];return isSea(n.y)?(()=>{const d=dock(n);return[d[0],d[1]-SEAT-4]})():berthPos()}
+/* قایق تنها (بدون کودک) آرام به جای تازه می‌رود؛ با reduce/skip فوری */
+async function moveBoat(to,ms){const a=boatAt.slice();if(Math.hypot(to[0]-a[0],to[1]-a[1])<1.5){placeBoat(to[0],to[1],0);return}
+ await tween(ms||900,p=>placeBoat(a[0]+(to[0]-a[0])*p,a[1]+(to[1]-a[1])*p,0),ease);placeBoat(to[0],to[1],0)}
 /* قایق کنار سکو در آب پهلو می‌گیرد؛ کودک روی سکو می‌ایستد (D104) */
 const dock=n=>{const q=pd(n),s=n.x<195?1:-1;return[n.x+s*(q.rx+30),n.y+q.w/2+6]};
 const stand=n=>n.st?[n.x+n.st[0],n.y+n.st[1]]:[n.x,n.y+pd(n).ry*.6]; /* جای ایستادن: جلوی سکو، پایین مرکز بیضی بالایی (جلوی بنا) */
 const padFig=stand;
-function putAt(id){const n=NODES[id],sea=isSea(n.y);setOutfit(sea);showBoat(sea);if(sea){const d=dock(n);placeBoat(d[0],d[1]-SEAT-4,0);const f=padFig(n);placeFig(f[0],f[1])}else{const f=stand(n);placeFig(f[0],f[1])}setTilt(0,0)}
+function putAt(id){const n=NODES[id],sea=isSea(n.y);setOutfit(sea);showBoat();const bt=boatTarget(id);placeBoat(bt[0],bt[1],0);{const f=padFig(n);placeFig(f[0],f[1])}setTilt(0,0)}
 const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
 function follow(y){if(skip||reduce)return;const t=y*k-sc.clientHeight*.55;sc.scrollTop=Math.max(0,t)}
 function tween(ms,fn,e){return new Promise(res=>{if(reduce||skip){fn(1);res();return}const t0=performance.now();(function f(t){if(skip){fn(1);res();return}const p=Math.min(1,Math.max(0,(t-t0)/ms));fn(e?e(p):p);p<1?requestAnimationFrame(f):res()})(t0)})}
@@ -194,18 +203,19 @@ async function travel(a,b){const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=i
  if(seaB){const rl=runs[runs.length-1];if(rl.m)rl.pts=[...rl.pts.filter(p=>!inOuter(NB,p[0],p[1])),dock(NB)]}
  for(const r of runs){
   if(r.m!==sea){const p0=r.pts[0];
-   if(r.m){const f0=pts_last_land(runs,r);setOutfit(true);showBoat(true);placeBoat(BERTH[0],BERTH[1]-SEAT-4,0);await hopTo(f0,[BERTH[0],BERTH[1]-4],18);r.pts=[BERTH,...r.pts.filter(p=>p[0]<BERTH[0]-1&&p[1]<JDOT+2)]}
-   else{await hopTo([p0[0],p0[1]-4],p0,18);setOutfit(false);showBoat(false)}
+   if(r.m){const f0=pts_last_land(runs,r);setOutfit(true);await moveBoat(berthPos(),500);await hopTo(f0,[BERTH[0],BERTH[1]-4],18);r.pts=[BERTH,...r.pts.filter(p=>p[0]<BERTH[0]-1&&p[1]<JDOT+2)]}
+   else{await hopTo([p0[0],p0[1]-4],p0,18);setOutfit(false);moveBoat(berthPos(),1400)}
    sea=r.m}
   if(r.m)await sail(r.pts);else await walk(r.pts)}
- const e=NODES[b];if(!isSea(e.y)){setOutfit(false);showBoat(false);const f=stand(e);placeFig(f[0],f[1])}
- else{const d=dock(e),f=padFig(e);placeBoat(d[0],d[1]-SEAT-4,0);await hopTo([d[0],d[1]-4],f,16);placeFig(f[0],f[1])}}
+ const e=NODES[b];if(!isSea(e.y)){setOutfit(false);await moveBoat(berthPos(),900);const f=stand(e);placeFig(f[0],f[1])}
+ else{const d=dock(e),f=padFig(e);await moveBoat([d[0],d[1]-SEAT-4],500);await hopTo([d[0],d[1]-4],f,16);placeFig(f[0],f[1])}}
 /* پرش دراماتیک به جای قبلاً‌رفته (D86): یک پرش بلند با چرخش و له‌شدن؛ حدود نیم‌ثانیه */
 async function dramatic(a,b){const A=NODES[a],B=NODES[b],seaB=isSea(B.y),dist=Math.hypot(B.x-A.x,B.y-A.y),hgt=Math.min(260,90+dist*.18);
  const y0=stand(A)[1],y1=stand(B)[1];
  await tween(150,p=>{setTilt(0,0,1-.18*Math.sin(p*Math.PI/2))});
- await tween(520,p=>{const x=A.x+(B.x-A.x)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
- setOutfit(seaB);showBoat(seaB);if(seaB){const d=dock(B);placeBoat(d[0],d[1]-SEAT-4,0)}
+ const b0=boatAt.slice(),bt=boatTarget(b),sameB=Math.hypot(bt[0]-b0[0],bt[1]-b0[1])<1.5;
+ await tween(520,p=>{if(!sameB)placeBoat(b0[0]+(bt[0]-b0[0])*p,b0[1]+(bt[1]-b0[1])*p,0);const x=A.x+(B.x-A.x)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
+ setOutfit(seaB);placeBoat(bt[0],bt[1],0);
  await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(stand(B)[0],y1)}
 async function run(fn){if(busy)return;busy=true;skip=false;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}
 function status(){$('st').textContent=T('here').replace('%s',NODES[here].title||'')||T('hint')}

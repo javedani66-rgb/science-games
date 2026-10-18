@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ایستگاه «فانوس دریایی» (E04): قهرمان = برج راه‌راه با اتاقک چراغ، سکوی دریایی.
-لایهٔ متحرک node_lighthouse_light = دو پرتو چپ و راست (چشمک: روشن/خاموش، بدون خروج از سکو).
+لایه‌های متحرک node_lighthouse_beam_l و node_lighthouse_beam_r = پرتوهای چپ و راست (یکی‌درمیان/جاروب حول اتاقک).
 برج و اتاقک چراغ ثابت و کامل زیر پرتو."""
 import sys, pathlib, json
 HERE = pathlib.Path(__file__).resolve().parent
@@ -11,13 +11,13 @@ OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/lighthouse'
 import functools, station_kit as _k   # D122/D123: حاشیهٔ چپ/راست ≥۴px (بدون دست‌زدن به کیت)
 _k.margin_check = functools.partial(_k.margin_check, min_margin=4); _k.motion_check = functools.partial(_k.motion_check, min_margin=4)
-XF = (1.0, -18.0, 0.0)             # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
+XF = (1.0, -22.0, 0.0)             # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 RED = '#ef6a4a'; RED_D = '#c9452c'; WHITE = '#fffaf0'; WHITE_D = '#e6dcf0'; GLASS = '#ffd84d'; GLASS_D = '#d9961c'; ROOF = '#ef6a4a'
 BEAM = '#ffe45c'; ROCK = '#c9c2e6'; ROCK_D = '#8f88c4'; ROCK_L = '#ece8ff'; DOOR = '#7a3a12'; SEA_W = '#d6e8ff'
 YB, YT = -8, -58           # پای برج، بالای برج
 WB, WT = 26, 17            # نیم‌پهنای پایین/بالا
 LY = -80                   # ارتفاع مرکز اتاقک چراغ
-BX = 47                    # دورترین نقطهٔ پرتوها از محور
+BX = 40                    # دورترین نقطهٔ پرتوها از محور
 
 
 def hw(y): return WB + (WT - WB) * (y - YB) / (YT - YB)
@@ -32,11 +32,11 @@ def build(out=OUTD):
     p = Pen('lighthouse', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
     p.tipshadow(0, 15, 38); p.foot_tip(0, 15, 18)
-    # پرتوها (لایهٔ متحرک): هر طرف یک پرتوی کوتاه افقی و یک پرتوی بلند رو به بالا؛ متقارن حول محور برج
-    with layer(p, 'light'):
-        for s_ in (-1, 1):
-            poly(p, [(s_ * 11, LY - 2), (s_ * 30, LY - 8), (s_ * 30, LY + 5), (s_ * 11, LY + 2)], BEAM, .95)
-            poly(p, [(s_ * 11, LY - 8), (s_ * BX, LY - 38), (s_ * (BX + 2), LY - 20)], BEAM, .95)
+    # دو پرتو، دو لایهٔ جدا (چپ/راست)، پشت اتاقک چراغ؛ از مرکز اتاقک (0, LY) شروع می‌شوند تا scaleX/opacity حول همان مرکز انجام شود
+    for nm, s_ in (('beam_l', -1), ('beam_r', 1)):
+        with layer(p, nm):
+            poly(p, [(s_ * 4, LY - 7), (s_ * BX, LY - 34), (s_ * BX, LY + 6), (s_ * 4, LY + 7)], BEAM, .95)
+            poly(p, [(s_ * 14, LY - 3), (s_ * (BX - 4), LY - 12), (s_ * (BX - 4), LY + 4), (s_ * 14, LY + 3)], '#fffbd0')   # هستهٔ روشن
     # صخرهٔ پایه: سنگ اصلی + دو سنگ کوچک
     p.shape([(-35, 16), (-33, 2), (-22, -8), (22, -8), (33, 2), (35, 16)], ROCK, PART, j=.3, step=99)
     p.ln((-22, 8), (-6, 3), INNER, ROCK_D, j=.1); p.ln((10, 4), (26, 10), INNER, ROCK_D, j=.1); p.ln((-26, -1), (-16, -4), INNER, ROCK_L, j=.1)
@@ -67,10 +67,17 @@ STAND = None     # خودکار: find_stand
 
 if __name__ == '__main__':
     p = build()
-    r = finish(p, 'lighthouse', STAND, motion={'light': dict(offsets=[(0, 0)])}, out=OUTD, shots=SHOTS)
-    ax = p.X((0, 0))[0]; xl = p.X((-BX, 0))[0]; xr = p.X((BX, 0))[0]       # تقارن پرتوها حول محور برج
-    sym_err = round(abs((ax - xl) - (xr - ax)), 3)
-    sp = r['spec']; sp['motion_spec'] = dict(kind='blink', note='پرتوها با opacity روشن/خاموش؛ بدنه و اتاقک ثابت', beams_symmetry_error=sym_err)
-    assert sym_err < .01
+    r = finish(p, 'lighthouse', STAND, motion={'beam_l': dict(offsets=[(0, 0)]), 'beam_r': dict(offsets=[(0, 0)])}, out=OUTD, shots=SHOTS)
+    cx, cy = p.X((0, LY)); ax = p.X((0, 0))[0]
+    sym_err = round(abs((ax - p.X((-BX, 0))[0]) - (p.X((BX, 0))[0] - ax)), 3); assert sym_err < .01
+    sp = r['spec']
+    sp['motion_spec'] = {
+        'pivot': [round(cx, 1), round(cy, 1)],
+        'note': 'برج، بالکن و اتاقک چراغ (شیشه+سقف+گوی) ثابت و کاملند؛ دو پرتو پشت اتاقک‌اند و از مرکز اتاقک شروع می‌شوند. نیم‌سر چرخان وجود ندارد؛ پرتوها جاروب می‌شوند.',
+        'node_lighthouse_beam_l': dict(transform_origin=[round(cx, 1), round(cy, 1)], mode_alternate='opacity 1→0.12 و برگشت', mode_sweep='scaleX 1→0.25 (حول مرکز اتاقک) همراه opacity 1→0.3', cycle_s=2.4, phase='شروع در 0'),
+        'node_lighthouse_beam_r': dict(transform_origin=[round(cx, 1), round(cy, 1)], mode_alternate='همان، با نیم‌چرخه جابه‌جایی (delay 1.2s) تا یکی‌درمیان روشن شوند', mode_sweep='همان با delay 1.2s', cycle_s=2.4, phase='delay 1.2s'),
+        'bounds': 'حالت ایستا بیشینهٔ گسترش است؛ هر حالت دیگر زیرمجموعهٔ آن است پس بیرون‌زدگی ندارد (motion_check با حالت ایستا)',
+        'reduced_motion': 'هر دو پرتو ثابت و روشن',
+        'beams_symmetry_error': sym_err}
     (OUTD / 'lighthouse.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
-    print(json.dumps(r, ensure_ascii=False, indent=1))
+    print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))
