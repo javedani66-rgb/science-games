@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-"""ایستگاه «کارخانهٔ کشتی‌سازی» (بازطراحی ۱۸ اکتبر شب، D125): بدنهٔ نیمه‌ساختهٔ کشتی (دنده‌های باز + چند تخته) روی سکوی ساخت، داربست با نردبان، چکش و تخته‌های آماده؛ فقط دکل لخت.
-لایهٔ متحرک node_shipyard_hammer (چکش). ----- توضیح قدیمی: 
-بدنهٔ منحنی (هلال)، دکل مستقیم، یک بادبان مثلثی ساده. پایه‌ها ثابت‌اند و تا زیر بدنه بالا آمده‌اند.
-لایهٔ متحرک node_shipyard_hull = بدنه + دکل + بادبان؛ فقط کمی بالا و پایین می‌رود (پایه‌ها همیشه زیر بدنه کامل‌اند)."""
+"""ایستگاه «کارگاه کشتی‌سازی» (D127): کشتی چوبی کامل از کنار (بدنهٔ بلند، دماغهٔ بالا‌آمده، دکل، بادبان روشن، پرچم) روی سه پایهٔ لغزان کوتاه؛ چکش و یک تخته جلوی آن.
+لایهٔ متحرک node_shipyard_hammer (چکش)."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
@@ -32,67 +30,71 @@ def poly(p, pts, col):
     p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col))
 
 
-# بدنه: کشتی چوبی بلند از کنار؛ دماغهٔ بالا‌آمده چپ، پاشنه راست. u از 0 (دماغه) تا 1 (پاشنه)
-HX0, HX1 = -64, 14
-PLANK2 = '#f7b36a'; SEAM_C = '#c9692a'
-def top_(u): return (HX0 + (HX1 - HX0) * u, -26 - 18 * (1 - u) ** 2.2)
-def bot_(u): return (HX0 + (HX1 - HX0) * u, 10 - 30 * (1 - u) ** 3 - 8 * u ** 4)
-def at(u, f):
-    (x0, y0), (x1, y1) = bot_(u), top_(u); return (x0 + (x1 - x0) * f, y0 + (y1 - y0) * f)
-def us_(a, b, n=10): return [a + (b - a) * i / n for i in range(n + 1)]
+# D127 (۱۹ اکتبر): کشتی چوبی کامل از کنار روی سه پایهٔ لغزان کوتاه؛ دماغهٔ بالا‌آمده (چپ)، دکل، بادبان روشن و پرچم. چکش و یک تخته جلوی پایه‌ها.
+PLANK2 = '#f7b36a'; SEAM_C = '#c9692a'; CREAM_ = '#fff3c4'
+BOW = (-82, -52); STERN = (24, -38); KEEL_B = (-60, -2); KEEL_S = (16, -3)
+MX, MTOP = -24, -120
 
 
-def cradles(p):
-    """سه پایهٔ نگه‌دارندهٔ ساخت زیر کیل."""
-    for u in (.28, .58, .88):
-        x, y = bot_(u)
-        p.tipshadow(x, 18, 9)
-        p.shape([(x - 6, y - 4), (x + 6, y - 4), (x + 8, 18), (x - 8, 18)], WOOD, INNER, j=.2, step=8, clip=False)
+def sheer():
+    return bez(BOW, (-62, -30), (-30, -30)) + bez((-30, -30), (-4, -31), STERN)[1:]
 
 
-def boat(p):
-    """نیمهٔ جلو تختهٔ کامل (ردیف تخته + میخ)، نیمهٔ عقب فقط پنج دندهٔ زرد روی درونِ تیره؛ دکل لخت کوتاه."""
-    p.ln((-22, -20), (-22, -66), PART, MAST, j=.1, probe='دکل (جزء)')
-    p.shape([(-22, -66), (-10, -62), (-22, -58)], FLAG, INNER, j=.1, step=99, clip=False)
-    sil = [top_(u) for u in us_(0, 1, 14)] + [bot_(u) for u in us_(1, 0, 14)]
-    p.shape(sil, DARK, PART, j=.15, step=99, clip=False)
-    for u in (.60, .70, .80, .90, .985):                                  # دنده‌های باز (عقب)
-        (xa, ya), (xb, yb) = at(u, 1.02), at(u, -.02)
-        poly(p, [(xa - 3, ya), (xa + 3, ya), (xb + 3, yb), (xb - 3, yb)], RIB)
-    p.ln(top_(.56), top_(1), INNER, RIB, j=0)                              # لبهٔ بالای عقب
-    ext = [.58, .50, .58, .50]                                            # ردیف‌های تخته، پله‌ای
-    for k, ue in enumerate(ext):
-        f0, f1 = k / 4, (k + 1) / 4
-        pts = [at(u, f0) for u in us_(0, ue, 10)] + [at(u, f1) for u in us_(ue, 0, 10)]
-        poly(p, pts, PLANK if k % 2 == 0 else PLANK2)
-        if k: p.raw('<path d="M%s" fill="none" stroke="%s" stroke-width="2.2" stroke-linecap="round"/>' % (' L'.join('%.1f,%.1f' % q for q in p.X([at(u, f0) for u in us_(.03, ue, 10)])), SEAM_C))
-        for u in (.12, .3, .46):
-            if k % 2 == 0: p.raw('<circle cx="%.1f" cy="%.1f" r="1.6" fill="%s"/>' % (*p.X(at(u, (f0 + f1) / 2)), DARK))
-    p.shape(sil, 'none', PART, j=.15, step=99, clip=False)
+def hull_pts():
+    keel = bez(KEEL_S, (-20, 3), KEEL_B)[1:]
+    stem = bez(KEEL_B, (-86, -4), BOW)[1:]
+    return sheer() + [(19, -18), KEEL_S] + keel + stem
+
+
+def slipway(p):
+    """سه پایهٔ لغزان کوتاه زیر کیل + تیر طولی زیرین."""
+    for x in (-50, -22, 6):
+        p.tipshadow(x, 20, 9)
+        p.shape([(x - 5, -1), (x + 5, -1), (x + 7, 14), (x - 7, 14)], WOOD, INNER, j=.2, step=8, clip=False)
+    p.shape([(-64, 12), (18, 10), (20, 19), (-66, 21)], WOOD_D, INNER, j=.2, step=99, clip=False)
+    p.ln((-60, 14), (12, 12.5), INNER, WOOD_L, j=0)
+
+
+def ship(p):
+    # بادبان‌ها (پشت دکل)
+    p.shape([(MX + 3, -112), (MX + 9, -104)] + bez((MX + 9, -104), (26, -86), (16, -52))[1:] + [(MX + 3, -50)], CREAM_, PART, j=.2, step=99, clip=False)
+    p.shape([(MX - 3, -108), (MX - 3, -52), (-74, -54)], '#fffaf0', PART, j=.2, step=99, clip=False)
+    p.ln((MX, -52), (16, -50), PART, MAST, j=0)                                                                                 # تیر پایین بادبان
+    p.ln((MX, -28), (MX, MTOP), PART, MAST, j=.1, probe='دکل (جزء)')                                                             # دکل
+    p.shape([(MX, MTOP), (MX + 24, MTOP + 7), (MX, MTOP + 14)], FLAG, INNER, j=.1, step=99, clip=False)                       # پرچم
+    # بدنهٔ بلند
+    p.shape(hull_pts(), PLANK, PART, j=.15, step=99, clip=False)
+    T = sheer()
+    p.raw('<path d="M%s" fill="none" stroke="%s" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>' % (' L'.join('%.1f,%.1f' % q for q in p.X([(x + 1, y + 5) for x, y in T[3:]])), DARK))   # لبهٔ تیرهٔ عرشه
+    for d, xmax in ((11, 12), (18, 4)):                                                                                        # درز تخته‌ها
+        p.raw('<path d="M%s" fill="none" stroke="%s" stroke-width="2.4" stroke-linecap="round"/>' % (' L'.join('%.1f,%.1f' % q for q in p.X([(x, y + d) for x, y in T[4:] if x < xmax])), SEAM_C))
+    for x in (-52, -28, -4):                                                                                                    # سه روزنه
+        y = min(q[1] for q in T if abs(q[0] - x) < 4) + 11
+        p.raw('<circle cx="%.1f" cy="%.1f" r="3.6" fill="%s"/>' % (*p.X((x, y)), CREAM_))
 
 
 def hammer(p):
-    """چکش بزرگ خوابیده روی کف جلوی پایه‌ها: سر آبی‌خاکستری چپ، دستهٔ چوبی."""
-    p.ln((-22, 26), (0, 26), PART, WOOD_D, j=0)
-    p.shape([(-34, 20), (-21, 20), (-21, 32), (-34, 32)], '#aab3d9', INNER, j=.1, step=99, clip=False)
+    """چکش خوابیده روی کف جلوی پایه‌ها: سر آبی‌خاکستری، دستهٔ چوبی."""
+    p.ln((-46, 27), (-22, 27), PART, WOOD_D, j=0)
+    p.shape([(-58, 21), (-45, 21), (-45, 33), (-58, 33)], '#aab3d9', INNER, j=.1, step=99, clip=False)
 
 
 def boards(p):
-    """تختهٔ آماده روی کف کنار چکش."""
-    poly(p, [(6, 22), (26, 22), (28, 28), (4, 28)], PLANK2); rect(p, 5, 26, 27, 28, SEAM_C)
+    """یک تخته روی کف کنار چکش."""
+    poly(p, [(-12, 22), (14, 22), (17, 30), (-15, 30)], PLANK2); rect(p, -13, 28, 15, 30, SEAM_C)
 
 
 def build(out=OUTD):
-    p = Pen('shipyard', 'sea'); pad(p, line=((44, 30), (62, 27)), tri=((18, -22), (62, 6)), dot=(58, -16))
+    p = Pen('shipyard', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    cradles(p)
-    boat(p)
+    slipway(p)
+    ship(p)
     boards(p)
     with layer(p, 'hammer'): hammer(p)
     return p
 
 
-XF = (1.0, 0.0, -4.0)
+XF = (0.94, 5.0, -1.2)
 HAMMER_LIFT = 5
 
 STAND = None

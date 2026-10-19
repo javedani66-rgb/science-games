@@ -2,14 +2,14 @@
  "id": "harbor_crane",
  "kind": "sea",
  "pad": [
-  54.7,
-  27.4,
+  66.2,
+  31.7,
   11.5,
   92
  ],
  "stand": [
-  31.5,
-  5.5
+  37.5,
+  4.0
  ],
  "ring": [
   0,
@@ -20,7 +20,7 @@
   "node_harbor_crane_hook"
  ],
  "inside_pad": {
-  "min_margin_px": 5.8,
+  "min_margin_px": 13.8,
   "base_on_pad": true,
   "height_px": 104.2,
   "bbox_px": [

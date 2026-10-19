@@ -14,7 +14,7 @@ station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/v2/wheel_dock'
-XF = (1.0, 6.0, -10.0)
+XF = (1.23, 12.4, -13.2)
 BED = '#c98a3a'; BED_L = '#e8b25a'; BED_D = '#8a5f0c'; WOOD_H = '#ffd84d'
 CR_A = '#ffd84d'; CR_A_D = '#d9961c'; CR_B = '#f59a3a'; CR_B_D = '#b4620f'; CR_C = '#52c7c0'; CR_C_D = '#2a8f8a'
 BAR = '#a8672f'; BAR_L = '#d29255'; IRON = '#c9d3ea'

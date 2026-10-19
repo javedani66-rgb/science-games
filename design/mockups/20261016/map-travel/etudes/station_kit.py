@@ -16,7 +16,10 @@ import math, random, json, pathlib
 from contextlib import contextmanager
 
 HERE = pathlib.Path(__file__).resolve().parent
-K = .72                                   # مقیاس نماد روی نقشه (144px از 200)
+SET_SCALE = 1.0                           # ضریب یکِ کل مجموعه (سکو+نماد+فیگور) روی نقشه؛ برای کوچک‌تر کردن همه، فقط این عدد را کم کن (مثلاً 0.9)
+K = .72 * SET_SCALE                       # مقیاس نماد روی نقشه (۱۴۴px از ۲۰۰ در SET_SCALE=1)
+MAP_W = round(200 * K)                    # پهنای رندر نماد روی نقشه (px)
+PAD_RX, PAD_RY, PAD_WALL = 92, 44, 16     # D127: اندازهٔ سکوی یکسان همهٔ ایستگاه‌ها (واحد symbol)؛ قبلاً 76/38/16
 OUT, PART, INNER = 7.6, 5.8, 3.9         # ضخامت اسمی (واحد symbol)؛ ×۰٫۷۲ ⇒ روی نقشه ≈ 5.5 / 4.2 / 2.8px (هم‌قطر مرجع M09 و راه، D113)
 SEAM = INNER                              # درز ریز هم‌اندازهٔ داخلی (حداقل 2.5px نقشه)
 SHADOW_SX = .96                           # کمی باریک‌تر تا نوک‌های چپ و راست بیرون نزنند
@@ -33,6 +36,7 @@ def fig_footprint(dsf):
     """پوشهٔ فیگور (با هاله) به‌صورت آرایهٔ بولی؛ لنگر = وسط ردیف آخر (کف). برمی‌گرداند (آرایه، ردیف_لنگر، ستون_لنگر)."""
     import numpy as np
     from scipy.ndimage import distance_transform_edt as edt
+    dsf = dsf * SET_SCALE                                  # فیگور هم با ضریب مجموعه کوچک می‌شود
     h = int(round(2 * dsf)); halo = int(math.ceil(FIG_HALO * dsf)) + 2
     R = len(FIG_ROWS) * h; Wd = int(40 * dsf) | 1
     raw = np.zeros((R + 2 * halo, Wd + 2 * halo), bool); c = raw.shape[1] // 2
@@ -100,7 +104,7 @@ def TP(f, pts): return [f(p) for p in pts]
 
 # ---------------- قلم ----------------
 class Pen:
-    def __init__(s, station_id, kind='land', rx=76, ry=38, wall=16):
+    def __init__(s, station_id, kind='land', rx=PAD_RX, ry=PAD_RY, wall=PAD_WALL):
         assert kind in PALETTES, 'kind باید land یا sea باشد'
         s.id = s.uid = station_id; s.kind = kind; s.rx, s.ry, s.wall = rx, ry, wall
         s.ntop = s.npad = 0; s.o = []; s.clip = []; s.k = 0; s.probes = []; s.foot = []; s.layers = {}
@@ -229,7 +233,7 @@ def symbol(pen, name, motion_layers=(), out=None, legacy_shadow=False):
     return sym
 
 
-def preview(sym, name, w=144, tall=False):
+def preview(sym, name, w=MAP_W, tall=False):
     """صفحهٔ svg مستقل برای دیدن نماد (با STYLE). w = پهنای نمایش؛ ۱۴۴ = اندازهٔ نقشه."""
     vh = 222.2 if tall else 190     # tall: دیوارهٔ سکو زیر خط ۱۹۰ بریده نشود (فقط برای شات)
     return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 %s" width="%s" height="%s"><style>%s</style>%s'
@@ -264,7 +268,7 @@ def _browser():
     return _PW['b']
 
 
-def _shot(body, dsf=4, bg=None, w=144, h=160):
+def _shot(body, dsf=4, bg=None, w=MAP_W, h=round(160 * SET_SCALE)):
     """body: محتوای svg (سطر بالا مثل symbol؛ پایین بلندتر تا دیوارهٔ سکو بریده نشود) → آرایهٔ RGBA. هر px نقشه = dsf پیکسل."""
     import numpy as np, io
     from PIL import Image
@@ -319,7 +323,7 @@ def margin_check(pen, stand=None, dsf=4, min_margin=8, min_stand=10, save=None, 
         fig = _place_fig(top.shape, sx, sy, dsf)
         res['stand_to_hero'] = round(float(edt(~fig)[hero].min()) / dsf, 1) if hero.any() else 99
         dtop = edt(top)
-        pts = [(int(sy), int(sx + k * dsf)) for k in FIG_FEET]
+        pts = [(int(sy), int(sx + k * dsf * SET_SCALE)) for k in FIG_FEET]
         res['stand_to_pad_edge'] = round(min(float(dtop[a, b]) for a, b in pts) / dsf, 1)
         res['stand_on_pad'] = all(bool(top[a, b]) for a, b in pts)
     ok = res['out_px'] == 0 and (res['x_margin'] or 0) >= min_margin and res['shadow_on_road_px'] == 0
@@ -374,7 +378,7 @@ def find_stand(pen, motion=None, dsf=2, gmax=24):
         elif sh < 0: Rs[:sh] = C[-sh:]
         else: Rs = C
         F = np.ones_like(Rs)
-        for k in FIG_FEET: F &= np.roll(Dt >= g, -int(k * dsf), axis=1)
+        for k in FIG_FEET: F &= np.roll(Dt >= g, -int(k * dsf * SET_SCALE), axis=1)
         return Rs & F
     best = None; lo, hi = 0.0, float(gmax)
     if not feasible(0).any(): return ((0, 0), -1)
@@ -498,8 +502,8 @@ def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), 
         shots = pathlib.Path(shots); shots.mkdir(parents=True, exist_ok=True)
         b = _browser()
         for tag in ('map', 'big'):
-            pg = b.new_page(device_scale_factor=4 if tag == 'big' else 2, viewport={'width': 144 * (3 if tag == 'big' else 1), 'height': 160 * (3 if tag == 'big' else 1)})
-            pg.set_content(('<body style="margin:0;background:#c9a35c">' + preview(sym, name, 144 * (3 if tag == 'big' else 1), tall=True)))
+            pg = b.new_page(device_scale_factor=4 if tag == 'big' else 2, viewport={'width': MAP_W * (3 if tag == 'big' else 1), 'height': round(160 * SET_SCALE) * (3 if tag == 'big' else 1)})
+            pg.set_content(('<body style="margin:0;background:#c9a35c">' + preview(sym, name, MAP_W * (3 if tag == 'big' else 1), tall=True)))
             pg.screenshot(path=str(shots / ('%s_%s.png' % (name, tag)))); pg.close()
     sp['inside_pad'] = ic; (pathlib.Path(out) if out else HERE / 'stations').joinpath('%s.json' % name).write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     r = dict(name=name, kind=pen.kind, margin=m, motion=mo, widths=w, inside=ic, spec=sp, ok=bool(m['ok'] and ic['ok'] and all(x['ok'] for x in mo) and all(x['ok'] for x in w)))

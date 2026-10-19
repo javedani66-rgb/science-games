@@ -8,7 +8,7 @@ HERE = pathlib.Path(__file__).resolve().parent     # station_kit.HERE (etudes/) 
 
 import functools, station_kit as _k   # D122/D123: حاشیهٔ چپ/راست ≥۴px (بدون دست‌زدن به کیت)
 _k.margin_check = functools.partial(_k.margin_check, min_margin=4); _k.motion_check = functools.partial(_k.motion_check, min_margin=4)
-XF = (1.0, -25.2, 0.0)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
+XF = (1.19, -26.8, -2.7)            # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 BLUE = '#8fb5f2'; PURP = '#8f8bd6'; HEAD_S = '#d6e8ff'; HEAD_T = '#f1f8ff'; THREAD = '#ffe08a'
 NUT_T = '#ffd84d'; NUT_L = '#f2b92c'; NUT_R = '#d9961c'; NUT_H = '#8a5f0c'
 

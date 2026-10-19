@@ -14,7 +14,7 @@ station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/v2/lumber'
-XF = (1.0, -5.0, 3.0)
+XF = (1.22, -2.1, -0.1)
 BARK = '#a8672f'; BARK_L = '#d29255'; BARK_D = '#7a4a1f'; FACE = '#f2cf8e'; FACE_L = '#fbe3b0'; RING = '#c98f4a'; PITH = '#8a4f1f'; ROPE = '#fff3c4'
 WOOD = '#7a4a1c'; WOOD_L = '#a8703c'
 

@@ -11,7 +11,7 @@ OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/lighthouse'
 import functools, station_kit as _k   # D122/D123: حاشیهٔ چپ/راست ≥۴px (بدون دست‌زدن به کیت)
 _k.margin_check = functools.partial(_k.margin_check, min_margin=4); _k.motion_check = functools.partial(_k.motion_check, min_margin=4)
-XF = (1.0, -22.0, 0.0)             # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
+XF = (1.25, -26.7, -3.5)             # قاب قهرمان: (مقیاس هندسه، dx، dy) در واحد symbol؛ ضخامت خط ثابت می‌ماند
 RED = '#ef6a4a'; RED_D = '#c9452c'; WHITE = '#fffaf0'; WHITE_D = '#e6dcf0'; GLASS = '#ffd84d'; GLASS_D = '#d9961c'; ROOF = '#ef6a4a'
 BEAM = '#ffe45c'; ROCK = '#c9c2e6'; ROCK_D = '#8f88c4'; ROCK_L = '#ece8ff'; DOOR = '#7a3a12'; SEA_W = '#d6e8ff'
 YB, YT = -8, -58           # پای برج، بالای برج

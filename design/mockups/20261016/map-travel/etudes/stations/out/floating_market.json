@@ -2,14 +2,14 @@
  "id": "floating_market",
  "kind": "sea",
  "pad": [
-  54.7,
-  27.4,
+  66.2,
+  31.7,
   11.5,
   96
  ],
  "stand": [
-  31.5,
-  5.0
+  37.5,
+  4.0
  ],
  "ring": [
   0,
@@ -20,7 +20,7 @@
   "node_floating_market_boat"
  ],
  "inside_pad": {
-  "min_margin_px": 5.8,
+  "min_margin_px": 13.5,
   "base_on_pad": true,
   "height_px": 110.5,
   "bbox_px": [

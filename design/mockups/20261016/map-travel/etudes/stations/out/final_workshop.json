@@ -2,14 +2,14 @@
  "id": "final_workshop",
  "kind": "land",
  "pad": [
-  54.7,
-  27.4,
+  66.2,
+  31.7,
   11.5,
-  80
+  84
  ],
  "stand": [
-  31.5,
-  5.0
+  32.5,
+  3.0
  ],
  "ring": [
   0,
@@ -23,13 +23,13 @@
   "node_final_workshop_smoke_3"
  ],
  "inside_pad": {
-  "min_margin_px": 5.5,
+  "min_margin_px": 4.9,
   "base_on_pad": true,
-  "height_px": 110.2,
+  "height_px": 115.5,
   "bbox_px": [
-   28.8,
-   10.5,
-   97.5,
+   16.5,
+   5.2,
+   88.5,
    120.8
   ],
   "ok": true
@@ -37,8 +37,8 @@
  "motion_spec": {
   "node_final_workshop_gear": {
    "center": [
-    -3.0,
-    -24.0
+    -17.2,
+    -25.9
    ],
    "dir": "cw",
    "note": "چرخ‌دندهٔ تابلو؛ ۸ دنده، چرخش آهسته. لامپ ثابت."

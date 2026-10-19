@@ -2,13 +2,13 @@
  "id": "wheel_dock",
  "kind": "sea",
  "pad": [
-  54.7,
-  27.4,
+  66.2,
+  31.7,
   11.5,
-  85
+  105
  ],
  "stand": [
-  31.5,
+  40.0,
   4.0
  ],
  "ring": [
@@ -21,14 +21,14 @@
   "node_wheel_dock_wheel_back"
  ],
  "inside_pad": {
-  "min_margin_px": 5.0,
+  "min_margin_px": 9.8,
   "base_on_pad": true,
-  "height_px": 91.2,
+  "height_px": 111.8,
   "bbox_px": [
-   24.0,
-   23.0,
-   82.5,
-   114.2
+   17.8,
+   2.8,
+   88.2,
+   114.5
   ],
   "ok": true
  },
@@ -36,16 +36,16 @@
   "wheel": {
    "layer": "node_wheel_dock_wheel",
    "rotate_about": [
-    -2.0,
-    -6.0
+    2.6,
+    -8.3
    ],
    "note": "چرخ راست؛ id قدیمی حفظ شد"
   },
   "wheel_back": {
    "layer": "node_wheel_dock_wheel_back",
    "rotate_about": [
-    -38.0,
-    -6.0
+    -41.7,
+    -8.3
    ],
    "note": "چرخ چپ، لایهٔ جدید"
   }

@@ -17,7 +17,7 @@ import functools, station_kit as _k   # D122/D123: حاشیهٔ چپ/راست �
 _k.margin_check = functools.partial(_k.margin_check, min_margin=4); _k.motion_check = functools.partial(_k.motion_check, min_margin=4)
 CX, BASE, HW, HH = -23, 7, 33, 58       # مرکز تپه، خط کف، نیم‌پهنا، ارتفاع
 DX, DY, DR = -35, -4, 16                  # مرکز و شعاع در
-XF = (1.0, 0.0, 0.0)
+XF = (1.05, -14.1, -0.7)
 SMOKE_B = ((2, -87, 7), (12, -95, 8), (25, -101, 9))
 RISE = 25; DELAYS = (0, .7, 1.4); CYCLE = 2.8
 GX, GY = -3, -24                         # مرکز چرخ‌دندهٔ تابلو

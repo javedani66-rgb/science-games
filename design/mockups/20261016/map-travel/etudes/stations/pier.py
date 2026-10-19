@@ -12,7 +12,7 @@ station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/v2/pier'
-XF = (1.0, 2.0, 0.0)
+XF = (1.13, -2.6, -1.8)
 DECK = '#e9a65b'; DECK_L = '#f6c98a'; DECK_D = '#b8682a'; PILE = '#c9772a'; PILE_L = '#e29a52'; WOOD_D = '#8a4a1c'; MAST = '#d98f45'; MAST_L = '#f0b878'
 BOX = '#ffd84d'; BOX_D = '#c9892a'; ROPE = '#7a4a1c'; IRON = '#c9d3ea'; IRON_D = '#8c9ac8'; CREAM = '#fff3c4'
 UP = 6
