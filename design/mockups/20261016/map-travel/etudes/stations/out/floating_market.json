@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  96
+  94
  ],
  "stand": [
-  37.5,
-  4.0
+  42.5,
+  4.5
  ],
  "ring": [
   0,
@@ -20,14 +20,14 @@
   "node_floating_market_boat"
  ],
  "inside_pad": {
-  "min_margin_px": 13.5,
+  "min_margin_px": 4.4,
   "base_on_pad": true,
-  "height_px": 110.5,
+  "height_px": 107.0,
   "bbox_px": [
-   28.5,
-   10.2,
-   103.5,
-   120.8
+   17.5,
+   11.5,
+   122.5,
+   118.5
   ],
   "ok": true
  },

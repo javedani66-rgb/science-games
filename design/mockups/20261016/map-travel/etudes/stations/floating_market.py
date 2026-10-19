@@ -14,7 +14,8 @@ station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/v2/floating_market'
-XF = (1.0, 0.0, -20.0)
+XF = (1.0, 0.0, -23.0)
+SX, CX0 = 1.4, -24.5          # کشیدگی افقی قهرمان (فقط x نقطه‌ها؛ ضخامت و قطر دایره‌ها ثابت)
 HULL = '#c98a4a'; HULL_L = '#e8b070'; HULL_D = '#8a5a2a'; RED = '#ef6a4a'; RED_D = '#c24a30'; WH = '#fff8e0'; WOOD = '#ffd84d'; WOOD_D = '#d9a020'
 ORG = '#ff9b2f'; GRN = '#8bd45a'; GRN_D = '#4f9a2f'; YEL = '#ffe14d'; BASKET = '#b8742f'; BASKET_D = '#7a4a1c'; PURP = '#b06ad6'
 BOB = 3
@@ -36,26 +37,35 @@ def fruit(p, x, y, r, c):
     disc(p, x, y, r, c); disc(p, x - r * .35, y - r * .35, r * .28, '#ffffff')    # نقطهٔ نور
 
 
+def sharp(p, pts, col, sw=PART):
+    """چندضلعی تیز با خط دور (کنج‌ها نرم نمی‌شوند)."""
+    q = p.X(pts)
+    p.raw('<polygon points="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (' '.join('%.1f,%.1f' % t for t in q), col, sw))
+    p.clip.append('M' + ' L'.join('%.1f,%.1f' % t for t in q) + ' Z')
+
+
 def hull(p):
-    p.shape([(X0, 8), (X0 + 10, 14), (X1 - 10, 14), (X1, 8), (X1 - 6, 32), (X0 + 8, 32)], HULL, PART, j=.25, step=4)
-    rect(p, X0 + 8, 16, X1 - 8, 20, HULL_L)                                   # لبهٔ روشن (نور)
-    rect(p, X0 + 10, 27, X1 - 8, 29.5, HULL_D)                                # خط آب
-    for x in range(-44, 4, 16): p.ln((x, 21), (x, 26), INNER, HULL_D, j=0)     # درز تخته‌ها
-    p.ln((X0 + 12, 23.5), (X1 - 12, 23.5), INNER, HULL_D, j=0, probe='خط داخلی (تختهٔ قایق)')
-    disc(p, X0 + 4, 10, 3, YEL); disc(p, X1 - 4, 10, 3, YEL)                  # میخ‌های سر و ته بلم
+    """سکوی بازار = عرشهٔ تخته‌ای روی سه بشکهٔ شناور."""
+    for c in (-48, -24, 0):                                                   # بشکه‌ها
+        sharp(p, [(c - 9, 16), (c + 9, 16), (c + 10.5, 24), (c + 9, 32), (c - 9, 32), (c - 10.5, 24)], HULL)
+        rect(p, c - 10, 19.5, c + 10, 22.5, HULL_D); rect(p, c - 10, 27, c + 10, 30, HULL_D)   # حلقه‌های فلزی
+        rect(p, c - 6, 17, c - 3.5, 31, HULL_L)                                                # نور
+    sharp(p, [(X0 - 1, 6), (X1 + 1, 6), (X1 - 1, 17), (X0 + 1, 17)], HULL_L, PART)                # عرشه
+    rect(p, X0 + 4, 8.5, X1 - 4, 10.5, '#fff0d0')
+    for x in range(-42, 4, 18): p.ln((x, 12.5), (x, 16), INNER, WOOD_D, j=0)
 
 
 def stall(p):
     for x in (-54, 4):                                                        # ستون‌ها
-        rect(p, x - 3, -46, x + 3, 12, HULL_D); rect(p, x - 3, -46, x - 1, 12, '#a8703c')
-    p.shape([(-52, -8), (2, -8), (2, 14), (-52, 14)], WOOD, PART, j=.2, step=6)                # پیشخوان
-    rect(p, -49, -5, -2, -1, '#fff08a')                                       # نور تخته
-    for x in (-34, -17): p.ln((x, 2), (x, 11), INNER, WOOD_D, j=0)
+        rect(p, x - 3, -46, x + 3, 7, HULL_D); rect(p, x - 3, -46, x - 1, 7, '#a8703c')
+    p.shape([(-52, -8), (2, -8), (2, 6), (-52, 6)], WOOD, PART, j=.2, step=6)                # پیشخوان
+    rect(p, -49, -5, -2, -2, '#fff08a')                                       # نور تخته
+    for x in (-34, -17): p.ln((x, 0), (x, 3), INNER, WOOD_D, j=0)
     for bx0, bx1, cols in ((-50, -32, (RED, ORG, YEL)), (-30, -14, (GRN, YEL, GRN)), (-12, 0, (PURP, RED, ORG))):
         flat(p, [(bx0, -22), (bx1, -22), (bx1 - 2.5, -6), (bx0 + 2.5, -6)], BASKET)   # سبد
         flat(p, [(bx0, -22), (bx1, -22), (bx1 - .6, -18), (bx0 + .6, -18)], '#d9955a'); rect(p, bx0 + 4, -14, bx1 - 4, -11.5, BASKET_D); rect(p, bx0 + 4, -9, bx1 - 4, -6.5, BASKET_D)
         c = (bx0 + bx1) / 2; w = (bx1 - bx0) / 4
-        for i, col in enumerate(cols): fruit(p, c + (i - 1) * w * 1.1, -27 - (i % 2) * 4, 5.2, col)
+        for i, col in enumerate(cols): fruit(p, c + (i - 1) * w * 1.1, -27 - (i % 2) * 4, 6.4, col)
     # سایبان راه‌راه با لبهٔ دندانه‌دار
     ax, n, w, y0, y1 = -58, 8, 8.8, -46, -66
     for i in range(n):
@@ -66,14 +76,14 @@ def stall(p):
 
 def mast(p):
     """دکل بلند، پرچم و ریسمان فانوس‌ها (از بالای فیگور رد می‌شود)."""
-    rect(p, -57, -104, -51, -60, HULL_D); rect(p, -57, -104, -55, -60, '#a8703c')
-    flat(p, [(-51, -108), (-34, -101), (-51, -94)], ORG)                       # پرچم
-    flat(p, [(-51, -108), (-34, -101), (-40, -101)], '#ffb860')
+    rect(p, -57, -99, -51, -60, HULL_D); rect(p, -57, -99, -55, -60, '#a8703c')
+    flat(p, [(-51, -103), (-34, -96), (-51, -89)], ORG)                       # پرچم
+    flat(p, [(-51, -103), (-34, -96), (-40, -96)], '#ffb860')
 
 
 def lights(p):
-    p.ln((-52, -98), (42, -111), INNER, '#7a4a1c', j=0)                         # ریسمان
-    for x, y, c in ((-30, -100, RED), (-12, -102, YEL), (6, -104.5, ORG), (26, -107.5, RED)):          # فانوس‌ها
+    p.ln((-52, -93), (42, -106), INNER, '#7a4a1c', j=0)                         # ریسمان
+    for x, y, c in ((-30, -95, RED), (-12, -97, YEL), (6, -99.5, ORG), (26, -102.5, RED)):          # فانوس‌ها
         p.ln((x, y), (x, y + 6), INNER - 1.5, '#7a4a1c', j=0)
         flat(p, [(x - 3.5, y + 6), (x + 3.5, y + 6), (x + 2, y + 9), (x - 2, y + 9)], '#7a4a1c')
         disc(p, x, y + 16, 8, c); disc(p, x - 2.5, y + 13.5, 2.6, '#ffffff')
@@ -87,6 +97,11 @@ def boat(p):
 def build(out=OUTD):
     p = Pen('floating_market', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
+    _X = p.X
+    def X(q):
+        if q and isinstance(q[0], (tuple, list)): return _X([((x - CX0) * SX + CX0, y) for x, y in q])
+        return _X(((q[0] - CX0) * SX + CX0, q[1]))
+    p.X = X
     p.tipshadow(-24, 34, 38); p.foot_tip(-24, 26, 18)
     with layer(p, 'boat'): boat(p)
     return p

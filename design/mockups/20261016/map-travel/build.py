@@ -126,7 +126,7 @@ def map_parts():
         t = re.escape(STR['maptravel.node.' + nid]['text'] if ('maptravel.node.' + nid) in STR else LABEL_TITLE[nid])
         body, c = re.subn(r'(<text x="[\d.]+" y=")([\d.]+)("[^>]*>%s</text>)' % t, lambda m: m.group(1) + ('%.1f' % (float(m.group(2)) + dy)) + m.group(3), body)
         assert c == 1, (nid, c)
-    WAVE_AVOID[:] = [(x - 75, y - 50, x + 75, y + 38) for x, y in KIT_XY.values()] + [(346 - 30, 940, 380, 1040)]   # سکوها + اسکله
+    WAVE_AVOID[:] = [(x - 75, y - (85 if (x, y) == KIT_XY["M12"] else 50), x + 75, y + 38) for x, y in KIT_XY.values()] + [(346 - 30, 940, 380, 1040)]   # سکوها + اسکله
     for m in re.finditer(r'<text x="([\d.]+)" y="([\d.]+)"[^>]*>([^<]+)</text>', body):
         t = m.group(3)
         if t in set(v['text'] for k, v in STR.items() if k.startswith('maptravel.node.') and k != 'maptravel.node.label') | set(LABEL_TITLE.values()):
