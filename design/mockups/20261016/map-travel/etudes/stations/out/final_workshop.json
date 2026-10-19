@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  84
+  88
  ],
  "stand": [
-  32.5,
-  3.0
+  41.5,
+  4.5
  ],
  "ring": [
   0,
@@ -23,22 +23,22 @@
   "node_final_workshop_smoke_3"
  ],
  "inside_pad": {
-  "min_margin_px": 4.9,
+  "min_margin_px": 6.7,
   "base_on_pad": true,
-  "height_px": 115.5,
+  "height_px": 107.5,
   "bbox_px": [
-   16.5,
-   5.2,
-   88.5,
-   120.8
+   15.2,
+   11.0,
+   91.8,
+   118.5
   ],
   "ok": true
  },
  "motion_spec": {
   "node_final_workshop_gear": {
    "center": [
-    -17.2,
-    -25.9
+    -4.0,
+    -11.0
    ],
    "dir": "cw",
    "note": "چرخ‌دندهٔ تابلو؛ ۸ دنده، چرخش آهسته. لامپ ثابت."
@@ -46,7 +46,7 @@
   "node_final_workshop_smoke_1": {
    "translate_y": [
     0,
-    -25
+    -12
    ],
    "opacity": [
     1,
@@ -62,7 +62,7 @@
   "node_final_workshop_smoke_2": {
    "translate_y": [
     0,
-    -25
+    -12
    ],
    "opacity": [
     1,
@@ -78,7 +78,7 @@
   "node_final_workshop_smoke_3": {
    "translate_y": [
     0,
-    -25
+    -12
    ],
    "opacity": [
     1,
