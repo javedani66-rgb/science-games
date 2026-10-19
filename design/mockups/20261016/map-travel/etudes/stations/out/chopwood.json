@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  95
+  96
  ],
  "stand": [
   42.0,
@@ -20,13 +20,13 @@
   "node_chopwood_axe"
  ],
  "inside_pad": {
-  "min_margin_px": 6.7,
+  "min_margin_px": 6.4,
   "base_on_pad": true,
-  "height_px": 130.0,
+  "height_px": 131.0,
   "bbox_px": [
    17.2,
-   2.5,
-   109.2,
+   1.5,
+   101.2,
    132.5
   ],
   "ok": true

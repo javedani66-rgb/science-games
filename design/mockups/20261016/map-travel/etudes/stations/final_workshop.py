@@ -17,11 +17,11 @@ import functools, station_kit as _k   # D122/D123: حاشیهٔ چپ/راست �
 _k.margin_check = functools.partial(_k.margin_check, min_margin=4); _k.motion_check = functools.partial(_k.motion_check, min_margin=4)
 CX, BASE, HW, HH = -23, 7, 33, 58       # مرکز تپه، خط کف، نیم‌پهنا، ارتفاع
 DX, DY, DR = -24, -17, 16                  # مرکز و شعاع در
-XF = (1.0, -18, 12)
+XF = (1.0, -18, 6)
 CHX0, CHX1 = 14, 30
 ROOF = '#6a45c4'; ROOF_D = '#4f2f9a'; ROOF_L = '#9a78e6'
-SMOKE_B = ((20, -112, 6), (28, -119, 7), (36, -126, 8))
-RISE = 12; DELAYS = (0, .7, 1.4); CYCLE = 2.8
+SMOKE_B = ((20, -100, 5), (28, -105, 6), (36, -111, 7))
+RISE = 8; DELAYS = (0, .7, 1.4); CYCLE = 2.8
 GX, GY = 14, -23                         # مرکز چرخ‌دندهٔ تابلو
 
 
@@ -67,9 +67,9 @@ def build(out=OUTD):
     p.xf = XF
     p.tipshadow(-8, 3, 42)
     # دودکش آجری بلند (پشت سقف) با کلاهک
-    sharp(p, [(CHX0, -30), (CHX1, -30), (CHX1, -94), (CHX0, -94)], BRICK, PART)
-    for y in (-52, -68, -84): p.ln((CHX0 + 2, y), (CHX1 - 2, y), INNER, BRICK_D, j=.1)
-    sharp(p, [(CHX0 - 5, -104), (CHX1 + 5, -104), (CHX1 + 5, -94), (CHX0 - 5, -94)], BRICK_D, PART)
+    sharp(p, [(CHX0, -30), (CHX1, -30), (CHX1, -84), (CHX0, -84)], BRICK, PART)
+    for y in (-50, -64, -76): p.ln((CHX0 + 2, y), (CHX1 - 2, y), INNER, BRICK_D, j=.1)
+    sharp(p, [(CHX0 - 5, -94), (CHX1 + 5, -94), (CHX1 + 5, -84), (CHX0 - 5, -84)], BRICK_D, PART)
     # سه حباب دود: هرکدام یک لایهٔ جدا؛ حالت ایستا = روی دودکشِ کامل
     for k, (x, y, r) in enumerate(SMOKE_B, 1):
         with layer(p, 'smoke_%d' % k):
@@ -79,11 +79,15 @@ def build(out=OUTD):
     for x in (-1, 28): p.ln((x, -6), (x, -40), INNER, FUR_D, j=.05)
     for x in (-42, 38 - 4): pass
     p.ln((-44, -40), (-30, -40), INNER, FUR_L, j=.05)
-    # در گردِ زردِ نیمه‌باز: دهانهٔ تیره + نور درون + لنگهٔ چوبی
-    p.shape(ell(DX, DY, DR, DR, 0, 360, 28), HOLE, PART, j=.2, step=99)
-    p.fill(ell(DX - 5, DY + 2, 9, 10, 0, 360, 20), GLOW)
-    p.shape(ell(DX + 10, DY, 7, DR - 1, 0, 360, 20), WOOD, PART, j=.2, step=99)
-    p.ln((DX + 10, DY - 5), (DX + 10, DY + 5), INNER, WOOD_D, j=.05)
+    # در قوسی با هیولای کوچک پشمالو که از تاریکی نگاه می‌کند (چشم‌های درشت، گوش، دو پنجه روی آستانه)
+    sharp(p, [(-42, -2), (-6, -2), (-6, -30), (-12, -38), (-36, -38), (-42, -30)], HOLE, PART)
+    sharp(p, [(-38, -22), (-35, -31), (-30, -26), (-18, -26), (-13, -31), (-10, -22), (-10, -8), (-38, -8)], FUR_D, INNER, clipit=False)   # سر با دو گوش
+    poly(p, [(-36, -20), (-12, -20), (-12, -10), (-36, -10)], FUR_D)
+    for ex in (-30, -18):
+        p.fill(ell(ex, -20, 5.2, 5.6, 0, 360, 16), '#ffffff'); p.fill(ell(ex + 1, -19, 2.4, 2.8, 0, 360, 12), NAVY)
+    p.fill([(-28, -11), (-20, -11), (-20, -9), (-28, -9)], GLOW)                       # دهان کوچک خندان
+    for px in (-34, -14):
+        p.shape(ell(px, -5, 6, 5, 0, 360, 14), FUR, INNER, j=.1, step=99, clip=False)   # پنجه‌ها روی آستانه
     # سقف دوشیب: شیب چپ بنفش، شیب راست تیره‌تر؛ زِرِه و پیچ
     sharp(p, [(-58, -44), (-12, -90), (-12, -44)], ROOF, PART)
     sharp(p, [(-12, -90), (42, -44), (-12, -44)], ROOF_D, PART)

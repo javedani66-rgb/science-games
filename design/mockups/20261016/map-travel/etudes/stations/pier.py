@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ایستگاه «اسکله» (M07؛ بازطراحی ۱۸ اکتبر شب، D123): اسکلهٔ چوبی درشت روی سکوی دریایی: عرشهٔ تخته‌ای با لبهٔ روشن و درزها روی چهار پایهٔ چوبی
+"""ایستگاه «اسکله» (M07؛ ۱۹ اکتبر: عرشهٔ دراز + شمع + بولارد + فانوس، بدون قاب L/قرقره؛ لایهٔ متحرک node_pier_lantern). قدیمی: بازطراحی ۱۸ اکتبر شب، D123): اسکلهٔ چوبی درشت روی سکوی دریایی: عرشهٔ تخته‌ای با لبهٔ روشن و درزها روی چهار پایهٔ چوبی
 با کلاهک، بولارد با طناب حلقه، دکل L‌شکل با تکیه‌گاه مورب، قرقرهٔ بزرگ زیر سر بازو (از بالای فیگور رد می‌شود؛ آزاد از بالا) و جعبهٔ آویزان.
 پایه‌های عرشه سمت چپ می‌مانند. لایه‌های متحرک: node_pier_load = طناب + جعبه (بالا/پایین ۰ تا ۶-)، node_pier_pulley = قرقره (می‌چرخد). بقیه ثابت."""
 import sys, pathlib, json, math
@@ -12,16 +12,16 @@ station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/v2/pier'
-XF = (1.13, -2.6, -1.8)
-DECK = '#e9a65b'; DECK_L = '#f6c98a'; DECK_D = '#b8682a'; PILE = '#c9772a'; PILE_L = '#e29a52'; WOOD_D = '#8a4a1c'; MAST = '#d98f45'; MAST_L = '#f0b878'
-BOX = '#ffd84d'; BOX_D = '#c9892a'; ROPE = '#7a4a1c'; IRON = '#c9d3ea'; IRON_D = '#8c9ac8'; CREAM = '#fff3c4'
-UP = 6
-DT, DB, DL, DR = -34, -14, -62, 6              # عرشه
-PB = 10                                       # کف پایه‌ها
-PILES = (-50, -26, 0)
-MXL, MXR, JT, JB, JR = -58, -46, -120, -108, 20    # دکل و بازو
-PX, PY, PR = 4, -96, 11                      # قرقره
-RX = PX - PR + 1                              # محور طناب (لبهٔ چپ قرقره)
+XF = (1.0, 0.0, 0.0)
+DECK = '#e9a65b'; DECK_L = '#f6c98a'; DECK_D = '#b8682a'; PILE = '#c9772a'; PILE_L = '#e29a52'; WOOD_D = '#8a4a1c'
+ROPE = '#f3dca0'; ROPE_D = '#b8892a'; CREAM = '#fff3c4'; FLAME = '#ffd84d'; LAMP = '#8c9ac8'
+UP = 3
+DT, DB, DL, DR = -26, -6, -72, 22               # عرشهٔ دراز (۷۲ واحد)
+PB = 12                                        # کف پایه‌ها
+UNDER = (-38, -12)                              # پایه‌های زیر عرشه
+TALL = (-64, 14)                                # دو شمع بلندتر از عرشه
+BOLL = (-44, -18)                               # بولاردها
+LX, LY = -64, -54                               # فانوس روی شمع چپ
 
 
 def flat(p, pts, col):
@@ -35,48 +35,41 @@ def disc(p, x, y, r, col):
     a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
 
 
+def pile(p, x, top, w=8):
+    p.shape([(x - w, top), (x + w, top), (x + w, PB), (x - w, PB)], PILE, PART, j=.2, step=6)
+    rect(p, x - w + 3, top + 4, x - w + 6, PB - 4, PILE_L)
+
+
 def build():
     p = Pen('pier', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
-    for x in PILES: p.tipshadow(x, PB + 1, 11)
-    p.foot_tip(-50, PB, 7); p.foot_tip(0, PB, 7)
-    for x in PILES:                                                                       # چهار پایه با کلاهک
-        p.shape([(x - 5, DB - 2), (x + 5, DB - 2), (x + 5, PB), (x - 5, PB)], PILE, PART, j=.2, step=6)
-        rect(p, x - 2.5, DB + 4, x - .5, PB - 3, PILE_L)
-        rect(p, x - 9, PB - 2, x + 9, PB + 3, WOOD_D)
-    # دکل L‌شکل (بازو بالای فیگور)
-    p.shape([(MXL, DT), (MXL, JT), (JR, JT), (JR, JB), (MXR, JB), (MXR, DT)], MAST, PART, j=.2, step=6)
-    rect(p, MXL + 3, JT + 3, JR - 3, JT + 5.5, MAST_L); rect(p, MXL + 3, JT + 3, MXL + 5.5, DT - 4, MAST_L)
-    p.ln((-46, -70), (-20, -106), PART + 2 * INNER, NAVY, j=.05); p.ln((-46, -70), (-20, -106), PART, MAST, j=.05)          # تکیه‌گاه مورب
-    # عرشه
+    for x in UNDER + TALL: p.tipshadow(x, PB + 1, 11)
+    p.foot_tip(TALL[0], PB, 7); p.foot_tip(TALL[1], PB, 7)
+    for x in UNDER: pile(p, x, DB - 2, 7)                                               # پایهٔ میانی زیر عرشه
+    for x in TALL: pile(p, x, DT - 18, 7)                                               # شمع‌های بلند پشت عرشه
+    # عرشه: روی تخته‌های عرضی روشن + تیر زیرین با ردیف میخ
     p.shape([(DL, DT), (DR, DT), (DR, DB), (DL, DB)], DECK, OUT, j=.25, step=8)
-    rect(p, DL + 5, DT + 4, DR - 5, DT + 7, DECK_L)                                       # نور لبهٔ عرشه
-    for x in (-42, -22, -2): p.ln((x, DT + 10), (x, DB - 4), INNER, DECK_D, j=0)             # درز تخته‌ها (عمودی)
-    p.ln((DL + 6, DT + 13), (DR - 8, DT + 13), INNER, DECK_D, j=0, probe='درز تخته (داخلی)')
-    # بولارد با طناب حلقه
-    p.shape([(-34, DT - 12), (-22, DT - 12), (-22, DT + 2), (-34, DT + 2)], WOOD_D, PART, j=.1, step=6, clip=False)
-    rect(p, -31, DT - 9, -25, DT - 6, CREAM); rect(p, -31, DT - 3, -25, DT, CREAM)
-    with layer(p, 'load'):                                                                # طناب + جعبه
-        p.ln((RX, PY), (RX, -60), PART, ROPE, j=0); p.probes.append(('طناب (جزء)', PART, p.X((RX, -75)), (1, 0), ROPE))
-        p.shape([(PX - 17, -60), (PX + 5, -60), (PX + 5, -42), (PX - 17, -42)], BOX, PART, j=.2, step=6, clip=False)
-        rect(p, PX - 14, -57, PX + 2, -55, '#fff3b0')
-        p.ln((PX - 12, -49), (PX, -49), INNER, BOX_D, j=0, probe='تختهٔ جعبه (داخلی)')
-    with layer(p, 'pulley'):                                                              # قرقرهٔ درشت
-        p.shape(ell(PX, PY, PR, PR, 0, 360, 28), IRON, PART, j=.1, step=99, clip=False)
-        for a in range(3):
-            c, sn = math.cos(math.radians(a * 120 + 30)), math.sin(math.radians(a * 120 + 30))
-            p.ln((PX, PY), (PX + (PR - 4) * c, PY + (PR - 4) * sn), INNER, WOOD_D, j=0)
-        p.raw('<circle cx="%s" cy="%s" r="3.6" fill="%s" class="eo" stroke-width="3"/>' % (*p.X((PX, PY)), WOOD_D))
+    rect(p, DL + 6, DT + 5, DR - 6, DT + 11, DECK_L)
+    for x in range(DL + 15, DR - 6, 14): p.ln((x, DT + 5), (x, DT + 11), INNER, DECK_D, j=0)     # درز تخته‌های عرضی
+    for x in range(DL + 15, DR - 6, 14): disc(p, x, DB - 6, 2.4, CREAM)                          # ردیف میخ
+    # بولاردها با طناب پیچیده
+    p.ln((BOLL[0] + 6, DT - 5), (BOLL[1] - 6, DT - 5), INNER, ROPE, j=0)
+    for x in BOLL:
+        p.shape([(x - 7, DT - 16), (x + 7, DT - 16), (x + 7, DT + 2), (x - 7, DT + 2)], WOOD_D, PART, j=.1, step=6, clip=False)
+        rect(p, x - 6, DT - 12, x + 6, DT - 9, ROPE); rect(p, x - 6, DT - 6, x + 6, DT - 3, ROPE)
+    with layer(p, 'lantern'):                                                             # فانوس روی شمع چپ
+        p.shape([(LX - 7, LY), (LX + 7, LY), (LX + 7, LY + 16), (LX - 7, LY + 16)], LAMP, PART, j=.1, step=99, clip=False)
+        rect(p, LX - 3, LY + 4, LX + 3, LY + 12, FLAME)
+        p.shape([(LX - 9, LY), (LX, LY - 9), (LX + 9, LY)], WOOD_D, INNER, j=0, step=99, clip=False)
     return p
 
 
 def run():
     p = build()
-    motion = {'load': dict(offsets=[p.V((0, -UP * k / 3)) for k in range(4)]), 'pulley': dict(rotate=p.X((PX, PY)))}
+    motion = {'lantern': dict(offsets=[p.V((0, -UP * k / 3)) for k in range(4)])}
     r = finish(p, 'pier', None, motion=motion, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_pier_pulley': dict(rotate_deg=[0, 360], center=[round(v, 1) for v in p.X((PX, PY))], unit='symbol', note='قرقره می‌چرخد'),
-                         'node_pier_load': dict(translate_y=[0, -UP], unit='symbol', note='جعبه با طناب بالا/پایین'),
-                         'fixed': 'پایه‌ها، عرشه، بولارد، دکل، بازو و تکیه‌گاه'}
+    sp['motion_spec'] = {'node_pier_lantern': dict(translate_y=[0, -UP], unit='symbol', note='فانوس کمی بالا/پایین (تکان نرم)'),
+                         'fixed': 'عرشه، پایه‌ها، شمع‌ها، بولاردها و طناب'}
     (OUTD / 'pier.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     return r
 

@@ -32,27 +32,26 @@ def poly(p, pts, col):
 
 # D127 (۱۹ اکتبر): کشتی چوبی کامل از کنار روی سه پایهٔ لغزان کوتاه؛ دماغهٔ بالا‌آمده (چپ)، دکل، بادبان روشن و پرچم. چکش و یک تخته جلوی پایه‌ها.
 PLANK2 = '#f7b36a'; SEAM_C = '#c9692a'; CREAM_ = '#fff3c4'
-BOW = (-82, -52); STERN = (24, -38); KEEL_B = (-60, -2); KEEL_S = (16, -3)
+BOW = (-72, -50); STERN = (24, -38); KEEL_B = (-60, -2); KEEL_S = (16, -3)
 MX, MTOP = -24, -126
 
 
 def sheer():
-    return bez(BOW, (-62, -30), (-30, -30)) + bez((-30, -30), (-4, -31), STERN)[1:]
+    return bez(BOW, (-48, -50), (-30, -30), 18) + bez((-30, -30), (-4, -31), STERN)[1:]
 
 
 def hull_pts():
     keel = bez(KEEL_S, (-20, 3), KEEL_B)[1:]
-    stem = bez(KEEL_B, (-86, -4), BOW)[1:]
+    stem = bez(KEEL_B, (-90, -4), (-85, -34), 18)[1:] + bez((-85, -34), (-86, -50), BOW, 12)[1:]       # دماغهٔ نرم و گرد
     return sheer() + [(19, -18), KEEL_S] + keel + stem
 
 
 def slipway(p):
-    """سه پایهٔ لغزان کوتاه زیر کیل + تیر طولی زیرین."""
-    for x in (-50, -22, 6):
-        p.tipshadow(x, 20, 9)
-        p.shape([(x - 5, -1), (x + 5, -1), (x + 7, 14), (x - 7, 14)], WOOD, INNER, j=.2, step=8, clip=False)
-    p.shape([(-64, 12), (18, 10), (20, 19), (-66, 21)], WOOD_D, INNER, j=.2, step=99, clip=False)
-    p.ln((-60, 14), (12, 12.5), INNER, WOOD_L, j=0)
+    """سه پایهٔ لغزان ضخیم و کوتاه زیر کیل (بدون تیر و تکهٔ ریز)."""
+    for x in (-46, -20, 6):
+        p.tipshadow(x, 17, 11)
+        p.shape([(x - 8, -1), (x + 8, -1), (x + 9, 14), (x - 9, 14)], WOOD, PART, j=.2, step=8, clip=False)
+        rect(p, x - 4, 3, x - 1, 9, WOOD_L)
 
 
 def sail(p, pts, col):
@@ -78,14 +77,14 @@ def ship(p):
 
 
 def hammer(p):
-    """چکش خوابیده روی کف جلوی پایه‌ها: سر آبی‌خاکستری، دستهٔ چوبی."""
-    p.ln((-46, 27), (-22, 27), PART, WOOD_D, j=0)
-    p.shape([(-58, 21), (-45, 21), (-45, 33), (-58, 33)], '#aab3d9', INNER, j=.1, step=99, clip=False)
+    """چکش درشت خوابیده جلوی پایه‌ها: دستهٔ چوبی ضخیم + سر آبی‌خاکستری."""
+    p.shape([(-62, 23), (-36, 23), (-36, 31), (-62, 31)], WOOD, PART, j=.1, step=8, clip=False)
+    p.shape([(-42, 17), (-28, 17), (-28, 37), (-42, 37)], '#aab3d9', PART, j=.1, step=8, clip=False)
 
 
 def boards(p):
-    """یک تخته روی کف کنار چکش."""
-    poly(p, [(-12, 22), (14, 22), (17, 30), (-15, 30)], PLANK2); rect(p, -13, 28, 15, 30, SEAM_C)
+    """یک تختهٔ درشت روی کف، کنار چکش."""
+    p.shape([(-14, 20), (16, 20), (16, 33), (-14, 33)], PLANK2, PART, j=.1, step=8, clip=False); rect(p, -9, 24, 11, 26.5, SEAM_C)
 
 
 def build(out=OUTD):
@@ -98,7 +97,7 @@ def build(out=OUTD):
     return p
 
 
-XF = (0.94, 5.0, -1.2)
+XF = (0.94, 8.0, -9.0)
 HAMMER_LIFT = 5
 
 STAND = None

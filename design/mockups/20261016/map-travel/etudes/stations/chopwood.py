@@ -20,7 +20,7 @@ WOOD = '#b77a3a'; WOOD_L = '#d9a463'
 STEEL = '#dbe9f8'; STEEL_S = '#a3bbd9'; STEEL_L = '#ffffff'; EYE = '#7f95b8'
 
 CX, CR, TOPY, BOTY, RYE = -36, 36, -42, 2, 13      # کنده: مرکز x، شعاع، y رویه، y ته، نیم‌ارتفاع بیضی
-AX, AY, LEAN = -41, -35, 48                        # نقطهٔ نشستن لبهٔ تیغه روی رویه و زاویهٔ خوابیدن دسته (درجه، به راست)
+AX, AY, LEAN = -52, -36, 48                        # نقطهٔ نشستن لبهٔ تیغه روی رویه و زاویهٔ خوابیدن دسته (درجه، به راست)
 LIFT = 22
 
 
@@ -87,14 +87,27 @@ def axe(p):
     p.ln(F(EDGE[0]), F(EDGE[2]), PART, STEEL_L, j=.1)                                    # لبهٔ تیز روشن
 
 
+def crack(p):
+    """شکاف تیره و تراشه‌های روشن روی رویهٔ کنده در جای فرورفتن تیغه (پشت تبر، ثابت)."""
+    F = axe_f(); bot = sorted((F(q) for q in BLADE), key=lambda t: -t[1])[:2]
+    (x0, y0), (x1, y1) = sorted(bot)
+    L = math.hypot(x1 - x0, y1 - y0) or 1; ux, uy = (x1 - x0) / L, (y1 - y0) / L
+    a = (x0 - ux * 9, y0 - uy * 9 + 1); b = (x1 + ux * 9, y1 + uy * 9 + 1)
+    p.ln(a, b, PART, PITH, j=.05)
+    p.ln((a[0] + 4, a[1] - 5), (b[0] - 6, b[1] - 6), INNER, FACE_L, j=.05)          # لبهٔ روشن بالای شکاف
+    p.fill([(x0 + 2, y0 + 1), (x0 + 9, y0 + 7), (x0 + 12, y0 + 2)], FACE_L)         # تراشهٔ چوب
+    p.fill([(x1 - 4, y1 + 2), (x1 + 6, y1 + 9), (x1 + 9, y1 + 2)], FACE_L)
+
+
 def build(out=None, legacy_shadow=False):
     p = Pen('chopwood', 'land')
-    pad(p, line=((-62, 33), (-44, 35)), tri=((66, 22),), dot=(-12, 36))
+    pad(p, line=((-62, 33), (-44, 35)), tri=(), dot=(-12, 36))
     p.foot_tip(CX, BOTY + 4, 34); p.foot_tip(14, 6, 12); p.foot_tip(0, 23, 14)
     stump(p)
     p.tipshadow(14, 8, 14); p.tipshadow(2, 29, 18)
     piece_up(p, 3, 22, -20, 6)
     piece_lying(p, -14, 14, 23, 8.5)
+    crack(p)
     with layer(p, 'axe'): axe(p)
     return p, symbol(p, 'chopwood', ['axe'], out=out, legacy_shadow=legacy_shadow)
 
