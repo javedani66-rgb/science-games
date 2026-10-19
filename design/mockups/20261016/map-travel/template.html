@@ -26,6 +26,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .hit:focus-visible{outline:4px solid var(--gold)}
 .hit.shake{animation:sh .35s}
 @keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.lock{transition:opacity .7s ease}.lock.open{opacity:0;pointer-events:none}@media (prefers-reduced-motion:reduce){.lock{transition:none}}
 #boat{position:absolute;left:0;top:0;width:130px;height:130px;display:block;pointer-events:none}
 #boat svg{display:block;animation:bob 4.2s ease-in-out infinite;transform-origin:50% 80%}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-2px) rotate(.8deg)}}
@@ -249,7 +250,8 @@ async function go(id){if(busy||id===here)return;const up=nextUp();
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
-function refreshRing(){ring.style.display='none';const old=document.getElementById('ringG');if(old)old.remove();
+function updateLocks(){document.querySelectorAll('.lock').forEach(l=>l.classList.toggle('open',visited.has(l.dataset.lock)))} /* R20: قفل ایستگاه پس از رسیدن کودک باز می‌شود (محو آرام) */
+function refreshRing(){updateLocks();ring.style.display='none';const old=document.getElementById('ringG');if(old)old.remove();
  const n=NODES[here],q=pd(n),g=n.rg||[0,0,0],rx=q.rx+5+g[0],ry=q.ry+q.w/2+3+g[1],cx=n.x+g[2],cy=n.y+q.w/2+2;
  const nd=svgMap.querySelector('.node[data-id="'+here+'"]');if(!nd)return;
  const G=document.createElementNS('http://www.w3.org/2000/svg','g');G.id='ringG';
