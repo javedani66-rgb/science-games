@@ -1,0 +1,54 @@
+{
+ "id": "chopwood",
+ "kind": "land",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  95
+ ],
+ "stand": [
+  42.0,
+  6.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_chopwood_axe"
+ ],
+ "inside_pad": {
+  "min_margin_px": 6.7,
+  "base_on_pad": true,
+  "height_px": 130.0,
+  "bbox_px": [
+   17.2,
+   2.5,
+   109.2,
+   132.5
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "axe": {
+   "layer": "node_chopwood_axe",
+   "offsets": [
+    [
+     0,
+     0
+    ],
+    [
+     8.2,
+     -7.4
+    ],
+    [
+     16.3,
+     -14.7
+    ]
+   ],
+   "note": "تبر در امتداد دسته تا ۲۲ واحد بالا می‌رود و با فرود دوباره در کنده فرو می‌رود؛ حالت ایستا = فرورفته"
+  }
+ }
+}
