@@ -39,7 +39,12 @@ def map_parts():
     rest = body[e:j]
     d = json.load(open(EA / 'slots.json', encoding='utf-8'))
     d['path_d'] = d['path_d'].replace(OLD_J, NEW_J)   # D118 v2: اسکله عمودی در x=340، نوک ۹۵۶؛ نقطه‌چین از نوک
-    d['path_d'] = d['path_d'].replace('C302.2,945.6 275.8,964.9 255.0,966.1 C234.2,967.3 211.8,965.9 195.0,964.7 C178.2,963.5 164.0,960.5 154.0,959.0 C144.0,957.5 149.0,957.6 135.0,955.9 C121.0,954.2 87.8,965.2 70.0,948.9', 'C300,957.7 296,925 282,909 C262,898 215,899 196,925 C184,941 196,962 180,964 C160,966 140,962 120,960 C110,959 105,959 100,959 C90,958 80,955 70.0,948.9')   # مسیر دریایی بلندتر: قوس لنگرگاه بین اسکلهٔ ساحل و M07
+    d['path_d'] = d['path_d'].replace('C302.2,945.6 275.8,964.9 255.0,966.1 C234.2,967.3 211.8,965.9 195.0,964.7 C178.2,963.5 164.0,960.5 154.0,959.0 C144.0,957.5 149.0,957.6 135.0,955.9 C121.0,954.2 87.8,965.2 70.0,948.9', 'C300,958.4 268,960.6 236,960.6 C205,960.6 172,959.8 156,959.4 C150,959.2 145,959.1 140,959 C120,958.7 90,957 70.0,948.9')   # مسیر دریایی ساده: از نوک اسکلهٔ ساحل مستقیم تا پهلوگاه راست M07 (x≈236) و عبور از مرکز تازهٔ M07 (140)
+    for a_, b_ in (('C215.0,767.5 243.2,762.3 255.0,760.5 C266.8,758.7 255.2,759.7 266.0,759.0 C276.8,758.3 304.0,775.3 320.0,756.1', 'C215.0,767.5 232.0,763.2 242.0,761.3 C246.0,760.2 247.5,759.4 250.0,759.0 C268.0,758.3 304.0,775.3 320.0,756.1'),   # M08: 266→250
+                   ('C215.0,314.9 237.5,319.4 255.0,321.4 C272.5,323.3 289.2,323.7 300.0,324.0 C310.8,324.3 309.7,334.7 320.0,323.3', 'C215.0,314.9 232.0,319.4 241.0,322.0 C245.0,323.1 247.5,323.7 250.0,324.0 C275.0,324.4 309.7,334.7 320.0,323.3'),   # E06: 300→250
+                   ('C175.0,200.4 147.8,196.2 135.0,194.7 C122.2,193.3 128.8,193.6 118.0,192.0 C107.2,190.4 78.0,186.3 70.0,185.1', 'C175.0,200.4 156.0,197.0 148.0,195.0 C144.5,194.0 142.5,192.6 140.0,192.0 C122.0,190.4 88.0,186.3 70.0,185.1')):   # E04: 118→140
+        assert a_ in d['path_d'], a_[:30]
+        d['path_d'] = d['path_d'].replace(a_, b_)
     d['path_d'] += ' C52,182.5 30,158 30,125 C30,80 60,40 120,34 C170,28 225,52 272,96'   # راه دریایی تا ایستگاه نهایی (M12)
     PATHD[:] = [d['path_d']]
     new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 966 + 40)
@@ -69,7 +74,7 @@ def map_parts():
     body = body.replace('stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".34"', 'stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".6"')
     # ایستگاه نهایی M12 (کارگاه ماشین مرکب): در قاب، با قفل و برچسب
     m12 = '<g style="filter:saturate(1.6) brightness(1.1)"><g class="node" data-id="M12" filter="url(#env_wob)"><use href="#node_final_workshop" x="192" y="-25" width="160" height="152" /></g></g>'
-    m12lab = '<text x="272" y="%.1f" text-anchor="middle" font-family="Lalezar" font-size="20" fill="#fff3c4" stroke="#241a5e" stroke-width="6" paint-order="stroke" stroke-linejoin="round">%s</text>' % (158 + LABEL_DY.get('M12', 0), STR['maptravel.node.M12']['text'])
+    m12lab = '<text x="294" y="%.1f" text-anchor="middle" font-family="Lalezar" font-size="20" fill="#fff3c4" stroke="#241a5e" stroke-width="6" paint-order="stroke" stroke-linejoin="round">%s</text>' % (158 + LABEL_DY.get('M12', 0), STR['maptravel.node.M12']['text'])
     body = body.replace('<g id="env_zone_titles"', m12lab + '<g id="env_zone_titles"', 1)
     body = body.replace('<g id="env_labels"', m12 + '<g id="env_labels"', 1)
     # قفل یکدست (مالک ۱۸ اکتبر): همهٔ قفل‌ها یک شکل، یک رنگ، یک جای نسبی روی لبهٔ راست-پایین سکو، کاملاً روی سکو
@@ -77,7 +82,7 @@ def map_parts():
     assert nlk == 3, nlk      # E04 E06 M11 از env_sheet
     lk = ''.join('<g class="lock" data-lock="%s" transform="translate(%.1f %.1f)"><circle r="10" fill="#fff3c4" stroke="#241a5e" stroke-width="3"/><path d="M-3.6,-1 v-2.4 a3.6,3.6 0 0 1 7.2,0 v2.4" fill="none" stroke="#241a5e" stroke-width="2.4"/><rect x="-5.6" y="-1" width="11.2" height="8" rx="2" fill="#241a5e"/></g>' % (n, KIT_XY[n][0] + LOCK_DXY[0], KIT_XY[n][1] + LOCK_DXY[1]) for n in LOCKED)
     body = body.replace('<g id="env_labels"', lk + '<g id="env_labels"', 1)
-    body = body.replace('<text x="154" y="1016"', '<text x="100" y="1016"')   # برچسب M07 همراه سکو
+    body = body.replace('<text x="154" y="1016"', '<text x="140" y="1016"')   # برچسب M07 همراه سکو
     body = re.sub(r'(<text[^>]*?)>(انبار الوار|جرثقیل بندر)</text>', r'\1 word-spacing="9">\2</text>', body)   # D119: فاصلهٔ کلمات برچسب دیده شود
     # کارخانهٔ صنعتی ← کارخانهٔ کشتی‌سازی؛ میدان شهر ← بازارچهٔ شناور (دارایی‌های assets/)
     body = body.replace('<use href="#node_11"', '<use href="#node_shipyard"')
@@ -112,7 +117,7 @@ def map_parts():
         pat = r'<g class="node" data-id="%s"(?: filter="url\(#env_wob\)")?><use href="#[^"]+"[^>]*/></g>' % nid
         assert re.search(pat, body), nid
         body = re.sub(pat, lambda m, sid=sid, nid=nid: '<g class="node" data-id="%s"><use href="#node_%s" x="%s" y="%s" width="144" height="137" /></g>' % (nid, sid, KIT_XY[nid][0] - 72, KIT_XY[nid][1] - 108), body)
-    for a, b in (('<text x="118" y="244"', '<text x="118" y="256"'), ('<text x="300" y="376"', '<text x="300" y="388"'), ('<text x="162" y="605"', '<text x="162" y="591"'), ('<text x="266" y="832"', '<text x="266" y="836"')):   # R17-05/21/23: فاصلهٔ برچسب تا جزیره ≥ ۷
+    for a, b in (('<text x="118" y="244"', '<text x="140" y="256"'), ('<text x="300" y="376"', '<text x="250" y="388"'), ('<text x="162" y="605"', '<text x="162" y="591"'), ('<text x="266" y="832"', '<text x="250" y="836"')):   # R17-05/21/23: فاصلهٔ برچسب تا جزیره ≥ ۷
         assert a in body, a
         body = body.replace(a, b)
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
@@ -134,7 +139,7 @@ LOCK_DXY = (42, 14)   # جای قفل نسبت به مرکز سکو
 LABEL_DY = {'E04': 3.0, 'E06': 7.5, 'M11': 6.0, 'M07': 11.5, 'M02': 15.0, 'E03': 5.0, 'M10': 8.0, 'M12': 7.5, 'M09': 6.0}   # جابه‌جایی عمودی برچسب هر ایستگاه (تنظیم با tools/measure_map.py؛ حداقل ۷px تا سکو/حلقه)
 LABEL_TITLE = {'M07': 'اسکله', 'M02': 'بارانداز', 'M08': 'جرثقیل بندر', 'E03': 'انبار الوار', 'M10': 'پیچ‌کاری', 'M09': 'چوب‌شکافی'}
 KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pier': 'M07', 'harbor_crane': 'M08', 'shipyard': 'M11', 'floating_market': 'E06', 'lighthouse': 'E04', 'final_workshop': 'M12', 'chopwood': 'M09'}
-KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (100, 959), 'M08': (266, 759), 'M11': (162, 524), 'E06': (300, 324), 'E04': (118, 192), 'M12': (272, 96), 'M09': (118, 1543)}   # مرکز سکو = مرکز گره
+KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (140, 959), 'M08': (250, 759), 'M11': (162, 524), 'E06': (250, 324), 'E04': (140, 192), 'M12': (272, 96), 'M09': (118, 1543)}   # مرکز سکو = مرکز گره
 E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
 
 WAVE_AVOID = []
@@ -154,7 +159,7 @@ def drop_waves(sprite):
                     pts.append(tuple((1-u)**3*a[j] + 3*(1-u)**2*u*b[j] + 3*(1-u)*u*u*c2[j] + u**3*e[j] for j in (0, 1)))
             else: pts.append(q[0])
             cur = q[-1]
-    extra = [(346, 938), (320, 906), (196, 925), (70, 949)]   # قوس لنگرگاه و بقیه (تقریب؛ فاصلهٔ ۲۲ کافی است)
+    extra = [(346, 938), (320, 958), (236, 961), (70, 949)]   # قوس لنگرگاه و بقیه (تقریب؛ فاصلهٔ ۲۲ کافی است)
     def bad(m):
         x, y = float(m.group(1)), float(m.group(2))
         if y < 0: return m.group(0)
