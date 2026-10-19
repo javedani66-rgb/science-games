@@ -70,7 +70,8 @@ function sOf(n){let best=1e9,bs=0;for(const p of samp){const d=(p[0]-n.x)**2+(p[
 const ids=Object.keys(NODES);ids.forEach(i=>NODES[i].s=sOf(NODES[i]));
 const ORDER=ids.sort((a,b)=>NODES[a].s-NODES[b].s);
 const isSea=(y,x)=>y<COAST&&!(x!==undefined&&x>=JX-6&&y>=JTIP); /* با x: راهِ اسکله (x≥۳۳۴ و y≥۹۵۸) خشکی حساب می‌شود */
-function leg(a,b){const pts=[];const s0=NODES[a].s,s1=NODES[b].s,dir=s1>s0?1:-1;for(let s=s0;dir>0?s<=s1:s>=s1;s+=3*dir){const p=pth.getPointAtLength(s);pts.push([p.x,p.y])}pts.unshift(stand(NODES[a]));pts.push(stand(NODES[b]));return pts}
+function leg(a,b){const pts=[];const s0=NODES[a].s,s1=NODES[b].s,dir=s1>s0?1:-1;for(let s=s0;dir>0?s<=s1:s>=s1;s+=3*dir){const p=pth.getPointAtLength(s);pts.push([p.x,p.y])}const A=NODES[a],B=NODES[b];while(pts.length>2&&inOuter(A,pts[0][0],pts[0][1]))pts.shift();while(pts.length>2&&inOuter(B,pts[pts.length-1][0],pts[pts.length-1][1]))pts.pop(); /* R19: ردِ مسیر داخل سکوی مبدأ/مقصد حذف شود تا کودک اول به مرکز سکو و بعد برنگردد */
+ pts.unshift(stand(A));pts.push(stand(B));return pts}
 /* وضعیت */
 let here='E03';const visited=new Set(ORDER.filter(i=>NODES[i].y>=1200));
 const NEXT=()=>ORDER.slice().reverse().find(i=>!visited.has(i)&&true);
@@ -183,10 +184,28 @@ function at(pts,c,d){let i=0;while(i<c.length-2&&d>c[i+1])i++;const u=c[i+1]>c[i
 async function walk(pts){if(pts.length<2)return;const c=cum(pts),tot=c[c.length-1],SPD=130,STEP=40,A=5.5;
  await tween(tot/SPD*1000,p=>{const d=p*tot,[x,y]=at(pts,c,d);const env=Math.min(1,d/14,(tot-d)/18),ph=d/STEP*Math.PI,sn=Math.abs(Math.sin(ph));placeFig(x,y);setTilt(A*Math.sin(ph)*env,-2.5*sn*env,1-.03*(1-sn)*env);follow(y)});
  setTilt(0,0);const l=pts[pts.length-1];placeFig(l[0],l[1])}
+/* R19: قایق (و بدنهٔ ≈۵۶×۴۰) هرگز از روی سکو یا بنا نمی‌گذرد: مسیر مرکز قایق از «حریم» هر ایستگاه (بیضی سکو + جعبهٔ بنا، بزرگ‌شده به اندازهٔ قایق) بیرون رانده و نرم می‌شود */
+const BHW=28,BHH=20;
+function inKeep(c,n){const q=pd(n),u=(c[0]-n.x)/(q.rx+BHW),v=(c[1]-n.y-q.w/2)/(q.ry+q.w/2+BHH);
+ if(u*u+v*v<1)return true;return c[0]>n.x-q.rx*.8-BHW&&c[0]<n.x+q.rx*.8+BHW&&c[1]>n.y-q.bh-BHH&&c[1]<n.y+1}
+function pushOut(c,t){let p=c.slice();const tx=t?t[0]:1,ty=t?t[1]:0,dirs=[[-ty,tx],[ty,-tx]];for(let it=0;it<4;it++){let moved=false;for(const id in NODES){const n=NODES[id];if(!inKeep(p,n))continue;
+  let best=null;for(const [dx,dy] of dirs)for(let d=2;d<=240;d+=2){const q=[p[0]+dx*d,p[1]+dy*d];if(!inKeep(q,n)){const cost=d*(1+.3*Math.max(0,-dy))+(q[1]>COAST-36?900:0);if(!best||cost<best[0])best=[cost,q];break}}
+  if(best){p=best[1];moved=true}}if(!moved)break}return p}
+function densify(P,st){const o=[P[0]];for(let i=1;i<P.length;i++){const a=P[i-1],b=P[i],L=Math.hypot(b[0]-a[0],b[1]-a[1]),m=Math.max(1,Math.ceil(L/st));for(let j=1;j<=m;j++)o.push([a[0]+(b[0]-a[0])*j/m,a[1]+(b[1]-a[1])*j/m])}return o}
+function exitD(q,n,dx,dy){for(let d=2;d<=240;d+=2)if(!inKeep([q[0]+dx*d,q[1]+dy*d],n))return d;return 999}
+function avoidBoat(P){const D=densify(P,5),N=D.length;const T=D.map((q,i)=>{const a=D[Math.max(0,i-2)],b=D[Math.min(N-1,i+2)],L=Math.hypot(b[0]-a[0],b[1]-a[1])||1;return[(b[0]-a[0])/L,(b[1]-a[1])/L]});
+ /* هر بازهٔ پیوستهٔ درون حریم یک ایستگاه: یک سمت ثابت (کم‌هزینه‌ترین) برای همهٔ نقطه‌ها، تا میانگین‌گیری مسیر را به مرکز سکو برنگرداند */
+ for(const id in NODES){const n=NODES[id];let i=0;while(i<N){if(!inKeep(D[i],n)){i++;continue}let j=i;while(j+1<N&&inKeep(D[j+1],n))j++;
+  let best=null;for(const sg of [1,-1]){let cost=0;for(let k=i;k<=j;k++){const dx=-T[k][1]*sg,dy=T[k][0]*sg,d=exitD(D[k],n,dx,dy);cost+=d*(1+.3*Math.max(0,-dy))+(D[k][1]+dy*d>COAST-36?900:0)}if(!best||cost<best[0])best=[cost,sg]}
+  for(let k=i;k<=j;k++){if(k===0||k===N-1)continue;const dx=-T[k][1]*best[1],dy=T[k][0]*best[1],d=exitD(D[k],n,dx,dy);D[k]=[D[k][0]+dx*d,D[k][1]+dy*d]}
+  i=j+1}}
+ const E=D.map(q=>q.slice()),R=7;
+ for(let i=1;i<N-1;i++){let sx=0,sy=0,m=0;for(let j=Math.max(0,i-R);j<=Math.min(N-1,i+R);j++){sx+=D[j][0];sy+=D[j][1];m++}E[i]=[sx/m,sy/m]}
+ return E.map((q,i)=>(i===0||i===N-1)?q:pushOut(q,T[i]))}
 /* قایق */
 const foams=[];for(let i=0;i<8;i++){const d=document.createElement('div');d.className='foam';$('foams').appendChild(d);foams.push(d)}
 const hist=[];
-async function sail(pts){if(pts.length<2)return;const c=cum(pts),tot=c[c.length-1];hist.length=0;
+async function sail(pts0){if(pts0.length<2)return;const pts=avoidBoat(pts0.map(q=>[q[0],q[1]-SEAT-4])).map(q=>[q[0],q[1]+SEAT+4]);const c=cum(pts),tot=c[c.length-1];hist.length=0;
  await tween(Math.max(1500,tot/95*1000),p=>{const [x,y]=at(pts,c,p*tot);const env=Math.min(1,p*6,(1-p)*6),roll=2.6*Math.sin(p*Math.PI*Math.max(2,tot/45))*env,bob=1.4*Math.sin(p*Math.PI*Math.max(3,tot/30))*env;
   placeBoat(x,y-SEAT-4+bob,roll);placeFig(x,y-4+bob);setTilt(-roll*.7,0);hist.push([x,y+6]);if(hist.length>70)hist.shift();
   foams.forEach((f,i)=>{const h=hist[hist.length-1-i*5];if(!h){f.style.opacity=0;return}f.style.opacity=Math.max(0,.75-i*.1)*env;f.style.transform='translate('+h[0]+'px,'+h[1]+'px) scale('+(1+i*.12)+')'});follow(y)},ease);
@@ -200,10 +219,11 @@ async function travel(a,b){const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=i
  runs.push({m,pts:cur});let sea=runs[0].m;
  const NA=NODES[a],NB=NODES[b],seaA=isSea(NA.y),seaB=isSea(NB.y);
  if(seaA){const d=dock(NA),r0=runs[0];r0.pts=[d,...r0.pts.filter(p=>!inOuter(NA,p[0],p[1]))];const f=padFig(NA);await hopTo(f,[d[0],d[1]-4],16)}
- if(seaB){const rl=runs[runs.length-1];if(rl.m)rl.pts=[...rl.pts.filter(p=>!inOuter(NB,p[0],p[1])),dock(NB)]}
+ const DK=seaB?dock(NB):null;
+ if(seaB){const rl=runs[runs.length-1];if(rl.m)rl.pts=[...rl.pts.filter(p=>!inOuter(NB,p[0],p[1])),DK]}
  for(const r of runs){
   if(r.m!==sea){const p0=r.pts[0];
-   if(r.m){const f0=pts_last_land(runs,r);setOutfit(true);await moveBoat(berthPos(),500);await hopTo(f0,[BERTH[0],BERTH[1]-4],18);r.pts=[BERTH,...r.pts.filter(p=>p[0]<BERTH[0]-1&&p[1]<JDOT+2)]}
+   if(r.m){const f0=pts_last_land(runs,r);setOutfit(true);await moveBoat(berthPos(),500);await hopTo(f0,[BERTH[0],BERTH[1]-4],18);r.pts=[BERTH,...r.pts.filter(p=>p===DK||(p[0]<BERTH[0]-1&&p[1]<JDOT+2))]}
    else{await hopTo([p0[0],p0[1]-4],p0,18);setOutfit(false);moveBoat(berthPos(),1400)}
    sea=r.m}
   if(r.m)await sail(r.pts);else await walk(r.pts)}
@@ -214,7 +234,8 @@ async function dramatic(a,b){const A=NODES[a],B=NODES[b],seaB=isSea(B.y),dist=Ma
  const y0=stand(A)[1],y1=stand(B)[1];
  await tween(150,p=>{setTilt(0,0,1-.18*Math.sin(p*Math.PI/2))});
  const b0=boatAt.slice(),bt=boatTarget(b),sameB=Math.hypot(bt[0]-b0[0],bt[1]-b0[1])<1.5;
- await tween(520,p=>{if(!sameB)placeBoat(b0[0]+(bt[0]-b0[0])*p,b0[1]+(bt[1]-b0[1])*p,0);const x=A.x+(B.x-A.x)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
+ const BP=sameB?null:avoidBoat([b0,bt]),BC=BP?cum(BP):null;
+ await tween(520,p=>{if(!sameB){const q=at(BP,BC,p*BC[BC.length-1]);placeBoat(q[0],q[1],0)};const x=A.x+(B.x-A.x)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
  setOutfit(seaB);placeBoat(bt[0],bt[1],0);
  await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(stand(B)[0],y1)}
 async function run(fn){if(busy)return;busy=true;skip=false;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}

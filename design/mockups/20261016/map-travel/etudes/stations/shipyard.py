@@ -56,10 +56,11 @@ def slipway(p):
 
 
 def ship(p):
-    # بادبان‌ها (پشت دکل)
-    p.shape([(MX + 3, -112), (MX + 9, -104)] + bez((MX + 9, -104), (26, -86), (16, -52))[1:] + [(MX + 3, -50)], CREAM_, PART, j=.2, step=99, clip=False)
-    p.shape([(MX - 3, -108), (MX - 3, -52), (-74, -54)], '#fffaf0', PART, j=.2, step=99, clip=False)
-    p.ln((MX, -52), (16, -50), PART, MAST, j=0)                                                                                 # تیر پایین بادبان
+    # بادبان‌ها: اصلی بزرگ سمت راست دکل با تیرک پایینی؛ جلویی مثلثی کوچک‌تر بین دکل و دماغه؛ هر دو بالاتر از بدنه و زیر پرچم
+    BY = -62
+    p.shape([(MX + 2, -100)] + bez((MX + 2, -100), (20, -88), (15, BY))[1:] + [(MX + 2, BY)], CREAM_, PART, j=.1, step=99, clip=False)
+    p.shape([(MX - 3, -96)] + bez((MX - 3, -96), (-46, -84), (-66, -66))[1:] + [(MX - 3, -66)], '#ffd2bd', PART, j=.1, step=99, clip=False)
+    p.ln((MX, BY), (17, BY), PART, MAST, j=0)                                                                                   # تیرک پایین بادبان اصلی
     p.ln((MX, -28), (MX, MTOP), PART, MAST, j=.1, probe='دکل (جزء)')                                                             # دکل
     p.shape([(MX, MTOP), (MX + 24, MTOP + 7), (MX, MTOP + 14)], FLAG, INNER, j=.1, step=99, clip=False)                       # پرچم
     # بدنهٔ بلند
