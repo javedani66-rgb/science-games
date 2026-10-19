@@ -150,7 +150,7 @@ function legDots(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],run=[];
 const dotSvg=(P,ro,ri,co,ci,oo,oi)=>P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ro+'" fill="'+co+'" opacity="'+oo+'"/>').join('')+P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ri+'" fill="'+ci+'" opacity="'+oi+'"/>').join('');
 (function(){let P=[];for(let k=0;k<ORDER.length-1;k++)P=P.concat(legDots(k));document.getElementById('seadots').innerHTML=dotSvg(P,4.5,2.5,'#241a5e','#e8f6f8',.35,.85)})();
 const trail=document.createElementNS(NS,'g');trail.id='trail';trail.setAttribute('filter','url(#env_wob)');seaG.parentNode.insertBefore(trail,seaG.nextSibling);
-function updateTrail(){trail.innerHTML='';const b=nextUp();if(!b)return;const k=ORDER.indexOf(b)-1;if(k<0)return;const P=legDots(k);if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)}
+function updateTrail(){trail.innerHTML='';const b=nextUp(),kmax=b?ORDER.indexOf(b)-1:ORDER.length-2;let P=[];for(let k=0;k<=kmax;k++)if(visited.has(ORDER[k]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
 /* کاراکتر و قایق */
 const SEAT=27,FH=56;
 const scaleAt=()=>1;

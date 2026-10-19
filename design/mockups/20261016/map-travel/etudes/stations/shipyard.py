@@ -33,7 +33,7 @@ def poly(p, pts, col):
 # D127 (۱۹ اکتبر): کشتی چوبی کامل از کنار روی سه پایهٔ لغزان کوتاه؛ دماغهٔ بالا‌آمده (چپ)، دکل، بادبان روشن و پرچم. چکش و یک تخته جلوی پایه‌ها.
 PLANK2 = '#f7b36a'; SEAM_C = '#c9692a'; CREAM_ = '#fff3c4'
 BOW = (-82, -52); STERN = (24, -38); KEEL_B = (-60, -2); KEEL_S = (16, -3)
-MX, MTOP = -24, -120
+MX, MTOP = -24, -126
 
 
 def sheer():
@@ -55,14 +55,17 @@ def slipway(p):
     p.ln((-60, 14), (12, 12.5), INNER, WOOD_L, j=0)
 
 
+def sail(p, pts, col):
+    p.raw('<polygon points="%s" fill="%s" stroke="%s" stroke-width="5.8" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, NAVY))
+
+
 def ship(p):
     # بادبان‌ها: اصلی بزرگ سمت راست دکل با تیرک پایینی؛ جلویی مثلثی کوچک‌تر بین دکل و دماغه؛ هر دو بالاتر از بدنه و زیر پرچم
-    BY = -62
-    p.shape([(MX + 2, -100)] + bez((MX + 2, -100), (20, -88), (15, BY))[1:] + [(MX + 2, BY)], CREAM_, PART, j=.1, step=99, clip=False)
-    p.shape([(MX - 3, -96)] + bez((MX - 3, -96), (-46, -84), (-66, -66))[1:] + [(MX - 3, -66)], '#ffd2bd', PART, j=.1, step=99, clip=False)
-    p.ln((MX, BY), (17, BY), PART, MAST, j=0)                                                                                   # تیرک پایین بادبان اصلی
-    p.ln((MX, -28), (MX, MTOP), PART, MAST, j=.1, probe='دکل (جزء)')                                                             # دکل
-    p.shape([(MX, MTOP), (MX + 24, MTOP + 7), (MX, MTOP + 14)], FLAG, INNER, j=.1, step=99, clip=False)                       # پرچم
+    BY = -42
+    sail(p, [(MX, -108), (MX + 34, BY), (MX, BY)], CREAM_)                       # بادبان اصلی: مثلث قائم تیز سمت راست دکل
+    sail(p, [(MX, -84), (MX, BY), (MX - 25, BY)], '#ffb23e')                     # بادبان جلویی: مثلث کوچک‌تر سمت چپ دکل
+    p.ln((MX, -28), (MX, MTOP), PART, MAST, j=.1, probe='دکل (جزء)')                                       # دکل
+    p.shape([(MX, MTOP), (MX + 20, MTOP + 6), (MX, MTOP + 12)], FLAG, INNER, j=.1, step=99, clip=False)   # پرچم
     # بدنهٔ بلند
     p.shape(hull_pts(), PLANK, PART, j=.15, step=99, clip=False)
     T = sheer()
