@@ -166,7 +166,8 @@ function boatTarget(id){const n=NODES[id];return isSea(n.y)?(()=>{const d=dock(n
 async function moveBoat(to,ms){const a=boatAt.slice();if(Math.hypot(to[0]-a[0],to[1]-a[1])<1.5){placeBoat(to[0],to[1],0);return}
  await tween(ms||900,p=>placeBoat(a[0]+(to[0]-a[0])*p,a[1]+(to[1]-a[1])*p,0),ease);placeBoat(to[0],to[1],0)}
 /* قایق کنار سکو در آب پهلو می‌گیرد؛ کودک روی سکو می‌ایستد (D104) */
-const dock=n=>{const q=pd(n),s=n.x<195?1:-1;return[n.x+s*(q.rx+30),n.y+q.w/2+6]};
+const defSide=n=>n.x<195?1:-1;
+const dock=(n,s0)=>{const q=pd(n),s=s0||defSide(n);return[n.x+s*(q.rx+30),n.y+q.w/2+6]}; /* R20: سمت پهلوگاه برای رسیدن = سمتی که مسیر می‌آید؛ برای رفتن = سمتی که مسیر ادامه می‌یابد */
 const stand=n=>n.st?[n.x+n.st[0],n.y+n.st[1]]:[n.x,n.y+pd(n).ry*.6]; /* جای ایستادن: جلوی سکو، پایین مرکز بیضی بالایی (جلوی بنا) */
 const padFig=stand;
 function putAt(id){const n=NODES[id],sea=isSea(n.y);setOutfit(sea);showBoat();const bt=boatTarget(id);placeBoat(bt[0],bt[1],0);{const f=padFig(n);placeFig(f[0],f[1])}setTilt(0,0)}
@@ -215,7 +216,12 @@ async function travel(a,b){const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=i
  for(let t=1;t<pts.length;t++){const mt=isSea(pts[t][1],pts[t][0]);cur.push(pts[t]);if(mt!==m){runs.push({m,pts:cur});cur=[pts[t]];m=mt}}
  runs.push({m,pts:cur});let sea=runs[0].m;
  const NA=NODES[a],NB=NODES[b],seaA=isSea(NA.y),seaB=isSea(NB.y);
- if(seaA){const d=dock(NA),r0=runs[0];r0.pts=[d,...r0.pts.filter(p=>!inOuter(NA,p[0],p[1]))];const f=padFig(NA);await hopTo(f,[d[0],d[1]-4],16)}
+ if(seaA){const r0=runs[0],rest=r0.pts.filter(p=>!inOuter(NA,p[0],p[1])),ds=defSide(NA),fp=rest[0],sd=(!fp||Math.abs(fp[0]-NA.x)<20)?ds:(fp[0]<NA.x?-1:1),d=dock(NA,sd),f=padFig(NA),q=pd(NA);r0.pts=[d,...rest];
+  if(sd===ds)await hopTo(f,[d[0],d[1]-4],16);
+  else{ /* مسیر از سمت دیگر سکو ادامه می‌یابد: قایق (بدون کودک) از جلوی سکو دور می‌زند و کودک هم‌زمان از جلوی سکو پیاده به لبهٔ آن سمت می‌رود */
+   const ey=f[1]+q.ry*.45,e=[NA.x+sd*(q.rx-12),ey],route=avoidBoat([boatAt.slice(),[d[0],d[1]-SEAT-4]]),rc=cum(route);
+   await Promise.all([walk([f,[NA.x+sd*q.rx*.2,ey],e]),tween(1300,p=>{const w=at(route,rc,p*rc[rc.length-1]);placeBoat(w[0],w[1],0)},ease)]);
+   placeBoat(d[0],d[1]-SEAT-4,0);await hopTo(e,[d[0],d[1]-4],16)}}
  const DK=seaB?dock(NB):null;
  if(seaB){const rl=runs[runs.length-1];if(rl.m)rl.pts=[...rl.pts.filter(p=>!inOuter(NB,p[0],p[1])),DK]}
  for(const r of runs){
