@@ -11387,21 +11387,6 @@
    "text": "راه هیولا آمد؛ ایستگاه بعد را انتخاب کن",
    "status": "draft"
   },
-  "maptravel.hide.enter": {
-   "id": "maptravel.hide.enter",
-   "kind": "ui",
-   "where_fa": "دکمهٔ ورود به مخفی‌گاه (پایین)",
-   "context_fa": "دکمهٔ ورود به مخفی‌گاه (پایین)؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
-   "band": "همه",
-   "file": "design/mockups/20261016/map-travel/strings.fa.json",
-   "target": "json",
-   "locator": [
-    "maptravel.hide.enter",
-    "text"
-   ],
-   "text": "وارد مخفی‌گاه",
-   "status": "draft"
-  },
   "maptravel.hide.title": {
    "id": "maptravel.hide.title",
    "kind": "ui",
