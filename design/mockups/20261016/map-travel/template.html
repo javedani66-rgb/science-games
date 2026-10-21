@@ -41,7 +41,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .btn{min-height:56px;min-width:96px;border:3.5px solid var(--navy);border-radius:18px;background:var(--gold);box-shadow:0 4px 0 var(--edge);font-weight:700;font-size:16px;padding:6px 12px}
 .btn[hidden]{display:none}
 .btn.sec{background:var(--cream)}
-.pr{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@keyframes stamp{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}@media (prefers-reduced-motion:reduce){.pr{animation:none}}
+.dpop{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@media (prefers-reduced-motion:reduce){.dpop{animation:none}}.pr{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@keyframes stamp{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}@media (prefers-reduced-motion:reduce){.pr{animation:none}}
 </style>
 </head>
 <body data-light="day">
@@ -151,7 +151,7 @@ function legDots(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],run=[];
 const dotSvg=(P,ro,ri,co,ci,oo,oi)=>P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ro+'" fill="'+co+'" opacity="'+oo+'"/>').join('')+P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ri+'" fill="'+ci+'" opacity="'+oi+'"/>').join('');
 (function(){let P=[];for(let k=0;k<ORDER.length-1;k++)P=P.concat(legDots(k));document.getElementById('seadots').innerHTML=dotSvg(P,4.5,2.5,'#241a5e','#e8f6f8',.35,.85)})();
 const trail=document.createElementNS(NS,'g');trail.id='trail';trail.setAttribute('filter','url(#env_wob)');seaG.parentNode.insertBefore(trail,seaG.nextSibling);
-function updateTrail(){trail.innerHTML='';const b=nextUp(),kmax=b?ORDER.indexOf(b)-1:ORDER.length-2;let P=[];for(let k=0;k<=kmax;k++)if(visited.has(ORDER[k]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
+function updateTrail(){trail.innerHTML='';let P=[];for(let k=0;k<=ORDER.length-2;k++)if(visited.has(ORDER[k+1]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
 /* کاراکتر و قایق */
 const SEAT=27,FH=56;
 const scaleAt=()=>1;
@@ -178,11 +178,22 @@ function tween(ms,fn,e){return new Promise(res=>{if(reduce||skip){fn(1);res();re
 function cum(pts){const c=[0];for(let i=1;i<pts.length;i++)c.push(c[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));return c}
 function at(pts,c,d){let i=0;while(i<c.length-2&&d>c[i+1])i++;const u=c[i+1]>c[i]?Math.min(1,(d-c[i])/(c[i+1]-c[i])):1;return[pts[i][0]+(pts[i+1][0]-pts[i][0])*u,pts[i][1]+(pts[i+1][1]-pts[i][1])*u]}
 /* تلوتلوی عروسکی روی خشکی */
+/* D136: ردپا و نقطه‌های آب مالِ هیولای مخترع‌اند و یک مرحله جلوتر از کودک؛ اول یکی‌یکی «تاپ تاپ» حک می‌شوند، بعد کودک دنبالشان می‌رود */
+async function monsterTrail(a,b,pts){const K=ORDER.indexOf(b)-1;if(K<0||ORDER[K]!==a&&ORDER.indexOf(a)>K)return;
+ const c=cum(pts),near=(x,y)=>{let bi=0,bd=1e9;for(let i=0;i<pts.length;i++){const d=(pts[i][0]-x)**2+(pts[i][1]-y)**2;if(d<bd){bd=d;bi=i}}return c[bi]};
+ const items=[];prints.childNodes.forEach(g=>{if(g.dataset.on||+g.dataset.leg!==K)return;items.push({k:near(+g.dataset.px,+g.dataset.py),y:+g.dataset.py,g})});
+ legDots(K).forEach(p=>items.push({k:near(p[0],p[1]),y:p[1],d:p}));
+ if(!items.length)return;items.sort((u,v)=>u.k-v.k);const n=items.length;let shown=0;
+ await tween(Math.min(3000,Math.max(500,n*120)),p=>{const m=Math.min(n,Math.floor(p*n)+(p>=1?1:0));
+  while(shown<m){const it=items[shown++];if(it.g){const g=it.g;g.dataset.on='1';g.style.display='';const e=g.firstChild;e.style.animation='none';void e.getBoundingClientRect();e.style.animationDelay='0ms';e.style.animation=''}
+   else{const q=it.d,mk=(r,col)=>'<circle class="dpop" cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+r+'" fill="'+col+'"/>';trail.insertAdjacentHTML('beforeend',mk(5,'#241a5e')+mk(3.2,'#b07af0'))}
+   follow(it.y)}});
+ await new Promise(r=>setTimeout(r,reduce||skip?0:350))}
 let curLeg=-1;
 function revealNear(x,y){if(curLeg<0)return;prints.childNodes.forEach(g=>{if(g.dataset.on||+g.dataset.leg!==curLeg)return;if(Math.hypot(g.dataset.px-x,g.dataset.py-y)>15)return;
   g.dataset.on='1';g.style.display='';const e=g.firstChild;e.style.animation='none';void e.getBoundingClientRect();e.style.animationDelay='0ms';e.style.animation=''})}
 async function walk(pts){if(pts.length<2)return;const c=cum(pts),tot=c[c.length-1],SPD=130,STEP=40,A=5.5;
- await tween(tot/SPD*1000,p=>{const d=p*tot,[x,y]=at(pts,c,d);const env=Math.min(1,d/14,(tot-d)/18),ph=d/STEP*Math.PI,sn=Math.abs(Math.sin(ph));placeFig(x,y);revealNear(x,y);setTilt(A*Math.sin(ph)*env,-2.5*sn*env,1-.03*(1-sn)*env);follow(y)});
+ await tween(tot/SPD*1000,p=>{const d=p*tot,[x,y]=at(pts,c,d);const env=Math.min(1,d/14,(tot-d)/18),ph=d/STEP*Math.PI,sn=Math.abs(Math.sin(ph));placeFig(x,y);setTilt(A*Math.sin(ph)*env,-2.5*sn*env,1-.03*(1-sn)*env);follow(y)});
  setTilt(0,0);const l=pts[pts.length-1];placeFig(l[0],l[1])}
 /* R19: قایق (و بدنهٔ ≈۵۶×۴۰) هرگز از روی سکو یا بنا نمی‌گذرد: مسیر مرکز قایق از «حریم» هر ایستگاه (بیضی سکو + جعبهٔ بنا، بزرگ‌شده به اندازهٔ قایق) بیرون رانده و نرم می‌شود */
 const BHW=28,BHH=20;
@@ -216,7 +227,7 @@ async function hopTo(a,b,h){await tween(380,p=>{placeFig(a[0]+(b[0]-a[0])*p,a[1]
  await tween(150,p=>{setTilt(0,0,1-.07*Math.sin(p*Math.PI))});setTilt(0,0,1)}
 /* سفر عادی به گرهٔ تازه: پاها روی خشکی، قایق روی دریا؛ در ساحل پرش */
 const pts_last_land=(runs,r)=>{const i=runs.indexOf(r),q=runs[i-1];return q?q.pts[q.pts.length-1]:[JX,JTIP]};
-async function travel(a,b){curLeg=ORDER.indexOf(b)-1;fadeRing();const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=isSea(pts[0][1],pts[0][0]);
+async function travel(a,b){fadeRing();const pts=leg(a,b);await monsterTrail(a,b,pts);const runs=[];let cur=[pts[0]],m=isSea(pts[0][1],pts[0][0]);
  for(let t=1;t<pts.length;t++){const mt=isSea(pts[t][1],pts[t][0]);cur.push(pts[t]);if(mt!==m){runs.push({m,pts:cur});cur=[pts[t]];m=mt}}
  runs.push({m,pts:cur});let sea=runs[0].m;
  const NA=NODES[a],NB=NODES[b],seaA=isSea(NA.y),seaB=isSea(NB.y);
