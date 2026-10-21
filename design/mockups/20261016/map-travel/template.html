@@ -65,12 +65,12 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <button class="opt" id="o_sea"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6v28" /><path d="M26 8L44 32H26Z" fill="#fff3c4"/><path d="M8 36h36l-6 9H14Z" fill="#ff9a3c"/></svg><span id="t_sea"></span></button>
 <button class="opt soft" id="o_cr"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><path d="M26 44C8 31 7 16 17 12c5-2 8 1 9 5 1-4 4-7 9-5 10 4 9 19-9 32Z" fill="#f08a8a"/></svg><span id="t_cr"></span></button></div>
 <p id="ovn" aria-live="polite"></p><button class="btn" id="ovc"></button></div></div>
-<div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn" id="fin" hidden></button><button class="btn" id="enter" hidden></button><button class="btn sec" id="again"></button></div>
+<div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn" id="fin" hidden></button><button class="btn sec" id="again"></button></div>
 </div>
 <script>
 const S={{STRINGS}};const REV={{REVIEW}};const NODES={{NODES}};const IM={{IMAGES}};const PATHD={{PATHD}};const COAST={{COAST}};
 const T=k=>S['maptravel.'+k].text;const $=id=>document.getElementById(id);
-$('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');$('fin').textContent=T('finish');$('enter').textContent=T('hide.enter');$('ovt').textContent=T('hide.title');$('t_rev').textContent=T('hide.review');$('t_card').textContent=T('hide.cards');$('t_sea').textContent=T('hide.sea');$('t_cr').textContent=T('hide.credits');$('ovc').textContent=T('hide.close');
+$('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');$('fin').textContent=T('finish');$('ovt').textContent=T('hide.title');$('t_rev').textContent=T('hide.review');$('t_card').textContent=T('hide.cards');$('t_sea').textContent=T('hide.sea');$('t_cr').textContent=T('hide.credits');$('ovc').textContent=T('hide.close');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let skip=false,busy=false;
 const sc=$('sc'),world=$('world'),fig=$('fig'),tilt=$('tilt'),fimg=$('fimg'),boat=$('boat');
 let k=1;
@@ -270,21 +270,22 @@ async function dramatic(a,b){fadeRing();const A=NODES[a],B=NODES[b],seaB=isSea(B
  await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(x1,y1)}
 async function run(fn){if(busy)return;busy=true;skip=false;$('fin').hidden=true;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}
 function status(){const up=nextUp(),prev=up?ORDER[ORDER.indexOf(up)-1]:null,can=!!up&&!done.has(here)&&here===prev;
- $('st').textContent=(T('here').replace('%s',NODES[here].title||'')||T('hint'))+(up?'. '+(done.has(prev)?T('picknext'):T('needfin')):'');$('fin').hidden=!can||busy;$('enter').hidden=!(here==='M12'&&!busy)}
+ $('st').textContent=(T('here').replace('%s',NODES[here].title||'')||T('hint'))+(up?'. '+(done.has(prev)?T('picknext'):T('needfin')):'');$('fin').hidden=!can||busy}
 async function finish(){if(busy||done.has(here))return;const b=ORDER[ORDER.indexOf(here)+1];if(!b)return;
  await run(()=>monsterTrail(here,b,leg(here,b)));done.add(here);updateTrail();showPrints(false);status()}
 $('fin').onclick=finish;
 /* D138/D139 (پیشنهاد، ماکت): صفحهٔ انتخاب مخفی‌گاه؛ چهار گزینه کنار هم؛ آب‌های آزاد: قایق از بالای کادر می‌رود و پیام می‌آید */
 const ov=$('ov'),ovn=$('ovn');let atSea=false;
 function openHide(){ovn.textContent='';ov.hidden=false}
-$('enter').onclick=()=>{if(!busy)openHide()};$('ovc').onclick=()=>{ov.hidden=true;$('ovt').textContent=T('hide.title');$('opts').hidden=false;$('ovc').textContent=T('hide.close');if(atSea)seaBack()};
+$('ovc').onclick=()=>{ov.hidden=true;$('ovt').textContent=T('hide.title');$('opts').hidden=false;$('ovc').textContent=T('hide.close');if(atSea)seaBack()};
 ['o_rev','o_card','o_cr'].forEach(i=>$(i).onclick=()=>{ovn.textContent=T('hide.mock')});
 $('o_sea').onclick=async()=>{ov.hidden=true;await run(seaOut);$('ovt').textContent=T('hide.seamsg');$('opts').hidden=true;$('ovn').textContent='';$('ovc').textContent=T('hide.back');atSea=true;ov.hidden=false};
 async function seaOut(){const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,by,0);setOutfit(true);await hopTo(f,[d[0],d[1]-4],16);
  await tween(2800,p=>{const y=by-(by+150)*p,x=bx+10*Math.sin(p*6)*(1-p),r=3*Math.sin(p*9);placeBoat(x,y,r);placeFig(x,y+SEAT);setTilt(-r*.7,0);follow(Math.max(0,y))},ease)}
 async function seaBack(){atSea=false;await run(async()=>{const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;
  await tween(2200,p=>{const y=-150+(by+150)*p;placeBoat(bx,y,0);placeFig(bx,y+SEAT);follow(Math.max(0,y))},ease);setTilt(0,0);await hopTo([d[0],d[1]-4],f,16);setOutfit(false);placeFig(f[0],f[1])});status()}
-async function go(id){if(busy||id===here)return;const up=nextUp();
+async function go(id){if(busy)return;if(id===here){if(id==='M12')openHide();return} /* D143: ورود به مخفی‌گاه مثل بقیهٔ ایستگاه‌ها: لمس خود ایستگاه، نه دکمهٔ جدا */
+ const up=nextUp();
  if(visited.has(id)){await run(()=>dramatic(here,id));here=id}
  else if(id===up){if(!done.has(ORDER[ORDER.indexOf(up)-1])){const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');$('st').textContent=T('needfin');return}await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true)}
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
