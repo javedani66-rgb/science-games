@@ -14,7 +14,8 @@ _k.margin_check = functools.partial(_k.margin_check, min_margin=4); _k.motion_ch
 W_B = '#e9a65b'; W_L = '#fbe0a8'; W_D = '#b8682a'; BLK = '#c9772a'; BLK_L = '#e29a52'; BLK_D = '#9a5420'
 CR = '#f2552c'; CR_S = '#ffd98a'
 GY = 18                       # زمین
-XR, XL = 14, -60              # لبهٔ راست (پایین) و چپ (بالا) تخته
+XR, XL = 14, -52
+SEAT = 5              # لبهٔ راست (پایین) و چپ (بالا) تخته
 ANG = math.radians(27)
 TH = 16                       # ضخامت عمودی تخته
 SL = -math.tan(ANG)           # dy/dx: سمت راست پایین‌تر (y بزرگ‌تر) ⇒ شیب منفی در x
@@ -22,7 +23,7 @@ def top_y(x): return (GY - TH) + (x - XR) * SL * -1 * -1 if False else (GY - TH)
 U = (-math.cos(ANG), -math.sin(ANG))        # بالا رفتن (چپ و بالا)
 N = (-math.sin(ANG), math.cos(ANG))         # عمود به سمت پایین-راست؟ (پایین تخته)
 NUP = (math.sin(ANG), -math.cos(ANG))       # عمود رو به بالا
-CS = 27                                     # ضلع جعبه
+CS = 24                                     # ضلع جعبه
 T_END = 36                                  # فاصلهٔ لبهٔ پایین جعبه (مرکز کف) از سر پایین تخته در پایان
 RISE = 26
 
@@ -36,17 +37,16 @@ def build():
     TYL, TYR = top_y(XL), top_y(XR)
     p.tipshadow(-60, GY + 1, 20); p.tipshadow(8, GY + 1, 14)
     p.foot_tip(-60, GY, 10); p.foot_tip(12, GY - 1, 5)
-    # تخته
-    B = [(XL - 8, TYL + 4), (XL, TYL), (XR, TYR), (XR, TYR + TH), (XL - 8, TYL + TH)]
-    p.shape(B, W_B, OUT, j=.2, step=10)
-    d = 3.4
-    flat(p, [(XL + 3, TYL + 3), (XR - 3, TYR + 3), (XR - 3, TYR + 3 + 3.6), (XL + 3, TYL + 3 + 3.6)], W_L)       # نوار روشن لبهٔ بالا
-    flat(p, [(XL + 3, TYL + TH - 5.5), (XR - 3, TYR + TH - 5.5), (XR - 3, TYR + TH - 3), (XL + 3, TYL + TH - 3)], W_D)  # سایهٔ لبهٔ پایین
-    # سکوی چوبی بعد از تخته کشیده می‌شود: سطح بالایش تراز با لبهٔ بالای تخته در سر بالا؛ تخته از وجه راست بلوک بیرون می‌آید
-    bx0, bx1, by0 = XL - 30, XL, TYL
+    # بلوک (پایهٔ پهن و کوتاه، وجه بالا + جلو) اول کشیده می‌شود؛ سر بالای تخته روی وجه بالای آن می‌نشیند
+    by0 = TYL + TH + SEAT; bx0, bx1 = XL - 24, XL + SEAT / math.tan(ANG)
     p.shape([(bx0, by0), (bx1, by0), (bx1, GY), (bx0, GY)], BLK, PART, j=.1, step=12)
-    flat(p, [(bx0 + 3, by0 + 3), (bx1 - 3, by0 + 3), (bx1 - 3, by0 + 9), (bx0 + 3, by0 + 9)], BLK_L)
+    flat(p, [(bx0 + 3, by0 + 3), (bx1 - 3, by0 + 3), (bx1 - 3, by0 + 9), (bx0 + 3, by0 + 9)], BLK_L)            # وجه بالا (روشن)
     flat(p, [(bx0 + 3, GY - 8), (bx1 - 3, GY - 8), (bx1 - 3, GY - 3), (bx0 + 3, GY - 3)], BLK_D)
+    # تخته: کف سر بالا صاف روی لبهٔ بالای بلوک، بعد زیر تخته مایل می‌شود (از گوشهٔ راست-بالای بلوک)
+    B = [(XL, TYL), (XR, TYR), (XR, TYR + TH), (bx1, by0), (XL, by0)]
+    p.shape(B, W_B, OUT, j=.15, step=10)
+    flat(p, [(XL + 3, TYL + 3), (XR - 3, TYR + 3), (XR - 3, TYR + 3 + 3.6), (XL + 3, TYL + 3 + 3.6)], W_L)       # نوار روشن لبهٔ بالا
+    flat(p, [(bx1 + 3, top_y(bx1 + 3) + TH - 5.5), (XR - 3, TYR + TH - 5.5), (XR - 3, TYR + TH - 3), (bx1 + 3, top_y(bx1 + 3) + TH - 3)], W_D)  # سایهٔ لبهٔ پایین
     # جعبه
     with layer(p, 'crate'):
         base = (XR - T_END * math.cos(ANG) * 1, 0); base = (XR + U[0] * T_END, TYR + U[1] * T_END)   # روی لبهٔ بالا
