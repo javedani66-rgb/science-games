@@ -22,7 +22,7 @@ GY = 14                                    # زمین
 XA, YA = -36, -40                          # سر بالای سطح تخته = لبهٔ سکو
 XB, YB = 38, -8                            # سر پایین سطح تخته
 TH = 22                                    # ضخامت (عمودی) تخته
-PX0 = -62                                  # لبهٔ چپ سکو
+PX0 = -58                                  # لبهٔ چپ سکو
 SLOPE = (YB - YA) / (XB - XA)
 TH_ANG = math.atan(SLOPE)
 U = (math.cos(TH_ANG), math.sin(TH_ANG))   # جهت سرازیری
@@ -62,7 +62,7 @@ def leg(p, x, w=16):
 def build():
     p = Pen('loading_ramp', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
     for x, r in ((-49, 20), (LEGS[0], 10), (LEGS[1], 10), (32, 12)): p.tipshadow(x, GY + 1, r)
-    p.foot_tip(-54, GY - 1, 8); p.foot_tip(-42, GY - 1, 8); p.foot_tip(LEGS[0], GY, 7); p.foot_tip(LEGS[1], GY, 7); p.foot_tip(34, GY - 2, 9)
+    p.foot_tip(-52, GY - 1, 8); p.foot_tip(-42, GY - 1, 8); p.foot_tip(LEGS[0], GY, 7); p.foot_tip(LEGS[1], GY, 7); p.foot_tip(34, GY - 2, 9)
     for x in LEGS: leg(p, x)                                                    # پایه‌های باز زیر تخته
     # --- تخته: متوازی‌الاضلاع بلند (ضخامت عمودی TH) که زیر سکو ادامه دارد و پایینش روی زمین است
     PLK = [(XA - 8, ys(XA - 8)), (XB, YB), (XB, YB + TH), (XA - 8, ys(XA - 8) + TH)]
@@ -88,9 +88,9 @@ def build():
     flat(p, [(POST[1] - 6, YA - 14), (POST[1] - 2, YA - 14), (POST[1] - 2, YA + 1), (POST[1] - 6, YA + 1)], WD_D, .55)
     p.stroke(pst, PART, j=.15, step=8)
     # --- پرچمک: میلهٔ تخت و پارچهٔ قرمز
-    p.ln((-57, YA + 2), (-57, YA - 42), PART, ROPE, j=0)
-    p.shape([(-57, YA - 42), (-35, YA - 42), (-42, YA - 34), (-35, YA - 26), (-57, YA - 26)], FLAG, INNER, j=.1, step=99, clip=False)
-    disc(p, -57, YA - 43, 3, YEL)
+    p.ln((-54, YA + 2), (-54, YA - 42), PART, ROPE, j=0)
+    p.shape([(-54, YA - 42), (-32, YA - 42), (-39, YA - 34), (-35, YA - 26), (-54, YA - 26)], FLAG, INNER, j=.1, step=99, clip=False)
+    disc(p, -54, YA - 43, 3, YEL)
     # --- جعبه و طناب (لایهٔ متحرک)؛ برش ثابت بیرونی: سر اضافی طناب چپ لبهٔ تیرک پنهان می‌ماند
     cx0 = p.X((POST[1], 0))[0]
     p.raw('<defs><clipPath id="loading_ramp_rope_clip"><rect x="%.1f" y="-400" width="500" height="800"/></clipPath></defs><g clip-path="url(#loading_ramp_rope_clip)">' % cx0)
@@ -110,7 +110,7 @@ def build():
     return p
 
 
-XF = (1.0, -11.0, 0.0)
+XF = (1.0, -9.0, -3.0)
 STAND = None
 if __name__ == '__main__':
     import sys as _s

@@ -9,7 +9,7 @@ sys.path.insert(0, str(HERE.parent))
 import functools, station_kit as _k
 from station_kit import *
 _k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_check = functools.partial(_k.motion_check, min_margin=8)
-OUTD = HERE / 'out'
+OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/archery'
 
 WOOD = '#b77a3a'; WOOD_L = '#d9a463'; WOOD_D = '#7a4a1f'
