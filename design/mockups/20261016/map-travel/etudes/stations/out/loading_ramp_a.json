@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  36
+  47
  ],
  "stand": [
-  40.0,
-  -1.5
+  43.0,
+  4.5
  ],
  "ring": [
   0,
@@ -20,16 +20,16 @@
   "node_loading_ramp_a_crate"
  ],
  "inside_pad": {
-  "min_margin_px": 0.0,
-  "base_on_pad": false,
-  "height_px": 58.2,
+  "min_margin_px": 4.8,
+  "base_on_pad": true,
+  "height_px": 58.5,
   "bbox_px": [
-   16.2,
-   71.5,
-   91.0,
-   129.8
+   19.2,
+   61.2,
+   93.8,
+   119.8
   ],
-  "ok": false
+  "ok": true
  },
  "motion_spec": {
   "node_loading_ramp_a_crate": {

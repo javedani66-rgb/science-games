@@ -5,10 +5,10 @@
   66.2,
   31.7,
   11.5,
-  38
+  49
  ],
  "stand": [
-  42.5,
+  44.0,
   4.5
  ],
  "ring": [
@@ -20,23 +20,23 @@
   "node_loading_ramp_b_crate"
  ],
  "inside_pad": {
-  "min_margin_px": 0.0,
-  "base_on_pad": false,
-  "height_px": 50.0,
+  "min_margin_px": 5.5,
+  "base_on_pad": true,
+  "height_px": 59.8,
   "bbox_px": [
-   7.2,
-   69.8,
-   92.8,
-   119.8
+   15.0,
+   59.0,
+   95.8,
+   118.8
   ],
-  "ok": false
+  "ok": true
  },
  "motion_spec": {
   "node_loading_ramp_b_crate": {
    "translate_xy": [
     [
-     14.2,
-     6.5
+     13.1,
+     8.5
     ],
     [
      0,
@@ -44,7 +44,7 @@
     ]
    ],
    "unit": "واحد symbol",
-   "dir_deg": 24.4,
+   "dir_deg": 33.1,
    "start": "جعبه پایین‌تر روی تخته",
    "end": "حالت ایستا (پایان): جعبه بالاتر نزدیک کف تخت",
    "note": "فقط جعبه و تسمه؛ بدون چرخش؛ یک‌بار هنگام رسیدن"

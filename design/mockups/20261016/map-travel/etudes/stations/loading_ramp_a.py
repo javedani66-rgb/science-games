@@ -39,7 +39,7 @@ def build():
     # سکوی چوبی (مکعب کوتاه) زیر سر بالا
     bx0, bx1, by0 = XL - 3, XL + 32, top_y(XL + 10) + TH - 1
     p.shape([(bx0, by0), (bx1, by0), (bx1, GY), (bx0, GY)], BLK, PART, j=.2, step=10)
-    flat(p, [(bx0 + 3, by0 + 3), (bx1 - 3, by0 + 3), (bx1 - 3, by0 + 9), (bx0 + 3, by0 + 9)], BLK_L)
+    flat(p, [(bx0 + 3, by0 + 14), (bx0 + 10, by0 + 14), (bx0 + 10, GY - 3), (bx0 + 3, GY - 3)], BLK_L)
     flat(p, [(bx1 - 9, by0 + 12), (bx1 - 3, by0 + 12), (bx1 - 3, GY - 3), (bx1 - 9, GY - 3)], BLK_D)
     # تخته
     B = [(XL, TYL), (XR, TYR), (XR, TYR + TH), (XL, TYL + TH)]
@@ -54,11 +54,12 @@ def build():
         a = A(a, NUP, .0)
         p.shape([a, b, c, e], CR, PART, j=.15, step=8, clip=False)
         s0, s1 = .40, .62                                                  # تسمهٔ روشن (بدون خط دور)
-        flat(p, [A(a, U, CS * s0), A(a, U, CS * s1), A(A(a, U, CS * s1), NUP, CS), A(A(a, U, CS * s0), NUP, CS)], CR_S)
+        q0 = A(a, NUP, 3); H = CS - 6
+        flat(p, [A(q0, U, CS * s0), A(q0, U, CS * s1), A(A(q0, U, CS * s1), NUP, H), A(A(q0, U, CS * s0), NUP, H)], CR_S)
     return p
 
 
-XF = (1.2, 6.0, 6.0)
+XF = (1.2, 10.0, -8.0)
 if __name__ == '__main__':
     if len(sys.argv) > 3: XF = tuple(float(v) for v in sys.argv[1:4])
     p = build()
