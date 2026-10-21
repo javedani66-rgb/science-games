@@ -17,7 +17,7 @@ RED = '#e0553a'; RED_L = '#ff9a6c'; RED_D = '#9c2f1c'
 STEEL = '#dbe9f8'; STEEL_S = '#a3bbd9'; STEEL_L = '#ffffff'
 CORD = '#8a5f0c'; CREAM = '#fff3c4'; YEL = '#ffd84d'; FEA_D = '#c9452c'
 
-XF = (1.0, 5.0, 0.0)
+XF = (1.0, -1.0, 0.0)
 YT, YB = -112, 4
 YM = (YT + YB) / 2            # -54
 HC = (YB - YT) / 2 - 0        # 58
@@ -26,8 +26,8 @@ R = (HC ** 2 + SAG ** 2) / (2 * SAG)
 X0 = math.sqrt(R * R - 0) - SAG   # = R - SAG
 AY = YM - 8                   # ارتفاع تیر = رأس V (روی بخش بالایی دستگیره)
 NX = 16                       # ته تیر (رأس V) در حالت کشیده
-PULL = 12                     # جابه‌جایی تا حالت رها
-TIPX = -66
+PULL = 8                     # جابه‌جایی تا حالت رها
+TIPX = -63
 
 
 def cx(dy): return -(math.sqrt(R * R - dy * dy) - X0)          # خط مرکز کمان (دایره‌ای)
@@ -133,14 +133,14 @@ def build():
         p.ln((NX - 1, AY), (TIPX + 18, AY), INNER, CREAM, j=.03, probe='تیر (چوب)')
         # پرها: خوابیده به سمت زه (لبهٔ بیرونی به راست جابه‌جا)
         for sg, col, lt in ((-1, RED, RED_L), (1, FEA_D, None)):
-            P = [(NX - 30, AY + sg * 2), (NX - 24, AY + sg * 11.5), (NX - 8, AY + sg * 11.5), (NX - 14, AY + sg * 2)]
+            P = [(NX - 25, AY + sg * 2), (NX - 17, AY + sg * 11.5), (NX - 1.5, AY + sg * 11.5), (NX - 8, AY + sg * 2)]
             p.shape(P, col, INNER, j=.04, step=99, clip=False)
-            if lt: p.fill([(NX - 22, AY + sg * 9.5), (NX - 11, AY + sg * 9.5), (NX - 11.5, AY + sg * 7.4), (NX - 22.5, AY + sg * 7.4)], lt)
+            if lt: p.fill([(NX - 15, AY + sg * 9.5), (NX - 4.5, AY + sg * 9.5), (NX - 5, AY + sg * 7.4), (NX - 15.5, AY + sg * 7.4)], lt)
         # نوک فلزی (سمت هدف): دو پله + برق، دور PART، نوک بریده
-        H = [(TIPX, AY - 1.5), (TIPX + 25, AY - 9), (TIPX + 25, AY + 9), (TIPX, AY + 1.5)]
+        H = [(TIPX, AY - .6), (TIPX + 26, AY - 8), (TIPX + 26, AY + 8), (TIPX, AY + .6)]
         p.shape(H, STEEL, PART, j=.04, step=99, clip=False)
-        p.fill([(TIPX + 3, AY + .2), (TIPX + 22.5, AY + .2), (TIPX + 22.5, AY + 6.4), (TIPX + 3.5, AY + 1.6)], STEEL_S)
-        p.ln((TIPX + 8, AY - 3.5), (TIPX + 19, AY - 6), INNER, STEEL_L, j=.03)
+        p.fill([(TIPX + 3, AY + .2), (TIPX + 23, AY + .2), (TIPX + 23, AY + 5.4), (TIPX + 4, AY + 1.2)], STEEL_S)
+        p.ln((TIPX + 9, AY - 2.8), (TIPX + 20, AY - 5.2), INNER, STEEL_L, j=.03)
         p.stroke(H, PART, j=.04, step=99)
         # کام روی رأس V
         a, b = p.X((NX, AY)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.4" fill="%s"/>' % (a, b, YEL))

@@ -18,18 +18,18 @@ C_B, C_L, C_D = '#ef6a4a', '#ffb59c', '#c9452c'
 SPAR = '#7a4a1f'; DOOR = '#b77a3a'; DOOR_D = '#7a4a1f'; GLASS = '#cfeaff'; YEL = '#ffd84d'
 
 CX, BASE = -30, 7
-TOP = -66                      # بالای برج
-ROOF_B, ROOF_T = -61, -97      # کف و بالای سقف
-HUB = (CX, -72)
-R = 34                         # طول پارچه از محور
-CW = 14                        # پهنای پارچه
+TOP = -78                      # بالای برج
+ROOF_B, ROOF_T = -73, -109      # کف و بالای سقف
+HUB = (CX, -88)
+R = 46                         # طول پارچه از محور
+CW = 19                        # پهنای پارچه
 STATIC = (-135, -45, 45, 135)  # ضربدر ×
 
 
 def hw(y): return 26 - 9 * (BASE - y) / (BASE - TOP)       # نیم‌پهنای برج
 
 
-def rw(y): return 29 - 17 * (ROOF_B - y) / (ROOF_B - ROOF_T)   # نیم‌پهنای سقف
+def rw(y): return 38 - 22 * (ROOF_B - y) / (ROOF_B - ROOF_T)   # نیم‌پهنای سقف
 
 
 def poly(p, pts, col, op=1):
@@ -42,12 +42,12 @@ def disc(p, x, y, r, col):
 
 
 def build(out=OUTD):
-    p = Pen('windmill', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.1, 3, -1)
+    p = Pen('windmill', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 8, 0)
     p.tipshadow(CX + 4, BASE + 3, 28); p.foot_tip(CX + 2, BASE + 2, 20)
     # ۱) برج
     body = [(CX - hw(BASE), BASE), (CX + hw(BASE), BASE), (CX + hw(TOP), TOP), (CX - hw(TOP), TOP)]
     p.shape(body, T_B, OUT, j=.15, step=8)
-    poly(p, [(CX - hw(-58) + 5, -58), (CX - hw(-58) + 8.5, -58), (CX - hw(-2) + 8.5, -2), (CX - hw(-2) + 5, -2)], T_L)          # نور
+    poly(p, [(CX - hw(-70) + 5, -70), (CX - hw(-70) + 8.5, -70), (CX - hw(-2) + 8.5, -2), (CX - hw(-2) + 5, -2)], T_L)          # نور
     poly(p, [(CX + 5, TOP + 3), (CX + hw(TOP), TOP + 3), (CX + hw(BASE) - 1, BASE), (CX + 5, BASE)], T_D)                         # سایهٔ تیز راست
     poly(p, [(CX - hw(2), 2), (CX + hw(2), 2), (CX + hw(BASE), BASE), (CX - hw(BASE), BASE)], T_D)                                # کرسی سنگی
     p.stroke(body, OUT, j=.15, step=8)
@@ -59,11 +59,11 @@ def build(out=OUTD):
     p.shape(ell(CX, -27, 5.5, 5.5, 0, 360, 16), GLASS, INNER, j=.05, step=99, clip=False)
     poly(p, [(CX - 2.5, -29.5), (CX - 0.5, -29.5), (CX - 0.5, -27.5), (CX - 2.5, -27.5)], '#ffffff')
     # ۴) سقف
-    roof = [(CX - 29, ROOF_B), (CX + 29, ROOF_B), (CX + 12, ROOF_T), (CX - 12, ROOF_T)]
+    roof = [(CX - 38, ROOF_B), (CX + 38, ROOF_B), (CX + 16, ROOF_T), (CX - 16, ROOF_T)]
     p.shape(roof, R_B, PART, j=.15, step=8)
-    poly(p, [(CX - rw(-92) + 4, -92), (CX - rw(-92) + 7.5, -92), (CX - rw(-65) + 7.5, -65), (CX - rw(-65) + 4, -65)], R_L)      # نور
-    poly(p, [(CX + 6, ROOF_T), (CX + 12, ROOF_T), (CX + 29, ROOF_B), (CX + 16, ROOF_B)], R_D)                                         # سایهٔ تیز راست
-    poly(p, [(CX - 29, ROOF_B - 4), (CX + 29, ROOF_B - 4), (CX + 29, ROOF_B), (CX - 29, ROOF_B)], R_D)                              # لبهٔ پیش‌آمده
+    poly(p, [(CX - rw(-104) + 4, -104), (CX - rw(-104) + 7.5, -104), (CX - rw(-77) + 7.5, -77), (CX - rw(-77) + 4, -77)], R_L)      # نور
+    poly(p, [(CX + 6, ROOF_T), (CX + 16, ROOF_T), (CX + 38, ROOF_B), (CX + 22, ROOF_B)], R_D)                                         # سایهٔ تیز راست
+    poly(p, [(CX - 38, ROOF_B - 4), (CX + 38, ROOF_B - 4), (CX + 38, ROOF_B), (CX - 38, ROOF_B)], R_D)                              # لبهٔ پیش‌آمده
     p.stroke(roof, PART, j=.15, step=8)
     # ۵) پره‌ها (لایهٔ دوّار): اول همهٔ پارچه‌ها، سپس تیرک‌ها
     with layer(p, 'blades'):
@@ -72,11 +72,11 @@ def build(out=OUTD):
             cloth = TP(f, [(8, 0), (R, 0), (R, -CW), (8, -CW)])
             p.raw('<polygon points="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (
                 ' '.join('%.1f,%.1f' % q for q in p.X(cloth)), C_B, INNER))
-            poly(p, TP(f, [(13, -3.5), (R - 4, -3.5), (R - 4, -6), (13, -6)]), C_L)             # نوار روشن
-            poly(p, TP(f, [(R - 7, -CW + 3), (R - 3, -CW + 3), (R - 3, -3.5), (R - 7, -3.5)]), C_D)   # لبهٔ تیره
+            poly(p, TP(f, [(16, -11), (R - 9, -11), (R - 9, -14), (16, -14)]), C_L)             # نوار روشن
+            poly(p, TP(f, [(R - 7, -CW + 3), (R - 4, -CW + 3), (R - 4, -9), (R - 7, -9)]), C_D)   # لبهٔ تیره
         for a in STATIC:
             f = rot(HUB[0], HUB[1], a)
-            p.ln(f((4, 0)), f((R + 3, 0)), PART, SPAR, j=0)                                        # تیرک (یک‌بار)
+            p.ln(f((4, -5.5)), f((R - 5, -5.5)), PART, SPAR, j=0)                                        # تیرک (یک‌بار)
     p.shape(ell(HUB[0], HUB[1], 6.5, 6.5, 0, 360, 16), SPAR, PART, j=.05, step=99, clip=False)     # کلاهک محور
     disc(p, HUB[0], HUB[1], 2, YEL)
     return p
