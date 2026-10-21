@@ -1,0 +1,53 @@
+{
+ "id": "loading_ramp_b",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  38
+ ],
+ "stand": [
+  42.5,
+  4.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_loading_ramp_b_crate"
+ ],
+ "inside_pad": {
+  "min_margin_px": 0.0,
+  "base_on_pad": false,
+  "height_px": 50.0,
+  "bbox_px": [
+   7.2,
+   69.8,
+   92.8,
+   119.8
+  ],
+  "ok": false
+ },
+ "motion_spec": {
+  "node_loading_ramp_b_crate": {
+   "translate_xy": [
+    [
+     14.2,
+     6.5
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "unit": "واحد symbol",
+   "dir_deg": 24.4,
+   "start": "جعبه پایین‌تر روی تخته",
+   "end": "حالت ایستا (پایان): جعبه بالاتر نزدیک کف تخت",
+   "note": "فقط جعبه و تسمه؛ بدون چرخش؛ یک‌بار هنگام رسیدن"
+  }
+ }
+}

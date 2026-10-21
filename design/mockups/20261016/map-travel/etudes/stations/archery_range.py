@@ -17,17 +17,17 @@ RED = '#e0553a'; RED_L = '#ff9a6c'; RED_D = '#9c2f1c'
 STEEL = '#dbe9f8'; STEEL_S = '#a3bbd9'; STEEL_L = '#ffffff'
 CORD = '#8a5f0c'; CREAM = '#fff3c4'; YEL = '#ffd84d'; FEA_D = '#c9452c'
 
-XF = (1.0, -1.0, 0.0)
+XF = (0.9, 2.0, 0.0)
 YT, YB = -112, 4
 YM = (YT + YB) / 2            # -54
 HC = (YB - YT) / 2 - 0        # 58
 SAG = 24
 R = (HC ** 2 + SAG ** 2) / (2 * SAG)
 X0 = math.sqrt(R * R - 0) - SAG   # = R - SAG
-AY = YM - 8                   # ارتفاع تیر = رأس V (روی بخش بالایی دستگیره)
+AY = YM - 12                   # ارتفاع تیر = رأس V (روی بخش بالایی دستگیره)
 NX = 16                       # ته تیر (رأس V) در حالت کشیده
-PULL = 8                     # جابه‌جایی تا حالت رها
-TIPX = -63
+PULL = 6                     # جابه‌جایی تا حالت رها
+TIPX = -66
 
 
 def cx(dy): return -(math.sqrt(R * R - dy * dy) - X0)          # خط مرکز کمان (دایره‌ای)
@@ -100,6 +100,13 @@ def top_fix(L, Rr):
     return _cap(c, Rr[0], L[0], best[0])
 
 
+def mpoly(p, pts, fill, sw):
+    """چندضلعی تیز: دور سرمه‌ای با miter (نوک تیز، نه گرد)."""
+    q = p.X(pts)
+    d = 'M' + 'L'.join('%.1f,%.1f' % z for z in q) + 'Z'
+    p.o.append('<path d="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (d, fill or 'none', sw))
+
+
 def build():
     p = Pen('archery_range', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
@@ -115,9 +122,9 @@ def build():
         p.fill(band(d0, d1, .3, 1.6), WOOD_D, .55)
     p.stroke(pts, PART, j=.04, step=99)
     # ۴) دستگیره: قرمز تخت روی بدنه، دو نوار تیره، یک نوار روشن
-    p.fill(band(-18, 10, -1, 1), RED)
-    p.fill(band(-18, 10, -.85, -.2), RED_L)
-    p.fill(band(-18, -15, -1, 1), RED_D); p.fill(band(7, 10, -1, 1), RED_D)
+    p.fill(band(-22, 6, -1, 1), RED)
+    p.fill(band(-22, 6, -.85, -.2), RED_L)
+    p.fill(band(-22, -19, -1, 1), RED_D); p.fill(band(3, 6, -1, 1), RED_D)
     # ۵) نوک‌گیر زرد
     for dy in (-HC + 4, HC - 4):
         (x, y), _ = frame(dy); a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.4" fill="%s"/>' % (a, b, YEL))
@@ -128,20 +135,19 @@ def build():
         p.ln((tx, ty), (NX, AY), INNER, CORD, j=.03, probe='زه (بالا)')
         p.ln((NX, AY), (bx, by), INNER, CORD, j=.03)
         p.raw('</g><g id="node_archery_range_string_arrow">')
-        # شفت: زیرخط OUT سرمه‌ای + هستهٔ INNER کرم (هم‌ضخامت کیت)
-        p.ln((NX - 1, AY), (TIPX + 18, AY), OUT, NAVY, j=.03)
-        p.ln((NX - 1, AY), (TIPX + 18, AY), INNER, CREAM, j=.03, probe='تیر (چوب)')
-        # پرها: خوابیده به سمت زه (لبهٔ بیرونی به راست جابه‌جا)
-        for sg, col, lt in ((-1, RED, RED_L), (1, FEA_D, None)):
-            P = [(NX - 25, AY + sg * 2), (NX - 17, AY + sg * 11.5), (NX - 1.5, AY + sg * 11.5), (NX - 8, AY + sg * 2)]
-            p.shape(P, col, INNER, j=.04, step=99, clip=False)
-            if lt: p.fill([(NX - 15, AY + sg * 9.5), (NX - 4.5, AY + sg * 9.5), (NX - 5, AY + sg * 7.4), (NX - 15.5, AY + sg * 7.4)], lt)
-        # نوک فلزی (سمت هدف): دو پله + برق، دور PART، نوک بریده
-        H = [(TIPX, AY - .6), (TIPX + 26, AY - 8), (TIPX + 26, AY + 8), (TIPX, AY + .6)]
-        p.shape(H, STEEL, PART, j=.04, step=99, clip=False)
-        p.fill([(TIPX + 3, AY + .2), (TIPX + 23, AY + .2), (TIPX + 23, AY + 5.4), (TIPX + 4, AY + 1.2)], STEEL_S)
-        p.ln((TIPX + 9, AY - 2.8), (TIPX + 20, AY - 5.2), INNER, STEEL_L, j=.03)
-        p.stroke(H, PART, j=.04, step=99)
+        # شفت باریک: زیرخط سرمه‌ای PART (۵٫۸) + هستهٔ کرم ۲٫۹
+        p.ln((NX - 1, AY), (TIPX + 14, AY), PART, NAVY, j=.02)
+        p.ln((NX - 1, AY), (TIPX + 14, AY), 2.9, CREAM, j=.02)
+        # پرها: دو ذوزنقهٔ باریک و بلند موازی شفت، ۱۲ واحد آخر تیر (لبهٔ بیرونی کمی به سمت زه)
+        for sg, col in ((-1, RED), (1, CREAM)):
+            mpoly(p, [(NX - 17, AY + sg * 3.5), (NX - 13, AY + sg * 11), (NX - 1, AY + sg * 11), (NX - 4, AY + sg * 3.5)], col, INNER)
+        # نوک فلزی: مثلث کشیدهٔ تیز، دور INNER با miter؛ دو پله + برق
+        T0 = TIPX; L = 17; HW = 6
+        Hd = [(T0, AY), (T0 + L, AY - HW), (T0 + L, AY + HW)]
+        mpoly(p, Hd, STEEL, INNER)
+        p.fill([(T0 + 4, AY + .5), (T0 + L - 1, AY + .5), (T0 + L - 1, AY + HW - 2.2), (T0 + 7.2, AY + 2.2)], STEEL_S)
+        p.ln((T0 + 8, AY - 1.4), (T0 + 14, AY - 3.2), 2.2 if False else INNER * .6, STEEL_L, j=.02)
+        mpoly(p, Hd, None, INNER)
         # کام روی رأس V
         a, b = p.X((NX, AY)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.4" fill="%s"/>' % (a, b, YEL))
         p.raw('</g>')
