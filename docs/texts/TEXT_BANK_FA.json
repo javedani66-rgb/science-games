@@ -11386,6 +11386,156 @@
    ],
    "text": "راه هیولا آمد؛ ایستگاه بعد را انتخاب کن",
    "status": "draft"
+  },
+  "maptravel.hide.enter": {
+   "id": "maptravel.hide.enter",
+   "kind": "ui",
+   "where_fa": "دکمهٔ ورود به مخفی‌گاه (پایین)",
+   "context_fa": "دکمهٔ ورود به مخفی‌گاه (پایین)؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.enter",
+    "text"
+   ],
+   "text": "وارد مخفی‌گاه",
+   "status": "draft"
+  },
+  "maptravel.hide.title": {
+   "id": "maptravel.hide.title",
+   "kind": "ui",
+   "where_fa": "سخن هیولا در صفحهٔ انتخاب مخفی‌گاه",
+   "context_fa": "سخن هیولا در صفحهٔ انتخاب مخفی‌گاه؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.title",
+    "text"
+   ],
+   "text": "هر ایستگاه را تا آخر رفتی! حالا خودت انتخاب کن.",
+   "status": "draft"
+  },
+  "maptravel.hide.review": {
+   "id": "maptravel.hide.review",
+   "kind": "ui",
+   "where_fa": "گزینهٔ مخفی‌گاه",
+   "context_fa": "گزینهٔ مخفی‌گاه؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.review",
+    "text"
+   ],
+   "text": "مرور مرحله‌ها",
+   "status": "draft"
+  },
+  "maptravel.hide.cards": {
+   "id": "maptravel.hide.cards",
+   "kind": "ui",
+   "where_fa": "گزینهٔ مخفی‌گاه",
+   "context_fa": "گزینهٔ مخفی‌گاه؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.cards",
+    "text"
+   ],
+   "text": "جعبهٔ کارت",
+   "status": "draft"
+  },
+  "maptravel.hide.sea": {
+   "id": "maptravel.hide.sea",
+   "kind": "ui",
+   "where_fa": "گزینهٔ مخفی‌گاه",
+   "context_fa": "گزینهٔ مخفی‌گاه؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.sea",
+    "text"
+   ],
+   "text": "پیش به سوی آب‌های آزاد",
+   "status": "draft"
+  },
+  "maptravel.hide.credits": {
+   "id": "maptravel.hide.credits",
+   "kind": "ui",
+   "where_fa": "گزینهٔ مخفی‌گاه (عنوان موقت)",
+   "context_fa": "گزینهٔ مخفی‌گاه (عنوان موقت)؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.credits",
+    "text"
+   ],
+   "text": "سازندگان و قدردانی",
+   "status": "draft"
+  },
+  "maptravel.hide.close": {
+   "id": "maptravel.hide.close",
+   "kind": "ui",
+   "where_fa": "بستن صفحهٔ مخفی‌گاه",
+   "context_fa": "بستن صفحهٔ مخفی‌گاه؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.close",
+    "text"
+   ],
+   "text": "برگشت به نقشه",
+   "status": "draft"
+  },
+  "maptravel.hide.mock": {
+   "id": "maptravel.hide.mock",
+   "kind": "ui",
+   "where_fa": "پیام ماکت برای گزینه‌های ناساخته",
+   "context_fa": "پیام ماکت برای گزینه‌های ناساخته؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.mock",
+    "text"
+   ],
+   "text": "در بازی واقعی اینجا باز می‌شود",
+   "status": "draft"
+  },
+  "maptravel.hide.seamsg": {
+   "id": "maptravel.hide.seamsg",
+   "kind": "ui",
+   "where_fa": "پیام پایان مسیر آب‌های آزاد (سخن هیولا)",
+   "context_fa": "پیام پایان مسیر آب‌های آزاد (سخن هیولا)؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.seamsg",
+    "text"
+   ],
+   "text": "منتظر بازی‌های بعدی باش قهرمان!",
+   "status": "draft"
+  },
+  "maptravel.hide.back": {
+   "id": "maptravel.hide.back",
+   "kind": "ui",
+   "where_fa": "دکمهٔ برگشت پس از آب‌های آزاد",
+   "context_fa": "دکمهٔ برگشت پس از آب‌های آزاد؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.back",
+    "text"
+   ],
+   "text": "برگشت به مخفی‌گاه",
+   "status": "draft"
   }
  },
  "meta": {
