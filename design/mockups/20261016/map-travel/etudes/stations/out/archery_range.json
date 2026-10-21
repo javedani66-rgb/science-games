@@ -1,0 +1,62 @@
+{
+ "id": "archery_range",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  98
+ ],
+ "stand": [
+  33.0,
+  1.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_archery_range_string"
+ ],
+ "inside_pad": {
+  "min_margin_px": 10.5,
+  "base_on_pad": true,
+  "height_px": 95.0,
+  "bbox_px": [
+   18.5,
+   10.0,
+   75.2,
+   105.0
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_archery_range_string": {
+   "kind": "زه + تیر با هم؛ حالت ایستا = حالت کشیده (پایان حرکت)",
+   "translate_x_symbol_units": [
+    -11.0,
+    0
+   ],
+   "translate_x_map_px": [
+    -7.9,
+    0
+   ],
+   "nock_rest": [
+    -10.0,
+    -86.0
+   ],
+   "nock_end": [
+    1.0,
+    -86.0
+   ],
+   "duration_s": 0.7,
+   "easing": "ease-out",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "string_ends": "دو سر زه روی نوک کمان می‌ماند: زه را به‌صورت path-morph (یا دو خط با انتهای ثابت) اجرا کن؛ نوک تیر و پر دم با ته تیر (translateX) می‌روند. حالت رها: ته تیر در x=-10.0",
+   "note": "بدنهٔ کمان ثابت و کامل؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "ثابت در حالت کشیده"
+ }
+}
