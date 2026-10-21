@@ -1,80 +1,150 @@
 #!/usr/bin/env python3
-"""ایستگاه F03 «میدان کمان‌کِشی» (سرزمین ورزشگاه، سکوی سبز): کمان چوبی نارنجی-قهوه‌ای ایستاده، دو سر نوک‌تیز، زه سمت راست،
-یک تیر با پر دم روی زه. لایهٔ متحرک node_archery_range_string = زه + تیر (با هم). حالت ایستا = زه کشیده‌شده (پایان حرکت)."""
+"""ایستگاه F03 «میدان کمان‌کِشی» (سرزمین ورزشگاه، سکوی سبز) — بازسازی کامل (۲۲ اکتبر).
+کمان چوبی باریک و ایستاده (شکم به چپ = سمت هدف)، زه سمت راست، تیر روی دستگیره: نوک فلزی سمت هدف، پر سمت زه،
+ته تیر دقیقاً روی رأس V زه. فقط خط‌های ۷٫۶/۵٫۸/۳٫۹؛ چوب = همان سه پلهٔ چوب‌شکافی/تبر؛ فلز = پله‌های تیغهٔ تبر؛
+زه = رنگ کابل جرثقیل؛ قرمز = بدنهٔ جرثقیل. لایهٔ متحرک node_archery_range_string = زه + تیر. حالت ایستا = زه کشیده (پایان)."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
+import functools, station_kit as _k
 from station_kit import *
-HERE = pathlib.Path(__file__).resolve().parent
+_k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_check = functools.partial(_k.motion_check, min_margin=8)
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/archery'
 
-import functools, station_kit as _k
-_k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_check = functools.partial(_k.motion_check, min_margin=8)
+WOOD = '#b77a3a'; WOOD_L = '#d9a463'; WOOD_D = '#7a4a1f'
+RED = '#e0553a'; RED_L = '#ff9a6c'; RED_D = '#9c2f1c'
+STEEL = '#dbe9f8'; STEEL_S = '#a3bbd9'; STEEL_L = '#ffffff'
+CORD = '#8a5f0c'; CREAM = '#fff3c4'; YEL = '#ffd84d'; FEA_D = '#c9452c'
 
-WOOD = '#e0702a'; WOOD_D = '#a8480f'; WOOD_L = '#f59a55'; GRIP = '#c8321f'
-STRING = '#fff3c4'; SHAFT = '#f6dfa4'; HEAD = '#dfe6f2'; FEA = '#ffffff'; FEA2 = '#ff5a48'
-XF = (1.0, -11.0, -4.0)
-YT, YB = -128, -4              # نوک بالا و پایین کمان
-YM = (YT + YB) / 2             # مرکز (جای تیر)
-HALF = (YB - YT) / 2
-BELLY = 36                     # عمق خمیدگی کمان به چپ
-NOCK = 12                      # جای ته تیر روی زه در حالت کشیده (ایستا)
-PULL = 11                      # جابه‌جایی زه/تیر از حالت رها تا کشیده (واحد symbol ≈ ۸px نقشه)
-AY = YM - 16                  # ارتفاع تیر (کمی بالاتر از دستگیره)
-TIP = -50                      # نوک تیر (حالت کشیده)
-
-
-def bow_center(t):
-    return (-BELLY * (1 - t * t) ** 1.15, YM + HALF * t)
+XF = (1.0, 5.0, 0.0)
+YT, YB = -112, 4
+YM = (YT + YB) / 2            # -54
+HC = (YB - YT) / 2 - 0        # 58
+SAG = 24
+R = (HC ** 2 + SAG ** 2) / (2 * SAG)
+X0 = math.sqrt(R * R - 0) - SAG   # = R - SAG
+AY = YM - 8                   # ارتفاع تیر = رأس V (روی بخش بالایی دستگیره)
+NX = 16                       # ته تیر (رأس V) در حالت کشیده
+PULL = 12                     # جابه‌جایی تا حالت رها
+TIPX = -66
 
 
-def limb(a, b, n=40):
-    """چندضلعی چوب کمان بین پارامتر a..b؛ ضخامت از میانه (۱۲) به نوک (۰) باریک می‌شود."""
-    L, R = [], []
+def cx(dy): return -(math.sqrt(R * R - dy * dy) - X0)          # خط مرکز کمان (دایره‌ای)
+def half(dy): return 8 - 3 * abs(dy / HC) ** 3                # نیم‌پهنای بدنه: ۷ در میانه، ۴٫۵ در نوک
+
+
+def frame(dy):
+    """نقطهٔ مرکز، نرمال (به سمت +x)."""
+    e = .01
+    d = (cx(dy + e) - cx(dy - e)) / (2 * e)
+    n = math.hypot(d, 1)
+    return (cx(dy), YM + dy), (1 / n, -d / n)
+
+
+def band(d0, d1, f0, f1, n=24, absolute=False):
+    """نوار موازی منحنی بین دو سطح dy، از آفست f0 تا f1 (کسری از نیم‌پهنای دیدنی h = نیم‌پهنا − ۲٫۹)."""
+    A, B = [], []
     for i in range(n + 1):
-        t = a + (b - a) * i / n; x, y = bow_center(t)
-        e = 1e-3; x2, y2 = bow_center(min(1, t + e)); x1, y1 = bow_center(max(-1, t - e))
-        dx, dy = x2 - x1, y2 - y1; m = math.hypot(dx, dy); nx, ny = -dy / m, dx / m     # نرمال (به سمت راست/زه = +x)
-        w = 1.5 + 10.5 * (1 - abs(t) ** 2.0)
-        L.append((x - nx * w * .85, y - ny * w * .85)); R.append((x + nx * w * .85, y + ny * w * .85))
-    return L, R
+        dy = d0 + (d1 - d0) * i / n
+        (x, y), (nx, ny) = frame(dy); h = half(dy) - PART / 2
+        o0 = f0 if absolute else f0 * h; o1 = f1 if absolute else f1 * h
+        A.append((x + nx * o0, y + ny * o0)); B.append((x + nx * o1, y + ny * o1))
+    return A + B[::-1]
 
 
-def rawpoly(p, pts, fill, sw, miter=True):
-    q = p.X(pts)
-    d = 'M' + 'L'.join('%.1f,%.1f' % z for z in q) + 'Z'
-    p.o.append('<path d="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="%s" stroke-miterlimit="8"/>' % (d, fill, sw, 'miter' if miter else 'round'))
-    p.clip.append(d)
+def outline(n=40):
+    """بدنهٔ پیوستهٔ کمان با دو نوک گرد (نیم‌دایره r=۴٫۵)."""
+    L, Rr = [], []
+    for i in range(n + 1):
+        dy = -HC + 2 * HC * i / n
+        (x, y), (nx, ny) = frame(dy); w = half(dy)
+        L.append((x - nx * w, y - ny * w)); Rr.append((x + nx * w, y + ny * w))
+    return L, Rr
+
+
+def body_pts():
+    L, Rr = outline()
+    # مسیر: چپ از بالا به پایین، نوک پایین (چپ→راست)، راست از پایین به بالا، نوک بالا (راست→چپ)
+    return L + bottom_fix(L, Rr) + Rr[::-1] + top_fix(L, Rr)
+
+
+def _cap(c, a, b, flip):
+    """نیم‌دایره از نقطهٔ a تا b دور مرکز c (همسو با جهت: از a به b از بیرونِ نوک)."""
+    r = math.hypot(a[0] - c[0], a[1] - c[1]); a0 = math.atan2(a[1] - c[1], a[0] - c[0])
+    out = []
+    for k in range(1, 8):
+        t = a0 + flip * math.pi * k / 8
+        out.append((c[0] + r * math.cos(t), c[1] + r * math.sin(t)))
+    return out
+
+
+def bottom_fix(L, Rr):
+    c = ((L[-1][0] + Rr[-1][0]) / 2, (L[-1][1] + Rr[-1][1]) / 2)
+    # از چپ-پایین به راست-پایین از زیر (y بزرگ‌تر): در مختصات y-پایین، زاویه از ~۱۸۰° به ~۰° از طریق ۹۰°
+    a0 = math.atan2(L[-1][1] - c[1], L[-1][0] - c[0]); r = math.hypot(L[-1][0] - c[0], L[-1][1] - c[1])
+    best = None
+    for flip in (1, -1):
+        mid = (c[0] + r * math.cos(a0 + flip * math.pi / 2), c[1] + r * math.sin(a0 + flip * math.pi / 2))
+        if best is None or mid[1] > best[1][1]: best = (flip, mid)
+    return _cap(c, L[-1], Rr[-1], best[0])
+
+
+def top_fix(L, Rr):
+    c = ((L[0][0] + Rr[0][0]) / 2, (L[0][1] + Rr[0][1]) / 2)
+    a0 = math.atan2(Rr[0][1] - c[1], Rr[0][0] - c[0]); r = math.hypot(Rr[0][0] - c[0], Rr[0][1] - c[1])
+    best = None
+    for flip in (1, -1):
+        mid = (c[0] + r * math.cos(a0 + flip * math.pi / 2), c[1] + r * math.sin(a0 + flip * math.pi / 2))
+        if best is None or mid[1] < best[1][1]: best = (flip, mid)
+    return _cap(c, Rr[0], L[0], best[0])
 
 
 def build():
     p = Pen('archery_range', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow(-2, 7, 11); p.foot_tip(-2, 7, 8)
-    # بدنهٔ کمان: یک تکهٔ پیوسته (نوک‌تیز)، بدون زه
-    L, R = limb(-1, 1, 60)
-    rawpoly(p, L + R[::-1], WOOD, OUT)
-    # خط روشن چوب روی بازوها (داخل بدنه)
-    for a, b in ((-.88, -.22), (.22, .88)):
-        pts = [((lambda c: (c[0] - 4.5, c[1]))(bow_center(a + (b - a) * i / 10))) for i in range(11)]
-        for u, v in zip(pts, pts[1:]): p.ln(u, v, INNER, WOOD_L, j=.05)
-    # دستگیره (قرمز، رنگ تخت)
-    gl, gr = limb(-.13, .13, 6)
-    p.fill(gl + gr[::-1], GRIP)
-    for s in (-.06, .06):
-        c = bow_center(s); p.ln((c[0] - 8, c[1]), (c[0] + 8, c[1]), INNER, WOOD_D, j=.05)
-    # لایهٔ متحرک: زه + تیر
+    p.tipshadow(-.5, YB + 4, 14); p.foot_tip(-.5, YB + 6, 9)
+    # ۱) بدنهٔ کمان: یک بدنهٔ پیوسته، خط دور PART (هم‌ضخامت بازوی جرثقیل)، نوک گرد
+    pts = body_pts()
+    p.shape(pts, WOOD, PART, j=.04, step=99, clip=True)
+    # ۲) نور چوب: یک نوار تخت در لبهٔ بیرونی (چپ)، هر بازو
+    for d0, d1 in ((-46, -8), (8, 46)):
+        p.fill(band(d0, d1, -.86, -.2), WOOD_L)
+    # ۳) سایهٔ تیز راست هر بازو، سپس دور بدنه دوباره
+    for d0, d1 in ((-50, -8), (8, 50)):
+        p.fill(band(d0, d1, .3, 1.6), WOOD_D, .55)
+    p.stroke(pts, PART, j=.04, step=99)
+    # ۴) دستگیره: قرمز تخت روی بدنه، دو نوار تیره، یک نوار روشن
+    p.fill(band(-18, 10, -1, 1), RED)
+    p.fill(band(-18, 10, -.85, -.2), RED_L)
+    p.fill(band(-18, -15, -1, 1), RED_D); p.fill(band(7, 10, -1, 1), RED_D)
+    # ۵) نوک‌گیر زرد
+    for dy in (-HC + 4, HC - 4):
+        (x, y), _ = frame(dy); a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.4" fill="%s"/>' % (a, b, YEL))
+    # ۶) لایهٔ متحرک: زه + تیر
+    (tx, ty), _ = frame(-HC + 4); (bx, by), _ = frame(HC - 4)
     with layer(p, 'string'):
-        tt = (0, YT + 1); tb = (0, YB - 1); nk = (NOCK, AY)
-        p.ln(tt, nk, INNER + 2.4, NAVY, j=.05); p.ln(nk, tb, INNER + 2.4, NAVY, j=.05)       # زیرخط تیره تا زه روی سبز گم نشود
-        p.ln(tt, nk, INNER, STRING, j=.05, probe='زه (بالا)'); p.ln(nk, tb, INNER, STRING, j=.05)
-        # تیر: چوب + نوک فلزی + پر دم؛ روی زه، بالای دستگیره
-        p.ln((NOCK - 26, AY), (TIP + 22, AY), PART + 3, NAVY, j=.0)
-        rawpoly(p, [(TIP, AY), (TIP + 26, AY - 11), (TIP + 20, AY), (TIP + 26, AY + 11)], HEAD, INNER + 1)
-        for sgn in (-1, 1):
-            rawpoly(p, [(NOCK - 1, AY + sgn * 2), (NOCK - 12, AY + sgn * 14), (NOCK - 30, AY + sgn * 14), (NOCK - 22, AY + sgn * 2)], FEA2 if sgn < 0 else FEA, INNER + 1, miter=False)
-        p.ln((NOCK + 1, AY), (TIP + 22, AY), PART, SHAFT, j=.0, probe='تیر (چوب)')
+        p.raw('<g id="node_archery_range_string_cord">')
+        p.ln((tx, ty), (NX, AY), INNER, CORD, j=.03, probe='زه (بالا)')
+        p.ln((NX, AY), (bx, by), INNER, CORD, j=.03)
+        p.raw('</g><g id="node_archery_range_string_arrow">')
+        # شفت: زیرخط OUT سرمه‌ای + هستهٔ INNER کرم (هم‌ضخامت کیت)
+        p.ln((NX - 1, AY), (TIPX + 18, AY), OUT, NAVY, j=.03)
+        p.ln((NX - 1, AY), (TIPX + 18, AY), INNER, CREAM, j=.03, probe='تیر (چوب)')
+        # پرها: خوابیده به سمت زه (لبهٔ بیرونی به راست جابه‌جا)
+        for sg, col, lt in ((-1, RED, RED_L), (1, FEA_D, None)):
+            P = [(NX - 30, AY + sg * 2), (NX - 24, AY + sg * 11.5), (NX - 8, AY + sg * 11.5), (NX - 14, AY + sg * 2)]
+            p.shape(P, col, INNER, j=.04, step=99, clip=False)
+            if lt: p.fill([(NX - 22, AY + sg * 9.5), (NX - 11, AY + sg * 9.5), (NX - 11.5, AY + sg * 7.4), (NX - 22.5, AY + sg * 7.4)], lt)
+        # نوک فلزی (سمت هدف): دو پله + برق، دور PART، نوک بریده
+        H = [(TIPX, AY - 1.5), (TIPX + 25, AY - 9), (TIPX + 25, AY + 9), (TIPX, AY + 1.5)]
+        p.shape(H, STEEL, PART, j=.04, step=99, clip=False)
+        p.fill([(TIPX + 3, AY + .2), (TIPX + 22.5, AY + .2), (TIPX + 22.5, AY + 6.4), (TIPX + 3.5, AY + 1.6)], STEEL_S)
+        p.ln((TIPX + 8, AY - 3.5), (TIPX + 19, AY - 6), INNER, STEEL_L, j=.03)
+        p.stroke(H, PART, j=.04, step=99)
+        # کام روی رأس V
+        a, b = p.X((NX, AY)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.4" fill="%s"/>' % (a, b, YEL))
+        p.raw('</g>')
     return p
 
 
@@ -83,15 +153,18 @@ if __name__ == '__main__':
     offs = [p.V((-PULL, 0)), (0, 0)]
     r = finish(p, 'archery_range', None, motion={'string': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    nk_rest = p.X((NOCK - PULL, AY)); nk_end = p.X((NOCK, AY))
+    nk_rest = p.X((NX - PULL, AY)); nk_end = p.X((NX, AY))
+    (tx, ty), _ = frame(-HC + 4); (bx, by), _ = frame(HC - 4)
     ms = {'node_archery_range_string': dict(
-        kind='زه + تیر با هم؛ حالت ایستا = حالت کشیده (پایان حرکت)',
-        translate_x_symbol_units=[-PULL * XF[0], 0], translate_x_map_px=[round(-PULL * XF[0] * K, 1), 0],
+        kind='زه + تیر؛ حالت ایستا = حالت کشیده (پایان حرکت)',
+        children={'node_archery_range_string_arrow': 'تیر + پر + نوک + کام؛ فقط translateX',
+                  'node_archery_range_string_cord': 'دو خط زه؛ دو سر بالا و پایین ثابت روی نوک‌گیرها، سر میانی روی ته تیر'},
+        translate_x_symbol_units=[-PULL, 0], translate_x_map_px=[round(-PULL * K, 1), 0],
+        string_fixed_ends_map_px=[[round(v, 1) for v in p.X((tx, ty))], [round(v, 1) for v in p.X((bx, by))]],
         nock_rest=[round(v, 1) for v in nk_rest], nock_end=[round(v, 1) for v in nk_end],
         duration_s=.7, easing='ease-out', loop=False, trigger='رسیدن کودک (یک‌بار)',
-        string_ends='دو سر زه روی نوک کمان می‌ماند: زه را به‌صورت path-morph (یا دو خط با انتهای ثابت) اجرا کن؛ نوک تیر و پر دم با ته تیر (translateX) می‌روند. حالت رها: ته تیر در x=%.1f' % nk_rest[0],
-        note='بدنهٔ کمان ثابت و کامل؛ بدون حلقهٔ بیکار.')}
-    ms['reduced_motion'] = 'ثابت در حالت کشیده'
+        how='گروه arrow را از translateX(-%d) به 0 ببر. زه: دو خط (یا یک path با سه نقطه) که دو سر ثابت می‌مانند و نقطهٔ میانی (رأس V) با ته تیر از x=%.1f تا x=%.1f می‌رود؛ یعنی در حالت رها زه تقریباً راست است. بدنهٔ کمان ثابت و کامل.' % (PULL, nk_rest[0], nk_end[0]),
+        note='بدون حلقهٔ بیکار؛ با reduced-motion ثابت در حالت کشیده.')}
     sp['motion_spec'] = ms
     (OUTD / 'archery_range.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

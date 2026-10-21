@@ -1,54 +1,84 @@
 #!/usr/bin/env python3
-"""ایستگاه E01 «آسیاب بادی» (سرزمین مزرعه): برج مخروطی گچی-گرم با در و یک پنجره، سقف کلاهی قرمز-قهوه‌ای،
-چهار پرهٔ پارچه‌ای پهن (قرمز، ضربدر ×) حول محور. لایهٔ دوّار: node_windmill_blades. بدون حلقهٔ بیکار، بدون عامل نیرو."""
+"""ایستگاه E01 «آسیاب بادی» (سرزمین مزرعه)، بازسازی کامل طبق docs/STATION_SYMBOL_CRAFT_FA.md بخش ۵.
+سه خانوادهٔ رنگ جدا: برج کرم روشن، سقف قهوه‌ای تیره، چهار پرهٔ پارچه‌ای قرمز (ضربدر ×) حول محور.
+لایهٔ دوّار: node_windmill_blades (مرکز = محور). بدون حلقهٔ بیکار، بدون عامل نیرو."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from station_kit import *
-HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/windmill'
 
-TOWER = '#f1e9da'; TOWER_D = '#cdbfa6'; ROOF = '#b8432f'; ROOF_D = '#8a2f20'
-CLOTH = '#e8503a'; CLOTH_D = '#b8392a'; SPAR = '#7a4a22'; DOOR = '#8a5a26'; WIN = '#8cc6ea'; STONE = '#d7c9ae'
-CX, BASE = -28, 7              # محور برج، خط کف
-HW_B, HW_T, TOP = 31, 19, -50   # نیم‌پهنای کف/بالا، y بالای برج
+# برج (سنگ): پایه/روشن/تیره
+T_B, T_L, T_D = '#f7ecd0', '#fffaf0', '#dcc896'
+# سقف (چوب تیره)
+R_B, R_L, R_D = '#7a4220', '#9c5c2c', '#55290f'
+# پره (پارچه)
+C_B, C_L, C_D = '#ef6a4a', '#ffb59c', '#c9452c'
+SPAR = '#7a4a1f'; DOOR = '#b77a3a'; DOOR_D = '#7a4a1f'; GLASS = '#cfeaff'; YEL = '#ffd84d'
+
+CX, BASE = -30, 7
+TOP = -66                      # بالای برج
+ROOF_B, ROOF_T = -61, -97      # کف و بالای سقف
 HUB = (CX, -72)
-R = 36                           # طول پره از محور
-STATIC = (-135, -45, 45, 135)    # ضربدر (×)؛ مرکز برج برای پنجره باز می‌ماند
+R = 34                         # طول پارچه از محور
+CW = 14                        # پهنای پارچه
+STATIC = (-135, -45, 45, 135)  # ضربدر ×
 
 
-def blade(a):
-    """یک پره: تیرک چوبی + پارچهٔ پهن کنار آن (نقاط در قاب محلی، چرخیده حول محور)."""
-    f = rot(HUB[0], HUB[1], a)
-    cloth = [(13, 0), (R, 0), (R, -19), (13, -19)]
-    return f, cloth
+def hw(y): return 26 - 9 * (BASE - y) / (BASE - TOP)       # نیم‌پهنای برج
+
+
+def rw(y): return 29 - 17 * (ROOF_B - y) / (ROOF_B - ROOF_T)   # نیم‌پهنای سقف
+
+
+def poly(p, pts, col, op=1):
+    """چندضلعی تیز و تخت (بدون گردشدن گوشه‌ها)."""
+    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
+
+
+def disc(p, x, y, r, col):
+    a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
 
 
 def build(out=OUTD):
-    p = Pen('windmill', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
-    p.tipshadow(CX + 2, BASE + 8, 40)
-    # برج مخروطی
-    p.shape([(CX - HW_B, BASE), (CX + HW_B, BASE), (CX + HW_T, TOP), (CX - HW_T, TOP)], TOWER, OUT, j=.3, step=8)
-    p.fill([(CX + 10, TOP + 2), (CX + HW_T, TOP), (CX + HW_B, BASE), (CX + 12, BASE)], TOWER_D)   # نیم‌سایهٔ راست
-    for y in (-36,):                                      # دو درز افقی منظم
-        k = (BASE - y) / (BASE - TOP); w = HW_B + (HW_T - HW_B) * k
-        p.ln((CX - w + 3, y), (CX + w - 3, y), INNER, STONE, j=.1)
-    # در و پنجره
-    p.shape([(CX - 7, BASE - 1), (CX + 7, BASE - 1), (CX + 7, BASE - 18), (CX - 7, BASE - 18)], DOOR, PART, j=.2, step=99)
-    p.shape(ell(CX, BASE - 18, 7, 5, 180, 360, 10) + [(CX + 7, BASE - 18), (CX - 7, BASE - 18)], DOOR, PART, j=.2, step=99)
-    p.shape([(CX - 7, -26), (CX + 7, -26), (CX + 7, -14), (CX - 7, -14)], WIN, PART, j=.2, step=99)
-    # سقف کلاهی
-    p.shape([(CX - 25, TOP + 3), (CX + 25, TOP + 3), (CX + 7, -82), (CX - 7, -82)], ROOF, OUT, j=.3, step=8)
-    p.fill([(CX + 6, TOP + 2), (CX + 25, TOP + 3), (CX + 7, -82), (CX + 2, -82)], ROOF_D)
-    # پره‌ها (لایهٔ دوّار)
+    p = Pen('windmill', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.1, 3, -1)
+    p.tipshadow(CX + 4, BASE + 3, 28); p.foot_tip(CX + 2, BASE + 2, 20)
+    # ۱) برج
+    body = [(CX - hw(BASE), BASE), (CX + hw(BASE), BASE), (CX + hw(TOP), TOP), (CX - hw(TOP), TOP)]
+    p.shape(body, T_B, OUT, j=.15, step=8)
+    poly(p, [(CX - hw(-58) + 5, -58), (CX - hw(-58) + 8.5, -58), (CX - hw(-2) + 8.5, -2), (CX - hw(-2) + 5, -2)], T_L)          # نور
+    poly(p, [(CX + 5, TOP + 3), (CX + hw(TOP), TOP + 3), (CX + hw(BASE) - 1, BASE), (CX + 5, BASE)], T_D)                         # سایهٔ تیز راست
+    poly(p, [(CX - hw(2), 2), (CX + hw(2), 2), (CX + hw(BASE), BASE), (CX - hw(BASE), BASE)], T_D)                                # کرسی سنگی
+    p.stroke(body, OUT, j=.15, step=8)
+    # ۲) در (یک در بزرگ با قوس)
+    p.shape([(CX - 8, BASE - 1), (CX + 8, BASE - 1), (CX + 8, -3)] + ell(CX, -3, 8, 8, 0, -180, 12) + [(CX - 8, -3)], DOOR, INNER, j=.08, step=99, clip=False)
+    poly(p, [(CX - 5, BASE - 3), (CX - 2.5, BASE - 3), (CX - 2.5, -4), (CX - 5, -4)], '#d9a463')
+    disc(p, CX + 4, 0, 1.9, YEL)
+    # ۳) پنجرهٔ گرد کوچک
+    p.shape(ell(CX, -27, 5.5, 5.5, 0, 360, 16), GLASS, INNER, j=.05, step=99, clip=False)
+    poly(p, [(CX - 2.5, -29.5), (CX - 0.5, -29.5), (CX - 0.5, -27.5), (CX - 2.5, -27.5)], '#ffffff')
+    # ۴) سقف
+    roof = [(CX - 29, ROOF_B), (CX + 29, ROOF_B), (CX + 12, ROOF_T), (CX - 12, ROOF_T)]
+    p.shape(roof, R_B, PART, j=.15, step=8)
+    poly(p, [(CX - rw(-92) + 4, -92), (CX - rw(-92) + 7.5, -92), (CX - rw(-65) + 7.5, -65), (CX - rw(-65) + 4, -65)], R_L)      # نور
+    poly(p, [(CX + 6, ROOF_T), (CX + 12, ROOF_T), (CX + 29, ROOF_B), (CX + 16, ROOF_B)], R_D)                                         # سایهٔ تیز راست
+    poly(p, [(CX - 29, ROOF_B - 4), (CX + 29, ROOF_B - 4), (CX + 29, ROOF_B), (CX - 29, ROOF_B)], R_D)                              # لبهٔ پیش‌آمده
+    p.stroke(roof, PART, j=.15, step=8)
+    # ۵) پره‌ها (لایهٔ دوّار): اول همهٔ پارچه‌ها، سپس تیرک‌ها
     with layer(p, 'blades'):
         for a in STATIC:
-            f, cl = blade(a)
-            p.ln(f((8, 0)), f((R, 0)), PART, SPAR, j=.05)
-            p.raw('<polygon points="%s" fill="%s" stroke="%s" stroke-width="5.8" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(TP(f, cl))), CLOTH, NAVY))
-            p.ln(f((12, 0)), f((R, 0)), PART, SPAR, j=.05)
-    p.shape(ell(HUB[0], HUB[1], 6.5, 6.5, 0, 360, 16), SPAR, PART, j=.1, step=99)   # کلاهک محور (ثابت)
+            f = rot(HUB[0], HUB[1], a)
+            cloth = TP(f, [(8, 0), (R, 0), (R, -CW), (8, -CW)])
+            p.raw('<polygon points="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (
+                ' '.join('%.1f,%.1f' % q for q in p.X(cloth)), C_B, INNER))
+            poly(p, TP(f, [(13, -3.5), (R - 4, -3.5), (R - 4, -6), (13, -6)]), C_L)             # نوار روشن
+            poly(p, TP(f, [(R - 7, -CW + 3), (R - 3, -CW + 3), (R - 3, -3.5), (R - 7, -3.5)]), C_D)   # لبهٔ تیره
+        for a in STATIC:
+            f = rot(HUB[0], HUB[1], a)
+            p.ln(f((4, 0)), f((R + 3, 0)), PART, SPAR, j=0)                                        # تیرک (یک‌بار)
+    p.shape(ell(HUB[0], HUB[1], 6.5, 6.5, 0, 360, 16), SPAR, PART, j=.05, step=99, clip=False)     # کلاهک محور
+    disc(p, HUB[0], HUB[1], 2, YEL)
     return p
 
 
@@ -58,7 +88,8 @@ if __name__ == '__main__':
     hm = p.X(HUB)
     r = finish(p, 'windmill', STAND, motion={'blades': dict(rotate=hm)}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_windmill_blades': dict(center=[round(v, 1) for v in hm], dir='cw', note='چهار پرهٔ پارچه‌ای حول محور برج؛ وضعیت ایستا = ضربدر ×؛ چرخش آهسته هنگام رسیدن؛ بدون حلقهٔ بیکار.'),
+    sp['motion_spec'] = {'node_windmill_blades': dict(center=[round(v, 1) for v in hm], dir='cw (جهت عقربه‌های ساعت)', turns=3,
+                                                     note='چهار پرهٔ پارچه‌ای حول کلاهک محور؛ حالت ایستا = ضربدر ×؛ چرخش آهسته فقط هنگام رسیدن؛ بدون حلقهٔ بیکار.'),
                          'reduced_motion': 'پره‌ها ثابت در حالت ضربدر ×'}
     (OUTD / 'windmill.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))
