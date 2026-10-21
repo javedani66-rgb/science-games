@@ -7,7 +7,7 @@ import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from station_kit import *
-OUTD = HERE / 'out'
+OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit5/loading_ramp'
 
 import functools, station_kit as _k   # حاشیهٔ چپ/راست ≥۴px مثل نمونه‌های دیگر (کیت دست‌نخورده)
