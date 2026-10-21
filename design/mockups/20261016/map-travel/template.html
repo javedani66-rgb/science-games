@@ -235,13 +235,13 @@ async function travel(a,b){const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=i
  else{const d=dock(e),f=padFig(e);await moveBoat([d[0],d[1]-SEAT-4],500);await hopTo([d[0],d[1]-4],f,16);placeFig(f[0],f[1])}}
 /* پرش دراماتیک به جای قبلاً‌رفته (D86): یک پرش بلند با چرخش و له‌شدن؛ حدود نیم‌ثانیه */
 async function dramatic(a,b){const A=NODES[a],B=NODES[b],seaB=isSea(B.y),dist=Math.hypot(B.x-A.x,B.y-A.y),hgt=Math.min(260,90+dist*.18);
- const y0=stand(A)[1],y1=stand(B)[1];
+ const x0=stand(A)[0],x1=stand(B)[0],y0=stand(A)[1],y1=stand(B)[1];
  await tween(150,p=>{setTilt(0,0,1-.18*Math.sin(p*Math.PI/2))});
  const b0=boatAt.slice(),bt=boatTarget(b),sameB=Math.hypot(bt[0]-b0[0],bt[1]-b0[1])<1.5;
  const BP=sameB?null:avoidBoat([b0,bt]),BC=BP?cum(BP):null;
- await tween(520,p=>{if(!sameB){const q=at(BP,BC,p*BC[BC.length-1]);placeBoat(q[0],q[1],0)};const x=A.x+(B.x-A.x)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
+ await tween(520,p=>{if(!sameB){const q=at(BP,BC,p*BC[BC.length-1]);placeBoat(q[0],q[1],0)};const x=x0+(x1-x0)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
  setOutfit(seaB);placeBoat(bt[0],bt[1],0);
- await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(stand(B)[0],y1)}
+ await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(x1,y1)}
 async function run(fn){if(busy)return;busy=true;skip=false;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}
 function status(){$('st').textContent=T('here').replace('%s',NODES[here].title||'')||T('hint')}
 async function go(id){if(busy||id===here)return;const up=nextUp();
