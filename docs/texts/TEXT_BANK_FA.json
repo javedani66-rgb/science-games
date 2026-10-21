@@ -11341,10 +11341,55 @@
    ],
    "text": "مخفی‌گاه هیولای مخترع",
    "status": "draft"
+  },
+  "maptravel.finish": {
+   "id": "maptravel.finish",
+   "kind": "ui",
+   "where_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.finish",
+    "text"
+   ],
+   "text": "این ایستگاه تمام شد",
+   "status": "draft"
+  },
+  "maptravel.needfin": {
+   "id": "maptravel.needfin",
+   "kind": "ui",
+   "where_fa": "پیام نوار پایین وقتی ایستگاه تمام نشده",
+   "context_fa": "پیام نوار پایین وقتی ایستگاه تمام نشده؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.needfin",
+    "text"
+   ],
+   "text": "اول این ایستگاه را تمام کن",
+   "status": "draft"
+  },
+  "maptravel.picknext": {
+   "id": "maptravel.picknext",
+   "kind": "ui",
+   "where_fa": "پیام نوار پایین پس از آمدن ردپاها",
+   "context_fa": "پیام نوار پایین پس از آمدن ردپاها؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.picknext",
+    "text"
+   ],
+   "text": "راه هیولا آمد؛ ایستگاه بعد را انتخاب کن",
+   "status": "draft"
   }
  },
  "meta": {
-  "updated": "2026-10-19",
+  "updated": "2026-10-21",
   "glossary": {
    "نیرو": "نه «زور»",
    "جرم": "مقدار ماده؛ ترازو، گرم و کیلوگرم",

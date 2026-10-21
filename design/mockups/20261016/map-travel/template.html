@@ -36,9 +36,9 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 #tilt{transform-origin:50% 58%}
 #fimg{height:56px;width:auto;max-width:none;display:block;transform-origin:50% 100%;
  filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))} /* D81: فقط هالهٔ کرم */
-#bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;align-items:center;gap:10px;min-height:76px}
-#st{flex:1;min-width:0;margin:0;text-align:center;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:4px 14px;min-height:48px;display:flex;align-items:center;justify-content:center}
-.btn{min-height:56px;min-width:96px;border:3.5px solid var(--navy);border-radius:18px;background:var(--gold);box-shadow:0 4px 0 var(--edge);font-weight:700;font-size:16px;padding:6px 12px}
+#bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;min-height:76px}
+#st{flex:1 1 100%;min-width:0;font-size:15px;margin:0;text-align:center;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:4px 14px;min-height:48px;display:flex;align-items:center;justify-content:center}
+.btn{flex:1 1 0;min-height:52px;min-width:96px;border:3.5px solid var(--navy);border-radius:18px;background:var(--gold);box-shadow:0 4px 0 var(--edge);font-weight:700;font-size:16px;padding:6px 12px}
 .btn[hidden]{display:none}
 .btn.sec{background:var(--cream)}
 .dpop{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@media (prefers-reduced-motion:reduce){.dpop{animation:none}}.pr{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@keyframes stamp{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}@media (prefers-reduced-motion:reduce){.pr{animation:none}}
@@ -53,12 +53,12 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <div id="boat"><svg width="130" height="130" viewBox="0 0 120 120" aria-hidden="true"><use href="#env_dec_city_sail" width="120" height="120"/></svg></div>
 <div id="fig"><div id="tilt"><img id="fimg" alt=""></div></div>
 </div></div>
-<div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn sec" id="again"></button></div>
+<div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn" id="fin" hidden></button><button class="btn sec" id="again"></button></div>
 </div>
 <script>
 const S={{STRINGS}};const REV={{REVIEW}};const NODES={{NODES}};const IM={{IMAGES}};const PATHD={{PATHD}};const COAST={{COAST}};
 const T=k=>S['maptravel.'+k].text;const $=id=>document.getElementById(id);
-$('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');
+$('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');$('fin').textContent=T('finish');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let skip=false,busy=false;
 const sc=$('sc'),world=$('world'),fig=$('fig'),tilt=$('tilt'),fimg=$('fimg'),boat=$('boat');
 let k=1;
@@ -74,7 +74,7 @@ const isSea=(y,x)=>y<COAST&&!(x!==undefined&&x>=JX-6&&y>=JTIP); /* با x: را�
 function leg(a,b){const pts=[];const s0=NODES[a].s,s1=NODES[b].s,dir=s1>s0?1:-1;for(let s=s0;dir>0?s<=s1:s>=s1;s+=3*dir){const p=pth.getPointAtLength(s);pts.push([p.x,p.y])}const A=NODES[a],B=NODES[b];while(pts.length>2&&inOuter(A,pts[0][0],pts[0][1]))pts.shift();while(pts.length>2&&inOuter(B,pts[pts.length-1][0],pts[pts.length-1][1]))pts.pop(); /* R19: ردِ مسیر داخل سکوی مبدأ/مقصد حذف شود تا کودک اول به مرکز سکو و بعد برنگردد */
  pts.unshift(stand(A));pts.push(stand(B));return pts}
 /* وضعیت */
-let here='E03';const visited=new Set(ORDER.filter(i=>NODES[i].y>=1200));
+let here='E03';const visited=new Set(ORDER.filter(i=>NODES[i].y>=1200));const done=new Set(ORDER.slice(0,ORDER.indexOf('E03'))); /* D137: ردپاهای بند پس از «تکمیل ایستگاه» می‌آیند */
 const NEXT=()=>ORDER.slice().reverse().find(i=>!visited.has(i)&&true);
 function nextId(){const r=ORDER.filter(i=>!visited.has(i));return r.length?r.reduce((m,i)=>NODES[i].s>NODES[m].s?i:m,r[0]):null} // اولین ناانجام در راه (از پایین)
 function nextUp(){const vs=ORDER.filter(i=>visited.has(i));if(!vs.length)return ORDER[0];const top=vs.reduce((m,i)=>NODES[i].s>NODES[m].s?i:m,vs[0]);const idx=ORDER.indexOf(top);return ORDER[idx+1]||null}
@@ -134,7 +134,7 @@ const PLACED=[];
     side=-side;prints.appendChild(g)}
    need-=L;acc+=L}}})();
 /* animate=true: ردپاهای تازه یکی‌یکی (از ایستگاه به سمت بعد) حک می‌شوند */
-function showPrints(animate){const fresh=[];prints.childNodes.forEach(g=>{const vis=visited.has(ORDER[+g.dataset.leg+1]);if(!vis){g.style.display='none';g.dataset.on='';return}
+function showPrints(animate){const fresh=[];prints.childNodes.forEach(g=>{const vis=done.has(ORDER[+g.dataset.leg]);if(!vis){g.style.display='none';g.dataset.on='';return}
   if(g.dataset.on)return;g.dataset.on='1';g.style.display='';fresh.push(g)});
  fresh.sort((u,v)=>u.dataset.s-v.dataset.s).forEach((g,n)=>{const e=g.firstChild;e.style.animation='none';void e.getBoundingClientRect();e.style.animationDelay=animate?(n*55)+'ms':'0ms';e.style.animation=animate?'':'none'})}
 function resetPrints(){prints.childNodes.forEach(g=>{g.style.display='none';g.dataset.on=''})}
@@ -151,7 +151,7 @@ function legDots(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],run=[];
 const dotSvg=(P,ro,ri,co,ci,oo,oi)=>P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ro+'" fill="'+co+'" opacity="'+oo+'"/>').join('')+P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ri+'" fill="'+ci+'" opacity="'+oi+'"/>').join('');
 (function(){let P=[];for(let k=0;k<ORDER.length-1;k++)P=P.concat(legDots(k));document.getElementById('seadots').innerHTML=dotSvg(P,4.5,2.5,'#241a5e','#e8f6f8',.35,.85)})();
 const trail=document.createElementNS(NS,'g');trail.id='trail';trail.setAttribute('filter','url(#env_wob)');seaG.parentNode.insertBefore(trail,seaG.nextSibling);
-function updateTrail(){trail.innerHTML='';let P=[];for(let k=0;k<=ORDER.length-2;k++)if(visited.has(ORDER[k+1]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
+function updateTrail(){trail.innerHTML='';let P=[];for(let k=0;k<=ORDER.length-2;k++)if(done.has(ORDER[k]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
 /* کاراکتر و قایق */
 const SEAT=27,FH=56;
 const scaleAt=()=>1;
@@ -227,7 +227,7 @@ async function hopTo(a,b,h){await tween(380,p=>{placeFig(a[0]+(b[0]-a[0])*p,a[1]
  await tween(150,p=>{setTilt(0,0,1-.07*Math.sin(p*Math.PI))});setTilt(0,0,1)}
 /* سفر عادی به گرهٔ تازه: پاها روی خشکی، قایق روی دریا؛ در ساحل پرش */
 const pts_last_land=(runs,r)=>{const i=runs.indexOf(r),q=runs[i-1];return q?q.pts[q.pts.length-1]:[JX,JTIP]};
-async function travel(a,b){fadeRing();const pts=leg(a,b);await monsterTrail(a,b,pts);const runs=[];let cur=[pts[0]],m=isSea(pts[0][1],pts[0][0]);
+async function travel(a,b){fadeRing();const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=isSea(pts[0][1],pts[0][0]);
  for(let t=1;t<pts.length;t++){const mt=isSea(pts[t][1],pts[t][0]);cur.push(pts[t]);if(mt!==m){runs.push({m,pts:cur});cur=[pts[t]];m=mt}}
  runs.push({m,pts:cur});let sea=runs[0].m;
  const NA=NODES[a],NB=NODES[b],seaA=isSea(NA.y),seaB=isSea(NB.y);
@@ -256,11 +256,15 @@ async function dramatic(a,b){fadeRing();const A=NODES[a],B=NODES[b],seaB=isSea(B
  await tween(520,p=>{if(!sameB){const q=at(BP,BC,p*BC[BC.length-1]);placeBoat(q[0],q[1],0)};const x=x0+(x1-x0)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
  setOutfit(seaB);placeBoat(bt[0],bt[1],0);
  await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(x1,y1)}
-async function run(fn){if(busy)return;busy=true;skip=false;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}
-function status(){$('st').textContent=T('here').replace('%s',NODES[here].title||'')||T('hint')}
+async function run(fn){if(busy)return;busy=true;skip=false;$('fin').hidden=true;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}
+function status(){const up=nextUp(),prev=up?ORDER[ORDER.indexOf(up)-1]:null,can=!!up&&!done.has(here)&&here===prev;
+ $('st').textContent=(T('here').replace('%s',NODES[here].title||'')||T('hint'))+(up?'. '+(done.has(prev)?T('picknext'):T('needfin')):'');$('fin').hidden=!can||busy}
+async function finish(){if(busy||done.has(here))return;const b=ORDER[ORDER.indexOf(here)+1];if(!b)return;
+ await run(()=>monsterTrail(here,b,leg(here,b)));done.add(here);updateTrail();showPrints(false);status()}
+$('fin').onclick=finish;
 async function go(id){if(busy||id===here)return;const up=nextUp();
  if(visited.has(id)){await run(()=>dramatic(here,id));here=id}
- else if(id===up){await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true)}
+ else if(id===up){if(!done.has(ORDER[ORDER.indexOf(up)-1])){const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');$('st').textContent=T('needfin');return}await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true)}
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
@@ -276,7 +280,7 @@ function refreshRing(){updateLocks();ring.style.display='none';const old=documen
 ids.forEach(i=>{const n=NODES[i],h=n.hit;const b=document.createElement('button');b.className='hit';b.dataset.id=i;b.setAttribute('aria-label',T('node.label').replace('%s',n.title||i));
  b.style.cssText='left:'+h[0]+'px;top:'+h[1]+'px;width:'+Math.max(48,h[2])+'px;height:'+Math.max(48,h[3])+'px';b.onclick=()=>go(i);world.appendChild(b)});
 $('skip').onclick=()=>{skip=true};
-$('again').onclick=()=>{if(busy)return;visited.clear();ORDER.filter(i=>NODES[i].y>=1200).forEach(i=>visited.add(i));here='E03';putAt(here);status();refreshRing();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55);updateTrail();resetPrints();showPrints(true)};
+$('again').onclick=()=>{if(busy)return;visited.clear();done.clear();ORDER.filter(i=>NODES[i].y>=1200).forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('E03')).forEach(i=>done.add(i));here='E03';putAt(here);status();refreshRing();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55);updateTrail();resetPrints();showPrints(true)};
 fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
 </script>
 </body>
