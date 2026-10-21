@@ -1,0 +1,56 @@
+{
+ "id": "loading_ramp",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  41
+ ],
+ "stand": [
+  36.0,
+  3.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_loading_ramp_crate"
+ ],
+ "inside_pad": {
+  "min_margin_px": 6.9,
+  "base_on_pad": true,
+  "height_px": 51.0,
+  "bbox_px": [
+   20.2,
+   66.8,
+   81.0,
+   117.8
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_loading_ramp_crate": {
+   "translate_xy": [
+    [
+     15.3,
+     7.5
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "unit": "واحد symbol",
+   "dir_deg": 26,
+   "easing": "ease-in-out",
+   "loop": false,
+   "start": "جعبه پایین رمپ (جابه‌جایی +15.3,+7.5)",
+   "end": "حالت ایستا: نیمهٔ شیب",
+   "note": "جعبه و طناب با هم در امتداد شیب (مماس بر تخته) بالا می‌روند؛ سر طناب پشت ستون ثابت پنهان می‌ماند. بدون دست و پیکان، بدون حلقهٔ بیکار؛ فقط هنگام رسیدن."
+  },
+  "reduced_motion": "جعبه در حالت ایستا (نیمهٔ شیب)"
+ }
+}

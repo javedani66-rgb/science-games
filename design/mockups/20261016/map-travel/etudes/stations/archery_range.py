@@ -70,12 +70,11 @@ def build():
         p.ln(tt, nk, INNER + 2.4, NAVY, j=.05); p.ln(nk, tb, INNER + 2.4, NAVY, j=.05)       # زیرخط تیره تا زه روی سبز گم نشود
         p.ln(tt, nk, INNER, STRING, j=.05, probe='زه (بالا)'); p.ln(nk, tb, INNER, STRING, j=.05)
         # تیر: چوب + نوک فلزی + پر دم؛ روی زه، بالای دستگیره
-        p.ln((NOCK - 28, AY), (TIP + 22, AY), PART + 3, NAVY, j=.0)
-        p.ln((NOCK + 1, AY), (TIP + 22, AY), PART, SHAFT, j=.0, probe='تیر (چوب)')
+        p.ln((NOCK - 26, AY), (TIP + 22, AY), PART + 3, NAVY, j=.0)
         rawpoly(p, [(TIP, AY), (TIP + 26, AY - 11), (TIP + 20, AY), (TIP + 26, AY + 11)], HEAD, INNER + 1)
         for sgn in (-1, 1):
             rawpoly(p, [(NOCK - 1, AY + sgn * 2), (NOCK - 12, AY + sgn * 14), (NOCK - 30, AY + sgn * 14), (NOCK - 22, AY + sgn * 2)], FEA2 if sgn < 0 else FEA, INNER + 1, miter=False)
-        p.ln((NOCK - 22, AY), (NOCK + 1, AY), PART, SHAFT, j=.0)
+        p.ln((NOCK + 1, AY), (TIP + 22, AY), PART, SHAFT, j=.0, probe='تیر (چوب)')
     return p
 
 
