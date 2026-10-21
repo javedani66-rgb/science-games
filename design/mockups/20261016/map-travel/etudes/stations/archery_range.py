@@ -17,14 +17,14 @@ RED = '#e0553a'; RED_L = '#ff9a6c'; RED_D = '#9c2f1c'
 STEEL = '#dbe9f8'; STEEL_S = '#a3bbd9'; STEEL_L = '#ffffff'
 CORD = '#8a5f0c'; CREAM = '#fff3c4'; YEL = '#ffd84d'; FEA_D = '#c9452c'
 
-XF = (0.9, 2.0, 0.0)
+XF = (0.9, 2.0, -14.0)
 YT, YB = -112, 4
 YM = (YT + YB) / 2            # -54
 HC = (YB - YT) / 2 - 0        # 58
 SAG = 24
 R = (HC ** 2 + SAG ** 2) / (2 * SAG)
 X0 = math.sqrt(R * R - 0) - SAG   # = R - SAG
-AY = YM - 12                   # ارتفاع تیر = رأس V (روی بخش بالایی دستگیره)
+AY = YM                        # ارتفاع تیر = رأس V (روی بخش بالایی دستگیره)
 NX = 16                       # ته تیر (رأس V) در حالت کشیده
 PULL = 6                     # جابه‌جایی تا حالت رها
 TIPX = -66
@@ -122,9 +122,9 @@ def build():
         p.fill(band(d0, d1, .3, 1.6), WOOD_D, .55)
     p.stroke(pts, PART, j=.04, step=99)
     # ۴) دستگیره: قرمز تخت روی بدنه، دو نوار تیره، یک نوار روشن
-    p.fill(band(-22, 6, -1, 1), RED)
-    p.fill(band(-22, 6, -.85, -.2), RED_L)
-    p.fill(band(-22, -19, -1, 1), RED_D); p.fill(band(3, 6, -1, 1), RED_D)
+    p.fill(band(-14, 14, -1, 1), RED)
+    p.fill(band(-14, 14, -.85, -.2), RED_L)
+    p.fill(band(-14, -11, -1, 1), RED_D); p.fill(band(11, 14, -1, 1), RED_D)
     # ۵) نوک‌گیر زرد
     for dy in (-HC + 4, HC - 4):
         (x, y), _ = frame(dy); a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.4" fill="%s"/>' % (a, b, YEL))
