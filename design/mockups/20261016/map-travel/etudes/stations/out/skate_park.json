@@ -8,8 +8,8 @@
   61
  ],
  "stand": [
-  35.5,
-  -13.0
+  36.5,
+  -11.5
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_skate_park_skateboard"
  ],
  "inside_pad": {
-  "min_margin_px": 3.2,
+  "min_margin_px": 3.5,
   "base_on_pad": true,
   "height_px": 87.2,
   "bbox_px": [
    21.8,
    47.2,
-   134.2,
+   130.5,
    134.5
   ],
   "ok": false

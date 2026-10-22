@@ -13,9 +13,16 @@ def circ(p, x, y, r, col):
     a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r * p.xf[0], col))
 
 
+import os
+ROUND = float(os.environ.get('SYM_ROUND', '0'))   # گرد کردن گوشه‌های محدب نیم‌رخ (واحد symbol)
+
+
 def extrude(p, pts, D, front, top, side, mid=None, sw=PART, sw_in=INNER, in_stroke=True):
     """pts: نیم‌رخ جلو (مختصات symbol)، D: بردار عمق. رویه=top، پهلو=side، بین=mid. خط دور یکدست."""
     mid = mid or side
+    if ROUND > 0:
+        g_ = Polygon(pts).buffer(0).buffer(-ROUND).buffer(ROUND, 4)
+        if g_.geom_type == 'Polygon' and g_.area > .6 * Polygon(pts).buffer(0).area: pts = list(g_.exterior.coords)[:-1]
     n = len(pts)
     area = sum(pts[i][0] * pts[(i + 1) % n][1] - pts[(i + 1) % n][0] * pts[i][1] for i in range(n)) / 2
     pieces = [Polygon(pts).buffer(0), Polygon([(x + D[0], y + D[1]) for x, y in pts]).buffer(0)]

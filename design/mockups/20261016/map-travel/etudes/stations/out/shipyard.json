@@ -8,8 +8,8 @@
   83
  ],
  "stand": [
-  50.5,
-  10.0
+  49.5,
+  -4.5
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_shipyard_hammer"
  ],
  "inside_pad": {
-  "min_margin_px": 7.0,
+  "min_margin_px": 7.7,
   "base_on_pad": true,
   "height_px": 104.8,
   "bbox_px": [
-   18.0,
+   20.5,
    24.8,
-   111.0,
+   108.5,
    129.5
   ],
   "ok": true
