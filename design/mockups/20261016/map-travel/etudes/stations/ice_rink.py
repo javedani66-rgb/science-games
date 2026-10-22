@@ -29,14 +29,15 @@ def skate(p, ox, oy, k=1.0):
     """اسکیت ¾ (نوک به راست): پایه‌ها، تیغه، پوتین."""
     T = lambda pts: [(ox + x * k, oy + y * k) for x, y in pts]
     T0 = T
-    D = (11 * k, -7 * k)
+    D = (13 * k, -12 * k)
     poly(p, T(ell(54, 2, 64, 7, 0, 360, 24)), ICE_D, .9)                       # سایهٔ تیز روی یخ
     prof = [(-6, -11), (-6, 0), (92, 0), (104, -5), (109, -13), (101, -14), (97, -11)]
     u = unary_union([Polygon(prof)] + [Polygon(rect(x0, -34, x0 + 10, -11)) for x0 in (14, 70)]).buffer(0)
     runner = T(list(u.exterior.coords)[:-1])                                   # تیغه و دو پایه یک شکل یکپارچه
     extrude(p, runner, (5 * k, -3.5 * k), M_B, M_L, M_D, mid=M_B, sw=2.6, sw_in=0)
     T = lambda pts: [(ox + x * k, oy + (y - 10) * k) for x, y in pts]   # پوتین ۱۰ واحد بالاتر از تیغه
-    boot = T([(0, -100), (38, -100), (40, -64), (62, -48), (88, -42), (101, -30), (101, -20), (0, -20)])
+    boot_pts = [(0, -100), (38, -100), (40, -64), (62, -48), (88, -42), (101, -30), (101, -20), (0, -20)]
+    boot = T(boot_pts)
     extrude(p, boot, D, BT_B, BT_L, BT_D, sw=3.6, sw_in=0)
     rx_ = lambda pts, c=(RD_B, '#f2705e', RD_D): extrude(p, T(pts), D, c[0], c[1], c[2], mid=c[0], sw=0, sw_in=0)
     rx_([(0, -100), (38, -100), (38.5, -86), (0, -86)])                                   # سرِ ساق (دور رویه و پهلو هم می‌پیچد)
@@ -46,6 +47,18 @@ def skate(p, ox, oy, k=1.0):
     poly(p, [(ox + 88 * k, oy + (-42 - 10) * k), (ox + 101 * k, oy + (-30 - 10) * k), (ox + 101 * k + Dx, oy + (-40) * k + Dy), (ox + 88 * k + Dx, oy + (-52) * k + Dy)], '#f2705e')
     poly(p, [(ox + 101 * k, oy + (-40) * k), (ox + 101 * k, oy + (-30) * k), (ox + 101 * k + Dx, oy + (-30) * k + Dy), (ox + 101 * k + Dx, oy + (-40) * k + Dy)], RD_D)
     poly(p, T([(0, -26), (101, -26), (101, -20), (0, -20)]), RD_D)                        # کفی
+    (ax, ay), (bx, by) = T([(5, -100), (33, -100)])                                          # دهانهٔ ساق: گود، نه پُر
+    f = lambda q, u: (q[0] + D[0] * u, q[1] + D[1] * u)
+    poly(p, [f((ax, ay), .16), f((bx, by), .16), f((bx, by), .88), f((ax, ay), .88)], '#3b4778')
+    poly(p, [f((ax, ay), .16), f((bx, by), .16), f((bx, by), .28), f((ax, ay), .28)], '#6a78ad')
+    pts_b = T(boot_pts)                                                                      # خط دور یکدست روی همهٔ رنگ‌ها
+    pcs = [Polygon(pts_b).buffer(0), Polygon([(x + D[0], y + D[1]) for x, y in pts_b]).buffer(0)]
+    for i_ in range(len(pts_b)):
+        a_, b_ = pts_b[i_], pts_b[(i_ + 1) % len(pts_b)]
+        pcs.append(Polygon([a_, b_, (b_[0] + D[0], b_[1] + D[1]), (a_[0] + D[0], a_[1] + D[1])]).buffer(0))
+    sil = unary_union(pcs).buffer(0.01)
+    if sil.geom_type != 'Polygon': sil = max(sil.geoms, key=lambda g: g.area)
+    p.stroke(list(sil.exterior.coords)[:-1], 3.6, j=0, step=6)
     for y in (-76, -64, -52): poly(p, T(rect(18, y - 3, 37, y + 3)), RD_B)                # سه بند
 
 
