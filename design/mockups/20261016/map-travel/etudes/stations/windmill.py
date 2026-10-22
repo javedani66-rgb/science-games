@@ -34,7 +34,7 @@ def rw(y): return 38 - 22 * (ROOF_B - y) / (ROOF_B - ROOF_T)   # نیم‌پهن
 
 def poly(p, pts, col, op=1):
     """چندضلعی تیز و تخت (بدون گردشدن گوشه‌ها)."""
-    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
+    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, (' stroke="%s" stroke-width=".6" stroke-linejoin="round"' % col) if op == 1 else ' opacity="%s"' % op))   # حاشیهٔ هم‌رنگ: درز مویی بین چندضلعی‌ها نماند
 
 
 def disc(p, x, y, r, col):

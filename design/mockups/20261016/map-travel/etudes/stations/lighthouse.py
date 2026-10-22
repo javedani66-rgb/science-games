@@ -25,7 +25,7 @@ def hw(y): return WB + (WT - WB) * (y - YB) / (YT - YB)
 
 def poly(p, pts, col, op=1):
     """چندضلعی تیز (بدون گردشدن گوشه‌ها) در قاب قهرمان."""
-    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
+    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, (' stroke="%s" stroke-width=".6" stroke-linejoin="round"' % col) if op == 1 else ' opacity="%s"' % op))   # حاشیهٔ هم‌رنگ: درز مویی بین چندضلعی‌ها نماند
 
 
 def build(out=OUTD):

@@ -34,7 +34,7 @@ DRISE = 14
 def A(p, v, k=1): return (p[0] + v[0] * k, p[1] + v[1] * k)
 def yf(x): return P1[1] + (x - P1[0]) * SL                 # لبهٔ بالای جلو
 def flat(p, pts, col, op=1):
-    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
+    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, (' stroke="%s" stroke-width=".6" stroke-linejoin="round"' % col) if op == 1 else ' opacity="%s"' % op))   # حاشیهٔ هم‌رنگ: درز مویی بین چندضلعی‌ها نماند
 
 
 def build():

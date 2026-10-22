@@ -13,49 +13,38 @@ S_B, S_L, S_D = '#f1dba8', '#fff6dc', '#c9a96c'
 S_M = '#dcc58c'
 W_B, W_L, W_D = '#a8672f', '#e0a96a', '#6e3f18'
 HOLE = '#5a4690'; YEL = '#ffd84d'; ROAD = '#e6dcc0'; ROAD_J = '#a89870'
-BASE = 6; DD = (9, -6)
+BASE = 6; DD = (7, -5)
 PX0, PX1, IX = 60, 38, 38     # ستون: x از ±58 تا ±36 (عرض ۲۲)
 
 
 def build():
-    p = Pen('city_gate', 'city'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = (.93, -5, 4)
-    p.tipshadow(4, BASE + 4, 62)
-    p.foot_tip(-44, BASE + 2, 12); p.foot_tip(52, BASE + 2, 12)
-    # سنگ‌فرش جلو و داخل دهانه
-    road = [(-30, -20), (30, -20), (48, 27), (-48, 27)]
+    p = Pen('city_gate', 'city'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = (.86, -4, 6)
+    PX0_, PX1_ = 46, 22
+    p.tipshadow(0, BASE + 4, 56)
+    p.foot_tip(-34, BASE + 2, 12); p.foot_tip(34, BASE + 2, 12)
+    # جادهٔ سنگ‌فرش از میان دو ستون
+    road = [(-22, -30), (22, -30), (40, 27), (-40, 27)]
     p.shape(road, ROAD, PART, j=.15, step=8, clip=False)
-    for a, b in (((-10, -16), (-17, 25)), ((10, -16), (17, 25)), ((-38, 13), (38, 13)), ((-34, 2), (34, 2))):
-        p.ln(a, b, INNER, ROAD_J, j=.1)
-    # پس‌زمینهٔ دهانه (عمق تیره)
-    poly(p, R(-IX, -72, IX, BASE - 8), HOLE)
-    # ستون‌ها
+    for a, b in (((-8, -24), (-14, 25)), ((8, -24), (14, 25)), ((-32, 13), (32, 13)), ((-27, 0), (27, 0))):
+        p.ln(a, b, 1.6, ROAD_J, j=.1)
+    # دو لنگهٔ چوبی باز: تختهٔ ضخیم کنار هر ستون، رو به عمق
+    with layer(p, 'door'):
+        extrude(p, R(PX0_ + 3, -64, PX0_ + 9, BASE - 1), (18, -12), W_D, W_L, W_B, sw=PART, sw_in=0)
+        disc(p, PX0_ + 6, -30, 2.4, YEL)
+    extrude(p, R(-PX0_ - 9, -64, -PX0_ - 3, BASE - 1), (-18, -12), W_D, W_L, W_B, sw=PART, sw_in=0)
+    # دو ستون سنگی مکعبی (هر کدام یک مکعب بلند با کلاهک)
     for sgn in (-1, 1):
-        x0, x1 = (-PX0, -PX1) if sgn < 0 else (PX1, PX0)
-        box3(p, x0, -72, x1, BASE, DD, S_B, S_L, S_D, sw=OUT)
-        poly(p, R(x0 + 3, -66, x0 + 7, BASE - 10), S_L)
-        for y in (-48, -26, -6):
-            p.ln((x0 + 2, y), (x1 - 2, y), INNER, '#b8975a', j=.05)
-    # دو لنگهٔ چوبی باز (جلوی ستون‌ها، لولا روی لبهٔ داخلی؛ هم‌پوشان ۵)
-    for sg, lay in ((-1, None), (1, 'door')):
-        def dr():
-            h = IX - 5
-            pts = [(sg * h, BASE - 1), (sg * h, -56), (sg * (IX - 22), -50), (sg * (IX - 22), -2)]
-            p.shape(pts, W_B, INNER + .6, j=.05, step=7, clip=False)
-            poly(p, [(sg * (h - 3), -50), (sg * (h - 8), -48), (sg * (h - 8), BASE - 9), (sg * (h - 3), BASE - 7)], W_L)
-            p.ln((sg * (IX - 15), -50), (sg * (IX - 15), -6), INNER, W_D, j=.05)
-            disc(p, sg * (IX - 18), -26, 3, YEL)
-        if lay:
-            with layer(p, lay): dr()
-        else: dr()
-    # سردر طاق تخت (روی ستون‌ها، هم‌پوشان ≥۱۴)
-    arch = [(-PX0, -92), (PX0, -92), (PX0, -58), (IX, -58)] + [(IX - 2 * IX * t / 12.0, -58 - 9 * math.sin(math.pi * t / 12.0)) for t in range(1, 12)] + [(-IX, -58), (-PX0, -58)]
-    extrude(p, arch, DD, S_B, S_L, S_D, sw=OUT)
-    poly(p, R(-PX0 + 4, -88, PX0 - 4, -85), S_L, .8)
-    # تابلوی سردر روی سردر
-    sb = R(-27, -116, 27, -86)
-    p.shape(sb, W_B, OUT, j=.05, step=7, clip=False)
-    poly(p, R(-24, -113, 24, -108), W_L); poly(p, R(-24, -93, 24, -89), W_D)
-    disc(p, 0, -101, 8, YEL)
+        x0, x1 = (-PX0_, -PX1_) if sgn < 0 else (PX1_, PX0_)
+        extrude(p, R(x0, -88, x1, BASE), DD, S_B, S_L, S_D, sw=OUT, sw_in=0)
+        for y in (-62, -36, -12):
+            p.ln((x0 + 2, y), (x1 - 2, y), 1.2, '#b8975a', j=.05)
+    # تیر افقی سنگی بین دو ستون (باریک؛ زیرش باز است)
+    beam = R(-PX0_ - 4, -108, PX0_ + 4, -88)
+    extrude(p, beam, DD, S_B, S_L, S_D, sw=OUT, sw_in=0)
+    # تابلوی چوبی روی تیر
+    sb = R(-24, -132, 24, -108)
+    extrude(p, sb, (6, -4), W_B, W_L, W_D, sw=PART, sw_in=0)
+    disc(p, 0, -120, 7, YEL)
     return p
 
 

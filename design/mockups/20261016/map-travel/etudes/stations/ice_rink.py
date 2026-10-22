@@ -49,7 +49,7 @@ def skate(p, ox, oy, k=1.0):
     poly(p, T([(0, -26), (101, -26), (101, -20), (0, -20)]), RD_D)                        # کفی
     (ax, ay), (bx, by) = T([(5, -100), (33, -100)])                                          # دهانهٔ ساق: گود، نه پُر
     f = lambda q, u: (q[0] + D[0] * u, q[1] + D[1] * u)
-    poly(p, [f((ax, ay), .16), f((bx, by), .16), f((bx, by), .88), f((ax, ay), .88)], '#3b4778')
+    poly(p, [f((ax, ay), .16), f((bx, by), .16), f((bx, by), .88), f((ax, ay), .88)], '#2a3463')
     poly(p, [f((ax, ay), .16), f((bx, by), .16), f((bx, by), .28), f((ax, ay), .28)], '#6a78ad')
     pts_b = T(boot_pts)                                                                      # خط دور یکدست روی همهٔ رنگ‌ها
     pcs = [Polygon(pts_b).buffer(0), Polygon([(x + D[0], y + D[1]) for x, y in pts_b]).buffer(0)]
@@ -78,7 +78,7 @@ def build(out=OUTD, glide=0):
     arcline(p, ell(CX + 8, CY + 2, 26, 7, 190, 340, 12), ICE_L, 2.4)
     arcline(p, ell(CX + 30, CY - 6, 22, 8, 10, 120, 12), ICE_L, 2.2)
     with layer(p, 'skate_back'):                                               # اسکیت پشتی: ثابت، دورتر و بالاتر
-        skate(p, CX - 4, CY - 6, .44)
+        skate(p, CX + 3, CY - 7, .44)
     with layer(p, 'skate'):                                                    # اسکیت جلویی: می‌لغزد
         skate(p, CX - 56 - GLIDE + glide, CY + 12, .5)
     return p

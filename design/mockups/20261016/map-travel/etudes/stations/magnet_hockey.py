@@ -20,7 +20,7 @@ K3 = .6; Y0 = -34; H = 24    # فشردگی نما، مرکز کمان، ضخا�
 TIP = 20                      # طول نوک نقره‌ای
 CLIPSHIFT = 12
 def poly(p, pts, col, op=1):
-    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
+    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, (' stroke="%s" stroke-width=".6" stroke-linejoin="round"' % col) if op == 1 else ' opacity="%s"' % op))   # حاشیهٔ هم‌رنگ: درز مویی بین چندضلعی‌ها نماند
 AY = math.radians(15); DX0 = 0
 def P(u, v, t=0):
     return (u * math.cos(AY) - v * math.sin(AY) + DX0, Y0 + (u * math.sin(AY) + v * math.cos(AY)) * K3 + t)
