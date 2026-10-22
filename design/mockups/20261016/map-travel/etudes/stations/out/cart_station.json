@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  56
+  67
  ],
  "stand": [
   0.0,
@@ -17,40 +17,47 @@
   0
  ],
  "motion": [
-  "node_cart_station_roll"
+  "node_cart_station_wheel_near",
+  "node_cart_station_wheel_far"
  ],
  "inside_pad": {
-  "min_margin_px": 14.0,
+  "min_margin_px": 5.8,
   "base_on_pad": true,
-  "height_px": 64.8,
+  "height_px": 79.2,
   "bbox_px": [
-   25.0,
-   51.8,
-   120.0,
-   116.5
+   23.2,
+   41.2,
+   130.0,
+   120.5
   ],
   "ok": true
  },
  "motion_spec": {
-  "node_cart_station_roll": {
-   "kind": "translate",
-   "dx_from": -5,
-   "dx_to": 0,
-   "dur_s": 1.8,
-   "count": 1,
-   "ease": "ease-out",
-   "note": "کل گاری از ۵ واحد چپ می‌غلتد و در جای ایستا می‌ایستد؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار."
-  },
-  "node_cart_station_roll_wheel": {
+  "node_cart_station_wheel_near": {
    "kind": "rotate",
    "about": [
-    -23.6,
-    -10.9
+    -33.5,
+    -9.7
    ],
-   "deg_from": -13,
+   "deg_from": -90,
    "deg_to": 0,
-   "note": "چرخ بزرگ؛ ساعت‌گرد؛ هم‌زمان با غلتیدن"
+   "dur_s": 1.6,
+   "ease": "ease-out",
+   "count": 1
   },
+  "node_cart_station_wheel_far": {
+   "kind": "rotate",
+   "about": [
+    5.7,
+    -17.5
+   ],
+   "deg_from": -90,
+   "deg_to": 0,
+   "dur_s": 1.6,
+   "ease": "ease-out",
+   "count": 1
+  },
+  "note": "هر دو چرخ هم‌زمان ۹۰° ساعت‌گرد می‌چرخند و می‌ایستند (پره‌ها ۸تایی؛ حالت ایستا = پایان)؛ بدون حلقهٔ بیکار.",
   "reduced_motion": "ایستا"
  }
 }

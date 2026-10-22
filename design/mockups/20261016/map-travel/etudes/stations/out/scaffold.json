@@ -8,8 +8,8 @@
   88
  ],
  "stand": [
-  -53.0,
-  -1.5
+  0.0,
+  19.0
  ],
  "ring": [
   0,
@@ -17,25 +17,25 @@
   0
  ],
  "motion": [
-  "node_scaffold_plumb"
+  "node_scaffold_bucket"
  ],
  "inside_pad": {
-  "min_margin_px": 14.3,
+  "min_margin_px": 8.2,
   "base_on_pad": true,
-  "height_px": 97.0,
+  "height_px": 98.8,
   "bbox_px": [
-   28.0,
-   19.5,
-   115.5,
-   116.5
+   16.2,
+   20.2,
+   119.8,
+   119.0
   ],
   "ok": true
  },
  "motion_spec": {
-  "node_scaffold_plumb": {
+  "node_scaffold_bucket": {
    "center": [
-    0.0,
-    -98.0
+    -58.6,
+    -110.8
    ],
    "angles_deg": [
     0,
@@ -47,8 +47,8 @@
    ],
    "duration_s": 2.8,
    "repeat": "یک‌بار",
-   "note": "فقط شاقول از زیر تختهٔ بالا تاب می‌خورد و قائم می‌ایستد؛ داربست ثابت؛ حالت ایستا=قائم."
+   "note": "فقط سطل با ریسمان حول قرقره تاب می‌خورد و قائم می‌ایستد؛ داربست ثابت؛ حالت ایستا=قائم."
   },
-  "reduced_motion": "شاقول قائم"
+  "reduced_motion": "سطل قائم"
  }
 }

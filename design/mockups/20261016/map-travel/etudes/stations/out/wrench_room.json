@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  30
+  98
  ],
  "stand": [
-  -0.5,
-  -27.5
+  -44.0,
+  13.5
  ],
  "ring": [
   0,
@@ -17,37 +17,35 @@
   0
  ],
  "motion": [
-  "node_wrench_room_wrench"
+  "node_wrench_room_nut"
  ],
  "inside_pad": {
-  "min_margin_px": 7.9,
+  "min_margin_px": 8.2,
   "base_on_pad": true,
-  "height_px": 51.8,
+  "height_px": 113.5,
   "bbox_px": [
-   28.8,
-   78.5,
-   115.2,
-   130.2
+   24.5,
+   4.2,
+   129.2,
+   117.8
   ],
   "ok": true
  },
  "motion_spec": {
-  "node_wrench_room_wrench": {
-   "center": [
-    0.0,
-    -8.0
+  "node_wrench_room_nut": {
+   "translate_from": [
+    0,
+    -16
    ],
-   "pivot": "مرکز آچار",
-   "rotate_deg": "0 → -8 → +8 → 0 (حالت ایستا 0)",
-   "dur_s": 1.6,
-   "once": true,
-   "note": "کل آچار اندکی تاب می‌خورد و برمی‌گردد؛ فقط هنگام رسیدن؛ بدون حلقهٔ بیکار."
+   "translate_to": [
+    0,
+    0
+   ],
+   "dur_s": 1.2,
+   "easing": "ease-in",
+   "repeat": 1,
+   "note": "مهره از بالای دهانه آرام در دهانهٔ آچار می‌نشیند؛ آچار و جعبه ثابت؛ حالت ایستا = نشسته؛ بدون حلقهٔ بیکار."
   },
-  "reduced_motion": "ایستا"
- },
- "swing_check": {
-  "out_px": 0.0,
-  "x_margin": 20.5,
-  "min_inside": 16.6
+  "reduced_motion": "مهره در دهانه"
  }
 }

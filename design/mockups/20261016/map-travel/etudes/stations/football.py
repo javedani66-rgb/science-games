@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
-"""ایستگاه F01 «زمین فوتبال» (سرزمین ورزشگاه، سکوی sports #7fbf4a) — بازطراحی دور ۵.
-ایدهٔ یک‌نگاه: توپ فوتبال بزرگ و وسط، جلوی یک دروازهٔ پهن با تور. همه متقارن حول x=0 (مرکز سکو).
-طرح قطعه‌به‌قطعه (واحد symbol؛ کف توپ y=+2، کف دروازه y=-12):
- ۱) تور: مستطیل پهن 112x92 (x ±56، y -104..-12) آبی-خاکستری روشن (#c4d6f2)، خط‌های لوزی تخت و نازک (#7f9bc8)، خط دور PART.
- ۲) دو تیرک سفید (۱۴ پهن، مرکز x=±56، y -108..-8) و تیرک افقی سفید (۱۴ بلند، y -111..-97، از x=-63 تا 63)، سه‌پله (سفید/آبی روشن/آبی-خاکستری)،
-    در هم‌پوشانی با تیرک افقی هم‌رنگ؛ خط PART دور هر جزء.
- ۳) توپ (لایهٔ متحرک ball): دایرهٔ سفید r=44 مرکز (0,-42)، سایهٔ تیز هلالی پایین-راست (#c9d6ee)، پنج‌ضلعی مرکزی تیره (r=15، رأس بالا)،
-    پنج خط درز از رأس‌ها، پنج لکهٔ نیمه‌پنهان کنار لبه (قرمز-بنفش تیره نه؛ همان تیرهٔ مرکزی)، خط دور PART؛ سایهٔ تماس زیر توپ.
-قهرمان: سفید/آبی روشن + تیره روی سبز ⇒ کنتراست ارزشی؛ توپ ≈۴۸٪ عرض سکو، کل مجموعه ≈۶۸٪.
-حرکت: فقط ball؛ از ۱۷ واحد (≈۱۲px) چپ می‌غلتد با چرخش و می‌ایستد؛ حالت ایستا = پایان؛ بدون بیکار."""
+"""ایستگاه F01 «زمین فوتبال» — بازطراحی دور ۶ (همسطح پیچ‌کاری).
+ایده: دروازهٔ ¾ (چارچوب جلو + چارچوب پشتِ بالا-راست‌تر، تور سقف/کنار/پشت در سه پلهٔ آبی) و توپ بزرگ جلوی آن.
+واحد symbol؛ کف دروازه y=-6، سقف جلو y=-98؛ عمق (+20,-16).
+ اجزای درشت: ۱) تور سه‌وجهی ۲) دو تیرک جلو + تیرافقی (سفید/آبی روشن/آبی-خاکستری) ۳) چارچوب پشت (باریک‌تر) ۴) توپ r=44 (سفید/خاکستری/تیره) + سایهٔ تماس.
+ عرض کل ≈۷۰٪ سکو؛ توپ نیمی از ارتفاع. حرکت: فقط ball؛ ایستا=پایان؛ بدون بیکار."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
@@ -17,16 +12,14 @@ from station_kit import *
 _k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_check = functools.partial(_k.motion_check, min_margin=8)
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/football'
-
-POST_B, POST_L, POST_D = '#ffffff', '#e6efff', '#aebfdc'
-NET_B, NET_L = '#b9cdee', '#7f9bc8'
-BALL_B, BALL_D = '#ffffff', '#c9d6ee'
-PATCH = '#34306e'
-BR = 42; BCX, BCY = 0, -40
-GX = 54; GT, GB = -104, -14
+POST_B, POST_L, POST_D = '#ffffff', '#e6efff', '#a9bbdc'
+NET_BK, NET_SD, NET_RF, NET_L = '#9fb9e2', '#bcd0ee', '#dce8fa', '#6f8dc0'
+BALL_B, BALL_D, BALL_DD = '#ffffff', '#d3ddf0', '#a7b5d6'
+PATCH = '#2b2766'
+BR = 37; BCX, BCY = -14, -29
+FX0, FX1 = -62, 46; FT, FB = -104, -8      # چارچوب جلو
+DX, DY = 18, -17                          # عمق
 ROLL = 17
-
-
 def poly(p, pts, col, op=1):
     p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
 
@@ -50,7 +43,7 @@ def clipc(pts, R):
     return out
 
 
-def post(p, x0, y0, x1, y1):
+def post(p, x0, y0, x1, y1):  # سه‌پله
     q = rect(x0, y0, x1, y1)
     p.shape(q, POST_B, PART, j=.1, step=8)
     w = x1 - x0
@@ -60,57 +53,51 @@ def post(p, x0, y0, x1, y1):
 
 
 def build():
-    p = Pen('football', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-70, 14), (66, 8)), dot=(62, -22))
-    p.xf = (1.0, 0.0, -1.0)
-    p.tipshadow(0, GB + 2, 64); p.foot_tip(-GX, GB + 2, 10); p.foot_tip(GX, GB + 2, 10); p.foot_tip(0, 4, 20)
-    # ۱) تور
-    net = rect(-GX, GT + 4, GX, GB)
-    p.shape(net, NET_B, PART, j=.1, step=8)
-    for i in range(-5, 6):   # لوزی: دو دستهٔ مورب تخت
-        x = i * 22.4
-        for sg in (1, -1):
-            a = (x - sg * 46, GB - 1); b = (x + sg * 46, GT + 5)
-            # برش به مستطیل تور
-            ts = []
-            for xe in (-GX + 3, GX - 3):
-                t = (xe - a[0]) / (b[0] - a[0]); y = a[1] + t * (b[1] - a[1])
-                if GT + 5 <= y <= GB - 1: ts.append((xe, y))
-            for ye in (GT + 5, GB - 1):
-                t = (ye - a[1]) / (b[1] - a[1]); xx = a[0] + t * (b[0] - a[0])
-                if -GX + 3 <= xx <= GX - 3: ts.append((xx, ye))
-            ts = sorted(set((round(u, 2), round(v, 2)) for u, v in ts))
-            if len(ts) >= 2: p.ln(ts[0], ts[-1], 2.0, NET_L, j=0)
-    p.stroke(net, PART, j=.1, step=8)
-    # ۲) تیرک‌ها
-    post(p, -GX - 7, GT, -GX + 7, GB + 2)
-    post(p, GX - 7, GT, GX + 7, GB + 2)
-    post(p, -GX - 7, GT - 3, GX + 7, GT + 11)
+    p = Pen('football', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-74, 14), (70, 8)), dot=(64, -22))
+    p.xf = (1.0, 0.0, 0.0)
+    p.tipshadow(0, FB + 8, 62); p.foot_tip(FX0, FB + 2, 10);  p.foot_tip(0, 8, 20)
+    bx0, bx1, bt, bb = FX0 + DX, FX1 + DX, FT + DY, FB + DY
+    # ۱) تور: پشت، کنار راست، سقف
+    lside = [(FX0, FT), (bx0, bt), (bx0, bb), (FX0, FB)]
+    p.shape(lside, NET_BK, INNER, j=.1, step=8)
+    back = rect(bx0, bt, bx1, bb)
+    p.shape(back, NET_BK, INNER, j=.1, step=8)
+    for x in range(bx0 + 20, bx1, 20): p.ln((x, bt + 3), (x, bb - 3), 2.2, NET_L, j=0)
+    for y in (bt + 30, bt + 60): p.ln((bx0 + 3, y), (bx1 - 3, y), 2.2, NET_L, j=0)
+    # پایهٔ پشت چپ (باریک)
+    side = [(FX1, FT), (bx1, bt), (bx1, bb), (FX1, FB)]
+    p.shape(side, NET_SD, PART, j=.1, step=8)
+    for k in (1,): 
+        t = k / 2; p.ln((FX1 + DX * t, FT + DY * t + 3), (FX1 + DX * t, FB + DY * t - 3), 2.2, NET_L, j=0)
+    for y in (-80, -50): p.ln((FX1 + 3, y), (bx1 - 3, y + DY), 2.2, NET_L, j=0)
+    roof = [(FX0, FT), (FX1, FT), (bx1, bt), (bx0, bt)]
+    p.shape(roof, NET_RF, PART, j=.1, step=8)
+    for k in (1, 2, 3):
+        t = k / 4; p.ln((FX0 + (FX1 - FX0) * t, FT - 2), (bx0 + (bx1 - bx0) * t, bt + 2), 2.2, NET_L, j=0)
+    # پایهٔ پشت راست
+    # ۲) تیرک‌های جلو و تیرافقی
+    post(p, FX0 - 7, FT, FX0 + 7, FB + 2)
+    post(p, FX1 - 7, FT, FX1 + 7, FB + 2)
+    post(p, FX0 - 7, FT - 7, FX1 + 7, FT + 7)
     # ۳) توپ
     with layer(p, 'ball'):
-        p.tipshadow(2, 3, 36)
+        p.tipshadow(2, 7, 34)
         circ = ell(BCX, BCY, BR, BR, 0, 360, 48)
-        p.shape(circ, BALL_B, PART, j=.06, step=99)
-        phi = math.radians(40.6); dd = 18.4; h = math.degrees(math.acos(dd / (2 * BR)))
-        S = (BCX - 14, BCY - 12)
-        cres = [(BCX + BR * math.cos(math.radians(a)), BCY + BR * math.sin(math.radians(a))) for a in [math.degrees(phi) - h + 2 * h * i / 20 for i in range(21)]]
-        cres += [(S[0] + BR * math.cos(math.radians(a)), S[1] + BR * math.sin(math.radians(a))) for a in [math.degrees(phi) + h - 2 * h * i / 20 for i in range(21)]]
-        poly(p, cres, BALL_D)
-        # لکه‌ها: پنج‌ضلعی مرکزی + پنج لکهٔ لبه
-        C0 = pent(BCX, BCY, 15.5, -90)
+        p.shape(circ, BALL_B, OUT, j=.06, step=99)
+        for dd, off, col in ((17, 0, BALL_D), (8, 0, BALL_DD)):
+            phi = math.radians(40.6); h = math.degrees(math.acos(dd / (2 * BR)))
+            S = (BCX - 14 - off, BCY - 12)
+            cres = [(BCX + BR * math.cos(math.radians(a)), BCY + BR * math.sin(math.radians(a))) for a in [math.degrees(phi) - h + 2 * h * i / 20 for i in range(21)]]
+            cres += [(S[0] + BR * math.cos(math.radians(a)), S[1] + BR * math.sin(math.radians(a))) for a in [math.degrees(phi) + h - 2 * h * i / 20 for i in range(21)]]
+            poly(p, cres, col)
         for i in range(5):
-            a = math.radians(-90 + 72 * i); b = math.radians(-90 + 72 * i + 36)
-            v = (BCX + 15.5 * math.cos(a), BCY + 15.5 * math.sin(a))
-            e = (BCX + 33 * math.cos(a), BCY + 33 * math.sin(a))
+            a = math.radians(-90 + 72 * i)
+            v = (BCX + 14 * math.cos(a), BCY + 14 * math.sin(a)); e = (BCX + 28 * math.cos(a), BCY + 28 * math.sin(a))
             p.ln(v, e, INNER, NAVY, j=0)
-            # لکهٔ لبه در زاویهٔ میانی
-            oc = (BCX + 47 * math.cos(a), BCY + 47 * math.sin(a))
-            q = clipc(pent(oc[0], oc[1], 16, math.degrees(a) + 180), BR - 1.2)
-            poly(p, q, PATCH)
-            # خط از انتهای درز تا لکهٔ لبه
-            tip = (BCX + 30 * math.cos(a), BCY + 30 * math.sin(a))
-            side = (BCX + 36 * math.cos(math.radians(math.degrees(a) + 36 * (1 if i % 2 else 1))), BCY + 36 * math.sin(math.radians(math.degrees(a) + 36)))
-        poly(p, C0, PATCH)
-        p.stroke(circ, PART, j=.06, step=99)
+            oc = (BCX + 42 * math.cos(a), BCY + 42 * math.sin(a))
+            poly(p, clipc(pent(oc[0], oc[1], 15, math.degrees(a) + 180), BR - 1.5), PATCH)
+        poly(p, pent(BCX, BCY, 14, -90), PATCH)
+        p.stroke(circ, OUT, j=.06, step=99)
     return p
 
 

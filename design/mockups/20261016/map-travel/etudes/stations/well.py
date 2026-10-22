@@ -1,117 +1,103 @@
 #!/usr/bin/env python3
-"""ایستگاه E07 «چاه آب» (سرزمین مزرعه، سکوی farm #d6c98a، رنگ‌مایهٔ ۵۰°).
-طرح قطعه‌به‌قطعه (واحد symbol؛ CX=-34 مرکز چاه؛ پایهٔ تماس y=+7):
- ۱) بدنهٔ چاه: استوانهٔ سنگی نیم‌پهنا ۳۶، از y=-36 تا کف خمیده (+7)؛ سنگ آبی-خاکستری ۲۱۳° (سه پله: پایه/روشن/تیره)؛ سه ردیف درز آجری تخت.
- ۲) لبهٔ دهانه (بیضی ۳۶×۱۰ روشن) و دهانهٔ تیرهٔ آب (۲۲×۷).
- ۳) دو ستون چوبی (۱۳ پهنا، مرکز CX±۲۶، y -98..-33) با خط PART، روی لبه می‌نشینند.
- ۴) قرقره: استوانهٔ افقی کرم (پهنا ۵۲، ارتفاع ۱۶، y=-66) بین ستون‌ها؛ دو سرش پشت ستون‌ها می‌رود.
- ۵) سقف دوشیبهٔ کوچک: مثلث ۹۶×۲۶ قرمز-قهوه‌ای (رنگ‌مایهٔ ≈۵°، دور از ۵۰°)؛ لبهٔ تیره، نور چپ، سایهٔ تیز راست.
- ۶) چرخ‌چاه: دیسک r=12 در (CX+40,-66) با دو پره و کلاهک (روی محور افقی قرقره y=-66).
- ۷) دلو (لایهٔ متحرک): دلوِ نارنجی با طناب از قرقره، روی محور CX؛ حالت ایستا = پایین.
-حرکت: node_well_bucket ۸ واحد بالا و آهسته برمی‌گردد؛ یک‌بار؛ بدون حلقهٔ بیکار."""
+"""ایستگاه E07 «چاه آب» (سرزمین مزرعه، سکوی farm ۵۰°) — دور ۶ (R6): بزرگ‌تر، دلوِ درشت و آشکار.
+طرح (واحد symbol؛ مرکز چاه x=0؛ کف y=8؛ دهانه y=-26):
+ ۱) بدنهٔ سنگی استوانه‌ای rx=42، y -26..8، سه پله (#b4c3d6 / #d6e1ee / #8798b3) با سه ردیف آجر منحنی؛ لبهٔ روشن و دهانهٔ تیره rx=31.
+ ۲) دو ستون چوبی قهوه‌ای تیره x ±36 (۱۴ پهن) از لبه تا y=-100؛ قرقرهٔ کرم افقی y=-82 (۷۴ پهن، ۲۰ بلند).
+ ۳) سقف دوشیبهٔ قرمز: مثلث ±60 از y=-96 تا -124، لبهٔ پیش‌آمده تیره، سایهٔ تیز راست.
+ ۴) دستهٔ چرخان طلایی راست: میلهٔ محور + بازو + دستگیرهٔ گرد.
+ ۵) دلوی چوبی نارنجی درشت (لایهٔ bucket): دهانهٔ بیضی ۳۰ پهن، ۲۴ بلند، دو بند فلزی، دستهٔ فلزی کمانی و طناب از قرقره، وسط قاب روی محور x=0.
+حرکت: node_well_bucket ۱۰ واحد بالا؛ پایان = پایین (ایستا)؛ یک‌بار؛ بدون حلقهٔ بیکار."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent))
+sys.path.insert(0, str(HERE.parent)); sys.path.insert(0, str(HERE))
 from station_kit import *
+from g4_helpers import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/well'
 
-S_B, S_L, S_D = '#b4c3d6', '#d6e1ee', '#8798b3'          # سنگ
-R_B, R_L, R_D = '#b3362b', '#dc5a4a', '#7a1f19'          # سقف
-W_B, W_L, W_D = '#c28a4a', '#e2ae6c', '#966126'          # چوب ستون
-C_B, C_L, C_D = '#f3e2b5', '#fff6d8', '#c99a58'          # قرقره/چرخ
-B_B, B_L, B_D = '#f0913a', '#ffc07a', '#a8531a'          # دلو
+S_B, S_L, S_D = '#b4c3d6', '#d6e1ee', '#8798b3'
+R_B, R_L, R_D = '#c23a2c', '#e8604c', '#7a1f19'
+W_B, W_L, W_D = '#8a5a2a', '#b88048', '#5e3a18'
+C_B, C_L, C_D = '#f6e6b8', '#fff8dc', '#c99a58'
+B_B, B_L, B_D = '#f08a2e', '#ffb866', '#b85a14'
+M_B, M_L = '#aab8cc', '#e6eef8'
 ROPE = '#6b4a2a'; HOLE = '#1f3560'; WATER = '#4f86c6'; YEL = '#ffd84d'
-
-CX = -26
-HW = 36
-RIM_Y = -36
-BASE = 7
-SPOOL_Y = -80
-PX = 28
-PW = 16
-POST_T, POST_B = -112, -33
-ROOF_B, ROOF_T = -106, -132
-BUCKET_DY = -11
+HW, RIM_Y, BASE = 42, -26, 8
+SPY, PX = -82, 36
+BUCKET_DY = -10
 
 
-def poly(p, pts, col, op=1):
-    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
-
-
-def disc(p, x, y, r, col):
-    a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
-
-
-def rect(x0, y0, x1, y1): return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+def bucket(p):
+    p.ln((0, SPY), (0, -68), INNER, ROPE, j=0)
+    ty, by = -54, -30
+    body = [(-15, ty), (15, ty)] + ell(0, by, 12, 4.4, 0, 180, 14)[::-1][::-1]
+    body = [(-15, ty), (15, ty), (12, by)] + [q for q in ell(0, by, 12, 4.4, 0, 180, 14)] + [(-12, by)]
+    # بدنه: ذوزنقه با کف بیضی
+    body = [(-15, ty), (15, ty)] + ell(0, by, 12, 4.4, 0, 180, 14)
+    # دستهٔ فلزی (پشت دلو)
+    arcline(p, ell(0, ty, 14, 14, 180, 360, 16), '#241a5e', PART + 2.6)
+    arcline(p, ell(0, ty, 14, 14, 180, 360, 16), M_B, 2.6)
+    sharp(p, body, B_B, PART)
+    poly(p, [(-12, ty + 3), (-8, ty + 3), (-6.5, by - 1), (-9.5, by - 1)], B_L)
+    poly(p, [(7, ty + 3), (15, ty + 3), (12, by + 2), (6, by + 4)], B_D)
+    for y in (-47, -36):
+        w = 15 - (y - ty) * 3 / 24
+        poly(p, [(-w, y), (w, y), (w - .4, y + 4), (-w + .4, y + 4)], M_B)
+        poly(p, [(-w + 1.5, y + .6), (-w + 5, y + .6), (-w + 5, y + 2), (-w + 1.5, y + 2)], M_L)
+    p.shape(ell(0, ty, 15, 4.8, 0, 360, 24), B_D, PART, j=.05, step=99, clip=False)
+    p.shape(ell(0, ty + .6, 11, 2.8, 0, 360, 20), '#3a1c08', INNER, j=0, step=99, clip=False)
+    disc(p, 0, -68, 3.2, M_B)
 
 
 def build(out=OUTD):
-    p = Pen('well', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((42, -26), (72, 8)), dot=(62, -14))
-    p.tipshadow(CX - 2, BASE + 3, 34); p.foot_tip(CX, BASE + 2, 26)
-    # ۱) بدنهٔ سنگی
-    body = [(CX - HW, RIM_Y), (CX + HW, RIM_Y)] + ell(CX, BASE - 8, HW, 8, 0, 180, 16)
+    p = Pen('well', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((62, -26), (76, 8)), dot=(70, -14)); p.xf = (1.0, 0, 6)
+    p.tipshadow(0, BASE + 3, 44); p.foot_tip(0, BASE + 2, 36)
+    body = [(-HW, RIM_Y), (HW, RIM_Y)] + ell(0, BASE - 10, HW, 10, 0, 180, 20)
     p.shape(body, S_B, OUT, j=.15, step=8)
-    poly(p, rect(CX - HW + 4.5, -30, CX - HW + 8.5, -1), S_L)
-    k = math.acos(14 / HW)
-    arc = [(CX + HW * math.cos(a * k / 10), BASE - 8 + 8 * math.sin(a * k / 10)) for a in range(11)]
-    poly(p, [(CX + 14, RIM_Y + 2), (CX + HW, RIM_Y + 2)] + arc, S_D)
-    for y in (-22, -8):
-        poly(p, rect(CX - HW + 5, y - 1.6, CX + HW - 5, y + 1.6), S_D)
-    for y0, y1, xs in ((-22, -8, (-12, 12)), (-8, 3, (-24, 0, 24))):
+    poly(p, rect(-HW + 5, -22, -HW + 10.5, -3), S_L)
+    k = math.acos(18 / HW)
+    arc = [(HW * math.cos(a * k / 10), BASE - 10 + 10 * math.sin(a * k / 10)) for a in range(11)]
+    poly(p, [(18, RIM_Y + 2), (HW, RIM_Y + 2)] + arc, S_D)
+    for y in (-18, -10): poly(p, band(0, y, HW - 1, 10, 3.2), S_D)
+    for y0, y1, xs in ((-15, -10, (-26, -6, 16)), (-7, -4, (-34, -14, 8, 28))):
         for x in xs:
-            poly(p, rect(CX + x - 1.6, y0 + 1.6, CX + x + 1.6, y1 - 1.6), S_D)
+            r_ = 10 * math.sqrt(max(0, 1 - (x / (HW - 1)) ** 2))
+            poly(p, rect(x - 1.6, y0 + r_, x + 1.6, y1 + r_), S_D)
     p.stroke(body, OUT, j=.15, step=8)
-    # ۲) لبه و دهانه
-    p.shape(ell(CX, RIM_Y, HW, 12, 0, 360, 40), S_L, PART, j=.1, step=8)
-    p.shape(ell(CX, RIM_Y + 1, 23, 7, 0, 360, 32), HOLE, INNER, j=.05, step=99, clip=False)
-    poly(p, [(CX - 7, RIM_Y + 3.4), (CX + 7, RIM_Y + 3.4), (CX + 5.5, RIM_Y + 4.8), (CX - 5.5, RIM_Y + 4.8)], WATER)
-    # ۳) دلو و طناب (لایهٔ متحرک)
+    p.shape(ell(0, RIM_Y, HW, 13, 0, 360, 40), S_L, PART, j=.05, step=99, clip=False)
+    p.shape(ell(0, RIM_Y + 1.5, 31, 9, 0, 360, 32), HOLE, INNER, j=.05, step=99, clip=False)
+    poly(p, [(-9, RIM_Y + 6), (9, RIM_Y + 6), (7, RIM_Y + 8), (-7, RIM_Y + 8)], WATER)
     with layer(p, 'bucket'):
-        p.ln((CX, SPOOL_Y + 4), (CX, -52), INNER, ROPE, j=0)
-        bk = [(CX - 7, -52), (CX + 7, -52), (CX + 6, -34), (CX - 6, -34)]
-        p.shape(bk, B_B, PART, j=.1, step=8)
-        poly(p, rect(CX - 3.6, -48, CX - 1.8, -38), B_L)
-        poly(p, [(CX + 1.4, -48), (CX + 3.2, -48), (CX + 3, -38), (CX + 1.4, -38)], B_D)
-        poly(p, rect(CX - 4, -44.5, CX + 4, -42.5), '#7a3a1a')
-    # ۴) قرقره
-    sp = rect(CX - PX, SPOOL_Y - 10, CX + PX, SPOOL_Y + 10)
-    p.shape(sp, C_B, PART, j=.1, step=8)
-    poly(p, rect(CX - PX + 5, SPOOL_Y - 7, CX + PX - 5, SPOOL_Y - 4), C_L)
-    for x in (-12, 0, 12): poly(p, rect(CX + x - 1.8, SPOOL_Y - 1, CX + x + 1.8, SPOOL_Y + 6), C_D)
-    p.stroke(sp, PART, j=.1, step=8)
-    # ۵) ستون‌ها
+        bucket(p)
+    sp = rect(-PX - 3, SPY - 10, PX + 3, SPY + 10)
+    sharp(p, sp, C_B, PART)
+    poly(p, rect(-PX + 2, SPY - 7, PX - 2, SPY - 3.5), C_L)
+    for x in (-18, 0, 18): poly(p, rect(x - 2, SPY + 1, x + 2, SPY + 6.5), C_D)
     for s in (-1, 1):
-        c = CX + s * PX
-        pts = rect(c - PW / 2, POST_T, c + PW / 2, POST_B)
-        p.shape(pts, W_B, PART, j=.1, step=8)
-        poly(p, rect(c - 4.4, POST_T + 8, c - 1.9, POST_B - 4), W_L)
-        poly(p, rect(c + 1.2, POST_T + 8, c + 4.8, POST_B - 4), W_D)
-        p.stroke(pts, PART, j=.1, step=8)
-    # ۶) سقف
-    roof = [(CX - 48, ROOF_B), (CX + 48, ROOF_B), (CX, ROOF_T)]
-    p.shape(roof, R_B, PART, j=.1, step=8)
-    poly(p, [(CX - 9, -125), (CX - 5.5, -125), (CX - 24.5, -114), (CX - 28, -114)], R_L)
-    poly(p, [(CX + 8, -124), (CX + 42, -108.5), (CX + 42, ROOF_B), (CX + 8, ROOF_B)], R_D)
-    poly(p, [(CX - 40.5, -110), (CX + 40.5, -110), (CX + 48, ROOF_B), (CX - 48, ROOF_B)], R_D)
-    p.stroke(roof, PART, j=.1, step=8)
-    # ۷) چرخ‌چاه
-    WX = CX + 44
-    p.shape(ell(WX, SPOOL_Y, 14, 14, 0, 360, 24), C_B, PART, j=.05, step=99, clip=False)
-    poly(p, rect(WX - 11, SPOOL_Y - 1.75, WX + 11, SPOOL_Y + 1.75), C_D)
-    poly(p, rect(WX - 1.75, SPOOL_Y - 11, WX + 1.75, SPOOL_Y + 11), C_D)
-    p.shape(ell(WX, SPOOL_Y, 3.6, 3.6, 0, 360, 12), '#7a4a1f', INNER, j=0, step=99, clip=False)
-    disc(p, WX, SPOOL_Y, 1.2, YEL)
+        c = s * PX
+        pts = rect(c - 7, -100, c + 7, RIM_Y + 3)
+        sharp(p, pts, W_B, PART)
+        poly(p, rect(c - 4.5, -95, c - 2, RIM_Y - 1), W_L)
+        poly(p, rect(c + 1.8, -95, c + 4.8, RIM_Y - 1), W_D)
+    roof = [(-60, -96), (60, -96), (0, -124)]
+    sharp(p, roof, R_B, PART)
+    poly(p, [(-9, -118), (-5, -118), (-33, -101), (-37, -101)], R_L)
+    poly(p, [(7, -118), (50, -100.5), (50, -96), (7, -96)], R_D)
+    poly(p, [(-52, -100), (52, -100), (60, -96), (-60, -96)], R_D)
+    # دستهٔ چرخان
+    sharp(p, rect(PX + 5, SPY - 3, PX + 15, SPY + 3), W_D, INNER)
+    sharp(p, rect(PX + 12, SPY - 3, PX + 20, SPY + 22), YEL, PART)
+    p.shape(ell(PX + 16, SPY + 25, 7, 7, 0, 360, 16), YEL, PART, j=.05, step=99, clip=False)
     return p
 
 
 STAND = None
 if __name__ == '__main__':
     p = build()
-    r = finish(p, 'well', STAND, motion={'bucket': dict(offsets=[(0, 0), (0, BUCKET_DY)])}, out=OUTD, shots=SHOTS)
+    r = finish(p, 'well', STAND, motion={'bucket': dict(offsets=[(0, BUCKET_DY), (0, 0)])}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_well_bucket': dict(offsets=[[0, 0], [0, BUCKET_DY]], dy_units=BUCKET_DY, dy_px=round(BUCKET_DY * K, 1), duration_s=2, repeat=1,
-                                                  note='دلو با طناب ۱۱ واحد symbol (≈۸px نقشه) بالا می‌رود و آهسته به حالت ایستا برمی‌گردد؛ سر طناب پشت قرقره می‌ماند؛ بدون حلقهٔ بیکار؛ تزئینی.'),
+    sp['motion_spec'] = {'node_well_bucket': dict(offsets=[[0, BUCKET_DY], [0, 0]], dy_units=BUCKET_DY, dy_px=round(BUCKET_DY * K, 1), duration_s=2, repeat=1, ease='ease-in-out',
+                                                  note='دلو با طناب ۱۰ واحد از بالا آهسته پایین می‌آید و در حالت ایستا (پایین) می‌ماند؛ سر طناب پشت قرقره؛ بدون حلقهٔ بیکار.'),
                          'reduced_motion': 'دلو ثابت در حالت پایین'}
     (OUTD / 'well.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

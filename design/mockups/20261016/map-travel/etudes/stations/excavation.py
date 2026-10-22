@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""ایستگاه M04 «گودبرداری» (سرزمین شهر، سکوی آبی-فولادی ۲۱۳°). تصمیم مالک: میلهٔ فلزی روی سنگ تکیه‌گاه که سنگی را بالا می‌آورد.
+"""R6: بازطراحی — دیلم ضخیم‌تر با سر خمیده، سنگ تکیه‌گاه سه‌وجهی بزرگ‌تر، تخته‌سنگ بار درشت چندوجهی، دو سنگ‌ریزه؛ لایهٔ متحرک node_excavation_bar (میله+سنگ بار)، حالت ایستا = پایان.
+ایستگاه M04 «گودبرداری» (سرزمین شهر، سکوی آبی-فولادی ۲۱۳°). تصمیم مالک: میلهٔ فلزی روی سنگ تکیه‌گاه که سنگی را بالا می‌آورد.
 نمای جانبی؛ حالت ایستا = پایان حرکت (سر بلند میله پایین آمده، سنگ بار بالا رفته).
 فقط ۳ جزء درشت (تل خاک و گودال حذف شد)، همهٔ خط‌ها راست (j=0):
  ۱ سنگ تکیه‌گاه: مکعب‌گونهٔ خاکستری گرم ۲۶×۲۰، پایه روی زمین (y=8)؛ سه پله (#7f7968 / #a59f8c / #58533f)؛ نوار روشن چپ، نوار تیره راست، داخل جزء.
@@ -20,13 +21,13 @@ F_B, F_L, F_D = '#c9b68a', '#e6d8ae', '#8f7d52'     # سنگ تکیه‌گاه: 
 B_B, B_L, B_D = '#e8483c', '#ff8a78', '#a82a24'     # دیلم قرمز
 YEL = '#ffd84d'
 GY = 8
-ANG = 22
+ANG = 26
 PX = -7.5
-PIV = (PX, -29.0)
-BW = 9.0
-L0, L1 = -48, 70
+PIV = (PX, -37.0)
+BW = 10.0
+L0, L1 = -48, 62
 REST = -8
-XF = (1.0, 0.0, 0.0)
+XF = (1.0, 0.0, 4.0)
 
 
 def flat(p, pts, col, op=1):
@@ -53,28 +54,39 @@ def clip_x_l(pts, x1):
     return clip_x([(-x, y) for x, y in pts][::-1], -x1) and [(-x, y) for x, y in clip_x([(-x, y) for x, y in pts][::-1], -x1)]
 
 
+def pebble(p, cx, cy, r, col=(F_B, F_L, F_D)):
+    pts = [(cx - r, cy), (cx - r * .85, cy - r * .8), (cx - r * .2, cy - r * 1.2), (cx + r * .7, cy - r * 1.0), (cx + r * 1.1, cy - r * .3), (cx + r * 1.0, cy)]
+    p.shape(pts, col[0], PART, j=0, step=99)
+    flat(p, [(cx - r * .5, cy - r * .6), (cx - r * .2, cy - r * .95), (cx + r * .1, cy - r * .85), (cx - r * .1, cy - r * .45)], col[1])
+
+
 def build():
     p = Pen('excavation', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((-52, 22), (72, -22)), dot=(74, -8)); p.xf = XF
     f = rot(PIV[0], PIV[1], ANG)
-    P = lambda pts: TP(f, [(x, y) for x, y in pts])      # نقطه‌های محلی (نسبت به لولا) -> جهان
-    p.tipshadow(PX, GY + 1, 28); p.tipshadow(60, GY + 1, 12)
-    p.foot_tip(PX, GY, 22); p.foot_tip(60, GY, 8)
-    ful = [(PX - 32, GY), (PX - 31, -6), (PX - 23, -17), (PX - 10, -25), (PX + 10, -25), (PX + 23, -17), (PX + 31, -6), (PX + 32, GY)]
+    P = lambda pts: TP(f, [(x, y) for x, y in pts])
+    p.tipshadow(PX, GY + 1, 30); p.foot_tip(PX, GY, 24)
+    pebble(p, -62, GY, 11); pebble(p, -42, GY + 3, 8)
+    ful = [(PX - 32, GY), (PX - 31, -6), (PX - 23, -17), (PX - 10, -26), (PX + 10, -26), (PX + 23, -17), (PX + 31, -6), (PX + 32, GY)]
     p.shape(ful, F_B, OUT, j=0, step=6)
-    flat(p, [(PX - 32, GY), (PX - 31, -6), (PX - 23, -17), (PX - 10, -25), (PX - 4, -25), (PX - 17, -10), (PX - 21, GY)], F_L)
+    flat(p, [(PX - 32, GY), (PX - 31, -6), (PX - 23, -17), (PX - 10, -26), (PX - 4, -26), (PX - 17, -10), (PX - 21, GY)], F_L)
     flat(p, [(PX + 16, -22), (PX + 23, -17), (PX + 31, -6), (PX + 32, GY), (PX + 17, GY)], F_D)
     p.stroke(ful, OUT, j=0, step=6)
+    py = 0; QX = 0
     with layer(p, 'bar'):
-        rock = [(-46, -5), (-52, -18), (-46, -33), (-34, -44), (-18, -46), (-6, -37), (-1, -22), (-1, -5)]
+        bar = P([(QX - 50, py - BW), (QX + 58, py - BW), (QX + 58, py + BW), (QX - 50, py + BW)])
+        p.shape(bar, B_B, PART, j=0, step=6, clip=False)
+        flat(p, P([(QX - 44, py - BW + 3), (QX + 44, py - BW + 3), (QX + 44, py - BW + 7.5), (QX - 44, py - BW + 7.5)]), B_L)
+        flat(p, P([(QX - 44, py + BW - 7.5), (QX + 55, py + BW - 7.5), (QX + 55, py + BW - 3), (QX - 44, py + BW - 3)]), B_D)
+        flat(p, P([(QX + 40, py - 4.5), (QX + 49, py - 4.5), (QX + 49, py + 4.5), (QX + 40, py + 4.5)]), YEL)
+        hook = P([(QX + 52, py - BW), (QX + 62, py - BW + 2), (QX + 70, py + BW + 6), (QX + 64, py + BW + 14), (QX + 57, py + BW + 6), (QX + 52, py + BW)])
+        p.shape(hook, B_B, PART, j=0, step=6, clip=False)
+        rock = [(QX - 58, py + 2), (QX - 66, py - 14), (QX - 60, py - 34), (QX - 46, py - 48), (QX - 28, py - 50), (QX - 14, py - 38), (QX - 8, py - 20), (QX - 8, py + 2)]
         rk = P(rock)
         p.shape(rk, S_B, OUT, j=0, step=6, clip=False)
-        flat(p, P(clip_x_l(rock, -40)), S_L)
-        flat(p, P(clip_x(rock, -12)), S_D); p.stroke(rk, OUT, j=0, step=6)
-        bar = P([(L0, -BW), (L1, -BW), (L1, BW), (L0, BW)])
-        p.shape(bar, B_B, PART, j=0, step=6, clip=False)
-        flat(p, P([(L0 + 5, -BW + 3), (L1 - 14, -BW + 3), (L1 - 14, -BW + 6.2), (L0 + 5, -BW + 6.2)]), B_L)
-        flat(p, P([(L0 + 5, BW - 6.2), (L1 - 3, BW - 6.2), (L1 - 3, BW - 3), (L0 + 5, BW - 3)]), B_D)
-        flat(p, P([(L1 - 14, -4.5), (L1 - 6, -4.5), (L1 - 6, 4.5), (L1 - 14, 4.5)]), YEL)
+        flat(p, P(clip_x_l(rock, QX - 48)), S_L)
+        flat(p, P(clip_x(rock, QX - 20)), S_D)
+        p.ln(f((QX - 46, py - 48)), f((QX - 38, py - 26)), INNER, NAVY, j=0); p.ln(f((QX - 38, py - 26)), f((QX - 58, py + 2)), INNER, NAVY, j=0)
+        p.stroke(rk, OUT, j=0, step=6)
         disc(p, PIV[0], PIV[1], 3.6, YEL)
     return p
 

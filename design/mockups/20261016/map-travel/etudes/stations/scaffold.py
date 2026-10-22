@@ -1,73 +1,79 @@
 #!/usr/bin/env python3
-"""ایستگاه B01 «داربست» (شهر، پالت city)، دور ۵ (فرمان مدیر: قاب پهن، ستون‌ها، تخته‌های افقی، ضربدر کامل، ۶۰٪، وسط).
-طرح (واحد symbol، مرکز سکو x=0؛ کف y=8):
- ۱) دو پایهٔ عمودی کرم-سفید (x=±44، پهنا ۱۵، y=-112..8): پایه #f6f1e4 / روشن #ffffff / تیره #cfc4a8.
- ۲) دو کفشک (بلوک پایه) قهوه‌ای-خاکستری زیر پایه‌ها.
- ۳) ضربدر کامل قرمز مرجانی (#e2553d) در طبقهٔ پایین بین پایه‌ها، پشت پایه‌ها (سرها زیر پایه‌ها پنهان).
- ۴) تختهٔ میانی (سکوی کار) و تختهٔ بالایی، چوب قهوه‌ای #c98a4b / روشن #e8b27a / تیره #8f5a2c؛ x=±58 (≈۶۳٪ عرض سکو).
- ۵) شاقول (لایهٔ node_scaffold_plumb) در طبقهٔ بالا (بدون ضربدر) زیر تختهٔ بالا، محور x=0: ریسمان قهوه‌ای و وزنهٔ زرد؛ محور تاب = (0,-98).
- حرکت: شاقول ±۶° هنگام رسیدن، پایان = قائم؛ بدون حلقهٔ بیکار."""
+"""B01 «داربست» (سکوی city) — دور ۶ (R6): داربست لوله‌ای ¾، دو طبقه، دو سکوی تخته‌ای، نردبان، سطل آویزان با قرقره.
+طرح (واحد symbol، مرکز سکو x=0، کف y=6):
+ ۱ دو پایهٔ لوله‌ای (x=-40 و +24، پهنا ۱۴، y 6..-114): سه پله کرم/سفید/خاکستری-آبی (#e9edf3 / #ffffff / #a9b4c8)، کفشک تیره.
+ ۲ دو ضربدر لوله‌ای (پهنا ۹، #b6c2d6) در دو طبقه، پشت پایه‌ها.
+ ۳ دو سکوی تخته‌ای ¾ نارنجی (#f09a3a / #ffc983 / #b5621c): رو + رویه + وجه راست؛ طبقهٔ پایین y=-48 و بالا y=-102.
+ ۴ نردبان چوبی روشن سمت راست (x=42..60) با ۴ پله.
+ ۵ بازوی بالا + قرقره (چرخ خاکستری) بالای راست؛ سطل قرمز (لایهٔ node_scaffold_bucket: ریسمان+سطل+دسته) آویزان زیر قرقره، چپ داربست.
+حرکت: سطل حول قرقره ±۶° تاب می‌خورد و قائم می‌ایستد (یک‌بار)."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent))
+sys.path.insert(0, str(HERE.parent)); sys.path.insert(0, str(HERE))
 from station_kit import *
+from g6h import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/scaffold'
-S_B, S_L, S_D = '#f6f1e4', '#ffffff', '#cfc4a8'
-W_B, W_L, W_D = '#c98a4b', '#e8b27a', '#8f5a2c'
-R_B = '#e2553d'
-FT = '#a08a70'; STR = '#5a3a1a'; YEL = '#ffd84d'
-PX = (-44, 44); PW = 15; TOPY = -112; BASE = 8
-PV = (0, -98)
+T_B, T_L, T_D = '#e9edf3', '#ffffff', '#a9b4c8'
+BR = '#b6c2d6'
+P_B, P_L, P_D = '#f09a3a', '#ffc983', '#b5621c'
+L_B = '#f3cf86'; STR = '#6e3f18'; RED, RED_L, RED_D = '#e2402e', '#ff8f7a', '#a42418'
+FT = '#6f7c93'
+BASE = 6; PXs = (-40, 24); PW = 14; TOPY = -114
+PV = (-68, -127)
 
 
-def rect(p, x0, y0, x1, y1, col):
-    p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X([(x0, y0), (x1, y0), (x1, y1), (x0, y1)])), col))
+def plank(p, x0, x1, y, h=11, D=12, E=7):
+    sil = [(x0, y + h), (x1, y + h), (x1 + D, y + h - E), (x1 + D, y - E), (x0 + D, y - E), (x0, y)]
+    p.shape(sil, P_B, OUT, j=.1, step=7)
+    poly(p, [(x0, y), (x1, y), (x1 + D, y - E), (x0 + D, y - E)], P_L)
+    poly(p, [(x1, y), (x1 + D, y - E), (x1 + D, y + h - E), (x1, y + h)], P_D)
+    poly(p, R(x0 + 3, y + h - 4, x1 - 2, y + h - 1.5), P_D, .9)
+    p.ln((x0, y), (x1, y), INNER, NAVY, j=.1); p.ln((x1, y), (x1, y + h), INNER, NAVY, j=.1)
 
 
-def box(p, x0, y0, x1, y1, col, sw=PART):
-    p.shape([(x0, y0), (x1, y0), (x1, y1), (x0, y1)], col, sw, j=.15, step=6)
-
-
-def _bp(a, b, w):
-    dx, dy = b[0] - a[0], b[1] - a[1]; L = math.hypot(dx, dy); nx, ny = -dy / L * w / 2, dx / L * w / 2
-    return [(a[0] + nx, a[1] + ny), (b[0] + nx, b[1] + ny), (b[0] - nx, b[1] - ny), (a[0] - nx, a[1] - ny)]
-
-
-def braces(p, lst):
-    for a, b, w in lst: p.shape(_bp(a, b, w), R_B, PART, j=.15, step=6, clip=False)
-    for a, b, w in lst:
-        p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(_bp(a, b, w - PART))), R_B))
-
-
-def build(out=OUTD):
-    p = Pen('scaffold', 'city'); pad(p, line=((-14, 36), (8, 36)), tri=((72, -14), (68, 14)), dot=(-74, -6)); p.xf = (1.0, 0, 0)
-    p.tipshadow(0, BASE + 2, 56); p.foot_tip(0, BASE + 1, 44)
-    # ۱) ضربدر کامل (پشت پایه‌ها)
-    braces(p, [((-44, 0), (44, -52), 11), ((44, 0), (-44, -52), 11)])
-    # ۲) کفشک‌ها + پایه‌ها
-    for x in PX:
-        box(p, x - 12, 1, x + 12, BASE + 1, FT)
-        box(p, x - PW / 2, TOPY, x + PW / 2, 3, S_B)
-        rect(p, x - PW / 2 + 3, TOPY + 10, x - PW / 2 + 6.5, -6, S_L)
-        rect(p, x + 1.5, TOPY + 10, x + PW / 2 - 2.5, -6, S_D)
-    # ۳) شاقول (زیر تختهٔ بالا)
-    with layer(p, 'plumb'):
-        p.ln((PV[0], -100), (PV[0], -84), INNER, STR, j=0, probe='ریسمان شاقول')
-        p.shape([(PV[0] - 10, -86), (PV[0] + 10, -86), (PV[0], -64)], YEL, INNER, j=.1, step=99, clip=False)
-    # ۴) تخته‌ها
-    for y0, y1 in ((-60, -46), (-120, -106)):
-        box(p, -58, y0, 58, y1, W_B)
-        rect(p, -50, y0 + 3.5, 50, y0 + 7, W_L); rect(p, -50, y1 - 5.5, 50, y1 - 3, W_D)
+def build():
+    p = Pen('scaffold', 'city'); pad(p, line=((-14, 36), (8, 36)), tri=((72, -14), (68, 14)), dot=(-74, -6)); p.xf = (0.92, 4, 6)
+    p.tipshadow(-4, BASE + 3, 62); p.foot_tip(-40, BASE + 1, 14); p.foot_tip(24, BASE + 1, 14); p.foot_tip(52, BASE + 1, 12)
+    # ۲ ضربدرها (پشت)
+    for y0, y1 in ((BASE - 2, -48), (-56, -100)):
+        for a, b in (((-40, y0), (24, y1)), ((24, y0), (-40, y1))):
+            p.shape(bar(a, b, 10), BR, PART, j=.15, step=7, clip=False)
+        for a, b in (((-40, y0), (24, y1)), ((24, y0), (-40, y1))):
+            poly(p, bar(a, b, 4.2), '#d8e0ee', .9)
+    # ۱ پایه‌ها
+    for x in PXs:
+        p.shape(R(x - 12, BASE - 6, x + 12, BASE + 1), FT, PART, j=.12, step=6)
+        p.shape(R(x - PW / 2, TOPY, x + PW / 2, BASE - 4), T_B, PART, j=.12, step=7)
+        poly(p, R(x - PW / 2 + 2.5, TOPY + 6, x - PW / 2 + 5.5, BASE - 8), T_L)
+        poly(p, R(x + 1.5, TOPY + 4, x + PW / 2 - 2, BASE - 8), T_D)
+    # ۴ نردبان
+    for y in (-72, -52, -32, -12): p.ln((45, y), (63, y), PART, STR, j=.1)
+    for x in (45, 63): p.shape(R(x - 2.8, -86, x + 2.8, BASE), L_B, INNER, j=.1, step=7, clip=False)
+    # ۳ تخته‌ها
+    plank(p, -52, 30, -48); plank(p, -52, 30, -102)
+    # ۵ بازو + قرقره + سطل
+    p.shape(R(-70, -132, -30, -121), T_B, PART, j=.1, step=7, clip=False)
+    poly(p, R(-66, -130, -33, -127.5), T_L)
+    with layer(p, 'bucket'):
+        p.ln((PV[0], PV[1] + 4), (PV[0], -70), INNER, STR, j=0)
+        p.ln((PV[0] - 10, -62), (PV[0], -70), INNER, STR, j=0); p.ln((PV[0] + 10, -62), (PV[0], -70), INNER, STR, j=0)
+        b = [(PV[0] - 12, -62), (PV[0] + 12, -62), (PV[0] + 9, -34), (PV[0] - 9, -34)]
+        p.shape(b, RED, PART, j=.1, step=6, clip=False)
+        poly(p, [(PV[0] + 3, -60), (PV[0] + 11, -60), (PV[0] + 8, -36), (PV[0] + 3, -36)], RED_D)
+        poly(p, R(PV[0] - 9, -59, PV[0] - 6, -39), RED_L)
+        p.shape(R(PV[0] - 15, -66, PV[0] + 15, -60), RED_L, INNER, j=.1, step=6, clip=False)
+    p.shape(ell(PV[0], PV[1], 9, 9, 0, 360, 18), '#d8e0ee', PART, j=.1, step=6, clip=False); disc(p, PV[0], PV[1], 2.6, NAVY)
     return p
 
 
+STAND = None
 if __name__ == '__main__':
     p = build()
     hm = p.X(PV)
-    r = finish(p, 'scaffold', None, motion={'plumb': dict(offsets=[(0, 0), (-3, 0), (3, 0)])}, out=OUTD, shots=SHOTS)
+    r = finish(p, 'scaffold', STAND, motion={'bucket': dict(offsets=[(-3, 0), (3, 0), (0, 0)])}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_scaffold_plumb': dict(center=[round(v, 1) for v in hm], angles_deg=[0, 6, -6, 3, -1.5, 0], duration_s=2.8, repeat='یک‌بار',
-        note='فقط شاقول از زیر تختهٔ بالا تاب می‌خورد و قائم می‌ایستد؛ داربست ثابت؛ حالت ایستا=قائم.'), 'reduced_motion': 'شاقول قائم'}
+    sp['motion_spec'] = {'node_scaffold_bucket': dict(center=[round(v, 1) for v in hm], angles_deg=[0, 6, -6, 3, -1.5, 0], duration_s=2.8, repeat='یک‌بار',
+        note='فقط سطل با ریسمان حول قرقره تاب می‌خورد و قائم می‌ایستد؛ داربست ثابت؛ حالت ایستا=قائم.'), 'reduced_motion': 'سطل قائم'}
     (OUTD / 'scaffold.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  38
+  44
  ],
  "stand": [
   0.0,
@@ -17,38 +17,36 @@
   0
  ],
  "motion": [
-  "node_ice_rink_glint"
+  "node_ice_rink_skate"
  ],
  "inside_pad": {
-  "min_margin_px": 9.9,
+  "min_margin_px": 6.0,
   "base_on_pad": true,
-  "height_px": 60.2,
+  "height_px": 69.8,
   "bbox_px": [
-   25.2,
-   70.5,
-   118.5,
-   130.8
+   19.5,
+   64.5,
+   124.2,
+   134.2
   ],
   "ok": true
  },
  "motion_spec": {
-  "node_ice_rink_glint": {
-   "kind": "دو نوار سفید مایل کوتاه روی یخ؛ حالت ایستا = پایان حرکت",
+  "node_ice_rink_skate": {
+   "kind": "اسکیت جلویی روی یخ به راست می‌لغزد؛ حالت ایستا = پایان",
    "translate_x_symbol_units": [
-    -10,
+    -12,
     0
    ],
    "translate_x_map_px": [
-    -7.2,
+    -8.6,
     0
    ],
-   "opacity": "از ۰ تا ۰٫۷۵ در ۲۰٪ اول؛ بعد ثابت",
-   "duration_s": 1.4,
+   "duration_s": 1.2,
    "easing": "ease-out",
    "loop": false,
    "trigger": "رسیدن کودک (یک‌بار)",
-   "how": "گروه glint را از translateX(%d) و شفافیت ۰ به 0 و ۱ ببر. تزئینی است. بدون حلقهٔ بیکار.",
-   "note": "با reduced-motion ثابت در وضع پایان."
+   "note": "با reduced-motion ثابت در وضع پایان؛ بدون حلقهٔ بیکار."
   }
  }
 }

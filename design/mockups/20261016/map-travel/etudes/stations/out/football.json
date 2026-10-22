@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  80
+  89
  ],
  "stand": [
   0.0,
@@ -20,14 +20,14 @@
   "node_football_ball"
  ],
  "inside_pad": {
-  "min_margin_px": 18.0,
+  "min_margin_px": 12.2,
   "base_on_pad": true,
-  "height_px": 84.0,
+  "height_px": 97.5,
   "bbox_px": [
-   26.0,
-   28.0,
-   117.8,
-   112.0
+   20.2,
+   18.8,
+   120.0,
+   116.2
   ],
   "ok": true
  },
@@ -43,12 +43,12 @@
     0
    ],
    "rotate_deg": [
-    -23.19114885053332,
+    -26.325087884389173,
     0
    ],
    "pivot_symbol": [
-    0,
-    -40
+    -14,
+    -29
    ],
    "duration_s": 1.6,
    "easing": "ease-out (کندشونده)",

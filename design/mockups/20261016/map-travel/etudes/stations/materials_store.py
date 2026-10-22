@@ -1,30 +1,25 @@
 #!/usr/bin/env python3
-"""ایستگاه B02 «انبار مصالح» (سرزمین شهر، سکو آبی‌خاکستری ۲۱۳°) — دور ۵ (دستور مدیر هنری: دو پشتهٔ برابر گونی روی پالت، ۶۰٪ وسط).
-طرح قطعه‌به‌قطعه (واحد symbol، xf=1، مرکز سکو ≈ (0,0)، کف پالت y=15):
- ۱ دو پالت چوبی (مرکز ±19): عرشه ۳۶×۷ (y 4..11) + سه پایهٔ ۸×۴ (y 11..15) با شکاف تیره؛ چوب #b77a3a.
- ۲ گونی پایین: خوابیده، بدنهٔ بالشی ۲۶×۲۰ (کرم #f3e1b0)، دهانهٔ بسته‌شده به‌صورت دُم کوتاه سمت چپ با نوار قرمز.
- ۳ گونی بالا (لایهٔ bags): ایستاده و کمی افتاده، بدنه ۲۴×۱۸، گردن ۱۰ با نوار قرمز و چین‌دار بالا (ذوزنقهٔ باز).
- ۴ هر گونی یک سایهٔ تیز راست داخل بدنه؛ بدون برچسب و ریزه. سایهٔ تماس زیر هر پالت.
- رنگ: کرم ≈۴۲°، قرمز، چوب ≈۳۰°؛ سکو ۲۱۳°. دو پشته دقیقاً یکسان.
-لایهٔ متحرک node_materials_store_bags = گونی بالاییِ هر دو پشته؛ حالت ایستا = روی پشته."""
+"""B02 «انبار مصالح» (سکوی city) — دور ۶ (R6): دو پشتهٔ برابر، هرکدام ۳ گونی روی پالت چوبی؛ پشتهٔ چپ کرم، راست خاکستری.
+طرح (واحد symbol، xf=(1.22،0،-2)، مرکز پشته‌ها x=±27، کف y=14):
+ ۱ پالت چوبی ¾ (۵۰ پهن): عرشه y 0..8 با وجه راست تیره (عمق ۶) + سه پایه (y 8..14)؛ چوب #c98a4b/#e6b27a/#8f5a2c.
+ ۲ دو گونی خوابیده (۴۴×۲۴ و ۴۰×۲۴، پایین‌تر آفست ۲) با دُم گره‌دار سمت چپ/راست متناوب، رشتهٔ قرمز، چین‌های کوتاه.
+ ۳ گونی ایستادهٔ بالایی (۳۲×۲۵) با گردن چین‌دار و گره قرمز در بالا. هر گونی سه پله: پایه/روشن چپ/تیره راست (داخل جزء).
+ رنگ: کرم #f6e6b8/#fffaea/#d2b06a، خاکستری #d0d4de/#f4f6fb/#8b92a8، سکو آبی-خاکستری ۲۱۳°.
+حرکت: node_materials_store_bag = گونی بالایی پشتهٔ راست؛ هنگام رسیدن از ۱۴ واحد بالاتر می‌افتد و می‌نشیند؛ ایستا = روی پشته؛ بدون بیکار."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent))
+sys.path.insert(0, str(HERE.parent)); sys.path.insert(0, str(HERE))
 from station_kit import *
+from g6h import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/materials_store'
-
-S_B, S_L, S_D = '#f6e6b8', '#fffaea', '#d9b979'
-W_B, W_L, W_D = '#b77a3a', '#d9a463', '#6e421a'
+CREAM = ('#f6e6b8', '#fffaea', '#d2b06a')
+GREY = ('#d9dbe0', '#f7f8fa', '#989daa')
+W_B, W_L, W_D = '#c98a4b', '#e6b27a', '#8f5a2c'
 RED, RED_D = '#e0402e', '#a82a1c'
-XF = (1.2, 0, -2)
-PX = (-24, 24)
-GROUND, DECK0, DECK1 = 15, 3, 11
-DROP = 16
-
-
-def poly(p, pts, col, op=1):
-    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
+XF = (1.3, 0, -3)
+PX = (-25, 25)
+DECK0, DECK1, GROUND, DROP = 0, 8, 15, 11
 
 
 def rrect(x0, y0, x1, y1, r, n=5):
@@ -36,35 +31,56 @@ def rrect(x0, y0, x1, y1, r, n=5):
 
 
 def pallet(p, c):
-    pts = [(c - 24, DECK0), (c + 24, DECK0), (c + 24, GROUND), (c - 24, GROUND)]
-    p.shape(pts, W_B, PART, j=.05, step=99)
-    poly(p, [(c - 19, DECK0 + 2.5), (c + 19, DECK0 + 2.5), (c + 19, DECK0 + 4.3), (c - 19, DECK0 + 4.3)], W_L)
-    for dx in (-13, 13): poly(p, [(c + dx - 7, GROUND - 5.5), (c + dx + 7, GROUND - 5.5), (c + dx + 7, GROUND - 2), (c + dx - 7, GROUND - 2)], W_D)
-    p.stroke(pts, PART, j=.05, step=99)
+    x0, x1, D = c - 23, c + 23, 6
+    for dx in (-15, 15):
+        p.shape(R(c + dx - 5, DECK1 - 1, c + dx + 5, GROUND), W_D, PART, j=.05, step=99, clip=False)
+    sil = [(x0, DECK0), (x1, DECK0), (x1 + D, DECK0 - 4), (x1 + D, DECK1 - 4), (x1, DECK1), (x0, DECK1)]
+    p.shape(sil, W_B, PART, j=.05, step=99)
+    poly(p, [(x1, DECK0), (x1 + D, DECK0 - 4), (x1 + D, DECK1 - 4), (x1, DECK1)], W_D)
+    poly(p, R(x0 + 3, DECK0 + 2.2, x1 - 3, DECK0 + 4.6), W_L)
+    p.ln((x1, DECK0), (x1, DECK1), INNER, NAVY, j=.05)
 
 
-def sack(p, bx, by):
-    """گونی بالشی خوابیده: بدنه ۳۰×۲۲ از x=bx، کف y=by. دم چین‌دارِ بسته‌شده سمت چپ؛ طناب قرمز پهن."""
-    yc = by - 11
-    fr = [(bx + 3, yc - 8), (bx - 14, yc - 13), (bx - 14, yc + 13), (bx + 3, yc + 8)]
-    p.shape(fr, S_B, PART, j=.05, step=99)
-    poly(p, [(bx - 7, yc - 11), (bx - 1, yc - 9.2), (bx - 1, yc + 9.2), (bx - 7, yc + 11)], RED)
-    p.stroke(fr, PART, j=.05, step=99)
-    body = rrect(bx, by - 22, bx + 30, by, 10)
-    p.shape(body, S_B, PART, j=.05, step=99)
-    poly(p, [(bx + 23, yc - 5), (bx + 26.5, yc - 5), (bx + 26.5, yc + 7), (bx + 23, yc + 7)], S_D)
-    poly(p, [(bx + 8, by - 17), (bx + 19, by - 17), (bx + 19, by - 14.5), (bx + 8, by - 14.5)], S_L)
-    p.stroke(body, PART, j=.05, step=99)
+def sack(p, cx, yb, w, h, col, tail=0):
+    """گونی خوابیده؛ tail=-1 دُم چپ، +1 دُم راست."""
+    B, L, D = col
+    x0, x1, y0 = cx - w / 2, cx + w / 2, yb - h
+    if tail:
+        t = tail; xe = cx + t * (w / 2 + 7)
+        ear = [(cx + t * (w / 2 - 5), yb - h * .68), (xe, yb - h * .78), (xe + t * 1, yb - h * .22), (cx + t * (w / 2 - 5), yb - h * .32)]
+        p.shape(ear, B, PART, j=.05, step=99, clip=False)
+        poly(p, R(min(cx + t * (w / 2 - 1), cx + t * (w / 2 + 3.5)), yb - h * .66, max(cx + t * (w / 2 - 1), cx + t * (w / 2 + 3.5)), yb - h * .34), RED)
+    body = rrect(x0, y0, x1, yb, 9)
+    p.shape(body, B, PART, j=.05, step=99)
+    poly(p, R(x1 - 8, y0 + 5, x1 - 2.5, yb - 5), D, .9)
+    poly(p, R(x0 + 3, y0 + 5, x0 + 6.5, yb - 7), L)
+    p.ln((cx - 7, yb - h * .55), (cx + 3, yb - h * .47), INNER, D, j=.05)
 
 
-def build(out=OUTD):
+def top_sack(p, cx, yb, col, w=32, h=25):
+    B, L, D = col
+    x0, x1, y0 = cx - w / 2, cx + w / 2, yb - h
+    neck = [(cx - 6, y0 + 3), (cx + 6, y0 + 3), (cx + 14, y0 - 6), (cx + 9, y0 - 9), (cx + 4, y0 - 15), (cx, y0 - 10), (cx - 4, y0 - 15), (cx - 9, y0 - 9), (cx - 14, y0 - 6)]
+    p.shape(neck, B, PART, j=.05, step=99, clip=False)
+    poly(p, R(cx - 7.5, y0 - 3.5, cx + 7.5, y0 + 0.5), RED)
+    body = rrect(x0, y0, x1, yb, 10)
+    p.shape(body, B, PART, j=.05, step=99)
+    poly(p, R(x1 - 9, y0 + 7, x1 - 3, yb - 5), D, .9)
+    poly(p, R(x0 + 4, y0 + 7, x0 + 8, yb - 8), L)
+    p.ln((cx - 6, yb - h * .5), (cx + 4, yb - h * .42), INNER, D, j=.05)
+
+
+def build():
     p = Pen('materials_store', 'city'); pad(p, line=((-80, 12), (-66, 20)), tri=((72, -22), (80, 8)), dot=(-74, -14)); p.xf = XF
     for cx in PX:
-        p.tipshadow(cx, GROUND + 1.5, 28); p.foot_tip(cx, GROUND, 18)
-    for cx in PX: pallet(p, cx)
-    for cx in PX: sack(p, cx - 12, DECK0)
-    with layer(p, 'bags'):
-        for cx in PX: sack(p, cx - 10, DECK0 - 22)
+        p.tipshadow(cx + 3, GROUND + 1.5, 32); p.foot_tip(cx, GROUND, 20)
+    for cx, col in zip(PX, (CREAM, GREY)):
+        pallet(p, cx)
+        sack(p, cx - 1, DECK0, 38, 22, col, -1)
+        sack(p, cx + 2, DECK0 - 21, 36, 22, col, 1)
+    top_sack(p, PX[0], DECK0 - 42, CREAM, 30, 23)
+    with layer(p, 'bag'):
+        top_sack(p, PX[1], DECK0 - 42, GREY, 30, 23)
     return p
 
 
@@ -72,11 +88,11 @@ STAND = None
 if __name__ == '__main__':
     p = build()
     offs = [p.V((0, -DROP)), p.V((0, -DROP / 2)), (0, 0)]
-    r = finish(p, 'materials_store', STAND, motion={'bags': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
+    r = finish(p, 'materials_store', STAND, motion={'bag': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_materials_store_bags': dict(
-        layer='گونی بالاییِ هر دو پشته (هم‌حرکت)', dx=0, dy_from=-DROP, dy_to=0, dur_s=1.4,
-        note='هنگام رسیدن: هر دو گونی از ۱۵ واحد بالاتر پایین می‌افتند و روی پشته می‌نشینند (جهش خیلی کوچک)؛ حالت ایستا = روی پشته؛ بدون حلقهٔ بیکار؛ بدون عدد/عقربه.'),
-        'reduced_motion': 'گونی‌ها روی پشته (ایستا)'}
+    sp['motion_spec'] = {'node_materials_store_bag': dict(
+        layer='گونی بالایی پشتهٔ راست', dx=0, dy_from=-DROP, dy_to=0, dur_s=1.2,
+        note='هنگام رسیدن: گونی از ۱۴ واحد بالاتر پایین می‌افتد و روی پشته می‌نشیند؛ حالت ایستا = روی پشته؛ بدون حلقهٔ بیکار.'),
+        'reduced_motion': 'گونی روی پشته (ایستا)'}
     (OUTD / 'materials_store.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

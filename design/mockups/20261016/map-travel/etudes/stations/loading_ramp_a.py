@@ -1,69 +1,72 @@
 #!/usr/bin/env python3
-"""M03 «رمپ بارگیری» نسخهٔ A، دور ۵: همان ایده (گوهٔ رمپ + جعبه روی شیب) ولی بزرگ‌تر، وسط و رمپ‌مانند، نه پنیر/میز.
-طرح (واحد symbol، کف GY=22، مرکز x=0، عرض ≈۶۵٪ سکو):
- ۱) رمپ: یک چندضلعی چوبی #d7a762 (روشن #fbe6b4، تیره #b8864a): سکوی بالای تخت (طول ۲۲، ارتفاع ۵۸) در سمت چپ + شیب ≈۲۸° تا پنجهٔ راست (ارتفاع ۶).
- ۲) سطح تختهٔ رمپ: نوار روشن موازی سطح (سکو + شیب)، و ۵ پله‌چوب (کلیت) تیرهٔ عمود بر شیب (#8f5a2c)؛ نوار تیرهٔ کف.
- ۳) جعبهٔ بار ۳۶×۳۶ بنفش #8b5fd0 (روشن #b690ec، تیره #5f3a9e) هم‌شیب، ۳ واحد فرورفته؛ تسمهٔ روشن عمودی؛ لایهٔ node_loading_ramp_a_crate.
- ۴) سایهٔ تماس زیر کف + foot_tip. رنگ‌مایه: سکو ≈۲۱۰°، رمپ ≈۳۸°، جعبه ≈۲۶۵°."""
+"""M03 «رمپ بارگیری» نسخهٔ A، دور ۶: رمپ چوبی ¾ سه‌بعدی (نیم‌رخ بیرون‌کشیده با عمق (-20,-12) به پشت-چپ) + جعبهٔ نارنجی روی شیب + چرخ‌دستی فیروزه‌ای.
+اجزای درشت (۴): ۱) رمپ: بدنهٔ گوه‌ای چوبی (جلو #d9a05a، رویه #fbe6b4، پهلو #b8843a) با سکوی بالا و شیب ≈۳۲°؛ درز تخته‌های بدنه؛ ۲) نرده/ریل دو طرف شیب (جلو و پشت) چوب روشن؛
+ ۳) جعبهٔ نارنجی (#f28c28 / #ffc070 / #b5560e) هم‌جهت شیب با تسمهٔ روشن (لایهٔ node_loading_ramp_a_crate)؛ ۴) چرخ‌دستی فیروزه‌ای #2fb5a8 با چرخ.
+ حرکت: جعبه در امتداد شیب از ۲۰ واحد پایین‌تر بالا می‌آید؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار. سایهٔ تماس زیر رمپ و چرخ‌دستی."""
 import sys, pathlib, json, math
-sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
-from station_kit import *
+HERE = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent)); sys.path.insert(0, str(HERE))
+from r6lib import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/loading_ramp_a'
-W_BODY = '#d9a05a'; W_LIGHT = '#fbe6b4'; W_DARK = '#a8743a'; CLEAT = '#8f5a2c'
-CR = '#8b5fd0'; CR_L = '#b690ec'; CR_D = '#5f3a9e'
-GY = 18; X0, X1 = -57, 57; LAND = 20; HH, HT = 68, 6
-CS, SINK = 38, 3
-L2 = (X0 + LAND, GY - HH); TOE = (X1, GY - HT)
-DX, DY = TOE[0] - L2[0], TOE[1] - L2[1]
-SL = math.hypot(DX, DY); ANG = math.atan2(DY, DX)
-D = (DX / SL, DY / SL)
-N = (-D[1], D[0])
-U = (-D[0], -D[1])
-NUP = (-N[0], -N[1])
-T0, RISE = 50, 18
-XF = (1.0, 0, 0)
+W_F, W_T, W_S = '#d9a05a', '#fbe6b4', '#a8743a'
+RL, RL_T = '#f0c27a', '#fff0c8'
+C_F, C_T, C_S = '#f28c28', '#ffc070', '#b5560e'
+T_F, T_T, T_S = '#2fb5a8', '#7fe0d4', '#1d7a70'
+GY = 14
+D = (-18, -14)
+XT, XP, XE = -42, 12, 38
+HP = 48; HT = 6
+T = (XT, GY - HT); H = (XP, GY - HP)
+_l = math.hypot(H[0] - T[0], H[1] - T[1])
+U = ((H[0] - T[0]) / _l, (H[1] - T[1]) / _l)    # بالاشیب
+N = (U[1], -U[0])                               # عمود بالا (بالا-چپ)
+S0, S1 = 40, 22                                 # فاصلهٔ پای جعبه از پنجه (ایستا / شروع)
+CS = 30
 
 
-def A(p, v, k=1): return (p[0] + v[0] * k, p[1] + v[1] * k)
-def flat(p, pts, col, op=1): p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
+def pt(P, v, k): return (P[0] + v[0] * k, P[1] + v[1] * k)
 
 
 def build():
-    p = Pen('loading_ramp_a', 'city'); pad(p, line=((62, 30), (76, 26)), tri=((-76, -10), (-70, 12)), dot=(72, -14)); p.xf = XF
-    p.tipshadow(0, GY + 1, 58); p.foot_tip(0, GY, 32)
-    outline = [(X0, GY - HH), L2, TOE, (X1, GY), (X0, GY)]
-    p.shape(outline, W_BODY, OUT, j=.1, step=12)
-    # شیارهای تختهٔ بدنه (۳ خط افقی تیره، داخل بدنه)
-    for yy in (GY - 16, GY - 32, GY - 48):
-        xe = min(X1 - 14, L2[0] + (yy - L2[1]) * DX / DY - 16)
-        flat(p, [(X0 + 7, yy - 1.5), (xe, yy - 1.5), (xe, yy + 1.5), (X0 + 7, yy + 1.5)], W_DARK)
-    # سطح روشن: سکوی بالا + شیب
-    flat(p, [(X0 + 6, GY - HH + 4.5), (L2[0] + 3, GY - HH + 4.5), (L2[0] + 3, GY - HH + 12.5), (X0 + 6, GY - HH + 12.5)], W_LIGHT)
-    a = A(L2, N, 4.5); b = A(A(TOE, D, -9), N, 4.5)
-    flat(p, [a, b, A(b, N, 8), A(a, N, 8)], W_LIGHT)
-    for t in (24, 40, 56, 72, 88):
-        c0 = A(A(L2, D, t), N, 3.5); c1 = A(c0, D, 4)
-        flat(p, [c0, c1, A(c1, N, 10), A(c0, N, 10)], CLEAT)
-    p.stroke(outline, OUT, j=.1, step=12)
+    p = Pen('loading_ramp_a', 'city'); pad(p, line=((62, 30), (76, 26)), tri=((-76, -4), (-70, 18)), dot=(76, -8)); p.xf = (1.0, 0, 0)
+    p.tipshadow(-6, GY + 2, 56); p.foot_tip(-6, GY, 36)
+    p.tipshadow(66, GY + 2, 16)
+    prof = [(XE, GY), (XE, GY - HP), H, T, (XT, GY)]
+    extrude(p, prof, D, W_F, W_T, W_S, mid=W_T, sw=OUT, sw_in=PART)
+    for yy in (GY - 14, GY - 28):
+        xs = XT + 8 + (GY - 6 - yy) * (XP - XT) / (HP - HT) if yy > H[1] else XT
+        rect(p, xs + 4, yy - 1.5, XE - 7, yy + 1.5, W_S, .85)
+    for s_ in (14, 30, 46, 62):
+        a = pt(T, U, s_); b = (a[0] + D[0] * .92, a[1] + D[1] * .92)
+        p.ln(a, b, INNER, W_S, op=.9, j=0)
+    bk = lambda q: (q[0] + D[0], q[1] + D[1])
+    a2, b2 = bk(T), bk(H)
+    p.shape([a2, b2, (b2[0], b2[1] - 7), (a2[0], a2[1] - 7)], RL, PART, j=.05, step=8, clip=False)
     with layer(p, 'crate'):
-        P = A(TOE, U, T0)
-        a_ = A(P, NUP, -SINK); b_ = A(a_, U, CS); c_ = A(b_, NUP, CS); e_ = A(a_, NUP, CS)
-        flat(p, [A(P, U, -2), A(P, U, CS + 2), A(A(P, U, CS + 2), NUP, -3), A(A(P, U, -2), NUP, -3)], '#10083a', .3)
-        p.shape([a_, b_, c_, e_], CR, PART, j=.1, step=8, clip=False)
-        Q = lambda u, v: A(A(a_, U, u), NUP, v)
-        flat(p, [Q(9, CS - 9), Q(CS - 4.5, CS - 9), Q(CS - 4.5, CS - 4.5), Q(9, CS - 4.5)], CR_L)
-        flat(p, [Q(4.5, 4.5), Q(9, 4.5), Q(9, CS - 4.5), Q(4.5, CS - 4.5)], CR_D)
-    return p
+        P = pt(T, U, S0); P = (P[0] + D[0] * .16, P[1] + D[1] * .16)
+        c = [P, pt(P, U, CS), pt(pt(P, U, CS), N, CS), pt(P, N, CS)]
+        p.tipshadow(P[0] + 2, P[1] + 1, 8)
+        extrude(p, c, (D[0] * .64, D[1] * .64), C_F, C_T, C_S, mid=C_F, sw=PART)
+        q = lambda s, h: pt(pt(P, U, s), N, h)
+        poly(p, [q(11, 2), q(17, 2), q(17, CS - 2), q(11, CS - 2)], '#ffd9a0', .9)
+        poly(p, [q(CS - 4, 2), q(CS - 1, 2), q(CS - 1, CS - 2), q(CS - 4, CS - 2)], C_S, .5)
+    p.shape([T, H, (H[0], H[1] - 7), (T[0], T[1] - 7)], RL, PART, j=.05, step=8, clip=False)
+    # چرخ‌دستی
+    tx = 62
+    p.shape([(tx + 6, GY - 4), (tx + 20, GY - 4), (tx + 20, GY), (tx + 6, GY)], T_F, PART, j=.05, step=6, clip=False)
+    extrude(p, [(tx - 4, GY - 4), (tx + 4, GY - 4), (tx + 4, GY - 62), (tx - 4, GY - 62)], (-4, -3), T_F, T_T, T_S, sw=PART)
+    extrude(p, [(tx - 12, GY - 66), (tx + 12, GY - 66), (tx + 12, GY - 60), (tx - 12, GY - 60)], (-4, -3), T_F, T_T, T_S, sw=PART)
+    p.shape(ell(tx, GY - 11, 11, 11, 0, 360, 20), '#3a2a6a', PART, j=.05, step=99, clip=False)
+    circ(p, tx, GY - 11, 4, '#ffd84d')
+    return p, off
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 3: XF = tuple(float(v) for v in sys.argv[1:4])
-    p = build()
-    offs = [p.V((-U[0] * RISE * f, -U[1] * RISE * f)) for f in (1, .75, .5, .25, 0)]
+    p, off = build()
+    offs = [p.V((-U[0] * S1 * f, -U[1] * S1 * f)) for f in (1, .75, .5, .25, 0)]
     r = finish(p, 'loading_ramp_a', None, motion={'crate': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
-    sp = r['spec']; so = [round(v, 1) for v in p.V((-U[0] * RISE, -U[1] * RISE))]
-    sp['motion_spec'] = {'node_loading_ramp_a_crate': dict(translate_xy=[so, [0, 0]], unit='واحد symbol', dir_deg=round(math.degrees(ANG), 1),
-        easing='ease-in-out', loop=False, start='جعبه پایین‌تر روی شیب (جابه‌جایی %.1f,%.1f)' % tuple(so), end='حالت ایستا = پایان (بالاتر)',
-        note='فقط جعبه، در امتداد شیب؛ بدون چرخش، بدون طناب/دست/پیکان.'), 'reduced_motion': 'جعبه در حالت ایستا'}
+    sp = r['spec']; so = [round(v, 1) for v in offs[0]]
+    sp['motion_spec'] = {'node_loading_ramp_a_crate': dict(translate_xy=[so, [0, 0]], unit='واحد symbol', dir_deg=round(math.degrees(math.atan2(U[1], U[0])), 1), easing='ease-in-out', loop=False,
+        start='جعبه %d واحد پایین‌تر روی شیب' % S1, end='حالت ایستا = پایان (بالاتر)', note='فقط جعبه، در امتداد شیب؛ بدون چرخش، بدون طناب/دست/پیکان.'), 'reduced_motion': 'جعبه در حالت ایستا'}
     (OUTD / 'loading_ramp_a.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

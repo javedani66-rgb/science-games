@@ -1,81 +1,89 @@
 #!/usr/bin/env python3
-"""ایستگاه W04 «ایستگاه فضایی» (سرزمین فضا، سکوی بنفش ۲۵۶°) — دور ۵ (دستور مدیر هنری: ماژول استوانه‌ای، دو بال خورشیدی بزرگ، دریچهٔ گرد، ۶۵٪ وسط، ماهواره نشود).
-طرح قطعه‌به‌قطعه (واحد symbol، xf=1٫5، مرکز سکو (0,0)، محور بال‌ها y=-16):
- ۱) پایهٔ طلایی: ذوزنقهٔ کوتاه زیر بدنه x ±13 (پایین y 12)، سه پله.
- ۲) ماژول اصلی: کپسول افقی x ±17، y -28..-4 (سفید-نقره‌ای #eceff4 / روشن / تیره)، دو شیار قائم، دریچهٔ گرد r=6٫5 وسط (حلقهٔ NAVY + شیشهٔ آبی).
- ۳) ماژول بالایی (گره اتصال): کپسول کوچک x ±6، y -37..-27 با کلاهک طلایی؛ نشان می‌دهد چند ماژول است.
- ۴) دو بال خورشیدی بزرگ (لایهٔ panels): بازوی طلایی x 15..24 (۶ بلند) و پنل فیروزه‌ای x 21..37، y -36..4 (۱۶×۴۰) با شبکهٔ سه‌ردیفه و نوار نور؛ حول (0,-16) ±۶°؛ حالت ایستا = افقی.
-لایهٔ متحرک node_space_station_panels؛ بدون حلقهٔ بیکار."""
+"""ایستگاه W04 «ایستگاه فضایی» (سرزمین فضا، سکوی بنفش ۲۵۶°) — دور ۶ (R6).
+هدف: هم‌سطح «پیچ‌کاری»: بزرگ (≈۶۵٪ عرض سکو)، ¾، سه پلهٔ رنگ، ۶ جزء درشت. ماژول اصلی «استوانهٔ قائم» تا بالای آن رویه و بندر دیده شود.
+طرح قطعه‌به‌قطعه (واحد symbol؛ مرکز بدنه x=0؛ محور بال‌ها y=-34):
+ ۱) پایهٔ طلایی: ذوزنقه x ±14 تا y=12.
+ ۲) ماژول اصلی: استوانهٔ قائم r=20 (ry=7)، y -58..-6، سفید-نقره‌ای سه پله (#eef1f7 / سفید / #aeb8d0)، دو دریچهٔ گرد r=5٫5، دو شیار منحنی.
+ ۳) بندر (حلقهٔ طلایی روی رویه) + ماژول کوچک قائم r=9، y -72..-58 + آنتن با گوی قرمز.
+ ۴) دو بال خورشیدی (لایهٔ panels): بازوی طلایی + پنل آبی روشن ۳۴×۵۸ مایل (¾) با شبکهٔ ۳×۴؛ سه پله (#3fb6f0 / #9be0ff / #1f78c4). حول (0,-34) ±۶°؛ ایستا = افقی."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent))
+sys.path.insert(0, str(HERE.parent)); sys.path.insert(0, str(HERE))
 from station_kit import *
+from g4_helpers import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/space_station'
 
-M_B, M_L, M_D = '#eceff4', '#ffffff', '#b4bccd'
+M_B, M_L, M_D = '#eef1f7', '#ffffff', '#aeb8d0'
 G_B, G_L, G_D = '#f0b03c', '#ffd98a', '#b9741c'
-P_B, P_L, P_D = '#1f8a98', '#58c8d0', '#0f5560'
-GLASS = '#cfeaff'; M_DD = '#8f98b0'
-XF = (1.25, 0, 12)
-CY = -16
+P_B, P_L, P_D = '#3fb6f0', '#9be0ff', '#1f78c4'
+GLASS = '#bfe6ff'; ROD = '#5b6684'; RED = '#e8503a'
+CYA = -34
 
 
-def poly(p, pts, col, op=1):
-    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
-
-
-def sharp(p, pts, col, sw):
-    p.raw('<polygon points="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, sw))
-
-
-def capsule(x0, y0, x1, y1, r):
-    cy = (y0 + y1) / 2
-    return [(x0 + r, y0), (x1 - r, y0)] + ell(x1 - r, cy, r, (y1 - y0) / 2, -90, 90, 10) + [(x1 - r, y1), (x0 + r, y1)] + ell(x0 + r, cy, r, (y1 - y0) / 2, 90, 270, 10)
+def wing(p, sg):
+    X = lambda x, y: (sg * x, y)
+    x0, x1 = 35, 63
+    def Y(t, s):
+        yt = -62 - 8 * t; yb = -2 - 8 * t
+        return yt + s * (yb - yt)
+    pn = [X(x0, -62), X(x1, -70), X(x1, -10), X(x0, -2)]
+    arm = [(sg * 18, CYA - 5.5), (sg * 38, CYA - 5.5), (sg * 38, CYA + 5.5), (sg * 18, CYA + 5.5)]
+    sharp(p, arm, G_B, PART)
+    poly(p, [(sg * 21, CYA - 3.5), (sg * 36, CYA - 3.5), (sg * 36, CYA - 1.2), (sg * 21, CYA - 1.2)], G_L)
+    sharp(p, pn, P_B, PART)
+    xs = lambda t: x0 + (x1 - x0) * t
+    poly(p, [X(xs(.06), Y(.06, .04)), X(xs(.3), Y(.3, .04)), X(xs(.3), Y(.3, .96)), X(xs(.06), Y(.06, .96))], P_L)
+    poly(p, [X(xs(.72), Y(.72, .04)), X(xs(.94), Y(.94, .04)), X(xs(.94), Y(.94, .96)), X(xs(.72), Y(.72, .96))], P_D, .8)
+    p.ln(X(xs(.5), Y(.5, .04)), X(xs(.5), Y(.5, .96)), INNER, P_D, j=0)
+    for s_ in (.33, .66):
+        p.ln(X(xs(.04), Y(.04, s_)), X(xs(.96), Y(.96, s_)), INNER, P_D, j=0)
 
 
 def build(out=OUTD, ang=0):
-    p = Pen('space_station', 'space'); pad(p, line=((-80, 12), (-66, 20)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = XF
-    p.tipshadow(0, 13, 30); p.foot_tip(0, 12, 16)
-    # ۱) پایه
-    sharp(p, [(-13, 12), (13, 12), (9, -6), (-9, -6)], G_B, PART)
-    poly(p, [(-8.5, 9), (-5, 9), (-4, -3), (-6, -3)], G_L)
-    poly(p, [(3, -3), (5.5, -3), (8, 9), (4.5, 9)], G_D)
-    # ۴) بال‌ها (لایهٔ متحرک)
+    p = Pen('space_station', 'space'); pad(p, line=((-80, 12), (-66, 20)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = (1.0, 0, 6)
+    p.tipshadow(0, 10, 34); p.foot_tip(0, 9, 18)
+    sharp(p, [(-15, 12), (15, 12), (10, -4), (-10, -4)], G_B, PART)
+    poly(p, [(-10, 9), (-6, 9), (-5, -1), (-8, -1)], G_L)
+    poly(p, [(5, -1), (8, -1), (11, 9), (7, 9)], G_D)
     with layer(p, 'panels'):
-        cx_, cy_ = p.X((0, CY))
+        cx_, cy_ = p.X((0, CYA))
         p.raw('<g transform="rotate(%s %.1f %.1f)">' % (ang, cx_, cy_))
-        for sg in (-1, 1):
-            sharp(p, [(sg * 17, CY - 5), (sg * 31, CY - 5), (sg * 31, CY + 5), (sg * 17, CY + 5)], G_B, PART)
-            xa, xb = sorted((sg * 29, sg * 44))
-            sharp(p, [(xa, -42), (xb, -42), (xb, 6), (xa, 6)], P_B, PART)
-            poly(p, [(xa + 3, -38), (xa + 6.5, -38), (xa + 6.5, 2), (xa + 3, 2)], P_L)
-            for y in (-29, -17, -5): p.ln((xa + 3, y), (xb - 3, y), INNER, P_D, j=0)
+        wing(p, -1); wing(p, 1)
         p.raw('</g>')
-    # ۲) ماژول اصلی
-    body = capsule(-21, -28, 21, -4, 10)
-    sharp(p, body, M_B, OUT)
-    poly(p, [(-14, -25), (14, -25), (14, -22), (-14, -22)], M_L)
-    poly(p, [(-14, -9), (14, -9), (14, -6.5), (-14, -6.5)], M_D)
-    for x in (-12.5, 12.5): poly(p, [(x - 1.2, -23), (x + 1.2, -23), (x + 1.2, -9), (x - 1.2, -9)], M_DD)
-    p.shape(ell(0, CY, 7, 7, 0, 360, 16), GLASS, PART, j=.05, step=99, clip=False)
-    poly(p, [(-3.5, CY - 3.5), (-1, CY - 3.5), (-1, CY - 1), (-3.5, CY - 1)], '#ffffff')
+    # ماژول اصلی
+    body = [(-21, -58), (21, -58)] + ell(0, -6, 21, 7.4, 0, 180, 24)
+    p.shape(body, M_B, OUT, j=.1, step=99, clip=False)
+    poly(p, rect(-16, -54, -11, -8), M_L)
+    arc = [(x, -6 + 7.4 * math.sqrt(1 - (x / 21) ** 2)) for x in (21 - 8 * i / 8 for i in range(9))]
+    poly(p, [(13, -56), (21, -56)] + arc, M_D)
+    for y in (-53, -12): poly(p, band(0, y, 20.5, 7.2, 2.8), M_D)
+    p.stroke(body, OUT, j=.1, step=99)
+    p.shape(ell(0, -58, 21, 7.4, 0, 360, 30), M_L, PART, j=.05, step=99, clip=False)
+    for y in (-43, -24):
+        p.shape(ell(-2, y, 6, 6, 0, 360, 16), GLASS, INNER, j=.05, step=99, clip=False)
+        poly(p, rect(-4.8, y - 3, -2.8, y - .8), '#ffffff')
+    # ماژول کوچک (با کمربند بندر طلایی) + آنتن
+    vcyl(p, 0, -74, -59, 10, 3.6, M_B, M_L, M_D, M_L, sw=PART, lx=2.6)
+    poly(p, band(0, -64, 9.4, 3.4, 3.4), G_B)
+    p.ln((0, -76), (0, -91), INNER, ROD, j=0)
+    p.shape(ell(0, -93, 4, 4, 0, 360, 12), RED, INNER, j=.05, step=99, clip=False)
     return p
 
 
 STAND = None
 if __name__ == '__main__':
     p = build()
-    hm = p.X((0, CY))
+    hm = p.X((0, CYA))
     r = finish(p, 'space_station', STAND, motion={'panels': dict(offsets=[(0, 0)])}, out=OUTD, shots=SHOTS)
     st = r['spec']['stand']; ext = []
-    for a_ in (-6, 6):    # قاب حرکت واقعی ±۶° (کیت فقط چرخش ۳۶۰° یا جابه‌جایی می‌شناسد)
+    for a_ in (-6, 6):
         q = build(ang=a_)
         ext.append((a_, motion_check(q, 'panels', offsets=[(0, 0)], stand=st), inside_check(q, {'panels': dict(offsets=[(0, 0)])})))
-    print('EXT', json.dumps([(a, m, i) for a, m, i in ext], ensure_ascii=False))
+    print('EXT', json.dumps([(a, m['ok'], i['ok']) for a, m, i in ext], ensure_ascii=False))
     sp = r['spec']
     sp['motion_spec'] = {'node_space_station_panels': dict(center=[round(v, 1) for v in hm], max_angle_deg=6, pattern='0 -> +6 -> -6 -> 0', repeats=3, duration_s=6,
-                                                          note='هر دو بال خورشیدی و بندها با هم حول مرکز ماژول ±۶° مایل می‌شوند؛ فقط هنگام رسیدن/بیداری؛ بدون حلقهٔ بیکار؛ ماژول و نگهدارنده‌ها ثابت و کامل؛ تزئینی، بدون سبک‌شدن/شناوری.'),
-                         'reduced_motion': 'بال‌ها ایستا و راست'}
+                                                          note='هر دو بال خورشیدی با بازو حول مرکز ماژول ±۶° مایل می‌شوند؛ فقط هنگام رسیدن؛ حالت ایستا = افقی (پایان)؛ بدون حلقهٔ بیکار.'),
+                         'reduced_motion': 'بال‌ها ایستا'}
     (OUTD / 'space_station.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
-    print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))
+    print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))
