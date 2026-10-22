@@ -62,7 +62,8 @@ def build():
         p.shape(b, RED, PART, j=.1, step=6, clip=False)
         poly(p, [(PV[0] + 3, -60), (PV[0] + 11, -60), (PV[0] + 8, -36), (PV[0] + 3, -36)], RED_D)
         poly(p, R(PV[0] - 9, -59, PV[0] - 6, -39), RED_L)
-        p.shape(R(PV[0] - 15, -66, PV[0] + 15, -60), RED_L, 3, j=.1, step=6, clip=False)
+        p.shape(ell(PV[0], -62, 15, 5, 0, 360, 24), RED_L, 3, j=0, step=6, clip=False)      # لبهٔ سطل (بیضی)
+        p.fill(ell(PV[0], -61.5, 11, 3, 0, 360, 20), '#3a1410')                               # دهانهٔ تیرهٔ داخل سطل
     p.shape(ell(PV[0], PV[1], 9, 9, 0, 360, 18), '#d8e0ee', PART, j=.1, step=6, clip=False); disc(p, PV[0], PV[1], 2.6, NAVY)
     return p
 
