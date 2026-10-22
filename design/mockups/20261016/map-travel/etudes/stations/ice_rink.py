@@ -37,13 +37,13 @@ def skate(p, ox, oy, k=1.0):
         extrude(p, T0(rect(x0, -34, x0 + 10, -7)), (4 * k, -3 * k), M_B, M_L, M_D, mid=M_B, sw=3.0, sw_in=1.8)
     T = lambda pts: [(ox + x * k, oy + (y - 10) * k) for x, y in pts]   # پوتین ۱۰ واحد بالاتر از تیغه
     boot = T([(0, -100), (38, -100), (40, -64), (62, -48), (88, -42), (101, -30), (101, -20), (0, -20)])
-    extrude(p, boot, D, BT_B, BT_L, BT_D)
+    extrude(p, boot, D, BT_B, BT_L, BT_D, sw=4.4, sw_in=2.2)
     poly(p, T([(0, -100), (38, -100), (38.5, -86), (0, -86)]), RD_B)                      # سرِ ساق
     poly(p, T([(0, -50), (14, -50), (14, -20), (0, -20)]), RD_B)                          # پاشنه
     poly(p, T([(88, -42), (101, -30), (101, -20), (80, -20), (82, -36)]), RD_B)            # نوک
     poly(p, T([(0, -26), (101, -26), (101, -20), (0, -20)]), RD_D)                        # کفی
     for y in (-76, -64, -52): poly(p, T(rect(18, y - 3, 37, y + 3)), RD_B)                # سه بند
-    p.stroke(boot, PART, j=0, step=5)
+    p.stroke(boot, 4.4, j=0, step=5)
 
 
 def build(out=OUTD, glide=0):
@@ -61,8 +61,10 @@ def build(out=OUTD, glide=0):
     arcline(p, ell(CX - 10, CY - 4, 44, 12, 200, 330, 12), ICE_L, 2.4)
     arcline(p, ell(CX + 8, CY + 2, 26, 7, 190, 340, 12), ICE_L, 2.4)
     arcline(p, ell(CX + 30, CY - 6, 22, 8, 10, 120, 12), ICE_L, 2.2)
-    with layer(p, 'skate'):
-        skate(p, CX - 36 - GLIDE + glide, CY + 10, .54)
+    with layer(p, 'skate_back'):                                               # اسکیت پشتی: ثابت، دورتر و بالاتر
+        skate(p, CX - 4, CY - 6, .44)
+    with layer(p, 'skate'):                                                    # اسکیت جلویی: می‌لغزد
+        skate(p, CX - 56 - GLIDE + glide, CY + 12, .5)
     return p
 
 
