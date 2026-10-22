@@ -30,5 +30,25 @@
    108.2
   ],
   "ok": true
+ },
+ "motion_spec": {
+  "node_wrench_room_wrench": {
+   "center": [
+    -46.0,
+    -4.0
+   ],
+   "pivot": "پای دسته (ته گرد، روی سکو)",
+   "rotate_deg": "0 → -8 → +8 → 0 (حالت ایستا 0)",
+   "dur_s": 1.6,
+   "once": true,
+   "note": "کل آچار حول پای دسته اندکی تاب می‌خورد و پایش نمی‌لغزد و برمی‌گردد؛ فقط هنگام رسیدن؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "ایستا"
+ },
+ "swing_check": {
+  "out_px": 0.0,
+  "x_margin": 23.0,
+  "min_inside": 25.8,
+  "stand_to_swing": 10.1
  }
 }

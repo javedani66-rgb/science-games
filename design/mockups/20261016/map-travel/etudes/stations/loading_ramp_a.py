@@ -16,10 +16,10 @@ _k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_ch
 W_B = '#f7d894'; BLK = '#b8743a'; BLK_L = '#e0a468'
 CR = '#f2a63e'; CR_D = '#cf7e26'
 GY = 18; XR = 14
-HB, BW, TH, CS, SINK = 38, 36, 13, 17, 4
-ANG = math.radians(24); TAN = math.tan(ANG)
+HB, BW, TH, CS, SINK = 40, 36, 15, 19, 4
+ANG = math.radians(22); TAN = math.tan(ANG)
 U = (-math.cos(ANG), -math.sin(ANG)); NUP = (math.sin(ANG), -math.cos(ANG))
-T_END, RISE = 26, 18
+T_END, RISE = 28, 18
 
 
 def A(p, v, k=1): return (p[0] + v[0] * k, p[1] + v[1] * k)
@@ -33,8 +33,6 @@ def build():
     bx1 = XL + 6; bx0 = bx1 - BW
     p.tipshadow((bx0 + XR) / 2, GY + 1, (XR - bx0) / 2 - 8)
     p.foot_tip((bx0 + XR) / 2, GY, 12)
-    lx = XL + (XR - XL) * .55; ty = lambda x: TYR - (XR - x) * TAN
-    flat(p, [(lx, ty(lx) + 3), (lx + 7, ty(lx + 7) + 3), (lx + 7, GY - 1), (lx, GY - 1)], '#8f5a2c')   # پایهٔ نازک
     p.shape([(XL, by0), (XR, TYR), (XR, GY), (XL, by0 + TH)], W_B, PART, j=.1, step=10)
     p.shape([(bx0, by0), (bx1, by0), (bx1, GY), (bx0, GY)], BLK, PART, j=.1, step=12)
     flat(p, [(bx0 + 3, by0 + 3), (bx1 - 3, by0 + 3), (bx1 - 3, by0 + 10), (bx0 + 3, by0 + 10)], BLK_L)

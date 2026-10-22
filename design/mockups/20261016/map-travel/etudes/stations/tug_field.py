@@ -27,7 +27,7 @@ PX = (-71, -15)                  # مراکز میله‌ها
 CX = sum(PX) / 2                 # -49 محور تقارن
 PW = 14; PT, PB = -92, 2         # میله: بالا/پایین
 BW, BT, BB = 24, -6, 10           # بلوک پایه (از y=0 تا 10)... میله روی آن می‌نشیند
-RY, RH = -68, 12                 # طناب
+RY, RH = -68, 14                 # طناب
 BAND_W = 14; BAND_T = -77; BAND_B = -54
 SH = 7                           # حرکت: ±5px ≈ 7 واحد
 
@@ -64,16 +64,13 @@ def build():
     p = Pen('tug_field', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((36, -22), (62, 6)), dot=(58, -16)); p.xf = XF
     for x in PX: post(p, x)
     # طناب باریک (۱۲، خط ۳٫۹) از گرهٔ چپ تا گرهٔ راست روی میله‌ها پیچیده؛ هر گره ۷ واحد از میلهٔ بیرونی بیرون می‌زند
-    x0, x1 = PX[0] - PW / 2 - 1, PX[1] + PW / 2 + 1
+    x0, x1 = PX[0], PX[1]
     p.shape([(x0, RY - RH / 2), (x1, RY - RH / 2), (x1, RY + RH / 2), (x0, RY + RH / 2)], SAND, INNER, j=.1, step=6, clip=False)
-    for dx in (-21, -15, 15, 21):                                      # بافت مورب منظم، متقارن حول CX
+    for dx in (-17, -11, 11, 17):                                      # بافت مورب منظم، متقارن حول CX
         flat(p, [(CX + dx - 2.8, RY + RH / 2 - 1.9), (CX + dx + 1.1, RY + RH / 2 - 1.9), (CX + dx + 2.8, RY - RH / 2 + 1.9), (CX + dx - 1.1, RY - RH / 2 + 1.9)], SAND_D)
-    for x, o in ((PX[0], -1), (PX[1], 1)):                            # گره: حلقهٔ هشت‌ضلعی
-        e = x + o * (PW / 2 + 7); i = x + o * (PW / 2 - 3); c = 3
-        ks = [(e - o * 0, RY - 7 + c), (e - o * c, RY - 7), (i, RY - 7), (i, RY + 7), (e - o * c, RY + 7), (e, RY + 7 - c)]
-        mpoly(p, ks, SAND_D, INNER)
-    # خط گچی تخت روی سکو زیر پرچم
-    flat(p, [(CX - 13, 3.2), (CX + 11, 3.2), (CX + 13, 6.4), (CX - 11, 6.4)], '#ffffff', .92)
+    for x in PX:                                                       # لولا: رسن دور ستون پیچیده (۵ واحد بیرون‌زدگی) + گرهٔ گرد روی آن
+        mpoly(p, [(x - PW / 2 - 5, RY - 9), (x + PW / 2 + 5, RY - 9), (x + PW / 2 + 5, RY + 9), (x - PW / 2 - 5, RY + 9)], SAND_D, INNER)
+        mpoly(p, [(x - 3, RY - 6), (x + 3, RY - 6), (x + 6, RY - 3), (x + 6, RY + 3), (x + 3, RY + 6), (x - 3, RY + 6), (x - 6, RY + 3), (x - 6, RY - 3)], SAND, INNER)
     with layer(p, 'flag'):
         w = BAND_W / 2
         pts = [(CX - w, BAND_T), (CX + w, BAND_T), (CX + w, BAND_B), (CX, BAND_B - 6), (CX - w, BAND_B)]
