@@ -19,9 +19,9 @@ G_B, G_L, G_D = '#f0b03c', '#ffd98a', '#b9741c'
 P_B, P_L, P_D = '#1f8a98', '#58c8d0', '#126370'
 GLASS = '#cfeaff'; M_DD = '#8f98b0'
 
-XF = (0.88, -32, 0)
-CY = -48
-MX, MT, MB = 21, -66, -30
+XF = (0.88, -31, 0)
+CY = -53
+MX, MT, MB = 21, -71, -35
 
 
 def poly(p, pts, col, op=1):
