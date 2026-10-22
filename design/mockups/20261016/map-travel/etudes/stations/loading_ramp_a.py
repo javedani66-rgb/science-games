@@ -15,9 +15,9 @@ W_B = '#e9a65b'; W_L = '#fbe0a8'; W_D = '#b8682a'; BLK = '#c9772a'; BLK_L = '#e2
 CR = '#f2552c'; CR_S = '#ffd98a'
 GY = 18                       # زمین
 XR, XL = 14, -52
-SEAT = 5              # لبهٔ راست (پایین) و چپ (بالا) تخته
+HB, BW, OVER = 30, 34, 12              # لبهٔ راست (پایین) و چپ (بالا) تخته
 ANG = math.radians(27)
-TH = 16                       # ضخامت عمودی تخته
+TH = 19                       # ضخامت عمودی تخته
 SL = -math.tan(ANG)           # dy/dx: سمت راست پایین‌تر (y بزرگ‌تر) ⇒ شیب منفی در x
 def top_y(x): return (GY - TH) + (x - XR) * SL * -1 * -1 if False else (GY - TH) - (XR - x) * math.tan(ANG)
 U = (-math.cos(ANG), -math.sin(ANG))        # بالا رفتن (چپ و بالا)
@@ -33,20 +33,21 @@ def flat(p, pts, col): p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1
 
 
 def build():
-    p = Pen('loading_ramp_a', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
-    TYL, TYR = top_y(XL), top_y(XR)
-    p.tipshadow(-60, GY + 1, 20); p.tipshadow(8, GY + 1, 14)
-    p.foot_tip(-60, GY, 10); p.foot_tip(12, GY - 1, 5)
-    # بلوک (پایهٔ پهن و کوتاه، وجه بالا + جلو) اول کشیده می‌شود؛ سر بالای تخته روی وجه بالای آن می‌نشیند
-    by0 = TYL + TH + SEAT; bx0, bx1 = XL - 24, XL + SEAT / math.tan(ANG)
+    p = Pen('loading_ramp_a', 'city'); pad(p, line=((34, 28), (52, 25)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
+    TYR = top_y(XR)
+    p.tipshadow(-62, GY + 1, 22); p.tipshadow(6, GY + 1, 9)
+    p.foot_tip(-62, GY, 10); p.foot_tip(12, GY - 1, 5)
+    # بلوک (پایهٔ پهن و کوتاه، وجه بالا + جلو) اول کشیده می‌شود. گوشهٔ راست-بالای بلوک زیر تخته را می‌گیرد؛
+    # سر بالای تخته کمی روی وجه بالای بلوک می‌نشیند (کف تخته روی لبهٔ بالا).
+    by0 = GY - HB; bx1 = XR - HB / math.tan(ANG); bx0 = bx1 - BW; XL = bx1 - OVER
+    TYL = top_y(XL)
     p.shape([(bx0, by0), (bx1, by0), (bx1, GY), (bx0, GY)], BLK, PART, j=.1, step=12)
     flat(p, [(bx0 + 3, by0 + 3), (bx1 - 3, by0 + 3), (bx1 - 3, by0 + 9), (bx0 + 3, by0 + 9)], BLK_L)            # وجه بالا (روشن)
     flat(p, [(bx0 + 3, GY - 8), (bx1 - 3, GY - 8), (bx1 - 3, GY - 3), (bx0 + 3, GY - 3)], BLK_D)
-    # تخته: کف سر بالا صاف روی لبهٔ بالای بلوک، بعد زیر تخته مایل می‌شود (از گوشهٔ راست-بالای بلوک)
-    B = [(XL, TYL), (XR, TYR), (XR, TYR + TH), (bx1, by0), (XL, by0)]
+    B = [(XL, TYL), (XR, TYR), (XR, TYR + TH), (XL, TYL + TH)]
     p.shape(B, W_B, OUT, j=.15, step=10)
     flat(p, [(XL + 3, TYL + 3), (XR - 3, TYR + 3), (XR - 3, TYR + 3 + 3.6), (XL + 3, TYL + 3 + 3.6)], W_L)       # نوار روشن لبهٔ بالا
-    flat(p, [(bx1 + 3, top_y(bx1 + 3) + TH - 5.5), (XR - 3, TYR + TH - 5.5), (XR - 3, TYR + TH - 3), (bx1 + 3, top_y(bx1 + 3) + TH - 3)], W_D)  # سایهٔ لبهٔ پایین
+    flat(p, [(XL + 3, TYL + TH - 5.5), (XR - 3, TYR + TH - 5.5), (XR - 3, TYR + TH - 3), (XL + 3, TYL + TH - 3)], W_D)  # نوار تیرهٔ کف
     # جعبه
     with layer(p, 'crate'):
         base = (XR - T_END * math.cos(ANG) * 1, 0); base = (XR + U[0] * T_END, TYR + U[1] * T_END)   # روی لبهٔ بالا
@@ -59,7 +60,7 @@ def build():
     return p
 
 
-XF = (0.95, 14.0, -4.0)
+XF = (0.9, 14.0, 9.0)
 if __name__ == '__main__':
     if len(sys.argv) > 3: XF = tuple(float(v) for v in sys.argv[1:4])
     p = build()

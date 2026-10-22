@@ -1,0 +1,63 @@
+{
+ "id": "skate_park",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  39
+ ],
+ "stand": [
+  30.5,
+  1.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_skate_park_wheel",
+  "node_skate_park_wheel_back"
+ ],
+ "inside_pad": {
+  "min_margin_px": 8.5,
+  "base_on_pad": true,
+  "height_px": 45.0,
+  "bbox_px": [
+   16.5,
+   69.2,
+   69.5,
+   114.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_skate_park_wheel": {
+   "center": [
+    -22.0,
+    -8.0
+   ],
+   "dir": "cw",
+   "turns": 1,
+   "duration_s": 1.2,
+   "repeat": 1,
+   "easing": "ease-out",
+   "note": "چرخ راست؛ یک دور کامل هنگام رسیدن؛ حالت ایستا = پایان"
+  },
+  "node_skate_park_wheel_back": {
+   "center": [
+    -58.0,
+    -8.0
+   ],
+   "dir": "cw",
+   "turns": 1,
+   "duration_s": 1.2,
+   "repeat": 1,
+   "easing": "ease-out",
+   "note": "چرخ چپ؛ هم‌زمان با چرخ راست"
+  },
+  "idle_loop": false,
+  "reduced_motion": "چرخ‌ها ثابت"
+ }
+}

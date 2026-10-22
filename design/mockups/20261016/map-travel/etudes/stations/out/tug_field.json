@@ -1,0 +1,59 @@
+{
+ "id": "tug_field",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  41
+ ],
+ "stand": [
+  42.5,
+  4.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_tug_field_flag"
+ ],
+ "inside_pad": {
+  "min_margin_px": 7.4,
+  "base_on_pad": true,
+  "height_px": 50.0,
+  "bbox_px": [
+   21.0,
+   67.0,
+   92.5,
+   117.0
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_tug_field_flag": {
+   "kind": "نوار بنفش روی طناب؛ فقط translateX؛ حالت ایستا = وسط (پایان)",
+   "keyframes_px": [
+    0,
+    -5,
+    5,
+    0
+   ],
+   "keyframes_symbol_units": [
+    0,
+    -7,
+    7,
+    0
+   ],
+   "average_px": 0,
+   "duration_s": 2.4,
+   "easing": "ease-in-out",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "concept": "نیروی برآیند: وسط ایستاده = نیروهای برابر و مخالف؛ بدون برنده، بدون پیکان",
+   "constraint": "نوار بین دو میله می‌ماند و از سکو بیرون نمی‌زند؛ کاهش حرکت: وسط",
+   "fixed": "میله‌ها، بلوک‌ها، طناب"
+  }
+ }
+}

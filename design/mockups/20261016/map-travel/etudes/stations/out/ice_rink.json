@@ -1,0 +1,54 @@
+{
+ "id": "ice_rink",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  67
+ ],
+ "stand": [
+  42.5,
+  -0.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_ice_rink_glint"
+ ],
+ "inside_pad": {
+  "min_margin_px": 7.6,
+  "base_on_pad": true,
+  "height_px": 86.0,
+  "bbox_px": [
+   16.8,
+   41.2,
+   98.2,
+   127.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_ice_rink_glint": {
+   "kind": "دو نوار سفید مایل روی رویهٔ یخ (پشت اسکی و عصا)؛ حالت ایستا = پایان حرکت (نوارها در راست رویه)",
+   "translate_x_symbol_units": [
+    -76,
+    0
+   ],
+   "translate_x_map_px": [
+    -54.7,
+    0
+   ],
+   "opacity": "۰ تا ۰٫۶۲ در ۱۵٪ اول و ۰٫۶۲ تا ۰٫۶۲ ثابت؛ در پایان ثابت می‌ماند",
+   "duration_s": 1.8,
+   "easing": "ease-in-out",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "how": "گروه glint را از translateX(-76) به 0 ببر؛ نوارها از چپ به راست روی یخ می‌گذرند. حرکت تزئینی است (حرکت لغزش را F01/F09 نشان می‌دهند). بدون حلقهٔ بیکار.",
+   "note": "با reduced-motion ثابت در وضع پایان."
+  }
+ }
+}

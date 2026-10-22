@@ -1,0 +1,62 @@
+{
+ "id": "football",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  47
+ ],
+ "stand": [
+  42.5,
+  4.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_football_ball"
+ ],
+ "inside_pad": {
+  "min_margin_px": 13.0,
+  "base_on_pad": true,
+  "height_px": 64.5,
+  "bbox_px": [
+   21.0,
+   60.8,
+   93.2,
+   125.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_football_ball": {
+   "type": "translate+rotate",
+   "from_offset_units": [
+    -17,
+    0
+   ],
+   "from_offset_map_px": -12.2,
+   "to": [
+    0,
+    0
+   ],
+   "duration_s": 1.6,
+   "easing": "ease-out (آرام کندتر می‌شود)",
+   "repeat": 1,
+   "spin": {
+    "layer": "node_football_ball_spin",
+    "center": [
+     88,
+     126
+    ],
+    "deg_cw": 180,
+    "note": "چرخش ساعت‌گرد (غلتیدن به راست) هم‌زمان با انتقال و با همان easing؛ در پایان زاویه ۰ (ایستا)"
+   },
+   "note": "حالت ایستا = توپ روی نشان گچی؛ بدون حلقهٔ بیکار؛ سایه و برق ثابت‌اند"
+  },
+  "reduced_motion": "ایستا"
+ }
+}
