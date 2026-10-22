@@ -25,7 +25,7 @@ PV = (-68, -127)
 
 def plank(p, x0, x1, y, h=11, D=12, E=7):
     sil = [(x0, y + h), (x1, y + h), (x1 + D, y + h - E), (x1 + D, y - E), (x0 + D, y - E), (x0, y)]
-    p.shape(sil, P_B, PART, j=.1, step=7)
+    p.shape(sil, P_B, PART, j=0, step=7)
     poly(p, [(x0, y), (x1, y), (x1 + D, y - E), (x0 + D, y - E)], P_L)
     poly(p, [(x1, y), (x1 + D, y - E), (x1 + D, y + h - E), (x1, y + h)], P_D)
     poly(p, R(x0 + 3, y + h - 4, x1 - 2, y + h - 1.5), P_D, .9)
