@@ -29,21 +29,21 @@ def wing(p, sg):
         return yt + s * (yb - yt)
     pn = [X(x0, -62), X(x1, -70), X(x1, -10), X(x0, -2)]
     arm = [(sg * 18, CYA - 5.5), (sg * 38, CYA - 5.5), (sg * 38, CYA + 5.5), (sg * 18, CYA + 5.5)]
-    sharp(p, arm, G_B, PART)
+    sharp(p, arm, G_B, 2.6)
     poly(p, [(sg * 21, CYA - 3.5), (sg * 36, CYA - 3.5), (sg * 36, CYA - 1.2), (sg * 21, CYA - 1.2)], G_L)
-    sharp(p, pn, P_B, PART)
+    sharp(p, pn, P_B, 3.6)
     xs = lambda t: x0 + (x1 - x0) * t
     poly(p, [X(xs(.06), Y(.06, .04)), X(xs(.3), Y(.3, .04)), X(xs(.3), Y(.3, .96)), X(xs(.06), Y(.06, .96))], P_L)
     poly(p, [X(xs(.72), Y(.72, .04)), X(xs(.94), Y(.94, .04)), X(xs(.94), Y(.94, .96)), X(xs(.72), Y(.72, .96))], P_D, .8)
-    p.ln(X(xs(.5), Y(.5, .04)), X(xs(.5), Y(.5, .96)), INNER, P_D, j=0)
+    p.ln(X(xs(.5), Y(.5, .04)), X(xs(.5), Y(.5, .96)), 1.8, P_D, j=0)
     for s_ in (.33, .66):
-        p.ln(X(xs(.04), Y(.04, s_)), X(xs(.96), Y(.96, s_)), INNER, P_D, j=0)
+        p.ln(X(xs(.04), Y(.04, s_)), X(xs(.96), Y(.96, s_)), 1.8, P_D, j=0)
 
 
 def build(out=OUTD, ang=0):
     p = Pen('space_station', 'space'); pad(p, line=((-80, 12), (-66, 20)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = (1.0, 0, 6)
     p.tipshadow(0, 10, 34); p.foot_tip(0, 9, 18)
-    sharp(p, [(-15, 12), (15, 12), (10, -4), (-10, -4)], G_B, PART)
+    sharp(p, [(-15, 12), (15, 12), (10, -4), (-10, -4)], G_B, 3.6)
     poly(p, [(-10, 9), (-6, 9), (-5, -1), (-8, -1)], G_L)
     poly(p, [(5, -1), (8, -1), (11, 9), (7, 9)], G_D)
     with layer(p, 'panels'):
@@ -53,21 +53,21 @@ def build(out=OUTD, ang=0):
         p.raw('</g>')
     # ماژول اصلی
     body = [(-21, -58), (21, -58)] + ell(0, -6, 21, 7.4, 0, 180, 24)
-    p.shape(body, M_B, OUT, j=.1, step=99, clip=False)
+    p.shape(body, M_B, 3.6, j=.1, step=99, clip=False)
     poly(p, rect(-16, -54, -11, -8), M_L)
-    arc = [(x, -6 + 7.4 * math.sqrt(1 - (x / 21) ** 2)) for x in (21 - 8 * i / 8 for i in range(9))]
-    poly(p, [(13, -56), (21, -56)] + arc, M_D)
-    for y in (-53, -12): poly(p, band(0, y, 20.5, 7.2, 2.8), M_D)
-    p.stroke(body, OUT, j=.1, step=99)
-    p.shape(ell(0, -58, 21, 7.4, 0, 360, 30), M_L, PART, j=.05, step=99, clip=False)
+    arc = [(x, -6 + 7.4 * math.sqrt(1 - (x / 21) ** 2) - 1.8) for x in (19 - 6 * i / 8 for i in range(9))]
+    poly(p, [(13, -53), (19, -53)] + arc, M_D)
+    for y in (-53, -12): poly(p, band(0, y, 18.6, 6.6, 2.8), M_D)
+    p.stroke(body, 3.6, j=.1, step=99)
+    p.shape(ell(0, -58, 21, 7.4, 0, 360, 30), M_L, 3.6, j=.05, step=99, clip=False)
     for y in (-43, -24):
-        p.shape(ell(-2, y, 6, 6, 0, 360, 16), GLASS, INNER, j=.05, step=99, clip=False)
+        p.shape(ell(-2, y, 6, 6, 0, 360, 16), GLASS, 2.6, j=.05, step=99, clip=False)
         poly(p, rect(-4.8, y - 3, -2.8, y - .8), '#ffffff')
     # ماژول کوچک (با کمربند بندر طلایی) + آنتن
-    vcyl(p, 0, -74, -59, 10, 3.6, M_B, M_L, M_D, M_L, sw=PART, lx=2.6)
+    vcyl(p, 0, -74, -59, 10, 3.6, M_B, M_L, M_D, M_L, sw=3.6, lx=2.6)
     poly(p, band(0, -64, 9.4, 3.4, 3.4), G_B)
-    p.ln((0, -76), (0, -91), INNER, ROD, j=0)
-    p.shape(ell(0, -93, 4, 4, 0, 360, 12), RED, INNER, j=.05, step=99, clip=False)
+    p.ln((0, -76), (0, -91), 2.6, ROD, j=0)
+    p.shape(ell(0, -93, 4, 4, 0, 360, 12), RED, 2.6, j=.05, step=99, clip=False)
     return p
 
 

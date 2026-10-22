@@ -19,7 +19,7 @@ D_T, D_L, D_S = '#ff8a2b', '#ffc27a', '#2a5fc4'
 W_Y, W_C = '#ffd84d', '#d9961c'
 RD = (16, -10)                         # عمق رمپ
 RB, RT = -2, -62                       # کف و لبهٔ بالای رمپ
-BCX, BCY = 16, 6                        # مرکز تخته
+BCX, BCY = 22, 10                        # مرکز تخته
 TILT = -5                              # بالاآمدن دماغهٔ تخته (درجه)
 
 
@@ -32,10 +32,9 @@ def ramp(p):
     R = 38
     arc = [(R * math.cos(math.radians(a)), RT + R * math.sin(math.radians(a))) for a in range(0, 181, 10)]
     pts = [(-46, RT), (-46, RB), (46, RB), (46, RT), (R, RT)] + arc + [(-R, RT)]
-    pts = [(x * .8 - 26, y * .8 - 4) for x, y in pts]
-    p.tipshadow(-30, RB + 3, 46)
+    pts = [(x * .8 - 30, y * .8 - 20) for x, y in pts]
+    p.tipshadow(-30, RB - 10, 44)
     extrude(p, pts, RD, C_F, C_T, C_R, mid=C_I, sw=OUT, sw_in=PART)
-    poly(p, [(-43, RT + 5), (-39, RT + 5), (-39, RB - 8), (-43, RB - 8)], C_T, .85)
 
 
 def wheel(p, x, y, r=12, core=True):

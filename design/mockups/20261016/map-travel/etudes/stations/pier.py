@@ -11,8 +11,8 @@ from functools import partial
 station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D123: حاشیهٔ چپ/راست ≥۴px
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/v2/pier'
-XF = (1.0, 0.0, 0.0)
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/pier'
+XF = (1.12, 0.0, 2.0)
 DECK = '#e9a65b'; DECK_L = '#f6c98a'; DECK_D = '#b8682a'; PILE = '#c9772a'; PILE_L = '#e29a52'; WOOD_D = '#8a4a1c'
 ROPE = '#f3dca0'; ROPE_D = '#b8892a'; CREAM = '#fff3c4'; FLAME = '#ffd84d'; LAMP = '#8c9ac8'
 UP = 3
@@ -24,42 +24,60 @@ BOLL = (-44, -18)                               # بولاردها
 LX, LY = -64, -54                               # فانوس روی شمع چپ
 
 
-def flat(p, pts, col):
-    p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col))
+from r6lib import extrude, poly, rect, circ        # حجم ¾ با سه پلهٔ رنگ؛ بین وجه‌ها خط نیست (قاعده ۱۴)
+from g4_helpers import vcyl, arcline
+D_DECK = (20, -12)                                   # عمق عرشه (پشت-راست)
+DK_F, DK_T, DK_S = '#e9a65b', '#fbd9a0', '#b8682a'   # عرشه: جلو / رو / پهلو
+PL_F, PL_T, PL_S = '#c9772a', '#e8a860', '#8a4a1c'   # شمع‌ها
+HERO_W, HERO_T = 3.6, 2.8                            # خط دور قهرمان / قطعهٔ فرعی (قاعده ۲۴)
+DECK_X0, DECK_X1, DECK_Y0, DECK_Y1 = -60, 40, -24, -8
+POLE_X = -48
 
 
-def rect(p, x0, y0, x1, y1, col): flat(p, [(x0, y0), (x1, y0), (x1, y1), (x0, y1)], col)
+def piles(p):
+    """سه شمع زیر عرشه، هم‌ضخامت (قاعده ۲۰)؛ اول کشیده می‌شوند تا عرشه روی آن‌ها بیاید."""
+    for x in (-50, -10, 30):
+        p.tipshadow(x + 6, PB + 1, 12)
+        extrude(p, [(x - 7, DECK_Y1 - 2), (x + 7, DECK_Y1 - 2), (x + 7, PB), (x - 7, PB)], (8, -5), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)
+        rect(p, x - 3.5, DECK_Y1 + 4, x - 1.5, PB - 4, '#f0b774', .9)          # نوار برق باریک
 
 
-def disc(p, x, y, r, col):
-    a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
+def deck(p):
+    extrude(p, [(DECK_X0, DECK_Y0), (DECK_X1, DECK_Y0), (DECK_X1, DECK_Y1), (DECK_X0, DECK_Y1)], D_DECK, DK_F, DK_T, DK_S, mid=DK_F, sw=HERO_W, sw_in=0)
+    rect(p, DECK_X0 + 3, DECK_Y0 + 3, DECK_X1 - 3, DECK_Y0 + 6.5, '#f6c98a')       # لبهٔ روشن جلو (پلهٔ رنگ)
+    for x in range(DECK_X0 + 14, DECK_X1 - 4, 14):                                     # درز تخته‌های رو: خط ریز هم‌رنگ
+        p.ln((x, DECK_Y0 - .5), (x + D_DECK[0] - 2, DECK_Y0 + D_DECK[1] + 1.5), 1.6, '#d9a45e', j=0)
 
 
-def pile(p, x, top, w=8):
-    p.shape([(x - w, top), (x + w, top), (x + w, PB), (x - w, PB)], PILE, PART, j=.2, step=6)
-    rect(p, x - w + 3, top + 4, x - w + 6, PB - 4, PILE_L)
+def bollard(p):
+    bx, by = 24, DECK_Y0 - 5
+    p.tipshadow(bx + 3, by + 3, 9)
+    vcyl(p, bx, by - 22, by, 10, 4.2, '#8a4a1c', '#b8682a', '#5c2f10', '#c9772a', sw=HERO_T)
+    arcline(p, ell(bx, by - 14, 10.4, 4.4, 8, 172, 12), '#f3dca0', 3.2)                # طناب دور بولارد
+    arcline(p, ell(bx, by - 8, 10.4, 4.4, 8, 172, 12), '#f3dca0', 3.2)
+
+
+def pole(p):
+    x, base = POLE_X, DECK_Y0 - 3
+    extrude(p, [(x - 7, -104), (x + 7, -104), (x + 6, base), (x - 6, base)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)
+    extrude(p, [(x + 7, -104), (x + 40, -104), (x + 40, -97), (x + 7, -97)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)   # بازوی فانوس (یک شکل با ستون)
+    extrude(p, [(x + 7, -78), (x + 7, -97), (x + 28, -97)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)     # تکیه‌گاه مورب زیر بازو
+
+
+def lantern(p):
+    cx, top = POLE_X + 33, -98
+    p.ln((cx, top + 1), (cx, top + 9), 1.8, NAVY, j=0)                                   # زنجیر
+    p.shape([(cx - 9, top + 8), (cx + 9, top + 8), (cx + 9, top + 28), (cx - 9, top + 28)], LAMP, HERO_T, j=.05, step=99, clip=False)
+    rect(p, cx - 5, top + 13, cx + 5, top + 24, FLAME)                                    # شعله
+    rect(p, cx - 5, top + 13, cx - 2.5, top + 24, '#fff3c4')
+    p.shape([(cx - 11, top + 8), (cx, top - 2), (cx + 11, top + 8)], WOOD_D, HERO_T, j=.05, step=99, clip=False)   # سقف
 
 
 def build():
     p = Pen('pier', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
-    for x in UNDER + TALL: p.tipshadow(x, PB + 1, 11)
-    p.foot_tip(TALL[0], PB, 7); p.foot_tip(TALL[1], PB, 7)
-    for x in UNDER: pile(p, x, DB - 2, 7)                                               # پایهٔ میانی زیر عرشه
-    for x in TALL: pile(p, x, DT - 18, 7)                                               # شمع‌های بلند پشت عرشه
-    # عرشه: روی تخته‌های عرضی روشن + تیر زیرین با ردیف میخ
-    p.shape([(DL, DT), (DR, DT), (DR, DB), (DL, DB)], DECK, OUT, j=.25, step=8)
-    rect(p, DL + 6, DT + 5, DR - 6, DT + 11, DECK_L)
-    for x in range(DL + 15, DR - 6, 14): p.ln((x, DT + 5), (x, DT + 11), INNER, DECK_D, j=0)     # درز تخته‌های عرضی
-    for x in range(DL + 15, DR - 6, 14): disc(p, x, DB - 6, 2.4, CREAM)                          # ردیف میخ
-    # بولاردها با طناب پیچیده
-    p.ln((BOLL[0] + 6, DT - 5), (BOLL[1] - 6, DT - 5), INNER, ROPE, j=0)
-    for x in BOLL:
-        p.shape([(x - 7, DT - 16), (x + 7, DT - 16), (x + 7, DT + 2), (x - 7, DT + 2)], WOOD_D, PART, j=.1, step=6, clip=False)
-        rect(p, x - 6, DT - 12, x + 6, DT - 9, ROPE); rect(p, x - 6, DT - 6, x + 6, DT - 3, ROPE)
-    with layer(p, 'lantern'):                                                             # فانوس روی شمع چپ
-        p.shape([(LX - 7, LY), (LX + 7, LY), (LX + 7, LY + 16), (LX - 7, LY + 16)], LAMP, PART, j=.1, step=99, clip=False)
-        rect(p, LX - 3, LY + 4, LX + 3, LY + 12, FLAME)
-        p.shape([(LX - 9, LY), (LX, LY - 9), (LX + 9, LY)], WOOD_D, INNER, j=0, step=99, clip=False)
+    p.foot_tip(-20, PB, 40)
+    piles(p); deck(p); bollard(p); pole(p)
+    with layer(p, 'lantern'): lantern(p)
     return p
 
 
