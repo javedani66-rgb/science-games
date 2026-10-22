@@ -32,18 +32,18 @@ def skate(p, ox, oy, k=1.0):
     D = (11 * k, -7 * k)
     poly(p, T(ell(54, 2, 64, 7, 0, 360, 24)), ICE_D, .9)                       # سایهٔ تیز روی یخ
     blade = T([(-6, -11), (-6, 0), (92, 0), (104, -5), (109, -13), (101, -14), (97, -11)])
-    extrude(p, blade, D, M_B, M_L, M_D, mid=M_B, sw=3.0, sw_in=1.8)
+    extrude(p, blade, D, M_B, M_L, M_D, mid=M_B, sw=2.6, sw_in=1.0)
     for x0 in (14, 70):                                                        # پایه‌ها جلوی/روی تیغه ایستاده‌اند
-        extrude(p, T0(rect(x0, -34, x0 + 10, -7)), (4 * k, -3 * k), M_B, M_L, M_D, mid=M_B, sw=3.0, sw_in=1.8)
+        extrude(p, T0(rect(x0, -34, x0 + 10, -7)), (4 * k, -3 * k), M_B, M_L, M_D, mid=M_B, sw=2.6, sw_in=1.0)
     T = lambda pts: [(ox + x * k, oy + (y - 10) * k) for x, y in pts]   # پوتین ۱۰ واحد بالاتر از تیغه
     boot = T([(0, -100), (38, -100), (40, -64), (62, -48), (88, -42), (101, -30), (101, -20), (0, -20)])
-    extrude(p, boot, D, BT_B, BT_L, BT_D, sw=4.4, sw_in=2.2)
+    extrude(p, boot, D, BT_B, BT_L, BT_D, sw=3.6, sw_in=1.0)
     poly(p, T([(0, -100), (38, -100), (38.5, -86), (0, -86)]), RD_B)                      # سرِ ساق
     poly(p, T([(0, -50), (14, -50), (14, -20), (0, -20)]), RD_B)                          # پاشنه
     poly(p, T([(88, -42), (101, -30), (101, -20), (80, -20), (82, -36)]), RD_B)            # نوک
     poly(p, T([(0, -26), (101, -26), (101, -20), (0, -20)]), RD_D)                        # کفی
     for y in (-76, -64, -52): poly(p, T(rect(18, y - 3, 37, y + 3)), RD_B)                # سه بند
-    p.stroke(boot, 4.4, j=0, step=5)
+    p.stroke(boot, 1.0, j=0, step=5)
 
 
 def build(out=OUTD, glide=0):
