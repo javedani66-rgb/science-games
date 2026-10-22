@@ -59,7 +59,7 @@ def build():
     extrude(p, [(tx - 12, GY - 66), (tx + 12, GY - 66), (tx + 12, GY - 60), (tx - 12, GY - 60)], (-4, -3), T_F, T_T, T_S, sw=PART)
     p.shape(ell(tx, GY - 11, 11, 11, 0, 360, 20), '#3a2a6a', PART, j=.05, step=99, clip=False)
     circ(p, tx, GY - 11, 4, '#ffd84d')
-    return p, off
+    return p, None
 
 
 if __name__ == '__main__':

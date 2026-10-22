@@ -8,8 +8,8 @@
   46
  ],
  "stand": [
-  -53.0,
-  -1.5
+  -53.5,
+  -1.0
  ],
  "ring": [
   0,
@@ -20,16 +20,16 @@
   "node_pool_ball"
  ],
  "inside_pad": {
-  "min_margin_px": 5.9,
+  "min_margin_px": 2.2,
   "base_on_pad": true,
-  "height_px": 66.0,
+  "height_px": 69.2,
   "bbox_px": [
-   29.5,
+   27.8,
    61.8,
-   117.2,
-   127.8
+   125.2,
+   131.0
   ],
-  "ok": true
+  "ok": false
  },
  "motion_spec": {
   "node_pool_ball": {
