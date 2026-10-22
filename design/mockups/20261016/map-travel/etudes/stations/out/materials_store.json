@@ -1,0 +1,45 @@
+{
+ "id": "materials_store",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  68
+ ],
+ "stand": [
+  39.5,
+  4.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_materials_store_bags"
+ ],
+ "inside_pad": {
+  "min_margin_px": 4.3,
+  "base_on_pad": true,
+  "height_px": 92.0,
+  "bbox_px": [
+   19.5,
+   28.0,
+   86.8,
+   120.0
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_materials_store_bags": {
+   "layer": "گونی بالاییِ هر دو پشته (هم‌حرکت)",
+   "dx": 0,
+   "dy_from": -15,
+   "dy_to": 0,
+   "dur_s": 1.4,
+   "note": "هنگام رسیدن: هر دو گونی از ۱۵ واحد بالاتر پایین می‌افتند و روی پشته می‌نشینند (جهش خیلی کوچک)؛ حالت ایستا = روی پشته؛ بدون حلقهٔ بیکار؛ بدون عدد/عقربه."
+  },
+  "reduced_motion": "گونی‌ها روی پشته (ایستا)"
+ }
+}

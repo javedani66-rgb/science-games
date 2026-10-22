@@ -1,0 +1,54 @@
+{
+ "id": "scaffold",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  80
+ ],
+ "stand": [
+  43.0,
+  5.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_scaffold_plumb"
+ ],
+ "inside_pad": {
+  "min_margin_px": 7.6,
+  "base_on_pad": true,
+  "height_px": 87.0,
+  "bbox_px": [
+   18.0,
+   28.0,
+   95.5,
+   115.0
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_scaffold_plumb": {
+   "center": [
+    14.0,
+    -96.0
+   ],
+   "angles_deg": [
+    0,
+    6,
+    -6,
+    3,
+    -1.5,
+    0
+   ],
+   "duration_s": 2.8,
+   "repeat": "یک‌بار",
+   "note": "فقط شاقول از نقطهٔ تیرک تاب می‌خورد و قائم می‌ایستد؛ داربست و تخته ثابت؛ حالت ایستا=قائم."
+  },
+  "reduced_motion": "شاقول قائم"
+ }
+}

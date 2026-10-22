@@ -17,15 +17,16 @@ OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/basketball_hall'
 
 S_B, S_L, S_D = '#7f9bc8', '#b4c8e8', '#566f9c'
-W_B, W_L, W_D = '#f3f7ff', '#ffffff', '#c9d6ee'
+W_B, W_L, W_D = '#e6edfb', '#ffffff', '#c9d6ee'
 RED, RED_D, HOLE = '#e0553a', '#9c2f1c', '#4a1f4a'
 NETL = '#9fb8e0'
 XF = (1.0, -30.0, -8.0)
 GY = 4
-PX = 27                     # محور ستون (زیر لبهٔ راست تخته، بیرون از تور)
+PX = 26                     # محور ستون (زیر لبهٔ راست تخته، بیرون از تور)
 PW = 7                      # نیم‌پهنای ستون
-BX0, BX1, BY0, BY1 = -35, 35, -138, -92
-RIMY = -92
+BX0, BX1, BY0, BY1 = -35, 35, -132, -86
+RIMY = -86
+RX = -7                     # محور رینگ/تور/مربع (چپ ستون)
 SWAY = 3
 
 
@@ -39,21 +40,21 @@ def mpoly(p, pts, fill, sw):
 
 
 def build():
-    p = Pen('basketball_hall', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-52, -6), (62, 6)), dot=(58, -16))
+    p = Pen('basketball_hall', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-56, 12), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow(2, GY + 3, 34); p.foot_tip(0, GY + 2, 24)
+    p.tipshadow(PX + 1, GY + 3, 34); p.foot_tip(PX, GY + 2, 24)
+    # 2) ستون (زیر پایه و زیر تخته؛ ۶ واحد هم‌پوشانی با پایه، بالا داخل تخته)
+    pole = [(PX - PW, -105), (PX + PW, -105), (PX + PW, -6), (PX - PW, -6)]
+    p.shape(pole, S_B, PART, j=.1, step=8)
+    poly(p, [(PX - 4, -100), (PX - 1.5, -100), (PX - 1.5, -14), (PX - 4, -14)], S_L)
+    poly(p, [(PX + 2, -100), (PX + 4.2, -100), (PX + 4.2, -14), (PX + 2, -14)], S_D)
+    p.stroke(pole, PART, j=.1, step=8)
     # 1) پایه
     base = [(PX - 27, -12), (PX + 27, -12), (PX + 28, GY), (PX - 28, GY)]
     p.shape(base, S_B, PART, j=.1, step=8)
     poly(p, [(PX - 23, -7), (PX - 19, -7), (PX - 19, GY - 4), (PX - 23, GY - 4)], S_L)
     poly(p, [(PX + 10, -9), (PX + 24, -9), (PX + 24, GY - 2), (PX + 10, GY - 2)], S_D)
     p.stroke(base, PART, j=.1, step=8)
-    # 2) ستون
-    pole = [(PX - PW, -96), (PX + PW, -96), (PX + PW, -12), (PX - PW, -12)]
-    p.shape(pole, S_B, PART, j=.1, step=8)
-    poly(p, [(PX - 4, -92), (PX - 1.5, -92), (PX - 1.5, -16), (PX - 4, -16)], S_L)
-    poly(p, [(PX + 2, -92), (PX + 4.2, -92), (PX + 4.2, -16), (PX + 2, -16)], S_D)
-    p.stroke(pole, PART, j=.1, step=8)
     # 3) تخته
     bd = [(BX0, BY0), (BX1, BY0), (BX1, BY1), (BX0, BY1)]
     p.shape(bd, W_B, PART, j=.1, step=8)
@@ -61,17 +62,17 @@ def build():
     poly(p, [(BX1 - 16, BY0 + 4), (BX1 - 3, BY0 + 4), (BX1 - 3, BY1 - 3), (BX1 - 16, BY1 - 3)], W_D)
     p.stroke(bd, PART, j=.1, step=8)
     # 4) مربع هدف
-    mpoly(p, [(-12, -121), (12, -121), (12, -105), (-12, -105)], RED, INNER)
+    mpoly(p, [(RX - 10, -120), (RX + 10, -120), (RX + 10, -106), (RX - 10, -106)], RED, INNER)
     # 5) تور
     with layer(p, 'net'):
-        net = [(-15, RIMY), (15, RIMY), (9, -50), (-9, -50)]
+        net = [(RX - 13, RIMY), (RX + 13, RIMY), (RX + 8, -44), (RX - 8, -44)]
         mpoly(p, net, W_B, INNER)
-        for a, b in (((-12, -90), (6, -53)), ((12, -90), (-6, -53)), ((-2, -90), (-8, -68)), ((2, -90), (8, -68))):
-            p.ln(a, b, 2.2, NETL, j=0)
+        for a, b in (((-7, -79), (4, -54)), ((7, -79), (-4, -54))):
+            p.ln((RX + a[0], a[1]), (RX + b[0], b[1]), INNER, NETL, j=0)
         mpoly(p, net, 'none', INNER)
     # 6) رینگ
-    p.shape(ell(0, RIMY, 20, 7, 0, 360, 24), RED, INNER, j=.05, step=99, clip=False)
-    p.fill(ell(0, RIMY, 14, 3.2, 0, 360, 20), HOLE)
+    p.shape(ell(RX, RIMY, 18, 7, 0, 360, 24), RED, INNER, j=.05, step=99, clip=False)
+    p.fill(ell(RX, RIMY, 12, 3.2, 0, 360, 20), HOLE)
     return p
 
 
@@ -80,7 +81,7 @@ if __name__ == '__main__':
     offs = [p.V((-SWAY, 0)), p.V((SWAY, 0)), (0, 0)]
     r = finish(p, 'basketball_hall', None, motion={'net': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    top = p.X((0, RIMY))
+    top = p.X((RX, RIMY))
     sp['motion_spec'] = {'node_basketball_hall_net': dict(
         kind='تور آویزان زیر رینگ؛ حالت ایستا = حالت پایان (راست‌ایستاده)',
         pivot_map_symbol=[round(v, 1) for v in top], transform='rotate حول لبهٔ بالای تور؛ پایین تور ±%d واحد (≈±%.1fpx)' % (SWAY, SWAY * K),

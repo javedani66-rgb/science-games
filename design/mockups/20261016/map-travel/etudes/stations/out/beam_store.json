@@ -1,0 +1,50 @@
+{
+ "id": "beam_store",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  50
+ ],
+ "stand": [
+  45.5,
+  6.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_beam_store_prop"
+ ],
+ "inside_pad": {
+  "min_margin_px": 21.7,
+  "base_on_pad": true,
+  "height_px": 59.5,
+  "bbox_px": [
+   31.8,
+   57.5,
+   100.5,
+   117.0
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_beam_store_prop": {
+   "translate_from": [
+    11,
+    0
+   ],
+   "translate_to": [
+    0,
+    0
+   ],
+   "dur_s": 1.6,
+   "repeat": 1,
+   "note": "تکیه‌گاه ≈۸px (۱۱ واحد) از راست به سوی جعبه می‌لغزد و می‌ماند؛ تیر و جعبه ثابت‌اند و لبهٔ تکیه‌گاه پشت تیر است؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "تکیه‌گاه در جای نهایی"
+ }
+}
