@@ -81,20 +81,20 @@ RF = ('#b97a40', '#8d5226', '#5b2e12')       # سقف
 CL = ('#ff9d84', '#ef6a4a', '#b53b24')       # پارچهٔ پره
 SPAR = '#6b3f17'; DOOR = '#4f240a'; GLASS = '#cfeaff'; YEL = '#ffd84d'; NAVY_ = '#241a5e'
 XF = (1.15, -5.0, 2.0)
-HUB = (0, -52); R = 38; CW = 12; STATIC = (-135, -45, 45, 135)
+HUB = (0, -54); R = 50; CW = 16; STATIC = (-135, -45, 45, 135)
 
 
 def build(out=OUTD):
     p = Pen('windmill', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
     p.tipshadow(2, 12, 34); p.foot_tip(0, 12, 22)
-    tower = Fr(0, -74, 8, 19, 30); roof = Fr(0, -100, -74, 0, 24)
+    tower = Fr(0, -78, 8, 20, 31); roof = Fr(0, -106, -78, 0, 25)
     S = sil([tower.body, roof.body])
     sil_open(p, S, TW[1])
     tower.paint(p, *TW)
     yb = lambda x: 8 + tower.k * 30 * (1 - (x / 30.) ** 2) ** .5
     poly(p, ell(0, -4, 7, 7, 180, 360, 12) + [(7, yb(7) - 2), (-7, yb(-7) - 2)], DOOR)          # در: گودی تیره
     roof.paint(p, *RF)
-    arcline(p, roof.front_arc(-74, 24), NAVY_, M_PART)                                            # مرز سقف و برج
+    arcline(p, roof.front_arc(-78, 25), NAVY_, M_PART)                                            # مرز سقف و برج
     sil_close(p, S)
     # پره‌ها: یک سیلوئت (پارچه‌ها + تیرک‌ها + محور)
     with layer(p, 'blades'):

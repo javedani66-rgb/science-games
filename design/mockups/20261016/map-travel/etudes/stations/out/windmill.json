@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  83
+  88
  ],
  "stand": [
-  48.0,
-  5.5
+  52.0,
+  10.0
  ],
  "ring": [
   0,
@@ -20,14 +20,14 @@
   "node_windmill_blades"
  ],
  "inside_pad": {
-  "min_margin_px": 15.1,
+  "min_margin_px": 14.8,
   "base_on_pad": true,
-  "height_px": 100.0,
+  "height_px": 105.5,
   "bbox_px": [
-   34.0,
-   25.2,
-   102.5,
-   125.2
+   23.5,
+   20.0,
+   113.0,
+   125.5
   ],
   "ok": true
  },
@@ -35,7 +35,7 @@
   "node_windmill_blades": {
    "center": [
     -5.0,
-    -57.8
+    -60.1
    ],
    "dir": "cw (جهت عقربه‌های ساعت)",
    "turns": 3,
