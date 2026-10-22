@@ -18,41 +18,5 @@
  ],
  "motion": [
   "node_basketball_hall_net"
- ],
- "inside_pad": {
-  "min_margin_px": 15.0,
-  "base_on_pad": true,
-  "height_px": 106.2,
-  "bbox_px": [
-   23.0,
-   0.8,
-   91.8,
-   107.0
-  ],
-  "ok": true
- },
- "motion_spec": {
-  "node_basketball_hall_net": {
-   "kind": "تور آویزان زیر رینگ؛ حالت ایستا = حالت پایان (راست‌ایستاده)",
-   "pivot_map_symbol": [
-    -30.0,
-    -100.0
-   ],
-   "transform": "rotate حول لبهٔ بالای تور؛ پایین تور ±3 واحد (≈±2.2px)",
-   "keyframes_deg": [
-    0,
-    -4,
-    4,
-    -2.5,
-    1.5,
-    0
-   ],
-   "duration_s": 1.4,
-   "easing": "ease-in-out (میرا)",
-   "loop": false,
-   "trigger": "رسیدن کودک (یک‌بار)",
-   "reduced_motion": "ایستا",
-   "note": "رینگ، تخته، ستون و پایه ثابت؛ بدون توپ؛ بدون حلقهٔ بیکار."
-  }
- }
+ ]
 }

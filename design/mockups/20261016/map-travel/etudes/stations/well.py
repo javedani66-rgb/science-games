@@ -68,12 +68,12 @@ def build(out=OUTD):
     poly(p, [(CX - 7, RIM_Y + 3.4), (CX + 7, RIM_Y + 3.4), (CX + 5.5, RIM_Y + 4.8), (CX - 5.5, RIM_Y + 4.8)], WATER)
     # ۳) دلو و طناب (لایهٔ متحرک)
     with layer(p, 'bucket'):
-        p.ln((CX, SPOOL_Y + 4), (CX, -57), INNER, ROPE, j=0)
-        bk = [(CX - 11, -57), (CX + 11, -57), (CX + 8.5, -44), (CX - 8.5, -44)]
+        p.ln((CX, SPOOL_Y + 4), (CX, -62), INNER, ROPE, j=0)
+        bk = [(CX - 14, -62), (CX + 14, -62), (CX + 11, -44), (CX - 11, -44)]
         p.shape(bk, B_B, PART, j=.1, step=8)
-        poly(p, rect(CX - 7, -54, CX - 4.5, -47), B_L)
-        poly(p, [(CX + 3, -54), (CX + 6, -54), (CX + 5.5, -47), (CX + 3, -47)], B_D)
-        poly(p, rect(CX - 7.5, -51.5, CX + 7.5, -49.5), '#7a3a1a')
+        poly(p, rect(CX - 9, -58, CX - 6, -48), B_L)
+        poly(p, [(CX + 4, -58), (CX + 8, -58), (CX + 7.5, -48), (CX + 4, -48)], B_D)
+        poly(p, rect(CX - 10, -54.5, CX + 10, -51.5), '#7a3a1a')
     # ۴) قرقره
     sp = rect(CX - PX, SPOOL_Y - 10, CX + PX, SPOOL_Y + 10)
     p.shape(sp, C_B, PART, j=.1, step=8)

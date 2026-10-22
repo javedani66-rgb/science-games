@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """ایستگاه F01 «زمین فوتبال» (سرزمین ورزشگاه، پالت sports، سکوی سبز با رنگ‌مایهٔ ۹۳°).
 طرح قطعه‌به‌قطعه:
- ۱) توپ: یک کرهٔ درشت r=38 (قطر ≈۵۵px نقشه)، رنگ سفید-کرم سه‌پله‌ای: پایه #fffaf0، سایهٔ تیز هلالی لاوندر #d3cce8 پایین-راست، برق سفید بالا-چپ. دور OUT.
- ۲) لکه‌ها: یک پنج‌ضلعی مرکزی (r=11) + پنج پنج‌ضلعی لبه (r=8.5، فاصله ۲۶ از مرکز، رأس به سمت بیرون) به رنگ آبی‌بنفش تیره #3a3a86 (رنگ‌مایهٔ ≈۲۴۰°، ۱۴۷° از سکو)؛ بین مرکز و هر لکهٔ لبه یک درز تخت ۲٫۶ پهنا.
+ ۱) توپ: یک کرهٔ درشت r=38 (قطر ≈۵۵px نقشه)، رنگ سفید-کرم سه‌پله‌ای: پایه #f3ead6، سایهٔ تیز هلالی لاوندر پایین-راست، برق سفید بالا-چپ. دور OUT.
+ ۲) لکه‌ها: یک پنج‌ضلعی مرکزی (r=11) + پنج پنج‌ضلعی لبه (r=7، فاصله ۲۱ از مرکز، رأس به سمت بیرون) به رنگ آبی‌بنفش تیره #3a3a86 (رنگ‌مایهٔ ≈۲۴۰°، ۱۴۷° از سکو)؛ بین مرکز و هر لکهٔ لبه یک درز تخت INNER=3.9 پهنا.
     همه تخت و بی‌خط؛ فاصلهٔ لکه‌ها ≥۸؛ لکه‌ها داخل کره‌اند (۳ واحد تا لبه) و با چرخش بیرون نمی‌زنند.
  ۲b) نشان گچی زیر توپ: بیضی تخت سفید-سبز روشن (نقطهٔ پنالتی) بدون خط؛ توپ را به سکو می‌چسباند.
  ۳) سایهٔ تماس زیر توپ (داخل لایهٔ متحرک تا توپ شناور نماند).
@@ -15,12 +15,12 @@ from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/football'
 
-B_, B_L, B_D = '#fffaf0', '#ffffff', '#cfc7e6'
+B_, B_L, B_D = '#f3ead6', '#ffffff', '#cfc7e6'
 PATCH = '#3a3a86'
 CHALK = '#d9f0b4'
 R = 38
 CX, CY = -12, -24          # مرکز توپ (کفش y=14 روی سکو)
-ROLL = 17                  # ≈۱۲px نقشه
+ROLL = 9                   # ≈۶px نقشه؛ شروع ≥۸px از لبهٔ سکو
 
 
 def penta(cx, cy, r, a):
@@ -54,10 +54,10 @@ def crescent(p, c, r, s, col, op):
 def build():
     p = Pen('football', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 0, 0)
     # نشان گچی (ثابت): بیضی تخت زیر جای ایستادن توپ
-    p.raw('<ellipse cx="%s" cy="%s" rx="30" ry="9.5" fill="%s" opacity=".85"/>' % (CX, CY + R + 1, CHALK))
+    p.raw('<ellipse cx="%s" cy="%s" rx="24" ry="9.5" fill="%s" opacity=".85"/>' % (CX, CY + R + 1, CHALK))
     p.foot_tip(CX, CY + R + 1, 20)
     with layer(p, 'ball'):
-        p.tipshadow(CX + 4, CY + R + 2, 30)
+        p.tipshadow(CX, CY + R + 1, 24)
         p.shape(ell(CX, CY, R, R, 0, 360, 48), B_, OUT, j=.12, step=99)
         p.raw('<g id="node_football_ball_spin">')
         c = (CX, CY)
@@ -67,18 +67,18 @@ def build():
         for i in range(5):
             ang = -90 + 72 * i                          # جهت رأس‌های پنج‌ضلعی مرکزی
             ax = math.radians(ang)
-            q = (CX + 24 * math.cos(ax), CY + 24 * math.sin(ax))
+            q = (CX + 21 * math.cos(ax), CY + 21 * math.sin(ax))
             # درز از رأس مرکزی تا لکهٔ لبه
             v = penta(CX, CY, 11, -90)[(i + 1) % 5] if False else None
-            s0 = (CX + 9 * math.cos(ax), CY + 9 * math.sin(ax)); s1 = (CX + (24 - 7.5) * math.cos(ax), CY + (24 - 7.5) * math.sin(ax))
-            p.ln(s0, s1, 2.6, PATCH, j=0)
-            poly(p, penta(q[0], q[1], 7.5, ang + 180), PATCH)
+            s0 = (CX + 9 * math.cos(ax), CY + 9 * math.sin(ax)); s1 = (CX + (21 - 7) * math.cos(ax), CY + (21 - 7) * math.sin(ax))
+            p.ln(s0, s1, INNER, PATCH, j=0)
+            poly(p, penta(q[0], q[1], 7, ang + 180), PATCH)
         p.raw('</g>')
         # ثابت‌ها روی توپ: سایهٔ تیز هلالی پایین-راست و برق بالا-چپ
         crescent(p, c, R - 3.0, (-9, -9), '#4a3a8c', .2)
         ha = math.radians(-126); tx, ty = -math.sin(ha), math.cos(ha); nx, ny = math.cos(ha), math.sin(ha)
         hx, hy = CX + 26 * nx, CY + 26 * ny
-        poly(p, [(hx + tx * 6 + nx * 2, hy + ty * 6 + ny * 2), (hx + tx * 6 - nx * 2, hy + ty * 6 - ny * 2), (hx - tx * 6 - nx * 2, hy - ty * 6 - ny * 2), (hx - tx * 6 + nx * 2, hy - ty * 6 + ny * 2)], B_L)
+        poly(p, [(hx + tx * 7 + nx * 2.2, hy + ty * 7 + ny * 2.2), (hx + tx * 7 - nx * 2.2, hy + ty * 7 - ny * 2.2), (hx - tx * 7 - nx * 2.2, hy - ty * 7 - ny * 2.2), (hx - tx * 7 + nx * 2.2, hy - ty * 7 + ny * 2.2)], B_L)
     return p
 
 
@@ -89,7 +89,7 @@ if __name__ == '__main__':
     sp = r['spec']
     sp['motion_spec'] = {'node_football_ball': dict(type='translate+rotate', from_offset_units=[-ROLL, 0], from_offset_map_px=round(-ROLL * K, 1), to=[0, 0],
                                                     duration_s=1.6, easing='ease-out (آرام کندتر می‌شود)', repeat=1,
-                                                    spin=dict(layer='node_football_ball_spin', center=[CX + 100, CY + 150], deg_cw=180, note='چرخش ساعت‌گرد (غلتیدن به راست) هم‌زمان با انتقال و با همان easing؛ در پایان زاویه ۰ (ایستا)'),
+                                                    spin=dict(layer='node_football_ball_spin', center=[CX + 100, CY + 150], deg_cw=round(math.degrees(ROLL / R), 1), note='چرخش ساعت‌گرد (غلتیدن به راست) هم‌زمان با انتقال و با همان easing؛ در پایان زاویه ۰ (ایستا)'),
                                                     note='حالت ایستا = توپ روی نشان گچی؛ بدون حلقهٔ بیکار؛ سایه و برق ثابت‌اند'),
                          'reduced_motion': 'ایستا'}
     (OUTD / 'football.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

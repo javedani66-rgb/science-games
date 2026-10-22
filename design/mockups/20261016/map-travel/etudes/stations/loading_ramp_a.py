@@ -60,7 +60,7 @@ def build():
     return p
 
 
-XF = (0.9, 14.0, 9.0)
+XF = (0.92, 14.0, 10.0)
 if __name__ == '__main__':
     if len(sys.argv) > 3: XF = tuple(float(v) for v in sys.argv[1:4])
     p = build()

@@ -25,8 +25,8 @@ S_B, S_L = '#ff6f61', '#ffc2b8'                           # گوی مرجانی
 STR = '#dfe6fb'
 G = 12
 PY = -66                  # محور تیر
-HL = 41                   # نیم‌طول تیر
-PX, PR, PD, PTOP = 26, 12, 11, -28
+HL = 43                   # نیم‌طول تیر
+PX, PR, PD, PTOP = 27, 13, 13, -28
 
 
 def poly(p, pts, col):
@@ -59,7 +59,7 @@ def left_objs(cx):
 
 
 def build(out=OUTD):
-    p = Pen('scale_lab', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((40, -6), (62, 8)), dot=(58, -18)); p.xf = (1.15, -22, 0)
+    p = Pen('scale_lab', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((40, -6), (62, 8)), dot=(58, -18)); p.xf = (1.08, -17, 0)
     p.tipshadow(2, G + 3, 30); p.foot_tip(0, G + 1, 22)
     # ستون (زیر پایه)
     p.shape([(-6.5, PY), (6.5, PY), (6.5, 0), (-6.5, 0)], W_B, PART, j=.1, step=8)
@@ -90,10 +90,10 @@ def build(out=OUTD):
             poly(p, inn, W_D)
             if s == -1:     # سه مکعب واحد (کفهٔ چپ)
                 yb = PTOP - 0.5
-                cube(p, cx - 8, yb - 8, 8); cube(p, cx, yb - 8, 8); cube(p, cx - 4, yb - 16, 8)
+                cube(p, cx - 9, yb - 9, 9); cube(p, cx, yb - 9, 9); cube(p, cx - 4.5, yb - 18, 9)
             else:           # گوی (کفهٔ راست)
-                disc(p, cx, PTOP - 8, 7.5, S_B)
-                poly(p, [(cx - 4.6, PTOP - 12.4), (cx - 1.4, PTOP - 14), (cx - 1.4, PTOP - 12), (cx - 4.6, PTOP - 10.4)], S_L)
+                disc(p, cx, PTOP - 9, 8.5, S_B)
+                poly(p, [(cx - 5.2, PTOP - 14), (cx - 1.8, PTOP - 15.8), (cx - 1.8, PTOP - 13.6), (cx - 5.2, PTOP - 11.8)], S_L)
             p.raw('</g>')
         p.shape(ell(0, PY, 6.5, 6.5, 0, 360, 16), Y_B, INNER, j=.05, step=99, clip=False)
         disc(p, -1.6, PY - 1.8, 1.8, Y_L)
