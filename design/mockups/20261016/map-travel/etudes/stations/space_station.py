@@ -55,9 +55,9 @@ def build(out=OUTD, ang=0):
     body = [(-21, -58), (21, -58)] + ell(0, -6, 21, 7.4, 0, 180, 24)
     p.shape(body, M_B, 3.6, j=.1, step=99, clip=False)
     poly(p, rect(-16, -54, -11, -8), M_L)
-    arc = [(x, -6 + 7.4 * math.sqrt(1 - (x / 21) ** 2)) for x in (21 - 8 * i / 8 for i in range(9))]
-    poly(p, [(13, -56), (21, -56)] + arc, M_D)
-    for y in (-53, -12): poly(p, band(0, y, 20.5, 7.2, 2.8), M_D)
+    arc = [(x, -6 + 7.4 * math.sqrt(1 - (x / 21) ** 2) - 1.8) for x in (19 - 6 * i / 8 for i in range(9))]
+    poly(p, [(13, -53), (19, -53)] + arc, M_D)
+    for y in (-53, -12): poly(p, band(0, y, 18.6, 6.6, 2.8), M_D)
     p.stroke(body, 3.6, j=.1, step=99)
     p.shape(ell(0, -58, 21, 7.4, 0, 360, 30), M_L, 3.6, j=.05, step=99, clip=False)
     for y in (-43, -24):
