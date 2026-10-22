@@ -21,11 +21,11 @@ M_B, M_L, M_D = '#efe6d0', '#fffaf0', '#b9ad90'
 G_B, G_L, G_D = '#9a63e0', '#c4a0f5', '#6a3cb5'
 YEL = '#ffd84d'
 ANG = 114
-LEN = 112
-E = (-26, -4)                       # مرکز ته دسته (جهان)
+LEN = 104
+E = (-36, -4)                       # مرکز ته دسته (جهان)
 H = (E[0] - LEN * math.cos(math.radians(ANG)), E[1] - LEN * math.sin(math.radians(ANG)))   # مرکز دهانه
 HW = 9.5                          # نیم‌پهنای دسته
-SL0, SL1 = 40, 112                 # غلاف از تا
+SL0, SL1 = 40, 104                 # غلاف از تا
 
 
 def poly(p, pts, col, op=1):

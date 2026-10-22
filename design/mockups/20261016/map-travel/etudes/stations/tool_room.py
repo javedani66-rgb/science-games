@@ -129,7 +129,7 @@ def build(out=OUTD):
     board(p)
     for x, y in ((-75, -133), (19, -133)): disc(p, x, y, 2.4, SCREW)
     plinth(p)
-    hammer(p, -62, -108)
+    hammer(p, -56, -108)
     pliers(p, 1)
     pivot = scissors(p, -56)
     return p, pivot
