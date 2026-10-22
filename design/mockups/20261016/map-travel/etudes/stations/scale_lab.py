@@ -59,7 +59,7 @@ def left_objs(cx):
 
 
 def build(out=OUTD):
-    p = Pen('scale_lab', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((40, -6), (62, 8)), dot=(58, -18)); p.xf = (1.2, -26, 0)
+    p = Pen('scale_lab', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((40, -6), (62, 8)), dot=(58, -18)); p.xf = (1.15, -22, 0)
     p.tipshadow(2, G + 3, 30); p.foot_tip(0, G + 1, 22)
     # ستون (زیر پایه)
     p.shape([(-6.5, PY), (6.5, PY), (6.5, 0), (-6.5, 0)], W_B, PART, j=.1, step=8)

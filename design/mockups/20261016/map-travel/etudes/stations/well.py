@@ -27,12 +27,12 @@ CX = -28
 HW = 36
 RIM_Y = -36
 BASE = 7
-SPOOL_Y = -66
+SPOOL_Y = -80
 PX = 28
 PW = 16
-POST_T, POST_B = -98, -33
-ROOF_B, ROOF_T = -92, -118
-BUCKET_DY = -8
+POST_T, POST_B = -112, -33
+ROOF_B, ROOF_T = -106, -132
+BUCKET_DY = -11
 
 
 def poly(p, pts, col, op=1):
@@ -64,16 +64,16 @@ def build(out=OUTD):
     p.stroke(body, OUT, j=.15, step=8)
     # ۲) لبه و دهانه
     p.shape(ell(CX, RIM_Y, HW, 12, 0, 360, 40), S_L, PART, j=.1, step=8)
-    p.shape(ell(CX, RIM_Y + 1, 20, 6, 0, 360, 32), HOLE, INNER, j=.05, step=99, clip=False)
+    p.shape(ell(CX, RIM_Y + 1, 23, 7, 0, 360, 32), HOLE, INNER, j=.05, step=99, clip=False)
     poly(p, [(CX - 7, RIM_Y + 3.4), (CX + 7, RIM_Y + 3.4), (CX + 5.5, RIM_Y + 4.8), (CX - 5.5, RIM_Y + 4.8)], WATER)
     # ۳) دلو و طناب (لایهٔ متحرک)
     with layer(p, 'bucket'):
-        p.ln((CX, SPOOL_Y + 4), (CX, -44), INNER, ROPE, j=0)
-        bk = [(CX - 11, -44), (CX + 11, -44), (CX + 8.5, -31), (CX - 8.5, -31)]
+        p.ln((CX, SPOOL_Y + 4), (CX, -57), INNER, ROPE, j=0)
+        bk = [(CX - 11, -57), (CX + 11, -57), (CX + 8.5, -44), (CX - 8.5, -44)]
         p.shape(bk, B_B, PART, j=.1, step=8)
-        poly(p, rect(CX - 7, -41, CX - 4.5, -34), B_L)
-        poly(p, [(CX + 3, -41), (CX + 6, -41), (CX + 5.5, -34), (CX + 3, -34)], B_D)
-        poly(p, rect(CX - 7.5, -38.5, CX + 7.5, -36.5), '#7a3a1a')
+        poly(p, rect(CX - 7, -54, CX - 4.5, -47), B_L)
+        poly(p, [(CX + 3, -54), (CX + 6, -54), (CX + 5.5, -47), (CX + 3, -47)], B_D)
+        poly(p, rect(CX - 7.5, -51.5, CX + 7.5, -49.5), '#7a3a1a')
     # ۴) قرقره
     sp = rect(CX - PX, SPOOL_Y - 10, CX + PX, SPOOL_Y + 10)
     p.shape(sp, C_B, PART, j=.1, step=8)
@@ -91,9 +91,9 @@ def build(out=OUTD):
     # ۶) سقف
     roof = [(CX - 48, ROOF_B), (CX + 48, ROOF_B), (CX, ROOF_T)]
     p.shape(roof, R_B, PART, j=.1, step=8)
-    poly(p, [(CX - 9, -111), (CX - 5.5, -111), (CX - 24.5, -100), (CX - 28, -100)], R_L)
-    poly(p, [(CX + 8, -110), (CX + 42, -94.5), (CX + 42, ROOF_B), (CX + 8, ROOF_B)], R_D)
-    poly(p, [(CX - 40.5, -96), (CX + 40.5, -96), (CX + 48, ROOF_B), (CX - 48, ROOF_B)], R_D)
+    poly(p, [(CX - 9, -125), (CX - 5.5, -125), (CX - 24.5, -114), (CX - 28, -114)], R_L)
+    poly(p, [(CX + 8, -124), (CX + 42, -108.5), (CX + 42, ROOF_B), (CX + 8, ROOF_B)], R_D)
+    poly(p, [(CX - 40.5, -110), (CX + 40.5, -110), (CX + 48, ROOF_B), (CX - 48, ROOF_B)], R_D)
     p.stroke(roof, PART, j=.1, step=8)
     # ۷) چرخ‌چاه
     WX = CX + 44

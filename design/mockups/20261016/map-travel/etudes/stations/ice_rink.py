@@ -21,18 +21,18 @@ ICE, ICE_L, ICE_D, ICE_S, CRACK = '#d6f1fb', '#ffffff', '#a5dcf0', '#7fc0dc', '#
 RED, RED_L, RED_D = '#e0553a', '#ff9a6c', '#9c2f1c'
 YEL, YEL_L, YEL_D = '#ffd84d', '#fff0a0', '#d9961c'
 BT, BT_L, BT_D = '#6f63d9', '#9a90f0', '#4a3fa8'
-XF = (1.0, 0.0, -2.0)
+XF = (0.9, 5.0, -3.0)
 
 # تختهٔ یخ: جلو x∈[XL,XR]، y∈[0,FH]؛ رویه عمق D (کج به بالا-راست)
-XL, XR, FH, D = -76, 30, 24, 12
+XL, XR, FH, D = -86, 36, 24, 14
 FRONT = [(XL, 0), (XR, 0), (XR, FH), (XL, FH)]
 TOPF = [(XL, 0), (XR, 0), (XR + D, -D), (XL + D, -D)]
 SIDE = [(XR, 0), (XR + D, -D), (XR + D, FH - D), (XR, FH)]
 
 # اسکی (روی رویه، کف y=SB)
-SB = -6
-ST_H = 15
-X_TAIL, X_BEND, X_TIP = 18, -26, -64
+SB = -4
+ST_H = 14
+X_TAIL, X_BEND, X_TIP = 28, -36, -78
 def sk_bot(x):
     if x >= X_BEND: return SB
     t = (X_BEND - x) / (X_BEND - X_TIP); return SB - 19 * t * t
@@ -70,8 +70,8 @@ def build():
     p.tipshadow(-12, FH + 2, 44); p.foot_tip(-12, FH, 30)
     # ۱) یخ
     sp(p, SIDE, ICE_S, PART); sp(p, FRONT, ICE_D, PART); sp(p, TOPF, ICE, PART)
-    poly(p, [(XL + 6, 4.5), (XL + 6, 8), (XL + 50, 8), (XL + 50, 4.5)], ICE_L)                 # نور لبهٔ بالا-چپ
-    for pts in (((-44, 5), (-37, 13), (-41, 20)), ((6, 5), (0, 12), (4, 19))):               # ترک‌های راست
+    poly(p, [(XL + 6, 4.5), (XL + 6, 8), (XL + 30, 8), (XL + 30, 4.5)], ICE_L)                 # نور لبهٔ بالا-چپ
+    for pts in (((-52, 5), (-45, 13), (-49, 20)), ((16, 5), (10, 12), (14, 19))):               # ترک‌های راست
         p.ln(pts[0], pts[1], 3, CRACK, j=0); p.ln(pts[1], pts[2], 3, CRACK, j=0)
     # ۲) درخشش (لایهٔ متحرک)
     with layer(p, 'glint'):
@@ -79,18 +79,18 @@ def build():
             poly(p, s, '#ffffff', .62)
     # ۳) پوتین (پشت اسکی)
     B = SB - ST_H - 5
-    sp(p, [(-40, B), (-6, B), (-6, B - 44), (-24, B - 44), (-24, B - 24), (-32, B - 18), (-40, B - 12)], BT, PART, False)
-    poly(p, [(-37, B - 3), (-37, B - 9), (-31, B - 14), (-27, B - 18), (-27, B - 3)], BT_L)
-    poly(p, [(-12, B - 40), (-9, B - 40), (-9, B - 3), (-12, B - 3)], BT_D)
-    poly(p, [(-21, B - 30), (-12, B - 30), (-12, B - 27), (-21, B - 27)], YEL)
+    sp(p, [(-30, B), (2, B), (2, B - 38), (-14, B - 38), (-14, B - 22), (-22, B - 16), (-30, B - 12)], BT, PART, False)
+    poly(p, [(-27, B - 3), (-27, B - 9), (-21, B - 13), (-17, B - 17), (-17, B - 3)], BT_L)
+    poly(p, [(-3, B - 35), (0, B - 35), (0, B - 3), (-3, B - 3)], BT_D)
+    poly(p, [(-11, B - 28), (-3, B - 28), (-3, B - 25), (-11, B - 25)], YEL)
     # ۴) اسکی + بست
     body = ski_pts()
     sp(p, body, RED, PART)
-    poly(p, [(x, sk_bot(x) - sk_th(x) + 3.5) for x in (X_TAIL - 6, -10, -26, -46)] + [(x, sk_bot(x) - sk_th(x) + 6.8) for x in (-46, -26, -10, X_TAIL - 6)], RED_L)
-    poly(p, [(X_TAIL - 6, SB - 5), (-24, SB - 5), (-24, SB - 1.8), (X_TAIL - 6, SB - 1.8)], RED_D)
+    poly(p, [(x, sk_bot(x) - sk_th(x) + 3.5) for x in (X_TAIL - 6, 0, -36, -58)] + [(x, sk_bot(x) - sk_th(x) + 6.8) for x in (-58, -36, 0, X_TAIL - 6)], RED_L)
+    poly(p, [(X_TAIL - 6, SB - 5), (-30, SB - 5), (-30, SB - 1.8), (X_TAIL - 6, SB - 1.8)], RED_D)
     p.stroke(body, PART, j=.04, step=99)
-    sp(p, [(-42, SB - ST_H - 1), (-2, SB - ST_H - 1), (-2, SB - ST_H - 6), (-42, SB - ST_H - 6)], YEL, INNER, False)
-    poly(p, [(-38, SB - ST_H - 5), (-6, SB - ST_H - 5), (-6, SB - ST_H - 3), (-38, SB - ST_H - 3)], YEL_L)
+    sp(p, [(-34, SB - ST_H - 1), (6, SB - ST_H - 1), (6, SB - ST_H - 6), (-34, SB - ST_H - 6)], YEL, INNER, False)
+    poly(p, [(-30, SB - ST_H - 5), (2, SB - ST_H - 5), (2, SB - ST_H - 3), (-30, SB - ST_H - 3)], YEL_L)
     return p
 
 

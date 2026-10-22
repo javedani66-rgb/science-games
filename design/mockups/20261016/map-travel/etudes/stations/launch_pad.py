@@ -28,7 +28,7 @@ YB, YT = -22, -100
 NT = -132
 FX0, FX1 = 22, 35
 FLAME_TOP = -10
-XF = (1.0, -27, 8)
+XF = (1.0, -25, 8)
 
 
 def poly(p, pts, col, op=1):

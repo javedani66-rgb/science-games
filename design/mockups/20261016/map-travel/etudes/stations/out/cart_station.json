@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  46
+  56
  ],
  "stand": [
-  43.0,
-  6.0
+  45.0,
+  7.0
  ],
  "ring": [
   0,
@@ -22,11 +22,11 @@
  "inside_pad": {
   "min_margin_px": 10.0,
   "base_on_pad": true,
-  "height_px": 53.2,
+  "height_px": 64.0,
   "bbox_px": [
    18.0,
-   62.2,
-   94.5,
+   51.5,
+   99.2,
    115.5
   ],
   "ok": true
@@ -44,7 +44,7 @@
   "node_cart_station_roll_wheel": {
    "kind": "rotate",
    "about": [
-    -28.0,
+    -30.0,
     -20.0
    ],
    "deg_from": -33,

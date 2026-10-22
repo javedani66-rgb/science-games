@@ -53,11 +53,11 @@ def crater(p, x, y, r):
 
 def build():
     p = Pen('moon', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 0, 0)
-    p.tipshadow(CX + 4, 20, 36); p.foot_tip(CX, 19, 32)
-    body = ell(CX, 6, 34, 10, 180, 360, 18) + ell(CX, 17, 34, 10, 0, 180, 18)
+    p.tipshadow(CX + 3, 16, 30); p.foot_tip(CX, 15, 26)
+    body = ell(CX, 5, 29, 9, 180, 360, 18) + ell(CX, 12, 29, 9, 0, 180, 18)
     p.shape(body, S_B, OUT, j=.12, step=99)
-    poly(p, ell(CX, 6, 28, 6.5, 0, 360, 24), S_L)
-    poly(p, ell(CX, 16.5, 32, 8.5, 10, 170, 14) + ell(CX, 12, 32, 5, 170, 10, 14), S_D)
+    poly(p, ell(CX, 5, 23, 5.5, 0, 360, 24), S_L)
+    poly(p, ell(CX, 11.5, 26, 7.5, 10, 170, 14) + ell(CX, 8, 26, 4.5, 170, 10, 14), S_D)
     p.shape(ell(CX, CY, R, R, 0, 360, 48), M_B, OUT, j=.12, step=99)
     crater(p, CX - 14, CY - 4, 11); crater(p, CX + 12, CY - 20, 7.5); crater(p, CX - 6, CY + 19, 8)
     ha = math.radians(-126); tx, ty = -math.sin(ha), math.cos(ha); nx, ny = math.cos(ha), math.sin(ha)
