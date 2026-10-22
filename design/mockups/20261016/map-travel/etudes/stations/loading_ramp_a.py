@@ -17,7 +17,7 @@ GY = 18                       # زمین
 XR, XL = 14, -52
 HB, BW, OVER = 30, 34, 12              # لبهٔ راست (پایین) و چپ (بالا) تخته
 ANG = math.radians(27)
-TH = 19                       # ضخامت عمودی تخته
+TH = 16                       # ضخامت عمودی تخته
 SL = -math.tan(ANG)           # dy/dx: سمت راست پایین‌تر (y بزرگ‌تر) ⇒ شیب منفی در x
 def top_y(x): return (GY - TH) + (x - XR) * SL * -1 * -1 if False else (GY - TH) - (XR - x) * math.tan(ANG)
 U = (-math.cos(ANG), -math.sin(ANG))        # بالا رفتن (چپ و بالا)

@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  40
+  46
  ],
  "stand": [
-  44.0,
-  7.5
+  43.0,
+  6.0
  ],
  "ring": [
   0,
@@ -20,21 +20,21 @@
   "node_cart_station_roll"
  ],
  "inside_pad": {
-  "min_margin_px": 0.0,
+  "min_margin_px": 10.0,
   "base_on_pad": true,
-  "height_px": 47.0,
+  "height_px": 53.2,
   "bbox_px": [
-   8.0,
-   68.5,
-   97.0,
+   18.0,
+   62.2,
+   94.5,
    115.5
   ],
-  "ok": false
+  "ok": true
  },
  "motion_spec": {
   "node_cart_station_roll": {
    "kind": "translate",
-   "dx_from": -14,
+   "dx_from": -12,
    "dx_to": 0,
    "dur_s": 1.8,
    "count": 1,
@@ -44,8 +44,8 @@
   "node_cart_station_roll_wheel": {
    "kind": "rotate",
    "about": [
-    -36.0,
-    -16.0
+    -28.0,
+    -20.0
    ],
    "deg_from": -33,
    "deg_to": 0,

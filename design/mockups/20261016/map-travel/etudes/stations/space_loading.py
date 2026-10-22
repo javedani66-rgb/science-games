@@ -19,12 +19,12 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 
 S_B, S_L, S_D = '#e6e5e3', '#fafaf8', '#bcbab6'      # نقره‌ای
 G_B, G_L, G_D = '#ffd84d', '#fff3c4', '#d9961c'      # طلایی
-H_B, H_D = '#8d9099', '#4a4d57'                      # دستگیره/پایهٔ چراغ (فولاد)
+H_B, H_D = '#a4a8b0', '#3f424c'                      # دستگیره/پایهٔ چراغ (فولاد)
 L_B, L_L, L_OFF = '#ef6a4a', '#ffb59c', '#9c2f1c'   # چراغ
 
 CX, BASE = -29, 7
-BT, LT, LB = -42, -58, -40        # بالای بدنه، بالای درپوش، کف درپوش
-BW, LW = 38, 41
+BT, LT, LB = -46, -62, -44        # بالای بدنه، بالای درپوش، کف درپوش
+BW, LW = 36, 39
 
 
 def poly(p, pts, col, op=1):
@@ -39,21 +39,21 @@ def dome(r=8):
 
 
 def build(out=OUTD):
-    p = Pen('space_loading', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 6, 0)
+    p = Pen('space_loading', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 9, 0)
     p.tipshadow(CX + 2, BASE + 3, 36); p.foot_tip(CX, BASE + 2, 26)
     # ۲) دستگیره‌ها (پشت بدنه)
     for s in (-1, 1):
-        x_in, x_out = CX + s * (BW - 4), CX + s * (BW + 13)
-        p.shape(rect(min(x_in, x_out), -30, max(x_in, x_out), -8), H_B, PART, j=.12, step=6)
-        xs = CX + s * (BW + 4)
-        poly(p, rect(xs - 2, -24, xs + 2, -14), H_D)
+        x_in, x_out = CX + s * (BW - 4), CX + s * (BW + 14)
+        p.shape(rect(min(x_in, x_out), -34, max(x_in, x_out), -4), H_B, PART, j=.12, step=6)
+        xs = CX + s * (BW + 6.5)
+        poly(p, rect(xs - 2.5, -26, xs + 2.5, -12), H_D)
     # ۳) بدنه
     body = rect(CX - BW, BT, CX + BW, BASE)
     p.shape(body, S_B, OUT, j=.12, step=6)
     poly(p, rect(CX - BW + 5, BT + 8, CX - BW + 8.5, BASE - 12), S_L)                               # نور
     poly(p, rect(CX + BW - 14, BT + 4, CX + BW - 3, BASE - 1), S_D)                                  # سایهٔ تیز راست
     poly(p, rect(CX - BW + 3, BASE - 7, CX + BW - 3, BASE - 1), S_D)                                 # کرسی
-    for y in (-24, -10):
+    for y in (-14,):
         poly(p, rect(CX - BW + 8, y - 1.95, CX + BW - 8, y + 1.95), S_D)                         # دو نوار افقی
     for sx in (-1, 1):
         x0 = CX + sx * (BW - 13)
@@ -67,12 +67,12 @@ def build(out=OUTD):
     p.stroke(lid, PART, j=.12, step=6)
     # ۵) پایهٔ چراغ و ۶) گنبد خاموش
     p.shape(rect(CX - 11, LT - 6, CX + 11, LT + 3), H_B, INNER, j=.05, step=99, clip=False)
-    base_dome = [(CX + 9 * math.cos(math.radians(a)), LT - 6 + 9 * math.sin(math.radians(a))) for a in range(180, 361, 15)]
+    base_dome = [(CX + 10 * math.cos(math.radians(a)), LT - 6 + 10 * math.sin(math.radians(a))) for a in range(180, 361, 15)]
     p.shape(base_dome, L_OFF, INNER, j=.05, step=99, clip=False)
     # ۷) لایهٔ متحرک: گنبد روشن
     with layer(p, 'light'):
         p.shape(base_dome, L_B, INNER, j=.05, step=99, clip=False)
-        poly(p, [(CX - 5.5, LT - 11), (CX - 2, LT - 11), (CX - 2, LT - 8), (CX - 5.5, LT - 8)], L_L)
+        poly(p, [(CX - 6, LT - 12), (CX - 2.5, LT - 12), (CX - 2.5, LT - 8.5), (CX - 6, LT - 8.5)], L_L)
     return p
 
 

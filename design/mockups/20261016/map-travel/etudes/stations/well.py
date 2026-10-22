@@ -28,8 +28,8 @@ HW = 36
 RIM_Y = -36
 BASE = 7
 SPOOL_Y = -66
-PX = 26
-PW = 13
+PX = 28
+PW = 16
 POST_T, POST_B = -98, -33
 ROOF_B, ROOF_T = -92, -118
 BUCKET_DY = -8
@@ -63,30 +63,30 @@ def build(out=OUTD):
             poly(p, rect(CX + x - 1.6, y0 + 1.6, CX + x + 1.6, y1 - 1.6), S_D)
     p.stroke(body, OUT, j=.15, step=8)
     # ۲) لبه و دهانه
-    p.shape(ell(CX, RIM_Y, HW, 10, 0, 360, 40), S_L, PART, j=.1, step=8)
-    p.shape(ell(CX, RIM_Y + 1, 22, 7, 0, 360, 32), HOLE, INNER, j=.05, step=99, clip=False)
-    poly(p, [(CX - 9, RIM_Y + 3.5), (CX + 9, RIM_Y + 3.5), (CX + 7, RIM_Y + 5.5), (CX - 7, RIM_Y + 5.5)], WATER)
+    p.shape(ell(CX, RIM_Y, HW, 12, 0, 360, 40), S_L, PART, j=.1, step=8)
+    p.shape(ell(CX, RIM_Y + 1, 20, 6, 0, 360, 32), HOLE, INNER, j=.05, step=99, clip=False)
+    poly(p, [(CX - 7, RIM_Y + 3.4), (CX + 7, RIM_Y + 3.4), (CX + 5.5, RIM_Y + 4.8), (CX - 5.5, RIM_Y + 4.8)], WATER)
     # ۳) دلو و طناب (لایهٔ متحرک)
     with layer(p, 'bucket'):
-        p.ln((CX, SPOOL_Y + 4), (CX, -46), INNER, ROPE, j=0)
-        bk = [(CX - 12, -46), (CX + 12, -46), (CX + 9.5, -31), (CX - 9.5, -31)]
+        p.ln((CX, SPOOL_Y + 4), (CX, -44), INNER, ROPE, j=0)
+        bk = [(CX - 11, -44), (CX + 11, -44), (CX + 8.5, -31), (CX - 8.5, -31)]
         p.shape(bk, B_B, PART, j=.1, step=8)
-        poly(p, rect(CX - 8, -44, CX - 5, -33.5), B_L)
-        poly(p, [(CX + 3, -44), (CX + 8, -44), (CX + 7, -33.5), (CX + 3, -33.5)], B_D)
-        poly(p, rect(CX - 8.5, -40.5, CX + 8.5, -37), '#7a3a1a')
+        poly(p, rect(CX - 7, -41, CX - 4.5, -34), B_L)
+        poly(p, [(CX + 3, -41), (CX + 6, -41), (CX + 5.5, -34), (CX + 3, -34)], B_D)
+        poly(p, rect(CX - 7.5, -38.5, CX + 7.5, -36.5), '#7a3a1a')
     # ۴) قرقره
-    sp = rect(CX - PX, SPOOL_Y - 8, CX + PX, SPOOL_Y + 8)
+    sp = rect(CX - PX, SPOOL_Y - 10, CX + PX, SPOOL_Y + 10)
     p.shape(sp, C_B, PART, j=.1, step=8)
-    poly(p, rect(CX - PX + 5, SPOOL_Y - 5, CX + PX - 5, SPOOL_Y - 2.5), C_L)
-    for x in (-12, 0, 12): poly(p, rect(CX + x - 1.8, SPOOL_Y - 1, CX + x + 1.8, SPOOL_Y + 5), C_D)
+    poly(p, rect(CX - PX + 5, SPOOL_Y - 7, CX + PX - 5, SPOOL_Y - 4), C_L)
+    for x in (-12, 0, 12): poly(p, rect(CX + x - 1.8, SPOOL_Y - 1, CX + x + 1.8, SPOOL_Y + 6), C_D)
     p.stroke(sp, PART, j=.1, step=8)
     # ۵) ستون‌ها
     for s in (-1, 1):
         c = CX + s * PX
         pts = rect(c - PW / 2, POST_T, c + PW / 2, POST_B)
         p.shape(pts, W_B, PART, j=.1, step=8)
-        poly(p, rect(c - 3.4, POST_T + 8, c - 1.4, POST_B - 4), W_L)
-        poly(p, rect(c + 0.8, POST_T + 8, c + 3.4, POST_B - 4), W_D)
+        poly(p, rect(c - 4.4, POST_T + 8, c - 1.9, POST_B - 4), W_L)
+        poly(p, rect(c + 1.2, POST_T + 8, c + 4.8, POST_B - 4), W_D)
         p.stroke(pts, PART, j=.1, step=8)
     # ۶) سقف
     roof = [(CX - 48, ROOF_B), (CX + 48, ROOF_B), (CX, ROOF_T)]
@@ -96,12 +96,12 @@ def build(out=OUTD):
     poly(p, [(CX - 40.5, -96), (CX + 40.5, -96), (CX + 48, ROOF_B), (CX - 48, ROOF_B)], R_D)
     p.stroke(roof, PART, j=.1, step=8)
     # ۷) چرخ‌چاه
-    WX = CX + 40
-    p.shape(ell(WX, SPOOL_Y, 12, 12, 0, 360, 24), C_B, PART, j=.05, step=99, clip=False)
-    poly(p, rect(WX - 9, SPOOL_Y - 1.75, WX + 9, SPOOL_Y + 1.75), C_D)
-    poly(p, rect(WX - 1.75, SPOOL_Y - 9, WX + 1.75, SPOOL_Y + 9), C_D)
-    p.shape(ell(WX, SPOOL_Y, 4.5, 4.5, 0, 360, 12), '#7a4a1f', INNER, j=0, step=99, clip=False)
-    disc(p, WX, SPOOL_Y, 1.6, YEL)
+    WX = CX + 44
+    p.shape(ell(WX, SPOOL_Y, 14, 14, 0, 360, 24), C_B, PART, j=.05, step=99, clip=False)
+    poly(p, rect(WX - 11, SPOOL_Y - 1.75, WX + 11, SPOOL_Y + 1.75), C_D)
+    poly(p, rect(WX - 1.75, SPOOL_Y - 11, WX + 1.75, SPOOL_Y + 11), C_D)
+    p.shape(ell(WX, SPOOL_Y, 3.6, 3.6, 0, 360, 12), '#7a4a1f', INNER, j=0, step=99, clip=False)
+    disc(p, WX, SPOOL_Y, 1.2, YEL)
     return p
 
 
