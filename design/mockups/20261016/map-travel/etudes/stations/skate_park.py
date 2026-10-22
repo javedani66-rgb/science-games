@@ -19,12 +19,12 @@ D_B, D_L, D_D = '#2cb5c6', '#8fe8ee', '#1a8696'
 M_B, M_D = '#b8c9e6', '#7f95b8'
 W_B, W_D = '#fff1c0', '#e3c66e'
 HUBC = '#7a4a1f'; YEL = '#ffd84d'; ORG = '#ff9b4a'
-GY = 6; R = 12; WYC = GY - R
-WX = (-57, -15)          # چرخ چپ (back)، چرخ راست
-XF = (1.0, -4, 0)
+GY = 6; R = 9; WYC = GY - R
+WX = (-62, -14)          # چرخ چپ (back)، چرخ راست
+XF = (1.0, 0, 0)
 
-TOPF, BOT = -49, -33     # بالا و پایین بخش صاف تخته
-DECK = [(-70, -56), (-63, TOPF), (-9, TOPF), (-2, -56), (-2, -44), (-9, BOT), (-63, BOT), (-70, -44)]
+TOPF, BOT = -43, -27     # بالا و پایین بخش صاف تخته
+DECK = [(-74, -50), (-67, TOPF), (-7, TOPF), (0, -50), (0, -38), (-7, BOT), (-67, BOT), (-74, -38)]
 
 
 def poly(p, pts, col, op=1):
@@ -32,19 +32,16 @@ def poly(p, pts, col, op=1):
 
 
 def truck(p, cx):
-    pts = [(cx - 10, BOT - 4), (cx + 10, BOT - 4), (cx + 7, WYC + 2), (cx - 7, WYC + 2)]
-    p.shape(pts, M_B, INNER, j=.1, step=99, clip=False)
-    poly(p, [(cx + 2, BOT + 1), (cx + 10, BOT + 1), (cx + 7, WYC), (cx + 2, WYC)], M_D)
-    p.stroke(pts, INNER, j=.1, step=99)
+    pts = [(cx - 8, BOT - 4), (cx + 8, BOT - 4), (cx + 6, WYC + 2), (cx - 6, WYC + 2)]
+    p.shape(pts, M_B, INNER, j=0, step=99, clip=False)
+    poly(p, [(cx + 2, BOT + 1), (cx + 8, BOT + 1), (cx + 6, WYC), (cx + 2, WYC)], M_D)
+    p.stroke(pts, INNER, j=0, step=99)
 
 
 def wheel(p, cx):
     p.shape(ell(cx, WYC, R, R, 0, 360, 40), W_B, PART, j=.1, step=99, clip=False)
-    arc = [(cx + (R - 3.5) * math.cos(math.radians(a)), WYC + (R - 3.5) * math.sin(math.radians(a))) for a in range(-45, 100, 12)]
-    poly(p, arc, W_D)
-    p.stroke(ell(cx, WYC, R, R, 0, 360, 40), PART, j=.1, step=99)
-    poly(p, [(cx - 8, WYC - 2.5), (cx + 8, WYC - 2.5), (cx + 8, WYC + 2.5), (cx - 8, WYC + 2.5)], HUBC)          # تکهٔ تیرهٔ مرکزی (نشانهٔ چرخش)
-    p.raw('<circle cx="%.1f" cy="%.1f" r="3" fill="%s"/>' % (*p.X((cx, WYC)), YEL))
+    poly(p, [(cx - 4, WYC - 2), (cx + 4, WYC - 2), (cx + 4, WYC + 2), (cx - 4, WYC + 2)], HUBC)          # نوار کوتاه مرکزی ۸×۴ (نشانهٔ چرخش)
+    p.raw('<circle cx="%.1f" cy="%.1f" r="2.2" fill="%s"/>' % (*p.X((cx, WYC)), YEL))
 
 
 def build(out=None):
@@ -53,8 +50,8 @@ def build(out=None):
         p.tipshadow(cx, GY - 1, 14); p.foot_tip(cx, GY - 2, 8)
     for cx in WX: truck(p, cx)
     p.shape(DECK, D_B, PART, j=.1, step=8)
-    poly(p, [(-62, TOPF + 4), (-12, TOPF + 4), (-12, TOPF + 7.5), (-62, TOPF + 7.5)], D_L)                    # نور
-    poly(p, [(-24, TOPF + 3), (-9, TOPF + 3), (-5, -53), (-3, -55), (-3, -45), (-9, BOT - 3), (-24, BOT - 3)], D_D)   # سایهٔ تیز راست
+    poly(p, [(-66, TOPF + 4), (-12, TOPF + 4), (-12, TOPF + 7.5), (-66, TOPF + 7.5)], D_L)                    # نور
+    poly(p, [(-26, TOPF + 3), (-7, TOPF + 3), (-3, TOPF - 4), (-1.5, TOPF - 6), (-1.5, -39), (-7, BOT - 3), (-26, BOT - 3)], D_D)   # سایهٔ تیز راست
     p.stroke(DECK, PART, j=.1, step=8)
     with layer(p, 'wheel_back'): wheel(p, WX[0])
     with layer(p, 'wheel'): wheel(p, WX[1])

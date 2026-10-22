@@ -30,11 +30,11 @@ YEL = '#ffd84d'
 
 GY = 8                       # زمین
 ANG = 20                     # زاویهٔ ایستای میله (درجه، ساعتگرد در svg = سر راست پایین)
-PIV = (-12.0, -14.0)         # لولا
+PIV = (-14.0, -14.0)         # لولا
 BW = 8.0                     # نیم‌پهنای میله
 L0, L1 = -44, 31             # سر کوتاه (چپ) و سر بلند (راست)
-BC = (-28.0, -41.0)          # مرکز سنگ بار
-BRX, BRY = 19, 17
+BC = (-29.0, -42.0)          # مرکز سنگ بار
+BRX, BRY = 20, 19
 REST = -8                    # شروع حرکت
 
 
@@ -58,10 +58,10 @@ def clip_x(pts, x0):
 
 
 def build():
-    p = Pen('excavation', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.1, 2, 4)
+    p = Pen('excavation', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.1, 4, 4)
     f = rot(PIV[0], PIV[1], ANG)
-    p.tipshadow(-12, GY + 1, 20); p.tipshadow(-42, GY + 4, 20); p.tipshadow(17, GY + 1, 7)
-    p.foot_tip(-12, GY, 14); p.foot_tip(-42, GY + 4, 18); p.foot_tip(17, GY, 6)
+    p.tipshadow(-14, GY + 1, 20); p.tipshadow(-42, GY + 4, 20); p.tipshadow(17, GY + 1, 7)
+    p.foot_tip(-14, GY, 14); p.foot_tip(-42, GY + 4, 15); p.foot_tip(17, GY, 6)
     # ۲) تل خاک (پشت گودال)
     mound = [(-66, 3), (-62, -8), (-52, -19), (-40, -19), (-30, -8), (-26, 3)]
     p.shape(mound, E_B, PART, j=.3, step=7)
@@ -69,7 +69,7 @@ def build():
     flat(p, clip_x(mound, -41), E_D, .55); p.stroke(mound, PART, j=.3, step=7)
     # ۳) گودال: لبهٔ خاکی + سوراخ
     rim = ell(-42, 9, 19, 7.5, 0, 360, 24)
-    p.shape(rim, E_L, PART, j=.25, step=7)
+    p.shape(rim, '#b07a42', PART, j=.25, step=7)
     flat(p, ell(-42, 10, 12.5, 4, 0, 360, 24), E_D)
     # ۴) سنگ تکیه‌گاه
     ful = [(-30, GY), (-32, -4), (-27, -14), (-14, -18), (-1, -14), (4, -4), (2, GY)]

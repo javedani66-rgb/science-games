@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  103
+  108
  ],
  "stand": [
-  41.0,
-  5.0
+  39.5,
+  4.5
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_basketball_hall_net"
  ],
  "inside_pad": {
-  "min_margin_px": 15.0,
+  "min_margin_px": 5.0,
   "base_on_pad": true,
-  "height_px": 102.0,
+  "height_px": 107.0,
   "bbox_px": [
-   23.0,
-   5.0,
-   91.0,
+   13.0,
+   0.0,
+   88.2,
    107.0
   ],
   "ok": true

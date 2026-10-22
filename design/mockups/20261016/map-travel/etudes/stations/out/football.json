@@ -8,8 +8,8 @@
   47
  ],
  "stand": [
-  42.5,
-  4.5
+  42.0,
+  1.0
  ],
  "ring": [
   0,
@@ -22,11 +22,11 @@
  "inside_pad": {
   "min_margin_px": 14.5,
   "base_on_pad": true,
-  "height_px": 64.5,
+  "height_px": 64.0,
   "bbox_px": [
-   26.8,
-   60.8,
-   93.2,
+   27.5,
+   61.2,
+   92.5,
    125.2
   ],
   "ok": true

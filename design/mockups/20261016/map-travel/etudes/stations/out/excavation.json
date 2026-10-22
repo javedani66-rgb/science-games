@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  45
+  47
  ],
  "stand": [
   40.5,
@@ -20,13 +20,13 @@
   "node_excavation_bar"
  ],
  "inside_pad": {
-  "min_margin_px": 5.5,
+  "min_margin_px": 6.5,
   "base_on_pad": true,
-  "height_px": 62.8,
+  "height_px": 65.0,
   "bbox_px": [
-   20.0,
-   63.0,
-   90.2,
+   21.5,
+   60.8,
+   90.0,
    125.8
   ],
   "ok": true
@@ -34,7 +34,7 @@
  "motion_spec": {
   "node_excavation_bar": {
    "rotate_about": [
-    -11.2,
+    -11.4,
     -11.4
    ],
    "angle_deg": [
@@ -56,7 +56,7 @@
    ],
    "out_px": 0.0,
    "x_margin": 18.8,
-   "stand_to_motion": 12.8,
+   "stand_to_motion": 13.0,
    "ok": true
   }
  }

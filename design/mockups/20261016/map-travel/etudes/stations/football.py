@@ -20,7 +20,8 @@ PATCH = '#3a3a86'
 CHALK = '#d9f0b4'
 R = 38
 CX, CY = -12, -24          # مرکز توپ (کفش y=14 روی سکو)
-ROLL = 9                   # ≈۶px نقشه؛ شروع ≥۸px از لبهٔ سکو
+RC, RE, DE = 11, 11, 35     # پنج‌ضلعی مرکزی، لبه‌ای، فاصلهٔ مرکز لبه‌ای‌ها (فاصلهٔ لکه‌ها 13)
+ROLL = 9                  # ≈۶px نقشه؛ شروع ≥۸px از لبهٔ سکو
 
 
 def penta(cx, cy, r, a):
@@ -58,27 +59,26 @@ def build():
     p.foot_tip(CX, CY + R + 1, 20)
     with layer(p, 'ball'):
         p.tipshadow(CX, CY + R + 1, 24)
-        p.shape(ell(CX, CY, R, R, 0, 360, 48), B_, OUT, j=.12, step=99)
+        disc = ell(CX, CY, R, R, 0, 360, 48)
+        p.shape(disc, B_, PART, j=0, step=99)
+        # جزئیات داخل توپ با clip به دایره (لکه‌های لبه نیمه‌بریده)؛ clip ثابت، چرخش داخلش
+        p.raw('<clipPath id="fbclip"><circle cx="%s" cy="%s" r="%s"/></clipPath><g clip-path="url(#fbclip)">' % (CX, CY, R - 1))
         p.raw('<g id="node_football_ball_spin">')
         c = (CX, CY)
-        for a in (-90 + 36,):
-            pass
-        poly(p, penta(CX, CY, 11, -90), PATCH)
         for i in range(5):
-            ang = -90 + 72 * i                          # جهت رأس‌های پنج‌ضلعی مرکزی
-            ax = math.radians(ang)
-            q = (CX + 21 * math.cos(ax), CY + 21 * math.sin(ax))
-            # درز از رأس مرکزی تا لکهٔ لبه
-            v = penta(CX, CY, 11, -90)[(i + 1) % 5] if False else None
-            s0 = (CX + 9 * math.cos(ax), CY + 9 * math.sin(ax)); s1 = (CX + (21 - 7) * math.cos(ax), CY + (21 - 7) * math.sin(ax))
-            p.ln(s0, s1, INNER, PATCH, j=0)
-            poly(p, penta(q[0], q[1], 7, ang + 180), PATCH)
+            ang = -90 + 72 * i; ax = math.radians(ang)
+            q = (CX + DE * math.cos(ax), CY + DE * math.sin(ax))   # مرکز لکهٔ لبه روی همان شعاع رأس
+            p.raw('<path d="M%.1f,%.1f L%.1f,%.1f" stroke="%s" stroke-width="%s" fill="none"/>' % (CX + (RC - 3) * math.cos(ax), CY + (RC - 3) * math.sin(ax), q[0], q[1], PATCH, INNER))
+            poly(p, penta(q[0], q[1], RE, ang + 180), PATCH)   # رأس رو به مرکز
+        poly(p, penta(CX, CY, RC, -90), PATCH)
         p.raw('</g>')
-        # ثابت‌ها روی توپ: سایهٔ تیز هلالی پایین-راست و برق بالا-چپ
-        crescent(p, c, R - 3.0, (-9, -9), '#4a3a8c', .2)
+        # ثابت‌ها (در همان clip): سایهٔ تیز هلالی و برق
+        crescent(p, c, R, (-9, -9), '#4a3a8c', .2)
         ha = math.radians(-126); tx, ty = -math.sin(ha), math.cos(ha); nx, ny = math.cos(ha), math.sin(ha)
         hx, hy = CX + 26 * nx, CY + 26 * ny
         poly(p, [(hx + tx * 7 + nx * 2.2, hy + ty * 7 + ny * 2.2), (hx + tx * 7 - nx * 2.2, hy + ty * 7 - ny * 2.2), (hx - tx * 7 - nx * 2.2, hy - ty * 7 - ny * 2.2), (hx - tx * 7 + nx * 2.2, hy - ty * 7 + ny * 2.2)], B_L)
+        p.raw('</g>')
+        p.stroke(disc, PART, j=0, step=99)                # خط دور ۵٫۸ روی همه
     return p
 
 

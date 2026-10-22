@@ -25,16 +25,16 @@ B_B, B_L, B_D = '#8a5ad0', '#b992f0', '#5b3a9c'
 YEL = '#ffd84d'
 G = 10
 FX = 20                                   # مرکز سر نزدیک تیر
-D = (-40, -40)                            # امتداد تیر
+D = (-44, -34)                            # امتداد تیر
 DD = 6                                    # بخش «عمق» روی زمین
 M = D[1] / D[0]                           # شیب زیر تیر
-XF = (1.0, -12, -2)
+XF = (1.15, -14, -6)
 W, H, TF, TW = 34, 32, 9, 12
 I0 = [(-W / 2, -H), (W / 2, -H), (W / 2, -H + TF), (TW / 2, -H + TF), (TW / 2, -TF), (W / 2, -TF), (W / 2, 0), (-W / 2, 0),
       (-W / 2, -TF), (-TW / 2, -TF), (-TW / 2, -H + TF), (-W / 2, -H + TF)]
 SLIDE = 9                                 # واحد symbol، موازی تیر: (dx,dy)
 SL = (-SLIDE, -SLIDE * DD / abs(D[0]))    # جابه‌جایی نهایی نسبت به شروع (x، y): تکیه‌گاه به سمت جعبه
-XC = -34                                  # مرکز نهایی تکیه‌گاه (x نسبی به FX)
+XC = -44                                  # مرکز نهایی تکیه‌گاه (x نسبی به FX)
 
 
 def at(pts, dx=0, dy=0): return [(FX + x + dx, G + y + dy) for x, y in pts]
@@ -88,10 +88,9 @@ def box(p):
     front = [A, B_, (B_[0], by - h), (A[0], by - h)]
     topf = para((A[0], by - h), (B_[0], by - h), q)
     left = para(A, (A[0], by - h), q)
-    poly(p, topf, B_L)
-    p.shape(topf, B_L, INNER, j=.05, step=6, clip=False)
     p.shape(front, B_B, PART, j=.1, step=6, clip=False)
-    p.ln((A[0] + 5, by - h + 5), (B_[0] - 5, by - 5), INNER, B_D, j=0); p.ln((B_[0] - 5, by - h + 5), (A[0] + 5, by - 5), INNER, B_D, j=0)
+    p.ln((A[0] + 6, by - h + 11), (B_[0] - 6, by - 5), INNER, B_D, j=0); p.ln((B_[0] - 6, by - h + 11), (A[0] + 6, by - 5), INNER, B_D, j=0)
+    poly(p, [(A[0] + 4, by - h + 4), (B_[0] - 4, by - h + 4), (B_[0] - 4, by - h + 7.5), (A[0] + 4, by - h + 7.5)], B_L)
     p.stroke(front, PART, j=.1, step=6)
 
 

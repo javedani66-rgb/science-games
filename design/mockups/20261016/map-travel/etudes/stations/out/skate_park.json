@@ -5,10 +5,10 @@
   66.2,
   31.7,
   11.5,
-  41
+  36
  ],
  "stand": [
-  31.0,
+  32.0,
   1.0
  ],
  "ring": [
@@ -21,13 +21,13 @@
   "node_skate_park_wheel_back"
  ],
  "inside_pad": {
-  "min_margin_px": 8.5,
+  "min_margin_px": 7.0,
   "base_on_pad": true,
-  "height_px": 47.2,
+  "height_px": 42.8,
   "bbox_px": [
-   16.5,
-   67.0,
-   69.5,
+   15.0,
+   71.5,
+   72.5,
    114.2
   ],
   "ok": true
@@ -35,8 +35,8 @@
  "motion_spec": {
   "node_skate_park_wheel": {
    "center": [
-    -19.0,
-    -6.0
+    -16.0,
+    -3.0
    ],
    "dir": "cw",
    "turns": 1,
@@ -47,8 +47,8 @@
   },
   "node_skate_park_wheel_back": {
    "center": [
-    -61.0,
-    -6.0
+    -64.0,
+    -3.0
    ],
    "dir": "cw",
    "turns": 1,

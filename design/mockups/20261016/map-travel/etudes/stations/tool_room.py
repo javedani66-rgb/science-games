@@ -141,6 +141,6 @@ if __name__ == '__main__':
     hm = p.X(pivot)
     r = finish(p, 'tool_room', STAND, motion={'scissors': dict(rotate=hm)}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_tool_room_scissors': dict(center=[round(v, 1) for v in hm], angle_deg=-25, note='نیمهٔ راست قیچی (تیغه+دسته) حول پیچ ≈۲۵° باز می‌شود و برمی‌گردد؛ ۱٫۲ث؛ یک‌بار هنگام رسیدن؛ نیمهٔ چپ ثابت. حالت ایستا = نیمه‌باز پایان.'),
+    sp['motion_spec'] = {'node_tool_room_scissors': dict(center=[round(v, 1) for v in hm], angle_deg=25, dir='cw', note='نیمهٔ متحرک قیچی (تیغه+دسته) حول پیچ تا ≈۲۵° بیشتر باز می‌شود و به حالت ایستا برمی‌گردد؛ ۱٫۲ث؛ یک‌بار هنگام رسیدن؛ نیمهٔ چپ ثابت. حالت ایستا = نیمه‌باز پایان.'),
                          'reduced_motion': 'قیچی ثابت'}
     (OUTD / 'tool_room.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

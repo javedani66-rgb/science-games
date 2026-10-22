@@ -47,15 +47,15 @@ def build():
     poly(p, [(WR + 4, TOP + 4), (R_ - 4, TOP + 4), (R_ - 4, TOP + 10), (WR + 4, TOP + 10)], W_L)
     poly(p, [(L + 4, BOT - 10), (R_ - 4, BOT - 10), (R_ - 4, BOT - 4), (L + 4, BOT - 4)], W_D)
     poly(p, [(18, -34), (22, -34), (22, -2), (18, -2)], W_D)
+    # آب (زیر خط دور؛ خط دور را نمی‌پوشاند)
+    poly(p, [(WL, WT + 4), (WR, WT + 4), (WR, WATER), (WL, WATER)], AIR)
+    poly(p, [(WL, WATER), (WR, WATER), (WR, WB), (WL, WB)], A_B)
     p.stroke(shell, OUT, j=.15, step=8)
-    # آب (۴ واحد داخل خط دور)
-    poly(p, [(WL + 4, WT + 4), (WR - 4, WT + 4), (WR - 4, WATER), (WL + 4, WATER)], AIR)
-    poly(p, [(WL + 4, WATER), (WR - 4, WATER), (WR - 4, WB - 4), (WL + 4, WB - 4)], A_B)
     # خط شنا
     ry = -17
-    pline(p, [(WL + 10, ry), (WR - 10, ry)], '#ffffff', INNER)
+    pline(p, [(WL + 10, ry), (WR - 7.6, ry)], '#ffffff', INNER)
     p.raw('<circle cx="%.1f" cy="%.1f" r="3.4" fill="%s"/>' % (*p.X((WL + 10, ry)), RED))
-    p.raw('<circle cx="%.1f" cy="%.1f" r="3.4" fill="%s"/>' % (*p.X((WR - 10, ry)), YEL))
+    p.raw('<circle cx="%.1f" cy="%.1f" r="3.4" fill="%s"/>' % (*p.X((WR - 7.6, ry)), YEL))
     with layer(p, 'wave'):
         pline(p, wave(WL + 10, WR - 10, WATER + 5), '#ffffff', INNER)
     # نردبان: دو ریل تو‌در‌تو، از روی دیواره، روی لبه، به آب
