@@ -49,18 +49,18 @@ def build(out=OUTD, rot=0):
     p.tipshadow(-14, G, 40); p.foot_tip(-14, G - 1, 30)
     with layer(p, 'wheel_far'):
         wheel(p, None, FX, FY, R, front=False)
-    # دسته: از وسط پهلوی راست جعبه (پشت جعبه کشیده می‌شود تا وصل دیده شود)
-    a0, a1 = (36, -30), (90, -46)
-    dx, dy = a1[0] - a0[0], a1[1] - a0[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy * 6, ux * 6
-    sh = [(a0[0] + nx, a0[1] + ny), (a1[0] + nx, a1[1] + ny), (a1[0] - nx, a1[1] - ny), (a0[0] - nx, a0[1] - ny)]
-    p.shape(sh, H_B, PART, j=0, step=6, clip=False)
-    poly(p, [(a0[0] + nx * .5, a0[1] + ny * .5), (a1[0] + nx * .5, a1[1] + ny * .5), (a1[0] + nx * .1, a1[1] + ny * .1), (a0[0] + nx * .1, a0[1] + ny * .1)], H_L)
     # جعبهٔ چوبی باز: داخل تیره، گونی‌ها از دهانه، دیوارهٔ جلو روی پایین گونی‌ها
     extrude(p, rect(-52, -44, 30, -14), (14, -11), W_B, INTR, W_D, sw=PART, sw_in=0)
     sack(p, -36, -46, 24, 22); sack(p, -10, -46, 24, 22); sack(p, -23, -58, 24, 22)
     p.shape(rect(-52, -44, 30, -14), W_B, PART, j=0, step=6, clip=False)
     poly(p, rect(-49, -41, 27, -37), W_L)
     poly(p, rect(-49, -27, 27, -24), W_D)
+    # دسته: از وسط پهلوی راست جعبه (جلوی پهلوی جعبه)
+    a0, a1 = (36, -30), (90, -46)
+    dx, dy = a1[0] - a0[0], a1[1] - a0[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy * 6, ux * 6
+    sh = [(a0[0] + nx, a0[1] + ny), (a1[0] + nx, a1[1] + ny), (a1[0] - nx, a1[1] - ny), (a0[0] - nx, a0[1] - ny)]
+    p.shape(sh, H_B, PART, j=0, step=6, clip=False)
+    poly(p, [(a0[0] + nx * .5, a0[1] + ny * .5), (a1[0] + nx * .5, a1[1] + ny * .5), (a1[0] + nx * .1, a1[1] + ny * .1), (a0[0] + nx * .1, a0[1] + ny * .1)], H_L)
     # چرخ نزدیک
     with layer(p, 'wheel_near'):
         wheel(p, None, NX, NY, R, front=True)

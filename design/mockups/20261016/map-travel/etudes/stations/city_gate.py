@@ -22,14 +22,17 @@ def build():
     p = Pen('city_gate', 'city'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = (.9, 0, 4)
     p.tipshadow(0, BASE + 4, 56)
     # جادهٔ سنگ‌فرش از دروازه تا جلوی سکو (جای ایستادن بچه آزاد)
-    road = [(-16, -6), (16, -6), (36, 27), (-36, 27)]
-    p.shape(road, ROAD, PART, j=.15, step=8, clip=False)
+    road = [(-18, -12), (18, -12), (36, 27), (-36, 27)]
+    poly(p, road, ROAD)
     for a, b in (((-6, 0), (-10, 25)), ((6, 0), (10, 25)), ((-30, 14), (30, 14))):
         p.ln(a, b, 1.6, ROAD_J, j=.1)
     # بدنهٔ دروازه: یک قطعه با کنگره
     u = sbox(-50, -84, 50, BASE)
     for x0, x1 in ((-50, -34), (-8, 8), (34, 50)):
         u = u.union(sbox(x0, -100, x1, -84))
+    from shapely.geometry import Polygon as SP
+    arch_p = [(-25, BASE + 2), (-25, -44)] + [(25 * math.cos(math.radians(a)), -44 - 25 * math.sin(math.radians(a))) for a in range(180, -1, -15)] + [(25, -44), (25, BASE + 2)]
+    u = u.difference(SP(arch_p))
     pts = list(u.exterior.coords)[:-1]
     extrude(p, pts, DD, S_B, S_L, S_D, sw=OUT, sw_in=0)
     for y in (-70, -44, -18):
@@ -38,21 +41,18 @@ def build():
     # دهانهٔ طاقی تیره
     arch = [(-19, BASE)] + [(-19 * math.cos(math.radians(a)), -44 - 19 * math.sin(math.radians(a))) for a in range(0, 181, 15)][::-1] + [(19, BASE)]
     arch = [(-19, BASE), (-19, -44)] + [(19 * math.cos(math.radians(a)), -44 - 19 * math.sin(math.radians(a))) for a in range(180, -1, -15)] + [(19, -44), (19, BASE)]
-    p.shape(arch, '#9fd7e8', PART, j=.1, step=8, clip=False)          # آن‌سوی دروازه: آسمان روشن
-    poly(p, [(-19, -30), (19, -30), (19, BASE), (-19, BASE)], '#8fc46a')   # زمین آن‌سو
-    poly(p, [(-5, -30), (5, -30), (17, BASE), (-17, BASE)], ROAD)          # جاده در عمق
     # لنگه‌های چوبی باز، رو به جلو
     for sg in (-1, 1):
-        q = [(sg * 19, -56), (sg * 19, BASE), (sg * 31, BASE + 8), (sg * 31, -48)]
+        q = [(sg * 25, -56), (sg * 25, BASE), (sg * 36, BASE + 8), (sg * 36, -48)]
         if sg > 0:
             with layer(p, 'door'):
                 p.shape(q, W_B, PART, j=.1, step=8, clip=False)
-                poly(p, [(sg * 21, -50), (sg * 21, 0), (sg * 24, 2), (sg * 24, -48)], W_L)
-                disc(p, 28, -22, 2.2, YEL)
+                poly(p, [(sg * 27, -50), (sg * 27, 0), (sg * 30, 2), (sg * 30, -48)], W_L)
+                disc(p, 33, -22, 2.2, YEL)
         else:
             p.shape(q, W_B, PART, j=.1, step=8, clip=False)
-            poly(p, [(sg * 21, -50), (sg * 21, 0), (sg * 24, 2), (sg * 24, -48)], W_L)
-            disc(p, -28, -22, 2.2, YEL)
+            poly(p, [(sg * 27, -50), (sg * 27, 0), (sg * 30, 2), (sg * 30, -48)], W_L)
+            disc(p, -33, -22, 2.2, YEL)
     # تابلوی گرد زرد روی طاق
     p.shape(ell(0, -79, 11, 7, 0, 360, 20), YEL, PART, j=.05, step=99, clip=False)
     return p

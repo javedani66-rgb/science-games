@@ -20,14 +20,14 @@
   "node_city_gate_door"
  ],
  "inside_pad": {
-  "min_margin_px": 8.3,
+  "min_margin_px": 10.0,
   "base_on_pad": true,
-  "height_px": 90.2,
+  "height_px": 88.5,
   "bbox_px": [
    36.8,
    40.0,
    111.5,
-   130.2
+   128.5
   ],
   "ok": true
  },
