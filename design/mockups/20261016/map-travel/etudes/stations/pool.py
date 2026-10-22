@@ -15,8 +15,8 @@ W_T, W_F, W_S = '#ffffff', '#dfe8f4', '#a9bcd6'       # لبه: رو، جلو، 
 A_B, A_L, A_D = '#3fb4f0', '#9be0ff', '#1f7fc4'
 RAIL, RAIL_L, RAIL_D = '#aebfd8', '#f2f7ff', '#6f86ab'
 FX0, FX1, FY0, FY1 = -52, 40, 4, 22
-DX, DY = 14, -54
-BR = 8; BALL_C = (-27, -22)
+DX, DY = 12, -40
+BR = 12; BALL_C = (-24, -18)
 DRIFT = (-12, 3)
 def poly(p, pts, col, op=1):
     p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
@@ -34,28 +34,30 @@ def build():
     p.shape([(FX0, FY0), (FX1, FY0), (FX1 + DX, FY0 + DY), (FX0 + DX, FY0 + DY)], W_T, PART, j=.05, step=8)
     p.ln((FX0 + 8, FY0 + 10), (FX1 - 8, FY0 + 10), INNER, '#b9c9de', j=.1)      # نوار کاشی جلو
     # دهانه و آب
-    u0, u1, w0, w1, ww = .05, .95, .12, .91, .80
+    u0, u1, w0, w1, ww = .09, .91, .21, .84, .66
     hole = [pos(u0, w0), pos(u1, w0), pos(u1, w1), pos(u0, w1)]
     poly(p, hole, A_D)
     water = [pos(u0, w0), pos(u1, w0), pos(u1, ww), pos(u0, ww)]
     poly(p, water, A_B)
     poly(p, [pos(u0, w0 + .02), pos(u0 + .18, w0 + .02), pos(u0 + .18 + .03, w0 + .09), pos(u0 + .03, w0 + .09)], A_L)
     p.stroke(hole, INNER, j=.05, step=8)
-    for (ua, ub, wv) in ((.12, .40, .62), (.55, .88, .50), (.20, .46, .36), (.62, .90, .30)):
-        pline(p, [(pos(ua + (ub - ua) * i / 12, wv)[0], pos(0, wv)[1] + 1.6 * math.sin(i * 1.5)) for i in range(13)], '#ffffff', 2.6)
-    # ۳) نردبان کوتاه و باریک گوشهٔ پشت-راست
-    xs, ys = pos(.80, .93); XG = 14; LH = 30
+    p.ln(pos(.12, .48), pos(.26, .48), INNER, '#ffffff', j=0); p.ln(pos(.42, .30), pos(.58, .30), INNER, '#ffffff', j=0)
+    # ۳) نردبان بلند فلزی (دو ریل ضخیم سه‌پله + ۳ پله + دستگیرهٔ خمیده)
+    xs, ys = pos(.72, .62)
+    LH = 46; XG = 24
     def rail(x):
         pts = [(x, ys), (x, ys - LH)]
-        for k in range(1, 7):
-            t = math.radians(180 - 160 * k / 6); pts.append((x + XG / 2 + XG / 2 * math.cos(t), ys - LH - 5 * math.sin(t)))
+        for k in range(1, 8):
+            t = math.radians(180 - 160 * k / 7); pts.append((x + 7 + 7 * math.cos(t), ys - LH - 7 * math.sin(t)))
         return pts
-    rungs = (ys - 10, ys - 22)
-    for x in (xs, xs + XG): pline(p, rail(x), NAVY, 11)
-    for y in rungs: pline(p, [(xs, y), (xs + XG, y)], NAVY, 9, 'butt')
-    for x in (xs, xs + XG): pline(p, rail(x), RAIL, 6)
-    for y in rungs: pline(p, [(xs, y), (xs + XG, y)], RAIL, 4, 'butt')
-    for x in (xs, xs + XG): pline(p, [(x - 1.5, ys - 3), (x - 1.5, ys - LH + 2)], RAIL_L, 2)
+    rungs = (ys - 16, ys - 32)
+    for x in (xs, xs + XG): pline(p, rail(x), NAVY, 15)
+    for y in rungs: pline(p, [(xs, y), (xs + XG, y)], NAVY, 12, 'butt')
+    for x in (xs, xs + XG): pline(p, rail(x), RAIL, 8)
+    for y in rungs: pline(p, [(xs, y), (xs + XG, y)], RAIL, 6, 'butt')
+    for x in (xs, xs + XG): pline(p, [(x - 3, ys - 6), (x - 3, ys - LH + 4)], RAIL_L, 2.5)
+    for x in (xs, xs + XG): pline(p, [(x + 4.5, ys - 6), (x + 4.5, ys - LH + 4)], RAIL_D, 2)
+    for y in rungs: pline(p, [(xs + 6, y - 2.5), (xs + XG - 6, y - 2.5)], RAIL_L, 2.5, 'butt')
     # ۴) توپ ساحلی درشت
     with layer(p, 'ball'):
         cx, cy = BALL_C
@@ -64,7 +66,7 @@ def build():
         poly(p, ell(cx, cy + BR - 3, BR * 1.15, BR * .2, 0, 360, 24), '#ffffff', .75)
         cols = ['#ee4b3c', '#ffc93c', '#ffffff']
         circ = ell(cx, cy, BR, BR, 0, 360, 40)
-        p.shape(circ, '#ffffff', INNER, j=.05, step=99)
+        p.shape(circ, '#ffffff', PART, j=.05, step=99)
         lam = [-90, -32, 32, 90]
         def mer(l): return [(cx + BR * math.cos(math.radians(t)) * math.sin(math.radians(l)), cy - BR * math.sin(math.radians(t))) for t in range(-90, 91, 15)]
         for i in range(2):
@@ -74,7 +76,7 @@ def build():
         for l in lam[1:-1]: pline(p, mer(l), NAVY, INNER)
         poly(p, [(cx + BR * .98 * math.cos(math.radians(t)), cy + BR * .98 * math.sin(math.radians(t))) for t in range(-60, 61, 12)] + [(cx + BR * .45 * math.cos(math.radians(t)), cy + BR * .45 * math.sin(math.radians(t))) for t in range(60, -61, -12)], '#10083a', .2)
         poly(p, ell(cx - BR * .35, cy - BR * .45, BR * .22, BR * .14, 0, 360, 14), '#ffffff', .8)
-        p.stroke(circ, INNER, j=.05, step=99)
+        p.stroke(circ, PART, j=.05, step=99)
     return p
 STAND = None
 if __name__ == '__main__':

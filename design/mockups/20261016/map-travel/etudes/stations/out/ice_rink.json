@@ -22,12 +22,12 @@
  "inside_pad": {
   "min_margin_px": 0.0,
   "base_on_pad": false,
-  "height_px": 75.8,
+  "height_px": 78.0,
   "bbox_px": [
-   11.2,
+   5.0,
    66.5,
-   132.5,
-   142.2
+   138.8,
+   144.5
   ],
   "ok": false
  },

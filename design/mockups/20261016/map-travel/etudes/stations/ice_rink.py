@@ -21,7 +21,7 @@ ICE, ICE_L, ICE_D = '#8fd3f4', '#c6ecfb', '#5fb0dc'
 BT_B, BT_L, BT_D = '#ffffff', '#ffffff', '#c3d2ea'
 RD_B, RD_D = '#e0402e', '#a82818'
 M_B, M_L, M_D = '#cdd6e2', '#ffffff', '#7e8da6'
-CX, CY, RX, RY, WH = 0, 0, 74, 34, 7
+CX, CY, RX, RY, WH = 0, -2, 82, 38, 8
 GLIDE = 10
 
 
@@ -61,7 +61,7 @@ def build(out=OUTD, glide=0):
     arcline(p, ell(CX + 8, CY + 2, 26, 7, 190, 340, 12), ICE_L, 2.4)
     arcline(p, ell(CX + 30, CY - 6, 22, 8, 10, 120, 12), ICE_L, 2.2)
     with layer(p, 'skate'):
-        skate(p, CX - 32 - GLIDE + glide, CY + 8, .54)
+        skate(p, CX - 36 - GLIDE + glide, CY + 10, .54)
     return p
 
 

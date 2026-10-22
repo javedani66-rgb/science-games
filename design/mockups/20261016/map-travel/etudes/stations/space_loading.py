@@ -48,6 +48,7 @@ def crane(p):
     box(p, bx + 8, -100, 14, by + 100, (8, -5), YB, sw=PART)                  # دکل
     p.tipshadow(bx + 20, GY + 2, 26)
     box(p, -26, -112, 72, 14, (9, -6), YB, sw=PART)                          # بازو
+    p.shape([(10, -98), (bx + 8, -98), (bx + 8, -72)], YB[2], PART, j=.05, step=6, clip=False)     # نبشی بین تیر و ستون
     cyl(p, bx + 18, -116, 7.5, 11, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=PART)   # چراغ
 
 
