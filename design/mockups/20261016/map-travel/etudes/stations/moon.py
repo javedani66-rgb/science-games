@@ -18,10 +18,10 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 M_B, M_L, M_SH = '#fff4d2', '#ffffff', '#d2c4e4'
 CR, CR_D = '#e6d49a', '#a89258'
 S_B, S_L, S_D = '#b7c4d4', '#dbe4ee', '#8e9db6'
-R = 33
-CX, CY = -24, -25
+R = 48
+CX, CY = 0, -40
 SLIDE = 8.3          # ≈۶px نقشه (واحد)
-SH = (-10, -10)
+SH = (-14, -14)
 
 
 def poly(p, pts, col, op=1):
@@ -54,17 +54,17 @@ def crater(p, x, y, r):
 
 def build():
     p = Pen('moon', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 0, 0)
-    p.tipshadow(CX + 3, 16, 30); p.foot_tip(CX, 15, 26)
-    body = ell(CX, 5, 29, 9, 180, 360, 36) + ell(CX, 12, 29, 9, 0, 180, 36)
+    p.tipshadow(CX + 3, 19, 42); p.foot_tip(CX, 18, 38)
+    body = ell(CX, 6, 40, 11, 180, 360, 36) + ell(CX, 15, 40, 11, 0, 180, 36)
     p.shape(body, S_B, OUT, j=.0, step=99)
-    poly(p, ell(CX, 5, 29, 9, 180, 360, 36) + ell(CX, 5, 29, 9, 360, 180, 36), S_L)                      # رویهٔ روشن (بیضی کامل)
-    poly(p, ell(CX, 12, 29, 9, 0, 180, 36) + ell(CX, 5, 29, 9, 180, 0, 36), S_D)                         # نوار تیرهٔ جلو
+    poly(p, ell(CX, 6, 40, 11, 180, 360, 36) + ell(CX, 6, 40, 11, 360, 180, 36), S_L)                      # رویهٔ روشن (بیضی کامل)
+    poly(p, ell(CX, 15, 40, 11, 0, 180, 36) + ell(CX, 6, 40, 11, 180, 0, 36), S_D)                         # نوار تیرهٔ جلو
     p.stroke(body, OUT, j=.0, step=99)
     sph = p.shape(ell(CX, CY, R, R, 0, 352.5, 47), M_B, OUT, j=0, step=99)   # بدون نقطهٔ تکراری Z (زائدهٔ خط دور)
-    crater(p, CX - 17, CY - 6, 6.5); crater(p, CX + 11, CY - 18, 6.5); crater(p, CX - 6, CY + 13, 6)
+    crater(p, CX - 25, CY - 9, 9.5); crater(p, CX + 16, CY - 26, 9.5); crater(p, CX - 9, CY + 19, 8.5)
     ha = math.radians(-126); tx, ty = -math.sin(ha), math.cos(ha); nx, ny = math.cos(ha), math.sin(ha)
-    hx, hy = CX + 25 * nx, CY + 25 * ny
-    poly(p, [(hx + tx * 6 + nx * 2, hy + ty * 6 + ny * 2), (hx + tx * 6 - nx * 2, hy + ty * 6 - ny * 2), (hx - tx * 6 - nx * 2, hy - ty * 6 - ny * 2), (hx - tx * 6 + nx * 2, hy - ty * 6 + ny * 2)], M_L)
+    hx, hy = CX + 36 * nx, CY + 36 * ny
+    poly(p, [(hx + tx * 8 + nx * 3, hy + ty * 8 + ny * 3), (hx + tx * 8 - nx * 3, hy + ty * 8 - ny * 3), (hx - tx * 8 - nx * 3, hy - ty * 8 - ny * 3), (hx - tx * 8 + nx * 3, hy - ty * 8 + ny * 3)], M_L)
     p.raw('<defs><clipPath id="moon_sph_clip"><circle cx="%.1f" cy="%.1f" r="%.1f"/></clipPath></defs><g clip-path="url(#moon_sph_clip)">' % (*p.X((CX, CY)), R - 2))
     with layer(p, 'shade'):
         crescent(p, (CX, CY), R - 3, SH, M_SH)

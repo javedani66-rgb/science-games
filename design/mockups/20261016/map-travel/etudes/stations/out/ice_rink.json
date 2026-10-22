@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  75
+  42
  ],
  "stand": [
   0.0,
@@ -20,14 +20,14 @@
   "node_ice_rink_skate"
  ],
  "inside_pad": {
-  "min_margin_px": 1.5,
-  "base_on_pad": true,
-  "height_px": 106.2,
+  "min_margin_px": 0.0,
+  "base_on_pad": false,
+  "height_px": 75.8,
   "bbox_px": [
-   19.2,
-   32.8,
-   130.8,
-   139.0
+   11.2,
+   66.5,
+   132.5,
+   142.2
   ],
   "ok": false
  },

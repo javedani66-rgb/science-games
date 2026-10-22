@@ -45,19 +45,19 @@ def crane(p):
     for i in range(3):
         a = bx + 5 + i * 8.5
         p.fill([(a, by + 12), (a + 4, by + 12), (a + 1, by + 19), (a - 3, by + 19)], '#241a5e')
-    box(p, bx + 8, -92, 14, by + 92, (8, -5), YB, sw=PART)                  # دکل
+    box(p, bx + 8, -100, 14, by + 100, (8, -5), YB, sw=PART)                  # دکل
     p.tipshadow(bx + 20, GY + 2, 26)
-    box(p, -26, -104, 72, 14, (9, -6), YB, sw=PART)                          # بازو
-    cyl(p, bx + 18, -108, 7.5, 11, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=PART)   # چراغ
+    box(p, -26, -112, 72, 14, (9, -6), YB, sw=PART)                          # بازو
+    cyl(p, bx + 18, -116, 7.5, 11, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=PART)   # چراغ
 
 
 def load(p):
     cx = -4
     with layer(p, 'crate'):
-        p.ln((cx, -99), (cx, -78), INNER, NAVY, j=.05)
-        p.shape(ell(cx, -75, 6.5, 6.5, 0, 360, 16), '#aab8cf', PART, j=.1, step=99, clip=False)
-        box(p, cx - 14, -70, 28, 28, (10, -7), OR, sw=PART)
-        p.fill([(cx - 14, -58), (cx + 14, -58), (cx + 14, -53), (cx - 14, -53)], '#a8470a', .85)
+        p.ln((cx, -107), (cx, -88), INNER, NAVY, j=.05)
+        p.shape(ell(cx, -85, 6.5, 6.5, 0, 360, 16), '#aab8cf', PART, j=.1, step=99, clip=False)
+        box(p, cx - 13, -80, 26, 26, (10, -7), OR, sw=PART)
+        p.fill([(cx - 13, -68), (cx + 13, -68), (cx + 13, -63), (cx - 13, -63)], '#a8470a', .85)
 
 
 def build():

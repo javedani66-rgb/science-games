@@ -21,7 +21,7 @@ ICE, ICE_L, ICE_D = '#8fd3f4', '#c6ecfb', '#5fb0dc'
 BT_B, BT_L, BT_D = '#ffffff', '#ffffff', '#c3d2ea'
 RD_B, RD_D = '#e0402e', '#a82818'
 M_B, M_L, M_D = '#cdd6e2', '#ffffff', '#7e8da6'
-CX, CY, RX, RY, WH = 4, 0, 68, 29, 8
+CX, CY, RX, RY, WH = 0, 0, 74, 34, 7
 GLIDE = 10
 
 
@@ -56,9 +56,12 @@ def build(out=OUTD, glide=0):
     p.shape(ell(CX, CY, RX, RY, 0, 360, 48), RIM, PART, j=.1, step=10, clip=False)
     p.shape(ell(CX, CY, RX - 8, RY - 6, 0, 360, 48), ICE, INNER, j=.1, step=99, clip=False)
     poly(p, ell(CX, CY, RX - 11, RY - 9, 195, 270, 14) + ell(CX, CY, RX - 22, RY - 15, 270, 195, 14), ICE_L)
-    arcline(p, ell(CX + 14, CY + 10, 34, 8, 20, 150, 12), ICE_L, 2.6)
+    arcline(p, ell(CX + 14, CY + 12, 40, 9, 20, 150, 12), ICE_L, 2.6)
+    arcline(p, ell(CX - 10, CY - 4, 44, 12, 200, 330, 12), ICE_L, 2.4)
+    arcline(p, ell(CX + 8, CY + 2, 26, 7, 190, 340, 12), ICE_L, 2.4)
+    arcline(p, ell(CX + 30, CY - 6, 22, 8, 10, 120, 12), ICE_L, 2.2)
     with layer(p, 'skate'):
-        skate(p, CX - 50 - GLIDE + glide, CY + 4, .9)
+        skate(p, CX - 32 - GLIDE + glide, CY + 8, .54)
     return p
 
 
