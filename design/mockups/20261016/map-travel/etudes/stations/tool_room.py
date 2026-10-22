@@ -30,7 +30,7 @@ def flat(p, plan, col, sw=2.2, lift=3):
 
 
 def build():
-    p = Pen('tool_room', 'city'); pad(p, line=((60, 24), (76, 20)), tri=((-74, 4), (-66, 20)), dot=(72, -10)); p.xf = (1.0, -4, 14)
+    p = Pen('tool_room', 'city'); pad(p, line=((60, 24), (76, 20)), tri=((-74, 4), (-66, 20)), dot=(72, -10)); p.xf = (0.82, -1, 17)
     p.tipshadow(8, 14, 62); p.foot_tip(-40, 8, 12); p.foot_tip(40, 8, 12)
     # پایه‌ها (دو عقبی کوتاه‌تر دیده می‌شوند) و زیرکش
     for x0, x1 in ((X0 + 36, X0 + 46), (X1 - 30 + 8, X1 - 30 + 18)):

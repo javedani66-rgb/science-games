@@ -25,7 +25,7 @@ PV = (-68, -127)
 
 def plank(p, x0, x1, y, h=11, D=12, E=7):
     sil = [(x0, y + h), (x1, y + h), (x1 + D, y + h - E), (x1 + D, y - E), (x0 + D, y - E), (x0, y)]
-    p.shape(sil, P_B, PART, j=0, step=7)
+    p.shape(sil, P_B, PART, j=0, step=6, clip=False)
     poly(p, [(x0, y), (x1, y), (x1 + D, y - E), (x0 + D, y - E)], P_L)
     poly(p, [(x1, y), (x1 + D, y - E), (x1 + D, y + h - E), (x1, y + h)], P_D)
     poly(p, R(x0 + 3, y + h - 4, x1 - 2, y + h - 1.5), P_D, .9)
@@ -33,7 +33,7 @@ def plank(p, x0, x1, y, h=11, D=12, E=7):
 
 def build():
     p = Pen('scaffold', 'city'); pad(p, line=((-14, 36), (8, 36)), tri=((72, -14), (68, 14)), dot=(-74, -6)); p.xf = (0.92, 4, 6)
-    p.tipshadow(-4, BASE + 3, 62); p.foot_tip(-40, BASE + 1, 14); p.foot_tip(24, BASE + 1, 14); p.foot_tip(52, BASE + 1, 12)
+    p.tipshadow(-4, BASE + 3, 62); p.foot_tip(-40, BASE + 1, 14); p.foot_tip(24, BASE + 1, 14); p.foot_tip(60, BASE + 1, 12)
     # ۲ ضربدرها (پشت)
     for y0, y1 in ((BASE - 2, -48), (-56, -100)):
         for a, b in (((-40, y0), (24, y1)), ((24, y0), (-40, y1))):
@@ -48,8 +48,8 @@ def build():
         poly(p, R(x - PW / 2 + 2.5, ty + 6, x - PW / 2 + 5.5, BASE - 8), T_L)
         poly(p, R(x + 1.5, ty + 4, x + PW / 2 - 2, BASE - 8), T_D)
     # ۴ نردبان
-    for y in (-72, -52, -32, -12): p.ln((45, y), (63, y), 3.4, STR, j=.1)
-    for x in (45, 63): p.shape(R(x - 2.8, -86, x + 2.8, BASE), L_B, 3, j=.1, step=7, clip=False)
+    for y in (-92, -72, -52, -32, -12): p.ln((52, y), (68, y), 3.4, STR, j=.1)
+    for x in (52, 68): p.shape(R(x - 2.8, -112, x + 2.8, BASE), L_B, 3, j=.1, step=7, clip=False)
     # ۳ تخته‌ها
     plank(p, -52, 30, -48); plank(p, -52, 30, -102)
     # ۵ بازو + قرقره + سطل
