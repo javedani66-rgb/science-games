@@ -23,12 +23,12 @@ SAND = '#f6e7b4'; SAND_L = '#fffaf0'; SAND_D = '#cfae62'
 PUR = '#7b4fd0'; PUR_L = '#a98bf0'; PUR_D = '#4a2c94'; YEL = '#ffd84d'
 
 XF = (1.0, 19.0, 0.0)
-PX = (-71, -15)                  # مراکز میله‌ها
+PX = (-74, -12)                  # مراکز میله‌ها
 CX = sum(PX) / 2                 # -49 محور تقارن
 PW = 14; PT, PB = -92, 2         # میله: بالا/پایین
 BW, BT, BB = 24, -6, 10           # بلوک پایه (از y=0 تا 10)... میله روی آن می‌نشیند
 RY, RH = -68, 14                 # طناب
-BAND_W = 14; BAND_T = -77; BAND_B = -54
+BAND_W = 12; BAND_T = -77; BAND_B = -54
 SH = 7                           # حرکت: ±5px ≈ 7 واحد
 
 
@@ -66,11 +66,11 @@ def build():
     # طناب باریک (۱۲، خط ۳٫۹) از گرهٔ چپ تا گرهٔ راست روی میله‌ها پیچیده؛ هر گره ۷ واحد از میلهٔ بیرونی بیرون می‌زند
     x0, x1 = PX[0], PX[1]
     p.shape([(x0, RY - RH / 2), (x1, RY - RH / 2), (x1, RY + RH / 2), (x0, RY + RH / 2)], SAND, INNER, j=.1, step=6, clip=False)
-    for dx in (-17, -11, 11, 17):                                      # بافت مورب منظم، متقارن حول CX
+    for dx in (-15, 15):                                      # بافت مورب منظم، متقارن حول CX
         flat(p, [(CX + dx - 2.8, RY + RH / 2 - 1.9), (CX + dx + 1.1, RY + RH / 2 - 1.9), (CX + dx + 2.8, RY - RH / 2 + 1.9), (CX + dx - 1.1, RY - RH / 2 + 1.9)], SAND_D)
     for x in PX:                                                       # لولا: رسن دور ستون پیچیده (۵ واحد بیرون‌زدگی) + گرهٔ گرد روی آن
-        mpoly(p, [(x - PW / 2 - 5, RY - 9), (x + PW / 2 + 5, RY - 9), (x + PW / 2 + 5, RY + 9), (x - PW / 2 - 5, RY + 9)], SAND_D, INNER)
-        mpoly(p, [(x - 3, RY - 6), (x + 3, RY - 6), (x + 6, RY - 3), (x + 6, RY + 3), (x + 3, RY + 6), (x - 3, RY + 6), (x - 6, RY + 3), (x - 6, RY - 3)], SAND, INNER)
+        mpoly(p, [(x - PW / 2 - 3, RY - 8), (x + PW / 2 + 3, RY - 8), (x + PW / 2 + 3, RY + 8), (x - PW / 2 - 3, RY + 8)], SAND_D, INNER)
+        mpoly(p, [(x - 2, RY - 4.5), (x + 2, RY - 4.5), (x + 4.5, RY - 2), (x + 4.5, RY + 2), (x + 2, RY + 4.5), (x - 2, RY + 4.5), (x - 4.5, RY + 2), (x - 4.5, RY - 2)], SAND, INNER)
     with layer(p, 'flag'):
         w = BAND_W / 2
         pts = [(CX - w, BAND_T), (CX + w, BAND_T), (CX + w, BAND_B), (CX, BAND_B - 6), (CX - w, BAND_B)]

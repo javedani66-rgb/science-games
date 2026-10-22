@@ -20,21 +20,24 @@ from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/excavation'
 
-# سنگ
+# سنگ بار (روشن)
 S_B, S_L, S_D = '#d8c3a0', '#f2e6cc', '#ad9570'
-# میلهٔ رنگ‌شدهٔ فلزی
+# سنگ تکیه‌گاه (تیره)
+F_B, F_L, F_D = '#8c7a68', '#b3a08b', '#675848'
+# میلهٔ رنگ‌شدهٔ فلزی (باریک و بلند)
 B_B, B_L, B_D = '#e0553a', '#ff9a6c', '#9c2f1c'
-# خاک
-E_B, E_L, E_D = '#9a6636', '#c08850', '#5a3a22'
+# خاک: تل (روشن)، لبهٔ گودال (روشن‌ترین)، سوراخ (تیره)
+M_B, M_L, M_D = '#c48e55', '#e0b078', '#9a6636'
+P_RIM, P_HOLE = '#e8c08a', '#2e1a0e'
 YEL = '#ffd84d'
 
 GY = 8                       # زمین
-ANG = 20                     # زاویهٔ ایستای میله (درجه، ساعتگرد در svg = سر راست پایین)
-PIV = (-14.0, -14.0)         # لولا
-BW = 8.0                     # نیم‌پهنای میله
-L0, L1 = -44, 31             # سر کوتاه (چپ) و سر بلند (راست)
-BC = (-29.0, -42.0)          # مرکز سنگ بار
-BRX, BRY = 20, 19
+ANG = 12                     # زاویهٔ ایستای میله (درجه، ساعتگرد در svg = سر راست پایین)
+PIV = (-22.0, -9.0)          # لولا
+BW = 7.0                     # نیم‌پهنای میله (۱۴ پهن)
+L0, L1 = -33, 36             # سر کوتاه (چپ) و سر بلند (راست)
+BC = (-38.0, -36.0)          # مرکز سنگ بار
+BRX, BRY = 19, 19
 REST = -8                    # شروع حرکت
 
 
@@ -58,39 +61,36 @@ def clip_x(pts, x0):
 
 
 def build():
-    p = Pen('excavation', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.1, 4, 4)
+    p = Pen('excavation', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.1, 9, -2)
     f = rot(PIV[0], PIV[1], ANG)
-    p.tipshadow(-14, GY + 1, 20); p.tipshadow(-42, GY + 4, 20); p.tipshadow(17, GY + 1, 7)
-    p.foot_tip(-14, GY, 14); p.foot_tip(-42, GY + 4, 15); p.foot_tip(17, GY, 6)
-    # ۲) تل خاک (پشت گودال)
-    mound = [(-66, 3), (-62, -8), (-52, -19), (-40, -19), (-30, -8), (-26, 3)]
-    p.shape(mound, E_B, PART, j=.3, step=7)
-    flat(p, [(-60, -3), (-57, -10), (-51, -15), (-48, -12), (-54, -4)], E_L)
-    flat(p, clip_x(mound, -41), E_D, .55); p.stroke(mound, PART, j=.3, step=7)
-    # ۳) گودال: لبهٔ خاکی + سوراخ
-    rim = ell(-42, 9, 19, 7.5, 0, 360, 24)
-    p.shape(rim, '#b07a42', PART, j=.25, step=7)
-    flat(p, ell(-42, 10, 12.5, 4, 0, 360, 24), E_D)
-    # ۴) سنگ تکیه‌گاه
-    ful = [(-30, GY), (-32, -4), (-27, -14), (-14, -18), (-1, -14), (4, -4), (2, GY)]
-    p.shape(ful, S_B, OUT, j=.3, step=7)
-    flat(p, [(-28, 4), (-28, -5), (-25, -11), (-21, -11), (-24, -5), (-24, 4)], S_L)
-    flat(p, clip_x(ful, -4), S_D, .9); p.stroke(ful, OUT, j=.3, step=7)
-    # ۵) لایهٔ متحرک: میله + سنگ بار (روی میله) + پین
+    p.tipshadow(-22, GY + 1, 20); p.tipshadow(-46, GY + 4, 19); p.tipshadow(18, GY + 1, 6)
+    p.foot_tip(-22, GY, 13); p.foot_tip(-46, GY + 4, 15); p.foot_tip(18, GY, 5)
+    # ۲) تل خاک (پشت گودال و پشت سنگ بار)
+    mound = [(-66, 3), (-63, -8), (-55, -21), (-42, -23), (-31, -10), (-28, 3)]
+    p.shape(mound, M_B, PART, j=.3, step=7)
+    flat(p, [(-61, -2), (-59, -10), (-54, -16), (-51, -13), (-56, -3)], M_L)
+    flat(p, clip_x(mound, -43), M_D, .75); p.stroke(mound, PART, j=.3, step=7)
+    # ۳) گودال: لبهٔ روشن + سوراخ تیره
+    p.shape(ell(-46, 9, 19, 7.5, 0, 360, 24), P_RIM, PART, j=.25, step=7)
+    flat(p, ell(-46, 10, 12, 4.2, 0, 360, 24), P_HOLE)
+    # ۴) سنگ تکیه‌گاه (درشت، تیره، کامل)
+    ful = [(-38, GY), (-40, 0), (-35, -8), (-22, -12), (-9, -8), (-4, 0), (-6, GY)]
+    p.shape(ful, F_B, OUT, j=.3, step=7)
+    flat(p, [(-36, 5), (-36, -1), (-32, -7), (-28, -7), (-31, -1), (-31, 5)], F_L)
+    flat(p, clip_x(ful, -12), F_D, .9); p.stroke(ful, OUT, j=.3, step=7)
+    # ۵) لایهٔ متحرک: میله + سنگ بار (روی میله، لب گودال) + پین
     with layer(p, 'bar'):
         bar = TP(f, [(L0, -BW), (L1, -BW), (L1, BW), (L0, BW)])
         p.shape(bar, B_B, PART, j=.15, step=6, clip=False)
-        flat(p, TP(f, [(L0 + 6, -BW + 3.6), (L1 - 14, -BW + 3.6), (L1 - 14, -BW + 7.1), (L0 + 6, -BW + 7.1)]), B_L)       # نور
-        flat(p, TP(f, [(L0 + 6, BW - 5.6), (L1 - 4, BW - 5.6), (L1 - 4, BW - 3.2), (L0 + 6, BW - 3.2)]), B_D)             # سایهٔ تیز زیر
-        flat(p, TP(f, [(22, -4.2), (26.5, -4.2), (26.5, 4.2), (22, 4.2)]), YEL)                                            # دستگیرهٔ زرد
+        flat(p, TP(f, [(L0 + 6, -BW + 3.4), (L1 - 16, -BW + 3.4), (L1 - 16, -BW + 6.2), (L0 + 6, -BW + 6.2)]), B_L)       # نور
+        flat(p, TP(f, [(L0 + 6, BW - 5.2), (L1 - 4, BW - 5.2), (L1 - 4, BW - 3.2), (L0 + 6, BW - 3.2)]), B_D)             # سایهٔ تیز زیر
+        flat(p, TP(f, [(29, -3.4), (34, -3.4), (34, 3.4), (29, 3.4)]), YEL)                                                # دستگیرهٔ زرد
         rock = [(BC[0] + BRX * math.cos(math.radians(a)) * k, BC[1] + BRY * math.sin(math.radians(a)) * k)
                 for a, k in ((0, 1), (40, .96), (80, 1.02), (125, .95), (165, 1.0), (200, .98), (245, 1.03), (290, 1.0), (330, .95))]
         p.shape(rock, S_B, OUT, j=.4, step=7, clip=False)
         flat(p, [(BC[0] - 14, BC[1] + 3), (BC[0] - 14, BC[1] - 6), (BC[0] - 10, BC[1] - 12), (BC[0] - 10, BC[1] - 5), (BC[0] - 11, BC[1] + 5)], S_L)
         flat(p, clip_x(rock, BC[0] + 7), S_D, .9); p.stroke(rock, OUT, j=.4, step=7)
-        p.ln((BC[0] + 3, BC[1] - 12), (BC[0] + 1, BC[1] - 1), INNER, S_D, j=0)
-        p.ln((BC[0] + 1, BC[1] - 1), (BC[0] - 6, BC[1] + 5), INNER, S_D, j=0)
-        disc(p, PIV[0], PIV[1], 3.2, YEL)
+        disc(p, PIV[0], PIV[1], 4.4, YEL)
     return p
 
 
@@ -101,7 +101,7 @@ def rot_states(p, steps=(REST, REST / 2, 0)):
 if __name__ == '__main__':
     p = build()
     hm = p.X(PIV)
-    lift = abs(math.sin(math.radians(ANG)) - math.sin(math.radians(ANG + REST))) * 26
+    lift = abs(math.sin(math.radians(ANG)) - math.sin(math.radians(ANG + REST))) * 37
     r = finish(p, 'excavation', None, motion={'bar': dict(offsets=[(0, 0), (0, lift)])}, out=OUTD, shots=SHOTS)
     # سنجش واقعی چرخش (کیت فقط چرخش ۳۶۰ را می‌شناسد)
     import station_kit as K_

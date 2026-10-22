@@ -16,8 +16,8 @@ _k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_ch
 W_B = '#f7d894'; BLK = '#b8743a'; BLK_L = '#e0a468'
 CR = '#f2a63e'; CR_D = '#cf7e26'
 GY = 18; XR = 14
-HB, BW, TH, CS, SINK = 40, 36, 15, 19, 4
-ANG = math.radians(22); TAN = math.tan(ANG)
+HB, BW, TH, CS, SINK = 30, 50, 15, 19, 4
+ANG = math.radians(15); TAN = math.tan(ANG)
 U = (-math.cos(ANG), -math.sin(ANG)); NUP = (math.sin(ANG), -math.cos(ANG))
 T_END, RISE = 28, 18
 
@@ -46,7 +46,7 @@ def build():
     return p
 
 
-XF = (0.88, 20.0, 8.0)
+XF = (0.8, 22.0, 8.0)
 if __name__ == '__main__':
     if len(sys.argv) > 3: XF = tuple(float(v) for v in sys.argv[1:4])
     p = build()

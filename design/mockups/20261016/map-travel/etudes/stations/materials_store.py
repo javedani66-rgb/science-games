@@ -23,13 +23,14 @@ S_B, S_L, S_D = '#f3e1b0', '#fff6dc', '#d9b979'
 W_B, W_L, W_D = '#b77a3a', '#d9a463', '#7a4a1f'
 F_B = '#a8672f'
 LAB = '#d9503a'
+TIE = '#8a5f0c'
 
-PX = (-24, 24)             # مرکز دو پشته
-SW, SH, STEP = 36, 30, 25  # گونی
+PX = (-23.5, 23.5)             # مرکز دو پشته
+SW, SH, STEP = 37, 30, 25  # گونی
 NS = 3                     # گونی در هر پشته
 Y0 = 6                     # کف گونی اول
 OFFS = (0, 3, -2)  # جابه‌جایی افقی؛ در دو پشته دقیقاً یکی است
-DECK_W, DECK_Y0, DECK_Y1 = 40, 0, 11
+DECK_W, DECK_Y0, DECK_Y1 = 38, 0, 11
 GROUND = 19
 DROP = 16
 
@@ -41,7 +42,7 @@ def poly(p, pts, col, op=1):
 def sack_pts(cx, yb):
     """گونیِ گره‌دار: دو گوشهٔ بالا مثل نوک گره بالا می‌آیند، وسط بالا کمی فرو؛ بدنه پر و دو طرف گرد."""
     t = yb - SH
-    rel = [(-13, 0), (-6, 3.5), (6, 3.5), (13, 0), (18, 8), (18.5, 20), (15, 27), (8, 30), (-8, 30), (-15, 27), (-18.5, 20), (-18, 8)]
+    rel = [(-15, -1), (-9, 2.5), (9, 2.5), (15, -1), (18, 8), (18.5, 19), (15, 26), (9, SH), (-9, SH), (-15, 26), (-18.5, 19), (-18, 8)]
     return [(cx + x, t + y) for x, y in rel]
 
 
@@ -49,9 +50,10 @@ def sack(p, cx, yb):
     top = yb - SH
     pts = sack_pts(cx, yb)
     p.shape(pts, S_B, INNER, j=.08, step=6)
-    poly(p, [(cx + 10, top + 9), (cx + 15, top + 9), (cx + 15, yb - 5), (cx + 10, yb - 5)], S_D)             # سایهٔ تیز راست
-    poly(p, [(cx - 14, top + 11), (cx - 10.5, top + 11), (cx - 10.5, yb - 8), (cx - 14, yb - 8)], S_L)           # نوار روشن
-    poly(p, [(cx - 3, top + 14), (cx + 4, top + 14), (cx + 4, top + 19), (cx - 3, top + 19)], LAB)           # برچسب کوچک
+    poly(p, [(cx + 10, top + 12), (cx + 15, top + 12), (cx + 15, yb - 5), (cx + 10, yb - 5)], S_D)             # سایهٔ تیز راست
+    poly(p, [(cx - 14, top + 13), (cx - 10.5, top + 13), (cx - 10.5, yb - 7), (cx - 14, yb - 7)], S_L)           # نوار روشن
+    poly(p, [(cx - 5, top + 15), (cx + 5, top + 15), (cx + 5, top + 21), (cx - 5, top + 21)], LAB)           # برچسب کوچک
+    poly(p, [(cx - 8, top + 7), (cx + 8, top + 7), (cx + 8, top + 10), (cx - 8, top + 10)], TIE)                  # گرهٔ بالای گونی
     p.stroke(pts, INNER, j=.08, step=6)
 
 
@@ -59,7 +61,7 @@ def sack_y(i): return Y0 - STEP * i
 
 
 def pallet_feet(p, cx):
-    for dx in (-20, 11):
+    for dx in (-19, 10):
         p.shape([(cx + dx, DECK_Y1 - 4), (cx + dx + 9, DECK_Y1 - 4), (cx + dx + 9, GROUND), (cx + dx, GROUND)], F_B, INNER, j=.1, step=6, clip=False)
         poly(p, [(cx + dx + 5.5, DECK_Y1 + 1), (cx + dx + 7, DECK_Y1 + 1), (cx + dx + 7, GROUND - 2), (cx + dx + 5.5, GROUND - 2)], W_D)
 
@@ -74,7 +76,7 @@ def deck(p, cx):
 
 
 def build(out=OUTD):
-    p = Pen('materials_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((44, -30), (62, 6)), dot=(58, -16)); p.xf = (1.1, -20, -8)
+    p = Pen('materials_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((44, -30), (62, 6)), dot=(58, -16)); p.xf = (1.15, -18, -8)
     for cx in PX:
         p.tipshadow(cx, GROUND + 1.5, 22); p.foot_tip(cx, GROUND, 14)
     for cx in PX: pallet_feet(p, cx)

@@ -8,8 +8,8 @@
   68
  ],
  "stand": [
-  39.0,
-  4.5
+  40.0,
+  4.0
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_tug_field_flag"
  ],
  "inside_pad": {
-  "min_margin_px": 9.5,
+  "min_margin_px": 8.0,
   "base_on_pad": true,
   "height_px": 77.8,
   "bbox_px": [
-   23.8,
+   21.5,
    39.5,
-   85.2,
+   87.5,
    117.2
   ],
   "ok": true
