@@ -16,10 +16,10 @@ OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/tug_field'
 RP = ('#e0463a', '#ff9a86', '#a82a24')
 WD = ('#f1dba6', '#fff7da', '#c19a55', '#fff0c0')
-RR = 10; XL, XR = -44, 44
+RR = 9; XL, XR = -46, 46
 
 
-def cy_(x): return -32 + 9 * (1 - (x / 46.) ** 2)          # طناب کشیده با افتادگی کم
+def cy_(x): return -40 + 4 * (1 - (x / 48.) ** 2)          # طناب کشیده با افتادگی کم
 def tan(x):
     h = .01; a, b = (x - h, cy_(x - h)), (x + h, cy_(x + h)); L = math.hypot(b[0] - a[0], b[1] - a[1]); return ((b[0] - a[0]) / L, (b[1] - a[1]) / L)
 def at(x, k):
@@ -27,11 +27,11 @@ def at(x, k):
 
 
 def build():
-    p = Pen('tug_field', 'sports'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = (1.0, 0, 0)
+    p = Pen('tug_field', 'sports'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = (1.2, 0, -6)
     GYB = 14
     for x in (XL, XR):                                                                            # دو تیرک بلند
         p.fill(ell(x + 3, GYB + 3, 17, 5, 0, 360, 20), '#10083a', .25)
-        cyl(p, x, GYB, 9.5, 74, WD, sw=PART, top=True)
+        cyl(p, x, GYB, 9.5, 92, WD, sw=PART, top=True)
     xs = [XL + i * (XR - XL) / 48. for i in range(49)]
     top = [at(x, -1) for x in xs]; bot = [at(x, 1) for x in xs]
     rope = top + bot[::-1]
@@ -45,12 +45,15 @@ def build():
         q = [(x - 4 + t[0] * 0 + n[0] * RR * -.85, cy_(x) - RR * .85), (x + 1, cy_(x) - RR * .85), (x + 7, cy_(x) + RR * .85), (x + 2, cy_(x) + RR * .85)]
         p.fill(q, RP[1], .9)
     p.stroke(rope, OUT, j=.1, step=8)
+    for x in (XL, XR):
+        c = (x, cy_(x)); p.shape(ell(c[0], c[1], 11, 12, 0, 360, 24), '#8a1f1a', PART, j=.1, step=99, clip=False)
+        p.fill(ell(c[0] - 3, c[1] - 3, 4, 3, 0, 360, 10), '#ff9a86')
     with layer(p, 'flag'):
         x0 = 0; yb = cy_(0) - 5
         cyl(p, x0, yb, 6, 40, ('#ffffff', '#ffffff', '#b8c4dc', '#ffffff'), sw=PART, top=True)
-        fl = [(x0 + 3, yb - 38), (x0 + 42, yb - 38), (x0 + 31, yb - 26), (x0 + 42, yb - 14), (x0 + 3, yb - 14)]
+        fl = [(x0 + 3, yb - 38), (x0 + 34, yb - 38), (x0 + 25, yb - 26), (x0 + 34, yb - 14), (x0 + 3, yb - 14)]
         p.shape(fl, '#ffd23f', PART, j=.1, step=4, clip=False)
-        p.fill([(x0 + 8, yb - 34), (x0 + 36, yb - 34), (x0 + 36, yb - 30), (x0 + 8, yb - 30)], '#fff3a8')
+        p.fill([(x0 + 8, yb - 34), (x0 + 28, yb - 34), (x0 + 28, yb - 30), (x0 + 8, yb - 30)], '#fff3a8')
     return p
 
 
