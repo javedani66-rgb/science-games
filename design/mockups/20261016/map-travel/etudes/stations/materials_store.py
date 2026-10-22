@@ -76,7 +76,7 @@ def deck(p, cx):
 
 
 def build(out=OUTD):
-    p = Pen('materials_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((44, -30), (62, 6)), dot=(58, -16)); p.xf = (1.15, -18, -8)
+    p = Pen('materials_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((44, -30), (62, 6)), dot=(58, -16)); p.xf = (1.12, -19, -8)
     for cx in PX:
         p.tipshadow(cx, GROUND + 1.5, 22); p.foot_tip(cx, GROUND, 14)
     for cx in PX: pallet_feet(p, cx)
