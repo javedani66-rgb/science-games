@@ -20,14 +20,14 @@
   "node_wrench_room_nut"
  ],
  "inside_pad": {
-  "min_margin_px": 8.2,
+  "min_margin_px": 9.0,
   "base_on_pad": true,
-  "height_px": 113.5,
+  "height_px": 112.2,
   "bbox_px": [
    24.5,
-   4.2,
-   129.2,
-   117.8
+   5.0,
+   128.5,
+   117.2
   ],
   "ok": true
  },

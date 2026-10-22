@@ -23,7 +23,7 @@ def I0(cx, base):
 
 def beam(p, cx, base, strap=False):
     f = I0(cx, base)
-    extrude(p, f, D, FR, TP_, SD, mid=MD, sw=PART, sw_in=INNER)
+    extrude(p, f, D, FR, TP_, SD, mid=MD, sw=3.6, sw_in=0)   # بین وجه‌ها خط نیست
     t = base - H
     rect(p, cx - W / 2 + OX + 5, t + 4, cx + W / 2 + OX - 12, t + 7.5, '#fffbe0', .95)
     if strap:
@@ -31,7 +31,7 @@ def beam(p, cx, base, strap=False):
         poly(p, [(x0, t), (x1, t), (x1 + D[0], t + D[1]), (x0 + D[0], t + D[1])], YEL)
         poly(p, [(x0, t), (x1, t), (x1, t + TF), (x0, t + TF)], YEL)
         rect(p, x1 - 4, t + 2, x1, t + TF, YEL_D, .9)
-        p.stroke([(x0, t), (x1, t), (x1, t + TF), (x0, t + TF)], INNER, j=0, step=6)
+        p.stroke([(x0, t), (x1, t), (x1, t + TF), (x0, t + TF)], 2.4, j=0, step=6)   # بست: قطعهٔ جدا، خط نازک
 
 
 def build(out=OUTD):

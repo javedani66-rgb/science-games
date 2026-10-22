@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  89
+  88
  ],
  "stand": [
   0.0,
@@ -20,14 +20,14 @@
   "node_football_ball"
  ],
  "inside_pad": {
-  "min_margin_px": 12.2,
+  "min_margin_px": 13.0,
   "base_on_pad": true,
-  "height_px": 97.5,
+  "height_px": 96.0,
   "bbox_px": [
-   20.2,
-   18.8,
-   120.0,
-   116.2
+   21.0,
+   19.5,
+   119.2,
+   115.5
   ],
   "ok": true
  },

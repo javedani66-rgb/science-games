@@ -27,7 +27,7 @@ G = 10
 def sack(p, cx, yb, w=30, h=30):
     hw = w / 2; yt = yb - h
     pts = [(cx - hw + 3, yb), (cx - hw, yb - 8), (cx - hw + 1, yb - 18), (cx - 9, yt + 6), (cx - 6, yt), (cx + 6, yt), (cx + 9, yt + 6), (cx + hw - 1, yb - 18), (cx + hw, yb - 8), (cx + hw - 3, yb)]
-    p.shape(pts, SK, PART, j=.05, step=99, clip=False)
+    p.shape(pts, SK, 3.2, j=.05, step=99, clip=False)
     poly(p, [(cx + 4, yb - 3), (cx + hw - 3.5, yb - 3), (cx + hw - 3.5, yb - 17), (cx + 9, yb - 22), (cx + 4, yb - 22)], SK_D)
     poly(p, [(cx - 6.5, yt + 10), (cx + 6.5, yt + 10), (cx + 6.5, yt + 14.5), (cx - 6.5, yt + 14.5)], RED)
 
@@ -39,7 +39,7 @@ def wheel(p, gid, cx, cy, R, front=True):
     a, b = p.X((cx, cy)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, ri * p.xf[0], CREAM if front else CREAM_D))
     for k in range(8):
         t = math.radians(22.5 + k * 45)
-        p.ln((cx, cy), (cx + ri * math.cos(t), cy + ri * math.sin(t)), INNER, INTR, j=0)
+        p.ln((cx, cy), (cx + ri * math.cos(t), cy + ri * math.sin(t)), 3, INTR, j=0)
     disc(p, cx, cy, 6.5, INTR); disc(p, cx, cy, 2.6, '#ffd84d')
 
 
@@ -51,16 +51,20 @@ def build(out=OUTD, rot=0):
         wheel(p, None, FX, FY, R, front=False)
     # پایه
     sharp(p, rect(-56, -30, -42, G - 1), W_D, PART)
-    # جعبه
+    # جعبه: سه وجه بدون خط میانی؛ فقط یک خط دورِ یکپارچه
     top = [(-54, -48), (30, -48), (44, -60), (-40, -60)]
-    sharp(p, top, INTR, PART)
-    sack(p, -34, -53, 30, 28); sack(p, -2, -53, 30, 28); sack(p, -18, -70, 30, 28)
     front = rect(-54, -48, 30, -20)
-    sharp(p, front, W_B, PART)
+    side = [(30, -48), (44, -60), (44, -32), (30, -20)]
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
+    ring = list(unary_union([Polygon(q).buffer(.2) for q in (top, front, side)]).exterior.coords)[:-1]
+    p.shape(ring, W_D, PART, j=.05, step=99, clip=False)
+    poly(p, top, INTR); poly(p, front, W_B); poly(p, side, W_D)
+    p.stroke(ring, PART, j=.05, step=99)
+    sack(p, -34, -53, 30, 28); sack(p, -2, -53, 30, 28); sack(p, -18, -70, 30, 28)
     poly(p, rect(-51, -45, 27, -41), W_L)
-    for y in (-34, -27): p.ln((-51, y), (27, y), INNER, W_D, j=0)
+    for y in (-34, -27): p.ln((-51, y), (27, y), 3, W_D, j=0)
     poly(p, rect(19, -39, 27, -23), W_D, .55)
-    sharp(p, [(30, -48), (44, -60), (44, -32), (30, -20)], W_D, PART)
     poly(p, [(33, -45), (41, -54), (41, -48), (33, -39)], W_B, .8)
     # دسته
     a0, a1 = (42, -50), (86, -74)

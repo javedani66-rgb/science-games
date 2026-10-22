@@ -32,25 +32,24 @@ def build():
     p = Pen('loading_ramp_a', 'city'); pad(p, line=((62, 30), (76, 26)), tri=((-76, -4), (-70, 18)), dot=(76, -8)); p.xf = (1.05, 12, -2)
     p.tipshadow(-4, GY + 2, 60); p.foot_tip(-4, GY, 40)
     prof = [(XE, GY), (XE, GY - HP), H, T, (XT, GY)]
-    extrude(p, prof, D, W_F, W_T, W_S, mid=W_T, sw=OUT, sw_in=PART)
+    extrude(p, prof, D, W_F, W_T, W_S, mid=W_T, sw=3.8, sw_in=0)   # بین وجه‌ها خط نیست؛ فقط پلهٔ رنگ
     for yy in (GY - 20, GY - 40):
         xs = XT + 8 + (GY - 6 - yy) * (XP - XT) / (HP - HT) if yy > H[1] else XT
         rect(p, xs + 4, yy - 1.5, XE - 7, yy + 1.5, W_S, .85)
     for s_ in (30, 62, 94):
         a = pt(T, U, s_); b = (a[0] + D[0] * .92, a[1] + D[1] * .92)
-        p.ln(a, b, INNER, W_S, op=.9, j=0)
+        p.ln(a, b, 1.8, W_S, op=.95, j=0)   # درز تخته: خط ریز هم‌رنگ
     bk = lambda q: (q[0] + D[0], q[1] + D[1])
     a2, b2 = bk(T), bk(H)
-    p.shape([a2, b2, (b2[0], b2[1] - 6), (a2[0], a2[1] - 6)], RL, INNER, j=.05, step=8, clip=False)
+    p.shape([a2, b2, (b2[0], b2[1] - 6), (a2[0], a2[1] - 6)], RL, 2.6, j=.05, step=8, clip=False)   # ریل پشتی: قطعهٔ جدا و نازک
     with layer(p, 'crate'):
-        P = pt(T, U, S0); P = (P[0] + D[0] * .16, P[1] + D[1] * .16)
+        P = pt(T, U, S0); P = (P[0] + D[0] * .06, P[1] + D[1] * .06)
         c = [P, pt(P, U, CS), pt(pt(P, U, CS), N, CS), pt(P, N, CS)]
         p.tipshadow(P[0] + 2, P[1] + 1, 8)
-        extrude(p, c, (D[0] * .66, D[1] * .66), C_F, C_T, C_S, mid=C_F, sw=PART)
+        extrude(p, c, (D[0] * .55, D[1] * .55), C_F, C_T, C_S, mid=C_F, sw=3.0, sw_in=0)
         q = lambda s, h: pt(pt(P, U, s), N, h)
         poly(p, [q(15, 3), q(24, 3), q(24, CS - 3), q(15, CS - 3)], '#ffd9a0', .9)
         poly(p, [q(CS - 6, 3), q(CS - 2, 3), q(CS - 2, CS - 3), q(CS - 6, CS - 3)], C_S, .5)
-    p.shape([T, H, (H[0], H[1] - 6), (T[0], T[1] - 6)], RL, INNER, j=.05, step=8, clip=False)
     return p, None
 
 

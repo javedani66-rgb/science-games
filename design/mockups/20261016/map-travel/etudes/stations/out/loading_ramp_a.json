@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  73
+  70
  ],
  "stand": [
   0.0,
@@ -20,14 +20,14 @@
   "node_loading_ramp_a_crate"
  ],
  "inside_pad": {
-  "min_margin_px": 8.6,
+  "min_margin_px": 10.0,
   "base_on_pad": true,
-  "height_px": 84.5,
+  "height_px": 80.8,
   "bbox_px": [
-   17.8,
-   35.2,
-   119.5,
-   119.8
+   21.8,
+   37.5,
+   118.0,
+   118.2
   ],
   "ok": true
  },

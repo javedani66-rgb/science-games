@@ -23,11 +23,11 @@ RANGE = 14
 def container(p):
     x0, y0, w, h, D = -78, -34, 72, 52, (24, -15)
     p.tipshadow(x0 + w / 2 + 8, GY + 2, 54); p.foot_tip(x0 + w / 2, GY, 30)
-    box(p, x0, y0, w, h, D, CB, sw=OUT)
+    box(p, x0, y0, w, h, D, CB, sw=OUT, seam=0)
     for rx in (x0 + 8, x0 + w - 8):                                  # دنده‌های روشن
         p.fill([(rx - 1.5, y0 + 5), (rx + 1.5, y0 + 5), (rx + 1.5, y0 + h - 14), (rx - 1.5, y0 + h - 14)], '#6db0ea')
     dx0, dx1, dy0, dy1 = x0 + 16, x0 + w - 16, y0 + 8, y0 + h - 13   # در باز
-    p.shape([(dx0, dy0), (dx1, dy0), (dx1, dy1), (dx0, dy1)], '#142a5c', PART, j=.05, step=6, clip=False)
+    p.shape([(dx0, dy0), (dx1, dy0), (dx1, dy1), (dx0, dy1)], '#142a5c', 3.4, j=.05, step=6, clip=False)
     p.fill([(dx0 + 4, dy1 - 7), (dx1 - 4, dy1 - 7), (dx1 - 4, dy1 - 2.5), (dx0 + 4, dy1 - 2.5)], '#9db4d6')
     p.fill([(dx0 + 4, dy0 + 4), (dx0 + 9, dy0 + 4), (dx0 + 9, dy1 - 8), (dx0 + 4, dy1 - 8)], '#27428a')
     sy0, sy1 = y0 + h - 10, y0 + h - 1                                # نوار هشدار زرد-سیاه
@@ -35,29 +35,28 @@ def container(p):
     for i in range(7):
         a = x0 + 6 + i * 9.8
         p.fill([(a, sy0), (a + 5, sy0), (a + 1, sy1), (a - 4, sy1)], '#241a5e')
-    p.stroke([(x0, sy0), (x0 + w, sy0)], INNER, j=0, step=99)
 
 
 def crane(p):
     bx, by = 28, GY - 20
     p.foot_tip(bx + 14, GY, 12)
-    box(p, bx, by, 30, 20, (13, -9), YB, sw=PART)                            # پایه
+    box(p, bx, by, 30, 20, (13, -9), YB, sw=PART, seam=0)                            # پایه
     for i in range(3):
         a = bx + 5 + i * 8.5
         p.fill([(a, by + 12), (a + 4, by + 12), (a + 1, by + 19), (a - 3, by + 19)], '#241a5e')
-    box(p, bx + 8, -100, 14, by + 100, (8, -5), YB, sw=PART)                  # دکل
+    box(p, bx + 8, -100, 14, by + 100, (8, -5), YB, sw=PART, seam=0)                  # دکل
     p.tipshadow(bx + 20, GY + 2, 26)
-    box(p, -26, -112, 72, 14, (9, -6), YB, sw=PART)                          # بازو
-    p.shape([(10, -98), (bx + 8, -98), (bx + 8, -72)], YB[2], PART, j=.05, step=6, clip=False)     # نبشی بین تیر و ستون
-    cyl(p, bx + 18, -116, 7.5, 11, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=PART)   # چراغ
+    box(p, -26, -112, 72, 14, (9, -6), YB, sw=PART, seam=0)                          # بازو
+    p.shape([(10, -98), (bx + 8, -98), (bx + 8, -72)], YB[2], 3.2, j=.05, step=6, clip=False)     # نبشی بین تیر و ستون
+    cyl(p, bx + 18, -116, 7.5, 11, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=3.6)   # چراغ
 
 
 def load(p):
     cx = -4
     with layer(p, 'crate'):
-        p.ln((cx, -107), (cx, -88), INNER, NAVY, j=.05)
-        p.shape(ell(cx, -85, 6.5, 6.5, 0, 360, 16), '#aab8cf', PART, j=.1, step=99, clip=False)
-        box(p, cx - 13, -80, 26, 26, (10, -7), OR, sw=PART)
+        p.ln((cx, -107), (cx, -88), 3, NAVY, j=.05)
+        p.shape(ell(cx, -85, 6.5, 6.5, 0, 360, 16), '#aab8cf', 3.2, j=.1, step=99, clip=False)
+        box(p, cx - 13, -80, 26, 26, (10, -7), OR, sw=3.8, seam=0)
         p.fill([(cx - 13, -68), (cx + 13, -68), (cx + 13, -63), (cx - 13, -63)], '#a8470a', .85)
 
 

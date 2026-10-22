@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  66
+  65
  ],
  "stand": [
   -49.5,
@@ -20,14 +20,14 @@
   "node_beam_store_prop"
  ],
  "inside_pad": {
-  "min_margin_px": 13.3,
+  "min_margin_px": 14.1,
   "base_on_pad": true,
-  "height_px": 84.8,
+  "height_px": 83.2,
   "bbox_px": [
-   34.8,
-   36.2,
-   119.5,
-   121.0
+   35.5,
+   37.0,
+   118.8,
+   120.2
   ],
   "ok": true
  },

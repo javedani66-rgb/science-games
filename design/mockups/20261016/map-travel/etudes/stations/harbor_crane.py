@@ -93,7 +93,7 @@ def build(out=None):
 
 
 STAND = None     # خودکار: find_stand
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/v2/harbor_crane'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/harbor_crane'
 
 if __name__ == '__main__':
     p = build()

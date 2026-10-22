@@ -27,57 +27,63 @@ def poly(p, pts, col, op=1):
 def rect(x0, y0, x1, y1): return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
 def pline(p, pts, col, w):
     p.raw('<polyline points="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, w))
-def box(p, x0, y0, x1, y1, dx, dy, cols):
-    """جعبهٔ ¾: وجه جلو + رو + راست؛ cols=(جلو، رو، راست)."""
-    p.shape([(x1, y0), (x1 + dx, y0 + dy), (x1 + dx, y1 + dy), (x1, y1)], cols[2], PART, j=.05, step=8)
-    p.shape([(x0, y0), (x1, y0), (x1 + dx, y0 + dy), (x0 + dx, y0 + dy)], cols[1], PART, j=.05, step=8)
-    p.shape(rect(x0, y0, x1, y1), cols[0], PART, j=.05, step=8)
+def box(p, x0, y0, x1, y1, dx, dy, cols, extra=(), sw=3.6):
+    """جعبهٔ ¾ یک‌پارچه: وجه‌ها فقط با پلهٔ رنگ، یک خط دور؛ extra = شکل‌های متصل (اتحاد)."""
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
+    R = [(x1, y0), (x1 + dx, y0 + dy), (x1 + dx, y1 + dy), (x1, y1)]
+    T = [(x0, y0), (x1, y0), (x1 + dx, y0 + dy), (x0 + dx, y0 + dy)]
+    F = rect(x0, y0, x1, y1)
+    u = unary_union([Polygon(q).buffer(0) for q in (R, T, F)] + [Polygon(q).buffer(0) for q in extra]).buffer(0.01)
+    xy = list(u.exterior.coords)[:-1]
+    p.shape(xy, cols[0], sw, j=.05, step=8, clip=False)
+    poly(p, R, cols[2]); poly(p, T, cols[1]); poly(p, F, cols[0])
+    return xy
 def build():
     p = Pen('basketball_hall', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-74, 14), (70, 8)), dot=(62, -22))
     p.xf = (1.0, 0.0, 0.0)
     p.tipshadow(0, 4, 36); p.foot_tip(0, 2, 26); p.foot_tip(BALL[0], BALL[1] + BR - 2, 14)
-    # ۳) ستون و پایه
+    # ۳) ستون و پایه: یک شکل
     pole = rect(-9, -80, 9, -10)
-    p.shape(pole, S_B, PART, j=.05, step=8)
-    poly(p, rect(-5, -76, -2, -14), S_L); poly(p, rect(3, -76, 6.5, -14), S_D)
-    box(p, -26, -16, 26, 0, 10, -7, (S_B, S_L, S_D))
+    xy = box(p, -26, -16, 26, 0, 10, -7, (S_B, S_L, S_D), extra=(pole,))
+    poly(p, rect(-5, -76, -2, -23), S_L); poly(p, rect(3, -76, 6.5, -23), S_D)
     poly(p, rect(-22, -12, -16, -3), S_L)
+    p.stroke(xy, 3.6, j=.05, step=8)
     # ۱) تخته
-    p.shape([(BX1, BT), (BX1 + TX, BT + TY), (BX1 + TX, BB + TY), (BX1, BB)], W_D, PART, j=.05, step=8)
-    p.shape([(BX0, BT), (BX1, BT), (BX1 + TX, BT + TY), (BX0 + TX, BT + TY)], W_L, PART, j=.05, step=8)
-    p.shape(rect(BX0, BT, BX1, BB), W_B, PART, j=.05, step=8)
+    xy = box(p, BX0, BT, BX1, BB, TX, TY, (W_B, W_L, W_D))
     poly(p, rect(BX0 + 6, BT + 6, BX0 + 14, BB - 6), W_L)
     poly(p, rect(BX1 - 20, BT + 5, BX1 - 5, BB - 5), '#e3ebf8')
+    p.stroke(xy, 3.6, j=.05, step=8)
     q = rect(-22, -118, 22, -88)
-    p.shape(q, RED, INNER, j=.05, step=6, clip=False)
+    p.shape(q, RED, 2.6, j=.05, step=6, clip=False)
     poly(p, rect(-14, -111, 14, -95), W_B)
     # ۲) حلقه و تور
     ring = ell(0, RIMY, 32, 11, 0, 360, 36)
-    p.shape(ring, OR_B, PART, j=.05, step=99, clip=False)
+    p.shape(ring, OR_B, 2.6, j=.05, step=99, clip=False)
     p.fill(ell(0, RIMY - 1, 22, 5.5, 0, 360, 28), HOLE)
     net = [(-25, RIMY + 5), (25, RIMY + 5), (14, -44), (-14, -44)]
-    p.shape(net, '#ffffff', INNER, j=.05, step=8)
+    p.shape(net, '#ffffff', 2.6, j=.05, step=8)
     for a, b in (((-14, RIMY + 8), (0, -48)), ((0, RIMY + 8), (-8, -48)), ((0, RIMY + 8), (8, -48)), ((14, RIMY + 8), (0, -48)), ((-14, RIMY + 8), (-9, -48)), ((14, RIMY + 8), (9, -48))):
-        p.ln(a, b, 2.4, NETL, j=0)
-    p.stroke(net, INNER, j=.05, step=8)
-    pline(p, [(x, RIMY + 2 + 10.5 * math.sin(math.radians(a))) for x, a in [(32 * math.cos(math.radians(t)), t) for t in range(10, 171, 10)]], OR_L, 3.2)
+        p.ln(a, b, 1.8, NETL, j=0)
+    p.stroke(net, 2.6, j=.05, step=8)
+    pline(p, [(x, RIMY + 2 + 10.5 * math.sin(math.radians(a))) for x, a in [(32 * math.cos(math.radians(t)), t) for t in range(10, 171, 10)]], OR_L, 2.4)
     # ۴) توپ
     with layer(p, 'ball'):
         cx, cy = BALL
         p.tipshadow(cx + 2, cy + BR - 1, 24)
         circ = ell(cx, cy, BR, BR, 0, 360, 40)
-        p.shape(circ, OR_B, OUT, j=.05, step=99)
+        p.shape(circ, OR_B, 3.6, j=.05, step=99)
         h = math.degrees(math.acos(10 / (2 * BR))); phi = 40.6
         c1 = [(cx + BR * math.cos(math.radians(a)), cy + BR * math.sin(math.radians(a))) for a in [phi - h + 2 * h * i / 16 for i in range(17)]]
         c1 += [(cx - 10 + BR * math.cos(math.radians(a)), cy - 8 + BR * math.sin(math.radians(a))) for a in [phi + h - 2 * h * i / 16 for i in range(17)]]
         poly(p, c1, OR_D)
         poly(p, [(cx - 16 + 5 * math.cos(math.radians(t)), cy - 12 + 3 * math.sin(math.radians(t))) for t in range(0, 360, 30)], OR_L)
-        for a, b in (((cx, cy - BR + 1), (cx, cy + BR - 1)), ((cx - BR + 1, cy), (cx + BR - 1, cy))): p.ln(a, b, INNER, NAVY, j=0)
+        for a, b in (((cx, cy - BR + 1), (cx, cy + BR - 1)), ((cx - BR + 1, cy), (cx + BR - 1, cy))): p.ln(a, b, 2.2, NAVY, j=0)
         for sg in (-1, 1):
             pts = [(cx + sg * (1.45 * BR - 1.05 * BR * math.cos(math.radians(t))), cy + 1.05 * BR * math.sin(math.radians(t))) for t in range(-60, 61, 6)]
             pts = [q_ for q_ in pts if math.hypot(q_[0] - cx, q_[1] - cy) < BR - 1.5]
-            pline(p, pts, NAVY, INNER)
-        p.stroke(circ, OUT, j=.05, step=99)
+            pline(p, pts, NAVY, 2.2)
+        p.stroke(circ, 3.6, j=.05, step=99)
     return p
 if __name__ == '__main__':
     p = build()

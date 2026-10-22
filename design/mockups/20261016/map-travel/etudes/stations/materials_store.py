@@ -20,7 +20,7 @@ D = (14, -10)
 
 def brick_wall(p, x0, x1, rows, rh):
     top = G - rows * rh
-    box3(p, x0, top, x1, G, D, BR_F, BR_T, BR_S, sw=PART, sw_in=INNER)
+    box3(p, x0, top, x1, G, D, BR_F, BR_T, BR_S, sw=PART, sw_in=0)
     for r in range(1, rows):
         y = top + r * rh; rect(p, x0 + 1.5, y - 1, x1 - 1.5, y + 1, MORT, .9)
     for r in range(rows):
@@ -34,7 +34,7 @@ def brick_wall(p, x0, x1, rows, rh):
 
 def rebar(p, x0, x1, h):
     y0 = G - h
-    box3(p, x0, y0, x1, G, (12, -8), GO_F, GO_T, GO_S, sw=PART, sw_in=INNER)
+    box3(p, x0, y0, x1, G, (12, -8), GO_F, GO_T, GO_S, sw=PART, sw_in=0)
     for k in range(3):
         y = y0 + 3.5 + k * 5.6; rect(p, x0 + 3, y, x1 - 3, y + 2.4, '#8aa0c8', .95)
 
@@ -46,7 +46,7 @@ def build():
     rebar(p, 7, 47, 20)
     with layer(p, 'brick'):
         y0 = top - 11
-        box3(p, -36, y0, -12, top, D, BR_F, BR_T, BR_S, sw=PART, sw_in=INNER)
+        box3(p, -36, y0, -12, top, D, BR_F, BR_T, BR_S, sw=PART, sw_in=0)
     return p
 
 

@@ -43,47 +43,48 @@ def clipc(pts, R):
     return out
 
 
-def post(p, x0, y0, x1, y1):  # سه‌پله
-    q = rect(x0, y0, x1, y1)
-    p.shape(q, POST_B, PART, j=.1, step=8)
+def post(p, x0, y0, x1, y1):  # سه‌پله، بدون خط بین وجه‌ها
     w = x1 - x0
     poly(p, rect(x0 + 2.5, y0 + 4, x0 + 2.5 + w * .22, y1 - 4), POST_L)
     poly(p, rect(x1 - 2.5 - w * .26, y0 + 4, x1 - 2.5, y1 - 4), POST_D)
-    p.stroke(q, PART, j=.1, step=8)
 
 
 def build():
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
     p = Pen('football', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-74, 14), (70, 8)), dot=(64, -22))
     p.xf = (1.0, 0.0, 0.0)
     p.tipshadow(0, FB + 8, 62); p.foot_tip(FX0, FB + 2, 10);  p.foot_tip(0, 8, 20)
     bx0, bx1, bt, bb = FX0 + DX, FX1 + DX, FT + DY, FB + DY
-    # ۱) تور: پشت، کنار راست، سقف
+    # ۱) تور: یک جسم ¾ (پشت، کنار، سقف) با یک خط دور؛ بین وجه‌ها فقط پلهٔ رنگ
     lside = [(FX0, FT), (bx0, bt), (bx0, bb), (FX0, FB)]
-    p.shape(lside, NET_BK, INNER, j=.1, step=8)
     back = rect(bx0, bt, bx1, bb)
-    p.shape(back, NET_BK, INNER, j=.1, step=8)
-    for x in range(bx0 + 20, bx1, 20): p.ln((x, bt + 3), (x, bb - 3), 2.2, NET_L, j=0)
-    for y in (bt + 30, bt + 60): p.ln((bx0 + 3, y), (bx1 - 3, y), 2.2, NET_L, j=0)
-    # پایهٔ پشت چپ (باریک)
     side = [(FX1, FT), (bx1, bt), (bx1, bb), (FX1, FB)]
-    p.shape(side, NET_SD, PART, j=.1, step=8)
-    for k in (1,): 
-        t = k / 2; p.ln((FX1 + DX * t, FT + DY * t + 3), (FX1 + DX * t, FB + DY * t - 3), 2.2, NET_L, j=0)
-    for y in (-80, -50): p.ln((FX1 + 3, y), (bx1 - 3, y + DY), 2.2, NET_L, j=0)
     roof = [(FX0, FT), (FX1, FT), (bx1, bt), (bx0, bt)]
-    p.shape(roof, NET_RF, PART, j=.1, step=8)
+    nsil = unary_union([Polygon(q).buffer(0) for q in (lside, back, side, roof)]).buffer(0.01)
+    nxy = list(nsil.exterior.coords)[:-1]
+    p.shape(nxy, NET_BK, 3.6, j=.1, step=8, clip=False)
+    poly(p, back, NET_BK); poly(p, side, NET_SD); poly(p, roof, NET_RF)
+    for x in range(bx0 + 20, bx1, 20): p.ln((x, bt + 3), (x, bb - 3), 1.8, NET_L, j=0)
+    for y in (bt + 30, bt + 60): p.ln((bx0 + 3, y), (bx1 - 3, y), 1.8, NET_L, j=0)
+    t = .5; p.ln((FX1 + DX * t, FT + DY * t + 3), (FX1 + DX * t, FB + DY * t - 3), 1.8, NET_L, j=0)
+    for y in (-80, -50): p.ln((FX1 + 3, y), (bx1 - 3, y + DY), 1.8, NET_L, j=0)
     for k in (1, 2, 3):
-        t = k / 4; p.ln((FX0 + (FX1 - FX0) * t, FT - 2), (bx0 + (bx1 - bx0) * t, bt + 2), 2.2, NET_L, j=0)
-    # پایهٔ پشت راست
-    # ۲) تیرک‌های جلو و تیرافقی
+        t = k / 4; p.ln((FX0 + (FX1 - FX0) * t, FT - 2), (bx0 + (bx1 - bx0) * t, bt + 2), 1.8, NET_L, j=0)
+    p.stroke(nxy, 3.6, j=.1, step=8)
+    # ۲) چارچوب جلو: تیرک‌ها و تیرافقی یک شکل (اتحاد)، یک خط دور
+    fr = unary_union([Polygon(rect(FX0 - 7, FT, FX0 + 7, FB + 2)), Polygon(rect(FX1 - 7, FT, FX1 + 7, FB + 2)), Polygon(rect(FX0 - 7, FT - 7, FX1 + 7, FT + 7))]).buffer(0)
+    fxy = list(fr.exterior.coords)[:-1]
+    p.shape(fxy, POST_B, 3.6, j=.1, step=8, clip=False)
     post(p, FX0 - 7, FT, FX0 + 7, FB + 2)
     post(p, FX1 - 7, FT, FX1 + 7, FB + 2)
-    post(p, FX0 - 7, FT - 7, FX1 + 7, FT + 7)
+    poly(p, rect(FX0 + 7, FT - 3, FX1 - 7, FT - 1), POST_L); poly(p, rect(FX0 + 7, FT + 3, FX1 - 7, FT + 5.5), POST_D)
+    p.stroke(fxy, 3.6, j=.1, step=8)
     # ۳) توپ
     with layer(p, 'ball'):
         p.tipshadow(2, 7, 34)
         circ = ell(BCX, BCY, BR, BR, 0, 360, 48)
-        p.shape(circ, BALL_B, OUT, j=.06, step=99)
+        p.shape(circ, BALL_B, 3.6, j=.06, step=99)
         for dd, off, col in ((17, 0, BALL_D), (8, 0, BALL_DD)):
             phi = math.radians(40.6); h = math.degrees(math.acos(dd / (2 * BR)))
             S = (BCX - 14 - off, BCY - 12)
@@ -93,11 +94,11 @@ def build():
         for i in range(5):
             a = math.radians(-90 + 72 * i)
             v = (BCX + 14 * math.cos(a), BCY + 14 * math.sin(a)); e = (BCX + 28 * math.cos(a), BCY + 28 * math.sin(a))
-            p.ln(v, e, INNER, NAVY, j=0)
+            p.ln(v, e, 2.2, NAVY, j=0)
             oc = (BCX + 42 * math.cos(a), BCY + 42 * math.sin(a))
             poly(p, clipc(pent(oc[0], oc[1], 15, math.degrees(a) + 180), BR - 1.5), PATCH)
         poly(p, pent(BCX, BCY, 14, -90), PATCH)
-        p.stroke(circ, OUT, j=.06, step=99)
+        p.stroke(circ, 3.6, j=.06, step=99)
     return p
 
 

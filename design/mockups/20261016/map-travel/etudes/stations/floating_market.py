@@ -13,7 +13,7 @@ from functools import partial
 station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D123: حاشیهٔ چپ/راست ≥۴px
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/v2/floating_market'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/floating_market'
 XF = (1.0, 0.0, -23.0)
 SX, CX0 = 1.4, -24.5          # کشیدگی افقی قهرمان (فقط x نقطه‌ها؛ ضخامت و قطر دایره‌ها ثابت)
 HULL = '#c98a4a'; HULL_L = '#e8b070'; HULL_D = '#8a5a2a'; RED = '#ef6a4a'; RED_D = '#c24a30'; WH = '#fff8e0'; WOOD = '#ffd84d'; WOOD_D = '#d9a020'
