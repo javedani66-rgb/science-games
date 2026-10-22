@@ -20,11 +20,11 @@
   "node_football_ball"
  ],
  "inside_pad": {
-  "min_margin_px": 13.0,
+  "min_margin_px": 14.5,
   "base_on_pad": true,
   "height_px": 64.5,
   "bbox_px": [
-   21.0,
+   26.8,
    60.8,
    93.2,
    125.2
@@ -35,10 +35,10 @@
   "node_football_ball": {
    "type": "translate+rotate",
    "from_offset_units": [
-    -17,
+    -9,
     0
    ],
-   "from_offset_map_px": -12.2,
+   "from_offset_map_px": -6.5,
    "to": [
     0,
     0
@@ -52,7 +52,7 @@
      88,
      126
     ],
-    "deg_cw": 180,
+    "deg_cw": 13.6,
     "note": "چرخش ساعت‌گرد (غلتیدن به راست) هم‌زمان با انتقال و با همان easing؛ در پایان زاویه ۰ (ایستا)"
    },
    "note": "حالت ایستا = توپ روی نشان گچی؛ بدون حلقهٔ بیکار؛ سایه و برق ثابت‌اند"
