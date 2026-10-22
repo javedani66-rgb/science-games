@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""ایستگاه F06 «پیست اسکی روی یخ» (سرزمین ورزشگاه، سکوی sports #7fbf4a، رنگ‌مایهٔ ۹۳°).
-طرح قطعه‌به‌قطعه (مختصات symbol، مرکز سکو (0,0)؛ ۱ واحد ≈ ۰٫۷۲px):
- ۱) تختهٔ یخ (بلوک، نمای جلو + رویهٔ باریک + دیوارهٔ راست): رویه #d6f1fb، جلو #a5dcf0، راست #7fc0dc؛ رنگ‌مایه ۱۹۰° (۹۷° از سکو).
-    خط دور PART، نوار نور تخت، دو ترک راست (خط تخت) روی دیوارهٔ جلو.
- ۲) لایهٔ متحرک node_ice_rink_glint: دو نوار سفید مایل (۷ و ۳ واحد) روی دیوارهٔ جلوی یخ (تزئینی). حالت ایستا = پایان (نوارها در راست).
- ۳) اسکی بلند و باریک (۱۵ واحد ضخامت، خط PART): قرمز مرجانی #e0553a/#ff9a6c/#9c2f1c، نوک چپ خمیده به بالا؛ همان قرمز بدنهٔ جرثقیل؛ رنگ‌مایه ۱۰° (۸۳° از سکو).
- ۴) بستِ زرد: صفحهٔ باریک روی اسکی (خط INNER).
- ۵) پوتین اسکی: بنفش-آبی #6f63d9/#9a90f0/#4a3fa8 (رنگ‌مایه ۲۴۵°)، روی بست؛ ساق بلند برای نام‌پذیری «اسکی» (PART).
- فقط خط‌های ۷٫۶/۵٫۸/۳٫۹. بدون چرخ (فرق با F09)، شفاف نیست (فرق با E06)."""
+"""ایستگاه F06 «پیست اسکی روی یخ» (سرزمین ورزشگاه، سکوی sports #7fbf4a، رنگ‌مایهٔ ۹۳°) — بازطراحی دوم.
+طرح (مختصات symbol، مرکز سکو (0,0)؛ ۱ واحد ≈ ۰٫۷۲px):
+ ۱) سطح یخ صاف و عریض (متوازی‌الاضلاع کم‌عمق + لبهٔ جلوی نازک ۸ + لبهٔ راست): رویه #d9f2fb، جلو #a6d9ee، راست #82bcd8 (رنگ‌مایه ۱۹۰°، ΔE پله‌ها ≈ ۱۵–۲۰).
+    خط دور PART؛ دو ترک راست و بلند (خط تخت ۳٫۹ = INNER) زیر اسکی‌ها.
+ ۲) node_ice_rink_glint: دو نوار سفید مایل روی رویه (پشت ترک/اسکی)؛ حالت ایستا = پایان (راست).
+ ۳) دو اسکی موازی خوابیده (عرض ۱۳، خط PART) قرمز #e0553a/#ff9a6c/#9c2f1c، نوک سمت چپ باریک و بالا‌آمده (سایهٔ زیر نوک + نور روشن)؛ بست زرد تخت روی هر کدام.
+ ۴) دو چوب‌دستی ضربدری پشت اسکی‌ها، سمت راست: فلز #dbe9f8/#a3bbd9 (۹ پهن، INNER)، دستگیرهٔ چوبی، حلقهٔ قرمز.
+ هیچ لوزی/نقطهٔ بی‌معنا؛ هیچ اسکی با لبهٔ یخ مماس نیست (فاصله ≥ ۸)."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
@@ -17,27 +16,21 @@ _k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_ch
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/ice_rink'
 
-ICE, ICE_L, ICE_D, ICE_S, CRACK = '#d6f1fb', '#ffffff', '#a5dcf0', '#7fc0dc', '#5f9fc0'
+ICE, ICE_L, ICE_D, ICE_S, CRACK = '#d9f2fb', '#ffffff', '#a6d9ee', '#82bcd8', '#6aa6c6'
 RED, RED_L, RED_D = '#e0553a', '#ff9a6c', '#9c2f1c'
 YEL, YEL_L, YEL_D = '#ffd84d', '#fff0a0', '#d9961c'
-BT, BT_L, BT_D = '#6f63d9', '#9a90f0', '#4a3fa8'
-XF = (1.0, -2.0, 0.0)
+ST, ST_S, ST_L = '#dbe9f8', '#a3bbd9', '#ffffff'
+WOOD, WOOD_L, WOOD_D = '#b77a3a', '#d9a463', '#7a4a1f'
+XF = (1.0, -6.0, -6.0)
 
-# تختهٔ یخ: جلو x∈[XL,XR]، y∈[0,FH]؛ رویه عمق D (کج به بالا-راست)
-XL, XR, FH, D = -56, 18, 18, 14
-FRONT = [(XL, 0), (XR, 0), (XR, FH), (XL, FH)]
-TOPF = [(XL, 0), (XR, 0), (XR + D, -D), (XL + D, -D)]
-SIDE = [(XR, 0), (XR + D, -D), (XR + D, FH - D), (XR, FH)]
-
-# اسکی ایستاده، فرو رفته در رویهٔ یخ؛ نوک بالا به چپ خمیده
-XS, SB, ST_TOP, BEND = -8, -5, -108, -66
-def cl(y):
-    return XS if y >= BEND else XS - 20 * ((BEND - y) / (BEND - ST_TOP)) ** 2
-def hw(y):
-    return 7.5 if y >= BEND else 7.5 - 3.5 * (BEND - y) / (BEND - ST_TOP)
-def ski_pts():
-    ys = [SB - i * (SB - ST_TOP) / 30 for i in range(31)]
-    return [(cl(y) - hw(y), y) for y in ys] + [(cl(y) + hw(y), y) for y in ys][::-1]
+# سطح یخ: رویه y∈[YT,YB]، لبهٔ بالا به راست کج (SKW)
+XL, XR, YT, YB, TH, SKW = -68, 34, -34, 24, 8, 8
+def sh(y): return SKW * (YB - y) / (YB - YT)
+TOPF = [(XL + SKW, YT), (XR + SKW, YT), (XR, YB), (XL, YB)]
+FRONT = [(XL, YB), (XR, YB), (XR, YB + TH), (XL, YB + TH)]
+SIDE = [(XR + SKW, YT), (XR + SKW, YT + TH), (XR, YB + TH), (XR, YB)]
+SKIS = (-14, 8)          # محور y دو اسکی
+SX0, SX1, SW = -54, 22, 13   # نوک و دم اسکی، عرض
 
 
 def poly(p, pts, col, op=1):
@@ -51,53 +44,78 @@ def sp(p, pts, fill, sw, clip=True):
     if clip: p.clip.append(d)
 
 
-GL_REST = 46
+def ski_pts(c, x0=SX0, x1=SX1, w=SW):
+    h = w / 2
+    return [(x0, c - 1.5), (x0 + 5, c - 4.5), (x0 + 22, c - h), (x1 - 3, c - h), (x1, c - h + 3), (x1, c + h - 3), (x1 - 3, c + h), (x0 + 22, c + h), (x0 + 5, c + 4.5), (x0, c + 1.5)]
+
+
+def pole(p, b, t, w=9):
+    dx, dy = t[0] - b[0], t[1] - b[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy, ux; h = w / 2
+    P = lambda s, o: (b[0] + ux * s + nx * o, b[1] + uy * s + ny * o)
+    sp(p, [P(0, -h), P(0, h), P(L, h), P(L, -h)], ST, INNER, False)
+    poly(p, [P(6, h - 4.5), P(6, h - 1.5), P(L - 4, h - 1.5), P(L - 4, h - 4.5)], ST_S)
+    poly(p, [P(6, -h + 1.5), P(6, -h + 3.2), P(L - 14, -h + 3.2), P(L - 14, -h + 1.5)], ST_L)
+    # دستگیره (چوب)
+    sp(p, [P(L - 24, -5.5), P(L - 24, 5.5), P(L + 4, 5.5), P(L + 4, -5.5)], WOOD, PART, False)
+    poly(p, [P(L - 20, -3.5), P(L - 20, -1.2), P(L, -1.2), P(L, -3.5)], WOOD_L)
+    poly(p, [P(L - 20, 2), P(L - 20, 3.6), P(L, 3.6), P(L, 2)], WOOD_D)
+    # حلقهٔ قرمز نزدیک پایین
+    sp(p, [P(13, -8), P(13, 8), P(20, 8), P(20, -8)], RED, INNER, False)
+
+
+GL_REST = 14
+GL_START = -60
 def strips(dx):
     out = []
     for x, w in ((0, 7), (8, 3)):
-        a = XL + 12 + x + dx; y0, y1 = 5, FH - 5
-        out.append([(a + .5 * (FH - y0) / 2, y0), (a + w + .5 * (FH - y0) / 2, y0), (a + w, y1), (a, y1)])
+        a = x + dx; y0, y1 = YT + 5, YB - 5
+        out.append([(a + sh(y0), y0), (a + w + sh(y0), y0), (a + w + sh(y1), y1), (a + sh(y1), y1)])
     return out
 
 
 def build():
-    p = Pen('ice_rink', 'sports'); pad(p, line=((-58, 28), (-42, 31)), tri=((62, -22), (66, 12)), dot=(44, 24))
+    p = Pen('ice_rink', 'sports'); pad(p, line=((-60, 36), (-44, 39)), tri=((62, -22), (66, 12)), dot=(62, 26))
     p.xf = XF
-    p.tipshadow(-8, FH + 2, 38); p.foot_tip(-8, FH, 26)
+    p.tipshadow(-10, YB + TH + 2, 44); p.foot_tip(-10, YB + TH - 1, 30)
     # ۱) یخ
     sp(p, SIDE, ICE_S, PART); sp(p, FRONT, ICE_D, PART); sp(p, TOPF, ICE, PART)
-    poly(p, [(XL + 6, 4.5), (XL + 6, 8), (XL + 20, 8), (XL + 20, 4.5)], ICE_L)                 # نور لبهٔ بالا-چپ
-    for c0, c1 in (((-30, 3), (-35, 16)), ((-14, 3), (-17, 11))):                                  # ترک‌های راست (تک‌خط)
-        p.ln(c0, c1, 3, CRACK, j=0)
+    # ترک‌های راست و بلند (INNER) زیر اسکی‌ها
+    p.ln((-22, YT + 6), (12, YB - 5), INNER, CRACK, j=0)
+    p.ln((30, YT + 6), (27, YB - 6), INNER, CRACK, j=0)
     # ۲) درخشش (لایهٔ متحرک)
     with layer(p, 'glint'):
-        for s in strips(GL_REST):
-            poly(p, s, '#ffffff', .62)
-    # ۳) اسکی
-    poly(p, [(XS - 10, SB + .5), (XS + 12, SB + .5), (XS + 16, SB + 4), (XS - 6, SB + 4)], ICE_D, .9)          # سایهٔ تماس روی یخ
-    body = ski_pts()
-    sp(p, body, RED, PART)
-    poly(p, [(cl(y) - 4.5, y) for y in (SB - 6, -40, -70, -90)] + [(cl(y) - 1.5, y) for y in (-90, -70, -40, SB - 6)], RED_L)   # نور چپ
-    poly(p, [(XS + 3, SB - 6), (XS + 3, -66), (XS + 6, -66), (XS + 6, SB - 6)], RED_D)                                 # سایهٔ تیز راست
-    p.stroke(body, PART, j=.04, step=99)
-    # ۴) بست زرد: صفحهٔ عرضی روی اسکی
-    sp(p, [(XS - 12, -30), (XS + 12, -30), (XS + 12, -43), (XS - 12, -43)], YEL, INNER, False)
-    poly(p, [(XS - 8, -40), (XS + 3, -40), (XS + 3, -37.5), (XS - 8, -37.5)], YEL_L)
-    poly(p, [(XS - 9, -34), (XS + 9, -34), (XS + 9, -32), (XS - 9, -32)], YEL_D)
+        for s_ in strips(GL_REST):
+            poly(p, s_, '#ffffff', .62)
+    p.stroke(TOPF, PART, j=.1, step=99)
+    # ۳) چوب‌دستی‌های ضربدری (پشت اسکی)
+    for b, t in (((6, -26), (28, -92)), ((24, -26), (2, -92))):
+        poly(p, [(b[0] - 7, b[1] + 1), (b[0] + 8, b[1] + 1), (b[0] + 8, b[1] + 4.5), (b[0] - 7, b[1] + 4.5)], ICE_D, .9)
+        pole(p, b, t)
+    # ۴) اسکی‌ها
+    for c in SKIS:
+        sx = sh(c)
+        body = [(x + sx * 0, y) for x, y in ski_pts(c)]
+        poly(p, [(SX0 + 2, c + 4), (SX0 + 24, c + SW / 2 + 3), (SX0 + 24, c + SW / 2 + .5), (SX0 + 8, c + 4)], ICE_D, .9)   # سایه زیر نوک بالا‌آمده
+        sp(p, body, RED, PART)
+        poly(p, [(SX0 + 6, c - 2.5), (SX0 + 24, c - 4.2), (SX1 - 5, c - 4.2), (SX1 - 5, c - 2.4), (SX0 + 24, c - 2.4), (SX0 + 8, c - .5)], RED_L)
+        poly(p, [(SX0 + 26, c + 2.2), (SX1 - 4, c + 2.2), (SX1 - 4, c + 4), (SX0 + 26, c + 4)], RED_D)
+        poly(p, [(-30, c - 3.8), (-14, c - 3.8), (-14, c + 3.8), (-30, c + 3.8)], YEL)            # بست زرد (تخت)
+        poly(p, [(-28, c - 2.8), (-16, c - 2.8), (-16, c - 1.5), (-28, c - 1.5)], YEL_L)
+        poly(p, [(-28, c + 1.6), (-16, c + 1.6), (-16, c + 2.8), (-28, c + 2.8)], YEL_D)
     return p
 
 
 if __name__ == '__main__':
     p = build()
-    mo = {'glint': dict(offsets=[(-50 * XF[0], 0), (0, 0)])}
+    mo = {'glint': dict(offsets=[(GL_START - GL_REST, 0), (0, 0)])}
     r = finish(p, 'ice_rink', None, motion=mo, out=OUTD, shots=SHOTS)
     sp_ = r['spec']
     sp_['motion_spec'] = {'node_ice_rink_glint': dict(
-        kind='دو نوار سفید مایل روی دیوارهٔ جلوی یخ؛ حالت ایستا = پایان حرکت (نوارها در راست)',
-        translate_x_symbol_units=[-50, 0], translate_x_map_px=[round(-50 * K, 1), 0],
+        kind='دو نوار سفید مایل روی رویهٔ یخ؛ حالت ایستا = پایان حرکت (نوارها در راست)',
+        translate_x_symbol_units=[GL_START - GL_REST, 0], translate_x_map_px=[round((GL_START - GL_REST) * K, 1), 0],
         opacity='از ۰ تا ۰٫۶۲ در ۱۵٪ اول؛ بعد ثابت',
         duration_s=1.8, easing='ease-in-out', loop=False, trigger='رسیدن کودک (یک‌بار)',
-        how='گروه glint را از translateX(-50) به 0 ببر؛ نوارها از چپ به راست روی یخ می‌گذرند. تزئینی است (لغزش را F01/F09 نشان می‌دهند). بدون حلقهٔ بیکار.',
+        how='گروه glint را از translateX(%d)' % (GL_START - GL_REST) + ' به 0 ببر؛ نوارها از چپ به راست روی یخ می‌گذرند. تزئینی است (لغزش را F01/F09 نشان می‌دهند). بدون حلقهٔ بیکار.',
         note='با reduced-motion ثابت در وضع پایان.')}
     (OUTD / 'ice_rink.json').write_text(json.dumps(sp_, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

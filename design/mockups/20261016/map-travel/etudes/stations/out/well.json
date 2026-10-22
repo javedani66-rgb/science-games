@@ -8,8 +8,8 @@
   96
  ],
  "stand": [
-  43.5,
-  8.5
+  42.5,
+  7.5
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_well_bucket"
  ],
  "inside_pad": {
-  "min_margin_px": 13.0,
+  "min_margin_px": 10.0,
   "base_on_pad": true,
   "height_px": 104.0,
   "bbox_px": [
-   21.0,
+   18.0,
    11.5,
-   99.8,
+   96.8,
    115.5
   ],
   "ok": true

@@ -17,13 +17,14 @@ from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/cart_station'
 
-W_B, W_L, W_D = '#b8572f', '#d9784a', '#7f3a1f'
-RIM = '#6e2f1b'; HUBC = '#fbeee0'; YEL = '#ffd84d'
-SK, SK_D, BLUE = '#f4f7ff', '#cfd8ee', '#6f8fe8'
+W_B, W_L, W_D = '#b77a3a', '#d29255', '#7a4a1f'
+WHL, WHD = '#6f8fe8', '#2f3f8f'; CREAM = '#fbeee0'; YEL = '#ffd84d'
+SK, SK_D, BLUE = '#f4f7ff', '#cfd8ee', '#5f86d9'
 G = 8
-WC = (-40, -18); WR = 25
-SH0, SH1 = (-14, -40), (10, 2)
-SLIDE = -10
+W1 = (-54, -9, 17)      # چرخ بزرگ عقب (x, y, شعاع)
+W2 = (-20, -6, 14)      # چرخ کوچک‌تر جلو
+POLE0, POLE1 = (-20, -6), (3, 4)
+SLIDE = -7
 
 
 def poly(p, pts, col, op=1):
@@ -34,39 +35,48 @@ def disc(p, x, y, r, col):
     a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
 
 
+def wheel(p, gid, w, nsp):
+    cx, cy, R = w; ri = R - 6.5
+    p.raw('<g id="%s">' % gid)
+    p.shape(ell(cx, cy, R, R, 0, 360, 40), WHL, PART, j=.05, step=99, clip=False)
+    a, b = p.X((cx, cy)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, ri, CREAM))
+    for k in range(nsp):
+        t = math.radians(k * 360 / nsp + 10)
+        p.ln((cx, cy), (cx + ri * math.cos(t), cy + ri * math.sin(t)), INNER, WHD, j=0)
+    disc(p, cx, cy, 4.5, WHD); disc(p, cx, cy, 2, YEL)
+    t = math.radians(10 + 180 / nsp + 0)
+    disc(p, cx + ri * .62 * math.cos(t), cy + ri * .62 * math.sin(t), 1.9, YEL)
+    p.raw('</g>')
+
+
 def build(out=OUTD):
-    p = Pen('cart_station', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 15, 0)
-    p.tipshadow(WC[0] + 4, G - 1, 22); p.foot_tip(WC[0] + 2, G - 1, 14)
-    p.tipshadow(SH1[0] + 3, G - 3, 8); p.foot_tip(SH1[0] + 1, G - 3, 6)
+    p = Pen('cart_station', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 0, 0)
+    for (cx, cy, R) in (W1, W2):
+        p.tipshadow(cx + 3, G - 1, R + 4); p.foot_tip(cx + 2, G - 1, R * .6)
+    p.tipshadow(POLE1[0] + 1, POLE1[1] + 3, 7)
     with layer(p, 'roll'):
-        dx, dy = SH1[0] - SH0[0], SH1[1] - SH0[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy * 6.5, ux * 6.5
-        sh = [(SH0[0] + nx, SH0[1] + ny), (SH1[0] + nx, SH1[1] + ny), (SH1[0] - nx, SH1[1] - ny), (SH0[0] - nx, SH0[1] - ny)]
+        # میلهٔ جلو (کم‌شیب، از محور چرخ جلو تا زمین)
+        dx, dy = POLE1[0] - POLE0[0], POLE1[1] - POLE0[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy * 6.5, ux * 6.5
+        sh = [(POLE0[0] + nx, POLE0[1] + ny), (POLE1[0] + nx, POLE1[1] + ny), (POLE1[0] - nx, POLE1[1] - ny), (POLE0[0] - nx, POLE0[1] - ny)]
         p.shape(sh, W_L, PART, j=.1, step=8, clip=False)
-        poly(p, [(SH0[0] + 12 * ux - nx * .15, SH0[1] + 12 * uy - ny * .15), (SH1[0] - 4 * ux - nx * .15, SH1[1] - 4 * uy - ny * .15),
-                 (SH1[0] - 4 * ux + nx * .15, SH1[1] - 4 * uy + ny * .15), (SH0[0] + 12 * ux + nx * .15, SH0[1] + 12 * uy + ny * .15)], '#f2a47a')
-        p.shape([(-78, -66), (-68, -66), (-68, -34), (-78, -34)], W_B, PART, j=.1, step=8, clip=False)
-        poly(p, [(-75, -63), (-72.5, -63), (-72.5, -37), (-75, -37)], W_L)
-        bed = [(-78, -49), (-8, -49), (-8, -34), (-78, -34)]
-        p.shape(bed, W_B, PART, j=.1, step=8, clip=False)
-        poly(p, [(-66, -46.3), (-12, -46.3), (-12, -43.5), (-66, -43.5)], W_L)
-        poly(p, [(-66, -38), (-12, -38), (-12, -35.6), (-66, -35.6)], W_D)
-        p.stroke(bed, PART, j=.1, step=8)
-        sack = [(-62, -49), (-62, -62)] + ell(-47, -62, 15, 14, 180, 360, 12) + [(-32, -49)]
-        p.shape(sack, SK, PART, j=.1, step=99, clip=False)
-        poly(p, [(-39, -70), (-32, -63), (-32, -52), (-39, -52)], SK_D)
-        poly(p, [(-58, -66), (-55, -68), (-55, -54), (-58, -54)], '#ffffff')
-        p.ln((-58, -71.5), (-38, -71.5), INNER, BLUE, j=0)
-        p.raw('<g id="node_cart_station_roll_wheel">')
-        p.shape(ell(WC[0], WC[1], WR, WR, 0, 360, 48), RIM, PART, j=.05, step=99, clip=False)
-        a, b = p.X(WC)
-        p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, 19, HUBC))
-        for k in range(8):
-            t = math.radians(k * 45 + 10)
-            p.ln((WC[0], WC[1]), (WC[0] + 19 * math.cos(t), WC[1] + 19 * math.sin(t)), INNER, RIM, j=0)
-        disc(p, WC[0], WC[1], 7, RIM); disc(p, WC[0], WC[1], 3, YEL)
-        t = math.radians(32.5)
-        disc(p, WC[0] + 22 * math.cos(t), WC[1] + 22 * math.sin(t), 2.6, YEL)
-        p.raw('</g>')
+        poly(p, [(POLE0[0] + 10 * ux + nx * .2, POLE0[1] + 10 * uy + ny * .2), (POLE1[0] - 3 * ux + nx * .2, POLE1[1] - 3 * uy + ny * .2),
+                 (POLE1[0] - 3 * ux + nx * .5, POLE1[1] - 3 * uy + ny * .5), (POLE0[0] + 10 * ux + nx * .5, POLE0[1] + 10 * uy + ny * .5)], '#f2b583')
+        # جعبهٔ بار با کناره‌های تخته‌ای
+        box = [(-70, -46), (-12, -46), (-12, -22), (-70, -22)]
+        p.shape(box, W_B, PART, j=.1, step=8, clip=False)
+        for y in (-38.5, -30.5): p.ln((-66, y), (-16, y), INNER, W_D, j=0)
+        poly(p, [(-66, -43.5), (-16, -43.5), (-16, -40.5), (-66, -40.5)], W_L)
+        for x in (-67, -15): poly(p, [(x - 2, -44), (x + 2, -44), (x + 2, -25), (x - 2, -25)], W_D)
+        p.stroke(box, PART, j=.1, step=8)
+        # گونی با گردن گره‌خورده
+        sack = [(-62, -46), (-63, -57), (-58, -66), (-51, -71), (-49, -76), (-39, -76), (-37, -71), (-32, -66), (-27, -57), (-28, -46)]
+        p.shape(sack, SK, PART, j=.1, step=6, clip=False)
+        poly(p, [(-36, -69), (-31, -65), (-27.5, -57), (-28.5, -48), (-36, -48)], SK_D)
+        poly(p, [(-59, -62), (-56.5, -64), (-56.5, -50), (-59, -50)], '#ffffff')
+        poly(p, [(-50.5, -74), (-37.5, -74), (-37.5, -70.5), (-50.5, -70.5)], BLUE)
+        p.shape([(-49, -76.5), (-39, -76.5), (-36.5, -83), (-44, -79.5), (-51.5, -83)], SK, INNER, j=.1, step=99, clip=False)
+        wheel(p, 'node_cart_station_roll_wheel', W1, 8)
+        wheel(p, 'node_cart_station_roll_wheel2', W2, 6)
     return p
 
 
@@ -75,11 +85,11 @@ if __name__ == '__main__':
     p = build()
     mo = {'roll': dict(offsets=[(SLIDE * i / 6, 0) for i in range(7)])}
     r = finish(p, 'cart_station', STAND, motion=mo, out=OUTD, shots=SHOTS)
-    sp = r['spec']; hub = [round(v, 1) for v in p.X(WC)]
+    sp = r['spec']; hub = [round(v, 1) for v in p.X(W1[:2])]; hub2 = [round(v, 1) for v in p.X(W2[:2])]
     sp['motion_spec'] = {'node_cart_station_roll': dict(kind='translate', dx_from=SLIDE, dx_to=0, dur_s=1.8, count=1, ease='ease-out',
-                         note='کل گاری از ۱۴ واحد (≈۱۰px) چپ می‌غلتد و در جای ایستا می‌ایستد؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار.'),
-                         'node_cart_station_roll_wheel': dict(kind='rotate', about=hub, deg_from=-33, deg_to=0,
-                         note='گروه تو‌در‌توی چرخ؛ ۱۴ واحد روی شعاع ۲۴ ≈ ۳۳°؛ ساعت‌گرد؛ هم‌زمان با غلتیدن'),
+                         note='کل گاری از ۷ واحد (≈۵px) چپ می‌غلتد و در جای ایستا می‌ایستد؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار.'),
+                         'node_cart_station_roll_wheel': dict(kind='rotate', about=hub, deg_from=-round(7 / W1[2] * 57.3), deg_to=0, note='چرخ بزرگ عقب؛ ساعت‌گرد؛ هم‌زمان با غلتیدن'),
+                         'node_cart_station_roll_wheel2': dict(kind='rotate', about=hub2, deg_from=-round(7 / W2[2] * 57.3), deg_to=0, note='چرخ کوچک جلو'),
                          'reduced_motion': 'ایستا'}
     (OUTD / 'cart_station.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))
