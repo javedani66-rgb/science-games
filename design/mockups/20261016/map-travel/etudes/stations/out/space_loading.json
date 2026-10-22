@@ -1,0 +1,45 @@
+{
+ "id": "space_loading",
+ "kind": "space",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  64
+ ],
+ "stand": [
+  39.5,
+  5.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_space_loading_light"
+ ],
+ "inside_pad": {
+  "min_margin_px": 9.2,
+  "base_on_pad": true,
+  "height_px": 72.0,
+  "bbox_px": [
+   17.2,
+   44.2,
+   87.8,
+   116.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_space_loading_light": {
+   "kind": "opacity-blink",
+   "blinks": 3,
+   "duration_s": 1.8,
+   "trigger": "هنگام رسیدن",
+   "iterations": 1,
+   "note": "لایهٔ گنبد روشن ۳ بار محو و دوباره پدیدار می‌شود (زیرش گنبد خاموش ثابت است)؛ حالت ایستا و پایان = روشن؛ تزئینی؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "چراغ روشن ثابت"
+ }
+}

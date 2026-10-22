@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  67
+  74
  ],
  "stand": [
-  42.5,
-  -0.5
+  44.0,
+  4.5
  ],
  "ring": [
   0,
@@ -20,14 +20,14 @@
   "node_ice_rink_glint"
  ],
  "inside_pad": {
-  "min_margin_px": 7.6,
+  "min_margin_px": 4.2,
   "base_on_pad": true,
-  "height_px": 86.0,
+  "height_px": 87.5,
   "bbox_px": [
-   16.8,
-   41.2,
-   98.2,
-   127.2
+   12.2,
+   34.0,
+   95.5,
+   121.5
   ],
   "ok": true
  },

@@ -39,7 +39,7 @@ def build():
     p.foot_tip(-62, GY, 10); p.foot_tip(12, GY - 1, 5)
     # بلوک (پایهٔ پهن و کوتاه، وجه بالا + جلو) اول کشیده می‌شود. گوشهٔ راست-بالای بلوک زیر تخته را می‌گیرد؛
     # سر بالای تخته کمی روی وجه بالای بلوک می‌نشیند (کف تخته روی لبهٔ بالا).
-    by0 = GY - HB; bx1 = XR - HB / math.tan(ANG); bx0 = bx1 - BW; XL = bx1 - OVER
+    by0 = GY - HB; bx1 = XR - HB / math.tan(ANG) + 4 / math.tan(ANG); bx0 = bx1 - BW; XL = bx1 - OVER
     TYL = top_y(XL)
     p.shape([(bx0, by0), (bx1, by0), (bx1, GY), (bx0, GY)], BLK, PART, j=.1, step=12)
     flat(p, [(bx0 + 3, by0 + 3), (bx1 - 3, by0 + 3), (bx1 - 3, by0 + 9), (bx0 + 3, by0 + 9)], BLK_L)            # وجه بالا (روشن)

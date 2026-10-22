@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  27
+  29
  ],
  "stand": [
-  41.5,
-  4.5
+  42.0,
+  -1.0
  ],
  "ring": [
   0,
@@ -20,23 +20,23 @@
   "node_loading_ramp_a_crate"
  ],
  "inside_pad": {
-  "min_margin_px": 0.0,
-  "base_on_pad": false,
-  "height_px": 51.8,
+  "min_margin_px": 7.1,
+  "base_on_pad": true,
+  "height_px": 49.0,
   "bbox_px": [
-   20.2,
-   81.2,
-   91.8,
-   133.0
+   31.5,
+   79.0,
+   94.2,
+   128.0
   ],
-  "ok": false
+  "ok": true
  },
  "motion_spec": {
   "node_loading_ramp_a_crate": {
    "translate_xy": [
     [
-     23.2,
-     11.8
+     22.0,
+     11.2
     ],
     [
      0,
@@ -47,7 +47,7 @@
    "dir_deg": 27.0,
    "easing": "ease-in-out",
    "loop": false,
-   "start": "جعبه پایین‌تر روی شیب (جابه‌جایی 23.2,11.8)",
+   "start": "جعبه پایین‌تر روی شیب (جابه‌جایی 22.0,11.2)",
    "end": "حالت ایستا = پایان (بالاتر)",
    "note": "فقط جعبه؛ بدون چرخش، بدون طناب/دست/پیکان."
   },

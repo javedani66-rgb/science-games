@@ -19,10 +19,10 @@ W_B, W_L, W_D = '#eef4fb', '#ffffff', '#bccbdc'
 A_B, A_L, A_D = '#43b0ec', '#8fd8ff', '#2b86c8'
 S_B, S_L, S_D = '#d6dde8', '#ffffff', '#8b9ab2'
 AIR = '#e6f6ff'
-L, R_, TOP, BOT = -80, 22, -48, 8
-WL, WR, WT, WB = -64, 6, -48, -6       # پنجره
+L, R_, TOP, BOT = -80, 18, -48, 8
+WL, WR, WT, WB = -64, 2, -48, -6       # پنجره
 WATER = -30
-LAD = (-6, -62, -12)                    # محور ریل، بالای نردبان، پایین
+LAD = (-19, -60, -12)                    # محور ریل، بالای نردبان، پایین
 
 
 def poly(p, pts, col, op=1):
@@ -49,23 +49,23 @@ def build():
     p.stroke(shell, OUT, j=.15, step=8)
     # ۲) آب
     poly(p, [(WL + 2, WT + 3), (WR - 2, WT + 3), (WR - 2, WATER), (WL + 2, WATER)], AIR)
-    water = [(WL, WATER), (WR, WATER), (WR, WB), (WL, WB)]
+    water = [(WL + 1, WATER), (WR - 1, WATER), (WR - 1, WB), (WL + 1, WB)]
     poly(p, water, A_B)
     poly(p, [(WL + 4, WATER + 5), (WR - 4, WATER + 5), (WR - 4, WATER + 9), (WL + 4, WATER + 9)], A_L)
     poly(p, [(WL + 4, WB - 6), (WR - 4, WB - 6), (WR - 4, WB - 3), (WL + 4, WB - 3)], A_D)
     # ۴) موج (لایهٔ متحرک)
     with layer(p, 'wave'):
-        pts = wave(-56, -28, WATER + 1, 2.2, 14)
+        pts = wave(-58, -40, WATER + 1, 2.2, 14)
         p.raw('<polyline points="%s" fill="none" stroke="#ffffff" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), INNER))
-        pts = wave(-54, -34, WATER + 14, 2.2, 14)
+        pts = wave(-58, -44, WATER + 14, 2.2, 14)
         p.raw('<polyline points="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), A_D, INNER))
     # ۳) نردبان: U وارونه
-    cx, top, bot = LAD[0], LAD[1], LAD[2]; hw_, gap = 17, 5
-    u = [(cx - hw_, bot), (cx - hw_, top), (cx + hw_, top), (cx + hw_, bot), (cx + hw_ - 11, bot), (cx + hw_ - 11, top + 11), (cx - hw_ + 11, top + 11), (cx - hw_ + 11, bot)]
+    cx, top, bot = LAD[0], LAD[1], LAD[2]; hw_, gap = 19, 5
+    u = [(cx - hw_, bot), (cx - hw_, top), (cx + hw_, top), (cx + hw_, bot), (cx + hw_ - 12, bot), (cx + hw_ - 12, top + 12), (cx - hw_ + 12, top + 12), (cx - hw_ + 12, bot)]
     p.shape(u, S_B, PART, j=.1, step=8, clip=False)
     poly(p, [(cx - hw_ + 3, top + 3), (cx + hw_ - 3, top + 3), (cx + hw_ - 3, top + 6), (cx - hw_ + 3, top + 6)], S_L)
     for y in (-40, -24):
-        poly(p, [(cx - hw_ + 9, y), (cx + hw_ - 9, y), (cx + hw_ - 9, y + 5), (cx - hw_ + 9, y + 5)], S_D)
+        poly(p, [(cx - hw_ + 10, y), (cx + hw_ - 10, y), (cx + hw_ - 10, y + 6), (cx - hw_ + 10, y + 6)], S_D)
     return p
 
 

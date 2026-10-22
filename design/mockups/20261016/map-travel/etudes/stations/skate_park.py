@@ -19,12 +19,12 @@ D_B, D_L, D_D = '#2cb5c6', '#8fe8ee', '#1a8696'
 M_B, M_D = '#dbe9f8', '#a3bbd9'
 W_B, W_D = '#fff1c0', '#e3c66e'
 HUBC = '#7a4a1f'; YEL = '#ffd84d'; ORG = '#ff9b4a'
-GY = 6; R = 14; WYC = GY - R
-WX = (-54, -18)          # چرخ چپ (back)، چرخ راست
+GY = 6; R = 12; WYC = GY - R
+WX = (-57, -15)          # چرخ چپ (back)، چرخ راست
 XF = (1.0, -4, 0)
 
-TOPF, BOT = -46, -29     # بالا و پایین بخش صاف تخته
-DECK = [(-70, -53), (-63, TOPF), (-9, TOPF), (-2, -53), (-2, -40), (-9, BOT), (-63, BOT), (-70, -40)]
+TOPF, BOT = -49, -33     # بالا و پایین بخش صاف تخته
+DECK = [(-70, -56), (-63, TOPF), (-9, TOPF), (-2, -56), (-2, -44), (-9, BOT), (-63, BOT), (-70, -44)]
 
 
 def poly(p, pts, col, op=1):
@@ -32,7 +32,7 @@ def poly(p, pts, col, op=1):
 
 
 def truck(p, cx):
-    pts = [(cx - 11, BOT - 4), (cx + 11, BOT - 4), (cx + 8, WYC + 2), (cx - 8, WYC + 2)]
+    pts = [(cx - 10, BOT - 4), (cx + 10, BOT - 4), (cx + 7, WYC + 2), (cx - 7, WYC + 2)]
     p.shape(pts, M_B, INNER, j=.1, step=99, clip=False)
     poly(p, [(cx + 2, BOT + 1), (cx + 10, BOT + 1), (cx + 7, WYC), (cx + 2, WYC)], M_D)
     p.stroke(pts, INNER, j=.1, step=99)
@@ -54,7 +54,7 @@ def build(out=None):
     for cx in WX: truck(p, cx)
     p.shape(DECK, D_B, PART, j=.1, step=8)
     poly(p, [(-62, TOPF + 4), (-12, TOPF + 4), (-12, TOPF + 7.5), (-62, TOPF + 7.5)], D_L)                    # نور
-    poly(p, [(-24, TOPF + 3), (-9, TOPF + 3), (-5, -50), (-3, -52), (-3, -41), (-9, BOT - 3), (-24, BOT - 3)], D_D)   # سایهٔ تیز راست
+    poly(p, [(-24, TOPF + 3), (-9, TOPF + 3), (-5, -53), (-3, -55), (-3, -45), (-9, BOT - 3), (-24, BOT - 3)], D_D)   # سایهٔ تیز راست
     p.stroke(DECK, PART, j=.1, step=8)
     with layer(p, 'wheel_back'): wheel(p, WX[0])
     with layer(p, 'wheel'): wheel(p, WX[1])

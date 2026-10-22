@@ -26,7 +26,7 @@ R, W = 36, 17
 r = R - W
 YC = -42                      # مرکز کمان
 TIPY = -9                     # مرز نوک نقره‌ای
-SHIFT = 12
+SHIFT = 8
 CLIPW, CLIPH = 13, 22
 
 
@@ -73,8 +73,8 @@ def build():
     for x0, x1 in ((CX - R, CX - R + W), (CX + R - W, CX + R)):
         p.ln((x0 + 2, TIPY), (x1 - 2, TIPY), INNER, NAVY, j=0)
     # گیرهٔ کاغذ (لایهٔ متحرک): موقعیت پایانی = چسبیده به لبهٔ درونی قطب راست
-    CH = 32; OW, IW = 8.0, 2.5
-    ce = CX + r - OW - 3.9 / 2 - 1.5                 # لبهٔ بیرونی سیم روی لبهٔ درونی قطب راست (هم‌پوشانی با خط قطب)
+    CH = 32; OW, IW = 7.5, 1.5
+    ce = CX + r - OW - 2.3 - 1.5                # لبهٔ بیرونی سیم روی لبهٔ درونی قطب راست (هم‌پوشانی با خط قطب)
     cy1 = BASE - 3; cy0 = cy1 - CH
     wire = ([(ce + IW, cy0 + 20), (ce + IW, cy0 + 13)] + ell(ce, cy0 + 13, IW, IW, 0, -180, 6) + [(ce - IW, cy1 - 8)]
             + ell(ce + (OW - IW) / 2 * 1.0 - 0.0 + 0, cy1 - 8, (OW + IW) / 2, 5, 180, 0, 10)[0:0]
@@ -83,8 +83,8 @@ def build():
     with layer(p, 'clip'):
         p.tipshadow(ce + 1, BASE + 2, 11)
         q = p.X(wire); d = 'M' + 'L'.join('%.1f,%.1f' % z for z in q)
-        p.raw('<path d="%s" fill="none" stroke="#241a5e" stroke-width="%s" stroke-linejoin="round" stroke-linecap="round"/>' % (d, 5.8))
-        p.raw('<path d="%s" fill="none" stroke="%s" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>' % (d, S_B))
+        p.raw('<path d="%s" fill="none" stroke="#241a5e" stroke-width="%s" stroke-linejoin="round" stroke-linecap="round"/>' % (d, 4.6))
+        p.raw('<path d="%s" fill="none" stroke="%s" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>' % (d, S_B))
     return p, ce
 
 

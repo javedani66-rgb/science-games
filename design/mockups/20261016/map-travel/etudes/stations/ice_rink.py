@@ -22,20 +22,20 @@ RED, RED_L, RED_D = '#e0553a', '#ff9a6c', '#9c2f1c'
 YEL, YEL_L, YEL_D = '#ffd84d', '#fff0a0', '#d9961c'
 ST, ST_S, ST_L = '#dbe9f8', '#a3bbd9', '#ffffff'
 WOOD, WOOD_L, WOOD_D = '#b77a3a', '#d9a463', '#7a4a1f'
-XF = (1.0, -6.0, 0.0)
+XF = (1.0, -2.0, -4.0)
 
 # تختهٔ یخ
-T0, T1, Y0, Y1, SK = -68, 22, -22, 10, 18   # لبهٔ چپ/راست رویه در بالا، y بالا/پایین رویه، کجی (۱۸ واحد روی ۳۲)
-TH = 14                                      # ضخامت دیواره
+T0, T1, Y0, Y1, SK = -78, 14, -26, 8, 18   # لبهٔ چپ/راست رویه در بالا، y بالا/پایین رویه، کجی (۱۸ واحد روی ۳۲)
+TH = 12                                      # ضخامت دیواره
 def ex(x, y): return x + SK * (y - Y0) / (Y1 - Y0)   # x لبهٔ مایل در ارتفاع y (با مبدأ لبه)
 TOPF = [(T0, Y0), (T1, Y0), (T1 + SK, Y1), (T0 + SK, Y1)]
 FRONT = [(T0 + SK, Y1), (T1 + SK, Y1), (T1 + SK, Y1 + TH), (T0 + SK, Y1 + TH)]
 SIDE = [(T0, Y0), (T0 + SK, Y1), (T0 + SK, Y1 + TH), (T0, Y0 + TH)]
 
 # اسکی
-SB = 2          # کف اسکی
+SB = 0          # کف اسکی
 ST_H = 15       # ضخامت
-X_TAIL, X_BEND, X_TIP = 4, -30, -60
+X_TAIL, X_BEND, X_TIP = 4, -34, -68
 def sk_bot(x):
     if x >= X_BEND: return SB
     t = (X_BEND - x) / (X_BEND - X_TIP); return SB - 19 * t * t
@@ -47,7 +47,7 @@ def ski_pts():
     bot = [(x, sk_bot(x)) for x in xs]; top = [(x, sk_bot(x) - sk_th(x)) for x in xs]
     return bot + top[::-1]
 
-PX = 20      # محور عصا
+PX = 12      # محور عصا
 
 
 def poly(p, pts, col, op=1):
@@ -79,14 +79,14 @@ GL_REST = 60      # حالت پایان: نوارها نزدیک راست روی
 def build():
     p = Pen('ice_rink', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow(-14, Y1 + TH + 3, 46); p.foot_tip(-12, Y1 + TH + 2, 34)
+    p.tipshadow(-18, Y1 + TH + 1, 44); p.foot_tip(-18, Y1 + TH - 1, 26)
     # ۱) یخ: دیواره‌ها
     sp(p, SIDE, ICE_S, PART)
     sp(p, FRONT, ICE_D, PART)
     sp(p, TOPF, ICE, PART)
     # نور لبهٔ بالا-چپ رویه و ترک‌های راست روی دیواره
     poly(p, [(T0 + 7, Y0 + 5), (T0 + 10.5, Y0 + 5), (T0 + SK - 1 + 7, Y1 - 5), (T0 + SK - 1 + 3.5, Y1 - 5)], ICE_L)
-    for (a, b) in (((-34, Y1 + 1), (-26, Y1 + 11)), ((16, Y1 + 1), (9, Y1 + 12))):
+    for (a, b) in (((-36, Y1 + 1), (-27, Y1 + 10)), ((12, Y1 + 1), (6, Y1 + 11))):
         p.ln(a, b, 3, CRACK, j=0)
     # ۲) درخشش (لایهٔ متحرک): پشت اسکی و عصا
     with layer(p, 'glint'):
@@ -94,17 +94,17 @@ def build():
             poly(p, s, '#ffffff', .62)
     p.stroke(TOPF, PART, j=.1, step=99)
     # سایهٔ تماس اسکی روی یخ (چندضلعی تیز، داخل رویه)
-    poly(p, [(-52, SB + 1), (X_TAIL + 2, SB + 1), (X_TAIL - 1, SB + 5), (-50, SB + 5)], ICE_D, .9)
+    poly(p, [(-40, SB + 1), (X_TAIL + 2, SB + 1), (X_TAIL - 2, SB + 5), (-42, SB + 5)], ICE_D, .9)
     # ۳) عصا (پشت اسکی)
-    sy0, sy1 = -2, -80
-    p.ln((PX + 4, sy0 + 2), (PX + 14, sy0 + 2), 4, ICE_D, op=.9, j=0)
-    sp(p, [(PX - 6.5, sy0), (PX + 6.5, sy0), (PX + 6.5, sy1), (PX - 6.5, sy1)], ST, INNER)
+    sy0, sy1 = -6, -84
+    poly(p, [(PX + 6, sy0 + 1), (PX + 17, sy0 + 1), (PX + 14, sy0 + 5), (PX + 4, sy0 + 5)], ICE_D, .9)
+    sp(p, [(PX - 6.5, sy0), (PX + 6.5, sy0), (PX + 6.5, sy1), (PX - 6.5, sy1)], ST, INNER, False)
     poly(p, [(PX + 1.5, sy1 + 4), (PX + 5.5, sy1 + 4), (PX + 5.5, sy0 - 1.5), (PX + 1.5, sy0 - 1.5)], ST_S)
     poly(p, [(PX - 4.2, sy1 + 22), (PX - 2.2, sy1 + 22), (PX - 2.2, sy0 - 12), (PX - 4.2, sy0 - 12)], ST_L)
-    sp(p, [(PX - 8, sy1 - 10), (PX + 8, sy1 - 10), (PX + 8, sy1 + 18), (PX - 8, sy1 + 18)], WOOD, PART)
-    poly(p, [(PX + 2, sy1 - 8), (PX + 5.5, sy1 - 8), (PX + 5.5, sy1 + 16), (PX + 2, sy1 + 16)], WOOD_D)
-    poly(p, [(PX - 5.5, sy1 - 7), (PX - 3, sy1 - 7), (PX - 3, sy1 + 15), (PX - 5.5, sy1 + 15)], WOOD_L)
-    sp(p, ell(PX, -17, 13, 5, 0, 360, 20), RED, INNER)
+    sp(p, [(PX - 5, sy1 - 12), (PX + 5, sy1 - 12), (PX + 9, sy1 - 8), (PX + 9, sy1 + 14), (PX + 5, sy1 + 18), (PX - 5, sy1 + 18), (PX - 9, sy1 + 14), (PX - 9, sy1 - 8)], WOOD, PART, False)
+    poly(p, [(PX + 3, sy1 - 9), (PX + 6.5, sy1 - 9), (PX + 6.5, sy1 + 13), (PX + 3, sy1 + 13)], WOOD_D)
+    poly(p, [(PX - 6.5, sy1 - 7), (PX - 4, sy1 - 7), (PX - 4, sy1 + 13), (PX - 6.5, sy1 + 13)], WOOD_L)
+    sp(p, ell(PX, -24, 13, 5, 0, 360, 20), RED, INNER, False)
     poly(p, [(PX - 8, -17.5), (PX - 3, -19), (PX - 3, -17), (PX - 8, -15.8)], RED_L)
     # ۴) اسکی
     body = ski_pts()
