@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  65
+  56
  ],
  "stand": [
-  0.0,
-  19.0
+  26.0,
+  -21.0
  ],
  "ring": [
   0,
@@ -17,29 +17,29 @@
   0
  ],
  "motion": [
-  "node_materials_store_bag"
+  "node_materials_store_brick"
  ],
  "inside_pad": {
-  "min_margin_px": 0.0,
-  "base_on_pad": false,
-  "height_px": 92.5,
+  "min_margin_px": 8.3,
+  "base_on_pad": true,
+  "height_px": 79.2,
   "bbox_px": [
-   0.5,
-   31.5,
-   143.8,
-   124.0
+   28.0,
+   43.0,
+   122.8,
+   122.2
   ],
-  "ok": false
+  "ok": true
  },
  "motion_spec": {
-  "node_materials_store_bag": {
-   "layer": "گونی بالایی پشتهٔ راست",
+  "node_materials_store_brick": {
+   "layer": "آجر بالای پشته",
    "dx": 0,
    "dy_from": -11,
    "dy_to": 0,
    "dur_s": 1.2,
-   "note": "هنگام رسیدن: گونی از ۱۴ واحد بالاتر پایین می‌افتد و روی پشته می‌نشیند؛ حالت ایستا = روی پشته؛ بدون حلقهٔ بیکار."
+   "note": "هنگام رسیدن: آجر از ۱۱ واحد بالاتر پایین می‌افتد و روی پشته می‌نشیند؛ حالت ایستا = روی پشته؛ بدون حلقهٔ بیکار."
   },
-  "reduced_motion": "گونی روی پشته (ایستا)"
+  "reduced_motion": "آجر روی پشته (ایستا)"
  }
 }

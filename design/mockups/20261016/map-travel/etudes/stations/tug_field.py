@@ -51,9 +51,9 @@ def build():
     with layer(p, 'flag'):
         x0 = 0; yb = cy_(0) - 5
         cyl(p, x0, yb, 6, 40, ('#ffffff', '#ffffff', '#b8c4dc', '#ffffff'), sw=PART, top=True)
-        fl = [(x0 + 3, yb - 38), (x0 + 34, yb - 38), (x0 + 25, yb - 26), (x0 + 34, yb - 14), (x0 + 3, yb - 14)]
+        fl = [(x0 + 3, yb - 38), (x0 + 28, yb - 38), (x0 + 20, yb - 26), (x0 + 28, yb - 14), (x0 + 3, yb - 14)]
         p.shape(fl, '#ffd23f', PART, j=.1, step=4, clip=False)
-        p.fill([(x0 + 8, yb - 34), (x0 + 28, yb - 34), (x0 + 28, yb - 30), (x0 + 8, yb - 30)], '#fff3a8')
+        p.fill([(x0 + 8, yb - 34), (x0 + 23, yb - 34), (x0 + 23, yb - 30), (x0 + 8, yb - 30)], '#fff3a8')
     return p
 
 

@@ -9,6 +9,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent)); sys.path.insert(0, str(HERE))
 from station_kit import *
 from g4_helpers import *
+from r6lib import extrude
+import r6lib
 from shapely.geometry import Polygon
 from shapely.ops import unary_union
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
@@ -19,43 +21,44 @@ ICE, ICE_L, ICE_D = '#8fd3f4', '#c6ecfb', '#5fb0dc'
 BT_B, BT_L, BT_D = '#ffffff', '#ffffff', '#c3d2ea'
 RD_B, RD_D = '#e0402e', '#a82818'
 M_B, M_L, M_D = '#cdd6e2', '#ffffff', '#7e8da6'
-CX, CY, RX, RY, WH = 0, -6, 70, 31, 9
-GLIDE = 12
+CX, CY, RX, RY, WH = 4, 0, 68, 29, 8
+GLIDE = 10
 
 
 def skate(p, ox, oy, k=1.0):
+    """اسکیت بزرگ ¾ (نوک به راست): تیغه و دو پایه (نقره‌ای سه‌پله) + پوتین سفید سه‌پله با سرِ ساق/پاشنه/نوک قرمز و سه بند."""
     T = lambda pts: [(ox + x * k, oy + y * k) for x, y in pts]
-    poly(p, T(ell(26, 1, 34, 5, 0, 360, 20)), ICE_D, .85)                       # سایهٔ تیز روی یخ
-    blade = unary_union([Polygon([(-6, 0), (42, 0), (52, -6), (57, -12), (50, -11), (44, -5), (-6, -5)]), Polygon(rect(4, -16, 13, -3)), Polygon(rect(33, -16, 42, -3))])
-    bl = T(list(blade.exterior.coords)[:-1])
-    p.shape(bl, M_B, INNER, j=0, step=5, clip=False)
-    poly(p, T(rect(-3, -3.5, 40, -1.5)), M_L)
-    boot = T([(-1, -13), (-1, -62), (23, -62), (25, -40), (41, -38), (52, -29), (51, -13)])
-    p.shape(boot, BT_B, PART, j=0, step=5, clip=False)
-    poly(p, T([(16, -60), (23, -60), (24.5, -41), (25, -39), (41, -37.5), (50, -30), (49.5, -15), (16, -15)]), BT_D)       # سایهٔ تیز سمت راست
-    poly(p, T(rect(2, -58, 6, -18)), BT_L)
-    poly(p, T([(-1, -62), (23, -62), (23, -55), (-1, -55)]), RD_B)                      # سرِ ساق
-    poly(p, T([(-1, -34), (6, -34), (6, -13), (-1, -13)]), RD_B)                       # پاشنه
-    poly(p, T([(41, -38), (52, -29), (51, -13), (42, -13)]), RD_B)           # نوک
-    poly(p, T([(-1, -17), (51, -17), (51, -13), (-1, -13)]), RD_D)                      # کفی
-    for y in (-44, -36, -28): poly(p, T(rect(10, y - 1.7, 23, y + 1.7)), RD_B)          # سه بند
+    D = (11 * k, -7 * k)
+    poly(p, T(ell(54, 2, 64, 7, 0, 360, 24)), ICE_D, .9)                       # سایهٔ تیز روی یخ
+    with_pts = lambda pts: pts
+    blade = T([(-6, -9), (-6, 0), (92, 0), (104, -5), (109, -13), (101, -14), (97, -9)])
+    extrude(p, blade, D, M_B, M_L, M_D, mid=M_B)
+    for x0 in (12, 74):
+        extrude(p, T(rect(x0, -22, x0 + 12, -8)), D, M_B, M_L, M_D, mid=M_B)
+    boot = T([(0, -100), (38, -100), (40, -64), (62, -48), (88, -42), (101, -30), (101, -20), (0, -20)])
+    extrude(p, boot, D, BT_B, BT_L, BT_D)
+    poly(p, T([(0, -100), (38, -100), (38.5, -86), (0, -86)]), RD_B)                      # سرِ ساق
+    poly(p, T([(0, -50), (14, -50), (14, -20), (0, -20)]), RD_B)                          # پاشنه
+    poly(p, T([(88, -42), (101, -30), (101, -20), (80, -20), (82, -36)]), RD_B)            # نوک
+    poly(p, T([(0, -26), (101, -26), (101, -20), (0, -20)]), RD_D)                        # کفی
+    for y in (-76, -64, -52): poly(p, T(rect(18, y - 3, 37, y + 3)), RD_B)                # سه بند
     p.stroke(boot, PART, j=0, step=5)
 
 
 def build(out=OUTD, glide=0):
     p = Pen('ice_rink', 'sports'); pad(p, line=((-52, 40), (-36, 43)), tri=((74, -20), (70, 18)), dot=(-70, -14))
+    p.xf = (1.1, 0, 0)
     top = ell(CX, CY, RX, RY, 180, 360, 24); bot = ell(CX, CY + WH, RX, RY, 0, 180, 24)
     p.tipshadow(CX, CY + WH + 2, 62); p.foot_tip(CX, CY + WH, 56)
     p.shape(top + bot, W_B, PART, j=.1, step=10)
     poly(p, band(CX, CY + 2, RX - 1, RY, 3.5, 20, 160, 20), W_L)
     poly(p, [(x, y) for x, y in ell(CX, CY, RX, RY, 10, 80, 14)] + [(x, y + WH) for x, y in ell(CX, CY, RX, RY, 80, 10, 14)], W_D, .75)
     p.shape(ell(CX, CY, RX, RY, 0, 360, 48), RIM, PART, j=.1, step=10, clip=False)
-    p.shape(ell(CX, CY, RX - 9, RY - 7, 0, 360, 48), ICE, INNER, j=.1, step=99, clip=False)
-    poly(p, ell(CX, CY, RX - 12, RY - 10, 195, 270, 14) + ell(CX, CY, RX - 24, RY - 17, 270, 195, 14), ICE_L)
-    arcline(p, ell(0, CY + 10, 44, 10, 190, 330, 14), ICE_L, 2.4); arcline(p, ell(8, CY + 2, 52, 14, 15, 75, 10), ICE_L, 2.4); arcline(p, ell(-4, CY + 4, 30, 6, 200, 300, 10), ICE_L, 2.4)
-    skate(p, -48, -8, .8)
+    p.shape(ell(CX, CY, RX - 8, RY - 6, 0, 360, 48), ICE, INNER, j=.1, step=99, clip=False)
+    poly(p, ell(CX, CY, RX - 11, RY - 9, 195, 270, 14) + ell(CX, CY, RX - 22, RY - 15, 270, 195, 14), ICE_L)
+    arcline(p, ell(CX + 14, CY + 10, 34, 8, 20, 150, 12), ICE_L, 2.6)
     with layer(p, 'skate'):
-        skate(p, 2 - GLIDE + glide, 8, .8)
+        skate(p, CX - 50 - GLIDE + glide, CY + 4, .9)
     return p
 
 

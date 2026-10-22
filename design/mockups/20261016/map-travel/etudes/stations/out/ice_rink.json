@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  44
+  75
  ],
  "stand": [
   0.0,
@@ -20,26 +20,26 @@
   "node_ice_rink_skate"
  ],
  "inside_pad": {
-  "min_margin_px": 6.0,
+  "min_margin_px": 1.5,
   "base_on_pad": true,
-  "height_px": 69.8,
+  "height_px": 106.2,
   "bbox_px": [
-   19.5,
-   64.5,
-   124.2,
-   134.2
+   19.2,
+   32.8,
+   130.8,
+   139.0
   ],
-  "ok": true
+  "ok": false
  },
  "motion_spec": {
   "node_ice_rink_skate": {
    "kind": "اسکیت جلویی روی یخ به راست می‌لغزد؛ حالت ایستا = پایان",
    "translate_x_symbol_units": [
-    -12,
+    -10,
     0
    ],
    "translate_x_map_px": [
-    -8.6,
+    -7.2,
     0
    ],
    "duration_s": 1.2,

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ایستگاه M05 «انبار تیرآهن» (شهر، پالت city)، دور ۶: سه تیرآهن I درشت و سه‌بعدی (¾) روی هم، دو تا پایین و یکی بالا.
+"""ایستگاه M05 «انبار تیرآهن» (شهر، پالت city)، دور ۶: دو تیرآهن I درشت و گرم (نارنجی-زرد) و سه‌بعدی (¾) روی هم، دو تا پایین و یکی بالا.
 هر تیر: مقطع I (بال ۱۶، جان ۱۸، پهنا ۵۲، ارتفاع ۴۸) بیرون‌کشیده با عمق (17,-12) به پشت-راست؛ رخ جلو #b9cdf0 (میانی)، رویهٔ بال‌ها #f6f9ff (روشن)،
  پهلو #7f86c8 (تیره)؛ نوار برق باریک روی بال بالایی. بست زرد (#ffd84d) روی رویهٔ تیر بالا (لایهٔ node_beam_store_prop همراه تیر بالا).
  مرکز دو تیر پایین x=∓27؛ تیر بالا مرکز x=0. فلز روشن روی سکوی تیرهٔ شهر. سایهٔ تماس زیر دو تیر پایین. حرکت: تیر بالا از ۸ واحد بالاتر می‌نشیند (یک‌بار)."""
@@ -9,11 +9,11 @@ sys.path.insert(0, str(HERE.parent)); sys.path.insert(0, str(HERE))
 from r6lib import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/beam_store'
-FR, TP_, SD, MD = '#b9cdf0', '#f6f9ff', '#7f86c8', '#9aa8dc'
+FR, TP_, SD, MD = '#ffb62e', '#fff2a6', '#c46a18', '#e48a22'
 YEL, YEL_D = '#ffd84d', '#c9891a'
-W, H, TF, TW = 52, 48, 16, 18
-D = (17, -12)
-G = 12; OX = -8; DROP = 8
+W, H, TF, TW = 70, 42, 13, 16
+D = (18, -12)
+G = 14; OX = -8; DROP = 8
 
 
 def I0(cx, base):
@@ -25,7 +25,7 @@ def beam(p, cx, base, strap=False):
     f = I0(cx, base)
     extrude(p, f, D, FR, TP_, SD, mid=MD, sw=PART, sw_in=INNER)
     t = base - H
-    rect(p, cx - W / 2 + OX + 5, t + 4, cx + W / 2 + OX - 12, t + 7.5, '#ffffff', .9)
+    rect(p, cx - W / 2 + OX + 5, t + 4, cx + W / 2 + OX - 12, t + 7.5, '#fffbe0', .95)
     if strap:
         x0 = cx + OX - 11; x1 = cx + OX + 11
         poly(p, [(x0, t), (x1, t), (x1 + D[0], t + D[1]), (x0 + D[0], t + D[1])], YEL)
@@ -36,12 +36,11 @@ def beam(p, cx, base, strap=False):
 
 def build(out=OUTD):
     p = Pen('beam_store', 'city'); pad(p, line=((-52, 40), (-36, 43)), tri=((72, -22), (-74, 14)), dot=(78, 6))
-    p.xf = (1.06, 4, 0)
-    p.tipshadow(OX + 4, G + 1, 60); p.foot_tip(OX + 4, G, 48)
-    beam(p, -27, G)
-    beam(p, 27, G)
+    p.xf = (1.1, 4, 0)
+    p.tipshadow(OX + 8, G + 1, 62); p.foot_tip(OX + 8, G, 50)
+    beam(p, 0, G)
     with layer(p, 'prop'):
-        beam(p, 0, G - H, strap=True)
+        beam(p, 0, G - H + 2)
     return p
 
 
