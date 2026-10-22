@@ -31,10 +31,10 @@ def skate(p, ox, oy, k=1.0):
     T0 = T
     D = (11 * k, -7 * k)
     poly(p, T(ell(54, 2, 64, 7, 0, 360, 24)), ICE_D, .9)                       # سایهٔ تیز روی یخ
-    blade = T([(-6, -11), (-6, 0), (92, 0), (104, -5), (109, -13), (101, -14), (97, -11)])
-    extrude(p, blade, D, M_B, M_L, M_D, mid=M_B, sw=2.6, sw_in=1.0)
-    for x0 in (14, 70):                                                        # پایه‌ها جلوی/روی تیغه ایستاده‌اند
-        extrude(p, T0(rect(x0, -34, x0 + 10, -7)), (4 * k, -3 * k), M_B, M_L, M_D, mid=M_B, sw=2.6, sw_in=1.0)
+    prof = [(-6, -11), (-6, 0), (92, 0), (104, -5), (109, -13), (101, -14), (97, -11)]
+    u = unary_union([Polygon(prof)] + [Polygon(rect(x0, -34, x0 + 10, -11)) for x0 in (14, 70)]).buffer(0)
+    runner = T(list(u.exterior.coords)[:-1])                                   # تیغه و دو پایه یک شکل یکپارچه
+    extrude(p, runner, (5 * k, -3.5 * k), M_B, M_L, M_D, mid=M_B, sw=2.6, sw_in=0)
     T = lambda pts: [(ox + x * k, oy + (y - 10) * k) for x, y in pts]   # پوتین ۱۰ واحد بالاتر از تیغه
     boot = T([(0, -100), (38, -100), (40, -64), (62, -48), (88, -42), (101, -30), (101, -20), (0, -20)])
     extrude(p, boot, D, BT_B, BT_L, BT_D, sw=3.6, sw_in=0)
