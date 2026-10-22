@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  54
+  49
  ],
  "stand": [
   43.0,
@@ -22,10 +22,10 @@
  "inside_pad": {
   "min_margin_px": 12.2,
   "base_on_pad": true,
-  "height_px": 62.2,
+  "height_px": 57.2,
   "bbox_px": [
    26.0,
-   54.2,
+   59.2,
    93.2,
    116.5
   ],

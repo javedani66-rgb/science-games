@@ -53,19 +53,14 @@ def build():
     p.stroke(shell, OUT, j=.15, step=8)
     # خط شنا (از پشت نردبان رد نمی‌شود: فقط سمت چپ آن)
     ry = -17; XB = -13   # محور ریل چپ
-    pline(p, [(WL + 10, ry), (-26, ry)], '#ffffff', INNER)
-    p.raw('<circle cx="%.1f" cy="%.1f" r="3.4" fill="%s"/>' % (*p.X((WL + 10, ry)), RED))
-    p.raw('<circle cx="%.1f" cy="%.1f" r="3.4" fill="%s"/>' % (*p.X((-26, ry)), YEL))
     with layer(p, 'wave'):
         pline(p, wave(WL + 10, -23, WATER + 5), '#ffffff', INNER)
     # نردبان: ریل‌های کنار دیوارهٔ راست، قلاب کوتاه روی لبه؛ زیر ریل ۵٫۸ خاکستری یک ریل ۷٫۶ تیره
     def rail(sx, hy, xv):
-        r = 4.5; X = p.X
-        a, b, c, d = X((sx, WT + 6)), X((sx, hy)), X((xv, hy)), X((xv, -12))
-        return 'M%.1f,%.1f L%.1f,%.1f Q%.1f,%.1f %.1f,%.1f L%.1f,%.1f Q%.1f,%.1f %.1f,%.1f L%.1f,%.1f' % (
-            a[0], a[1], b[0], b[1] + r, b[0], b[1], b[0] - r, b[1], c[0] + r, c[1], c[0], c[1], c[0], c[1] + r, d[0], d[1])
-    rails = (rail(12, WT - 4, 1), rail(19, WT - 13, XB))
-    rungs = [p.X([(XB, y), (1, y)]) for y in (-50, -40, -24)]
+        a, b = p.X((xv, hy)), p.X((xv, -12))
+        return 'M%.1f,%.1f L%.1f,%.1f' % (a[0], a[1], b[0], b[1])
+    rails = (rail(1, WT - 6, 1), rail(XB, WT - 6, XB))
+    rungs = [p.X([(XB, y), (1, y)]) for y in (-46, -34, -22)]
     for d in rails:
         p.raw('<path d="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (d, NAVY, OUT))
     for q in rungs:
