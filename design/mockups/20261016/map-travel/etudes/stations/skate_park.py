@@ -19,8 +19,8 @@ D_T, D_L, D_S = '#ff8a2b', '#ffc27a', '#2a5fc4'
 W_Y, W_C = '#ffd84d', '#d9961c'
 RD = (16, -10)                         # عمق رمپ
 RB, RT = -2, -62                       # کف و لبهٔ بالای رمپ
-BCX, BCY = 22, 10                        # مرکز تخته
-TILT = -5                              # بالاآمدن دماغهٔ تخته (درجه)
+BCX, BCY = 24, 16                        # مرکز تخته
+TILT = 0                              # بالاآمدن دماغهٔ تخته (درجه)
 
 
 def tf(pts, a=TILT, c=(BCX, BCY)):
@@ -34,28 +34,31 @@ def ramp(p):
     pts = [(-46, RT), (-46, RB), (46, RB), (46, RT), (R, RT)] + arc + [(-R, RT)]
     pts = [(x * .8 - 30, y * .8 - 20) for x, y in pts]
     p.tipshadow(-30, RB - 10, 44)
-    extrude(p, pts, RD, C_F, C_T, C_R, mid=C_I, sw=OUT, sw_in=PART)
+    extrude(p, pts, RD, C_F, C_T, C_R, mid=C_I, sw=3.6, sw_in=0)
 
 
 def wheel(p, x, y, r=12, core=True):
     pts = tf(ell(x, y, r, r, 0, 360, 36))
-    p.shape(pts, W_Y, PART, j=.05, step=99, clip=False)
+    p.shape(pts, W_Y, 2.6, j=.05, step=99, clip=False)
     if core:
         cx, cy = tf([(x, y)])[0]
         circ(p, cx, cy, 4.5, W_C)
 
 
 def board(p):
-    deck = [(-46, -13), (-38, -3), (38, -3), (46, -13), (46, -6), (38, 5), (-38, 5), (-46, -6)]
-    D = (16, -13)
-    for sx in (-27, 27):
-        wheel(p, sx + D[0] * .9, 12 + D[1] * .9, 12, core=False)               # چرخ‌های دور
-    for sx in (-27, 27):
-        p.tipshadow(BCX + sx, 27, 17)
-    extrude(p, tf(deck), D, D_S, D_T, D_S, mid=D_L, sw=PART, sw_in=PART)
-    st = [(-34, -3), (34, -3), (34 + D[0] * .22, -3 + D[1] * .22), (-34 + D[0] * .22, -3 + D[1] * .22)]
-    poly(p, tf([(x + D[0] * .4, y + D[1] * .4) for x, y in st]), D_S, .0001)
-    for sx in (-27, 27): wheel(p, sx, 13, 14)                                    # چرخ‌های نزدیک
+    """تخته‌اسکیت ساده، بدون کج‌شدن: تخته با دو دماغهٔ بالاآمده، دو چرخ کوچک جلو و دو چرخ پشت."""
+    deck = [(-50, -14), (-42, -3), (42, -3), (50, -14), (50, -9), (43, 3), (-43, 3), (-50, -9)]
+    D = (12, -8)
+    for sx in (-26, 26):
+        p.tipshadow(BCX + sx + 4, 27, 12)
+    for sx in (-26, 26):                                                       # چرخ‌های دور (پشت)
+        x, y = sx + D[0] * .9, 9 + D[1] * .9
+        p.shape(tf(ell(x, y, 8, 8, 0, 360, 28)), W_Y, 2.6, j=.05, step=99, clip=False)
+    extrude(p, tf(deck), D, D_S, D_T, D_S, mid=D_L, sw=3.6, sw_in=0)
+    for sx in (-26, 26):                                                       # چرخ‌های نزدیک
+        p.shape(tf(ell(sx, 11, 9, 9, 0, 360, 28)), W_Y, 2.6, j=.05, step=99, clip=False)
+        cx, cy = tf([(sx, 11)])[0]
+        circ(p, cx, cy, 3.4, W_C)
 
 
 def build():
