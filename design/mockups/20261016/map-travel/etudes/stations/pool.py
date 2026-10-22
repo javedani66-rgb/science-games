@@ -44,13 +44,13 @@ def build():
     p.ln(pos(.12, .48), pos(.26, .48), INNER, '#ffffff', j=0); p.ln(pos(.42, .30), pos(.58, .30), INNER, '#ffffff', j=0)
     # ۳) نردبان بلند فلزی (دو ریل ضخیم سه‌پله + ۳ پله + دستگیرهٔ خمیده)
     xs, ys = pos(.72, .62)
-    LH = 46; XG = 24
+    LH = 66; XG = 24
     def rail(x):
         pts = [(x, ys), (x, ys - LH)]
         for k in range(1, 8):
             t = math.radians(180 - 160 * k / 7); pts.append((x + 7 + 7 * math.cos(t), ys - LH - 7 * math.sin(t)))
         return pts
-    rungs = (ys - 16, ys - 32)
+    rungs = (ys - 20, ys - 40, ys - 58)
     for x in (xs, xs + XG): pline(p, rail(x), NAVY, 15)
     for y in rungs: pline(p, [(xs, y), (xs + XG, y)], NAVY, 12, 'butt')
     for x in (xs, xs + XG): pline(p, rail(x), RAIL, 8)
@@ -63,17 +63,17 @@ def build():
         poly(p, ell(cx, cy + BR - 3, BR * 1.15, BR * .2, 0, 360, 24), '#ffffff', .75)
         cols = ['#ee4b3c', '#ffc93c', '#ffffff']
         circ = ell(cx, cy, BR, BR, 0, 360, 40)
-        p.shape(circ, '#ffffff', PART, j=.05, step=99)
+        poly(p, circ, '#ffffff')
         lam = [-90, -32, 32, 90]
         def mer(l): return [(cx + BR * math.cos(math.radians(t)) * math.sin(math.radians(l)), cy - BR * math.sin(math.radians(t))) for t in range(-90, 91, 15)]
         for i in range(2):
             a = mer(lam[i]); b = mer(lam[i + 1])[::-1]
             poly(p, a + b, cols[i])
         a = mer(lam[2]); b = mer(lam[3])[::-1]; poly(p, a + b, '#ff8a2a')
-        for l in lam[1:-1]: pline(p, mer(l), NAVY, INNER)
+        for l in lam[1:-1]: pline(p, mer(l), NAVY, 1.3)
         poly(p, [(cx + BR * .98 * math.cos(math.radians(t)), cy + BR * .98 * math.sin(math.radians(t))) for t in range(-60, 61, 12)] + [(cx + BR * .45 * math.cos(math.radians(t)), cy + BR * .45 * math.sin(math.radians(t))) for t in range(60, -61, -12)], '#10083a', .2)
         poly(p, ell(cx - BR * .35, cy - BR * .45, BR * .22, BR * .14, 0, 360, 14), '#ffffff', .8)
-        p.stroke(circ, PART, j=.05, step=99)
+        pline(p, circ + [circ[0]], NAVY, 2.0)
     return p
 STAND = None
 if __name__ == '__main__':
