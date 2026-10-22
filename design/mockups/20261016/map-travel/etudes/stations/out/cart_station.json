@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  60
+  65
  ],
  "stand": [
-  34.5,
-  2.5
+  42.0,
+  6.0
  ],
  "ring": [
   0,
@@ -20,44 +20,44 @@
   "node_cart_station_roll"
  ],
  "inside_pad": {
-  "min_margin_px": 5.8,
+  "min_margin_px": 9.5,
   "base_on_pad": true,
-  "height_px": 68.2,
+  "height_px": 73.5,
   "bbox_px": [
-   13.8,
-   47.8,
-   76.8,
-   116.0
+   17.5,
+   43.0,
+   92.0,
+   116.5
   ],
   "ok": true
  },
  "motion_spec": {
   "node_cart_station_roll": {
    "kind": "translate",
-   "dx_from": -7,
+   "dx_from": -5,
    "dx_to": 0,
    "dur_s": 1.8,
    "count": 1,
    "ease": "ease-out",
-   "note": "کل گاری از ۷ واحد (≈۵px) چپ می‌غلتد و در جای ایستا می‌ایستد؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار."
+   "note": "کل گاری از ۵ واحد (≈۴px) چپ می‌غلتد و در جای ایستا می‌ایستد؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار."
   },
   "node_cart_station_roll_wheel": {
    "kind": "rotate",
    "about": [
-    -54.0,
-    -9.0
+    -49.0,
+    -11.0
    ],
-   "deg_from": -24,
+   "deg_from": -15,
    "deg_to": 0,
    "note": "چرخ بزرگ عقب؛ ساعت‌گرد؛ هم‌زمان با غلتیدن"
   },
   "node_cart_station_roll_wheel2": {
    "kind": "rotate",
    "about": [
-    -20.0,
+    -11.0,
     -6.0
    ],
-   "deg_from": -29,
+   "deg_from": -20,
    "deg_to": 0,
    "note": "چرخ کوچک جلو"
   },

@@ -21,16 +21,16 @@ RED, RED_L, RED_D = '#e0553a', '#ff9a6c', '#9c2f1c'
 YEL, YEL_L, YEL_D = '#ffd84d', '#fff0a0', '#d9961c'
 ST, ST_S, ST_L = '#dbe9f8', '#a3bbd9', '#ffffff'
 WOOD, WOOD_L, WOOD_D = '#b77a3a', '#d9a463', '#7a4a1f'
-XF = (1.0, -6.0, -6.0)
+XF = (1.0, -8.0, -22.0)
 
 # سطح یخ: رویه y∈[YT,YB]، لبهٔ بالا به راست کج (SKW)
-XL, XR, YT, YB, TH, SKW = -68, 34, -34, 24, 8, 8
+XL, XR, YT, YB, TH, SKW = -62, 28, -34, 24, 8, 8
 def sh(y): return SKW * (YB - y) / (YB - YT)
 TOPF = [(XL + SKW, YT), (XR + SKW, YT), (XR, YB), (XL, YB)]
 FRONT = [(XL, YB), (XR, YB), (XR, YB + TH), (XL, YB + TH)]
 SIDE = [(XR + SKW, YT), (XR + SKW, YT + TH), (XR, YB + TH), (XR, YB)]
-SKIS = (-14, 8)          # محور y دو اسکی
-SX0, SX1, SW = -54, 22, 13   # نوک و دم اسکی، عرض
+SKIS = (-13, 9)          # محور y دو اسکی
+SX0, SX1, SW = -50, 16, 14   # نوک و دم اسکی، عرض
 
 
 def poly(p, pts, col, op=1):
@@ -63,7 +63,7 @@ def pole(p, b, t, w=9):
     sp(p, [P(13, -8), P(13, 8), P(20, 8), P(20, -8)], RED, INNER, False)
 
 
-GL_REST = 14
+GL_REST = 8
 GL_START = -60
 def strips(dx):
     out = []
@@ -74,21 +74,21 @@ def strips(dx):
 
 
 def build():
-    p = Pen('ice_rink', 'sports'); pad(p, line=((-60, 36), (-44, 39)), tri=((62, -22), (66, 12)), dot=(62, 26))
+    p = Pen('ice_rink', 'sports'); pad(p, line=((-52, 40), (-36, 43)), tri=((62, -22), (66, 12)), dot=(62, 26))
     p.xf = XF
     p.tipshadow(-10, YB + TH + 2, 44); p.foot_tip(-10, YB + TH - 1, 30)
     # ۱) یخ
     sp(p, SIDE, ICE_S, PART); sp(p, FRONT, ICE_D, PART); sp(p, TOPF, ICE, PART)
     # ترک‌های راست و بلند (INNER) زیر اسکی‌ها
     p.ln((-22, YT + 6), (12, YB - 5), INNER, CRACK, j=0)
-    p.ln((30, YT + 6), (27, YB - 6), INNER, CRACK, j=0)
+    p.ln((24, YT + 6), (22, YB - 6), INNER, CRACK, j=0)
     # ۲) درخشش (لایهٔ متحرک)
     with layer(p, 'glint'):
         for s_ in strips(GL_REST):
             poly(p, s_, '#ffffff', .62)
-    p.stroke(TOPF, PART, j=.1, step=99)
+    q = p.X(TOPF); p.o.append('<path d="M%s" fill="none" class="eo" stroke-width="%s"/>' % ('L'.join('%.1f,%.1f' % z for z in q) + 'Z', PART))
     # ۳) چوب‌دستی‌های ضربدری (پشت اسکی)
-    for b, t in (((6, -26), (28, -92)), ((24, -26), (2, -92))):
+    for b, t in (((4, -27), (12, -92)), ((26, -27), (34, -92))):
         poly(p, [(b[0] - 7, b[1] + 1), (b[0] + 8, b[1] + 1), (b[0] + 8, b[1] + 4.5), (b[0] - 7, b[1] + 4.5)], ICE_D, .9)
         pole(p, b, t)
     # ۴) اسکی‌ها
@@ -96,7 +96,7 @@ def build():
         sx = sh(c)
         body = [(x + sx * 0, y) for x, y in ski_pts(c)]
         poly(p, [(SX0 + 2, c + 4), (SX0 + 24, c + SW / 2 + 3), (SX0 + 24, c + SW / 2 + .5), (SX0 + 8, c + 4)], ICE_D, .9)   # سایه زیر نوک بالا‌آمده
-        sp(p, body, RED, PART)
+        sp(p, body, RED, INNER)
         poly(p, [(SX0 + 6, c - 2.5), (SX0 + 24, c - 4.2), (SX1 - 5, c - 4.2), (SX1 - 5, c - 2.4), (SX0 + 24, c - 2.4), (SX0 + 8, c - .5)], RED_L)
         poly(p, [(SX0 + 26, c + 2.2), (SX1 - 4, c + 2.2), (SX1 - 4, c + 4), (SX0 + 26, c + 4)], RED_D)
         poly(p, [(-30, c - 3.8), (-14, c - 3.8), (-14, c + 3.8), (-30, c + 3.8)], YEL)            # بست زرد (تخت)
