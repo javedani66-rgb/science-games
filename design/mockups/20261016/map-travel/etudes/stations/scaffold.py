@@ -17,10 +17,10 @@ S_B, S_L, S_D = '#d5dde6', '#f4f7fa', '#9aa8ba'
 W_B, W_L, W_D = '#f0cf86', '#fbe8b8', '#c99a4a'
 R_B, R_L, R_D = '#e2553d', '#ff9b84', '#a83420'
 FT = '#7d8794'; STR = '#7a4a1f'; YEL = '#ffd84d'; YEL_L = '#fff2a8'
-PX = (-44, -4); PW = 15; TOPY = -102; BASE = 7
-DK = ((-58, -44, 10, -30), (-58, -86, 10, -72))
-BAR = (-52, -108, 38, -96)
-PV = (28, -96); BOB_Y = (-20, 4)
+PX = (-48, 0); PW = 15; TOPY = -112; BASE = 7
+DK = ((-62, -48, 12, -34), (-62, -94, 12, -80))
+BAR = (-56, -118, 38, -106)
+PV = (28, -106); BOB_Y = (-20, 4)
 
 
 def rect(p, x0, y0, x1, y1, col):
@@ -41,19 +41,18 @@ def brace(p, a, b, w=14):
 
 
 def build(out=OUTD):
-    p = Pen('scaffold', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((62, -24), (66, 10)), dot=(74, -8)); p.xf = (1.0, -14, 0)
+    p = Pen('scaffold', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((62, -24), (66, 10)), dot=(74, -8)); p.xf = (0.92, -12, 5)
     for x in PX + (20,): pass
     p.tipshadow(-24, BASE + 3, 36); p.foot_tip(-24, BASE + 2, 24)
     # ۱) کفشک‌ها
-    for x in PX: box(p, x - 12, -1, x + 12, BASE, FT)
     # ۲) مورب‌ها (پشت پایه‌ها)
-    brace(p, (-44, -2), (-4, -30), 15)
-    brace(p, (-4, -44), (-44, -72), 15)
+    brace(p, (-48, -2), (0, -32), 18)
+    brace(p, (0, -48), (-48, -80), 18)
     # ۳) پایه‌ها
     for x in PX:
-        box(p, x - PW / 2, TOPY, x + PW / 2, BASE - 5, S_B)
-        rect(p, x - PW / 2 + 3, TOPY + 5, x - PW / 2 + 6.5, BASE - 9, S_L)
-        rect(p, x + 1.5, TOPY + 5, x + PW / 2 - 2.5, BASE - 9, S_D)
+        box(p, x - PW / 2, TOPY, x + PW / 2, BASE, S_B)
+        rect(p, x - PW / 2 + 3, TOPY + 5, x - PW / 2 + 6.5, BASE - 6, S_L)
+        rect(p, x + 1.5, TOPY + 5, x + PW / 2 - 2.5, BASE - 6, S_D)
     # ۴) تخته‌ها
     for x0, y0, x1, y1 in DK:
         box(p, x0, y0, x1, y1, W_B)
@@ -74,7 +73,7 @@ def build(out=OUTD):
 if __name__ == '__main__':
     p = build()
     hm = p.X(PV)
-    r = finish(p, 'scaffold', None, motion={'plumb': dict(offsets=[(0, 0), (-9, 0), (9, 0)])}, out=OUTD, shots=SHOTS)
+    r = finish(p, 'scaffold', None, motion={'plumb': dict(offsets=[(0, 0), (-8, 0), (8, 0)])}, out=OUTD, shots=SHOTS)
     sp = r['spec']
     sp['motion_spec'] = {'node_scaffold_plumb': dict(center=[round(v, 1) for v in hm], angles_deg=[0, 6, -6, 3, -1.5, 0], duration_s=2.8, repeat='یک‌بار',
         note='فقط شاقول از نقطهٔ تیرک تاب می‌خورد و قائم می‌ایستد؛ داربست و تخته ثابت؛ حالت ایستا=قائم.'), 'reduced_motion': 'شاقول قائم'}

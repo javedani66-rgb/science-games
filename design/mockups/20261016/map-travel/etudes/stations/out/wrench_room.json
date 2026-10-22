@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  102
+  104
  ],
  "stand": [
   38.0,
@@ -20,13 +20,13 @@
   "node_wrench_room_wrench"
  ],
  "inside_pad": {
-  "min_margin_px": 10.0,
+  "min_margin_px": 8.0,
   "base_on_pad": true,
-  "height_px": 101.8,
+  "height_px": 103.5,
   "bbox_px": [
-   18.0,
-   6.2,
-   82.2,
+   16.0,
+   4.5,
+   82.8,
    108.0
   ],
   "ok": true
@@ -47,8 +47,8 @@
  },
  "swing_check": {
   "out_px": 0.0,
-  "x_margin": 8.5,
-  "min_inside": 11.2,
+  "x_margin": 6.5,
+  "min_inside": 9.2,
   "stand_to_swing": 0.0
  }
 }

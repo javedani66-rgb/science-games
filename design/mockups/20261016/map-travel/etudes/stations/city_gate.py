@@ -19,15 +19,15 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 
 S_B, S_L, S_D = '#f3dfb0', '#fff7de', '#cfb078'       # سنگ
 W_B, W_L, W_D = '#a8672f', '#d9a463', '#6e3f18'       # چوب
-HOLE = '#4a2f58'                                      # داخل دهانه
+HOLE = '#5a3d6e'                                      # داخل دهانه
 YEL = '#ffd84d'
 
 CX, BASE = -30, 7
-TT = -62           # بالای برجک
-WT = -44           # بالای دیوار میانی
-OR = 15            # نیم‌پهنای دهانه
-OY = -14           # مرکز قوس
-TW = 32            # نیم‌پهنای کل
+TT = -72           # بالای برجک
+WT = -50           # بالای دیوار میانی
+OR = 18            # نیم‌پهنای دهانه
+OY = -16           # مرکز قوس
+TW = 34            # نیم‌پهنای کل
 
 
 def poly(p, pts, col, op=1):
@@ -42,7 +42,7 @@ def disc(p, x, y, r, col):
 
 
 def build():
-    p = Pen('city_gate', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 18, 0)
+    p = Pen('city_gate', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 4, 0)
     p.tipshadow(CX + 4, BASE + 3, 38); p.foot_tip(CX - 22, BASE + 2, 10); p.foot_tip(CX + 22, BASE + 2, 10)
     # بدنهٔ سنگی یک‌تکه: دو برجک + دیوار میانی
     body = [(CX - TW, BASE), (CX + TW, BASE), (CX + TW, TT), (CX + OR, TT), (CX + OR, WT), (CX - OR, WT), (CX - OR, TT), (CX - TW, TT)]
@@ -57,19 +57,20 @@ def build():
     p.stroke(body, OUT, j=.1, step=6)
     # شکاف پنجرهٔ برجک‌ها (تخت)
     for cx in (-(TW + OR) / 2, (TW + OR) / 2):
-        poly(p, R(cx - 2, TT + 20, cx + 2, TT + 36), HOLE)
+        poly(p, R(cx - 2, TT + 22, cx + 2, TT + 40), HOLE)
     # دهانهٔ طاقی
     hole = [(CX - OR, BASE - 1), (CX + OR, BASE - 1), (CX + OR, OY)] + ell(CX, OY, OR, OR, 0, -180, 14) + [(CX - OR, OY)]
     p.shape(hole, HOLE, INNER, j=.08, step=6, clip=False)
     # لنگهٔ چپ (ثابت، بسته)
     L = [(CX - OR + 1, BASE - 1), (CX - 1, BASE - 1), (CX - 1, OY - OR + 1)] + ell(CX, OY, OR - 1, OR - 1, -90, -180, 8)[1:] + [(CX - OR + 1, OY)]
     p.shape(L, W_B, INNER, j=.08, step=6, clip=False)
-    poly(p, R(-11, BASE - 4, -8, -18), W_L)
+    poly(p, R(-13, BASE - 4, -10, -22), W_L)
     disc(p, CX - 4.5, -3, 2, YEL)
     # لنگهٔ راست (نیمه‌باز)
     with layer(p, 'leaf'):
-        p.shape([(CX + 6, BASE - 1), (CX + OR - 1, BASE - 1), (CX + OR - 1, -18), (CX + 6, -29)], W_B, INNER, j=.08, step=6, clip=False)
-        disc(p, CX + 9, -3, 2, YEL)
+        p.shape([(CX + 6, BASE - 1), (CX + OR - 1, BASE - 1), (CX + OR - 1, -22), (CX + 6, -29)], W_B, INNER, j=.08, step=6, clip=False)
+        poly(p, [(CX + 12.5, BASE - 4), (CX + 15, BASE - 4), (CX + 15, -22), (CX + 12.5, -24)], W_L)
+        disc(p, CX + 9.5, -3, 1.8, YEL)
     return p
 
 
@@ -79,9 +80,9 @@ if __name__ == '__main__':
     r = finish(p, 'city_gate', STAND, motion={'leaf': dict(offsets=[(0, 0)])}, out=OUTD, shots=SHOTS)
     sp = r['spec']
     sp['motion_spec'] = {'node_city_gate_leaf': dict(
-        type='scaleX افقی حول لولا (لبهٔ راست لنگه)', hinge_x_symbol=round(p.X((CX + OR - 1, 0))[0], 1), scale_from=1.6, scale_to=1.0,
+        type='scaleX افقی حول لولا (لبهٔ راست لنگه)', hinge_x_symbol=round(p.X((CX + OR - 1, 0))[0], 1), scale_from=1.5, scale_to=1.0,
         duration_s=1.4, easing='ease-out', loop=False,
-        start='لنگهٔ راست بسته (پهنای ۱۳ واحد، تمام نیمهٔ راست دهانه)', end='حالت ایستا (پایان): نیمه‌باز؛ پهنای ظاهری ۸ واحد (فشردگی افقی ≈ ۰٫۶۲؛ در نمای رو‌به‌رو باز شدنی بیش از ۲۵° دیده می‌شود تا خوانا باشد)',
+        start='لنگهٔ راست بسته (پهنای ۱۷ واحد، تمام نیمهٔ راست دهانه)', end='حالت ایستا (پایان): نیمه‌باز؛ پهنای ظاهری ۱۱ واحد (فشردگی افقی ≈ ۰٫۶۵؛ در نمای رو‌به‌رو باز شدنی بیش از ۲۵° دیده می‌شود تا خوانا باشد)',
         note='فقط هنگام رسیدن، یک‌بار؛ لنگهٔ چپ و برجک‌ها ثابت؛ لنگه فیگور را نمی‌پوشاند؛ بدون حلقهٔ بیکار.'),
         'reduced_motion': 'نیمه‌باز (حالت ایستا)'}
     (OUTD / 'city_gate.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

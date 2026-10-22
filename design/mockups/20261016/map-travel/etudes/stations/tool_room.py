@@ -22,7 +22,8 @@ W_B, W_L, W_D = '#f3cf7a', '#ffe9a8', '#d9a647'      # تخته
 F_B, F_L, F_D = '#d4dce8', '#f6f9fd', '#94a2b8'      # فولاد
 H_B, H_L, H_D = '#8b5fd0', '#b898ec', '#5d3a9e'      # دستهٔ بنفش
 HOLE = '#a8742a'
-BX0, BX1, BY0, BY1 = -88, 30, -118, -8
+BX0, BX1, BY0, BY1 = -92, 32, -122, -8
+XF = (0.8, -4.0, 0.0)
 
 
 def poly(p, pts, col):
@@ -40,30 +41,101 @@ def part(p, pts, col, sw=INNER):
     p.shape(pts, col, sw, j=.12, step=6, clip=False)
 
 
+def ring(p, x, y, r, col, hole, sw=INNER):
+    p.shape(ell(x, y, r, r, 0, 360, 20), col, sw, j=.05, step=99, clip=False)
+    p.fill(ell(x, y, 3.4, 3.4, 0, 360, 14), hole)
+
+
+def bar(a, b, w0, w1):
+    dx, dy = b[0] - a[0], b[1] - a[1]; L = math.hypot(dx, dy); nx, ny = -dy / L, dx / L
+    return [(a[0] + nx * w0 / 2, a[1] + ny * w0 / 2), (b[0] + nx * w1 / 2, b[1] + ny * w1 / 2),
+            (b[0] - nx * w1 / 2, b[1] - ny * w1 / 2), (a[0] - nx * w0 / 2, a[1] - ny * w0 / 2)]
+
+
+def strip(a, b, off, w, t0=.12, t1=.88):
+    """نوار روشن/تیرهٔ تخت موازی محور (off = فاصلهٔ عمود از محور)."""
+    dx, dy = b[0] - a[0], b[1] - a[1]; L = math.hypot(dx, dy); nx, ny = -dy / L, dx / L
+    p0 = (a[0] + dx * t0, a[1] + dy * t0); p1 = (a[0] + dx * t1, a[1] + dy * t1)
+    return [(p0[0] + nx * off, p0[1] + ny * off), (p1[0] + nx * off, p1[1] + ny * off),
+            (p1[0] + nx * (off + w), p1[1] + ny * (off + w)), (p0[0] + nx * (off + w), p0[1] + ny * (off + w))]
+
+
 def board(p):
     part(p, [(BX0, BY0), (BX1, BY0), (BX1, BY1), (BX0, BY1)], W_B, PART)
-    rect(p, BX0 + 4, BY0 + 4, BX1 - 4, BY0 + 8, W_L)                       # نور بالا
-    rect(p, BX1 - 9, BY0 + 8, BX1 - 3, BY1 - 3, W_D)                       # سایهٔ تیز راست
-    for i in range(7): disc(p, -78 + i * 17, -20, 2.4, HOLE)               # ردیف سوراخ
+    rect(p, BX0 + 5, BY0 + 5, BX1 - 5, BY0 + 8.5, W_L)                       # نور بالا
+    rect(p, BX1 - 11, BY0 + 11, BX1 - 5, BY1 - 5, W_D)                       # سایهٔ تیز راست
+    for i in range(8): disc(p, -80 + i * 15.5, -113, 2.3, HOLE)             # ردیف سوراخ بالا
 
 
 def plinth(p):
-    part(p, [(-92, -13), (32, -13), (32, 7), (-92, 7)], S_B, PART)
-    rect(p, -87, -9, 26, -6, S_L)
-    rect(p, 20, -6, 28, 3, S_D)
-    rect(p, -88, 1, 26, 3.5, S_D)
+    part(p, [(-96, -13), (36, -13), (36, 7), (-96, 7)], S_B, PART)
+    rect(p, -91, -9, 25, -6.5, S_L)
+    rect(p, 28, -6.5, 31, 2.5, S_D)
+    rect(p, -91, 1.5, 31, 3.5, S_D)
 
 
-def arm(p, f, tip_x, tip_y, hx, hy):
-    """یک نیمهٔ قیچی در قاب f (مبدأ = پیچ): تیغه از پیچ تا نوک، دستهٔ بنفش با حلقه."""
-    pass
+def scissors(p, cx):
+    P = (cx, -60); TIPY = -98; RC = (11, -32)
+
+    def half(sg):
+        tip = (cx - sg * 7, TIPY); rc = (cx + sg * RC[0], RC[1])
+        hb = bar(P, (rc[0], rc[1] - 4), 12, 12)
+        part(p, hb, H_B, INNER)
+        ring(p, rc[0], rc[1], 8, H_B, W_B)
+        poly(p, strip(P, rc, -4.2, 2.2, .3, .7), H_L)
+        part(p, bar((P[0] - sg * 0.5, P[1] + 3), tip, 13, 3.5), F_B, INNER)       # تیغه
+        poly(p, strip((P[0], P[1]), tip, -3.6 * sg, 1.8, .18, .86), F_L)
+    half(1)                                                                         # نیمهٔ ثابت (تیغه بالا-چپ)
+    with layer(p, 'scissors'):                                                      # نیمهٔ متحرک
+        half(-1)
+    p.shape(ell(P[0], P[1] + 1, 4.6, 4.6, 0, 360, 14), F_D, INNER, j=.05, step=99, clip=False)
+    p.fill(ell(P[0] - 1, P[1], 1.4, 1.4, 0, 360, 8), F_L)
+    return (P[0], P[1])
 
 
-def scissors(p, cx, py):
-    """دو نیمه. نیمهٔ چپ (ثابت): تیغه تا بالا-چپ، حلقه پایین-راست. نیمهٔ راست (متحرک): آینه."""
-    def half(sg, f):
-        # محلی: مبدأ = پیچ؛ sg=-1 تیغه به چپ بالا
-        blade = [(-sg * 1, -6), (sg * 7, -6), (sg * 11, -42), (sg * 6, -42), (-sg * 2, 4)]
-        blade = [(sg * 6.5, 4), (-sg * 5, 4), (sg * 0.5, -44), (sg * 7, -40)]
-        return blade
-    return None
+def hammer(p, cx):
+    part(p, bar((cx, -92), (cx, -28), 13, 13), H_B, INNER)
+    poly(p, strip((cx, -92), (cx, -28), -4.3, 2.2, .26, .94), H_L)
+    poly(p, strip((cx, -92), (cx, -28), 2.2, 2.2, .26, .94), H_D)
+    claw = [(cx - 4, -104), (cx - 11, -103.5), (cx - 17, -98), (cx - 20, -88), (cx - 21, -77), (cx - 16, -84), (cx - 12, -90), (cx - 4, -93)]
+    part(p, claw, F_B, INNER)
+    part(p, [(cx - 8, -106), (cx + 16, -106), (cx + 16, -82), (cx - 8, -82)], F_B, INNER)
+    rect(p, cx - 5, -103.5, cx + 6, -101, F_L)
+    rect(p, cx + 10.5, -103, cx + 14, -84.5, F_D)
+
+
+def pliers(p, cx):
+    P = (cx, -62); TIPY = -99
+    for sg in (1, -1):
+        rc = (cx + sg * 12, -30)
+        part(p, bar((P[0], P[1] + 4), (rc[0], rc[1]), 13, 13), H_B, INNER)
+        poly(p, strip(P, rc, -4.3 * sg if sg > 0 else 2.3, 2.2, .3, .92), H_L if sg > 0 else H_D)
+    for sg in (1, -1):
+        tip = (cx - sg * 8.5, TIPY)
+        part(p, bar((P[0], P[1] + 3), tip, 15, 10), F_B, INNER)
+        poly(p, strip((P[0], P[1] + 3), tip, 2.2 if sg > 0 else -3.9, 1.7, .3, .9), F_L)
+    p.shape(ell(P[0], P[1], 5.4, 5.4, 0, 360, 14), F_D, INNER, j=.05, step=99, clip=False)
+    p.fill(ell(P[0] - 1, P[1] - 1, 1.5, 1.5, 0, 360, 8), F_L)
+
+
+def build(out=OUTD):
+    p = Pen('tool_room', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
+    p.xf = XF
+    p.tipshadow(-30, 8, 52); p.foot_tip(-30, 7, 30)
+    board(p)
+    plinth(p)
+    hammer(p, -31)
+    pliers(p, 8)
+    pivot = scissors(p, -70)
+    return p, pivot
+
+
+STAND = None
+if __name__ == '__main__':
+    p, pivot = build()
+    hm = p.X(pivot)
+    r = finish(p, 'tool_room', STAND, motion={'scissors': dict(rotate=hm)}, out=OUTD, shots=SHOTS)
+    sp = r['spec']
+    sp['motion_spec'] = {'node_tool_room_scissors': dict(center=[round(v, 1) for v in hm], angle_deg=-25, note='نیمهٔ راست قیچی (تیغه+دسته) حول پیچ ≈۲۵° باز می‌شود و برمی‌گردد؛ ۱٫۲ث؛ یک‌بار هنگام رسیدن؛ نیمهٔ چپ ثابت. حالت ایستا = نیمه‌باز پایان.'),
+                         'reduced_motion': 'قیچی ثابت'}
+    (OUTD / 'tool_room.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

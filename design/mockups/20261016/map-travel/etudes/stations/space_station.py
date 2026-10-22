@@ -58,7 +58,6 @@ def build(out=OUTD, ang=0):
     sharp(p, body, M_B, OUT)
     poly(p, [(-MX + 9, MT + 4), (MX - 9, MT + 4), (MX - 9, MT + 7.5), (-MX + 9, MT + 7.5)], M_L)
     poly(p, [(-MX + 9, MB - 9), (MX - 9, MB - 9), (MX - 9, MB - 4), (-MX + 9, MB - 4)], M_D)
-    poly(p, [(MX - 18, MT + 9), (MX - 9, MT + 9), (MX - 9, MB - 9), (MX - 18, MB - 9)], M_D)
     poly(p, [(-MX + 9, MB - 4), (MX - 9, MB - 4), (MX - 9, MB - 1.5), (-MX + 9, MB - 1.5)], M_DD)
     for xx in (-42, 42):
         poly(p, [(xx - 2, MT + 2), (xx + 2, MT + 2), (xx + 2, MB - 2), (xx - 2, MB - 2)], G_B)

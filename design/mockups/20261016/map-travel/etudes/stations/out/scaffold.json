@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  80
+  77
  ],
  "stand": [
-  43.0,
-  5.5
+  44.0,
+  7.0
  ],
  "ring": [
   0,
@@ -20,22 +20,22 @@
   "node_scaffold_plumb"
  ],
  "inside_pad": {
-  "min_margin_px": 7.6,
+  "min_margin_px": 7.2,
   "base_on_pad": true,
   "height_px": 87.0,
   "bbox_px": [
-   18.0,
-   28.0,
-   95.5,
-   115.0
+   20.0,
+   31.2,
+   97.5,
+   118.2
   ],
   "ok": true
  },
  "motion_spec": {
   "node_scaffold_plumb": {
    "center": [
-    14.0,
-    -96.0
+    17.4,
+    -92.5
    ],
    "angles_deg": [
     0,

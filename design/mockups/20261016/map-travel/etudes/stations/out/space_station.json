@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  63
+  68
  ],
  "stand": [
-  40.0,
-  5.5
+  41.5,
+  4.5
  ],
  "ring": [
   0,
@@ -20,22 +20,22 @@
   "node_space_station_panels"
  ],
  "inside_pad": {
-  "min_margin_px": 12.2,
+  "min_margin_px": 8.8,
   "base_on_pad": true,
-  "height_px": 69.2,
+  "height_px": 75.2,
   "bbox_px": [
-   20.2,
-   45.0,
-   89.0,
-   114.2
+   16.8,
+   39.5,
+   91.0,
+   114.8
   ],
   "ok": true
  },
  "motion_spec": {
   "node_space_station_panels": {
    "center": [
-    -24.0,
-    -25.5
+    -25.0,
+    -27.8
    ],
    "max_angle_deg": 6,
    "pattern": "0 -> +6 -> -6 -> 0",

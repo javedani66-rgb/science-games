@@ -22,10 +22,10 @@ G_B, G_L, G_D = '#9a63e0', '#c4a0f5', '#6a3cb5'
 YEL = '#ffd84d'
 ANG = 66
 LEN = 112
-E = (6, -4)                       # مرکز ته دسته (جهان)
+E = (12, -4)                       # مرکز ته دسته (جهان)
 H = (E[0] - LEN * math.cos(math.radians(ANG)), E[1] - LEN * math.sin(math.radians(ANG)))   # مرکز دهانه
-HW = 8.5                          # نیم‌پهنای دسته
-SL0, SL1 = 44, 90                 # غلاف از تا
+HW = 9.5                          # نیم‌پهنای دسته
+SL0, SL1 = 40, 112                 # غلاف از تا
 
 
 def poly(p, pts, col, op=1):
@@ -37,24 +37,25 @@ def build():
     f = rot(H[0], H[1], ANG)
     L = lambda pts: TP(f, pts)
     p.tipshadow(E[0] + 2, E[1] + 7, 13); p.foot_tip(E[0], E[1] + 5, 10)
-    body_l = [(-24, -25), (6, -25), (22, -12), (34, -HW), (LEN - HW, -HW)] + ell(LEN - HW, 0, HW, HW, -90, 90, 8)[1:-1] + \
-             [(LEN - HW, HW), (34, HW), (22, 12), (6, 25), (-24, 25), (-24, 8), (-10, 8), (-2, 0), (-10, -8), (-24, -8)]
+    HH = 27
+    nk = SL0 + 6
+    body_l = [(-26, -HH), (6, -HH), (22, -13), (34, -HW), (nk, -HW), (nk, HW), (34, HW), (22, 13), (6, HH), (-26, HH),
+              (-26, 9.5), (-12, 9.5), (-3, 0), (-12, -9.5), (-26, -9.5)]
+    sl_l = [(SL0, -HW), (LEN - HW, -HW)] + ell(LEN - HW, 0, HW, HW, -90, 90, 8)[1:-1] + [(LEN - HW, HW), (SL0, HW)]
     with layer(p, 'wrench'):
         body = L(body_l)
         p.shape(body, M_B, OUT, j=.1, step=6)
-        poly(p, L([(-18, 16), (2, 16), (2, 19.5), (-18, 19.5)]), M_L)                                    # نور (سمت +y = چپ-پایین)
-        poly(p, L([(LEN - 24, 4), (LEN - 6, 4), (LEN - 6, 7), (LEN - 24, 7)]), M_L)                      # نور ته دسته
-        poly(p, L([(-24, -25), (6, -25), (22, -12), (34, -HW), (34, -2.5), (18, -6), (2, -19), (-24, -19)]), M_D)   # سایهٔ تیز سر
-        poly(p, L([(LEN - 24, -HW), (LEN - HW, -HW), (LEN - 1, -4), (LEN - 1, -2), (LEN - 24, -2)]), M_D)           # سایهٔ ته دسته
+        poly(p, L([(-20, 17), (2, 17), (2, 20.5), (-20, 20.5)]), M_L)                                    # نور
+        poly(p, L([(-26, -HH), (6, -HH), (22, -13), (34, -HW), (nk, -HW), (nk, -3), (18, -6), (2, -19), (-26, -19)]), M_D)   # سایهٔ تیز
         p.stroke(body, OUT, j=.1, step=6)
-        sl = L([(SL0, -HW), (SL1, -HW), (SL1, HW), (SL0, HW)])
-        p.shape(sl, G_B, PART, j=.08, step=6)
-        poly(p, L([(SL0 + 6, 1.8), (SL1 - 4, 1.8), (SL1 - 4, 5), (SL0 + 6, 5)]), G_L)                      # نور غلاف
-        poly(p, L([(SL0, -HW), (SL1, -HW), (SL1, -2.5), (SL0, -2.5)]), G_D)                                # سایهٔ تیز غلاف
-        for x in (62, 73, 84):
-            poly(p, L([(x, -5.5), (x + 3.5, -5.5), (x + 3.5, 5.5), (x, 5.5)]), G_D)                         # شیار
-        poly(p, L([(SL0 + 4, -5.5), (SL0 + 9, -5.5), (SL0 + 9, 5.5), (SL0 + 4, 5.5)]), YEL)               # نوار زرد
-        p.stroke(sl, PART, j=.08, step=6)
+        sl = L(sl_l)
+        p.shape(sl, G_B, OUT, j=.08, step=6)
+        poly(p, L([(SL0 + 8, 2.5), (LEN - 14, 2.5), (LEN - 14, 5.5), (SL0 + 8, 5.5)]), G_L)                # نور غلاف
+        poly(p, L([(SL0, -HW), (LEN - HW, -HW), (LEN - HW, -3), (SL0, -3)]), G_D)                          # سایهٔ تیز غلاف
+        for x in (SL0 + 22, SL0 + 33, SL0 + 44):
+            poly(p, L([(x, -5), (x + 3.5, -5), (x + 3.5, 5), (x, 5)]), G_D)                                 # شیار
+        poly(p, L([(SL0 + 4, -5), (SL0 + 9, -5), (SL0 + 9, 5), (SL0 + 4, 5)]), YEL)                        # نوار زرد
+        p.stroke(sl, OUT, j=.08, step=6)
     return p
 
 

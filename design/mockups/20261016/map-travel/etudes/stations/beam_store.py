@@ -19,12 +19,12 @@ F_B, F_L, F_D = '#e0702a', '#ffa561', '#a64a16'          # تکیه‌گاه
 B_B, B_L, B_D = '#8a5ad0', '#b992f0', '#5b3a9c'          # جعبه
 YEL = '#ffd84d'
 G = 10
-ANG = 25
-P = (-24, -14)
-U0, U1, TH = -42, 52, 16
-SLIDE = 11
-FW = 24
-XF = (1.0, 8, 0)
+ANG = 28
+P = (-18, -9)
+U0, U1, TH = -38, 40, 16
+SLIDE = 9
+FW = 22
+XF = (1.25, -7.5, -4)
 f = rot(P[0], P[1], ANG)
 M = math.tan(math.radians(ANG))
 
@@ -64,13 +64,24 @@ def beam(p):
 
 
 def box(p):
-    u0, u1 = -38, -10; h = 26
+    u0, u1 = -32, -6; h = 26
     pts = L(u0, u1, -TH - h, -TH + 2)
     p.shape(pts, B_B, PART, j=.1, step=6, clip=False)
     poly(p, L(u0 + 4, u1 - 4, -TH - h + 4, -TH - h + 7.5), B_L)
-    poly(p, L(u1 - 9, u1 - 4, -TH - h + 10, -TH - 3), B_D)           # سایهٔ تیز راست
-    poly(p, L(u0 + 3, u1 - 3, -TH - 15, -TH - 11), YEL)              # تسمهٔ زرد
+    poly(p, L(u1 - 8, u1 - 4, -TH - h + 10, -TH - 3), B_D)           # سایهٔ تیز راست
+    a, b, c, d = f((u0 + 5, -TH - h + 12)), f((u1 - 11, -TH - 5)), f((u1 - 11, -TH - h + 12)), f((u0 + 5, -TH - 5))
+    p.ln(a, b, INNER, B_D, j=0); p.ln(c, d, INNER, B_D, j=0)         # ضربدر جعبه
     p.stroke(pts, PART, j=.1, step=6)
+
+
+def endcap(p):
+    """رخ مقطع I روی سر پایین تیر (چندضلعی تخت، بدون چرخش): دو بال و یک جان."""
+    c = f((U1, -TH / 2)); x, y = c[0] + 1, c[1]
+    W, H, t, w = 15, 21, 5, 5
+    pts = [(x - W / 2, y - H / 2), (x + W / 2, y - H / 2), (x + W / 2, y - H / 2 + t), (x + w / 2, y - H / 2 + t), (x + w / 2, y + H / 2 - t),
+           (x + W / 2, y + H / 2 - t), (x + W / 2, y + H / 2), (x - W / 2, y + H / 2), (x - W / 2, y + H / 2 - t), (x - w / 2, y + H / 2 - t),
+           (x - w / 2, y - H / 2 + t), (x - W / 2, y - H / 2 + t)]
+    p.shape(pts, S_L, INNER, j=.05, step=6, clip=False)
 
 
 def build(out=OUTD):
@@ -82,6 +93,7 @@ def build(out=OUTD):
     with layer(p, 'prop'): prop(p)
     beam(p)
     box(p)
+    endcap(p)
     return p
 
 

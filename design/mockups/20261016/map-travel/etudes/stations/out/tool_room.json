@@ -1,0 +1,45 @@
+{
+ "id": "tool_room",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  72
+ ],
+ "stand": [
+  42.0,
+  4.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_tool_room_scissors"
+ ],
+ "inside_pad": {
+  "min_margin_px": 0.0,
+  "base_on_pad": true,
+  "height_px": 78.5,
+  "bbox_px": [
+   5.5,
+   35.5,
+   91.8,
+   114.0
+  ],
+  "ok": false
+ },
+ "motion_spec": {
+  "node_tool_room_scissors": {
+   "center": [
+    -60.0,
+    -48.0
+   ],
+   "angle_deg": -25,
+   "note": "نیمهٔ راست قیچی (تیغه+دسته) حول پیچ ≈۲۵° باز می‌شود و برمی‌گردد؛ ۱٫۲ث؛ یک‌بار هنگام رسیدن؛ نیمهٔ چپ ثابت. حالت ایستا = نیمه‌باز پایان."
+  },
+  "reduced_motion": "قیچی ثابت"
+ }
+}
