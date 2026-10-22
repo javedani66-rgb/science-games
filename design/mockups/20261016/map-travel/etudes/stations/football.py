@@ -16,7 +16,7 @@ OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/football'
 
 B_, B_L, B_D = '#f3ead6', '#ffffff', '#cfc7e6'
-PATCH = '#3a3a86'
+PATCH = '#4a52b0'
 CHALK = '#d9f0b4'
 R = 38
 CX, CY = -12, -24          # مرکز توپ (کفش y=14 روی سکو)
@@ -73,7 +73,7 @@ def build():
         poly(p, penta(CX, CY, RC, -90), PATCH)
         p.raw('</g>')
         # ثابت‌ها (در همان clip): سایهٔ تیز هلالی و برق
-        crescent(p, c, R, (-9, -9), '#4a3a8c', .2)
+        crescent(p, c, R, (-5, -5), '#4a3a8c', .2)
         ha = math.radians(-126); tx, ty = -math.sin(ha), math.cos(ha); nx, ny = math.cos(ha), math.sin(ha)
         hx, hy = CX + 26 * nx, CY + 26 * ny
         poly(p, [(hx + tx * 7 + nx * 2.2, hy + ty * 7 + ny * 2.2), (hx + tx * 7 - nx * 2.2, hy + ty * 7 - ny * 2.2), (hx - tx * 7 - nx * 2.2, hy - ty * 7 - ny * 2.2), (hx - tx * 7 + nx * 2.2, hy - ty * 7 + ny * 2.2)], B_L)
