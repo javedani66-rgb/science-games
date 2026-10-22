@@ -223,15 +223,18 @@ def symbol(pen, name, motion_layers=(), out=None, legacy_shadow=False):
     under = '<g class="under">%s</g>' % under
     cid = sid + '_clip'
     allpad = '<path d="%s"/><path d="%s"/>' % (hd(_wall_pts(pen), True, 1, 0, 999), hd(pen.padtop, True, 1, 0, 999))
-    clip = '<defs><clipPath id="%s">%s%s</clipPath></defs>' % (cid, allpad, ''.join('<path d="%s"/>' % d for d in pen.clip))
+    clip = '<defs><clipPath id="%s">%s</clipPath></defs>' % (cid, allpad)     # روکش نور/سایه فقط روی خود سکو (قهرمان بی‌لکه، ۲۰۲۶-۱۰-۲۳)
+    npad = getattr(pen, 'npad', 0) or 0
+    pad_svg, hero_svg = ''.join(pen.o[:npad]), ''.join(pen.o[npad:])
     lit = '<polygon points="-%s,-165 -%s,-165 -%s,50 -%s,50" class="elit"/>' % (RX, RX * .37, RX * .7, RX)
     shade = '<polygon points="%s,-165 %s,-165 %s,50 0,50" class="esh"/>' % (RX * .33, RX, RX)
     sym = ('<symbol id="%s" viewBox="0 0 200 190" overflow="visible">%s'
            '<g id="%s_shadow" transform="translate(100 150)">%s</g>'
            '<g id="%s_base" transform="translate(100 150)">%s%s</g>'
            '<g id="%s_lit" transform="translate(100 150)" clip-path="url(#%s)">%s</g>'
-           '<g id="%s_shade" transform="translate(100 150)" clip-path="url(#%s)">%s</g></symbol>') % (
-        sid, clip, sid, shadow, sid, under, pen.svg(), sid, cid, lit, sid, cid, shade)
+           '<g id="%s_shade" transform="translate(100 150)" clip-path="url(#%s)">%s</g>'
+           '<g id="%s_hero" transform="translate(100 150)">%s</g></symbol>') % (
+        sid, clip, sid, shadow, sid, under, pad_svg, sid, cid, lit, sid, cid, shade, sid, hero_svg)
     if out:
         out = pathlib.Path(out); out.mkdir(parents=True, exist_ok=True)
         (out / ('node_%s.svg' % name)).write_text(sym, encoding='utf-8')
