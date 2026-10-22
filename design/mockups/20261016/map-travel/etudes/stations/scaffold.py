@@ -67,8 +67,7 @@ def build(out=OUTD):
     # ۶) شاقول داخل چارچوب
     with layer(p, 'plumb'):
         p.ln((PV[0], -112), (PV[0], -95), INNER, STR, j=0, probe='ریسمان شاقول')
-        p.shape([(PV[0] - 6, -96), (PV[0] + 6, -96), (PV[0], -86)], YEL, INNER, j=.1, step=99, clip=False)
-        p.fill([(PV[0] - 3, -95), (PV[0] - 1.2, -95), (PV[0] - 1.2, -91)], YEL_L)
+        p.shape([(PV[0] - 7.5, -97), (PV[0] + 7.5, -97), (PV[0], -85)], YEL, INNER, j=.1, step=99, clip=False)
     # ۴) تیرک بالا (کوتاه، تا کنار لولهٔ راست)
     x0, y0, x1, y1 = BAR
     box(p, x0, y0, x1, y1, S_B)

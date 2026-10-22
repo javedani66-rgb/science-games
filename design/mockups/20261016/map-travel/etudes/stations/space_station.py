@@ -19,7 +19,7 @@ G_B, G_L, G_D = '#f0b03c', '#ffd98a', '#b9741c'
 P_B, P_L, P_D = '#1f8a98', '#58c8d0', '#126370'
 GLASS = '#cfeaff'; M_DD = '#8f98b0'
 
-XF = (0.92, -28, 0)
+XF = (0.88, -32, 0)
 CY = -48
 MX, MT, MB = 21, -66, -30
 
@@ -44,8 +44,8 @@ def build(out=OUTD, ang=0):
         cx_, cy_ = p.X((0, CY))
         p.raw('<g transform="rotate(%s %.1f %.1f)">' % (ang, cx_, cy_))
         for sg in (-1, 1):
-            sharp(p, [(sg * 17, CY - 7), (sg * 37, CY - 7), (sg * 37, CY + 7), (sg * 17, CY + 7)], G_B, PART)
-            xa, xb = sorted((sg * 33, sg * 51))
+            sharp(p, [(sg * 17, CY - 7), (sg * 35, CY - 7), (sg * 35, CY + 7), (sg * 17, CY + 7)], G_B, PART)
+            xa, xb = sorted((sg * 31, sg * 47))
             sharp(p, [(xa, CY - 14), (xb, CY - 14), (xb, CY + 14), (xa, CY + 14)], P_B, PART)
             poly(p, [(xa + 4, CY - 10), (xa + 7.5, CY - 10), (xa + 7.5, CY + 10), (xa + 4, CY + 10)], P_L)
             p.ln((xa + 4, CY), (xb - 4, CY), INNER, P_D, j=0)

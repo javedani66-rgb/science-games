@@ -22,12 +22,12 @@
  "inside_pad": {
   "min_margin_px": 9.2,
   "base_on_pad": true,
-  "height_px": 93.0,
+  "height_px": 92.2,
   "bbox_px": [
-   20.0,
+   23.5,
    26.0,
    73.2,
-   119.0
+   118.2
   ],
   "ok": true
  },
@@ -35,7 +35,7 @@
   "node_scaffold_plumb": {
    "center": [
     -34.1,
-    -103.6
+    -98.0
    ],
    "angles_deg": [
     0,
