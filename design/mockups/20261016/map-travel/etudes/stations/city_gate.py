@@ -13,8 +13,8 @@ S_B, S_L, S_D = '#f1dba8', '#fff6dc', '#c9a96c'
 S_M = '#dcc58c'
 W_B, W_L, W_D = '#a8672f', '#e0a96a', '#6e3f18'
 HOLE = '#5a4690'; YEL = '#ffd84d'; ROAD = '#e6dcc0'; ROAD_J = '#a89870'
-BASE = 6; DD = (14, -9)
-PX0, PX1, IX = 58, 36, 36     # ستون: x از ±58 تا ±36 (عرض ۲۲)
+BASE = 6; DD = (9, -6)
+PX0, PX1, IX = 60, 38, 38     # ستون: x از ±58 تا ±36 (عرض ۲۲)
 
 
 def build():
@@ -22,23 +22,12 @@ def build():
     p.tipshadow(4, BASE + 4, 62)
     p.foot_tip(-44, BASE + 2, 12); p.foot_tip(52, BASE + 2, 12)
     # سنگ‌فرش جلو و داخل دهانه
-    road = [(-30, -20), (30, -20), (52, 31), (-52, 31)]
+    road = [(-30, -20), (30, -20), (48, 27), (-48, 27)]
     p.shape(road, ROAD, PART, j=.15, step=8, clip=False)
-    for a, b in (((-10, -16), (-18, 28)), ((10, -16), (18, 28)), ((-40, 14), (40, 14)), ((-34, 2), (34, 2))):
+    for a, b in (((-10, -16), (-17, 25)), ((10, -16), (17, 25)), ((-38, 13), (38, 13)), ((-34, 2), (34, 2))):
         p.ln(a, b, INNER, ROAD_J, j=.1)
     # پس‌زمینهٔ دهانه (عمق تیره)
-    poly(p, R(-IX, -58, IX, BASE - 8), HOLE)
-    poly(p, [(-IX, -20), (IX, -20), (30, -20), (-30, -20)], HOLE)
-    # لنگهٔ چپ (ثابت، باز): ذوزنقهٔ چوبی چسبیده به ستون
-    lf = [(-IX + 2, BASE - 1), (-IX + 2, -54), (-24, -48), (-24, -2)]
-    p.shape(lf, W_B, INNER, j=.05, step=7, clip=False)
-    poly(p, [(-IX + 5, -48), (-IX + 9, -46), (-IX + 9, BASE - 8), (-IX + 5, BASE - 6)], W_L)
-    p.ln((-IX + 14, -48), (-IX + 14, BASE - 6), INNER, W_D, j=.05); disc(p, -28, -22, 2.6, YEL)
-    with layer(p, 'door'):
-        rf = [(IX - 2, BASE - 1), (IX - 2, -54), (24, -48), (24, -2)]
-        p.shape(rf, W_B, INNER, j=.05, step=7, clip=False)
-        poly(p, [(IX - 5, -48), (IX - 9, -46), (IX - 9, BASE - 8), (IX - 5, BASE - 6)], W_L)
-        p.ln((IX - 14, -48), (IX - 14, BASE - 6), INNER, W_D, j=.05); disc(p, 28, -22, 2.6, YEL)
+    poly(p, R(-IX, -72, IX, BASE - 8), HOLE)
     # ستون‌ها
     for sgn in (-1, 1):
         x0, x1 = (-PX0, -PX1) if sgn < 0 else (PX1, PX0)
@@ -46,8 +35,20 @@ def build():
         poly(p, R(x0 + 3, -66, x0 + 7, BASE - 10), S_L)
         for y in (-48, -26, -6):
             p.ln((x0 + 2, y), (x1 - 2, y), INNER, '#b8975a', j=.05)
+    # دو لنگهٔ چوبی باز (جلوی ستون‌ها، لولا روی لبهٔ داخلی؛ هم‌پوشان ۵)
+    for sg, lay in ((-1, None), (1, 'door')):
+        def dr():
+            h = IX - 5
+            pts = [(sg * h, BASE - 1), (sg * h, -56), (sg * (IX - 22), -50), (sg * (IX - 22), -2)]
+            p.shape(pts, W_B, INNER + .6, j=.05, step=7, clip=False)
+            poly(p, [(sg * (h - 3), -50), (sg * (h - 8), -48), (sg * (h - 8), BASE - 9), (sg * (h - 3), BASE - 7)], W_L)
+            p.ln((sg * (IX - 15), -50), (sg * (IX - 15), -6), INNER, W_D, j=.05)
+            disc(p, sg * (IX - 18), -26, 3, YEL)
+        if lay:
+            with layer(p, lay): dr()
+        else: dr()
     # سردر طاق تخت (روی ستون‌ها، هم‌پوشان ≥۱۴)
-    arch = [(-PX0, -92), (PX0, -92), (PX0, -58), (IX, -58)] + [(IX - 72 * t / 12.0, -58 - 9 * math.sin(math.pi * t / 12.0)) for t in range(1, 12)] + [(-IX, -58), (-PX0, -58)]
+    arch = [(-PX0, -92), (PX0, -92), (PX0, -58), (IX, -58)] + [(IX - 2 * IX * t / 12.0, -58 - 9 * math.sin(math.pi * t / 12.0)) for t in range(1, 12)] + [(-IX, -58), (-PX0, -58)]
     extrude(p, arch, DD, S_B, S_L, S_D, sw=OUT)
     poly(p, R(-PX0 + 4, -88, PX0 - 4, -85), S_L, .8)
     # تابلوی سردر روی سردر
@@ -64,7 +65,7 @@ if __name__ == '__main__':
     r = finish(p, 'city_gate', STAND, motion={'door': dict(offsets=[(0, 0)])}, out=OUTD, shots=SHOTS)
     sp = r['spec']
     sp['motion_spec'] = {'node_city_gate_door': dict(
-        type='scaleX افقی حول لولا (لبهٔ بیرونی لنگه، چسبیده به ستون راست)', hinge_x_symbol=round(p.X((36, 0))[0], 1), scale_from=2.2, scale_to=1.0,
+        type='scaleX افقی حول لولا (لبهٔ بیرونی لنگه، چسبیده به ستون راست)', hinge_x_symbol=round(p.X((IX - 5, 0))[0], 1), scale_from=2.2, scale_to=1.0,
         duration_s=1.4, easing='ease-out', loop=False, start='لنگهٔ راست نیمه‌بسته (پهن‌تر)', end='حالت ایستا: کاملاً باز (کنار ستون)',
         note='فقط هنگام رسیدن، یک‌بار؛ لنگهٔ چپ، ستون‌ها و جاده ثابت؛ بدون حلقهٔ بیکار.'), 'reduced_motion': 'باز (حالت ایستا)'}
     (OUTD / 'city_gate.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')

@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  67
+  43
  ],
  "stand": [
-  0.0,
-  19.0
+  3.0,
+  -27.0
  ],
  "ring": [
   0,
@@ -17,47 +17,36 @@
   0
  ],
  "motion": [
-  "node_skate_park_wheel",
-  "node_skate_park_wheel_back"
+  "node_skate_park_skateboard"
  ],
  "inside_pad": {
-  "min_margin_px": 3.5,
-  "base_on_pad": true,
-  "height_px": 86.0,
+  "min_margin_px": 0.0,
+  "base_on_pad": false,
+  "height_px": 80.2,
   "bbox_px": [
-   11.5,
-   41.0,
-   132.0,
-   127.0
+   25.8,
+   65.0,
+   114.8,
+   145.2
   ],
   "ok": false
  },
  "motion_spec": {
-  "node_skate_park_wheel": {
-   "center": [
-    44.0,
-    10.0
+  "node_skate_park_skateboard": {
+   "from_offset_symbol": [
+    -12,
+    3
    ],
-   "dir": "cw",
-   "turns": 1,
-   "duration_s": 1.2,
+   "to_offset": [
+    0,
+    0
+   ],
+   "duration_s": 0.9,
    "repeat": 1,
    "easing": "ease-out",
-   "note": "چرخ نزدیک راست؛ یک دور کامل هنگام رسیدن؛ حالت ایستا = پایان"
-  },
-  "node_skate_park_wheel_back": {
-   "center": [
-    -12.0,
-    10.0
-   ],
-   "dir": "cw",
-   "turns": 1,
-   "duration_s": 1.2,
-   "repeat": 1,
-   "easing": "ease-out",
-   "note": "چرخ نزدیک چپ؛ هم‌زمان؛ چرخ‌های دور ثابت"
+   "note": "تخته یک‌بار از چپ روی کف رمپ می‌لغزد و می‌ایستد؛ حالت ایستا = پایان؛ چرخ‌ها جزو همان لایه"
   },
   "idle_loop": false,
-  "reduced_motion": "چرخ‌ها ثابت"
+  "reduced_motion": "تخته ایستا"
  }
 }

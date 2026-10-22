@@ -16,18 +16,20 @@ from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/excavation'
 
-S_B, S_L, S_D = '#efe7d3', '#fffcf1', '#c7bb9b'     # بار: تخته‌سنگ کرم روشن
-F_B, F_L, F_D = '#c9b68a', '#e6d8ae', '#8f7d52'     # سنگ تکیه‌گاه: ماسه‌سنگ
+from r6lib import extrude
+from shapely.geometry import Polygon
+from shapely.ops import unary_union
+S_B, S_L, S_D = '#efe7d3', '#fffcf1', '#c7bb9b'     # تخته‌سنگ بار: کرم روشن
+F_B, F_L, F_D = '#c2b79d', '#ddd3b8', '#8a8068'     # سنگ تکیه‌گاه: خاکستری-بژ
 B_B, B_L, B_D = '#e8483c', '#ff8a78', '#a82a24'     # دیلم قرمز
 YEL = '#ffd84d'
 GY = 8
-ANG = 26
-PX = -7.5
-PIV = (PX, -37.0)
-BW = 10.0
-L0, L1 = -48, 62
+ANG = 20
+PIV = (8.0, -22.0)
+BW = 9.0
 REST = -8
-XF = (1.0, 0.0, 4.0)
+XF = (.88, 2.0, 8.0)
+DD = (10, -6)
 
 
 def flat(p, pts, col, op=1):
@@ -38,56 +40,35 @@ def disc(p, x, y, r, col):
     a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
 
 
-def clip_x(pts, x0):
-    """بخشی از چندضلعی محدب که x ≥ x0 است (سایهٔ تیز داخل جزء)."""
-    out = []; n = len(pts)
-    for i in range(n):
-        a, b = pts[i], pts[(i + 1) % n]; ia, ib = a[0] >= x0, b[0] >= x0
-        if ia: out.append(a)
-        if ia != ib:
-            t = (x0 - a[0]) / (b[0] - a[0]); out.append((x0, a[1] + t * (b[1] - a[1])))
-    return out
-
-
-def clip_x_l(pts, x1):
-    """بخشی که x ≤ x1 است."""
-    return clip_x([(-x, y) for x, y in pts][::-1], -x1) and [(-x, y) for x, y in clip_x([(-x, y) for x, y in pts][::-1], -x1)]
-
-
-def pebble(p, cx, cy, r, col=(F_B, F_L, F_D)):
-    pts = [(cx - r, cy), (cx - r * .85, cy - r * .8), (cx - r * .2, cy - r * 1.2), (cx + r * .7, cy - r * 1.0), (cx + r * 1.1, cy - r * .3), (cx + r * 1.0, cy)]
-    p.shape(pts, col[0], PART, j=0, step=99)
-    flat(p, [(cx - r * .5, cy - r * .6), (cx - r * .2, cy - r * .95), (cx + r * .1, cy - r * .85), (cx - r * .1, cy - r * .45)], col[1])
+def pebble(p, cx, cy, r):
+    pts = [(cx - r, cy), (cx - r * .8, cy - r * .8), (cx - r * .1, cy - r * 1.15), (cx + r * .8, cy - r * .8), (cx + r, cy)]
+    extrude(p, pts, (r * .5, -r * .3), F_B, F_L, F_D, sw=PART)
 
 
 def build():
     p = Pen('excavation', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((-52, 22), (72, -22)), dot=(74, -8)); p.xf = XF
+    p.tipshadow(0, GY + 1, 40); p.foot_tip(0, GY, 24)
+    pebble(p, 56, GY, 9); pebble(p, 70, GY - 1, 6); pebble(p, -62, GY, 11)
+    ful = [(-26, GY), (-24, -6), (-10, -16), (8, -20), (24, -12), (30, -2), (30, GY)]
+    extrude(p, ful, DD, F_B, F_L, F_D, sw=OUT)
+    flat(p, [(-23, GY - 2), (-22, -5), (-10, -14), (-4, -17), (-12, -4), (-14, GY - 2)], F_L)
     f = rot(PIV[0], PIV[1], ANG)
-    P = lambda pts: TP(f, [(x, y) for x, y in pts])
-    p.tipshadow(PX, GY + 1, 30); p.foot_tip(PX, GY, 24)
-    pebble(p, -62, GY, 11); pebble(p, -42, GY + 3, 8)
-    ful = [(PX - 32, GY), (PX - 31, -6), (PX - 23, -17), (PX - 10, -26), (PX + 10, -26), (PX + 23, -17), (PX + 31, -6), (PX + 32, GY)]
-    p.shape(ful, F_B, OUT, j=0, step=6)
-    flat(p, [(PX - 32, GY), (PX - 31, -6), (PX - 23, -17), (PX - 10, -26), (PX - 4, -26), (PX - 17, -10), (PX - 21, GY)], F_L)
-    flat(p, [(PX + 16, -22), (PX + 23, -17), (PX + 31, -6), (PX + 32, GY), (PX + 17, GY)], F_D)
-    p.stroke(ful, OUT, j=0, step=6)
-    py = 0; QX = 0
+    P = lambda pts: TP(f, [(PIV[0] + x, PIV[1] + y) for x, y in pts])
     with layer(p, 'bar'):
-        bar = P([(QX - 50, py - BW), (QX + 58, py - BW), (QX + 58, py + BW), (QX - 50, py + BW)])
-        p.shape(bar, B_B, PART, j=0, step=6, clip=False)
-        flat(p, P([(QX - 44, py - BW + 3), (QX + 44, py - BW + 3), (QX + 44, py - BW + 7.5), (QX - 44, py - BW + 7.5)]), B_L)
-        flat(p, P([(QX - 44, py + BW - 7.5), (QX + 55, py + BW - 7.5), (QX + 55, py + BW - 3), (QX - 44, py + BW - 3)]), B_D)
-        flat(p, P([(QX + 40, py - 4.5), (QX + 49, py - 4.5), (QX + 49, py + 4.5), (QX + 40, py + 4.5)]), YEL)
-        hook = P([(QX + 52, py - BW), (QX + 62, py - BW + 2), (QX + 70, py + BW + 6), (QX + 64, py + BW + 14), (QX + 57, py + BW + 6), (QX + 52, py + BW)])
-        p.shape(hook, B_B, PART, j=0, step=6, clip=False)
-        rock = [(QX - 58, py + 2), (QX - 66, py - 14), (QX - 60, py - 34), (QX - 46, py - 48), (QX - 28, py - 50), (QX - 14, py - 38), (QX - 8, py - 20), (QX - 8, py + 2)]
-        rk = P(rock)
-        p.shape(rk, S_B, OUT, j=0, step=6, clip=False)
-        flat(p, P(clip_x_l(rock, QX - 48)), S_L)
-        flat(p, P(clip_x(rock, QX - 20)), S_D)
-        p.ln(f((QX - 46, py - 48)), f((QX - 38, py - 26)), INNER, NAVY, j=0); p.ln(f((QX - 38, py - 26)), f((QX - 58, py + 2)), INNER, NAVY, j=0)
-        p.stroke(rk, OUT, j=0, step=6)
-        disc(p, PIV[0], PIV[1], 3.6, YEL)
+        main = [(-40, -BW), (50, -BW), (50, BW), (-40, BW)]
+        head = [(44, -BW), (60, -BW - 14), (72, -BW - 6), (56, BW)]
+        u = unary_union([Polygon(P(main)), Polygon(P(head))]).buffer(.01)
+        ext = list(u.exterior.coords)[:-1]
+        p.shape(ext, B_B, OUT, j=0, step=6, clip=False)
+        flat(p, P([(-34, -BW + 3), (46, -BW + 3), (46, -BW + 7.5), (-34, -BW + 7.5)]), B_L)
+        flat(p, P([(-34, BW - 7.5), (46, BW - 7.5), (46, BW - 3), (-34, BW - 3)]), B_D)
+        flat(p, P([(-14, -BW + 1), (-4, -BW + 1), (-4, BW - 1), (-14, BW - 1)]), YEL)
+        p.stroke(ext, OUT, j=0, step=6)
+        # تخته‌سنگ بزرگ روی سر کوتاه دیلم: مستطیل ضخیم کج، لبهٔ چپ روی سنگ‌ریزه
+        g = rot(-66, -10, -26)
+        slab = TP(g, [(0, 0), (56, 0), (56, -22), (0, -22)])
+        extrude(p, slab, DD, S_B, S_L, S_D, sw=OUT)
+        p.ln(g((12, -6)), g((30, -6)), INNER, NAVY, j=0)
     return p
 
 
@@ -98,7 +79,7 @@ def rot_states(p, steps=(REST, REST / 2, 0)):
 if __name__ == '__main__':
     p = build()
     hm = p.X(PIV)
-    lift = abs(math.sin(math.radians(ANG)) - math.sin(math.radians(ANG + REST))) * 30
+    lift = 48 * math.sin(math.radians(abs(REST)))
     r = finish(p, 'excavation', None, motion={'bar': dict(offsets=[(0, 0), (0, lift)])}, out=OUTD, shots=SHOTS)
     # سنجش واقعی چرخش (کیت فقط چرخش ۳۶۰ را می‌شناسد)
     import station_kit as K_
