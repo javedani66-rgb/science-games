@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  47
+  80
  ],
  "stand": [
-  42.0,
-  1.0
+  0.0,
+  19.0
  ],
  "ring": [
   0,
@@ -20,43 +20,42 @@
   "node_football_ball"
  ],
  "inside_pad": {
-  "min_margin_px": 14.5,
+  "min_margin_px": 18.0,
   "base_on_pad": true,
-  "height_px": 64.0,
+  "height_px": 84.0,
   "bbox_px": [
-   27.5,
-   61.2,
-   92.5,
-   125.2
+   26.0,
+   28.0,
+   117.8,
+   112.0
   ],
   "ok": true
  },
  "motion_spec": {
   "node_football_ball": {
-   "type": "translate+rotate",
-   "from_offset_units": [
-    -9,
+   "kind": "توپ؛ حالت ایستا = پایان (کنار دروازه، وسط سکو)",
+   "translate_x_symbol_units": [
+    -17,
     0
    ],
-   "from_offset_map_px": -6.5,
-   "to": [
-    0,
+   "translate_x_map_px": [
+    -12.2,
     0
+   ],
+   "rotate_deg": [
+    -23.19114885053332,
+    0
+   ],
+   "pivot_symbol": [
+    0,
+    -40
    ],
    "duration_s": 1.6,
-   "easing": "ease-out (آرام کندتر می‌شود)",
-   "repeat": 1,
-   "spin": {
-    "layer": "node_football_ball_spin",
-    "center": [
-     88,
-     126
-    ],
-    "deg_cw": 13.6,
-    "note": "چرخش ساعت‌گرد (غلتیدن به راست) هم‌زمان با انتقال و با همان easing؛ در پایان زاویه ۰ (ایستا)"
-   },
-   "note": "حالت ایستا = توپ روی نشان گچی؛ بدون حلقهٔ بیکار؛ سایه و برق ثابت‌اند"
-  },
-  "reduced_motion": "ایستا"
+   "easing": "ease-out (کندشونده)",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "reduced_motion": "ایستا",
+   "note": "دروازه و تور ثابت؛ سایهٔ تماس با توپ می‌رود؛ بدون عامل هل و بدون خط حرکت؛ بدون حلقهٔ بیکار."
+  }
  }
 }

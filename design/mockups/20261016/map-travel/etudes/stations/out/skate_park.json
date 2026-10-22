@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  36
+  41
  ],
  "stand": [
-  32.5,
-  0.5
+  -49.5,
+  1.5
  ],
  "ring": [
   0,
@@ -21,41 +21,41 @@
   "node_skate_park_wheel_back"
  ],
  "inside_pad": {
-  "min_margin_px": 8.5,
+  "min_margin_px": 24.4,
   "base_on_pad": true,
-  "height_px": 42.8,
+  "height_px": 45.5,
   "bbox_px": [
-   16.5,
-   71.5,
-   74.0,
-   114.2
+   33.2,
+   67.2,
+   112.2,
+   112.8
   ],
   "ok": true
  },
  "motion_spec": {
   "node_skate_park_wheel": {
    "center": [
-    -14.0,
-    -3.0
+    26.0,
+    -8.0
    ],
    "dir": "cw",
    "turns": 1,
    "duration_s": 1.2,
    "repeat": 1,
    "easing": "ease-out",
-   "note": "چرخ راست؛ یک دور کامل هنگام رسیدن؛ حالت ایستا = پایان"
+   "note": "چرخ نزدیک راست؛ یک دور کامل هنگام رسیدن؛ حالت ایستا = پایان"
   },
   "node_skate_park_wheel_back": {
    "center": [
-    -62.0,
-    -3.0
+    -34.0,
+    -8.0
    ],
    "dir": "cw",
    "turns": 1,
    "duration_s": 1.2,
    "repeat": 1,
    "easing": "ease-out",
-   "note": "چرخ چپ؛ هم‌زمان با چرخ راست"
+   "note": "چرخ نزدیک چپ؛ هم‌زمان؛ چرخ‌های دور ثابت‌اند"
   },
   "idle_loop": false,
   "reduced_motion": "چرخ‌ها ثابت"

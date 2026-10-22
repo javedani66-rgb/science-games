@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  49
+  16
  ],
  "stand": [
-  43.0,
-  1.0
+  0.0,
+  -24.5
  ],
  "ring": [
   0,
@@ -20,14 +20,14 @@
   "node_pool_wave"
  ],
  "inside_pad": {
-  "min_margin_px": 12.2,
+  "min_margin_px": 5.5,
   "base_on_pad": true,
-  "height_px": 57.2,
+  "height_px": 38.8,
   "bbox_px": [
-   26.0,
-   59.2,
-   93.2,
-   116.5
+   30.8,
+   92.5,
+   113.0,
+   131.2
   ],
   "ok": true
  },

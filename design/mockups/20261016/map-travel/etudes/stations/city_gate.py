@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""ایستگاه M01 «دروازهٔ شهر» (سکوی city).
-طرح قطعه‌به‌قطعه (واحد symbol، محور دروازه CX=-30، کف BASE=7):
- ۱ سایهٔ تماس: بیضی rx 40 زیر کف.
- ۲ دیوار (سنگ): مستطیل CX±24 از y=7 تا -50، OUT؛ سایه تیز راست، نور چپ، کرسی تیره پایین.
- ۳ دهانهٔ طاقی: مستطیل CX±18 از کف تا y=-20 + نیم‌دایرهٔ r=18 (بالای طاق y=-38)؛ داخل بنفش-قهوه‌ای تیره، INNER.
- ۴ لنگهٔ چپ (ثابت، بسته): چوب قهوه‌ای CX-17..CX، با قوس؛ INNER؛ یک نوار روشن، دستگیره زرد.
- ۵ لنگهٔ راست (لایهٔ node_city_gate_leaf): نیمه‌باز، ذوزنقهٔ باریک چوب CX+8..CX+17 (لولا روی CX+17).
- ۶ دو برجک (سنگ): CX-36..CX-18 و CX+18..CX+36 تا y=-70؛ سایه/نور؛ بالای هرکدام سربند تیره 6 بلند؛ شکاف پنجرهٔ تخت تیره.
- ۷ سنگ کلید: مستطیل تخت روشن بالای طاق.
-سه خانواده: سنگ کرم (پایه/روشن/تیره)، چوب قهوه‌ای (پایه/روشن/تیره)، داخل دهانه تیره. بدون چرخ‌دنده/موتور/دودکش.
+"""ایستگاه M01 «دروازهٔ شهر» (سکوی city) — دور ۵ (بازطراحی طبق دستور مدیر هنری: بزرگ، وسط، سیلوئت روشن).
+طرح قطعه‌به‌قطعه (واحد symbol، محور CX=0 = مرکز سکو، کف BASE=7):
+ ۱ بدنهٔ سنگی یک‌تکه: دو برج (CX±29..54) تا y=-72 و دیوار میانی تا y=-50؛ سنگ کرم (پایه/روشن/تیره)، OUT؛ نور چپ، سایهٔ تیز راست، کرسی.
+ ۲ سه دندانهٔ درشت روی دیوار (۱۴ پهنا، y -50..-62)، هر دندانه PART.
+ ۳ دهانهٔ طاقی بزرگ (CX±19، قوس تا y=-35)، داخل بنفش تیره؛ لنگهٔ چپ چوبی بسته؛ دو میخ زرد.
+ ۴ لنگهٔ راست (لایهٔ node_city_gate_leaf): چوب، لولا روی CX+18؛ حالت ایستا = نیمه‌باز.
+ ۵ دو سقف مخروطی قرمز-نارنجی (پهنا ۳۸، ارتفاع ۳۶) روی دو برج؛ ۶ پرچم کوچک زرد روی برج راست.
+ ۷ دو شکاف پنجرهٔ برج (تخت تیره).
+سه خانواده: سنگ کرم، سقف قرمز-نارنجی، چوب قهوه‌ای (+پرچم زرد). بدون چرخ‌دنده/موتور.
 حرکت: لنگهٔ راست یک‌بار هنگام رسیدن از بسته تا حالت ایستا (نیمه‌باز)، بدون بیکار."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
@@ -19,22 +18,22 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 
 S_B, S_L, S_D = '#f3dfb0', '#fff7de', '#cfb078'       # سنگ
 W_B, W_L, W_D = '#a8672f', '#d9a463', '#6e3f18'       # چوب
-HOLE = '#5a3d6e'                                      # داخل دهانه
-YEL = '#ffd84d'
+R_B, R_L, R_D = '#e0502e', '#ff9a6a', '#a8301a'       # سقف
+HOLE = '#3a2a5a'
+YEL = '#ffd84d'; FLAG = '#ffd84d'
 
-CX, BASE = -30, 7
-TT = -72           # بالای برجک
-WT = -50           # بالای دیوار میانی
-OR = 18            # نیم‌پهنای دهانه
-OY = -16           # مرکز قوس
-TW = 34            # نیم‌پهنای کل
+CX, BASE = 0, 7
+TO, TI = 54, 29            # بیرون/درون برج
+TT, WT, MT = -76, -50, -67  # بالای برج، دیوار، دندانه
+OR, OY = 22, -14           # نیم‌پهنای دهانه، مرکز قوس
+ROOF_B, ROOF_T, ROOF_W = -72, -108, 19
 
 
 def poly(p, pts, col, op=1):
     p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
 
 
-def R(x0, y0, x1, y1): return [(CX + x0, y0), (CX + x1, y0), (CX + x1, y1), (CX + x0, y1)]
+def R(x0, y0, x1, y1): return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
 
 
 def disc(p, x, y, r, col):
@@ -42,34 +41,53 @@ def disc(p, x, y, r, col):
 
 
 def build():
-    p = Pen('city_gate', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 4, 0)
-    p.tipshadow(CX + 4, BASE + 3, 38); p.foot_tip(CX - 22, BASE + 2, 10); p.foot_tip(CX + 22, BASE + 2, 10)
-    # بدنهٔ سنگی یک‌تکه: دو برجک + دیوار میانی
-    body = [(CX - TW, BASE), (CX + TW, BASE), (CX + TW, TT), (CX + OR, TT), (CX + OR, WT), (CX - OR, WT), (CX - OR, TT), (CX - TW, TT)]
+    p = Pen('city_gate', 'city'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = (1.0, 0, 0)
+    p.tipshadow(CX + 3, BASE + 3, 50); p.foot_tip(CX - 42, BASE + 2, 12); p.foot_tip(CX + 42, BASE + 2, 12)
+    # ۲) دندانه‌ها (پشت دیوار)
+    for a, b in ((-TI, -TI + 14), (-7, 7), (TI - 14, TI)):
+        t = R(a, MT, b, WT + 3)
+        p.shape(t, S_B, PART, j=.1, step=6, clip=False)
+        poly(p, R(a + 3.5, MT + 3.5, a + 6.5, WT - 1), S_L)
+        poly(p, R(b - 5.5, MT + 4, b - 2.5, WT - 1), S_D, .9)
+    # ۱) بدنه: دو برج + دیوار
+    body = [(CX - TO, BASE), (CX + TO, BASE), (CX + TO, TT), (CX + TI, TT), (CX + TI, WT), (CX - TI, WT), (CX - TI, TT), (CX - TO, TT)]
     p.shape(body, S_B, OUT, j=.1, step=6)
-    poly(p, R(-TW + 4, TT + 46, -TW + 7.5, BASE - 7), S_L)                    # نور برج چپ
-    poly(p, R(OR + 4, TT + 46, OR + 7.5, BASE - 7), S_L)                      # نور برج راست
-    poly(p, R(TW - 6.5, TT + 8, TW - 1, BASE - 1), S_D)                       # سایهٔ تیز راست
-    poly(p, R(-TW + 1, TT + 1, -OR - 1, TT + 7), S_D)                         # سربند برج چپ
-    poly(p, R(OR + 1, TT + 1, TW - 1, TT + 7), S_D)                           # سربند برج راست
-    poly(p, R(-TW + 1, BASE - 5, TW - 1, BASE - 1), S_D)                      # کرسی
+    poly(p, R(-TO + 4, TT + 6, -TO + 7.5, BASE - 8), S_L)                       # نور برج چپ
+    poly(p, R(TI + 4, WT + 6, TI + 7.5, BASE - 8), S_L)                          # نور برج راست
+    poly(p, R(TO - 7.5, TT + 6, TO - 1, BASE - 1), S_D)                          # سایهٔ تیز راست
+    poly(p, R(-TI - 7.5, TT + 6, -TI - 1, BASE - 1), S_D)                       # سایهٔ سمت راست برج چپ
+    poly(p, R(-TI + 1, WT + 1, TI - 1, WT + 6), S_D)                              # لبهٔ بالای دیوار
+    poly(p, R(-TO + 1, BASE - 5, TO - 1, BASE - 1), S_D)                          # کرسی
     p.stroke(body, OUT, j=.1, step=6)
-    # شکاف پنجرهٔ برجک‌ها (تخت)
-    for cx in (-(TW + OR) / 2, (TW + OR) / 2):
-        poly(p, R(cx - 2, TT + 22, cx + 2, TT + 40), HOLE)
-    # دهانهٔ طاقی
-    hole = [(CX - OR, BASE - 1), (CX + OR, BASE - 1), (CX + OR, OY)] + ell(CX, OY, OR, OR, 0, -180, 14) + [(CX - OR, OY)]
+    # ۷) شکاف پنجرهٔ برج‌ها
+    for c in (-(TO + TI) / 2, (TO + TI) / 2):
+        poly(p, R(c - 2.5, TT + 12, c + 2.5, TT + 32), HOLE)
+    # ۳) دهانهٔ طاقی بزرگ
+    hole = [(CX - OR, BASE - 1), (CX + OR, BASE - 1), (CX + OR, OY)] + ell(CX, OY, OR, OR, 0, -180, 16) + [(CX - OR, OY)]
     p.shape(hole, HOLE, INNER, j=.08, step=6, clip=False)
-    # لنگهٔ چپ (ثابت، بسته)
+    # لنگهٔ چپ (بسته)
     L = [(CX - OR + 1, BASE - 1), (CX - 1, BASE - 1), (CX - 1, OY - OR + 1)] + ell(CX, OY, OR - 1, OR - 1, -90, -180, 8)[1:] + [(CX - OR + 1, OY)]
     p.shape(L, W_B, INNER, j=.08, step=6, clip=False)
-    poly(p, R(-13, BASE - 4, -10, -22), W_L)
-    disc(p, CX - 4.5, -3, 2, YEL)
-    # لنگهٔ راست (نیمه‌باز)
+    poly(p, R(-OR + 5, -16, -OR + 8.5, BASE - 5), W_L)
+    disc(p, CX - 6, -4, 2.3, YEL)
+    # ۴) لنگهٔ راست (نیمه‌باز)، لولا روی CX+OR-1
     with layer(p, 'leaf'):
-        p.shape([(CX + 6, BASE - 1), (CX + OR - 1, BASE - 1), (CX + OR - 1, OY)] + ell(CX, OY, OR - 1, OR - 1, 0, -69.3, 8)[1:], W_B, INNER, j=.08, step=6, clip=False)
-        poly(p, [(CX + 12.5, BASE - 4), (CX + 15, BASE - 4), (CX + 15, -19), (CX + 12.5, -21)], W_L)
-        disc(p, CX + 9.5, -3, 1.8, YEL)
+        p.shape([(CX + 8, BASE - 1), (CX + OR - 1, BASE - 1), (CX + OR - 1, OY)] + ell(CX, OY, OR - 1, OR - 1, 0, -64, 8)[1:], W_B, INNER, j=.08, step=6, clip=False)
+        poly(p, R(CX + 13, -16, CX + 16, BASE - 5), W_L)
+        disc(p, CX + 12.5, -4, 2.1, YEL)
+    # ۶) پرچم روی برج راست
+    c = (TO + TI) / 2
+    p.ln((c, ROOF_T + 3), (c, ROOF_T - 24), PART, W_D, j=0)
+    fl = [(c - 1, ROOF_T - 25), (c + 24, ROOF_T - 17), (c - 1, ROOF_T - 9)]
+    p.shape(fl, FLAG, INNER, j=.05, step=99, clip=False)
+    # ۵) سقف‌های مخروطی
+    for c in (-(TO + TI) / 2, (TO + TI) / 2):
+        cone = [(c - ROOF_W, ROOF_B), (c + ROOF_W, ROOF_B), (c, ROOF_T)]
+        p.shape(cone, R_B, PART, j=.1, step=6)
+        poly(p, [(c + 1, ROOF_T + 6), (c + ROOF_W - 4, ROOF_B - 3), (c + 1, ROOF_B - 3)], R_D)
+        poly(p, [(c - 3.5, ROOF_T + 14), (c - 1, ROOF_T + 14), (c - 9, ROOF_B - 7), (c - 11.5, ROOF_B - 7)], R_L)
+        poly(p, R(c - ROOF_W + 3, ROOF_B - 5, c + ROOF_W - 3, ROOF_B - 1), R_D)
+        p.stroke(cone, PART, j=.1, step=6)
     return p
 
 
@@ -81,7 +99,8 @@ if __name__ == '__main__':
     sp['motion_spec'] = {'node_city_gate_leaf': dict(
         type='scaleX افقی حول لولا (لبهٔ راست لنگه)', hinge_x_symbol=round(p.X((CX + OR - 1, 0))[0], 1), scale_from=1.5, scale_to=1.0,
         duration_s=1.4, easing='ease-out', loop=False,
-        start='لنگهٔ راست بسته (پهنای ۱۷ واحد، تمام نیمهٔ راست دهانه)', end='حالت ایستا (پایان): نیمه‌باز؛ پهنای ظاهری ۱۱ واحد (فشردگی افقی ≈ ۰٫۶۵؛ در نمای رو‌به‌رو باز شدنی بیش از ۲۵° دیده می‌شود تا خوانا باشد)',
-        note='فقط هنگام رسیدن، یک‌بار؛ لنگهٔ چپ و برجک‌ها ثابت؛ لنگه فیگور را نمی‌پوشاند؛ بدون حلقهٔ بیکار.'),
+        start='لنگهٔ راست بسته (پهنای ۱۸ واحد، تمام نیمهٔ راست دهانه)', end='حالت ایستا (پایان): نیمه‌باز؛ پهنای ظاهری ۱۲ واحد (فشردگی افقی ≈ ۰٫۶۷)',
+        note='فقط هنگام رسیدن، یک‌بار؛ لنگهٔ چپ و برج‌ها ثابت؛ لنگه فیگور را نمی‌پوشاند؛ بدون حلقهٔ بیکار.'),
         'reduced_motion': 'نیمه‌باز (حالت ایستا)'}
     (OUTD / 'city_gate.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
+    print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

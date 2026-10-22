@@ -1,32 +1,33 @@
 #!/usr/bin/env python3
-"""ایستگاه F02 «سالن بسکتبال» (سرزمین ورزشگاه، سکوی sports #7fbf4a). شناسه basketball_hall.
-طرح قطعه‌به‌قطعه (واحد symbol، مرکز هندسی hero روی x=0 و سپس xf او را چپ می‌برد؛ کف y=4):
- 1) پایه (بلوک): مستطیل 56x16، y -12..4، آبی-فولادی؛ سه پله STEEL B/L/D؛ خط PART.
- 2) ستون: مستطیل 14 پهن، y -90..-12 روی محور x=0، همان آبی-فولادی (خط PART، رنگ دیدنی ~8).
- 3) تخته: مستطیل 70x46، x -35..35، y -138..-92، سفید-آبی خیلی روشن (B/L/D)؛ خط PART؛ ستون زیر آن با هم‌پوشانی 2 واحد داخل تخته.
- 4) مربع هدف: 24x16 روی محور، y -121..-105، قرمز تخت با خط INNER (قرمز-مرجان، نه نارنجی).
- 5) تور (لایهٔ متحرک node_basketball_hall_net): ذوزنقه بالا ±19 (زیر رینگ)، پایین ±11، y -92..-50، سفید با خط INNER و دو قطر تخت آبی روشن.
- 6) رینگ: بیضی تخت rx22 ry7 مرکز (0,-92) قرمز-مرجان با خط INNER + سوراخ بیضی تیره rx14 ry3.2؛ جلوی تور.
-قهرمان: خاکستری-آبی (~215°) + سفید + قرمز کوچک؛ سکو 100° ⇒ اختلاف >100°. بدون توپ.
-حرکت: فقط تور؛ حالت ایستا = پایان؛ بدون بیکار."""
+"""ایستگاه F02 «سالن بسکتبال» (سرزمین ورزشگاه، سکوی sports #7fbf4a) — بازطراحی دور ۵.
+ایدهٔ یک‌نگاه: تابلوی بسکتبال عمودی و وسط، رینگ نارنجی جلوی تخته، تور سفید زیر رینگ، پایه زیر آن؛ همه روی محور x=0 (مرکز سکو).
+طرح قطعه‌به‌قطعه (واحد symbol؛ کف y=+4؛ بالاترین نقطه ≈ -138):
+ ۱) پایه (بلوک): مستطیل 60x16 (x ±30، y -12..4)، آبی-فولادی (STEEL B/L/D)، خط PART.
+ ۲) ستون: مستطیل 16 پهن (x ±8، y -92..-8) همان آبی-فولادی، پشت تور؛ بالا داخل تخته.
+ ۳) تخته: مستطیل 96x56 (x ±48، y -138..-82) سفید-آبی خیلی روشن (B/L/D)، خط PART، سایهٔ تیز راست.
+ ۴) مربع هدف: قرمز-مرجان 28x18 (x ±14، y -126..-108)، خط INNER، روی محور.
+ ۵) تور (لایهٔ net): ذوزنقه بالا ±22 (y -88)، پایین ±12 (y -50)، سفید با خط INNER و شش خط مورب لوزی (آبی)؛ پشت رینگ، جلوی ستون.
+ ۶) رینگ: بیضی تخت نارنجی (#ff8a1f) rx26 ry8 مرکز (0,-88)، خط INNER، سوراخ تیره؛ جلوی تور و تخته.
+قهرمان: خاکستری-آبی/سفید/نارنجی روی سبز ⇒ کنتراست ارزشی؛ نارنجی ۳۰°، سکو ۱۰۰°. بدون توپ.
+عرض ≈۵۰–۵۳٪ سکو. حرکت: فقط net (تاب میرا)؛ حالت ایستا = پایان؛ بدون بیکار."""
 import sys, pathlib, json
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
+import functools, station_kit as _k
 from station_kit import *
+_k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_check = functools.partial(_k.motion_check, min_margin=8)
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/basketball_hall'
 
 S_B, S_L, S_D = '#7f9bc8', '#b4c8e8', '#566f9c'
-W_B, W_L, W_D = '#e6edfb', '#ffffff', '#c9d6ee'
-RED, RED_D, HOLE = '#e0553a', '#9c2f1c', '#4a1f4a'
-NETL = '#5f7fb8'
-XF = (1.0, -22.0, -4.0)
+W_B, W_L, W_D = '#f1f5fc', '#ffffff', '#c9d6ee'
+RED = '#e0553a'
+OR_B, OR_L, OR_D = '#ff8a1f', '#ffc27a', '#b85a0a'
+NET_B, NETL = '#ffffff', '#7f9bc8'
+HOLE = '#4a1f4a'
 GY = 4
-PX = 18                     # محور ستون؛ لبهٔ راستش ۶ داخل لبهٔ راست تخته (29 در برابر 35)
-PW = 7                      # نیم‌پهنای ستون
-BX0, BX1, BY0, BY1 = -45, 31, -140, -86   # تخته 84x60، مرکز x=-7 = محور رینگ و مربع
-RIMY = -86
-RX = -7                     # محور رینگ/تور/مربع (چپ ستون)
+BW, BT, BB = 48, -138, -82
+RIMY = -88
 SWAY = 3
 
 
@@ -34,45 +35,45 @@ def poly(p, pts, col, op=1):
     p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
 
 
-def mpoly(p, pts, fill, sw):
-    d = 'M' + 'L'.join('%.1f,%.1f' % z for z in p.X(pts)) + 'Z'
-    p.raw('<path d="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (d, fill, sw))
+def rect(x0, y0, x1, y1): return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
 
 
 def build():
-    p = Pen('basketball_hall', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-56, 12), (62, 6)), dot=(58, -16))
-    p.xf = XF
-    p.tipshadow(PX + 1, GY + 3, 34); p.foot_tip(PX, GY + 2, 24)
-    # 2) ستون (زیر پایه و زیر تخته؛ ۶ واحد هم‌پوشانی با پایه، بالا داخل تخته)
-    pole = [(PX - PW, -100), (PX + PW, -100), (PX + PW, -6), (PX - PW, -6)]
+    p = Pen('basketball_hall', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-68, 14), (66, 8)), dot=(60, -18))
+    p.xf = (1.0, 0.0, -4.0)
+    p.tipshadow(0, GY + 3, 32); p.foot_tip(0, GY + 2, 28)
+    # ۲) ستون
+    pole = rect(-8, -92, 8, -6)
     p.shape(pole, S_B, PART, j=.1, step=8)
-    poly(p, [(PX - 4, -96), (PX - 1.5, -96), (PX - 1.5, -14), (PX - 4, -14)], S_L)
-    poly(p, [(PX + 2, -96), (PX + 4.2, -96), (PX + 4.2, -14), (PX + 2, -14)], S_D)
+    poly(p, rect(-4.6, -86, -1.8, -14), S_L); poly(p, rect(2.2, -86, 4.8, -14), S_D)
     p.stroke(pole, PART, j=.1, step=8)
-    # 1) پایه
-    base = [(PX - 22, -12), (PX + 22, -12), (PX + 23, GY), (PX - 23, GY)]
+    # ۱) پایه
+    base = rect(-26, -12, 26, GY)
     p.shape(base, S_B, PART, j=.1, step=8)
-    poly(p, [(PX - 18, -7), (PX - 14, -7), (PX - 14, GY - 4), (PX - 18, GY - 4)], S_L)
-    poly(p, [(PX + 8, -9), (PX + 19, -9), (PX + 19, GY - 2), (PX + 8, GY - 2)], S_D)
+    poly(p, rect(-21, -7, -11, GY - 4), S_L); poly(p, rect(11, -8, 21, GY - 3), S_D)
     p.stroke(base, PART, j=.1, step=8)
-    # 3) تخته
-    bd = [(BX0, BY0), (BX1, BY0), (BX1, BY1), (BX0, BY1)]
+    # ۳) تخته
+    bd = rect(-BW, BT, BW, BB)
     p.shape(bd, W_B, PART, j=.1, step=8)
-    poly(p, [(BX0 + 5, BY0 + 6), (BX0 + 9, BY0 + 6), (BX0 + 9, BY1 - 6), (BX0 + 5, BY1 - 6)], W_L)
-    poly(p, [(BX1 - 16, BY0 + 4), (BX1 - 3, BY0 + 4), (BX1 - 3, BY1 - 3), (BX1 - 16, BY1 - 3)], W_D)
+    poly(p, rect(-BW + 5, BT + 6, -BW + 10, BB - 6), W_L)
+    poly(p, rect(BW - 17, BT + 5, BW - 4, BB - 4), W_D)
     p.stroke(bd, PART, j=.1, step=8)
-    # 4) مربع هدف
-    mpoly(p, [(RX - 9, -124), (RX + 9, -124), (RX + 9, -112), (RX - 9, -112)], RED, INNER)
-    # 5) تور
+    # ۴) مربع هدف
+    q = rect(-14, -127, 14, -109)
+    p.shape(q, RED, INNER, j=.05, step=99, clip=False)
+    # ۵) تور
     with layer(p, 'net'):
-        net = [(RX - 10, RIMY), (RX + 10, RIMY), (RX + 7, -44), (RX - 7, -44)]
-        mpoly(p, net, W_B, INNER)
-        for a, b in (((-5, -78), (0, -56)), ((5, -78), (0, -56))):   # زیگزاگ ساده V؛ سرها ۱۲ از هم
-            p.ln((RX + a[0], a[1]), (RX + b[0], b[1]), INNER, NETL, j=0)
-        mpoly(p, net, 'none', INNER)
-    # 6) رینگ
-    p.shape(ell(RX, RIMY, 13, 6.5, 0, 360, 24), RED, INNER, j=.05, step=99, clip=False)
-    p.fill(ell(RX, RIMY, 8, 3, 0, 360, 20), HOLE)
+        net = [(-22, RIMY), (22, RIMY), (12, -50), (-12, -50)]
+        p.shape(net, NET_B, INNER, j=.05, step=99)
+        tx = [-14, 0, 14]; bx = [-6.5, 0, 6.5]
+        for i, j in ((0, 1), (1, 0), (1, 2), (2, 1)):
+            p.ln((tx[i], RIMY + 8), (bx[j], -57), 2.6, NETL, j=0)
+        p.stroke(net, INNER, j=.05, step=99)
+    # ۶) رینگ
+    ring = ell(0, RIMY, 26, 8, 0, 360, 32)
+    p.shape(ring, OR_B, INNER, j=.05, step=99, clip=False)
+    p.fill(ell(0, RIMY, 17, 4.2, 0, 360, 24), HOLE)
+    p.fill(ell(0, RIMY + 7, 22, 1.2, 0, 180, 14), OR_L)
     return p
 
 
@@ -81,7 +82,7 @@ if __name__ == '__main__':
     offs = [p.V((-SWAY, 0)), p.V((SWAY, 0)), (0, 0)]
     r = finish(p, 'basketball_hall', None, motion={'net': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    top = p.X((RX, RIMY))
+    top = p.X((0, RIMY))
     sp['motion_spec'] = {'node_basketball_hall_net': dict(
         kind='تور آویزان زیر رینگ؛ حالت ایستا = حالت پایان (راست‌ایستاده)',
         pivot_map_symbol=[round(v, 1) for v in top], transform='rotate حول لبهٔ بالای تور؛ پایین تور ±%d واحد (≈±%.1fpx)' % (SWAY, SWAY * K),

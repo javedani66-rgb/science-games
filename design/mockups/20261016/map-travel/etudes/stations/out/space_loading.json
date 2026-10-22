@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  57
+  71
  ],
  "stand": [
-  43.5,
-  6.5
+  20.0,
+  -24.0
  ],
  "ring": [
   0,
@@ -20,14 +20,14 @@
   "node_space_loading_light"
  ],
  "inside_pad": {
-  "min_margin_px": 11.5,
+  "min_margin_px": 13.2,
   "base_on_pad": true,
-  "height_px": 64.5,
+  "height_px": 78.2,
   "bbox_px": [
-   19.5,
-   51.2,
-   95.5,
-   115.8
+   26.8,
+   36.8,
+   116.2,
+   115.0
   ],
   "ok": true
  },

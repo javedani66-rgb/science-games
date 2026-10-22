@@ -22,11 +22,11 @@ W_B, W_L, W_D = '#f1f5fa', '#ffffff', '#b9c5dc'           # سفید-خاکست�
 T_B, T_L, T_D = '#22bfb2', '#8ae8dc', '#12857f'           # فیروزه‌ای
 Y_B, Y_L, Y_D = '#ffd84d', '#fff0a0', '#d9a01e'           # مکعب زرد
 S_B, S_L = '#ff6f61', '#ffc2b8'                           # گوی مرجانی
-STR = '#dfe6fb'
+STR = '#fff3c4'
 G = 12
-PY = -90                  # محور تیر
-HL = 56                   # نیم‌طول تیر
-PX, PR, PD, PTOP = 33, 22, 12, -46
+PY = -88                  # محور تیر
+HL = 62                   # نیم‌طول تیر
+PX, PR, PD, PTOP = 40, 24, 13, -34
 
 
 def poly(p, pts, col):
@@ -42,29 +42,29 @@ def box(p, x0, y0, x1, y1, col):
     p.raw('<polygon points="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (pts, col, INNER))
 
 
-def stack3(p, cx, yb, c=12):
-    """سه مکعب واحد روی هم (یک جزء): جعبهٔ زرد خط‌دار با دو خط جداکننده و نور تخت."""
-    top = yb - 3 * c
-    box(p, cx - c / 2, top, cx + c / 2, yb, Y_B)
-    for k in range(3):
-        y0 = top + k * c
-        poly(p, [(cx - c / 2 + 2.6, y0 + 2.6), (cx + c / 2 - 2.6, y0 + 2.6), (cx + c / 2 - 2.6, y0 + 4.2), (cx - c / 2 + 2.6, y0 + 4.2)], Y_L)
-        if k: p.ln((cx - c / 2, y0), (cx + c / 2, y0), INNER, NAVY, j=0)
+def cube(p, cx, yb, c):
+    box(p, cx - c / 2, yb - c, cx + c / 2, yb, Y_B)
+    poly(p, [(cx - c / 2 + 2.6, yb - c + 2.6), (cx + c / 2 - 2.6, yb - c + 2.6), (cx + c / 2 - 2.6, yb - c + 4.4), (cx - c / 2 + 2.6, yb - c + 4.4)], Y_L)
+
+
+def stack3(p, cx, yb, c=13):
+    """سه مکعب واحد (هرم دو + یک): دو مکعب کنار هم، یکی روی آن‌ها."""
+    cube(p, cx - c / 2, yb, c); cube(p, cx + c / 2, yb, c); cube(p, cx, yb - c + 1.5, c)
 
 
 def hanger(p, cx):
-    """دو بند عمودی (یک جزء): از تیر تا لبهٔ کفه؛ انتهایشان زیر لبهٔ کفه پنهان است."""
-    a = p.X([(cx - PR, PY), (cx - PR, PTOP + 1), (cx + PR, PY), (cx + PR, PTOP + 1)])
+    """بند مثلثی (یک جزء): از سر تیر به دو لبهٔ کفه."""
+    a = p.X([(cx, PY), (cx - PR + 2, PTOP + 1), (cx + PR - 2, PTOP + 1)])
     p.raw('<path d="M%.1f,%.1f L%.1f,%.1f M%.1f,%.1f L%.1f,%.1f" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="butt"/>' % (
-        a[0][0], a[0][1], a[1][0], a[1][1], a[2][0], a[2][1], a[3][0], a[3][1], STR, INNER))
+        a[1][0], a[1][1], a[0][0], a[0][1], a[2][0], a[2][1], a[0][0], a[0][1], STR, INNER))
 
 
 def build(out=OUTD):
-    p = Pen('scale_lab', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((40, -6), (62, 8)), dot=(58, -18)); p.xf = (0.9, -23, 8)
+    p = Pen('scale_lab', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((40, -6), (62, 8)), dot=(58, -18)); p.xf = (0.88, 0, 8)
     p.tipshadow(2, G + 3, 30); p.foot_tip(0, G + 1, 22)
-    p.shape([(-6.5, PY), (6.5, PY), (6.5, 0), (-6.5, 0)], W_B, PART, j=.1, step=8)
-    poly(p, [(-3.4, PY + 6), (-1.0, PY + 6), (-1.0, -6), (-3.4, -6)], W_L)
-    poly(p, [(1.2, PY + 6), (3.4, PY + 6), (3.4, -6), (1.2, -6)], W_D)
+    p.shape([(-8, PY), (8, PY), (8, 0), (-8, 0)], W_B, PART, j=.1, step=8)
+    poly(p, [(-4.6, PY + 8), (-1.6, PY + 8), (-1.6, -6), (-4.6, -6)], W_L)
+    poly(p, [(1.8, PY + 8), (4.6, PY + 8), (4.6, -6), (1.8, -6)], W_D)
     body = [(-24, G), (24, G), (19, -6), (-19, -6)]
     p.shape(body, W_B, OUT, j=.1, step=8)
     poly(p, [(-14.5, -1.8), (-11.2, -1.8), (-15.8, G - 4.5), (-18.2, G - 4.5)], W_L)
@@ -84,8 +84,8 @@ def build(out=OUTD):
             if s == -1:
                 stack3(p, cx, yb)
             else:
-                ax, ay = p.X((cx, yb - 7.5)); p.raw('<circle cx="%.1f" cy="%.1f" r="7.5" fill="%s" class="eo" stroke-width="%s"/>' % (ax, ay, S_B, INNER))
-                poly(p, [(cx - 3.6, yb - 11.4), (cx - 1.4, yb - 12.4), (cx - 1.4, yb - 10.2), (cx - 3.6, yb - 9.2)], S_L)
+                ax, ay = p.X((cx, yb - 10)); p.raw('<circle cx="%.1f" cy="%.1f" r="10" fill="%s" class="eo" stroke-width="%s"/>' % (ax, ay, S_B, INNER))
+                poly(p, [(cx - 5.2, yb - 15), (cx - 2.2, yb - 16.4), (cx - 2.2, yb - 13), (cx - 5.2, yb - 11.6)], S_L)
             p.raw('</g>')
         beam = [(-HL, PY - 6.5), (HL, PY - 6.5), (HL, PY + 6.5), (-HL, PY + 6.5)]
         p.shape(beam, T_B, PART, j=.1, step=8, clip=False)

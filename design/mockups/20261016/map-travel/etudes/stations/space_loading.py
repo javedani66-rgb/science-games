@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
-"""ایستگاه W01 «ایستگاه بارگیری فضایی» (سرزمین فضا، سکوی 'space' رنگ‌مایه ۲۵۶°).
-قهرمان: صندوق بار فضایی نقره‌ای (نمای روبه‌رو)، بدون ترازو؛ دو دستگیرهٔ کناری و چراغ کوچک روی درپوش.
-طرح قطعه‌به‌قطعه (واحد symbol، مرکز محور CX، کف BASE):
- ۱ سایهٔ تماس: بیضی r=۳۶ زیر کف.
- ۲ دو دستگیره (پشت بدنه): مستطیل ۱۲ بیرون‌زده × ۲۴ بلند، فولادی خاکستری ۸d9099، شکاف تیره ۴×۱۰ وسط؛ ۴ واحد زیر بدنه می‌رود.
- ۳ بدنه: مستطیل ۶۰×۵۷ (CX±۳۰، y ‑۵۰..۷)، نقره‌ای گرم e6e5e3 / روشن fafaf8 / تیره bcbab6 (سه پله)؛ OUT؛
-   نور چپ، سایهٔ تیز راست، ۳ شیار عمودی تخت (فاصلهٔ ۱۵)، کرسی تیره پایین ۶ واحد.
- ۴ درپوش (لبهٔ طلایی): مستطیل ۶۶×۱۶ (CX±۳۳، y ‑۶۴..‑۴۸) ffd84d / روشن fff3c4 / تیره d9961c؛ PART.
- ۵ پایهٔ چراغ: مستطیل ۲۰×۷ فولادی روی درپوش (محور CX). ۶ گنبد چراغ خاموش (ثابت): نیم‌دایره r=۱۳ (ارتفاع دیدنی ≥۸)؛ دستگیره آبی-فولادی #7f95b8 بدون شیار، ۱۶ بیرون‌زده؛ بدنه بدون نوار؛ هم‌پوشانی درپوش/بدنه ۴؛ قدیمی r=۸ قرمز تیره.
- ۷ لایهٔ متحرک node_space_loading_light: گنبد روشن ef6a4a + برق ffb59c، روی گنبد خاموش؛ چشمک = محوشدن لایه (۳ بار)، حالت پایان = روشن.
-رنگ‌مایه: بدنه خنثی گرم (≈۴۰°)، طلایی ۴۸°، چراغ ۱۰°؛ همه دور از ۲۵۶° سکو. بدون ترازو/عدد/متن/پیکان."""
+"""ایستگاه W01 «ایستگاه بارگیری فضایی» (سکوی space، رنگ‌مایهٔ سکو ۲۵۶°) — دور ۵ (بازطراحی: کپسول بارگیری + رمپ + جعبه).
+طرح قطعه‌به‌قطعه (واحد symbol؛ مختصات پایه، سپس xf مجموعه را وسط می‌آورد؛ کف 7):
+ ۱) پایهٔ فولادی: تختهٔ پهن (۶۸×۹، آبی-خاکستری ۲۰۵°) زیر کپسول.
+ ۲) کپسول: بیضی ایستاده کرم-سفید (rx32, ry38، مرکز (-22,-44)) با نور چپ و سایهٔ هلالی راست؛ OUT.
+ ۳) دریچهٔ باز: دهانهٔ طاقی تیره (۲۴×۲۴) روی بدنه، پایین دریچه به رمپ می‌رسد؛ یک پنجرهٔ گرد آبی بالای دریچه.
+ ۴) رمپ فلزی زرد: نوار شیب‌دار از کف دریچه تا زمین (کف x=32)؛ سه پلهٔ تخت نارنجی.
+ ۵) جعبهٔ بار (قهوه‌ای، ۲۶×۲۸) انتهای رمپ؛ تختهٔ چوبی روشن و ضربدر تیره.
+ ۶) چراغ: پایهٔ فولادی + گنبد خاموش (ثابت) بالای کپسول؛ ۷) لایهٔ node_space_loading_light: گنبد روشن قرمز-نارنجی.
+رنگ‌مایه: کرم ≈۴۵°، زرد ≈۴۸°، قهوه‌ای ≈۳۰°، فولاد ≈۲۰۵°، چراغ ≈۱۰° — همه ≥۳۵° از ۲۵۶°. بدون ترازو/عدد/متن/پیکان."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
@@ -17,14 +15,16 @@ from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/space_loading'
 
-S_B, S_L, S_D = '#e6e5e3', '#fafaf8', '#bcbab6'      # نقره‌ای
-G_B, G_L, G_D = '#ffd84d', '#fff3c4', '#d9961c'      # طلایی
-H_B, H_D = '#7f95b8', '#5f7496'                      # دستگیره/پایهٔ چراغ (فولاد)
-L_B, L_L, L_OFF = '#ef6a4a', '#ffb59c', '#9c2f1c'   # چراغ
+C_B, C_L, C_D = '#f7efd9', '#ffffff', '#d2c5a6'      # کپسول
+Y_B, Y_L, Y_D = '#ffd23f', '#fff0a8', '#d9961c'      # رمپ
+H_B, H_L, H_D = '#8fa6b8', '#c4d3df', '#667f94'      # فولاد
+X_B, X_L, X_D = '#b9733a', '#e0a468', '#7a4520'      # جعبه
+L_B, L_L, L_OFF = '#ef5a3a', '#ffb59c', '#8c2a1a'    # چراغ
+HOLE = '#26365f'; GLASS = '#9fd0ff'
 
-CX, BASE = -29, 7
-BT, LT, LB = -48, -62, -44        # بالای بدنه، بالای درپوش، کف درپوش
-BW, LW = 36, 39
+CX0, CY0, RX, RY = -22, -44, 32, 38
+BASE = 7
+XF = (1.0, -4.0, 0.0)
 
 
 def poly(p, pts, col, op=1):
@@ -34,40 +34,60 @@ def poly(p, pts, col, op=1):
 def rect(x0, y0, x1, y1): return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
 
 
-def dome(r=8):
-    return [(CX + r * math.cos(math.radians(a)), -62 - 7 + 0 + r * math.sin(math.radians(a))) for a in range(180, 361, 15)]
+def disc(p, x, y, r, col):
+    a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
+
+
+def arc(sx, sy, a0, a1, n=12): return ell(CX0, CY0, RX * sx, RY * sy, a0, a1, n)
+
+
+def dome(r=9): return [(CX0 + r * math.cos(math.radians(a)), -88 + r * math.sin(math.radians(a))) for a in range(180, 361, 15)]
 
 
 def build(out=OUTD):
-    p = Pen('space_loading', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 9, 0)
-    p.tipshadow(CX + 2, BASE + 3, 36); p.foot_tip(CX, BASE + 2, 26)
-    # ۲) دستگیره‌ها (پشت بدنه)
-    for s in (-1, 1):
-        x_in, x_out = CX + s * (BW - 4), CX + s * (BW + 14)
-        p.shape(rect(min(x_in, x_out), -34, max(x_in, x_out), -4), H_B, PART, j=.12, step=6)
-    # ۳) بدنه
-    body = rect(CX - BW, BT, CX + BW, BASE)
-    p.shape(body, S_B, OUT, j=.12, step=6)
-    poly(p, rect(CX + BW - 14, BT + 4, CX + BW - 3, BASE - 1), S_D)                                  # سایهٔ تیز راست
-    poly(p, rect(CX - BW + 3, BASE - 7, CX + BW - 3, BASE - 1), S_D)                                 # کرسی
-    poly(p, rect(CX - BW + 3, -29, CX + BW - 14, -21), H_B)                                          # نوار فولادی ساده
-    poly(p, rect(CX + BW - 14, -29, CX + BW - 3, -21), H_D)
-    poly(p, rect(CX - BW + 3, -29, CX + BW - 14, -27.2), '#a9bad6')
-    p.stroke(body, OUT, j=.12, step=6)
-    # ۴) درپوش طلایی
-    lid = rect(CX - LW, LT, CX + LW, LB)
-    p.shape(lid, G_B, PART, j=.12, step=6)
-    poly(p, rect(CX - LW + 5, LT + 4, CX - LW + 8.5, LB - 4), G_L)
-    poly(p, rect(CX + LW - 12, LT + 3, CX + LW - 3, LB - 1), G_D)
-    p.stroke(lid, PART, j=.12, step=6)
-    # ۵) پایهٔ چراغ و ۶) گنبد خاموش
-    p.shape(rect(CX - 14, LT - 6, CX + 14, LT + 5), H_B, INNER, j=.05, step=99, clip=False)
-    base_dome = [(CX + 13 * math.cos(math.radians(a)), LT - 2 + 13 * math.sin(math.radians(a))) for a in range(180, 361, 15)]
-    p.shape(base_dome, L_OFF, INNER, j=.05, step=99, clip=False)
+    p = Pen('space_loading', 'space'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = XF
+    p.tipshadow(2, BASE + 3, 52); p.foot_tip(CX0 - 14, BASE + 2, 14); p.foot_tip(50, BASE + 2, 10)
+    # ۱) پایهٔ فولادی
+    sl = rect(CX0 - 34, -3, CX0 + 34, BASE)
+    p.shape(sl, H_B, PART, j=.1, step=6, clip=False)
+    poly(p, rect(CX0 - 30, -0, CX0 - 12, 2.5), H_L)
+    poly(p, rect(CX0 + 18, 0, CX0 + 30, BASE - 1.5), H_D, .85)
+    p.stroke(sl, PART, j=.1, step=6)
+    # ۲) کپسول
+    cap = arc(1, 1, 0, 360, 36)
+    p.shape(cap, C_B, OUT, j=.1, step=8)
+    poly(p, arc(.93, .93, -62, 62, 12) + arc(.62, .93, 62, -62, 12)[:0] + [(CX0 + RX * .93 * math.cos(math.radians(a)) - 15, CY0 + RY * .93 * math.sin(math.radians(a))) for a in range(62, -63, -10)], C_D)   # سایهٔ هلالی راست
+    poly(p, arc(.86, .86, 200, 258, 8) + arc(.74, .74, 258, 200, 8), C_L)                                       # نور چپ
+    p.stroke(cap, OUT, j=.1, step=8)
+    # ۳) دریچهٔ باز و پنجرهٔ گرد
+    hole = [(CX0 - 13, -9)] + ell(CX0, -26, 13, 13, 180, 360, 10) + [(CX0 + 13, -9)]
+    p.shape(hole, HOLE, INNER, j=.06, step=6, clip=False)
+    p.shape(ell(CX0, -62, 8, 8, 0, 360, 16), GLASS, INNER, j=.05, step=99, clip=False)
+    poly(p, rect(CX0 - 4.5, -66, CX0 - 1.5, -61), '#ffffff')
+    # ۴) رمپ فلزی زرد (از کف دریچه تا زمین)
+    ramp = [(CX0 - 6, -17), (32, -1), (32, BASE), (CX0 - 6, -9)]
+    p.shape(ramp, Y_B, PART, j=.08, step=6, clip=False)
+    for x in (4, 14, 24):
+        y0 = -17 + (x - (CX0 - 6)) * 16 / 54
+        poly(p, [(x - 1.8, y0 + 3), (x + 1.8, y0 + 3), (x + 1.8, y0 + 8.5), (x - 1.8, y0 + 8.5)], Y_D)
+    poly(p, [(CX0 - 3, -15.5), (30, -1.5), (30, 1), (CX0 - 3, -12.5)], Y_L)
+    p.stroke(ramp, PART, j=.08, step=6)
+    # ۵) جعبهٔ بار
+    box = rect(37, -22, 63, BASE)
+    p.shape(box, X_B, PART, j=.08, step=6)
+    poly(p, rect(41, -18, 44.5, BASE - 4), X_L)
+    poly(p, rect(57, -18, 60, BASE - 3), X_D, .8)
+    poly(p, [(40, -19), (44, -19), (60, 3), (56, 3)], X_D)                                                       # ضربدر
+    poly(p, [(56, -19), (60, -19), (44, 3), (40, 3)], X_D)
+    p.stroke(box, PART, j=.08, step=6)
+    # ۶) پایهٔ چراغ و گنبد خاموش
+    p.shape(rect(CX0 - 8, -88, CX0 + 8, -78), H_B, INNER, j=.05, step=6, clip=False)
+    d = dome(9)
+    p.shape(d, L_OFF, INNER, j=.05, step=99, clip=False)
     # ۷) لایهٔ متحرک: گنبد روشن
     with layer(p, 'light'):
-        p.shape(base_dome, L_B, INNER, j=.05, step=99, clip=False)
-        ax, ay = p.X((CX - 5.5, LT - 9.5)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.6" fill="%s"/>' % (ax, ay, L_L))
+        p.shape(d, L_B, INNER, j=.05, step=99, clip=False)
+        ax, ay = p.X((CX0 - 3.5, -93)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.2" fill="%s"/>' % (ax, ay, L_L))
     return p
 
 

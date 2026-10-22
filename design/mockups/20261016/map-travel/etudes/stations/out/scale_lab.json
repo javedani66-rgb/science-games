@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  59
+  56
  ],
  "stand": [
-  43.0,
-  5.5
+  53.0,
+  6.5
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_scale_lab_beam"
  ],
  "inside_pad": {
-  "min_margin_px": 9.0,
+  "min_margin_px": 15.8,
   "base_on_pad": true,
-  "height_px": 77.5,
+  "height_px": 74.8,
   "bbox_px": [
-   17.0,
-   46.5,
-   93.5,
+   29.5,
+   49.2,
+   114.2,
    124.0
   ],
   "ok": true
@@ -34,8 +34,8 @@
  "motion_spec": {
   "node_scale_lab_beam": {
    "center": [
-    -23.0,
-    -73.0
+    0.0,
+    -69.4
    ],
    "keyframes_deg": [
     0,

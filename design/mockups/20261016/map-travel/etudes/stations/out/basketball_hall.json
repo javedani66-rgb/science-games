@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  106
+  104
  ],
  "stand": [
-  39.5,
-  5.0
+  40.5,
+  9.0
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_basketball_hall_net"
  ],
  "inside_pad": {
-  "min_margin_px": 13.5,
+  "min_margin_px": 27.2,
   "base_on_pad": true,
-  "height_px": 107.8,
+  "height_px": 106.5,
   "bbox_px": [
-   21.5,
-   2.2,
-   87.5,
+   35.2,
+   3.5,
+   108.5,
    110.0
   ],
   "ok": true
@@ -35,8 +35,8 @@
   "node_basketball_hall_net": {
    "kind": "تور آویزان زیر رینگ؛ حالت ایستا = حالت پایان (راست‌ایستاده)",
    "pivot_map_symbol": [
-    -29.0,
-    -90.0
+    0.0,
+    -92.0
    ],
    "transform": "rotate حول لبهٔ بالای تور؛ پایین تور ±3 واحد (≈±2.2px)",
    "keyframes_deg": [

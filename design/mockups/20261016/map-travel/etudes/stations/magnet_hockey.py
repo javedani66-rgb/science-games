@@ -21,11 +21,11 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 B_B, B_L, B_D = '#3f82e8', '#8cbcff', '#2456b0'
 P_B, P_L, P_D = '#a56fe0', '#d2adff', '#6c3fae'
 S_B, S_L, S_D = '#dbe9f8', '#ffffff', '#a3bbd9'
-CX, BASE = -30, 7
-R, W = 36, 17
+CX, BASE = 0, 6
+R, W = 56, 24
 r = R - W
-YC = -42                      # مرکز کمان
-TIPY = -9                     # مرز نوک نقره‌ای
+YC = -46                      # مرکز کمان
+TIPY = -14                     # مرز نوک نقره‌ای
 SHIFT = 5
 CLIPW, CLIPH = 13, 22
 
@@ -48,20 +48,20 @@ def ribbon(rr0, rr1, a0, a1, n=12):
 
 
 def build():
-    p = Pen('magnet_hockey', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((36, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 8, 0)
-    p.tipshadow(CX + 3, BASE + 3, 36); p.foot_tip(CX - R + W / 2, BASE + 2, 10); p.foot_tip(CX + R - W / 2, BASE + 2, 10)
+    p = Pen('magnet_hockey', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-72, 12), (62, 8)), dot=(58, -16)); p.xf = (1.0, 0, -2)
+    p.tipshadow(CX + 2, BASE + 3, 50); p.foot_tip(CX - R + W / 2, BASE + 2, 12); p.foot_tip(CX + R - W / 2, BASE + 2, 12)
     b = body()
     p.shape(b, B_B, PART, j=.04, step=99)
     p.fill(right_half(), P_B)
     # نور (چپ، لبهٔ بیرونی)
-    poly(p, ribbon(R - 7.5, R - 4, 190, 255), B_L)
-    poly(p, [(CX - R + 4, YC), (CX - R + 7.5, YC), (CX - R + 7.5, TIPY - 3), (CX - R + 4, TIPY - 3)], B_L)
+    poly(p, ribbon(R - 10, R - 5, 190, 255), B_L)
+    poly(p, [(CX - R + 5, YC), (CX - R + 10, YC), (CX - R + 10, TIPY - 3), (CX - R + 5, TIPY - 3)], B_L)
     # سایهٔ تیز راست
-    poly(p, ribbon(R - 7, R - 1.5, 290, 358), P_D)
-    poly(p, [(CX + R - 7, YC), (CX + R - 1.5, YC), (CX + R - 1.5, TIPY - 3), (CX + R - 7, TIPY - 3)], P_D)
-    poly(p, [(CX - r - 6, YC), (CX - r - 1.5, YC), (CX - r - 1.5, TIPY - 3), (CX - r - 6, TIPY - 3)], B_D)   # سایهٔ درونی ساق چپ
+    poly(p, ribbon(R - 9, R - 2, 290, 358), P_D)
+    poly(p, [(CX + R - 9, YC), (CX + R - 2, YC), (CX + R - 2, TIPY - 3), (CX + R - 9, TIPY - 3)], P_D)
+    poly(p, [(CX - r - 8, YC), (CX - r - 2, YC), (CX - r - 2, TIPY - 3), (CX - r - 8, TIPY - 3)], B_D)   # سایهٔ درونی ساق چپ
     # نور روی بنفش (درون ساق راست، لبهٔ چپ آن)
-    poly(p, [(CX + r + 4, YC), (CX + r + 7.5, YC), (CX + r + 7.5, TIPY - 3), (CX + r + 4, TIPY - 3)], P_L)
+    poly(p, [(CX + r + 5, YC), (CX + r + 10, YC), (CX + r + 10, TIPY - 3), (CX + r + 5, TIPY - 3)], P_L)
     # برش وسط
     p.ln((CX, YC - R + 2), (CX, YC - r - 2), INNER, NAVY, j=0, probe='برش وسط')
     # نوک‌های نقره‌ای
@@ -75,14 +75,14 @@ def build():
     # گیرهٔ کاغذ (لایهٔ متحرک): موقعیت پایانی = چسبیده به لبهٔ درونی قطب راست
     # گیره: سه ران با فاصلهٔ ۱۰ (مرکز تا مرکز)، عرض مرکزها ۲۰ (+خط ≈۲۷٫۶)، ارتفاع کل ≈۴۰
     GAP = 10; NV, SV = 7.6, 3.9
-    ce = CX + r - 3.8 + 6.5 - NV / 2               # ران راست: لبهٔ بیرونی خط گیره ۲٫۵ واحد روی خط دور قطب راست
+    ce = CX + r - 3.8 - NV / 2 - 1.0
     xR, xM, xL = ce, ce - GAP, ce - 2 * GAP
-    yb = BASE - 1; yt = yb - (40 - NV)
+    yb = BASE - 1; yt = yb - (46 - NV)
     wire = ([(xL, yb - 12), (xL, yt + GAP)] + ell((xL + xR) / 2, yt + GAP, GAP, GAP, -180, 0, 14)
             + [(xR, yb - GAP / 2)] + ell((xR + xM) / 2, yb - GAP / 2, GAP / 2, GAP / 2, 0, 180, 10)
             + [(xM, yt + GAP + 8)])
     with layer(p, 'clip'):
-        p.tipshadow((xL + xR) / 2, BASE + 3, 28)
+        p.tipshadow((xL + xR) / 2, BASE + 3, 20)
         q = p.X(wire); d = 'M' + 'L'.join('%.1f,%.1f' % z for z in q)
         p.raw('<path d="%s" fill="none" stroke="#241a5e" stroke-width="%s" stroke-linejoin="round" stroke-linecap="round"/>' % (d, NV))
         p.raw('<path d="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linejoin="round" stroke-linecap="round"/>' % (d, S_B, SV))

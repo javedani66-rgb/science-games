@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  34
+  38
  ],
  "stand": [
-  44.0,
-  4.5
+  0.0,
+  19.0
  ],
  "ring": [
   0,
@@ -20,34 +20,34 @@
   "node_ice_rink_glint"
  ],
  "inside_pad": {
-  "min_margin_px": 12.4,
+  "min_margin_px": 9.9,
   "base_on_pad": true,
-  "height_px": 48.8,
+  "height_px": 60.2,
   "bbox_px": [
-   30.5,
-   74.2,
-   96.8,
-   123.0
+   25.2,
+   70.5,
+   118.5,
+   130.8
   ],
   "ok": true
  },
  "motion_spec": {
   "node_ice_rink_glint": {
-   "kind": "دو نوار سفید مایل روی رویهٔ یخ؛ حالت ایستا = پایان حرکت (نوارها در راست)",
+   "kind": "دو نوار سفید مایل کوتاه روی یخ؛ حالت ایستا = پایان حرکت",
    "translate_x_symbol_units": [
-    -68,
+    -10,
     0
    ],
    "translate_x_map_px": [
-    -49.0,
+    -7.2,
     0
    ],
-   "opacity": "از ۰ تا ۰٫۶۲ در ۱۵٪ اول؛ بعد ثابت",
-   "duration_s": 1.8,
-   "easing": "ease-in-out",
+   "opacity": "از ۰ تا ۰٫۷۵ در ۲۰٪ اول؛ بعد ثابت",
+   "duration_s": 1.4,
+   "easing": "ease-out",
    "loop": false,
    "trigger": "رسیدن کودک (یک‌بار)",
-   "how": "گروه glint را از translateX(-68) به 0 ببر؛ نوارها از چپ به راست روی یخ می‌گذرند. تزئینی است. بدون حلقهٔ بیکار.",
+   "how": "گروه glint را از translateX(%d) و شفافیت ۰ به 0 و ۱ ببر. تزئینی است. بدون حلقهٔ بیکار.",
    "note": "با reduced-motion ثابت در وضع پایان."
   }
  }

@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  98
+  30
  ],
  "stand": [
-  42.0,
-  8.0
+  -0.5,
+  -27.5
  ],
  "ring": [
   0,
@@ -20,35 +20,34 @@
   "node_wrench_room_wrench"
  ],
  "inside_pad": {
-  "min_margin_px": 23.9,
+  "min_margin_px": 7.9,
   "base_on_pad": true,
-  "height_px": 98.5,
+  "height_px": 51.8,
   "bbox_px": [
-   32.2,
-   9.8,
-   96.5,
-   108.2
+   28.8,
+   78.5,
+   115.2,
+   130.2
   ],
   "ok": true
  },
  "motion_spec": {
   "node_wrench_room_wrench": {
    "center": [
-    -46.0,
-    -4.0
+    0.0,
+    -8.0
    ],
-   "pivot": "پای دسته (ته گرد، روی سکو)",
+   "pivot": "مرکز آچار",
    "rotate_deg": "0 → -8 → +8 → 0 (حالت ایستا 0)",
    "dur_s": 1.6,
    "once": true,
-   "note": "کل آچار حول پای دسته اندکی تاب می‌خورد و پایش نمی‌لغزد و برمی‌گردد؛ فقط هنگام رسیدن؛ بدون حلقهٔ بیکار."
+   "note": "کل آچار اندکی تاب می‌خورد و برمی‌گردد؛ فقط هنگام رسیدن؛ بدون حلقهٔ بیکار."
   },
   "reduced_motion": "ایستا"
  },
  "swing_check": {
   "out_px": 0.0,
-  "x_margin": 23.0,
-  "min_inside": 25.8,
-  "stand_to_swing": 10.1
+  "x_margin": 20.5,
+  "min_inside": 16.6
  }
 }
