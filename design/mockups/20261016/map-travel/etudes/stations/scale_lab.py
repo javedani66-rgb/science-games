@@ -42,7 +42,7 @@ def box(p, x0, y0, x1, y1, col):
     p.raw('<polygon points="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (pts, col, INNER))
 
 
-def stack3(p, cx, yb, c=11):
+def stack3(p, cx, yb, c=12):
     """سه مکعب واحد روی هم (یک جزء): جعبهٔ زرد خط‌دار با دو خط جداکننده و نور تخت."""
     top = yb - 3 * c
     box(p, cx - c / 2, top, cx + c / 2, yb, Y_B)
