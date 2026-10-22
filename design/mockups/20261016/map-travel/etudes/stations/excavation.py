@@ -21,12 +21,12 @@ from shapely.geometry import Polygon
 from shapely.ops import unary_union
 S_B, S_L, S_D = '#efe7d3', '#fffcf1', '#c7bb9b'     # تخته‌سنگ بار: کرم روشن
 F_B, F_L, F_D = '#c2b79d', '#ddd3b8', '#8a8068'     # سنگ تکیه‌گاه: خاکستری-بژ
-B_B, B_L, B_D = '#e8483c', '#ff8a78', '#a82a24'     # دیلم قرمز
+B_B, B_L, B_D = '#e8b866', '#fbd990', '#b8843a'     # دیلم قرمز
 YEL = '#ffd84d'
 GY = 8
-ANG = 28
-PIV = (8.0, -24.0)
-BW = 9.0
+ANG = 20
+PIV = (10.0, -30.0)
+BW = 11.0
 REST = -8
 XF = (.9, 0.0, 6.0)
 DD = (10, -6)
@@ -48,28 +48,22 @@ def pebble(p, cx, cy, r):
 def build():
     p = Pen('excavation', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((-52, 22), (72, -22)), dot=(74, -8)); p.xf = XF
     p.tipshadow(0, GY + 1, 40); p.foot_tip(0, GY, 24)
-    pebble(p, 62, GY, 8); pebble(p, 74, GY - 1, 5)
-    extrude(p, [(-74, GY), (-73, -8), (-62, -15), (-48, -12), (-44, GY)], (8, -5), F_B, F_L, F_D, sw=OUT)
-    ful = [(-24, GY), (-22, -8), (-8, -18), (8, -23), (26, -15), (36, -2), (38, GY)]
-    extrude(p, ful, DD, F_B, F_L, F_D, sw=OUT)
-    flat(p, [(-23, GY - 2), (-22, -5), (-10, -14), (-4, -17), (-12, -4), (-14, GY - 2)], F_L)
+    ful = [(-30, GY), (6, -34), (40, GY)]
+    extrude(p, ful, (12, -8), F_B, F_L, F_D, sw=OUT, sw_in=0)
     f = rot(PIV[0], PIV[1], ANG)
     P = lambda pts: TP(f, [(PIV[0] + x, PIV[1] + y) for x, y in pts])
     with layer(p, 'bar'):
         main = [(-36, -BW), (48, -BW), (48, BW), (-36, BW)]
-        head = [(42, -BW), (56, -BW - 14), (68, -BW - 5), (54, BW)]
+        head = [(42, -BW), (60, -BW), (60, BW), (42, BW)]
         u = unary_union([Polygon(P(main)), Polygon(P(head))]).buffer(.01)
         ext = list(u.exterior.coords)[:-1]
         p.shape(ext, B_B, OUT, j=0, step=6, clip=False)
         flat(p, P([(-30, -BW + 3), (44, -BW + 3), (44, -BW + 7.5), (-30, -BW + 7.5)]), B_L)
         flat(p, P([(-30, BW - 7.5), (44, BW - 7.5), (44, BW - 3), (-30, BW - 3)]), B_D)
-        flat(p, P([(24, -BW + 1), (34, -BW + 1), (34, BW - 1), (24, BW - 1)]), YEL)
         p.stroke(ext, OUT, j=0, step=6)
-        # تخته‌سنگ بزرگ روی سر کوتاه دیلم: مستطیل ضخیم کج، لبهٔ چپ روی سنگ‌ریزه
-        g = rot(-62, -14, -30)
-        slab = TP(g, [(0, 0), (48, 0), (48, -26), (0, -26)])
-        extrude(p, slab, DD, S_B, S_L, S_D, sw=OUT)
-        p.ln(g((10, -9)), g((30, -9)), INNER, NAVY, j=0)
+        # تخته‌سنگ بزرگ روی سر کوتاه چوب (در قاب چوب می‌چرخد)
+        rock = P([(-40, -BW), (-44, -BW - 14), (-36, -BW - 30), (-20, -BW - 36), (-4, -BW - 28), (2, -BW - 12), (-2, -BW)])
+        extrude(p, rock, DD, S_B, S_L, S_D, sw=OUT, sw_in=0)
     return p
 
 
