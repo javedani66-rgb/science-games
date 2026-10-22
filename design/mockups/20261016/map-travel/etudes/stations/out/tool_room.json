@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  78
+  73
  ],
  "stand": [
-  43.5,
-  6.5
+  42.5,
+  -3.0
  ],
  "ring": [
   0,
@@ -20,22 +20,22 @@
   "node_tool_room_scissors"
  ],
  "inside_pad": {
-  "min_margin_px": 6.7,
+  "min_margin_px": 10.3,
   "base_on_pad": true,
-  "height_px": 84.0,
+  "height_px": 79.2,
   "bbox_px": [
-   17.5,
-   30.2,
-   94.0,
-   114.2
+   22.2,
+   34.8,
+   94.2,
+   114.0
   ],
   "ok": true
  },
  "motion_spec": {
   "node_tool_room_scissors": {
    "center": [
-    -4.8,
-    -51.6
+    -2.4,
+    -48.6
    ],
    "angle_deg": 25,
    "dir": "cw",

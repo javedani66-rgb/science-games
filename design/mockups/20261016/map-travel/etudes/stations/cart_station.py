@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-"""ایستگاه E02 «ایستگاه گاری‌ها» (سرزمین مزرعه، پالت farm). نمای کنار، بدون حیوان.
+"""ایستگاه E02 «ایستگاه گاری‌ها» (سرزمین مزرعه، پالت farm). نمای کنار، بدون حیوان. (دور سوم بازطراحی؛ مختصات نهایی، xf=یک)
 طرح قطعه‌به‌قطعه (واحد symbol، y منفی = بالا، زمین y=8):
- ۱ سایهٔ تماس چرخ و سر دسته (بیرون از لایهٔ متحرک، ایستا)
+ ۱ سایهٔ تماس زیر دو چرخ (ایستا)
  لایهٔ متحرک node_cart_station_roll (کل گاری؛ پایان = جای ایستا):
- ۲ دستهٔ بلند (شافت): متوازی‌الاضلاع ۱۳ پهن، از زیر تختهٔ بار (x=-26) رو به راست-پایین تا زمین (x=24)؛ چوب روشن #d9784a
- ۳ تختهٔ بار: x -80..-14، y -31..-19، چوب سرخ #b8572f، روشن #d9784a، تیره #7f3a1f
- ۴ دیوارهٔ عقب: x -80..-70، y -48..-19 (هم‌پوشان با تخته)
- ۵ گونی سفید-آبی #f4f7ff با بند #6f8fe8
- ۶ چرخ بلند: مرکز (-44,-16) شعاع ۲۴؛ لبه #6e2f1b، داخل کرم #fbeee0، ۸ پره، توپی زرد، میخ زرد روی لبه (تا چرخش دیده شود)
- چرخ داخل گروه تو‌در‌توی node_cart_station_roll_wheel است.
-رنگ قهرمان رنگ‌مایهٔ ≈۱۵° در برابر سکوی مزرعه ۵۰°."""
+ ۲ دستهٔ بلند: متوازی‌الاضلاع ۱۳ پهن، از دیوارهٔ راست جعبه (-14,-42) رو به بالا-راست تا (40,-68)؛ ≈۴۸ بیرون از جعبه، شیب ≈۲۶°.
+   عمداً بالا: نوکش بالای لبهٔ سکوست تا سایهٔ راست سکو روی آن نیفتد. چوب روشن.
+ ۳ گونی (پیش از جعبه کشیده می‌شود): کف y=-40، لبهٔ بالای جعبه y=-46 ⇒ ۶ واحد فرو رفته.
+ ۴ جعبهٔ چوبی x -76..-4، y -46..-18 (قرمزتر و تیره‌تر از سکو: رنگ‌مایهٔ ≈۱۶° در برابر ۵۰°)، دو شیار، نوار روشن، دو تیرک تیره.
+ ۵ دو چرخ هم‌اندازه: مراکز (-58,-9) و (-18,-9)، شعاع ۱۷ (قطر ۳۴)، ۶ پره؛ لبهٔ آبی، داخل کرم، توپی تیره؛ بدون نقطهٔ زرد.
+ چرخ‌ها داخل گروه‌های تودرتوی node_cart_station_roll_wheel و ..._wheel2 هستند."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
@@ -17,13 +16,13 @@ from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/cart_station'
 
-W_B, W_L, W_D = '#b77a3a', '#d29255', '#7a4a1f'
-WHL, WHD = '#6f8fe8', '#2f3f8f'; CREAM = '#fbeee0'; YEL = '#ffd84d'
-SK, SK_D, BLUE = '#f4f7ff', '#cfd8ee', '#5f86d9'
+W_B, W_L, W_D, W_H = '#a14a2a', '#cf7a4c', '#6a2c16', '#f0a878'
+WHL, WHD = '#6f8fe8', '#2f3f8f'; CREAM = '#fbeee0'
+SK, SK_D = '#f4f7ff', '#cfd8ee'; BLUE = '#5f86d9'
 G = 8
-W1 = (-60, -11, 19)      # چرخ بزرگ عقب (x, y, شعاع)
-W2 = (-22, -6, 14)      # چرخ کوچک‌تر جلو
-POLE0, POLE1 = (-22, -6), (14, 4)
+R = 17
+W1 = (-52, -9, R)
+W2 = (-14, -9, R)
 SLIDE = -5
 
 
@@ -35,48 +34,46 @@ def disc(p, x, y, r, col):
     a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
 
 
-def wheel(p, gid, w, nsp):
-    cx, cy, R = w; ri = R - 5.8
+def wheel(p, gid, w, nsp=6):
+    cx, cy, Rr = w; ri = Rr - 5.8
     p.raw('<g id="%s">' % gid)
-    p.shape(ell(cx, cy, R, R, 0, 360, 40), WHL, PART, j=.05, step=99, clip=False)
+    p.shape(ell(cx, cy, Rr, Rr, 0, 360, 40), WHL, PART, j=.05, step=99, clip=False)
     a, b = p.X((cx, cy)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, ri, CREAM))
     for k in range(nsp):
-        t = math.radians(k * 360 / nsp + 10)
+        t = math.radians(30 + k * 360 / nsp)
         p.ln((cx, cy), (cx + ri * math.cos(t), cy + ri * math.sin(t)), INNER, WHD, j=0)
-    disc(p, cx, cy, 4.5, WHD); disc(p, cx, cy, 2, YEL)
-    t = math.radians(10 + 180 / nsp + 0)
-    disc(p, cx + ri * .62 * math.cos(t), cy + ri * .62 * math.sin(t), 1.9, YEL)
+    disc(p, cx, cy, 4.5, WHD)
     p.raw('</g>')
 
 
 def build(out=OUTD):
-    p = Pen('cart_station', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 11, 0)
-    for (cx, cy, R) in (W1, W2):
-        p.tipshadow(cx + 3, G - 1, R + 4); p.foot_tip(cx + 2, G - 1, R * .6)
-    p.tipshadow(POLE1[0] + 1, POLE1[1] + 3, 7)
+    p = Pen('cart_station', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (0.88, -4, 2)
+    for (cx, cy, Rr) in (W1, W2):
+        p.tipshadow(cx + 3, G - 1, Rr + 4); p.foot_tip(cx + 2, G - 1, Rr * .6)
     with layer(p, 'roll'):
-        # میلهٔ جلو (کم‌شیب، از محور چرخ جلو تا زمین)
-        dx, dy = POLE1[0] - POLE0[0], POLE1[1] - POLE0[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy * 6.5, ux * 6.5
-        sh = [(POLE0[0] + nx, POLE0[1] + ny), (POLE1[0] + nx, POLE1[1] + ny), (POLE1[0] - nx, POLE1[1] - ny), (POLE0[0] - nx, POLE0[1] - ny)]
+        # دستهٔ بلند (از دیوارهٔ راست جعبه، رو به بالا-راست)
+        a0, a1 = (-12, -42), (36, -70)
+        dx, dy = a1[0] - a0[0], a1[1] - a0[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy * 6.5, ux * 6.5
+        sh = [(a0[0] + nx, a0[1] + ny), (a1[0] + nx, a1[1] + ny), (a1[0] - nx, a1[1] - ny), (a0[0] - nx, a0[1] - ny)]
         p.shape(sh, W_L, PART, j=.1, step=8, clip=False)
-        poly(p, [(POLE0[0] + 10 * ux + nx * .2, POLE0[1] + 10 * uy + ny * .2), (POLE1[0] - 3 * ux + nx * .2, POLE1[1] - 3 * uy + ny * .2),
-                 (POLE1[0] - 3 * ux + nx * .5, POLE1[1] - 3 * uy + ny * .5), (POLE0[0] + 10 * ux + nx * .5, POLE0[1] + 10 * uy + ny * .5)], '#f2b583')
-        # جعبهٔ بار با کناره‌های تخته‌ای
-        box = [(-72, -48), (-10, -48), (-10, -22), (-72, -22)]
-        p.shape(box, W_B, PART, j=.1, step=8, clip=False)
-        for y in (-40.5, -32.5): p.ln((-68, y), (-14, y), INNER, W_D, j=0)
-        poly(p, [(-68, -45.5), (-14, -45.5), (-14, -42.5), (-68, -42.5)], W_L)
-        for x in (-69, -13): poly(p, [(x - 2, -46), (x + 2, -46), (x + 2, -25), (x - 2, -25)], W_D)
-        p.stroke(box, PART, j=.1, step=8)
-        # گونی با گردن گره‌خورده
-        sack = [(-62, -48), (-63, -61), (-58, -70), (-51, -75), (-49, -80), (-39, -80), (-37, -75), (-32, -70), (-27, -61), (-28, -48)]
+        k0, k1, o = 14, L - 6, .55
+        poly(p, [(a0[0] + ux * k0 + nx * o, a0[1] + uy * k0 + ny * o), (a0[0] + ux * k1 + nx * o, a0[1] + uy * k1 + ny * o),
+                 (a0[0] + ux * k1 + nx * .2, a0[1] + uy * k1 + ny * .2), (a0[0] + ux * k0 + nx * .2, a0[1] + uy * k0 + ny * .2)], W_H)
+        # گونی (کفش y=-40، زیر لبهٔ جعبه)
+        sack = [(-54, -40), (-55, -53), (-50, -62), (-43, -67), (-41, -72), (-32, -72), (-30, -67), (-23, -62), (-18, -53), (-19, -40)]
         p.shape(sack, SK, PART, j=.1, step=6, clip=False)
-        poly(p, [(-36, -73), (-31, -69), (-27.5, -61), (-28.5, -50), (-36, -50)], SK_D)
-        poly(p, [(-59, -66), (-56.5, -68), (-56.5, -52), (-59, -52)], '#ffffff')
-        poly(p, [(-50.5, -78), (-37.5, -78), (-37.5, -74.5), (-50.5, -74.5)], BLUE)
-        p.shape([(-50, -80.5), (-38, -80.5), (-33.5, -90), (-44, -84.5), (-54.5, -90)], SK, INNER, j=.1, step=99, clip=False)
-        wheel(p, 'node_cart_station_roll_wheel', W1, 8)
-        wheel(p, 'node_cart_station_roll_wheel2', W2, 5)
+        poly(p, [(-27.5, -43), (-22, -43), (-22, -53), (-25.5, -58.5), (-27.5, -58.5)], SK_D)
+        poly(p, [(-51.5, -45), (-48.5, -45), (-48.5, -56), (-51.5, -54)], '#ffffff')
+        poly(p, [(-42.5, -68.5), (-30.5, -68.5), (-30.5, -65.5), (-42.5, -65.5)], BLUE)
+        # جعبهٔ چوبی
+        box = [(-68, -46), (-4, -46), (-4, -18), (-68, -18)]
+        p.shape(box, W_B, PART, j=.1, step=8, clip=False)
+        for y in (-35.5, -26.5): p.ln((-64, y), (-8, y), INNER, W_D, j=0)
+        poly(p, [(-64, -43), (-8, -43), (-8, -40), (-64, -40)], W_L)
+        for x in (-65, -7): poly(p, [(x - 1.5, -43), (x + 1.5, -43), (x + 1.5, -21), (x - 1.5, -21)], W_D)
+        p.stroke(box, PART, j=.1, step=8)
+        wheel(p, 'node_cart_station_roll_wheel', W1)
+        wheel(p, 'node_cart_station_roll_wheel2', W2)
     return p
 
 
@@ -88,8 +85,8 @@ if __name__ == '__main__':
     sp = r['spec']; hub = [round(v, 1) for v in p.X(W1[:2])]; hub2 = [round(v, 1) for v in p.X(W2[:2])]
     sp['motion_spec'] = {'node_cart_station_roll': dict(kind='translate', dx_from=SLIDE, dx_to=0, dur_s=1.8, count=1, ease='ease-out',
                          note='کل گاری از ۵ واحد (≈۴px) چپ می‌غلتد و در جای ایستا می‌ایستد؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار.'),
-                         'node_cart_station_roll_wheel': dict(kind='rotate', about=hub, deg_from=-round(5 / W1[2] * 57.3), deg_to=0, note='چرخ بزرگ عقب؛ ساعت‌گرد؛ هم‌زمان با غلتیدن'),
-                         'node_cart_station_roll_wheel2': dict(kind='rotate', about=hub2, deg_from=-round(5 / W2[2] * 57.3), deg_to=0, note='چرخ کوچک جلو'),
+                         'node_cart_station_roll_wheel': dict(kind='rotate', about=hub, deg_from=-round(5 / W1[2] * 57.3), deg_to=0, note='چرخ عقب؛ ساعت‌گرد؛ هم‌زمان با غلتیدن'),
+                         'node_cart_station_roll_wheel2': dict(kind='rotate', about=hub2, deg_from=-round(5 / W2[2] * 57.3), deg_to=0, note='چرخ جلو (هم‌اندازهٔ چرخ عقب)'),
                          'reduced_motion': 'ایستا'}
     (OUTD / 'cart_station.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

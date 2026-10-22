@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
-"""ایستگاه F08 «میدان طناب‌کشی» (سرزمین ورزشگاه، پالت sports، رنگ‌مایهٔ سکو ۹۳°).
-طرح قطعه‌به‌قطعه (واحد symbol، مرکز سکو (0,0)، y منفی = بالا):
- ۱) دو پایهٔ چوبی هم‌اندازه و هم‌ارتفاع (لنگر دو سر): بلوک پایهٔ قهوه‌ای تیره 24x10 + میلهٔ چوبی 14x56، چوب سه پله (#b77a3a/#d9a463/#7a4a1f).
-    مراکز x = -80 و -18 ⇒ نمای متقارن حول x=-49. نوار نور چپ + سایهٔ تیز راست داخل میله.
- ۲) طناب افقی و صاف، y=-34 (ارتفاع 14)، ماسه‌ای-سفید (#f6e7b4 / روشن #fffaf0 / تیره #cfae62) با خط PART؛ دو سرش 5 واحد روی میله‌ها
-    همپوشانی دارد؛ جای بافت: متوازی‌الاضلاع‌های تخت منظم (فاصلهٔ 9). بدون قرقره/قلاب/جعبه/پیکان.
- ۳) لایهٔ متحرک node_tug_field_flag = نوار بنفش-تیره (#7b4fd0 / #a98bf0 / #4a2c94) به پهنای 14 که دور طناب پیچیده و تا y=-8 آویزان است
-    با دم دوشاخه؛ مرکزش روی x=-49 (محور تقارن). حالت ایستا = وسط (پایان حرکت).
- ۴) زرد کوچک: حلقهٔ تخت r2.4 روی هر میله در تماس با طناب (تأکید).
-رنگ قهرمان: چوب ≈۳۰°، ماسه ≈۴۵°، بنفش ≈۲۶۰° — همه ≥۳۵° از ۹۳°."""
+"""ایستگاه F08 «میدان طناب‌کشی» (سرزمین ورزشگاه، پالت sports، رنگ‌مایهٔ سکو ۹۳°) — دور ۲ (اصلاح پس از ردّ ناظر).
+طرح قطعه‌به‌قطعه (واحد symbol، y منفی = بالا):
+ ۱) دو میلهٔ چوبی کوتاه (۴۵ واحد، پهنای ۱۴) با فاصلهٔ ۹۰ (x=-66 و +24 و XF جابه‌جا می‌کند)؛ چوب #b77a3a/#d9a463/#7a4a1f.
+    بلوک پایه ۲۶×۱۲ از ماده‌ای دیگر: سنگ آبی-خاکستری #8fa3bf/#b9c9de/#5e7194 (رنگ‌مایه ≈۲۱۵ در برابر چوب ≈۳۰).
+    میله‌ها clip=False: نوار نور/سایهٔ سکو هیچ‌کدام را نمی‌پوشاند ⇒ یکسان. نور و سایهٔ خود میله تخت و داخل میله.
+ ۲) طناب کلفت (۱۰) ماسه‌ای #f6e7b4/#fffaf0/#cfae62، کمی شُل (خمیدگی ۸ واحد به پایین)، از گرهٔ چپ تا گرهٔ راست؛
+    گرهٔ درشت هشت‌ضلعی r=9 روی هر میله با نقطهٔ نور؛ دو برش مورب تخت روی هر نیمهٔ طناب.
+ ۳) لایهٔ متحرک node_tug_field_flag: نوار پرچم بنفش بزرگ (۲۶×۴۰، دم دوشاخه) آویزان از وسط طناب، مرکز روی x=CX؛
+    #7b4fd0/#a98bf0/#4a2c94؛ حالت ایستا = وسط.
+ ۴) زرد کوچک: دایرهٔ تخت r2.4 روی نقطهٔ نور هر گره.
+رنگ قهرمان: چوب ≈۳۰°، ماسه ≈۴۵°، بنفش ≈۲۶۰°، پایه ≈۲۱۵° — همه ≥۳۵° از ۹۳°."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 import functools, station_kit as _k
 from station_kit import *
-_k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_check = functools.partial(_k.motion_check, min_margin=8)
+_k.margin_check = functools.partial(_k.margin_check, min_margin=8.5); _k.motion_check = functools.partial(_k.motion_check, min_margin=8.5)
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/tug_field'
 
@@ -22,14 +23,19 @@ WOOD = '#b77a3a'; WOOD_L = '#d9a463'; WOOD_D = '#7a4a1f'
 SAND = '#f6e7b4'; SAND_L = '#fffaf0'; SAND_D = '#cfae62'
 PUR = '#7b4fd0'; PUR_L = '#a98bf0'; PUR_D = '#4a2c94'; YEL = '#ffd84d'
 
-XF = (1.0, 19.0, 0.0)
-PX = (-74, -12)                  # مراکز میله‌ها
-CX = sum(PX) / 2                 # -49 محور تقارن
-PW = 14; PT, PB = -92, 2         # میله: بالا/پایین
-BW, BT, BB = 24, -6, 10           # بلوک پایه (از y=0 تا 10)... میله روی آن می‌نشیند
-RY, RH = -68, 14                 # طناب
-BAND_W = 12; BAND_T = -77; BAND_B = -54
+STONE = '#8fa3bf'; STONE_L = '#b9c9de'; STONE_D = '#5e7194'
+XF = (1.2, 5.6, 0.0)
+PX = (-45, 9)                    # مراکز میله‌ها
+CX = sum(PX) / 2                 # -21 محور تقارن
+PW = 13; PT = -44                # میله: بالا (ارتفاع ۴۵ تا بالای پایه)
+BW, BT, BB = 20, -2, 10           # بلوک پایه ۲۶×۱۲
+RY0, RH, SAG = -28, 10, 8         # طناب: مرکز در میله‌ها، ضخامت، شُلی وسط
+BAND_W = 17; BAND_B = 0
 SH = 7                           # حرکت: ±5px ≈ 7 واحد
+
+
+def rope_y(x):
+    t = (x - PX[0]) / (PX[1] - PX[0]); return RY0 + SAG * 4 * t * (1 - t)
 
 
 def flat(p, pts, col, op=1):
@@ -50,33 +56,42 @@ def mpoly(p, pts, fill, sw):
 
 def post(p, x):
     p.tipshadow(x + 1, BB, 17); p.foot_tip(x, BB, 10)
-    # بلوک پایه
-    p.shape([(x - BW / 2, BT), (x + BW / 2, BT), (x + BW / 2, BB), (x - BW / 2, BB)], WOOD_D, PART, j=.1, step=6)
-    rect(p, x - BW / 2 + 3.5, BT + 3.5, x - BW / 2 + 6.5, BB - 4, WOOD, .0001) if False else None
-    # میله
-    p.shape([(x - PW / 2, PT), (x + PW / 2, PT), (x + PW / 2, BT + 3), (x - PW / 2, BT + 3)], WOOD, PART, j=.1, step=6)
-    rect(p, x - PW / 2 + 3.5, PT + 5, x - PW / 2 + 6.5, BT - 4, WOOD_L)
-    rect(p, x + 1.5, PT + 4, x + PW / 2 - 2.9, BT - 1, WOOD_D, .55)
-    p.stroke([(x - PW / 2, PT), (x + PW / 2, PT), (x + PW / 2, BT + 3), (x - PW / 2, BT + 3)], PART, j=.1, step=6)
+    # بلوک پایه (سنگ)
+    q = [(x - BW / 2, BT), (x + BW / 2, BT), (x + BW / 2, BB), (x - BW / 2, BB)]
+    p.shape(q, STONE, PART, j=.1, step=6, clip=False)
+    rect(p, x - BW / 2 + 4, BT + 4, x - BW / 2 + 8, BB - 4, STONE_L)
+    rect(p, x + 3, BT + 4, x + BW / 2 - 3, BB - 3, STONE_D, .6)
+    p.stroke(q, PART, j=.1, step=6)
+    # میله (چوب)
+    q = [(x - PW / 2, PT), (x + PW / 2, PT), (x + PW / 2, BT + 3), (x - PW / 2, BT + 3)]
+    p.shape(q, WOOD, PART, j=.1, step=6, clip=False)
+    rect(p, x - PW / 2 + 3.5, PT + 4, x - PW / 2 + 6.5, BT - 2, WOOD_L)
+    rect(p, x + 1.5, PT + 4, x + PW / 2 - 2.9, BT - 2, WOOD_D, .55)
+    p.stroke(q, PART, j=.1, step=6)
 
 
 def build():
     p = Pen('tug_field', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((36, -22), (62, 6)), dot=(58, -16)); p.xf = XF
     for x in PX: post(p, x)
-    # طناب باریک (۱۲، خط ۳٫۹) از گرهٔ چپ تا گرهٔ راست روی میله‌ها پیچیده؛ هر گره ۷ واحد از میلهٔ بیرونی بیرون می‌زند
-    x0, x1 = PX[0], PX[1]
-    p.shape([(x0, RY - RH / 2), (x1, RY - RH / 2), (x1, RY + RH / 2), (x0, RY + RH / 2)], SAND, INNER, j=.1, step=6, clip=False)
-    for dx in (-15, 15):                                      # بافت مورب منظم، متقارن حول CX
-        flat(p, [(CX + dx - 2.8, RY + RH / 2 - 1.9), (CX + dx + 1.1, RY + RH / 2 - 1.9), (CX + dx + 2.8, RY - RH / 2 + 1.9), (CX + dx - 1.1, RY - RH / 2 + 1.9)], SAND_D)
-    for x in PX:                                                       # لولا: رسن دور ستون پیچیده (۵ واحد بیرون‌زدگی) + گرهٔ گرد روی آن
-        mpoly(p, [(x - PW / 2 - 3, RY - 8), (x + PW / 2 + 3, RY - 8), (x + PW / 2 + 3, RY + 8), (x - PW / 2 - 3, RY + 8)], SAND_D, INNER)
-        mpoly(p, [(x - 2, RY - 4.5), (x + 2, RY - 4.5), (x + 4.5, RY - 2), (x + 4.5, RY + 2), (x + 2, RY + 4.5), (x - 2, RY + 4.5), (x - 4.5, RY + 2), (x - 4.5, RY - 2)], SAND, INNER)
+    # طناب شُل: نوار منحنی کلفت ۱۰ (خط INNER)
+    n = 24; xs = [PX[0] + (PX[1] - PX[0]) * i / n for i in range(n + 1)]
+    up = [(x, rope_y(x) - RH / 2) for x in xs]; dn = [(x, rope_y(x) + RH / 2) for x in reversed(xs)]
+    mpoly(p, up + dn, SAND, INNER)
+    for sgn in (-1, 1):                                   # برش‌های مورب منظم، متقارن حول CX
+        for dx in (20, 30):
+            x = CX + sgn * dx; y = rope_y(x); h = RH / 2 - 1.9
+            flat(p, [(x - 3.2, y + h), (x + .6, y + h), (x + 3.2, y - h), (x - .6, y - h)], SAND_D)
+    for x in PX:                                          # گرهٔ درشت: بند دور میله ۲۰×۱۴ + نقطهٔ نور و زرد
+        y = rope_y(x)
+        mpoly(p, [(x - 10, y - 7), (x + 10, y - 7), (x + 10, y + 7), (x - 10, y + 7)], SAND_D, INNER)
+        flat(p, [(x - 6.5, y - 3.5), (x - 3, y - 3.5), (x - 3, y + 3.5), (x - 6.5, y + 3.5)], SAND_L)
+        disc(p, x + 3, y, 2.4, YEL)
     with layer(p, 'flag'):
-        w = BAND_W / 2
-        pts = [(CX - w, BAND_T), (CX + w, BAND_T), (CX + w, BAND_B), (CX, BAND_B - 6), (CX - w, BAND_B)]
+        w = BAND_W / 2; top = rope_y(CX) - 3
+        pts = [(CX - w, top), (CX + w, top), (CX + w, BAND_B), (CX, BAND_B - 9), (CX - w, BAND_B)]
         mpoly(p, pts, PUR, PART)
-        rect(p, CX - w + 3.2, BAND_T + 4, CX - w + 6.2, BAND_B - 4, PUR_L)
-        flat(p, [(CX + 1.5, BAND_T + 3.5), (CX + w - 2.9, BAND_T + 3.5), (CX + w - 2.9, BAND_B - 3), (CX + 1.5, BAND_B - 6)], PUR_D, .6)
+        rect(p, CX - w + 4.5, top + 5, CX - w + 8.5, BAND_B - 5, PUR_L)
+        flat(p, [(CX + 4, top + 5), (CX + w - 3, top + 5), (CX + w - 3, BAND_B - 4), (CX + 4, BAND_B - 11)], PUR_D, .6)
         mpoly(p, pts, 'none', PART)
     return p
 

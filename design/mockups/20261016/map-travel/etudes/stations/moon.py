@@ -19,7 +19,7 @@ M_B, M_L, M_SH = '#fff4d2', '#ffffff', '#d2c4e4'
 CR, CR_D = '#e6d49a', '#a89258'
 S_B, S_L, S_D = '#b7c4d4', '#dbe4ee', '#8e9db6'
 R = 33
-CX, CY = -12, -25
+CX, CY = -24, -25
 SLIDE = 8.3          # ≈۶px نقشه (واحد)
 SH = (-10, -10)
 
@@ -46,9 +46,10 @@ def crescent(p, c, r, s, col):
 def crater(p, x, y, r):
     a, b = p.X((x, y))
     p.raw('<ellipse cx="%.1f" cy="%.1f" rx="%.1f" ry="%.1f" fill="%s"/>' % (a, b, r, r * .8, CR))
-    pts = ell(x, y, r, r * .8, 110, 290, 14)
-    inner = ell(x + r * .22, y + r * .18, r * .78, r * .62, 290, 110, 14)
-    poly(p, pts + inner, CR_D)
+    # هلال تیرهٔ بالا-چپ = بیضی تیره منهای بیضی روشنِ جابه‌جا (بدون نوک)؛ بیضی روشن درون تیره می‌ماند
+    ex, ey = p.X((x + r * .2, y + r * .16))
+    p.raw('<ellipse cx="%.1f" cy="%.1f" rx="%.1f" ry="%.1f" fill="%s"/>' % (a, b, r, r * .8, CR_D))
+    p.raw('<ellipse cx="%.1f" cy="%.1f" rx="%.1f" ry="%.1f" fill="%s"/>' % (ex, ey, r * .78, r * .62, CR))
 
 
 def build():
@@ -59,7 +60,7 @@ def build():
     poly(p, ell(CX, 5, 29, 9, 180, 360, 36) + ell(CX, 5, 29, 9, 360, 180, 36), S_L)                      # رویهٔ روشن (بیضی کامل)
     poly(p, ell(CX, 12, 29, 9, 0, 180, 36) + ell(CX, 5, 29, 9, 180, 0, 36), S_D)                         # نوار تیرهٔ جلو
     p.stroke(body, OUT, j=.0, step=99)
-    sph = p.shape(ell(CX, CY, R, R, 0, 360, 48), M_B, OUT, j=0, step=99)
+    sph = p.shape(ell(CX, CY, R, R, 0, 352.5, 47), M_B, OUT, j=0, step=99)   # بدون نقطهٔ تکراری Z (زائدهٔ خط دور)
     crater(p, CX - 17, CY - 6, 6.5); crater(p, CX + 11, CY - 18, 6.5); crater(p, CX - 6, CY + 13, 6)
     ha = math.radians(-126); tx, ty = -math.sin(ha), math.cos(ha); nx, ny = math.cos(ha), math.sin(ha)
     hx, hy = CX + 25 * nx, CY + 25 * ny

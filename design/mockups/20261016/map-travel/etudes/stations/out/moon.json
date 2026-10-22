@@ -8,8 +8,8 @@
   44
  ],
  "stand": [
-  40.5,
-  5.5
+  36.5,
+  3.0
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_moon_shade"
  ],
  "inside_pad": {
-  "min_margin_px": 13.9,
+  "min_margin_px": 11.7,
   "base_on_pad": true,
   "height_px": 62.2,
   "bbox_px": [
-   36.8,
+   28.2,
    63.5,
-   89.5,
+   81.0,
    125.8
   ],
   "ok": true

@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  52
+  44
  ],
  "stand": [
-  43.5,
-  5.0
+  35.0,
+  3.0
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_beam_store_prop"
  ],
  "inside_pad": {
-  "min_margin_px": 16.8,
+  "min_margin_px": 8.8,
   "base_on_pad": true,
-  "height_px": 60.5,
+  "height_px": 52.0,
   "bbox_px": [
-   24.8,
-   55.8,
-   95.5,
+   19.0,
+   64.2,
+   78.2,
    116.2
   ],
   "ok": true
@@ -34,8 +34,8 @@
  "motion_spec": {
   "node_beam_store_prop": {
    "translate_from": [
-    -9,
-    -4
+    -6,
+    -4.4
    ],
    "translate_to": [
     0,

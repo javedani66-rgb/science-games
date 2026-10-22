@@ -24,19 +24,19 @@ F_B, F_L, F_D = '#e0702a', '#ffa561', '#a64a16'
 B_B, B_L, B_D = '#8a5ad0', '#b992f0', '#5b3a9c'
 YEL = '#ffd84d'
 G = 10
-FX = 22                                   # مرکز سر نزدیک تیر
-D = (-50, -22)                            # امتداد تیر
+FX = -2                                   # مرکز سر نزدیک تیر
+D = (-34, -25)                           # امتداد تیر
 DD = 0                                    # بخش «عمق» روی زمین
 M = D[1] / D[0]                           # شیب زیر تیر
-FB = -10                                  # کف سر نزدیک تیر نسبت به زمین (در هوا)
+FB = -3                                  # کف سر نزدیک تیر نسبت به زمین (در هوا)
 BY = G + FB
-XF = (1.1, -13, -2)
+XF = (1.08, -10, -2)
 W, H, TF, TW = 34, 32, 9, 12
 I0 = [(-W / 2, -H), (W / 2, -H), (W / 2, -H + TF), (TW / 2, -H + TF), (TW / 2, -TF), (W / 2, -TF), (W / 2, 0), (-W / 2, 0),
       (-W / 2, -TF), (-TW / 2, -TF), (-TW / 2, -H + TF), (-W / 2, -H + TF)]
 SLIDE = 14.3                                 # واحد symbol، موازی تیر: (dx,dy)
-SL = (9, 4)    # جابه‌جایی نهایی نسبت به شروع (x، y): تکیه‌گاه به سمت جعبه
-XC = -33                                  # مرکز نهایی تکیه‌گاه (x نسبی به FX)
+SL = (6, 4.4)    # جابه‌جایی نهایی نسبت به شروع (x، y): تکیه‌گاه به سمت جعبه
+XC = -37                                 # مرکز نهایی تکیه‌گاه (x نسبی به FX)
 
 
 def at(pts, dx=0, dy=0): return [(FX + x + dx, BY + y + dy) for x, y in pts]
@@ -55,12 +55,12 @@ def under(x):                              # لبهٔ زیرِ تیر (مختص�
 
 def prop(p):
     """تکیه‌گاه: مکعب (مستطیل) از زمین تا زیر تیر؛ لبهٔ بالای آن موازی تیر و ۷ واحد داخل تیر."""
-    xc = XC; hw = 13; ins = 7
+    xc = XC; hw = 11; ins = 7
     ytop = lambda x: under(x) - ins
     pts = [(FX + xc - hw, G), (FX + xc + hw, G), (FX + xc + hw, G + ytop(xc + hw)), (FX + xc - hw, G + ytop(xc - hw))]
     p.shape(pts, F_B, PART, j=.1, step=6, clip=False)
-    poly(p, [(FX + xc - hw + 3.5, G - 3), (FX + xc - hw + 7, G - 3), (FX + xc - hw + 7, G + under(xc - hw + 5) + 12), (FX + xc - hw + 3.5, G + under(xc - hw + 4) + 12)], F_L)
-    poly(p, [(FX + xc + 4, G - 3), (FX + xc + hw - 3.5, G - 3), (FX + xc + hw - 3.5, G + under(xc + hw) + 12), (FX + xc + 4, G + under(xc + 4) + 12)], F_D)
+    poly(p, [(FX + xc - hw + 3.5, G - 3), (FX + xc - hw + 7, G - 3), (FX + xc - hw + 7, min(G - 6, G + under(xc - hw + 5) + 12)), (FX + xc - hw + 3.5, min(G - 6, G + under(xc - hw + 4) + 12))], F_L)
+    poly(p, [(FX + xc + 4, G - 3), (FX + xc + hw - 3.5, G - 3), (FX + xc + hw - 3.5, min(G - 6, G + under(xc + hw) + 12)), (FX + xc + 4, min(G - 6, G + under(xc + 4) + 12))], F_D)
     p.stroke(pts, PART, j=.1, step=6)
 
 
@@ -80,7 +80,7 @@ def beam(p):
 
 def box(p):
     t0 = .25; w = 24; h = 24
-    bx, by = FX + t0 * D[0], BY - H + t0 * D[1]          # وسط لبهٔ جلوی ردپا روی روی بال
+    bx, by = FX + t0 * D[0], BY - H + t0 * D[1] + 3.5          # وسط لبهٔ جلوی ردپا روی روی بال
     q = (0, -6)               # عمق کم جعبه
     A, B_ = (bx - w / 2, by), (bx + w / 2, by)
     front = [A, B_, (B_[0], by - h), (A[0], by - h)]
@@ -95,7 +95,7 @@ def box(p):
 def build(out=OUTD):
     p = Pen('beam_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow(FX, G + 2, 15)
+    p.tipshadow(FX, G + 1, 19); p.foot_tip(FX, G, 12)
     xc = FX + XC
     p.tipshadow(xc, G + 1, 17); p.foot_tip(xc, G, 12)
     with layer(p, 'prop'): prop(p)

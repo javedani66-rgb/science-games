@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  65
+  48
  ],
  "stand": [
-  42.0,
-  6.0
+  44.0,
+  4.5
  ],
  "ring": [
   0,
@@ -20,14 +20,14 @@
   "node_cart_station_roll"
  ],
  "inside_pad": {
-  "min_margin_px": 9.5,
+  "min_margin_px": 10.5,
   "base_on_pad": true,
-  "height_px": 73.5,
+  "height_px": 55.8,
   "bbox_px": [
-   17.5,
-   43.0,
-   92.0,
-   116.5
+   19.8,
+   60.5,
+   94.8,
+   116.2
   ],
   "ok": true
  },
@@ -44,22 +44,22 @@
   "node_cart_station_roll_wheel": {
    "kind": "rotate",
    "about": [
-    -49.0,
-    -11.0
+    -49.8,
+    -5.9
    ],
-   "deg_from": -15,
+   "deg_from": -17,
    "deg_to": 0,
-   "note": "چرخ بزرگ عقب؛ ساعت‌گرد؛ هم‌زمان با غلتیدن"
+   "note": "چرخ عقب؛ ساعت‌گرد؛ هم‌زمان با غلتیدن"
   },
   "node_cart_station_roll_wheel2": {
    "kind": "rotate",
    "about": [
-    -11.0,
-    -6.0
+    -16.3,
+    -5.9
    ],
-   "deg_from": -20,
+   "deg_from": -17,
    "deg_to": 0,
-   "note": "چرخ کوچک جلو"
+   "note": "چرخ جلو (هم‌اندازهٔ چرخ عقب)"
   },
   "reduced_motion": "ایستا"
  }

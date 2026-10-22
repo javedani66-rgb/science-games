@@ -25,8 +25,8 @@ S_B, S_L = '#ff6f61', '#ffc2b8'                           # گوی مرجانی
 STR = '#dfe6fb'
 G = 12
 PY = -90                  # محور تیر
-HL = 52                   # نیم‌طول تیر
-PX, PR, PD, PTOP = 32, 19, 12, -46
+HL = 56                   # نیم‌طول تیر
+PX, PR, PD, PTOP = 33, 22, 12, -46
 
 
 def poly(p, pts, col):
@@ -60,7 +60,7 @@ def hanger(p, cx):
 
 
 def build(out=OUTD):
-    p = Pen('scale_lab', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((40, -6), (62, 8)), dot=(58, -18)); p.xf = (0.96, -23, 0)
+    p = Pen('scale_lab', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((40, -6), (62, 8)), dot=(58, -18)); p.xf = (0.9, -23, 8)
     p.tipshadow(2, G + 3, 30); p.foot_tip(0, G + 1, 22)
     p.shape([(-6.5, PY), (6.5, PY), (6.5, 0), (-6.5, 0)], W_B, PART, j=.1, step=8)
     poly(p, [(-3.4, PY + 6), (-1.0, PY + 6), (-1.0, -6), (-3.4, -6)], W_L)

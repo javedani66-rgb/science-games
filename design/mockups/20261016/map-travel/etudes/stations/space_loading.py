@@ -50,9 +50,9 @@ def build(out=OUTD):
     p.shape(body, S_B, OUT, j=.12, step=6)
     poly(p, rect(CX + BW - 14, BT + 4, CX + BW - 3, BASE - 1), S_D)                                  # سایهٔ تیز راست
     poly(p, rect(CX - BW + 3, BASE - 7, CX + BW - 3, BASE - 1), S_D)                                 # کرسی
-    for sx in (-1, 1):
-        x0 = CX + sx * (BW - 13)
-        poly(p, rect(min(x0, x0 + sx * 9), BT + 5, max(x0, x0 + sx * 9), BT + 14), G_D if sx > 0 else G_B)   # گوشه‌بند طلایی
+    poly(p, rect(CX - BW + 3, -29, CX + BW - 14, -21), H_B)                                          # نوار فولادی ساده
+    poly(p, rect(CX + BW - 14, -29, CX + BW - 3, -21), H_D)
+    poly(p, rect(CX - BW + 3, -29, CX + BW - 14, -27.2), '#a9bad6')
     p.stroke(body, OUT, j=.12, step=6)
     # ۴) درپوش طلایی
     lid = rect(CX - LW, LT, CX + LW, LB)
@@ -61,13 +61,13 @@ def build(out=OUTD):
     poly(p, rect(CX + LW - 12, LT + 3, CX + LW - 3, LB - 1), G_D)
     p.stroke(lid, PART, j=.12, step=6)
     # ۵) پایهٔ چراغ و ۶) گنبد خاموش
-    p.shape(rect(CX - 14, LT - 6, CX + 14, LT + 3), H_B, INNER, j=.05, step=99, clip=False)
-    base_dome = [(CX + 13 * math.cos(math.radians(a)), LT - 6 + 13 * math.sin(math.radians(a))) for a in range(180, 361, 15)]
+    p.shape(rect(CX - 14, LT - 6, CX + 14, LT + 5), H_B, INNER, j=.05, step=99, clip=False)
+    base_dome = [(CX + 13 * math.cos(math.radians(a)), LT - 2 + 13 * math.sin(math.radians(a))) for a in range(180, 361, 15)]
     p.shape(base_dome, L_OFF, INNER, j=.05, step=99, clip=False)
     # ۷) لایهٔ متحرک: گنبد روشن
     with layer(p, 'light'):
         p.shape(base_dome, L_B, INNER, j=.05, step=99, clip=False)
-        poly(p, [(CX - 8, LT - 15), (CX - 4, LT - 15), (CX - 4, LT - 11), (CX - 8, LT - 11)], L_L)
+        ax, ay = p.X((CX - 5.5, LT - 9.5)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.6" fill="%s"/>' % (ax, ay, L_L))
     return p
 
 

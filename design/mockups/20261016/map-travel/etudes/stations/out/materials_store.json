@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  67
+  33
  ],
  "stand": [
-  44.0,
-  1.0
+  42.5,
+  2.0
  ],
  "ring": [
   0,
@@ -20,14 +20,14 @@
   "node_materials_store_bags"
  ],
  "inside_pad": {
-  "min_margin_px": 7.3,
+  "min_margin_px": 10.3,
   "base_on_pad": true,
-  "height_px": 90.2,
+  "height_px": 53.5,
   "bbox_px": [
-   21.5,
-   28.5,
-   95.8,
-   118.8
+   25.2,
+   64.2,
+   92.2,
+   117.8
   ],
   "ok": true
  },

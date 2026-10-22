@@ -2,16 +2,16 @@
 """ایستگاه B02 «انبار مصالح» (سرزمین شهر، سکو #5b7390 رنگ‌مایهٔ ۲۱۳°). تصمیم مالک: دو پشتهٔ گونیِ برابر روی دو پالت هم‌سطح؛
 بدون ترازو، بدون عدد/متن، بدون جرثقیل.
 
-طرح قطعه‌به‌قطعه (واحد محلی؛ XF = مقیاس ۱٫۱۵):
- ۱ سایهٔ تماس: یک بیضی زیر هر پالت (rx ۲۰ = ۰٫۶۲ پهنای پالت ۳۲).
- ۲ پایه‌های پالت: دو بلوک ۹×۱۱ (چوب میانه #a8672f، INNER) در دو سر؛ بینشان ۱۴ فاصله (دیدنی ≈ ۱۰).
- ۳ چهار گونی روی هر پشته (۲۶×۲۲، گوشه‌های بریده ۳، دور PART، رنگ کرم #f3e1b0؛ سه پله: پایه/روشن #fff6dc/تیره #d9b979).
-   نوار روشن افقی بالای هر گونی، برچسب مستطیلی قرمز تخت #d9503a (۱۰×۶)، سایهٔ تیز راست داخل گونی؛ دورِ گونی بعد از سایه دوباره کشیده می‌شود.
-   جابه‌جایی افقی گونی‌ها در دو پشته دقیقاً یکی است (برابری): (۰، +۱٫۵، −۱٫۵، ۰).
- ۴ عرشهٔ پالت ۳۲×۱۱ (چوب #b77a3a، روشن #d9a463، تیره #7a4a1f، INNER) روی لبهٔ پایین گونی‌ها و جلوی آن‌ها (هم‌پوشانی ۶).
+طرح قطعه‌به‌قطعه (واحد محلی؛ XF = مقیاس ۱٫۱۲) — دور دوم (پس از ردّ ناظر):
+ ۱ سایهٔ تماس: یک بیضی زیر هر پالت.
+ ۲ پایه‌های پالت: دو بلوک ۹×۸ (چوب میانه #a8672f) در دو سر، بینشان ۱۶ فاصله؛ خط دور PART ۵٫۸.
+ ۳ دو گونی درشت در هر پشته (جمعاً ۴): بالشیِ مستطیلی ۳۲×۲۴ با گوشهٔ گرد (شعاع ۸)، بدون گوش نوک‌دار؛
+   رنگ کرم #f3e1b0، تنها یک نوار دوخت تخت (#d9b979) و یک سایهٔ تیز راست داخل گونی؛ بدون برچسب و ریزه. خط دور PART ۵٫۸.
+   جابه‌جایی افقی در دو پشته یکی است (۰، +۲) ⇒ دو پشتهٔ برابر و قرینهٔ خوانا.
+ ۴ عرشهٔ پالت ۳۴×۱۰ (چوب #b77a3a، روشن #d9a463، تیره #7a4a1f)، خط دور PART ۵٫۸، روی لبهٔ پایین گونی‌ها.
  ۵ لایهٔ متحرک node_materials_store_bags = گونی بالاییِ هر دو پشته؛ حالت ایستا = روی پشته.
- رنگ‌مایه: کرم ≈۴۲°، چوب ≈۳۰°، قرمز ≈۷°؛ سکو ۲۱۳° ⇒ فاصله ≥ ۱۷۰°.
- تفاوت مجاور: گونی کرم (L≈۹۰) / چوب (L≈۵۵)."""
+ رنگ‌مایه: کرم ≈۴۲°، چوب ≈۳۰°؛ سکو ۲۱۳°. تفاوت مجاور: گونی کرم (L≈۹۰) / چوب (L≈۵۵).
+ موتیف جدا از M05 (تیرآهن): گونی گرد کرم، نه تیر فلزی."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
@@ -25,14 +25,15 @@ F_B = '#a8672f'
 LAB = '#d9503a'
 TIE = '#8a5f0c'
 
-PX = (-23.5, 23.5)             # مرکز دو پشته
-SW, SH, STEP = 37, 30, 25  # گونی
-NS = 3                     # گونی در هر پشته
-Y0 = 6                     # کف گونی اول
-OFFS = (0, 3, -2)  # جابه‌جایی افقی؛ در دو پشته دقیقاً یکی است
-DECK_W, DECK_Y0, DECK_Y1 = 38, 0, 11
-GROUND = 19
+PX = (-25, 25)             # مرکز دو پشته
+SW, SH, STEP, R = 40, 26, 24, 9   # گونی
+NS = 2                     # گونی در هر پشته
+Y0 = 8                     # کف گونی اول
+OFFS = (0, 3)              # جابه‌جایی افقی؛ در دو پشته دقیقاً یکی است
+DECK_W, DECK_Y0, DECK_Y1 = 42, 0, 16
+GROUND = 16
 DROP = 16
+LW = PART                  # دور گونی و پالت ۵٫۸
 
 
 def poly(p, pts, col, op=1):
@@ -40,48 +41,48 @@ def poly(p, pts, col, op=1):
 
 
 def sack_pts(cx, yb):
-    """گونیِ گره‌دار: دو گوشهٔ بالا مثل نوک گره بالا می‌آیند، وسط بالا کمی فرو؛ بدنه پر و دو طرف گرد."""
-    t = yb - SH
-    rel = [(-15, -1), (-9, 2.5), (9, 2.5), (15, -1), (18, 8), (18.5, 19), (15, 26), (9, SH), (-9, SH), (-15, 26), (-18.5, 19), (-18, 8)]
-    return [(cx + x, t + y) for x, y in rel]
+    """گونیِ بالشی: مستطیل با گوشهٔ گرد؛ بالا و پایین کمی برآمده."""
+    t = yb - SH; w = SW / 2
+    pts = []
+    for (ox, oy, a0) in ((w - R, t + R, -90), (w - R, yb - R, 0), (-w + R, yb - R, 90), (-w + R, t + R, 180)):
+        for k in range(6):
+            a = math.radians(a0 + 15 * k)
+            pts.append((cx + ox + R * math.cos(a), oy + R * math.sin(a)))
+    return pts
 
 
 def sack(p, cx, yb):
     top = yb - SH
     pts = sack_pts(cx, yb)
-    p.shape(pts, S_B, INNER, j=.08, step=6)
-    poly(p, [(cx + 10, top + 12), (cx + 15, top + 12), (cx + 15, yb - 5), (cx + 10, yb - 5)], S_D)             # سایهٔ تیز راست
-    poly(p, [(cx - 14, top + 13), (cx - 10.5, top + 13), (cx - 10.5, yb - 7), (cx - 14, yb - 7)], S_L)           # نوار روشن
-    poly(p, [(cx - 5, top + 15), (cx + 5, top + 15), (cx + 5, top + 21), (cx - 5, top + 21)], LAB)           # برچسب کوچک
-    poly(p, [(cx - 8, top + 7), (cx + 8, top + 7), (cx + 8, top + 10), (cx - 8, top + 10)], TIE)                  # گرهٔ بالای گونی
-    p.stroke(pts, INNER, j=.08, step=6)
+    p.shape(pts, S_B, LW, j=.05, step=6)
+    poly(p, [(cx + 11, top + 12), (cx + 15, top + 12), (cx + 15, yb - 9), (cx + 11, yb - 9)], S_D)                  # سایهٔ تیز راست
+    poly(p, [(cx - 15, top + 9), (cx + 4, top + 9), (cx + 4, top + 13), (cx - 15, top + 13)], S_D)                # نوار دوخت
+    p.stroke(pts, LW, j=.05, step=6)
 
 
 def sack_y(i): return Y0 - STEP * i
 
 
 def pallet_feet(p, cx):
-    for dx in (-19, 10):
-        p.shape([(cx + dx, DECK_Y1 - 4), (cx + dx + 9, DECK_Y1 - 4), (cx + dx + 9, GROUND), (cx + dx, GROUND)], F_B, INNER, j=.1, step=6, clip=False)
-        poly(p, [(cx + dx + 5.5, DECK_Y1 + 1), (cx + dx + 7, DECK_Y1 + 1), (cx + dx + 7, GROUND - 2), (cx + dx + 5.5, GROUND - 2)], W_D)
+    for dx in (-18, 9):
+        p.shape([(cx + dx, DECK_Y1 - 3.5), (cx + dx + 9, DECK_Y1 - 3.5), (cx + dx + 9, GROUND), (cx + dx, GROUND)], F_B, LW, j=.08, step=6, clip=False)
 
 
 def deck(p, cx):
     x0, x1 = cx - DECK_W / 2, cx + DECK_W / 2
     pts = [(x0, DECK_Y0), (x1, DECK_Y0), (x1, DECK_Y1), (x0, DECK_Y1)]
-    p.shape(pts, W_B, INNER, j=.1, step=6)
-    poly(p, [(x0 + 3, DECK_Y0 + 2.5), (x1 - 3, DECK_Y0 + 2.5), (x1 - 3, DECK_Y0 + 4.5), (x0 + 3, DECK_Y0 + 4.5)], W_L)
-    poly(p, [(x0 + 3, DECK_Y1 - 4.5), (x1 - 3, DECK_Y1 - 4.5), (x1 - 3, DECK_Y1 - 2.2), (x0 + 3, DECK_Y1 - 2.2)], W_D)
-    p.stroke(pts, INNER, j=.1, step=6)
+    p.shape(pts, W_B, LW, j=.08, step=6)
+    poly(p, [(x0 + 5, DECK_Y0 + 3), (x1 - 5, DECK_Y0 + 3), (x1 - 5, DECK_Y0 + 5), (x0 + 5, DECK_Y0 + 5)], W_L)
+    for dx in (-12, 12): poly(p, [(cx + dx - 4, DECK_Y1 - 8), (cx + dx + 4, DECK_Y1 - 8), (cx + dx + 4, DECK_Y1 - 3.5), (cx + dx - 4, DECK_Y1 - 3.5)], W_D)   # دو جیب چنگک
+    p.stroke(pts, LW, j=.08, step=6)
 
 
 def build(out=OUTD):
-    p = Pen('materials_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((44, -30), (62, 6)), dot=(58, -16)); p.xf = (1.12, -19, -8)
+    p = Pen('materials_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((44, -30), (62, 6)), dot=(58, -16)); p.xf = (0.93, -19, -4)
     for cx in PX:
-        p.tipshadow(cx, GROUND + 1.5, 22); p.foot_tip(cx, GROUND, 14)
-    for cx in PX: pallet_feet(p, cx)
+        p.tipshadow(cx, GROUND + 1.5, 22); p.foot_tip(cx, GROUND, 12)
     for cx in PX:
-        for i in range(NS - 1): sack(p, cx + OFFS[i], sack_y(i))
+        sack(p, cx + OFFS[0], sack_y(0))
     with layer(p, 'bags'):
         for cx in PX: sack(p, cx + OFFS[NS - 1], sack_y(NS - 1))
     for cx in PX: deck(p, cx)

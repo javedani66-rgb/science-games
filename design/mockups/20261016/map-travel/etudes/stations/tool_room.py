@@ -20,7 +20,7 @@ H_B, H_L, H_D = '#8b5fd0', '#b898ec', '#5d3a9e'      # دستهٔ بنفش
 T_B, T_L, T_D = '#2fb5a8', '#7fe0d4', '#1f7f77'      # دستهٔ فیروزه‌ای (چکش)
 SCREW = '#a8742a'
 BX0, BX1, BY0, BY1 = -73, 28, -122, -8
-XF = (0.86, -6.5, 0.0)
+XF = (0.81, -4.0, 0.0)
 
 
 def poly(p, pts, col):
@@ -60,6 +60,7 @@ def strip(a, b, off, w, t0=.12, t1=.88):
 def board(p):
     part(p, [(BX0, BY0), (BX1, BY0), (BX1, BY1), (BX0, BY1)], W_B, PART)
     rect(p, BX0 + 5, BY0 + 5, BX1 - 5, BY0 + 8.5, W_L)                       # نور بالا
+    poly(p, [(BX1 - 5, BY0 + 5), (BX1 - 1.5, BY0 + 8), (BX1 - 1.5, BY1 - 1.5), (BX0 + 5, BY1 - 1.5), (BX0 + 8, BY1 - 5), (BX1 - 5, BY1 - 5)], W_D)  # سایهٔ تیز راست/پایین
 
 
 def plinth(p):
@@ -102,7 +103,7 @@ def hammer(p, cx, oy):
 
 
 def build(out=OUTD):
-    p = Pen('tool_room', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
+    p = Pen('tool_room', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((44, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
     p.tipshadow(-24, 8, 48); p.foot_tip(-24, 7, 28)
     board(p)
