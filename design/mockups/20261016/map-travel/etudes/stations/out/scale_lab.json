@@ -1,0 +1,54 @@
+{
+ "id": "scale_lab",
+ "kind": "space",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  54
+ ],
+ "stand": [
+  47.5,
+  8.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_scale_lab_beam"
+ ],
+ "inside_pad": {
+  "min_margin_px": 20.1,
+  "base_on_pad": true,
+  "height_px": 68.2,
+  "bbox_px": [
+   40.5,
+   51.0,
+   103.2,
+   119.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_scale_lab_beam": {
+   "center": [
+    0.0,
+    -66.0
+   ],
+   "keyframes_deg": [
+    0,
+    5,
+    -3.5,
+    2,
+    -1,
+    0
+   ],
+   "duration_s": 2.2,
+   "once": true,
+   "note": "کل لایه حول محور تیر می‌چرخد؛ هر کفه (g.pan، pivot در data-pivot = سر تیر آن سمت) خلاف جهت همان زاویه می‌چرخد تا افقی بماند؛ حالت ایستا = تراز؛ هنگام رسیدن، یک‌بار؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "تراز ثابت"
+ }
+}

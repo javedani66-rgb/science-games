@@ -19,9 +19,9 @@ M_B, M_L, M_SH = '#fff4d2', '#ffffff', '#d2c4e4'
 CR, CR_D = '#dccb9e', '#b8a578'
 S_B, S_L, S_D = '#b7c4d4', '#dbe4ee', '#8e9db6'
 R = 38
-CX, CY = -12, -26
+CX, CY = -12, -32
 SLIDE = 8.3          # ≈۶px نقشه (واحد)
-SH = (-13, -13)
+SH = (-10, -10)
 
 
 def poly(p, pts, col, op=1):
@@ -53,13 +53,13 @@ def crater(p, x, y, r):
 
 def build():
     p = Pen('moon', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 0, 0)
-    p.tipshadow(CX + 4, 18, 32); p.foot_tip(CX, 17, 28)
-    body = ell(CX, 8, 28, 8.5, 180, 360, 16) + ell(CX, 17, 28, 8.5, 0, 180, 16)
+    p.tipshadow(CX + 4, 20, 36); p.foot_tip(CX, 19, 32)
+    body = ell(CX, 6, 34, 10, 180, 360, 18) + ell(CX, 17, 34, 10, 0, 180, 18)
     p.shape(body, S_B, OUT, j=.12, step=99)
-    poly(p, ell(CX, 8, 22, 5.5, 0, 360, 24), S_L)
-    poly(p, ell(CX, 17, 27, 8, 5, 85, 8) + [(CX + 24, 9), (CX + 27.5, 9)], S_D)
+    poly(p, ell(CX, 6, 28, 6.5, 0, 360, 24), S_L)
+    poly(p, ell(CX, 16.5, 32, 8.5, 10, 170, 14) + ell(CX, 12, 32, 5, 170, 10, 14), S_D)
     p.shape(ell(CX, CY, R, R, 0, 360, 48), M_B, OUT, j=.12, step=99)
-    crater(p, CX - 15, CY - 5, 9); crater(p, CX + 12, CY - 19, 6); crater(p, CX - 3, CY + 17, 7)
+    crater(p, CX - 14, CY - 4, 11); crater(p, CX + 12, CY - 20, 7.5); crater(p, CX - 6, CY + 19, 8)
     ha = math.radians(-126); tx, ty = -math.sin(ha), math.cos(ha); nx, ny = math.cos(ha), math.sin(ha)
     hx, hy = CX + 29 * nx, CY + 29 * ny
     poly(p, [(hx + tx * 6 + nx * 2, hy + ty * 6 + ny * 2), (hx + tx * 6 - nx * 2, hy + ty * 6 - ny * 2), (hx - tx * 6 - nx * 2, hy - ty * 6 - ny * 2), (hx - tx * 6 + nx * 2, hy - ty * 6 + ny * 2)], M_L)

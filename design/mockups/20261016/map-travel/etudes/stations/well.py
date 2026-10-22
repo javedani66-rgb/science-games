@@ -23,7 +23,7 @@ C_B, C_L, C_D = '#f3e2b5', '#fff6d8', '#c99a58'          # قرقره/چرخ
 B_B, B_L, B_D = '#f0913a', '#ffc07a', '#a8531a'          # دلو
 ROPE = '#6b4a2a'; HOLE = '#1f3560'; WATER = '#4f86c6'; YEL = '#ffd84d'
 
-CX = -34
+CX = -28
 HW = 36
 RIM_Y = -36
 BASE = 7

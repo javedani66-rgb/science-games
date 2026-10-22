@@ -21,9 +21,9 @@ W_B, W_L, W_D = '#b8572f', '#d9784a', '#7f3a1f'
 RIM = '#6e2f1b'; HUBC = '#fbeee0'; YEL = '#ffd84d'
 SK, SK_D, BLUE = '#f4f7ff', '#cfd8ee', '#6f8fe8'
 G = 8
-WC = (-44, -16); WR = 24
-SH0, SH1 = (-26, -25), (24, 3)
-SLIDE = -14
+WC = (-40, -20); WR = 28
+SH0, SH1 = (-22, -30), (16, 3)
+SLIDE = -12
 
 
 def poly(p, pts, col, op=1):
@@ -35,8 +35,8 @@ def disc(p, x, y, r, col):
 
 
 def build(out=OUTD):
-    p = Pen('cart_station', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 8, 0)
-    p.tipshadow(WC[0] + 4, G - 1, 20); p.foot_tip(WC[0] + 2, G - 1, 14)
+    p = Pen('cart_station', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 12, 0)
+    p.tipshadow(WC[0] + 4, G - 1, 22); p.foot_tip(WC[0] + 2, G - 1, 14)
     p.tipshadow(SH1[0] + 3, G - 3, 8); p.foot_tip(SH1[0] + 1, G - 3, 6)
     with layer(p, 'roll'):
         dx, dy = SH1[0] - SH0[0], SH1[1] - SH0[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy * 6.5, ux * 6.5
@@ -44,28 +44,28 @@ def build(out=OUTD):
         p.shape(sh, W_L, PART, j=.1, step=99, clip=False)
         poly(p, [(SH0[0] + 12 * ux - nx * .15, SH0[1] + 12 * uy - ny * .15), (SH1[0] - 4 * ux - nx * .15, SH1[1] - 4 * uy - ny * .15),
                  (SH1[0] - 4 * ux + nx * .15, SH1[1] - 4 * uy + ny * .15), (SH0[0] + 12 * ux + nx * .15, SH0[1] + 12 * uy + ny * .15)], '#f2a47a')
-        p.shape([(-80, -48), (-70, -48), (-70, -19), (-80, -19)], W_B, PART, j=.1, step=99, clip=False)
-        poly(p, [(-77, -45), (-74.5, -45), (-74.5, -22), (-77, -22)], W_L)
-        bed = [(-80, -31), (-14, -31), (-14, -19), (-80, -19)]
+        p.shape([(-72, -56), (-62, -56), (-62, -23), (-72, -23)], W_B, PART, j=.1, step=99, clip=False)
+        poly(p, [(-69, -53), (-66.5, -53), (-66.5, -26), (-69, -26)], W_L)
+        bed = [(-72, -35), (-12, -35), (-12, -23), (-72, -23)]
         p.shape(bed, W_B, PART, j=.1, step=99, clip=False)
-        poly(p, [(-69, -28.3), (-17, -28.3), (-17, -25.5), (-69, -25.5)], W_L)
-        poly(p, [(-69, -22), (-17, -22), (-17, -19.6), (-69, -19.6)], W_D)
+        poly(p, [(-60, -32.3), (-15, -32.3), (-15, -29.5), (-60, -29.5)], W_L)
+        poly(p, [(-60, -26), (-15, -26), (-15, -23.6), (-60, -23.6)], W_D)
         p.stroke(bed, PART, j=.1, step=99)
-        sack = [(-65, -31), (-65, -40)] + ell(-49, -40, 16, 12, 180, 360, 12) + [(-33, -31)]
+        sack = [(-60, -35), (-60, -47)] + ell(-45, -47, 15, 14, 180, 360, 12) + [(-30, -35)]
         p.shape(sack, SK, PART, j=.1, step=99, clip=False)
-        poly(p, [(-42, -48), (-34, -43), (-34, -33), (-42, -33)], SK_D)
-        poly(p, [(-60, -45), (-57, -47), (-57, -36), (-60, -36)], '#ffffff')
-        p.ln((-60, -46.5), (-39, -46.5), INNER, BLUE, j=0)
+        poly(p, [(-38, -57), (-31, -50), (-31, -37), (-38, -37)], SK_D)
+        poly(p, [(-55, -52), (-52, -54), (-52, -40), (-55, -40)], '#ffffff')
+        p.ln((-55, -56.5), (-36, -56.5), INNER, BLUE, j=0)
         p.raw('<g id="node_cart_station_roll_wheel">')
         p.shape(ell(WC[0], WC[1], WR, WR, 0, 360, 48), RIM, PART, j=.05, step=99, clip=False)
         a, b = p.X(WC)
-        p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, 14.5, HUBC))
+        p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, 18.5, HUBC))
         for k in range(8):
             t = math.radians(k * 45 + 10)
-            p.ln((WC[0], WC[1]), (WC[0] + 17 * math.cos(t), WC[1] + 17 * math.sin(t)), INNER, RIM, j=0)
-        disc(p, WC[0], WC[1], 6.5, RIM); disc(p, WC[0], WC[1], 3, YEL)
+            p.ln((WC[0], WC[1]), (WC[0] + 20 * math.cos(t), WC[1] + 20 * math.sin(t)), INNER, RIM, j=0)
+        disc(p, WC[0], WC[1], 7, RIM); disc(p, WC[0], WC[1], 3, YEL)
         t = math.radians(32.5)
-        disc(p, WC[0] + 19.5 * math.cos(t), WC[1] + 19.5 * math.sin(t), 2.6, YEL)
+        disc(p, WC[0] + 23 * math.cos(t), WC[1] + 23 * math.sin(t), 2.6, YEL)
         p.raw('</g>')
     return p
 

@@ -1,0 +1,53 @@
+{
+ "id": "well",
+ "kind": "farm",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  86
+ ],
+ "stand": [
+  42.0,
+  4.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_well_bucket"
+ ],
+ "inside_pad": {
+  "min_margin_px": 8.5,
+  "base_on_pad": true,
+  "height_px": 93.8,
+  "bbox_px": [
+   16.5,
+   21.8,
+   91.0,
+   115.5
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_well_bucket": {
+   "offsets": [
+    [
+     0,
+     0
+    ],
+    [
+     0,
+     -8
+    ]
+   ],
+   "dy_px": -5.8,
+   "duration_s": 2,
+   "repeat": 1,
+   "note": "دلو با طناب ۸ واحد (≈۵٫۸px نقشه) بالا می‌رود و آهسته به حالت ایستا برمی‌گردد؛ سر طناب پشت قرقره می‌ماند؛ بدون حلقهٔ بیکار؛ تزئینی."
+  },
+  "reduced_motion": "دلو ثابت در حالت پایین"
+ }
+}

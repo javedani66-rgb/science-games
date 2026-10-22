@@ -22,9 +22,9 @@ G_B, G_L, G_D = '#ffd84d', '#fff3c4', '#d9961c'      # طلایی
 H_B, H_D = '#8d9099', '#4a4d57'                      # دستگیره/پایهٔ چراغ (فولاد)
 L_B, L_L, L_OFF = '#ef6a4a', '#ffb59c', '#9c2f1c'   # چراغ
 
-CX, BASE = -30, 7
-BT, LT, LB = -58, -74, -56        # بالای بدنه، بالای درپوش، کف درپوش
-BW, LW = 31, 34
+CX, BASE = -29, 7
+BT, LT, LB = -42, -58, -40        # بالای بدنه، بالای درپوش، کف درپوش
+BW, LW = 38, 41
 
 
 def poly(p, pts, col, op=1):
@@ -39,22 +39,25 @@ def dome(r=8):
 
 
 def build(out=OUTD):
-    p = Pen('space_loading', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.1, 6, 0)
+    p = Pen('space_loading', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 6, 0)
     p.tipshadow(CX + 2, BASE + 3, 36); p.foot_tip(CX, BASE + 2, 26)
     # ۲) دستگیره‌ها (پشت بدنه)
     for s in (-1, 1):
-        x_in, x_out = CX + s * (BW - 4), CX + s * (BW + 12)
-        p.shape(rect(min(x_in, x_out), -40, max(x_in, x_out), -14), H_B, PART, j=.12, step=6)
+        x_in, x_out = CX + s * (BW - 4), CX + s * (BW + 13)
+        p.shape(rect(min(x_in, x_out), -30, max(x_in, x_out), -8), H_B, PART, j=.12, step=6)
         xs = CX + s * (BW + 4)
-        poly(p, rect(xs - 2, -32, xs + 2, -22), H_D)
+        poly(p, rect(xs - 2, -24, xs + 2, -14), H_D)
     # ۳) بدنه
     body = rect(CX - BW, BT, CX + BW, BASE)
     p.shape(body, S_B, OUT, j=.12, step=6)
     poly(p, rect(CX - BW + 5, BT + 8, CX - BW + 8.5, BASE - 12), S_L)                               # نور
     poly(p, rect(CX + BW - 14, BT + 4, CX + BW - 3, BASE - 1), S_D)                                  # سایهٔ تیز راست
     poly(p, rect(CX - BW + 3, BASE - 7, CX + BW - 3, BASE - 1), S_D)                                 # کرسی
-    for dx in (-15, 0, 15):
-        poly(p, rect(CX + dx - 1.9, BT + 12, CX + dx + 1.9, BASE - 12), S_D)                         # شیار
+    for y in (-24, -10):
+        poly(p, rect(CX - BW + 8, y - 1.95, CX + BW - 8, y + 1.95), S_D)                         # دو نوار افقی
+    for sx in (-1, 1):
+        x0 = CX + sx * (BW - 13)
+        poly(p, rect(min(x0, x0 + sx * 9), BT + 5, max(x0, x0 + sx * 9), BT + 14), G_D if sx > 0 else G_B)   # گوشه‌بند طلایی
     p.stroke(body, OUT, j=.12, step=6)
     # ۴) درپوش طلایی
     lid = rect(CX - LW, LT, CX + LW, LB)
