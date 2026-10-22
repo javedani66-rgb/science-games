@@ -20,13 +20,13 @@
   "node_well_bucket"
  ],
  "inside_pad": {
-  "min_margin_px": 18.8,
+  "min_margin_px": 11.5,
   "base_on_pad": true,
   "height_px": 99.5,
   "bbox_px": [
    26.8,
    21.0,
-   117.0,
+   126.0,
    120.5
   ],
   "ok": true

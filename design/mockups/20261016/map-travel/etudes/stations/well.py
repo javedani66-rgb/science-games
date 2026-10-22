@@ -39,7 +39,7 @@ def bucket(p):
     arcline(p, ell(0, ty, 14, 14, 180, 360, 16), M_B, 2.6)
     sharp(p, body, B_B, PART)
     poly(p, [(-12, ty + 3), (-8, ty + 3), (-6.5, by - 1), (-9.5, by - 1)], B_L)
-    poly(p, [(7, ty + 3), (15, ty + 3), (12, by + 2), (6, by + 4)], B_D)
+    poly(p, [(7.5, ty + 3), (13.8, ty + 3), (11.2, by - .5), (7, by - .5)], B_D)
     for y in (-47, -36):
         w = 15 - (y - ty) * 3 / 24
         poly(p, [(-w, y), (w, y), (w - .4, y + 4), (-w + .4, y + 4)], M_B)
@@ -85,9 +85,9 @@ def build(out=OUTD):
     poly(p, [(7, -118), (50, -100.5), (50, -96), (7, -96)], R_D)
     poly(p, [(-52, -100), (52, -100), (60, -96), (-60, -96)], R_D)
     # دستهٔ چرخان
-    sharp(p, rect(PX + 5, SPY - 3, PX + 15, SPY + 3), W_D, INNER)
-    sharp(p, rect(PX + 12, SPY - 3, PX + 20, SPY + 22), YEL, PART)
-    p.shape(ell(PX + 16, SPY + 25, 7, 7, 0, 360, 16), YEL, PART, j=.05, step=99, clip=False)
+    sharp(p, rect(PX + 6, SPY - 3.5, PX + 16, SPY + 3.5), W_D, INNER)
+    sharp(p, [(PX + 11, SPY - 4), (PX + 19, SPY - 1), (PX + 31, SPY + 15), (PX + 24, SPY + 20)], YEL, PART)
+    p.shape(ell(PX + 29, SPY + 19, 7.5, 7.5, 0, 360, 16), '#f0b020', PART, j=.05, step=99, clip=False)
     return p
 
 

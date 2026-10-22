@@ -26,7 +26,7 @@ def pline(p, pts, col, w, cap='round'):
 def wave(x0, x1, y, amp=1.8, n=20):
     return [(x0 + (x1 - x0) * i / n, y + amp * math.sin(2 * math.pi * i / n * 1.5)) for i in range(n + 1)]
 def build():
-    p = Pen('pool', 'sports'); pad(p, line=((-80, 12), (-66, 20)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = (1.2, 4, 3)
+    p = Pen('pool', 'sports'); pad(p, line=((-80, 12), (-66, 20)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = (1.15, 3, 0)
     p.tipshadow(8, FY1 + 4, 56); p.foot_tip(-30, FY1 - 2, 18); p.foot_tip(24, FY1 - 2, 18)
     # ۱) بدنه
     p.shape([(FX1, FY0), (FX1 + DX, FY0 + DY), (FX1 + DX, FY1 + DY), (FX1, FY1)], W_S, PART, j=.05, step=8)

@@ -15,26 +15,26 @@ C_F, C_T, C_S = '#f28c28', '#ffc070', '#b5560e'
 T_F, T_T, T_S = '#2fb5a8', '#7fe0d4', '#1d7a70'
 GY = 14
 D = (-18, -14)
-XT, XP, XE = -42, 12, 38
-HP = 48; HT = 6
+XT, XP, XE = -38, 6, 32
+HP = 60; HT = 6
 T = (XT, GY - HT); H = (XP, GY - HP)
 _l = math.hypot(H[0] - T[0], H[1] - T[1])
 U = ((H[0] - T[0]) / _l, (H[1] - T[1]) / _l)    # بالاشیب
 N = (U[1], -U[0])                               # عمود بالا (بالا-چپ)
-S0, S1 = 40, 22                                 # فاصلهٔ پای جعبه از پنجه (ایستا / شروع)
-CS = 30
+S0, S1 = 38, 20                                 # فاصلهٔ پای جعبه از پنجه (ایستا / شروع)
+CS = 28
 
 
 def pt(P, v, k): return (P[0] + v[0] * k, P[1] + v[1] * k)
 
 
 def build():
-    p = Pen('loading_ramp_a', 'city'); pad(p, line=((62, 30), (76, 26)), tri=((-76, -4), (-70, 18)), dot=(76, -8)); p.xf = (1.0, 0, 0)
+    p = Pen('loading_ramp_a', 'city'); pad(p, line=((62, 30), (76, 26)), tri=((-76, -4), (-70, 18)), dot=(76, -8)); p.xf = (1.0, -2, 0)
     p.tipshadow(-6, GY + 2, 56); p.foot_tip(-6, GY, 36)
-    p.tipshadow(66, GY + 2, 16)
+    p.tipshadow(tx_ := 60, GY + 2, 16)
     prof = [(XE, GY), (XE, GY - HP), H, T, (XT, GY)]
     extrude(p, prof, D, W_F, W_T, W_S, mid=W_T, sw=OUT, sw_in=PART)
-    for yy in (GY - 14, GY - 28):
+    for yy in (GY - 16, GY - 32, GY - 46):
         xs = XT + 8 + (GY - 6 - yy) * (XP - XT) / (HP - HT) if yy > H[1] else XT
         rect(p, xs + 4, yy - 1.5, XE - 7, yy + 1.5, W_S, .85)
     for s_ in (14, 30, 46, 62):
@@ -42,7 +42,7 @@ def build():
         p.ln(a, b, INNER, W_S, op=.9, j=0)
     bk = lambda q: (q[0] + D[0], q[1] + D[1])
     a2, b2 = bk(T), bk(H)
-    p.shape([a2, b2, (b2[0], b2[1] - 7), (a2[0], a2[1] - 7)], RL, PART, j=.05, step=8, clip=False)
+    p.shape([a2, b2, (b2[0], b2[1] - 6), (a2[0], a2[1] - 6)], RL, INNER, j=.05, step=8, clip=False)
     with layer(p, 'crate'):
         P = pt(T, U, S0); P = (P[0] + D[0] * .16, P[1] + D[1] * .16)
         c = [P, pt(P, U, CS), pt(pt(P, U, CS), N, CS), pt(P, N, CS)]
@@ -51,12 +51,12 @@ def build():
         q = lambda s, h: pt(pt(P, U, s), N, h)
         poly(p, [q(11, 2), q(17, 2), q(17, CS - 2), q(11, CS - 2)], '#ffd9a0', .9)
         poly(p, [q(CS - 4, 2), q(CS - 1, 2), q(CS - 1, CS - 2), q(CS - 4, CS - 2)], C_S, .5)
-    p.shape([T, H, (H[0], H[1] - 7), (T[0], T[1] - 7)], RL, PART, j=.05, step=8, clip=False)
+    p.shape([T, H, (H[0], H[1] - 6), (T[0], T[1] - 6)], RL, INNER, j=.05, step=8, clip=False)
     # چرخ‌دستی
-    tx = 62
+    tx = 56
     p.shape([(tx + 6, GY - 4), (tx + 20, GY - 4), (tx + 20, GY), (tx + 6, GY)], T_F, PART, j=.05, step=6, clip=False)
-    extrude(p, [(tx - 4, GY - 4), (tx + 4, GY - 4), (tx + 4, GY - 62), (tx - 4, GY - 62)], (-4, -3), T_F, T_T, T_S, sw=PART)
-    extrude(p, [(tx - 12, GY - 66), (tx + 12, GY - 66), (tx + 12, GY - 60), (tx - 12, GY - 60)], (-4, -3), T_F, T_T, T_S, sw=PART)
+    extrude(p, [(tx - 5, GY - 4), (tx + 5, GY - 4), (tx + 5, GY - 70), (tx - 5, GY - 70)], (-5, -3), T_F, T_T, T_S, sw=PART)
+    extrude(p, [(tx - 13, GY - 76), (tx + 13, GY - 76), (tx + 13, GY - 68), (tx - 13, GY - 68)], (-5, -3), T_F, T_T, T_S, sw=PART)
     p.shape(ell(tx, GY - 11, 11, 11, 0, 360, 20), '#3a2a6a', PART, j=.05, step=99, clip=False)
     circ(p, tx, GY - 11, 4, '#ffd84d')
     return p, None
