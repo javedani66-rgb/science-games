@@ -38,9 +38,9 @@ def build(out=OUTD):
     p = Pen('beam_store', 'city'); pad(p, line=((-52, 40), (-36, 43)), tri=((72, -22), (-74, 14)), dot=(78, 6))
     p.xf = (1.1, 4, 0)
     p.tipshadow(OX + 8, G + 1, 62); p.foot_tip(OX + 8, G, 50)
-    beam(p, 0, G)
+    beam(p, -5, G)
     with layer(p, 'prop'):
-        beam(p, 0, G - H + 2)
+        beam(p, 9, G - H + 2)
     return p
 
 
