@@ -1,110 +1,121 @@
 #!/usr/bin/env python3
 """ایستگاه M05 «انبار تیرآهن» (سکوی شهر، city). id=beam_store؛ لایهٔ متحرک node_beam_store_prop.
-طرح قطعه‌به‌قطعه (واحد symbol؛ y منفی = بالا؛ زمین G=10):
- تیرآهن (فلز کرمی-خاکستری سه پله #e6dfca / #fffaf0 / #b3aa92): مستطیل بلند ۹۴×۱۶ (PART) با نوار روشن بالا (بالهٔ بالایی)، نوار تیرهٔ پایین
-   (بالهٔ پایینی) و سه پرچ زرد؛ حول نقطهٔ تکیه‌گاه P=(-24,-14) با ۲۵° خوابیده (سر راست پایین و روی زمین، سر چپ بالا).
- تکیه‌گاه (آجری-نارنجی #e0702a / #ffa561 / #a64a16): بلوک ۲۴ پهن از زمین تا زیر تیر؛ لبهٔ بالایی موازی تیر و ۶ واحد داخل تیر (پشتِ تیر)؛
-   لایهٔ node_beam_store_prop: از ۱۱ واحد راست‌تر تا جای نهایی (چپ، نزدیک جعبه)؛ حالت ایستا = پایان.
- جعبه (بنفش #8a5ad0 / #b992f0 / #5b3a9c): مربع ۲۸×۲۶ روی سر بالای تیر، هم‌شیب تیر، نوار نور بالا، دو آج، تسمهٔ زرد.
- سایهٔ تماس زیر تکیه‌گاه و سر پایین تیر."""
+نمای سه‌چهارم: تیرآهن I‌شکل از سر به سمت بیننده است؛ مقطع I (۲۶ پهن، ۲۴ بلند، بال ۶، جان ۸) روی سر نزدیک (روی زمین) دیده می‌شود
+و تیر با بردار D=(-46,-40) بالا و به عقب (سمت چپ) می‌رود؛ سر دور بالا آمده است. جعبه روی سر دورِ تیر نشسته.
+اجزا (از پشت به جلو؛ واحد symbol، y منفی = بالا، زمین G=10):
+ ۱) سایهٔ تماس: زیر سر نزدیک تیر و زیر تکیه‌گاه.
+ ۲) تکیه‌گاه (لایهٔ prop): بلوک مکعبی نارنجی-آجری ۲۲ پهن #e0702a/#ffa561/#a64a16؛ لبهٔ بالای آن موازی زیر تیر و داخل تیر؛ تیر آن را می‌پوشاند.
+    حرکت: ≈۸px (به‌صورت جابه‌جایی موازی تیر به سوی جعبه)؛ حالت ایستا = پایان.
+ ۳) تیرآهن: جسم کشیده‌شدهٔ مقطع I با سه پله فلز کرمی-خاکستری #e6dfca (پایه) / #fffaf0 (روی بال بالا) / #b3aa92 (جان و سایه)،
+    رخ مقطع روی سر نزدیک با خط INNER، دور بیرونی PART.
+ ۴) جعبه بنفش #8a5ad0 / #b992f0 (رو) / #5b3a9c (پهلو): رخ ۲۴×۲۴ با ضربدر و رو و پهلوی کم‌عمق، روی بال بالایی نزدیک سر دور.
+ رنگ‌مایه: فلز ≈۴۵°، تکیه‌گاه ≈۲۲°، جعبه ≈۲۶۵°، سکوی شهر ≈۲۱۱° (همه ≥۳۵° از سکو)."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent))
 from station_kit import *
+from shapely.geometry import Polygon
+from shapely.ops import unary_union
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/beam_store'
 
-S_B, S_L, S_D = '#e6dfca', '#fffaf0', '#b3aa92'          # تیرآهن
-F_B, F_L, F_D = '#e0702a', '#ffa561', '#a64a16'          # تکیه‌گاه
-B_B, B_L, B_D = '#8a5ad0', '#b992f0', '#5b3a9c'          # جعبه
+S_B, S_L, S_D = '#e6dfca', '#fffaf0', '#b3aa92'
+F_B, F_L, F_D = '#e0702a', '#ffa561', '#a64a16'
+B_B, B_L, B_D = '#8a5ad0', '#b992f0', '#5b3a9c'
 YEL = '#ffd84d'
 G = 10
-ANG = 28
-P = (-18, -9)
-U0, U1, TH = -38, 40, 16
-SLIDE = 9
-FW = 22
-XF = (1.25, -7.5, -4)
-f = rot(P[0], P[1], ANG)
-M = math.tan(math.radians(ANG))
+FX = 12                                   # مرکز سر نزدیک تیر
+D = (-46, -40)                            # امتداد تیر
+DD = 8                                    # بخش «عمق» روی زمین
+M = D[1] / D[0]                           # شیب زیر تیر
+XF = (1.1, -2, -4)
+W, H, TF, TW = 26, 24, 6, 8
+I0 = [(-W / 2, -H), (W / 2, -H), (W / 2, -H + TF), (TW / 2, -H + TF), (TW / 2, -TF), (W / 2, -TF), (W / 2, 0), (-W / 2, 0),
+      (-W / 2, -TF), (-TW / 2, -TF), (-TW / 2, -H + TF), (-W / 2, -H + TF)]
+SLIDE = 9                                 # واحد symbol، موازی تیر: (dx,dy)
+SL = (-SLIDE, -SLIDE * DD / abs(D[0]))    # جابه‌جایی نهایی نسبت به شروع (x، y): تکیه‌گاه به سمت جعبه
+XC = -33                                  # مرکز نهایی تکیه‌گاه (x نسبی به FX)
+
+
+def at(pts, dx=0, dy=0): return [(FX + x + dx, G + y + dy) for x, y in pts]
 
 
 def poly(p, pts, col, op=1):
     p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
 
 
-def disc(p, x, y, r, col):
-    a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
+def para(a, b, v): return [a, b, (b[0] + v[0], b[1] + v[1]), (a[0] + v[0], a[1] + v[1])]
 
 
-def yu(x): return P[1] + M * (x - P[0])      # خط زیر تیر
-
-
-def L(u0, u1, v0, v1): return TP(f, [(u0, v0), (u1, v0), (u1, v1), (u0, v1)])
+def under(x):                              # لبهٔ زیرِ تیر (مختصات نسبی به (FX,G)) برای x < -W/2
+    return (x + W / 2) * (D[1] / D[0])
 
 
 def prop(p):
-    xc = P[0]
-    top = lambda x: yu(x) - 6
-    pts = [(xc - FW / 2, G), (xc + FW / 2, G), (xc + FW / 2, top(xc + FW / 2)), (xc - FW / 2, top(xc - FW / 2))]
+    xc = XC; hw = 11
+    ins = 7                                 # عمق فرورفتن لبهٔ بالا در تیر (نهایی)
+    ytop = lambda x: under(x) - ins
+    base = -DD * (-W / 2 - xc) / abs(D[0]) + 2
+    pts = at([(xc - hw, base), (xc + hw, base), (xc + hw, ytop(xc + hw)), (xc - hw, ytop(xc - hw))])
     p.shape(pts, F_B, PART, j=.1, step=6, clip=False)
-    poly(p, [(xc - FW / 2 + 3.5, G - 3), (xc - FW / 2 + 7, G - 3), (xc - FW / 2 + 7, top(xc - FW / 2 + 5) + 12), (xc - FW / 2 + 3.5, top(xc - FW / 2 + 5) + 12)], F_L)       # نور
-    poly(p, [(xc + 3, G - 3), (xc + FW / 2 - 3, G - 3), (xc + FW / 2 - 3, top(xc + FW / 2) + 12), (xc + 3, top(xc + 3) + 12)], F_D)                                          # سایهٔ تیز راست
+    a = at([(xc - hw + 3.5, base - 3), (xc - hw + 7, base - 3), (xc - hw + 7, ytop(xc - hw + 5) + 14), (xc - hw + 3.5, ytop(xc - hw + 4) + 14)])
+    poly(p, a, F_L)
+    b = at([(xc + 3, base - 3), (xc + hw - 3.5, base - 3), (xc + hw - 3.5, ytop(xc + hw) + 14), (xc + 3, ytop(xc + 3) + 14)])
+    poly(p, b, F_D)
     p.stroke(pts, PART, j=.1, step=6)
 
 
 def beam(p):
-    body = L(U0, U1, -TH, 0)
-    p.shape(body, S_B, PART, j=.1, step=6, clip=False)
-    poly(p, L(U0 + 4, U1 - 4, -TH + 3.5, -TH + 6.8), S_L)           # بالهٔ بالایی (روشن)
-    poly(p, L(U0 + 4, U1 - 4, -6.8, -3.5), S_D)                      # بالهٔ پایینی (تیره)
-    for u in (-6, 18, 42):
-        a = f((u, -TH / 2)); disc(p, a[0], a[1], 2.2, YEL)            # پرچ
-    p.stroke(body, PART, j=.1, step=6)
+    sil = unary_union([Polygon(I0), Polygon([(x + D[0], y + D[1]) for x, y in I0])] +
+                      [Polygon(para(I0[i], I0[(i + 1) % 12], D)) for i in range(12) if Polygon(para(I0[i], I0[(i + 1) % 12], D)).area > 0]).buffer(0)
+    ext = list(sil.exterior.coords)[:-1]
+    p.shape(at(ext), S_B, PART, j=.05, step=7, clip=False)
+    poly(p, at(para(I0[0], I0[1], D)), S_L)                                   # روی بال بالایی
+    poly(p, at(para(I0[0], I0[11], D)), S_B)                                  # پهلوی چپ بال بالا
+    poly(p, at(para(I0[10], I0[9], D)[:]), S_D)                               # پهلوی چپ جان
+    poly(p, at(para(I0[8], I0[9], D)), S_L)                                   # روی بال پایین (درون کانال)
+    poly(p, at(para(I0[7], I0[8], D)), S_B)
+    p.shape(at(I0), S_B, INNER, j=.05, step=99, clip=False)                    # رخ مقطع I
+    poly(p, at([(-W / 2 + 3, -H + 3), (W / 2 - 3, -H + 3), (W / 2 - 3, -H + 5.8), (-W / 2 + 3, -H + 5.8)]), S_L)
+    p.stroke(at(ext), PART, j=.05, step=7)
 
 
 def box(p):
-    u0, u1 = -32, -6; h = 26
-    pts = L(u0, u1, -TH - h, -TH + 2)
-    p.shape(pts, B_B, PART, j=.1, step=6, clip=False)
-    poly(p, L(u0 + 4, u1 - 4, -TH - h + 4, -TH - h + 7.5), B_L)
-    poly(p, L(u1 - 8, u1 - 4, -TH - h + 10, -TH - 3), B_D)           # سایهٔ تیز راست
-    a, b, c, d = f((u0 + 5, -TH - h + 12)), f((u1 - 11, -TH - 5)), f((u1 - 11, -TH - h + 12)), f((u0 + 5, -TH - 5))
-    p.ln(a, b, INNER, B_D, j=0); p.ln(c, d, INNER, B_D, j=0)         # ضربدر جعبه
-    p.stroke(pts, PART, j=.1, step=6)
-
-
-def endcap(p):
-    """رخ مقطع I روی سر پایین تیر (چندضلعی تخت، بدون چرخش): دو بال و یک جان."""
-    c = f((U1, -TH / 2)); x, y = c[0] + 1, c[1]
-    W, H, t, w = 15, 21, 5, 5
-    pts = [(x - W / 2, y - H / 2), (x + W / 2, y - H / 2), (x + W / 2, y - H / 2 + t), (x + w / 2, y - H / 2 + t), (x + w / 2, y + H / 2 - t),
-           (x + W / 2, y + H / 2 - t), (x + W / 2, y + H / 2), (x - W / 2, y + H / 2), (x - W / 2, y + H / 2 - t), (x - w / 2, y + H / 2 - t),
-           (x - w / 2, y - H / 2 + t), (x - W / 2, y - H / 2 + t)]
-    p.shape(pts, S_L, INNER, j=.05, step=6, clip=False)
+    t0 = .62; w = 22; h = 24
+    bx, by = FX + t0 * D[0], G - H + t0 * D[1]          # وسط لبهٔ جلوی ردپا روی روی بال
+    q = (-.2 * 46 * .55, -.2 * 40 * .55)               # عمق کم جعبه
+    A, B_ = (bx - w / 2, by), (bx + w / 2, by)
+    front = [A, B_, (B_[0], by - h), (A[0], by - h)]
+    topf = para((A[0], by - h), (B_[0], by - h), q)
+    left = para(A, (A[0], by - h), q)
+    poly(p, left, B_D); poly(p, topf, B_L)
+    p.shape(front, B_B, PART, j=.1, step=6, clip=False)
+    p.ln((A[0] + 5, by - h + 5), (B_[0] - 5, by - 5), INNER, B_D, j=0); p.ln((B_[0] - 5, by - h + 5), (A[0] + 5, by - 5), INNER, B_D, j=0)
+    p.stroke(front, PART, j=.1, step=6)
+    p.stroke(left + [], INNER, j=.05, step=99)
+    p.stroke(topf, INNER, j=.05, step=99)
 
 
 def build(out=OUTD):
     p = Pen('beam_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow(P[0] + 2, G + 2, 18); p.foot_tip(P[0], G, 12)
-    rx = f((U1, 0))[0]
-    p.tipshadow(rx - 2, G + 1, 9); p.foot_tip(rx - 4, G, 6)
+    p.tipshadow(FX, G + 1, 17); p.foot_tip(FX, G, 12)
+    xc = FX + XC
+    p.tipshadow(xc, G - 4, 13); p.foot_tip(xc, G - 4, 8)
     with layer(p, 'prop'): prop(p)
     beam(p)
     box(p)
-    endcap(p)
     return p
 
 
 STAND = None
 if __name__ == '__main__':
     p = build()
-    offs = [p.V(o) for o in [(SLIDE, 0), (SLIDE * .75, 0), (SLIDE * .5, 0), (SLIDE * .25, 0), (0, 0)]]
+    offs = [p.V((-SL[0] * k, -SL[1] * k)) for k in (1, .75, .5, .25, 0)]
     r = finish(p, 'beam_store', STAND, motion={'prop': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_beam_store_prop': dict(translate_from=[SLIDE, 0], translate_to=[0, 0], dur_s=1.6, repeat=1,
-                         note='تکیه‌گاه ≈۸px (۱۱ واحد) از راست به سوی جعبه می‌لغزد و می‌ماند؛ تیر و جعبه ثابت‌اند و لبهٔ تکیه‌گاه پشت تیر است؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار.'),
+    sp['motion_spec'] = {'node_beam_store_prop': dict(translate_from=[round(-SL[0], 1), round(-SL[1], 1)], translate_to=[0, 0], dur_s=1.6, repeat=1,
+                         note='تکیه‌گاه ≈۸px موازی تیر به سوی جعبه (سر دور) می‌لغزد و می‌ماند؛ تیر و جعبه ثابت؛ لبهٔ بالای تکیه‌گاه همیشه پشت تیر؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار.'),
                          'reduced_motion': 'تکیه‌گاه در جای نهایی'}
     (OUTD / 'beam_store.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

@@ -23,12 +23,12 @@ SAND = '#f6e7b4'; SAND_L = '#fffaf0'; SAND_D = '#cfae62'
 PUR = '#7b4fd0'; PUR_L = '#a98bf0'; PUR_D = '#4a2c94'; YEL = '#ffd84d'
 
 XF = (1.0, 22.0, 0.0)
-PX = (-78, -8)                  # مراکز میله‌ها
+PX = (-71, -15)                  # مراکز میله‌ها
 CX = sum(PX) / 2                 # -49 محور تقارن
-PW = 14; PT, PB = -68, 2         # میله: بالا/پایین
-BW, BT, BB = 24, 0, 10           # بلوک پایه (از y=0 تا 10)... میله روی آن می‌نشیند
-RY, RH = -44, 16                 # طناب
-BAND_W = 18; BAND_T = -58; BAND_B = -20
+PW = 14; PT, PB = -84, 2         # میله: بالا/پایین
+BW, BT, BB = 24, -6, 10           # بلوک پایه (از y=0 تا 10)... میله روی آن می‌نشیند
+RY, RH = -52, 10                 # طناب
+BAND_W = 14; BAND_T = -66; BAND_B = -30
 SH = 7                           # حرکت: ±5px ≈ 7 واحد
 
 
@@ -45,14 +45,14 @@ def disc(p, x, y, r, col):
 
 def mpoly(p, pts, fill, sw):
     q = p.X(pts); d = 'M' + 'L'.join('%.1f,%.1f' % z for z in q) + 'Z'
-    p.raw('<path d="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (d, fill, sw))
+    p.raw('<path d="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="round"/>' % (d, fill, sw))
 
 
 def post(p, x):
     p.tipshadow(x + 1, BB, 17); p.foot_tip(x, BB, 10)
     # بلوک پایه
     p.shape([(x - BW / 2, BT), (x + BW / 2, BT), (x + BW / 2, BB), (x - BW / 2, BB)], WOOD_D, PART, j=.1, step=6)
-    rect(p, x - BW / 2 + 4, BT + 3.5, x - BW / 2 + 7.5, BT + 6.5, WOOD)
+    rect(p, x - BW / 2 + 3.5, BT + 3.5, x - BW / 2 + 6.5, BB - 4, WOOD, .0001) if False else None
     # میله
     p.shape([(x - PW / 2, PT), (x + PW / 2, PT), (x + PW / 2, BT + 3), (x - PW / 2, BT + 3)], WOOD, PART, j=.1, step=6)
     rect(p, x - PW / 2 + 3.5, PT + 5, x - PW / 2 + 6.5, BT - 4, WOOD_L)
@@ -61,15 +61,21 @@ def post(p, x):
 
 
 def build():
-    p = Pen('tug_field', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((38, -22), (62, 6)), dot=(58, -16)); p.xf = XF
+    p = Pen('tug_field', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((36, -22), (62, 6)), dot=(58, -16)); p.xf = XF
     for x in PX: post(p, x)
-    # طناب: روی میله‌ها ۵ واحد هم‌پوشانی
-    x0, x1 = PX[0] + PW / 2 - 5, PX[1] - PW / 2 + 5
+    # طناب باریک (۱۰) بین دو گرهٔ دور میله‌ها؛ هر گره ۷ واحد از میلهٔ بیرونی بیرون می‌زند
+    x0, x1 = PX[0] + 2, PX[1] - 2
     p.shape([(x0, RY - RH / 2), (x1, RY - RH / 2), (x1, RY + RH / 2), (x0, RY + RH / 2)], SAND, PART, j=.1, step=6, clip=False)
-    for x in range(int(x0 + 9), int(x1 - 16), 9):                      # بافت طناب: متوازی‌الاضلاع تخت منظم
-        flat(p, [(x, RY + RH / 2 - 3.2), (x + 4, RY + RH / 2 - 3.2), (x + 7.6, RY - RH / 2 + 3.2), (x + 3.6, RY - RH / 2 + 3.2)], SAND_D)
-    rect(p, x0 + 6, RY - RH / 2 + 3.2, x1 - 6, RY - RH / 2 + 4.8, SAND_L)
-    for x in PX: disc(p, x, RY, 2.4, YEL)
+    for dx in (-15.5, 15.5):                                          # بافت مورب منظم، متقارن حول CX
+        p.ln((CX + dx - 2.6, RY + 2.4), (CX + dx + 2.6, RY - 2.4), INNER, SAND_D, j=0)
+    for x, o in ((PX[0], -1), (PX[1], 1)):                            # گره: دور میله پیچیده، ۷ واحد بیرون‌زده
+        ks = [(x - PW / 2 - 7, RY - 8), (x + PW / 2 + 1, RY - 8), (x + PW / 2 + 1, RY + 8), (x - PW / 2 - 7, RY + 8)] if o < 0 else \
+             [(x - PW / 2 - 1, RY - 8), (x + PW / 2 + 7, RY - 8), (x + PW / 2 + 7, RY + 8), (x - PW / 2 - 1, RY + 8)]
+        mpoly(p, ks, SAND_D, PART)
+        kx = ks[0][0] + 3.5 if o < 0 else ks[1][0] - 3.5
+        rect(p, kx - 1.3, RY - 4.5, kx + 1.3, RY + 4.5, SAND_L)
+    # خط گچی تخت روی سکو زیر پرچم
+    flat(p, [(CX - 13, 3.2), (CX + 11, 3.2), (CX + 13, 6.4), (CX - 11, 6.4)], '#ffffff', .92)
     with layer(p, 'flag'):
         w = BAND_W / 2
         pts = [(CX - w, BAND_T), (CX + w, BAND_T), (CX + w, BAND_B), (CX, BAND_B - 10), (CX - w, BAND_B)]
