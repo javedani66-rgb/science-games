@@ -57,16 +57,18 @@ def build():
     q = rect(-22, -118, 22, -88)
     p.shape(q, RED, 2.6, j=.05, step=6, clip=False)
     poly(p, rect(-14, -111, 14, -95), W_B)
-    # ۲) حلقه و تور
+    # ۲) حلقه و تور: تور از لبهٔ جلویی حلقه آویزان است (دور حلقه = نیم‌دایرهٔ جلو)
     ring = ell(0, RIMY, 32, 11, 0, 360, 36)
-    p.shape(ring, OR_B, 2.6, j=.05, step=99, clip=False)
-    p.fill(ell(0, RIMY - 1, 22, 5.5, 0, 360, 28), HOLE)
-    net = [(-25, RIMY + 5), (25, RIMY + 5), (14, -44), (-14, -44)]
+    p.fill(ring, OR_B)
+    p.fill(ell(0, RIMY - 1, 24, 6.5, 0, 360, 28), HOLE)
+    front = [(32 * math.cos(math.radians(t)), RIMY + 11 * math.sin(math.radians(t))) for t in range(0, 181, 10)]
+    net = front + [(-14, -44), (14, -44)]
     p.shape(net, '#ffffff', 2.6, j=.05, step=8)
-    for a, b in (((-14, RIMY + 8), (0, -48)), ((0, RIMY + 8), (-8, -48)), ((0, RIMY + 8), (8, -48)), ((14, RIMY + 8), (0, -48)), ((-14, RIMY + 8), (-9, -48)), ((14, RIMY + 8), (9, -48))):
-        p.ln(a, b, 1.8, NETL, j=0)
-    p.stroke(net, 2.6, j=.05, step=8)
-    pline(p, [(x, RIMY + 2 + 10.5 * math.sin(math.radians(a))) for x, a in [(32 * math.cos(math.radians(t)), t) for t in range(10, 171, 10)]], OR_L, 2.4)
+    ytop = lambda x: RIMY + 11 * math.sqrt(max(0, 1 - (x / 32.) ** 2))
+    for tx in (-24, -12, 0, 12, 24):
+        for d in (-3.5, 3.5):
+            p.ln((tx, ytop(tx) + 1), (tx * .45 + d, -45), 1.6, NETL, j=0)
+    p.shape(ring, 'none', 2.6, j=.05, step=99, clip=False)
     # ۴) توپ
     with layer(p, 'ball'):
         cx, cy = BALL

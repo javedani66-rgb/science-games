@@ -52,22 +52,20 @@ def build(out=OUTD, ang=0):
         wing(p, -1); wing(p, 1)
         p.raw('</g>')
     # ماژول اصلی
-    body = [(-21, -58), (21, -58)] + ell(0, -6, 21, 7.4, 0, 180, 24)
+    body = ell(0, -50, 21, 16, 180, 360, 24) + ell(0, -6, 21, 7.4, 0, 180, 24)
     p.shape(body, M_B, 3.6, j=.1, step=99, clip=False)
     poly(p, rect(-16, -54, -11, -8), M_L)
     arc = [(x, -6 + 7.4 * math.sqrt(1 - (x / 21) ** 2) - 1.8) for x in (19 - 6 * i / 8 for i in range(9))]
     poly(p, [(13, -53), (19, -53)] + arc, M_D)
     for y in (-53, -12): poly(p, band(0, y, 18.6, 6.6, 2.8), M_D)
     p.stroke(body, 3.6, j=.1, step=99)
-    p.shape(ell(0, -58, 21, 7.4, 0, 360, 30), M_L, 3.6, j=.05, step=99, clip=False)
+    poly(p, band(0, -60, 20.2, 7.8, 3.4), G_B)                                            # حلقهٔ بندر طلایی دور بدنه
     for y in (-43, -24):
         p.shape(ell(-2, y, 6, 6, 0, 360, 16), GLASS, 2.6, j=.05, step=99, clip=False)
         poly(p, rect(-4.8, y - 3, -2.8, y - .8), '#ffffff')
     # ماژول کوچک (با کمربند بندر طلایی) + آنتن
-    vcyl(p, 0, -74, -59, 10, 3.6, M_B, M_L, M_D, M_L, sw=3.6, lx=2.6)
-    poly(p, band(0, -64, 9.4, 3.4, 3.4), G_B)
-    p.ln((0, -76), (0, -91), 2.6, ROD, j=0)
-    p.shape(ell(0, -93, 4, 4, 0, 360, 12), RED, 2.6, j=.05, step=99, clip=False)
+    p.ln((0, -64), (0, -82), 2.6, ROD, j=0)
+    p.shape(ell(0, -85, 4.4, 4.4, 0, 360, 12), RED, 2.6, j=.05, step=99, clip=False)
     return p
 
 
