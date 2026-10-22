@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  68
+  90
  ],
  "stand": [
-  24.0,
-  -23.5
+  0.0,
+  19.0
  ],
  "ring": [
   0,
@@ -17,29 +17,39 @@
   0
  ],
  "motion": [
-  "node_space_loading_light"
+  "node_space_loading_crate"
  ],
  "inside_pad": {
-  "min_margin_px": 16.3,
-  "base_on_pad": true,
-  "height_px": 74.5,
+  "min_margin_px": 0.0,
+  "base_on_pad": false,
+  "height_px": 105.2,
   "bbox_px": [
-   26.0,
-   40.5,
-   116.2,
-   115.0
+   11.5,
+   18.2,
+   123.8,
+   123.5
   ],
-  "ok": true
+  "ok": false
  },
  "motion_spec": {
-  "node_space_loading_light": {
-   "kind": "opacity-blink",
-   "blinks": 3,
+  "node_space_loading_crate": {
+   "kind": "کابل + قلاب + جعبهٔ نارنجی؛ translateY؛ از پایین‌تر (+14 واحد) به بالا (۰)؛ حالت ایستا = بالا (پایان)",
+   "keyframes_symbol_units": [
+    [
+     0,
+     14
+    ],
+    [
+     0,
+     0
+    ]
+   ],
    "duration_s": 1.8,
-   "trigger": "هنگام رسیدن",
-   "iterations": 1,
-   "note": "لایهٔ گنبد روشن ۳ بار محو و دوباره پدیدار می‌شود (زیرش گنبد خاموش ثابت است)؛ حالت ایستا و پایان = روشن؛ تزئینی؛ بدون حلقهٔ بیکار."
-  },
-  "reduced_motion": "چراغ روشن ثابت"
+   "easing": "ease-out",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "note": "کابل در همان لایه می‌ماند و بالای آن پشت بازو پنهان است؛ جعبه از سکو بیرون نمی‌زند",
+   "reduced_motion": "بالا"
+  }
  }
 }
