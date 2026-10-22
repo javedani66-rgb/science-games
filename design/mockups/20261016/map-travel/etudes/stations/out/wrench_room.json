@@ -8,8 +8,8 @@
   98
  ],
  "stand": [
-  34.0,
-  14.0
+  42.0,
+  8.0
  ],
  "ring": [
   0,
@@ -20,35 +20,15 @@
   "node_wrench_room_wrench"
  ],
  "inside_pad": {
-  "min_margin_px": 29.2,
+  "min_margin_px": 23.9,
   "base_on_pad": true,
   "height_px": 98.5,
   "bbox_px": [
-   39.2,
+   32.2,
    9.8,
-   103.8,
+   96.5,
    108.2
   ],
   "ok": true
- },
- "motion_spec": {
-  "node_wrench_room_wrench": {
-   "center": [
-    6.3,
-    -99.0
-   ],
-   "pivot": "مرکز دهانهٔ آچار",
-   "rotate_deg": "0 → -20 → +20 → 0 (حالت ایستا 0)",
-   "dur_s": 1.6,
-   "once": true,
-   "note": "کل آچار حول مرکز دهانه می‌چرخد و برمی‌گردد؛ فقط هنگام رسیدن؛ بدون حلقهٔ بیکار."
-  },
-  "reduced_motion": "ایستا"
- },
- "swing_check": {
-  "out_px": 0.0,
-  "x_margin": 11.5,
-  "min_inside": 14.2,
-  "stand_to_swing": 11.3
  }
 }
