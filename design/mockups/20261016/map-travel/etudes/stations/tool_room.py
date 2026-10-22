@@ -15,7 +15,7 @@ A_F = '#cf9a4a'
 S_F, S_T, S_S = '#d4dce8', '#f6f9fd', '#8c9ab8'
 H_F, H_T, H_S = '#e2553d', '#ff9b84', '#9c2a1a'
 Y_F, Y_T, Y_S = '#ffd84d', '#ffe98f', '#c9891a'
-DB = (14, -12)
+DB = (20, -17)
 TY0, TY1 = -34, -18          # بالا و پایین رویهٔ میز (جلو)
 BL, BR = -50, 44             # چپ و راست میز
 HB = (-22, TY0 - 8)          # پای دستهٔ چکش (روی رویه)
@@ -47,10 +47,10 @@ def build():
     box3(p, BL, TY0, BR, TY1, DB, W_F, W_T, W_S, sw=PART)
     rect(p, BL + 6, TY0 + 4, BR - 36, TY0 + 7.5, '#fff3c4', .8)
     # انبردست (زرد) روی رویهٔ میز، افتاده
-    cx, cy = 4, TY0 - 5
+    cx, cy = 6, TY0 - 9
     for sg in (-1, 1):
         p.shape(bar((cx - 24, cy + sg * 6), (cx + 2, cy + sg * 1.5), 10, 8), Y_F, PART, j=.05, step=6, clip=False)
-    p.shape([(cx + 2, cy - 5), (cx + 20, cy - 2), (cx + 22, cy), (cx + 20, cy + 2), (cx + 2, cy + 5)], S_F, PART, j=.05, step=6, clip=False)
+    p.shape([(cx + 2, cy - 7), (cx + 22, cy - 3), (cx + 26, cy), (cx + 22, cy + 3), (cx + 2, cy + 7)], S_F, PART, j=.05, step=6, clip=False)
     circ(p, cx + 3, cy, 3.2, Y_D)
     # گیره (راست)
     vx0, vx1 = 32, 50
