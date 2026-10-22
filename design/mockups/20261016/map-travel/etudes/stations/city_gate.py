@@ -38,7 +38,9 @@ def build():
     # دهانهٔ طاقی تیره
     arch = [(-19, BASE)] + [(-19 * math.cos(math.radians(a)), -44 - 19 * math.sin(math.radians(a))) for a in range(0, 181, 15)][::-1] + [(19, BASE)]
     arch = [(-19, BASE), (-19, -44)] + [(19 * math.cos(math.radians(a)), -44 - 19 * math.sin(math.radians(a))) for a in range(180, -1, -15)] + [(19, -44), (19, BASE)]
-    p.shape(arch, HOLE, PART, j=.1, step=8, clip=False)
+    p.shape(arch, '#9fd7e8', PART, j=.1, step=8, clip=False)          # آن‌سوی دروازه: آسمان روشن
+    poly(p, [(-19, -30), (19, -30), (19, BASE), (-19, BASE)], '#8fc46a')   # زمین آن‌سو
+    poly(p, [(-5, -30), (5, -30), (17, BASE), (-17, BASE)], ROAD)          # جاده در عمق
     # لنگه‌های چوبی باز، رو به جلو
     for sg in (-1, 1):
         q = [(sg * 19, -56), (sg * 19, BASE), (sg * 31, BASE + 8), (sg * 31, -48)]

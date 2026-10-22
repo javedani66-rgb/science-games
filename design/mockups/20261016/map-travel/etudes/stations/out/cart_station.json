@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  64
+  55
  ],
  "stand": [
   -52.5,
-  0.5
+  1.0
  ],
  "ring": [
   0,
@@ -21,13 +21,13 @@
   "node_cart_station_wheel_far"
  ],
  "inside_pad": {
-  "min_margin_px": 9.2,
+  "min_margin_px": 4.8,
   "base_on_pad": true,
-  "height_px": 76.2,
+  "height_px": 66.5,
   "bbox_px": [
    28.0,
-   43.5,
-   128.2,
+   53.2,
+   132.8,
    119.8
   ],
   "ok": true
@@ -48,8 +48,8 @@
   "node_cart_station_wheel_far": {
    "kind": "rotate",
    "about": [
-    14.6,
-    -9.7
+    -14.8,
+    -18.5
    ],
    "deg_from": -90,
    "deg_to": 0,
