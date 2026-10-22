@@ -23,7 +23,7 @@ C_B, C_L, C_D = '#f3e2b5', '#fff6d8', '#c99a58'          # قرقره/چرخ
 B_B, B_L, B_D = '#f0913a', '#ffc07a', '#a8531a'          # دلو
 ROPE = '#6b4a2a'; HOLE = '#1f3560'; WATER = '#4f86c6'; YEL = '#ffd84d'
 
-CX = -28
+CX = -16
 HW = 36
 RIM_Y = -36
 BASE = 7
@@ -47,8 +47,8 @@ def rect(x0, y0, x1, y1): return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
 
 
 def build(out=OUTD):
-    p = Pen('well', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
-    p.tipshadow(CX + 4, BASE + 3, 34); p.foot_tip(CX + 2, BASE + 2, 26)
+    p = Pen('well', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((46, -24), (74, 8)), dot=(64, -14))
+    p.tipshadow(CX - 2, BASE + 3, 34); p.foot_tip(CX, BASE + 2, 26)
     # ۱) بدنهٔ سنگی
     body = [(CX - HW, RIM_Y), (CX + HW, RIM_Y)] + ell(CX, BASE - 8, HW, 8, 0, 180, 16)
     p.shape(body, S_B, OUT, j=.15, step=8)
@@ -68,12 +68,12 @@ def build(out=OUTD):
     poly(p, [(CX - 7, RIM_Y + 3.4), (CX + 7, RIM_Y + 3.4), (CX + 5.5, RIM_Y + 4.8), (CX - 5.5, RIM_Y + 4.8)], WATER)
     # ۳) دلو و طناب (لایهٔ متحرک)
     with layer(p, 'bucket'):
-        p.ln((CX, SPOOL_Y + 4), (CX, -62), INNER, ROPE, j=0)
-        bk = [(CX - 14, -62), (CX + 14, -62), (CX + 11, -44), (CX - 11, -44)]
+        p.ln((CX, SPOOL_Y + 4), (CX, -52), INNER, ROPE, j=0)
+        bk = [(CX - 7, -52), (CX + 7, -52), (CX + 6, -34), (CX - 6, -34)]
         p.shape(bk, B_B, PART, j=.1, step=8)
-        poly(p, rect(CX - 9, -58, CX - 6, -48), B_L)
-        poly(p, [(CX + 4, -58), (CX + 8, -58), (CX + 7.5, -48), (CX + 4, -48)], B_D)
-        poly(p, rect(CX - 10, -54.5, CX + 10, -51.5), '#7a3a1a')
+        poly(p, rect(CX - 3.6, -48, CX - 1.8, -38), B_L)
+        poly(p, [(CX + 1.4, -48), (CX + 3.2, -48), (CX + 3, -38), (CX + 1.4, -38)], B_D)
+        poly(p, rect(CX - 4, -44.5, CX + 4, -42.5), '#7a3a1a')
     # ۴) قرقره
     sp = rect(CX - PX, SPOOL_Y - 10, CX + PX, SPOOL_Y + 10)
     p.shape(sp, C_B, PART, j=.1, step=8)
@@ -110,8 +110,8 @@ if __name__ == '__main__':
     p = build()
     r = finish(p, 'well', STAND, motion={'bucket': dict(offsets=[(0, 0), (0, BUCKET_DY)])}, out=OUTD, shots=SHOTS)
     sp = r['spec']
-    sp['motion_spec'] = {'node_well_bucket': dict(offsets=[[0, 0], [0, BUCKET_DY]], dy_px=round(BUCKET_DY * K, 1), duration_s=2, repeat=1,
-                                                  note='دلو با طناب ۸ واحد (≈۵٫۸px نقشه) بالا می‌رود و آهسته به حالت ایستا برمی‌گردد؛ سر طناب پشت قرقره می‌ماند؛ بدون حلقهٔ بیکار؛ تزئینی.'),
+    sp['motion_spec'] = {'node_well_bucket': dict(offsets=[[0, 0], [0, BUCKET_DY]], dy_units=BUCKET_DY, dy_px=round(BUCKET_DY * K, 1), duration_s=2, repeat=1,
+                                                  note='دلو با طناب ۱۱ واحد symbol (≈۸px نقشه) بالا می‌رود و آهسته به حالت ایستا برمی‌گردد؛ سر طناب پشت قرقره می‌ماند؛ بدون حلقهٔ بیکار؛ تزئینی.'),
                          'reduced_motion': 'دلو ثابت در حالت پایین'}
     (OUTD / 'well.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

@@ -65,14 +65,14 @@ def build():
     mpoly(p, [(RX - 9, -124), (RX + 9, -124), (RX + 9, -112), (RX - 9, -112)], RED, INNER)
     # 5) تور
     with layer(p, 'net'):
-        net = [(RX - 12, RIMY), (RX + 12, RIMY), (RX + 8, -44), (RX - 8, -44)]
+        net = [(RX - 10, RIMY), (RX + 10, RIMY), (RX + 7, -44), (RX - 7, -44)]
         mpoly(p, net, W_B, INNER)
-        for a, b in (((-6, -78), (0, -56)), ((6, -78), (0, -56))):   # زیگزاگ ساده V؛ سرها ۱۲ از هم
+        for a, b in (((-5, -78), (0, -56)), ((5, -78), (0, -56))):   # زیگزاگ ساده V؛ سرها ۱۲ از هم
             p.ln((RX + a[0], a[1]), (RX + b[0], b[1]), INNER, NETL, j=0)
         mpoly(p, net, 'none', INNER)
     # 6) رینگ
-    p.shape(ell(RX, RIMY, 16, 7, 0, 360, 24), RED, INNER, j=.05, step=99, clip=False)
-    p.fill(ell(RX, RIMY, 10.5, 3.2, 0, 360, 20), HOLE)
+    p.shape(ell(RX, RIMY, 13, 6.5, 0, 360, 24), RED, INNER, j=.05, step=99, clip=False)
+    p.fill(ell(RX, RIMY, 8, 3, 0, 360, 20), HOLE)
     return p
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ایستگاه B01 «داربست» (شهر). طرح قطعه‌به‌قطعه (واحد symbol، مرکز سکو (0,0)):
- ۱) دو پایهٔ عمودی لوله‌ای نقره‌ای (x=-46 و -6، پهنا ۱۴، از y=-100 تا ۷)، سه پله: #d5dde6 / روشن #f4f7fa / تیره #9aa8ba.
+ (بازنگری: شاقول داخل چارچوب زیر تیرک کوتاه، X کامل پایین) ۱) دو پایهٔ عمودی لوله‌ای نقره‌ای (x=-46 و -6، پهنا ۱۴، از y=-100 تا ۷)، سه پله: #d5dde6 / روشن #f4f7fa / تیره #9aa8ba.
  ۲) دو کفشک (بلوک پایه) خاکستری تیره زیر هر پایه.
  ۳) ضربدر قرمز مرجانی (#e2553d) در دو طاق بین پایه‌ها (پشت پایه‌ها؛ سرها زیر پایه پنهان = اتصال تمیز).
  ۴) دو تختهٔ چوبی روشن (#f0cf86) در y=-44..-34 و y=-84..-74، همپوشان با پایه‌ها.
@@ -13,14 +13,14 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/scaffold'
-S_B, S_L, S_D = '#d5dde6', '#f4f7fa', '#9aa8ba'
+S_B, S_L, S_D = '#c3cfdc', '#f6f9fc', '#8a98ac'
 W_B, W_L, W_D = '#f0cf86', '#fbe8b8', '#c99a4a'
 R_B, R_L, R_D = '#e2553d', '#ff9b84', '#a83420'
 FT = '#7d8794'; STR = '#7a4a1f'; YEL = '#ffd84d'; YEL_L = '#fff2a8'
-PX = (-48, 0); PW = 15; TOPY = -112; BASE = 7
-DK = ((-62, -48, 12, -34), (-62, -94, 12, -80))
-BAR = (-56, -118, 38, -106)
-PV = (28, -106); BOB_Y = (-26, 2)
+PX = (-48, 0); PW = 15; TOPY = -118; BASE = 7
+DK = ((-62, -40, 12, -26), (-62, -78, 12, -64))
+BAR = (-56, -126, 8, -110)
+PV = (-24, -118)
 
 
 def rect(p, x0, y0, x1, y1, col):
@@ -42,38 +42,38 @@ def brace(p, a, b, w=14):
 
 def build(out=OUTD):
     p = Pen('scaffold', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((62, -24), (66, 10)), dot=(74, -8)); p.xf = (0.92, -12, 5)
-    for x in PX + (20,): pass
     p.tipshadow(-24, BASE + 3, 36); p.foot_tip(-24, BASE + 2, 24)
-    # ۱) کفشک‌ها
-    # ۲) مورب‌ها (پشت پایه‌ها)
-    brace(p, (-48, -8), (0, -34), 18)
-    brace(p, (0, -48), (-48, -80), 18)
-    # ۳) پایه‌ها
+    # ۱) مهاربندها (پشت پایه‌ها): X کامل در طبقهٔ پایین، یک مورب در طبقهٔ میانی
+    brace(p, (-48, 4), (0, -24), 13)
+    brace(p, (0, 4), (-48, -24), 13)
+    brace(p, (0, -42), (-48, -62), 16)
+    # ۲) پایه‌ها
     for x in PX:
         box(p, x - PW / 2, TOPY, x + PW / 2, BASE, S_B)
         rect(p, x - PW / 2 + 3, TOPY + 5, x - PW / 2 + 6.5, BASE - 6, S_L)
         rect(p, x + 1.5, TOPY + 5, x + PW / 2 - 2.5, BASE - 6, S_D)
-    # ۴) تخته‌ها
+    # ۳) تخته‌ها
     for x0, y0, x1, y1 in DK:
         box(p, x0, y0, x1, y1, W_B)
         rect(p, x0 + 4, y0 + 3, x1 - 4, y0 + 6, W_L); rect(p, x0 + 4, y1 - 5, x1 - 4, y1 - 3, W_D)
-    # ۵) تیرک بالا
+    # ۴) تیرک بالا (کوتاه، تا کنار لولهٔ راست)
     x0, y0, x1, y1 = BAR
     box(p, x0, y0, x1, y1, S_B)
-    rect(p, x0 + 4, y0 + 3, x1 - 4, y0 + 5.5, S_L); rect(p, x0 + 4, y1 - 4.5, x1 - 4, y1 - 2.5, S_D)
-    # ۶) شاقول
+    rect(p, x0 + 4, y0 + 3, x1 - 4, y0 + 6, S_L); rect(p, x0 + 4, y1 - 5, x1 - 4, y1 - 3, S_D)
+    # ۵) سایهٔ تماس شاقول روی تختهٔ بالا
+    p.raw('<ellipse cx="%.1f" cy="%.1f" rx="%.1f" ry="%.1f" fill="#10083a" opacity=".22"/>' % (p.X((PV[0], -73))[0], p.X((PV[0], -73))[1], 6, 1.8))
+    # ۶) شاقول داخل چارچوب
     with layer(p, 'plumb'):
-        p.ln((PV[0], PV[1]), (PV[0], BOB_Y[0] + 1), INNER, STR, j=0, probe='ریسمان شاقول')
-        p.shape([(PV[0], BOB_Y[0]), (PV[0] + 10, -11), (PV[0], BOB_Y[1]), (PV[0] - 10, -11)], YEL, PART, j=.1, step=6, clip=False)
-        p.fill([(PV[0] - 4.5, -12), (PV[0] - 1.5, -17), (PV[0] - 1.5, -10)], YEL_L)
-    disc(p, PV[0], PV[1] + 6, 2.2, STR)   # بست ریسمان زیر تیرک (ثابت)
+        p.ln((PV[0], PV[1]), (PV[0], -97), INNER, STR, j=0, probe='ریسمان شاقول')
+        p.shape([(PV[0] - 6, -98), (PV[0] + 6, -98), (PV[0], -86)], YEL, INNER, j=.1, step=99, clip=False)
+        p.fill([(PV[0] - 3, -96), (PV[0] - 1.5, -96), (PV[0] - 1.5, -92)], YEL_L)
     return p
 
 
 if __name__ == '__main__':
     p = build()
     hm = p.X(PV)
-    r = finish(p, 'scaffold', None, motion={'plumb': dict(offsets=[(0, 0), (-8, 0), (8, 0)])}, out=OUTD, shots=SHOTS)
+    r = finish(p, 'scaffold', None, motion={'plumb': dict(offsets=[(0, 0), (-3, 0), (3, 0)])}, out=OUTD, shots=SHOTS)
     sp = r['spec']
     sp['motion_spec'] = {'node_scaffold_plumb': dict(center=[round(v, 1) for v in hm], angles_deg=[0, 6, -6, 3, -1.5, 0], duration_s=2.8, repeat='یک‌بار',
         note='فقط شاقول از نقطهٔ تیرک تاب می‌خورد و قائم می‌ایستد؛ داربست و تخته ثابت؛ حالت ایستا=قائم.'), 'reduced_motion': 'شاقول قائم'}

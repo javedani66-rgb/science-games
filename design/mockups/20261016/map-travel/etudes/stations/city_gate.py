@@ -47,10 +47,9 @@ def build():
     # بدنهٔ سنگی یک‌تکه: دو برجک + دیوار میانی
     body = [(CX - TW, BASE), (CX + TW, BASE), (CX + TW, TT), (CX + OR, TT), (CX + OR, WT), (CX - OR, WT), (CX - OR, TT), (CX - TW, TT)]
     p.shape(body, S_B, OUT, j=.1, step=6)
-    poly(p, R(-TW + 4, TT + 10, -TW + 7.5, BASE - 7), S_L)                    # نور برج چپ
-    poly(p, R(OR + 4, TT + 10, OR + 7.5, BASE - 7), S_L)                      # نور برج راست
+    poly(p, R(-TW + 4, TT + 46, -TW + 7.5, BASE - 7), S_L)                    # نور برج چپ
+    poly(p, R(OR + 4, TT + 46, OR + 7.5, BASE - 7), S_L)                      # نور برج راست
     poly(p, R(TW - 6.5, TT + 8, TW - 1, BASE - 1), S_D)                       # سایهٔ تیز راست
-    poly(p, R(-OR, WT + 8, OR, WT + 4), S_D)                                  # زیر لبهٔ دیوار (نوار تیره)
     poly(p, R(-TW + 1, TT + 1, -OR - 1, TT + 7), S_D)                         # سربند برج چپ
     poly(p, R(OR + 1, TT + 1, TW - 1, TT + 7), S_D)                           # سربند برج راست
     poly(p, R(-TW + 1, BASE - 5, TW - 1, BASE - 1), S_D)                      # کرسی
@@ -68,7 +67,7 @@ def build():
     disc(p, CX - 4.5, -3, 2, YEL)
     # لنگهٔ راست (نیمه‌باز)
     with layer(p, 'leaf'):
-        p.shape([(CX + 6, BASE - 1), (CX + OR - 1, BASE - 1), (CX + OR - 1, -22), (CX + 6, -29)], W_B, INNER, j=.08, step=6, clip=False)
+        p.shape([(CX + 6, BASE - 1), (CX + OR - 1, BASE - 1), (CX + OR - 1, OY)] + ell(CX, OY, OR - 1, OR - 1, 0, -69.3, 8)[1:], W_B, INNER, j=.08, step=6, clip=False)
         poly(p, [(CX + 12.5, BASE - 4), (CX + 15, BASE - 4), (CX + 15, -19), (CX + 12.5, -21)], W_L)
         disc(p, CX + 9.5, -3, 1.8, YEL)
     return p

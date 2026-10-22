@@ -15,7 +15,7 @@ OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/launch_pad'
 
 W_B, W_L, W_D = '#fbf6ea', '#ffffff', '#d8cdb0'
-N_B, N_D = '#ead59a', '#c3a762'
+N_B, N_D = '#ebc96e', '#bf9a4a'
 M_B, M_D = '#e3a82e', '#b07a12'
 F_B, F_L, F_D = '#ef6a4a', '#ffb59c', '#c9452c'
 S_B, S_L, S_D = '#dbe9f8', '#ffffff', '#a3bbd9'
@@ -49,7 +49,7 @@ def flame(p, s=1.0, sx=1.0):
 
 def build(out=OUTD, fs=1.0, fsx=1.0):
     p = Pen('launch_pad', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
-    p.tipshadow(2, GY + 3, 34); p.foot_tip(-28, GY + 1, 10); p.foot_tip(28, GY + 1, 10)
+    p.tipshadow(-2, GY + 3, 42); p.foot_tip(-28, GY + 1, 10); p.foot_tip(28, GY + 1, 10)
     with layer(p, 'flame'):
         flame(p, fs, fsx)
     for sg in (-1, 1):
