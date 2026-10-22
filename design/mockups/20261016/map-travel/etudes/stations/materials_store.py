@@ -13,12 +13,12 @@ from station_kit import *
 from g6h import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/materials_store'
-CREAM = ('#f6e6b8', '#fffaea', '#d2b06a')
-GREY = ('#d9dbe0', '#f7f8fa', '#989daa')
-W_B, W_L, W_D = '#c98a4b', '#e6b27a', '#8f5a2c'
+CREAM = ('#fbecc0', '#ffffff', '#d9b76e')
+YEL = ('#f5cf6a', '#fff0b0', '#c48a2a')
+W_B, W_L, W_D = '#a9653a', '#cf8f5c', '#6d3d22'
 RED, RED_D = '#e0402e', '#a82a1c'
-XF = (1.3, 0, -3)
-PX = (-25, 25)
+XF = (1.45, 0, -2)
+PX = (-31, 31)
 DECK0, DECK1, GROUND, DROP = 0, 8, 15, 11
 
 
@@ -31,56 +31,50 @@ def rrect(x0, y0, x1, y1, r, n=5):
 
 
 def pallet(p, c):
-    x0, x1, D = c - 23, c + 23, 6
-    for dx in (-15, 15):
-        p.shape(R(c + dx - 5, DECK1 - 1, c + dx + 5, GROUND), W_D, PART, j=.05, step=99, clip=False)
+    x0, x1, D = c - 28, c + 28, 7
+    for dx in (-18, 18):
+        p.shape(R(c + dx - 6, DECK1 - 1, c + dx + 6, GROUND), W_D, PART, j=.05, step=99, clip=False)
     sil = [(x0, DECK0), (x1, DECK0), (x1 + D, DECK0 - 4), (x1 + D, DECK1 - 4), (x1, DECK1), (x0, DECK1)]
     p.shape(sil, W_B, PART, j=.05, step=99)
     poly(p, [(x1, DECK0), (x1 + D, DECK0 - 4), (x1 + D, DECK1 - 4), (x1, DECK1)], W_D)
-    poly(p, R(x0 + 3, DECK0 + 2.2, x1 - 3, DECK0 + 4.6), W_L)
+    poly(p, R(x0 + 3, DECK0 + 2.4, x1 - 3, DECK0 + 5.2), W_L)
     p.ln((x1, DECK0), (x1, DECK1), INNER, NAVY, j=.05)
 
 
-def sack(p, cx, yb, w, h, col, tail=0):
-    """گونی خوابیده؛ tail=-1 دُم چپ، +1 دُم راست."""
-    B, L, D = col
-    x0, x1, y0 = cx - w / 2, cx + w / 2, yb - h
-    if tail:
-        t = tail; xe = cx + t * (w / 2 + 7)
-        ear = [(cx + t * (w / 2 - 5), yb - h * .68), (xe, yb - h * .78), (xe + t * 1, yb - h * .22), (cx + t * (w / 2 - 5), yb - h * .32)]
-        p.shape(ear, B, PART, j=.05, step=99, clip=False)
-        poly(p, R(min(cx + t * (w / 2 - 1), cx + t * (w / 2 + 3.5)), yb - h * .66, max(cx + t * (w / 2 - 1), cx + t * (w / 2 + 3.5)), yb - h * .34), RED)
-    body = rrect(x0, y0, x1, yb, 9)
-    p.shape(body, B, PART, j=.05, step=99)
-    poly(p, R(x1 - 8, y0 + 5, x1 - 2.5, yb - 5), D, .9)
-    poly(p, R(x0 + 3, y0 + 5, x0 + 6.5, yb - 7), L)
-    p.ln((cx - 7, yb - h * .55), (cx + 3, yb - h * .47), INNER, D, j=.05)
+def pillow(cx, yc, w, h, n=28):
+    pts = []
+    for k in range(n):
+        t = 2 * math.pi * k / n; c, s = math.cos(t), math.sin(t)
+        px = c * (1 - .16 * abs(c) ** 3) * w / 2          # chin pinched ends
+        py = math.copysign(abs(s) ** .62, s) * h / 2
+        pts.append((cx + px, yc + py))
+    return pts
 
 
-def top_sack(p, cx, yb, col, w=32, h=25):
+def sack(p, cx, yb, w, h, col, tail=1):
+    """گونی خوابیده با دو سر جمع‌شده؛ گرهٔ قرمز کنار tail (+1 راست، -1 چپ)."""
     B, L, D = col
-    x0, x1, y0 = cx - w / 2, cx + w / 2, yb - h
-    neck = [(cx - 6, y0 + 3), (cx + 6, y0 + 3), (cx + 14, y0 - 6), (cx + 9, y0 - 9), (cx + 4, y0 - 15), (cx, y0 - 10), (cx - 4, y0 - 15), (cx - 9, y0 - 9), (cx - 14, y0 - 6)]
-    p.shape(neck, B, PART, j=.05, step=99, clip=False)
-    poly(p, R(cx - 7.5, y0 - 3.5, cx + 7.5, y0 + 0.5), RED)
-    body = rrect(x0, y0, x1, yb, 10)
-    p.shape(body, B, PART, j=.05, step=99)
-    poly(p, R(x1 - 9, y0 + 7, x1 - 3, yb - 5), D, .9)
-    poly(p, R(x0 + 4, y0 + 7, x0 + 8, yb - 8), L)
-    p.ln((cx - 6, yb - h * .5), (cx + 4, yb - h * .42), INNER, D, j=.05)
+    x0, x1, y0, yc = cx - w / 2, cx + w / 2, yb - h, yb - h / 2
+    t = tail
+    ear = [(cx + t * (w / 2 - 4), yc - 6), (cx + t * (w / 2 + 8), yc - 10), (cx + t * (w / 2 + 9), yc + 8), (cx + t * (w / 2 - 4), yc + 6)]
+    p.shape(ear, B, PART, j=.05, step=99, clip=False)
+    poly(p, R(min(cx + t * (w / 2 - 1), cx + t * (w / 2 + 4)), yc - 6.5, max(cx + t * (w / 2 - 1), cx + t * (w / 2 + 4)), yc + 6.5), RED)
+    p.shape(pillow(cx, yc, w, h), B, PART, j=.05, step=99)
+    poly(p, R(x0 + 12, y0 + 4.5, x1 - 14, y0 + 8.5), L)
+    poly(p, R(x0 + 11, yb - 8, x1 - 11, yb - 4), D, .9)
+    p.ln((cx - t * 4, y0 + 12), (cx + t * 8, yb - 12), INNER, D, j=.05)
 
 
 def build():
     p = Pen('materials_store', 'city'); pad(p, line=((-80, 12), (-66, 20)), tri=((72, -22), (80, 8)), dot=(-74, -14)); p.xf = XF
     for cx in PX:
-        p.tipshadow(cx + 3, GROUND + 1.5, 32); p.foot_tip(cx, GROUND, 20)
-    for cx, col in zip(PX, (CREAM, GREY)):
+        p.tipshadow(cx + 3, GROUND + 1.5, 34); p.foot_tip(cx, GROUND, 22)
+    for cx, col in zip(PX, (CREAM, YEL)):
         pallet(p, cx)
-        sack(p, cx - 1, DECK0, 38, 22, col, -1)
-        sack(p, cx + 2, DECK0 - 21, 36, 22, col, 1)
-    top_sack(p, PX[0], DECK0 - 42, CREAM, 30, 23)
+        sack(p, cx - 1, DECK0, 52, 30, col, -1)
+    sack(p, PX[0] + 3, DECK0 - 29, 50, 30, CREAM, 1)
     with layer(p, 'bag'):
-        top_sack(p, PX[1], DECK0 - 42, GREY, 30, 23)
+        sack(p, PX[1] + 3, DECK0 - 29, 50, 30, YEL, 1)
     return p
 
 
