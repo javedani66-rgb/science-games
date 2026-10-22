@@ -20,9 +20,9 @@ SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratch
 M_B, M_L, M_D = '#efe6d0', '#fffaf0', '#b9ad90'
 G_B, G_L, G_D = '#9a63e0', '#c4a0f5', '#6a3cb5'
 YEL = '#ffd84d'
-ANG = 66
+ANG = 114
 LEN = 112
-E = (12, -4)                       # مرکز ته دسته (جهان)
+E = (-26, -4)                       # مرکز ته دسته (جهان)
 H = (E[0] - LEN * math.cos(math.radians(ANG)), E[1] - LEN * math.sin(math.radians(ANG)))   # مرکز دهانه
 HW = 9.5                          # نیم‌پهنای دسته
 SL0, SL1 = 40, 112                 # غلاف از تا
@@ -33,7 +33,7 @@ def poly(p, pts, col, op=1):
 
 
 def build():
-    p = Pen('wrench_room', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 0, 0)
+    p = Pen('wrench_room', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((-62, -10), (-54, 14)), dot=(-70, -24)); p.xf = (1.0, 0, 0)
     f = rot(H[0], H[1], ANG)
     L = lambda pts: TP(f, pts)
     p.tipshadow(E[0] + 2, E[1] + 7, 13); p.foot_tip(E[0], E[1] + 5, 10)

@@ -1,31 +1,27 @@
 #!/usr/bin/env python3
-"""M03 «رمپ بارگیری» نسخهٔ A (آزمون): نمای جانبی ساده، فقط چهار جزء درشت:
-تختهٔ بلند و نازک (شیب حدود ۲۶ درجه، بالا-چپ)، بلوک چوبی زیر سر بالا، سر پایین روی زمین با سایهٔ تماس، و جعبهٔ نارنجی-قرمز
-هم‌شیب با تخته که کفش مماس بر لبهٔ بالای تخته است (یک خط دور، نوار تسمهٔ روشن بدون خط دور).
-بدون ستون/پرچم/تیرک/طناب/درز. لایهٔ متحرک node_loading_ramp_a_crate = فقط جعبه (ایستا = پایان، بالاترین جا)."""
+"""M03 «رمپ بارگیری» نسخهٔ A (اصلاح پس از رد ناظر: شبیه پتک بود). نمای جانبی ساده، ۶ جزء:
+۱) شیب مثلثی روشن زیر تخته (قاعدهٔ رمپ، #e2a25e)  ۲) تختهٔ ضخیم ۱۹ واحد، رنگ #f7d894، شیب ۲۶ درجه، دور PART=5.8 (هم‌خط با سکو)
+۳) دو تختهٔ عرضی تخت (بدون خط، بدون نوار ریز)  ۴) بلوک تیرهٔ #a24f1c که بالای آن دقیقاً هم‌تراز بالاترین نقطهٔ تخته است
+(گوشهٔ بالا-راست بلوک = گوشهٔ بالای تخته؛ تخته زیر بلوک می‌رود و از پهلوی آن بیرون می‌آید)
+۵) جعبهٔ چوبی-نارنجی ساده ۲۰ واحد بدون راه‌راه، کفش روی لبهٔ بالای تخته، هم‌شیب. لایهٔ متحرک node_loading_ramp_a_crate = فقط جعبه.
+بدون طناب. حرکت: جعبه از پایین تخته (۱۸ واحد پایین‌تر روی شیب) تا حالت ایستا (بالاتر)."""
 import sys, pathlib, json, math
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit7/loading_ramp_a'
 import functools, station_kit as _k
-_k.margin_check = functools.partial(_k.margin_check, min_margin=4); _k.motion_check = functools.partial(_k.motion_check, min_margin=4)
+_k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_check = functools.partial(_k.motion_check, min_margin=8); _k.inside_check = functools.partial(_k.inside_check, min_margin=8)
 
-W_B = '#e9a65b'; W_L = '#fbe0a8'; W_D = '#b8682a'; BLK = '#c9772a'; BLK_L = '#e29a52'; BLK_D = '#9a5420'
-CR = '#f2552c'; CR_S = '#ffd98a'
-GY = 18                       # زمین
-XR, XL = 14, -52
-HB, BW, OVER = 30, 34, 12              # لبهٔ راست (پایین) و چپ (بالا) تخته
-ANG = math.radians(27)
-TH = 16                       # ضخامت عمودی تخته
-SL = -math.tan(ANG)           # dy/dx: سمت راست پایین‌تر (y بزرگ‌تر) ⇒ شیب منفی در x
-def top_y(x): return (GY - TH) + (x - XR) * SL * -1 * -1 if False else (GY - TH) - (XR - x) * math.tan(ANG)
-U = (-math.cos(ANG), -math.sin(ANG))        # بالا رفتن (چپ و بالا)
-N = (-math.sin(ANG), math.cos(ANG))         # عمود به سمت پایین-راست؟ (پایین تخته)
-NUP = (math.sin(ANG), -math.cos(ANG))       # عمود رو به بالا
-CS = 24                                     # ضلع جعبه
-T_END = 36                                  # فاصلهٔ لبهٔ پایین جعبه (مرکز کف) از سر پایین تخته در پایان
-RISE = 26
+
+W_B = '#f7d894'; W_X = '#e6bd6e'; WG = '#e2a25e'; BLK = '#a24f1c'; BLK_L = '#c06a2c'
+CR = '#f0a244'; CR_D = '#d27f2a'
+GY = 18; XR = 14
+HB, BW, TH, CS = 46, 30, 19, 23
+ANG = math.radians(26)
+TAN = math.tan(ANG)
+U = (-math.cos(ANG), -math.sin(ANG)); NUP = (math.sin(ANG), -math.cos(ANG))
+T_END, RISE = 28, 18
 
 
 def A(p, v, k=1): return (p[0] + v[0] * k, p[1] + v[1] * k)
@@ -33,34 +29,36 @@ def flat(p, pts, col): p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1
 
 
 def build():
-    p = Pen('loading_ramp_a', 'city'); pad(p, line=((34, 28), (52, 25)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = XF
-    TYR = top_y(XR)
-    p.tipshadow(-62, GY + 1, 22); p.tipshadow(6, GY + 1, 9)
-    p.foot_tip(-62, GY, 10); p.foot_tip(12, GY - 1, 5)
-    # بلوک (پایهٔ پهن و کوتاه، وجه بالا + جلو) اول کشیده می‌شود. گوشهٔ راست-بالای بلوک زیر تخته را می‌گیرد؛
-    # سر بالای تخته کمی روی وجه بالای بلوک می‌نشیند (کف تخته روی لبهٔ بالا).
-    by0 = GY - HB; bx1 = XR - HB / math.tan(ANG) + 4 / math.tan(ANG); bx0 = bx1 - BW; XL = bx1 - OVER
-    TYL = top_y(XL)
+    p = Pen('loading_ramp_a', 'city'); pad(p, line=((34, 28), (52, 25)), tri=((-24, -30), (62, 6)), dot=(58, -16)); p.xf = XF
+    TYR = GY - TH; by0 = GY - HB
+    XL = XR - (TYR - by0) / TAN              # سر بالای تخته: بالای تخته در y=by0
+    bx1 = XL; bx0 = bx1 - BW; XS = XL - 8     # تخته ۸ واحد زیر بلوک ادامه دارد
+    TYS = by0 - 8 * -0 + 0
+    TYS = TYR - (XR - XS) * TAN
+    p.tipshadow(-4, GY + 1, 26); p.tipshadow(10, GY + 1, 8)
+    p.foot_tip(-4, GY, 12); p.foot_tip(11, GY - 1, 5)
+    # ۱) شیب مثلثی روشن
+    p.shape([(bx1 - 2, TYS + TH), (XR, GY), (bx1 - 2, GY)], WG, PART, j=.1, step=12)
+    # ۲) تخته
+    p.shape([(XS, TYS), (XR, TYR), (XR, TYR + TH), (XS, TYS + TH)], W_B, PART, j=.1, step=10)
+    # ۳) تخته‌های عرضی تخت
+    for x0 in (XR - 9, XR - 38):
+        for k in (0, 5):
+            pass
+        flat(p, [(x0, TYR - (XR - x0) * TAN + 4), (x0 + 5, TYR - (XR - x0 - 5) * TAN + 4), (x0 + 5, TYR - (XR - x0 - 5) * TAN + TH - 4), (x0, TYR - (XR - x0) * TAN + TH - 4)], W_X)
+    # ۴) بلوک (روی تخته)
     p.shape([(bx0, by0), (bx1, by0), (bx1, GY), (bx0, GY)], BLK, PART, j=.1, step=12)
-    flat(p, [(bx0 + 3, by0 + 3), (bx1 - 3, by0 + 3), (bx1 - 3, by0 + 9), (bx0 + 3, by0 + 9)], BLK_L)            # وجه بالا (روشن)
-    flat(p, [(bx0 + 3, GY - 8), (bx1 - 3, GY - 8), (bx1 - 3, GY - 3), (bx0 + 3, GY - 3)], BLK_D)
-    B = [(XL, TYL), (XR, TYR), (XR, TYR + TH), (XL, TYL + TH)]
-    p.shape(B, W_B, OUT, j=.15, step=10)
-    flat(p, [(XL + 3, TYL + 3), (XR - 3, TYR + 3), (XR - 3, TYR + 3 + 3.6), (XL + 3, TYL + 3 + 3.6)], W_L)       # نوار روشن لبهٔ بالا
-    flat(p, [(XL + 3, TYL + TH - 5.5), (XR - 3, TYR + TH - 5.5), (XR - 3, TYR + TH - 3), (XL + 3, TYL + TH - 3)], W_D)  # نوار تیرهٔ کف
-    # جعبه
+    flat(p, [(bx0 + 3, by0 + 3), (bx1 - 3, by0 + 3), (bx1 - 3, by0 + 9), (bx0 + 3, by0 + 9)], BLK_L)
+    # ۵) جعبه
     with layer(p, 'crate'):
-        base = (XR - T_END * math.cos(ANG) * 1, 0); base = (XR + U[0] * T_END, TYR + U[1] * T_END)   # روی لبهٔ بالا
-        a = base; b = A(a, U, CS); c = A(b, NUP, CS); e = A(a, NUP, CS)
-        a = A(a, NUP, .0)
-        p.shape([a, b, c, e], CR, PART, j=.15, step=8, clip=False)
-        s0, s1 = .40, .62                                                  # تسمهٔ روشن (بدون خط دور)
-        q0 = A(a, NUP, 3); H = CS - 6
-        flat(p, [A(q0, U, CS * s0), A(q0, U, CS * s1), A(A(q0, U, CS * s1), NUP, H), A(A(q0, U, CS * s0), NUP, H)], CR_S)
+        a = (XR + U[0] * T_END, TYR + U[1] * T_END); b = A(a, U, CS); c = A(b, NUP, CS); e = A(a, NUP, CS)
+        p.shape([a, b, c, e], CR, PART, j=.1, step=8, clip=False)
+        q = A(a, NUP, 3)
+        flat(p, [A(q, U, 3), A(q, U, CS - 3), A(A(q, U, CS - 3), NUP, 4), A(A(q, U, 3), NUP, 4)], CR_D)
     return p
 
 
-XF = (0.92, 14.0, 10.0)
+XF = (0.92, 19.0, 10.0)
 if __name__ == '__main__':
     if len(sys.argv) > 3: XF = tuple(float(v) for v in sys.argv[1:4])
     p = build()

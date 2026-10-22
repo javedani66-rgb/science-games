@@ -26,7 +26,7 @@ R, W = 36, 17
 r = R - W
 YC = -42                      # مرکز کمان
 TIPY = -9                     # مرز نوک نقره‌ای
-SHIFT = 8
+SHIFT = 5
 CLIPW, CLIPH = 13, 22
 
 
@@ -48,20 +48,20 @@ def ribbon(rr0, rr1, a0, a1, n=12):
 
 
 def build():
-    p = Pen('magnet_hockey', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 8, 0)
+    p = Pen('magnet_hockey', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((36, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, 8, 0)
     p.tipshadow(CX + 3, BASE + 3, 36); p.foot_tip(CX - R + W / 2, BASE + 2, 10); p.foot_tip(CX + R - W / 2, BASE + 2, 10)
     b = body()
     p.shape(b, B_B, PART, j=.04, step=99)
     p.fill(right_half(), P_B)
     # نور (چپ، لبهٔ بیرونی)
-    p.fill(ribbon(R - 7.5, R - 4, 190, 255) + [], B_L)
+    poly(p, ribbon(R - 7.5, R - 4, 190, 255), B_L)
     poly(p, [(CX - R + 4, YC), (CX - R + 7.5, YC), (CX - R + 7.5, TIPY - 3), (CX - R + 4, TIPY - 3)], B_L)
     # سایهٔ تیز راست
-    p.fill(ribbon(R - 7, R - 1.5, 290, 358), P_D)
+    poly(p, ribbon(R - 7, R - 1.5, 290, 358), P_D)
     poly(p, [(CX + R - 7, YC), (CX + R - 1.5, YC), (CX + R - 1.5, TIPY - 3), (CX + R - 7, TIPY - 3)], P_D)
     poly(p, [(CX - r - 6, YC), (CX - r - 1.5, YC), (CX - r - 1.5, TIPY - 3), (CX - r - 6, TIPY - 3)], B_D)   # سایهٔ درونی ساق چپ
     # نور روی بنفش (درون ساق راست، لبهٔ چپ آن)
-    poly(p, [(CX + r + 1.5, YC), (CX + r + 4.5, YC), (CX + r + 4.5, TIPY - 3), (CX + r + 1.5, TIPY - 3)], P_L)
+    poly(p, [(CX + r + 4, YC), (CX + r + 7.5, YC), (CX + r + 7.5, TIPY - 3), (CX + r + 4, TIPY - 3)], P_L)
     # برش وسط
     p.ln((CX, YC - R + 2), (CX, YC - r - 2), INNER, NAVY, j=0, probe='برش وسط')
     # نوک‌های نقره‌ای
@@ -73,18 +73,19 @@ def build():
     for x0, x1 in ((CX - R, CX - R + W), (CX + R - W, CX + R)):
         p.ln((x0 + 2, TIPY), (x1 - 2, TIPY), INNER, NAVY, j=0)
     # گیرهٔ کاغذ (لایهٔ متحرک): موقعیت پایانی = چسبیده به لبهٔ درونی قطب راست
-    CH = 32; OW, IW = 7.5, 1.5
-    ce = CX + r - OW - 2.3 - 1.5                # لبهٔ بیرونی سیم روی لبهٔ درونی قطب راست (هم‌پوشانی با خط قطب)
-    cy1 = BASE - 3; cy0 = cy1 - CH
-    wire = ([(ce + IW, cy0 + 20), (ce + IW, cy0 + 13)] + ell(ce, cy0 + 13, IW, IW, 0, -180, 6) + [(ce - IW, cy1 - 8)]
-            + ell(ce + (OW - IW) / 2 * 1.0 - 0.0 + 0, cy1 - 8, (OW + IW) / 2, 5, 180, 0, 10)[0:0]
-            + ell(ce + (OW - IW) / 2, cy1 - 8, (OW + IW) / 2, 5.5, 180, 0, 10)
-            + [(ce + OW, cy0 + 8)] + ell(ce, cy0 + 8, OW, OW, 0, -180, 12) + [(ce - OW, cy1 - 14)])
+    # گیره: سه ران با فاصلهٔ ۱۰ (مرکز تا مرکز)، عرض مرکزها ۲۰ (+خط ≈۲۷٫۶)، ارتفاع کل ≈۴۰
+    GAP = 10; NV, SV = 7.6, 3.9
+    ce = CX + r - 3.8 + 2.5 - NV / 2               # ران راست: لبهٔ بیرونی خط گیره ۲٫۵ واحد روی خط دور قطب راست
+    xR, xM, xL = ce, ce - GAP, ce - 2 * GAP
+    yb = BASE - 1; yt = yb - (40 - NV)
+    wire = ([(xL, yb - 12), (xL, yt + GAP)] + ell((xL + xR) / 2, yt + GAP, GAP, GAP, -180, 0, 14)
+            + [(xR, yb - GAP / 2)] + ell((xR + xM) / 2, yb - GAP / 2, GAP / 2, GAP / 2, 0, 180, 10)
+            + [(xM, yt + GAP + 8)])
     with layer(p, 'clip'):
-        p.tipshadow(ce + 1, BASE + 2, 11)
+        p.tipshadow((xL + xR) / 2, BASE + 3, 28)
         q = p.X(wire); d = 'M' + 'L'.join('%.1f,%.1f' % z for z in q)
-        p.raw('<path d="%s" fill="none" stroke="#241a5e" stroke-width="%s" stroke-linejoin="round" stroke-linecap="round"/>' % (d, 4.6))
-        p.raw('<path d="%s" fill="none" stroke="%s" stroke-width="2.0" stroke-linejoin="round" stroke-linecap="round"/>' % (d, S_B))
+        p.raw('<path d="%s" fill="none" stroke="#241a5e" stroke-width="%s" stroke-linejoin="round" stroke-linecap="round"/>' % (d, NV))
+        p.raw('<path d="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linejoin="round" stroke-linecap="round"/>' % (d, S_B, SV))
     return p, ce
 
 

@@ -9,7 +9,7 @@
  ],
  "stand": [
   38.0,
-  22.0
+  18.0
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_wrench_room_wrench"
  ],
  "inside_pad": {
-  "min_margin_px": 12.5,
+  "min_margin_px": 24.2,
   "base_on_pad": true,
   "height_px": 103.5,
   "bbox_px": [
-   20.5,
+   46.5,
    4.5,
-   87.0,
+   113.2,
    108.0
   ],
   "ok": true
@@ -34,7 +34,7 @@
  "motion_spec": {
   "node_wrench_room_wrench": {
    "center": [
-    -33.6,
+    19.6,
     -106.3
    ],
    "pivot": "مرکز دهانهٔ آچار",
@@ -47,8 +47,8 @@
  },
  "swing_check": {
   "out_px": 0.0,
-  "x_margin": 10.8,
-  "min_inside": 13.5,
-  "stand_to_swing": 0.0
+  "x_margin": 17.0,
+  "min_inside": 19.8,
+  "stand_to_swing": 6.5
  }
 }

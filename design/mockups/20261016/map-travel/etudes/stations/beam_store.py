@@ -24,17 +24,17 @@ F_B, F_L, F_D = '#e0702a', '#ffa561', '#a64a16'
 B_B, B_L, B_D = '#8a5ad0', '#b992f0', '#5b3a9c'
 YEL = '#ffd84d'
 G = 10
-FX = 12                                   # مرکز سر نزدیک تیر
-D = (-46, -40)                            # امتداد تیر
-DD = 8                                    # بخش «عمق» روی زمین
+FX = 20                                   # مرکز سر نزدیک تیر
+D = (-40, -40)                            # امتداد تیر
+DD = 6                                    # بخش «عمق» روی زمین
 M = D[1] / D[0]                           # شیب زیر تیر
-XF = (1.1, -2, -4)
-W, H, TF, TW = 26, 24, 6, 8
+XF = (1.0, -12, -2)
+W, H, TF, TW = 34, 32, 9, 12
 I0 = [(-W / 2, -H), (W / 2, -H), (W / 2, -H + TF), (TW / 2, -H + TF), (TW / 2, -TF), (W / 2, -TF), (W / 2, 0), (-W / 2, 0),
       (-W / 2, -TF), (-TW / 2, -TF), (-TW / 2, -H + TF), (-W / 2, -H + TF)]
 SLIDE = 9                                 # واحد symbol، موازی تیر: (dx,dy)
 SL = (-SLIDE, -SLIDE * DD / abs(D[0]))    # جابه‌جایی نهایی نسبت به شروع (x، y): تکیه‌گاه به سمت جعبه
-XC = -33                                  # مرکز نهایی تکیه‌گاه (x نسبی به FX)
+XC = -34                                  # مرکز نهایی تکیه‌گاه (x نسبی به FX)
 
 
 def at(pts, dx=0, dy=0): return [(FX + x + dx, G + y + dy) for x, y in pts]
@@ -52,7 +52,7 @@ def under(x):                              # لبهٔ زیرِ تیر (مختص�
 
 
 def prop(p):
-    xc = XC; hw = 11
+    xc = XC; hw = 14
     ins = 7                                 # عمق فرورفتن لبهٔ بالا در تیر (نهایی)
     ytop = lambda x: under(x) - ins
     base = -DD * (-W / 2 - xc) / abs(D[0]) + 2
@@ -75,25 +75,24 @@ def beam(p):
     poly(p, at(para(I0[10], I0[9], D)[:]), S_D)                               # پهلوی چپ جان
     poly(p, at(para(I0[8], I0[9], D)), S_L)                                   # روی بال پایین (درون کانال)
     poly(p, at(para(I0[7], I0[8], D)), S_B)
-    p.shape(at(I0), S_B, INNER, j=.05, step=99, clip=False)                    # رخ مقطع I
+    p.shape(at(I0), S_B, INNER, j=.05, step=6, clip=False)                    # رخ مقطع I
     poly(p, at([(-W / 2 + 3, -H + 3), (W / 2 - 3, -H + 3), (W / 2 - 3, -H + 5.8), (-W / 2 + 3, -H + 5.8)]), S_L)
-    p.stroke(at(ext), PART, j=.05, step=7)
+    p.stroke(at(ext), PART, j=.05, step=6)
 
 
 def box(p):
-    t0 = .62; w = 22; h = 24
+    t0 = .6; w = 24; h = 24
     bx, by = FX + t0 * D[0], G - H + t0 * D[1]          # وسط لبهٔ جلوی ردپا روی روی بال
-    q = (-.2 * 46 * .55, -.2 * 40 * .55)               # عمق کم جعبه
+    q = (0, -6)               # عمق کم جعبه
     A, B_ = (bx - w / 2, by), (bx + w / 2, by)
     front = [A, B_, (B_[0], by - h), (A[0], by - h)]
     topf = para((A[0], by - h), (B_[0], by - h), q)
     left = para(A, (A[0], by - h), q)
-    poly(p, left, B_D); poly(p, topf, B_L)
+    poly(p, topf, B_L)
+    p.shape(topf, B_L, INNER, j=.05, step=6, clip=False)
     p.shape(front, B_B, PART, j=.1, step=6, clip=False)
     p.ln((A[0] + 5, by - h + 5), (B_[0] - 5, by - 5), INNER, B_D, j=0); p.ln((B_[0] - 5, by - h + 5), (A[0] + 5, by - 5), INNER, B_D, j=0)
     p.stroke(front, PART, j=.1, step=6)
-    p.stroke(left + [], INNER, j=.05, step=99)
-    p.stroke(topf, INNER, j=.05, step=99)
 
 
 def build(out=OUTD):
