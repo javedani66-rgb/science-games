@@ -8,8 +8,8 @@
   71
  ],
  "stand": [
-  -36.0,
-  -7.5
+  -40.5,
+  -1.5
  ],
  "ring": [
   0,
@@ -24,7 +24,7 @@
   "base_on_pad": true,
   "height_px": 82.8,
   "bbox_px": [
-   49.8,
+   53.5,
    37.2,
    132.8,
    120.0
@@ -56,7 +56,7 @@
    ],
    "out_px": 0.0,
    "x_margin": 4.5,
-   "stand_to_motion": 14.8,
+   "stand_to_motion": 19.2,
    "ok": false
   }
  }

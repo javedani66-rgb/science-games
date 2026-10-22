@@ -14,7 +14,7 @@ def circ(p, x, y, r, col):
 
 
 import os
-ROUND = float(os.environ.get('SYM_ROUND', '0'))   # گرد کردن گوشه‌های محدب نیم‌رخ (واحد symbol)
+ROUND = float(os.environ.get('SYM_ROUND', '5'))   # گرد کردن گوشه‌های محدب نیم‌رخ (واحد symbol)
 
 
 def extrude(p, pts, D, front, top, side, mid=None, sw=PART, sw_in=INNER, in_stroke=True):

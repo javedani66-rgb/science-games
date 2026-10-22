@@ -8,8 +8,8 @@
   59
  ],
  "stand": [
-  0.0,
-  19.0
+  54.0,
+  7.5
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_floating_market_boat"
  ],
  "inside_pad": {
-  "min_margin_px": 9.2,
+  "min_margin_px": 10.2,
   "base_on_pad": true,
   "height_px": 74.5,
   "bbox_px": [
-   26.0,
+   27.0,
    46.8,
-   117.8,
+   116.8,
    121.2
   ],
   "ok": true

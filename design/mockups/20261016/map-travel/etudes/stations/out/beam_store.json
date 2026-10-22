@@ -8,7 +8,7 @@
   65
  ],
  "stand": [
-  -49.5,
+  -48.0,
   -4.0
  ],
  "ring": [
@@ -20,7 +20,7 @@
   "node_beam_store_prop"
  ],
  "inside_pad": {
-  "min_margin_px": 14.1,
+  "min_margin_px": 15.4,
   "base_on_pad": true,
   "height_px": 83.2,
   "bbox_px": [

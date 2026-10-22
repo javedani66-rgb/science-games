@@ -20,7 +20,7 @@
   "node_materials_store_brick"
  ],
  "inside_pad": {
-  "min_margin_px": 8.3,
+  "min_margin_px": 10.1,
   "base_on_pad": true,
   "height_px": 79.2,
   "bbox_px": [
