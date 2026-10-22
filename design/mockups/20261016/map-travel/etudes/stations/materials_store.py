@@ -58,7 +58,7 @@ def sack(p, bx, by):
 
 
 def build(out=OUTD):
-    p = Pen('materials_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((72, -22), (80, 8)), dot=(-74, -14)); p.xf = XF
+    p = Pen('materials_store', 'city'); pad(p, line=((-80, 12), (-66, 20)), tri=((72, -22), (80, 8)), dot=(-74, -14)); p.xf = XF
     for cx in PX:
         p.tipshadow(cx, GROUND + 1.5, 28); p.foot_tip(cx, GROUND, 18)
     for cx in PX: pallet(p, cx)

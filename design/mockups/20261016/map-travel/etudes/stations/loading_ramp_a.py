@@ -10,18 +10,18 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent.parent))
 from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/loading_ramp_a'
-W_BODY = '#d7a762'; W_LIGHT = '#fbe6b4'; W_DARK = '#b8864a'; CLEAT = '#8f5a2c'
+W_BODY = '#d9a05a'; W_LIGHT = '#fbe6b4'; W_DARK = '#a8743a'; CLEAT = '#8f5a2c'
 CR = '#8b5fd0'; CR_L = '#b690ec'; CR_D = '#5f3a9e'
-GY = 22; X0, X1 = -60, 60; LAND = 22; HH, HT = 58, 6
-CS, SINK = 36, 3
+GY = 18; X0, X1 = -57, 57; LAND = 20; HH, HT = 68, 6
+CS, SINK = 38, 3
 L2 = (X0 + LAND, GY - HH); TOE = (X1, GY - HT)
 DX, DY = TOE[0] - L2[0], TOE[1] - L2[1]
 SL = math.hypot(DX, DY); ANG = math.atan2(DY, DX)
-D = (DX / SL, DY / SL)                       # پایین شیب (راست-پایین)
-N = (-D[1], D[0])                            # به درون بدنه (چپ-پایین)
-U = (-D[0], -D[1])                           # بالای شیب
-NUP = (-N[0], -N[1])                         # بیرون از سطح
-T0, RISE = 46, 18
+D = (DX / SL, DY / SL)
+N = (-D[1], D[0])
+U = (-D[0], -D[1])
+NUP = (-N[0], -N[1])
+T0, RISE = 50, 18
 XF = (1.0, 0, 0)
 
 
@@ -30,18 +30,21 @@ def flat(p, pts, col, op=1): p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.j
 
 
 def build():
-    p = Pen('loading_ramp_a', 'city'); pad(p, line=((60, 26), (76, 22)), tri=((-76, -8), (-70, 14)), dot=(72, -14)); p.xf = XF
-    p.tipshadow(0, GY + 1, 56); p.foot_tip(0, GY, 40)
+    p = Pen('loading_ramp_a', 'city'); pad(p, line=((62, 30), (76, 26)), tri=((-76, -10), (-70, 12)), dot=(72, -14)); p.xf = XF
+    p.tipshadow(0, GY + 1, 58); p.foot_tip(0, GY, 32)
     outline = [(X0, GY - HH), L2, TOE, (X1, GY), (X0, GY)]
     p.shape(outline, W_BODY, OUT, j=.1, step=12)
+    # شیارهای تختهٔ بدنه (۳ خط افقی تیره، داخل بدنه)
+    for yy in (GY - 16, GY - 32, GY - 48):
+        xe = min(X1 - 14, L2[0] + (yy - L2[1]) * DX / DY - 16)
+        flat(p, [(X0 + 7, yy - 1.5), (xe, yy - 1.5), (xe, yy + 1.5), (X0 + 7, yy + 1.5)], W_DARK)
     # سطح روشن: سکوی بالا + شیب
     flat(p, [(X0 + 6, GY - HH + 4.5), (L2[0] + 3, GY - HH + 4.5), (L2[0] + 3, GY - HH + 12.5), (X0 + 6, GY - HH + 12.5)], W_LIGHT)
-    a = A(A(L2, D, 0), N, 4.5); b = A(A(TOE, D, -9), N, 4.5)
+    a = A(L2, N, 4.5); b = A(A(TOE, D, -9), N, 4.5)
     flat(p, [a, b, A(b, N, 8), A(a, N, 8)], W_LIGHT)
-    for t in (22, 38, 54, 70, 86):                    # پله‌چوب‌ها (کلیت)
-        c0 = A(A(L2, D, t), N, 3.5); c1 = A(c0, D, 4); 
+    for t in (24, 40, 56, 72, 88):
+        c0 = A(A(L2, D, t), N, 3.5); c1 = A(c0, D, 4)
         flat(p, [c0, c1, A(c1, N, 10), A(c0, N, 10)], CLEAT)
-    flat(p, [(X0 + 6, GY - 10), (X1 - 6, GY - 10), (X1 - 6, GY - 4.5), (X0 + 6, GY - 4.5)], W_DARK)
     p.stroke(outline, OUT, j=.1, step=12)
     with layer(p, 'crate'):
         P = A(TOE, U, T0)
@@ -49,9 +52,8 @@ def build():
         flat(p, [A(P, U, -2), A(P, U, CS + 2), A(A(P, U, CS + 2), NUP, -3), A(A(P, U, -2), NUP, -3)], '#10083a', .3)
         p.shape([a_, b_, c_, e_], CR, PART, j=.1, step=8, clip=False)
         Q = lambda u, v: A(A(a_, U, u), NUP, v)
-        flat(p, [Q(9, CS - 9), Q(CS - 4.5, CS - 9), Q(CS - 4.5, CS - 4.5), Q(9, CS - 4.5)], CR_L)      # نور بالا
-        flat(p, [Q(4.5, 4.5), Q(9, 4.5), Q(9, CS - 4.5), Q(4.5, CS - 4.5)], CR_D)                       # سایهٔ سمت پنجه
-        flat(p, [Q(CS / 2 - 3, 4.5), Q(CS / 2 + 4, 4.5), Q(CS / 2 + 4, CS - 9), Q(CS / 2 - 3, CS - 9)], CR_L)  # تسمه
+        flat(p, [Q(9, CS - 9), Q(CS - 4.5, CS - 9), Q(CS - 4.5, CS - 4.5), Q(9, CS - 4.5)], CR_L)
+        flat(p, [Q(4.5, 4.5), Q(9, 4.5), Q(9, CS - 4.5), Q(4.5, CS - 4.5)], CR_D)
     return p
 
 

@@ -22,7 +22,7 @@ X_B, X_L, X_D = '#b9733a', '#e0a468', '#7a4520'      # جعبه
 L_B, L_L, L_OFF = '#ef5a3a', '#ffb59c', '#8c2a1a'    # چراغ
 HOLE = '#26365f'; GLASS = '#9fd0ff'
 
-CX0, CY0, RX, RY = -22, -44, 32, 38
+CX0, CY0, RX, RY = -20, -34, 36, 30
 BASE = 7
 XF = (1.0, -4.0, 0.0)
 
@@ -45,7 +45,7 @@ def dome(r=9): return [(CX0 + r * math.cos(math.radians(a)), -88 + r * math.sin(
 
 
 def build(out=OUTD):
-    p = Pen('space_loading', 'space'); pad(p, line=((50, 30), (70, 27)), tri=((78, -6),), dot=(70, -28)); p.xf = XF
+    p = Pen('space_loading', 'space'); pad(p, line=((50, 30), (70, 27)), tri=((78, -6),), dot=(32, -34)); p.xf = XF
     p.tipshadow(2, BASE + 3, 52); p.foot_tip(CX0 - 14, BASE + 2, 14); p.foot_tip(50, BASE + 2, 10)
     # ۲) کپسول
     cap = arc(1, 1, 0, 360, 36)
@@ -54,6 +54,10 @@ def build(out=OUTD):
     inner = [(x - 15 + 4 * (1 - math.cos(math.radians(t))) , y) for (x, y), t in zip(outer[::-1], range(60, -61, -10))]
     poly(p, outer + inner, C_D)                                                                                  # سایهٔ هلالی راست
     poly(p, arc(.88, .88, 205, 250, 8) + arc(.76, .76, 250, 205, 8), C_L)                                       # نور چپ
+    # کمربند فولادی دور کپسول
+    hw = lambda y: RX * math.sqrt(1 - ((y - CY0) / RY) ** 2)
+    poly(p, [(CX0 - hw(-51), -51), (CX0 + hw(-51), -51), (CX0 + hw(-45), -45), (CX0 - hw(-45), -45)], H_B)
+    poly(p, [(CX0 - hw(-51), -51), (CX0 - 8, -51), (CX0 - 8, -48.5), (CX0 - hw(-48.5), -48.5)], H_L)
     p.stroke(cap, OUT, j=.1, step=8)
     sl = rect(CX0 - 30, -9, CX0 + 30, BASE)
     p.shape(sl, H_B, PART, j=.1, step=6, clip=False)
@@ -61,17 +65,15 @@ def build(out=OUTD):
     poly(p, rect(CX0 + 18, -5, CX0 + 26, BASE - 3), H_D, .85)
     p.stroke(sl, PART, j=.1, step=6)
     # ۳) دریچهٔ باز و پنجرهٔ گرد
-    hole = [(CX0 - 13, -12)] + ell(CX0, -28, 13, 13, 180, 360, 10) + [(CX0 + 13, -12)]
+    hole = [(CX0 - 13, -12)] + ell(CX0, -25, 13, 13, 180, 360, 10) + [(CX0 + 13, -12)]
     p.shape(hole, HOLE, INNER, j=.06, step=6, clip=False)
-    p.shape(ell(CX0, -62, 8, 8, 0, 360, 16), GLASS, INNER, j=.05, step=99, clip=False)
-    poly(p, rect(CX0 - 4.5, -66, CX0 - 1.5, -61), '#ffffff')
     # ۴) رمپ فلزی زرد (از کف دریچه تا زمین)
-    ramp = [(CX0 - 10, -27), (34, -10), (34, BASE), (CX0 - 10, -9)]
+    ramp = [(CX0 - 8, -24), (34, -10), (34, BASE), (CX0 - 8, -8)]
     p.shape(ramp, Y_B, PART, j=.08, step=6, clip=False)
-    for x in (-6, 6, 18):
-        y0 = -27 + (x - (CX0 - 10)) * 17 / 56
+    for x in (-4, 8, 20):
+        y0 = -24 + (x - (CX0 - 8)) * 14 / 62
         poly(p, [(x - 2, y0 + 5), (x + 2, y0 + 5), (x + 2, y0 + 15), (x - 2, y0 + 15)], Y_D)
-    poly(p, [(CX0 - 7, -24), (31, -8.5), (31, -5), (CX0 - 7, -20.5)], Y_L)
+    poly(p, [(CX0 - 5, -21), (31, -8), (31, -4.5), (CX0 - 5, -17.5)], Y_L)
     p.stroke(ramp, PART, j=.08, step=6)
     # ۵) جعبهٔ بار
     box = rect(37, -22, 63, BASE)
@@ -81,8 +83,9 @@ def build(out=OUTD):
     poly(p, [(40, -19), (44, -19), (60, 3), (56, 3)], X_D)                                                       # ضربدر
     poly(p, [(56, -19), (60, -19), (44, 3), (40, 3)], X_D)
     p.stroke(box, PART, j=.08, step=6)
-    # ۶) چراغ نشانگر روی بدنه (خاموش) و ۷) لایهٔ متحرک: روشن
-    lc = (CX0 + 18, -54)
+    # ۶) آنتن و چراغ (خاموش) و ۷) لایهٔ متحرک: چراغ روشن
+    p.ln((CX0, CY0 - RY + 4), (CX0, -78), PART, H_D, j=0)
+    lc = (CX0, -84)
     lamp = ell(lc[0], lc[1], 8, 8, 0, 360, 16)
     p.shape(lamp, L_OFF, INNER, j=.05, step=99, clip=False)
     with layer(p, 'light'):

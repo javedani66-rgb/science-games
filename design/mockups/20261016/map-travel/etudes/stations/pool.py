@@ -18,7 +18,7 @@ W_B, W_L, W_D = '#eef4fb', '#ffffff', '#b3c4d8'
 A_B, A_L, A_D = '#43b0ec', '#8fd8ff', '#2b86c8'
 RAIL = '#8b9ab2'
 RED, YEL = '#e8554e', '#ffc93c'
-XF = (1.55, 0, 8)
+XF = (1.5, 0, 3)
 
 
 def poly(p, pts, col, op=1):
@@ -46,12 +46,12 @@ def wave(x0, x1, y, amp=1.6, n=24):
 
 
 def build():
-    p = Pen('pool', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = XF
-    p.tipshadow(0, 18, 44); p.foot_tip(0, 16, 38)
-    front = rrect(-34, -24, 34, 17, 9)
+    p = Pen('pool', 'sports'); pad(p, line=((-80, 12), (-66, 20)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = XF
+    p.tipshadow(0, 16, 40); p.foot_tip(0, 12, 24)
+    front = rrect(-34, -24, 34, 17, 13)
     p.shape(front, W_D, PART, j=.05, step=99)
     p.stroke(front, PART, j=.05, step=99)
-    rim = rrect(-34, -24, 34, 10, 9)
+    rim = rrect(-34, -24, 34, 10, 13)
     p.shape(rim, W_B, PART, j=.05, step=99)
     poly(p, [(-24, -22), (14, -22), (14, -20), (-24, -20)], W_L)
     p.stroke(rim, PART, j=.05, step=99)
