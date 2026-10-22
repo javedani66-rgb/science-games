@@ -45,32 +45,33 @@ def dome(r=9): return [(CX0 + r * math.cos(math.radians(a)), -88 + r * math.sin(
 
 
 def build(out=OUTD):
-    p = Pen('space_loading', 'space'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = XF
+    p = Pen('space_loading', 'space'); pad(p, line=((50, 30), (70, 27)), tri=((78, -6),), dot=(70, -28)); p.xf = XF
     p.tipshadow(2, BASE + 3, 52); p.foot_tip(CX0 - 14, BASE + 2, 14); p.foot_tip(50, BASE + 2, 10)
-    # ۱) پایهٔ فولادی
-    sl = rect(CX0 - 34, -3, CX0 + 34, BASE)
-    p.shape(sl, H_B, PART, j=.1, step=6, clip=False)
-    poly(p, rect(CX0 - 30, -0, CX0 - 12, 2.5), H_L)
-    poly(p, rect(CX0 + 18, 0, CX0 + 30, BASE - 1.5), H_D, .85)
-    p.stroke(sl, PART, j=.1, step=6)
     # ۲) کپسول
     cap = arc(1, 1, 0, 360, 36)
     p.shape(cap, C_B, OUT, j=.1, step=8)
-    poly(p, arc(.93, .93, -62, 62, 12) + arc(.62, .93, 62, -62, 12)[:0] + [(CX0 + RX * .93 * math.cos(math.radians(a)) - 15, CY0 + RY * .93 * math.sin(math.radians(a))) for a in range(62, -63, -10)], C_D)   # سایهٔ هلالی راست
-    poly(p, arc(.86, .86, 200, 258, 8) + arc(.74, .74, 258, 200, 8), C_L)                                       # نور چپ
+    outer = [(CX0 + RX * .94 * math.cos(math.radians(t)), CY0 + RY * .94 * math.sin(math.radians(t))) for t in range(-60, 61, 10)]
+    inner = [(x - 15 + 4 * (1 - math.cos(math.radians(t))) , y) for (x, y), t in zip(outer[::-1], range(60, -61, -10))]
+    poly(p, outer + inner, C_D)                                                                                  # سایهٔ هلالی راست
+    poly(p, arc(.88, .88, 205, 250, 8) + arc(.76, .76, 250, 205, 8), C_L)                                       # نور چپ
     p.stroke(cap, OUT, j=.1, step=8)
+    sl = rect(CX0 - 30, -9, CX0 + 30, BASE)
+    p.shape(sl, H_B, PART, j=.1, step=6, clip=False)
+    poly(p, rect(CX0 - 25, -5, CX0 - 20, BASE - 4), H_L)
+    poly(p, rect(CX0 + 18, -5, CX0 + 26, BASE - 3), H_D, .85)
+    p.stroke(sl, PART, j=.1, step=6)
     # ۳) دریچهٔ باز و پنجرهٔ گرد
-    hole = [(CX0 - 13, -9)] + ell(CX0, -26, 13, 13, 180, 360, 10) + [(CX0 + 13, -9)]
+    hole = [(CX0 - 13, -12)] + ell(CX0, -28, 13, 13, 180, 360, 10) + [(CX0 + 13, -12)]
     p.shape(hole, HOLE, INNER, j=.06, step=6, clip=False)
     p.shape(ell(CX0, -62, 8, 8, 0, 360, 16), GLASS, INNER, j=.05, step=99, clip=False)
     poly(p, rect(CX0 - 4.5, -66, CX0 - 1.5, -61), '#ffffff')
     # ۴) رمپ فلزی زرد (از کف دریچه تا زمین)
-    ramp = [(CX0 - 6, -17), (32, -1), (32, BASE), (CX0 - 6, -9)]
+    ramp = [(CX0 - 10, -27), (34, -10), (34, BASE), (CX0 - 10, -9)]
     p.shape(ramp, Y_B, PART, j=.08, step=6, clip=False)
-    for x in (4, 14, 24):
-        y0 = -17 + (x - (CX0 - 6)) * 16 / 54
-        poly(p, [(x - 1.8, y0 + 3), (x + 1.8, y0 + 3), (x + 1.8, y0 + 8.5), (x - 1.8, y0 + 8.5)], Y_D)
-    poly(p, [(CX0 - 3, -15.5), (30, -1.5), (30, 1), (CX0 - 3, -12.5)], Y_L)
+    for x in (-6, 6, 18):
+        y0 = -27 + (x - (CX0 - 10)) * 17 / 56
+        poly(p, [(x - 2, y0 + 5), (x + 2, y0 + 5), (x + 2, y0 + 15), (x - 2, y0 + 15)], Y_D)
+    poly(p, [(CX0 - 7, -24), (31, -8.5), (31, -5), (CX0 - 7, -20.5)], Y_L)
     p.stroke(ramp, PART, j=.08, step=6)
     # ۵) جعبهٔ بار
     box = rect(37, -22, 63, BASE)
@@ -80,14 +81,13 @@ def build(out=OUTD):
     poly(p, [(40, -19), (44, -19), (60, 3), (56, 3)], X_D)                                                       # ضربدر
     poly(p, [(56, -19), (60, -19), (44, 3), (40, 3)], X_D)
     p.stroke(box, PART, j=.08, step=6)
-    # ۶) پایهٔ چراغ و گنبد خاموش
-    p.shape(rect(CX0 - 8, -88, CX0 + 8, -78), H_B, INNER, j=.05, step=6, clip=False)
-    d = dome(9)
-    p.shape(d, L_OFF, INNER, j=.05, step=99, clip=False)
-    # ۷) لایهٔ متحرک: گنبد روشن
+    # ۶) چراغ نشانگر روی بدنه (خاموش) و ۷) لایهٔ متحرک: روشن
+    lc = (CX0 + 18, -54)
+    lamp = ell(lc[0], lc[1], 8, 8, 0, 360, 16)
+    p.shape(lamp, L_OFF, INNER, j=.05, step=99, clip=False)
     with layer(p, 'light'):
-        p.shape(d, L_B, INNER, j=.05, step=99, clip=False)
-        ax, ay = p.X((CX0 - 3.5, -93)); p.raw('<circle cx="%.1f" cy="%.1f" r="2.2" fill="%s"/>' % (ax, ay, L_L))
+        p.shape(lamp, L_B, INNER, j=.05, step=99, clip=False)
+        ax, ay = p.X((lc[0] - 2.5, lc[1] - 2.5)); p.raw('<circle cx="%.1f" cy="%.1f" r="2" fill="%s"/>' % (ax, ay, L_L))
     return p
 
 

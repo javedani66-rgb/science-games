@@ -63,12 +63,15 @@ def build():
     with layer(p, 'wave'):
         pline(p, wave(-22, -8, 0.5), '#ffffff', INNER)
         pline(p, wave(-10, 6, -7.5), '#ffffff', INNER)
-    for xr in (19, 29):
-        pline(p, [(xr, -6), (xr, -33)], NAVY, OUT)
-    for y in (-14, -24): pline(p, [(19, y), (29, y)], NAVY, PART, 'butt')
-    for xr in (19, 29):
-        pline(p, [(xr, -6), (xr, -33)], RAIL, PART)
-    for y in (-14, -24): pline(p, [(19, y), (29, y)], RAIL, INNER, 'butt')
+    def rail(xr):
+        pts = [(xr, -5), (xr, -27)]
+        for k in range(1, 9):
+            t = math.radians(180 - 90 * k / 8); pts.append((xr + 6 + 6 * math.cos(t), -27 - 6 * math.sin(t)))
+        return pts
+    for xr in (17, 26): pline(p, rail(xr), NAVY, OUT)
+    for y in (-13, -22): pline(p, [(17, y), (26, y)], NAVY, PART, 'butt')
+    for xr in (17, 26): pline(p, rail(xr), RAIL, PART)
+    for y in (-13, -22): pline(p, [(17, y), (26, y)], RAIL, INNER, 'butt')
     return p
 
 
