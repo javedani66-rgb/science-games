@@ -18,33 +18,41 @@ PX0, PX1, IX = 60, 38, 38     # ستون: x از ±58 تا ±36 (عرض ۲۲)
 
 
 def build():
-    p = Pen('city_gate', 'city'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = (.86, -4, 6)
-    PX0_, PX1_ = 46, 22
+    from shapely.geometry import box as sbox
+    p = Pen('city_gate', 'city'); pad(p, line=((50, 30), (70, 27)), tri=((36, -22), (74, 6)), dot=(68, -14)); p.xf = (.9, 0, 4)
     p.tipshadow(0, BASE + 4, 56)
-    p.foot_tip(-34, BASE + 2, 12); p.foot_tip(34, BASE + 2, 12)
-    # جادهٔ سنگ‌فرش از میان دو ستون
-    road = [(-22, -30), (22, -30), (40, 27), (-40, 27)]
+    # جادهٔ سنگ‌فرش از دروازه تا جلوی سکو (جای ایستادن بچه آزاد)
+    road = [(-16, -6), (16, -6), (36, 27), (-36, 27)]
     p.shape(road, ROAD, PART, j=.15, step=8, clip=False)
-    for a, b in (((-8, -24), (-14, 25)), ((8, -24), (14, 25)), ((-32, 13), (32, 13)), ((-27, 0), (27, 0))):
+    for a, b in (((-6, 0), (-10, 25)), ((6, 0), (10, 25)), ((-30, 14), (30, 14))):
         p.ln(a, b, 1.6, ROAD_J, j=.1)
-    # دو لنگهٔ چوبی باز: تختهٔ ضخیم کنار هر ستون، رو به عمق
-    with layer(p, 'door'):
-        extrude(p, R(PX0_ + 3, -64, PX0_ + 9, BASE - 1), (18, -12), W_D, W_L, W_B, sw=PART, sw_in=0)
-        disc(p, PX0_ + 6, -30, 2.4, YEL)
-    extrude(p, R(-PX0_ - 9, -64, -PX0_ - 3, BASE - 1), (-18, -12), W_D, W_L, W_B, sw=PART, sw_in=0)
-    # دو ستون سنگی مکعبی (هر کدام یک مکعب بلند با کلاهک)
-    for sgn in (-1, 1):
-        x0, x1 = (-PX0_, -PX1_) if sgn < 0 else (PX1_, PX0_)
-        extrude(p, R(x0, -88, x1, BASE), DD, S_B, S_L, S_D, sw=OUT, sw_in=0)
-        for y in (-62, -36, -12):
-            p.ln((x0 + 2, y), (x1 - 2, y), 1.2, '#b8975a', j=.05)
-    # تیر افقی سنگی بین دو ستون (باریک؛ زیرش باز است)
-    beam = R(-PX0_ - 4, -108, PX0_ + 4, -88)
-    extrude(p, beam, DD, S_B, S_L, S_D, sw=OUT, sw_in=0)
-    # تابلوی چوبی روی تیر
-    sb = R(-24, -132, 24, -108)
-    extrude(p, sb, (6, -4), W_B, W_L, W_D, sw=PART, sw_in=0)
-    disc(p, 0, -120, 7, YEL)
+    # بدنهٔ دروازه: یک قطعه با کنگره
+    u = sbox(-50, -84, 50, BASE)
+    for x0, x1 in ((-50, -34), (-8, 8), (34, 50)):
+        u = u.union(sbox(x0, -100, x1, -84))
+    pts = list(u.exterior.coords)[:-1]
+    extrude(p, pts, DD, S_B, S_L, S_D, sw=OUT, sw_in=0)
+    for y in (-70, -44, -18):
+        for x0, x1 in ((-47, -24), (24, 47)):
+            p.ln((x0, y), (x1, y), 1.4, '#b8975a', j=.05)
+    # دهانهٔ طاقی تیره
+    arch = [(-19, BASE)] + [(-19 * math.cos(math.radians(a)), -44 - 19 * math.sin(math.radians(a))) for a in range(0, 181, 15)][::-1] + [(19, BASE)]
+    arch = [(-19, BASE), (-19, -44)] + [(19 * math.cos(math.radians(a)), -44 - 19 * math.sin(math.radians(a))) for a in range(180, -1, -15)] + [(19, -44), (19, BASE)]
+    p.shape(arch, HOLE, PART, j=.1, step=8, clip=False)
+    # لنگه‌های چوبی باز، رو به جلو
+    for sg in (-1, 1):
+        q = [(sg * 19, -56), (sg * 19, BASE), (sg * 31, BASE + 8), (sg * 31, -48)]
+        if sg > 0:
+            with layer(p, 'door'):
+                p.shape(q, W_B, PART, j=.1, step=8, clip=False)
+                poly(p, [(sg * 21, -50), (sg * 21, 0), (sg * 24, 2), (sg * 24, -48)], W_L)
+                disc(p, 28, -22, 2.2, YEL)
+        else:
+            p.shape(q, W_B, PART, j=.1, step=8, clip=False)
+            poly(p, [(sg * 21, -50), (sg * 21, 0), (sg * 24, 2), (sg * 24, -48)], W_L)
+            disc(p, -28, -22, 2.2, YEL)
+    # تابلوی گرد زرد روی طاق
+    p.shape(ell(0, -79, 11, 7, 0, 360, 20), YEL, PART, j=.05, step=99, clip=False)
     return p
 
 

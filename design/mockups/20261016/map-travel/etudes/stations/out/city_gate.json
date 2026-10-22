@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  82
+  68
  ],
  "stand": [
-  0.0,
-  19.0
+  -49.5,
+  1.5
  ],
  "ring": [
   0,
@@ -20,21 +20,21 @@
   "node_city_gate_door"
  ],
  "inside_pad": {
-  "min_margin_px": 6.9,
+  "min_margin_px": 8.3,
   "base_on_pad": true,
-  "height_px": 105.0,
+  "height_px": 90.2,
   "bbox_px": [
-   21.8,
-   26.0,
-   116.2,
-   131.0
+   36.8,
+   40.0,
+   111.5,
+   130.2
   ],
   "ok": true
  },
  "motion_spec": {
   "node_city_gate_door": {
    "type": "scaleX افقی حول لولا (لبهٔ بیرونی لنگه، چسبیده به ستون راست)",
-   "hinge_x_symbol": 24.4,
+   "hinge_x_symbol": 29.7,
    "scale_from": 2.2,
    "scale_to": 1.0,
    "duration_s": 1.4,

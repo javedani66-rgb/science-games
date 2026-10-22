@@ -44,43 +44,31 @@ def wheel(p, gid, cx, cy, R, front=True):
 
 
 def build(out=OUTD, rot=0):
-    p = Pen('cart_station', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (0.98, -7, 6)
-    p.tipshadow(-22, G, 34); p.foot_tip(-20, G - 1, 26); p.tipshadow(30, G - 1, 12)
-    NX, NY, FX, FY, R = -24, -16, 16, -24, 24
+    from r6lib import extrude
+    p = Pen('cart_station', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (0.98, -7, 4)
+    p.tipshadow(-14, G, 40); p.foot_tip(-14, G - 1, 30)
     with layer(p, 'wheel_far'):
         wheel(p, None, FX, FY, R, front=False)
-    # پایه
-    sharp(p, rect(-56, -30, -42, G - 1), W_D, PART)
-    # جعبه: سه وجه بدون خط میانی؛ فقط یک خط دورِ یکپارچه
-    top = [(-54, -48), (30, -48), (44, -60), (-40, -60)]
-    front = rect(-54, -48, 30, -20)
-    side = [(30, -48), (44, -60), (44, -32), (30, -20)]
-    from shapely.geometry import Polygon
-    from shapely.ops import unary_union
-    ring = list(unary_union([Polygon(q).buffer(.2) for q in (top, front, side)]).exterior.coords)[:-1]
-    p.shape(ring, W_D, PART, j=.05, step=99, clip=False)
-    poly(p, top, INTR); poly(p, front, W_B); poly(p, side, W_D)
-    p.stroke(ring, PART, j=.05, step=99)
-    sack(p, -34, -53, 30, 28); sack(p, -2, -53, 30, 28); sack(p, -18, -70, 30, 28)
-    poly(p, rect(-51, -45, 27, -41), W_L)
-    for y in (-34, -27): p.ln((-51, y), (27, y), 3, W_D, j=0)
-    poly(p, rect(19, -39, 27, -23), W_D, .55)
-    poly(p, [(33, -45), (41, -54), (41, -48), (33, -39)], W_B, .8)
-    # دسته
-    a0, a1 = (42, -50), (86, -74)
-    dx, dy = a1[0] - a0[0], a1[1] - a0[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy * 8, ux * 8
+    # دسته: میلهٔ چوبی ضخیم از پهلوی راست جعبه (پشت جعبه کشیده می‌شود)
+    a0, a1 = (34, -36), (84, -62)
+    dx, dy = a1[0] - a0[0], a1[1] - a0[1]; L = math.hypot(dx, dy); ux, uy = dx / L, dy / L; nx, ny = -uy * 6.5, ux * 6.5
     sh = [(a0[0] + nx, a0[1] + ny), (a1[0] + nx, a1[1] + ny), (a1[0] - nx, a1[1] - ny), (a0[0] - nx, a0[1] - ny)]
-    sharp(p, sh, H_B, PART)
-    poly(p, [(a0[0] + ux * 10 + nx * .6, a0[1] + uy * 10 + ny * .6), (a1[0] - ux * 6 + nx * .6, a1[1] - uy * 6 + ny * .6), (a1[0] - ux * 6 + nx * .1, a1[1] - uy * 6 + ny * .1), (a0[0] + ux * 10 + nx * .1, a0[1] + uy * 10 + ny * .1)], H_L)
-    poly(p, [(a0[0] + ux * 10 - nx * .1, a0[1] + uy * 10 - ny * .1), (a1[0] - ux * 6 - nx * .1, a1[1] - uy * 6 - ny * .1), (a1[0] - ux * 6 - nx * .6, a1[1] - uy * 6 - ny * .6), (a0[0] + ux * 10 - nx * .6, a0[1] + uy * 10 - ny * .6)], H_D)
+    p.shape(sh, H_B, PART, j=.05, step=99, clip=False)
+    poly(p, [(a0[0] + nx * .5, a0[1] + ny * .5), (a1[0] + nx * .5, a1[1] + ny * .5), (a1[0] + nx * .1, a1[1] + ny * .1), (a0[0] + nx * .1, a0[1] + ny * .1)], H_L)
+    # جعبهٔ چوبی باز (یک مکعب؛ رویه تیره = داخل جعبه)
+    extrude(p, rect(-52, -44, 30, -14), (14, -11), W_B, INTR, W_D, sw=PART, sw_in=0)
+    poly(p, rect(-49, -41, 27, -37), W_L)
+    poly(p, rect(-49, -27, 27, -24), W_D)
+    # سه گونی روی جعبه
+    sack(p, -32, -52, 28, 26); sack(p, -2, -52, 28, 26); sack(p, -17, -68, 28, 26)
     # چرخ نزدیک
     with layer(p, 'wheel_near'):
         wheel(p, None, NX, NY, R, front=True)
     return p
 
 
+NX, NY, FX, FY, R = -22, -12, 22, -14, 22
 STAND = None
-NX, NY, FX, FY, R = -24, -16, 16, -24, 24
 if __name__ == '__main__':
     p = build()
     r = finish(p, 'cart_station', STAND, motion={'wheel_near': dict(offsets=[(0, 0)]), 'wheel_far': dict(offsets=[(0, 0)])}, out=OUTD, shots=SHOTS)

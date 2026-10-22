@@ -102,9 +102,12 @@ def boat(p):
         p.shape([(x - 3, -62), (x + 3, -62), (x + 3, -3), (x - 3, -3)], POST, M_PART, j=0, step=6, clip=False)
     # پیشخوان
     extrude(p, [(-50, -14), (34, -14), (34, 0), (-50, 0)], (8, -6), CNT[0], CNT[1], CNT[2], mid=CNT[0], sw=M_OUT, sw_in=0)
-    # میوه‌ها
-    for i, c in enumerate(FRUIT):
-        fruit(p, -38 + i * 19.5, -23 - (i % 2) * 2.5, 9, c)
+    # دو سبد چوبی روی پیشخوان؛ میوه‌ها از دهانهٔ سبد بیرون می‌زنند (سبد جلوتر از میوه کشیده می‌شود)
+    for k, cx in enumerate((-30, 8)):
+        for j, dx in enumerate((-7, 7)):
+            fruit(p, cx + dx, -33 - (j % 2) * 2, 9.2, FRUIT[(k * 2 + j) % 4])
+        extrude(p, [(cx - 15, -25), (cx + 15, -25), (cx + 15, -9), (cx - 15, -9)], (4, -3), '#b9722f', '#e0a468', '#7a4a1c', mid='#b9722f', sw=M_PART, sw_in=0)
+        poly(p, [(cx - 11, -20), (cx + 11, -20), (cx + 11, -17), (cx - 11, -17)], '#e0a468')
     # سایبان راه‌راه: قاب سفید، راه‌راه قرمز روی جلو و رویه
     ax0, n, w, y0, y1, Dx, Dy = -56, 8, 12, -46, -60, 10, -12
     ext = extrude(p, [(ax0, y1), (ax0 + n * w, y1), (ax0 + n * w, y0), (ax0, y0)], (Dx, Dy), AW_W[0], AW_W[1], AW_W[2], mid=AW_W[0], sw=M_OUT, sw_in=0)
