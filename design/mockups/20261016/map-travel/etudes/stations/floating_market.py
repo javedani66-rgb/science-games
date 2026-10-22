@@ -1,125 +1,108 @@
 #!/usr/bin/env python3
-"""ایستگاه «بازارچهٔ شناور» (E06؛ اصلاح خط ۲۳ اکتبر): قهرمان = بلم بازار ¾ سه‌بعدی. سه جزء درشت:
-۱) عرشهٔ چوبی بلم (جعبهٔ ¾: رویه/جلو/پهلو)؛ ۲) غرفه: پیشخوان زرد + سایبان راه‌راه قرمز-سفید (راه‌راه‌ها از جلو روی رویهٔ سایبان می‌پیچند) + دو ستون؛ ۳) چهار میوهٔ درشت روی پیشخوان.
-بین وجه‌ها خط نیست (فقط پلهٔ رنگ)؛ خط دور اصلی ۳٫۶، فرعی ۲٫۶ (ستون‌ها، میوه‌ها).
-لایهٔ متحرک node_floating_market_boat = کل بلم و غرفه و میوه که روی موج بالا و پایین می‌رود (dy در -3..+3)؛ سکو و سایهٔ تماس ثابت."""
+"""ایستگاه «بازارچهٔ شناور» (E06؛ بازطراحی ۱۸ اکتبر شب، D123): قهرمان = بلمِ بازار، درشت و پرجزئیات، روی سکوی دریایی:
+بدنهٔ بلم با لبهٔ روشن و تخته‌ها، غرفه با پیشخوان و سه سبد پر از میوه، سایبان راه‌راه با لبهٔ دندانه‌دار، دکل بلند با پرچم و
+ریسمان فانوس‌ها که از بالای فیگور رد می‌شود (آزاد از بالا)؛ پایهٔ بلم سمت چپ می‌ماند.
+لایهٔ متحرک node_floating_market_boat = کل بلم و غرفه و دکل که روی موج بالا و پایین می‌رود (dy در -3..+3)؛ سکو ثابت است.
+نوارها و میوه‌ها و فانوس‌ها رنگ تخت (بدون خط دور) تا خط ضخیم آن‌ها را نبلعد (D110)."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent)); sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(HERE.parent))
 import station_kit
 from station_kit import *
 from functools import partial
 station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D123: حاشیهٔ چپ/راست ≥۴px
-
-# ---- کمک‌های ¾ سه‌بعدی (محلی؛ سه پلهٔ رنگ، بدون خط بین وجه‌ها، خط دور یکدست) ----
-from shapely.geometry import Polygon, MultiPoint, box as sbox
-from shapely.ops import unary_union
-from g4_helpers import poly, disc, arcline
-from r6lib import extrude
-M_OUT, M_PART = 3.6, 2.6          # قاعدهٔ ۲۴: خط اصلی ۳٫۶، فرعی ۲٫۶
-
-
-def gfill(p, g, col):
-    for q in (g.geoms if hasattr(g, 'geoms') else [g]):
-        if q.geom_type == 'Polygon' and q.area > .05: poly(p, list(q.exterior.coords)[:-1], col)
-
-
-def sil(geoms):
-    s = unary_union(geoms).buffer(.01)
-    return s if s.geom_type == 'Polygon' else max(s.geoms, key=lambda g: g.area)
-
-
-def sil_open(p, s, fill, sw=M_OUT):
-    p.shape(list(s.exterior.coords)[:-1], fill, sw, j=0, step=6, clip=False)
-
-
-def sil_close(p, s, sw=M_OUT):
-    p.stroke(list(s.exterior.coords)[:-1], sw, j=0, step=6)
-
-
-class Fr:
-    """استوانه/مخروط ناقص ¾: مرکز رویه (cx,yt) شعاع rt (۰ = مخروط)، مرکز کف yb شعاع rb؛ ellipse با نسبت k."""
-    def __init__(s, cx, yt, yb, rt, rb, k=.32):
-        s.cx, s.yt, s.yb, s.rt, s.rb, s.k = cx, yt, yb, rt, rb, k
-        s.bot = Polygon(ell(cx, yb, rb, rb * k, 0, 360, 40))
-        s.top = Polygon(ell(cx, yt, rt, rt * k, 0, 360, 40)) if rt > 0 else None
-        pts = list(s.bot.exterior.coords) + (list(s.top.exterior.coords) if s.top else [(cx, yt)])
-        s.body = MultiPoint(pts).convex_hull
-
-    def r(s, y): return s.rt + (s.rb - s.rt) * (y - s.yt) / (s.yb - s.yt)
-
-    def above(s, y):
-        r = s.r(y)
-        return unary_union([sbox(s.cx - 400, s.yt - 400, s.cx + 400, y), Polygon(ell(s.cx, y, r, r * s.k, 0, 360, 40))])
-
-    def strip(s, f0, f1):
-        y0 = s.yt - (s.rt * s.k if s.rt > 0 else 0); y1 = s.yb + s.rb * s.k + 1
-        return Polygon([(s.cx + f0 * s.r(y0), y0), (s.cx + f1 * s.r(y0), y0), (s.cx + f1 * s.r(y1), y1), (s.cx + f0 * s.r(y1), y1)])
-
-    def region(s, ya=None, yb=None):
-        g = s.body
-        if yb is not None: g = g.intersection(s.above(yb))
-        if ya is not None: g = g.difference(s.above(ya))
-        return g
-
-    def paint(s, p, L, M, D, TOP=None, bands=(), hl=None):
-        """سه پله: روشن چپ، میانی، تیره راست؛ نوارهای رنگی دور بدنه می‌پیچند."""
-        def tri(g, l, m, d):
-            gfill(p, g, m); gfill(p, g.intersection(s.strip(-1.1, -.32)), l); gfill(p, g.intersection(s.strip(.28, 1.1)), d)
-        tri(s.body, L, M, D)
-        for ya, yb, (l, m, d) in bands: tri(s.region(ya, yb), l, m, d)
-        if hl: gfill(p, s.body.intersection(s.strip(-.8, -.62)).intersection(s.above(s.yb - 1)), hl)
-        if s.top is not None and TOP: gfill(p, s.top, TOP)
-
-    def front_arc(s, y=None, r=None, a0=0, a1=180):
-        y = s.yb if y is None else y; r = s.r(y) if r is None else r
-        return ell(s.cx, y, r, r * s.k, a0, a1, 24)
-
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/floating_market'
-XF = (1.0, 0.0, -8.0)
-DECK = ('#c98a4a', '#eab677', '#8a5a2a'); CNT = ('#ffd84d', '#fff0a0', '#d9961c')
-AW_W = ('#fff8e0', '#ffffff', '#d9cba0'); AW_R = ('#ef6a4a', '#ff9a7e', '#b53b24')
-POST = '#8a5a2a'; NAVY_ = '#241a5e'
-FRUIT = (('#ef6a4a', '#b53b24'), ('#ff9b2f', '#c46a10'), ('#8bd45a', '#4f9a2f'), ('#ffe14d', '#d9a020'))
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/v2/floating_market'
+XF = (1.0, 0.0, -23.0)
+SX, CX0 = 1.4, -24.5          # کشیدگی افقی قهرمان (فقط x نقطه‌ها؛ ضخامت و قطر دایره‌ها ثابت)
+HULL = '#c98a4a'; HULL_L = '#e8b070'; HULL_D = '#8a5a2a'; RED = '#ef6a4a'; RED_D = '#c24a30'; WH = '#fff8e0'; WOOD = '#ffd84d'; WOOD_D = '#d9a020'
+ORG = '#ff9b2f'; GRN = '#8bd45a'; GRN_D = '#4f9a2f'; YEL = '#ffe14d'; BASKET = '#b8742f'; BASKET_D = '#7a4a1c'; PURP = '#b06ad6'
 BOB = 3
+X0, X1 = -58, 9          # طول بلم
+
+
+def flat(p, pts, col):
+    p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col))
+
+
+def rect(p, x0, y0, x1, y1, col): flat(p, [(x0, y0), (x1, y0), (x1, y1), (x0, y1)], col)
+
+
+def disc(p, x, y, r, col):
+    mx, my = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (mx, my, r * p.xf[0], col))
 
 
 def fruit(p, x, y, r, c):
-    disc(p, x, y, r, c[0])
-    from shapely.geometry import Point
-    gfill(p, Point(x, y).buffer(r, 16).difference(Point(x - r * .32, y - r * .3).buffer(r * .98, 16)), c[1])     # هلال سایه
-    disc(p, x - r * .38, y - r * .38, r * .26, '#ffffff')
-    p.shape(ell(x, y, r, r, 0, 360, 24), 'none', 2.3, j=0, step=99, clip=False)
+    disc(p, x, y, r, c); disc(p, x - r * .35, y - r * .35, r * .28, '#ffffff')    # نقطهٔ نور
+
+
+def sharp(p, pts, col, sw=PART):
+    """چندضلعی تیز با خط دور (کنج‌ها نرم نمی‌شوند)."""
+    q = p.X(pts)
+    p.raw('<polygon points="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (' '.join('%.1f,%.1f' % t for t in q), col, sw))
+    p.clip.append('M' + ' L'.join('%.1f,%.1f' % t for t in q) + ' Z')
+
+
+def hull(p):
+    """سکوی بازار = عرشهٔ تخته‌ای روی سه بشکهٔ شناور."""
+    for c in (-48, -24, 0):                                                   # بشکه‌ها
+        sharp(p, [(c - 9, 16), (c + 9, 16), (c + 10.5, 24), (c + 9, 32), (c - 9, 32), (c - 10.5, 24)], HULL)
+        rect(p, c - 10, 19.5, c + 10, 22.5, HULL_D); rect(p, c - 10, 27, c + 10, 30, HULL_D)   # حلقه‌های فلزی
+        rect(p, c - 6, 17, c - 3.5, 31, HULL_L)                                                # نور
+    sharp(p, [(X0 - 1, 6), (X1 + 1, 6), (X1 - 1, 17), (X0 + 1, 17)], HULL_L, PART)                # عرشه
+    rect(p, X0 + 4, 8.5, X1 - 4, 10.5, '#fff0d0')
+    for x in range(-42, 4, 18): p.ln((x, 12.5), (x, 16), INNER, WOOD_D, j=0)
+
+
+def stall(p):
+    for x in (-54, 4):                                                        # ستون‌ها
+        rect(p, x - 3, -46, x + 3, 7, HULL_D); rect(p, x - 3, -46, x - 1, 7, '#a8703c')
+    p.shape([(-52, -8), (2, -8), (2, 6), (-52, 6)], WOOD, PART, j=.2, step=6)                # پیشخوان
+    rect(p, -49, -5, -2, -2, '#fff08a')                                       # نور تخته
+    for x in (-34, -17): p.ln((x, 0), (x, 3), INNER, WOOD_D, j=0)
+    for bx0, bx1, cols in ((-50, -32, (RED, ORG, YEL)), (-30, -14, (GRN, YEL, GRN)), (-12, 0, (PURP, RED, ORG))):
+        flat(p, [(bx0, -22), (bx1, -22), (bx1 - 2.5, -6), (bx0 + 2.5, -6)], BASKET)   # سبد
+        flat(p, [(bx0, -22), (bx1, -22), (bx1 - .6, -18), (bx0 + .6, -18)], '#d9955a'); rect(p, bx0 + 4, -14, bx1 - 4, -11.5, BASKET_D); rect(p, bx0 + 4, -9, bx1 - 4, -6.5, BASKET_D)
+        c = (bx0 + bx1) / 2; w = (bx1 - bx0) / 4
+        for i, col in enumerate(cols): fruit(p, c + (i - 1) * w * 1.1, -27 - (i % 2) * 4, 6.4, col)
+    # سایبان راه‌راه با لبهٔ دندانه‌دار
+    ax, n, w, y0, y1 = -58, 8, 8.8, -46, -66
+    for i in range(n):
+        flat(p, [(ax + i * w, y0), (ax + (i + 1) * w, y0), (ax + (i + 1) * w - 2.5, y1), (ax + i * w + 2.5, y1)], RED if i % 2 == 0 else WH)
+        flat(p, [(ax + i * w, y0), (ax + (i + 1) * w, y0), (ax + (i + .5) * w, y0 + 8)], RED_D if i % 2 == 0 else '#f3dfa8')   # دندانه
+    p.stroke([(ax, y0), (ax + n * w, y0), (ax + n * w - 2.5, y1), (ax + 2.5, y1)], INNER, j=.2, step=4)
+
+
+def mast(p):
+    """دکل بلند، پرچم و ریسمان فانوس‌ها (از بالای فیگور رد می‌شود)."""
+    rect(p, -57, -99, -51, -60, HULL_D); rect(p, -57, -99, -55, -60, '#a8703c')
+    flat(p, [(-51, -103), (-34, -96), (-51, -89)], ORG)                       # پرچم
+    flat(p, [(-51, -103), (-34, -96), (-40, -96)], '#ffb860')
+
+
+def lights(p):
+    p.ln((-52, -93), (42, -106), INNER, '#7a4a1c', j=0)                         # ریسمان
+    for x, y, c in ((-30, -95, RED), (-12, -97, YEL), (6, -99.5, ORG), (26, -102.5, RED)):          # فانوس‌ها
+        p.ln((x, y), (x, y + 6), INNER - 1.5, '#7a4a1c', j=0)
+        flat(p, [(x - 3.5, y + 6), (x + 3.5, y + 6), (x + 2, y + 9), (x - 2, y + 9)], '#7a4a1c')
+        disc(p, x, y + 16, 8, c); disc(p, x - 2.5, y + 13.5, 2.6, '#ffffff')
+        flat(p, [(x - 3, y + 24), (x + 3, y + 24), (x + 2, y + 27), (x - 2, y + 27)], '#7a4a1c')
 
 
 def boat(p):
-    DD = (16, -12)
-    extrude(p, [(-62, 4), (46, 4), (42, 22), (-58, 22)], DD, DECK[0], DECK[1], DECK[2], mid=DECK[0], sw=M_OUT, sw_in=0)
-    # ستون‌های غرفه (جزء جدا، خط نازک)
-    for x in (-54, 44):
-        p.shape([(x - 3, -62), (x + 3, -62), (x + 3, -3), (x - 3, -3)], POST, M_PART, j=0, step=6, clip=False)
-    # پیشخوان
-    extrude(p, [(-50, -14), (34, -14), (34, 0), (-50, 0)], (8, -6), CNT[0], CNT[1], CNT[2], mid=CNT[0], sw=M_OUT, sw_in=0)
-    # میوه‌ها
-    for i, c in enumerate(FRUIT):
-        fruit(p, -38 + i * 19.5, -23 - (i % 2) * 2.5, 9, c)
-    # سایبان راه‌راه: قاب سفید، راه‌راه قرمز روی جلو و رویه
-    ax0, n, w, y0, y1, Dx, Dy = -56, 8, 12, -46, -60, 10, -12
-    ext = extrude(p, [(ax0, y1), (ax0 + n * w, y1), (ax0 + n * w, y0), (ax0, y0)], (Dx, Dy), AW_W[0], AW_W[1], AW_W[2], mid=AW_W[0], sw=M_OUT, sw_in=0)
-    for i in range(0, n, 2):
-        xa, xb = ax0 + i * w, ax0 + (i + 1) * w
-        poly(p, [(xa, y1), (xb, y1), (xb, y0), (xa, y0)], AW_R[0])                                            # جلو
-        poly(p, [(xa, y1), (xb, y1), (xb + Dx, y1 + Dy), (xa + Dx, y1 + Dy)], AW_R[1])                        # رویه (راه‌راه می‌پیچد)
-    poly(p, [(ax0 + n * w, y1), (ax0 + n * w + Dx, y1 + Dy), (ax0 + n * w + Dx, y0 + Dy), (ax0 + n * w, y0)], AW_W[2])   # پهلو
-    p.stroke(ext, M_OUT, j=0, step=6)                                                                           # خط دور یکدست
+    hull(p); mast(p); stall(p); lights(p)
 
 
 def build(out=OUTD):
     p = Pen('floating_market', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
-    p.tipshadow(-2, 24, 56); p.foot_tip(-2, 24, 30)
+    _X = p.X
+    def X(q):
+        if q and isinstance(q[0], (tuple, list)): return _X([((x - CX0) * SX + CX0, y) for x, y in q])
+        return _X(((q[0] - CX0) * SX + CX0, q[1]))
+    p.X = X
+    p.tipshadow(-24, 34, 38); p.foot_tip(-24, 26, 18)
     with layer(p, 'boat'): boat(p)
     return p
 
@@ -130,6 +113,6 @@ if __name__ == '__main__':
     p = build()
     offs = [p.V(o) for o in [(0, -BOB), (0, 0), (0, BOB)]]
     r = finish(p, 'floating_market', STAND, motion={'boat': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
-    sp = r['spec']; sp['motion_spec'] = dict(offsets=offs, note='کل بلم، غرفه و میوه‌ها روی موج بالا و پایین؛ سکو ثابت؛ سایهٔ تماس ثابت')
+    sp = r['spec']; sp['motion_spec'] = dict(offsets=offs, note='کل بلم، غرفه، دکل و ریسمان فانوس روی موج بالا و پایین؛ سکو ثابت؛ سایهٔ تماس ثابت')
     (OUTD / 'floating_market.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({'ok': r['ok'], 'margin': r['margin'], 'inside': r['inside'], 'motion': r['motion'], 'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

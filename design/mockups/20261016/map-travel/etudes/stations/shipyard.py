@@ -7,7 +7,7 @@ sys.path.insert(0, str(HERE.parent))
 from station_kit import *
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
-SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/shipyard'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/kit3/shipyard'
 HULL = '#e8803a'; HULL_D = '#b85a1c'; HULL_L = '#ffc46b'; SAIL = '#fff3c4'; SAIL_B = '#ef6a4a'; MAST = '#8a5f0c'; WOOD = '#ffd84d'; WOOD_D = '#d9961c'
 BOB = 3
 
@@ -46,50 +46,45 @@ def hull_pts():
     return sheer() + [(19, -18), KEEL_S] + keel + stem
 
 
-from r6lib import extrude, poly as fpoly, circ          # حجم ¾ با سه پلهٔ رنگ؛ بین وجه‌ها خط نیست (قاعده ۱۴)
-HERO_W, HERO_T = 3.6, 2.8                                 # خط دور قهرمان / قطعهٔ فرعی (قاعده ۲۴)
-D_H = (12, -8)
-H_F, H_T, H_S = '#f09a52', '#ffd9a0', '#b85a1c'          # بدنه: جلو / رو / پهلو
-SL_F, SL_T, SL_S = '#ffd84d', '#fff0a0', '#d9961c'      # پایه‌های لغزان
-HM_F, HM_T, HM_S = '#aab3d9', '#dde2f5', '#6b75a8'       # سر چکش
-
-
 def slipway(p):
-    """سه پایهٔ لغزان کوتاه و هم‌ضخامت زیر کیل (قاعده ۲۰)."""
+    """سه پایهٔ لغزان ضخیم و کوتاه زیر کیل (بدون تیر و تکهٔ ریز)."""
     for x in (-46, -20, 6):
-        p.tipshadow(x + 5, 17, 11)
-        extrude(p, [(x - 8, -1), (x + 8, -1), (x + 9, 14), (x - 9, 14)], (7, -4), SL_F, SL_T, SL_S, sw=HERO_T, sw_in=0)
+        p.tipshadow(x, 17, 11)
+        p.shape([(x - 8, -1), (x + 8, -1), (x + 9, 14), (x - 9, 14)], WOOD, PART, j=.2, step=8, clip=False)
+        rect(p, x - 4, 3, x - 1, 9, WOOD_L)
 
 
 def sail(p, pts, col):
-    """بادبان: ورقهٔ نازک و جدا (خط نازک)."""
-    p.raw('<polygon points="%s" fill="%s" class="eo" stroke-width="%s" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, HERO_T))
+    p.raw('<polygon points="%s" fill="%s" stroke="%s" stroke-width="5.8" stroke-linejoin="miter" stroke-miterlimit="6"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, NAVY))
 
 
 def ship(p):
+    # بادبان‌ها: اصلی بزرگ سمت راست دکل با تیرک پایینی؛ جلویی مثلثی کوچک‌تر بین دکل و دماغه؛ هر دو بالاتر از بدنه و زیر پرچم
     BY = -42
-    sail(p, [(MX, -108), (MX + 34, BY), (MX, BY)], CREAM_)                       # بادبان اصلی
-    sail(p, [(MX, -84), (MX, BY), (MX - 25, BY)], '#ffb23e')                     # بادبان جلویی
-    sail(p, [(MX - 3.6, MTOP), (MX + 3.6, MTOP), (MX + 3.6, -28), (MX - 3.6, -28)], MAST)   # دکل
-    sail(p, [(MX + 2.2, MTOP), (MX + 21, MTOP + 6), (MX + 2.2, MTOP + 12)], FLAG)         # پرچم
-    extrude(p, hull_pts(), D_H, H_F, H_T, H_S, mid=H_F, sw=HERO_W, sw_in=0)                                                   # بدنه: یک شکل
+    sail(p, [(MX, -108), (MX + 34, BY), (MX, BY)], CREAM_)                       # بادبان اصلی: مثلث قائم تیز سمت راست دکل
+    sail(p, [(MX, -84), (MX, BY), (MX - 25, BY)], '#ffb23e')                     # بادبان جلویی: مثلث کوچک‌تر سمت چپ دکل
+    p.ln((MX, -28), (MX, MTOP), PART, MAST, j=.1, probe='دکل (جزء)')                                       # دکل
+    p.shape([(MX, MTOP), (MX + 20, MTOP + 6), (MX, MTOP + 12)], FLAG, INNER, j=.1, step=99, clip=False)   # پرچم
+    # بدنهٔ بلند
+    p.shape(hull_pts(), PLANK, PART, j=.15, step=99, clip=False)
     T = sheer()
-    for d, xmax in ((11, 12), (18, 4)):                                                                                        # درز تخته‌ها: خط ریز هم‌رنگ
-        p.raw('<path d="M%s" fill="none" stroke="%s" stroke-width="1.8" stroke-linecap="round"/>' % (' L'.join('%.1f,%.1f' % q for q in p.X([(x, y + d) for x, y in T[4:] if x < xmax])), SEAM_C))
+    p.raw('<path d="M%s" fill="none" stroke="%s" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/>' % (' L'.join('%.1f,%.1f' % q for q in p.X([(x + 1, y + 5) for x, y in T[3:]])), DARK))   # لبهٔ تیرهٔ عرشه
+    for d, xmax in ((11, 12), (18, 4)):                                                                                        # درز تخته‌ها
+        p.raw('<path d="M%s" fill="none" stroke="%s" stroke-width="2.4" stroke-linecap="round"/>' % (' L'.join('%.1f,%.1f' % q for q in p.X([(x, y + d) for x, y in T[4:] if x < xmax])), SEAM_C))
     for x in (-52, -28, -4):                                                                                                    # سه روزنه
         y = min(q[1] for q in T if abs(q[0] - x) < 4) + 11
-        a, b = p.X((x, y)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, 3.6 * p.xf[0], CREAM_))
+        p.raw('<circle cx="%.1f" cy="%.1f" r="3.6" fill="%s"/>' % (*p.X((x, y)), CREAM_))
 
 
 def hammer(p):
-    """چکش درشت خوابیده: دستهٔ چوبی + سر آبی‌خاکستری."""
-    extrude(p, [(-72, 24), (-34, 24), (-34, 32), (-72, 32)], (5, -3), SL_F, SL_T, SL_S, sw=HERO_T, sw_in=0)
-    extrude(p, [(-40, 15), (-26, 15), (-26, 41), (-40, 41)], (6, -4), HM_F, HM_T, HM_S, sw=HERO_T, sw_in=0)
+    """چکش درشت خوابیده جلوی پایه‌ها: دستهٔ چوبی ضخیم + سر آبی‌خاکستری."""
+    p.shape([(-62, 23), (-36, 23), (-36, 31), (-62, 31)], WOOD, PART, j=.1, step=8, clip=False)
+    p.shape([(-42, 17), (-28, 17), (-28, 37), (-42, 37)], '#aab3d9', PART, j=.1, step=8, clip=False)
 
 
 def boards(p):
-    extrude(p, [(-14, 22), (16, 22), (16, 33), (-14, 33)], (8, -5), PLANK2, '#ffe0b0', SEAM_C, sw=HERO_T, sw_in=0)
-    rect(p, -9, 26, 11, 28, SEAM_C)
+    """یک تختهٔ درشت روی کف، کنار چکش."""
+    p.shape([(-14, 20), (16, 20), (16, 33), (-14, 33)], PLANK2, PART, j=.1, step=8, clip=False); rect(p, -9, 24, 11, 26.5, SEAM_C)
 
 
 def build(out=OUTD):
@@ -102,7 +97,7 @@ def build(out=OUTD):
     return p
 
 
-XF = (0.9, 6.0, -8.0)
+XF = (0.94, 8.0, -9.0)
 HAMMER_LIFT = 5
 
 STAND = None
