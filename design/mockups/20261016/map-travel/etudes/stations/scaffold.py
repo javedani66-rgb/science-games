@@ -42,17 +42,18 @@ def build():
             poly(p, bar(a, b, 4.2), '#d8e0ee', .9)
     # ۱ پایه‌ها
     for x in PXs:
+        ty = -132 if x == PXs[0] else TOPY                                    # ستون چپ بلندتر: بازوی قرقره روی آن سوار است
         p.shape(R(x - 12, BASE - 6, x + 12, BASE + 1), FT, PART, j=.12, step=6)
-        p.shape(R(x - PW / 2, TOPY, x + PW / 2, BASE - 4), T_B, PART, j=.12, step=7)
-        poly(p, R(x - PW / 2 + 2.5, TOPY + 6, x - PW / 2 + 5.5, BASE - 8), T_L)
-        poly(p, R(x + 1.5, TOPY + 4, x + PW / 2 - 2, BASE - 8), T_D)
+        p.shape(R(x - PW / 2, ty, x + PW / 2, BASE - 4), T_B, PART, j=.12, step=7)
+        poly(p, R(x - PW / 2 + 2.5, ty + 6, x - PW / 2 + 5.5, BASE - 8), T_L)
+        poly(p, R(x + 1.5, ty + 4, x + PW / 2 - 2, BASE - 8), T_D)
     # ۴ نردبان
     for y in (-72, -52, -32, -12): p.ln((45, y), (63, y), 3.4, STR, j=.1)
     for x in (45, 63): p.shape(R(x - 2.8, -86, x + 2.8, BASE), L_B, 3, j=.1, step=7, clip=False)
     # ۳ تخته‌ها
     plank(p, -52, 30, -48); plank(p, -52, 30, -102)
     # ۵ بازو + قرقره + سطل
-    p.shape(R(-70, -132, -30, -121), T_B, PART, j=.1, step=7, clip=False)
+    p.shape(R(-72, -132, -34, -121), T_B, PART, j=.1, step=7, clip=False)
     poly(p, R(-66, -130, -33, -127.5), T_L)
     with layer(p, 'bucket'):
         p.ln((PV[0], PV[1] + 4), (PV[0], -70), 3, STR, j=0)

@@ -76,9 +76,10 @@ def ship(p):
     fq = lambda u, x: (x + dx * u, -46 + dy * u)
     poly(p, [fq(.2, -66), fq(.2, 24), fq(.9, 24), fq(.9, -66)], '#7a3a12')
     poly(p, [fq(.2, -66), fq(.2, 24), fq(.32, 24), fq(.32, -66)], '#b85a1c')
-    sail(p, [(MXX, -112), (MXX + 38, BY - 2), (MXX, BY - 2)], CREAM_)                    # بادبان بزرگ (جلوی دهانه، پایش در کشتی)
-    sail(p, [(MXX - 3.6, -118), (MXX + 3.6, -118), (MXX + 3.6, BY), (MXX - 3.6, BY)], MAST)   # دکل
-    sail(p, [(MXX + 2.2, -118), (MXX + 22, -112), (MXX + 2.2, -106)], FLAG)              # پرچم
+    sail(p, [(MXX, -128), (MXX + 56, BY - 2), (MXX, BY - 2)], CREAM_)
+    sail(p, [(MXX - 4, -100), (MXX - 4, BY - 2), (MXX - 38, BY - 2)], '#ffb23e')      # بادبان جلو                    # بادبان بزرگ (جلوی دهانه، پایش در کشتی)
+    sail(p, [(MXX - 3.6, -134), (MXX + 3.6, -134), (MXX + 3.6, BY), (MXX - 3.6, BY)], MAST)   # دکل
+    sail(p, [(MXX + 2.2, -134), (MXX + 24, -128), (MXX + 2.2, -122)], FLAG)              # پرچم
     p.raw('<path d="M%s" fill="none" stroke="%s" stroke-width="1.8" stroke-linecap="round"/>' % (' L'.join('%.1f,%.1f' % q for q in p.X([(-68, -24), (20, -24)])), SEAM_C))
     for x in (-48, -22, 4):                                                               # سه روزنه
         a, b = p.X((x, -35)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, 3.8 * p.xf[0], CREAM_))
