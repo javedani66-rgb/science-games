@@ -16,7 +16,7 @@ A_B, A_L, A_D = '#3fb4f0', '#9be0ff', '#1f7fc4'
 RAIL, RAIL_L, RAIL_D = '#aebfd8', '#f2f7ff', '#6f86ab'
 FX0, FX1, FY0, FY1 = -52, 40, 4, 22
 DX, DY = 12, -40
-BR = 26; BALL_C = (-20, -24)
+BR = 24; BALL_C = (-22, -22)
 DRIFT = (-12, 3)
 def poly(p, pts, col, op=1):
     p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, '' if op == 1 else ' opacity="%s"' % op))
@@ -43,7 +43,7 @@ def build():
     p.stroke(hole, INNER, j=.05, step=8)
     p.ln(pos(.12, .48), pos(.26, .48), INNER, '#ffffff', j=0); p.ln(pos(.42, .30), pos(.58, .30), INNER, '#ffffff', j=0)
     # ۳) نردبان بلند فلزی (دو ریل ضخیم سه‌پله + ۳ پله + دستگیرهٔ خمیده)
-    xs, ys = pos(.66, .56)
+    xs, ys = pos(.56, .56)
     LH = 92; XG = 36
     def rail(x):
         pts = [(x, ys), (x, ys - LH)]

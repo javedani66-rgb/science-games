@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  54
+  52
  ],
  "stand": [
-  -30.5,
-  -19.5
+  52.0,
+  -3.5
  ],
  "ring": [
   0,
@@ -20,16 +20,16 @@
   "node_tug_field_flag"
  ],
  "inside_pad": {
-  "min_margin_px": 0.0,
-  "base_on_pad": false,
-  "height_px": 79.2,
+  "min_margin_px": 11.8,
+  "base_on_pad": true,
+  "height_px": 67.8,
   "bbox_px": [
-   17.5,
-   53.5,
-   125.0,
-   132.8
+   31.2,
+   54.5,
+   112.5,
+   122.2
   ],
-  "ok": false
+  "ok": true
  },
  "motion_spec": {
   "node_tug_field_flag": {
