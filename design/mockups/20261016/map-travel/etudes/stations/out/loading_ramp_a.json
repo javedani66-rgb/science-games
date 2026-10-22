@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  48
+  58
  ],
  "stand": [
   0.0,
@@ -20,14 +20,14 @@
   "node_loading_ramp_a_crate"
  ],
  "inside_pad": {
-  "min_margin_px": 9.0,
+  "min_margin_px": 12.6,
   "base_on_pad": true,
-  "height_px": 60.2,
+  "height_px": 70.2,
   "bbox_px": [
-   24.5,
-   60.5,
-   125.8,
-   120.8
+   25.0,
+   50.0,
+   117.0,
+   120.2
   ],
   "ok": true
  },
@@ -35,8 +35,8 @@
   "node_loading_ramp_a_crate": {
    "translate_xy": [
     [
-     -14.6,
-     10.5
+     -17.7,
+     13.9
     ],
     [
      0,
@@ -44,7 +44,7 @@
     ]
    ],
    "unit": "واحد symbol",
-   "dir_deg": -35.5,
+   "dir_deg": -38.2,
    "easing": "ease-in-out",
    "loop": false,
    "start": "جعبه 18 واحد پایین‌تر روی شیب",

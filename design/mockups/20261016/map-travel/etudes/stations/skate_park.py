@@ -56,7 +56,7 @@ def board(p):
     ox, oy = BX, BY
     P = lambda pts: [(ox + x, oy + y) for x, y in pts]
     fy, th = -38, 10
-    FRONT = P([(-50, -50), (-46, -43), (-40, fy), (40, fy), (46, -43), (50, -50)])
+    FRONT = P([(-49, -47), (-45, -42), (-40, fy), (40, fy), (45, -42), (49, -47)])
     BACK = [(x + BD[0], y + BD[1]) for x, y in FRONT]
     SIDE = FRONT[:-1] + [(x, y + th) for x, y in FRONT[::-1]][1:]
     TOP = FRONT + BACK[::-1]

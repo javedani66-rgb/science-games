@@ -33,3 +33,11 @@ def cyl(p, cx, yb, r, h, cols, ry=None, sw=OUT, lit=.45, f=ident, top=True):
 
 def disc(p, x, y, r, col, f=ident):
     a, b = p.X(f((x, y))); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, r, col))
+
+
+def _flat_fill(s, pts, fill, op=1):
+    """چندضلعی تیز (بدون نرم‌سازی گوشه‌ها) — به‌جای Pen.fill کیت که گوشه‌ها را گرد می‌کند؛ فقط در این فرایند."""
+    s.o.append('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in s.X(pts)), fill, '' if op == 1 else ' opacity="%s"' % op))
+
+
+Pen.fill = _flat_fill

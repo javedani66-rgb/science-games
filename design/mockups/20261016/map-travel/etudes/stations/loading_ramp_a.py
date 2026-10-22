@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """M03 «رمپ بارگیری» نسخهٔ A، دور ۶: رمپ چوبی ¾ سه‌بعدی (نیم‌رخ بیرون‌کشیده با عمق (-20,-12) به پشت-چپ) + جعبهٔ نارنجی روی شیب + چرخ‌دستی فیروزه‌ای.
-اجزای درشت (۴): ۱) رمپ: بدنهٔ گوه‌ای چوبی (جلو #d9a05a، رویه #fbe6b4، پهلو #b8843a) با سکوی بالا و شیب ≈۳۲°؛ درز تخته‌های بدنه؛ ۲) نرده/ریل دو طرف شیب (جلو و پشت) چوب روشن؛
- ۳) جعبهٔ نارنجی (#f28c28 / #ffc070 / #b5560e) هم‌جهت شیب با تسمهٔ روشن (لایهٔ node_loading_ramp_a_crate)؛ ۴) چرخ‌دستی فیروزه‌ای #2fb5a8 با چرخ.
+اجزای درشت (۳): ۱) رمپ: بدنهٔ گوه‌ای چوبی (جلو #d9a05a، رویه #fbe6b4، پهلو #b8843a) با سکوی بالا و شیب ≈۳۲°؛ درز تخته‌های بدنه؛ ۲) نرده/ریل دو طرف شیب (جلو و پشت) چوب روشن؛
+ ۳) جعبهٔ نارنجی (#f28c28 / #ffc070 / #b5560e) هم‌جهت شیب با تسمهٔ روشن (لایهٔ node_loading_ramp_a_crate)؛ (چرخ‌دستی در این دور حذف شد تا شلوغ نشود).
  حرکت: جعبه در امتداد شیب از ۲۰ واحد پایین‌تر بالا می‌آید؛ حالت ایستا = پایان؛ بدون حلقهٔ بیکار. سایهٔ تماس زیر رمپ و چرخ‌دستی."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
@@ -16,7 +16,7 @@ T_F, T_T, T_S = '#2fb5a8', '#7fe0d4', '#1d7a70'
 GY = 14
 D = (-20, -8)
 XT, XP, XE = -40, 16, 36
-HP = 46; HT = 6
+HP = 50; HT = 6
 T = (XT, GY - HT); H = (XP, GY - HP)
 _l = math.hypot(H[0] - T[0], H[1] - T[1])
 U = ((H[0] - T[0]) / _l, (H[1] - T[1]) / _l)    # بالاشیب
@@ -29,9 +29,8 @@ def pt(P, v, k): return (P[0] + v[0] * k, P[1] + v[1] * k)
 
 
 def build():
-    p = Pen('loading_ramp_a', 'city'); pad(p, line=((62, 30), (76, 26)), tri=((-76, -4), (-70, 18)), dot=(76, -8)); p.xf = (1.0, -2, 0)
-    p.tipshadow(-6, GY + 2, 56); p.foot_tip(-6, GY, 36)
-    p.tipshadow(tx_ := 60, GY + 2, 16)
+    p = Pen('loading_ramp_a', 'city'); pad(p, line=((62, 30), (76, 26)), tri=((-76, -4), (-70, 18)), dot=(76, -8)); p.xf = (1.25, 14, -4)
+    p.tipshadow(-4, GY + 2, 60); p.foot_tip(-4, GY, 40)
     prof = [(XE, GY), (XE, GY - HP), H, T, (XT, GY)]
     extrude(p, prof, D, W_F, W_T, W_S, mid=W_T, sw=OUT, sw_in=PART)
     for yy in (GY - 14, GY - 28):
@@ -52,15 +51,6 @@ def build():
         poly(p, [q(11, 2), q(17, 2), q(17, CS - 2), q(11, CS - 2)], '#ffd9a0', .9)
         poly(p, [q(CS - 4, 2), q(CS - 1, 2), q(CS - 1, CS - 2), q(CS - 4, CS - 2)], C_S, .5)
     p.shape([T, H, (H[0], H[1] - 6), (T[0], T[1] - 6)], RL, INNER, j=.05, step=8, clip=False)
-    # چرخ‌دستی
-    tx = 54
-    p.shape([(tx + 6, GY - 4), (tx + 20, GY - 4), (tx + 20, GY), (tx + 6, GY)], T_F, PART, j=.05, step=6, clip=False)
-    for ux in (-7, 7):
-        extrude(p, [(tx + ux - 4, GY - 4), (tx + ux + 4, GY - 4), (tx + ux + 4, GY - 66), (tx + ux - 4, GY - 66)], (-5, -3), T_F, T_T, T_S, sw=PART)
-    for yy in (-70, -34):
-        extrude(p, [(tx - 13, GY + yy - 4), (tx + 13, GY + yy - 4), (tx + 13, GY + yy + 4), (tx - 13, GY + yy + 4)], (-5, -3), T_F, T_T, T_S, sw=PART)
-    p.shape(ell(tx, GY - 11, 11, 11, 0, 360, 20), '#3a2a6a', PART, j=.05, step=99, clip=False)
-    circ(p, tx, GY - 11, 4, '#ffd84d')
     return p, None
 
 
