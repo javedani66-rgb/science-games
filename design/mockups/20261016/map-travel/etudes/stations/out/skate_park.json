@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  43
+  55
  ],
  "stand": [
-  3.0,
-  -27.0
+  -53.0,
+  3.0
  ],
  "ring": [
   0,
@@ -20,16 +20,16 @@
   "node_skate_park_skateboard"
  ],
  "inside_pad": {
-  "min_margin_px": 0.0,
-  "base_on_pad": false,
-  "height_px": 80.2,
+  "min_margin_px": 5.2,
+  "base_on_pad": true,
+  "height_px": 79.5,
   "bbox_px": [
-   25.8,
-   65.0,
-   114.8,
-   145.2
+   29.5,
+   52.8,
+   120.2,
+   132.2
   ],
-  "ok": false
+  "ok": true
  },
  "motion_spec": {
   "node_skate_park_skateboard": {
