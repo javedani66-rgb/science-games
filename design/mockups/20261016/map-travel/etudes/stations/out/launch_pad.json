@@ -1,0 +1,54 @@
+{
+ "id": "launch_pad",
+ "kind": "space",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  92
+ ],
+ "stand": [
+  36.5,
+  3.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_launch_pad_flame"
+ ],
+ "inside_pad": {
+  "min_margin_px": 5.0,
+  "base_on_pad": true,
+  "height_px": 104.0,
+  "bbox_px": [
+   19.5,
+   16.0,
+   81.0,
+   120.0
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_launch_pad_flame": {
+   "transform_origin": [
+    -30.0,
+    -4.0
+   ],
+   "from_state": "شعلهٔ کوچک ایستا",
+   "scale_peak": [
+    1.3,
+    1.6
+   ],
+   "flicker": "سه بار بین ۱٫۶ و ۱٫۱ (scaleY) و scaleX هم‌جهت",
+   "end": "برگشت به شعلهٔ کوچک ایستا",
+   "duration_s": 1.5,
+   "repeat": "یک‌بار هنگام رسیدن",
+   "purpose": "تزئینی"
+  },
+  "reduced_motion": "شعلهٔ کوچک ایستا",
+  "note": "شعله رنگ تخت بدون خط (مثل پرتو فانوس)؛ موشک بلند نمی‌شود."
+ }
+}

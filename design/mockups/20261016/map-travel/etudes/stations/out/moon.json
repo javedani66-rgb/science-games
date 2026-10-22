@@ -1,0 +1,53 @@
+{
+ "id": "moon",
+ "kind": "space",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  49
+ ],
+ "stand": [
+  42.5,
+  4.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_moon_shade"
+ ],
+ "inside_pad": {
+  "min_margin_px": 10.8,
+  "base_on_pad": true,
+  "height_px": 69.8,
+  "bbox_px": [
+   33.2,
+   59.2,
+   93.2,
+   129.0
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_moon_shade": {
+   "type": "translate",
+   "from_offset_units": [
+    -5.9,
+    -5.9
+   ],
+   "from_offset_map_px": -6.0,
+   "to": [
+    0,
+    0
+   ],
+   "duration_s": 3,
+   "easing": "ease-in-out",
+   "repeat": 1,
+   "note": "فقط هلال سایه روی کره می‌لغزد؛ حالت ایستا = پایان؛ بدنهٔ کره زیر آن کامل؛ بدون حلقهٔ بیکار"
+  },
+  "reduced_motion": "ایستا"
+ }
+}

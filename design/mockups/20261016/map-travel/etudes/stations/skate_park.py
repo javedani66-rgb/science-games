@@ -16,7 +16,7 @@ OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/skate_park'
 
 D_B, D_L, D_D = '#2cb5c6', '#8fe8ee', '#1a8696'
-M_B, M_D = '#dbe9f8', '#a3bbd9'
+M_B, M_D = '#b8c9e6', '#7f95b8'
 W_B, W_D = '#fff1c0', '#e3c66e'
 HUBC = '#7a4a1f'; YEL = '#ffd84d'; ORG = '#ff9b4a'
 GY = 6; R = 12; WYC = GY - R

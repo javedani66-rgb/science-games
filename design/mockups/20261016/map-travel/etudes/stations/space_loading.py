@@ -23,8 +23,8 @@ H_B, H_D = '#8d9099', '#4a4d57'                      # دستگیره/پایهٔ
 L_B, L_L, L_OFF = '#ef6a4a', '#ffb59c', '#9c2f1c'   # چراغ
 
 CX, BASE = -30, 7
-BT, LT, LB = -50, -64, -48        # بالای بدنه، بالای درپوش، کف درپوش
-BW, LW = 30, 33
+BT, LT, LB = -58, -74, -56        # بالای بدنه، بالای درپوش، کف درپوش
+BW, LW = 31, 34
 
 
 def poly(p, pts, col, op=1):
@@ -44,24 +44,24 @@ def build(out=OUTD):
     # ۲) دستگیره‌ها (پشت بدنه)
     for s in (-1, 1):
         x_in, x_out = CX + s * (BW - 4), CX + s * (BW + 12)
-        p.shape(rect(min(x_in, x_out), -36, max(x_in, x_out), -12), H_B, PART, j=.1, step=99)
+        p.shape(rect(min(x_in, x_out), -40, max(x_in, x_out), -14), H_B, PART, j=.12, step=6)
         xs = CX + s * (BW + 4)
-        poly(p, rect(xs - 2, -29, xs + 2, -19), H_D)
+        poly(p, rect(xs - 2, -32, xs + 2, -22), H_D)
     # ۳) بدنه
     body = rect(CX - BW, BT, CX + BW, BASE)
-    p.shape(body, S_B, OUT, j=.1, step=99)
+    p.shape(body, S_B, OUT, j=.12, step=6)
     poly(p, rect(CX - BW + 5, BT + 8, CX - BW + 8.5, BASE - 12), S_L)                               # نور
     poly(p, rect(CX + BW - 14, BT + 4, CX + BW - 3, BASE - 1), S_D)                                  # سایهٔ تیز راست
     poly(p, rect(CX - BW + 3, BASE - 7, CX + BW - 3, BASE - 1), S_D)                                 # کرسی
     for dx in (-15, 0, 15):
         poly(p, rect(CX + dx - 1.9, BT + 12, CX + dx + 1.9, BASE - 12), S_D)                         # شیار
-    p.stroke(body, OUT, j=.1, step=99)
+    p.stroke(body, OUT, j=.12, step=6)
     # ۴) درپوش طلایی
     lid = rect(CX - LW, LT, CX + LW, LB)
-    p.shape(lid, G_B, PART, j=.1, step=99)
+    p.shape(lid, G_B, PART, j=.12, step=6)
     poly(p, rect(CX - LW + 5, LT + 4, CX - LW + 8.5, LB - 4), G_L)
     poly(p, rect(CX + LW - 12, LT + 3, CX + LW - 3, LB - 1), G_D)
-    p.stroke(lid, PART, j=.1, step=99)
+    p.stroke(lid, PART, j=.12, step=6)
     # ۵) پایهٔ چراغ و ۶) گنبد خاموش
     p.shape(rect(CX - 11, LT - 6, CX + 11, LT + 3), H_B, INNER, j=.05, step=99, clip=False)
     base_dome = [(CX + 9 * math.cos(math.radians(a)), LT - 6 + 9 * math.sin(math.radians(a))) for a in range(180, 361, 15)]

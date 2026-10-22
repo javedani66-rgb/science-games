@@ -20,9 +20,9 @@ G_B, G_L, G_D = '#f0b03c', '#ffd98a', '#b9741c'
 P_B, P_L, P_D = '#1f8a98', '#58c8d0', '#126370'
 GLASS = '#cfeaff'
 
-XF = (1.1, -16, 0)
+XF = (1.08, -22, 0)
 CY = -52
-MX, MT, MB = 24, -70, -34
+MX, MT, MB = 20, -70, -34
 
 
 def poly(p, pts, col, op=1):
@@ -44,9 +44,9 @@ def build(out=OUTD):
     # ۳) بال‌ها (لایهٔ متحرک): اول بندها، بعد بال‌ها
     with layer(p, 'panels'):
         for s in (-1, 1):
-            poly(p, [(s * 18, CY - 7), (s * 34, CY - 7), (s * 34, CY + 7), (s * 18, CY + 7)], G_B)
-            p.shape([(s * 20, CY - 7), (s * 34, CY - 7), (s * 34, CY + 7), (s * 20, CY + 7)], G_B, PART, j=.1, step=99, clip=False)
-            x0, x1 = (30, 58) if s > 0 else (-58, -30)
+            poly(p, [(s * 14, CY - 7), (s * 28, CY - 7), (s * 28, CY + 7), (s * 14, CY + 7)], G_B)
+            p.shape([(s * 16, CY - 7), (s * 28, CY - 7), (s * 28, CY + 7), (s * 16, CY + 7)], G_B, PART, j=.1, step=99, clip=False)
+            x0, x1 = (24, 50) if s > 0 else (-50, -24)
             pan = [(x0, -76), (x1, -76), (x1, -28), (x0, -28)]
             p.shape(pan, P_B, PART, j=.1, step=99, clip=False)
             inner, outer = (x0, x1) if s > 0 else (x1, x0)
@@ -57,12 +57,12 @@ def build(out=OUTD):
             for yy in (-60, -44):
                 p.ln((x0 + 3, yy), (x1 - 3, yy), INNER, P_D, j=0)
     # ۴) ماژول
-    body = [(-MX + 10, MT)] + [(MX - 10, MT)] + ell(MX - 10, CY, 10, 18, -90, 90, 10) + [(MX - 10, MB), (-MX + 10, MB)] + ell(-MX + 10, CY, 10, 18, 90, 270, 10)
+    body = [(-MX + 8, MT)] + [(MX - 8, MT)] + ell(MX - 8, CY, 8, 18, -90, 90, 10) + [(MX - 8, MB), (-MX + 8, MB)] + ell(-MX + 8, CY, 8, 18, 90, 270, 10)
     p.shape(body, M_B, OUT, j=.15, step=8)
     poly(p, [(-MX + 12, MT + 4), (MX - 12, MT + 4), (MX - 12, MT + 7.5), (-MX + 12, MT + 7.5)], M_L)
     poly(p, [(-MX + 12, MB - 9), (MX - 6, MB - 9), (MX - 8, MB - 3), (-MX + 12, MB - 3)], M_D)
     p.stroke(body, OUT, j=.15, step=8)
-    for xx in (-15, 15):
+    for xx in (-12, 12):
         poly(p, [(xx - 2.5, MT + 2), (xx + 2.5, MT + 2), (xx + 2.5, MB - 2), (xx - 2.5, MB - 2)], G_B)
     p.shape(ell(0, CY, 8, 8, 0, 360, 16), GLASS, INNER, j=.05, step=99, clip=False)
     poly(p, [(-4, CY - 4), (-1.5, CY - 4), (-1.5, CY - 1.5), (-4, CY - 1.5)], '#ffffff')

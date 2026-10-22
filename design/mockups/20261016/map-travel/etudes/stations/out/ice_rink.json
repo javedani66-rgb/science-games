@@ -8,8 +8,8 @@
   74
  ],
  "stand": [
-  44.0,
-  4.5
+  44.5,
+  -5.0
  ],
  "ring": [
   0,
@@ -20,13 +20,13 @@
   "node_ice_rink_glint"
  ],
  "inside_pad": {
-  "min_margin_px": 4.2,
+  "min_margin_px": 9.2,
   "base_on_pad": true,
   "height_px": 87.5,
   "bbox_px": [
-   12.2,
+   17.2,
    34.0,
-   95.5,
+   100.5,
    121.5
   ],
   "ok": true
