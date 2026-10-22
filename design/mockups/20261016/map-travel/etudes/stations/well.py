@@ -34,13 +34,11 @@ def bucket(p):
     body = [(-15, ty), (15, ty), (12, by)] + [q for q in ell(0, by, 12, 4.4, 0, 180, 14)] + [(-12, by)]
     # بدنه: ذوزنقه با کف بیضی
     body = [(-15, ty), (15, ty)] + ell(0, by, 12, 4.4, 0, 180, 14)
-    # دستهٔ فلزی (پشت دلو)
-    arcline(p, ell(0, ty, 14, 14, 180, 360, 16), '#241a5e', 6.2)
-    arcline(p, ell(0, ty, 14, 14, 180, 360, 16), M_B, 2.6)
+    p.ln((-12, ty), (0, -66), 3.2, ROPE, j=0); p.ln((12, ty), (0, -66), 3.2, ROPE, j=0)
     sharp(p, body, B_B, 2.6)
     poly(p, [(-12, ty + 3), (-8, ty + 3), (-6.5, by - 1), (-9.5, by - 1)], B_L)
     poly(p, [(7.5, ty + 3), (13.8, ty + 3), (11.2, by - .5), (7, by - .5)], B_D)
-    for y in (-47, -36):
+    for y in (-42,):
         w = 15 - (y - ty) * 3 / 24
         poly(p, [(-w, y), (w, y), (w - .4, y + 4), (-w + .4, y + 4)], M_B)
         poly(p, [(-w + 1.5, y + .6), (-w + 5, y + .6), (-w + 5, y + 2), (-w + 1.5, y + 2)], M_L)
@@ -58,11 +56,8 @@ def build(out=OUTD):
     k = math.acos(18 / HW)
     arc = [(HW * math.cos(a * k / 10), BASE - 10 + 10 * math.sin(a * k / 10)) for a in range(11)]
     poly(p, [(18, RIM_Y + 2), (HW, RIM_Y + 2)] + arc, S_D)
-    for y in (-18, -10): poly(p, band(0, y, HW - 1, 10, 3.2), S_D)
-    for y0, y1, xs in ((-15, -10, (-26, -6, 16)), (-7, -4, (-34, -14, 8, 28))):
-        for x in xs:
-            r_ = 10 * math.sqrt(max(0, 1 - (x / (HW - 1)) ** 2))
-            poly(p, rect(x - 1.6, y0 + r_, x + 1.6, y1 + r_), S_D)
+    for x, y, r_ in ((-28, -6, 9), (-4, -1, 10), (22, -6, 9), (-14, -17, 7), (12, -18, 7), (32, -17, 6)):
+        poly(p, ell(x, y, r_ * 1.25, r_ * .62, 0, 360, 16), S_L if x < 5 else S_D)
     p.stroke(body, 3.6, j=.15, step=8)
     p.shape(ell(0, RIM_Y, HW, 13, 0, 360, 40), S_L, 3.6, j=.05, step=99, clip=False)
     p.fill(ell(0, RIM_Y + 2.5, 32, 9.5, 0, 360, 32), HOLE)

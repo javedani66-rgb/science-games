@@ -43,14 +43,14 @@ def build():
     p.stroke(hole, INNER, j=.05, step=8)
     p.ln(pos(.12, .48), pos(.26, .48), INNER, '#ffffff', j=0); p.ln(pos(.42, .30), pos(.58, .30), INNER, '#ffffff', j=0)
     # ۳) نردبان بلند فلزی (دو ریل ضخیم سه‌پله + ۳ پله + دستگیرهٔ خمیده)
-    xs, ys = pos(.72, .62)
-    LH = 66; XG = 24
+    xs, ys = pos(.46, .50)
+    LH = 54; XG = 22
     def rail(x):
         pts = [(x, ys), (x, ys - LH)]
         for k in range(1, 8):
             t = math.radians(180 - 160 * k / 7); pts.append((x + 7 + 7 * math.cos(t), ys - LH - 7 * math.sin(t)))
         return pts
-    rungs = (ys - 20, ys - 40, ys - 58)
+    rungs = (ys - 16, ys - 32, ys - 48)
     for x in (xs, xs + XG): pline(p, rail(x), NAVY, 15)
     for y in rungs: pline(p, [(xs, y), (xs + XG, y)], NAVY, 12, 'butt')
     for x in (xs, xs + XG): pline(p, rail(x), RAIL, 8)
