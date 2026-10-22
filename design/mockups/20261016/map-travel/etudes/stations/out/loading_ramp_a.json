@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  54
+  48
  ],
  "stand": [
   0.0,
@@ -20,13 +20,13 @@
   "node_loading_ramp_a_crate"
  ],
  "inside_pad": {
-  "min_margin_px": 8.1,
+  "min_margin_px": 9.0,
   "base_on_pad": true,
-  "height_px": 66.8,
+  "height_px": 60.2,
   "bbox_px": [
-   23.2,
-   54.0,
-   127.0,
+   24.5,
+   60.5,
+   125.8,
    120.8
   ],
   "ok": true
@@ -35,8 +35,8 @@
   "node_loading_ramp_a_crate": {
    "translate_xy": [
     [
-     -12.6,
-     15.5
+     -14.6,
+     10.5
     ],
     [
      0,
@@ -44,10 +44,10 @@
     ]
    ],
    "unit": "واحد symbol",
-   "dir_deg": -50.8,
+   "dir_deg": -35.5,
    "easing": "ease-in-out",
    "loop": false,
-   "start": "جعبه 20 واحد پایین‌تر روی شیب",
+   "start": "جعبه 18 واحد پایین‌تر روی شیب",
    "end": "حالت ایستا = پایان (بالاتر)",
    "note": "فقط جعبه، در امتداد شیب؛ بدون چرخش، بدون طناب/دست/پیکان."
   },
