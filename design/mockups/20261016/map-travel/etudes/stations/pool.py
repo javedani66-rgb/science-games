@@ -18,7 +18,7 @@ W_B, W_L, W_D = '#eef4fb', '#ffffff', '#b3c4d8'
 A_B, A_L, A_D = '#43b0ec', '#8fd8ff', '#2b86c8'
 RAIL = '#8b9ab2'
 RED, YEL = '#e8554e', '#ffc93c'
-XF = (1.6, 0, 4)
+XF = (1.55, 0, 8)
 
 
 def poly(p, pts, col, op=1):
@@ -47,7 +47,40 @@ def wave(x0, x1, y, amp=1.6, n=24):
 
 def build():
     p = Pen('pool', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = XF
-    p.tipshadow(0, 17, 44); p.foot_tip(0, 15, 40)
+    p.tipshadow(0, 18, 44); p.foot_tip(0, 16, 38)
+    front = rrect(-34, -24, 34, 17, 9)
+    p.shape(front, W_D, PART, j=.05, step=99)
+    p.stroke(front, PART, j=.05, step=99)
+    rim = rrect(-34, -24, 34, 10, 9)
+    p.shape(rim, W_B, PART, j=.05, step=99)
+    poly(p, [(-24, -22), (14, -22), (14, -20), (-24, -20)], W_L)
+    p.stroke(rim, PART, j=.05, step=99)
+    water = rrect(-27, -17, 27, 3, 5)
+    p.shape(water, A_B, INNER, j=.05, step=99, clip=False)
+    poly(p, [(-26, -16), (26, -16), (26, -10), (-26, -10)], A_D)
+    # خط‌کشی طناب با شناور
+    pline(p, [(-25, -3), (12, -3)], '#ffffff', INNER)
+    for i, x in enumerate((-22, -13, -4, 5, 12)): disc(p, x, -3, 3.1, RED if i % 2 == 0 else YEL)
+    with layer(p, 'wave'):
+        pline(p, wave(-22, -8, 0.5), '#ffffff', INNER)
+        pline(p, wave(-10, 6, -7.5), '#ffffff', INNER)
+    # نردبان فلزی
+    for xr in (19, 29):
+        pline(p, [(xr, -6), (xr, -33)], NAVY, OUT)
+    for y in (-14, -24): pline(p, [(19, y), (29, y)], NAVY, PART, 'butt')
+    for xr in (19, 29):
+        pline(p, [(xr, -6), (xr, -33)], RAIL, PART)
+    for y in (-14, -24): pline(p, [(19, y), (29, y)], RAIL, INNER, 'butt')
+    return pts
+
+
+def wave(x0, x1, y, amp=1.6, n=24):
+    return [(x0 + (x1 - x0) * i / n, y + amp * math.sin(2 * math.pi * i / n * 1.5)) for i in range(n + 1)]
+
+
+def build():
+    p = Pen('pool', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = XF
+    p.tipshadow(0, 18, 44); p.foot_tip(0, 16, 38)
     front = rrect(-34, -14, 34, 16, 9)
     p.shape(front, W_D, PART, j=.05, step=99)
     p.stroke(front, PART, j=.05, step=99)
