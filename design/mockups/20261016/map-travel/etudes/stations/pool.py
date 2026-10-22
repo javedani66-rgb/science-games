@@ -51,21 +51,29 @@ def build():
     poly(p, [(WL, WT + 4), (WR, WT + 4), (WR, WATER), (WL, WATER)], AIR)
     poly(p, [(WL, WATER), (WR, WATER), (WR, WB), (WL, WB)], A_B)
     p.stroke(shell, OUT, j=.15, step=8)
-    # خط شنا
-    ry = -17
-    pline(p, [(WL + 10, ry), (WR - 7.6, ry)], '#ffffff', INNER)
+    # خط شنا (از پشت نردبان رد نمی‌شود: فقط سمت چپ آن)
+    ry = -17; XB = -13   # محور ریل چپ
+    pline(p, [(WL + 10, ry), (-26, ry)], '#ffffff', INNER)
     p.raw('<circle cx="%.1f" cy="%.1f" r="3.4" fill="%s"/>' % (*p.X((WL + 10, ry)), RED))
-    p.raw('<circle cx="%.1f" cy="%.1f" r="3.4" fill="%s"/>' % (*p.X((WR - 7.6, ry)), YEL))
+    p.raw('<circle cx="%.1f" cy="%.1f" r="3.4" fill="%s"/>' % (*p.X((-26, ry)), YEL))
     with layer(p, 'wave'):
-        pline(p, wave(WL + 10, WR - 10, WATER + 5), '#ffffff', INNER)
-    # نردبان: دو ریل تو‌در‌تو، از روی دیواره، روی لبه، به آب
-    for sx, hy, xv in ((12, WT - 4, -5), (20, WT - 11, -19)):
+        pline(p, wave(WL + 10, -23, WATER + 5), '#ffffff', INNER)
+    # نردبان: ریل‌های کنار دیوارهٔ راست، قلاب کوتاه روی لبه؛ زیر ریل ۵٫۸ خاکستری یک ریل ۷٫۶ تیره
+    def rail(sx, hy, xv):
         r = 4.5; X = p.X
         a, b, c, d = X((sx, WT + 6)), X((sx, hy)), X((xv, hy)), X((xv, -12))
-        p.raw('<path d="M%.1f,%.1f L%.1f,%.1f Q%.1f,%.1f %.1f,%.1f L%.1f,%.1f Q%.1f,%.1f %.1f,%.1f L%.1f,%.1f" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (
-            a[0], a[1], b[0], b[1] + r, b[0], b[1], b[0] - r, b[1], c[0] + r, c[1], c[0], c[1], c[0], c[1] + r, d[0], d[1], RAIL, PART))
-    for y in (-50, -40, -24):
-        pline(p, [(-19, y), (-5, y)], RAIL, INNER, 'butt')
+        return 'M%.1f,%.1f L%.1f,%.1f Q%.1f,%.1f %.1f,%.1f L%.1f,%.1f Q%.1f,%.1f %.1f,%.1f L%.1f,%.1f' % (
+            a[0], a[1], b[0], b[1] + r, b[0], b[1], b[0] - r, b[1], c[0] + r, c[1], c[0], c[1], c[0], c[1] + r, d[0], d[1])
+    rails = (rail(12, WT - 4, 1), rail(19, WT - 13, XB))
+    rungs = [p.X([(XB, y), (1, y)]) for y in (-50, -40, -24)]
+    for d in rails:
+        p.raw('<path d="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (d, NAVY, OUT))
+    for q in rungs:
+        p.raw('<path d="M%.1f,%.1f L%.1f,%.1f" stroke="%s" stroke-width="%s" stroke-linecap="butt"/>' % (q[0][0], q[0][1], q[1][0], q[1][1], NAVY, PART))
+    for d in rails:
+        p.raw('<path d="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (d, RAIL, PART))
+    for q in rungs:
+        p.raw('<path d="M%.1f,%.1f L%.1f,%.1f" stroke="%s" stroke-width="%s" stroke-linecap="butt"/>' % (q[0][0], q[0][1], q[1][0], q[1][1], RAIL, INNER))
     return p
 
 

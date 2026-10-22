@@ -18,9 +18,9 @@ W_B, W_L, W_D = '#f0cf86', '#fbe8b8', '#c99a4a'
 R_B, R_L, R_D = '#e2553d', '#ff9b84', '#a83420'
 FT = '#7d8794'; STR = '#7a4a1f'; YEL = '#ffd84d'; YEL_L = '#fff2a8'
 PX = (-48, 0); PW = 15; TOPY = -118; BASE = 7
-DK = ((-62, -40, 12, -26), (-62, -78, 12, -64))
+DK = ((-57, -40, 12, -26), (-57, -78, 12, -64))
 BAR = (-56, -126, 8, -110)
-PV = (-24, -118)
+PV = (-24, -112)
 
 
 def rect(p, x0, y0, x1, y1, col):
@@ -35,18 +35,24 @@ def box(p, x0, y0, x1, y1, col):
     p.shape([(x0, y0), (x1, y0), (x1, y1), (x0, y1)], col, PART, j=.2, step=6)
 
 
-def brace(p, a, b, w=14):
+def _bp(a, b, w):
     dx, dy = b[0] - a[0], b[1] - a[1]; L = math.hypot(dx, dy); nx, ny = -dy / L * w / 2, dx / L * w / 2
-    p.shape([(a[0] + nx, a[1] + ny), (b[0] + nx, b[1] + ny), (b[0] - nx, b[1] - ny), (a[0] - nx, a[1] - ny)], R_B, PART, j=.2, step=6)
+    return [(a[0] + nx, a[1] + ny), (b[0] + nx, b[1] + ny), (b[0] - nx, b[1] - ny), (a[0] - nx, a[1] - ny)]
+
+
+def braces(p, lst):
+    """همهٔ مورب‌ها اول با خط دور، بعد رنگ تخت درون‌نشین روی همه: ضربدر تمیز بدون تکه‌تکه شدن."""
+    for a, b, w in lst: p.shape(_bp(a, b, w), R_B, PART, j=.2, step=6)
+    for a, b, w in lst:
+        p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(_bp(a, b, w - PART))), R_B))
 
 
 def build(out=OUTD):
     p = Pen('scaffold', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((62, -24), (66, 10)), dot=(74, -8)); p.xf = (0.92, -12, 5)
     p.tipshadow(-24, BASE + 3, 36); p.foot_tip(-24, BASE + 2, 24)
     # ۱) مهاربندها (پشت پایه‌ها): X کامل در طبقهٔ پایین، یک مورب در طبقهٔ میانی
-    brace(p, (-48, 4), (0, -24), 13)
-    brace(p, (0, 4), (-48, -24), 13)
-    brace(p, (0, -42), (-48, -62), 16)
+    braces(p, [((-48, 1), (0, -24), 14), ((0, 1), (-48, -24), 14)])
+    braces(p, [((0, -42), (-48, -62), 16)])
     # ۲) پایه‌ها
     for x in PX:
         box(p, x - PW / 2, TOPY, x + PW / 2, BASE, S_B)
@@ -56,17 +62,17 @@ def build(out=OUTD):
     for x0, y0, x1, y1 in DK:
         box(p, x0, y0, x1, y1, W_B)
         rect(p, x0 + 4, y0 + 3, x1 - 4, y0 + 6, W_L); rect(p, x0 + 4, y1 - 5, x1 - 4, y1 - 3, W_D)
-    # ۴) تیرک بالا (کوتاه، تا کنار لولهٔ راست)
-    x0, y0, x1, y1 = BAR
-    box(p, x0, y0, x1, y1, S_B)
-    rect(p, x0 + 4, y0 + 3, x1 - 4, y0 + 6, S_L); rect(p, x0 + 4, y1 - 5, x1 - 4, y1 - 3, S_D)
     # ۵) سایهٔ تماس شاقول روی تختهٔ بالا
     p.raw('<ellipse cx="%.1f" cy="%.1f" rx="%.1f" ry="%.1f" fill="#10083a" opacity=".22"/>' % (p.X((PV[0], -73))[0], p.X((PV[0], -73))[1], 6, 1.8))
     # ۶) شاقول داخل چارچوب
     with layer(p, 'plumb'):
-        p.ln((PV[0], PV[1]), (PV[0], -102), INNER, STR, j=0, probe='ریسمان شاقول')
-        p.shape([(PV[0] - 9, -103), (PV[0] + 9, -103), (PV[0], -85)], YEL, INNER, j=.1, step=99, clip=False)
-        p.fill([(PV[0] - 5, -101), (PV[0] - 2, -101), (PV[0] - 2, -93)], YEL_L)
+        p.ln((PV[0], -112), (PV[0], -95), INNER, STR, j=0, probe='ریسمان شاقول')
+        p.shape([(PV[0] - 6, -96), (PV[0] + 6, -96), (PV[0], -86)], YEL, INNER, j=.1, step=99, clip=False)
+        p.fill([(PV[0] - 3, -95), (PV[0] - 1.2, -95), (PV[0] - 1.2, -91)], YEL_L)
+    # ۴) تیرک بالا (کوتاه، تا کنار لولهٔ راست)
+    x0, y0, x1, y1 = BAR
+    box(p, x0, y0, x1, y1, S_B)
+    rect(p, x0 + 4, y0 + 3, x1 - 4, y0 + 6, S_L); rect(p, x0 + 4, y1 - 5, x1 - 4, y1 - 3, S_D)
     return p
 
 

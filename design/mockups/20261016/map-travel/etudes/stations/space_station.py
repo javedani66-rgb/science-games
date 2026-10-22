@@ -19,9 +19,9 @@ G_B, G_L, G_D = '#f0b03c', '#ffd98a', '#b9741c'
 P_B, P_L, P_D = '#1f8a98', '#58c8d0', '#126370'
 GLASS = '#cfeaff'; M_DD = '#8f98b0'
 
-XF = (0.94, -23, 0)
-CY = -44
-MX, MT, MB = 21, -62, -26
+XF = (0.92, -28, 0)
+CY = -48
+MX, MT, MB = 21, -66, -30
 
 
 def poly(p, pts, col, op=1):
@@ -39,8 +39,6 @@ def build(out=OUTD, ang=0):
     sharp(p, [(-14, 7), (14, 7), (10, MB - 4), (-10, MB - 4)], G_B, PART)
     poly(p, [(-9.5, 3), (-6, 3), (-5, MB - 1), (-7, MB - 1)], G_L)
     poly(p, [(3, MB - 1), (6, MB - 1), (9, 3), (5, 3)], G_D)
-    # ۲) گنبد
-    sharp(p, [(-9, MT + 4)] + ell(0, MT + 4, 9, 14, 180, 360, 10) + [(9, MT + 4)], G_B, PART)
     # ۳) ساقه‌ها و پنل‌ها (لایهٔ متحرک)؛ پنل بعد از ساقه
     with layer(p, 'panels'):
         cx_, cy_ = p.X((0, CY))
