@@ -25,7 +25,7 @@ B_B, B_L, B_D = '#e8b866', '#fbd990', '#b8843a'     # دیلم قرمز
 YEL = '#ffd84d'
 GY = 8
 ANG = 20
-PIV = (10.0, -30.0)
+PIV = (8.0, -27.0)
 BW = 11.0
 REST = -8
 XF = (.9, 0.0, 6.0)
@@ -48,7 +48,7 @@ def pebble(p, cx, cy, r):
 def build():
     p = Pen('excavation', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((-52, 22), (72, -22)), dot=(74, -8)); p.xf = XF
     p.tipshadow(0, GY + 1, 40); p.foot_tip(0, GY, 24)
-    ful = [(-30, GY), (6, -34), (40, GY)]
+    ful = [(-30, GY), (-16, -26), (30, -26), (44, GY)]
     extrude(p, ful, (12, -8), F_B, F_L, F_D, sw=OUT, sw_in=0)
     f = rot(PIV[0], PIV[1], ANG)
     P = lambda pts: TP(f, [(PIV[0] + x, PIV[1] + y) for x, y in pts])
@@ -62,7 +62,7 @@ def build():
         flat(p, P([(-30, BW - 7.5), (44, BW - 7.5), (44, BW - 3), (-30, BW - 3)]), B_D)
         p.stroke(ext, OUT, j=0, step=6)
         # تخته‌سنگ بزرگ روی سر کوتاه چوب (در قاب چوب می‌چرخد)
-        rock = P([(-40, -BW), (-44, -BW - 14), (-36, -BW - 30), (-20, -BW - 36), (-4, -BW - 28), (2, -BW - 12), (-2, -BW)])
+        rock = P(ell(-22, -BW - 16, 21, 17, 0, 360, 22))
         extrude(p, rock, DD, S_B, S_L, S_D, sw=OUT, sw_in=0)
     return p
 
