@@ -67,14 +67,17 @@ def sail(p, pts, col):
 
 
 def ship(p):
-    BY = -46
-    hull = [(-88, -60), (-80, -50), (-68, -46), (28, -46), (38, -60), (34, -46), (22, -6), (-58, -6), (-76, -30)]
+    BY = -50                                                                              # پای دکل: داخل کشتی، روی کف عرشه
     hull = [(-88, -60), (-70, -46), (28, -46), (40, -60), (30, -30), (22, -6), (-58, -6), (-76, -32)]
     MXX = -22
-    sail(p, [(MXX, -112), (MXX + 38, BY - 2), (MXX, BY - 2)], CREAM_)                    # بادبان بزرگ
+    extrude(p, hull, D_H, H_F, H_T, H_S, mid=H_F, sw=HERO_W, sw_in=0)                    # بدنه: یک شکل
+    dx, dy = D_H                                                                           # درون کشتی توخالی: دهانهٔ تیره با لبهٔ روشن جلو (قاعده ۱۹)
+    fq = lambda u, x: (x + dx * u, -46 + dy * u)
+    poly(p, [fq(.2, -66), fq(.2, 24), fq(.9, 24), fq(.9, -66)], '#7a3a12')
+    poly(p, [fq(.2, -66), fq(.2, 24), fq(.32, 24), fq(.32, -66)], '#b85a1c')
+    sail(p, [(MXX, -112), (MXX + 38, BY - 2), (MXX, BY - 2)], CREAM_)                    # بادبان بزرگ (جلوی دهانه، پایش در کشتی)
     sail(p, [(MXX - 3.6, -118), (MXX + 3.6, -118), (MXX + 3.6, BY), (MXX - 3.6, BY)], MAST)   # دکل
     sail(p, [(MXX + 2.2, -118), (MXX + 22, -112), (MXX + 2.2, -106)], FLAG)              # پرچم
-    extrude(p, hull, D_H, H_F, H_T, H_S, mid=H_F, sw=HERO_W, sw_in=0)                    # بدنه: یک شکل
     p.raw('<path d="M%s" fill="none" stroke="%s" stroke-width="1.8" stroke-linecap="round"/>' % (' L'.join('%.1f,%.1f' % q for q in p.X([(-68, -24), (20, -24)])), SEAM_C))
     for x in (-48, -22, 4):                                                               # سه روزنه
         a, b = p.X((x, -35)); p.raw('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="%s"/>' % (a, b, 3.8 * p.xf[0], CREAM_))

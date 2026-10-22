@@ -59,9 +59,9 @@ def bollard(p):
 
 def pole(p):
     x, base = POLE_X, DECK_Y0 - 3
+    extrude(p, [(x + 7, -78), (x + 7, -97), (x + 21, -97)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)     # تکیه‌گاه مورب زیر بازو
     extrude(p, [(x - 7, -104), (x + 7, -104), (x + 6, base), (x - 6, base)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)
     extrude(p, [(x + 7, -104), (x + 40, -104), (x + 40, -97), (x + 7, -97)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)   # بازوی فانوس (یک شکل با ستون)
-    extrude(p, [(x + 7, -78), (x + 7, -97), (x + 28, -97)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)     # تکیه‌گاه مورب زیر بازو
 
 
 def lantern(p):
