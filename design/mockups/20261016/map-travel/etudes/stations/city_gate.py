@@ -69,7 +69,7 @@ def build():
     # لنگهٔ راست (نیمه‌باز)
     with layer(p, 'leaf'):
         p.shape([(CX + 6, BASE - 1), (CX + OR - 1, BASE - 1), (CX + OR - 1, -22), (CX + 6, -29)], W_B, INNER, j=.08, step=6, clip=False)
-        poly(p, [(CX + 12.5, BASE - 4), (CX + 15, BASE - 4), (CX + 15, -22), (CX + 12.5, -24)], W_L)
+        poly(p, [(CX + 12.5, BASE - 4), (CX + 15, BASE - 4), (CX + 15, -19), (CX + 12.5, -21)], W_L)
         disc(p, CX + 9.5, -3, 1.8, YEL)
     return p
 

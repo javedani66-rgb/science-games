@@ -20,7 +20,7 @@ FT = '#7d8794'; STR = '#7a4a1f'; YEL = '#ffd84d'; YEL_L = '#fff2a8'
 PX = (-48, 0); PW = 15; TOPY = -112; BASE = 7
 DK = ((-62, -48, 12, -34), (-62, -94, 12, -80))
 BAR = (-56, -118, 38, -106)
-PV = (28, -106); BOB_Y = (-20, 4)
+PV = (28, -106); BOB_Y = (-26, 2)
 
 
 def rect(p, x0, y0, x1, y1, col):
@@ -46,7 +46,7 @@ def build(out=OUTD):
     p.tipshadow(-24, BASE + 3, 36); p.foot_tip(-24, BASE + 2, 24)
     # ۱) کفشک‌ها
     # ۲) مورب‌ها (پشت پایه‌ها)
-    brace(p, (-48, -2), (0, -32), 18)
+    brace(p, (-48, -8), (0, -34), 18)
     brace(p, (0, -48), (-48, -80), 18)
     # ۳) پایه‌ها
     for x in PX:
@@ -64,8 +64,8 @@ def build(out=OUTD):
     # ۶) شاقول
     with layer(p, 'plumb'):
         p.ln((PV[0], PV[1]), (PV[0], BOB_Y[0] + 1), INNER, STR, j=0, probe='ریسمان شاقول')
-        p.shape([(PV[0], BOB_Y[0]), (PV[0] + 8, -8), (PV[0], BOB_Y[1]), (PV[0] - 8, -8)], YEL, PART, j=.1, step=6, clip=False)
-        p.fill([(PV[0] - 3.5, -9), (PV[0] - 1, -13), (PV[0] - 1, -8)], YEL_L)
+        p.shape([(PV[0], BOB_Y[0]), (PV[0] + 10, -11), (PV[0], BOB_Y[1]), (PV[0] - 10, -11)], YEL, PART, j=.1, step=6, clip=False)
+        p.fill([(PV[0] - 4.5, -12), (PV[0] - 1.5, -17), (PV[0] - 1.5, -10)], YEL_L)
     disc(p, PV[0], PV[1] + 6, 2.2, STR)   # بست ریسمان زیر تیرک (ثابت)
     return p
 

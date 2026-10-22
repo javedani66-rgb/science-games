@@ -24,14 +24,14 @@ W_B, W_L, W_D = '#b77a3a', '#d9a463', '#7a4a1f'
 F_B = '#a8672f'
 LAB = '#d9503a'
 
-PX = (-23, 23)             # مرکز دو پشته
-SW, SH, STEP = 26, 22, 19  # گونی
-CH = 3                     # بریدگی گوشه
+PX = (-24.5, 24.5)             # مرکز دو پشته
+SW, SH, STEP = 34, 23, 17  # گونی
+NS = 5                     # گونی در هر پشته
 Y0 = 6                     # کف گونی اول
-OFFS = (0, 1.5, -1.5, 0)
-DECK_W, DECK_Y0, DECK_Y1 = 32, 0, 11
+OFFS = (0, 2.5, -2.5, 2, -1.5)  # جابه‌جایی افقی؛ در دو پشته دقیقاً یکی است
+DECK_W, DECK_Y0, DECK_Y1 = 38, 0, 11
 GROUND = 19
-DROP = 15
+DROP = 16
 
 
 def poly(p, pts, col, op=1):
@@ -39,25 +39,29 @@ def poly(p, pts, col, op=1):
 
 
 def sack_pts(cx, yb):
-    x0, x1, y0, y1 = cx - SW / 2, cx + SW / 2, yb - SH, yb
-    return [(x0 + CH, y0), (x1 - CH, y0), (x1, y0 + CH), (x1, y1 - CH), (x1 - CH, y1), (x0 + CH, y1), (x0, y1 - CH), (x0, y0 + CH)]
+    """بالش گونی: ابَربیضی (n=3) ⇒ دو سر کمی گرد و بدنه پر."""
+    cy = yb - SH / 2; pts = []
+    for k in range(32):
+        t = math.radians(k * 360 / 32); c, sn = math.cos(t), math.sin(t)
+        pts.append((cx + SW / 2 * math.copysign(abs(c) ** (2 / 3), c), cy + SH / 2 * math.copysign(abs(sn) ** (2 / 3), sn)))
+    return pts
 
 
 def sack(p, cx, yb):
-    top = yb - SH; x1 = cx + SW / 2
+    top = yb - SH
     pts = sack_pts(cx, yb)
-    p.shape(pts, S_B, PART, j=.12, step=6)
-    poly(p, [(cx + 5, top + 3), (x1, top + 3), (x1, yb - 3), (cx + 5, yb - 3)], S_D)                 # سایهٔ تیز راست
-    poly(p, [(cx - 9, top + 4.5), (cx + 3, top + 4.5), (cx + 3, top + 8), (cx - 9, top + 8)], S_L)     # نوار روشن
-    poly(p, [(cx - 5, top + 11), (cx + 5, top + 11), (cx + 5, top + 17), (cx - 5, top + 17)], LAB)    # برچسب
-    p.stroke(pts, PART, j=.12, step=6)
+    p.shape(pts, S_B, INNER, j=.08, step=99)
+    poly(p, [(cx + 9, top + 4), (cx + 13, top + 4), (cx + 13, yb - 4), (cx + 9, yb - 4)], S_D)           # سایهٔ تیز راست
+    poly(p, [(cx - 12, top + 6), (cx + 3, top + 6), (cx + 3, top + 8.5), (cx - 12, top + 8.5)], S_L)       # نوار روشن
+    poly(p, [(cx - 7, top + 11.5), (cx + 5, top + 11.5), (cx + 5, top + 17.5), (cx - 7, top + 17.5)], LAB)  # برچسب
+    p.stroke(pts, INNER, j=.08, step=99)
 
 
 def sack_y(i): return Y0 - STEP * i
 
 
 def pallet_feet(p, cx):
-    for dx in (-16, 7):
+    for dx in (-20, 11):
         p.shape([(cx + dx, DECK_Y1 - 4), (cx + dx + 9, DECK_Y1 - 4), (cx + dx + 9, GROUND), (cx + dx, GROUND)], F_B, INNER, j=.1, step=6, clip=False)
         poly(p, [(cx + dx + 5.5, DECK_Y1 + 1), (cx + dx + 7, DECK_Y1 + 1), (cx + dx + 7, GROUND - 2), (cx + dx + 5.5, GROUND - 2)], W_D)
 
@@ -72,14 +76,14 @@ def deck(p, cx):
 
 
 def build(out=OUTD):
-    p = Pen('materials_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.15, -26, -7)
+    p = Pen('materials_store', 'city'); pad(p, line=((16, 27), (34, 24)), tri=((44, -30), (62, 6)), dot=(58, -16)); p.xf = (1.08, -25, -8)
     for cx in PX:
-        p.tipshadow(cx, GROUND + 1.5, 20); p.foot_tip(cx, GROUND, 13)
+        p.tipshadow(cx, GROUND + 1.5, 22); p.foot_tip(cx, GROUND, 14)
     for cx in PX: pallet_feet(p, cx)
     for cx in PX:
-        for i in range(3): sack(p, cx + OFFS[i], sack_y(i))
+        for i in range(NS - 1): sack(p, cx + OFFS[i], sack_y(i))
     with layer(p, 'bags'):
-        for cx in PX: sack(p, cx + OFFS[3], sack_y(3))
+        for cx in PX: sack(p, cx + OFFS[NS - 1], sack_y(NS - 1))
     for cx in PX: deck(p, cx)
     return p
 
