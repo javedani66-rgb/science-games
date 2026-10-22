@@ -55,9 +55,6 @@ def build():
     for y in rungs: pline(p, [(xs, y), (xs + XG, y)], NAVY, 12, 'butt')
     for x in (xs, xs + XG): pline(p, rail(x), RAIL, 8)
     for y in rungs: pline(p, [(xs, y), (xs + XG, y)], RAIL, 6, 'butt')
-    for x in (xs, xs + XG): pline(p, [(x - 3, ys - 6), (x - 3, ys - LH + 4)], RAIL_L, 2.5)
-    for x in (xs, xs + XG): pline(p, [(x + 4.5, ys - 6), (x + 4.5, ys - LH + 4)], RAIL_D, 2)
-    for y in rungs: pline(p, [(xs + 6, y - 2.5), (xs + XG - 6, y - 2.5)], RAIL_L, 2.5, 'butt')
     # ۴) توپ ساحلی درشت
     with layer(p, 'ball'):
         cx, cy = BALL_C

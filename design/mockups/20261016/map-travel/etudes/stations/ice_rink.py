@@ -33,8 +33,10 @@ def skate(p, ox, oy, k=1.0):
     with_pts = lambda pts: pts
     blade = T([(-6, -9), (-6, 0), (92, 0), (104, -5), (109, -13), (101, -14), (97, -9)])
     extrude(p, blade, D, M_B, M_L, M_D, mid=M_B)
+    T0 = T
     for x0 in (12, 74):
-        extrude(p, T(rect(x0, -22, x0 + 12, -8)), D, M_B, M_L, M_D, mid=M_B)
+        extrude(p, T0(rect(x0, -32, x0 + 12, -8)), D, M_B, M_L, M_D, mid=M_B)
+    T = lambda pts: [(ox + x * k, oy + (y - 10) * k) for x, y in pts]   # پوتین ۱۰ واحد بالاتر از تیغه
     boot = T([(0, -100), (38, -100), (40, -64), (62, -48), (88, -42), (101, -30), (101, -20), (0, -20)])
     extrude(p, boot, D, BT_B, BT_L, BT_D)
     poly(p, T([(0, -100), (38, -100), (38.5, -86), (0, -86)]), RD_B)                      # سرِ ساق
