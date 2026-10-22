@@ -1,81 +1,122 @@
 #!/usr/bin/env python3
-"""ایستگاه «بارانداز» (بازطراحی ۱۸ اکتبر شب، D123): قهرمان = چرخ‌دستیِ بارکش، درشت و پرجزئیات، روی سکوی دریایی:
-چرخ‌های بزرگ پره‌دار، کف تخته‌ای با لبهٔ روشن، دسته، سه جعبهٔ رنگی با تخته‌های ضربدری، بشکه با کمربند آهنی، طناب،
-و چوب‌پرچم بلند با پرچم راه‌راه که از بالای فیگور رد می‌شود (آزاد از بالا)؛ پایهٔ چرخ‌دستی سمت چپ می‌ماند.
-لایه‌های متحرک (هرکدام چرخش حول مرکز خودش): node_wheel_dock_wheel = چرخ راست (id قدیمی)، node_wheel_dock_wheel_back = چرخ چپ.
-بدنه، جعبه‌ها و دسته ثابت‌اند؛ چرخ‌ها دایره‌اند و در هر زاویه از سکو بیرون نمی‌زنند."""
+"""ایستگاه «بارانداز» (اصلاح خط ۲۳ اکتبر): قهرمان = چرخ‌دستیِ بارکش ¾ سه‌بعدی روی سکوی دریایی. سه جزء درشت:
+۱) کفِ چرخ‌دستی (جعبهٔ ¾ با رویه/جلو/پهلو) + دستهٔ بلند؛ ۲) بار = صندوق بزرگ زرد با ضربدر نازک و بشکهٔ قهوه‌ای با دو حلقهٔ آهنی؛ ۳) دو چرخ هم‌اندازه و دارای فاصله.
+بین وجه‌ها خط نیست (فقط پلهٔ رنگ)؛ خط دور اصلی ۳٫۶، فرعی ۲٫۶ (دسته، ضربدر، پره‌ها).
+لایه‌های متحرک (چرخش حول مرکز خودش): node_wheel_dock_wheel = چرخ راست (id قدیمی)، node_wheel_dock_wheel_back = چرخ چپ. چرخ‌ها دایره‌اند و در هر زاویه از سکو بیرون نمی‌زنند."""
 import sys, pathlib, json, math
 HERE = pathlib.Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent))
+sys.path.insert(0, str(HERE.parent)); sys.path.insert(0, str(HERE))
 import station_kit
 from station_kit import *
 from functools import partial
 station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D123: حاشیهٔ چپ/راست ≥۴px
+
+# ---- کمک‌های ¾ سه‌بعدی (محلی؛ سه پلهٔ رنگ، بدون خط بین وجه‌ها، خط دور یکدست) ----
+from shapely.geometry import Polygon, MultiPoint, box as sbox
+from shapely.ops import unary_union
+from g4_helpers import poly, disc, arcline
+from r6lib import extrude
+M_OUT, M_PART = 3.6, 2.6          # قاعدهٔ ۲۴: خط اصلی ۳٫۶، فرعی ۲٫۶
+
+
+def gfill(p, g, col):
+    for q in (g.geoms if hasattr(g, 'geoms') else [g]):
+        if q.geom_type == 'Polygon' and q.area > .05: poly(p, list(q.exterior.coords)[:-1], col)
+
+
+def sil(geoms):
+    s = unary_union(geoms).buffer(.01)
+    return s if s.geom_type == 'Polygon' else max(s.geoms, key=lambda g: g.area)
+
+
+def sil_open(p, s, fill, sw=M_OUT):
+    p.shape(list(s.exterior.coords)[:-1], fill, sw, j=0, step=6, clip=False)
+
+
+def sil_close(p, s, sw=M_OUT):
+    p.stroke(list(s.exterior.coords)[:-1], sw, j=0, step=6)
+
+
+class Fr:
+    """استوانه/مخروط ناقص ¾: مرکز رویه (cx,yt) شعاع rt (۰ = مخروط)، مرکز کف yb شعاع rb؛ ellipse با نسبت k."""
+    def __init__(s, cx, yt, yb, rt, rb, k=.32):
+        s.cx, s.yt, s.yb, s.rt, s.rb, s.k = cx, yt, yb, rt, rb, k
+        s.bot = Polygon(ell(cx, yb, rb, rb * k, 0, 360, 40))
+        s.top = Polygon(ell(cx, yt, rt, rt * k, 0, 360, 40)) if rt > 0 else None
+        pts = list(s.bot.exterior.coords) + (list(s.top.exterior.coords) if s.top else [(cx, yt)])
+        s.body = MultiPoint(pts).convex_hull
+
+    def r(s, y): return s.rt + (s.rb - s.rt) * (y - s.yt) / (s.yb - s.yt)
+
+    def above(s, y):
+        r = s.r(y)
+        return unary_union([sbox(s.cx - 400, s.yt - 400, s.cx + 400, y), Polygon(ell(s.cx, y, r, r * s.k, 0, 360, 40))])
+
+    def strip(s, f0, f1):
+        y0 = s.yt - (s.rt * s.k if s.rt > 0 else 0); y1 = s.yb + s.rb * s.k + 1
+        return Polygon([(s.cx + f0 * s.r(y0), y0), (s.cx + f1 * s.r(y0), y0), (s.cx + f1 * s.r(y1), y1), (s.cx + f0 * s.r(y1), y1)])
+
+    def region(s, ya=None, yb=None):
+        g = s.body
+        if yb is not None: g = g.intersection(s.above(yb))
+        if ya is not None: g = g.difference(s.above(ya))
+        return g
+
+    def paint(s, p, L, M, D, TOP=None, bands=(), hl=None):
+        """سه پله: روشن چپ، میانی، تیره راست؛ نوارهای رنگی دور بدنه می‌پیچند."""
+        def tri(g, l, m, d):
+            gfill(p, g, m); gfill(p, g.intersection(s.strip(-1.1, -.32)), l); gfill(p, g.intersection(s.strip(.28, 1.1)), d)
+        tri(s.body, L, M, D)
+        for ya, yb, (l, m, d) in bands: tri(s.region(ya, yb), l, m, d)
+        if hl: gfill(p, s.body.intersection(s.strip(-.8, -.62)).intersection(s.above(s.yb - 1)), hl)
+        if s.top is not None and TOP: gfill(p, s.top, TOP)
+
+    def front_arc(s, y=None, r=None, a0=0, a1=180):
+        y = s.yb if y is None else y; r = s.r(y) if r is None else r
+        return ell(s.cx, y, r, r * s.k, a0, a1, 24)
+
+from shapely.geometry import LineString
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/wheel_dock'
-XF = (1.23, 12.4, -13.2)
-BED = '#c98a3a'; BED_L = '#e8b25a'; BED_D = '#8a5f0c'; WOOD_H = '#ffd84d'
-CR_A = '#ffd84d'; CR_A_D = '#d9961c'; CR_B = '#f59a3a'; CR_B_D = '#b4620f'; CR_C = '#52c7c0'; CR_C_D = '#2a8f8a'
-BAR = '#a8672f'; BAR_L = '#d29255'; IRON = '#c9d3ea'
-WH = '#7b8fe0'; WH_L = '#a9b8f2'; WH_D = '#241a5e'
-R = 12; WY = 4; WX = (-44, -8)
-
-
-def flat(p, pts, col):
-    p.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col))
-
-
-def rect(p, x0, y0, x1, y1, col): flat(p, [(x0, y0), (x1, y0), (x1, y1), (x0, y1)], col)
-
-
-def crate(p, x0, y0, x1, y1, col, dk):
-    p.shape([(x0, y0), (x1, y0), (x1, y1), (x0, y1)], col, PART, j=.2, step=6)
-    rect(p, x0 + 3, y0 + 3, x1 - 3, y0 + 5.5, '#fff3b0')                           # نور بالا
-    p.ln((x0 + 5, y0 + 6), (x1 - 5, y1 - 5), INNER, dk, j=0)                       # تختهٔ ضربدری
-    p.ln((x1 - 5, y0 + 6), (x0 + 5, y1 - 5), INNER, dk, j=0)
-
-
-def cart(p):
-    # دسته (پشت بدنه)
-    p.ln((-52, -8), (-62, -28), PART + 2 * INNER, NAVY, j=.05); p.ln((-52, -8), (-62, -28), PART, WOOD_H, j=.05)
-    p.ln((-66, -30), (-58, -30), PART + 2 * INNER, NAVY, j=.05); p.ln((-66, -30), (-58, -30), PART, WOOD_H, j=.05)
-    # چوب‌پرچم و پرچم راه‌راه (پشت جعبه‌ها)
-    rect(p, -41, -108, -37, -59, '#7a4a1c'); rect(p, -41, -108, -39.5, -59, '#a8703c')
-    flat(p, [(-37, -108), (-22, -106), (-8, -100), (-22, -98), (-37, -92)], '#ef6a4a')
-    flat(p, [(-37, -103), (-22, -102), (-14, -100), (-22, -99), (-37, -98)], '#fff8e0')
-    flat(p, [(-37, -108), (-26, -107), (-37, -105)], '#ff9b6a')
-    # بدنه
-    p.shape([(-58, -17), (6, -17), (6, 4), (-58, 4)], BED, PART, j=.2, step=6)
-    rect(p, -54, -14, 2, -11.5, BED_L)
-    for x in (-26, -14): p.ln((x, -7), (x, 1), INNER, BED_D, j=0)
-    p.ln((-54, -7.5), (2, -7.5), INNER, BED_D, j=0)
-    # بار
-    crate(p, -50, -43, -26, -17, CR_A, CR_A_D)
-    crate(p, -50, -69, -26, -43, CR_B, CR_B_D)
-    crate(p, -24, -39, -2, -17, CR_C, CR_C_D)
-    # بشکه
-    p.shape([(-24, -63), (-4, -63), (-1, -53), (-4, -39), (-24, -39), (-27, -53)], BAR, PART, j=.25, step=5)
-    rect(p, -24, -59, -4, -57, IRON); rect(p, -24, -46, -4, -44, IRON); rect(p, -23, -62, -17, -41, BAR_L)
-    # طناب دور بار
-    p.ln((-48, -52), (-28, -52), INNER, '#fff3c4', j=0)
+XF = (1.0, 6.0, -8.0)
+BED = ('#c98a3a', '#f0c070', '#8a5a1e')            # جلو / رویه / پهلو
+CR = ('#ffd84d', '#fff0a0', '#d9961c'); CR_X = '#c98512'
+BAR = ('#d29255', '#a8672f', '#6e3f17'); IRON = ('#e4ebf7', '#aab6d3', '#6c7aa0')
+HAND = '#ffd84d'; NAVY_ = '#241a5e'
+TIRE = '#3b3380'; RIM = '#7b8fe0'; RIM_L = '#a9b8f2'; SPK = '#fff3c4'
+R = 14; WY = 6; WX = (-36, 18)
 
 
 def wheel(p, cx):
-    p.shape(ell(cx, WY, R, R, 0, 360, 40), WH, PART, j=.3, step=99, clip=False)
+    disc(p, cx, WY, R, TIRE)
+    disc(p, cx, WY, R - 4.5, RIM)
     for a in (0, 60, 120):
         t = math.radians(a + 25)
-        p.ln((cx - (R - 4) * math.cos(t), WY - (R - 4) * math.sin(t)), (cx + (R - 4) * math.cos(t), WY + (R - 4) * math.sin(t)), INNER, '#fff3c4', j=0)   # پره‌ها
-    p.raw('<circle cx="%.1f" cy="%.1f" r="3.6" fill="%s"/>' % (*p.X((cx, WY)), WH_D))
-    p.raw('<circle cx="%.1f" cy="%.1f" r="1.4" fill="%s"/>' % (*p.X((cx, WY)), '#ffd84d'))
+        p.ln((cx - (R - 5) * math.cos(t), WY - (R - 5) * math.sin(t)), (cx + (R - 5) * math.cos(t), WY + (R - 5) * math.sin(t)), 3.2, SPK, j=0)
+    disc(p, cx, WY, 4.2, NAVY_); disc(p, cx, WY, 1.8, '#ffd84d')
+    p.shape(ell(cx, WY, R, R, 0, 360, 40), 'none', M_OUT, j=0, step=99, clip=False)
 
 
 def build(out=None):
     p = Pen('wheel_dock', 'sea'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16))
     p.xf = XF
     for cx in WX:
-        p.tipshadow(cx, WY + R - 1, 14); p.foot_tip(cx, WY + R - 2, 6)
-    cart(p)
+        p.tipshadow(cx, WY + R - 1, 15); p.foot_tip(cx, WY + R - 2, 8)
+    # ۱) دسته (پشت کف)، سپس کف
+    h1 = LineString([(-50, -6), (-68, -34)]).buffer(3.4); h2 = LineString([(-74, -35), (-62, -35)]).buffer(3.6)
+    HS = sil([h1, h2])
+    sil_open(p, HS, HAND, M_PART); sil_close(p, HS, M_PART)
+    extrude(p, [(-56, -14), (38, -14), (38, 6), (-56, 6)], (14, -11), BED[0], BED[1], BED[2], mid=BED[0], sw=M_OUT, sw_in=0)
+    # ۲) بار: صندوق و بشکه
+    extrude(p, [(-46, -58), (-8, -58), (-8, -18), (-46, -18)], (12, -9), CR[0], CR[1], CR[2], mid=CR[0], sw=M_OUT, sw_in=0)
+    p.ln((-42, -54), (-12, -22), 2.6, CR_X, j=0); p.ln((-12, -54), (-42, -22), 2.6, CR_X, j=0)
+    bar = Fr(26, -56, -20, 15, 15)
+    BS = sil([bar.body, bar.top])
+    sil_open(p, BS, BAR[1])
+    bar.paint(p, *BAR[:3] if False else (BAR[0], BAR[1], BAR[2]), TOP='#e8b57c', bands=[(-52, -48, IRON), (-32, -28, IRON)])
+    sil_close(p, BS)
+    # ۳) چرخ‌ها (هم‌اندازه، با فاصله؛ لایهٔ متحرک)
     with layer(p, 'wheel_back'): wheel(p, WX[0])
     with layer(p, 'wheel'): wheel(p, WX[1])
     return p
