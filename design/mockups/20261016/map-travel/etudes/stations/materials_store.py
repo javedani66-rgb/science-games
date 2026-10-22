@@ -52,8 +52,8 @@ def sack(p, cx, yb):
     pts = sack_pts(cx, yb)
     p.shape(pts, S_B, INNER, j=.08, step=99)
     poly(p, [(cx + 9, top + 4), (cx + 13, top + 4), (cx + 13, yb - 4), (cx + 9, yb - 4)], S_D)           # سایهٔ تیز راست
-    poly(p, [(cx - 12, top + 6), (cx + 3, top + 6), (cx + 3, top + 8.5), (cx - 12, top + 8.5)], S_L)       # نوار روشن
-    poly(p, [(cx - 7, top + 11.5), (cx + 5, top + 11.5), (cx + 5, top + 17.5), (cx - 7, top + 17.5)], LAB)  # برچسب
+    poly(p, [(cx - 12, top + 7), (cx - 8.5, top + 7), (cx - 8.5, top + 15), (cx - 12, top + 15)], S_L)       # نوار روشن
+    poly(p, [(cx - 4, top + 8), (cx + 6, top + 8), (cx + 6, top + 14), (cx - 4, top + 14)], LAB)           # برچسب
     p.stroke(pts, INNER, j=.08, step=99)
 
 

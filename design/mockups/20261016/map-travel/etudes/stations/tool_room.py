@@ -21,9 +21,10 @@ S_B, S_L, S_D = '#efe3c4', '#fff7e0', '#cdbb90'      # پایهٔ سنگی
 W_B, W_L, W_D = '#f3cf7a', '#ffe9a8', '#d9a647'      # تخته
 F_B, F_L, F_D = '#d4dce8', '#f6f9fd', '#94a2b8'      # فولاد
 H_B, H_L, H_D = '#8b5fd0', '#b898ec', '#5d3a9e'      # دستهٔ بنفش
-HOLE = '#a8742a'
-BX0, BX1, BY0, BY1 = -92, 32, -122, -8
-XF = (0.8, -4.0, 0.0)
+T_B, T_L, T_D = '#2fb5a8', '#7fe0d4', '#1f7f77'      # دستهٔ فیروزه‌ای (چکش)
+SCREW = '#a8742a'
+BX0, BX1, BY0, BY1 = -84, 24, -146, -8
+XF = (0.85, -3.3, 0.0)
 
 
 def poly(p, pts, col):
@@ -43,7 +44,7 @@ def part(p, pts, col, sw=INNER):
 
 def ring(p, x, y, r, col, hole, sw=INNER):
     p.shape(ell(x, y, r, r, 0, 360, 20), col, sw, j=.05, step=99, clip=False)
-    p.fill(ell(x, y, 3.4, 3.4, 0, 360, 14), hole)
+    p.fill(ell(x, y, 3.2, 3.2, 0, 360, 14), hole)
 
 
 def bar(a, b, w0, w1):
@@ -64,56 +65,57 @@ def board(p):
     part(p, [(BX0, BY0), (BX1, BY0), (BX1, BY1), (BX0, BY1)], W_B, PART)
     rect(p, BX0 + 5, BY0 + 5, BX1 - 5, BY0 + 8.5, W_L)                       # نور بالا
     rect(p, BX1 - 11, BY0 + 11, BX1 - 5, BY1 - 5, W_D)                       # سایهٔ تیز راست
-    for i in range(8): disc(p, -80 + i * 15.5, -113, 2.3, HOLE)             # ردیف سوراخ بالا
 
 
 def plinth(p):
-    part(p, [(-96, -13), (36, -13), (36, 7), (-96, 7)], S_B, PART)
-    rect(p, -91, -9, 25, -6.5, S_L)
-    rect(p, 28, -6.5, 31, 2.5, S_D)
-    rect(p, -91, 1.5, 31, 3.5, S_D)
+    part(p, [(-88, -13), (28, -13), (28, 7), (-88, 7)], S_B, PART)
+    rect(p, -83, -9, 18, -6.5, S_L)
+    rect(p, 20, -6.5, 23, 2.5, S_D)
+    rect(p, -83, 1.5, 23, 3.5, S_D)
 
 
 def scissors(p, cx):
-    P = (cx, -60); TIPY = -98; RC = (11, -32)
+    P = (cx, -52); TIPY = -84; RC = (9.5, -29)
 
     def half(sg):
-        tip = (cx - sg * 7, TIPY); rc = (cx + sg * RC[0], RC[1])
-        hb = bar(P, (rc[0], rc[1] - 4), 12, 12)
-        part(p, hb, H_B, INNER)
-        ring(p, rc[0], rc[1], 8, H_B, W_B)
-        poly(p, strip(P, rc, -4.2, 2.2, .3, .7), H_L)
-        part(p, bar((P[0] - sg * 0.5, P[1] + 3), tip, 13, 3.5), F_B, INNER)       # تیغه
-        poly(p, strip((P[0], P[1]), tip, -3.6 * sg, 1.8, .18, .86), F_L)
+        tip = (cx - sg * 6, TIPY); rc = (cx + sg * RC[0], RC[1])
+        part(p, bar(P, (rc[0], rc[1] - 3), 12.5, 12.5), H_B, INNER)
+        ring(p, rc[0], rc[1], 7, H_B, W_B)
+        poly(p, strip(P, rc, -4.4, 2.2, .3, .6), H_L)
+        part(p, bar((P[0], P[1] + 3), tip, 13, 3.5), F_B, INNER)       # تیغه
+        poly(p, strip((P[0], P[1]), tip, -3.7 * sg, 1.8, .2, .84), F_L)
     half(1)                                                                         # نیمهٔ ثابت (تیغه بالا-چپ)
     with layer(p, 'scissors'):                                                      # نیمهٔ متحرک
         half(-1)
     p.shape(ell(P[0], P[1] + 1, 4.6, 4.6, 0, 360, 14), F_D, INNER, j=.05, step=99, clip=False)
     p.fill(ell(P[0] - 1, P[1], 1.4, 1.4, 0, 360, 8), F_L)
-    return (P[0], P[1])
+    return P
 
 
-def hammer(p, cx):
-    part(p, bar((cx, -92), (cx, -28), 13, 13), H_B, INNER)
-    poly(p, strip((cx, -92), (cx, -28), -4.3, 2.2, .26, .94), H_L)
-    poly(p, strip((cx, -92), (cx, -28), 2.2, 2.2, .26, .94), H_D)
-    claw = [(cx - 4, -104), (cx - 11, -103.5), (cx - 17, -98), (cx - 20, -88), (cx - 21, -77), (cx - 16, -84), (cx - 12, -90), (cx - 4, -93)]
-    part(p, claw, F_B, INNER)
-    part(p, [(cx - 8, -106), (cx + 16, -106), (cx + 16, -82), (cx - 8, -82)], F_B, INNER)
-    rect(p, cx - 5, -103.5, cx + 6, -101, F_L)
-    rect(p, cx + 10.5, -103, cx + 14, -84.5, F_D)
+def hammer(p, ox, oy):
+    """چکش میخ‌کش افقی: دسته به راست، سطح کوبه بالا، چنگک پایین (چرخش ۹۰- درجه از طرح عمودی)."""
+    f = rot(ox, oy, -90)
+    T = lambda pts: TP(f, pts)
+    part(p, T(bar((0, 4), (0, 74), 13, 13)), T_B, INNER)
+    poly(p, T(strip((0, 4), (0, 74), -4.3, 2.2, .3, .96)), T_L)
+    poly(p, T(strip((0, 4), (0, 74), 2.2, 2.2, .3, .96)), T_D)
+    claw = [(-4, -14), (-11, -13.5), (-17, -8), (-20, 2), (-21, 13), (-16, 6), (-12, 0), (-4, -3)]
+    part(p, T(claw), F_B, INNER)
+    part(p, T([(-8, -16), (16, -16), (16, 8), (-8, 8)]), F_B, INNER)
+    poly(p, T([(-5, -13.5), (6, -13.5), (6, -11), (-5, -11)]), F_L)
+    poly(p, T([(10.5, -13), (14, -13), (14, 5.5), (10.5, 5.5)]), F_D)
 
 
 def pliers(p, cx):
-    P = (cx, -62); TIPY = -99
+    P = (cx, -57); TIPY = -87
     for sg in (1, -1):
-        rc = (cx + sg * 12, -30)
-        part(p, bar((P[0], P[1] + 4), (rc[0], rc[1]), 13, 13), H_B, INNER)
-        poly(p, strip(P, rc, -4.3 * sg if sg > 0 else 2.3, 2.2, .3, .92), H_L if sg > 0 else H_D)
+        rc = (cx + sg * 9.5, -26)
+        part(p, bar((P[0], P[1] + 4), rc, 13, 13), H_B, INNER)
+        poly(p, strip(P, rc, -4.3 if sg > 0 else 2.3, 2.2, .3, .9), H_L if sg > 0 else H_D)
     for sg in (1, -1):
-        tip = (cx - sg * 8.5, TIPY)
+        tip = (cx - sg * 7.5, TIPY)
         part(p, bar((P[0], P[1] + 3), tip, 15, 10), F_B, INNER)
-        poly(p, strip((P[0], P[1] + 3), tip, 2.2 if sg > 0 else -3.9, 1.7, .3, .9), F_L)
+        poly(p, strip((P[0], P[1] + 3), tip, 2.4 if sg > 0 else -3.9, 1.7, .3, .9), F_L)
     p.shape(ell(P[0], P[1], 5.4, 5.4, 0, 360, 14), F_D, INNER, j=.05, step=99, clip=False)
     p.fill(ell(P[0] - 1, P[1] - 1, 1.5, 1.5, 0, 360, 8), F_L)
 
@@ -123,10 +125,11 @@ def build(out=OUTD):
     p.xf = XF
     p.tipshadow(-30, 8, 52); p.foot_tip(-30, 7, 30)
     board(p)
+    for x, y in ((-77, -139), (17, -139)): disc(p, x, y, 2.4, SCREW)
     plinth(p)
-    hammer(p, -31)
-    pliers(p, 8)
-    pivot = scissors(p, -70)
+    hammer(p, -62, -120)
+    pliers(p, 2)
+    pivot = scissors(p, -57)
     return p, pivot
 
 
