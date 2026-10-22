@@ -59,8 +59,11 @@ def build():
     with layer(p, 'wave'):
         pline(p, wave(WL + 10, WR - 10, WATER + 5), '#ffffff', INNER)
     # نردبان: دو ریل تو‌در‌تو، از روی دیواره، روی لبه، به آب
-    for sx, hy, xv in ((12, WT - 7, -5), (20, WT - 14, -19)):
-        pline(p, [(sx, WT + 6), (sx, hy), (xv, hy), (xv, -12)], RAIL, PART)
+    for sx, hy, xv in ((12, WT - 5, -5), (20, WT - 10, -19)):
+        r = 4.5; X = p.X
+        a, b, c, d = X((sx, WT + 6)), X((sx, hy)), X((xv, hy)), X((xv, -12))
+        p.raw('<path d="M%.1f,%.1f L%.1f,%.1f Q%.1f,%.1f %.1f,%.1f L%.1f,%.1f Q%.1f,%.1f %.1f,%.1f L%.1f,%.1f" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (
+            a[0], a[1], b[0], b[1] + r, b[0], b[1], b[0] - r, b[1], c[0] + r, c[1], c[0], c[1], c[0], c[1] + r, d[0], d[1], RAIL, PART))
     for y in (-50, -40, -24):
         pline(p, [(-19, y), (-5, y)], RAIL, INNER, 'butt')
     return p

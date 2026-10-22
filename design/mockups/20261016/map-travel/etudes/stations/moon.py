@@ -59,7 +59,7 @@ def build():
     poly(p, ell(CX, 5, 29, 9, 180, 360, 36) + ell(CX, 5, 29, 9, 360, 180, 36), S_L)                      # رویهٔ روشن (بیضی کامل)
     poly(p, ell(CX, 12, 29, 9, 0, 180, 36) + ell(CX, 5, 29, 9, 180, 0, 36), S_D)                         # نوار تیرهٔ جلو
     p.stroke(body, OUT, j=.0, step=99)
-    sph = p.shape(ell(CX, CY, R, R, 0, 360, 48), M_B, OUT, j=.12, step=99)
+    sph = p.shape(ell(CX, CY, R, R, 0, 360, 48), M_B, OUT, j=0, step=99)
     crater(p, CX - 17, CY - 6, 6.5); crater(p, CX + 11, CY - 18, 6.5); crater(p, CX - 6, CY + 13, 6)
     ha = math.radians(-126); tx, ty = -math.sin(ha), math.cos(ha); nx, ny = math.cos(ha), math.sin(ha)
     hx, hy = CX + 25 * nx, CY + 25 * ny

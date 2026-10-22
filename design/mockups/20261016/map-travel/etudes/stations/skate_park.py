@@ -49,10 +49,10 @@ def build(out=None):
     for cx in WX:
         p.tipshadow(cx, GY - 1, 14); p.foot_tip(cx, GY - 2, 8)
     for cx in WX: truck(p, cx)
-    p.shape(DECK, D_B, PART, j=.1, step=8)
+    p.shape(DECK, D_B, PART, j=0, step=8)
     poly(p, [(-66, TOPF + 4), (-12, TOPF + 4), (-12, TOPF + 7.5), (-66, TOPF + 7.5)], D_L)                    # نور
     poly(p, [(-26, TOPF + 3), (-7, TOPF + 3), (-3, TOPF - 4), (-1.5, TOPF - 6), (-1.5, -39), (-7, BOT - 3), (-26, BOT - 3)], D_D)   # سایهٔ تیز راست
-    p.stroke(DECK, PART, j=.1, step=8)
+    p.stroke(DECK, PART, j=0, step=8)
     with layer(p, 'wheel_back'): wheel(p, WX[0])
     with layer(p, 'wheel'): wheel(p, WX[1])
     return p

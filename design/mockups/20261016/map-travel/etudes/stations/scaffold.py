@@ -64,9 +64,9 @@ def build(out=OUTD):
     p.raw('<ellipse cx="%.1f" cy="%.1f" rx="%.1f" ry="%.1f" fill="#10083a" opacity=".22"/>' % (p.X((PV[0], -73))[0], p.X((PV[0], -73))[1], 6, 1.8))
     # ۶) شاقول داخل چارچوب
     with layer(p, 'plumb'):
-        p.ln((PV[0], PV[1]), (PV[0], -97), INNER, STR, j=0, probe='ریسمان شاقول')
-        p.shape([(PV[0] - 6, -98), (PV[0] + 6, -98), (PV[0], -86)], YEL, INNER, j=.1, step=99, clip=False)
-        p.fill([(PV[0] - 3, -96), (PV[0] - 1.5, -96), (PV[0] - 1.5, -92)], YEL_L)
+        p.ln((PV[0], PV[1]), (PV[0], -102), INNER, STR, j=0, probe='ریسمان شاقول')
+        p.shape([(PV[0] - 9, -103), (PV[0] + 9, -103), (PV[0], -85)], YEL, INNER, j=.1, step=99, clip=False)
+        p.fill([(PV[0] - 5, -101), (PV[0] - 2, -101), (PV[0] - 2, -93)], YEL_L)
     return p
 
 

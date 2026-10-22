@@ -23,7 +23,7 @@ C_B, C_L, C_D = '#f3e2b5', '#fff6d8', '#c99a58'          # قرقره/چرخ
 B_B, B_L, B_D = '#f0913a', '#ffc07a', '#a8531a'          # دلو
 ROPE = '#6b4a2a'; HOLE = '#1f3560'; WATER = '#4f86c6'; YEL = '#ffd84d'
 
-CX = -16
+CX = -22
 HW = 36
 RIM_Y = -36
 BASE = 7
@@ -47,7 +47,7 @@ def rect(x0, y0, x1, y1): return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
 
 
 def build(out=OUTD):
-    p = Pen('well', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((46, -24), (74, 8)), dot=(64, -14))
+    p = Pen('well', 'farm'); pad(p, line=((16, 27), (34, 24)), tri=((42, -26), (72, 8)), dot=(62, -14))
     p.tipshadow(CX - 2, BASE + 3, 34); p.foot_tip(CX, BASE + 2, 26)
     # ۱) بدنهٔ سنگی
     body = [(CX - HW, RIM_Y), (CX + HW, RIM_Y)] + ell(CX, BASE - 8, HW, 8, 0, 180, 16)
