@@ -26,7 +26,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .hit:focus-visible{outline:4px solid var(--gold)}
 .hit.shake{animation:sh .35s}
 @keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.lock{transition:opacity .7s ease}#ringG,#ringOld{transition:opacity .5s ease}@media (prefers-reduced-motion:reduce){#ringG,#ringOld{transition:none}}.lock.open{opacity:0;pointer-events:none}@media (prefers-reduced-motion:reduce){.lock{transition:none}}
+.lock{transition:opacity .7s ease}#ringG,#ringOld{transition:opacity .5s ease}@media (prefers-reduced-motion:reduce){#ringG,#ringOld{transition:none}}.lock.open{opacity:0;pointer-events:none}#dnlayer .pop{animation:popin .55s cubic-bezier(.3,1.6,.5,1) both;transform-box:fill-box;transform-origin:center}@keyframes popin{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}@media (prefers-reduced-motion:reduce){#dnlayer .pop{animation:none}}@media (prefers-reduced-motion:reduce){.lock{transition:none}}
 #boat{position:absolute;left:0;top:0;width:130px;height:130px;display:block;pointer-events:none}
 #boat svg{display:block;animation:bob 4.2s ease-in-out infinite;transform-origin:50% 80%}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-2px) rotate(.8deg)}}
@@ -164,9 +164,12 @@ function legDots(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],run=[];
  for(let m=0;m<=n;m++){const d=m*sp;while(j<c.length-2&&c[j+1]<d)j++;const u=c[j+1]>c[j]?Math.min(1,(d-c[j])/(c[j+1]-c[j])):0;out.push([run[j][0]+(run[j+1][0]-run[j][0])*u,run[j][1]+(run[j+1][1]-run[j][1])*u])}
  return out}
 const dotSvg=(P,ro,ri,co,ci,oo,oi)=>P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ro+'" fill="'+co+'" opacity="'+oo+'"/>').join('')+P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ri+'" fill="'+ci+'" opacity="'+oi+'"/>').join('');
+legDots=(f=>k=>f(k).filter(q=>!(q[0]>BERTH[0]-30&&q[1]>JDOT-30)))(legDots); /* D173: نقطه‌چین زیر قایقِ پهلوگرفته نیفتد */
 (function(){let P=[];for(let k=0;k<ORDER.length-1;k++)P=P.concat(legDots(k));document.getElementById('seadots').innerHTML=dotSvg(P,4.5,2.5,'#241a5e','#e8f6f8',.35,.85)})();
 const trail=document.createElementNS(NS,'g');trail.id='trail';seaG.parentNode.insertBefore(trail,seaG.nextSibling);
-function updateTrail(){trail.innerHTML='';let P=[];for(let k=0;k<=ORDER.length-2;k++)if(done.has(ORDER[k]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
+const DN={};let dnReady=false;const BADGE='<ellipse cx="1.5" cy="3" rx="10.5" ry="9" fill="#10083a" opacity=".3"/><circle r="11" fill="#8fe3a0" stroke="#241a5e" stroke-width="3"/><path d="M-7.2,-3 a8.5,8.5 0 0 1 8.6,-5.6" fill="none" stroke="#e6ffe9" stroke-width="2.2" stroke-linecap="round"/><polyline points="-5,.5 -1.5,4.2 5.5,-3.8" fill="none" stroke="#241a5e" stroke-width="6.2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="-5,.5 -1.5,4.2 5.5,-3.8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+function updateDone(){const L=document.getElementById('dnlayer');if(!L)return;const NS='http://www.w3.org/2000/svg';for(const id of ORDER){const on=done.has(id);let g=DN[id];if(on&&!g){const n=NODES[id];g=DN[id]=document.createElementNS(NS,'g');g.setAttribute('transform','translate('+(n.x+42)+' '+(n.y+14)+')');g.innerHTML='<g'+(dnReady?' class="pop"':'')+'>'+BADGE+'</g>';L.appendChild(g)}else if(!on&&g){g.remove();delete DN[id]}}dnReady=true} /* D173: تیک «انجام‌شد» هم‌جا با قفل، سبز نعنایی با خط سرمه‌ای */
+function updateTrail(){updateDone();trail.innerHTML='';let P=[];for(let k=0;k<=ORDER.length-2;k++)if(done.has(ORDER[k]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
 /* کاراکتر و قایق */
 const SEAT=27,FH=56;
 const scaleAt=()=>1;

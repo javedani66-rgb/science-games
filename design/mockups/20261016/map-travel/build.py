@@ -7,7 +7,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 EA = ROOT / 'design/mockups/20261008/flow-demo/v5/team/assets_r2/env'
 CACHE = ROOT / 'design/mockups/20261016/character-menu/_cache'
-H, COAST = 2700, 1039   # H=1650: برچسب چوب‌شکافی از لبهٔ پایین دور شود (R17-18)
+H, COAST = 2712, 1039   # H=1650: برچسب چوب‌شکافی از لبهٔ پایین دور شود (R17-18)
 
 def enc(im, q=80):
     b = io.BytesIO(); im.save(b, 'WEBP', quality=q, method=4)
@@ -36,6 +36,10 @@ def map_parts():
     e = body.index('</g>', i) + 4
     orig = body[i:e]
     orig = orig.replace(OLD_J, NEW_J)   # D118 v2: راه خشکی هم تا اسکلهٔ x=340
+    # D173: رنگ جاده یکدست: روکش «طی‌شده» (کرم + خط‌چین نارنجی تا M05) حذف و روکش ملایم تمام مسیر کشیده شد (پیشرفت را ردپاهای ماکت نشان می‌دهند)
+    _ps = re.findall(r'<path d="([^"]*)"', orig)
+    orig = orig.replace(_ps[1], _ps[0])
+    orig, _n = re.subn(r'<path d="M128\.0,5226\.0[^"]*104\.0,2099\.0"[^>]*/>', '', orig); assert _n == 2, _n
     rest = body[e:j]
     d = json.load(open(EA / 'slots.json', encoding='utf-8'))
     d['path_d'] = d['path_d'].replace(OLD_J, NEW_J)   # D118 v2: اسکله عمودی در x=340، نوک ۹۵۶؛ نقطه‌چین از نوک
@@ -74,12 +78,22 @@ def map_parts():
     mm = re.search(r'<text x="280" y="2019"[^>]*>ابزارخانه</text>', body)
     assert mm, 'M05 label src'
     body = body.replace(mm.group(0), mm.group(0) + mm.group(0).replace('x="280" y="2019"', 'x="104" y="2159"').replace('ابزارخانه', 'تیرآهن\u200cها'), 1)   # D172: M05 در env برچسب نداشت (زیر «تو اینجایی» بود)
+    body = re.sub(r'<use href="#env_dec_city_(truck_crane|truck_box|rail)"[^>]*/>', '', body)   # D173: «ماشین‌ها» (کامیون‌های دکور) زشت‌اند و روی راه می‌افتند؛ حذف
+    for href, ux, uy, dx, dy in (('env_tree_bush', '225.8', '1456.2', -5, -8), ('env_tree_round', '298', '1457.6', 8, -12.5), ('env_tree_bush', '46', '1701', 8, 9), ('env_tree_round', '110', '2227', 2, 4)):   # D173: درخت/درختچه‌ها از لبهٔ راه دور شوند (ovl.py)
+        a_ = re.search(r'<use href="#%s" x="%s" y="%s"' % (href, re.escape(ux), re.escape(uy)), body); assert a_, (href, ux, uy)
+        body = body.replace(a_.group(0), '<use href="#%s" x="%.1f" y="%.1f"' % (href, float(ux) + dx, float(uy) + dy), 1)
+    body, _n = re.subn(r'<use href="#env_tree_bush" x="315\.5" y="2566\.2"[^>]*/>', '', body); assert _n == 1   # روی پل می‌افتاد
+    body, _n = re.subn(r'<g transform="translate\([\d.]+ [\d.]+\)"><circle r="10" fill="#fff3c4" stroke="#241a5e" stroke-width="3"/><polyline[^>]*/></g>', '', body); print('env ticks removed', _n)   # D173: تیک‌های ثابت محیط؛ جایش تیک ماکت (پیشرفت واقعی)
     body = re.sub(r'<use href="#env_dec_city_(crate|sail|low)"[^>]*/>', '', body)      # جعبه و بادبان بی‌معنا بالای نقشه، خانهٔ خاکستری کنار راه
     body = body.replace('stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".34"', 'stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".6"')
     # ایستگاه نهایی M12 (کارگاه ماشین مرکب): در قاب، با قفل و برچسب
     m12 = '<g style="filter:saturate(1.6) brightness(1.1)"><g class="node" data-id="M12" filter="url(#env_wob)"><use href="#node_final_workshop" x="200" y="-12" width="144" height="137" /></g></g>'
     m12lab = '<text x="294" y="%.1f" text-anchor="middle" font-family="Lalezar" font-size="20" fill="#fff3c4" stroke="#241a5e" stroke-width="6" paint-order="stroke" stroke-linejoin="round">%s</text>' % (158 + LABEL_DY.get('M12', 0), STR['maptravel.node.M12']['text'])
     body = body.replace('<g id="env_zone_titles"', m12lab + '<g id="env_zone_titles"', 1)
+    seat = '<text x="105" y="1069" text-anchor="middle" font-family="Lalezar" font-size="27" fill="#fff" stroke="#241a5e" stroke-width="8" paint-order="stroke" stroke-linejoin="round" transform="rotate(-3 105 1069)">%s</text>' % STR['maptravel.zone.sea']['text']
+    body = body.replace('<g id="env_zone_titles">', '<g id="env_zone_titles">' + seat, 1)   # D173: منطقهٔ دریایی از شهر صنعتی جدا
+    body = body.replace('<g id="env_labels"', '<g id="dnlayer"></g><g id="env_labels"', 1)
+    body = re.sub(r'<text x="301\.3" y="2068"([^>]*?)font-size="34"([^>]*?)rotate\(-3 301\.3 2068\)', r'<text x="238" y="2084"\1font-size="28"\2rotate(-3 238 2084)', body, count=1)   # D173: عنوان «شهر صنعتی» از برچسب اتاق ابزار و راه دور شود
     body = body.replace('<g id="env_labels"', m12 + '<g id="env_labels"', 1)
     # قفل یکدست (مالک ۱۸ اکتبر): همهٔ قفل‌ها یک شکل، یک رنگ، یک جای نسبی روی لبهٔ راست-پایین سکو، کاملاً روی سکو
     body, nlk = re.subn(r'<g transform="translate\([\d.]+ [\d.]+\)"><circle r="10" fill="#fff3c4"[^>]*/><path d="M-3\.6[^>]*/><rect x="-5\.6"[^>]*/></g>', '', body)
