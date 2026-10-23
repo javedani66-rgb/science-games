@@ -94,7 +94,7 @@ def map_parts():
     body = body.replace(mm.group(0), mm.group(0) + mm.group(0).replace('x="280" y="2019"', 'x="104" y="2159"').replace('ابزارخانه', 'تیرآهن\u200cها'), 1)   # D172: M05 در env برچسب نداشت (زیر «تو اینجایی» بود)
     body = re.sub(r'<use href="#env_dec_city_(truck_crane|truck_box|rail)"[^>]*/>', '', body)
     body, _n = re.subn(r'<use href="#env_dec_(farm_fence|farm_scare|sports_flags|sports_hedge|space_rock2)"[^>]*/>|<use href="#env_tree_round" x="-16\.2" y="3948\.6"[^>]*/>', '', body); assert _n == 6, _n   # D175: دکورهای تازه‌نمایان روی راه
-    for a_, b_ in (('x="101.2" y="2985"', 'x="135" y="3035"'), ('rotate(-3 101.2 2985)', 'rotate(-3 135 3035)'), ('x="230.4" y="4515"', 'x="232" y="5285"'), ('rotate(-3 230.4 4515)', 'rotate(-3 232 5285)')):   # D175: عنوان «مزرعه و آسیاب» و «ورزشگاه» از برچسب ایستگاه‌ها دور شود
+    for a_, b_ in (('x="101.2" y="2985"', 'x="135" y="3092"'), ('rotate(-3 101.2 2985)', 'rotate(-3 135 3092)'), ('x="141.8" y="3360"', 'x="272" y="3190"'), ('rotate(-3 141.8 3360)', 'rotate(-3 272 3190)'), ('x="230.4" y="4515"', 'x="232" y="5285"'), ('rotate(-3 230.4 4515)', 'rotate(-3 232 5285)')):   # D175: عنوان «مزرعه و آسیاب» و «ورزشگاه» از برچسب ایستگاه‌ها دور شود
         assert a_ in body, a_
         body = body.replace(a_, b_)   # D173: «ماشین‌ها» (کامیون‌های دکور) زشت‌اند و روی راه می‌افتند؛ حذف
     for href, ux, uy, dx, dy in (('env_tree_bush', '225.8', '1456.2', -5, -8), ('env_tree_round', '298', '1457.6', 8, -12.5), ('env_tree_bush', '46', '1701', 8, 9), ('env_tree_round', '110', '2227', 2, 4)):   # D173: درخت/درختچه‌ها از لبهٔ راه دور شوند (ovl.py)
@@ -132,6 +132,7 @@ def map_parts():
     # مالک (D97/D98): ماشین‌لیفتِ دکور روی پیچ‌کاری حذف؛ حالت «قفل» نرم‌تر تا رنگ‌ها گل‌آلود نشوند
     body = re.sub(r'<use href="#env_dec_city_forklift"[^>]*/>', '', body)
     body, _n = re.subn(r'<use href="#env_(ice|tunnel)"[^>]*/>', '', body); assert _n == 2, _n   # D178: کوه/تونل و یخِ پس‌زمینه روی راه، برچسب و پیست می‌افتادند
+    body, _n = re.subn(r'<use href="#env_dec_space_dome"[^>]*/>', '', body); assert _n == 1, _n   # D181: گنبد شناور بی‌ربط
     body, _n = re.subn(r'<use href="#env_dec_farm_(bucket|wheat)"[^>]*/>|<use href="#env_tree_bush" x="(?:220\.8|54\.0)"[^>]*/>|<use href="#env_tree_round" x="(?:112\.0|325\.8)"[^>]*/>|<use href="#env_tree_pop" x="329\.5"[^>]*/>|<use href="#env_tree_oak" x="-9"[^>]*/>', '', body); assert _n == 8, _n   # D178: درخت/بوته/دکور چسبیده به راه یا ایستگاه
     # D178: پل‌ها دقیقاً روی راه: دو تقاطع راه و رودخانه (محاسبه با shapely) هر کدام یک پل هم‌جهت با راه
     body, _n = re.subn(r'<g transform="translate\(344 2665\.8\) rotate\(-129\.4\)" filter="url\(#env_wob\)"><use href="#env_bridge"[^>]*/></g>',
