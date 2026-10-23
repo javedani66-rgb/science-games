@@ -52,6 +52,18 @@ def map_parts():
         assert a_ in d['path_d'], a_[:30]
         d['path_d'] = d['path_d'].replace(a_, b_)
     d['path_d'] += ' C52,182.5 30,158 30,125 C30,80 60,40 120,34 C170,28 225,52 272,96'   # راه دریایی تا ایستگاه نهایی (M12)
+    # D178: تکهٔ راهِ چاه←دروازه که روی رودخانه افتاده بود به جنوب کشیده می‌شود (تنها یک تقاطع با رود = پل راست)
+    _K = [(10, 0), (28, 22), (52, 38), (75, 40), (95, 36), (118, 28), (140, 18), (175, 8), (215, 0)]
+    def _warp(x, y):
+        if not (10 < x < 215 and 2735 < y < 2872): return y
+        dy = 0
+        for (x0, d0), (x1, d1) in zip(_K, _K[1:]):
+            if x0 <= x <= x1: dy = d0 + (d1 - d0) * (x - x0) / (x1 - x0)
+        v = 1.0 if y <= 2815 else max(0.0, (2872 - y) / 57.0)
+        return y + dy * v
+    def _warp_d(ds): return re.sub(r'(-?\d+\.?\d*),(-?\d+\.?\d*)', lambda m: '%s,%.1f' % (m.group(1), _warp(float(m.group(1)), float(m.group(2)))), ds)
+    d['path_d'] = _warp_d(d['path_d'])
+    orig = re.sub(r'(<path d=")(M128\.0,5226\.0[^"]*)(")', lambda m: m.group(1) + _warp_d(m.group(2)) + m.group(3), orig)
     PATHD[:] = [d['path_d']]
     new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 966 + 40)
            + '<g clip-path="url(#cl_land)">' + orig + '</g>'
@@ -124,7 +136,7 @@ def map_parts():
     # D178: پل‌ها دقیقاً روی راه: دو تقاطع راه و رودخانه (محاسبه با shapely) هر کدام یک پل هم‌جهت با راه
     body, _n = re.subn(r'<g transform="translate\(344 2665\.8\) rotate\(-129\.4\)" filter="url\(#env_wob\)"><use href="#env_bridge"[^>]*/></g>',
         '<g transform="translate(347 2665.4) rotate(50.3)" filter="url(#env_wob)"><use href="#env_bridge" x="-40" y="-23.3" width="80" height="46.7" /></g>'
-        '<g transform="translate(69 2774.6) rotate(-25.6)" filter="url(#env_wob)"><use href="#env_bridge" x="-55" y="-32" width="110" height="64" /></g>', body); assert _n == 1, _n
+        '', body); assert _n == 1, _n
     body = re.sub(r'<use href="#env_dec_city_mid"[^>]*/>', '', body)   # بلوک‌های خاکستری نامفهوم
     body = body.replace('data-id="M10" filter="url(#env_wob)"', 'data-id="M10"')   # M10-nofilter: D107، نماد خط دستیِ برداری بدون فیلتر رستری
     body = body.replace('filter:grayscale(.8) brightness(.9)', 'filter:saturate(1.6) brightness(1.1)')
