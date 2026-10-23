@@ -21,7 +21,7 @@ ICE, ICE_L, ICE_D = '#8fd3f4', '#c6ecfb', '#5fb0dc'
 BT_B, BT_L, BT_D = '#ffffff', '#ffffff', '#c3d2ea'
 RD_B, RD_D = '#e0402e', '#a82818'
 M_B, M_L, M_D = '#cdd6e2', '#ffffff', '#7e8da6'
-CX, CY, RX, RY, WH = 0, -2, 82, 38, 8
+CX, CY, RX, RY, WH = 0, -5, 99, 47, 11
 GLIDE = 10
 
 
@@ -78,9 +78,9 @@ def build(out=OUTD, glide=0):
     arcline(p, ell(CX + 8, CY + 2, 26, 7, 190, 340, 12), ICE_L, 2.4)
     arcline(p, ell(CX + 30, CY - 6, 22, 8, 10, 120, 12), ICE_L, 2.2)
     with layer(p, 'skate_back'):                                               # اسکیت پشتی: ثابت، دورتر و بالاتر
-        skate(p, CX + 3, CY - 7, .44)
+        skate(p, CX + 6, CY - 8, .52)
     with layer(p, 'skate'):                                                    # اسکیت جلویی: می‌لغزد
-        skate(p, CX - 56 - GLIDE + glide, CY + 12, .5)
+        skate(p, CX - 66 - GLIDE + glide, CY + 14, .6)
     return p
 
 
