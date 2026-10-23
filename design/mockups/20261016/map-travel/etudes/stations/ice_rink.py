@@ -64,7 +64,7 @@ def skate(p, ox, oy, k=1.0):
 
 def build(out=OUTD, glide=0):
     p = Pen('ice_rink', 'sports'); pad(p, line=((-52, 40), (-36, 43)), tri=((74, -20), (70, 18)), dot=(-70, -14))
-    p.xf = (1.1, 0, 0)
+    p.xf = (0.86, 0, 6)
     top = ell(CX, CY, RX, RY, 180, 360, 24); bot = ell(CX, CY + WH, RX, RY, 0, 180, 24)
     p.tipshadow(CX, CY + WH + 2, 62); p.foot_tip(CX, CY + WH, 56)
     p.shape(top + bot, W_B, PART, j=.1, step=10)

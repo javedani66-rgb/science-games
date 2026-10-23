@@ -62,7 +62,7 @@ def board(p):
 
 
 def build():
-    p = Pen('skate_park', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, -1, -3)
+    p = Pen('skate_park', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (0.9, -1, 0)
     ramp(p)
     with layer(p, 'skateboard'): board(p)
     return p

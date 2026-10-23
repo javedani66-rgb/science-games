@@ -5,11 +5,11 @@
   66.2,
   31.7,
   11.5,
-  68
+  87
  ],
  "stand": [
-  -49.5,
-  1.5
+  -51.5,
+  4.0
  ],
  "ring": [
   0,
@@ -17,32 +17,32 @@
   0
  ],
  "motion": [
-  "node_city_gate_door"
+  "node_city_gate_leaf"
  ],
  "inside_pad": {
-  "min_margin_px": 10.0,
+  "min_margin_px": 2.2,
   "base_on_pad": true,
-  "height_px": 88.5,
+  "height_px": 112.8,
   "bbox_px": [
-   36.8,
-   40.0,
-   111.5,
-   128.5
+   28.2,
+   21.0,
+   127.0,
+   133.8
   ],
-  "ok": true
+  "ok": false
  },
  "motion_spec": {
-  "node_city_gate_door": {
-   "type": "scaleX افقی حول لولا (لبهٔ بیرونی لنگه، چسبیده به ستون راست)",
-   "hinge_x_symbol": 29.7,
-   "scale_from": 2.2,
+  "node_city_gate_leaf": {
+   "type": "scaleX افقی حول لولا (لبهٔ راست لنگه)",
+   "hinge_x_symbol": 24.0,
+   "scale_from": 1.6,
    "scale_to": 1.0,
    "duration_s": 1.4,
    "easing": "ease-out",
    "loop": false,
    "start": "لنگهٔ راست نیمه‌بسته (پهن‌تر)",
-   "end": "حالت ایستا: کاملاً باز (کنار ستون)",
-   "note": "فقط هنگام رسیدن، یک‌بار؛ لنگهٔ چپ، ستون‌ها و جاده ثابت؛ بدون حلقهٔ بیکار."
+   "end": "حالت ایستا: باز؛ پهنای ظاهری ۱۶ واحد",
+   "note": "فقط هنگام رسیدن، یک‌بار؛ لنگهٔ چپ و بدنه ثابت؛ بدون حلقهٔ بیکار."
   },
   "reduced_motion": "باز (حالت ایستا)"
  }

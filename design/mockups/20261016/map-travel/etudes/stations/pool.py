@@ -26,7 +26,7 @@ def pline(p, pts, col, w, cap='round'):
 def wave(x0, x1, y, amp=1.8, n=20):
     return [(x0 + (x1 - x0) * i / n, y + amp * math.sin(2 * math.pi * i / n * 1.5)) for i in range(n + 1)]
 def build():
-    p = Pen('pool', 'sports'); pad(p, line=((-80, 12), (-66, 20)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = (1.1, 0, 4)
+    p = Pen('pool', 'sports'); pad(p, line=((-80, 12), (-66, 20)), tri=((74, -20), (80, 6)), dot=(-76, -14)); p.xf = (1.0, 0, 0)
     p.tipshadow(8, FY1 + 4, 56); p.foot_tip(-30, FY1 - 2, 18); p.foot_tip(24, FY1 - 2, 18)
     # ۱) بدنه
     p.shape([(FX1, FY0), (FX1 + DX, FY0 + DY), (FX1 + DX, FY1 + DY), (FX1, FY1)], W_S, PART, j=.05, step=8)
@@ -44,13 +44,13 @@ def build():
     p.ln(pos(.12, .48), pos(.26, .48), INNER, '#ffffff', j=0); p.ln(pos(.42, .30), pos(.58, .30), INNER, '#ffffff', j=0)
     # ۳) نردبان بلند فلزی (دو ریل ضخیم سه‌پله + ۳ پله + دستگیرهٔ خمیده)
     xs, ys = pos(.46, .50)
-    LH = 54; XG = 22
+    LH = 44; XG = 22
     def rail(x):
         pts = [(x, ys), (x, ys - LH)]
         for k in range(1, 8):
             t = math.radians(180 - 160 * k / 7); pts.append((x + 7 + 7 * math.cos(t), ys - LH - 7 * math.sin(t)))
         return pts
-    rungs = (ys - 16, ys - 32, ys - 48)
+    rungs = (ys - 14, ys - 28, ys - 40)
     for x in (xs, xs + XG): pline(p, rail(x), NAVY, 15)
     for y in rungs: pline(p, [(xs, y), (xs + XG, y)], NAVY, 12, 'butt')
     for x in (xs, xs + XG): pline(p, rail(x), RAIL, 8)

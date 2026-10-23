@@ -61,7 +61,7 @@ def load(p):
 
 
 def build():
-    p = Pen('space_loading', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (1.0, -2, 0)
+    p = Pen('space_loading', 'space'); pad(p, line=((16, 27), (34, 24)), tri=((18, -22), (62, 6)), dot=(58, -16)); p.xf = (0.82, 3, 4)
     container(p); load(p); crane(p)
     return p
 
