@@ -174,5 +174,69 @@
   "context_fa": "دکمهٔ برگشت پس از آب‌های آزاد؛ پیش‌نویس (مالک ۲۱ اکتبر: D138/D139، پیشنهادِ تأییدنشده)",
   "band": "همه",
   "status": "draft"
+ },
+ "maptravel.node.M01": {
+  "text": "دروازهٔ شهر",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای M01 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.B01": {
+  "text": "داربست",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای B01 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.B02": {
+  "text": "انبار مصالح",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای B02 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.M04": {
+  "text": "گودبرداری",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای M04 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.M05": {
+  "text": "انبار تیرآهن",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای M05 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.M06": {
+  "text": "اتاق ابزار",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای M06 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.E05": {
+  "text": "اتاق مخصوص آچارها",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای E05 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.M03": {
+  "text": "رمپ بارگیری",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای M03 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
  }
 }

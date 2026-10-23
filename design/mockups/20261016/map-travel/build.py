@@ -7,7 +7,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 EA = ROOT / 'design/mockups/20261008/flow-demo/v5/team/assets_r2/env'
 CACHE = ROOT / 'design/mockups/20261016/character-menu/_cache'
-H, COAST = 1650, 1039   # H=1650: برچسب چوب‌شکافی از لبهٔ پایین دور شود (R17-18)
+H, COAST = 2700, 1039   # H=1650: برچسب چوب‌شکافی از لبهٔ پایین دور شود (R17-18)
 
 def enc(im, q=80):
     b = io.BytesIO(); im.save(b, 'WEBP', quality=q, method=4)
@@ -70,6 +70,10 @@ def map_parts():
     body = re.sub(r'<use href="#env_dec_city_buoy"[^>]*/>', '', body)      # R17: بویه و صخرهٔ بی‌ربط کنار کشتی‌سازی حذف
     body = re.sub(r'<use href="#env_dec_city_islet"[^>]*/>', '', body)
     body = body.replace('<use href="#env_tree_round" x="316.8" y="1457.6"', '<use href="#env_tree_round" x="298" y="1457.6"')   # سایهٔ درخت راست بریده نشود
+    body = re.sub(r'<g class="hero">(?:(?!</g>).)*تو اینجایی</text></g>', '', body, flags=re.S)   # D172: «تو اینجایی» محیط؛ ماکت آواتار خودش را دارد
+    mm = re.search(r'<text x="280" y="2019"[^>]*>ابزارخانه</text>', body)
+    assert mm, 'M05 label src'
+    body = body.replace(mm.group(0), mm.group(0) + mm.group(0).replace('x="280" y="2019"', 'x="104" y="2159"').replace('ابزارخانه', 'تیرآهن\u200cها'), 1)   # D172: M05 در env برچسب نداشت (زیر «تو اینجایی» بود)
     body = re.sub(r'<use href="#env_dec_city_(crate|sail|low)"[^>]*/>', '', body)      # جعبه و بادبان بی‌معنا بالای نقشه، خانهٔ خاکستری کنار راه
     body = body.replace('stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".34"', 'stroke="#fff3c4" stroke-width="22" stroke-linecap="round" opacity=".6"')
     # ایستگاه نهایی M12 (کارگاه ماشین مرکب): در قاب، با قفل و برچسب
@@ -98,7 +102,7 @@ def map_parts():
     body = re.sub(r'<use href="#env_dec_city_mid"[^>]*/>', '', body)   # بلوک‌های خاکستری نامفهوم
     body = body.replace('data-id="M10" filter="url(#env_wob)"', 'data-id="M10"')   # M10-nofilter: D107، نماد خط دستیِ برداری بدون فیلتر رستری
     body = body.replace('filter:grayscale(.8) brightness(.9)', 'filter:saturate(1.6) brightness(1.1)')
-    for old, key in (('میدان شهر', 'E06'), ('لنگرگاه', 'M11')):
+    for old, key in (('میدان شهر', 'E06'), ('لنگرگاه', 'M11'), ('تیرآهن\u200cها', 'M05'), ('ابزارخانه', 'M06'), ('آچارخانه', 'E05')):
         body = body.replace('>%s<' % old, '>%s<' % STR['maptravel.node.' + key]['text'])
     body = body.replace('translate(143 210)', 'translate(140 199)').replace('translate(248 570)', 'translate(205 536)')
     # D112 (گزارش بازبین flags_m10): برچسب‌ها زیر مرکز سکو و دور از لبه؛ درخت کنار E03 از راه دور
@@ -114,7 +118,7 @@ def map_parts():
     body = body.replace(m9, '<ellipse cx="118" cy="1556" rx="66" ry="31" fill="#fff6d0" opacity=".62"/>' + m9)
     # D115: ایستگاه‌های بازسازی‌شده با کیت (etudes/stations/out): مرکز سکو = مرکز گره؛ نماد برداری بدون فیلتر رستری
     for sid, nid in KIT_NODES.items():
-        pat = r'<g class="node" data-id="%s"(?: filter="url\(#env_wob\)")?><use href="#[^"]+"[^>]*/></g>' % nid
+        pat = r'<g class="node" data-id="%s"(?: filter="url\(#env_wob\)")?>(?:<use href="#[^"]+"[^>]*/>)+</g>' % nid
         assert re.search(pat, body), nid
         body = re.sub(pat, lambda m, sid=sid, nid=nid: '<g class="node" data-id="%s"><use href="#node_%s" x="%s" y="%s" width="144" height="137" /></g>' % (nid, sid, KIT_XY[nid][0] - 72, KIT_XY[nid][1] - 108), body)
     for a, b in (('<text x="118" y="244"', '<text x="140" y="256"'), ('<text x="300" y="376"', '<text x="250" y="388"'), ('<text x="162" y="605"', '<text x="162" y="591"'), ('<text x="266" y="832"', '<text x="250" y="836"')):   # R17-05/21/23: فاصلهٔ برچسب تا جزیره ≥ ۷
@@ -136,10 +140,11 @@ def map_parts():
 
 LOCKED = ['E04', 'E06', 'M11', 'M12']
 LOCK_DXY = (42, 14)   # جای قفل نسبت به مرکز سکو
-LABEL_DY = {'E04': 3.0, 'E06': 7.5, 'M11': 6.0, 'M07': 11.5, 'M02': 15.0, 'E03': 8.0, 'M10': 8.0, 'M12': 7.5, 'M09': 6.0}   # جابه‌جایی عمودی برچسب هر ایستگاه (تنظیم با tools/measure_map.py؛ حداقل ۷px تا سکو/حلقه)
+LABEL_DY = {'E04': 3.0, 'E06': 7.5, 'M11': 6.0, 'M07': 11.5, 'M02': 15.0, 'E03': 8.0, 'M10': 8.0, 'M12': 7.5, 'M09': 6.0, 'M01': 17.5, 'B01': 17.5, 'B02': 17.5, 'M04': 10.0, 'M05': 12.0, 'M06': 17.5, 'E05': 17.5, 'M03': 10.0}   # جابه‌جایی عمودی برچسب هر ایستگاه (تنظیم با tools/measure_map.py؛ حداقل ۷px تا سکو/حلقه)
 LABEL_TITLE = {'M07': 'اسکله', 'M02': 'بارانداز', 'M08': 'جرثقیل بندر', 'E03': 'انبار الوار', 'M10': 'پیچ‌کاری', 'M09': 'چوب‌شکافی'}
-KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pier': 'M07', 'harbor_crane': 'M08', 'shipyard': 'M11', 'floating_market': 'E06', 'lighthouse': 'E04', 'final_workshop': 'M12', 'chopwood': 'M09'}
-KIT_XY = {'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (140, 959), 'M08': (250, 759), 'M11': (162, 524), 'E06': (250, 324), 'E04': (140, 192), 'M12': (272, 96), 'M09': (118, 1543)}   # مرکز سکو = مرکز گره
+KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pier': 'M07', 'harbor_crane': 'M08', 'shipyard': 'M11', 'floating_market': 'E06', 'lighthouse': 'E04', 'final_workshop': 'M12', 'chopwood': 'M09',
+            'city_gate': 'M01', 'scaffold': 'B01', 'materials_store': 'B02', 'excavation': 'M04', 'beam_store': 'M05', 'tool_room': 'M06', 'wrench_room': 'E05', 'loading_ramp': 'M03'}   # D172: هشت ایستگاه شهر صنعتی
+KIT_XY = {'M01': (118, 2627), 'B01': (284, 2495), 'B02': (108, 2363), 'M04': (288, 2231), 'M05': (104, 2099), 'M06': (280, 1967), 'E05': (112, 1835), 'M03': (286, 1703), 'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (140, 959), 'M08': (250, 759), 'M11': (162, 524), 'E06': (250, 324), 'E04': (140, 192), 'M12': (272, 96), 'M09': (118, 1543)}   # مرکز سکو = مرکز گره
 E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
 
 WAVE_AVOID = []
