@@ -50,7 +50,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .dpop{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@media (prefers-reduced-motion:reduce){.dpop{animation:none}}.pr{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@keyframes stamp{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}@media (prefers-reduced-motion:reduce){.pr{animation:none}}
 
 
-.node{transition:opacity 1.6s ease-in-out}.node.dim{opacity:.7}@media (prefers-reduced-motion:reduce){.node{transition:none}}
+.node.dim{filter:saturate(.72) brightness(.94)}.node.glow{animation:glowIn 1.6s ease-out}@keyframes glowIn{0%{filter:saturate(.72) brightness(.94)}35%{filter:saturate(1.5) brightness(1.35) drop-shadow(0 0 8px #ffe27a)}100%{filter:none}}@media (prefers-reduced-motion:reduce){.node.glow{animation:none}}
 </style>
 </head>
 <body data-light="day">
@@ -315,12 +315,12 @@ function playStation(id){if(reduce)return;const g=stationG(id);if(!g)return;cons
 async function go(id){if(busy)return;if(id===here){if(id==='M12')openHide();else playStation(id);return} /* D143: ورود به مخفی‌گاه مثل بقیهٔ ایستگاه‌ها: لمس خود ایستگاه، نه دکمهٔ جدا */
  const up=nextUp();
  if(visited.has(id)){await run(()=>dramatic(here,id));here=id;playStation(id)}
- else if(id===up){if(!done.has(ORDER[ORDER.indexOf(up)-1])){const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');$('st').textContent=T('needfin');return}await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true);playStation(id)}
+ else if(id===up){if(!done.has(ORDER[ORDER.indexOf(up)-1])){const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');$('st').textContent=T('needfin');return}await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true);updateDim(id);playStation(id)}
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
 
-function updateDim(){document.querySelectorAll('.node[data-id]').forEach(n=>{const id=n.dataset.id;if(!(id in NODES))return;n.classList.toggle('dim',!(visited.has(id)||here===id))})}
+function updateDim(fresh){document.querySelectorAll('.node[data-id]').forEach(n=>{const id=n.dataset.id;if(!(id in NODES))return;const v=visited.has(id)||here===id;if(v){if(n.classList.contains('dim')){n.classList.remove('dim');if(fresh===id&&!reduce){n.classList.add('glow');setTimeout(()=>n.classList.remove('glow'),1700)}}}else n.classList.add('dim')})}
 function updateLocks(){updateDim();document.querySelectorAll('.lock').forEach(l=>l.classList.toggle('open',visited.has(l.dataset.lock)))} /* R20: قفل ایستگاه پس از رسیدن کودک باز می‌شود (محو آرام) */
 function fadeRing(){const old=document.getElementById('ringG');if(!old)return;old.id='ringOld';old.style.opacity=0;setTimeout(()=>old.remove(),reduce?0:520)}
 function refreshRing(){updateLocks();ring.style.display='none';const old=document.getElementById('ringG');if(old)old.remove();
