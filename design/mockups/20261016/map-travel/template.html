@@ -331,9 +331,9 @@ const ST={
    ob.setAttribute('transform',tr);of.setAttribute('transform',tr);
    ob.innerHTML=faces+hl+'<polygon points="'+pts(C)+'" fill="#ffd84d" class="eo" stroke-width="7.6" stroke-linejoin="round"/>'+'<polygon points="'+pts(hole)+'" fill="#8a5f0c" class="eo" stroke-width="3.9"/>'+sil;
    of.innerHTML=faces+hl+'<polygon points="'+cres+'" fill="#ffd84d"/>'+seams+'<path d="M'+pts(topf)+'" fill="none" class="eo" stroke-width="7.6"/><path d="M'+pts(arc)+'" fill="none" class="eo" stroke-width="3.9"/>'+sil}
-  let alive=true,raf=0;const DUR=4500,T0=performance.now(),ez=u=>u<.5?2*u*u:1-2*(1-u)*(1-u);
+  let alive=true,raf=0;const DUR=5200,T0=performance.now(),ez=u=>u<.5?2*u*u:1-2*(1-u)*(1-u);
   const done=()=>{if(!alive)return;alive=false;cancelAnimationFrame(raf);ob.remove();of.remove();nb.style.display='';nf.style.display=''};
-  (function f(now){if(!alive)return;const p=Math.min(1,(now-T0)/DUR),seg=Math.min(2,Math.floor(p*3)),u=ez(p*3-seg),y=-22*(seg%2===0?1-u:u);draw(360*y/22,y);if(p>=1)done();else raf=requestAnimationFrame(f)})(T0);
+  (function f(now){if(!alive)return;const p=Math.min(1,(now-T0)/DUR),seg=Math.min(3,Math.floor(p*4)),u=ez(p*4-seg),y=-22*(seg%2===0?u:1-u);draw(360*y/22,y);if(p>=1)done();else raf=requestAnimationFrame(f)})(T0);
   return_({cancel:done})}
 };
 const IT=3;let STA=[];function return_(a){if(a)STA.push(a)}
