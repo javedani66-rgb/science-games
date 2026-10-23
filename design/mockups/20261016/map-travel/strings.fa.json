@@ -246,5 +246,133 @@
   "context_fa": "مالک ۲۳ اکتبر ۱۲:۴۱: آخرین سرزمین باید از شهر صنعتی جدا شود (مثلاً «منطقهٔ دریایی»)؛ نام draft",
   "band": "همه",
   "status": "draft"
+ },
+ "maptravel.node.F01": {
+  "text": "زمین فوتبال",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای F01 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.F02": {
+  "text": "سالن بسکتبال",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای F02 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.F03": {
+  "text": "میدان کمان‌کِشی",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای F03 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.F04": {
+  "text": "هاکی آهنربایی",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای F04 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.F05": {
+  "text": "سکوی پرتاب",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای F05 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.F06": {
+  "text": "پیست اسکی روی یخ",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای F06 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.F07": {
+  "text": "استخر",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای F07 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.F08": {
+  "text": "میدان طناب‌کشی",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای F08 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.F09": {
+  "text": "زمین اسکیت",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای F09 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.W01": {
+  "text": "ایستگاه بارگیری فضایی",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای W01 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.W02": {
+  "text": "آزمایشگاه ترازو",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای W02 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.W03": {
+  "text": "کرهٔ ماه",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای W03 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.W04": {
+  "text": "ایستگاه فضایی",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای W04 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.E01": {
+  "text": "آسیاب بادی",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای E01 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.E02": {
+  "text": "ایستگاه گاری‌ها",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای E02 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "maptravel.node.E07": {
+  "text": "چاه آب",
+  "kind": "ui",
+  "where_fa": "برچسب و نام جای E07 روی نقشه",
+  "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+  "band": "همه",
+  "status": "draft"
  }
 }

@@ -80,7 +80,14 @@ let k=1;
 function fit(){k=Math.min(1.2,sc.clientWidth/390);world.style.transform='scale('+k+')';world.style.marginBottom=(({{H}}*k)-{{H}})+'px';world.style.width='390px'}
 addEventListener('resize',fit);
 /* هندسهٔ مسیر */
-const NS='http://www.w3.org/2000/svg';const pth=document.createElementNS(NS,'path');pth.setAttribute('d',PATHD);document.querySelector('svg.map').appendChild(pth);pth.setAttribute('fill','none');pth.style.display='none';
+const NS='http://www.w3.org/2000/svg';
+/* D175: getPointAtLength روی مسیر ۲۳۹ پارهٔ کامل هر بار ~۲ms (۷۴۰۰ نمونه = ۱۵ ثانیه)؛ مسیر به تکه‌های ۱۰پاره‌ای تقسیم می‌شود (همان هندسه، همان طول) */
+const pth=(function(d){const g_=document.createElementNS(NS,'svg');g_.setAttribute('width','0');g_.setAttribute('height','0');g_.style.cssText='position:absolute;left:0;top:0;visibility:hidden';document.body.appendChild(g_);
+ const cmds=[...d.matchAll(/([MCL])([^MCL]*)/g)].map(m=>[m[1],m[2].trim().split(/[\s,]+/).map(Number)]);let cur=null;const chunks=[];let seg=[],n=0;
+ const flush=()=>{if(!seg.length)return;const p=document.createElementNS(NS,'path');p.setAttribute('d','M'+start[0]+','+start[1]+' '+seg.join(' '));g_.appendChild(p);chunks.push(p);seg=[];n=0};let start=null;
+ for(const [c,v] of cmds){if(c==='M'){cur=[v[0],v[1]];if(!start)start=cur;continue}if(!seg.length)start=cur;seg.push(c+v.join(','));cur=[v[v.length-2],v[v.length-1]];if(++n>=10)flush()}flush();
+ const cum=[0];chunks.forEach(p=>cum.push(cum[cum.length-1]+p.getTotalLength()));
+ return{getTotalLength:()=>cum[cum.length-1],getPointAtLength(s){s=Math.max(0,Math.min(s,cum[cum.length-1]));let i=0;while(i<chunks.length-1&&s>cum[i+1])i++;return chunks[i].getPointAtLength(s-cum[i])}}})(PATHD);
 const L=pth.getTotalLength(),samp=[];for(let s=0;s<=L;s+=2){const p=pth.getPointAtLength(s);samp.push([p.x,p.y,s])}
 function sOf(n){let best=1e9,bs=0;for(const p of samp){const d=(p[0]-n.x)**2+(p[1]-n.y)**2;if(d<best){best=d;bs=p[2]}}return bs}
 const ids=Object.keys(NODES);ids.forEach(i=>NODES[i].s=sOf(NODES[i]));

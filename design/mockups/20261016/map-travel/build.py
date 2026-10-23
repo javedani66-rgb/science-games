@@ -7,7 +7,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 EA = ROOT / 'design/mockups/20261008/flow-demo/v5/team/assets_r2/env'
 CACHE = ROOT / 'design/mockups/20261016/character-menu/_cache'
-H, COAST = 2712, 1039   # H=1650: برچسب چوب‌شکافی از لبهٔ پایین دور شود (R17-18)
+H, COAST = 5351, 1039   # H=1650: برچسب چوب‌شکافی از لبهٔ پایین دور شود (R17-18)
 
 def enc(im, q=80):
     b = io.BytesIO(); im.save(b, 'WEBP', quality=q, method=4)
@@ -24,6 +24,8 @@ NEW_J = 'C334.0,1117.0 343.0,1106.0 343.0,1082.0 L343.0,966.0 C343.0,959.0 332.0
 PATHD = ['']
 
 def map_parts():
+    global NM
+    NM = {n['id']: n for n in json.load(open(EA / 'node_map.json', encoding='utf-8'))['nodes']}
     s = (EA / 'env_sheet.html').read_text(encoding='utf-8')
     style = re.search(r'<style>(.*?)</style>', s, re.S).group(1)
     style = re.sub(r"@font-face\{[^}]*\}", '', style)
@@ -78,7 +80,11 @@ def map_parts():
     mm = re.search(r'<text x="280" y="2019"[^>]*>ابزارخانه</text>', body)
     assert mm, 'M05 label src'
     body = body.replace(mm.group(0), mm.group(0) + mm.group(0).replace('x="280" y="2019"', 'x="104" y="2159"').replace('ابزارخانه', 'تیرآهن\u200cها'), 1)   # D172: M05 در env برچسب نداشت (زیر «تو اینجایی» بود)
-    body = re.sub(r'<use href="#env_dec_city_(truck_crane|truck_box|rail)"[^>]*/>', '', body)   # D173: «ماشین‌ها» (کامیون‌های دکور) زشت‌اند و روی راه می‌افتند؛ حذف
+    body = re.sub(r'<use href="#env_dec_city_(truck_crane|truck_box|rail)"[^>]*/>', '', body)
+    body, _n = re.subn(r'<use href="#env_dec_(farm_fence|farm_scare|sports_flags|sports_hedge|space_rock2)"[^>]*/>|<use href="#env_tree_round" x="-16\.2" y="3948\.6"[^>]*/>', '', body); assert _n == 6, _n   # D175: دکورهای تازه‌نمایان روی راه
+    for a_, b_ in (('x="101.2" y="2985"', 'x="135" y="3035"'), ('rotate(-3 101.2 2985)', 'rotate(-3 135 3035)'), ('x="230.4" y="4515"', 'x="232" y="5285"'), ('rotate(-3 230.4 4515)', 'rotate(-3 232 5285)')):   # D175: عنوان «مزرعه و آسیاب» و «ورزشگاه» از برچسب ایستگاه‌ها دور شود
+        assert a_ in body, a_
+        body = body.replace(a_, b_)   # D173: «ماشین‌ها» (کامیون‌های دکور) زشت‌اند و روی راه می‌افتند؛ حذف
     for href, ux, uy, dx, dy in (('env_tree_bush', '225.8', '1456.2', -5, -8), ('env_tree_round', '298', '1457.6', 8, -12.5), ('env_tree_bush', '46', '1701', 8, 9), ('env_tree_round', '110', '2227', 2, 4)):   # D173: درخت/درختچه‌ها از لبهٔ راه دور شوند (ovl.py)
         a_ = re.search(r'<use href="#%s" x="%s" y="%s"' % (href, re.escape(ux), re.escape(uy)), body); assert a_, (href, ux, uy)
         body = body.replace(a_.group(0), '<use href="#%s" x="%.1f" y="%.1f"' % (href, float(ux) + dx, float(uy) + dy), 1)
@@ -139,6 +145,11 @@ def map_parts():
         assert a in body, a
         body = body.replace(a, b)
     body = body.replace('>برج ساعت<', '>%s<' % STR['maptravel.node.E04']['text'])
+    for nid in ('F01', 'F02', 'F03', 'F04', 'F05', 'F06', 'F07', 'F08', 'F09', 'W01', 'W02', 'W03', 'W04', 'E01', 'E02', 'E07'):   # D175: برچسب هر ایستگاهٔ تازه زیر سکو
+        et = NM[nid]['env_title']; cx, cy = KIT_XY[nid]
+        m_ = re.search(r'<text x="[\d.]+" y="[\d.]+"([^>]*)>%s</text>' % re.escape(et), body)
+        assert m_, (nid, et)
+        body = body.replace(m_.group(0), '<text x="%s" y="%s"%s>%s</text>' % (cx, cy + 71 + {'E07': 1.5, 'F04': 1.5}.get(nid, 0), m_.group(1), STR['maptravel.node.' + nid]['text']), 1)
     for nid, dy in LABEL_DY.items():
         if nid == 'M12': continue
         t = re.escape(STR['maptravel.node.' + nid]['text'] if ('maptravel.node.' + nid) in STR else LABEL_TITLE[nid])
@@ -157,8 +168,12 @@ LOCK_DXY = (42, 14)   # جای قفل نسبت به مرکز سکو
 LABEL_DY = {'E04': 3.0, 'E06': 7.5, 'M11': 6.0, 'M07': 11.5, 'M02': 15.0, 'E03': 8.0, 'M10': 8.0, 'M12': 7.5, 'M09': 6.0, 'M01': 17.5, 'B01': 17.5, 'B02': 17.5, 'M04': 10.0, 'M05': 12.0, 'M06': 17.5, 'E05': 17.5, 'M03': 10.0}   # جابه‌جایی عمودی برچسب هر ایستگاه (تنظیم با tools/measure_map.py؛ حداقل ۷px تا سکو/حلقه)
 LABEL_TITLE = {'M07': 'اسکله', 'M02': 'بارانداز', 'M08': 'جرثقیل بندر', 'E03': 'انبار الوار', 'M10': 'پیچ‌کاری', 'M09': 'چوب‌شکافی'}
 KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pier': 'M07', 'harbor_crane': 'M08', 'shipyard': 'M11', 'floating_market': 'E06', 'lighthouse': 'E04', 'final_workshop': 'M12', 'chopwood': 'M09',
-            'city_gate': 'M01', 'scaffold': 'B01', 'materials_store': 'B02', 'excavation': 'M04', 'beam_store': 'M05', 'tool_room': 'M06', 'wrench_room': 'E05', 'loading_ramp': 'M03'}   # D172: هشت ایستگاه شهر صنعتی
+            'city_gate': 'M01', 'scaffold': 'B01', 'materials_store': 'B02', 'excavation': 'M04', 'beam_store': 'M05', 'tool_room': 'M06', 'wrench_room': 'E05', 'loading_ramp': 'M03',
+            'football': 'F01', 'basketball_hall': 'F02', 'archery_range': 'F03', 'magnet_hockey': 'F04', 'ice_rink': 'F06', 'pool': 'F07', 'tug_field': 'F08', 'skate_park': 'F09',
+            'launch_pad': 'F05', 'space_loading': 'W01', 'scale_lab': 'W02', 'moon': 'W03', 'space_station': 'W04', 'windmill': 'E01', 'cart_station': 'E02', 'well': 'E07'}   # D175: ورزشگاه، فضا، مزرعه   # D172: هشت ایستگاه شهر صنعتی
 KIT_XY = {'M01': (118, 2627), 'B01': (284, 2495), 'B02': (108, 2363), 'M04': (288, 2231), 'M05': (104, 2099), 'M06': (280, 1967), 'E05': (112, 1835), 'M03': (286, 1703), 'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (140, 959), 'M08': (250, 759), 'M11': (162, 524), 'E06': (250, 324), 'E04': (140, 192), 'M12': (272, 96), 'M09': (118, 1543)}   # مرکز سکو = مرکز گره
+_SL = json.load(open(EA / 'slots.json', encoding='utf-8'))['slots']
+for _n in ('F01', 'F02', 'F03', 'F04', 'F05', 'F06', 'F07', 'F08', 'F09', 'W01', 'W02', 'W03', 'W04', 'E01', 'E02', 'E07'): KIT_XY[_n] = tuple(_SL[_n]['base_center'])   # D175
 E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
 
 WAVE_AVOID = []
