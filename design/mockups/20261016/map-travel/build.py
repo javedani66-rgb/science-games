@@ -119,6 +119,12 @@ def map_parts():
     body = body.replace(old, '<use href="#node_screw_workshop" x="184" y="1277.5" width="144" height="137" />')
     # مالک (D97/D98): ماشین‌لیفتِ دکور روی پیچ‌کاری حذف؛ حالت «قفل» نرم‌تر تا رنگ‌ها گل‌آلود نشوند
     body = re.sub(r'<use href="#env_dec_city_forklift"[^>]*/>', '', body)
+    body, _n = re.subn(r'<use href="#env_(ice|tunnel)"[^>]*/>', '', body); assert _n == 2, _n   # D178: کوه/تونل و یخِ پس‌زمینه روی راه، برچسب و پیست می‌افتادند
+    body, _n = re.subn(r'<use href="#env_dec_farm_(bucket|wheat)"[^>]*/>|<use href="#env_tree_bush" x="(?:220\.8|54\.0)"[^>]*/>|<use href="#env_tree_round" x="(?:112\.0|325\.8)"[^>]*/>|<use href="#env_tree_pop" x="329\.5"[^>]*/>|<use href="#env_tree_oak" x="-9"[^>]*/>', '', body); assert _n == 8, _n   # D178: درخت/بوته/دکور چسبیده به راه یا ایستگاه
+    # D178: پل‌ها دقیقاً روی راه: دو تقاطع راه و رودخانه (محاسبه با shapely) هر کدام یک پل هم‌جهت با راه
+    body, _n = re.subn(r'<g transform="translate\(344 2665\.8\) rotate\(-129\.4\)" filter="url\(#env_wob\)"><use href="#env_bridge"[^>]*/></g>',
+        '<g transform="translate(347 2665.4) rotate(50.3)" filter="url(#env_wob)"><use href="#env_bridge" x="-40" y="-23.3" width="80" height="46.7" /></g>'
+        '<g transform="translate(69 2774.6) rotate(-25.6)" filter="url(#env_wob)"><use href="#env_bridge" x="-55" y="-32" width="110" height="64" /></g>', body); assert _n == 1, _n
     body = re.sub(r'<use href="#env_dec_city_mid"[^>]*/>', '', body)   # بلوک‌های خاکستری نامفهوم
     body = body.replace('data-id="M10" filter="url(#env_wob)"', 'data-id="M10"')   # M10-nofilter: D107، نماد خط دستیِ برداری بدون فیلتر رستری
     body = body.replace('filter:grayscale(.8) brightness(.9)', 'filter:saturate(1.6) brightness(1.1)')

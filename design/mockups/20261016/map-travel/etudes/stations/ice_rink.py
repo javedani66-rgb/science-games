@@ -95,3 +95,10 @@ if __name__ == '__main__':
         duration_s=1.2, easing='ease-out', loop=False, trigger='رسیدن کودک (یک‌بار)', note='با reduced-motion ثابت در وضع پایان؛ بدون حلقهٔ بیکار.')}
     (OUTD / 'ice_rink.json').write_text(json.dumps(sp_, ensure_ascii=False, indent=1), encoding='utf-8')
     print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))
+    # D178: خودِ سکو هم یخی است (نه چمن): رنگ‌های سکوی سبز در لایهٔ base به یخ تغییر می‌کنند
+    f_ = OUTD / 'node_ice_rink.svg'; t_ = f_.read_text(encoding='utf-8')
+    a_ = t_.index('id="node_ice_rink_base"'); b_ = t_.index('id="node_ice_rink_lit"')
+    seg = t_[a_:b_]
+    for o_, n_ in (('#4f8a2c', '#8db4d1'), ('#7fbf4a', '#cfe9f7'), ('#a8d878', '#f2fbff'), ('#3f7a24', '#6f9bbd'), ('#8f8bd6', '#a9c4e0')):
+        seg = seg.replace(o_, n_)
+    f_.write_text(t_[:a_] + seg + t_[b_:], encoding='utf-8')
