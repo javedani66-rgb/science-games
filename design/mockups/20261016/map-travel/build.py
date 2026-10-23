@@ -135,7 +135,7 @@ def map_parts():
     body, _n = re.subn(r'<use href="#env_dec_farm_(bucket|wheat)"[^>]*/>|<use href="#env_tree_bush" x="(?:220\.8|54\.0)"[^>]*/>|<use href="#env_tree_round" x="(?:112\.0|325\.8)"[^>]*/>|<use href="#env_tree_pop" x="329\.5"[^>]*/>|<use href="#env_tree_oak" x="-9"[^>]*/>', '', body); assert _n == 8, _n   # D178: درخت/بوته/دکور چسبیده به راه یا ایستگاه
     # D178: پل‌ها دقیقاً روی راه: دو تقاطع راه و رودخانه (محاسبه با shapely) هر کدام یک پل هم‌جهت با راه
     body, _n = re.subn(r'<g transform="translate\(344 2665\.8\) rotate\(-129\.4\)" filter="url\(#env_wob\)"><use href="#env_bridge"[^>]*/></g>',
-        '<g transform="translate(347 2665.4) rotate(50.3)" filter="url(#env_wob)"><use href="#env_bridge" x="-40" y="-23.3" width="80" height="46.7" /></g>'
+        '<g transform="translate(341.5 2669) rotate(50)" filter="url(#env_wob)"><use href="#env_bridge" x="-42" y="-24.5" width="84" height="49" /></g>'
         '', body); assert _n == 1, _n
     body = re.sub(r'<use href="#env_dec_city_mid"[^>]*/>', '', body)   # بلوک‌های خاکستری نامفهوم
     body = body.replace('data-id="M10" filter="url(#env_wob)"', 'data-id="M10"')   # M10-nofilter: D107، نماد خط دستیِ برداری بدون فیلتر رستری
@@ -228,6 +228,10 @@ def add_assets(sprite):
     extra += ''.join((SO / ('node_%s.svg' % sid)).read_text(encoding='utf-8') for sid in KIT_NODES)
     sprite = re.sub(r'<path d="M-5\.2,10\.9l4\.2,45\.2,-3"[^>]*/>', '', sprite)   # مسیر خراب در node_09 (خط نازک زیر چوب‌شکافی)
     sprite = sprite.replace('in2="n" scale="3.4"', 'in2="n" scale="2"').replace('baseFrequency=".045"', 'baseFrequency=".03"')   # D106: لرزش کمتر
+    sprite, _n = re.subn(r'<path d="[^"]*" fill="#2aa6c8" opacity="\.7"/>', '', sprite); assert _n == 1, _n   # D180: نوار سایهٔ رود با لبهٔ بُریده
+    sprite, _n = re.subn(r'<path transform="translate\(\d+ 17[37]\.2\d*\)"[^>]*/>', '', sprite); assert _n == 3, _n   # D180: لکهٔ دایره‌ای آبی/قهوه‌ای ابتدای رودخانه
+    assert '<feDisplacementMap in="SourceGraphic" in2="n" scale="2"/>' in sprite
+    sprite = sprite.replace('<feDisplacementMap in="SourceGraphic" in2="n" scale="2"/>', '<feDisplacementMap in="SourceGraphic" in2="n" scale="2"/><feGaussianBlur stdDeviation=".45"/>')   # D180: پله‌پله‌شدن لبهٔ جاده روی صفحهٔ ۱×
     # D112: سایهٔ سکو نباید بیرون سکو روی راه بیفتد (کوچک‌تر و هم‌مرکز با سکو)
     sprite = sprite.replace('<ellipse cx="8" cy="6" rx="58" ry="20" class="esd"/>', '<ellipse cx="2" cy="5" rx="52" ry="17" class="esd"/>')
     sprite = sprite.replace('<ellipse cx="7" cy="21" rx="55" ry="20.9" fill="#10083a" opacity=".3"/>', '<ellipse cx="3" cy="19" rx="50" ry="18" fill="#10083a" opacity=".3"/>')
