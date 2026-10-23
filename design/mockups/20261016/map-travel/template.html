@@ -284,10 +284,35 @@ async function seaOut(){const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-
  await tween(2800,p=>{const y=by-(by+150)*p,x=bx+10*Math.sin(p*6)*(1-p),r=3*Math.sin(p*9);placeBoat(x,y,r);placeFig(x,y+SEAT);setTilt(-r*.7,0);follow(Math.max(0,y))},ease)}
 async function seaBack(){atSea=false;await run(async()=>{const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;
  await tween(2200,p=>{const y=-150+(by+150)*p;placeBoat(bx,y,0);placeFig(bx,y+SEAT);follow(Math.max(0,y))},ease);setTilt(0,0);await hopTo([d[0],d[1]-4],f,16);setOutfit(false);placeFig(f[0],f[1])});status()}
-async function go(id){if(busy)return;if(id===here){if(id==='M12')openHide();return} /* D143: ورود به مخفی‌گاه مثل بقیهٔ ایستگاه‌ها: لمس خود ایستگاه، نه دکمهٔ جدا */
+
+/* D159 (ماکت): حرکت ایستگاه‌ها هنگام رسیدن؛ یک‌بار، بدون حلقهٔ بیکار؛ حالت پایانی = شکل ایستای نماد. «کاهش حرکت» = بی‌حرکت. با لمس ایستگاهِ فعلی دوباره پخش می‌شود. */
+function stationG(id){const node=document.querySelector('.node[data-id="'+id+'"]');if(!node)return null;let g=node.querySelector('g.live');if(g)return g;
+ const u=node.querySelector('use');if(!u)return null;const sym=document.getElementById(u.getAttribute('href').slice(1));if(!sym)return null;
+ const x=+u.getAttribute('x'),y=+u.getAttribute('y'),w=+u.getAttribute('width'),h=+u.getAttribute('height'),s=Math.min(w/200,h/190);
+ g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','live');g.dataset.sid=u.getAttribute('href').slice(6);g.setAttribute('transform','translate('+(x+(w-200*s)/2)+' '+(y+(h-190*s)/2)+') scale('+s+')');g.innerHTML=sym.innerHTML;u.replaceWith(g);return g}
+function Ly(g,n){return g.querySelector('[id$="_'+n+'"]')}
+function an(el,kf,ms,delay,ease){if(!el)return null;el.style.transformOrigin='0 0';return el.animate(kf,{duration:ms,delay:delay||0,easing:ease||'ease-in-out',fill:'backwards'})}
+function rotKf(el,cx,cy,degs){return degs.map(a=>({transform:'translate('+cx+'px,'+cy+'px) rotate('+a+'deg) translate('+(-cx)+'px,'+(-cy)+'px)'}))}
+function ctr(el){const b=el.getBBox();return[b.x+b.width/2,b.y+b.height/2,b]}
+const ST={
+ wheel_dock(g){for(const n of['wheel','wheel_back']){const e=Ly(g,n);if(!e)continue;const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[-300,0]),1500,0,'cubic-bezier(.2,.7,.3,1)'))}},
+ pier(g){const e=Ly(g,'lantern');return_(an(e,[{transform:'translateY(-6px)'},{transform:'translateY(1.6px)'},{transform:'translateY(-.8px)'},{transform:'translateY(0)'}],1300,0,'ease-out'))},
+ harbor_crane(g){return_(an(Ly(g,'hook'),[{transform:'translateY(-14px)'},{transform:'translateY(1.5px)',offset:.8},{transform:'translateY(0)'}],1500,0,'cubic-bezier(.3,.6,.4,1)'))},
+ shipyard(g){const e=Ly(g,'hammer');if(!e)return;const c=ctr(e),b=c[2],px=b.x+b.width/2,py=b.y+b.height;return_(an(e,rotKf(e,px,py,[-22,0,-14,0,-8,0]),1700,0,'ease-in-out'))},
+ floating_market(g){return_(an(Ly(g,'boat'),[{transform:'translateY(-3px)'},{transform:'translateY(3px)'},{transform:'translateY(-1.6px)'},{transform:'translateY(1px)'},{transform:'translateY(0)'}],1800,0,'ease-in-out'))},
+ lighthouse(g){[['beam_l',0],['beam_r',500]].forEach(([n,d])=>return_(an(Ly(g,n),[{opacity:1},{opacity:.12},{opacity:1},{opacity:.12},{opacity:1}],2000,d,'ease-in-out')))},
+ final_workshop(g){const e=Ly(g,'gear');if(e){const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[-90,0]),1500,0,'ease-out'))}
+  [['smoke_1',0],['smoke_2',500],['smoke_3',1000]].forEach(([n,d])=>return_(an(Ly(g,n),[{transform:'translateY(0)',opacity:1},{transform:'translateY(-25px)',opacity:0,offset:.7},{transform:'translateY(0)',opacity:0,offset:.71},{transform:'translateY(0)',opacity:1}],1800,d,'ease-out')))},
+ chopwood(g){return_(an(Ly(g,'axe'),[{transform:'translate(16px,-14.7px)'},{transform:'translate(16px,-14.7px)',offset:.45},{transform:'translate(0,0)',offset:.62},{transform:'translate(1px,-1px)',offset:.72},{transform:'translate(0,0)'}],1300,0,'ease-in'))},
+ screw_workshop(g){for(const n of['nut_back','nut_front']){const e=Ly(g,n);if(!e)continue;const b=e.getBBox();const cx=b.x+b.width/2,cy=b.y+b.height/2;
+  return_(an(e,[{transform:'translate('+cx+'px,'+(cy-22)+'px) scale(1,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+(cy-15)+'px) scale(.93,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+(cy-9)+'px) scale(1,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+(cy-4)+'px) scale(.93,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+cy+'px) scale(1,1) translate('+(-cx)+'px,'+(-cy)+'px)'}],1600,0,'ease-in-out'))}}
+};
+let STA=[];function return_(a){if(a)STA.push(a)}
+function playStation(id){if(reduce)return;const g=stationG(id);if(!g)return;const key=g.dataset.sid;if(!ST[key])return;STA.forEach(a=>{try{a.cancel()}catch(e){}});STA=[];ST[key](g)}
+async function go(id){if(busy)return;if(id===here){if(id==='M12')openHide();else playStation(id);return} /* D143: ورود به مخفی‌گاه مثل بقیهٔ ایستگاه‌ها: لمس خود ایستگاه، نه دکمهٔ جدا */
  const up=nextUp();
- if(visited.has(id)){await run(()=>dramatic(here,id));here=id}
- else if(id===up){if(!done.has(ORDER[ORDER.indexOf(up)-1])){const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');$('st').textContent=T('needfin');return}await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true)}
+ if(visited.has(id)){await run(()=>dramatic(here,id));here=id;playStation(id)}
+ else if(id===up){if(!done.has(ORDER[ORDER.indexOf(up)-1])){const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');$('st').textContent=T('needfin');return}await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true);playStation(id)}
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
