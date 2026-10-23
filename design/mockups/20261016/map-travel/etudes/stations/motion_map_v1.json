@@ -1,16 +1,263 @@
 {
-  "_note": "مشخصات حرکت ایستگاه‌ها آن‌گونه که در ماکت سفر نقشه اجرا می‌شود (مالک ۲۳ اکتبر ۱۲:۰۸: «خوب شده»). مرجع اجرا: template.html (ST و playStation). حرکت هنگام رسیدن کودک یک‌بار پخش می‌شود، حلقهٔ بیکار ندارد، حالت پایانی = شکل ایستای نماد. «کاهش حرکت» = بی‌حرکت. لمس ایستگاهِ فعلی دوباره پخش می‌کند (جز M12).",
-  "version": "map-v1 (آرتیفکت نسخهٔ ۵۲)",
-  "stations": {
-    "M10 screw_workshop": {"layers": ["nut_back", "nut_front"], "motion": "مهره دور پیچ یک دور کامل (۳۶۰°) می‌چرخد و همزمان ۲۲ واحد بالا و پایین می‌رود؛ از حالت ایستا شروع می‌کند: می‌پیچد و بالا می‌آید، برمی‌گردد پایین، دوباره بالا و دوباره پایین (۴ بخش)؛ فریم‌به‌فریم با JS رسم می‌شود و در پایان لایه‌های اصلی برمی‌گردند", "duration_ms": 5200, "iterations": 1, "segments": 4, "segment_ms": 1300, "easing": "ease-in-out"},
-    "M02 wheel_dock": {"layers": ["wheel", "wheel_back"], "motion": "هر دو چرخ حول مرکز خود یک چرخش بلند ۷۲۰° که کند می‌شود و می‌ایستد", "duration_ms": 2600, "iterations": 1, "easing": "cubic-bezier(.2,.6,.3,1)"},
-    "M07 pier": {"layers": ["lantern"], "motion": "فانوس از قلاب (بالای لایه) ±۵° تاب می‌خورد", "duration_ms": 1000, "iterations": 4, "alternate": true, "easing": "ease-in-out", "pivot": "وسط-بالای کادر لایه"},
-    "M08 harbor_crane": {"layers": ["hook"], "motion": "کابل، قلاب و کانتینر ۱۰ واحد بالا می‌روند و نرم پایین می‌آیند", "duration_ms": 1100, "iterations": 3, "alternate": true, "easing": "ease-in-out"},
-    "M11 shipyard": {"layers": ["hammer"], "motion": "سه ضربهٔ چکش: چرخش ۲۲°- تا ۰ حول ته دسته", "duration_ms": 3000, "iterations": 1, "easing": "ease-in-out", "pivot": "وسط-پایین کادر لایه"},
-    "E06 floating_market": {"layers": ["boat"], "motion": "کل بلم و غرفه روی موج ۳ واحد بالا و پایین", "duration_ms": 1000, "iterations": 3, "alternate": true, "easing": "ease-in-out"},
-    "E04 lighthouse": {"layers": ["beam_l", "beam_r"], "motion": "دو هالهٔ نرم یکی‌درمیان می‌تپند (شفافیت ۱ ← ۰٫۱۲ ← ۱ دو بار)", "duration_ms": 2000, "iterations": 3, "delay_ms": {"beam_l": 0, "beam_r": 500}, "easing": "ease-in-out"},
-    "M12 final_workshop": {"layers": ["gear", "smoke_1", "smoke_2", "smoke_3"], "motion": "چرخ‌دنده یک چرخش ۲۷۰° کند‌شونده؛ سه حباب دود یکی‌یکی ۲۵ واحد بالا می‌روند و محو می‌شوند و در جای ایستا برمی‌گردند", "duration_ms": {"gear": 3000, "smoke": 1800}, "iterations": {"gear": 1, "smoke": 3}, "delay_ms": {"smoke_1": 0, "smoke_2": 500, "smoke_3": 1000}},
-    "M09 chopwood": {"layers": ["axe"], "motion": "تبر حول انتهای دسته (قوس) ۲۶° سر را بالا می‌برد، لحظه‌ای مکث می‌کند و تند فرود می‌آید؛ سه ضربه (هر ضربه ۱۴۰۰ms)", "duration_ms": 4200, "iterations": 1, "pivot": "انتهای دسته", "easing": "بالا رفتن نرم، فرود تند (ease-in قوی)"},
-    "E03 lumber": {"layers": [], "motion": "ندارد (نماد ایستا؛ لایهٔ متحرک ساخته نشده)"}
+ "_note": "مشخصات حرکت ایستگاه‌ها آن‌گونه که در ماکت سفر نقشه اجرا می‌شود (مالک ۲۳ اکتبر ۱۲:۰۸: «خوب شده»). مرجع اجرا: template.html (ST و playStation). حرکت هنگام رسیدن کودک یک‌بار پخش می‌شود، حلقهٔ بیکار ندارد، حالت پایانی = شکل ایستای نماد. «کاهش حرکت» = بی‌حرکت. لمس ایستگاهِ فعلی دوباره پخش می‌کند (جز M12).",
+ "version": "map-v1 (۳۴ ایستگاه)",
+ "stations": {
+  "M10 screw_workshop": {
+   "layers": [
+    "nut_back",
+    "nut_front"
+   ],
+   "motion": "مهره دور پیچ یک دور کامل (۳۶۰°) می‌چرخد و همزمان ۲۲ واحد بالا و پایین می‌رود؛ از حالت ایستا شروع می‌کند: می‌پیچد و بالا می‌آید، برمی‌گردد پایین، دوباره بالا و دوباره پایین (۴ بخش)؛ فریم‌به‌فریم با JS رسم می‌شود و در پایان لایه‌های اصلی برمی‌گردند",
+   "duration_ms": 5200,
+   "iterations": 1,
+   "segments": 4,
+   "segment_ms": 1300,
+   "easing": "ease-in-out"
+  },
+  "M02 wheel_dock": {
+   "layers": [
+    "wheel",
+    "wheel_back"
+   ],
+   "motion": "هر دو چرخ حول مرکز خود یک چرخش بلند ۷۲۰° که کند می‌شود و می‌ایستد",
+   "duration_ms": 2600,
+   "iterations": 1,
+   "easing": "cubic-bezier(.2,.6,.3,1)"
+  },
+  "M07 pier": {
+   "layers": [
+    "lantern"
+   ],
+   "motion": "فانوس از قلاب (بالای لایه) ±۵° تاب می‌خورد",
+   "duration_ms": 1000,
+   "iterations": 4,
+   "alternate": true,
+   "easing": "ease-in-out",
+   "pivot": "وسط-بالای کادر لایه"
+  },
+  "M08 harbor_crane": {
+   "layers": [
+    "hook"
+   ],
+   "motion": "کابل، قلاب و کانتینر ۱۰ واحد بالا می‌روند و نرم پایین می‌آیند",
+   "duration_ms": 1100,
+   "iterations": 3,
+   "alternate": true,
+   "easing": "ease-in-out"
+  },
+  "M11 shipyard": {
+   "layers": [
+    "hammer"
+   ],
+   "motion": "سه ضربهٔ چکش: چرخش ۲۲°- تا ۰ حول ته دسته",
+   "duration_ms": 3000,
+   "iterations": 1,
+   "easing": "ease-in-out",
+   "pivot": "وسط-پایین کادر لایه"
+  },
+  "E06 floating_market": {
+   "layers": [
+    "boat"
+   ],
+   "motion": "کل بلم و غرفه روی موج ۳ واحد بالا و پایین",
+   "duration_ms": 1000,
+   "iterations": 3,
+   "alternate": true,
+   "easing": "ease-in-out"
+  },
+  "E04 lighthouse": {
+   "layers": [
+    "beam_l",
+    "beam_r"
+   ],
+   "motion": "دو هالهٔ نرم یکی‌درمیان می‌تپند (شفافیت ۱ ← ۰٫۱۲ ← ۱ دو بار)",
+   "duration_ms": 2000,
+   "iterations": 3,
+   "delay_ms": {
+    "beam_l": 0,
+    "beam_r": 500
+   },
+   "easing": "ease-in-out"
+  },
+  "M12 final_workshop": {
+   "layers": [
+    "gear",
+    "smoke_1",
+    "smoke_2",
+    "smoke_3"
+   ],
+   "motion": "چرخ‌دنده یک چرخش ۲۷۰° کند‌شونده؛ سه حباب دود یکی‌یکی ۲۵ واحد بالا می‌روند و محو می‌شوند و در جای ایستا برمی‌گردند",
+   "duration_ms": {
+    "gear": 3000,
+    "smoke": 1800
+   },
+   "iterations": {
+    "gear": 1,
+    "smoke": 3
+   },
+   "delay_ms": {
+    "smoke_1": 0,
+    "smoke_2": 500,
+    "smoke_3": 1000
+   }
+  },
+  "M09 chopwood": {
+   "layers": [
+    "axe"
+   ],
+   "motion": "تبر حول انتهای دسته (قوس) ۲۶° سر را بالا می‌برد، لحظه‌ای مکث می‌کند و تند فرود می‌آید؛ سه ضربه (هر ضربه ۱۴۰۰ms)",
+   "duration_ms": 4200,
+   "iterations": 1,
+   "pivot": "انتهای دسته",
+   "easing": "بالا رفتن نرم، فرود تند (ease-in قوی)"
+  },
+  "E03 lumber": {
+   "layers": [],
+   "motion": "ندارد (نماد ایستا؛ لایهٔ متحرک ساخته نشده)"
+  },
+  "M07 city_gate": {
+   "motion": "لنگهٔ دروازه حول لولا از حالت نیمه‌بسته باز می‌شود",
+   "duration_ms": 1400,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "B01 scaffold": {
+   "motion": "سطل داربست کمی تاب می‌خورد و می‌ایستد",
+   "duration_ms": 2800,
+   "iterations": 1,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "B02 materials_store": {
+   "motion": "آجر از بالا روی پشته می‌نشیند",
+   "duration_ms": 1200,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "B03 excavation": {
+   "motion": "میلهٔ بیل‌مکانیکی پایین می‌آید",
+   "duration_ms": 1800,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "B04 beam_store": {
+   "motion": "تکیه‌گاه از بالا جا می‌افتد",
+   "duration_ms": 1200,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "M06 tool_room": {
+   "motion": "چکش یک ضربه می‌زند",
+   "duration_ms": 1200,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "E05 wrench_room": {
+   "motion": "مهره از بالا روی آچار می‌نشیند",
+   "duration_ms": 1200,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "M04 loading_ramp": {
+   "motion": "جعبه روی رمپ می‌لغزد و جا می‌گیرد",
+   "duration_ms": 1600,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "F01 football": {
+   "motion": "توپ می‌غلتد و در دروازه می‌ایستد",
+   "duration_ms": 1600,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "F02 basketball_hall": {
+   "motion": "توپ از بالا پایین می‌آید و می‌ایستد",
+   "duration_ms": 1100,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "F03 archery_range": {
+   "motion": "تیر به جای خود می‌رود و زه همراهش کشیده می‌شود",
+   "duration_ms": 700,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "F04 magnet_hockey": {
+   "motion": "گیرهٔ آهنربا می‌لغزد و جا می‌گیرد",
+   "duration_ms": 1000,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "W01 launch_pad": {
+   "motion": "شعلهٔ موشک چند بار سوسو می‌زند",
+   "duration_ms": 1500,
+   "iterations": 1,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "F06 ice_rink": {
+   "motion": "اسکیت می‌لغزد و می‌ایستد",
+   "duration_ms": 1200,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "F07 pool": {
+   "motion": "توپ روی آب می‌نشیند",
+   "duration_ms": 1600,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "F08 tug_field": {
+   "motion": "پرچم طناب چپ و راست می‌رود و وسط می‌ایستد",
+   "duration_ms": 2400,
+   "iterations": 1,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "F09 skate_park": {
+   "motion": "اسکیت‌برد می‌لغزد و جا می‌گیرد",
+   "duration_ms": 900,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "W02 space_loading": {
+   "motion": "جعبه فرود می‌آید",
+   "duration_ms": 1800,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "F05 scale_lab": {
+   "motion": "بازوی ترازو نوسان می‌کند و تراز می‌شود",
+   "duration_ms": 2200,
+   "iterations": 1,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "W03 moon": {
+   "motion": "سایه آرام جا می‌افتد",
+   "duration_ms": 3000,
+   "iterations": 1,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "W04 space_station": {
+   "motion": "پنل‌های خورشیدی کمی نوسان می‌کنند",
+   "duration_ms": 2000,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "E01 windmill": {
+   "motion": "پره‌ها سه دور می‌چرخند و می‌ایستند",
+   "duration_ms": 5000,
+   "iterations": 1,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "E02 cart_station": {
+   "motion": "چرخ‌های گاری می‌غلتند و می‌ایستند",
+   "duration_ms": 3000,
+   "iterations": 1,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
+  },
+  "E07 well": {
+   "motion": "سطل چاه پایین/بالا می‌شود و می‌ایستد",
+   "duration_ms": 2000,
+   "iterations": 3,
+   "note": "ثبت ۲۳ اکتبر؛ شناسهٔ ایستگاه‌ها را با build.py تطبیق بده؛ پایان = حالت ایستا"
   }
+ }
 }
