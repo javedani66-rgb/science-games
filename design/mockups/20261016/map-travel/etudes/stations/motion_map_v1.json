@@ -10,7 +10,7 @@
     "E06 floating_market": {"layers": ["boat"], "motion": "کل بلم و غرفه روی موج ۳ واحد بالا و پایین", "duration_ms": 1000, "iterations": 3, "alternate": true, "easing": "ease-in-out"},
     "E04 lighthouse": {"layers": ["beam_l", "beam_r"], "motion": "دو هالهٔ نرم یکی‌درمیان می‌تپند (شفافیت ۱ ← ۰٫۱۲ ← ۱ دو بار)", "duration_ms": 2000, "iterations": 3, "delay_ms": {"beam_l": 0, "beam_r": 500}, "easing": "ease-in-out"},
     "M12 final_workshop": {"layers": ["gear", "smoke_1", "smoke_2", "smoke_3"], "motion": "چرخ‌دنده یک چرخش ۲۷۰° کند‌شونده؛ سه حباب دود یکی‌یکی ۲۵ واحد بالا می‌روند و محو می‌شوند و در جای ایستا برمی‌گردند", "duration_ms": {"gear": 3000, "smoke": 1800}, "iterations": {"gear": 1, "smoke": 3}, "delay_ms": {"smoke_1": 0, "smoke_2": 500, "smoke_3": 1000}},
-    "M09 chopwood": {"layers": ["axe"], "motion": "تبر ۲۲ واحد در امتداد دسته بالا می‌رود و فرو می‌آید؛ سه ضربه در یک رشته", "duration_ms": 3600, "iterations": 1, "easing": "ease-in"},
+    "M09 chopwood": {"layers": ["axe"], "motion": "تبر حول انتهای دسته (قوس) ۲۶° سر را بالا می‌برد، لحظه‌ای مکث می‌کند و تند فرود می‌آید؛ سه ضربه (هر ضربه ۱۴۰۰ms)", "duration_ms": 4200, "iterations": 1, "pivot": "انتهای دسته", "easing": "بالا رفتن نرم، فرود تند (ease-in قوی)"},
     "E03 lumber": {"layers": [], "motion": "ندارد (نماد ایستا؛ لایهٔ متحرک ساخته نشده)"}
   }
 }
