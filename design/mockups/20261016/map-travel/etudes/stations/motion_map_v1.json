@@ -2,7 +2,7 @@
   "_note": "مشخصات حرکت ایستگاه‌ها آن‌گونه که در ماکت سفر نقشه اجرا می‌شود (مالک ۲۳ اکتبر ۱۲:۰۸: «خوب شده»). مرجع اجرا: template.html (ST و playStation). حرکت هنگام رسیدن کودک یک‌بار پخش می‌شود، حلقهٔ بیکار ندارد، حالت پایانی = شکل ایستای نماد. «کاهش حرکت» = بی‌حرکت. لمس ایستگاهِ فعلی دوباره پخش می‌کند (جز M12).",
   "version": "map-v1 (آرتیفکت نسخهٔ ۵۲)",
   "stations": {
-    "M10 screw_workshop": {"layers": ["nut_back", "nut_front"], "motion": "مهره روی پیچ ۲۲ واحد بالا و پایین می‌آید (تاب‌دار: فشردگی افقی ۰٫۹۳)", "duration_ms": 1500, "iterations": 3, "alternate": true, "easing": "ease-in-out"},
+    "M10 screw_workshop": {"layers": ["nut_back", "nut_front"], "motion": "مهره دور پیچ یک دور کامل (۳۶۰°) می‌چرخد و همزمان ۲۲ واحد بالا و پایین می‌رود؛ سه رفت‌وبرگشت پشت‌سرهم؛ فریم‌به‌فریم با JS رسم می‌شود و در پایان لایه‌های اصلی برمی‌گردند", "duration_ms": 4500, "iterations": 1, "segments": 3, "segment_ms": 1500, "easing": "ease-in-out"},
     "M02 wheel_dock": {"layers": ["wheel", "wheel_back"], "motion": "هر دو چرخ حول مرکز خود یک چرخش بلند ۷۲۰° که کند می‌شود و می‌ایستد", "duration_ms": 2600, "iterations": 1, "easing": "cubic-bezier(.2,.6,.3,1)"},
     "M07 pier": {"layers": ["lantern"], "motion": "فانوس از قلاب (بالای لایه) ±۵° تاب می‌خورد", "duration_ms": 1000, "iterations": 4, "alternate": true, "easing": "ease-in-out", "pivot": "وسط-بالای کادر لایه"},
     "M08 harbor_crane": {"layers": ["hook"], "motion": "کابل، قلاب و کانتینر ۱۰ واحد بالا می‌روند و نرم پایین می‌آیند", "duration_ms": 1100, "iterations": 3, "alternate": true, "easing": "ease-in-out"},

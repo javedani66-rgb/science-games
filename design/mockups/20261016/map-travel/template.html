@@ -307,8 +307,34 @@ const ST={
  final_workshop(g){const e=Ly(g,'gear');if(e){const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[-270,0]),3000,0,'ease-out',false,1))}
   [['smoke_1',0],['smoke_2',500],['smoke_3',1000]].forEach(([n,d])=>return_(an(Ly(g,n),[{transform:'translateY(0)',opacity:1},{transform:'translateY(-25px)',opacity:0,offset:.7},{transform:'translateY(0)',opacity:0,offset:.71},{transform:'translateY(0)',opacity:1}],1800,d,'ease-out')))},
  chopwood(g){const U='translate(16px,-14.7px)',H='translate(0,0)';const s=[U,U,H,U,U,H,U,U,H].map((x,i)=>({transform:x}));return_(an(Ly(g,'axe'),s,3600,0,'ease-in',false,1))},
- screw_workshop(g){for(const n of['nut_back','nut_front']){const e=Ly(g,n);if(!e)continue;const b=e.getBBox();const cx=b.x+b.width/2,cy=b.y+b.height/2;
-  return_(an(e,[{transform:'translate('+cx+'px,'+(cy-22)+'px) scale(1,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+(cy-15)+'px) scale(.93,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+(cy-9)+'px) scale(1,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+(cy-4)+'px) scale(.93,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+cy+'px) scale(1,1) translate('+(-cx)+'px,'+(-cy)+'px)'}],1500,0,'ease-in-out',true,3))}}
+ screw_workshop(g){const nb=Ly(g,'nut_back'),nf=Ly(g,'nut_front');if(!nb||!nf)return;
+  /* D169: مهره دور پیچ می‌چرخد و همزمان بالا و پایین می‌رود؛ دو لایهٔ جایگزین فریم‌به‌فریم رسم می‌شوند و در پایان کنار می‌روند (پایان = لایه‌های اصلی) */
+  const NS2='http://www.w3.org/2000/svg',ob=document.createElementNS(NS2,'g'),of=document.createElementNS(NS2,'g');nb.after(ob);nf.after(of);nb.style.display='none';nf.style.display='none';
+  const CX=-26.8,CY=-55.1,R=45.2,AY=18.1,H=23.8,HR=27.4,RAD=Math.PI/180,mix=(a,b,u)=>{const p=s=>[1,3,5].map(i=>parseInt(s.substr(i,2),16));const A=p(a),B=p(b);return'#'+A.map((v,i)=>Math.round(v+(B[i]-v)*u).toString(16).padStart(2,'0')).join('')};
+  const fcol=c=>{const u=Math.min(1,Math.abs(c)/.866);return c>=0?mix('#f2b92c','#d9961c',u):mix('#f2b92c','#e8a51f',u)};
+  const bnd=(ph,t)=>{const m=((t-ph)%60+60)%60,r=R*.866/Math.cos((m-30)*RAD);return[CX+r*Math.cos(t*RAD),CY+AY/R*r*Math.sin(t*RAD)]};
+  const pts=a=>a.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');
+  function draw(ph,dy){const C=[];for(let i=0;i<6;i++){const th=(ph+60*i)*RAD;C.push([CX+R*Math.cos(th),CY+AY*Math.sin(th)])}
+   let faces='',hl='',seams='';let xs=C.map(c=>c[0]),iL=xs.indexOf(Math.min(...xs)),iR=xs.indexOf(Math.max(...xs));
+   for(let i=0;i<6;i++){const A=C[i],B=C[(i+1)%6],tm=(ph+60*i+30)*RAD;if(Math.sin(tm)<=0)continue;
+    faces+='<polygon points="'+pts([A,B,[B[0],B[1]+H],[A[0],A[1]+H]])+'" fill="'+fcol(Math.cos(tm))+'" stroke="'+fcol(Math.cos(tm))+'" stroke-width=".6"/>';
+    hl+='<polygon points="'+pts([A,B,[B[0],B[1]+6],[A[0],A[1]+6]])+'" fill="#ffe9a0"/>'}
+   for(let i=0;i<6;i++){const th=(ph+60*i)*RAD;if(Math.sin(th)>.02&&Math.sin(th)<1.01)seams+='<line x1="'+C[i][0].toFixed(1)+'" y1="'+C[i][1].toFixed(1)+'" x2="'+C[i][0].toFixed(1)+'" y2="'+(C[i][1]+H).toFixed(1)+'" stroke="#241a5e" stroke-width="3.9" stroke-linecap="round"/>'}
+   const fr=[],bo=[];for(let t=0;t<=180;t+=3){fr.push(bnd(ph,t))}fr.push(bnd(ph,180));for(let t=0;t<=180;t+=3){const q=bnd(ph,t);bo.push([q[0],q[1]+H])}
+   const outl='<path d="M'+pts([fr[0]])+' L'+pts(fr)+' L'+pts([[C[iL][0],C[iL][1]+H]])+' L'+pts(bo.slice().reverse())+' Z" fill="none" class="eo" stroke-width="7.6"/>';
+   const sil='<path d="M'+pts([[C[iL][0],C[iL][1]]])+' L'+pts([[C[iL][0],C[iL][1]+H]])+' L'+pts(bo.slice().reverse().filter((q,k,a)=>true))+' L'+pts([[C[iR][0],C[iR][1]+H]])+' L'+pts([C[iR]])+'" fill="none" class="eo" stroke-width="7.6"/>';
+   const hole=[];for(let t=0;t<360;t+=10)hole.push([CX+HR*Math.cos(t*RAD),CY+HR*.4*Math.sin(t*RAD)]);
+   const arc=[];for(let t=180;t>=0;t-=10)arc.push([CX+HR*Math.cos(t*RAD),CY+HR*.4*Math.sin(t*RAD)]);
+   const topf=[];for(let t=0;t<=180;t+=3)topf.push(bnd(ph,t));
+   const cres=pts(topf)+' '+pts(arc);
+   const tr='translate(0 '+dy.toFixed(2)+')';
+   ob.setAttribute('transform',tr);of.setAttribute('transform',tr);
+   ob.innerHTML=faces+hl+'<polygon points="'+pts(C)+'" fill="#ffd84d" class="eo" stroke-width="7.6" stroke-linejoin="round"/>'+'<polygon points="'+pts(hole)+'" fill="#8a5f0c" class="eo" stroke-width="3.9"/>'+sil;
+   of.innerHTML=faces+hl+'<polygon points="'+cres+'" fill="#ffd84d"/>'+seams+'<path d="M'+pts(topf)+'" fill="none" class="eo" stroke-width="7.6"/><path d="M'+pts(arc)+'" fill="none" class="eo" stroke-width="3.9"/>'+sil}
+  let alive=true,raf=0;const DUR=4500,T0=performance.now(),ez=u=>u<.5?2*u*u:1-2*(1-u)*(1-u);
+  const done=()=>{if(!alive)return;alive=false;cancelAnimationFrame(raf);ob.remove();of.remove();nb.style.display='';nf.style.display=''};
+  (function f(now){if(!alive)return;const p=Math.min(1,(now-T0)/DUR),seg=Math.min(2,Math.floor(p*3)),u=ez(p*3-seg),y=-22*(seg%2===0?1-u:u);draw(360*y/22,y);if(p>=1)done();else raf=requestAnimationFrame(f)})(T0);
+  return_({cancel:done})}
 };
 const IT=3;let STA=[];function return_(a){if(a)STA.push(a)}
 function playStation(id){if(reduce)return;const g=stationG(id);if(!g)return;const key=g.dataset.sid;if(!ST[key])return;STA.forEach(a=>{try{a.cancel()}catch(e){}});STA=[];ST[key](g)}
