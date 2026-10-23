@@ -41,18 +41,18 @@ def build():
     p.tipshadow(CX + 6, BASE + 2, 44); p.foot_tip(CX, BASE, 26)
     p.tipshadow(38, 10, 40); p.foot_tip(38, 10, 26)
     # دهانهٔ تیره پشت مهره (لایهٔ ثابت زیر آچار)
+    top_y = CY - math.sqrt(RH ** 2 - SL ** 2)
+    poly(p, [(CX - SL, top_y + 3), (CX + SL, top_y + 3), (CX + SL, CY + 8), (CX - SL, CY + 8)], '#4a5090')
     extrude(p, profile(), D, F_, T_, S_, mid=M_, sw=OUT, sw_in=0)
     # نوارها روی دسته و سر
     rect(p, CX + 5, -60, CX + HW - 2, BASE - 8, M_)
     rect(p, CX - HW + 5, -62, CX - HW + 8.5, BASE - 10, '#ffffff', .9)
     rect(p, CX - RH + 8, CY - 8, CX - RH + 11.5, CY + 14, '#ffffff', .9)
     p.shape([(CX + x, BASE - 28 + y) for x, y in ell(0, 0, 5, 9, 0, 360, 16)], '#3a4c68', 3, j=.05, step=99, clip=False)
-    top_y = CY - math.sqrt(RH ** 2 - SL ** 2)
-    poly(p, [(CX - SL, top_y + 3), (CX + SL, top_y + 3), (CX + SL, CY + 8), (CX - SL, CY + 8)], '#4a5090')
     with layer(p, 'nut'):
         hx = hexf(CX, NY)
         extrude(p, hx, (7, -5), Y_F, Y_T, Y_S, sw=3.6, sw_in=0)
-        p.shape([(CX + x, NY + y) for x, y in ell(0, 0, 6.5, 6.5, 0, 360, 14)], '#3a2a6a', 3, j=.05, step=99, clip=False)
+        p.shape([(CX + x, NY + y) for x, y in ell(0, 0, 6.5, 6.5, 0, 360, 14)], '#4a5090', 3, j=.05, step=99, clip=False)
     # جعبهٔ ابزار
     bx0, bx1, by0, by1 = 22, 64, -28, 10
     box3(p, bx0, by0, bx1, by1, (12, -9), R_F, R_T, R_S, sw=PART, sw_in=0)
