@@ -12,7 +12,7 @@ station_kit.margin_check = partial(station_kit.margin_check, min_margin=4)   # D
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/pier'
-XF = (1.12, 0.0, 2.0)
+XF = (0.95, 0.0, 8.0)
 DECK = '#e9a65b'; DECK_L = '#f6c98a'; DECK_D = '#b8682a'; PILE = '#c9772a'; PILE_L = '#e29a52'; WOOD_D = '#8a4a1c'
 ROPE = '#f3dca0'; ROPE_D = '#b8892a'; CREAM = '#fff3c4'; FLAME = '#ffd84d'; LAMP = '#8c9ac8'
 UP = 3
@@ -72,14 +72,15 @@ def crate(p):
 
 def pole(p):
     x, base = POLE_X, DECK_Y0 - 3
-    extrude(p, [(x + 7, -78), (x + 7, -97), (x + 21, -97)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)     # تکیه‌گاه مورب زیر بازو
-    extrude(p, [(x - 7, -104), (x + 7, -104), (x + 6, base), (x - 6, base)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)
-    extrude(p, [(x + 7, -104), (x + 40, -104), (x + 40, -97), (x + 7, -97)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)   # بازوی فانوس (یک شکل با ستون)
+    extrude(p, [(x + 7, -100), (x + 7, -119), (x + 21, -119)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)     # تکیه‌گاه مورب زیر بازو
+    extrude(p, [(x - 7, -128), (x + 7, -128), (x + 6, base), (x - 6, base)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)
+    extrude(p, [(x + 7, -128), (x + 40, -128), (x + 40, -119), (x + 7, -119)], (6, -4), PL_F, PL_T, PL_S, sw=HERO_T, sw_in=0)   # بازوی فانوس (یک شکل با ستون)
 
 
 def lantern(p):
-    cx, top = POLE_X + 33, -98
-    gx, gy = p.X((cx, top + 22)); p.raw('<ellipse cx="%.1f" cy="%.1f" rx="%.1f" ry="%.1f" fill="#ffe27a" opacity=".32"/>' % (gx, gy, 19 * p.xf[0], 19 * p.xf[0]))
+    cx, top = POLE_X + 33, -122
+    gx, gy = p.X((cx, top + 21)); rr = 30 * p.xf[0]
+    p.raw('<defs><radialGradient id="pier_halo"><stop offset="0" stop-color="#ffe27a" stop-opacity=".75"/><stop offset=".5" stop-color="#ffe27a" stop-opacity=".28"/><stop offset="1" stop-color="#ffe27a" stop-opacity="0"/></radialGradient></defs><circle cx="%.1f" cy="%.1f" r="%.1f" fill="url(#pier_halo)"/>' % (gx, gy, rr))
     p.ln((cx, top + 1), (cx, top + 8), 2.2, NAVY, j=0)                                   # زنجیر
     p.shape([(cx - 11, top + 8), (cx + 11, top + 8), (cx + 11, top + 34), (cx - 11, top + 34)], LAMP, HERO_T, j=.05, step=99, clip=False)
     rect(p, cx - 7, top + 13, cx + 7, top + 29, FLAME)                                    # شعله

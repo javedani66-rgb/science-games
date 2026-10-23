@@ -94,8 +94,9 @@ def build(out=OUTD):
     # دو پرتو، دو لایهٔ جدا، پشت اتاقک؛ از مرکز اتاقک شروع می‌شوند
     for nm, s_ in (('beam_l', -1), ('beam_r', 1)):
         with layer(p, nm):
-            poly_(p, [(s_ * 4, LY - 7), (s_ * BX, LY - 32), (s_ * BX, LY + 6), (s_ * 4, LY + 7)], BEAM, .95)
-            poly_(p, [(s_ * 14, LY - 3), (s_ * (BX - 4), LY - 11), (s_ * (BX - 4), LY + 4), (s_ * 14, LY + 3)], '#fffbd0')
+            cx_, cy_ = p.X((s_ * 24, LY)); k_ = p.xf[0]
+            gid = 'lh_%s' % nm
+            p.raw('<defs><radialGradient id="%s"><stop offset="0" stop-color="#fffbd0" stop-opacity="1"/><stop offset=".4" stop-color="#ffe45c" stop-opacity=".75"/><stop offset="1" stop-color="#ffe45c" stop-opacity="0"/></radialGradient></defs><ellipse cx="%.1f" cy="%.1f" rx="%.1f" ry="%.1f" fill="url(#%s)"/>' % (gid, cx_, cy_, 24 * k_, 15 * k_, gid))
     tower = Fr(0, -58, 8, 19, 30); bal = Fr(0, -64, -58, 28, 28, .3); lamp = Fr(0, -88, -64, 12, 12); roof = Fr(0, -114, -88, 0, 18)
     orb = Polygon(ell(0, -118, 4.8, 4.8, 0, 360, 20))
     S = sil([tower.body, bal.body, lamp.body, roof.body, orb])

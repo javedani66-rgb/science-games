@@ -49,7 +49,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .btn.sec{background:var(--cream)}
 .dpop{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@media (prefers-reduced-motion:reduce){.dpop{animation:none}}.pr{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@keyframes stamp{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}@media (prefers-reduced-motion:reduce){.pr{animation:none}}
 
-.node{transition:filter 1.1s ease}.node.dim{filter:saturate(.72) brightness(.94)}.node.glow{animation:glowIn 1.4s ease-out}@keyframes glowIn{0%{filter:saturate(.72) brightness(.94)}35%{filter:saturate(1.5) brightness(1.35) drop-shadow(0 0 8px #ffe27a)}100%{filter:none}}@media (prefers-reduced-motion:reduce){.node{transition:none}.node.glow{animation:none}}
+.node{transition:opacity 1.1s ease}.node.dim{opacity:.78}@media (prefers-reduced-motion:reduce){.node{transition:none}}
 </style>
 </head>
 <body data-light="day">
@@ -293,15 +293,15 @@ function stationG(id){const node=document.querySelector('.node[data-id="'+id+'"]
  const x=+u.getAttribute('x'),y=+u.getAttribute('y'),w=+u.getAttribute('width'),h=+u.getAttribute('height'),s=Math.min(w/200,h/190);
  g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','live');g.dataset.sid=u.getAttribute('href').slice(6);g.setAttribute('transform','translate('+(x+(w-200*s)/2)+' '+(y+(h-190*s)/2)+') scale('+s+')');g.innerHTML=sym.innerHTML;u.replaceWith(g);return g}
 function Ly(g,n){return g.querySelector('[id$="_'+n+'"]')}
-function an(el,kf,ms,delay,ease){if(!el)return null;el.style.transformOrigin='0 0';return el.animate(kf,{duration:ms,delay:delay||0,easing:ease||'ease-in-out',fill:'backwards',iterations:IT})}
+function an(el,kf,ms,delay,ease,alt){if(!el)return null;el.style.transformOrigin='0 0';return el.animate(kf,{duration:ms,delay:delay||0,easing:ease||'ease-in-out',fill:'backwards',iterations:IT,direction:alt?'alternate':'normal'})}
 function rotKf(el,cx,cy,degs){return degs.map(a=>({transform:'translate('+cx+'px,'+cy+'px) rotate('+a+'deg) translate('+(-cx)+'px,'+(-cy)+'px)'}))}
 function ctr(el){const b=el.getBBox();return[b.x+b.width/2,b.y+b.height/2,b]}
 const ST={
  wheel_dock(g){for(const n of['wheel','wheel_back']){const e=Ly(g,n);if(!e)continue;const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[-300,0]),1500,0,'cubic-bezier(.2,.7,.3,1)'))}},
- pier(g){const e=Ly(g,'lantern');return_(an(e,[{transform:'translateY(-6px)'},{transform:'translateY(1.6px)'},{transform:'translateY(-.8px)'},{transform:'translateY(0)'}],1300,0,'ease-out'))},
- harbor_crane(g){return_(an(Ly(g,'hook'),[{transform:'translateY(-14px)'},{transform:'translateY(1.5px)',offset:.8},{transform:'translateY(0)'}],1500,0,'cubic-bezier(.3,.6,.4,1)'))},
+ pier(g){return_(an(Ly(g,'lantern'),[{transform:'translateY(-5px) rotate(-3deg)'},{transform:'translateY(0) rotate(0deg)'}],900,0,'ease-in-out',true))},
+ harbor_crane(g){return_(an(Ly(g,'hook'),[{transform:'translateY(-10px)'},{transform:'translateY(0)'}],1100,0,'ease-in-out',true))},
  shipyard(g){const e=Ly(g,'hammer');if(!e)return;const c=ctr(e),b=c[2],px=b.x+b.width/2,py=b.y+b.height;return_(an(e,rotKf(e,px,py,[-22,0,-14,0,-8,0]),1700,0,'ease-in-out'))},
- floating_market(g){return_(an(Ly(g,'boat'),[{transform:'translateY(-3px)'},{transform:'translateY(3px)'},{transform:'translateY(-1.6px)'},{transform:'translateY(1px)'},{transform:'translateY(0)'}],1800,0,'ease-in-out'))},
+ floating_market(g){return_(an(Ly(g,'boat'),[{transform:'translateY(-3px)'},{transform:'translateY(0)'}],1000,0,'ease-in-out',true))},
  lighthouse(g){[['beam_l',0],['beam_r',500]].forEach(([n,d])=>return_(an(Ly(g,n),[{opacity:1},{opacity:.12},{opacity:1},{opacity:.12},{opacity:1}],2000,d,'ease-in-out')))},
  final_workshop(g){const e=Ly(g,'gear');if(e){const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[-90,0]),1500,0,'ease-out'))}
   [['smoke_1',0],['smoke_2',500],['smoke_3',1000]].forEach(([n,d])=>return_(an(Ly(g,n),[{transform:'translateY(0)',opacity:1},{transform:'translateY(-25px)',opacity:0,offset:.7},{transform:'translateY(0)',opacity:0,offset:.71},{transform:'translateY(0)',opacity:1}],1800,d,'ease-out')))},
@@ -319,7 +319,8 @@ async function go(id){if(busy)return;if(id===here){if(id==='M12')openHide();else
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
 
-function updateDim(fresh){document.querySelectorAll('.node[data-id]').forEach(n=>{const id=n.dataset.id;if(!(id in NODES))return;const v=visited.has(id)||here===id;if(v){if(n.classList.contains('dim')){n.classList.remove('dim');if(fresh===id&&!reduce){n.classList.add('glow');setTimeout(()=>n.classList.remove('glow'),1500)}}}else n.classList.add('dim')})}
+function updateDim(fresh){document.querySelectorAll('.node[data-id]').forEach(n=>{const id=n.dataset.id;if(!(id in NODES))return;const v=visited.has(id)||here===id;if(v){if(n.classList.contains('dim')){n.classList.remove('dim');if(fresh===id&&!reduce)glowRing(n)}}else n.classList.add('dim')})}
+function glowRing(n){const b=n.getBBox(),e=document.createElementNS('http://www.w3.org/2000/svg','ellipse');e.setAttribute('cx',b.x+b.width/2);e.setAttribute('cy',b.y+b.height*.62);e.setAttribute('rx',b.width*.55);e.setAttribute('ry',b.width*.28);e.setAttribute('fill','#ffe27a');e.setAttribute('opacity','0');n.insertBefore(e,n.firstChild);const a=e.animate([{opacity:0},{opacity:.55},{opacity:0}],{duration:1400,easing:'ease-out'});a.onfinish=()=>e.remove()}
 function updateLocks(){updateDim();document.querySelectorAll('.lock').forEach(l=>l.classList.toggle('open',visited.has(l.dataset.lock)))} /* R20: قفل ایستگاه پس از رسیدن کودک باز می‌شود (محو آرام) */
 function fadeRing(){const old=document.getElementById('ringG');if(!old)return;old.id='ringOld';old.style.opacity=0;setTimeout(()=>old.remove(),reduce?0:520)}
 function refreshRing(){updateLocks();ring.style.display='none';const old=document.getElementById('ringG');if(old)old.remove();
