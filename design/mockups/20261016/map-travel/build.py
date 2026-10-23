@@ -169,7 +169,11 @@ def drop_waves(sprite):
     return re.sub(r'<path d="M([\d.]+),([\d.]+) q6\.6,-7\.7 13\.2,0 t13\.2,0 t13\.2,0"[^>]*/>', bad, sprite)
 
 def add_assets(sprite):
-    extra = ''.join((HERE / 'assets' / f).read_text(encoding='utf-8') for f in sorted(p.name for p in (HERE / 'assets').glob('*.svg')))
+    # D160: نمادهای ایستگاه همیشه از خروجی کیت (etudes/stations/out) خوانده می‌شوند، نه از کپی‌های قدیمیِ assets/ (که ۱۹ تا ۲۱ اکتبر مانده بودند)
+    SO = HERE / 'etudes' / 'stations' / 'out'
+    skip = {'node_%s.svg' % sid for sid in KIT_NODES}
+    extra = ''.join((HERE / 'assets' / f).read_text(encoding='utf-8') for f in sorted(p.name for p in (HERE / 'assets').glob('*.svg')) if f not in skip)
+    extra += ''.join((SO / ('node_%s.svg' % sid)).read_text(encoding='utf-8') for sid in KIT_NODES)
     sprite = re.sub(r'<path d="M-5\.2,10\.9l4\.2,45\.2,-3"[^>]*/>', '', sprite)   # مسیر خراب در node_09 (خط نازک زیر چوب‌شکافی)
     sprite = sprite.replace('in2="n" scale="3.4"', 'in2="n" scale="2"').replace('baseFrequency=".045"', 'baseFrequency=".03"')   # D106: لرزش کمتر
     # D112: سایهٔ سکو نباید بیرون سکو روی راه بیفتد (کوچک‌تر و هم‌مرکز با سکو)

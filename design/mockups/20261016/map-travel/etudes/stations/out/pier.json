@@ -20,13 +20,13 @@
   "node_pier_lantern"
  ],
  "inside_pad": {
-  "min_margin_px": 8.8,
+  "min_margin_px": 7.1,
   "base_on_pad": true,
   "height_px": 98.8,
   "bbox_px": [
-   22.2,
+   19.0,
    21.2,
-   121.5,
+   129.5,
    120.0
   ],
   "ok": true

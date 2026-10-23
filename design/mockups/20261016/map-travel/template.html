@@ -48,6 +48,8 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .btn[hidden]{display:none}
 .btn.sec{background:var(--cream)}
 .dpop{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@media (prefers-reduced-motion:reduce){.dpop{animation:none}}.pr{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@keyframes stamp{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}@media (prefers-reduced-motion:reduce){.pr{animation:none}}
+
+.node{transition:filter 1.1s ease}.node.dim{filter:saturate(.72) brightness(.94)}.node.glow{animation:glowIn 1.4s ease-out}@keyframes glowIn{0%{filter:saturate(.72) brightness(.94)}35%{filter:saturate(1.5) brightness(1.35) drop-shadow(0 0 8px #ffe27a)}100%{filter:none}}@media (prefers-reduced-motion:reduce){.node{transition:none}.node.glow{animation:none}}
 </style>
 </head>
 <body data-light="day">
@@ -291,7 +293,7 @@ function stationG(id){const node=document.querySelector('.node[data-id="'+id+'"]
  const x=+u.getAttribute('x'),y=+u.getAttribute('y'),w=+u.getAttribute('width'),h=+u.getAttribute('height'),s=Math.min(w/200,h/190);
  g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','live');g.dataset.sid=u.getAttribute('href').slice(6);g.setAttribute('transform','translate('+(x+(w-200*s)/2)+' '+(y+(h-190*s)/2)+') scale('+s+')');g.innerHTML=sym.innerHTML;u.replaceWith(g);return g}
 function Ly(g,n){return g.querySelector('[id$="_'+n+'"]')}
-function an(el,kf,ms,delay,ease){if(!el)return null;el.style.transformOrigin='0 0';return el.animate(kf,{duration:ms,delay:delay||0,easing:ease||'ease-in-out',fill:'backwards'})}
+function an(el,kf,ms,delay,ease){if(!el)return null;el.style.transformOrigin='0 0';return el.animate(kf,{duration:ms,delay:delay||0,easing:ease||'ease-in-out',fill:'backwards',iterations:IT})}
 function rotKf(el,cx,cy,degs){return degs.map(a=>({transform:'translate('+cx+'px,'+cy+'px) rotate('+a+'deg) translate('+(-cx)+'px,'+(-cy)+'px)'}))}
 function ctr(el){const b=el.getBBox();return[b.x+b.width/2,b.y+b.height/2,b]}
 const ST={
@@ -307,16 +309,18 @@ const ST={
  screw_workshop(g){for(const n of['nut_back','nut_front']){const e=Ly(g,n);if(!e)continue;const b=e.getBBox();const cx=b.x+b.width/2,cy=b.y+b.height/2;
   return_(an(e,[{transform:'translate('+cx+'px,'+(cy-22)+'px) scale(1,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+(cy-15)+'px) scale(.93,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+(cy-9)+'px) scale(1,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+(cy-4)+'px) scale(.93,1) translate('+(-cx)+'px,'+(-cy)+'px)'},{transform:'translate('+cx+'px,'+cy+'px) scale(1,1) translate('+(-cx)+'px,'+(-cy)+'px)'}],1600,0,'ease-in-out'))}}
 };
-let STA=[];function return_(a){if(a)STA.push(a)}
+const IT=3;let STA=[];function return_(a){if(a)STA.push(a)}
 function playStation(id){if(reduce)return;const g=stationG(id);if(!g)return;const key=g.dataset.sid;if(!ST[key])return;STA.forEach(a=>{try{a.cancel()}catch(e){}});STA=[];ST[key](g)}
 async function go(id){if(busy)return;if(id===here){if(id==='M12')openHide();else playStation(id);return} /* D143: ورود به مخفی‌گاه مثل بقیهٔ ایستگاه‌ها: لمس خود ایستگاه، نه دکمهٔ جدا */
  const up=nextUp();
  if(visited.has(id)){await run(()=>dramatic(here,id));here=id;playStation(id)}
- else if(id===up){if(!done.has(ORDER[ORDER.indexOf(up)-1])){const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');$('st').textContent=T('needfin');return}await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true);playStation(id)}
+ else if(id===up){if(!done.has(ORDER[ORDER.indexOf(up)-1])){const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');$('st').textContent=T('needfin');return}await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true);updateDim(id);playStation(id)}
  else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
  status();refreshRing();updateTrail()}
 const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
-function updateLocks(){document.querySelectorAll('.lock').forEach(l=>l.classList.toggle('open',visited.has(l.dataset.lock)))} /* R20: قفل ایستگاه پس از رسیدن کودک باز می‌شود (محو آرام) */
+
+function updateDim(fresh){document.querySelectorAll('.node[data-id]').forEach(n=>{const id=n.dataset.id;if(!(id in NODES))return;const v=visited.has(id)||here===id;if(v){if(n.classList.contains('dim')){n.classList.remove('dim');if(fresh===id&&!reduce){n.classList.add('glow');setTimeout(()=>n.classList.remove('glow'),1500)}}}else n.classList.add('dim')})}
+function updateLocks(){updateDim();document.querySelectorAll('.lock').forEach(l=>l.classList.toggle('open',visited.has(l.dataset.lock)))} /* R20: قفل ایستگاه پس از رسیدن کودک باز می‌شود (محو آرام) */
 function fadeRing(){const old=document.getElementById('ringG');if(!old)return;old.id='ringOld';old.style.opacity=0;setTimeout(()=>old.remove(),reduce?0:520)}
 function refreshRing(){updateLocks();ring.style.display='none';const old=document.getElementById('ringG');if(old)old.remove();
  const n=NODES[here],q=pd(n),g=n.rg||[0,0,0],rx=q.rx+5+g[0],ry=q.ry+q.w/2+3+g[1],cx=n.x+g[2],cy=n.y+q.w/2+2;

@@ -78,7 +78,7 @@ class Fr:
 HERE = pathlib.Path(__file__).resolve().parent
 OUTD = HERE / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/floating_market'
-XF = (1.0, 0.0, -8.0)
+XF = (0.86, 0.0, -4.0)
 DECK = ('#c98a4a', '#eab677', '#8a5a2a'); CNT = ('#ffd84d', '#fff0a0', '#d9961c')
 AW_W = ('#fff8e0', '#ffffff', '#d9cba0'); AW_R = ('#ef6a4a', '#ff9a7e', '#b53b24')
 POST = '#8a5a2a'; NAVY_ = '#241a5e'
@@ -96,28 +96,33 @@ def fruit(p, x, y, r, c):
 
 def boat(p):
     DD = (16, -12)
-    extrude(p, [(-62, 4), (46, 4), (42, 22), (-58, 22)], DD, DECK[0], DECK[1], DECK[2], mid=DECK[0], sw=M_OUT, sw_in=0)
-    # ستون‌های غرفه (جزء جدا، خط نازک)
-    for x in (-54, 44):
-        p.shape([(x - 3, -62), (x + 3, -62), (x + 3, -3), (x - 3, -3)], POST, M_PART, j=0, step=6, clip=False)
-    # پیشخوان
-    extrude(p, [(-50, -14), (34, -14), (34, 0), (-50, 0)], (8, -6), CNT[0], CNT[1], CNT[2], mid=CNT[0], sw=M_OUT, sw_in=0)
-    # یک جعبهٔ باز روی پیشخوان: داخل تیره، میوه‌ها از دهانه، دیوارهٔ جلو روی پایین میوه‌ها
-    BX0, BX1 = -42, 24
-    extrude(p, [(BX0, -22), (BX1, -22), (BX1, -8), (BX0, -8)], (7, -6), '#b9722f', '#4a2a10', '#7a4a1c', mid='#b9722f', sw=M_PART, sw_in=0)
-    for i, c in enumerate(FRUIT):
-        fruit(p, BX0 + 11 + i * 15, -30 - (i % 2) * 2, 8, c)
-    p.shape([(BX0, -22), (BX1, -22), (BX1, -8), (BX0, -8)], '#b9722f', M_PART, j=0, step=6, clip=False)
-    poly(p, [(BX0 + 3, -17), (BX1 - 3, -17), (BX1 - 3, -13.5), (BX0 + 3, -13.5)], '#e0a468')
+    extrude(p, [(-64, 2), (48, 2), (42, 24), (-58, 24)], DD, DECK[0], DECK[1], DECK[2], mid=DECK[0], sw=M_OUT, sw_in=0)
+    poly(p, [(-60, 9), (44, 9), (43, 12.5), (-59.5, 12.5)], '#e0a468')                                          # نوار روشن بدنه
+    # پیشخوان زرد
+    extrude(p, [(-52, -16), (28, -16), (28, 2), (-52, 2)], (8, -6), CNT[0], CNT[1], CNT[2], mid=CNT[0], sw=M_OUT, sw_in=0)
+    poly(p, [(-46, -10), (22, -10), (22, -5), (-46, -5)], '#f0b830')
+    # جعبهٔ بستهٔ کوچک روی عرشه، راست پیشخوان
+    extrude(p, [(32, -12), (48, -12), (48, 2), (32, 2)], (6, -5), '#b9722f', '#e0a468', '#7a4a1c', mid='#b9722f', sw=M_PART, sw_in=0)
+    poly(p, [(34, -6), (46, -6), (46, -3), (34, -3)], '#8a5a2a')
+    # جعبهٔ باز میوه: داخل تیره، توده‌ای از میوه (هرم هم‌پوشان)، دیوارهٔ جلو روی پایین میوه‌ها
+    BX0, BX1 = -34, 12
+    extrude(p, [(BX0, -27), (BX1, -27), (BX1, -17), (BX0, -17)], (7, -6), '#b9722f', '#4a2a10', '#7a4a1c', mid='#b9722f', sw=M_PART, sw_in=0)
+    for x, y, r, ci in ((-17, -36, 10, 0), (-1, -36, 10, 2), (15, -36, 10, 1), (-9, -49, 9.5, 3), (7, -50, 9.5, 0)):
+        fruit(p, x - 4, y, r, FRUIT[ci])
+    p.shape([(BX0, -27), (BX1, -27), (BX1, -17), (BX0, -17)], '#b9722f', M_PART, j=0, step=6, clip=False)
+    poly(p, [(BX0 + 3, -24.5), (BX1 - 3, -24.5), (BX1 - 3, -21.5), (BX0 + 3, -21.5)], '#e0a468')
+    # ستون‌های ضخیم ¾ در دو گوشهٔ پیشخوان
+    for x in (-52, 20):
+        extrude(p, [(x, -72), (x + 8, -72), (x + 8, -14), (x, -14)], (4, -3), POST, '#b07a40', '#5e3a14', mid=POST, sw=M_PART, sw_in=0)
     # سایبان راه‌راه: قاب سفید، راه‌راه قرمز روی جلو و رویه
-    ax0, n, w, y0, y1, Dx, Dy = -56, 8, 12, -46, -60, 10, -12
+    ax0, n, w, y0, y1, Dx, Dy = -60, 8, 12, -68, -83, 10, -12
     ext = extrude(p, [(ax0, y1), (ax0 + n * w, y1), (ax0 + n * w, y0), (ax0, y0)], (Dx, Dy), AW_W[0], AW_W[1], AW_W[2], mid=AW_W[0], sw=M_OUT, sw_in=0)
     for i in range(0, n, 2):
         xa, xb = ax0 + i * w, ax0 + (i + 1) * w
-        poly(p, [(xa, y1), (xb, y1), (xb, y0), (xa, y0)], AW_R[0])                                            # جلو
-        poly(p, [(xa, y1), (xb, y1), (xb + Dx, y1 + Dy), (xa + Dx, y1 + Dy)], AW_R[1])                        # رویه (راه‌راه می‌پیچد)
-    poly(p, [(ax0 + n * w, y1), (ax0 + n * w + Dx, y1 + Dy), (ax0 + n * w + Dx, y0 + Dy), (ax0 + n * w, y0)], AW_W[2])   # پهلو
-    p.stroke(ext, M_OUT, j=0, step=6)                                                                           # خط دور یکدست
+        poly(p, [(xa, y1), (xb, y1), (xb, y0), (xa, y0)], AW_R[0])
+        poly(p, [(xa, y1), (xb, y1), (xb + Dx, y1 + Dy), (xa + Dx, y1 + Dy)], AW_R[1])
+    poly(p, [(ax0 + n * w, y1), (ax0 + n * w + Dx, y1 + Dy), (ax0 + n * w + Dx, y0 + Dy), (ax0 + n * w, y0)], AW_W[2])
+    p.stroke(ext, M_OUT, j=0, step=6)
 
 
 def build(out=OUTD):
@@ -128,7 +133,7 @@ def build(out=OUTD):
     return p
 
 
-STAND = None     # خودکار: find_stand
+STAND = (0.0, 19.0)     # خودکار: find_stand
 
 if __name__ == '__main__':
     p = build()
