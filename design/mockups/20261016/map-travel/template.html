@@ -93,7 +93,7 @@ function sOf(n){let best=1e9,bs=0;for(const p of samp){const d=(p[0]-n.x)**2+(p[
 const ids=Object.keys(NODES);ids.forEach(i=>NODES[i].s=sOf(NODES[i]));
 const ORDER=ids.sort((a,b)=>NODES[a].s-NODES[b].s);
 const isSea=(y,x)=>y<COAST&&!(x!==undefined&&x>=JX-6&&y>=JTIP); /* با x: راهِ اسکله (x≥۳۳۴ و y≥۹۵۸) خشکی حساب می‌شود */
-function leg(a,b){const pts=[];const s0=NODES[a].s,s1=NODES[b].s,dir=s1>s0?1:-1;for(let s=s0;dir>0?s<=s1:s>=s1;s+=3*dir){const p=pth.getPointAtLength(s);pts.push([p.x,p.y])}const A=NODES[a],B=NODES[b];while(pts.length>2&&inOuter(A,pts[0][0],pts[0][1]))pts.shift();while(pts.length>2&&inOuter(B,pts[pts.length-1][0],pts[pts.length-1][1]))pts.pop(); /* R19: ردِ مسیر داخل سکوی مبدأ/مقصد حذف شود تا کودک اول به مرکز سکو و بعد برنگردد */
+function leg(a,b){const pts=[];const s0=NODES[a].s,s1=NODES[b].s,dir=s1>s0?1:-1;for(let s=s0;dir>0?s<=s1:s>=s1;s+=3*dir){const p=samp[Math.min(samp.length-1,Math.max(0,Math.round(s/2)))];pts.push([p[0],p[1]])}const A=NODES[a],B=NODES[b];while(pts.length>2&&inOuter(A,pts[0][0],pts[0][1]))pts.shift();while(pts.length>2&&inOuter(B,pts[pts.length-1][0],pts[pts.length-1][1]))pts.pop(); /* R19: ردِ مسیر داخل سکوی مبدأ/مقصد حذف شود تا کودک اول به مرکز سکو و بعد برنگردد */
  pts.unshift(stand(A));pts.push(stand(B));return pts}
 /* وضعیت */
 let here='E03';const visited=new Set(ORDER.filter(i=>NODES[i].y>=1200));const done=new Set(ORDER.slice(0,ORDER.indexOf('E03'))); /* D137: ردپاهای بند پس از «تکمیل ایستگاه» می‌آیند */
@@ -171,7 +171,7 @@ function legDots(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],run=[];
  for(let m=0;m<=n;m++){const d=m*sp;while(j<c.length-2&&c[j+1]<d)j++;const u=c[j+1]>c[j]?Math.min(1,(d-c[j])/(c[j+1]-c[j])):0;out.push([run[j][0]+(run[j+1][0]-run[j][0])*u,run[j][1]+(run[j+1][1]-run[j][1])*u])}
  return out}
 const dotSvg=(P,ro,ri,co,ci,oo,oi)=>P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ro+'" fill="'+co+'" opacity="'+oo+'"/>').join('')+P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ri+'" fill="'+ci+'" opacity="'+oi+'"/>').join('');
-legDots=(f=>k=>f(k).filter(q=>!(q[0]>BERTH[0]-30&&q[1]>JDOT-30)))(legDots); /* D173: نقطه‌چین زیر قایقِ پهلوگرفته نیفتد */
+legDots=(f=>k=>f(k).filter(q=>Math.hypot(q[0]-BERTH[0],q[1]-(BERTH[1]-31))>26))(legDots); /* D173: نقطه‌چین زیر قایقِ پهلوگرفته نیفتد */
 (function(){let P=[];for(let k=0;k<ORDER.length-1;k++)P=P.concat(legDots(k));document.getElementById('seadots').innerHTML=dotSvg(P,4.5,2.5,'#241a5e','#e8f6f8',.35,.85)})();
 const trail=document.createElementNS(NS,'g');trail.id='trail';seaG.parentNode.insertBefore(trail,seaG.nextSibling);
 const DN={};let dnReady=false;const BADGE='<ellipse cx="1.5" cy="3.5" rx="12.5" ry="11" fill="#10083a" opacity=".35"/><circle r="12.6" fill="#241a5e"/><circle r="10.8" fill="#fff"/><circle r="8.7" fill="#3fcf72"/><path d="M-6,-3.2 a7,7 0 0 1 7.4,-4.6" fill="none" stroke="#c8ffd8" stroke-width="2" stroke-linecap="round"/><polyline points="-4.8,.4 -1.4,3.9 5.2,-3.6" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>';
@@ -336,12 +336,12 @@ const ST={
  magnet_hockey(g){return_(an2(Lh(g,'clip'),[{transform:'translateX(-28px)'},{transform:'translateX(0)'}],1000,0,'ease-in',true,3))},
  launch_pad(g){const e=Lh(g,'flame');if(!e)return;const s=(x,y)=>'translate(-25px,-2px) scale('+x+','+y+') translate(25px,2px)';return_(an2(e,[s(1,1),s(1.5,2),s(1.1,1.1),s(1.5,2),s(1.1,1.1),s(1.5,2),s(1,1)].map(x=>({transform:x})),1500,0,'ease-in-out',false,1))},
  ice_rink(g){return_(an2(Lh(g,'skate'),[{transform:'translateX(-26px)'},{transform:'translateX(0)'}],1200,0,'ease-out',true,3))},
- pool(g){return_(an2(Lh(g,'ball'),[{transform:'translate(-28px,6px)'},{transform:'translate(0,0)'}],1600,0,'ease-out',true,3))},
+ pool(g){const e=Lh(g,'ball');if(!e)return;e.style.transformOrigin='0 0';return_(e.animate([{transform:'translateY(0)',easing:'ease-out'},{transform:'translateY(-15px)',offset:.5,easing:'ease-in'},{transform:'translateY(0)'}],{duration:800,fill:'backwards',iterations:3}))},
  tug_field(g){return_(an2(Lh(g,'flag'),[[0,0],[-20,3],[20,-3],[0,0]].map(p=>({transform:'translate('+p[0]+'px,'+p[1]+'px)'})),2400,0,'ease-in-out',false,1))},
  skate_park(g){return_(an2(Lh(g,'skateboard'),[{transform:'translate(-28px,6px)'},{transform:'translate(0,0)'}],900,0,'ease-out',true,3))},
- space_loading(g){return_(an2(Lh(g,'crate'),[{transform:'translateY(30px)'},{transform:'translateY(0)'}],1800,0,'ease-out',true,3))},
+ space_loading(g){const e=Lh(g,'crate');if(!e)return;const cb=e.firstElementChild,D=30,K=(15.5+D)/15.5,sc=k=>({transform:'translate(0,-68.2px) scale(1,'+k+') translate(0,68.2px)'});return_(an2(e,[{transform:'translateY('+D+'px)'},{transform:'translateY(0)'}],1800,0,'ease-out',true,3));if(cb)return_(an2(cb,[sc(K),sc(1)],1800,0,'ease-out',true,3))},
  scale_lab(g){const e=Lh(g,'beam');if(!e)return;return_(an2(e,rotKf(e,0,-108,[0,20,-14,7,-3,0]),2200,0,'ease-out',false,1))},
- moon(g){return_(an2(Lh(g,'shade'),[{transform:'translate(0,0)'},{transform:'translate(-14px,-14px)'},{transform:'translate(0,0)'}],3000,0,'ease-in-out',false,1))},
+ moon(g){const e=Lh(g,'shade');if(!e)return;return_(e.animate([{opacity:1},{opacity:.15},{opacity:1}],{duration:3000,easing:'ease-in-out',fill:'backwards'}))},
  space_station(g){const e=Lh(g,'panels');if(!e)return;return_(an2(e,rotKf(e,0,-28,[0,14,-14,0]),2000,0,'ease-in-out',false,3))},
  windmill(g){const e=Lh(g,'blades');if(!e)return;return_(an2(e,rotKf(e,-5,-60.1,[0,1080]),5000,0,'ease-in-out',false,1))},
  cart_station(g){for(const [n,cx,cy] of[['wheel_near',-28.6,-7.8],['wheel_far',-14.8,-18.5]]){const e=Lh(g,n);if(e)return_(an2(e,rotKf(e,cx,cy,[0,360]),3000,0,'ease-in-out',false,1))}},

@@ -136,7 +136,7 @@ def map_parts():
     body, _n = re.subn(r'<use href="#env_dec_farm_(bucket|wheat)"[^>]*/>|<use href="#env_tree_bush" x="(?:220\.8|54\.0)"[^>]*/>|<use href="#env_tree_round" x="(?:112\.0|325\.8)"[^>]*/>|<use href="#env_tree_pop" x="329\.5"[^>]*/>|<use href="#env_tree_oak" x="-9"[^>]*/>', '', body); assert _n == 8, _n   # D178: درخت/بوته/دکور چسبیده به راه یا ایستگاه
     # D178: پل‌ها دقیقاً روی راه: دو تقاطع راه و رودخانه (محاسبه با shapely) هر کدام یک پل هم‌جهت با راه
     body, _n = re.subn(r'<g transform="translate\(344 2665\.8\) rotate\(-129\.4\)" filter="url\(#env_wob\)"><use href="#env_bridge"[^>]*/></g>',
-        '<g transform="translate(341.5 2669) rotate(50)" filter="url(#env_wob)"><use href="#env_bridge" x="-42" y="-24.5" width="84" height="49" /></g>'
+        '<g transform="translate(341.5 2669) rotate(50) scale(1 1.45)" filter="url(#env_wob)"><use href="#env_bridge" x="-42" y="-24.5" width="84" height="49" /></g>'
         '', body); assert _n == 1, _n
     body = re.sub(r'<use href="#env_dec_city_mid"[^>]*/>', '', body)   # بلوک‌های خاکستری نامفهوم
     body = body.replace('data-id="M10" filter="url(#env_wob)"', 'data-id="M10"')   # M10-nofilter: D107، نماد خط دستیِ برداری بدون فیلتر رستری

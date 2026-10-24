@@ -42,7 +42,6 @@ def build():
     p.tipshadow(38, 10, 40); p.foot_tip(38, 10, 26)
     # دهانهٔ تیره پشت مهره (لایهٔ ثابت زیر آچار)
     top_y = CY - math.sqrt(RH ** 2 - SL ** 2)
-    poly(p, [(CX - SL, top_y + 3), (CX + SL, top_y + 3), (CX + SL, CY + 8), (CX - SL, CY + 8)], '#4a5090')
     extrude(p, profile(), D, F_, T_, S_, mid=M_, sw=OUT, sw_in=0)
     # نوارها روی دسته و سر
     rect(p, CX + 5, -60, CX + HW - 2, BASE - 8, M_)
@@ -70,3 +69,15 @@ if __name__ == '__main__':
     sp['motion_spec'] = {'node_wrench_room_nut': dict(translate_from=[0, -16], translate_to=[0, 0], dur_s=1.2, easing='ease-in', repeat=1,
         note='مهره از بالای دهانه آرام در دهانهٔ آچار می‌نشیند؛ آچار و جعبه ثابت؛ حالت ایستا = نشسته؛ بدون حلقهٔ بیکار.'), 'reduced_motion': 'مهره در دهانه'}
     (OUTD / 'wrench_room.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
+    # D182: سوراخ مهره و گودی دهانهٔ آچار واقعاً توخالی‌اند (رنگ زمینِ پشت دیده می‌شود)
+    import re as re_
+    f_ = OUTD / 'node_wrench_room.svg'; t_ = f_.read_text(encoding='utf-8')
+    a_ = t_.index('id="node_wrench_room_nut"'); b_ = t_.index('</g>', a_)
+    seg = t_[a_:b_]
+    m_ = list(re_.finditer(r'<path d="([^"]+)" fill="#4a5090" class="eo" stroke-width="3"/>', seg))[-1]
+    hole_d = m_.group(1)
+    head = seg[:m_.start()]; k_ = head.index('>') + 1
+    new_seg = head[:k_] + '<g clip-path="url(#node_wrench_room_nutclip)">' + head[k_:] + '</g>' + '<path d="%s" fill="none" class="eo" stroke-width="3"/>' % hole_d + seg[m_.end():]
+    t_ = t_[:a_] + new_seg + t_[b_:]
+    t_ = t_.replace('</defs>', '<clipPath id="node_wrench_room_nutclip"><path clip-rule="evenodd" d="M-300,-300 H300 V300 H-300 Z %s"/></clipPath></defs>' % hole_d, 1)
+    f_.write_text(t_, encoding='utf-8')
