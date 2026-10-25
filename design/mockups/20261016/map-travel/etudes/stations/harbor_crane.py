@@ -56,8 +56,12 @@ def crane_body(p):
 
 
 def wheels(p):
-    for wx, wy, r_ in ((HX1 + 5, G - 5, 6.2), (HX0 + 8, G + 1, 7)):                  # D185: چرخ‌ها زیر کل پایه‌ی ماشین‌خانه (جلو و کناره)، نه فقط یک سو
-        p.shape(ell(wx, wy, r_, r_, 0, 360, 18), WHEEL, HERO_T, j=.05, step=99, clip=False); circ(p, wx, wy, 2.4, YEL)
+    """D185: دو چرخ هم‌اندازه و هم‌تراز، روی خط زمین، زیر پایهٔ جلوی ماشین‌خانه (یکی نزدیک هر سر)."""
+    r_ = 6.2
+    for wx in (HX0 + 6.5, HX1 - 6.5):
+        wy = G - r_
+        p.shape(ell(wx, wy, r_, r_, 0, 360, 24), WHEEL, HERO_T, j=.05, step=99, clip=False)
+        circ(p, wx, wy, r_ * .55, '#c6cdf2'); circ(p, wx, wy, 2.2, YEL)
 
 
 def hook(p):
@@ -83,7 +87,7 @@ def build(out=None):
     p.xf = XF
     p.tipshadow(-44, G + 6, 30); p.foot_tip(-44, G + 4, 6)
     with layer(p, 'hook'): hook(p)
-    crane_body(p); wheels(p); ground_container(p)
+    crane_body(p); ground_container(p)   # D185: بدون چرخ (دستور مالک)
     return p
 
 
