@@ -56,8 +56,8 @@ def crane_body(p):
 
 
 def wheels(p):
-    for wx in (HX0 + 7, HX1 - 7):
-        p.shape(ell(wx, G + 1, 7, 7, 0, 360, 18), WHEEL, HERO_T, j=.05, step=99, clip=False); circ(p, wx, G + 1, 2.4, YEL)
+    for wx, wy, r_ in ((HX1 + 5, G - 5, 6.2), (HX0 + 8, G + 1, 7)):                  # D185: چرخ‌ها زیر کل پایه‌ی ماشین‌خانه (جلو و کناره)، نه فقط یک سو
+        p.shape(ell(wx, wy, r_, r_, 0, 360, 18), WHEEL, HERO_T, j=.05, step=99, clip=False); circ(p, wx, wy, 2.4, YEL)
 
 
 def hook(p):

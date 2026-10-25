@@ -38,6 +38,13 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
  filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))} /* D81: فقط هالهٔ کرم */
 #bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;min-height:76px}
 #blk{position:absolute;inset:0;z-index:40;background:#000;opacity:0;pointer-events:none}#dv{position:absolute;left:0;top:0;width:100%;height:520px;pointer-events:none;opacity:0;background:linear-gradient(#031526 0%,rgba(5,35,60,.78) 42%,rgba(8,60,95,0) 100%)}
+#ov{flex-direction:column;gap:12px;animation:ovIn .55s ease both}@keyframes ovIn{from{opacity:0}to{opacity:1}}
+#hs{position:relative;width:100%;max-width:360px;aspect-ratio:1998/1116;overflow:hidden;border:4px solid var(--navy);border-radius:22px;box-shadow:0 6px 0 var(--edge);flex:none;background:#12323a}#ov.nosc #hs{display:none}
+#hs img{position:absolute;display:block}#hsb{inset:0;width:100%;height:100%;filter:brightness(.9) saturate(.92)}
+#hsm,#hsc{filter:drop-shadow(0 0 1px #fff3c8) drop-shadow(0 0 1px #fff3c8) drop-shadow(0 0 5px rgba(255,243,200,.85))}
+.hsh{position:absolute;border-radius:50%;background:rgba(10,40,50,.38);filter:blur(2px)}#hss1{left:57%;bottom:7%;width:22%;height:3.2%}#hss2{left:39.5%;bottom:5.4%;width:8%;height:2.2%}
+#hsm{left:60%;bottom:9%;height:62%;transform-origin:50% 100%;animation:hsb 3.2s ease-in-out infinite}#hsc{left:41%;bottom:7%;height:40%}@keyframes hsb{50%{transform:scaleY(1.012) translateY(-.4%)}}
+#ov:not(.nosc) .opt{min-height:84px}@media (prefers-reduced-motion:reduce){#hsm{animation:none}#ov{animation:none}}
 #ov{position:absolute;inset:0;z-index:30;background:rgba(36,26,94,.78);display:flex;align-items:center;justify-content:center;padding:16px}#ov[hidden]{display:none}
 #ovp{width:100%;max-width:360px;background:var(--cream);border:4px solid var(--navy);border-radius:26px;box-shadow:0 6px 0 var(--edge);padding:16px;display:flex;flex-direction:column;gap:12px;text-align:center}
 #ovt{margin:0;font-size:17px;font-weight:700;line-height:1.7;color:var(--navy)}#ovn{margin:0;min-height:22px;font-size:14px;color:var(--navy)}
@@ -64,7 +71,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <div id="boat"><svg width="130" height="130" viewBox="0 0 120 120" aria-hidden="true"><use href="#env_dec_city_sail" width="120" height="120"/></svg></div>
 <div id="fig"><div id="tilt"><img id="fimg" alt=""></div></div>
 </div></div>
-<div id="ov" hidden><div id="ovp" role="dialog" aria-modal="true"><p id="ovt"></p>
+<div id="ov" hidden><div id="hs"><img id="hsb" alt="" src="{{HS_BG}}"><div class="hsh" id="hss1"></div><div class="hsh" id="hss2"></div><img id="hsm" alt="" src="{{HS_MO}}"><img id="hsc" alt="" src="{{HS_CH}}"></div><div id="ovp" role="dialog" aria-modal="true"><p id="ovt"></p>
 <div id="opts"><button class="opt" id="o_rev"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 16A17 17 0 1 0 43 28" fill="#fff3c4"/><path d="M42 6v11H31" fill="#fff3c4"/><circle cx="26" cy="27" r="4" fill="#241a5e"/></svg><span id="t_rev"></span></button>
 <button class="opt" id="o_card"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="14" width="26" height="32" rx="5" fill="#f5a3c7" transform="rotate(-10 19 30)"/><rect x="18" y="8" width="26" height="32" rx="5" fill="#fff3c4" transform="rotate(8 31 24)"/></svg><span id="t_card"></span></button>
 <button class="opt" id="o_sea"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6v28" /><path d="M26 8L44 32H26Z" fill="#fff3c4"/><path d="M8 36h36l-6 9H14Z" fill="#ff9a3c"/></svg><span id="t_sea"></span></button>
@@ -293,11 +300,11 @@ async function finish(){if(busy||done.has(here))return;const b=ORDER[ORDER.index
 $('fin').onclick=finish;
 /* D138/D139 (پیشنهاد، ماکت): صفحهٔ انتخاب مخفی‌گاه؛ چهار گزینه کنار هم؛ آب‌های آزاد: قایق از بالای کادر می‌رود و پیام می‌آید */
 const ov=$('ov'),ovn=$('ovn');let atSea=false;
-function openHide(){ovn.textContent='';ov.hidden=false}
+function openHide(){ovn.textContent='';ov.classList.remove('nosc');ov.hidden=false}
 $('ovc').onclick=()=>{ov.hidden=true;$('ovt').textContent=T('hide.title');$('opts').hidden=false;$('ovc').textContent=T('hide.close');if(atSea)seaBack()};
 /* D184: هر گزینهٔ خروج از مخفی‌گاه = سفر قایق به آب‌های ناشناخته (آب تیره‌تر می‌شود) ← خروج از کادر ← فید سیاه ← مقصد (ماکت: پیام)؛ برگشت: فید از سیاه + قایق از بالا */
 const blk=$('blk'),dvEl=$('dv'),fadeBlk=(a,b,ms)=>tween(ms,p=>{blk.style.opacity=a+(b-a)*p});
-function leave(key){return async()=>{ov.hidden=true;await run(seaOut);await fadeBlk(0,1,650);$('ovt').textContent=T(key);$('opts').hidden=true;$('ovn').textContent='';$('ovc').textContent=T('hide.back');atSea=true;ov.hidden=false;await fadeBlk(1,0,600)}}
+function leave(key){return async()=>{ov.hidden=true;await run(seaOut);await fadeBlk(0,1,650);$('ovt').textContent=T(key);$('opts').hidden=true;$('ovn').textContent='';$('ovc').textContent=T('hide.back');atSea=true;ov.classList.add('nosc');ov.hidden=false;await fadeBlk(1,0,600)}}
 $('o_rev').onclick=leave('hide.mock');$('o_card').onclick=leave('hide.mock');$('o_cr').onclick=leave('hide.mock');$('o_sea').onclick=leave('hide.seamsg');
 async function seaOut(){const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,by,0);setOutfit(true);await hopTo(f,[d[0],d[1]-4],16);
  await tween(2800,p=>{const y=by-(by+150)*p,x=bx+10*Math.sin(p*6)*(1-p),r=3*Math.sin(p*9);placeBoat(x,y,r);placeFig(x,y+SEAT);setTilt(-r*.7,0);dvEl.style.opacity=.92*Math.min(1,p*1.6);follow(Math.max(0,y))},ease)}

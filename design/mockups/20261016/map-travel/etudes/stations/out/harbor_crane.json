@@ -20,7 +20,7 @@
   "node_harbor_crane_hook"
  ],
  "inside_pad": {
-  "min_margin_px": 13.0,
+  "min_margin_px": 13.2,
   "base_on_pad": true,
   "height_px": 92.8,
   "bbox_px": [

@@ -284,6 +284,7 @@ def main():
     for k, v in STAND.items(): nodes[k]['st'] = list(v)
     for k, v in RING.items(): nodes[k]['rg'] = list(v)
     for k, v in nodes.items(): v['pad'] = list(PAD.get(k, (48, 17, 14, 55)))
+    HSU = re.findall(r'data:[a-z/+]+;base64,[A-Za-z0-9+/=]+', (HERE.parent / 'hideout-scene' / 'index.html').read_text(encoding='utf-8')); assert len(HSU) == 3   # D185: صحنهٔ مخفی‌گاه (ماکت ۱۶ اکتبر)
     im = {}
     for o in ['sailor', 'construction']:
         im[o] = enc(scaled(Image.open(CACHE / o / 'nima.webp').convert('RGBA'), 200))
@@ -293,7 +294,7 @@ def main():
     for k, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
                      LIGHTCSS=style, SPRITE=add_assets(sprite if 'env_dec_city_sail' in sprite else sprite.replace('</defs>', sym + '</defs>', 1)), MAPSVG=mapsvg,
                      STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False),
-                     NODES=json.dumps(nodes, ensure_ascii=False), PATHD=json.dumps(d['path_d']), IMAGES=json.dumps(im), H=str(H), COAST=str(COAST)).items():
+                     NODES=json.dumps(nodes, ensure_ascii=False), PATHD=json.dumps(d['path_d']), IMAGES=json.dumps(im), HS_BG=HSU[0], HS_MO=HSU[1], HS_CH=HSU[2], H=str(H), COAST=str(COAST)).items():
         t = t.replace('{{%s}}' % k, v)
     (HERE / 'index.html').write_text(t, encoding='utf-8')
     a = re.sub(r'<!doctype html>\s*<html[^>]*>\s*<head>\s*<meta[^>]*>\s*<meta[^>]*>\s*', '', t, count=1, flags=re.I)
