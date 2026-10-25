@@ -132,6 +132,9 @@ def map_parts():
     # مالک (D97/D98): ماشین‌لیفتِ دکور روی پیچ‌کاری حذف؛ حالت «قفل» نرم‌تر تا رنگ‌ها گل‌آلود نشوند
     body = re.sub(r'<use href="#env_dec_city_forklift"[^>]*/>', '', body)
     body, _n = re.subn(r'<use href="#env_(ice|tunnel)"[^>]*/>', '', body); assert _n == 2, _n   # D178: کوه/تونل و یخِ پس‌زمینه روی راه، برچسب و پیست می‌افتادند
+    # D184: پهنهٔ آبیِ ژرف بالای نقشه (آب‌های ناشناخته)؛ بدون خط، محو در دریای موجود
+    _dg = '<defs><linearGradient id="deepg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04182b" stop-opacity=".92"/><stop offset=".5" stop-color="#06304f" stop-opacity=".45"/><stop offset="1" stop-color="#0a4a6e" stop-opacity="0"/></linearGradient></defs><rect x="-40" y="-60" width="470" height="230" fill="url(#deepg)"/>'
+    body, _n = re.subn(r'(<g id="env_zones">.*?</g>)', lambda m: m.group(1) + _dg, body, count=1, flags=re.S); assert _n == 1
     body, _n = re.subn(r'<use href="#env_dec_space_dome"[^>]*/>', '', body); assert _n == 1, _n   # D181: گنبد شناور بی‌ربط
     body, _n = re.subn(r'<use href="#env_dec_farm_(bucket|wheat)"[^>]*/>|<use href="#env_tree_bush" x="(?:220\.8|54\.0)"[^>]*/>|<use href="#env_tree_round" x="(?:112\.0|325\.8)"[^>]*/>|<use href="#env_tree_pop" x="329\.5"[^>]*/>|<use href="#env_tree_oak" x="-9"[^>]*/>', '', body); assert _n == 8, _n   # D178: درخت/بوته/دکور چسبیده به راه یا ایستگاه
     # D178: پل‌ها دقیقاً روی راه: دو تقاطع راه و رودخانه (محاسبه با shapely) هر کدام یک پل هم‌جهت با راه

@@ -37,6 +37,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 #fimg{height:56px;width:auto;max-width:none;display:block;transform-origin:50% 100%;
  filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))} /* D81: فقط هالهٔ کرم */
 #bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;min-height:76px}
+#blk{position:absolute;inset:0;z-index:40;background:#000;opacity:0;pointer-events:none}#dv{position:absolute;left:0;top:0;width:100%;height:520px;pointer-events:none;opacity:0;background:linear-gradient(#031526 0%,rgba(5,35,60,.78) 42%,rgba(8,60,95,0) 100%)}
 #ov{position:absolute;inset:0;z-index:30;background:rgba(36,26,94,.78);display:flex;align-items:center;justify-content:center;padding:16px}#ov[hidden]{display:none}
 #ovp{width:100%;max-width:360px;background:var(--cream);border:4px solid var(--navy);border-radius:26px;box-shadow:0 6px 0 var(--edge);padding:16px;display:flex;flex-direction:column;gap:12px;text-align:center}
 #ovt{margin:0;font-size:17px;font-weight:700;line-height:1.7;color:var(--navy)}#ovn{margin:0;min-height:22px;font-size:14px;color:var(--navy)}
@@ -58,6 +59,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <div id="rv"><span id="rvt"></span><span id="rvl"></span></div>
 <div id="page">
 <div id="sc"><div id="world">{{MAPSVG}}
+<div id="dv"></div>
 <div id="foams"></div>
 <div id="boat"><svg width="130" height="130" viewBox="0 0 120 120" aria-hidden="true"><use href="#env_dec_city_sail" width="120" height="120"/></svg></div>
 <div id="fig"><div id="tilt"><img id="fimg" alt=""></div></div>
@@ -68,6 +70,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <button class="opt" id="o_sea"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6v28" /><path d="M26 8L44 32H26Z" fill="#fff3c4"/><path d="M8 36h36l-6 9H14Z" fill="#ff9a3c"/></svg><span id="t_sea"></span></button>
 <button class="opt soft" id="o_cr"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><path d="M26 44C8 31 7 16 17 12c5-2 8 1 9 5 1-4 4-7 9-5 10 4 9 19-9 32Z" fill="#f08a8a"/></svg><span id="t_cr"></span></button></div>
 <p id="ovn" aria-live="polite"></p><button class="btn" id="ovc"></button></div></div>
+<div id="blk"></div>
 <div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn" id="fin" hidden></button><button class="btn sec" id="again"></button></div>
 </div>
 <script>
@@ -292,12 +295,14 @@ $('fin').onclick=finish;
 const ov=$('ov'),ovn=$('ovn');let atSea=false;
 function openHide(){ovn.textContent='';ov.hidden=false}
 $('ovc').onclick=()=>{ov.hidden=true;$('ovt').textContent=T('hide.title');$('opts').hidden=false;$('ovc').textContent=T('hide.close');if(atSea)seaBack()};
-['o_rev','o_card','o_cr'].forEach(i=>$(i).onclick=()=>{ovn.textContent=T('hide.mock')});
-$('o_sea').onclick=async()=>{ov.hidden=true;await run(seaOut);$('ovt').textContent=T('hide.seamsg');$('opts').hidden=true;$('ovn').textContent='';$('ovc').textContent=T('hide.back');atSea=true;ov.hidden=false};
+/* D184: هر گزینهٔ خروج از مخفی‌گاه = سفر قایق به آب‌های ناشناخته (آب تیره‌تر می‌شود) ← خروج از کادر ← فید سیاه ← مقصد (ماکت: پیام)؛ برگشت: فید از سیاه + قایق از بالا */
+const blk=$('blk'),dvEl=$('dv'),fadeBlk=(a,b,ms)=>tween(ms,p=>{blk.style.opacity=a+(b-a)*p});
+function leave(key){return async()=>{ov.hidden=true;await run(seaOut);await fadeBlk(0,1,650);$('ovt').textContent=T(key);$('opts').hidden=true;$('ovn').textContent='';$('ovc').textContent=T('hide.back');atSea=true;ov.hidden=false;await fadeBlk(1,0,600)}}
+$('o_rev').onclick=leave('hide.mock');$('o_card').onclick=leave('hide.mock');$('o_cr').onclick=leave('hide.mock');$('o_sea').onclick=leave('hide.seamsg');
 async function seaOut(){const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,by,0);setOutfit(true);await hopTo(f,[d[0],d[1]-4],16);
- await tween(2800,p=>{const y=by-(by+150)*p,x=bx+10*Math.sin(p*6)*(1-p),r=3*Math.sin(p*9);placeBoat(x,y,r);placeFig(x,y+SEAT);setTilt(-r*.7,0);follow(Math.max(0,y))},ease)}
-async function seaBack(){atSea=false;await run(async()=>{const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;
- await tween(2200,p=>{const y=-150+(by+150)*p;placeBoat(bx,y,0);placeFig(bx,y+SEAT);follow(Math.max(0,y))},ease);setTilt(0,0);await hopTo([d[0],d[1]-4],f,16);setOutfit(false);placeFig(f[0],f[1])});status()}
+ await tween(2800,p=>{const y=by-(by+150)*p,x=bx+10*Math.sin(p*6)*(1-p),r=3*Math.sin(p*9);placeBoat(x,y,r);placeFig(x,y+SEAT);setTilt(-r*.7,0);dvEl.style.opacity=.92*Math.min(1,p*1.6);follow(Math.max(0,y))},ease)}
+async function seaBack(){atSea=false;await fadeBlk(0,1,350);await run(async()=>{const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,-150,0);placeFig(bx,-150+SEAT);
+ await tween(2200,p=>{const y=-150+(by+150)*p;placeBoat(bx,y,0);placeFig(bx,y+SEAT);dvEl.style.opacity=.92*(1-p);blk.style.opacity=Math.max(0,1-p*6);follow(Math.max(0,y))},ease);blk.style.opacity=0;dvEl.style.opacity=0;setTilt(0,0);await hopTo([d[0],d[1]-4],f,16);setOutfit(false);placeFig(f[0],f[1])});status()}
 
 /* D159 (ماکت): حرکت ایستگاه‌ها هنگام رسیدن؛ یک‌بار، بدون حلقهٔ بیکار؛ حالت پایانی = شکل ایستای نماد. «کاهش حرکت» = بی‌حرکت. با لمس ایستگاهِ فعلی دوباره پخش می‌شود. */
 function stationG(id){const node=document.querySelector('.node[data-id="'+id+'"]');if(!node)return null;let g=node.querySelector('g.live');if(g)return g;
