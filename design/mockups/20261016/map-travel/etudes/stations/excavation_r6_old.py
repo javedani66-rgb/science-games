@@ -16,7 +16,7 @@ from station_kit import *
 OUTD = pathlib.Path(__file__).resolve().parent / 'out'
 SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/excavation'
 
-S_B, S_L, S_D = '#efe7d3', '#fffcf1', '#c7bb9b'     # بار: تخته‌سنگ کرم روشن
+S_B, S_L, S_D = '#a9a79f', '#d2d0c6', '#6f6d68'     # بار: تخته‌سنگ کرم روشن
 F_B, F_L, F_D = '#c9b68a', '#e6d8ae', '#8f7d52'     # سنگ تکیه‌گاه: ماسه‌سنگ
 B_B, B_L, B_D = '#e8483c', '#ff8a78', '#a82a24'     # دیلم قرمز
 YEL = '#ffd84d'

@@ -11521,10 +11521,610 @@
    ],
    "text": "برگشت به مخفی‌گاه",
    "status": "draft"
+  },
+  "flow.hide.back": {
+   "id": "flow.hide.back",
+   "kind": "button",
+   "where_fa": "دکمهٔ ثابت پایین صفحه وقتی ماکت جریان از مخفی‌گاه باز شده",
+   "context_fa": "فقط در حالت آمده-از-مخفی‌گاه (D186)",
+   "band": "همه",
+   "file": "design/mockups/20261008/flow-demo/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "flow.hide.back",
+    "text"
+   ],
+   "text": "برگشت به مخفی‌گاه",
+   "status": "draft"
+  },
+  "entry.title": {
+   "id": "entry.title",
+   "kind": "title",
+   "where_fa": "عنوان بازی روی صفحهٔ ورود",
+   "context_fa": "نام موقت است (B47/D52)؛ مالک تعیین می‌کند",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.title",
+    "text"
+   ],
+   "text": "سرزمین علوم",
+   "status": "draft"
+  },
+  "entry.tag": {
+   "id": "entry.tag",
+   "kind": "ui",
+   "where_fa": "زیرعنوان زیر نام بازی",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.tag",
+    "text"
+   ],
+   "text": "ماجرای ماشین‌های ساده",
+   "status": "draft"
+  },
+  "entry.start": {
+   "id": "entry.start",
+   "kind": "button",
+   "where_fa": "دکمهٔ اصلی در اولین ورود",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.start",
+    "text"
+   ],
+   "text": "شروع",
+   "status": "draft"
+  },
+  "entry.cont": {
+   "id": "entry.cont",
+   "kind": "button",
+   "where_fa": "دکمهٔ اصلی وقتی کودک قبلاً بازی کرده",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.cont",
+    "text"
+   ],
+   "text": "ادامه",
+   "status": "draft"
+  },
+  "entry.hello": {
+   "id": "entry.hello",
+   "kind": "ui",
+   "where_fa": "سلام بالای دکمهٔ ادامه",
+   "context_fa": "{name} همان اسمی است که کودک خودش نوشته (D77)",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.hello",
+    "text"
+   ],
+   "text": "خوش برگشتی، {name}!",
+   "status": "draft"
+  },
+  "entry.hello.first": {
+   "id": "entry.hello.first",
+   "kind": "ui",
+   "where_fa": "جملهٔ بالای دکمهٔ شروع در اولین ورود",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.hello.first",
+    "text"
+   ],
+   "text": "سلام! بیا با هم ماشین‌ها را بشناسیم.",
+   "status": "draft"
+  },
+  "entry.other": {
+   "id": "entry.other",
+   "kind": "button",
+   "where_fa": "دکمهٔ دوم: بازی با اسم و شخصیت دیگر",
+   "context_fa": "فقط وقتی کودک قبلاً بازی کرده؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.other",
+    "text"
+   ],
+   "text": "کودک دیگر",
+   "status": "draft"
+  },
+  "entry.grown": {
+   "id": "entry.grown",
+   "kind": "button",
+   "where_fa": "دکمهٔ کوچک گوشهٔ پایین",
+   "context_fa": "با نگه‌داشتن ۲ ثانیه باز می‌شود (B38)",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.grown",
+    "text"
+   ],
+   "text": "ویژهٔ بزرگ‌ترها",
+   "status": "draft"
+  },
+  "entry.hold": {
+   "id": "entry.hold",
+   "kind": "ui",
+   "where_fa": "راهنمای دکمهٔ ویژهٔ بزرگ‌ترها",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.hold",
+    "text"
+   ],
+   "text": "نگه دار ۲ ثانیه",
+   "status": "draft"
+  },
+  "entry.sheet.close": {
+   "id": "entry.sheet.close",
+   "kind": "button",
+   "where_fa": "دکمهٔ بستن برگهٔ پیام ماکت",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.sheet.close",
+    "text"
+   ],
+   "text": "بستن",
+   "status": "draft"
+  },
+  "entry.mock.start": {
+   "id": "entry.mock.start",
+   "kind": "ui",
+   "where_fa": "پیام ماکت بعد از «شروع»",
+   "context_fa": "فقط در ماکت",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.mock.start",
+    "text"
+   ],
+   "text": "در بازی واقعی: اولین بار ← انتخاب شخصیت و اسم ← نقشه.",
+   "status": "draft"
+  },
+  "entry.mock.cont": {
+   "id": "entry.mock.cont",
+   "kind": "ui",
+   "where_fa": "پیام ماکت بعد از «ادامه»",
+   "context_fa": "فقط در ماکت",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.mock.cont",
+    "text"
+   ],
+   "text": "در بازی واقعی: یکراست به نقشه، همان‌جا که کودک مانده بود.",
+   "status": "draft"
+  },
+  "entry.mock.other": {
+   "id": "entry.mock.other",
+   "kind": "ui",
+   "where_fa": "پیام ماکت بعد از «کودک دیگر»",
+   "context_fa": "فقط در ماکت",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.mock.other",
+    "text"
+   ],
+   "text": "در بازی واقعی: انتخاب شخصیت و نوشتن اسم تازه؛ پیشرفت کودک قبلی پاک نمی‌شود.",
+   "status": "draft"
+  },
+  "entry.mock.grown": {
+   "id": "entry.mock.grown",
+   "kind": "ui",
+   "where_fa": "پیام ماکت بعد از نگه‌داشتن",
+   "context_fa": "فقط در ماکت",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "entry.mock.grown",
+    "text"
+   ],
+   "text": "در بازی واقعی: نمای معلم و کد پیشرفت. در ماکت باز نمی‌شود.",
+   "status": "draft"
+  },
+  "maptravel.node.M01": {
+   "id": "maptravel.node.M01",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای M01 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.M01",
+    "text"
+   ],
+   "text": "دروازهٔ شهر",
+   "status": "draft"
+  },
+  "maptravel.node.B01": {
+   "id": "maptravel.node.B01",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای B01 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.B01",
+    "text"
+   ],
+   "text": "داربست",
+   "status": "draft"
+  },
+  "maptravel.node.B02": {
+   "id": "maptravel.node.B02",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای B02 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.B02",
+    "text"
+   ],
+   "text": "انبار مصالح",
+   "status": "draft"
+  },
+  "maptravel.node.M04": {
+   "id": "maptravel.node.M04",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای M04 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.M04",
+    "text"
+   ],
+   "text": "گودبرداری",
+   "status": "draft"
+  },
+  "maptravel.node.M05": {
+   "id": "maptravel.node.M05",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای M05 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.M05",
+    "text"
+   ],
+   "text": "انبار تیرآهن",
+   "status": "draft"
+  },
+  "maptravel.node.M06": {
+   "id": "maptravel.node.M06",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای M06 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.M06",
+    "text"
+   ],
+   "text": "اتاق ابزار",
+   "status": "draft"
+  },
+  "maptravel.node.E05": {
+   "id": "maptravel.node.E05",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای E05 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.E05",
+    "text"
+   ],
+   "text": "اتاق مخصوص آچارها",
+   "status": "draft"
+  },
+  "maptravel.node.M03": {
+   "id": "maptravel.node.M03",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای M03 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.M03",
+    "text"
+   ],
+   "text": "رمپ بارگیری",
+   "status": "draft"
+  },
+  "maptravel.zone.sea": {
+   "id": "maptravel.zone.sea",
+   "kind": "ui",
+   "where_fa": "عنوان منطقهٔ دریایی روی نقشه (کنار ساحل)",
+   "context_fa": "مالک ۲۳ اکتبر ۱۲:۴۱: آخرین سرزمین باید از شهر صنعتی جدا شود (مثلاً «منطقهٔ دریایی»)؛ نام draft",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.zone.sea",
+    "text"
+   ],
+   "text": "منطقهٔ دریایی",
+   "status": "draft"
+  },
+  "maptravel.node.F01": {
+   "id": "maptravel.node.F01",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای F01 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.F01",
+    "text"
+   ],
+   "text": "زمین فوتبال",
+   "status": "draft"
+  },
+  "maptravel.node.F02": {
+   "id": "maptravel.node.F02",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای F02 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.F02",
+    "text"
+   ],
+   "text": "سالن بسکتبال",
+   "status": "draft"
+  },
+  "maptravel.node.F03": {
+   "id": "maptravel.node.F03",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای F03 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.F03",
+    "text"
+   ],
+   "text": "میدان کمان‌کِشی",
+   "status": "draft"
+  },
+  "maptravel.node.F04": {
+   "id": "maptravel.node.F04",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای F04 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.F04",
+    "text"
+   ],
+   "text": "هاکی آهنربایی",
+   "status": "draft"
+  },
+  "maptravel.node.F05": {
+   "id": "maptravel.node.F05",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای F05 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.F05",
+    "text"
+   ],
+   "text": "سکوی پرتاب",
+   "status": "draft"
+  },
+  "maptravel.node.F06": {
+   "id": "maptravel.node.F06",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای F06 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.F06",
+    "text"
+   ],
+   "text": "پیست اسکی روی یخ",
+   "status": "draft"
+  },
+  "maptravel.node.F07": {
+   "id": "maptravel.node.F07",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای F07 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.F07",
+    "text"
+   ],
+   "text": "استخر",
+   "status": "draft"
+  },
+  "maptravel.node.F08": {
+   "id": "maptravel.node.F08",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای F08 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.F08",
+    "text"
+   ],
+   "text": "میدان طناب‌کشی",
+   "status": "draft"
+  },
+  "maptravel.node.F09": {
+   "id": "maptravel.node.F09",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای F09 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.F09",
+    "text"
+   ],
+   "text": "زمین اسکیت",
+   "status": "draft"
+  },
+  "maptravel.node.W01": {
+   "id": "maptravel.node.W01",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای W01 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.W01",
+    "text"
+   ],
+   "text": "ایستگاه بارگیری فضایی",
+   "status": "draft"
+  },
+  "maptravel.node.W02": {
+   "id": "maptravel.node.W02",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای W02 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.W02",
+    "text"
+   ],
+   "text": "آزمایشگاه ترازو",
+   "status": "draft"
+  },
+  "maptravel.node.W03": {
+   "id": "maptravel.node.W03",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای W03 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.W03",
+    "text"
+   ],
+   "text": "کرهٔ ماه",
+   "status": "draft"
+  },
+  "maptravel.node.W04": {
+   "id": "maptravel.node.W04",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای W04 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.W04",
+    "text"
+   ],
+   "text": "ایستگاه فضایی",
+   "status": "draft"
+  },
+  "maptravel.node.E01": {
+   "id": "maptravel.node.E01",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای E01 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.E01",
+    "text"
+   ],
+   "text": "آسیاب بادی",
+   "status": "draft"
+  },
+  "maptravel.node.E02": {
+   "id": "maptravel.node.E02",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای E02 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.E02",
+    "text"
+   ],
+   "text": "ایستگاه گاری‌ها",
+   "status": "draft"
+  },
+  "maptravel.node.E07": {
+   "id": "maptravel.node.E07",
+   "kind": "ui",
+   "where_fa": "برچسب و نام جای E07 روی نقشه",
+   "context_fa": "نام draft از titles_fa.json (مالک ۲۱ اکتبر D146: نام‌ها فعلاً تأیید)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.node.E07",
+    "text"
+   ],
+   "text": "چاه آب",
+   "status": "draft"
   }
  },
  "meta": {
-  "updated": "2026-10-21",
+  "updated": "2026-10-25",
   "glossary": {
    "نیرو": "نه «زور»",
    "جرم": "مقدار ماده؛ ترازو، گرم و کیلوگرم",

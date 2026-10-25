@@ -301,6 +301,7 @@ def main():
     a = a.replace('</head>\n<body data-light="day">', '<div id="root" dir="rtl" lang="fa" data-light="day">', 1).replace('</body>\n</html>', '</div>', 1)
     a = a.replace("const S=", "document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','fa');document.documentElement.setAttribute('data-light','day');\nconst S=", 1)
     (HERE / 'artifact.html').write_text(a, encoding='utf-8')
+    import shutil; shutil.copyfile(HERE.parents[2] / 'mockups/20261008/flow-demo/v5/index.html', HERE / 'cardbox.html')   # D186: صفحهٔ مقصد جعبهٔ کارت/مرور (ماکت جریان v5؛ با #box و #prac)
     print('index.html', len(t) // 1024, 'KB; artifact.html', len(a) // 1024, 'KB')
 
 if __name__ == '__main__':

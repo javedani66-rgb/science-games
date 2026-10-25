@@ -1,0 +1,114 @@
+{
+ "entry.title": {
+  "text": "سرزمین علوم",
+  "kind": "title",
+  "where_fa": "عنوان بازی روی صفحهٔ ورود",
+  "context_fa": "نام موقت است (B47/D52)؛ مالک تعیین می‌کند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.tag": {
+  "text": "ماجرای ماشین‌های ساده",
+  "kind": "ui",
+  "where_fa": "زیرعنوان زیر نام بازی",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.start": {
+  "text": "شروع",
+  "kind": "button",
+  "where_fa": "دکمهٔ اصلی در اولین ورود",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.cont": {
+  "text": "ادامه",
+  "kind": "button",
+  "where_fa": "دکمهٔ اصلی وقتی کودک قبلاً بازی کرده",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.hello": {
+  "text": "خوش برگشتی، {name}!",
+  "kind": "ui",
+  "where_fa": "سلام بالای دکمهٔ ادامه",
+  "context_fa": "{name} همان اسمی است که کودک خودش نوشته (D77)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.hello.first": {
+  "text": "سلام! بیا با هم ماشین‌ها را بشناسیم.",
+  "kind": "ui",
+  "where_fa": "جملهٔ بالای دکمهٔ شروع در اولین ورود",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.other": {
+  "text": "کودک دیگر",
+  "kind": "button",
+  "where_fa": "دکمهٔ دوم: بازی با اسم و شخصیت دیگر",
+  "context_fa": "فقط وقتی کودک قبلاً بازی کرده؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.grown": {
+  "text": "ویژهٔ بزرگ‌ترها",
+  "kind": "button",
+  "where_fa": "دکمهٔ کوچک گوشهٔ پایین",
+  "context_fa": "با نگه‌داشتن ۲ ثانیه باز می‌شود (B38)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.hold": {
+  "text": "نگه دار ۲ ثانیه",
+  "kind": "ui",
+  "where_fa": "راهنمای دکمهٔ ویژهٔ بزرگ‌ترها",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.sheet.close": {
+  "text": "بستن",
+  "kind": "button",
+  "where_fa": "دکمهٔ بستن برگهٔ پیام ماکت",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.mock.start": {
+  "text": "در بازی واقعی: اولین بار ← انتخاب شخصیت و اسم ← نقشه.",
+  "kind": "ui",
+  "where_fa": "پیام ماکت بعد از «شروع»",
+  "context_fa": "فقط در ماکت",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.mock.cont": {
+  "text": "در بازی واقعی: یکراست به نقشه، همان‌جا که کودک مانده بود.",
+  "kind": "ui",
+  "where_fa": "پیام ماکت بعد از «ادامه»",
+  "context_fa": "فقط در ماکت",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.mock.other": {
+  "text": "در بازی واقعی: انتخاب شخصیت و نوشتن اسم تازه؛ پیشرفت کودک قبلی پاک نمی‌شود.",
+  "kind": "ui",
+  "where_fa": "پیام ماکت بعد از «کودک دیگر»",
+  "context_fa": "فقط در ماکت",
+  "band": "همه",
+  "status": "draft"
+ },
+ "entry.mock.grown": {
+  "text": "در بازی واقعی: نمای معلم و کد پیشرفت. در ماکت باز نمی‌شود.",
+  "kind": "ui",
+  "where_fa": "پیام ماکت بعد از نگه‌داشتن",
+  "context_fa": "فقط در ماکت",
+  "band": "همه",
+  "status": "draft"
+ }
+}

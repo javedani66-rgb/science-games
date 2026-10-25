@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>صفحهٔ ورود به بازی</title>
+<style>
+@font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
+@font-face{font-family:Vazirmatn;font-weight:700;src:url(data:font/woff2;base64,{{FONT_VB}}) format("woff2")}
+@font-face{font-family:Lalezar;font-weight:400;src:url(data:font/woff2;base64,{{FONT_L}}) format("woff2")}
+:root{--navy:#241a5e;--edge:#120c3a;--cream:#fff3c4;--cream2:#fff9e0;--gold:#ffd23f;--sky:#d5ecf4;--sea1:#58c3e6;--sea2:#1d6fa8;--sea3:#0d3b6b;--ease:cubic-bezier(.22,.9,.25,1);color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#e7e2d3;color:var(--navy);font:400 16px/1.6 Vazirmatn,system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+:focus-visible{outline:4px solid var(--navy);outline-offset:3px}
+img{display:block;max-width:none}
+#rv{height:44px;background:#2b3a2b;color:#fff;display:flex;align-items:center;gap:8px;padding:0 12px;font-size:14px}
+#rv .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#rv button{background:#fff;color:#2b3a2b;border-radius:999px;padding:0 12px;min-height:32px;font-size:14px;font-weight:700}
+#rv button[aria-pressed=true]{background:var(--gold)}
+#app{position:relative;max-width:430px;margin:0 auto;height:calc(100% - 44px);min-height:600px;display:flex;flex-direction:column;overflow:hidden;background:linear-gradient(var(--sea1) 0%,var(--sea2) 55%,var(--sea3) 100%)}
+.wave{position:absolute;inset-inline:0;height:120px;opacity:.28;pointer-events:none}
+#w1{top:8%}#w2{top:46%;transform:scaleX(-1)}
+.wave path{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round}
+#head{position:relative;z-index:2;padding:18px 16px 0;text-align:center}
+.title{margin:0;font:400 54px/1.15 Lalezar,Vazirmatn,sans-serif;color:var(--cream);-webkit-text-stroke:9px var(--navy);paint-order:stroke fill;text-shadow:0 4px 0 var(--edge);word-spacing:.4em}
+.tag{display:block;width:fit-content;max-width:100%;margin:10px auto 0;background:var(--cream);border:3px solid var(--navy);border-radius:24px;box-shadow:0 3px 0 var(--edge);padding:2px 16px;font-size:16px;font-weight:700}
+#sc{position:relative;z-index:1;flex:1 1 auto;min-height:0;margin:16px 16px 0;border:4px solid var(--navy);border-radius:26px;box-shadow:0 6px 0 var(--edge);overflow:hidden;background:#12323a;direction:ltr}
+#pan{position:absolute;left:0;top:0}
+#pan img{position:absolute}
+#bg{inset:0;width:100%;height:100%;filter:brightness(.92) saturate(.95)}
+#mo,#ch{filter:drop-shadow(0 0 1px #fff3c8) drop-shadow(0 0 1px #fff3c8) drop-shadow(0 0 5px rgba(255,243,200,.85))}
+#mo{left:60%;bottom:9%;height:62%;transform-origin:50% 100%;animation:br 3.2s ease-in-out infinite}
+#ch{left:41%;bottom:7%;height:40%}
+@keyframes br{50%{transform:scaleY(1.012) translateY(-.4%)}}
+.sh{position:absolute;border-radius:50%;background:rgba(10,40,50,.38);filter:blur(2px)}#s1{left:57%;bottom:7%;width:22%;height:3.2%}#s2{left:39.5%;bottom:5.4%;width:8%;height:2.2%}
+#vg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,transparent 55%,rgba(8,20,40,.35));pointer-events:none}
+#pn{position:relative;z-index:2;margin:14px 16px 0;background:var(--cream);border:4px solid var(--navy);border-radius:28px;box-shadow:0 6px 0 var(--edge);padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px;align-items:stretch}
+#hello{margin:0;text-align:center;font-size:18px;font-weight:700;line-height:1.5}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;border:4px solid var(--navy);border-radius:22px;background:var(--gold);box-shadow:0 5px 0 var(--edge);font:400 30px/1 Lalezar,Vazirmatn,sans-serif;color:var(--navy);transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--edge)}
+.btn[hidden]{display:none}
+.btn svg{width:30px;height:30px;flex:none}
+.btn2{min-height:52px;background:var(--cream2);font:700 18px/1.3 Vazirmatn,sans-serif;box-shadow:0 4px 0 var(--edge);border-radius:18px}
+#bot{position:relative;z-index:2;display:flex;justify-content:center;padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px))}
+#grown{position:relative;display:flex;align-items:center;gap:10px;min-height:52px;padding:0 16px 0 12px;border:3px solid var(--navy);border-radius:26px;background:rgba(255,249,224,.92);font-size:14px;font-weight:700;touch-action:none;user-select:none}
+#grown svg.ring{width:34px;height:34px;flex:none;transform:rotate(-90deg)}
+#grown circle{fill:none;stroke-width:5}
+#rg0{stroke:#c9c3de}#rg1{stroke:var(--navy);stroke-linecap:round;stroke-dasharray:94.25;stroke-dashoffset:94.25}
+#grown .tx{display:flex;flex-direction:column;line-height:1.3;text-align:start}
+#grown .tx small{font-size:14px;font-weight:400}
+#shd{position:absolute;inset:0;z-index:20;background:rgba(18,12,58,.55);display:flex;align-items:flex-end;justify-content:center;padding:16px}
+#shd[hidden]{display:none}
+#sheet{width:100%;max-width:398px;background:var(--cream);border:4px solid var(--navy);border-radius:28px;box-shadow:0 6px 0 var(--edge);padding:18px 16px 16px;display:flex;flex-direction:column;gap:12px;animation:up .28s var(--ease) both}
+@keyframes up{from{transform:translateY(24px);opacity:0}}
+#sheet p{margin:0;font-size:18px;font-weight:700;text-align:center;line-height:1.7}
+#fade{position:absolute;inset:0;z-index:30;background:#120c3a;opacity:0;pointer-events:none}
+@media (max-height:700px){.title{font-size:44px}#sc{margin-top:10px}.btn{min-height:56px}#hello{font-size:16px}}
+@media (prefers-reduced-motion:reduce){#mo{animation:none}#sheet{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+<div id="rv" role="group"><span class="t" id="rvt"></span><button id="m1" aria-pressed="true"></button><button id="m2" aria-pressed="false"></button></div>
+<div id="app">
+ <svg class="wave" id="w1" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path d="M10 40q30-24 60 0t60 0 60 0 60 0 60 0 60 0M40 90q30-24 60 0t60 0 60 0 60 0"/></svg>
+ <svg class="wave" id="w2" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true"><path d="M10 40q30-24 60 0t60 0 60 0 60 0 60 0 60 0M40 90q30-24 60 0t60 0 60 0 60 0"/></svg>
+ <header id="head"><h1 class="title" id="t"></h1><span class="tag" id="tg"></span></header>
+ <div id="sc" role="img" aria-label="">
+  <div id="pan"><img id="bg" alt="" src="{{HS_BG}}"><div class="sh" id="s1"></div><div class="sh" id="s2"></div><img id="mo" alt="" src="{{HS_MO}}"><img id="ch" alt="" src="{{HS_CH}}"></div>
+  <div id="vg"></div>
+ </div>
+ <section id="pn">
+  <p id="hello"></p>
+  <button class="btn" id="go"><svg viewBox="0 0 32 32" aria-hidden="true" fill="var(--navy)"><path d="M11 6.5v19l15-9.5z" stroke="var(--navy)" stroke-width="3" stroke-linejoin="round"/></svg><span id="gol"></span></button>
+  <button class="btn btn2" id="oth" hidden></button>
+ </section>
+ <div id="bot"><button id="grown" aria-describedby="hl"><svg class="ring" viewBox="0 0 36 36" aria-hidden="true"><circle id="rg0" cx="18" cy="18" r="15"/><circle id="rg1" cx="18" cy="18" r="15"/></svg><span class="tx"><span id="gl"></span><small id="hl"></small></span></button></div>
+ <div id="shd" hidden><div id="sheet" role="dialog" aria-modal="true"><p id="sm"></p><button class="btn btn2" id="sx"></button></div></div>
+ <div id="fade"></div>
+</div>
+<script>
+const S0={{STRINGS}},R={{REVIEW}};
+document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','fa');
+const S=k=>(S0[k]||{}).text||k,$=id=>document.getElementById(id),NAME='مینا';
+let mode='first';
+function render(){
+ const back=mode==='back';
+ $('t').textContent=S('entry.title');$('tg').textContent=S('entry.tag');
+ $('hello').textContent=back?S('entry.hello').replace('{name}',NAME):S('entry.hello.first');
+ $('gol').textContent=S(back?'entry.cont':'entry.start');
+ $('oth').hidden=!back;$('oth').textContent=S('entry.other');
+ $('gl').textContent=S('entry.grown');$('hl').textContent=S('entry.hold');
+ $('sx').textContent=S('entry.sheet.close');
+ $('rvt').textContent=R.banner;$('m1').textContent=R['mode.first'];$('m2').textContent=R['mode.back'];
+ $('m1').setAttribute('aria-pressed',!back);$('m2').setAttribute('aria-pressed',back);
+}
+$('m1').onclick=()=>{mode='first';render()};$('m2').onclick=()=>{mode='back';render()};
+let lastFocus=null;
+function sheet(key){lastFocus=document.activeElement;$('sm').textContent=S(key);$('shd').hidden=false;$('sx').focus()}
+function closeSheet(){$('shd').hidden=true;if(lastFocus)lastFocus.focus()}
+$('sx').onclick=closeSheet;$('shd').onclick=e=>{if(e.target.id==='shd')closeSheet()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('shd').hidden)closeSheet()});
+const rm=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
+$('go').onclick=async()=>{const f=$('fade');if(!rm()){f.animate([{opacity:0},{opacity:1}],{duration:450,fill:'forwards'}).finished.then(()=>{sheet(mode==='back'?'entry.mock.cont':'entry.mock.start');f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0})}else sheet(mode==='back'?'entry.mock.cont':'entry.mock.start')};
+$('oth').onclick=()=>sheet('entry.mock.other');
+/* B38: «ویژهٔ بزرگ‌ترها» = نگه‌داشتن ۲ ثانیه (بدون پرسش ریاضی)؛ رها کردن زودتر = لغو */
+{const g=$('grown'),r=$('rg1'),L=94.25;let t0=0,raf=0,on=false;
+ const stop=()=>{on=false;cancelAnimationFrame(raf);r.style.strokeDashoffset=L};
+ const tick=()=>{if(!on)return;const p=Math.min(1,(performance.now()-t0)/2000);r.style.strokeDashoffset=L*(1-p);if(p>=1){stop();sheet('entry.mock.grown')}else raf=requestAnimationFrame(tick)};
+ const start=()=>{if(on)return;on=true;t0=performance.now();raf=requestAnimationFrame(tick)};
+ g.addEventListener('pointerdown',e=>{e.preventDefault();start()});['pointerup','pointercancel','pointerleave'].forEach(n=>g.addEventListener(n,stop));
+ g.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();start()}});g.addEventListener('keyup',stop);g.addEventListener('blur',stop);
+ g.addEventListener('contextmenu',e=>e.preventDefault())}
+/* صحنه همیشه کادر را کامل می‌پوشاند؛ هیولا و کودک در دید می‌مانند */
+function fit(){const sc=$('sc'),W=sc.clientWidth,H=sc.clientHeight,AR=1400/782,ph=Math.max(H,W/.62/AR),pw=ph*AR,pan=$('pan');
+ pan.style.width=pw+'px';pan.style.height=ph+'px';pan.style.left=-Math.min(.33*pw,pw-W)+'px';pan.style.top=(H-ph)+'px'}
+addEventListener('resize',fit);render();fit();
+</script>
+</body>
+</html>

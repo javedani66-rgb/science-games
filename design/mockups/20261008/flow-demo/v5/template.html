@@ -372,7 +372,7 @@ function go(scr,p={},push=true,fade=true){
   if(scr==='env'){st.ord=[2,1,0];st.envEnter=true}
   Object.assign(st,p,{scr});st.overlay=null;st.peek=null;st.lock=null;st.hint=0;st.pulled=false;st.tut=null;st.card=null;render({fade});
 }
-function back(){const b=st.nav.pop();if(!b){go('map',{},false);return}Object.assign(st,b);st.overlay=null;st.peek=null;st.lock=null;st.tut=null;st.card=null;render({fade:true})}
+function back(){const b=st.nav.pop();if(!b){if(st.hide){history.back();return}go('map',{},false);return}Object.assign(st,b);st.overlay=null;st.peek=null;st.lock=null;st.tut=null;st.card=null;render({fade:true})}
 
 /* ---------- اجزای مشترک ---------- */
 const menuIcon='<svg class="ui-ic" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="4.4" stroke-linecap="round"><path d="M6 9h20M6 16h20M6 23h20"/></svg>';
@@ -626,7 +626,7 @@ function envScreen(){
   const cards=[0,1,2].map(ti=>stackCard(ch[ti],ti,id)).join('');
   return `<div class="scr">${tb(menuBtn(),titleOf(n.env),spacer)}
    <div class="envbody"><div class="envbanner" aria-hidden="true"><svg viewBox="0 0 390 200" preserveAspectRatio="xMidYMid slice"><use href="#env_dock_banner"/></svg></div><div class="chs${enter?' enter':''}" id="chs">${cards}</div></div>
-   <div class="cd-bot">${secBtn('toMap',icBack()+esc(S('flow.nav.toMap')))}</div></div>`;
+   <div class="cd-bot">${secBtn('toMap',icBack()+esc(S(st.hide?'flow.hide.back':'flow.nav.toMap')))}</div></div>`;
 }
 function syncStack(){
   const c=$('#chs');if(!c)return;
@@ -847,7 +847,7 @@ function boxScreen(){
    ${st.search?`<div class="search"><input id="q" type="search" placeholder="${esc(S('flow.box.search'))}" value="${esc(st.q)}" aria-label="${esc(S('flow.box.search'))}"></div>`:''}
    <div class="jump" id="jump">${jump}</div>
    <div class="body" id="boxbody"><div class="shelf">${shelves}</div></div>
-   <div class="dock dock--b"><svg class="dkb" viewBox="0 0 100 92" aria-hidden="true"><g class="cs-bust-64 ch-pose-stand"><use class="ch-happy" href="#ch-b1"/></g></svg>${secBtn('toMap',ic('map')+esc(S('flow.nav.toMap')))}</div></div>`;
+   <div class="dock dock--b"><svg class="dkb" viewBox="0 0 100 92" aria-hidden="true"><g class="cs-bust-64 ch-pose-stand"><use class="ch-happy" href="#ch-b1"/></g></svg>${secBtn('toMap',ic('map')+esc(S(st.hide?'flow.hide.back':'flow.nav.toMap')))}</div></div>`;
 }
 function refreshBox(){
   const b=A('#boxbody');if(!b||st.scr!=='box')return;const top=b.scrollTop,jp=A('#jump').scrollLeft;
@@ -870,7 +870,7 @@ function pracScreen(){
   else if(st.prac===0)inner=`<div class="prac"><p>${esc(S('flow.practice.lead'))}</p>${priBtn('pstart',esc(S('flow.practice.start')),'','wide')}</div>`;
   else if(st.prac===1)inner=`<div class="prac"><h2 class="sec" style="margin:0 0 8px;font:400 22px/1.3 var(--ui-font-title);color:var(--ui-cream)">${esc(LES[pid]?LS(pid,'title'):N[pid].concept)}</h2>${LES[pid]?probLesson(pid,'pb2'):`<div class="pendbox">${esc(S('flow.card.noPractice'))}</div>`}<div id="pn" style="margin-top:12px;${LES[pid]?'display:none':''}">${priBtn('pnext',esc(S('flow.practice.next')),'','wide')}</div></div>`;
   else inner=`<div class="prac"><p>${esc(S('flow.practice.end'))}</p></div>`;
-  return `<div class="scr">${tb(menuBtn(),titleOf(S('flow.menu.practice')),spacer)}<div class="body">${inner}</div><div class="dock">${secBtn('toMap',ic('map')+esc(S('flow.nav.toMap')))}</div></div>`;
+  return `<div class="scr">${tb(menuBtn(),titleOf(S('flow.menu.practice')),spacer)}<div class="body">${inner}</div><div class="dock">${secBtn('toMap',ic('map')+esc(S(st.hide?'flow.hide.back':'flow.nav.toMap')))}</div></div>`;
 }
 
 /* ---------- برگه‌ها و روکش‌ها ---------- */
@@ -1047,7 +1047,7 @@ document.addEventListener('click',e=>{
   const act=a.dataset.act,id=a.dataset.id;
   switch(act){
    case'back':back();break;
-   case'toMap':st.nav=[];st.overlay=null;go('map',{},false);break;
+   case'toMap':if(st.hide){history.back();break}st.nav=[];st.overlay=null;go('map',{},false);break;
    case'node':{const s=nodeSt(id);if(s==='locked'||s==='fog'){st.lock=id;st.peek=null;renderOv()}else{st.peek=id;st.lock=null;renderOv()}break}
    case'cardlock':st.lock=id;renderOv();break;
    case'closeov':st.peek=null;st.lock=null;st.overlay=null;st.gateOK=false;renderOv();break;
@@ -1060,7 +1060,7 @@ document.addEventListener('click',e=>{
      setTimeout(()=>{scrollMapTo(id,true);const nd=A(`.mn[data-n="${id}"]`);if(nd&&!rm()){nd.classList.add('flash');setTimeout(()=>nd.classList.remove('flash'),900)}},60);break}
    case'srch':st.overlay='search';st.mq='';renderOv();{const q=$('#mq');if(q)q.focus()}break;
    case'me':scrollMapTo(st.here,true);break;
-   case'menumap':st.overlay=null;renderOv();scrollMapTo(st.here,true);break;
+   case'menumap':if(st.hide){history.back();break}st.overlay=null;renderOv();scrollMapTo(st.here,true);break;
    case'enter':go('env',{cur:id});break;
    case'card3':{const i=+a.dataset.i;st.ord=st.ord.filter(x=>x!==i).concat(i);updateStack();break}
    case'start':{e.stopPropagation();go('scene',{tier:+a.dataset.i});break}
@@ -1108,7 +1108,9 @@ document.addEventListener('change',e=>{const g=e.target.closest('[data-tg]');if(
   if(k==='teacher'||k==='fogClear'||k==='storyLight'){st.keepMap=true;render()}else renderPanel()});
 window.addEventListener('resize',()=>{if(st.tut)placeSpot();if(st.scr==='map')layoutMap()});
 $('#rvt').textContent=R['panel.toggle'];$('#rvb').textContent=R['banner'];
-render();
+/* D186: آمده از مخفی‌گاه نقشهٔ سفر (#box یا #prac): باز شدن مستقیم و دکمهٔ «گردیم به نقشه» = برگشت به مخفی‌گاه */
+{const H=location.hash.slice(1);if(H==='box'||H==='prac')st.hide=true;
+ render();if(H==='box'){st.nav=[];go('box',{boxTop:0},false,false)}else if(H==='prac'){st.nav=[];go('prac',{prac:0},false,false)}}
 window.__st=st;
 </script>
 </body>

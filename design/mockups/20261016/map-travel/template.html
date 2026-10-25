@@ -185,7 +185,7 @@ legDots=(f=>k=>f(k).filter(q=>Math.hypot(q[0]-BERTH[0],q[1]-(BERTH[1]-31))>26))(
 (function(){let P=[];for(let k=0;k<ORDER.length-1;k++)P=P.concat(legDots(k));document.getElementById('seadots').innerHTML=dotSvg(P,4.5,2.5,'#241a5e','#e8f6f8',.35,.85)})();
 const trail=document.createElementNS(NS,'g');trail.id='trail';seaG.parentNode.insertBefore(trail,seaG.nextSibling);
 const DN={};let dnReady=false;const BADGE='<ellipse cx="1.5" cy="3.5" rx="12.5" ry="11" fill="#10083a" opacity=".35"/><circle r="12.6" fill="#241a5e"/><circle r="10.8" fill="#fff"/><circle r="8.7" fill="#3fcf72"/><path d="M-6,-3.2 a7,7 0 0 1 7.4,-4.6" fill="none" stroke="#c8ffd8" stroke-width="2" stroke-linecap="round"/><polyline points="-4.8,.4 -1.4,3.9 5.2,-3.6" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>';
-function updateDone(){const L=document.getElementById('dnlayer');if(!L)return;const NS='http://www.w3.org/2000/svg';for(const id of ORDER){const on=done.has(id);let g=DN[id];if(on&&!g){const n=NODES[id];g=DN[id]=document.createElementNS(NS,'g');g.setAttribute('transform','translate('+(n.x+42)+' '+(n.y+14)+')');g.innerHTML='<g'+(dnReady?' class="pop"':'')+'>'+BADGE+'</g>';L.appendChild(g)}else if(!on&&g){g.remove();delete DN[id]}}dnReady=true} /* D173: تیک «انجام‌شد» هم‌جا با قفل، سبز نعنایی با خط سرمه‌ای */
+function updateDone(){const L=document.getElementById('dnlayer');if(!L)return;const NS='http://www.w3.org/2000/svg';for(const id of ORDER){const on=done.has(id);let g=DN[id];if(on&&!g){const n=NODES[id];g=DN[id]=document.createElementNS(NS,'g');g.setAttribute('transform','translate('+(n.x+44)+' '+(n.y+25)+')');g.innerHTML='<g'+(dnReady?' class="pop"':'')+'>'+BADGE+'</g>';L.appendChild(g)}else if(!on&&g){g.remove();delete DN[id]}}dnReady=true} /* D173: تیک «انجام‌شد» هم‌جا با قفل، سبز نعنایی با خط سرمه‌ای */
 function updateTrail(){updateDone();trail.innerHTML='';let P=[];for(let k=0;k<=ORDER.length-2;k++)if(done.has(ORDER[k]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
 /* کاراکتر و قایق */
 const SEAT=27,FH=56;
@@ -304,8 +304,13 @@ function openHide(){ovn.textContent='';ov.classList.remove('nosc');ov.hidden=fal
 $('ovc').onclick=()=>{ov.hidden=true;$('ovt').textContent=T('hide.title');$('opts').hidden=false;$('ovc').textContent=T('hide.close');if(atSea)seaBack()};
 /* D184: هر گزینهٔ خروج از مخفی‌گاه = سفر قایق به آب‌های ناشناخته (آب تیره‌تر می‌شود) ← خروج از کادر ← فید سیاه ← مقصد (ماکت: پیام)؛ برگشت: فید از سیاه + قایق از بالا */
 const blk=$('blk'),dvEl=$('dv'),fadeBlk=(a,b,ms)=>tween(ms,p=>{blk.style.opacity=a+(b-a)*p});
-function leave(key){return async()=>{ov.hidden=true;await run(seaOut);await fadeBlk(0,1,650);$('ovt').textContent=T(key);$('opts').hidden=true;$('ovn').textContent='';$('ovc').textContent=T('hide.back');atSea=true;ov.classList.add('nosc');ov.hidden=false;await fadeBlk(1,0,600)}}
-$('o_rev').onclick=leave('hide.mock');$('o_card').onclick=leave('hide.mock');$('o_cr').onclick=leave('hide.mock');$('o_sea').onclick=leave('hide.seamsg');
+/* D186: «جعبهٔ کارت» و «مرور مرحله‌ها» بعد از فید سیاه به صفحهٔ ماکت جریان (cardbox.html) می‌روند؛ برگشت = دوباره مخفی‌گاه */
+const RET='mt-return';let hideFail=false;
+function leave(key,url){return async()=>{ov.hidden=true;await run(seaOut);await fadeBlk(0,1,650);
+ if(url){try{sessionStorage.setItem(RET,'1')}catch(e){try{localStorage.setItem(RET,'1')}catch(e2){}}
+  try{location.href=url;await new Promise(r=>setTimeout(r,2500))}catch(e){}}
+ $('ovt').textContent=T(key);$('opts').hidden=true;$('ovn').textContent='';$('ovc').textContent=T('hide.back');atSea=true;ov.classList.add('nosc');ov.hidden=false;await fadeBlk(1,0,600)}}
+$('o_rev').onclick=leave('hide.mock','cardbox.html#prac');$('o_card').onclick=leave('hide.mock','cardbox.html#box');$('o_cr').onclick=leave('hide.mock');$('o_sea').onclick=leave('hide.seamsg');
 async function seaOut(){const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,by,0);setOutfit(true);await hopTo(f,[d[0],d[1]-4],16);
  await tween(2800,p=>{const y=by-(by+150)*p,x=bx+10*Math.sin(p*6)*(1-p),r=3*Math.sin(p*9);placeBoat(x,y,r);placeFig(x,y+SEAT);setTilt(-r*.7,0);dvEl.style.opacity=.92*Math.min(1,p*1.6);follow(Math.max(0,y))},ease)}
 async function seaBack(){atSea=false;await fadeBlk(0,1,350);await run(async()=>{const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,-150,0);placeFig(bx,-150+SEAT);
@@ -416,7 +421,9 @@ ids.forEach(i=>{const n=NODES[i],h=n.hit;const b=document.createElement('button'
  b.style.cssText='left:'+h[0]+'px;top:'+h[1]+'px;width:'+Math.max(48,h[2])+'px;height:'+Math.max(48,h[3])+'px';b.onclick=()=>go(i);world.appendChild(b)});
 $('skip').onclick=()=>{skip=true};
 $('again').onclick=()=>{if(busy)return;visited.clear();done.clear();ORDER.filter(i=>NODES[i].y>=1200).forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('E03')).forEach(i=>done.add(i));here='E03';putAt(here);status();refreshRing();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55);updateTrail();resetPrints();showPrints(true)};
-fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
+let ret=false;try{if(sessionStorage.getItem(RET)||localStorage.getItem(RET)){sessionStorage.removeItem(RET);localStorage.removeItem(RET);ret=true}}catch(e){}
+if(ret){ORDER.forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('M12')).forEach(i=>done.add(i));here='M12'}
+fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
 </script>
 </body>
 </html>
