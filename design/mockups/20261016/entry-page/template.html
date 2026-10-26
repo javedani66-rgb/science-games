@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>منوی ورود به بازی</title>
+<link rel="prefetch" href="map.html">
 <style>
 @font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
 @font-face{font-family:Vazirmatn;font-weight:700;src:url(data:font/woff2;base64,{{FONT_VB}}) format("woff2")}
@@ -111,7 +112,8 @@ $('go').onclick=async()=>{if(busy)return;busy=true;const g=$('hsv').querySelecto
   if(ST[SYM[mode]])ST[SYM[mode]](g);await wait(2300)}
  const an=f.animate([{opacity:0},{opacity:1}],{duration:reduce?120:650,fill:'forwards'});await an.finished;
  try{location.href='map.html#enter-'+(mode==='a'?'new':'cont')}catch(e){}
- await wait(2500);mountHero();sheet(k);an.cancel();busy=false};
+ /* صفحهٔ بعد ممکن است روی دستگاه کند دیرتر بیاید؛ فقط اگر بعد از ۱۵ ثانیه هنوز اینجاییم (ناوبری ممکن نشد) پیام ماکت */
+ let left=false;addEventListener('pagehide',()=>{left=true},{once:true});await wait(15000);if(left)return;mountHero();sheet(k);an.cancel();busy=false};
 document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>sheet('entry.mock.'+b.dataset.k));
 /* B38: «ویژهٔ بزرگ‌ترها» = نگه‌داشتن ۲ ثانیه (بدون پرسش ریاضی)؛ رها کردن زودتر = لغو */
 {const g=$('grown'),r=$('rg1'),L=94.25;let t0=0,raf=0,on=false;
