@@ -549,7 +549,10 @@ $('skip').onclick=()=>{skip=true};
 $('again').onclick=()=>{if(busy)return;visited.clear();done.clear();ORDER.filter(i=>NODES[i].y>=1200).forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('E03')).forEach(i=>done.add(i));here='E03';putAt(here);status();refreshRing();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55);updateTrail();resetPrints();showPrints(true)};
 let ret=false;try{if(sessionStorage.getItem(RET)||localStorage.getItem(RET)){sessionStorage.removeItem(RET);localStorage.removeItem(RET);ret=true}}catch(e){}
 if(ret){ORDER.forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('M12')).forEach(i=>done.add(i));here='M12'}
-fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
+/* D190: ورود از منوی ورود (#enter-new = اولین بار از اولین جا؛ #enter-cont = ادامه از «پیست اسکی روی یخ»): نقشه از سیاه باز می‌شود و حرکت رسیدن ایستگاه پخش می‌شود */
+const EN=location.hash.match(/^#enter-(new|cont)$/);
+if(EN&&!ret){const id=EN[1]==='new'?ORDER[0]:'F06',ix=ORDER.indexOf(id);visited.clear();done.clear();ORDER.slice(0,ix+1).forEach(i=>visited.add(i));ORDER.slice(0,ix).forEach(i=>done.add(i));here=id}
+fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}if(EN&&!ret){updateDim();blk.style.opacity=1;addEventListener('load',()=>setTimeout(async()=>{await fadeBlk(1,0,reduce?150:800);playStation(here)},350))}addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
 </script>
 </body>
 </html>

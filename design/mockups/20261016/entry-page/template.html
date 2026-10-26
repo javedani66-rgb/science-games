@@ -18,16 +18,14 @@ img{display:block;max-width:none}
 #rv .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #rv button{background:#fff;color:#2b3a2b;border-radius:999px;padding:0 10px;min-height:32px;font-size:14px;font-weight:700}
 #rv button[aria-pressed=true]{background:var(--cream);outline:2px solid #fff}
-#app{position:relative;max-width:430px;margin:0 auto;height:calc(100% - 44px);overflow-x:hidden;overflow-y:auto;display:flex;flex-direction:column;background:linear-gradient(var(--sky) 0%,#8fcfe6 38%,var(--sea) 100%)}
+#app{position:relative;max-width:430px;margin:0 auto;height:calc(100% - 44px);overflow-x:hidden;overflow-y:auto;display:flex;flex-direction:column;background:radial-gradient(ellipse 80% 38% at 50% 44%,#5a3fb8 0%,rgba(90,63,184,0) 70%),linear-gradient(#2c1470 0%,#190539 100%)}
 #head{flex:none;padding:14px 16px 0;text-align:center}
 .title{margin:0;font:400 58px/1.1 Lalezar,Vazirmatn,sans-serif;color:var(--cream);-webkit-text-stroke:10px var(--navy);paint-order:stroke fill;text-shadow:0 4px 0 var(--edge);word-spacing:.35em}
 .sub{display:block;width:fit-content;max-width:100%;margin:8px auto 0;background:var(--cream);border:3px solid var(--navy);border-radius:24px;box-shadow:0 3px 0 var(--edge);padding:2px 18px;font-size:17px;font-weight:700}
-#sc{position:relative;flex:1 1 190px;min-height:130px;margin:14px 16px 0;border:4px solid var(--navy);border-radius:26px;box-shadow:0 6px 0 var(--edge);overflow:hidden;background:#3f9a3a;direction:ltr}
-#pan{position:absolute;left:0;top:0}
-#pan img{position:absolute}
-#pg{inset:0;width:100%;height:100%}
-#ch{left:56%;bottom:37%;height:50%;filter:drop-shadow(0 0 1px #fff4d2) drop-shadow(0 0 1px #fff4d2) drop-shadow(0 0 4px rgba(255,244,210,.8));transform-origin:50% 100%;animation:br 3.2s ease-in-out infinite}
-@keyframes br{50%{transform:scaleY(1.015)}}
+#hero{position:relative;flex:1 1 220px;min-height:160px;margin:6px 16px 0;display:flex;align-items:center;justify-content:center;min-width:0}
+/* قاعدهٔ رنگ نمادها (همان LIGHTCSS نقشهٔ روز) */
+.eo{stroke:#241a5e;stroke-linejoin:round;stroke-linecap:round}.elit{fill:#fff4cf;opacity:.3}.esh{fill:#4a3a8c;opacity:.22}.esd{fill:#10083a;opacity:.28}
+#hsv{height:100%;max-height:300px;width:auto;max-width:100%;overflow:visible;filter:drop-shadow(0 10px 18px rgba(8,2,30,.55))}
 #pn{flex:none;margin:12px 16px 0;background:var(--cream);border:4px solid var(--navy);border-radius:28px;box-shadow:0 6px 0 var(--edge);padding:12px 12px 12px;display:flex;flex-direction:column;gap:8px}
 #hello{margin:0;text-align:center;font-size:18px;font-weight:700;line-height:1.5}
 .btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;border:4px solid var(--navy);border-radius:22px;background:var(--teal);box-shadow:0 5px 0 var(--edge);font:400 32px/1 Lalezar,Vazirmatn,sans-serif;color:var(--navy);transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
@@ -54,15 +52,16 @@ img{display:block;max-width:none}
 #sheet p{margin:0;font-size:18px;font-weight:700;text-align:center;line-height:1.7}
 .btn2{min-height:52px;background:var(--cream2);font:700 18px/1.3 Vazirmatn,sans-serif;box-shadow:0 4px 0 var(--edge);border-radius:18px}
 #fade{position:fixed;inset:0;z-index:30;background:#120c3a;opacity:0;pointer-events:none}
-@media (max-height:700px){.title{font-size:44px;-webkit-text-stroke:8px var(--navy)}#head{padding-top:8px}.btn{min-height:56px}.tile{min-height:66px}#bot{padding-top:8px}#pn{margin-top:8px}#sc{margin-top:8px}}
-@media (prefers-reduced-motion:reduce){#ch{animation:none}#sheet{animation:none}.btn,.tile{transition:none}}
+@media (max-height:700px){.title{font-size:44px;-webkit-text-stroke:8px var(--navy)}#head{padding-top:8px}.btn{min-height:56px}.tile{min-height:66px}#bot{padding-top:8px}#pn{margin-top:8px}}
+@media (prefers-reduced-motion:reduce){#sheet{animation:none}.btn,.tile{transition:none}}
 </style>
 </head>
 <body>
 <div id="rv" role="group"><span class="t" id="rvt"></span><button id="ma"></button><button id="mb"></button><button id="mt"></button></div>
 <div id="app">
  <header id="head"><h1 class="title" id="t"></h1><span class="sub" id="sb"></span></header>
- <div id="sc" aria-hidden="true"><div id="pan"><img id="pg" alt="" src="{{PANO}}"><img id="ch" alt="" src="{{CHILD}}"></div></div>
+ <div id="hero" aria-hidden="true"><svg id="hsv" viewBox="-14 -6 228 212" overflow="visible"></svg></div>
+ <svg id="syms" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>{{SYMS}}</defs></svg>
  <section id="pn">
   <p id="hello"></p>
   <button class="btn" id="go"><svg viewBox="0 0 32 32" aria-hidden="true" fill="var(--navy)"><path d="M11 6.5v19l15-9.5z" stroke="var(--navy)" stroke-width="3" stroke-linejoin="round"/></svg><span id="gol"></span></button>
@@ -93,7 +92,7 @@ function render(){
  $('gl').textContent=S('entry.grown');$('hl').textContent=S('entry.hold');$('sx').textContent=S('entry.sheet.close');
  $('rvt').textContent=R.banner;
  for(const [id,m] of [['ma','a'],['mb','b'],['mt','t']]){$(id).textContent=R['mode.'+m];$(id).setAttribute('aria-pressed',mode===m)}
- fit();
+ mountHero();
 }
 for(const [id,m] of [['ma','a'],['mb','b'],['mt','t']])$(id).onclick=()=>{mode=m;render()};
 let lastFocus=null;
@@ -102,9 +101,17 @@ function closeSheet(){$('shd').hidden=true;if(lastFocus)lastFocus.focus()}
 $('sx').onclick=closeSheet;$('shd').onclick=e=>{if(e.target.id==='shd')closeSheet()};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('shd').hidden)closeSheet()});
 const rm=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
-$('go').onclick=()=>{const k=mode==='a'?'entry.mock.start':'entry.mock.cont',f=$('fade');
- if(rm()){sheet(k);return}
- const an=f.animate([{opacity:0},{opacity:1}],{duration:450,fill:'forwards'});an.finished.then(()=>{sheet(k);an.cancel()})};
+/* نماد مرحله (همان نمادِ نقشه) + حرکت رسیدنش از همان کد ماکت نقشه؛ با «شروع/ادامه» روشن می‌شود و تکان می‌خورد ← فید سیاه ← نقشه که از سیاه باز می‌شود */
+{{ANIM}}
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,NS='http://www.w3.org/2000/svg',SYM={a:'football',b:'ice_rink',t:'shipyard'},wait=ms=>new Promise(r=>setTimeout(r,ms));
+let busy=false;
+function mountHero(){const sym=$('node_'+SYM[mode]),g=document.createElementNS(NS,'g');g.setAttribute('class','live');g.dataset.sid=SYM[mode];g.innerHTML=sym.innerHTML;$('hsv').replaceChildren(g);STA.forEach(a=>{try{a.cancel()}catch(e){}});STA=[];$('hsv').getAnimations().forEach(a=>a.cancel());$('hsv').style.filter=''}
+$('go').onclick=async()=>{if(busy)return;busy=true;const g=$('hsv').querySelector('g.live'),f=$('fade'),k=mode==='a'?'entry.mock.start':'entry.mock.cont';
+ if(!reduce){$('hsv').animate([{filter:'brightness(1) drop-shadow(0 10px 18px rgba(8,2,30,.55))'},{filter:'brightness(1.3) saturate(1.1) drop-shadow(0 0 12px rgba(255,244,210,.95)) drop-shadow(0 0 36px rgba(160,130,255,.9))'}],{duration:800,fill:'forwards',easing:'ease-out'});
+  if(ST[SYM[mode]])ST[SYM[mode]](g);await wait(2300)}
+ const an=f.animate([{opacity:0},{opacity:1}],{duration:reduce?120:650,fill:'forwards'});await an.finished;
+ try{location.href='map.html#enter-'+(mode==='a'?'new':'cont')}catch(e){}
+ await wait(2500);mountHero();sheet(k);an.cancel();busy=false};
 document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>sheet('entry.mock.'+b.dataset.k));
 /* B38: «ویژهٔ بزرگ‌ترها» = نگه‌داشتن ۲ ثانیه (بدون پرسش ریاضی)؛ رها کردن زودتر = لغو */
 {const g=$('grown'),r=$('rg1'),L=94.25;let t0=0,raf=0,on=false;
@@ -114,10 +121,8 @@ document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>sheet('entry.mock.'+
  g.addEventListener('pointerdown',e=>{e.preventDefault();start()});['pointerup','pointercancel','pointerleave'].forEach(n=>g.addEventListener(n,stop));
  g.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();start()}});g.addEventListener('keyup',stop);g.addEventListener('blur',stop);
  g.addEventListener('contextmenu',e=>e.preventDefault())}
-/* تصویر همیشه کادر را می‌پوشاند؛ پایین (دروازهٔ شروع و جاده) در دید می‌ماند */
-function fit(){const sc=$('sc'),W=sc.clientWidth,H=sc.clientHeight,AR=780/440,ph=Math.max(H,W/AR),pw=ph*AR,pan=$('pan');
- pan.style.width=pw+'px';pan.style.height=ph+'px';pan.style.left=((W-pw)/2)+'px';pan.style.top=(H-ph)+'px'}
-addEventListener('resize',fit);render();
+function fit(){}
+render();
 </script>
 </body>
 </html>
