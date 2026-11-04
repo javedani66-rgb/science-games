@@ -64,6 +64,8 @@ def map_parts():
     def _warp_d(ds): return re.sub(r'(-?\d+\.?\d*),(-?\d+\.?\d*)', lambda m: '%s,%.1f' % (m.group(1), _warp(float(m.group(1)), float(m.group(2)))), ds)
     d['path_d'] = _warp_d(d['path_d'])
     orig = re.sub(r'(<path d=")(M128\.0,5226\.0[^"]*)(")', lambda m: m.group(1) + _warp_d(m.group(2)) + m.group(3), orig)
+    d['path_d'] = smooth_path(d['path_d'])   # D195
+    orig = re.sub(r'(<path d=")(M128\.0,5226\.0[^"]*)(")', lambda m: m.group(1) + d['path_d'] + m.group(3), orig)   # راه دیده‌شده = همان مسیر هموار حرکت و ردپا
     PATHD[:] = [d['path_d']]
     new = ('<clipPath id="cl_land"><rect x="-40" y="%d" width="470" height="%d"/></clipPath><clipPath id="cl_sea"><rect x="-40" y="-40" width="470" height="%d"/></clipPath>' % (COAST, H, 966 + 40)
            + '<g clip-path="url(#cl_land)">' + orig + '</g>'
@@ -223,6 +225,67 @@ def drop_waves(sprite):
         if y > 1000: return m.group(0)
         return '' if any(min(abs(x + dx - px) ** 2 + (y - 3 - py) ** 2 for px, py in pts) < 20 ** 2 for dx in (0, 13, 26, 40)) else m.group(0)
     return re.sub(r'<path d="M([\d.]+),([\d.]+) q6\.6,-7\.7 13\.2,0 t13\.2,0 t13\.2,0"[^>]*/>', bad, sprite)
+
+def smooth_path(ds, step=1.5, sigma=5.0, out_step=3.0):
+    """D195 (مالک ۴ نوامبر: «بریدگی خطوط»): راه از تکه‌های بزیه با پرش انحنا در محل اتصال ساخته شده بود و لبهٔ ضخیمش آنجا شکسته دیده می‌شد.
+    مسیر نمونه‌برداری، با میانگین گاوسی (σ≈۷٫۵px) هموار و دوباره با خط‌های کوتاه ۳px نوشته می‌شود. عرشهٔ اسکله (x=343، ۹۶۰ تا ۱۱۱۰) دست نمی‌خورد."""
+    import math
+    cmds = re.findall(r'([MCL])([^MCL]*)', ds); pts = []; cur = None
+    for c, v in cmds:
+        n = [float(x) for x in re.split(r'[\s,]+', v.strip()) if x]
+        if c == 'M': cur = (n[0], n[1]); pts.append(cur); continue
+        if c == 'L':
+            for k in range(0, len(n), 2):
+                q = (n[k], n[k + 1]); L = math.dist(cur, q); m = max(1, int(L / .5))
+                pts += [(cur[0] + (q[0] - cur[0]) * i / m, cur[1] + (q[1] - cur[1]) * i / m) for i in range(1, m + 1)]; cur = q
+            continue
+        for k in range(0, len(n), 6):
+            p1, p2, p3 = (n[k], n[k + 1]), (n[k + 2], n[k + 3]), (n[k + 4], n[k + 5]); m = 60
+            for i in range(1, m + 1):
+                s = i / m; a, b_, c_, d_ = (1 - s) ** 3, 3 * (1 - s) ** 2 * s, 3 * (1 - s) * s * s, s ** 3
+                pts.append((a * cur[0] + b_ * p1[0] + c_ * p2[0] + d_ * p3[0], a * cur[1] + b_ * p1[1] + c_ * p2[1] + d_ * p3[1]))
+            cur = p3
+    # بازنمونه‌برداری یکنواخت
+    U = [pts[0]]; acc = 0.0
+    for a_, b2 in zip(pts, pts[1:]):
+        L = math.dist(a_, b2)
+        while acc + L >= step:
+            r = (step - acc) / L; a_ = (a_[0] + (b2[0] - a_[0]) * r, a_[1] + (b2[1] - a_[1]) * r); U.append(a_); L = math.dist(a_, b2); acc = 0.0
+        acc += L
+    U.append(pts[-1])
+    pin = [abs(x - 343) < 1.2 and 960 < y < 1110 for x, y in U]
+    R = int(3 * sigma); w = [math.exp(-(i / sigma) ** 2 / 2) for i in range(-R, R + 1)]
+    S = []
+    for i, q in enumerate(U):
+        if pin[i] or i < 2 or i > len(U) - 3: S.append(q); continue
+        sx = sy = sw = 0.0
+        for j in range(-R, R + 1):
+            k = min(len(U) - 1, max(0, i + j)); sx += w[j + R] * U[k][0]; sy += w[j + R] * U[k][1]; sw += w[j + R]
+        S.append((sx / sw, sy / sw))
+    # پیچ‌های تند: شعاع کمتر از نیم‌پهنای راه (۱۶٫۵) لبهٔ داخلی را تیز و شکسته می‌کند؛ همان‌جا چند بار دیگر هموار می‌شود تا شعاع ≥ ۲۴
+    def rad(i, h=5):
+        (x1, y1), (x2, y2), (x3, y3) = S[max(0, i - h)], S[i], S[min(len(S) - 1, i + h)]
+        a2 = math.dist((x1, y1), (x2, y2)); b2 = math.dist((x2, y2), (x3, y3)); c2 = math.dist((x1, y1), (x3, y3))
+        ar = abs((x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1)) / 2
+        return 1e9 if ar < 1e-6 else a2 * b2 * c2 / (4 * ar)
+    for _ in range(60):
+        bad = [i for i in range(6, len(S) - 6) if not pin[i] and rad(i) < 24]
+        if not bad: break
+        zone = set()
+        for i in bad: zone.update(range(max(3, i - 14), min(len(S) - 3, i + 15)))
+        S2 = list(S)
+        for i in zone:
+            if pin[i]: continue
+            sx = sy = sw = 0.0
+            for j in range(-6, 7):
+                ww = math.exp(-(j / 3.0) ** 2 / 2); sx += ww * S[i + j][0] if 0 <= i + j < len(S) else 0; sy += ww * S[i + j][1] if 0 <= i + j < len(S) else 0; sw += ww if 0 <= i + j < len(S) else 0
+            S2[i] = (sx / sw, sy / sw)
+        S = S2
+    print('smooth_path: tight turns left', len([i for i in range(6, len(S) - 6) if not pin[i] and rad(i) < 24]))
+    k = max(1, int(round(out_step / step)))
+    keep = [S[0]] + [S[i] for i in range(k, len(S) - 1, k) if not pin[i] or i % k == 0] + [S[-1]]
+    return 'M%.1f,%.1f ' % keep[0] + ' '.join('L%.1f,%.1f' % q for q in keep[1:])
+
 
 def clean_strips(sprite):
     """D194 (مالک ۴ نوامبر): لکه‌های تیره/روشنِ بافت زمین (مسیرهای کدر ۰٫۴ و ۰٫۴۵ در zb_strip_*) روی نقشه مثل آثار اصلاح دیده می‌شدند؛ برداشته می‌شوند.

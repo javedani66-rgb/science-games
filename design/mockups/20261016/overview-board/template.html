@@ -117,8 +117,8 @@ function draw(){
  /* ردپای بنفش روی راه‌های رفته (فقط خشکی) */
  const pr=el('g',{fill:'#a66be8',stroke:'#2a0f5e','stroke-width':1,'stroke-linejoin':'round'});let side=1;
  for(let k=0;k<Math.min(hi,seaFrom-1);k++){const [x0,y0]=pts[k],[x1,y1]=pts[k+1],L=Math.hypot(x1-x0,y1-y0),ang=Math.atan2(y1-y0,x1-x0);
-  for(let s=30;s<L-26;s+=13){const x=x0+(x1-x0)*s/L-Math.sin(ang)*2.6*side,y=y0+(y1-y0)*s/L+Math.cos(ang)*2.6*side;
-   pr.appendChild(el('g',{transform:'translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+') scale('+(.62*side)+' .62)'},PAW));side=-side}}
+  for(let s=30;s<L-26;s+=12){const x=x0+(x1-x0)*s/L-Math.sin(ang)*1.3*side,y=y0+(y1-y0)*s/L+Math.cos(ang)*1.3*side;   /* D195: ردپا کوچک و نزدیک محور تا کاملاً داخل راه باریک بماند */
+   pr.appendChild(el('g',{transform:'translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+') scale('+(.5*side)+' .5)'},PAW));side=-side}}
  g.appendChild(pr);
  for(const l in LAB){const t=el('text',{x:LAB[l][0],y:LAB[l][1],'text-anchor':'middle',class:'lab','aria-hidden':'true',transform:'rotate(-3 '+LAB[l][0]+' '+LAB[l][1]+')'});t.textContent=S('overview.land.'+l);g.appendChild(t)}
  /* ایستگاه‌ها: از بالا به پایین کشیده می‌شوند تا نماد پایینی روی پای نماد بالایی بیفتد */

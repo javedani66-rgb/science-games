@@ -151,7 +151,8 @@ const EXC=[],PRINT_R=10,GAP=5,POFF=5.2,PSC=.9; /* R17-10: ردپا کوچک‌ت
   const tg=document.createElementNS(NS,'g');tg.setAttribute('transform','translate('+u.x.baseVal.value+' '+u.y.baseVal.value+') scale('+(u.width.baseVal.value/vb[2])+' '+(u.height.baseVal.value/vb[3])+')');tg.style.visibility='hidden';
   [...sym.children].forEach(c=>{if(c.tagName==='defs'||/_(shadow|lit|shade)$/.test(c.id))return;const cl=c.cloneNode(true);cl.removeAttribute('id');tg.appendChild(cl)});
   svgMap.appendChild(tg);
-  [...tg.children].forEach(c=>{const r=c.getBoundingClientRect();if(r.width<1||r.height<1)return;EXC.push([(r.left-mr.left)/kk,(r.top-mr.top)/kk,(r.right-mr.left)/kk,(r.bottom-mr.top)/kk])});
+  /* D195: جعبهٔ هر شکل جدا (نه کل گروه)، تا فضای خالی کنار بنا (مثلاً زیر بازوی جرثقیل) ردپا را حذف نکند؛ سایه‌های زیرین (class under) حساب نمی‌شوند */
+  tg.querySelectorAll('path,polygon,polyline,rect,ellipse,circle,line').forEach(c=>{if(c.closest('.under'))return;const r=c.getBoundingClientRect();if(r.width<1||r.height<1)return;EXC.push([(r.left-mr.left)/kk,(r.top-mr.top)/kk,(r.right-mr.left)/kk,(r.bottom-mr.top)/kk])});
   tg.remove()})})();
 const nearStn=(x,y,g)=>EXC.some(b=>{const dx=Math.max(b[0]-x,0,x-b[2]),dy=Math.max(b[1]-y,0,y-b[3]);return Math.hypot(dx,dy)<(g===undefined?GAP:g)+PRINT_R});
 const PLACED=[];
