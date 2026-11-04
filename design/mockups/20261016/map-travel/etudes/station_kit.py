@@ -198,9 +198,7 @@ def pad(pen, kind=None, rx=None, ry=None, wall=None, line=None, tri=(), dot=None
     pen.shape(pen.padtop, pal['top'], OUT)
     pen.probes.append(('خط دور سکو (لبهٔ پایین دیواره)', OUT, (-12 * pen.rx / 52.8, 19.9 * pen.ry / 19.4 + pen.wall), (0, 1), NAVY))
     if line: pen.ln(line[0], line[1], INNER, pal['line'], j=.15, probe='خط داخلی (خط روشن سکو)')
-    for (x, y) in tri:
-        pen.shape([(x - 7, y + 5), (x + 7, y + 5), (x, y - 7)], pal['tri'], INNER, j=.2, step=99, clip=False)
-    if dot: pen.raw('<circle cx="%s" cy="%s" r="3.5" fill="%s"/>' % (dot[0], dot[1], pal['dot']))
+    # D194 (مالک ۴ نوامبر): مثلث‌های لبه و نقطهٔ تیره روی نقشه مثل لکه دیده می‌شدند؛ دیگر کشیده نمی‌شوند (پارامترها برای سازگاری می‌مانند)
     pen.npad = len(pen.o)
 
 

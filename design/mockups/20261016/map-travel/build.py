@@ -111,7 +111,7 @@ def map_parts():
     seat = '<text x="105" y="1069" text-anchor="middle" font-family="Lalezar" font-size="27" fill="#fff" stroke="#241a5e" stroke-width="8" paint-order="stroke" stroke-linejoin="round" transform="rotate(-3 105 1069)">%s</text>' % STR['maptravel.zone.sea']['text']
     body = body.replace('<g id="env_zone_titles">', '<g id="env_zone_titles">' + seat, 1)   # D173: منطقهٔ دریایی از شهر صنعتی جدا
     body = body.replace('<g id="env_labels"', '<g id="dnlayer"></g><g id="env_labels"', 1)
-    body = re.sub(r'<text x="301\.3" y="2068"([^>]*?)font-size="34"([^>]*?)rotate\(-3 301\.3 2068\)', r'<text x="238" y="2084"\1font-size="28"\2rotate(-3 238 2084)', body, count=1)   # D173: عنوان «شهر صنعتی» از برچسب اتاق ابزار و راه دور شود
+    body = re.sub(r'<text x="301\.3" y="2068"([^>]*?)font-size="34"([^>]*?)rotate\(-3 301\.3 2068\)', r'<text x="255" y="1872"\1font-size="28"\2rotate(-3 255 1872)', body, count=1)   # D173: عنوان «شهر صنعتی» از برچسب اتاق ابزار و راه دور شود   # D194: از روی راه برداشته شد (جای خالی پیداشده با اسکن)
     body = body.replace('<g id="env_labels"', m12 + '<g id="env_labels"', 1)
     # قفل یکدست (مالک ۱۸ اکتبر): همهٔ قفل‌ها یک شکل، یک رنگ، یک جای نسبی روی لبهٔ راست-پایین سکو، کاملاً روی سکو
     body, nlk = re.subn(r'<g transform="translate\([\d.]+ [\d.]+\)"><circle r="10" fill="#fff3c4"[^>]*/><path d="M-3\.6[^>]*/><rect x="-5\.6"[^>]*/></g>', '', body)
@@ -119,7 +119,7 @@ def map_parts():
     lk = ''.join('<g class="lock" data-lock="%s" transform="translate(%.1f %.1f)"><circle r="10" fill="#fff3c4" stroke="#241a5e" stroke-width="3"/><path d="M-3.6,-1 v-2.4 a3.6,3.6 0 0 1 7.2,0 v2.4" fill="none" stroke="#241a5e" stroke-width="2.4"/><rect x="-5.6" y="-1" width="11.2" height="8" rx="2" fill="#241a5e"/></g>' % (n, KIT_XY[n][0] + LOCK_DXY[0], KIT_XY[n][1] + LOCK_DXY[1]) for n in LOCKED)
     body = body.replace('<g id="env_labels"', lk + '<g id="env_labels"', 1)
     body = body.replace('<text x="154" y="1016"', '<text x="140" y="1016"')   # برچسب M07 همراه سکو
-    body = re.sub(r'(<text[^>]*?)>(انبار الوار|جرثقیل بندر)</text>', r'\1 word-spacing="9">\2</text>', body)   # D119: فاصلهٔ کلمات برچسب دیده شود
+    body = re.sub(r'(<text[^>]*?)>(انبار الوار|جرثقیل بندر)</text>', r'\1 word-spacing="3">\2</text>', body)   # D119: فاصلهٔ کلمات برچسب دیده شود   # D194: ۹ زیاد بود (مالک: «انبار  الوار» دو تکه)؛ ۳
     # کارخانهٔ صنعتی ← کارخانهٔ کشتی‌سازی؛ میدان شهر ← بازارچهٔ شناور (دارایی‌های assets/)
     body = body.replace('<use href="#node_11"', '<use href="#node_shipyard"')
     body = body.replace('<use href="#env_pad_city_ice" x="240" y="246" width="120" height="100" /><use href="#prop_04" x="240" y="246" width="120" height="100" />',
@@ -224,6 +224,16 @@ def drop_waves(sprite):
         return '' if any(min(abs(x + dx - px) ** 2 + (y - 3 - py) ** 2 for px, py in pts) < 20 ** 2 for dx in (0, 13, 26, 40)) else m.group(0)
     return re.sub(r'<path d="M([\d.]+),([\d.]+) q6\.6,-7\.7 13\.2,0 t13\.2,0 t13\.2,0"[^>]*/>', bad, sprite)
 
+def clean_strips(sprite):
+    """D194 (مالک ۴ نوامبر): لکه‌های تیره/روشنِ بافت زمین (مسیرهای کدر ۰٫۴ و ۰٫۴۵ در zb_strip_*) روی نقشه مثل آثار اصلاح دیده می‌شدند؛ برداشته می‌شوند.
+    راه‌راه چمن، دهانه‌های ماه، ریگ‌های شن و لبهٔ نرم منطقه‌ها می‌مانند."""
+    def one(m):
+        return re.sub(r'<path [^>]*opacity="0\.4(?:5)?"\s*/>', '', m.group(0))
+    out, n = re.subn(r'<symbol id="zb_strip_[a-z]+".*?</symbol>', one, sprite, flags=re.S)
+    assert n == 4, n
+    return out
+
+
 def add_assets(sprite):
     # D160: نمادهای ایستگاه همیشه از خروجی کیت (etudes/stations/out) خوانده می‌شوند، نه از کپی‌های قدیمیِ assets/ (که ۱۹ تا ۲۱ اکتبر مانده بودند)
     SO = HERE / 'etudes' / 'stations' / 'out'
@@ -292,7 +302,7 @@ def main():
     t = open(HERE / 'template.html', encoding='utf-8').read()
     sym = re.search(r'<symbol id="env_dec_city_sail".*?</symbol>', (EA / 'sprite_env.svg').read_text(encoding='utf-8'), re.S).group(0)
     for k, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
-                     LIGHTCSS=style, SPRITE=add_assets(sprite if 'env_dec_city_sail' in sprite else sprite.replace('</defs>', sym + '</defs>', 1)), MAPSVG=mapsvg,
+                     LIGHTCSS=style, SPRITE=clean_strips(add_assets(sprite if 'env_dec_city_sail' in sprite else sprite.replace('</defs>', sym + '</defs>', 1))), MAPSVG=mapsvg,
                      STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False),
                      NODES=json.dumps(nodes, ensure_ascii=False), PATHD=json.dumps(d['path_d']), IMAGES=json.dumps(im), HS_BG=HSU[0], HS_MO=HSU[1], HS_CH=HSU[2], H=str(H), COAST=str(COAST)).items():
         t = t.replace('{{%s}}' % k, v)
