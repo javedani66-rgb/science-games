@@ -204,7 +204,7 @@ def pad(pen, kind=None, rx=None, ry=None, wall=None, line=None, tri=(), dot=None
             pen.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in band), pal['wall']))
         up = [(x, y) for x, y in pen.padtop if y <= 1]
         up.sort(key=lambda q: q[0])
-        pen.raw('<polyline points="%s" fill="none" class="eo" stroke-width="%s"/>' % (' '.join('%.1f,%.1f' % q for q in up), OUT))
+        pen.raw('<polyline data-seam="%s" points="%s" fill="none" class="eo" stroke-width="%s"/>' % (sw_seam, ' '.join('%.1f,%.1f' % q for q in up), OUT))
     pen.probes.append(('خط دور سکو (لبهٔ پایین دیواره)', OUT, (-12 * pen.rx / 52.8, 19.9 * pen.ry / 19.4 + pen.wall), (0, 1), NAVY))
     if line: pen.ln(line[0], line[1], INNER, pal['line'], j=.15, probe='خط داخلی (خط روشن سکو)')
     # D194 (مالک ۴ نوامبر): مثلث‌های لبه و نقطهٔ تیره روی نقشه مثل لکه دیده می‌شدند؛ دیگر کشیده نمی‌شوند (پارامترها برای سازگاری می‌مانند)

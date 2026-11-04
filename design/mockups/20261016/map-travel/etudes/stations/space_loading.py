@@ -45,16 +45,17 @@ def crane(p):
     from shapely.ops import unary_union
     bx, by = 28, GY - 20
     MD = (8, -5)
-    mx0, mx1 = bx + 8, bx + 22
+    mx0, mx1 = bx + 14, bx + 28                   # مالک ۲۳:۳۱: دکل روی رویهٔ پایه می‌نشیند (نه هم‌سطح جلوی پایه)
+    mby = by - 4.5                                # پای دکل روی وسط رویهٔ پایه
     ax0, ay0, ay1 = -26, -112, -98
-    SEAM = 2.4
+    SEAM = 1.4                                                   # مالک ۲۳:۳۱: «هنوز کلفته» (۲٫۴ → ۱٫۴)
     p.foot_tip(bx + 14, GY, 12)
     def faces(x0, y0, w, h, d):
         dx, dy = d
         return ([(x0, y0), (x0 + w, y0), (x0 + w, y0 + h), (x0, y0 + h)],
                 [(x0, y0), (x0 + w, y0), (x0 + w + dx, y0 + dy), (x0 + dx, y0 + dy)],
                 [(x0 + w, y0), (x0 + w + dx, y0 + dy), (x0 + w + dx, y0 + h + dy), (x0 + w, y0 + h)])
-    parts = [faces(bx, by, 30, 20, (13, -9)), faces(mx0, ay1, mx1 - mx0, by - ay1, MD), faces(ax0, ay0, mx1 - ax0, ay1 - ay0, MD)]
+    parts = [faces(bx, by, 30, 20, (13, -9)), faces(mx0, ay1, mx1 - mx0, mby - ay1, MD), faces(ax0, ay0, mx1 - ax0, ay1 - ay0, MD)]
     sil = unary_union([Polygon(q).buffer(0) for fs in parts for q in fs]).buffer(0.01)
     outline = list(sil.exterior.coords)[:-1]
     p.shape(outline, YB[0], PART, j=.05, step=8, clip=False)
@@ -63,7 +64,7 @@ def crane(p):
     for i in range(3):                                           # نوار هشدار پایه
         a = bx + 5 + i * 8.5
         p.fill([(a, by + 12), (a + 4, by + 12), (a + 1, by + 19), (a - 3, by + 19)], '#241a5e')
-    for yy in (ay1, by):                                         # درزهای نازک یکسره (لبهٔ چپ دکل ← جلو ← پهلو)
+    for yy in (ay1, mby):                                         # درزهای نازک یکسره (لبهٔ چپ دکل ← جلو ← پهلو)
         p.raw('<polyline points="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="butt" stroke-linejoin="miter"/>' % (
             ' '.join('%.1f,%.1f' % q for q in p.X([(mx0, yy), (mx1, yy), (mx1 + MD[0], yy + MD[1])])), NAVY, SEAM))
     p.stroke(outline, PART, j=.05, step=8)

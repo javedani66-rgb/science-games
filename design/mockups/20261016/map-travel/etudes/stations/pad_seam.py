@@ -11,7 +11,9 @@ def attr(el, k): m = re.search(r'\b%s="([^"]*)"' % k, el); return m.group(1) if 
 for f in sorted(D.glob('node_*.svg')):
     s = f.read_text(encoding='utf-8')
     if 'data-seam' in s: print(f.name, 'skip'); continue
-    a = s.index('_base"'); ms = list(PATH.finditer(s, a)); wall, top = ms[0], ms[1]
+    a = s.index('_base"'); ms = list(PATH.finditer(s, a))
+    if len(ms) < 2: print(f.name, 'skip (kit already thin)'); continue
+    wall, top = ms[0], ms[1]
     pts = [(float(x), float(y)) for x, y in re.findall(r'(-?[\d.]+),(-?[\d.]+)', attr(top.group(0), 'd'))]
     rx = max(abs(x) for x, _ in pts)
     lo = sorted([(x, y) for x, y in pts if y >= 0 and abs(x) < rx - 7], key=lambda q: q[0])
