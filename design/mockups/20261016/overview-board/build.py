@@ -23,9 +23,11 @@ def main():
     cells, k = [], 0
     for land, n, _, _ in LANDS:
         for _ in range(n):
-            i = order[k]; cells.append(dict(id=i, sym=sym_of[i], title=nodes[i]['title'], land=land)); k += 1
+            i = order[k]; sp = json.load(open(MT / 'etudes/stations/out' / (sym_of[i] + '.json'), encoding='utf-8'))
+            cells.append(dict(id=i, sym=sym_of[i], title=nodes[i]['title'], land=land, pad=sp['pad'], rg=sp.get('ring', [0, 0, 0]))); k += 1
     out = MT / 'etudes/stations/out'
-    syms = ''.join((out / ('node_%s.svg' % c['sym'])).read_text(encoding='utf-8') for c in cells if c['id'] != 'M12')   # مخفی‌گاه لو نمی‌رود
+    strips = ''.join(re.search(r'<symbol id="zb_strip_%s".*?</symbol>' % z, mi, re.S).group(0) for z in ('sports', 'space', 'farm', 'city'))   # بافت زمین هر سرزمین = همان نقشهٔ بلند
+    syms = strips + ''.join((out / ('node_%s.svg' % c['sym'])).read_text(encoding='utf-8') for c in cells if c['id'] != 'M12')   # مخفی‌گاه لو نمی‌رود
     def enc(p):
         im = Image.open(p).convert('RGBA'); im = im.resize((round(im.width * 150 / im.height), 150), Image.LANCZOS)
         b = io.BytesIO(); im.save(b, 'WEBP', quality=82, method=4); return 'data:image/webp;base64,' + base64.b64encode(b.getvalue()).decode()

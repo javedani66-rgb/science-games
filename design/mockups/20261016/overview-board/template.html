@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>نقشهٔ کلی سرزمین</title>
 <script>if(/^#o-/.test(location.hash))document.documentElement.className='ent'</script>
+<style>.ent,.ent body{background:#000!important}.ent #app,.ent #rv{visibility:hidden}</style>
 <link rel="prefetch" href="map.html">
 <style>
 @font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
@@ -13,25 +14,24 @@
 :root{--navy:#241a5e;--edge:#120c3a;--cream:#fff4d2;--cream2:#fff9e6;--teal:#2fb8a8;--gold:#ffd23f;--ease:cubic-bezier(.22,.9,.25,1);color-scheme:light}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:#190539;color:var(--navy);font:400 16px/1.6 Vazirmatn,system-ui,sans-serif}
-.ent #fade{opacity:1}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
 :focus-visible{outline:4px solid var(--cream);outline-offset:3px}
 #rv{height:44px;background:#2b3a2b;color:#fff;display:flex;align-items:center;gap:6px;padding:0 10px;font-size:14px}
 #rv .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #rv button{background:#fff;color:#2b3a2b;border-radius:999px;padding:0 10px;min-height:32px;font-size:14px;font-weight:700}
 #rv button[aria-pressed=true]{background:var(--cream);outline:2px solid #fff}
-#app{position:relative;max-width:430px;margin:0 auto;height:calc(100% - 44px);overflow:hidden;display:flex;flex-direction:column;background:radial-gradient(ellipse 90% 45% at 50% 48%,#4a32a0 0%,rgba(74,50,160,0) 70%),linear-gradient(#2c1470 0%,#190539 100%)}
-#head{flex:none;padding:12px 16px 0;text-align:center}
-.sub{display:block;width:fit-content;max-width:100%;margin:0 auto;background:var(--cream);border:3px solid var(--navy);border-radius:24px;box-shadow:0 3px 0 var(--edge);padding:2px 18px;font:400 21px/1.5 Lalezar,Vazirmatn,sans-serif}
-#bw{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:10px 16px 0}
-#bd{width:100%;height:100%;overflow:visible;transform-origin:50% 50%}
+#app{position:relative;max-width:430px;margin:0 auto;height:calc(100% - 44px);overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(#2c1470 0%,#190539 100%)}
+#head{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}  /* عنوان فقط برای صفحه‌خوان؛ جا برای خود نقشه */
+.ttl{margin:0;font:400 26px/1.3 Lalezar,Vazirmatn,sans-serif;color:#fff;-webkit-text-stroke:7px var(--navy);paint-order:stroke fill;text-shadow:0 3px 0 var(--edge)}
+#bw{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:12px 16px 0}
+#bd{width:100%;height:100%;overflow:visible}
+/* قاعدهٔ رنگ نمادها و حالت «هنوز نرسیده» = همان نقشهٔ بلند */
 .eo{stroke:#241a5e;stroke-linejoin:round;stroke-linecap:round}.elit{fill:#fff4cf;opacity:.3}.esh{fill:#4a3a8c;opacity:.22}.esd{fill:#10083a;opacity:.28}
-.cell{cursor:pointer;outline:none}
-.cell:focus-visible .fr{stroke:var(--cream);stroke-width:6}
-.cell.ahead .art{opacity:.9;filter:saturate(.6)}
-.cell.ahead .bg{fill:#ece6d6}
-.lab{font:400 23px Lalezar,Vazirmatn,sans-serif;fill:#fff;stroke:var(--navy);stroke-width:7;paint-order:stroke;stroke-linejoin:round}
-#bot{flex:none;display:flex;flex-direction:column;gap:8px;padding:8px 16px calc(14px + env(safe-area-inset-bottom,0px))}
+.dim{filter:saturate(.72) brightness(.94)}
+.stn{cursor:pointer;outline:none}
+.stn:focus-visible .hb{stroke:#fff;stroke-width:4;stroke-dasharray:6 5}
+.lab{font:400 24px Lalezar,Vazirmatn,sans-serif;fill:#fff;stroke:var(--navy);stroke-width:7;paint-order:stroke;stroke-linejoin:round}
+#bot{flex:none;display:flex;flex-direction:column;gap:6px;padding:6px 16px calc(14px + env(safe-area-inset-bottom,0px))}
 #here{margin:0;text-align:center;font-size:16px;font-weight:700;color:var(--cream)}
 .btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:60px;border:4px solid var(--navy);border-radius:22px;background:var(--teal);box-shadow:0 5px 0 var(--edge);font:400 32px/1 Lalezar,Vazirmatn,sans-serif;color:var(--navy);transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
 .btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--edge)}
@@ -42,105 +42,129 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 #sheet p{margin:0;font-size:18px;font-weight:700;text-align:center;line-height:1.7}
 .btn2{min-height:52px;background:var(--cream2);font:700 18px/1.3 Vazirmatn,sans-serif;box-shadow:0 4px 0 var(--edge);border-radius:18px}
 #fade{position:fixed;inset:0;z-index:30;background:#000;opacity:0;pointer-events:none}
-@media (max-height:700px){#head{padding-top:8px}.sub{font-size:19px}.btn{min-height:54px;font-size:28px}#bot{gap:4px;padding-top:6px}#here{font-size:15px}}
+.ent #fade{opacity:1}
+@media (max-height:700px){#bw{padding-top:8px}.btn{min-height:54px;font-size:28px}#here{font-size:15px}}
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
 </style>
 </head>
 <body>
+<div id="fade"></div>
 <div id="rv" role="group"><span class="t" id="rvt"></span><button id="ma"></button><button id="mb"></button><button id="mt"></button></div>
 <div id="app">
- <header id="head"><h1 class="sub" id="ti"></h1></header>
+ <header id="head"><h1 class="ttl" id="ti"></h1></header>
  <div id="bw"><svg id="bd" xmlns="http://www.w3.org/2000/svg" role="group"></svg></div>
  <div id="bot"><p id="here"></p><button class="btn" id="go"><svg viewBox="0 0 32 32" aria-hidden="true" fill="var(--navy)"><path d="M11 6.5v19l15-9.5z" stroke="var(--navy)" stroke-width="3" stroke-linejoin="round"/></svg><span id="gol"></span></button></div>
 </div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>{{SYMS}}</defs></svg>
 <div id="shd" hidden><div id="sheet" role="dialog" aria-modal="true"><p id="sm"></p><button class="btn btn2" id="sx"></button></div></div>
-<div id="fade"></div>
 <script>
 const S0={{STRINGS}},R={{REVIEW}},CELLS={{CELLS}},LANDC={{LANDS}},FIG={{FIGS}};
 document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','fa');
 const S=k=>(S0[k]||{}).text||k,$=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,wait=ms=>new Promise(r=>setTimeout(r,ms));
-/* حالت‌ها (همان سه حالت منوی ورود): a = اولین بار (زمین فوتبال)، b = وسط راه (پیست اسکی روی یخ)، t = آخر راه (کارخانهٔ کشتی‌سازی) */
+/* حالت‌ها (همان سه حالت منوی ورود): a = اولین بار، b = وسط راه (پیست اسکی روی یخ)، t = آخر راه (کارخانهٔ کشتی‌سازی) */
 const HERE={a:'F01',b:'F06',t:'M11'};
 let mode=(location.hash.match(/^#o-([abt])$/)||[])[1]||'b';
-/* چیدمان: ۶ ستون (ستون ۰ = راست)، ۸ ردیف از پایین؛ هر سرزمین ردیف‌های خودش؛ راه پیوسته (هر خانه کنار خانهٔ قبلی).
-   هر ردیف: [سرزمین، ستون شروع، جهت، تعداد]. نام هر سرزمین بالای ناحیهٔ خودش؛ دو نوار نام (فضا، دریا) جایی که ردیف پر است. */
-const ROWS=[['sports',0,1,6],['sports',5,-1,2],['space',4,-1,5],['farm',0,1,3],['city',2,1,4],['city',5,-1,4],['city',2,1,4],['sea',5,-1,6]];
-const P=64,PAD=8,STRIP=.6*P,COLS=6,W=COLS*P+2*PAD;
-const stripBefore={2:1,7:1};  /* نوار نام پیش از ردیف ۲ (پایگاه فضایی) و ۷ (منطقهٔ دریایی) */
-let H=2*PAD;ROWS.forEach((r,i)=>H+=P+(stripBefore[i]?STRIP:0));
-const rowY=[];{let y=H-PAD;ROWS.forEach((r,i)=>{y-=P;rowY[i]=y+P/2;if(stripBefore[i])y-=STRIP})}
-const colX=c=>PAD+(COLS-1-c)*P+P/2;
-const POS=[];ROWS.forEach(([l,c0,d,n],r)=>{for(let j=0;j<n;j++)POS.push([colX(c0+d*j),rowY[r]])});
-/* جای نام‌ها: [x، y] در واحد صفحه */
-const LAB={sports:[(colX(0)+colX(3))/2,rowY[1]],space:[(colX(0)+colX(3))/2,rowY[2]-P/2-STRIP/2],farm:[colX(4),rowY[3]],city:[(colX(0)+colX(1))/2,rowY[5]],sea:[W/2,rowY[7]-P/2-STRIP/2]};
-/* ناحیهٔ هر سرزمین: از بالای اولین تا پایین آخرین ردیف (با نوار نام) */
-const BAND={};ROWS.forEach(([l],r)=>{const top=rowY[r]-P/2-(stripBefore[r]?STRIP:0),bot=rowY[r]+P/2;const b=BAND[l]||(BAND[l]=[top,bot]);b[0]=Math.min(b[0],top);b[1]=Math.max(b[1],bot)});
+/* زبان تصویری = نقشهٔ بلند به‌صورت جمع‌وجور: بافت زمین هر سرزمین، راه خاکستری با خط سرمه‌ای و خط‌چین کرم، ردپای بنفش روی راه رفته،
+   روی دریا راه نقطه‌چین (B70)، نماد هر ایستگاه مستقیم روی زمین (بدون جعبه)، تیک و حلقهٔ زرد و آدمک همان نقشه.
+   راه مارپیچ از پایین راست؛ هر ردیف از لبه تا لبه، پس آخرین ایستگاه هر ردیف درست زیر اولین ایستگاه ردیف بعد است و راه عمودی آن دو را وصل می‌کند. */
+const ROWS=[['sports',4],['sports',4],['space',5],['farm',3],['city',4],['city',4],['city',4],['sea',6]];
+const W=390,SW=62,SH=SW*.95,PY=.788*SH,XR=352,XL=38,RP=60,LS=38,TOPM=54,BOTM=54,K=SW/144;
+const rowY=[],POS=[],ROWOF=[];
+{let y=0;ROWS.forEach(([l],r)=>{if(r>0)y-=RP+(ROWS[r-1][0]!==l?LS:0);rowY[r]=y});const top=rowY[rowY.length-1]-TOPM;for(let r=0;r<rowY.length;r++)rowY[r]-=top}
+const H=rowY[0]+BOTM;
+ROWS.forEach(([l,n],r)=>{for(let j=0;j<n;j++){const f=n>1?j/(n-1):0,x=r%2===0?XR-(XR-XL)*f:XL+(XR-XL)*f;POS.push([x,rowY[r]]);ROWOF.push(r)}});
+/* نوار نام: زیر اولین ردیف هر سرزمین، طرف مقابل راه عمودی */
+const LAB={};ROWS.forEach(([l],r)=>{if(LAB[l])return;const below=r===0?null:r-1;const y=r===0?rowY[0]+37:rowY[below]-PY-17;
+ const jx=r===0?XR:POS[CELLS.findIndex((c,i)=>ROWOF[i]===r)][0];LAB[l]=[jx>W/2?W/2-30:W/2+30,y]});
+/* مرز سرزمین‌ها: کمی بالای نماد‌های آخرین ردیف سرزمین پایینی؛ موج‌دار */
+const EDGE={};ROWS.forEach(([l],r)=>{if(r>0&&ROWS[r-1][0]!==l)EDGE[l]=rowY[r-1]-PY-5});
+const STRIP={sports:[0,1494],space:[0,891],farm:[0,543],city:[1200,2693],sea:[60,2693]};  /* کدام تکهٔ بافت نقشه */
 const BADGE='<ellipse cx="1.5" cy="3.5" rx="12.5" ry="11" fill="#10083a" opacity=".35"/><circle r="12.6" fill="#241a5e"/><circle r="10.8" fill="#fff"/><circle r="8.7" fill="#3fcf72"/><path d="M-6,-3.2 a7,7 0 0 1 7.4,-4.6" fill="none" stroke="#c8ffd8" stroke-width="2" stroke-linecap="round"/><polyline points="-4.8,.4 -1.4,3.9 5.2,-3.6" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>';
+const PAW='<path d="M-3.1,-1.5 C-3.2,-3.4 -1.6,-4.2 0.2,-4.2 C2,-4.2 3.3,-3.4 3.2,-1.2 C3.1,0.8 2.1,1.6 2,3 C1.9,4.8 0.9,5.8 -0.5,5.8 C-1.9,5.8 -2.4,4.6 -2.3,3 C-2.2,1.5 -3,0.6 -3.1,-1.5Z"/><circle cx="-1.9" cy="-6.1" r="1.6"/><circle cx="0.4" cy="-7.1" r="1.25"/><circle cx="2.2" cy="-6.6" r="1.15"/><circle cx="3.5" cy="-5.3" r="1.05"/><circle cx="4" cy="-3.6" r=".95"/>';
 const el=(tag,at,html)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);if(html)e.innerHTML=html;return e};
-const CS=P-7;  /* اندازهٔ خانه؛ هدف لمس = کل گام P */
+const wavePts=(y,amp)=>{const a=[];for(let x=-10;x<=W+10;x+=10)a.push([x,+(y+amp*Math.sin(x/37)+amp*.5*Math.sin(x/13+1)).toFixed(1)]);return a};
+const wave=(y,amp)=>'M'+wavePts(y,amp).map(q=>q[0]+','+q[1]).join(' L');
 let busy=false;
 function draw(){
- const bd=$('bd');bd.replaceChildren();bd.setAttribute('viewBox',(-6)+' '+(-6)+' '+(W+12)+' '+(H+14));bd.setAttribute('aria-label',S('overview.title'));
+ const bd=$('bd');bd.replaceChildren();bd.setAttribute('viewBox','-4 -4 '+(W+8)+' '+(H+12));bd.setAttribute('aria-label',S('overview.title'));
  const hi=CELLS.findIndex(c=>c.id===HERE[mode]);
- const defs=el('defs',{},'<clipPath id="bclip"><rect width="'+W+'" height="'+H+'" rx="26"/></clipPath>');bd.appendChild(defs);
- bd.appendChild(el('rect',{x:0,y:6,width:W,height:H,rx:26,fill:'#10083a',opacity:.5}));   /* سایهٔ صفحه */
+ bd.appendChild(el('defs',{},'<clipPath id="bclip"><rect width="'+W+'" height="'+H+'" rx="28"/></clipPath>'));
+ bd.appendChild(el('rect',{x:0,y:7,width:W,height:H,rx:28,fill:'#0a0420',opacity:.55}));
  const g=el('g',{'clip-path':'url(#bclip)'});bd.appendChild(g);
- for(const l in BAND){const [t,b]=BAND[l];g.appendChild(el('rect',{x:0,y:t-(l==='sea'?PAD:0),width:W,height:b-t+(l==='sea'?PAD:0)+(l==='sports'?PAD:0),fill:LANDC[l]}))}
- /* راه: خط کرم با دور سرمه‌ای از مرکز خانه‌ها (مثل راه نقشهٔ بلند) */
- const d='M'+POS.map(p=>p[0]+','+p[1]).join(' L');
- g.appendChild(el('path',{d,fill:'none',stroke:'#241a5e','stroke-width':P*.46,'stroke-linejoin':'round','stroke-linecap':'round'}));
- g.appendChild(el('path',{d,fill:'none',stroke:'#fff4d2','stroke-width':P*.46-7,'stroke-linejoin':'round','stroke-linecap':'round'}));
- for(const l in LAB){const t=el('text',{x:LAB[l][0],y:LAB[l][1]+8,'text-anchor':'middle',class:'lab','aria-hidden':'true'});t.textContent=S('overview.land.'+l);g.appendChild(t)}
- bd.appendChild(el('rect',{width:W,height:H,rx:26,fill:'none',stroke:'#241a5e','stroke-width':5}));
- CELLS.forEach((c,i)=>{const [x,y]=POS[i],st=i<hi?'done':i===hi?'here':'ahead',hid=c.id==='M12';
-  const cg=el('g',{class:'cell '+st,tabindex:0,role:'button','data-i':i,transform:'translate('+x+' '+y+')'});
-  cg.setAttribute('aria-label',hid?S('overview.cell.hidden'):S('overview.cell.'+st).replace('{place}',c.title));
-  cg.appendChild(el('rect',{x:-P/2,y:-P/2,width:P,height:P,fill:'transparent'}));   /* هدف لمس = کل گام */
-  const inn=el('g',{class:'in'});cg.appendChild(inn);
-  inn.appendChild(el('rect',{class:'bg',x:-CS/2,y:-CS/2,width:CS,height:CS,rx:13,fill:hid?'#2c1470':'#fff9e6'}));
-  if(hid){const q=el('text',{x:0,y:13,'text-anchor':'middle',class:'lab','font-size':40,'aria-hidden':'true'});q.style.fontSize='40px';q.textContent='؟';inn.appendChild(q)}
-  else{const s=el('svg',{class:'art',x:-CS/2+2,y:-CS/2+3,width:CS-4,height:CS-4,viewBox:'-14 -6 228 212',overflow:'visible'});s.appendChild(el('use',{href:'#node_'+c.sym}));inn.appendChild(s)}
-  inn.appendChild(el('rect',{class:'fr',x:-CS/2,y:-CS/2,width:CS,height:CS,rx:13,fill:'none',stroke:'#241a5e','stroke-width':3.5}));
-  if(st==='done')inn.appendChild(el('g',{transform:'translate('+(-CS/2+9)+' '+(CS/2-9)+') scale(.78)'},BADGE));
-  if(st==='here')inn.appendChild(el('rect',{x:-CS/2-4,y:-CS/2-4,width:CS+8,height:CS+8,rx:16,fill:'none',stroke:'#ffd23f','stroke-width':5.5}));
-  cg.addEventListener('click',()=>tap(i));cg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tap(i)}});
-  bd.appendChild(cg)});
- /* آدمک کودک (لباس همان سرزمین) روی خانهٔ خودش */
- const [hx,hy]=POS[hi],fh=CS*.98;
- const fg=el('g',{id:'fig',transform:'translate('+(hx+CS*.22)+' '+(hy+CS/2-1)+')','aria-hidden':'true'});
- const fi=el('g',{id:'fin'});fi.appendChild(el('ellipse',{cx:0,cy:-1,rx:fh*.2,ry:fh*.06,fill:'#10083a',opacity:.35}));
- const im=el('image',{href:FIG[CELLS[hi].land],x:-fh*.33,y:-fh,height:fh,width:fh*.66,preserveAspectRatio:'xMidYMax meet'});fi.appendChild(im);fg.appendChild(fi);bd.appendChild(fg);
+ /* زمین: از پایین به بالا، هر سرزمین روی قبلی با لبهٔ موج‌دار */
+ const order=['sports','space','farm','city','sea'];
+ order.forEach(l=>{const top=l==='sea'?-10:0,bot=EDGE[l]!==undefined?EDGE[l]:H+10;
+  const cp='c_'+l,wp=wavePts(bot,3.2).reverse();
+  bd.querySelector('defs').appendChild(el('clipPath',{id:cp},'<path d="M-10,-10 L'+(W+10)+',-10 '+wp.map(q=>'L'+q[0]+','+q[1]).join(' ')+' Z"/>'));
+  const s=STRIP[l],h=Math.min(s[1]-s[0],H+20);
+  const lg=el('g',{'clip-path':'url(#'+cp+')'});
+  lg.appendChild(el('rect',{x:-10,y:-10,width:W+20,height:H+20,fill:LANDC[l]}));
+  lg.appendChild(el('svg',{x:0,y:-10,width:W,height:H+20,viewBox:'0 '+s[0]+' 390 '+(H+20),preserveAspectRatio:'xMidYMin slice',overflow:'hidden'},'<use href="#zb_strip_'+(l==='sea'?'city':l)+'"/>'));
+  g.appendChild(lg);
+  if(EDGE[l]!==undefined)g.appendChild(el('path',{d:wave(bot,3.2),fill:'none',stroke:'#10083a','stroke-width':4,opacity:.22}))});
+ /* راه */
+ const pts=POS.map(p=>[p[0],p[1]]);const seaFrom=CELLS.findIndex(c=>c.land==='sea');
+ const pl=a=>'M'+a.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' L');
+ const startStub=[[W+12,pts[0][1]],...pts.slice(0,seaFrom)];   /* راه از لبهٔ راستِ پایین وارد صفحه می‌شود */
+ const land=pl(startStub),sea=pl(pts.slice(seaFrom-1));
+ g.appendChild(el('path',{d:land,fill:'none',stroke:'#241a5e','stroke-width':18,'stroke-linecap':'round','stroke-linejoin':'round'}));
+ g.appendChild(el('path',{d:land,fill:'none',stroke:'#fff3c4','stroke-width':11.5,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.6}));
+ g.appendChild(el('path',{d:land,fill:'none',stroke:'#fff3c4','stroke-width':2.6,'stroke-linecap':'round','stroke-dasharray':'2 8',opacity:.95}));
+ /* روی دریا: نقطه‌چین کرم (B70)؛ از ساحل (آخرین ایستگاه شهر) شروع می‌شود */
+ g.appendChild(el('path',{d:sea,fill:'none',stroke:'#241a5e','stroke-width':8,'stroke-linecap':'round','stroke-dasharray':'0 15'}));
+ g.appendChild(el('path',{d:sea,fill:'none',stroke:'#fff4d2','stroke-width':5,'stroke-linecap':'round','stroke-dasharray':'0 15'}));
+ /* ردپای بنفش روی راه‌های رفته (فقط خشکی) */
+ const pr=el('g',{fill:'#a66be8',stroke:'#2a0f5e','stroke-width':1,'stroke-linejoin':'round'});let side=1;
+ for(let k=0;k<Math.min(hi,seaFrom-1);k++){const [x0,y0]=pts[k],[x1,y1]=pts[k+1],L=Math.hypot(x1-x0,y1-y0),ang=Math.atan2(y1-y0,x1-x0);
+  for(let s=30;s<L-26;s+=13){const x=x0+(x1-x0)*s/L-Math.sin(ang)*2.6*side,y=y0+(y1-y0)*s/L+Math.cos(ang)*2.6*side;
+   pr.appendChild(el('g',{transform:'translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+') scale('+(.62*side)+' .62)'},PAW));side=-side}}
+ g.appendChild(pr);
+ for(const l in LAB){const t=el('text',{x:LAB[l][0],y:LAB[l][1],'text-anchor':'middle',class:'lab','aria-hidden':'true',transform:'rotate(-3 '+LAB[l][0]+' '+LAB[l][1]+')'});t.textContent=S('overview.land.'+l);g.appendChild(t)}
+ /* ایستگاه‌ها: از بالا به پایین کشیده می‌شوند تا نماد پایینی روی پای نماد بالایی بیفتد */
+ const idx=CELLS.map((c,i)=>i).sort((a,b)=>POS[a][1]-POS[b][1]);
+ for(const i of idx){const c=CELLS[i],[x,y]=POS[i],st=i<hi?'done':i===hi?'here':'ahead',hid=c.id==='M12';
+  const sg=el('g',{class:'stn '+st,tabindex:0,role:'button','data-i':i});
+  sg.setAttribute('aria-label',hid?S('overview.cell.hidden'):S('overview.cell.'+st).replace('{place}',c.title));
+  sg.appendChild(el('rect',{class:'hb',x:x-35,y:y-PY-4,width:70,height:RP-2,rx:12,fill:'transparent'}));   /* هدف لمس = تقریباً کل جای ایستگاه (۷۰×۶۲ واحد) */
+  if(st==='here'){const p=c.pad,rg=c.rg||[0,0,0],rx=(p[0]+5+rg[0])*K,ry=(p[1]+p[2]/2+3+rg[1])*K,cy=y+(p[2]/2+2)*K;
+   sg.appendChild(el('ellipse',{cx:x+rg[2]*K,cy,rx:rx+2,ry:ry+2,fill:'none',stroke:'#241a5e','stroke-width':6.5}));
+   sg.appendChild(el('ellipse',{cx:x+rg[2]*K,cy,rx:rx+2,ry:ry+2,fill:'none',stroke:'#ffd23f','stroke-width':3.6}))}
+  if(hid){/* جای آخر: فقط سکوی بنفش با «؟»؛ مخفی‌گاه لو نمی‌رود */
+   sg.appendChild(el('g',{},'<ellipse cx="'+x+'" cy="'+(y+6)+'" rx="27" ry="10" fill="#10083a" opacity=".3"/><path d="M'+(x-25)+','+y+' v6 a25 9 0 0 0 50 0 v-6" fill="#5b3fb0" stroke="#241a5e" stroke-width="3"/><ellipse cx="'+x+'" cy="'+y+'" rx="25" ry="9" fill="#8a6ad8" stroke="#241a5e" stroke-width="3"/>'));
+   const q=el('text',{x:x,y:y-4,'text-anchor':'middle',class:'lab','aria-hidden':'true'});q.style.fontSize='38px';q.textContent='؟';sg.appendChild(q)}
+  else{const s=el('svg',{class:st==='ahead'?'dim':'',x:x-SW/2,y:y-PY,width:SW,height:SH,viewBox:'0 0 200 190',overflow:'visible'});s.appendChild(el('use',{href:'#node_'+c.sym}));sg.appendChild(s)}
+  if(st==='done')sg.appendChild(el('g',{transform:'translate('+(x+44*K)+' '+(y+25*K)+') scale(.62)'},BADGE));
+  if(st==='here'){const fh=36,fx=x+(c.pad[0]*.62)*K,fy=y+5;
+   sg.appendChild(el('ellipse',{cx:fx,cy:fy,rx:7,ry:2.4,fill:'#10083a',opacity:.35}));
+   sg.appendChild(el('image',{href:FIG[c.land],x:fx-fh*.33,y:fy-fh,height:fh,width:fh*.66,preserveAspectRatio:'xMidYMax meet','aria-hidden':'true'}))}
+  sg.addEventListener('click',()=>tap(i));sg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tap(i)}});
+  bd.appendChild(sg)}
+ bd.appendChild(el('rect',{width:W,height:H,rx:28,fill:'none',stroke:'#241a5e','stroke-width':5}));
  $('here').textContent=S('overview.here').replace('{place}',CELLS[hi].title);
 }
 function render(){$('ti').textContent=S('overview.title');$('gol').textContent=S('overview.go');$('sx').textContent=S('overview.sheet.close');$('rvt').textContent=R.banner;
  for(const [id,m] of [['ma','a'],['mb','b'],['mt','t']]){$(id).textContent=R['mode.'+m];$(id).setAttribute('aria-pressed',mode===m)}draw()}
-for(const [id,m] of [['ma','a'],['mb','b'],['mt','t']])$(id).onclick=()=>{if(busy)return;mode=m;render();hop()};
-function hop(){if(reduce)return;const f=$('fin');f.animate([{transform:'translateY(0)'},{transform:'translateY(-14px)',offset:.3},{transform:'translateY(0)',offset:.55},{transform:'translateY(-7px)',offset:.75},{transform:'translateY(0)'}],{duration:900,easing:'ease-in-out'})}
-function shake(i){if(reduce)return;const g=document.querySelector('.cell[data-i="'+i+'"] .in');g.animate([{transform:'translateX(0)'},{transform:'translateX(-5px)'},{transform:'translateX(5px)'},{transform:'translateX(-3px)'},{transform:'translateX(0)'}],{duration:320})}
+for(const [id,m] of [['ma','a'],['mb','b'],['mt','t']])$(id).onclick=()=>{if(busy)return;mode=m;render()};
+function shake(i){if(reduce)return;const g=document.querySelector('.stn[data-i="'+i+'"]');g.animate([{transform:'translateX(0)'},{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(-2px)'},{transform:'translateX(0)'}],{duration:320})}
 let lastFocus=null;
 function sheet(key){lastFocus=document.activeElement;$('sm').textContent=S(key);$('shd').hidden=false;$('sx').focus()}
 function closeSheet(){$('shd').hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus()}
 $('sx').onclick=closeSheet;$('shd').onclick=e=>{if(e.target.id==='shd')closeSheet()};
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('shd').hidden)closeSheet()});
 function tap(i){const hi=CELLS.findIndex(c=>c.id===HERE[mode]);if(i>hi){shake(i);return}enter(i)}
-/* ورود به نقشهٔ بلند: صفحه روی همان خانه بزرگ می‌شود ← فید سیاه ← نقشه که از سیاه باز می‌شود (فقط با لمس کودک، B5) */
-async function enter(i){if(busy)return;busy=true;const hid=HERE[mode],gid=CELLS[i].id,bd=$('bd'),f=$('fade');
- if(!reduce){const r=bd.getBoundingClientRect(),c=document.querySelector('.cell[data-i="'+i+'"]').getBoundingClientRect();
-  bd.style.transformOrigin=(c.left+c.width/2-r.left)+'px '+(c.top+c.height/2-r.top)+'px';
-  bd.animate([{transform:'scale(1)'},{transform:'scale(2.6)'}],{duration:850,easing:'cubic-bezier(.5,0,.75,0)',fill:'forwards'});await wait(380)}
- const an=f.animate([{opacity:0},{opacity:1}],{duration:reduce?120:520,fill:'forwards'});await an.finished;
+/* رفتن به نقشهٔ بلند: فقط فید به سیاه و بعد نقشه که از سیاه باز می‌شود (مثل بقیهٔ بازی؛ بدون زوم)؛ فقط با لمس کودک (B5) */
+async function enter(i){if(busy)return;busy=true;const hid=HERE[mode],gid=CELLS[i].id,f=$('fade');
+ const an=f.animate([{opacity:0},{opacity:1}],{duration:reduce?120:600,fill:'forwards'});await an.finished;
  try{location.href='map.html#enter-'+hid+(gid!==hid?'-'+gid:'')}catch(e){}
  let left=false;addEventListener('pagehide',()=>{left=true},{once:true});await wait(15000);if(left)return;
- bd.getAnimations().forEach(a=>a.cancel());an.cancel();busy=false;sheet('overview.mock.map')}
+ an.cancel();busy=false;sheet('overview.mock.map')}
 $('go').onclick=()=>enter(CELLS.findIndex(c=>c.id===HERE[mode]));
 render();
-/* رسیدن از منوی ورود: از سیاه باز می‌شود؛ بعد آدمک روی خانه‌اش می‌پرد */
-if(document.documentElement.classList.contains('ent')){const f=$('fade');f.style.opacity=1;document.documentElement.classList.remove('ent');
- addEventListener('load',()=>setTimeout(async()=>{await f.animate([{opacity:1},{opacity:0}],{duration:reduce?150:750,fill:'forwards'}).finished;f.style.opacity=0;hop()},250))}
-else addEventListener('load',()=>setTimeout(hop,300));
-addEventListener('pageshow',e=>{if(e.persisted){busy=false;$('fade').getAnimations().forEach(a=>a.cancel());$('fade').style.opacity=0;$('bd').getAnimations().forEach(a=>a.cancel())}});
+/* رسیدن از منوی ورود: صفحه کامل ساخته و فقط بعد از سیاه آرام باز می‌شود (هیچ چیزی پیش از فید دیده نمی‌شود) */
+if(document.documentElement.classList.contains('ent')){const f=$('fade');f.style.opacity=1;
+ addEventListener('load',()=>setTimeout(async()=>{document.documentElement.classList.remove('ent');await f.animate([{opacity:1},{opacity:0}],{duration:reduce?150:750,fill:'forwards'}).finished;f.style.opacity=0},200))}
+addEventListener('pageshow',e=>{if(e.persisted){busy=false;const f=$('fade');f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0}});
 </script>
 </body>
 </html>
