@@ -195,7 +195,7 @@ def pad(pen, kind=None, rx=None, ry=None, wall=None, line=None, tri=(), dot=None
         pen.rx, pen.ry, pen.wall = rx or pen.rx, ry or pen.ry, wall or pen.wall; pen.padtop = _padtop(pen.rx, pen.ry)
     pal = PALETTES[pen.kind]
     pen.shape(_wall_pts(pen), pal['wall'], OUT); pen.ntop = len(pen.o)
-    sw_seam = float(os.environ.get('PAD_SEAM_W', OUT))   # D198: آزمایش ضخامت مرز رویه/دیواره (پیش‌فرض همان OUT)
+    sw_seam = float(os.environ.get('PAD_SEAM_W', INNER))   # D199: مرز رویه/دیواره خط داخلی است → INNER (مالک ۴ نوامبر)
     pen.shape(pen.padtop, pal['top'], sw_seam)
     if sw_seam != OUT:   # کمان بالای رویه لبهٔ بیرونی نماد است و OUT می‌ماند؛ فقط کمان پایین (مرز با دیواره) نازک می‌شود
         lo = sorted([(x, y) for x, y in pen.padtop if y >= 0 and abs(x) < pen.rx - 7], key=lambda q: q[0])
