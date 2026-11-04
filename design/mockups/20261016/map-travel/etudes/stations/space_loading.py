@@ -38,39 +38,39 @@ def container(p):
 
 
 def crane(p):
-    """D198 (نمونهٔ اصلاح خط و اتصال): پایه، دکل و بازو یک سازه‌اند: هر وجه فقط رنگ تخت، یک خط دور PART دور کل سازه،
-    و درز داخلی فقط INNER (زیر بازو روی دکل، بالای پایه). سر بازو با سر دکل هم‌خط (هر دو تا x=50 + عمق یکسان)؛ چراغ روی محور دکل."""
+    """D198 دور ۳ (مالک: ظرافت نبشی حفظ شود؛ درز داخلی واقعاً نازک و یکسره): پایه+دکل+بازو یک سیلوئت با یک خط دور PART
+    (پس خط کلفت روی‌هم‌افتاده در محل اتصال وجود ندارد)؛ وجه‌ها رنگ تخت؛ دو درز نازک یکسره از لبهٔ چپ تا لبهٔ پهلو؛
+    نبشی دقیقاً مثل قبل (شکل جدا با خط ظریف ۳٫۲) روی سازه؛ سر بازو با سر دکل جفت؛ چراغ روی محور دکل."""
     from shapely.geometry import Polygon
     from shapely.ops import unary_union
     bx, by = 28, GY - 20
-    MD = (8, -5)                                   # عمق یکسان دکل و بازو تا سرها جفت شوند
-    mx0, mx1 = bx + 8, bx + 22                     # دکل
-    ax0, ax1, ay0, ay1 = -26, mx1, -112, -98       # بازو: سر راست = سر راست دکل
+    MD = (8, -5)
+    mx0, mx1 = bx + 8, bx + 22
+    ax0, ay0, ay1 = -26, -112, -98
+    SEAM = 2.4
     p.foot_tip(bx + 14, GY, 12)
     def faces(x0, y0, w, h, d):
         dx, dy = d
         return ([(x0, y0), (x0 + w, y0), (x0 + w, y0 + h), (x0, y0 + h)],
                 [(x0, y0), (x0 + w, y0), (x0 + w + dx, y0 + dy), (x0 + dx, y0 + dy)],
                 [(x0 + w, y0), (x0 + w + dx, y0 + dy), (x0 + w + dx, y0 + h + dy), (x0 + w, y0 + h)])
-    parts = [faces(bx, by, 30, 20, (13, -9)), faces(mx0, ay1, mx1 - mx0, by - ay1, MD), faces(ax0, ay0, ax1 - ax0, ay1 - ay0, MD)]
-    brace = [(10, ay1), (mx0, ay1), (mx0, -72)]
-    sil = unary_union([Polygon(q).buffer(0) for fs in parts for q in fs] + [Polygon(brace)]).buffer(0.01)
+    parts = [faces(bx, by, 30, 20, (13, -9)), faces(mx0, ay1, mx1 - mx0, by - ay1, MD), faces(ax0, ay0, mx1 - ax0, ay1 - ay0, MD)]
+    sil = unary_union([Polygon(q).buffer(0) for fs in parts for q in fs]).buffer(0.01)
     outline = list(sil.exterior.coords)[:-1]
     p.shape(outline, YB[0], PART, j=.05, step=8, clip=False)
-    for F, T, R in parts:                          # رنگ وجه‌ها، بدون خط
+    for F, T, R in parts:
         p.fill(F, YB[0]); p.fill(T, YB[1]); p.fill(R, YB[2])
-    p.fill(brace, YB[2])
-    for i in range(3):                             # نوار هشدار پایه
+    for i in range(3):                                           # نوار هشدار پایه
         a = bx + 5 + i * 8.5
         p.fill([(a, by + 12), (a + 4, by + 12), (a + 1, by + 19), (a - 3, by + 19)], '#241a5e')
-    for yy in (ay1, by):                                          # درزهای نازک: زیر بازو روی دکل، پای دکل روی پایه (روی وجه جلو و پهلو)
-        p.raw('<polyline points="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (
-            ' '.join('%.1f,%.1f' % q for q in p.X([(mx0, yy), (mx1, yy), (mx1 + MD[0], yy + MD[1])])), NAVY, INNER))
-    p.ln((10, ay1), (mx0, -72), INNER, NAVY, j=.03)               # لبهٔ نبشی
+    for yy in (ay1, by):                                         # درزهای نازک یکسره (لبهٔ چپ دکل ← جلو ← پهلو)
+        p.raw('<polyline points="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="butt" stroke-linejoin="miter"/>' % (
+            ' '.join('%.1f,%.1f' % q for q in p.X([(mx0, yy), (mx1, yy), (mx1 + MD[0], yy + MD[1])])), NAVY, SEAM))
     p.stroke(outline, PART, j=.05, step=8)
     p.tipshadow(bx + 20, GY + 2, 26)
-    cx = (mx0 + mx1) / 2 + MD[0] / 2                              # محور دکل (با عمق)
-    cyl(p, cx, ay0 + MD[1] / 2 - 1, 7, 10, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=3.6)   # چراغ روی محور
+    p.shape([(10, ay1), (mx0, ay1), (mx0, -72)], YB[2], 3.2, j=.05, step=6, clip=False)     # نبشی (همان قبلی)
+    cx = (mx0 + mx1) / 2 + MD[0] / 2
+    cyl(p, cx, ay0 + MD[1] / 2 - 1, 7, 10, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=3.6)   # چراغ روی محور دکل
 
 
 def load(p):
