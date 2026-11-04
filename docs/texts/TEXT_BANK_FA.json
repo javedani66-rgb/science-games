@@ -12196,10 +12196,220 @@
    ],
    "text": "در بازی واقعی: آموزش بازی باز می‌شود (قابل تکرار).",
    "status": "draft"
+  },
+  "overview.title": {
+   "id": "overview.title",
+   "kind": "title",
+   "where_fa": "پلاک عنوان بالای نقشهٔ کلی",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.title",
+    "text"
+   ],
+   "text": "سرزمین ماشین‌های ساده",
+   "status": "draft"
+  },
+  "overview.land.sports": {
+   "id": "overview.land.sports",
+   "kind": "ui",
+   "where_fa": "نام سرزمین روی نقشهٔ کلی",
+   "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.land.sports",
+    "text"
+   ],
+   "text": "ورزشگاه",
+   "status": "draft"
+  },
+  "overview.land.space": {
+   "id": "overview.land.space",
+   "kind": "ui",
+   "where_fa": "نام سرزمین روی نقشهٔ کلی",
+   "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.land.space",
+    "text"
+   ],
+   "text": "پایگاه فضایی",
+   "status": "draft"
+  },
+  "overview.land.farm": {
+   "id": "overview.land.farm",
+   "kind": "ui",
+   "where_fa": "نام سرزمین روی نقشهٔ کلی",
+   "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.land.farm",
+    "text"
+   ],
+   "text": "مزرعه و آسیاب",
+   "status": "draft"
+  },
+  "overview.land.city": {
+   "id": "overview.land.city",
+   "kind": "ui",
+   "where_fa": "نام سرزمین روی نقشهٔ کلی",
+   "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.land.city",
+    "text"
+   ],
+   "text": "شهر صنعتی",
+   "status": "draft"
+  },
+  "overview.land.sea": {
+   "id": "overview.land.sea",
+   "kind": "ui",
+   "where_fa": "نام سرزمین روی نقشهٔ کلی",
+   "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.land.sea",
+    "text"
+   ],
+   "text": "منطقهٔ دریایی",
+   "status": "draft"
+  },
+  "overview.here": {
+   "id": "overview.here",
+   "kind": "ui",
+   "where_fa": "خط زیر نقشهٔ کلی؛ {place} = نام ایستگاه کودک",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.here",
+    "text"
+   ],
+   "text": "اینجایی: {place}",
+   "status": "draft"
+  },
+  "overview.go": {
+   "id": "overview.go",
+   "kind": "button",
+   "where_fa": "دکمهٔ اصلی زیر نقشهٔ کلی؛ به نقشهٔ بلند می‌برد",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.go",
+    "text"
+   ],
+   "text": "برو",
+   "status": "draft"
+  },
+  "overview.cell.done": {
+   "id": "overview.cell.done",
+   "kind": "a11y",
+   "where_fa": "برچسب صفحه‌خوان خانهٔ رفته",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.cell.done",
+    "text"
+   ],
+   "text": "{place}، رفته",
+   "status": "draft"
+  },
+  "overview.cell.here": {
+   "id": "overview.cell.here",
+   "kind": "a11y",
+   "where_fa": "برچسب صفحه‌خوان خانهٔ کودک",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.cell.here",
+    "text"
+   ],
+   "text": "{place}، اینجایی",
+   "status": "draft"
+  },
+  "overview.cell.ahead": {
+   "id": "overview.cell.ahead",
+   "kind": "a11y",
+   "where_fa": "برچسب صفحه‌خوان خانهٔ جلوتر",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.cell.ahead",
+    "text"
+   ],
+   "text": "{place}، هنوز نرسیده",
+   "status": "draft"
+  },
+  "overview.cell.hidden": {
+   "id": "overview.cell.hidden",
+   "kind": "a11y",
+   "where_fa": "برچسب صفحه‌خوان خانهٔ آخر (مخفی‌گاه لو نمی‌رود)",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.cell.hidden",
+    "text"
+   ],
+   "text": "جای آخر، هنوز پنهان",
+   "status": "draft"
+  },
+  "overview.mock.map": {
+   "id": "overview.mock.map",
+   "kind": "ui",
+   "where_fa": "پیام ماکت اگر نقشهٔ بلند باز نشد",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.mock.map",
+    "text"
+   ],
+   "text": "اینجا نقشهٔ بلند باز می‌شود. (ماکت)",
+   "status": "draft"
+  },
+  "overview.sheet.close": {
+   "id": "overview.sheet.close",
+   "kind": "button",
+   "where_fa": "بستن پیام ماکت",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.sheet.close",
+    "text"
+   ],
+   "text": "باشه",
+   "status": "draft"
   }
  },
  "meta": {
-  "updated": "2026-10-26",
+  "updated": "2026-11-04",
   "glossary": {
    "نیرو": "نه «زور»",
    "جرم": "مقدار ماده؛ ترازو، گرم و کیلوگرم",

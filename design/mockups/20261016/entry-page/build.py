@@ -18,6 +18,8 @@ def main():
     ANIM = mt[mt.index('function Lh(g,n)'):mt.index(END) + len(END)]   # حرکت رسیدن ایستگاه‌ها: یک منبع (ماکت نقشه)
     import shutil
     for n in ('index', 'cardbox'): shutil.copyfile(MT / (n + '.html'), HERE / ('map.html' if n == 'index' else 'cardbox.html'))   # مقصد «شروع/ادامه» (گیت‌نشده)
+    OB = HERE.parent / 'overview-board'
+    shutil.copyfile(OB / 'index.html', HERE / 'overview.html')   # D192: نقشهٔ کلی بین منو و نقشه (گیت‌نشده)
     f = lambda p: base64.b64encode(open(ROOT / 'assets/fonts' / p, 'rb').read()).decode()
     t = open(HERE / 'template.html', encoding='utf-8').read()
     for k, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
