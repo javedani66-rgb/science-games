@@ -71,7 +71,20 @@ def crane(p):
     p.tipshadow(bx + 20, GY + 2, 26)
     p.shape([(10, ay1), (mx0, ay1), (mx0, -72)], YB[2], 3.2, j=.05, step=6, clip=False)     # نبشی (همان قبلی)
     cx = (mx0 + mx1) / 2 + MD[0] / 2
-    cyl(p, cx, ay0 + MD[1] / 2 - 1, 7, 10, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=3.6)   # چراغ روی محور دکل
+    lamp(p, cx, ay0 + MD[1] / 2 + 1)                              # چراغ روی محور دکل
+
+
+def lamp(p, cx, yb, r=7.5, h=9):
+    """D198 دور ۴ (مالک ۲۳:۳۴: چراغ با خط داخلی کلفت «داغون» شده): چراغ کوچک است، پس خط دورش نازک (۲٫۴)،
+    رویه فقط رنگ روشن با لبهٔ ظریف (۱٫۲)، و نشستنش روی بازو با همان خط نازک؛ هیچ خط کلفتی داخلش نیست."""
+    ry = .34 * r; yt = yb - h
+    sil = ell(cx, yb, r, ry, 0, 180, 16) + ell(cx, yt, r, ry, 180, 360, 16)
+    p.shape(sil, '#e0443a', 2.4, j=.03, step=99, clip=False)
+    p.fill([(cx - r + 1.4, yt), (cx - r * .45, yt), (cx - r * .45, yb + ry * .8), (cx - r + 1.4, yb)], '#ff9a86')
+    p.fill([(cx + r * .38, yt), (cx + r - 1.4, yt), (cx + r - 1.4, yb), (cx + r * .38, yb + ry * .9)], '#a82a24', .9)
+    p.fill(ell(cx, yt, r - 1.2, ry - .8, 0, 360, 24), '#ffb4a0')
+    p.raw('<polygon points="%s" fill="none" stroke="%s" stroke-width="1.2" stroke-linejoin="round"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(ell(cx, yt, r - .6, ry - .4, 0, 360, 24))), NAVY))
+    p.stroke(sil, 2.4, j=.03, step=99)
 
 
 def load(p):
