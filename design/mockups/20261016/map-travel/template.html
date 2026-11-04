@@ -359,7 +359,8 @@ const ST={
  pool(g){const e=Lh(g,'ball');if(!e)return;e.style.transformOrigin='0 0';return_(e.animate([{transform:'translateY(0)',easing:'ease-out'},{transform:'translateY(-15px)',offset:.5,easing:'ease-in'},{transform:'translateY(0)'}],{duration:800,fill:'backwards',iterations:3}))},
  tug_field(g){return_(an2(Lh(g,'flag'),[[0,0],[-20,3],[20,-3],[0,0]].map(p=>({transform:'translate('+p[0]+'px,'+p[1]+'px)'})),2400,0,'ease-in-out',false,1))},
  skate_park(g){return_(an2(Lh(g,'skateboard'),[{transform:'translate(-28px,6px)'},{transform:'translate(0,0)'}],900,0,'ease-out',true,3))},
- space_loading(g){const e=Lh(g,'crate');if(!e)return;const cb=e.firstElementChild,D=30,K=(15.5+D)/15.5,sc=k=>({transform:'translate(0,-68.2px) scale(1,'+k+') translate(0,68.2px)'});return_(an2(e,[{transform:'translateY('+D+'px)'},{transform:'translateY(0)'}],1800,0,'ease-out',true,3));if(cb)return_(an2(cb,[sc(K),sc(1)],1800,0,'ease-out',true,3))},
+ space_loading(g){const e=Lh(g,'crate');if(!e)return;const cb=e.firstElementChild,D=30;let y0=0,h=1;try{const b=cb.getBBox();y0=b.y;h=Math.max(1,b.height)}catch(_){}const k=(h+D)/h; /* D198: کابل بالا ثابت (پشت بازو)، پایین همراه جعبه؛ اندازه‌ها از خود کابل، نه عدد دستی */
+  return_(an2(e,[{transform:'translateY('+D+'px)'},{transform:'translateY(0)'}],1800,0,'ease-out',true,3));if(cb)return_(an2(cb,[{transform:'translate(0px,'+(y0-D)+'px) scale(1,'+k+') translate(0px,'+(-y0)+'px)'},{transform:'translate(0px,'+y0+'px) scale(1,1) translate(0px,'+(-y0)+'px)'}],1800,0,'ease-out',true,3))},
  scale_lab(g){const e=Lh(g,'beam');if(!e)return;return_(an2(e,rotKf(e,0,-108,[0,20,-14,7,-3,0]),2200,0,'ease-out',false,1))},
  moon(g){const e=Lh(g,'shade');if(!e)return;return_(e.animate([{opacity:1},{opacity:.15},{opacity:1}],{duration:3000,easing:'ease-in-out',fill:'backwards'}))},
  space_station(g){const e=Lh(g,'panels');if(!e)return;return_(an2(e,rotKf(e,0,-28,[0,14,-14,0]),2000,0,'ease-in-out',false,3))},

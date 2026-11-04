@@ -12,7 +12,7 @@
     spec('my_station', pad_px(pen, bh), stand, ['node_my_station_gear'], kind=pen.kind, out=پوشه)
 قاعده: همه‌چیز مستقیم در مختصات symbol (0 0 200 190، مرکز translate(100 150)) کشیده شود؛ هیچ scale() روی زیرگروه.
 """
-import math, random, json, pathlib
+import os, math, random, json, pathlib
 from contextlib import contextmanager
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -195,7 +195,16 @@ def pad(pen, kind=None, rx=None, ry=None, wall=None, line=None, tri=(), dot=None
         pen.rx, pen.ry, pen.wall = rx or pen.rx, ry or pen.ry, wall or pen.wall; pen.padtop = _padtop(pen.rx, pen.ry)
     pal = PALETTES[pen.kind]
     pen.shape(_wall_pts(pen), pal['wall'], OUT); pen.ntop = len(pen.o)
-    pen.shape(pen.padtop, pal['top'], OUT)
+    sw_seam = float(os.environ.get('PAD_SEAM_W', OUT))   # D198: آزمایش ضخامت مرز رویه/دیواره (پیش‌فرض همان OUT)
+    pen.shape(pen.padtop, pal['top'], sw_seam)
+    if sw_seam != OUT:   # کمان بالای رویه لبهٔ بیرونی نماد است و OUT می‌ماند؛ فقط کمان پایین (مرز با دیواره) نازک می‌شود
+        lo = sorted([(x, y) for x, y in pen.padtop if y >= 0 and abs(x) < pen.rx - 7], key=lambda q: q[0])
+        if len(lo) > 2:   # نیمهٔ زیرینِ خط دور دیواره که زیر کمان مانده با رنگ دیواره پوشانده می‌شود تا مرز واقعاً نازک دیده شود
+            band = [(x, y + sw_seam / 2 - .2) for x, y in lo] + [(x, y + OUT / 2 + .8) for x, y in reversed(lo)]
+            pen.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in band), pal['wall']))
+        up = [(x, y) for x, y in pen.padtop if y <= 1]
+        up.sort(key=lambda q: q[0])
+        pen.raw('<polyline points="%s" fill="none" class="eo" stroke-width="%s"/>' % (' '.join('%.1f,%.1f' % q for q in up), OUT))
     pen.probes.append(('خط دور سکو (لبهٔ پایین دیواره)', OUT, (-12 * pen.rx / 52.8, 19.9 * pen.ry / 19.4 + pen.wall), (0, 1), NAVY))
     if line: pen.ln(line[0], line[1], INNER, pal['line'], j=.15, probe='خط داخلی (خط روشن سکو)')
     # D194 (مالک ۴ نوامبر): مثلث‌های لبه و نقطهٔ تیره روی نقشه مثل لکه دیده می‌شدند؛ دیگر کشیده نمی‌شوند (پارامترها برای سازگاری می‌مانند)

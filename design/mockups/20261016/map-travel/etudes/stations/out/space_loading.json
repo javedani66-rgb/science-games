@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  76
+  75
  ],
  "stand": [
   50.0,
@@ -20,14 +20,14 @@
   "node_space_loading_crate"
  ],
  "inside_pad": {
-  "min_margin_px": 6.4,
+  "min_margin_px": 7.0,
   "base_on_pad": true,
-  "height_px": 91.8,
+  "height_px": 90.2,
   "bbox_px": [
-   25.2,
-   32.2,
+   26.0,
+   33.2,
    118.0,
-   124.0
+   123.5
   ],
   "ok": true
  },

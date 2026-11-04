@@ -23,7 +23,7 @@ RANGE = 14
 def container(p):
     x0, y0, w, h, D = -78, -34, 72, 52, (24, -15)
     p.tipshadow(x0 + w / 2 + 8, GY + 2, 54); p.foot_tip(x0 + w / 2, GY, 30)
-    box(p, x0, y0, w, h, D, CB, sw=OUT, seam=0)
+    box(p, x0, y0, w, h, D, CB, sw=PART, seam=0)   # D198: جعبه جلوی سکوست → مرز جزء (PART)، نه خط دور بیرونی
     for rx in (x0 + 8, x0 + w - 8):                                  # دنده‌های روشن
         p.fill([(rx - 1.5, y0 + 5), (rx + 1.5, y0 + 5), (rx + 1.5, y0 + h - 14), (rx - 1.5, y0 + h - 14)], '#6db0ea')
     dx0, dx1, dy0, dy1 = x0 + 16, x0 + w - 16, y0 + 8, y0 + h - 13   # در باز
@@ -38,17 +38,39 @@ def container(p):
 
 
 def crane(p):
+    """D198 (نمونهٔ اصلاح خط و اتصال): پایه، دکل و بازو یک سازه‌اند: هر وجه فقط رنگ تخت، یک خط دور PART دور کل سازه،
+    و درز داخلی فقط INNER (زیر بازو روی دکل، بالای پایه). سر بازو با سر دکل هم‌خط (هر دو تا x=50 + عمق یکسان)؛ چراغ روی محور دکل."""
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
     bx, by = 28, GY - 20
+    MD = (8, -5)                                   # عمق یکسان دکل و بازو تا سرها جفت شوند
+    mx0, mx1 = bx + 8, bx + 22                     # دکل
+    ax0, ax1, ay0, ay1 = -26, mx1, -112, -98       # بازو: سر راست = سر راست دکل
     p.foot_tip(bx + 14, GY, 12)
-    box(p, bx, by, 30, 20, (13, -9), YB, sw=PART, seam=0)                            # پایه
-    for i in range(3):
+    def faces(x0, y0, w, h, d):
+        dx, dy = d
+        return ([(x0, y0), (x0 + w, y0), (x0 + w, y0 + h), (x0, y0 + h)],
+                [(x0, y0), (x0 + w, y0), (x0 + w + dx, y0 + dy), (x0 + dx, y0 + dy)],
+                [(x0 + w, y0), (x0 + w + dx, y0 + dy), (x0 + w + dx, y0 + h + dy), (x0 + w, y0 + h)])
+    parts = [faces(bx, by, 30, 20, (13, -9)), faces(mx0, ay1, mx1 - mx0, by - ay1, MD), faces(ax0, ay0, ax1 - ax0, ay1 - ay0, MD)]
+    brace = [(10, ay1), (mx0, ay1), (mx0, -72)]
+    sil = unary_union([Polygon(q).buffer(0) for fs in parts for q in fs] + [Polygon(brace)]).buffer(0.01)
+    outline = list(sil.exterior.coords)[:-1]
+    p.shape(outline, YB[0], PART, j=.05, step=8, clip=False)
+    for F, T, R in parts:                          # رنگ وجه‌ها، بدون خط
+        p.fill(F, YB[0]); p.fill(T, YB[1]); p.fill(R, YB[2])
+    p.fill(brace, YB[2])
+    for i in range(3):                             # نوار هشدار پایه
         a = bx + 5 + i * 8.5
         p.fill([(a, by + 12), (a + 4, by + 12), (a + 1, by + 19), (a - 3, by + 19)], '#241a5e')
-    box(p, bx + 8, -100, 14, by + 100, (8, -5), YB, sw=PART, seam=0)                  # دکل
+    for yy in (ay1, by):                                          # درزهای نازک: زیر بازو روی دکل، پای دکل روی پایه (روی وجه جلو و پهلو)
+        p.raw('<polyline points="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (
+            ' '.join('%.1f,%.1f' % q for q in p.X([(mx0, yy), (mx1, yy), (mx1 + MD[0], yy + MD[1])])), NAVY, INNER))
+    p.ln((10, ay1), (mx0, -72), INNER, NAVY, j=.03)               # لبهٔ نبشی
+    p.stroke(outline, PART, j=.05, step=8)
     p.tipshadow(bx + 20, GY + 2, 26)
-    box(p, -26, -112, 72, 14, (9, -6), YB, sw=PART, seam=0)                          # بازو
-    p.shape([(10, -98), (bx + 8, -98), (bx + 8, -72)], YB[2], 3.2, j=.05, step=6, clip=False)     # نبشی بین تیر و ستون
-    cyl(p, bx + 18, -116, 7.5, 11, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=3.6)   # چراغ
+    cx = (mx0 + mx1) / 2 + MD[0] / 2                              # محور دکل (با عمق)
+    cyl(p, cx, ay0 + MD[1] / 2 - 1, 7, 10, ('#e0443a', '#ff9a86', '#a82a24', '#ffb4a0'), sw=3.6)   # چراغ روی محور
 
 
 def load(p):
