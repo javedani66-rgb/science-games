@@ -26,7 +26,7 @@ for m in re.finditer(r'<(polygon|path)\b[^>]*/>', h):
 print('navy', len(navy), 'color', len(color))
 # آخرین جزء تختهٔ بالایی و پایینی: درج پیش از بازو (گروه نردبان/بازو بعد از تخته‌ها)
 anchor = h.index('<g id="node_scaffold_bucket"')
-clip = '<clipPath id="scf_pk"><rect x="-60" y="-140" width="60" height="160"/><rect x="0" y="-75" width="60" height="95"/></clipPath>'   # ستون چپ کامل از جلوی هر دو تخته؛ ستون راست از زیر تختهٔ بالا (سرِ آن زیر تختهٔ بالا می‌ماند)
+clip = '<clipPath id="scf_pk"><rect x="-60" y="-140" width="60" height="160"/><rect x="0" y="-71" width="60" height="91"/></clipPath>'   # ستون چپ کامل از جلوی هر دو تخته؛ ستون راست از زیر تختهٔ بالا (سرِ آن زیر تختهٔ بالا می‌ماند)
 grp = '<g clip-path="url(#scf_pk)">' + ''.join(navy) + ''.join(color) + '</g>'
 h = h[:anchor] + clip + grp + h[anchor:]
 h = h.replace('id="node_scaffold_hero"', 'id="node_scaffold_hero" data-postfix="1"', 1)
