@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>نقشه و سفر</title>
-<script>if(/^#enter-/.test(location.hash))document.documentElement.className='ent flowx'</script><style>.flowx #rv{display:none}</style><style>.ent,.ent body{background:#000}.ent #blk{opacity:1}</style>
+<script>if(/^#enter-/.test(location.hash))document.documentElement.className='ent flowx';else if(location.hash==='#back')document.documentElement.className='ent'</script><style>.flowx #rv{display:none}</style><style>.ent,.ent body{background:#000}.ent #blk{opacity:1}</style>
 <style>
 @font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
 @font-face{font-family:Vazirmatn;font-weight:700;src:url(data:font/woff2;base64,{{FONT_VB}}) format("woff2")}
@@ -491,7 +491,8 @@ if(ret){ORDER.forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('M12')).for
 /* D192: از نقشهٔ کلی: #enter-<پیشرفت> یا #enter-<پیشرفت>-<جای رفته> (پیشرفت = جای کودک؛ جای رفته = خانه‌ای که روی نقشهٔ کلی زد) */
 const EN=location.hash.match(/^#enter-(new|cont|[A-Z]\d\d)(?:-([A-Z]\d\d))?(-tut)?$/);
 if(EN&&!ret){const id=EN[1]==='new'?ORDER[0]:EN[1]==='cont'?'F06':EN[1],ix=Math.max(0,ORDER.indexOf(id));visited.clear();done.clear();ORDER.slice(0,ix+1).forEach(i=>visited.add(i));ORDER.slice(0,ix).forEach(i=>done.add(i));here=ORDER[ix];if(EN[2]&&ORDER.indexOf(EN[2])>=0&&ORDER.indexOf(EN[2])<=ix)here=EN[2]}
-fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}if(EN&&!ret){updateDim();blk.style.opacity=1;addEventListener('load',()=>setTimeout(async()=>{await fadeBlk(1,0,reduce?150:800);playStation(here);if(EN[3])setTimeout(tutorial,reduce?100:1600)},350))}addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
+fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}if(EN&&!ret){updateDim();blk.style.opacity=1;addEventListener('load',()=>setTimeout(async()=>{await fadeBlk(1,0,reduce?150:800);playStation(here);if(EN[3])setTimeout(tutorial,reduce?100:1600)},350))}if(location.hash==='#back'){blk.style.opacity=1;addEventListener('load',()=>setTimeout(()=>fadeBlk(1,0,reduce?150:750),300))}   /* ماکت تنهای نقشه: برگشت از نقشهٔ کلی بدون پرش */
+addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
 </script>
 </body>
 </html>
