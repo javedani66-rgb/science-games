@@ -11354,7 +11354,7 @@
     "maptravel.finish",
     "text"
    ],
-   "text": "این ایستگاه تمام شد",
+   "text": "بریم به ایستگاه بعد",
    "status": "draft"
   },
   "maptravel.needfin": {
@@ -12406,10 +12406,265 @@
    ],
    "text": "باشه",
    "status": "draft"
+  },
+  "name.title": {
+   "id": "name.title",
+   "kind": "button",
+   "where_fa": "تیتر صفحهٔ اسم (بار اول، پیش از انتخاب کاراکتر)",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "name.title",
+    "text"
+   ],
+   "text": "اسمت چیه؟",
+   "status": "draft"
+  },
+  "name.placeholder": {
+   "id": "name.placeholder",
+   "kind": "button",
+   "where_fa": "متن خاکستری داخل جای نوشتن اسم",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "name.placeholder",
+    "text"
+   ],
+   "text": "اسمت را اینجا بنویس",
+   "status": "draft"
+  },
+  "name.hint": {
+   "id": "name.hint",
+   "kind": "button",
+   "where_fa": "زیر جای اسم، تا اسم نوشته نشده",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "name.hint",
+    "text"
+   ],
+   "text": "بعد ماجراجویت را انتخاب می‌کنی.",
+   "status": "draft"
+  },
+  "name.hello": {
+   "id": "name.hello",
+   "kind": "button",
+   "where_fa": "زیر جای اسم، وقتی اسم نوشته شد",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "name.hello",
+    "text"
+   ],
+   "text": "سلام {name}! بزن بریم.",
+   "status": "draft"
+  },
+  "name.go": {
+   "id": "name.go",
+   "kind": "button",
+   "where_fa": "دکمهٔ رفتن به انتخاب کاراکتر",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "name.go",
+    "text"
+   ],
+   "text": "بعدی",
+   "status": "draft"
+  },
+  "name.back": {
+   "id": "name.back",
+   "kind": "button",
+   "where_fa": "نام دکمهٔ برگشت (برای صفحه‌خوان)",
+   "context_fa": "پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/entry-page/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "name.back",
+    "text"
+   ],
+   "text": "برگشت به منو",
+   "status": "draft"
+  },
+  "maptravel.prev": {
+   "id": "maptravel.prev",
+   "kind": "ui",
+   "where_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.prev",
+    "text"
+   ],
+   "text": "برگردیم به ایستگاه قبل",
+   "status": "draft"
+  },
+  "maptravel.home": {
+   "id": "maptravel.home",
+   "kind": "ui",
+   "where_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.home",
+    "text"
+   ],
+   "text": "برگشت به نقشهٔ کلی",
+   "status": "draft"
+  },
+  "maptravel.tut.1": {
+   "id": "maptravel.tut.1",
+   "kind": "ui",
+   "where_fa": "آموزش کوتاه بار اول روی نقشهٔ بلند (D205)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.tut.1",
+    "text"
+   ],
+   "text": "اینجا جای توست. حلقهٔ زرد همیشه نشان می‌دهد کجایی.",
+   "status": "draft"
+  },
+  "maptravel.tut.2": {
+   "id": "maptravel.tut.2",
+   "kind": "ui",
+   "where_fa": "آموزش کوتاه بار اول روی نقشهٔ بلند (D205)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.tut.2",
+    "text"
+   ],
+   "text": "هر ایستگاه یک ماجرا دارد. روی خود ایستگاه بزن تا واردش شوی.",
+   "status": "draft"
+  },
+  "maptravel.tut.3": {
+   "id": "maptravel.tut.3",
+   "kind": "ui",
+   "where_fa": "آموزش کوتاه بار اول روی نقشهٔ بلند (D205)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.tut.3",
+    "text"
+   ],
+   "text": "کارت در ایستگاه که تمام شد، این دکمه را بزن. ردپای هیولا می‌آید و با هم به ایستگاه بعد می‌روید.",
+   "status": "draft"
+  },
+  "maptravel.tut.4": {
+   "id": "maptravel.tut.4",
+   "kind": "ui",
+   "where_fa": "آموزش کوتاه بار اول روی نقشهٔ بلند (D205)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.tut.4",
+    "text"
+   ],
+   "text": "اگر خواستی به ایستگاه قبل برگردی، این دکمه را بزن.",
+   "status": "draft"
+  },
+  "maptravel.tut.5": {
+   "id": "maptravel.tut.5",
+   "kind": "ui",
+   "where_fa": "آموزش کوتاه بار اول روی نقشهٔ بلند (D205)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.tut.5",
+    "text"
+   ],
+   "text": "با این دکمه نقشهٔ کل سرزمین را می‌بینی.",
+   "status": "draft"
+  },
+  "maptravel.tut.next": {
+   "id": "maptravel.tut.next",
+   "kind": "ui",
+   "where_fa": "آموزش کوتاه بار اول روی نقشهٔ بلند (D205)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.tut.next",
+    "text"
+   ],
+   "text": "بعدی",
+   "status": "draft"
+  },
+  "maptravel.tut.skip": {
+   "id": "maptravel.tut.skip",
+   "kind": "ui",
+   "where_fa": "آموزش کوتاه بار اول روی نقشهٔ بلند (D205)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.tut.skip",
+    "text"
+   ],
+   "text": "رد کن",
+   "status": "draft"
+  },
+  "maptravel.tut.done": {
+   "id": "maptravel.tut.done",
+   "kind": "ui",
+   "where_fa": "آموزش کوتاه بار اول روی نقشهٔ بلند (D205)",
+   "context_fa": "دکمهٔ شبیه‌ساز «تکمیل ایستگاه» در ماکت (در بازی واقعی خودِ تکمیل ایستگاه است)؛ پیش‌نویس (مالک ۲۱ اکتبر: ردپا پس از تکمیل ایستگاه)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.tut.done",
+    "text"
+   ],
+   "text": "بزن بریم!",
+   "status": "draft"
+  },
+  "overview.home": {
+   "id": "overview.home",
+   "kind": "button",
+   "where_fa": "دکمهٔ اصلی زیر نقشهٔ کلی؛ به نقشهٔ بلند می‌برد",
+   "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+   "band": "همه",
+   "file": "design/mockups/20261016/overview-board/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "overview.home",
+    "text"
+   ],
+   "text": "برگشت به منوی اول",
+   "status": "draft"
   }
  },
  "meta": {
-  "updated": "2026-11-04",
+  "updated": "2026-11-05",
   "glossary": {
    "نیرو": "نه «زور»",
    "جرم": "مقدار ماده؛ ترازو، گرم و کیلوگرم",
