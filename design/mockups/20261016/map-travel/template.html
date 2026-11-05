@@ -342,11 +342,12 @@ const ST={
  /* D176: حرکت هنگام رسیدن برای ۲۴ نمادِ دیگر؛ مشخصات از motion_spec هر نماد (etudes/stations/out/*.json)، تکرار ۳ بار رفت‌وبرگشتی (پایان = ایستا) */
  city_gate(g){const e=Lh(g,'leaf');if(!e)return;const hx=24,r=s=>'translate('+hx+'px,0) scale('+s+',1) translate('+(-hx)+'px,0)';return_(an2(e,[{transform:r(2)},{transform:r(1)}],1400,0,'ease-out',true,3))},
  scaffold(g){const e=Lh(g,'bucket');if(!e)return;return_(an2(e,rotKf(e,-58.6,-110.8,[0,14,-14,8,-4,0]),2800,0,'ease-in-out',false,1))},
- materials_store(g){return_(an2(Lh(g,'brick'),[{transform:'translateY(-26px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
+ /* ۵ نوامبر (فهرست اتصال D196): جابه‌جایی‌ها کوتاه شد تا جزء متحرک از جفتش جدا و معلق نشود */
+ materials_store(g){return_(an2(Lh(g,'brick'),[{transform:'translateY(-12px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
  excavation(g){const e=Lh(g,'bar');if(!e)return;return_(an2(e,rotKf(e,-7.5,-33,[-20,0]),1800,0,'ease-out',true,3))},
- beam_store(g){return_(an2(Lh(g,'prop'),[{transform:'translateY(-22px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
+ beam_store(g){return_(an2(Lh(g,'prop'),[{transform:'translateY(-10px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
  tool_room(g){const e=Lh(g,'hammer');if(!e)return;const A=-42,rt=a=>({transform:'translate(-1px,-22.4px) rotate('+a+'deg) translate(1px,22.4px)'}),kf=[];for(let i=0;i<3;i++){const o=i/3,w=1/3;kf.push(Object.assign(rt(0),{offset:o,easing:'ease-out'}),Object.assign(rt(A),{offset:o+w*.6,easing:'cubic-bezier(.6,0,1,.8)'}),Object.assign(rt(0),{offset:o+w*.8}))}kf.push(Object.assign(rt(0),{offset:1}));e.style.transformOrigin='0 0';return_(e.animate(kf,{duration:2700,fill:'backwards',iterations:1}))},
- wrench_room(g){return_(an2(Lh(g,'nut'),[{transform:'translateY(-32px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
+ wrench_room(g){return_(an2(Lh(g,'nut'),[{transform:'translateY(-14px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
  loading_ramp(g){return_(an2(Ly(g,'crate'),[{transform:'translate(30px,13px)'},{transform:'translate(0,0)'}],1600,0,'ease-in-out',true,3))},
  football(g){const e=Lh(g,'ball');if(!e)return;const f=(x,a)=>'translate('+x+'px,0) translate(-14px,-29px) rotate('+a+'deg) translate(14px,29px)';return_(an2(e,[{transform:f(-36,-55)},{transform:f(0,0)}],1600,0,'ease-out',true,3))},
  basketball_hall(g){const e=Lh(g,'ball');if(!e)return;return_(an2(e,[{transform:'translate(0,28.8px)',easing:'ease-out'},{transform:'translate(31.7px,37.4px)',easing:'ease-out'},{transform:'translate(37.4px,-27.4px)',easing:'ease-out'},{transform:'translate(15.8px,-47.5px)',easing:'ease-in'},{transform:'translate(1.4px,-30.2px)',easing:'ease-in'},{transform:'translate(0,0)'}],1700,0,'linear',true,3))}, /* D194: از تور پایین می‌افتد، می‌غلتد، بالا می‌رود و از بالای حلقه دوباره توی تور */
@@ -355,10 +356,10 @@ const ST={
   (function f(now){if(!alive)return;const p=Math.min(1,(now-T0)/(DUR*N)),k=Math.min(N-1,Math.floor(p*N)),u=ez(p*N-k),w=k%2===0?1-u:u;pos(-14*(1-w));if(p>=1)done();else raf=requestAnimationFrame(f)})(T0);return_({cancel:done})},
  magnet_hockey(g){return_(an2(Lh(g,'clip'),[{transform:'translateX(-28px)'},{transform:'translateX(0)'}],1000,0,'ease-in',true,3))},
  launch_pad(g){const e=Lh(g,'flame');if(!e)return;const s=(x,y)=>'translate(-25px,-2px) scale('+x+','+y+') translate(25px,2px)';return_(an2(e,[s(1,1),s(1.5,2),s(1.1,1.1),s(1.5,2),s(1.1,1.1),s(1.5,2),s(1,1)].map(x=>({transform:x})),1500,0,'ease-in-out',false,1))},
- ice_rink(g){return_(an2(Lh(g,'skate'),[{transform:'translateX(-26px)'},{transform:'translateX(0)'}],1200,0,'ease-out',true,3))},
+ ice_rink(g){return_(an2(Lh(g,'skate'),[{transform:'translateX(-14px)'},{transform:'translateX(0)'}],1200,0,'ease-out',true,3))},
  pool(g){const e=Lh(g,'ball');if(!e)return;e.style.transformOrigin='0 0';return_(e.animate([{transform:'translateY(0)',easing:'ease-out'},{transform:'translateY(-15px)',offset:.5,easing:'ease-in'},{transform:'translateY(0)'}],{duration:800,fill:'backwards',iterations:3}))},
- tug_field(g){return_(an2(Lh(g,'flag'),[[0,0],[-20,3],[20,-3],[0,0]].map(p=>({transform:'translate('+p[0]+'px,'+p[1]+'px)'})),2400,0,'ease-in-out',false,1))},
- skate_park(g){return_(an2(Lh(g,'skateboard'),[{transform:'translate(-28px,6px)'},{transform:'translate(0,0)'}],900,0,'ease-out',true,3))},
+ tug_field(g){return_(an2(Lh(g,'flag'),[[0,0],[-11,1.6],[11,-1.6],[0,0]].map(p=>({transform:'translate('+p[0]+'px,'+p[1]+'px)'})),2400,0,'ease-in-out',false,1))},
+ skate_park(g){return_(an2(Lh(g,'skateboard'),[{transform:'translate(-20px,0px)'},{transform:'translate(0,0)'}],900,0,'ease-out',true,3))},
  space_loading(g){const e=Lh(g,'crate');if(!e)return;const cb=e.firstElementChild,D=30;let y0=0,h=1;try{const b=cb.getBBox();y0=b.y;h=Math.max(1,b.height)}catch(_){}const k=(h+D)/h; /* D198: کابل بالا ثابت (پشت بازو)، پایین همراه جعبه؛ اندازه‌ها از خود کابل، نه عدد دستی */
   return_(an2(e,[{transform:'translateY('+D+'px)'},{transform:'translateY(0)'}],1800,0,'ease-out',true,3));if(cb)return_(an2(cb,[{transform:'translate(0px,'+(y0-D)+'px) scale(1,'+k+') translate(0px,'+(-y0)+'px)'},{transform:'translate(0px,'+y0+'px) scale(1,1) translate(0px,'+(-y0)+'px)'}],1800,0,'ease-out',true,3))},
  scale_lab(g){const e=Lh(g,'beam');if(!e)return;return_(an2(e,rotKf(e,0,-108,[0,20,-14,7,-3,0]),2200,0,'ease-out',false,1))},
@@ -366,9 +367,9 @@ const ST={
  space_station(g){const e=Lh(g,'panels');if(!e)return;return_(an2(e,rotKf(e,0,-28,[0,14,-14,0]),2000,0,'ease-in-out',false,3))},
  windmill(g){const e=Lh(g,'blades');if(!e)return;return_(an2(e,rotKf(e,-5,-60.1,[0,1080]),5000,0,'ease-in-out',false,1))},
  cart_station(g){for(const [n,cx,cy] of[['wheel_near',-28.6,-7.8],['wheel_far',-14.8,-18.5]]){const e=Lh(g,n);if(e)return_(an2(e,rotKf(e,cx,cy,[0,360]),3000,0,'ease-in-out',false,1))}},
- well(g){return_(an2(Lh(g,'bucket'),[{transform:'translateY(-24px)'},{transform:'translateY(0)'}],2000,0,'ease-in-out',true,3))},
+ well(g){return_(an2(Lh(g,'bucket'),[{transform:'translateY(-9px)'},{transform:'translateY(0)'}],2000,0,'ease-in-out',true,3))},
  chopwood(g){const e=Ly(g,'axe');if(!e)return;/* D171: تبر مثل تبر: سر تبر حول انتهای دسته بالا می‌رود، لحظه‌ای مکث، و تند فرود می‌آید؛ سه ضربه */
-  const h=(e.firstElementChild||e).getBBox(),cx=h.x+h.width-8,cy=h.y+8,A=26,N=3,rt=a=>'translate('+cx+'px,'+cy+'px) rotate('+a+'deg) translate('+(-cx)+'px,'+(-cy)+'px)',kf=[];
+  const h=(e.querySelector(':scope>:not(.bk)')||e).getBBox(),cx=h.x+h.width-8,cy=h.y+8,A=26,N=3,rt=a=>'translate('+cx+'px,'+cy+'px) rotate('+a+'deg) translate('+(-cx)+'px,'+(-cy)+'px)',kf=[];
   for(let i=0;i<N;i++){const o=i/N,w=1/N;kf.push({offset:o,transform:rt(0),easing:'cubic-bezier(.25,.1,.3,1)'},{offset:o+w*.5,transform:rt(A),easing:'linear'},{offset:o+w*.6,transform:rt(A),easing:'cubic-bezier(.7,0,1,.9)'},{offset:o+w*.76,transform:rt(0),easing:'linear'})}
   kf.push({offset:1,transform:rt(0)});e.style.transformOrigin='0 0';return_(e.animate(kf,{duration:4200,fill:'backwards',iterations:1}))},
  screw_workshop(g){const nb=Ly(g,'nut_back'),nf=Ly(g,'nut_front');if(!nb||!nf)return;
