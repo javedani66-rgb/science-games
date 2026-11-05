@@ -165,6 +165,10 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 #tut .row{display:flex;gap:10px}#tut .row button{flex:1;min-height:52px;border:3.5px solid var(--navy);border-radius:16px;font-weight:700;font-size:17px;box-shadow:0 4px 0 var(--edge)}
 #tut #tn{background:var(--gold)}#tut #ts{background:#fff;flex:0 0 auto;padding:0 16px}
 @media (prefers-reduced-motion:reduce){#tut,#tut .hole,#tut .card{transition:none}}
+#endsea{position:fixed;inset:0;z-index:38;overflow:hidden;background:#165f77}#endsea[hidden]{display:none}
+#endsea svg.bg{position:absolute;left:0;top:0;width:100%;will-change:transform}
+#esb{position:absolute;left:0;top:0;width:0;height:0;will-change:transform}#esb svg{position:absolute;left:-65px;top:-65px;width:130px;height:130px}#esb img{position:absolute;height:56px;width:auto;left:0;top:27px;transform:translate(-50%,-100%)}
+#esm{position:absolute;left:16px;right:16px;top:12%;margin:0;text-align:center;font:400 34px/1.35 Lalezar,Vazirmatn,sans-serif;color:#fff4d2;-webkit-text-stroke:7px var(--navy);paint-order:stroke fill;text-shadow:0 4px 0 var(--edge);opacity:0;transition:opacity .9s;text-wrap:balance}
 #blk{position:absolute;inset:0;z-index:40;background:#000;opacity:0;pointer-events:none}#dv{position:absolute;left:0;top:0;width:100%;height:520px;pointer-events:none;opacity:0;background:linear-gradient(#031526 0%,rgba(5,35,60,.78) 42%,rgba(8,60,95,0) 100%)}
 #ov{flex-direction:column;gap:12px;animation:ovIn .55s ease both}@keyframes ovIn{from{opacity:0}to{opacity:1}}
 #hs{position:relative;width:100%;max-width:360px;aspect-ratio:1998/1116;overflow:hidden;border:4px solid var(--navy);border-radius:22px;box-shadow:0 6px 0 var(--edge);flex:none;background:#12323a}#ov.nosc #hs{display:none}
@@ -212,7 +216,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <button class="opt" id="o_sea"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6v28" /><path d="M26 8L44 32H26Z" fill="#fff3c4"/><path d="M8 36h36l-6 9H14Z" fill="#ff9a3c"/></svg><span id="t_sea"></span></button>
 <button class="opt soft" id="o_cr"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><path d="M26 44C8 31 7 16 17 12c5-2 8 1 9 5 1-4 4-7 9-5 10 4 9 19-9 32Z" fill="#f08a8a"/></svg><span id="t_cr"></span></button></div>
 <p id="ovn" aria-live="polite"></p><button class="btn" id="ovc"></button></div></div>
-<button id="home" type="button"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 15 16 5l11 10M8.5 12.5V27h15V12.5" fill="none" stroke="#241a5e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 27v-7.5h5V27" fill="none" stroke="#241a5e" stroke-width="3" stroke-linejoin="round"/></svg></button><div id="tut" hidden><div class="hole" id="th"></div><div class="card" role="dialog" aria-live="polite"><p id="tt"></p><div class="row"><button id="tn" type="button"></button><button id="ts" type="button"></button></div></div></div><div id="blk"></div>
+<button id="home" type="button"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 15 16 5l11 10M8.5 12.5V27h15V12.5" fill="none" stroke="#241a5e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 27v-7.5h5V27" fill="none" stroke="#241a5e" stroke-width="3" stroke-linejoin="round"/></svg></button><div id="tut" hidden><div class="hole" id="th"></div><div class="card" role="dialog" aria-live="polite"><p id="tt"></p><div class="row"><button id="tn" type="button"></button><button id="ts" type="button"></button></div></div></div><div id="endsea" hidden aria-hidden="true"><svg class="bg" id="esbg"></svg><div id="esb"><svg viewBox="0 0 120 120"><use href="#env_dec_city_sail" width="120" height="120"/></svg><img id="esf" alt=""></div><p id="esm"></p></div><div id="blk"></div>
 <div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn sec" id="prv" hidden></button><button class="btn" id="fin" hidden></button><button class="btn sec" id="again"></button></div>
 </div>
 <script>
@@ -467,7 +471,34 @@ function leave(key,url){return async()=>{ov.hidden=true;await run(seaOut);await 
  if(url){try{sessionStorage.setItem(RET,'1')}catch(e){try{localStorage.setItem(RET,'1')}catch(e2){}}
   try{location.href=url;await new Promise(r=>setTimeout(r,2500))}catch(e){}}
  $('ovt').textContent=T(key);$('opts').hidden=true;$('ovn').textContent='';$('ovc').textContent=T('hide.back');atSea=true;ov.classList.add('nosc');ov.hidden=false;await fadeBlk(1,0,600)}}
-$('o_rev').onclick=leave('hide.mock','cardbox.html#prac');$('o_card').onclick=leave('hide.mock','cardbox.html#box');$('o_cr').onclick=leave('hide.mock');$('o_sea').onclick=leave('hide.seamsg');
+$('o_rev').onclick=leave('hide.mock','cardbox.html#prac');$('o_card').onclick=leave('hide.mock','cardbox.html#box');$('o_cr').onclick=leave('hide.mock');/* D205 (مالک ۵ نوامبر): «پیش به سوی آب‌های آزاد» = کاراکتر سوار قایق می‌شود، قایق از مخفی‌گاه بیرون می‌رود و در پهنهٔ آبی بلندِ پس از مخفی‌گاه
+   (که در نقشهٔ کلی و نقشهٔ بلند دیده نمی‌شود) به سوی افق می‌رود؛ پیام، سپس فید اوت. گذرها همه فید سیاه است، بدون پرش. */
+function drawOpenSea(W,V,L){const HZ=Math.round(V*.30),NS='http://www.w3.org/2000/svg';let h='<defs><linearGradient id="es_sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb46b"/><stop offset=".6" stop-color="#ffd9a0"/><stop offset="1" stop-color="#fff0c8"/></linearGradient>'
+  +'<linearGradient id="es_sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f9cbc"/><stop offset="'+(V/L).toFixed(3)+'" stop-color="#22728f"/><stop offset="1" stop-color="#165f77"/></linearGradient></defs>';
+ h+='<rect x="0" y="0" width="'+W+'" height="'+HZ+'" fill="url(#es_sky)"/>';
+ h+='<circle cx="'+(W*.62)+'" cy="'+(HZ+4)+'" r="'+(W*.13)+'" fill="#ffe27a" stroke="#241a5e" stroke-width="5"/>';
+ for(const [cx,cy,r] of [[W*.2,HZ*.35,26],[W*.82,HZ*.22,20]])h+='<g fill="#fff8ea" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round"><path d="M'+(cx-r*1.6)+','+cy+' a'+r*.7+','+r*.7+' 0 0 1 '+r*1.1+',-'+r*.55+' a'+r*.9+','+r*.9+' 0 0 1 '+r*1.5+',-.2 a'+r*.7+','+r*.7+' 0 0 1 '+r*.9+','+r*.75+' z"/></g>';
+ h+='<rect x="0" y="'+HZ+'" width="'+W+'" height="'+(L-HZ)+'" fill="url(#es_sea)"/><line x1="-10" y1="'+HZ+'" x2="'+(W+10)+'" y2="'+HZ+'" stroke="#241a5e" stroke-width="5"/>';
+ h+='<path d="M'+(W*.62-W*.13)+','+(HZ+10)+' h'+(W*.26)+'" stroke="#ffe27a" stroke-width="6" stroke-linecap="round" opacity=".8"/>';
+ let seed=7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+ for(let y=HZ+14;y<L-10;y+=Math.max(16,(y-HZ)*.12)){const k=Math.min(1,(y-HZ)/(V*.9)),n=1+Math.round(rnd()*2);for(let i=0;i<n;i++){const x=rnd()*W,w=6+16*k;
+  h+='<path d="M'+(x-w)+','+y.toFixed(1)+' q'+(w/2)+','+(-w*.55)+' '+w+',0 t'+w+',0" fill="none" stroke="#fff" stroke-width="'+(1.5+2*k).toFixed(1)+'" stroke-linecap="round" opacity="'+(.25+.25*k).toFixed(2)+'"/>'}}
+ const g=$('esbg');g.setAttribute('viewBox','0 0 '+W+' '+L);g.style.height=L+'px';g.innerHTML=h;return HZ}
+async function openSea(){const es=$('endsea'),W=innerWidth,V=innerHeight,L=Math.round(V*3.2),HZ=drawOpenSea(W,V,L),b=$('esb'),bg=$('esbg'),m=$('esm');$('esf').src=IM.sailor;m.textContent=T('hide.seamsg');m.style.opacity=0;
+ const put=(cam,x,y,s)=>{bg.style.transform='translateY('+(-cam)+'px)';b.style.transform='translate('+x+'px,'+(y-cam)+'px) scale('+s+')'};
+ const y0=L-V*.22,yS=V*.72,camEnd=0;put(L-V,W/2,y0,1.5);es.hidden=false;
+ await fadeBlk(1,0,reduce?150:700);
+ /* ۱) قایق در پهنهٔ بلند رو به بالا می‌رود و دوربین دنبالش می‌کند تا افق پیدا شود */
+ await tween(reduce?10:5200,p=>{const y=y0+(yS-y0)*p,cam=Math.max(camEnd,Math.min(L-V,y-V*.68));put(cam,W/2+14*Math.sin(p*7)*(1-p),y,1.5-.4*p)},ease);
+ /* ۲) قایق به سوی افق می‌رود و کوچک می‌شود */
+ await tween(reduce?10:3600,p=>{const y=yS+(HZ+10-yS)*p;put(0,W/2+6*Math.sin(p*5),y,1.1-.95*p)},p=>1-Math.pow(1-p,2));
+ m.style.opacity=1;await new Promise(r=>setTimeout(r,reduce?600:2600));
+ await fadeBlk(0,1,reduce?150:1000);es.hidden=true;m.style.opacity=0}
+$('o_sea').onclick=async()=>{ov.hidden=true;await run(seaOut);await fadeBlk(0,1,650);dvEl.style.opacity=0;
+ busy=true;try{await openSea()}finally{busy=false}
+ if(/map\.html$/.test(location.pathname)){try{location.href='index.html#back';return}catch(e){}}   /* در جریان کامل (منو ← … ← map.html): خروج به منوی اول */
+ /* ماکت تنها: پس از فید، برگشت به مخفی‌گاه */
+ const n=NODES.M12,d=dock(n),f=padFig(n);placeBoat(d[0],d[1]-SEAT-4,0);setOutfit(false);placeFig(f[0],f[1]);follow(NODES.M12.y);openHide();await fadeBlk(1,0,600)};
 async function seaOut(){const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,by,0);setOutfit(true);await hopTo(f,[d[0],d[1]-4],16);
  await tween(2800,p=>{const y=by-(by+150)*p,x=bx+10*Math.sin(p*6)*(1-p),r=3*Math.sin(p*9);placeBoat(x,y,r);placeFig(x,y+SEAT);setTilt(-r*.7,0);dvEl.style.opacity=.92*Math.min(1,p*1.6);follow(Math.max(0,y))},ease)}
 async function seaBack(){atSea=false;await fadeBlk(0,1,350);await run(async()=>{const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,-150,0);placeFig(bx,-150+SEAT);
