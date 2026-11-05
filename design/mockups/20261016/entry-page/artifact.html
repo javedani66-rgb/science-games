@@ -1,3 +1,4 @@
+<script>if(location.hash==="#back")document.documentElement.className="ent"</script><style>.ent,.ent body{background:#000!important}.ent #fade{opacity:1!important}</style>
 <title>منوی ورود به بازی</title>
 <link rel="prefetch" href="overview.html">
 <style>
@@ -199,5 +200,7 @@ function fit(){}
 render();
 /* برگشت با دکمهٔ «برگشت» دستگاه از صفحهٔ بعد: صفحه از حافظهٔ مرورگر می‌آید و نباید سیاه بماند */
 addEventListener('pageshow',e=>{if(e.persisted){$('fade').getAnimations().forEach(a=>a.cancel());busy=false;mountHero()}});
+/* D205: برگشت از نقشهٔ کلی (./#back): صفحه از سیاه باز می‌شود، بدون پرش */
+if(location.hash==='#back'){addEventListener('load',()=>setTimeout(async()=>{const f=$('fade');f.style.opacity=1;document.documentElement.classList.remove('ent');await f.animate([{opacity:1},{opacity:0}],{duration:reduce?150:750,fill:'forwards'}).finished;f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0;try{history.replaceState(null,'',location.pathname)}catch(e){}},200))}
 </script>
 </div>
