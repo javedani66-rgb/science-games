@@ -457,8 +457,8 @@ async function tutorial(){const tut=$('tut'),th=$('th'),tt=$('tt'),card=tut.quer
 $('fin').onclick=finish;
 /* D205: نقشهٔ بلند ← نقشهٔ کلی با فید سیاه (و برعکس، در خود نقشهٔ کلی)؛ پیشرفت و جای کودک در نشانی می‌رود */
 $('home').onclick=async()=>{if(busy)return;busy=true;STA.forEach(a=>{try{a.cancel()}catch(e){}});const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
- await fadeBlk(0,1,reduce?120:600);try{location.href='overview.html#o-'+fr+(here!==fr?'-'+here:'')}catch(e){}busy=false};
-addEventListener('pageshow',e=>{if(e.persisted){blk.style.opacity=1;fadeBlk(1,0,reduce?120:600)}});$('prv').onclick=()=>{const a=prv();if(a)go(a)};
+ await fadeBlk(0,1,reduce?120:380);try{location.href='overview.html#o-'+fr+(here!==fr?'-'+here:'')}catch(e){}busy=false};
+addEventListener('pageshow',e=>{if(e.persisted){blk.style.opacity=1;fadeBlk(1,0,reduce?120:380)}});$('prv').onclick=()=>{const a=prv();if(a)go(a)};
 /* D138/D139 (پیشنهاد، ماکت): صفحهٔ انتخاب مخفی‌گاه؛ چهار گزینه کنار هم؛ آب‌های آزاد: قایق از بالای کادر می‌رود و پیام می‌آید */
 const ov=$('ov'),ovn=$('ovn');let atSea=false;
 function openHide(){ovn.textContent='';ov.classList.remove('nosc');ov.hidden=false}
@@ -617,7 +617,7 @@ if(ret){ORDER.forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('M12')).for
 /* D192: از نقشهٔ کلی: #enter-<پیشرفت> یا #enter-<پیشرفت>-<جای رفته> (پیشرفت = جای کودک؛ جای رفته = خانه‌ای که روی نقشهٔ کلی زد) */
 const EN=location.hash.match(/^#enter-(new|cont|[A-Z]\d\d)(?:-([A-Z]\d\d))?(-tut)?$/);
 if(EN&&!ret){const id=EN[1]==='new'?ORDER[0]:EN[1]==='cont'?'F06':EN[1],ix=Math.max(0,ORDER.indexOf(id));visited.clear();done.clear();ORDER.slice(0,ix+1).forEach(i=>visited.add(i));ORDER.slice(0,ix).forEach(i=>done.add(i));here=ORDER[ix];if(EN[2]&&ORDER.indexOf(EN[2])>=0&&ORDER.indexOf(EN[2])<=ix)here=EN[2]}
-fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}if(EN&&!ret){updateDim();blk.style.opacity=1;addEventListener('load',()=>setTimeout(async()=>{await fadeBlk(1,0,reduce?150:800);playStation(here);if(EN[3])setTimeout(tutorial,reduce?100:1600)},350))}if(location.hash==='#back'){blk.style.opacity=1;addEventListener('load',()=>setTimeout(()=>fadeBlk(1,0,reduce?150:750),300))}   /* ماکت تنهای نقشه: برگشت از نقشهٔ کلی بدون پرش */
+fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}if(EN&&!ret){updateDim();blk.style.opacity=1;addEventListener('load',()=>setTimeout(async()=>{await fadeBlk(1,0,reduce?120:480);playStation(here);if(EN[3])setTimeout(tutorial,reduce?100:1600)},30))}if(location.hash==='#back'){blk.style.opacity=1;addEventListener('load',()=>setTimeout(()=>fadeBlk(1,0,reduce?120:480),300))}   /* ماکت تنهای نقشه: برگشت از نقشهٔ کلی بدون پرش */
 addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
 </script>
 </div>

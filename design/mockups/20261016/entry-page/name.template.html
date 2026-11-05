@@ -56,10 +56,10 @@ $('nm').addEventListener('input',upd);
 $('nm').addEventListener('keydown',e=>{if(e.key==='Enter'&&ok())$('go').click()});
 try{const v=sessionStorage.getItem('sw-name');if(v)$('nm').value=v}catch(e){}
 upd();
-async function leave(url){if(busy)return;busy=true;$('nm').blur();await $('fade').animate([{opacity:0},{opacity:1}],{duration:reduce?120:600,fill:'forwards'}).finished;try{location.href=url}catch(e){busy=false}}
+async function leave(url){if(busy)return;busy=true;$('nm').blur();await $('fade').animate([{opacity:0},{opacity:1}],{duration:reduce?120:380,fill:'forwards'}).finished;try{location.href=url}catch(e){busy=false}}
 $('go').onclick=()=>{if(!ok())return;const n=$('nm').value.trim();try{sessionStorage.setItem('sw-name',n)}catch(e){}leave('character.html#flow-'+encodeURIComponent(n))};
 $('back').onclick=()=>leave('index.html#back');
-addEventListener('load',()=>setTimeout(async()=>{const f=$('fade');document.documentElement.classList.remove('ent');f.style.opacity=1;await f.animate([{opacity:1},{opacity:0}],{duration:reduce?150:750,fill:'forwards'}).finished;f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0},200));
+addEventListener('load',()=>setTimeout(async()=>{const f=$('fade');document.documentElement.classList.remove('ent');f.style.opacity=1;await f.animate([{opacity:1},{opacity:0}],{duration:reduce?120:480,fill:'forwards'}).finished;f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0},30));
 addEventListener('pageshow',e=>{if(e.persisted){busy=false;const f=$('fade');f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0}});
 </script>
 </body>

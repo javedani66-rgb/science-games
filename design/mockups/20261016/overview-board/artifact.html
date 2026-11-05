@@ -174,18 +174,18 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('shd').hidden)cl
 function tap(i){const hi=CELLS.findIndex(c=>c.id===HERE[mode]);if(i>hi){shake(i);return}enter(i)}
 /* رفتن به نقشهٔ بلند: فقط فید به سیاه و بعد نقشه که از سیاه باز می‌شود (مثل بقیهٔ بازی؛ بدون زوم)؛ فقط با لمس کودک (B5) */
 async function enter(i){if(busy)return;busy=true;const hid=HERE[mode],gid=CELLS[i].id,f=$('fade');
- const an=f.animate([{opacity:0},{opacity:1}],{duration:reduce?120:600,fill:'forwards'});await an.finished;
+ const an=f.animate([{opacity:0},{opacity:1}],{duration:reduce?120:380,fill:'forwards'});await an.finished;
  try{location.href='map.html#enter-'+hid+(gid!==hid?'-'+gid:'')+(mode==='a'?'-tut':'')}catch(e){}
  let left=false;addEventListener('pagehide',()=>{left=true},{once:true});await wait(15000);if(left)return;
  an.cancel();busy=false;sheet('overview.mock.map')}
 /* D205: نقشهٔ کلی ← منوی ورود با فید سیاه */
 $('home').setAttribute('aria-label',S('overview.home'));
-$('home').onclick=async()=>{if(busy)return;busy=true;await $('fade').animate([{opacity:0},{opacity:1}],{duration:reduce?120:600,fill:'forwards'}).finished;try{location.href='index.html#back'}catch(e){}};
+$('home').onclick=async()=>{if(busy)return;busy=true;await $('fade').animate([{opacity:0},{opacity:1}],{duration:reduce?120:380,fill:'forwards'}).finished;try{location.href='index.html#back'}catch(e){}};
 $('go').onclick=()=>enter(CELLS.findIndex(c=>c.id===atId()));
 render();
 /* رسیدن از منوی ورود: صفحه کامل ساخته و فقط بعد از سیاه آرام باز می‌شود (هیچ چیزی پیش از فید دیده نمی‌شود) */
 if(document.documentElement.classList.contains('ent')){const f=$('fade');f.style.opacity=1;
- addEventListener('load',()=>setTimeout(async()=>{document.documentElement.classList.remove('ent');await f.animate([{opacity:1},{opacity:0}],{duration:reduce?150:750,fill:'forwards'}).finished;f.style.opacity=0},200))}
+ addEventListener('load',()=>setTimeout(async()=>{document.documentElement.classList.remove('ent');await f.animate([{opacity:1},{opacity:0}],{duration:reduce?120:480,fill:'forwards'}).finished;f.style.opacity=0},30))}
 addEventListener('pageshow',e=>{if(e.persisted){busy=false;const f=$('fade');f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0}});
 </script>
 </div>
