@@ -343,11 +343,11 @@ const ST={
  city_gate(g){const e=Lh(g,'leaf');if(!e)return;const hx=24,r=s=>'translate('+hx+'px,0) scale('+s+',1) translate('+(-hx)+'px,0)';return_(an2(e,[{transform:r(2)},{transform:r(1)}],1400,0,'ease-out',true,3))},
  scaffold(g){const e=Lh(g,'bucket');if(!e)return;return_(an2(e,rotKf(e,-58.6,-110.8,[0,14,-14,8,-4,0]),2800,0,'ease-in-out',false,1))},
  /* ۵ نوامبر (فهرست اتصال D196): جابه‌جایی‌ها کوتاه شد تا جزء متحرک از جفتش جدا و معلق نشود */
- materials_store(g){return_(an2(Lh(g,'brick'),[{transform:'translateY(-12px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
+ materials_store(g){return_(an2(Lh(g,'brick'),[{transform:'translateX(12px)'},{transform:'translateX(0)'}],1200,0,'ease-out',true,3))},   /* دور دوم عامل‌ها: آجر روی پشته سُر می‌خورد، معلق نمی‌شود */
  excavation(g){const e=Lh(g,'bar');if(!e)return;return_(an2(e,rotKf(e,-7.5,-33,[-20,0]),1800,0,'ease-out',true,3))},
  beam_store(g){return_(an2(Lh(g,'prop'),[{transform:'translateY(-10px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
  tool_room(g){const e=Lh(g,'hammer');if(!e)return;const A=-42,rt=a=>({transform:'translate(-1px,-22.4px) rotate('+a+'deg) translate(1px,22.4px)'}),kf=[];for(let i=0;i<3;i++){const o=i/3,w=1/3;kf.push(Object.assign(rt(0),{offset:o,easing:'ease-out'}),Object.assign(rt(A),{offset:o+w*.6,easing:'cubic-bezier(.6,0,1,.8)'}),Object.assign(rt(0),{offset:o+w*.8}))}kf.push(Object.assign(rt(0),{offset:1}));e.style.transformOrigin='0 0';return_(e.animate(kf,{duration:2700,fill:'backwards',iterations:1}))},
- wrench_room(g){return_(an2(Lh(g,'nut'),[{transform:'translateY(-14px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
+ wrench_room(g){const e=Lh(g,'nut');if(!e)return;const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[0,-30,0,-30,0]),2200,0,'ease-in-out',false,1))},   /* دور دوم عامل‌ها: مهره در دهانهٔ آچار می‌چرخد، از آن بیرون نمی‌آید */
  loading_ramp(g){return_(an2(Ly(g,'crate'),[{transform:'translate(30px,13px)'},{transform:'translate(0,0)'}],1600,0,'ease-in-out',true,3))},
  football(g){const e=Lh(g,'ball');if(!e)return;const f=(x,a)=>'translate('+x+'px,0) translate(-14px,-29px) rotate('+a+'deg) translate(14px,29px)';return_(an2(e,[{transform:f(-36,-55)},{transform:f(0,0)}],1600,0,'ease-out',true,3))},
  basketball_hall(g){const e=Lh(g,'ball');if(!e)return;return_(an2(e,[{transform:'translate(0,28.8px)',easing:'ease-out'},{transform:'translate(31.7px,37.4px)',easing:'ease-out'},{transform:'translate(37.4px,-27.4px)',easing:'ease-out'},{transform:'translate(15.8px,-47.5px)',easing:'ease-in'},{transform:'translate(1.4px,-30.2px)',easing:'ease-in'},{transform:'translate(0,0)'}],1700,0,'linear',true,3))}, /* D194: از تور پایین می‌افتد، می‌غلتد، بالا می‌رود و از بالای حلقه دوباره توی تور */
