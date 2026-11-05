@@ -27,9 +27,10 @@ def main():
     shutil.copyfile(OB / 'index.html', HERE / 'overview.html')   # D192: نقشهٔ کلی بین منو و نقشه (گیت‌نشده)
     f = lambda p: base64.b64encode(open(ROOT / 'assets/fonts' / p, 'rb').read()).decode()
     t = open(HERE / 'template.html', encoding='utf-8').read()
+    HSU = re.findall(r'data:[a-z/+]+;base64,[A-Za-z0-9+/=]+', (HERE.parent / 'hideout-scene' / 'index.html').read_text(encoding='utf-8'))   # D215: هیولا در قاب گرد
     for k, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
                      STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False),
-                     SYMS=SYMS, ANIM=ANIM, SYMOF=json.dumps(SYM_OF), TITLES=json.dumps(TITLES, ensure_ascii=False)).items():
+                     HS_BG=HSU[0], HS_MO=HSU[1], SYMS=SYMS, ANIM=ANIM, SYMOF=json.dumps(SYM_OF), TITLES=json.dumps(TITLES, ensure_ascii=False)).items():
         t = t.replace('{{%s}}' % k, v)
     (HERE / 'index.html').write_text(t, encoding='utf-8')
     # D205: صفحهٔ اسم (بار اول، پیش از کاراکتر) و صفحهٔ کاراکتر (ماکت character-menu در حالت جریان #flow)
