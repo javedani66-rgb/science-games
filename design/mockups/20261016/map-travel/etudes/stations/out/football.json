@@ -1,0 +1,61 @@
+{
+ "id": "football",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  88
+ ],
+ "stand": [
+  0.0,
+  19.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_football_ball"
+ ],
+ "inside_pad": {
+  "min_margin_px": 13.0,
+  "base_on_pad": true,
+  "height_px": 96.0,
+  "bbox_px": [
+   21.0,
+   19.5,
+   119.2,
+   115.5
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_football_ball": {
+   "kind": "توپ؛ حالت ایستا = پایان (کنار دروازه، وسط سکو)",
+   "translate_x_symbol_units": [
+    -17,
+    0
+   ],
+   "translate_x_map_px": [
+    -12.2,
+    0
+   ],
+   "rotate_deg": [
+    -26.325087884389173,
+    0
+   ],
+   "pivot_symbol": [
+    -14,
+    -29
+   ],
+   "duration_s": 1.6,
+   "easing": "ease-out (کندشونده)",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "reduced_motion": "ایستا",
+   "note": "دروازه و تور ثابت؛ سایهٔ تماس با توپ می‌رود؛ بدون عامل هل و بدون خط حرکت؛ بدون حلقهٔ بیکار."
+  }
+ }
+}

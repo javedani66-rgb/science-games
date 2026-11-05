@@ -1,0 +1,2194 @@
+{
+ "_doc": "قالب‌نامهٔ کنترل‌های v5 (ماشین‌خوان، نسخهٔ ۳: رنگ‌های جان‌دار v4 + نوشتهٔ روشن با حاشیهٔ ضخیم هم‌خانواده). منبع حقیقت برای spec_sample.html و tests/spec_contrast.py. ماکت؛ تصمیم مالک ۱۴ اکتبر (گزینهٔ ب).",
+ "meta": {
+  "version": "draft-3",
+  "status": "proposal",
+  "date": "2026-10-14",
+  "palette_sources": [
+   "team/assets_r2/light/zone_tokens.json",
+   "team/assets_r2/ui/ui_tokens.css"
+  ],
+  "wcag": {
+   "text_min": 4.5,
+   "large_text_min": 3,
+   "large_px": 24,
+   "large_bold_px": 18.66,
+   "nontext_min": 3,
+   "effective_min": 4.5,
+   "ring_px": 1.5,
+   "ring_percentile": 5,
+   "outline_required_below_raw": 4.5,
+   "outline_vs_fill_min": 3
+  },
+  "touch_min_px": 48,
+  "min_gap_px": 8,
+  "min_font_px": 16,
+  "derived_rule": "pressed_fill = mix(fill, edge, 0.12); edge = #120c3a (day) / #190539 (night). shadow = mix(fill, #190539, 0.7). deep fills: see derived_colors"
+ },
+ "palette": {
+  "cream": "#fff3c4",
+  "navy_line": "#241a5e",
+  "night_bg": "#190539",
+  "edge": "#120c3a",
+  "chip_violet": "#4b3b9e",
+  "violet_light": "#7a6af5",
+  "purple_hold": "#8a4fe0",
+  "lilac": "#a99dff",
+  "lilac_pale": "#cdb8ff",
+  "gold": "#ffd23f",
+  "cyan": "#46f0d8",
+  "pink": "#ff7be5",
+  "white": "#ffffff",
+  "card_plate": "#07203a",
+  "empty_fill": "#2a0b60",
+  "locked_fill": "#34145f",
+  "dash": "#9a78e0",
+  "disabled_day_fill": "#d9d3e8",
+  "disabled_day_text": "#4a4268",
+  "disabled_day_rim": "#6d6492",
+  "easy": "#2fa44a",
+  "mid": "#ff9d1c",
+  "hard": "#ff4b4b",
+  "easy_rim_night": "#a6f0b4",
+  "mid_rim_night": "#ffd29a",
+  "hard_rim_night": "#ffb0b0"
+ },
+ "fonts": {
+  "display": {
+   "family": "Lalezar",
+   "weights": [
+    400
+   ],
+   "roles": [
+    "title",
+    "button_label",
+    "icon_label"
+   ],
+   "rule": "titles (sheet title too), text on buttons, icon labels and plates",
+   "max_words": 4,
+   "min_px": 20,
+   "large_min_px": 24,
+   "note": "Lalezar has one weight (400); outlined 24px+ on buttons/titles, 20px on plates and map labels"
+  },
+  "base": {
+   "family": "Vazirmatn",
+   "weights": [
+    400,
+    700
+   ],
+   "roles": [
+    "body",
+    "long_text"
+   ],
+   "rule": "explanatory and long reading text: sheet body, descriptions, captions, sub-lines"
+  }
+ },
+ "radius_scale": {
+  "sm": 10,
+  "md": 16,
+  "lg": 18,
+  "xl": 28,
+  "full": "half of height (chip_simple 24, lock 18)"
+ },
+ "global_rules": {
+  "clip_path": "forbidden",
+  "sharp_corner": "forbidden: every corner of every control has the row radius (no 0, no asymmetric)",
+  "opacity_on_text": "forbidden (use disabled colors)",
+  "difficulty_on_node_sheet": "forbidden: the three difficulty levels appear only in challenge_row, challenge_stack (environment) and the mission bar in a scene",
+  "text_on_map_without_plate": "forbidden (map_label plate or zone_title halo only)",
+  "text_pattern": "light text (white or cream) on a VIVID v4 fill = thick same-family dark outline (stroke 5px, 6px for titles) plus a 3px drop; colour = mix(fill, #190539, .82). Cream/white fills keep navy text, no outline.",
+  "base_picker": "the base choice is a row in the menu plus a sheet; no permanent chips on the map",
+  "stars_rewards": "forbidden (B4)",
+  "vivid_fill_never_darkened": "owner decision 14 Oct (option b): the bright v4 fill is never darkened; if the ring ratio fails, make the outline thicker or darker, not the fill",
+  "outline_effective": "effective ratio = pixel measure on the ring around the letters (p5 >= 4.5) AND outline vs fill >= 3",
+  "map_text": "map labels are cream Lalezar with a 6px navy outline (same pattern as the zone title); status plates (اینجایی, اول: …, اختیاری) keep a plate"
+ },
+ "state_rules": {
+  "pressed": {
+   "shift_px": 2,
+   "lip_px_day": 2,
+   "glow_blur_px_night": 10,
+   "fill": "variant.pressed_fill",
+   "text": "unchanged"
+  },
+  "disabled": {
+   "day": {
+    "fill": "#d9d3e8",
+    "text": "#4a4268",
+    "rim": "#6d6492",
+    "rim_style": "dashed",
+    "stripes": true
+   },
+   "night": {
+    "fill": "#34145f",
+    "text": "#cdb8ff",
+    "rim": "#9a78e0",
+    "rim_style": "dashed",
+    "stripes": true
+   },
+   "shadow": "none",
+   "note": "looks different from normal by dashed rim and stripes; text stays readable (>=4.5); a lock icon is added when locked"
+  },
+  "focus": {
+   "ring_px": 4,
+   "offset_px": 3,
+   "on_light_surface": "#4b3b9e",
+   "on_dark_surface": "#ffd23f",
+   "note": "ring sits outside the control, separated by a 3px gap of surface"
+  }
+ },
+ "rows": [
+  {
+   "id": "btn_primary",
+   "name_key": "spec.row.btn_primary",
+   "desc_key": "spec.desc.btn_primary",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.3,
+    "max_words": 4,
+    "role": "button_label"
+   },
+   "size": {
+    "min_height_px": 56,
+    "min_width_px": 96,
+    "touch_px": 56,
+    "padding_inline_px": 22
+   },
+   "variants": [
+    {
+     "id": "cyan",
+     "day": {
+      "fill": "#46f0d8",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#40d5c5",
+      "shadow": "#212f56",
+      "outline": true
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "pressed_fill": "#41d4c5",
+      "glow": "#46f0d8",
+      "shadow": "#212f56",
+      "outline": true
+     }
+    },
+    {
+     "id": "gold",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3ba3e",
+      "shadow": "#422a3a",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#ffd23f",
+      "pressed_fill": "#e3b93e",
+      "glow": "#ffd23f",
+      "shadow": "#422a3a",
+      "outline": true
+     }
+    },
+    {
+     "id": "pink",
+     "day": {
+      "fill": "#ff7be5",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#e36ed0",
+      "shadow": "#421a58",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ff7be5",
+      "text": "#ffffff",
+      "rim": "#ff7be5",
+      "pressed_fill": "#e36dd0",
+      "glow": "#ff7be5",
+      "shadow": "#421a58",
+      "outline": true
+     }
+    },
+    {
+     "id": "violet",
+     "day": {
+      "fill": "#8a4fe0",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#7c47cc",
+      "outline": true,
+      "shadow": "#2d1257"
+     },
+     "night": {
+      "fill": "#8a4fe0",
+      "text": "#ffffff",
+      "rim": "#a99dff",
+      "pressed_fill": "#7c46cc",
+      "glow": "#a99dff",
+      "outline": true,
+      "shadow": "#2d1257"
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "btn_secondary",
+   "name_key": "spec.row.btn_secondary",
+   "desc_key": "spec.desc.btn_secondary",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.3,
+    "max_words": 4,
+    "role": "button_label"
+   },
+   "size": {
+    "min_height_px": 56,
+    "min_width_px": 96,
+    "touch_px": 56,
+    "padding_inline_px": 22
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3d7b3",
+      "outline": false
+     },
+     "night": {
+      "fill": "#a99dff",
+      "text": "#ffffff",
+      "rim": "#a99dff",
+      "pressed_fill": "#988be7",
+      "glow": "#a99dff",
+      "shadow": "#33205d",
+      "outline": true
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "btn_icon",
+   "name_key": "spec.row.btn_icon",
+   "desc_key": "spec.desc.btn_icon",
+   "interactive": true,
+   "surface": {
+    "day": "#241a5e",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 16,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": null,
+    "weight": null,
+    "size_px": null,
+    "line_height": null,
+    "max_words": 0,
+    "note": "icon only; aria-label from strings"
+   },
+   "size": {
+    "min_height_px": 56,
+    "min_width_px": 56,
+    "touch_px": 56,
+    "icon_px": 32
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3d7b3",
+      "icon": "#241a5e",
+      "outline": false
+     },
+     "night": {
+      "fill": "#a99dff",
+      "text": "#190539",
+      "rim": "#a99dff",
+      "pressed_fill": "#988be7",
+      "glow": "#a99dff",
+      "icon": "#190539",
+      "outline": false
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "base_picker",
+   "name_key": "spec.row.base_picker",
+   "desc_key": "spec.desc.base_picker",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.25,
+    "max_words": 3,
+    "role": "button_label"
+   },
+   "font_sub": {
+    "family": "Vazirmatn",
+    "weight": 400,
+    "size_px": 16,
+    "line_height": 1.5,
+    "max_words": null,
+    "role": "body"
+   },
+   "size": {
+    "min_height_px": 72,
+    "min_width_px": 280,
+    "touch_px": 72,
+    "option_height_px": 64
+   },
+   "variants": [
+    {
+     "id": "row",
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#443592",
+      "outline": false
+     },
+     "night": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "rim": "#a99dff",
+      "pressed_fill": "#453592",
+      "glow": "#a99dff",
+      "outline": false
+     }
+    },
+    {
+     "id": "opt_off",
+     "day": {
+      "fill": "#ffffff",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3e2e7",
+      "outline": false
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#280a5b",
+      "outline": false
+     }
+    },
+    {
+     "id": "opt_on",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3ba3e",
+      "shadow": "#422a3a",
+      "icon": "#ffffff",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#fff3c4",
+      "pressed_fill": "#e3b93e",
+      "glow": "#fff3c4",
+      "shadow": "#422a3a",
+      "icon": "#ffffff",
+      "outline": true
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "check_badge",
+     "kind": "icon",
+     "note_key": "spec.part.check_badge",
+     "day": {
+      "fill": "#46f0d8",
+      "text": "#190539",
+      "outline": false
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#190539",
+      "outline": false
+     }
+    },
+    {
+     "id": "row_sub",
+     "kind": "text",
+     "note_key": "spec.part.row_sub",
+     "font": {
+      "family": "Vazirmatn",
+      "weight": 700,
+      "size_px": 16,
+      "line_height": 1.5,
+      "max_words": null,
+      "role": "body"
+     },
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#fff3c4",
+      "outline": false
+     },
+     "night": {
+      "fill": "#4b3b9e",
+      "text": "#fff3c4",
+      "outline": false
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "chip_simple",
+   "name_key": "spec.row.chip_simple",
+   "desc_key": "spec.desc.chip_simple",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 24,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.2,
+    "max_words": 3,
+    "role": "button_label"
+   },
+   "size": {
+    "min_height_px": 48,
+    "min_width_px": 64,
+    "touch_px": 48,
+    "padding_inline_px": 18
+   },
+   "variants": [
+    {
+     "id": "off",
+     "day": {
+      "fill": "#ffffff",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3e2e7",
+      "outline": false
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#280a5b",
+      "outline": false
+     }
+    },
+    {
+     "id": "on",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3ba3e",
+      "shadow": "#422a3a",
+      "icon": "#ffffff",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#fff3c4",
+      "pressed_fill": "#e3b93e",
+      "shadow": "#422a3a",
+      "icon": "#ffffff",
+      "outline": true
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "challenge_row",
+   "name_key": "spec.row.challenge_row",
+   "desc_key": "spec.desc.challenge_row",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.2,
+    "max_words": 4,
+    "role": "button_label"
+   },
+   "size": {
+    "min_height_px": 72,
+    "min_width_px": 280,
+    "touch_px": 72
+   },
+   "variants": [
+    {
+     "id": "shell",
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#443592",
+      "outline": false
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "pressed_fill": "#280a5b",
+      "glow": "#46f0d8",
+      "outline": false
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "badge_easy",
+     "kind": "text",
+     "note_key": "spec.part.badge",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 24,
+      "line_height": 1.1,
+      "max_words": 1,
+      "role": "icon_label"
+     },
+     "day": {
+      "fill": "#2fa44a",
+      "text": "#ffffff",
+      "shadow": "#1d223c",
+      "outline": true
+     },
+     "night": {
+      "fill": "#2fa44a",
+      "text": "#ffffff",
+      "shadow": "#1d223c",
+      "outline": true
+     }
+    },
+    {
+     "id": "badge_mid",
+     "kind": "text",
+     "note_key": "spec.part.badge",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 24,
+      "line_height": 1.1,
+      "max_words": 1,
+      "role": "icon_label"
+     },
+     "day": {
+      "fill": "#ff9d1c",
+      "text": "#ffffff",
+      "shadow": "#422034",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ff9d1c",
+      "text": "#ffffff",
+      "shadow": "#422034",
+      "outline": true
+     }
+    },
+    {
+     "id": "badge_hard",
+     "kind": "text",
+     "note_key": "spec.part.badge",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 24,
+      "line_height": 1.1,
+      "max_words": 1,
+      "role": "icon_label"
+     },
+     "day": {
+      "fill": "#ff4b4b",
+      "text": "#ffffff",
+      "shadow": "#42123c",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ff4b4b",
+      "text": "#ffffff",
+      "shadow": "#42123c",
+      "outline": true
+     }
+    }
+   ],
+   "badge": {
+    "radius_px": 12,
+    "height_px": 40,
+    "border_px": 2.6,
+    "border_color": "#241a5e",
+    "fixed_colors_day_night": true
+   },
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "challenge_stack",
+   "name_key": "spec.row.challenge_stack",
+   "desc_key": "spec.desc.challenge_stack",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 28,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.25,
+    "max_words": 4,
+    "role": "title"
+   },
+   "font_sub": {
+    "family": "Vazirmatn",
+    "weight": 700,
+    "size_px": 16,
+    "line_height": 1.5,
+    "max_words": null,
+    "role": "body"
+   },
+   "size": {
+    "min_height_px": 112,
+    "min_width_px": 280,
+    "touch_px": 112
+   },
+   "stack": {
+    "front": "easy",
+    "order": [
+     "easy",
+     "mid",
+     "hard"
+    ],
+    "peek_px": 56,
+    "inset_px_per_step": 14,
+    "strip_touch": true,
+    "motion": "by motion-designer; this row defines only the static shape",
+    "strip_px": 56,
+    "note": "owner decision: MOTION_SPEC geometry; the two cards behind show a 56px bar (badge + name) that IS a touch target (>=48)"
+   },
+   "variants": [
+    {
+     "id": "easy",
+     "day": {
+      "fill": "#2fa44a",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#2c9248",
+      "shadow": "#1d223c",
+      "outline": true
+     },
+     "night": {
+      "fill": "#2fa44a",
+      "text": "#ffffff",
+      "rim": "#a6f0b4",
+      "pressed_fill": "#2c9148",
+      "glow": "#2fa44a",
+      "shadow": "#1d223c",
+      "outline": true
+     }
+    },
+    {
+     "id": "mid",
+     "day": {
+      "fill": "#ff9d1c",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#e38c20",
+      "shadow": "#422034",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ff9d1c",
+      "text": "#ffffff",
+      "rim": "#ffd29a",
+      "pressed_fill": "#e38b1f",
+      "glow": "#ff9d1c",
+      "shadow": "#422034",
+      "outline": true
+     }
+    },
+    {
+     "id": "hard",
+     "day": {
+      "fill": "#ff4b4b",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#e34349",
+      "shadow": "#42123c",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ff4b4b",
+      "text": "#ffffff",
+      "rim": "#ffb0b0",
+      "pressed_fill": "#e34349",
+      "glow": "#ff4b4b",
+      "shadow": "#42123c",
+      "outline": true
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "sub_plate",
+     "kind": "text",
+     "note_key": "spec.part.stack_sub",
+     "font": {
+      "family": "Vazirmatn",
+      "weight": 700,
+      "size_px": 16,
+      "line_height": 1.5,
+      "max_words": null,
+      "role": "body"
+     },
+     "day": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "outline": false
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "outline": false
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "map_label",
+   "name_key": "spec.row.map_label",
+   "desc_key": "spec.desc.map_label",
+   "interactive": false,
+   "surface": {
+    "day": "#469d36",
+    "night": "#190539"
+   },
+   "surfaces_extra": {
+    "sports": "#469d36",
+    "space": "#c55535",
+    "farm": "#9d8e16",
+    "city": "#155f77",
+    "sand": "#f0d07e",
+    "ice": "#d7efff"
+   },
+   "shape": {
+    "radius_px": null,
+    "corners": "text-only",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 6,
+    "style": "stroke"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 22,
+    "line_height": 1.35,
+    "max_words": 3,
+    "role": "icon_label"
+   },
+   "size": {
+    "min_height_px": 32,
+    "min_width_px": 0,
+    "touch_px": null,
+    "note": "not a button; the node itself is the touch target"
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#241a5e",
+      "text": "#fff3c4",
+      "rim": "#241a5e",
+      "outline": false
+     },
+     "night": {
+      "fill": "#190539",
+      "text": "#ffffff",
+      "rim": "#190539",
+      "outline": false
+     }
+    }
+   ],
+   "states_apply": []
+  },
+  {
+   "id": "side_path",
+   "name_key": "spec.row.side_path",
+   "desc_key": "spec.desc.side_path",
+   "interactive": true,
+   "surface": {
+    "day": "#469d36",
+    "night": "#190539"
+   },
+   "surfaces_extra": {
+    "sports": "#469d36",
+    "space": "#c55535",
+    "farm": "#9d8e16",
+    "city": "#155f77",
+    "sand": "#f0d07e",
+    "ice": "#d7efff"
+   },
+   "shape": {
+    "radius_px": 28,
+    "corners": "circle",
+    "size_px": 56,
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "dashed"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 20,
+    "line_height": 1.35,
+    "max_words": 3,
+    "role": "icon_label"
+   },
+   "size": {
+    "min_height_px": 56,
+    "min_width_px": 56,
+    "touch_px": 56,
+    "icon_px": 32
+   },
+   "path": {
+    "main": {
+     "style": "solid",
+     "width_px": 8
+    },
+    "side": {
+     "style": "dotted",
+     "width_px": 7,
+     "dash_px": [
+      1,
+      13
+     ],
+     "linecap": "round"
+    },
+    "casing_px": 4
+   },
+   "variants": [
+    {
+     "id": "node",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "icon": "#241a5e",
+      "pressed_fill": "#e3d7b3",
+      "outline": false
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#cdb8ff",
+      "icon": "#ffffff",
+      "pressed_fill": "#280a5b",
+      "outline": false
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "dots",
+     "kind": "line",
+     "note_key": "spec.part.side_dots",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "outline": false
+     },
+     "night": {
+      "fill": "#fff3c4",
+      "text": "#190539",
+      "outline": false
+     }
+    },
+    {
+     "id": "tag",
+     "kind": "text",
+     "note_key": "spec.part.side_tag",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 20,
+      "line_height": 1.3,
+      "max_words": 2,
+      "role": "icon_label"
+     },
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "outline": false
+     },
+     "night": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "outline": false
+     }
+    },
+    {
+     "id": "label",
+     "kind": "text",
+     "note_key": "spec.part.side_label",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 20,
+      "line_height": 1.35,
+      "max_words": 3,
+      "role": "icon_label"
+     },
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "outline": false
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "outline": false
+     }
+    }
+   ],
+   "state_overrides": {
+    "disabled": {
+     "day": {
+      "fill": "#d9d3e8",
+      "text": "#4a4268",
+      "rim": "#241a5e",
+      "rim_style": "dashed"
+     }
+    },
+    "focus": {
+     "ring": "#fff3c4",
+     "outline": "#241a5e",
+     "note": "two-tone ring (navy 3px next to the node, cream 4px outside) so it shows on every map colour"
+    }
+   },
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "zone_title",
+   "name_key": "spec.row.zone_title",
+   "desc_key": "spec.desc.zone_title",
+   "interactive": false,
+   "surface": {
+    "day": "#469d36",
+    "night": "#190539"
+   },
+   "surfaces_extra": {
+    "sports": "#469d36",
+    "space": "#c55535",
+    "farm": "#9d8e16",
+    "city": "#155f77",
+    "sand": "#f0d07e",
+    "ice": "#d7efff"
+   },
+   "shape": {
+    "radius_px": null,
+    "corners": "text-only",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 9,
+    "style": "halo",
+    "note": "text-stroke under the fill (paint-order: stroke fill)"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 34,
+    "line_height": 1.2,
+    "max_words": 4,
+    "min_size_px": 24,
+    "fallback": "Vazirmatn 700",
+    "role": "title"
+   },
+   "size": {
+    "min_height_px": 0,
+    "touch_px": null
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#241a5e",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "outline": false
+     },
+     "night": {
+      "fill": "#190539",
+      "text": "#ffffff",
+      "rim": "#190539",
+      "outline": false
+     }
+    }
+   ],
+   "states_apply": [],
+   "drop": {
+    "px": 4,
+    "color": "#241a5e"
+   }
+  },
+  {
+   "id": "plate",
+   "name_key": "spec.row.plate",
+   "desc_key": "spec.desc.plate",
+   "interactive": false,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 10,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 20,
+    "line_height": 1.4,
+    "max_words": 4,
+    "role": "icon_label"
+   },
+   "size": {
+    "min_height_px": 32,
+    "touch_px": null,
+    "padding_inline_px": 14
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "outline": false
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#9a78e0",
+      "outline": false
+     }
+    },
+    {
+     "id": "here",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "shadow": "#422a3a",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#fff3c4",
+      "shadow": "#422a3a",
+      "outline": true
+     }
+    },
+    {
+     "id": "new",
+     "day": {
+      "fill": "#ff7be5",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "shadow": "#421a58",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ff7be5",
+      "text": "#ffffff",
+      "rim": "#fff3c4",
+      "shadow": "#421a58",
+      "outline": true
+     }
+    }
+   ],
+   "states_apply": []
+  },
+  {
+   "id": "sheet",
+   "name_key": "spec.row.sheet",
+   "desc_key": "spec.desc.sheet",
+   "interactive": false,
+   "surface": {
+    "day": "#7fd4ff",
+    "night": "#190539"
+   },
+   "surface_note": "sheet floats over map/scene; checked against its own rim and text only",
+   "shape": {
+    "radius_px": 28,
+    "corners": "all-equal",
+    "clip_path": "none",
+    "margin_px": 8
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 22,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Vazirmatn",
+    "weight": 400,
+    "size_px": 16,
+    "line_height": 1.7,
+    "max_words": null,
+    "role": "body",
+    "title": {
+     "family": "Lalezar",
+     "weight": 400,
+     "size_px": 28,
+     "line_height": 1.3,
+     "max_words": 4,
+     "role": "title"
+    }
+   },
+   "size": {
+    "min_height_px": 0,
+    "touch_px": null
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#fff3c4",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "outline": false
+     },
+     "night": {
+      "fill": "#190539",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "glow": "#46f0d8",
+      "outline": false
+     }
+    }
+   ],
+   "states_apply": [],
+   "parts": [
+    {
+     "id": "title_band",
+     "kind": "text",
+     "note_key": "spec.part.sheet_band",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 28,
+      "line_height": 1.3,
+      "max_words": 4,
+      "role": "title"
+     },
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "outline": false
+     },
+     "night": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "outline": false
+     }
+    }
+   ]
+  },
+  {
+   "id": "tab",
+   "name_key": "spec.row.tab",
+   "desc_key": "spec.desc.tab",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 16,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.2,
+    "max_words": 2,
+    "role": "button_label"
+   },
+   "size": {
+    "min_height_px": 48,
+    "min_width_px": 88,
+    "touch_px": 48
+   },
+   "variants": [
+    {
+     "id": "off",
+     "day": {
+      "fill": "#ffffff",
+      "text": "#241a5e",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3e2e7",
+      "outline": false
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#ffffff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#280a5b",
+      "outline": false
+     }
+    },
+    {
+     "id": "on",
+     "day": {
+      "fill": "#241a5e",
+      "text": "#fff3c4",
+      "rim": "#241a5e",
+      "pressed_fill": "#22185a",
+      "icon": "#ffd23f",
+      "outline": false
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "pressed_fill": "#41d4c5",
+      "glow": "#46f0d8",
+      "shadow": "#212f56",
+      "icon": "#ffffff",
+      "outline": true
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "on_bar",
+     "kind": "icon",
+     "note_key": "spec.part.tab_bar",
+     "day": {
+      "fill": "#241a5e",
+      "text": "#ffd23f",
+      "outline": false
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#190539",
+      "outline": false
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "tile_menu",
+   "name_key": "spec.row.tile_menu",
+   "desc_key": "spec.desc.tile_menu",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": "Lalezar",
+    "weight": 400,
+    "size_px": 24,
+    "line_height": 1.25,
+    "max_words": 2,
+    "role": "icon_label"
+   },
+   "size": {
+    "min_height_px": 132,
+    "min_width_px": 150,
+    "touch_px": 132
+   },
+   "variants": [
+    {
+     "id": "cyan",
+     "day": {
+      "fill": "#46f0d8",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#40d5c5",
+      "shadow": "#212f56",
+      "icon": "#ffffff",
+      "outline": true
+     },
+     "night": {
+      "fill": "#46f0d8",
+      "text": "#ffffff",
+      "rim": "#46f0d8",
+      "pressed_fill": "#41d4c5",
+      "glow": "#46f0d8",
+      "shadow": "#212f56",
+      "icon": "#ffffff",
+      "outline": true
+     }
+    },
+    {
+     "id": "violet",
+     "day": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#443592",
+      "icon": "#ffffff",
+      "outline": false
+     },
+     "night": {
+      "fill": "#4b3b9e",
+      "text": "#ffffff",
+      "rim": "#a99dff",
+      "pressed_fill": "#453592",
+      "glow": "#a99dff",
+      "icon": "#ffffff",
+      "outline": false
+     }
+    },
+    {
+     "id": "gold",
+     "day": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#e3ba3e",
+      "shadow": "#422a3a",
+      "icon": "#ffffff",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ffd23f",
+      "text": "#ffffff",
+      "rim": "#ffd23f",
+      "pressed_fill": "#e3b93e",
+      "glow": "#ffd23f",
+      "shadow": "#422a3a",
+      "icon": "#ffffff",
+      "outline": true
+     }
+    },
+    {
+     "id": "pink",
+     "day": {
+      "fill": "#ff7be5",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#e36ed0",
+      "shadow": "#421a58",
+      "icon": "#ffffff",
+      "outline": true
+     },
+     "night": {
+      "fill": "#ff7be5",
+      "text": "#ffffff",
+      "rim": "#ff7be5",
+      "pressed_fill": "#e36dd0",
+      "glow": "#ff7be5",
+      "shadow": "#421a58",
+      "icon": "#ffffff",
+      "outline": true
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "tile_card",
+   "name_key": "spec.row.tile_card",
+   "desc_key": "spec.desc.tile_card",
+   "interactive": true,
+   "surface": {
+    "day": "#fff3c4",
+    "night": "#190539"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "all-equal",
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 3.5,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "lip",
+     "px": 4,
+     "color": "#120c3a"
+    },
+    "night": {
+     "type": "glow",
+     "blur_px": 18,
+     "alpha": 0.55
+    }
+   },
+   "font": {
+    "family": null,
+    "weight": null,
+    "size_px": null,
+    "line_height": null,
+    "max_words": 0,
+    "note": "icon only; the name sits on the plate part"
+   },
+   "size": {
+    "min_height_px": 112,
+    "min_width_px": 96,
+    "touch_px": 112
+   },
+   "name_plate": {
+    "radius_px": 10,
+    "fill": "#07203a",
+    "text": "#ffffff"
+   },
+   "variants": [
+    {
+     "id": "seen",
+     "day": {
+      "fill": "#25cdc0",
+      "text": "#190539",
+      "rim": "#241a5e",
+      "pressed_fill": "#23b6b0",
+      "icon": "#190539",
+      "outline": false
+     },
+     "night": {
+      "fill": "#25cdc0",
+      "text": "#190539",
+      "rim": "#25cdc0",
+      "pressed_fill": "#24b5b0",
+      "glow": "#25cdc0",
+      "icon": "#190539",
+      "outline": false
+     }
+    },
+    {
+     "id": "kept",
+     "day": {
+      "fill": "#4a2fb8",
+      "text": "#ffffff",
+      "rim": "#241a5e",
+      "pressed_fill": "#432ba9",
+      "icon": "#ffffff",
+      "outline": false
+     },
+     "night": {
+      "fill": "#4a2fb8",
+      "text": "#ffffff",
+      "rim": "#a99dff",
+      "pressed_fill": "#442aa9",
+      "glow": "#a99dff",
+      "icon": "#ffffff",
+      "outline": false
+     }
+    },
+    {
+     "id": "new",
+     "day": {
+      "fill": "#2a0b60",
+      "text": "#cdb8ff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#270b5b",
+      "icon": "#cdb8ff",
+      "rim_style": "dashed",
+      "outline": false
+     },
+     "night": {
+      "fill": "#2a0b60",
+      "text": "#cdb8ff",
+      "rim": "#9a78e0",
+      "pressed_fill": "#280a5b",
+      "icon": "#cdb8ff",
+      "rim_style": "dashed",
+      "outline": false
+     }
+    },
+    {
+     "id": "locked",
+     "day": {
+      "fill": "#34145f",
+      "text": "#cdb8ff",
+      "rim": "#cdb8ff",
+      "pressed_fill": "#30135b",
+      "icon": "#cdb8ff",
+      "outline": false
+     },
+     "night": {
+      "fill": "#34145f",
+      "text": "#cdb8ff",
+      "rim": "#cdb8ff",
+      "pressed_fill": "#31125a",
+      "icon": "#cdb8ff",
+      "outline": false
+     }
+    }
+   ],
+   "parts": [
+    {
+     "id": "name_plate",
+     "day": {
+      "fill": "#07203a",
+      "text": "#ffffff",
+      "outline": false
+     },
+     "night": {
+      "fill": "#07203a",
+      "text": "#ffffff",
+      "outline": false
+     },
+     "kind": "text",
+     "note_key": "spec.part.name_plate",
+     "font": {
+      "family": "Lalezar",
+      "weight": 400,
+      "size_px": 20,
+      "line_height": 1.3,
+      "max_words": 3,
+      "role": "icon_label"
+     }
+    }
+   ],
+   "states_apply": [
+    "normal",
+    "pressed",
+    "disabled",
+    "focus"
+   ]
+  },
+  {
+   "id": "lock",
+   "name_key": "spec.row.lock",
+   "desc_key": "spec.desc.lock",
+   "interactive": false,
+   "surface": {
+    "day": "#469d36",
+    "night": "#190539"
+   },
+   "surfaces_extra": {
+    "sports": "#469d36",
+    "space": "#c55535",
+    "farm": "#9d8e16",
+    "city": "#155f77",
+    "sand": "#f0d07e",
+    "ice": "#d7efff"
+   },
+   "shape": {
+    "radius_px": 18,
+    "corners": "circle",
+    "size_px": 36,
+    "clip_path": "none"
+   },
+   "border": {
+    "width_px": 2.6,
+    "style": "solid"
+   },
+   "depth": {
+    "day": {
+     "type": "none"
+    },
+    "night": {
+     "type": "none"
+    }
+   },
+   "font": {
+    "family": null,
+    "weight": null,
+    "size_px": null,
+    "max_words": 0
+   },
+   "size": {
+    "min_height_px": 36,
+    "min_width_px": 36,
+    "touch_px": null,
+    "note": "inert badge; touch belongs to the parent node/row/tile (>=48)"
+   },
+   "variants": [
+    {
+     "id": "plain",
+     "day": {
+      "fill": "#241a5e",
+      "text": "#fff3c4",
+      "rim": "#fff3c4",
+      "icon": "#fff3c4",
+      "outline": false
+     },
+     "night": {
+      "fill": "#34145f",
+      "text": "#cdb8ff",
+      "rim": "#cdb8ff",
+      "icon": "#cdb8ff",
+      "outline": false
+     }
+    }
+   ],
+   "states_apply": []
+  }
+ ],
+ "forbidden_pairs": [
+  {
+   "fg": "#241a5e",
+   "bg": "#4b3b9e",
+   "why_key": "spec.forbid.dark_on_violet",
+   "scope": "all"
+  },
+  {
+   "fg": "#241a5e",
+   "bg": "#155f77",
+   "why_key": "spec.forbid.dark_on_sea",
+   "scope": "all"
+  },
+  {
+   "fg": "#241a5e",
+   "bg": "#0a86a4",
+   "why_key": "spec.forbid.dark_on_card_blue",
+   "scope": "small"
+  },
+  {
+   "fg": "#241a5e",
+   "bg": "#8a4fe0",
+   "why_key": "spec.forbid.dark_on_purple",
+   "scope": "small"
+  },
+  {
+   "fg": "#7a6af5",
+   "bg": "#241a5e",
+   "why_key": "spec.forbid.pale_violet_on_navy",
+   "scope": "small"
+  },
+  {
+   "fg": "#8a4fe0",
+   "bg": "#190539",
+   "why_key": "spec.forbid.purple_on_night",
+   "scope": "small"
+  },
+  {
+   "fg": "#4b3b9e",
+   "bg": "#241a5e",
+   "why_key": "spec.forbid.chip_violet_on_navy",
+   "scope": "all"
+  },
+  {
+   "fg": "#4b3b9e",
+   "bg": "#190539",
+   "why_key": "spec.forbid.chip_violet_on_night",
+   "scope": "all"
+  },
+  {
+   "fg": "#9a78e0",
+   "bg": "#241a5e",
+   "why_key": "spec.forbid.dash_on_navy",
+   "scope": "small"
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#469d36",
+   "why_key": "spec.forbid.cream_on_grass",
+   "scope": "small",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#9d8e16",
+   "why_key": "spec.forbid.cream_on_farm",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#f0d07e",
+   "why_key": "spec.forbid.cream_on_sand",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#46f0d8",
+   "bg": "#fff3c4",
+   "why_key": "spec.forbid.bright_on_cream",
+   "scope": "all"
+  },
+  {
+   "fg": "#ffd23f",
+   "bg": "#fff3c4",
+   "why_key": "spec.forbid.bright_on_cream",
+   "scope": "all"
+  },
+  {
+   "fg": "#a99dff",
+   "bg": "#fff3c4",
+   "why_key": "spec.forbid.bright_on_cream",
+   "scope": "all"
+  },
+  {
+   "fg": "#4b3b9e",
+   "bg": "#34145f",
+   "why_key": "spec.forbid.violet_on_locked",
+   "scope": "all"
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#46f0d8",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#46f0d8",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#ffd23f",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#ffd23f",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#ff7be5",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#ff7be5",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#a99dff",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#a99dff",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#2fa44a",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "small",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#2fa44a",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#ff9d1c",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#ff9d1c",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#ff4b4b",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "small",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#ff4b4b",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#ffffff",
+   "bg": "#25cdc0",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  },
+  {
+   "fg": "#fff3c4",
+   "bg": "#25cdc0",
+   "why_key": "spec.forbid.bare_on_vivid",
+   "scope": "all",
+   "shadow_demo": true
+  }
+ ],
+ "allowed_text_on_dark": {
+  "on": [
+   "#241a5e",
+   "#190539",
+   "#2a0b60",
+   "#34145f"
+  ],
+  "colors": [
+   "#ffffff",
+   "#fff3c4",
+   "#a99dff",
+   "#cdb8ff",
+   "#46f0d8",
+   "#ffd23f"
+  ]
+ },
+ "derived_colors": {},
+ "text_shadow": {
+  "rule": "light text (white, or cream) on a vivid fill gets a thick same-family outline: stroke + a 3px drop, colour = mix(fill, #190539, 0.82). The fill stays bright (v4). Where raw text/fill >= 4.5 (dark fills) no outline. Cream/white fills keep navy text with no outline.",
+  "mix_toward": "#190539",
+  "mix_t": 0.82,
+  "stroke_px": 5,
+  "stroke_px_title": 6,
+  "layers_px": [
+   [
+    0,
+    3
+   ]
+  ],
+  "applies_to": "light text on a vivid coloured fill (raw ratio under 4.5)"
+ }
+}

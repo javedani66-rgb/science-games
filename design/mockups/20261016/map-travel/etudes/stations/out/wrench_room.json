@@ -1,0 +1,51 @@
+{
+ "id": "wrench_room",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  94
+ ],
+ "stand": [
+  -44.0,
+  13.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_wrench_room_nut"
+ ],
+ "inside_pad": {
+  "min_margin_px": 9.0,
+  "base_on_pad": true,
+  "height_px": 111.8,
+  "bbox_px": [
+   24.5,
+   5.5,
+   128.5,
+   117.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_wrench_room_nut": {
+   "translate_from": [
+    0,
+    -16
+   ],
+   "translate_to": [
+    0,
+    0
+   ],
+   "dur_s": 1.2,
+   "easing": "ease-in",
+   "repeat": 1,
+   "note": "مهره از بالای دهانه آرام در دهانهٔ آچار می‌نشیند؛ آچار و جعبه ثابت؛ حالت ایستا = نشسته؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "مهره در دهانه"
+ }
+}

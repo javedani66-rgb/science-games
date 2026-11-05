@@ -1,0 +1,75 @@
+{
+ "id": "basketball_hall",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  102
+ ],
+ "stand": [
+  -36.0,
+  14.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_basketball_hall_ball"
+ ],
+ "inside_pad": {
+  "min_margin_px": 15.0,
+  "base_on_pad": true,
+  "height_px": 112.5,
+  "bbox_px": [
+   30.2,
+   5.8,
+   122.5,
+   118.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_basketball_hall_ball": {
+   "kind": "توپ از کنار پایه بالا می‌رود و از بالای حلقه توی تور می‌افتد؛ حالت ایستا = پایان (توپ داخل تور)",
+   "translate_symbol_units": [
+    [
+     0,
+     40
+    ],
+    [
+     44,
+     52
+    ],
+    [
+     52,
+     -38
+    ],
+    [
+     22,
+     -66
+    ],
+    [
+     2,
+     -42
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "translate_map_px_start": [
+    0.0,
+    28.8
+   ],
+   "duration_s": 1.4,
+   "easing": "بالا رفتن ease-out، افتادن ease-in",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "reduced_motion": "ایستا",
+   "note": "تخته، حلقه، تور و ستون ثابت؛ بدون حلقهٔ بیکار."
+  }
+ }
+}

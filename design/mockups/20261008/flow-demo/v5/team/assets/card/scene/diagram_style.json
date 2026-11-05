@@ -1,0 +1,43 @@
+{
+ "_doc": "سبک نمودارهای JS صحنه (قرقره/طناب/فلش) به زبان نو؛ توسعه اعمال می‌کند. منبع: STYLE_BIBLE بخش ۲ و ۳.",
+ "line": {
+  "color": "#241a5e",
+  "color_night": "#0d0426",
+  "steps_px": [
+   6,
+   4.5,
+   2.6,
+   1.2
+  ],
+  "main_object_px": 4.5,
+  "rope_outline_px": 2.6,
+  "rope_core_px": 4,
+  "join": "round",
+  "cap": "round"
+ },
+ "brush": "در هندسه پخته؛ نمودارهای JS قلم‌مویی نمی‌شوند و خط صاف 4.5 می‌گیرند (بدون filter)",
+ "colors": {
+  "rope": "#c98a45",
+  "wheel_fill": "#fff4d2",
+  "wheel_hub": "#3a2a7a",
+  "beam": "#3a2a7a",
+  "load": "#c98a45",
+  "panel": "#d6f1ee",
+  "arrow_pull": "#2fb8a8",
+  "arrow_weight": "#d070c0"
+ },
+ "arrows": {
+  "rule": "دو رنگ تخت، خط دور 2.6، class=farr، بدون متن روی فلش",
+  "shaft_w": 8,
+  "head_w": 24,
+  "head_h": 20
+ },
+ "text_on_diagram": false,
+ "min_text_px": 14,
+ "forbidden": [
+  "filter",
+  "mix-blend-mode",
+  "متن روی طناب یا فلش",
+  "قرمز/نارنجی/سبز به‌جز نشان سختی"
+ ]
+}

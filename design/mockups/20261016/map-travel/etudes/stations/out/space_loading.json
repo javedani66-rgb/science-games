@@ -1,0 +1,55 @@
+{
+ "id": "space_loading",
+ "kind": "space",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  72
+ ],
+ "stand": [
+  0.0,
+  19.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_space_loading_crate"
+ ],
+ "inside_pad": {
+  "min_margin_px": 7.0,
+  "base_on_pad": true,
+  "height_px": 87.2,
+  "bbox_px": [
+   26.0,
+   36.2,
+   118.0,
+   123.5
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_space_loading_crate": {
+   "kind": "کابل + قلاب + جعبهٔ نارنجی؛ translateY؛ از پایین‌تر (+14 واحد) به بالا (۰)؛ حالت ایستا = بالا (پایان)",
+   "keyframes_symbol_units": [
+    [
+     0,
+     14
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "duration_s": 1.8,
+   "easing": "ease-out",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "note": "کابل در همان لایه می‌ماند و بالای آن پشت بازو پنهان است؛ جعبه از سکو بیرون نمی‌زند",
+   "reduced_motion": "بالا"
+  }
+ }
+}

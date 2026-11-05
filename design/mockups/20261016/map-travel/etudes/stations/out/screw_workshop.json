@@ -1,0 +1,35 @@
+{
+ "id": "screw_workshop",
+ "kind": "land",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  108
+ ],
+ "stand": [
+  40.5,
+  4.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_screw_workshop_nut_back",
+  "node_screw_workshop_nut_front"
+ ],
+ "inside_pad": {
+  "min_margin_px": 9.2,
+  "base_on_pad": true,
+  "height_px": 113.8,
+  "bbox_px": [
+   17.2,
+   0.0,
+   88.0,
+   113.8
+  ],
+  "ok": true
+ }
+}

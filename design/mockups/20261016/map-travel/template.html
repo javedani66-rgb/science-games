@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>نقشه و سفر</title>
+<script>if(/^#enter-/.test(location.hash))document.documentElement.className='ent flowx';else if(location.hash==='#back')document.documentElement.className='ent'</script><style>.flowx #rv{display:none}</style><style>.ent,.ent body{background:#000}.ent #blk{opacity:1}.ent:not(.rdy) #page{visibility:hidden}</style>
+<style>
+@font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
+@font-face{font-family:Vazirmatn;font-weight:700;src:url(data:font/woff2;base64,{{FONT_VB}}) format("woff2")}
+@font-face{font-family:Lalezar;font-weight:400;src:url(data:font/woff2;base64,{{FONT_L}}) format("woff2")}
+{{LIGHTCSS}}
+:root{--navy:#241a5e;--edge:#120c3a;--cream:#fff3c4;--gold:#ffd23f;color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;display:flex;flex-direction:column;background:#10083a;color:var(--navy);font:400 16px/1.6 Vazirmatn,system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+:focus-visible{outline:4px solid var(--cream);outline-offset:2px}
+#rv{min-height:40px;background:#2b3a2b;color:#fff;display:flex;align-items:center;padding:6px 16px;font-size:14px;gap:8px;flex-wrap:wrap}
+#rv span{flex:1;min-width:0}
+#root{height:100%;display:flex;flex-direction:column}
+#page{display:flex;flex-direction:column;flex:1;min-height:0}
+#sc{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;position:relative;background:#10083a;scrollbar-width:none}
+#sc::-webkit-scrollbar{display:none}
+#world{position:relative;margin:0 auto;width:390px;height:{{H}}px;transform-origin:50% 0}
+#world svg.map{position:absolute;left:0;top:0;display:block}
+.hit{position:absolute;border-radius:24px;min-width:48px;min-height:48px}
+.hit:focus-visible{outline:4px solid var(--gold)}
+.hit.shake{animation:sh .35s}
+@keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.lock{transition:opacity .7s ease}#ringG,#ringOld{transition:opacity .5s ease}@media (prefers-reduced-motion:reduce){#ringG,#ringOld{transition:none}}.lock.open{opacity:0;pointer-events:none}#dnlayer .pop{animation:popin .55s cubic-bezier(.3,1.6,.5,1) both;transform-box:fill-box;transform-origin:center}@keyframes popin{from{transform:scale(.2);opacity:0}to{transform:scale(1);opacity:1}}@media (prefers-reduced-motion:reduce){#dnlayer .pop{animation:none}}@media (prefers-reduced-motion:reduce){.lock{transition:none}}
+#boat{position:absolute;left:0;top:0;width:130px;height:130px;display:block;pointer-events:none}
+#boat svg{display:block;animation:bob 4.2s ease-in-out infinite;transform-origin:50% 80%}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-2px) rotate(.8deg)}}
+@media (prefers-reduced-motion:reduce){#boat svg{animation:none}}
+.foam{position:absolute;left:0;top:0;width:26px;height:10px;margin:-5px 0 0 -13px;border-radius:50%;background:var(--cream);opacity:0;pointer-events:none}
+#fig{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
+#tilt{transform-origin:50% 58%}
+#fimg{height:56px;width:auto;max-width:none;display:block;transform-origin:50% 100%;
+ filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))} /* D81: فقط هالهٔ کرم */
+#bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;min-height:76px}
+#home{position:absolute;top:10px;right:12px;z-index:30;width:52px;height:52px;border-radius:16px;border:3.5px solid var(--navy);background:var(--cream);box-shadow:0 4px 0 var(--edge);display:flex;align-items:center;justify-content:center;padding:0}#home svg{width:30px;height:30px}#home:active{transform:translateY(3px);box-shadow:0 1px 0 var(--edge)}
+#tut{position:fixed;inset:0;z-index:36;pointer-events:auto;opacity:0;transition:opacity .35s}#tut.on{opacity:1}#tut[hidden]{display:none}
+#tut .hole{position:fixed;border-radius:22px;box-shadow:0 0 0 4px #ffd23f,0 0 0 9999px rgba(10,4,32,.62);transition:left .45s cubic-bezier(.22,.9,.25,1),top .45s cubic-bezier(.22,.9,.25,1),width .45s cubic-bezier(.22,.9,.25,1),height .45s cubic-bezier(.22,.9,.25,1);pointer-events:none}
+#tut .card{position:fixed;left:16px;right:16px;max-width:398px;margin:0 auto;background:#fff4d2;border:3.5px solid var(--navy);border-radius:20px;box-shadow:0 5px 0 var(--edge);padding:14px 16px 12px;transition:top .45s cubic-bezier(.22,.9,.25,1)}
+#tut .card p{margin:0 0 12px;font-size:17px;font-weight:700;line-height:1.7;transition:opacity .2s}
+#tut .row{display:flex;gap:10px}#tut .row button{flex:1;min-height:52px;border:3.5px solid var(--navy);border-radius:16px;font-weight:700;font-size:17px;box-shadow:0 4px 0 var(--edge)}
+#tut #tn{background:var(--gold)}#tut #ts{background:#fff;flex:0 0 auto;padding:0 16px}
+@media (prefers-reduced-motion:reduce){#tut,#tut .hole,#tut .card{transition:none}}
+#endsea{position:fixed;inset:0;z-index:38;overflow:hidden;background:#165f77}#endsea[hidden]{display:none}
+#endsea svg.bg{position:absolute;left:0;top:0;width:100%;will-change:transform}
+#esb{position:absolute;left:0;top:0;width:0;height:0;will-change:transform}#esb svg{position:absolute;left:-65px;top:-65px;width:130px;height:130px}#esb img{position:absolute;height:56px;width:auto;left:0;top:27px;transform:translate(-50%,-100%)}
+#esm{position:absolute;left:16px;right:16px;top:12%;margin:0;text-align:center;font:400 34px/1.35 Lalezar,Vazirmatn,sans-serif;color:#fff4d2;-webkit-text-stroke:7px var(--navy);paint-order:stroke fill;text-shadow:0 4px 0 var(--edge);opacity:0;transition:opacity .9s;text-wrap:balance}
+#blk{position:absolute;inset:0;z-index:40;background:#000;opacity:0;pointer-events:none}#dv{position:absolute;left:0;top:0;width:100%;height:520px;pointer-events:none;opacity:0;background:linear-gradient(#031526 0%,rgba(5,35,60,.78) 42%,rgba(8,60,95,0) 100%)}
+#ov{flex-direction:column;gap:12px;animation:ovIn .55s ease both}#ovp{transition:opacity .55s ease,transform .55s ease}#ov.wait #ovp{opacity:0;transform:translateY(26px);pointer-events:none}@keyframes ovIn{from{opacity:0}to{opacity:1}}
+#hs{position:relative;width:100%;max-width:360px;aspect-ratio:1998/1116;overflow:hidden;border:4px solid var(--navy);border-radius:22px;box-shadow:0 6px 0 var(--edge);flex:none;background:#12323a}#ov.nosc #hs{display:none}
+#hs img{position:absolute;display:block}#hsb{inset:0;width:100%;height:100%;filter:brightness(.9) saturate(.92)}
+#hsm,#hsc{filter:drop-shadow(0 0 1px #fff3c8) drop-shadow(0 0 1px #fff3c8) drop-shadow(0 0 5px rgba(255,243,200,.85))}
+.hsh{position:absolute;border-radius:50%;background:rgba(10,40,50,.38);filter:blur(2px)}#hss1{left:57%;bottom:7%;width:22%;height:3.2%}#hss2{left:39.5%;bottom:5.4%;width:8%;height:2.2%}
+#hsm{left:60%;bottom:9%;height:62%;transform-origin:50% 100%;animation:hsb 3.2s ease-in-out infinite}#hsc{left:41%;bottom:7%;height:40%}@keyframes hsb{50%{transform:scaleY(1.012) translateY(-.4%)}}
+#hs{overflow:visible}#ov:not(.nosc){padding-top:30px}#ov:not(.nosc) #opts{display:none}
+.bb{position:absolute;z-index:5;min-height:48px;min-width:48px;display:flex;align-items:center;justify-content:center;background:#fff4d2;border:3.5px solid #241a5e;border-radius:16px;box-shadow:0 3px 0 #120c3a;padding:4px 12px;font:700 14px/1.3 Vazirmatn,sans-serif;color:#241a5e;white-space:nowrap;transform:translate(-50%,-100%);cursor:pointer;transition:opacity .4s ease,margin .4s ease;animation:bbIn .45s ease both}
+.bb:after{content:"";position:absolute;left:50%;bottom:-11px;width:14px;height:14px;background:#fff4d2;border:3.5px solid #241a5e;border-top:0;border-left:0;transform:translateX(-50%) rotate(45deg)}
+.bb.s{background:#fff;font-size:12px}.bb:active{margin-top:3px}#bb2{animation-delay:.15s}#bb3{animation-delay:.3s}#bb4{animation-delay:.45s}
+#ov.wait .bb{opacity:0;pointer-events:none;animation:none}#ov.nosc .bb{display:none}@keyframes bbIn{from{opacity:0;transform:translate(-50%,-90%) scale(.85)}}@media (prefers-reduced-motion:reduce){.bb{animation:none}}
+#ov:not(.nosc) .opt{min-height:84px}@media (prefers-reduced-motion:reduce){#hsm{animation:none}#ov{animation:none}}
+#ov{position:absolute;inset:0;z-index:30;background:rgba(36,26,94,.78);display:flex;align-items:center;justify-content:center;padding:16px}#ov[hidden]{display:none}
+#ovp{width:100%;max-width:360px;background:var(--cream);border:4px solid var(--navy);border-radius:26px;box-shadow:0 6px 0 var(--edge);padding:16px;display:flex;flex-direction:column;gap:12px;text-align:center}
+#ovt{margin:0;font-size:17px;font-weight:700;line-height:1.7;color:var(--navy)}#ovn{margin:0;min-height:22px;font-size:14px;color:var(--navy)}
+#opts[hidden]{display:none}#opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{min-height:116px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:8px;border:3.5px solid var(--navy);border-radius:20px;background:var(--gold);box-shadow:0 4px 0 var(--edge);font-weight:700;font-size:15px;line-height:1.5;color:var(--navy)}.opt.soft{background:#fff}
+.opt svg{width:52px;height:52px;overflow:visible}
+#st{flex:1 1 100%;min-width:0;font-size:15px;margin:0;text-align:center;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:4px 14px;min-height:48px;display:flex;align-items:center;justify-content:center}
+.btn{flex:1 1 0;min-height:52px;min-width:96px;border:3.5px solid var(--navy);border-radius:18px;background:var(--gold);box-shadow:0 4px 0 var(--edge);font-weight:700;font-size:16px;padding:6px 12px}
+.btn[hidden]{display:none}
+.btn.sec{background:var(--cream)}
+.dpop{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@media (prefers-reduced-motion:reduce){.dpop{animation:none}}.pr{transform-box:fill-box;transform-origin:center;animation:stamp .32s cubic-bezier(.3,1.6,.5,1) both}@keyframes stamp{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}@media (prefers-reduced-motion:reduce){.pr{animation:none}}
+
+
+.node.dim{filter:saturate(.72) brightness(.94)}.node.glow{animation:glowIn 1.6s ease-out}@keyframes glowIn{0%{filter:saturate(.72) brightness(.94)}35%{filter:saturate(1.5) brightness(1.35) drop-shadow(0 0 8px #ffe27a)}100%{filter:none}}@media (prefers-reduced-motion:reduce){.node.glow{animation:none}}
+</style>
+</head>
+<body data-light="day">
+{{SPRITE}}
+<div id="rv"><span id="rvt"></span><span id="rvl"></span></div>
+<div id="page">
+<div id="sc"><div id="world">{{MAPSVG}}
+<div id="dv"></div>
+<div id="foams"></div>
+<div id="boat"><svg width="130" height="130" viewBox="0 0 120 120" aria-hidden="true"><use href="#env_dec_city_sail" width="120" height="120"/></svg></div>
+<div id="fig"><div id="tilt"><img id="fimg" alt=""></div></div>
+</div></div>
+<div id="ov" hidden><div id="hs"><img id="hsb" alt="" src="{{HS_BG}}"><div class="hsh" id="hss1"></div><div class="hsh" id="hss2"></div><img id="hsm" alt="" src="{{HS_MO}}"><img id="hsc" alt="" src="{{HS_CH}}"><button class="bb" id="bb1" style="left:19%;top:30%"></button><button class="bb" id="bb2" style="left:22%;top:70%"></button><button class="bb" id="bb3" style="left:86%;top:42%"></button><button class="bb s" id="bb4" style="left:58%;top:13%"></button></div><div id="ovp" role="dialog" aria-modal="true"><p id="ovt"></p>
+<div id="opts"><button class="opt" id="o_rev"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 16A17 17 0 1 0 43 28" fill="#fff3c4"/><path d="M42 6v11H31" fill="#fff3c4"/><circle cx="26" cy="27" r="4" fill="#241a5e"/></svg><span id="t_rev"></span></button>
+<button class="opt" id="o_card"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="14" width="26" height="32" rx="5" fill="#f5a3c7" transform="rotate(-10 19 30)"/><rect x="18" y="8" width="26" height="32" rx="5" fill="#fff3c4" transform="rotate(8 31 24)"/></svg><span id="t_card"></span></button>
+<button class="opt" id="o_sea"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6v28" /><path d="M26 8L44 32H26Z" fill="#fff3c4"/><path d="M8 36h36l-6 9H14Z" fill="#ff9a3c"/></svg><span id="t_sea"></span></button>
+<button class="opt soft" id="o_cr"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><path d="M26 44C8 31 7 16 17 12c5-2 8 1 9 5 1-4 4-7 9-5 10 4 9 19-9 32Z" fill="#f08a8a"/></svg><span id="t_cr"></span></button></div>
+<p id="ovn" aria-live="polite"></p><button class="btn" id="ovc"></button></div></div>
+<button id="home" type="button"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 15 16 5l11 10M8.5 12.5V27h15V12.5" fill="none" stroke="#241a5e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 27v-7.5h5V27" fill="none" stroke="#241a5e" stroke-width="3" stroke-linejoin="round"/></svg></button><div id="tut" hidden><div class="hole" id="th"></div><div class="card" role="dialog" aria-live="polite"><p id="tt"></p><div class="row"><button id="tn" type="button"></button><button id="ts" type="button"></button></div></div></div><div id="endsea" hidden aria-hidden="true"><svg class="bg" id="esbg"></svg><div id="esb"><svg viewBox="0 0 120 120"><use href="#env_dec_city_sail" width="120" height="120"/></svg><img id="esf" alt=""></div><p id="esm"></p></div><div id="blk"></div>
+<div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn sec" id="prv" hidden></button><button class="btn" id="fin" hidden></button><button class="btn sec" id="again"></button></div>
+</div>
+<script>
+const S={{STRINGS}};const REV={{REVIEW}};const NODES={{NODES}};const IM={{IMAGES}};
+/* D206: پروندهٔ کودک روی همین دستگاه (حافظهٔ مرورگر، کلید sw-save-v1): آدمک = کاراکتر و رنگ انتخاب‌شده؛ جای کودک و ایستگاه‌های تمام‌شده بعد از هر اتفاق بی‌صدا ذخیره می‌شود */
+const SVK='sw-save-v1',SAVE=(()=>{try{const s=JSON.parse(localStorage.getItem(SVK));return s&&s.profiles&&s.profiles[s.cur]?s:null}catch(e){return null}})(),PROF=SAVE?SAVE.profiles[SAVE.cur]:null;
+if(PROF&&PROF.fig){if(PROF.fig.sailor)IM.sailor=PROF.fig.sailor;if(PROF.fig.construction)IM.construction=PROF.fig.construction}
+/* D210: شکل کاراکتر روی نقشه ۵٫۶ برابر کوچک می‌شد و محو بود؛ اینجا چندمرحله‌ای تا ۱۷۰ پیکسل کوچک می‌شود */
+['sailor','construction'].forEach(k=>{const old=IM[k],im=new Image();im.onload=()=>{try{let src=im,w0=im.naturalWidth,h0=im.naturalHeight;const H=170;if(h0<=H*1.3)return;const W=Math.round(w0*H/h0);
+ while(h0/2>=H){const c=document.createElement('canvas');c.width=Math.round(w0/2);c.height=Math.round(h0/2);const x=c.getContext('2d');x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';x.drawImage(src,0,0,c.width,c.height);src=c;w0=c.width;h0=c.height}
+ const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';x.drawImage(src,0,0,W,H);const u=c.toDataURL('image/webp',.92);IM[k]=u;if(typeof fimg!=='undefined'&&fimg.src===old)fimg.src=u}catch(e){}};im.src=old});
+function saveNow(){if(!PROF||!document.documentElement.classList.contains('flowx'))return;const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
+ PROF.here=here;PROF.front=fr;PROF.done=[...done];try{localStorage.setItem(SVK,JSON.stringify(SAVE))}catch(e){}}const PATHD={{PATHD}};const COAST={{COAST}};
+const T=k=>S['maptravel.'+k].text;const $=id=>document.getElementById(id);
+$('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');$('fin').textContent=T('finish');$('prv').textContent=T('prev');$('home').setAttribute('aria-label',T('home'));$('ovt').textContent=T('hide.title');$('t_rev').textContent=T('hide.review');$('t_card').textContent=T('hide.cards');$('t_sea').textContent=T('hide.sea');$('t_cr').textContent=T('hide.credits');$('bb1').textContent=T('hide.review');$('bb2').textContent=T('hide.bsea');$('bb3').textContent=T('hide.cards');$('bb4').textContent=T('hide.credits');[['bb1','o_rev'],['bb2','o_sea'],['bb3','o_card'],['bb4','o_cr']].forEach(([a,b])=>$(a).onclick=e=>{e.stopPropagation();$(b).click()});$('ovc').textContent=T('hide.close');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let skip=false,busy=false;
+const sc=$('sc'),world=$('world'),fig=$('fig'),tilt=$('tilt'),fimg=$('fimg'),boat=$('boat');
+let k=1;
+function fit(){k=Math.min(1.2,sc.clientWidth/390);world.style.transform='scale('+k+')';world.style.marginBottom=(({{H}}*k)-{{H}})+'px';world.style.width='390px'}
+addEventListener('resize',fit);
+/* هندسهٔ مسیر */
+const NS='http://www.w3.org/2000/svg';
+/* D175: getPointAtLength روی مسیر ۲۳۹ پارهٔ کامل هر بار ~۲ms (۷۴۰۰ نمونه = ۱۵ ثانیه)؛ مسیر به تکه‌های ۱۰پاره‌ای تقسیم می‌شود (همان هندسه، همان طول) */
+const pth=(function(d){const g_=document.createElementNS(NS,'svg');g_.setAttribute('width','0');g_.setAttribute('height','0');g_.style.cssText='position:absolute;left:0;top:0;visibility:hidden';document.body.appendChild(g_);
+ const cmds=[...d.matchAll(/([MCL])([^MCL]*)/g)].map(m=>[m[1],m[2].trim().split(/[\s,]+/).map(Number)]);let cur=null;const chunks=[];let seg=[],n=0;
+ const flush=()=>{if(!seg.length)return;const p=document.createElementNS(NS,'path');p.setAttribute('d','M'+start[0]+','+start[1]+' '+seg.join(' '));g_.appendChild(p);chunks.push(p);seg=[];n=0};let start=null;
+ for(const [c,v] of cmds){if(c==='M'){cur=[v[0],v[1]];if(!start)start=cur;continue}if(!seg.length)start=cur;seg.push(c+v.join(','));cur=[v[v.length-2],v[v.length-1]];if(++n>=10)flush()}flush();
+ const cum=[0];chunks.forEach(p=>cum.push(cum[cum.length-1]+p.getTotalLength()));
+ return{getTotalLength:()=>cum[cum.length-1],getPointAtLength(s){s=Math.max(0,Math.min(s,cum[cum.length-1]));let i=0;while(i<chunks.length-1&&s>cum[i+1])i++;return chunks[i].getPointAtLength(s-cum[i])}}})(PATHD);
+const L=pth.getTotalLength(),samp=[];for(let s=0;s<=L;s+=2){const p=pth.getPointAtLength(s);samp.push([p.x,p.y,s])}
+function sOf(n){let best=1e9,bs=0;for(const p of samp){const d=(p[0]-n.x)**2+(p[1]-n.y)**2;if(d<best){best=d;bs=p[2]}}return bs}
+const ids=Object.keys(NODES);ids.forEach(i=>NODES[i].s=sOf(NODES[i]));
+const ORDER=ids.sort((a,b)=>NODES[a].s-NODES[b].s);
+const isSea=(y,x)=>y<COAST&&!(x!==undefined&&x>=JX-6&&y>=JTIP); /* با x: راهِ اسکله (x≥۳۳۴ و y≥۹۵۸) خشکی حساب می‌شود */
+function leg(a,b){const pts=[];const s0=NODES[a].s,s1=NODES[b].s,dir=s1>s0?1:-1;for(let s=s0;dir>0?s<=s1:s>=s1;s+=3*dir){const p=samp[Math.min(samp.length-1,Math.max(0,Math.round(s/2)))];pts.push([p[0],p[1]])}const A=NODES[a],B=NODES[b];while(pts.length>2&&inOuter(A,pts[0][0],pts[0][1]))pts.shift();while(pts.length>2&&inOuter(B,pts[pts.length-1][0],pts[pts.length-1][1]))pts.pop(); /* R19: ردِ مسیر داخل سکوی مبدأ/مقصد حذف شود تا کودک اول به مرکز سکو و بعد برنگردد */
+ pts.unshift(stand(A));pts.push(stand(B));return pts}
+/* وضعیت */
+let here='E03';const visited=new Set(ORDER.filter(i=>NODES[i].y>=1200));const done=new Set(ORDER.slice(0,ORDER.indexOf('E03'))); /* D137: ردپاهای بند پس از «تکمیل ایستگاه» می‌آیند */
+const NEXT=()=>ORDER.slice().reverse().find(i=>!visited.has(i)&&true);
+function nextId(){const r=ORDER.filter(i=>!visited.has(i));return r.length?r.reduce((m,i)=>NODES[i].s>NODES[m].s?i:m,r[0]):null} // اولین ناانجام در راه (از پایین)
+function nextUp(){const vs=ORDER.filter(i=>visited.has(i));if(!vs.length)return ORDER[0];const top=vs.reduce((m,i)=>NODES[i].s>NODES[m].s?i:m,vs[0]);const idx=ORDER.indexOf(top);return ORDER[idx+1]||null}
+/* ردپا و نقطه‌چین بنفش (B76/D94/D95): خشکی و اسکله = ردپا روی کل راه؛ دریا = نقطه‌چین بنفش تا گرهٔ بعدی */
+const svgMap=document.querySelector('svg.map');
+const landG=svgMap.querySelector('g[clip-path="url(#cl_land)"]'),seaG=svgMap.querySelector('#seadots');
+const prints=document.createElementNS(NS,'g');prints.id='prints';(svgMap.querySelector('#env_labels')||svgMap.lastElementChild).before(prints);
+/* ردپا فقط پس از گذر از هر مرحله، از همان ایستگاه (روی سطح آن) تا ایستگاه بعد حک می‌شود (D99) */
+/* R17-09: اسکلهٔ چوبی از شن شروع می‌شود (y≈۱۰۶۸) و روی آب تا نوک ۹۵۶ می‌رود؛ پایه‌ها در آب؛ سکوی سنگی حذف شد. راه ساحلی زیر انتهای اسکله به آن می‌رسد.
+   R17-07: پلهٔ سنگی کوچک (آپرون) راهِ بالای بارانداز را به لبهٔ سکوی M02 می‌چسباند. خط دور یک‌پارچه: اول همهٔ شکل‌ها با خط دور، بعد پر. */
+const JX=343,JTIP=956,JDOT=964,JEND=1070,BERTH=[298,964];
+const jet=document.createElementNS(NS,'g');jet.id='jetty';jet.setAttribute('filter','url(#env_wob)');
+(function(){const Q=(x,y,w,h,r,f,sw)=>'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="'+r+'" fill="'+f+'" stroke="#241a5e" stroke-width="'+sw+'" stroke-linejoin="round"/>';
+ const x0=JX-13.5,w=27,DECK_END=1112;let h='';
+ /* R18: عرض عرشه = عرض راه (۳۳ با خط دور)؛ راه از زیر پله‌های ورودی ادامه می‌یابد و خط دورِ سرمه‌ای‌شان یکی است؛ پلهٔ سنگی حذف شد */
+ /* R19b: عرشه تا زیر لبهٔ پشتی سکوی M02 ادامه دارد (اسکله پیش از گروه M02 در DOM است، پس سکو روی آن می‌نشیند)؛ بدون پله و تخته‌ٔ کج */
+ h+='<rect x="'+(x0+3)+'" y="962" width="'+w+'" height="76" rx="6" fill="#0c0838" opacity=".28"/>';
+ [966,1004,1034].forEach(y=>{[x0-2,x0+w+2].forEach(px=>{h+=Q(px-3,y-5,6,11,3,'#7a4a28',2.6)})});
+ h+=Q(x0,JTIP,w,DECK_END-JTIP,5,'#c98f52',5.5);
+ for(let y=JTIP+8;y<DECK_END-4;y+=9)h+='<path d="M'+(x0+3)+','+y+' H'+(x0+w-3)+'" stroke="#8a5a30" stroke-width="2.2" stroke-linecap="round"/>';
+ jet.innerHTML=h})();
+{const m2=svgMap.querySelector('g.node[data-id="M02"]');(m2||prints).before(jet)}
+/* ردپا (D99/D100/D101): هر ایستگاه یک سکوی بالا آمده است. ردپا از پهلوی سکو (جایی که دیواره باریک دیده می‌شود) روی سطح بالایی می‌رود،
+   از بدنهٔ ساختمان نمی‌گذرد و بیرون سکو روی زمین راه را دنبال می‌کند. */
+const pd=n=>({rx:n.pad[0],ry:n.pad[1],w:n.pad[2],bh:n.pad[3]});
+const inOuter=(n,x,y)=>{const q=pd(n),dx=x-n.x,dy=y-n.y-q.w/2;return (dx/(q.rx+14))**2+(dy/(q.ry+q.w/2+12))**2<1};
+const inBuild=(x,y)=>Object.values(NODES).some(n=>{const q=pd(n);return Math.abs(x-n.x)<q.rx*.72&&y<n.y-q.ry*.5&&y>n.y-q.bh-q.ry});
+const onJetty=(x,y)=>x>JX-7&&x<JX+7&&y>JTIP+12&&y<1070; /* جاده روی اسکله و سکوی فرود؛ دیوارهٔ سکو (۱۰۵۶ تا ۱۰۷۲) ردپا ندارد */
+const onWall=()=>false;
+const inO=(n,x,y)=>{const q=pd(n),dx=x-n.x,dy=y-n.y-q.w/2;return (dx/(q.rx+6))**2+(dy/(q.ry+q.w/2+5))**2<1}; /* D210: ردپاها تا نزدیک لبهٔ سکو ادامه دارند (حاشیه ۱۴/۱۲ ← ۶/۵) */
+function legPoly(k){const A=k<0?null:NODES[ORDER[k]],B=NODES[ORDER[k<0?0:k+1]],sB=B.s; /* k=-1: راه از تابلوی «شروع» تا ایستگاه اول */
+ // فقط راهِ بیرون از سکوها؛ ردپا روی ایستگاه نمی‌افتد (D102)
+ const pts=[];let i=A?samp.findIndex(p=>p[2]>=A.s):0;
+ while(A&&i<samp.length&&inO(A,samp[i][0],samp[i][1]))i++;
+ for(;i<samp.length&&samp[i][2]<sB&&!inO(B,samp[i][0],samp[i][1]);i++)pts.push([samp[i][0],samp[i][1]]);
+ return pts}
+/* حریم ردپا (D112؛ D194: حریم ۱۵ به ۵ کم شد و آزمون جعبهٔ تقریبی بنا حذف شد، چون جعبهٔ واقعی همهٔ بخش‌های نماد هست و ردپاها جا می‌افتادند): جعبهٔ هر بخش از ایستگاه (سکو، بنا، پیچ، ...؛ بدون سایه) + حاشیه؛ ردپا باید از همهٔ آن‌ها ≥ ۱۵px (لبهٔ ردپا) فاصله داشته باشد */
+const EXC=[],PRINT_R=10,GAP=5,POFF=5.2,PSC=.9; /* R17-10: ردپا کوچک‌تر و نزدیک‌تر به محور تا کاملاً داخل پر راه (۲۲ واحد) بماند */
+(function(){const mr=svgMap.getBoundingClientRect(),kk=mr.width/390;
+ svgMap.querySelectorAll('g.node').forEach(g=>{const u=g.querySelector('use');if(!u)return;const sym=document.querySelector(u.getAttribute('href'));if(!sym)return;
+  const vb=(sym.getAttribute('viewBox')||'0 0 200 190').split(/\s+/).map(Number);
+  const tg=document.createElementNS(NS,'g');tg.setAttribute('transform','translate('+u.x.baseVal.value+' '+u.y.baseVal.value+') scale('+(u.width.baseVal.value/vb[2])+' '+(u.height.baseVal.value/vb[3])+')');tg.style.visibility='hidden';
+  [...sym.children].forEach(c=>{if(c.tagName==='defs'||/_(shadow|lit|shade|base)$/.test(c.id))return;const cl=c.cloneNode(true);cl.removeAttribute('id');tg.appendChild(cl)});
+  svgMap.appendChild(tg);
+  /* D195: جعبهٔ هر شکل جدا (نه کل گروه)، تا فضای خالی کنار بنا (مثلاً زیر بازوی جرثقیل) ردپا را حذف نکند؛ سایه‌های زیرین (class under) حساب نمی‌شوند */
+  tg.querySelectorAll('path,polygon,polyline,rect,ellipse,circle,line').forEach(c=>{if(c.closest('.under'))return;const r=c.getBoundingClientRect();if(r.width<1||r.height<1)return;EXC.push([(r.left-mr.left)/kk,(r.top-mr.top)/kk,(r.right-mr.left)/kk,(r.bottom-mr.top)/kk])});
+  tg.remove()})})();
+const nearStn=(x,y,g)=>EXC.some(b=>{const dx=Math.max(b[0]-x,0,x-b[2]),dy=Math.max(b[1]-y,0,y-b[3]);return Math.hypot(dx,dy)<(g===undefined?GAP:g)+PRINT_R});
+const PLACED=[];
+(function(){
+ for(let k=-1;k<ORDER.length-1;k++){const P=legPoly(k);let acc=0,side=1,need=0,STEP=26;{let T=0;for(let m=1;m<P.length;m++)T+=Math.hypot(P[m][0]-P[m-1][0],P[m][1]-P[m-1][1]);const E0=k<0?48:8,n=Math.max(1,Math.round((T-2*E0)/26));STEP=n?(T-2*E0)/n:26;need=E0}
+  for(let m=1;m<P.length;m++){const [x0,y0]=P[m-1],[x1,y1]=P[m],L=Math.hypot(x1-x0,y1-y0);if(!L)continue;const ang=Math.atan2(y1-y0,x1-x0);
+   while(need<=L){const x=x0+(x1-x0)*need/L,y=y0+(y1-y0)*need/L;need+=STEP;
+    const jt=onJetty(x,y),po=jt?5:POFF; /* روی عرشه: ردپا یک‌درمیان چپ/راست داخل عرشه؛ حریم بنای بارانداز کوچک‌تر (عرشه راه تنهاست) */
+    if(!(y>=COAST+14||jt)||onWall(x,y)||y>{{H}}-8||Object.values(NODES).some(n=>inO(n,x,y))||(!jt&&nearStn(x-Math.sin(ang)*po*side,y+Math.cos(ang)*po*side))||PLACED.some(q=>Math.hypot(q[0]-x,q[1]-y)<19))continue;PLACED.push([x,y]);
+    const g=document.createElementNS(NS,'g');g.dataset.leg=k<0?-7:k;g.dataset.px=(x-Math.sin(ang)*po*side).toFixed(1);g.dataset.py=(y+Math.cos(ang)*po*side).toFixed(1);g.dataset.s=k*100000+acc+need;g.style.display='none';
+    g.setAttribute('transform','translate('+(x-Math.sin(ang)*po*side).toFixed(1)+' '+(y+Math.cos(ang)*po*side).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
+    g.innerHTML='<g class="pr"><g transform="scale('+(PSC*side)+' '+PSC+')" fill="#a66be8" stroke="#2a0f5e" stroke-width="1" stroke-linejoin="round"><path d="M-3.1,-1.5 C-3.2,-3.4 -1.6,-4.2 0.2,-4.2 C2,-4.2 3.3,-3.4 3.2,-1.2 C3.1,0.8 2.1,1.6 2,3 C1.9,4.8 0.9,5.8 -0.5,5.8 C-1.9,5.8 -2.4,4.6 -2.3,3 C-2.2,1.5 -3,0.6 -3.1,-1.5Z"/><circle cx="-1.9" cy="-6.1" r="1.6"/><circle cx="0.4" cy="-7.1" r="1.25"/><circle cx="2.2" cy="-6.6" r="1.15"/><circle cx="3.5" cy="-5.3" r="1.05"/><circle cx="4" cy="-3.6" r=".95"/></g></g>';
+    side=-side;prints.appendChild(g)}
+   need-=L;acc+=L}}})();
+/* animate=true: ردپاهای تازه یکی‌یکی (از ایستگاه به سمت بعد) حک می‌شوند */
+function showPrints(animate){const fresh=[];prints.childNodes.forEach(g=>{const L=+g.dataset.leg,vis=L<0?done.has(ORDER[0]):done.has(ORDER[L]);if(!vis){g.style.display='none';g.dataset.on='';return}
+  if(g.dataset.on)return;g.dataset.on='1';g.style.display='';fresh.push(g)});
+ fresh.sort((u,v)=>u.dataset.s-v.dataset.s).forEach((g,n)=>{const e=g.firstChild;e.style.animation='none';void e.getBoundingClientRect();e.style.animationDelay=animate?(n*55)+'ms':'0ms';e.style.animation=animate?'':'none'})}
+function resetPrints(){prints.childNodes.forEach(g=>{g.style.display='none';g.dataset.on=''})}
+/* R17-26: نقطه‌چین قایق؛ هر بند (از گرهٔ A تا B) فاصلهٔ یکنواخت دارد: از نوک اسکله / لبهٔ سکو شروع و به لبهٔ سکوی بعد می‌رسد (آخرین نقطه کنار لبه، نه زیر سکو) */
+const DOT_STEP=18,DOT_EDGE=9;
+const inPad=(n,x,y)=>{const q=pd(n),dx=x-n.x,dy=y-n.y-q.w/2;return (dx/(q.rx+DOT_EDGE))**2+(dy/(q.ry+q.w/2+DOT_EDGE))**2<1};
+const seaPt=(x,y)=>y<COAST-4&&!(x>JX-8&&y>JDOT);
+function legDots(k){const A=NODES[ORDER[k]],B=NODES[ORDER[k+1]],run=[];
+ for(const p of samp){if(p[2]<A.s||p[2]>B.s)continue;if(seaPt(p[0],p[1])&&!inPad(A,p[0],p[1])&&!inPad(B,p[0],p[1]))run.push(p)}
+ if(run.length<2)return[];const c=[0];for(let i=1;i<run.length;i++)c.push(c[i-1]+Math.hypot(run[i][0]-run[i-1][0],run[i][1]-run[i-1][1]));
+ const tot=c[c.length-1],n=Math.max(1,Math.round(tot/DOT_STEP)),sp=tot/n,out=[];let j=0;
+ for(let m=0;m<=n;m++){const d=m*sp;while(j<c.length-2&&c[j+1]<d)j++;const u=c[j+1]>c[j]?Math.min(1,(d-c[j])/(c[j+1]-c[j])):0;out.push([run[j][0]+(run[j+1][0]-run[j][0])*u,run[j][1]+(run[j+1][1]-run[j][1])*u])}
+ return out}
+const dotSvg=(P,ro,ri,co,ci,oo,oi)=>P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ro+'" fill="'+co+'" opacity="'+oo+'"/>').join('')+P.map(p=>'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+ri+'" fill="'+ci+'" opacity="'+oi+'"/>').join('');
+legDots=(f=>k=>f(k).filter(q=>Math.hypot(q[0]-BERTH[0],q[1]-(BERTH[1]-31))>26))(legDots); /* D173: نقطه‌چین زیر قایقِ پهلوگرفته نیفتد */
+(function(){let P=[];for(let k=0;k<ORDER.length-1;k++)P=P.concat(legDots(k));document.getElementById('seadots').innerHTML=dotSvg(P,4.5,2.5,'#241a5e','#e8f6f8',.35,.85)})();
+const trail=document.createElementNS(NS,'g');trail.id='trail';seaG.parentNode.insertBefore(trail,seaG.nextSibling);
+const DN={};let dnReady=false;const BADGE='<ellipse cx="1.5" cy="3.5" rx="12.5" ry="11" fill="#10083a" opacity=".35"/><circle r="12.6" fill="#241a5e"/><circle r="10.8" fill="#fff"/><circle r="8.7" fill="#3fcf72"/><path d="M-6,-3.2 a7,7 0 0 1 7.4,-4.6" fill="none" stroke="#c8ffd8" stroke-width="2" stroke-linecap="round"/><polyline points="-4.8,.4 -1.4,3.9 5.2,-3.6" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>';
+function updateDone(){const L=document.getElementById('dnlayer');if(!L)return;const NS='http://www.w3.org/2000/svg';for(const id of ORDER){const on=done.has(id);let g=DN[id];if(on&&!g){const n=NODES[id];g=DN[id]=document.createElementNS(NS,'g');g.setAttribute('transform','translate('+(n.x+44)+' '+(n.y+25)+')');g.innerHTML='<g'+(dnReady?' class="pop"':'')+'>'+BADGE+'</g>';L.appendChild(g)}else if(!on&&g){g.remove();delete DN[id]}}dnReady=true} /* D173: تیک «انجام‌شد» هم‌جا با قفل، سبز نعنایی با خط سرمه‌ای */
+function updateTrail(){updateDone();trail.innerHTML='';let P=[];for(let k=0;k<=ORDER.length-2;k++)if(done.has(ORDER[k]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
+/* کاراکتر و قایق */
+const SEAT=27,FH=56;
+const scaleAt=()=>1;
+function setOutfit(sea){fimg.src=sea?IM.sailor:IM.construction}
+function placeFig(x,y){fig.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-100%)'}
+let boatAt=[0,0];
+function placeBoat(x,y,r){boatAt=[x,y];boat.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-50%) rotate('+r+'deg)'}
+function setTilt(rot,bob,sq){tilt.style.transform='rotate('+rot+'deg) translateY('+bob+'px)';fimg.style.transform='scaleY('+(sq||1)+')'}
+function showBoat(){boat.style.display='block'} /* R18: قایق همیشه دیده می‌شود؛ هیچ ظاهر/ناپدیدشدن ناگهانی */
+const berthPos=()=>[BERTH[0],BERTH[1]-SEAT-4];
+function boatTarget(id){const n=NODES[id];if(id==='M12'){const q=pd(n);return[n.x-q.rx-40,n.y-SEAT-30]} /* D194: قایق کنار مخفی‌گاه روی فانوس دریایی نیفتد */return isSea(n.y)?(()=>{const d=dock(n);return[d[0],d[1]-SEAT-4]})():berthPos()}
+/* قایق تنها (بدون کودک) آرام به جای تازه می‌رود؛ با reduce/skip فوری */
+async function moveBoat(to,ms){const a=boatAt.slice();if(Math.hypot(to[0]-a[0],to[1]-a[1])<1.5){placeBoat(to[0],to[1],0);return}
+ await tween(ms||900,p=>placeBoat(a[0]+(to[0]-a[0])*p,a[1]+(to[1]-a[1])*p,0),ease);placeBoat(to[0],to[1],0)}
+/* قایق کنار سکو در آب پهلو می‌گیرد؛ کودک روی سکو می‌ایستد (D104) */
+const defSide=n=>n.x<195?1:-1;
+const dock=(n,s0)=>{const q=pd(n),s=s0||defSide(n);return[n.x+s*(q.rx+30),n.y+q.w/2+6]}; /* R20: سمت پهلوگاه برای رسیدن = سمتی که مسیر می‌آید؛ برای رفتن = سمتی که مسیر ادامه می‌یابد */
+const stand=n=>n.st?[n.x+n.st[0],n.y+n.st[1]]:[n.x,n.y+pd(n).ry*.6]; /* جای ایستادن: جلوی سکو، پایین مرکز بیضی بالایی (جلوی بنا) */
+const padFig=stand;
+function putAt(id){const n=NODES[id],sea=isSea(n.y);setOutfit(sea);showBoat();const bt=boatTarget(id);placeBoat(bt[0],bt[1],0);{const f=padFig(n);placeFig(f[0],f[1])}setTilt(0,0)}
+const ease=p=>p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+let fT=0,fOn=false;function follow(y){if(skip||reduce)return;fT=Math.max(0,y*k-sc.clientHeight*.55);if(fOn)return;fOn=true;(function s(){const d=fT-sc.scrollTop;if(Math.abs(d)<1){sc.scrollTop=fT;fOn=false;return}sc.scrollTop+=Math.sign(d)*Math.max(1,Math.min(Math.abs(d)*.1,16));requestAnimationFrame(s)})()} /* D166: پیمایش پیوسته با rAF؛ پیش از این هر ردپا یک پرش گام‌دار می‌داد */
+function tween(ms,fn,e){return new Promise(res=>{if(reduce||skip){fn(1);res();return}const t0=performance.now();(function f(t){if(skip){fn(1);res();return}const p=Math.min(1,Math.max(0,(t-t0)/ms));fn(e?e(p):p);p<1?requestAnimationFrame(f):res()})(t0)})}
+function cum(pts){const c=[0];for(let i=1;i<pts.length;i++)c.push(c[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));return c}
+function at(pts,c,d){let i=0;while(i<c.length-2&&d>c[i+1])i++;const u=c[i+1]>c[i]?Math.min(1,(d-c[i])/(c[i+1]-c[i])):1;return[pts[i][0]+(pts[i+1][0]-pts[i][0])*u,pts[i][1]+(pts[i+1][1]-pts[i][1])*u]}
+/* تلوتلوی عروسکی روی خشکی */
+/* D136: ردپا و نقطه‌های آب مالِ هیولای مخترع‌اند و یک مرحله جلوتر از کودک؛ اول یکی‌یکی «تاپ تاپ» حک می‌شوند، بعد کودک دنبالشان می‌رود */
+async function monsterTrail(a,b,pts){const K=ORDER.indexOf(b)-1;if(K<0||ORDER[K]!==a&&ORDER.indexOf(a)>K)return;
+ const c=cum(pts),near=(x,y)=>{let bi=0,bd=1e9;for(let i=0;i<pts.length;i++){const d=(pts[i][0]-x)**2+(pts[i][1]-y)**2;if(d<bd){bd=d;bi=i}}return c[bi]};
+ const items=[];prints.childNodes.forEach(g=>{if(g.dataset.on||+g.dataset.leg!==K)return;items.push({k:near(+g.dataset.px,+g.dataset.py),y:+g.dataset.py,g})});
+ legDots(K).forEach(p=>items.push({k:near(p[0],p[1]),y:p[1],d:p}));
+ if(!items.length)return;items.sort((u,v)=>u.k-v.k);const n=items.length;let shown=0;
+ await tween(Math.min(3000,Math.max(500,n*120)),p=>{const m=Math.min(n,Math.floor(p*n)+(p>=1?1:0));
+  while(shown<m){const it=items[shown++];if(it.g){const g=it.g;g.dataset.on='1';g.style.display='';g.firstChild.style.animationDelay='0ms'}
+   else{const q=it.d,mk=(r,col)=>'<circle class="dpop" cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+r+'" fill="'+col+'"/>';trail.insertAdjacentHTML('beforeend',mk(5,'#241a5e')+mk(3.2,'#b07af0'))}
+   follow(it.y)}});
+ await new Promise(r=>setTimeout(r,reduce||skip?0:350))}
+let curLeg=-1;
+function revealNear(x,y){if(curLeg<0)return;prints.childNodes.forEach(g=>{if(g.dataset.on||+g.dataset.leg!==curLeg)return;if(Math.hypot(g.dataset.px-x,g.dataset.py-y)>15)return;
+  g.dataset.on='1';g.style.display='';g.firstChild.style.animationDelay='0ms'})}
+async function walk(pts){if(pts.length<2)return;const c=cum(pts),tot=c[c.length-1],SPD=130,STEP=40,A=5.5;
+ await tween(tot/SPD*1000,p=>{const d=p*tot,[x,y]=at(pts,c,d);const env=Math.min(1,d/14,(tot-d)/18),ph=d/STEP*Math.PI,sn=Math.abs(Math.sin(ph));placeFig(x,y);setTilt(A*Math.sin(ph)*env,-2.5*sn*env,1-.03*(1-sn)*env);follow(y);if(window.__wr)__wr(x,y)});
+ setTilt(0,0);const l=pts[pts.length-1];placeFig(l[0],l[1])}
+/* R19: قایق (و بدنهٔ ≈۵۶×۴۰) هرگز از روی سکو یا بنا نمی‌گذرد: مسیر مرکز قایق از «حریم» هر ایستگاه (بیضی سکو + جعبهٔ بنا، بزرگ‌شده به اندازهٔ قایق) بیرون رانده و نرم می‌شود */
+const BHW=28,BHH=20;
+function inKeep(c,n){const q=pd(n),u=(c[0]-n.x)/(q.rx+BHW),v=(c[1]-n.y-q.w/2)/(q.ry+q.w/2+BHH);
+ if(u*u+v*v<1)return true;return c[0]>n.x-q.rx*.8-BHW&&c[0]<n.x+q.rx*.8+BHW&&c[1]>n.y-q.bh-BHH&&c[1]<n.y+1}
+const oob=q=>q[0]<BXMIN||q[0]>BXMAX||q[1]<BYMIN; /* R20: قایق هرگز از کادر نقشه بیرون نمی‌رود */
+const BXMIN=36,BXMAX=354,BYMIN=50;
+function pushOut(c,t){let p=c.slice();const tx=t?t[0]:1,ty=t?t[1]:0,dirs=[[-ty,tx],[ty,-tx]];for(let it=0;it<4;it++){let moved=false;for(const id in NODES){const n=NODES[id];if(!inKeep(p,n))continue;
+  let best=null;for(const [dx,dy] of dirs)for(let d=2;d<=240;d+=2){const q=[p[0]+dx*d,p[1]+dy*d];if(!inKeep(q,n)){const cost=d*(1+.3*Math.max(0,-dy))+(q[1]>COAST-36||oob(q)?900:0);if(!best||cost<best[0])best=[cost,q];break}}
+  if(best){p=best[1];moved=true}}if(!moved)break}return p}
+function densify(P,st){const o=[P[0]];for(let i=1;i<P.length;i++){const a=P[i-1],b=P[i],L=Math.hypot(b[0]-a[0],b[1]-a[1]),m=Math.max(1,Math.ceil(L/st));for(let j=1;j<=m;j++)o.push([a[0]+(b[0]-a[0])*j/m,a[1]+(b[1]-a[1])*j/m])}return o}
+function exitD(q,n,dx,dy){for(let d=2;d<=240;d+=2)if(!inKeep([q[0]+dx*d,q[1]+dy*d],n))return d;return 999}
+function avoidBoat(P){const D=densify(P,5),N=D.length,free=new Array(N).fill(false);const T=D.map((q,i)=>{const a=D[Math.max(0,i-2)],b=D[Math.min(N-1,i+2)],L=Math.hypot(b[0]-a[0],b[1]-a[1])||1;return[(b[0]-a[0])/L,(b[1]-a[1])/L]});
+ /* هر بازهٔ پیوستهٔ درون حریم یک ایستگاه: یک سمت ثابت (کم‌هزینه‌ترین) برای همهٔ نقطه‌ها، تا میانگین‌گیری مسیر را به مرکز سکو برنگرداند */
+ for(const id in NODES){const n=NODES[id];let i=0;while(i<N){if(!inKeep(D[i],n)){i++;continue}let j=i;while(j+1<N&&inKeep(D[j+1],n))j++;
+  if((i===0)!==(j===N-1)){for(let k=i;k<=j;k++)free[k]=true;i=j+1;continue} /* D183: ناحیهٔ مبدأ/مقصدِ همین سفر دست‌نخورده می‌ماند (قایق دور سکوی مقصد نمی‌چرخد) */
+  let best=null;for(const sg of [1,-1]){let cost=0;for(let k=i;k<=j;k++){const dx=-T[k][1]*sg,dy=T[k][0]*sg,d=exitD(D[k],n,dx,dy);cost+=d*(1+.3*Math.max(0,-dy))+(D[k][1]+dy*d>COAST-36||oob([D[k][0]+dx*d,D[k][1]+dy*d])?900:0)}if(!best||cost<best[0])best=[cost,sg]}
+  for(let k=i;k<=j;k++){if(k===0||k===N-1)continue;const dx=-T[k][1]*best[1],dy=T[k][0]*best[1],d=exitD(D[k],n,dx,dy);D[k]=[D[k][0]+dx*d,D[k][1]+dy*d]}
+  i=j+1}}
+ const E=D.map(q=>q.slice()),R=7;
+ for(let i=1;i<N-1;i++){let sx=0,sy=0,m=0;for(let j=Math.max(0,i-R);j<=Math.min(N-1,i+R);j++){sx+=D[j][0];sy+=D[j][1];m++}E[i]=[sx/m,sy/m]}
+ return E.map((q,i)=>(i===0||i===N-1||free[i])?q:(q=>[Math.min(BXMAX,Math.max(BXMIN,q[0])),Math.max(BYMIN,q[1])])(pushOut(q,T[i])))}
+/* قایق */
+const foams=[];for(let i=0;i<8;i++){const d=document.createElement('div');d.className='foam';$('foams').appendChild(d);foams.push(d)}
+const hist=[];
+async function sail(pts0){if(pts0.length<2)return;const pts=avoidBoat(pts0.map(q=>[q[0],q[1]-SEAT-4])).map(q=>[q[0],q[1]+SEAT+4]);const c=cum(pts),tot=c[c.length-1];hist.length=0;
+ await tween(Math.max(1500,tot/95*1000),p=>{const [x,y]=at(pts,c,p*tot);const env=Math.min(1,p*6,(1-p)*6),roll=2.6*Math.sin(p*Math.PI*Math.max(2,tot/45))*env,bob=1.4*Math.sin(p*Math.PI*Math.max(3,tot/30))*env;
+  placeBoat(x,y-SEAT-4+bob,roll);placeFig(x,y-4+bob);setTilt(-roll*.7,0);hist.push([x,y+6]);if(hist.length>70)hist.shift();
+  foams.forEach((f,i)=>{const h=hist[hist.length-1-i*5];if(!h){f.style.opacity=0;return}f.style.opacity=Math.max(0,.75-i*.1)*env;f.style.transform='translate('+h[0]+'px,'+h[1]+'px) scale('+(1+i*.12)+')'});follow(y)},ease);
+ foams.forEach(f=>f.style.opacity=0);setTilt(0,0)}
+async function hopTo(a,b,h){await tween(380,p=>{placeFig(a[0]+(b[0]-a[0])*p,a[1]+(b[1]-a[1])*p-4*h*p*(1-p));setTilt(6*Math.sin(p*Math.PI)*(b[0]>a[0]?1:-1),0,1+.05*Math.sin(p*Math.PI))});
+ await tween(150,p=>{setTilt(0,0,1-.07*Math.sin(p*Math.PI))});setTilt(0,0,1)}
+/* سفر عادی به گرهٔ تازه: پاها روی خشکی، قایق روی دریا؛ در ساحل پرش */
+const pts_last_land=(runs,r)=>{const i=runs.indexOf(r),q=runs[i-1];return q?q.pts[q.pts.length-1]:[JX,JTIP]};
+async function travel(a,b){fadeRing();const pts=leg(a,b);const runs=[];let cur=[pts[0]],m=isSea(pts[0][1],pts[0][0]);
+ for(let t=1;t<pts.length;t++){const mt=isSea(pts[t][1],pts[t][0]);cur.push(pts[t]);if(mt!==m){runs.push({m,pts:cur});cur=[pts[t]];m=mt}}
+ runs.push({m,pts:cur});let sea=runs[0].m;
+ const NA=NODES[a],NB=NODES[b],seaA=isSea(NA.y),seaB=isSea(NB.y);
+ if(seaA){const r0=runs[0],rest=r0.pts.filter(p=>!inOuter(NA,p[0],p[1])),ds=defSide(NA),fp=rest[0],sd=(!fp||Math.abs(fp[0]-NA.x)<20)?ds:(fp[0]<NA.x?-1:1),d=dock(NA,sd),f=padFig(NA),q=pd(NA);r0.pts=[d,...rest];
+  if(sd===ds)await hopTo(f,[d[0],d[1]-4],16);
+  else{ /* مسیر از سمت دیگر سکو ادامه می‌یابد: قایق (بدون کودک) از جلوی سکو دور می‌زند و کودک هم‌زمان از جلوی سکو پیاده به لبهٔ آن سمت می‌رود */
+   const ey=f[1]+q.ry*.45,e=[NA.x+sd*(q.rx-12),ey],route=avoidBoat([boatAt.slice(),[d[0],d[1]-SEAT-4]]),rc=cum(route);
+   await Promise.all([walk([f,[NA.x+sd*q.rx*.2,ey],e]),tween(1300,p=>{const w=at(route,rc,p*rc[rc.length-1]);placeBoat(w[0],w[1],0)},ease)]);
+   placeBoat(d[0],d[1]-SEAT-4,0);await hopTo(e,[d[0],d[1]-4],16)}}
+ const DK=seaB?dock(NB):null;
+ if(seaB){const rl=runs[runs.length-1];if(rl.m){const o=rl.pts.filter(p=>!inOuter(NB,p[0],p[1]));let bi=0,bd=1e9;o.forEach((p,i)=>{const d=Math.hypot(p[0]-DK[0],p[1]-DK[1]);if(d<bd){bd=d;bi=i}});rl.pts=[...o.slice(0,bi+1),DK]}} /* D183: مسیر تا نزدیک‌ترین نقطه به اسکلهٔ مقصد؛ نه گذشتن از آن و برگشتن */
+ for(const r of runs){
+  if(r.m!==sea){const p0=r.pts[0];
+   if(r.m){const f0=pts_last_land(runs,r);setOutfit(true);await moveBoat(berthPos(),500);await hopTo(f0,[BERTH[0],BERTH[1]-4],18);r.pts=[BERTH,...r.pts.filter(p=>p===DK||(p[0]<BERTH[0]-1&&p[1]<JDOT+2))]}
+   else{await hopTo([p0[0],p0[1]-4],p0,18);setOutfit(false);moveBoat(berthPos(),1400)}
+   sea=r.m}
+  if(r.m)await sail(r.pts);else await walk(r.pts)}
+ const e=NODES[b];if(!isSea(e.y)){setOutfit(false);await moveBoat(berthPos(),900);const f=stand(e);placeFig(f[0],f[1])}
+ else{const d=dock(e),f=padFig(e);await moveBoat([d[0],d[1]-SEAT-4],500);await hopTo([d[0],d[1]-4],f,16);placeFig(f[0],f[1])}}
+/* پرش دراماتیک به جای قبلاً‌رفته (D86): یک پرش بلند با چرخش و له‌شدن؛ حدود نیم‌ثانیه */
+async function dramatic(a,b){fadeRing();const A=NODES[a],B=NODES[b],seaB=isSea(B.y),dist=Math.hypot(B.x-A.x,B.y-A.y),hgt=Math.min(260,90+dist*.18);
+ const x0=stand(A)[0],x1=stand(B)[0],y0=stand(A)[1],y1=stand(B)[1];
+ await tween(150,p=>{setTilt(0,0,1-.18*Math.sin(p*Math.PI/2))});
+ const b0=boatAt.slice(),bt=boatTarget(b),sameB=Math.hypot(bt[0]-b0[0],bt[1]-b0[1])<1.5;
+ const BP=sameB?null:avoidBoat([b0,bt]),BC=BP?cum(BP):null;
+ await tween(520,p=>{if(!sameB){const q=at(BP,BC,p*BC[BC.length-1]);placeBoat(q[0],q[1],0)};const x=x0+(x1-x0)*p,y=y0+(y1-y0)*p-4*hgt*p*(1-p);placeFig(x,y);setTilt(360*p,0,1+.12*Math.sin(p*Math.PI));follow(y)},ease);
+ setOutfit(seaB);placeBoat(bt[0],bt[1],0);
+ await tween(220,p=>{setTilt(0,0,1-.14*Math.sin(p*Math.PI))});setTilt(0,0,1);placeFig(x1,y1)}
+async function run(fn){if(busy)return;busy=true;skip=false;$('fin').hidden=true;$('prv').hidden=true;$('skip').hidden=reduce;$('again').hidden=true;try{await fn()}finally{busy=false;skip=false;$('skip').hidden=true;$('again').hidden=false}}
+/* D205 (مالک ۵ نوامبر): گذر ایستگاه به ایستگاه فقط روی نقشه و بدون فید: «بریم به ایستگاه بعد» (ردپای هیولا می‌آید و کودک راه می‌افتد) یا «برگردیم به ایستگاه قبل» */
+function nxt(){const i=ORDER.indexOf(here),b=ORDER[i+1];if(!b||b==='M12'&&ORDER.slice(0,ORDER.indexOf('M12')).some(x=>x!==here&&!done.has(x)))return null;return b}
+function prv(){const i=ORDER.indexOf(here);return i>0?ORDER[i-1]:null}
+function status(){saveNow();$('st').textContent=T('here').replace('%s',NODES[here].title||'');const atH=here==='M12';$('fin').textContent=atH?T('hide.enter'):T('finish');$('fin').hidden=(!nxt()&&!atH)||busy;$('prv').hidden=!prv()||busy}
+async function finish(){if(busy)return;if(here==='M12'){openHide();return}const b=nxt();if(!b)return;
+ if(!done.has(here)){await run(()=>monsterTrail(here,b,leg(here,b)));done.add(here);updateTrail();showPrints(false)}
+ await go(b)}
+
+/* D205 (مالک ۵ نوامبر): آموزش کوتاه بار اول روی نقشهٔ بلند (#enter-…-tut). چند گام با نورافکن روی چیز موردنظر؛ «بعدی» و «رد کن» همیشه هست؛ تغییر گام نرم است (بدون پرش). */
+async function tutorial(){const tut=$('tut'),th=$('th'),tt=$('tt'),card=tut.querySelector('.card');
+ const tgt=[()=>document.querySelector('.hit[data-id="'+here+'"]'),()=>document.querySelector('.hit[data-id="'+here+'"]'),()=>$('fin'),()=>$('prv'),()=>$('home')];
+ const steps=[1,2,3,4,5].filter(i=>{const e=tgt[i-1]();return e&&!e.hidden});let k=0;$('ts').textContent=T('tut.skip');
+ function show(){const i=steps[k],e=tgt[i-1](),r=e.getBoundingClientRect(),pad=i<=2?2:6;
+  let x=r.left-pad,y=r.top-pad,w=r.width+2*pad,h=r.height+2*pad;if(i<=2){const c=Math.min(w,h)*0.9;x+=(w-c*1.25)/2;y+=h*.18;w=c*1.25;h=c*.95}
+  th.style.left=x+'px';th.style.top=y+'px';th.style.width=w+'px';th.style.height=h+'px';
+  tt.style.opacity=0;setTimeout(()=>{tt.textContent=T('tut.'+i);tt.style.opacity=1},reduce?0:180);
+  $('tn').textContent=k===steps.length-1?T('tut.done'):T('tut.next');
+  const ch=card.offsetHeight||150,vh=innerHeight;card.style.top=(y+h/2>vh/2?Math.max(12,y-ch-18):Math.min(vh-ch-12,y+h+18))+'px'}
+ const end=()=>{if(PROF){PROF.tut=true;saveNow()}tut.classList.remove('on');setTimeout(()=>{tut.hidden=true},reduce?0:380)};
+ $('tn').onclick=()=>{if(k<steps.length-1){k++;show()}else end()};$('ts').onclick=end;
+ tut.hidden=false;show();void tut.offsetWidth;tut.classList.add('on')}
+$('fin').onclick=finish;
+/* D205: نقشهٔ بلند ← نقشهٔ کلی با فید سیاه (و برعکس، در خود نقشهٔ کلی)؛ پیشرفت و جای کودک در نشانی می‌رود */
+$('home').onclick=async()=>{if(busy)return;busy=true;STA.forEach(a=>{try{a.cancel()}catch(e){}});const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
+ await fadeBlk(0,1,reduce?120:380);try{location.href='overview.html#o-'+fr+(here!==fr?'-'+here:'')}catch(e){}busy=false};
+addEventListener('pageshow',e=>{if(e.persisted){blk.style.opacity=1;fadeBlk(1,0,reduce?120:380)}});$('prv').onclick=()=>{const a=prv();if(a)go(a)};
+/* D138/D139 (پیشنهاد، ماکت): صفحهٔ انتخاب مخفی‌گاه؛ چهار گزینه کنار هم؛ آب‌های آزاد: قایق از بالای کادر می‌رود و پیام می‌آید */
+const ov=$('ov'),ovn=$('ovn');let atSea=false;
+let HT=0;
+/* D211 (مالک ۵ نوامبر): ورود به مخفی‌گاه: اول فقط تصویر درون مخفی‌گاه با هیولا و کودک؛ بعد از ~۲٫۴ ثانیه (یا لمس تصویر) پیام و گزینه‌ها بالا می‌آید */
+function openHide(){if(PROF&&PROF.fig&&PROF.fig.sailor)$('hsc').src=PROF.fig.sailor;/* D214: بچهٔ مخفی‌گاه همان کاراکتر انتخابیِ هر کودک است، نه تصویر ثابت */ovn.textContent='';ov.classList.remove('nosc');clearTimeout(HT);if(!reduce){ov.classList.add('wait');HT=setTimeout(()=>ov.classList.remove('wait'),2400)}else ov.classList.remove('wait');ov.hidden=false}
+$('hs').addEventListener('click',()=>{clearTimeout(HT);ov.classList.remove('wait')});
+$('ovc').onclick=()=>{ov.hidden=true;$('ovt').textContent=T('hide.title');$('opts').hidden=false;$('ovc').textContent=T('hide.close');if(atSea)seaBack()};
+/* D184: هر گزینهٔ خروج از مخفی‌گاه = سفر قایق به آب‌های ناشناخته (آب تیره‌تر می‌شود) ← خروج از کادر ← فید سیاه ← مقصد (ماکت: پیام)؛ برگشت: فید از سیاه + قایق از بالا */
+const blk=$('blk'),dvEl=$('dv'),fadeBlk=(a,b,ms)=>tween(ms,p=>{blk.style.opacity=a+(b-a)*p});
+/* D186: «جعبهٔ کارت» و «مرور مرحله‌ها» بعد از فید سیاه به صفحهٔ ماکت جریان (cardbox.html) می‌روند؛ برگشت = دوباره مخفی‌گاه */
+const RET='mt-return';let hideFail=false;
+function leave(key,url){return async()=>{ov.hidden=true;await run(seaOut);await fadeBlk(0,1,650);
+ if(url){try{sessionStorage.setItem(RET,'1')}catch(e){try{localStorage.setItem(RET,'1')}catch(e2){}}
+  try{location.href=url;await new Promise(r=>setTimeout(r,2500))}catch(e){}}
+ $('ovt').textContent=T(key);$('opts').hidden=true;$('ovn').textContent='';$('ovc').textContent=T('hide.back');atSea=true;ov.classList.add('nosc');ov.hidden=false;await fadeBlk(1,0,600)}}
+$('o_rev').onclick=leave('hide.mock','cardbox.html#prac');$('o_card').onclick=leave('hide.mock','cardbox.html#box');$('o_cr').onclick=leave('hide.mock');/* D205 (مالک ۵ نوامبر): «پیش به سوی آب‌های آزاد» = کاراکتر سوار قایق می‌شود، قایق از مخفی‌گاه بیرون می‌رود و در پهنهٔ آبی بلندِ پس از مخفی‌گاه
+   (که در نقشهٔ کلی و نقشهٔ بلند دیده نمی‌شود) به سوی افق می‌رود؛ پیام، سپس فید اوت. گذرها همه فید سیاه است، بدون پرش. */
+function drawOpenSea(W,V,L){const HZ=Math.round(V*.30),NS='http://www.w3.org/2000/svg';let h='<defs><linearGradient id="es_sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb46b"/><stop offset=".6" stop-color="#ffd9a0"/><stop offset="1" stop-color="#fff0c8"/></linearGradient>'
+  +'<linearGradient id="es_sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f9cbc"/><stop offset="'+(V/L).toFixed(3)+'" stop-color="#22728f"/><stop offset="1" stop-color="#165f77"/></linearGradient></defs>';
+ h+='<rect x="0" y="0" width="'+W+'" height="'+HZ+'" fill="url(#es_sky)"/>';
+ h+='<circle cx="'+(W*.62)+'" cy="'+(HZ+4)+'" r="'+(W*.13)+'" fill="#ffe27a" stroke="#241a5e" stroke-width="5"/>';
+ for(const [cx,cy,r] of [[W*.2,HZ*.35,26],[W*.82,HZ*.22,20]])h+='<g fill="#fff8ea" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round"><path d="M'+(cx-r*1.6)+','+cy+' a'+r*.7+','+r*.7+' 0 0 1 '+r*1.1+',-'+r*.55+' a'+r*.9+','+r*.9+' 0 0 1 '+r*1.5+',-.2 a'+r*.7+','+r*.7+' 0 0 1 '+r*.9+','+r*.75+' z"/></g>';
+ h+='<rect x="0" y="'+HZ+'" width="'+W+'" height="'+(L-HZ)+'" fill="url(#es_sea)"/><line x1="-10" y1="'+HZ+'" x2="'+(W+10)+'" y2="'+HZ+'" stroke="#241a5e" stroke-width="5"/>';
+ h+='<path d="M'+(W*.62-W*.13)+','+(HZ+10)+' h'+(W*.26)+'" stroke="#ffe27a" stroke-width="6" stroke-linecap="round" opacity=".8"/>';
+ let seed=7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+ for(let y=HZ+14;y<L-10;y+=Math.max(16,(y-HZ)*.12)){const k=Math.min(1,(y-HZ)/(V*.9)),n=1+Math.round(rnd()*2);for(let i=0;i<n;i++){const x=rnd()*W,w=6+16*k;
+  h+='<path d="M'+(x-w)+','+y.toFixed(1)+' q'+(w/2)+','+(-w*.55)+' '+w+',0 t'+w+',0" fill="none" stroke="#fff" stroke-width="'+(1.5+2*k).toFixed(1)+'" stroke-linecap="round" opacity="'+(.25+.25*k).toFixed(2)+'"/>'}}
+ const g=$('esbg');g.setAttribute('viewBox','0 0 '+W+' '+L);g.style.height=L+'px';g.innerHTML=h;return HZ}
+async function openSea(){const es=$('endsea'),W=innerWidth,V=innerHeight,L=Math.round(V*3.2),HZ=drawOpenSea(W,V,L),b=$('esb'),bg=$('esbg'),m=$('esm');$('esf').src=IM.sailor;m.textContent=T('hide.seamsg');m.style.opacity=0;
+ const put=(cam,x,y,s)=>{bg.style.transform='translateY('+(-cam)+'px)';b.style.transform='translate('+x+'px,'+(y-cam)+'px) scale('+s+')'};
+ const y0=L-V*.22,yS=V*.72,camEnd=0;put(L-V,W/2,y0,1.5);es.hidden=false;
+ await fadeBlk(1,0,reduce?150:700);
+ /* ۱) قایق در پهنهٔ بلند رو به بالا می‌رود و دوربین دنبالش می‌کند تا افق پیدا شود */
+ await tween(reduce?10:5200,p=>{const y=y0+(yS-y0)*p,cam=Math.max(camEnd,Math.min(L-V,y-V*.68));put(cam,W/2+14*Math.sin(p*7)*(1-p),y,1.5-.4*p)},ease);
+ /* ۲) قایق به سوی افق می‌رود و کوچک می‌شود */
+ await tween(reduce?10:3600,p=>{const y=yS+(HZ+10-yS)*p;put(0,W/2+6*Math.sin(p*5),y,1.1-.95*p)},p=>1-Math.pow(1-p,2));
+ m.style.opacity=1;await new Promise(r=>setTimeout(r,reduce?600:2600));
+ await fadeBlk(0,1,reduce?150:1000);es.hidden=true;m.style.opacity=0}
+$('o_sea').onclick=async()=>{ov.hidden=true;await run(seaOut);await fadeBlk(0,1,650);dvEl.style.opacity=0;
+ busy=true;try{await openSea()}finally{busy=false}
+ if(/map\.html$/.test(location.pathname)){try{location.href='index.html#back';return}catch(e){}}   /* در جریان کامل (منو ← … ← map.html): خروج به منوی اول */
+ /* ماکت تنها: پس از فید، برگشت به مخفی‌گاه */
+ const n=NODES.M12,d=dock(n),f=padFig(n);placeBoat(d[0],d[1]-SEAT-4,0);setOutfit(false);placeFig(f[0],f[1]);follow(NODES.M12.y);openHide();await fadeBlk(1,0,600)};
+async function seaOut(){const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,by,0);setOutfit(true);await hopTo(f,[d[0],d[1]-4],16);
+ await tween(2800,p=>{const y=by-(by+150)*p,x=bx+10*Math.sin(p*6)*(1-p),r=3*Math.sin(p*9);placeBoat(x,y,r);placeFig(x,y+SEAT);setTilt(-r*.7,0);dvEl.style.opacity=.92*Math.min(1,p*1.6);follow(Math.max(0,y))},ease)}
+async function seaBack(){atSea=false;await fadeBlk(0,1,350);await run(async()=>{const n=NODES.M12,d=dock(n),f=padFig(n),bx=d[0],by=d[1]-SEAT-4;placeBoat(bx,-150,0);placeFig(bx,-150+SEAT);
+ await tween(2200,p=>{const y=-150+(by+150)*p;placeBoat(bx,y,0);placeFig(bx,y+SEAT);dvEl.style.opacity=.92*(1-p);blk.style.opacity=Math.max(0,1-p*6);follow(Math.max(0,y))},ease);blk.style.opacity=0;dvEl.style.opacity=0;setTilt(0,0);await hopTo([d[0],d[1]-4],f,16);setOutfit(false);placeFig(f[0],f[1])});status()}
+
+/* D159 (ماکت): حرکت ایستگاه‌ها هنگام رسیدن؛ یک‌بار، بدون حلقهٔ بیکار؛ حالت پایانی = شکل ایستای نماد. «کاهش حرکت» = بی‌حرکت. با لمس ایستگاهِ فعلی دوباره پخش می‌شود. */
+function stationG(id){const node=document.querySelector('.node[data-id="'+id+'"]');if(!node)return null;let g=node.querySelector('g.live');if(g)return g;
+ const u=node.querySelector('use');if(!u)return null;const sym=document.getElementById(u.getAttribute('href').slice(1));if(!sym)return null;
+ const x=+u.getAttribute('x'),y=+u.getAttribute('y'),w=+u.getAttribute('width'),h=+u.getAttribute('height'),s=Math.min(w/200,h/190);
+ g=document.createElementNS('http://www.w3.org/2000/svg','g');g.setAttribute('class','live');g.dataset.sid=u.getAttribute('href').slice(6);g.setAttribute('transform','translate('+(x+(w-200*s)/2)+' '+(y+(h-190*s)/2)+') scale('+s+')');g.innerHTML=sym.innerHTML;u.replaceWith(g);return g}
+function Lh(g,n){const h=g.querySelector('[id$="_hero"]')||g;return[...h.querySelectorAll('[id$="_'+n+'"]')].find(e=>e.tagName==='g')||Ly(g,n)} /* لایهٔ داخل hero (نه clipPath/shade عمومی) */
+function Ly(g,n){return g.querySelector('[id$="_'+n+'"]')}
+function an(el,kf,ms,delay,ease,alt,it){if(!el)return null;el.style.transformOrigin='0 0';return el.animate(kf,{duration:ms,delay:delay||0,easing:ease||'ease-in-out',fill:'backwards',iterations:it||IT,direction:alt?'alternate':'normal'})}
+/* D178: حرکت از حالت ایستا شروع می‌شود (بدون پرش): [ایستا، ...کلیدها] با رفت‌وبرگشت؛ فرودها با ease-in */
+function an2(el,kf,ms,delay,ease,alt,it){if(!alt||!el)return an(el,kf,ms,delay,ease,alt,it);const rest=kf[kf.length-1],f=kf.map(k=>Object.assign({},k));const k2=[Object.assign({},rest,{easing:'ease-out'}),...f];if(kf.length===2)k2[1].easing=ease||'ease-in-out';el.style.transformOrigin='0 0';return el.animate(k2,{duration:ms*(kf.length===2?1.5:1.3),delay:delay||0,easing:'linear',fill:'backwards',iterations:Math.ceil((it||IT)/2)})}
+function rotKf(el,cx,cy,degs){return degs.map(a=>({transform:'translate('+cx+'px,'+cy+'px) rotate('+a+'deg) translate('+(-cx)+'px,'+(-cy)+'px)'}))}
+function ctr(el){const b=el.getBBox();return[b.x+b.width/2,b.y+b.height/2,b]}
+const ST={
+ wheel_dock(g){for(const n of['wheel','wheel_back']){const e=Ly(g,n);if(!e)continue;const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[-720,0]),2600,0,'cubic-bezier(.2,.6,.3,1)',false,1))}},
+ pier(g){const e=Ly(g,'lantern');if(!e)return;const b=e.getBBox();return_(an(e,rotKf(e,b.x+b.width/2,b.y,[-5,5]),1000,0,'ease-in-out',true,4))},
+ harbor_crane(g){return_(an(Ly(g,'hook'),[{transform:'translateY(-10px)'},{transform:'translateY(0)'}],1100,0,'ease-in-out',true))},
+ shipyard(g){const e=Ly(g,'hammer');if(!e)return;const c=ctr(e),b=c[2],px=b.x+b.width/2,py=b.y+b.height;return_(an(e,rotKf(e,px,py,[-22,0,-22,0,-22,0]),3000,0,'ease-in-out',false,1))},
+ floating_market(g){return_(an(Ly(g,'boat'),[{transform:'translateY(-3px)'},{transform:'translateY(0)'}],1000,0,'ease-in-out',true))},
+ lighthouse(g){[['beam_l',0],['beam_r',500]].forEach(([n,d])=>return_(an(Ly(g,n),[{opacity:1},{opacity:.12},{opacity:1},{opacity:.12},{opacity:1}],2000,d,'ease-in-out')))},
+ final_workshop(g){const e=Ly(g,'gear');if(e){const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[-270,0]),3000,0,'ease-out',false,1))}
+  [['smoke_1',0],['smoke_2',500],['smoke_3',1000]].forEach(([n,d])=>return_(an(Ly(g,n),[{transform:'translateY(0)',opacity:1},{transform:'translateY(-25px)',opacity:0,offset:.7},{transform:'translateY(0)',opacity:0,offset:.71},{transform:'translateY(0)',opacity:1}],1800,d,'ease-out')))},
+ /* D176: حرکت هنگام رسیدن برای ۲۴ نمادِ دیگر؛ مشخصات از motion_spec هر نماد (etudes/stations/out/*.json)، تکرار ۳ بار رفت‌وبرگشتی (پایان = ایستا) */
+ city_gate(g){const e=Lh(g,'leaf');if(!e)return;const hx=24,r=s=>'translate('+hx+'px,0) scale('+s+',1) translate('+(-hx)+'px,0)';return_(an2(e,[{transform:r(2)},{transform:r(1)}],1400,0,'ease-out',true,3))},
+ scaffold(g){const e=Lh(g,'bucket');if(!e)return;return_(an2(e,rotKf(e,-58.6,-110.8,[0,14,-14,8,-4,0]),2800,0,'ease-in-out',false,1))},
+ /* ۵ نوامبر (فهرست اتصال D196): جابه‌جایی‌ها کوتاه شد تا جزء متحرک از جفتش جدا و معلق نشود */
+ materials_store(g){return_(an2(Lh(g,'brick'),[{transform:'translateX(12px)'},{transform:'translateX(0)'}],1200,0,'ease-out',true,3))},   /* دور دوم عامل‌ها: آجر روی پشته سُر می‌خورد، معلق نمی‌شود */
+ excavation(g){const e=Lh(g,'bar');if(!e)return;return_(an2(e,rotKf(e,-7.5,-33,[-20,0]),1800,0,'ease-out',true,3))},
+ beam_store(g){return_(an2(Lh(g,'prop'),[{transform:'translateY(-10px)'},{transform:'translateY(0)'}],1200,0,'ease-in',true,3))},
+ tool_room(g){const e=Lh(g,'hammer');if(!e)return;const A=-42,rt=a=>({transform:'translate(-1px,-22.4px) rotate('+a+'deg) translate(1px,22.4px)'}),kf=[];for(let i=0;i<3;i++){const o=i/3,w=1/3;kf.push(Object.assign(rt(0),{offset:o,easing:'ease-out'}),Object.assign(rt(A),{offset:o+w*.6,easing:'cubic-bezier(.6,0,1,.8)'}),Object.assign(rt(0),{offset:o+w*.8}))}kf.push(Object.assign(rt(0),{offset:1}));e.style.transformOrigin='0 0';return_(e.animate(kf,{duration:2700,fill:'backwards',iterations:1}))},
+ wrench_room(g){const e=Lh(g,'nut');if(!e)return;const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[0,-30,0,-30,0]),2200,0,'ease-in-out',false,1))},   /* دور دوم عامل‌ها: مهره در دهانهٔ آچار می‌چرخد، از آن بیرون نمی‌آید */
+ loading_ramp(g){return_(an2(Ly(g,'crate'),[{transform:'translate(21px,9.1px)'},{transform:'translate(0,0)'}],1600,0,'ease-in-out',true,3))},
+ football(g){const e=Lh(g,'ball');if(!e)return;const f=(x,a)=>'translate('+x+'px,0) translate(-14px,-29px) rotate('+a+'deg) translate(14px,29px)';return_(an2(e,[{transform:f(-36,-55)},{transform:f(0,0)}],1600,0,'ease-out',true,3))},
+ basketball_hall(g){const e=Lh(g,'ball');if(!e)return;return_(an2(e,[{transform:'translate(0,28.8px)',easing:'ease-out'},{transform:'translate(31.7px,37.4px)',easing:'ease-out'},{transform:'translate(37.4px,-27.4px)',easing:'ease-out'},{transform:'translate(15.8px,-47.5px)',easing:'ease-in'},{transform:'translate(1.4px,-30.2px)',easing:'ease-in'},{transform:'translate(0,0)'}],1700,0,'linear',true,3))}, /* D194: از تور پایین می‌افتد، می‌غلتد، بالا می‌رود و از بالای حلقه دوباره توی تور */
+ archery_range(g){const ar=Lh(g,'string_arrow'),cd=Lh(g,'string_cord');if(!ar||!cd)return;const ps=[...cd.querySelectorAll('path')],d0=ps.map(p=>p.getAttribute('d')),X0=16.4,pos=o=>{const x=X0+o;ar.style.transform='translateX('+o+'px)';ps[0].setAttribute('d','M-1.3,-111.2 L'+x+',-62.6');ps[1].setAttribute('d','M'+x+',-62.6 L-1.4,-14.0')};
+  const ez=u=>1-(1-u)*(1-u),DUR=550,N=4,T0=performance.now();let alive=true,raf=0;const done=()=>{if(!alive)return;alive=false;cancelAnimationFrame(raf);ar.style.transform='';ps.forEach((p,i)=>p.setAttribute('d',d0[i]))};
+  (function f(now){if(!alive)return;const p=Math.min(1,(now-T0)/(DUR*N)),k=Math.min(N-1,Math.floor(p*N)),u=ez(p*N-k),w=k%2===0?1-u:u;pos(-14*(1-w));if(p>=1)done();else raf=requestAnimationFrame(f)})(T0);return_({cancel:done})},
+ magnet_hockey(g){return_(an2(Lh(g,'clip'),[{transform:'translateX(-28px)'},{transform:'translateX(0)'}],1000,0,'ease-in',true,3))},
+ launch_pad(g){const e=Lh(g,'flame');if(!e)return;const s=(x,y)=>'translate(-25px,-2px) scale('+x+','+y+') translate(25px,2px)';return_(an2(e,[s(1,1),s(1.5,2),s(1.1,1.1),s(1.5,2),s(1.1,1.1),s(1.5,2),s(1,1)].map(x=>({transform:x})),1500,0,'ease-in-out',false,1))},
+ ice_rink(g){return_(an2(Lh(g,'skate'),[{transform:'translateX(-14px)'},{transform:'translateX(0)'}],1200,0,'ease-out',true,3))},
+ pool(g){const e=Lh(g,'ball');if(!e)return;e.style.transformOrigin='0 0';return_(e.animate([{transform:'translateY(0)',easing:'ease-out'},{transform:'translateY(-15px)',offset:.5,easing:'ease-in'},{transform:'translateY(0)'}],{duration:800,fill:'backwards',iterations:3}))},
+ tug_field(g){return_(an2(Lh(g,'flag'),[[0,0],[-11,1.6],[11,-1.6],[0,0]].map(p=>({transform:'translate('+p[0]+'px,'+p[1]+'px)'})),2400,0,'ease-in-out',false,1))},
+ skate_park(g){return_(an2(Lh(g,'skateboard'),[{transform:'translate(-20px,0px)'},{transform:'translate(0,0)'}],900,0,'ease-out',true,3))},
+ space_loading(g){const e=Lh(g,'crate');if(!e)return;const cb=e.firstElementChild,D=30;let y0=0,h=1;try{const b=cb.getBBox();y0=b.y;h=Math.max(1,b.height)}catch(_){}const k=(h+D)/h; /* D198: کابل بالا ثابت (پشت بازو)، پایین همراه جعبه؛ اندازه‌ها از خود کابل، نه عدد دستی */
+  return_(an2(e,[{transform:'translateY('+D+'px)'},{transform:'translateY(0)'}],1800,0,'ease-out',true,3));if(cb)return_(an2(cb,[{transform:'translate(0px,'+(y0-D)+'px) scale(1,'+k+') translate(0px,'+(-y0)+'px)'},{transform:'translate(0px,'+y0+'px) scale(1,1) translate(0px,'+(-y0)+'px)'}],1800,0,'ease-out',true,3))},
+ scale_lab(g){const e=Lh(g,'beam');if(!e)return;return_(an2(e,rotKf(e,0,-108,[0,20,-14,7,-3,0]),2200,0,'ease-out',false,1))},
+ moon(g){const e=Lh(g,'shade');if(!e)return;return_(e.animate([{opacity:1},{opacity:.15},{opacity:1}],{duration:3000,easing:'ease-in-out',fill:'backwards'}))},
+ space_station(g){const e=Lh(g,'panels');if(!e)return;return_(an2(e,rotKf(e,0,-28,[0,14,-14,0]),2000,0,'ease-in-out',false,3))},
+ windmill(g){const e=Lh(g,'blades');if(!e)return;return_(an2(e,rotKf(e,-5,-60.1,[0,1080]),5000,0,'ease-in-out',false,1))},
+ cart_station(g){for(const [n,cx,cy] of[['wheel_near',-28.6,-7.8],['wheel_far',-14.8,-18.5]]){const e=Lh(g,n);if(e)return_(an2(e,rotKf(e,cx,cy,[0,360]),3000,0,'ease-in-out',false,1))}},
+ well(g){return_(an2(Lh(g,'bucket'),[{transform:'translateY(-9px)'},{transform:'translateY(0)'}],2000,0,'ease-in-out',true,3))},
+ chopwood(g){const e=Ly(g,'axe');if(!e)return;/* D171: تبر مثل تبر: سر تبر حول انتهای دسته بالا می‌رود، لحظه‌ای مکث، و تند فرود می‌آید؛ سه ضربه */
+  const h=(e.querySelector(':scope>:not(.bk)')||e).getBBox(),cx=h.x+h.width-8,cy=h.y+8,A=26,N=3,rt=a=>'translate('+cx+'px,'+cy+'px) rotate('+a+'deg) translate('+(-cx)+'px,'+(-cy)+'px)',kf=[];
+  for(let i=0;i<N;i++){const o=i/N,w=1/N;kf.push({offset:o,transform:rt(0),easing:'cubic-bezier(.25,.1,.3,1)'},{offset:o+w*.5,transform:rt(A),easing:'linear'},{offset:o+w*.6,transform:rt(A),easing:'cubic-bezier(.7,0,1,.9)'},{offset:o+w*.76,transform:rt(0),easing:'linear'})}
+  kf.push({offset:1,transform:rt(0)});e.style.transformOrigin='0 0';return_(e.animate(kf,{duration:4200,fill:'backwards',iterations:1}))},
+ screw_workshop(g){const nb=Ly(g,'nut_back'),nf=Ly(g,'nut_front');if(!nb||!nf)return;
+  /* D169: مهره دور پیچ می‌چرخد و همزمان بالا و پایین می‌رود؛ دو لایهٔ جایگزین فریم‌به‌فریم رسم می‌شوند و در پایان کنار می‌روند (پایان = لایه‌های اصلی) */
+  const NS2='http://www.w3.org/2000/svg',ob=document.createElementNS(NS2,'g'),of=document.createElementNS(NS2,'g');nb.after(ob);nf.after(of);nb.style.display='none';nf.style.display='none';
+  const CX=-26.8,CY=-55.1,R=45.2,AY=18.1,H=23.8,HR=27.4,RAD=Math.PI/180,mix=(a,b,u)=>{const p=s=>[1,3,5].map(i=>parseInt(s.substr(i,2),16));const A=p(a),B=p(b);return'#'+A.map((v,i)=>Math.round(v+(B[i]-v)*u).toString(16).padStart(2,'0')).join('')};
+  const fcol=c=>{const u=Math.min(1,Math.abs(c)/.866);return c>=0?mix('#f2b92c','#d9961c',u):mix('#f2b92c','#e8a51f',u)};
+  const bnd=(ph,t)=>{const m=((t-ph)%60+60)%60,r=R*.866/Math.cos((m-30)*RAD);return[CX+r*Math.cos(t*RAD),CY+AY/R*r*Math.sin(t*RAD)]};
+  const pts=a=>a.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' ');
+  function draw(ph,dy){const C=[];for(let i=0;i<6;i++){const th=(ph+60*i)*RAD;C.push([CX+R*Math.cos(th),CY+AY*Math.sin(th)])}
+   let faces='',hl='',seams='';let xs=C.map(c=>c[0]),iL=xs.indexOf(Math.min(...xs)),iR=xs.indexOf(Math.max(...xs));
+   for(let i=0;i<6;i++){const A=C[i],B=C[(i+1)%6],tm=(ph+60*i+30)*RAD;if(Math.sin(tm)<=0)continue;
+    faces+='<polygon points="'+pts([A,B,[B[0],B[1]+H],[A[0],A[1]+H]])+'" fill="'+fcol(Math.cos(tm))+'" stroke="'+fcol(Math.cos(tm))+'" stroke-width=".6"/>';
+    hl+='<polygon points="'+pts([A,B,[B[0],B[1]+6],[A[0],A[1]+6]])+'" fill="#ffe9a0"/>'}
+   for(let i=0;i<6;i++){const th=(ph+60*i)*RAD;if(Math.sin(th)>.02&&Math.sin(th)<1.01)seams+='<line x1="'+C[i][0].toFixed(1)+'" y1="'+C[i][1].toFixed(1)+'" x2="'+C[i][0].toFixed(1)+'" y2="'+(C[i][1]+H).toFixed(1)+'" stroke="#241a5e" stroke-width="3.9" stroke-linecap="round"/>'}
+   const fr=[],bo=[];for(let t=0;t<=180;t+=3){fr.push(bnd(ph,t))}fr.push(bnd(ph,180));for(let t=0;t<=180;t+=3){const q=bnd(ph,t);bo.push([q[0],q[1]+H])}
+   const outl='<path d="M'+pts([fr[0]])+' L'+pts(fr)+' L'+pts([[C[iL][0],C[iL][1]+H]])+' L'+pts(bo.slice().reverse())+' Z" fill="none" class="eo" stroke-width="7.6"/>';
+   const sil='<path d="M'+pts([[C[iL][0],C[iL][1]]])+' L'+pts([[C[iL][0],C[iL][1]+H]])+' L'+pts(bo.slice().reverse().filter((q,k,a)=>true))+' L'+pts([[C[iR][0],C[iR][1]+H]])+' L'+pts([C[iR]])+'" fill="none" class="eo" stroke-width="7.6"/>';
+   const hole=[];for(let t=0;t<360;t+=10)hole.push([CX+HR*Math.cos(t*RAD),CY+HR*.4*Math.sin(t*RAD)]);
+   const arc=[];for(let t=180;t>=0;t-=10)arc.push([CX+HR*Math.cos(t*RAD),CY+HR*.4*Math.sin(t*RAD)]);
+   const topf=[];for(let t=0;t<=180;t+=3)topf.push(bnd(ph,t));
+   const cres=pts(topf)+' '+pts(arc);
+   const tr='translate(0 '+dy.toFixed(2)+')';
+   ob.setAttribute('transform',tr);of.setAttribute('transform',tr);
+   ob.innerHTML=faces+hl+'<polygon points="'+pts(C)+'" fill="#ffd84d" class="eo" stroke-width="7.6" stroke-linejoin="round"/>'+'<polygon points="'+pts(hole)+'" fill="#8a5f0c" class="eo" stroke-width="3.9"/>'+sil;
+   of.innerHTML=faces+hl+'<polygon points="'+cres+'" fill="#ffd84d"/>'+seams+'<path d="M'+pts(topf)+'" fill="none" class="eo" stroke-width="7.6"/><path d="M'+pts(arc)+'" fill="none" class="eo" stroke-width="3.9"/>'+sil}
+  let alive=true,raf=0;const DUR=5200,T0=performance.now(),ez=u=>u<.5?2*u*u:1-2*(1-u)*(1-u);
+  const done=()=>{if(!alive)return;alive=false;cancelAnimationFrame(raf);ob.remove();of.remove();nb.style.display='';nf.style.display=''};
+  (function f(now){if(!alive)return;const p=Math.min(1,(now-T0)/DUR),seg=Math.min(3,Math.floor(p*4)),u=ez(p*4-seg),y=-22*(seg%2===0?u:1-u);draw(360*y/22,y);if(p>=1)done();else raf=requestAnimationFrame(f)})(T0);
+  return_({cancel:done})}
+};
+const IT=3;let STA=[];function return_(a){if(a)STA.push(a)}
+function playStation(id){if(reduce)return;const g=stationG(id);if(!g)return;const key=g.dataset.sid;if(!ST[key])return;STA.forEach(a=>{try{a.cancel()}catch(e){}});STA=[];ST[key](g)}
+async function go(id){if(busy)return;if(id===here){if(id==='M12')openHide();else playStation(id);return} /* D143: ورود به مخفی‌گاه مثل بقیهٔ ایستگاه‌ها: لمس خود ایستگاه، نه دکمهٔ جدا */
+ const up=nextUp();
+ if(visited.has(id)){await run(()=>dramatic(here,id));here=id;playStation(id)}
+ else if(id===up){if(!done.has(ORDER[ORDER.indexOf(up)-1])){const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');$('st').textContent=T('needfin');return}await run(()=>travel(here,id));curLeg=-1;visited.add(id);here=id;showPrints(true);updateDim(id);playStation(id)}
+ else{const e=document.querySelector('[data-id="'+id+'"]');e.classList.remove('shake');void e.offsetWidth;e.classList.add('shake');return}
+ status();refreshRing();updateTrail()}
+const ring=document.createElement('div');ring.style.cssText='position:absolute;pointer-events:none;border:4px solid #ffd23f;border-radius:50%;opacity:.95;box-shadow:0 0 0 3px #241a5e';world.appendChild(ring);
+
+function updateDim(fresh){document.querySelectorAll('.node[data-id]').forEach(n=>{const id=n.dataset.id;if(!(id in NODES))return;const v=visited.has(id)||here===id;if(v){if(n.classList.contains('dim')){n.classList.remove('dim');if(fresh===id&&!reduce){n.classList.add('glow');setTimeout(()=>n.classList.remove('glow'),1700)}}}else n.classList.add('dim')})}
+function updateLocks(){updateDim();document.querySelectorAll('.lock').forEach(l=>l.classList.toggle('open',visited.has(l.dataset.lock)))} /* R20: قفل ایستگاه پس از رسیدن کودک باز می‌شود (محو آرام) */
+function fadeRing(){const old=document.getElementById('ringG');if(!old)return;old.id='ringOld';old.style.opacity=0;setTimeout(()=>old.remove(),reduce?0:520)}
+function refreshRing(){updateLocks();ring.style.display='none';const old=document.getElementById('ringG');if(old)old.remove();
+ const n=NODES[here],q=pd(n),g=n.rg||[0,0,0],rx=q.rx+5+g[0],ry=q.ry+q.w/2+3+g[1],cx=n.x+g[2],cy=n.y+q.w/2+2;
+ const nd=svgMap.querySelector('.node[data-id="'+here+'"]');if(!nd)return;
+ const G=document.createElementNS('http://www.w3.org/2000/svg','g');G.id='ringG';
+ const mk=(w,c)=>{const e=document.createElementNS('http://www.w3.org/2000/svg','ellipse');e.setAttribute('cx',cx);e.setAttribute('cy',cy);e.setAttribute('rx',rx);e.setAttribute('ry',ry);e.setAttribute('fill','none');e.setAttribute('stroke',c);e.setAttribute('stroke-width',w);return e};
+ G.appendChild(mk(9.5,'#241a5e'));G.appendChild(mk(4,'#ffd23f'));
+ G.style.opacity=0;nd.parentNode.insertBefore(G,nd);void G.getBoundingClientRect();G.style.opacity=1}
+ids.forEach(i=>{const n=NODES[i],h=n.hit;const b=document.createElement('button');b.className='hit';b.dataset.id=i;b.setAttribute('aria-label',T('node.label').replace('%s',n.title||i));
+ b.style.cssText='left:'+h[0]+'px;top:'+h[1]+'px;width:'+Math.max(48,h[2])+'px;height:'+Math.max(48,h[3])+'px';b.onclick=()=>go(i);world.appendChild(b)});
+$('skip').onclick=()=>{skip=true};
+$('again').onclick=()=>{if(busy)return;visited.clear();done.clear();ORDER.filter(i=>NODES[i].y>=1200).forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('E03')).forEach(i=>done.add(i));here='E03';putAt(here);status();refreshRing();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55);updateTrail();resetPrints();showPrints(true)};
+let ret=false;try{if(sessionStorage.getItem(RET)||localStorage.getItem(RET)){sessionStorage.removeItem(RET);localStorage.removeItem(RET);ret=true}}catch(e){}
+if(ret){ORDER.forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('M12')).forEach(i=>done.add(i));here='M12'}
+/* D190: ورود از منوی ورود (#enter-new = اولین بار از اولین جا؛ #enter-cont = ادامه از «پیست اسکی روی یخ»): نقشه از سیاه باز می‌شود و حرکت رسیدن ایستگاه پخش می‌شود */
+/* D192: از نقشهٔ کلی: #enter-<پیشرفت> یا #enter-<پیشرفت>-<جای رفته> (پیشرفت = جای کودک؛ جای رفته = خانه‌ای که روی نقشهٔ کلی زد) */
+const EN=location.hash.match(/^#enter-(new|cont|[A-Z]\d\d)(?:-([A-Z]\d\d))?(-tut)?$/);
+if(EN&&!ret){const id=EN[1]==='new'?ORDER[0]:EN[1]==='cont'?'F06':EN[1],ix=Math.max(0,ORDER.indexOf(id));visited.clear();done.clear();ORDER.slice(0,ix+1).forEach(i=>visited.add(i));ORDER.slice(0,ix).forEach(i=>done.add(i));here=ORDER[ix];if(EN[2]&&ORDER.indexOf(EN[2])>=0&&ORDER.indexOf(EN[2])<=ix)here=EN[2]}
+fit();putAt(here);const FIRST=EN&&!ret&&EN[3]&&here===ORDER[0]&&!reduce;if(FIRST)placeFig(samp[0][0],samp[0][1]);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}if(EN&&!ret){updateDim();blk.style.opacity=1;addEventListener('load',()=>setTimeout(async()=>{await fadeBlk(1,0,reduce?120:480);if(FIRST){const n0=NODES[here],pts=[];for(let q=0;q<=Math.min(samp.length-1,Math.round(n0.s/2));q+=2)pts.push([samp[q][0],samp[q][1]]);window.__wr=(x,y)=>prints.childNodes.forEach(g=>{if(g.dataset.on||+g.dataset.leg!==-7)return;if(Math.hypot(g.dataset.px-x,g.dataset.py-y)>60)return;g.dataset.on='1';g.style.display='';g.firstChild.style.animationDelay='0ms'});await run(async()=>{await new Promise(r=>setTimeout(r,500));const f=padFig(n0);pts.push([f[0],f[1]]);await walk(pts);window.__wr=null;placeFig(f[0],f[1])/* D215: راه رفتن تا خود نقطهٔ سکو ادامه دارد؛ پرش پایانی نیست */})}playStation(here);if(EN[3])setTimeout(async()=>{const nb=nxt();if(nb&&!done.has(here)){await run(()=>monsterTrail(here,nb,leg(here,nb)));done.add(here);updateTrail();showPrints(false);status()}sc.scrollTo({top:Math.max(0,NODES[here].y*k-sc.clientHeight*.55),behavior:reduce?'auto':'smooth'});await new Promise(r=>setTimeout(r,reduce?0:900));tutorial()},reduce?100:1900)},30))}if(location.hash==='#back'){blk.style.opacity=1;addEventListener('load',()=>setTimeout(()=>fadeBlk(1,0,reduce?120:480),300))}   /* ماکت تنهای نقشه: برگشت از نقشهٔ کلی بدون پرش */
+addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,(FIRST?samp[0][1]:NODES[here].y)*k-sc.clientHeight*.55);document.documentElement.classList.add('rdy')});
+</script>
+</body>
+</html>

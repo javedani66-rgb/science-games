@@ -6,7 +6,7 @@ const slideDist=(F,i)=>Math.min(300,Math.max(0,F-SURF[i].f)*9);
 const minPush=i=>Math.floor(SURF[i].f/5)*5+5;
 /* نشانگرِ اندازهٔ اصطکاک: برای سطح ۱ سه پلهٔ تصویری، برای بقیه عدد */
 function fricMeter(x,y,i){if(!NUMS()){let s="";for(let j=0;j<3;j++)s+=`<rect x="${x-22-j*16}" y="${y-12}" width="12" height="12" rx="3" fill="${j<=i?"#E8590C":"#fff"}" stroke="#E8590C" stroke-width="1.5"/>`;return s+T(x-60,y-1,"اصطکاک",{size:11,col:"#B4460A",anchor:"start",halo:false});}
-  return T(x,y,`اصطکاک تا <tspan class="num">${fa(SURF[i].f)}</tspan> نیوتن`,{size:12,col:"#B4460A",anchor:"start",halo:false});}
+  return T(x,y,`اصطکاک تا <tspan class="num">${fa(SURF[i].f)}</tspan> نیوتون`,{size:12,col:"#B4460A",anchor:"start",halo:false});}
 function surfTex(i,x0,x1,sy){if(i===0){let s="";for(let x=x0+30;x<x1-40;x+=170)s+=`<path d="M${x} ${sy+10} l40 -6" stroke="#fff" stroke-width="3" stroke-linecap="round"/>`;return s;}
   if(i===1){let s="";for(let x=x0+60;x<x1;x+=100)s+=`<line x1="${x}" y1="${sy}" x2="${x}" y2="${sy+26}" stroke="#B9834A" stroke-width="2"/>`;return s;}
   let s="";for(let x=x0+14;x<x1-4;x+=18)s+=`<circle cx="${x}" cy="${sy+8+(x%36?8:0)}" r="2.2" fill="#B85548"/>`;return s;}
@@ -40,11 +40,11 @@ const ST_fric={key:"fric",name:"اصطکاک",c:"#C2410C",sub:"یخ، چوب و 
    return h+arrow(110,330,180,330,10,BLUE);},
  lab(A){A.prompt("آزمایشگاه اصطکاک: اندازهٔ هل را انتخاب کن و «هل بده!» را بزن. ببین روی هر سطح جعبه چقدر جلو می‌رود.");A.counter("");
    let F=20,fr=makeFriction(A,F);A.formula(`<span class="fl">قانون</span><span>اصطکاک تا یک اندازه جلوی هل دادن را می‌گیرد. اگر نیروی هل دادن از آن اندازه بیشتر شود، جعبه راه می‌افتد.</span>`);A.refresh=()=>fr.render();
-   const c=A.ctrl("");if(!KID())stepper(c,{init:F,min:5,max:60,steps:[5],unit:"نیوتن",onChange:v=>{F=v;fr=makeFriction(A,F);A.refresh=()=>fr.render();}});
+   const c=A.ctrl("");if(!KID())stepper(c,{init:F,min:5,max:60,steps:[5],unit:"نیوتون",onChange:v=>{F=v;fr=makeFriction(A,F);A.refresh=()=>fr.render();}});
    else{c.insertAdjacentHTML("beforeend",`<div class="ctrl" id="kf"><button class="opt" data-f="10" type="button">آرام هل بده</button><button class="opt sel" data-f="20" type="button">کمی محکم‌تر</button><button class="opt" data-f="40" type="button">محکم هل بده</button></div>`);
      const kf=c.querySelector("#kf");kf.onclick=e=>{const b=e.target.closest("[data-f]");if(!b)return;F=+b.dataset.f;kf.querySelectorAll(".opt").forEach(x=>x.classList.toggle("sel",x===b));fr=makeFriction(A,F);A.refresh=()=>fr.render();};}
    btn(c,"هل بده!","go",b=>{b.disabled=true;fr.reset();fr.run(()=>{b.disabled=false;const moved=fr.lanes.filter(L=>F>L.f).map(L=>L.n);
-     A.fb(moved.length?`${NUMS()?`با ${fa(F)} نیوتن، `:""}جعبه روی ${andList(moved)} حرکت کرد.${moved.length<3?" روی بقیه، اصطکاک جلوی حرکت را گرفت.":""}`:"روی هیچ سطحی حرکت نکرد؛ نیروی هل دادن از اصطکاکِ هیچ سطحی بیشتر نبود.","info");});});},
+     A.fb(moved.length?`${NUMS()?`با ${fa(F)} نیوتون، `:""}جعبه روی ${andList(moved)} حرکت کرد.${moved.length<3?" روی بقیه، اصطکاک جلوی حرکت را گرفت.":""}`:"روی هیچ سطحی حرکت نکرد؛ نیروی هل دادن از اصطکاکِ هیچ سطحی بیشتر نبود.","info");});});},
  /* مرحله‌ها: هر سه چالش یک ایده (ببین ← امتحان کن ← به کار ببر) */
  kid:[
   {id:"fric.a1",title:"لیز یا زبر؟",desc:"جعبه روی یخ، چوب و فرش. کجا راحت‌تر سُر می‌خورد؟",ch:["fr.far","fr.rough","fr.move20","fr.stuck20","fr.flagW","fr.stop10"]},
@@ -62,7 +62,7 @@ const ST_fric={key:"fric",name:"اصطکاک",c:"#C2410C",sub:"یخ، چوب و 
   if(sp.t==="fq")return fricChallenge(sp,A);
   if(sp.t==="surf"){const sl=makeSlide(A,{F:sp.F,surf:sp.start==null?null:sp.start,flag:sp.goal==="flag"?slideDist(sp.F,sp.ans):null});A.refresh=()=>sl.render();A.counter("");
     A.formula(`<span class="fl">قانون</span><span>اگر نیروی هل دادن از اصطکاک بیشتر باشد، جعبه حرکت می‌کند.</span>`);
-    const K=KID(),Fs=NUMS()?` با ${fa(sp.F)} نیوتن`:"";
+    const K=KID(),Fs=NUMS()?` با ${fa(sp.F)} نیوتون`:"";
     if(sp.goal==="move")A.prompt(K?"جعبه روی فرش تکان نمی‌خورد. سطح را عوض کن تا راه بیفتد.":`جعبه را روی فرش${Fs} هل می‌دهیم، ولی تکان نمی‌خورد. سطح را عوض کن تا راه بیفتد. اگر نشد، دوباره امتحان کن.<small>یک سطح انتخاب کن و «هل بده!» را بزن.</small>`);
     else if(sp.goal==="stop")A.prompt(K?"جعبه روی یخ سُر می‌خورد. سطحی انتخاب کن که جعبه تکان نخورد.":`جعبه را روی یخ${Fs} هل می‌دهیم و سُر می‌خورد. سطحی انتخاب کن که جعبه تکان نخورد. اگر نشد، دوباره امتحان کن.<small>یک سطح انتخاب کن و «هل بده!» را بزن.</small>`);
     else A.prompt(K?"سطحی انتخاب کن که جعبه درست کنار پرچم بایستد.":`جعبه را${Fs} هل می‌دهیم. سطحی انتخاب کن که جعبه درست کنار پرچم بایستد. اگر نشد، دوباره امتحان کن.<small>یک سطح انتخاب کن و «هل بده!» را بزن.</small>`);
@@ -80,11 +80,11 @@ const ST_fric={key:"fric",name:"اصطکاک",c:"#C2410C",sub:"یخ، چوب و 
   if(sp.t==="min"){const sl=makeSlide(A,{F:5,surf:sp.s});A.refresh=()=>sl.render();A.counter("");const nm=SURF[sp.s].n,ans=minPush(sp.s);
     A.prompt(`کمترین نیرویی را پیدا کن که با هل دادن، جعبه را روی ${nm} راه می‌اندازد. اگر نشد، دوباره امتحان کن.<small>اندازهٔ هل را با + و − تنظیم کن و «هل بده!» را بزن. اصطکاکِ این سطح بالای صحنه نوشته شده است.</small>`);
     A.formula(`<span class="fl">قانون</span><span>اگر نیروی هل دادن از اصطکاک بیشتر باشد، جعبه راه می‌افتد.</span>`);
-    const c=A.ctrl("");const stp=stepper(c,{init:5,min:5,max:60,steps:[5],unit:"نیوتن",label:"نیروی هل دادن",onChange:v=>{sl.st.F=v;sl.reset();A.fb("");}});
+    const c=A.ctrl("");const stp=stepper(c,{init:5,min:5,max:60,steps:[5],unit:"نیوتون",label:"نیروی هل دادن",onChange:v=>{sl.st.F=v;sl.reset();A.fb("");}});
     const go=btn(c,"هل بده!","go",()=>{go.disabled=true;sl.reset();sl.run(d=>{const F=sl.st.F,ok=F===ans;
-      const res=A.trial(ok,{ok:`${fa(F)} نیوتن از اصطکاکِ ${nm} (${fa(SURF[sp.s].f)} نیوتن) بیشتر است، ولی ${fa(F-5)} نیوتن بیشتر نیست. پس کمترین نیروی هل دادن ${fa(F)} نیوتن است.`,
-        retry:d===0?`با ${fa(F)} نیوتن جعبه راه نیفتاد؛ نیروی هل دادن هنوز از اصطکاک بیشتر نیست.`:`جعبه راه افتاد، ولی با نیروی کمتری هم راه می‌افتاد. نیروی کمتری را امتحان کن.`,
-        more:`نیروی هل دادن باید فقط کمی از ${fa(SURF[sp.s].f)} نیوتن بیشتر باشد.`,final:`جواب: ${fa(ans)} نیوتن؛ چون نیروی هل دادن باید از ${fa(SURF[sp.s].f)} نیوتن بیشتر باشد.`,
+      const res=A.trial(ok,{ok:`${fa(F)} نیوتون از اصطکاکِ ${nm} (${fa(SURF[sp.s].f)} نیوتون) بیشتر است، ولی ${fa(F-5)} نیوتون بیشتر نیست. پس کمترین نیروی هل دادن ${fa(F)} نیوتون است.`,
+        retry:d===0?`با ${fa(F)} نیوتون جعبه راه نیفتاد؛ نیروی هل دادن هنوز از اصطکاک بیشتر نیست.`:`جعبه راه افتاد، ولی با نیروی کمتری هم راه می‌افتاد. نیروی کمتری را امتحان کن.`,
+        more:`نیروی هل دادن باید فقط کمی از ${fa(SURF[sp.s].f)} نیوتون بیشتر باشد.`,final:`جواب: ${fa(ans)} نیوتون؛ چون نیروی هل دادن باید از ${fa(SURF[sp.s].f)} نیوتون بیشتر باشد.`,
         show:()=>{stp.set(ans);sl.st.F=ans;sl.reset();sl.run();}});
       if(res||A.locked)stp.disable();else later(600,()=>{sl.reset();go.disabled=false;});});});
     return;}

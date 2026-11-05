@@ -5,3 +5,5 @@ src/*/jtest.html
 src/*/all.js
 src/*/tests/shots/
 __pycache__/
+design/mockups/*/*/_cache/
+

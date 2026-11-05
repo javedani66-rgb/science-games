@@ -1,0 +1,65 @@
+{
+ "id": "lighthouse",
+ "kind": "sea",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  108
+ ],
+ "stand": [
+  44.5,
+  5.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_lighthouse_beam_l",
+  "node_lighthouse_beam_r"
+ ],
+ "inside_pad": {
+  "min_margin_px": 16.6,
+  "base_on_pad": true,
+  "height_px": 123.5,
+  "bbox_px": [
+   34.0,
+   0.0,
+   102.8,
+   123.5
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "pivot": [
+   -5.0,
+   -97.0
+  ],
+  "note": "برج، بالکن و اتاقک چراغ (شیشه+سقف+گوی) ثابت و کاملند؛ دو پرتو پشت اتاقک‌اند و از مرکز اتاقک شروع می‌شوند.",
+  "node_lighthouse_beam_l": {
+   "transform_origin": [
+    -5.0,
+    -97.0
+   ],
+   "mode_alternate": "opacity 1→0.12 و برگشت",
+   "mode_sweep": "scaleX 1→0.25 (حول مرکز اتاقک) همراه opacity 1→0.3",
+   "cycle_s": 2.4,
+   "phase": "شروع در 0"
+  },
+  "node_lighthouse_beam_r": {
+   "transform_origin": [
+    -5.0,
+    -97.0
+   ],
+   "mode_alternate": "همان، با delay 1.2s تا یکی‌درمیان روشن شوند",
+   "mode_sweep": "همان با delay 1.2s",
+   "cycle_s": 2.4,
+   "phase": "delay 1.2s"
+  },
+  "bounds": "حالت ایستا بیشینهٔ گسترش است؛ هر حالت دیگر زیرمجموعهٔ آن است",
+  "reduced_motion": "هر دو پرتو ثابت و روشن",
+  "beams_symmetry_error": 0.0
+ }
+}

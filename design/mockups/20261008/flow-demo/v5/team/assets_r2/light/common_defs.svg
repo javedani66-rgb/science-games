@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<!-- فقط پشتیبان ابزار ماکت؛ هیچ blend/mix-blend-mode ای نیست -->
+<filter id="lt-wob" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4"/></filter>
+<linearGradient id="lt-sky-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd4ff"/><stop offset=".55" stop-color="#d4f6ff"/><stop offset="1" stop-color="#d4f6ff"/></linearGradient>
+<linearGradient id="lt-sky-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a2a9a"/><stop offset=".55" stop-color="#c2379a"/><stop offset="1" stop-color="#ff7a3d"/></linearGradient>
+<linearGradient id="lt-sky-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#190539"/><stop offset=".55" stop-color="#2a1064"/><stop offset="1" stop-color="#4b3b9e"/></linearGradient>
+<clipPath id="lt-clip-card"><rect width="360" height="240" rx="12"/></clipPath>
+<!-- بازتاب غروب روی آب: خط‌های افقی (نه لکه) -->
+<g id="lt-reflect-dusk" fill="#ffb21c" fill-opacity=".45"><rect x="0" y="0" width="120" height="3" rx="1.5"/><rect x="20" y="9" width="90" height="3" rx="1.5"/><rect x="40" y="18" width="60" height="3" rx="1.5"/></g>
+<!-- ستارهٔ چهارپر v4 (gen_card.py) -->
+<path id="lt-sparkle" d="M0,-8 l1.5,6.5 6.5,1.5 -6.5,1.5 -1.5,6.5 -1.5,-6.5 -6.5,-1.5 6.5,-1.5z" fill="#ffd9ff"/>
+</defs></svg>

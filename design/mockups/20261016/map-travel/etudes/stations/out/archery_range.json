@@ -1,0 +1,75 @@
+{
+ "id": "archery_range",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  88
+ ],
+ "stand": [
+  39.0,
+  5.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_archery_range_string"
+ ],
+ "inside_pad": {
+  "min_margin_px": 17.2,
+  "base_on_pad": true,
+  "height_px": 85.5,
+  "bbox_px": [
+   25.2,
+   20.0,
+   85.2,
+   105.5
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_archery_range_string": {
+   "kind": "زه + تیر؛ حالت ایستا = حالت کشیده (پایان حرکت)",
+   "children": {
+    "node_archery_range_string_arrow": "تیر + پر + نوک + کام؛ فقط translateX",
+    "node_archery_range_string_cord": "دو خط زه؛ دو سر بالا و پایین ثابت روی نوک‌گیرها، سر میانی روی ته تیر"
+   },
+   "translate_x_symbol_units": [
+    -6,
+    0
+   ],
+   "translate_x_map_px": [
+    -4.3,
+    0
+   ],
+   "string_fixed_ends_map_px": [
+    [
+     -1.4,
+     -111.2
+    ],
+    [
+     -1.4,
+     -14.0
+    ]
+   ],
+   "nock_rest": [
+    11.0,
+    -62.6
+   ],
+   "nock_end": [
+    16.4,
+    -62.6
+   ],
+   "duration_s": 0.7,
+   "easing": "ease-out",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "how": "گروه arrow را از translateX(-6) به 0 ببر. زه: دو خط (یا یک path با سه نقطه) که دو سر ثابت می‌مانند و نقطهٔ میانی (رأس V) با ته تیر از x=11.0 تا x=16.4 می‌رود؛ یعنی در حالت رها زه تقریباً راست است. بدنهٔ کمان ثابت و کامل.",
+   "note": "بدون حلقهٔ بیکار؛ با reduced-motion ثابت در حالت کشیده."
+  }
+ }
+}

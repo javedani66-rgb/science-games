@@ -1,0 +1,581 @@
+{
+ "_readme_fa": "ریسمان درس: ترتیب منطقی تدریس همهٔ ۳۴ گره. تنها منبع ترتیب کارت‌دان. تولید و راستی‌آزمایی: build_thread.py. نام فصل‌ها و جمله‌ها draft هستند و باید به strings.fa.json بروند (کلیدها: thread.<id>.name / thread.<id>.line). این فایل ادعایی دربارهٔ فهم کودک نیست (B9).",
+ "status": "draft",
+ "verified_b51": true,
+ "state_rules": {
+  "locked": "گرهٔ هنوز نرسیده (پیش‌نیاز دیده نشده)",
+  "unseen": "باز شده ولی کودک کارت را باز نکرده",
+  "seen": "کودک کارت را خوانده/ورق زده",
+  "collected": "کودک خودش «بذار تو جعبه» زده؛ وارد تمرین می‌شود",
+  "fog": "فقط hidden_detour تا کشف نشده"
+ },
+ "chapters": [
+  {
+   "id": "C01",
+   "name_fa": "نیرو",
+   "line_fa": "هل می‌دهیم، می‌کشیم؛ نیرو چیزها را به حرکت درمی‌آورد.",
+   "color_need": "آبی",
+   "symbol_need": "دست در حال هل‌دادن با پیکان",
+   "path_stages": [
+    1
+   ],
+   "nodes": [
+    {
+     "id": "F01",
+     "pos": 1,
+     "label_fa": "هل دادن و کشیدن",
+     "env_title_fa": "زمین فوتبال",
+     "flags": [],
+     "prereq": [],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "F02",
+     "pos": 2,
+     "label_fa": "اثر نیرو",
+     "env_title_fa": "سالن بسکتبال",
+     "flags": [],
+     "prereq": [
+      "F01"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "F03",
+     "pos": 3,
+     "label_fa": "جهت و اندازهٔ نیرو",
+     "env_title_fa": "میدان کمانداری",
+     "flags": [],
+     "prereq": [
+      "F01"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "F04",
+     "pos": 4,
+     "label_fa": "نیروی تماسی و نیروی از دور",
+     "env_title_fa": "هاکی آهنربایی",
+     "flags": [],
+     "prereq": [
+      "F01"
+     ],
+     "band_entry": "3-4"
+    }
+   ]
+  },
+  {
+   "id": "C02",
+   "name_fa": "اصطکاک",
+   "line_fa": "چیزهای زبر و صاف حرکت را کم و زیاد می‌کنند.",
+   "color_need": "قهوه‌ای خاکی",
+   "symbol_need": "کف‌دست روی سطح زبر",
+   "path_stages": [
+    2
+   ],
+   "nodes": [
+    {
+     "id": "F06",
+     "pos": 5,
+     "label_fa": "اصطکاک",
+     "env_title_fa": "پیست یخ",
+     "flags": [],
+     "prereq": [
+      "F01",
+      "F02"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "F07",
+     "pos": 6,
+     "label_fa": "مقاومت هوا و آب",
+     "env_title_fa": "استخر",
+     "flags": [],
+     "prereq": [
+      "F06"
+     ],
+     "band_entry": "3-4"
+    }
+   ]
+  },
+  {
+   "id": "C03",
+   "name_fa": "چند نیرو",
+   "line_fa": "وقتی چند نیرو با هم کار می‌کنند چه می‌شود؟",
+   "color_need": "بنفش",
+   "symbol_need": "دو پیکان مخالف روی یک جعبه",
+   "path_stages": [
+    2
+   ],
+   "nodes": [
+    {
+     "id": "F08",
+     "pos": 7,
+     "label_fa": "چند نیرو با هم (برآیند)",
+     "env_title_fa": "میدان طناب‌کشی",
+     "flags": [],
+     "prereq": [
+      "F03",
+      "F06"
+     ],
+     "band_entry": "5-6"
+    },
+    {
+     "id": "F09",
+     "pos": 8,
+     "label_fa": "کنش و واکنش و لختی",
+     "env_title_fa": "پارک اسکیت",
+     "flags": [
+      "to_test",
+      "experimental"
+     ],
+     "prereq": [
+      "F08"
+     ],
+     "band_entry": "to_test"
+    }
+   ]
+  },
+  {
+   "id": "C04",
+   "name_fa": "وزن و جرم",
+   "line_fa": "سنگین و سبک چیست و زمین چطور چیزها را می‌کشد؟",
+   "color_need": "فیروزه‌ای",
+   "symbol_need": "ترازو و سیب",
+   "path_stages": [
+    3
+   ],
+   "nodes": [
+    {
+     "id": "W01",
+     "pos": 9,
+     "label_fa": "سنگین و سبک",
+     "env_title_fa": "انبار بار فضایی",
+     "flags": [],
+     "prereq": [],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "W02",
+     "pos": 10,
+     "label_fa": "جرم",
+     "env_title_fa": "آزمایشگاه ترازو",
+     "flags": [],
+     "prereq": [
+      "W01"
+     ],
+     "band_entry": "3-4"
+    },
+    {
+     "id": "F05",
+     "pos": 11,
+     "label_fa": "گرانش (کشش زمین)",
+     "env_title_fa": "سکوی پرتاب",
+     "flags": [],
+     "prereq": [
+      "F01",
+      "F03"
+     ],
+     "band_entry": "3-4"
+    },
+    {
+     "id": "W03",
+     "pos": 12,
+     "label_fa": "وزن (نیروی گرانش)",
+     "env_title_fa": "سطح ماه",
+     "flags": [],
+     "prereq": [
+      "F03",
+      "F05",
+      "W02"
+     ],
+     "band_entry": "5-6"
+    },
+    {
+     "id": "W04",
+     "pos": 13,
+     "label_fa": "جرم در برابر وزن",
+     "env_title_fa": "ایستگاه فضایی",
+     "flags": [],
+     "prereq": [
+      "W02",
+      "W03"
+     ],
+     "band_entry": "5-6"
+    }
+   ]
+  },
+  {
+   "id": "C05",
+   "name_fa": "کار و انرژی",
+   "line_fa": "برای کار کردن انرژی لازم است.",
+   "color_need": "زرد",
+   "symbol_need": "آسیاب بادی یا جرقه",
+   "path_stages": [
+    4
+   ],
+   "nodes": [
+    {
+     "id": "E01",
+     "pos": 14,
+     "label_fa": "انرژی و تبدیلش",
+     "env_title_fa": "آسیاب بادی",
+     "flags": [],
+     "prereq": [
+      "F02"
+     ],
+     "band_entry": "3-4"
+    },
+    {
+     "id": "E02",
+     "pos": 15,
+     "label_fa": "کار (نیرو و جابه‌جایی)",
+     "env_title_fa": "گاری‌خانه",
+     "flags": [],
+     "prereq": [
+      "F02"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "E07",
+     "pos": 16,
+     "label_fa": "توان: سرعت انجام کار",
+     "env_title_fa": "چاه آب",
+     "flags": [
+      "to_test",
+      "hidden_detour",
+      "optional",
+      "experimental"
+     ],
+     "prereq": [
+      "E02"
+     ],
+     "band_entry": "to_test"
+    }
+   ]
+  },
+  {
+   "id": "C06",
+   "name_fa": "ماشین و تعادل",
+   "line_fa": "ماشین کارِ ما را راحت‌تر می‌کند؛ تعادل یعنی دو طرف برابر.",
+   "color_need": "صورتی",
+   "symbol_need": "ترازوی دوکفه",
+   "path_stages": [
+    5
+   ],
+   "nodes": [
+    {
+     "id": "M01",
+     "pos": 17,
+     "label_fa": "ماشین چیست",
+     "env_title_fa": "دروازهٔ شهر",
+     "flags": [],
+     "prereq": [
+      "F01"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "B01",
+     "pos": 18,
+     "label_fa": "تعادل و مرکز گرانش",
+     "env_title_fa": "داربست",
+     "flags": [],
+     "prereq": [
+      "F05",
+      "W01"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "B02",
+     "pos": 19,
+     "label_fa": "ترازو: برابری دو طرف",
+     "env_title_fa": "انبار مصالح",
+     "flags": [],
+     "prereq": [
+      "B01",
+      "W02"
+     ],
+     "band_entry": "3-4"
+    }
+   ]
+  },
+  {
+   "id": "C07",
+   "name_fa": "اهرم",
+   "line_fa": "یک میله و یک تکیه‌گاه، بار سنگین را بلند می‌کند.",
+   "color_need": "نیلی",
+   "symbol_need": "اهرم روی تکیه‌گاه",
+   "path_stages": [
+    6
+   ],
+   "nodes": [
+    {
+     "id": "M04",
+     "pos": 20,
+     "label_fa": "اهرم",
+     "env_title_fa": "گودبرداری",
+     "flags": [],
+     "prereq": [
+      "B01",
+      "F03",
+      "M01"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "M05",
+     "pos": 21,
+     "label_fa": "جای تکیه‌گاه",
+     "env_title_fa": "تیرآهن‌ها",
+     "flags": [],
+     "prereq": [
+      "M04"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "M06",
+     "pos": 22,
+     "label_fa": "سه نوع اهرم",
+     "env_title_fa": "ابزارخانه",
+     "flags": [
+      "experimental"
+     ],
+     "prereq": [
+      "M05"
+     ],
+     "band_entry": "5-6"
+    },
+    {
+     "id": "E05",
+     "pos": 23,
+     "label_fa": "گشتاور (اثر چرخاندن)",
+     "env_title_fa": "آچارخانه",
+     "flags": [
+      "to_test",
+      "hidden_detour",
+      "optional",
+      "experimental"
+     ],
+     "prereq": [
+      "F03",
+      "M05"
+     ],
+     "band_entry": "to_test"
+    }
+   ]
+  },
+  {
+   "id": "C08",
+   "name_fa": "شیب و گوه",
+   "line_fa": "راه شیب‌دار، گوه و پیچ نیرو را کمتر می‌کنند.",
+   "color_need": "عنابی",
+   "symbol_need": "رمپ با گوه",
+   "path_stages": [
+    7
+   ],
+   "nodes": [
+    {
+     "id": "M03",
+     "pos": 24,
+     "label_fa": "سطح شیب‌دار (رمپ)",
+     "env_title_fa": "رمپ بارگیری",
+     "flags": [],
+     "prereq": [
+      "F05",
+      "M01"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "M09",
+     "pos": 25,
+     "label_fa": "گوه",
+     "env_title_fa": "چوب‌شکافی",
+     "flags": [],
+     "prereq": [
+      "M03"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "M10",
+     "pos": 26,
+     "label_fa": "پیچ",
+     "env_title_fa": "پیچ‌کاری",
+     "flags": [],
+     "prereq": [
+      "M03"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "E03",
+     "pos": 27,
+     "label_fa": "نیروی کمتر، مسافت بیشتر",
+     "env_title_fa": "انبار الوار",
+     "flags": [],
+     "prereq": [
+      "M03",
+      "M05"
+     ],
+     "band_entry": "1-2"
+    }
+   ]
+  },
+  {
+   "id": "C09",
+   "name_fa": "چرخ و قرقره",
+   "line_fa": "چرخ و طناب و دنده بار را راحت‌تر می‌برند.",
+   "color_need": "خاکستری‌آبی",
+   "symbol_need": "قرقره و چرخ‌دنده",
+   "path_stages": [
+    8
+   ],
+   "nodes": [
+    {
+     "id": "M02",
+     "pos": 28,
+     "label_fa": "چرخ و محور",
+     "env_title_fa": "بارانداز",
+     "flags": [],
+     "prereq": [
+      "F06",
+      "M01"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "M07",
+     "pos": 29,
+     "label_fa": "قرقرهٔ ثابت",
+     "env_title_fa": "اسکله",
+     "flags": [],
+     "prereq": [
+      "F03",
+      "M02"
+     ],
+     "band_entry": "1-2"
+    },
+    {
+     "id": "M08",
+     "pos": 30,
+     "label_fa": "قرقرهٔ متحرک و دستگاه قرقره",
+     "env_title_fa": "جرثقیل بندر",
+     "flags": [],
+     "prereq": [
+      "E03",
+      "M07"
+     ],
+     "band_entry": "5-6"
+    },
+    {
+     "id": "M11",
+     "pos": 31,
+     "label_fa": "چرخ‌دنده",
+     "env_title_fa": "لنگرگاه",
+     "flags": [],
+     "prereq": [
+      "M02"
+     ],
+     "band_entry": "1-2"
+    }
+   ]
+  },
+  {
+   "id": "C10",
+   "name_fa": "جمع‌بندی",
+   "line_fa": "نیروی کمتر یعنی راه بیشتر؛ و کنجکاوی برای بیشتر دانستن.",
+   "color_need": "سرمه‌ای با نقش ستاره‌نما (نه ستارهٔ پاداش)",
+   "symbol_need": "در گشوده به اتاق مه‌آلود",
+   "path_stages": [
+    8
+   ],
+   "nodes": [
+    {
+     "id": "E06",
+     "pos": 32,
+     "label_fa": "نیروی کمتر اما زحمت بیشتر",
+     "env_title_fa": "میدان شهر",
+     "flags": [
+      "to_test",
+      "experimental"
+     ],
+     "prereq": [
+      "E02",
+      "E03"
+     ],
+     "band_entry": "to_test"
+    },
+    {
+     "id": "E04",
+     "pos": 33,
+     "label_fa": "مزیت مکانیکی",
+     "env_title_fa": "برج ساعت",
+     "flags": [
+      "hidden_detour",
+      "optional"
+     ],
+     "prereq": [
+      "M08"
+     ],
+     "band_entry": "5-6"
+    },
+    {
+     "id": "M12",
+     "pos": 34,
+     "label_fa": "ماشین مرکب",
+     "env_title_fa": "کارگاه ماشین مرکب",
+     "flags": [
+      "to_test",
+      "hidden_detour",
+      "deferred",
+      "experimental"
+     ],
+     "prereq": [],
+     "band_entry": "to_test"
+    }
+   ]
+  }
+ ],
+ "order": [
+  "F01",
+  "F02",
+  "F03",
+  "F04",
+  "F06",
+  "F07",
+  "F08",
+  "F09",
+  "W01",
+  "W02",
+  "F05",
+  "W03",
+  "W04",
+  "E01",
+  "E02",
+  "E07",
+  "M01",
+  "B01",
+  "B02",
+  "M04",
+  "M05",
+  "M06",
+  "E05",
+  "M03",
+  "M09",
+  "M10",
+  "E03",
+  "M02",
+  "M07",
+  "M08",
+  "M11",
+  "E06",
+  "E04",
+  "M12"
+ ]
+}

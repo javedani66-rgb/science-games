@@ -1,0 +1,29 @@
+{
+ "_doc": "متن‌های بوم نقشهٔ env. فقط این فایل؛ پیش‌نویس (draft). عنوان کامل زمین‌ها در titles_fa.json است و اینجا فقط نام کوتاه روی زمین آمده.",
+ "env.zone_title.sports": {
+  "text": "ورزشگاه",
+  "status": "draft"
+ },
+ "env.zone_title.space": {
+  "text": "پایگاه فضایی",
+  "status": "draft"
+ },
+ "env.zone_title.farm": {
+  "text": "مزرعه و آسیاب",
+  "status": "draft"
+ },
+ "env.zone_title.city": {
+  "text": "شهر صنعتی",
+  "status": "draft"
+ },
+ "env.start.label": {
+  "text": "شروع",
+  "status": "draft",
+  "note": "جاگذار بازبینی روی تابلوی شروع؛ متن نهایی کار UI"
+ },
+ "env.here.label": {
+  "text": "تو اینجایی",
+  "status": "draft",
+  "note": "از flow-demo/strings.fa.json (جاگذار بازبینی؛ نشانهٔ اصلی کار UI است)"
+ }
+}

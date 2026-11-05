@@ -1,0 +1,46 @@
+{
+ "id": "windmill",
+ "kind": "farm",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  88
+ ],
+ "stand": [
+  52.0,
+  10.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_windmill_blades"
+ ],
+ "inside_pad": {
+  "min_margin_px": 14.8,
+  "base_on_pad": true,
+  "height_px": 105.5,
+  "bbox_px": [
+   23.5,
+   20.0,
+   113.0,
+   125.5
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_windmill_blades": {
+   "center": [
+    -5.0,
+    -60.1
+   ],
+   "dir": "cw (جهت عقربه‌های ساعت)",
+   "turns": 3,
+   "note": "چهار پرهٔ پارچه‌ای حول محور؛ حالت ایستا = ضربدر ×؛ چرخش آهسته فقط هنگام رسیدن؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "پره‌ها ثابت در حالت ضربدر ×"
+ }
+}

@@ -1,0 +1,1369 @@
+{
+ "_doc": "جای هر گره، بوم 390×5694. base_center = لنگر (پایین-وسط بنا)؛ place_at = گوشهٔ بالا-چپ symbol (بنا 200×190، پروپ 120×100). نشان سختی بالا-ابتدا، قفل/انجام پایین-ابتدا، پای b1 لبهٔ جلوی پایه، برچسب زیر پایه. نور: بالا-چپ.",
+ "canvas": [
+  390,
+  5694
+ ],
+ "slots": {
+  "F01": {
+   "asset": "node_03",
+   "zone": "sports",
+   "base_center": [
+    118,
+    5364
+   ],
+   "base_rx": 84,
+   "base_ry": 28,
+   "silhouette_h": 124,
+   "place_at": [
+    18,
+    5214
+   ],
+   "hit_box": [
+    34,
+    5278,
+    168,
+    122
+   ],
+   "difficulty_pill_center": [
+    198,
+    5236
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    178,
+    5397
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    118,
+    5379
+   ],
+   "label_slot_center": [
+    118,
+    5436
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "F02": {
+   "asset": "prop_09",
+   "zone": "sports",
+   "base_center": [
+    284,
+    5204
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 64,
+   "place_at": [
+    224,
+    5126
+   ],
+   "hit_box": [
+    236,
+    5156,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    316,
+    5136
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    309,
+    5222
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    284,
+    5210
+   ],
+   "label_slot_center": [
+    284,
+    5260
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "F03": {
+   "asset": "prop_10",
+   "zone": "sports",
+   "base_center": [
+    108,
+    5072
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 62,
+   "place_at": [
+    48,
+    4994
+   ],
+   "hit_box": [
+    60,
+    5024,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    140,
+    5006
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    133,
+    5090
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    108,
+    5078
+   ],
+   "label_slot_center": [
+    108,
+    5128
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "F04": {
+   "asset": "prop_12",
+   "zone": "sports",
+   "base_center": [
+    288,
+    4940
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 48,
+   "place_at": [
+    228,
+    4862
+   ],
+   "hit_box": [
+    240,
+    4892,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    320,
+    4888
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    313,
+    4958
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    288,
+    4946
+   ],
+   "label_slot_center": [
+    288,
+    4996
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "F06": {
+   "asset": "node_02",
+   "zone": "sports",
+   "base_center": [
+    106,
+    4780
+   ],
+   "base_rx": 80,
+   "base_ry": 27,
+   "silhouette_h": 112,
+   "place_at": [
+    6,
+    4630
+   ],
+   "hit_box": [
+    26,
+    4702,
+    160,
+    113
+   ],
+   "difficulty_pill_center": [
+    182,
+    4664
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    163,
+    4812
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    106,
+    4794
+   ],
+   "label_slot_center": [
+    106,
+    4851
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "F07": {
+   "asset": "prop_01",
+   "zone": "sports",
+   "base_center": [
+    280,
+    4620
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 40,
+   "place_at": [
+    220,
+    4542
+   ],
+   "hit_box": [
+    232,
+    4572,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    312,
+    4576
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    305,
+    4638
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    280,
+    4626
+   ],
+   "label_slot_center": [
+    280,
+    4676
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "F08": {
+   "asset": "prop_06",
+   "zone": "sports",
+   "base_center": [
+    112,
+    4488
+   ],
+   "base_rx": 38,
+   "base_ry": 13,
+   "silhouette_h": 38,
+   "place_at": [
+    52,
+    4410
+   ],
+   "hit_box": [
+    64,
+    4440,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    146,
+    4446
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    139,
+    4507
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    112,
+    4495
+   ],
+   "label_slot_center": [
+    112,
+    4545
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "F09": {
+   "asset": "prop_07",
+   "zone": "sports",
+   "base_center": [
+    286,
+    4356
+   ],
+   "base_rx": 40,
+   "base_ry": 13,
+   "silhouette_h": 36,
+   "place_at": [
+    226,
+    4278
+   ],
+   "hit_box": [
+    238,
+    4308,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    322,
+    4316
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    314,
+    4375
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    286,
+    4363
+   ],
+   "label_slot_center": [
+    286,
+    4413
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "W01": {
+   "asset": "prop_02",
+   "zone": "space",
+   "base_center": [
+    118,
+    4224
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 44,
+   "place_at": [
+    58,
+    4146
+   ],
+   "hit_box": [
+    70,
+    4176,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    150,
+    4176
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    143,
+    4242
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    118,
+    4230
+   ],
+   "label_slot_center": [
+    118,
+    4280
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "W02": {
+   "asset": "node_04",
+   "zone": "space",
+   "base_center": [
+    284,
+    4064
+   ],
+   "base_rx": 56,
+   "base_ry": 19,
+   "silhouette_h": 100,
+   "place_at": [
+    184,
+    3914
+   ],
+   "hit_box": [
+    228,
+    3994,
+    112,
+    97
+   ],
+   "difficulty_pill_center": [
+    336,
+    3960
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    324,
+    4089
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    284,
+    4074
+   ],
+   "label_slot_center": [
+    284,
+    4127
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "F05": {
+   "asset": "node_05",
+   "zone": "space",
+   "base_center": [
+    108,
+    3904
+   ],
+   "base_rx": 58,
+   "base_ry": 20,
+   "silhouette_h": 118,
+   "place_at": [
+    8,
+    3754
+   ],
+   "hit_box": [
+    50,
+    3822,
+    116,
+    110
+   ],
+   "difficulty_pill_center": [
+    162,
+    3782
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    149,
+    3930
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    108,
+    3915
+   ],
+   "label_slot_center": [
+    108,
+    3968
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "W03": {
+   "asset": "prop_08",
+   "zone": "space",
+   "base_center": [
+    288,
+    3744
+   ],
+   "base_rx": 34,
+   "base_ry": 12,
+   "silhouette_h": 64,
+   "place_at": [
+    228,
+    3666
+   ],
+   "hit_box": [
+    240,
+    3696,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    318,
+    3676
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    312,
+    3762
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    288,
+    3750
+   ],
+   "label_slot_center": [
+    288,
+    3800
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "W04": {
+   "asset": "node_06",
+   "zone": "space",
+   "base_center": [
+    104,
+    3584
+   ],
+   "base_rx": 76,
+   "base_ry": 26,
+   "silhouette_h": 116,
+   "place_at": [
+    4,
+    3434
+   ],
+   "hit_box": [
+    28,
+    3503,
+    152,
+    115
+   ],
+   "difficulty_pill_center": [
+    176,
+    3464
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    158,
+    3615
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    104,
+    3598
+   ],
+   "label_slot_center": [
+    104,
+    3654
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "E01": {
+   "asset": "node_08",
+   "zone": "farm",
+   "base_center": [
+    280,
+    3394
+   ],
+   "base_rx": 66,
+   "base_ry": 23,
+   "silhouette_h": 128,
+   "place_at": [
+    180,
+    3244
+   ],
+   "hit_box": [
+    214,
+    3305,
+    132,
+    120
+   ],
+   "difficulty_pill_center": [
+    342,
+    3262
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    327,
+    3422
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    280,
+    3406
+   ],
+   "label_slot_center": [
+    280,
+    3461
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "E02": {
+   "asset": "prop_05",
+   "zone": "farm",
+   "base_center": [
+    112,
+    3234
+   ],
+   "base_rx": 38,
+   "base_ry": 13,
+   "silhouette_h": 44,
+   "place_at": [
+    52,
+    3156
+   ],
+   "hit_box": [
+    64,
+    3186,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    146,
+    3186
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    139,
+    3253
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    112,
+    3241
+   ],
+   "label_slot_center": [
+    112,
+    3291
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "E07": {
+   "asset": "prop_11",
+   "zone": "farm",
+   "base_center": [
+    286,
+    3102
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 58,
+   "place_at": [
+    226,
+    3024
+   ],
+   "hit_box": [
+    238,
+    3054,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    318,
+    3040
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    311,
+    3120
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    286,
+    3108
+   ],
+   "label_slot_center": [
+    286,
+    3158
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M01": {
+   "asset": "prop_16",
+   "zone": "city",
+   "base_center": [
+    118,
+    2970
+   ],
+   "base_rx": 44,
+   "base_ry": 14,
+   "silhouette_h": 72,
+   "place_at": [
+    58,
+    2892
+   ],
+   "hit_box": [
+    70,
+    2920,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    158,
+    2894
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    149,
+    2990
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    118,
+    2977
+   ],
+   "label_slot_center": [
+    118,
+    3028
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "B01": {
+   "asset": "prop_07",
+   "zone": "city",
+   "base_center": [
+    284,
+    2838
+   ],
+   "base_rx": 40,
+   "base_ry": 13,
+   "silhouette_h": 36,
+   "place_at": [
+    224,
+    2760
+   ],
+   "hit_box": [
+    236,
+    2790,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    320,
+    2798
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    312,
+    2857
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    284,
+    2845
+   ],
+   "label_slot_center": [
+    284,
+    2895
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "B02": {
+   "asset": "prop_02",
+   "zone": "city",
+   "base_center": [
+    108,
+    2706
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 44,
+   "place_at": [
+    48,
+    2628
+   ],
+   "hit_box": [
+    60,
+    2658,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    140,
+    2658
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    133,
+    2724
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    108,
+    2712
+   ],
+   "label_slot_center": [
+    108,
+    2762
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M04": {
+   "asset": "node_07",
+   "zone": "city",
+   "base_center": [
+    288,
+    2574
+   ],
+   "base_rx": 64,
+   "base_ry": 22,
+   "silhouette_h": 86,
+   "place_at": [
+    188,
+    2424
+   ],
+   "hit_box": [
+    224,
+    2514,
+    128,
+    96
+   ],
+   "difficulty_pill_center": [
+    348,
+    2484
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    334,
+    2601
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    288,
+    2586
+   ],
+   "label_slot_center": [
+    288,
+    2640
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M05": {
+   "asset": "prop_07",
+   "zone": "city",
+   "base_center": [
+    104,
+    2442
+   ],
+   "base_rx": 40,
+   "base_ry": 13,
+   "silhouette_h": 36,
+   "place_at": [
+    44,
+    2364
+   ],
+   "hit_box": [
+    56,
+    2394,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    140,
+    2402
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    132,
+    2461
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    104,
+    2449
+   ],
+   "label_slot_center": [
+    104,
+    2499
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M06": {
+   "asset": "prop_13",
+   "zone": "city",
+   "base_center": [
+    280,
+    2310
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 44,
+   "place_at": [
+    220,
+    2232
+   ],
+   "hit_box": [
+    232,
+    2262,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    312,
+    2262
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    305,
+    2328
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    280,
+    2316
+   ],
+   "label_slot_center": [
+    280,
+    2366
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "E05": {
+   "asset": "prop_13",
+   "zone": "city",
+   "base_center": [
+    112,
+    2178
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 44,
+   "place_at": [
+    52,
+    2100
+   ],
+   "hit_box": [
+    64,
+    2130,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    144,
+    2130
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    137,
+    2196
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    112,
+    2184
+   ],
+   "label_slot_center": [
+    112,
+    2234
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M03": {
+   "asset": "node_01",
+   "zone": "city",
+   "base_center": [
+    286,
+    2046
+   ],
+   "base_rx": 70,
+   "base_ry": 24,
+   "silhouette_h": 78,
+   "place_at": [
+    186,
+    1896
+   ],
+   "hit_box": [
+    216,
+    1992,
+    140,
+    96
+   ],
+   "difficulty_pill_center": [
+    352,
+    1964
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    336,
+    2075
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    286,
+    2059
+   ],
+   "label_slot_center": [
+    286,
+    2114
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M09": {
+   "asset": "node_09",
+   "zone": "city",
+   "base_center": [
+    118,
+    1886
+   ],
+   "base_rx": 52,
+   "base_ry": 18,
+   "silhouette_h": 104,
+   "place_at": [
+    18,
+    1736
+   ],
+   "hit_box": [
+    66,
+    1814,
+    104,
+    98
+   ],
+   "difficulty_pill_center": [
+    166,
+    1778
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    155,
+    1910
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    118,
+    1895
+   ],
+   "label_slot_center": [
+    118,
+    1948
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M10": {
+   "asset": "prop_14",
+   "zone": "city",
+   "base_center": [
+    284,
+    1726
+   ],
+   "base_rx": 34,
+   "base_ry": 12,
+   "silhouette_h": 40,
+   "place_at": [
+    224,
+    1648
+   ],
+   "hit_box": [
+    236,
+    1678,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    314,
+    1682
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    308,
+    1744
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    284,
+    1732
+   ],
+   "label_slot_center": [
+    284,
+    1782
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "E03": {
+   "asset": "prop_03",
+   "zone": "city",
+   "base_center": [
+    158,
+    1594
+   ],
+   "base_rx": 38,
+   "base_ry": 13,
+   "silhouette_h": 40,
+   "place_at": [
+    98,
+    1516
+   ],
+   "hit_box": [
+    110,
+    1546,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    192,
+    1550
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    185,
+    1613
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    158,
+    1601
+   ],
+   "label_slot_center": [
+    158,
+    1651
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M02": {
+   "asset": "prop_05",
+   "zone": "city",
+   "base_center": [
+    302,
+    1462
+   ],
+   "base_rx": 38,
+   "base_ry": 13,
+   "silhouette_h": 44,
+   "place_at": [
+    242,
+    1384
+   ],
+   "hit_box": [
+    254,
+    1414,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    336,
+    1414
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    329,
+    1481
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    302,
+    1469
+   ],
+   "label_slot_center": [
+    302,
+    1519
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M07": {
+   "asset": "node_10",
+   "zone": "city",
+   "base_center": [
+    154,
+    1302
+   ],
+   "base_rx": 54,
+   "base_ry": 19,
+   "silhouette_h": 132,
+   "place_at": [
+    54,
+    1152
+   ],
+   "hit_box": [
+    100,
+    1210,
+    108,
+    119
+   ],
+   "difficulty_pill_center": [
+    204,
+    1166
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    192,
+    1327
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    154,
+    1312
+   ],
+   "label_slot_center": [
+    154,
+    1365
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M08": {
+   "asset": "node_12",
+   "zone": "city",
+   "base_center": [
+    280,
+    1112
+   ],
+   "base_rx": 84,
+   "base_ry": 28,
+   "silhouette_h": 132,
+   "place_at": [
+    180,
+    962
+   ],
+   "hit_box": [
+    196,
+    1020,
+    168,
+    128
+   ],
+   "difficulty_pill_center": [
+    360,
+    976
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    340,
+    1145
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    280,
+    1127
+   ],
+   "label_slot_center": [
+    280,
+    1184
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M11": {
+   "asset": "node_11",
+   "zone": "city",
+   "base_center": [
+    162,
+    922
+   ],
+   "base_rx": 82,
+   "base_ry": 28,
+   "silhouette_h": 124,
+   "place_at": [
+    62,
+    772
+   ],
+   "hit_box": [
+    80,
+    836,
+    164,
+    122
+   ],
+   "difficulty_pill_center": [
+    240,
+    794
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    221,
+    955
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    162,
+    937
+   ],
+   "label_slot_center": [
+    162,
+    994
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "E06": {
+   "asset": "prop_04",
+   "zone": "city",
+   "base_center": [
+    300,
+    762
+   ],
+   "base_rx": 34,
+   "base_ry": 12,
+   "silhouette_h": 44,
+   "place_at": [
+    240,
+    684
+   ],
+   "hit_box": [
+    252,
+    714,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    330,
+    714
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    324,
+    780
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    300,
+    768
+   ],
+   "label_slot_center": [
+    300,
+    818
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "E04": {
+   "asset": "prop_15",
+   "zone": "city",
+   "base_center": [
+    118,
+    630
+   ],
+   "base_rx": 36,
+   "base_ry": 12,
+   "silhouette_h": 104,
+   "place_at": [
+    58,
+    552
+   ],
+   "hit_box": [
+    70,
+    558,
+    96,
+    96
+   ],
+   "difficulty_pill_center": [
+    150,
+    522
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    143,
+    648
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    118,
+    636
+   ],
+   "label_slot_center": [
+    118,
+    686
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  },
+  "M12": {
+   "asset": "node_11",
+   "zone": "city",
+   "base_center": [
+    282,
+    470
+   ],
+   "base_rx": 82,
+   "base_ry": 28,
+   "silhouette_h": 124,
+   "place_at": [
+    182,
+    320
+   ],
+   "hit_box": [
+    200,
+    384,
+    164,
+    122
+   ],
+   "difficulty_pill_center": [
+    360,
+    342
+   ],
+   "difficulty_corner": "top-start (راست در RTL)",
+   "lock_done_center": [
+    341,
+    503
+   ],
+   "lock_done_corner": "bottom-start (راست-پایین)",
+   "b1_foot": [
+    282,
+    485
+   ],
+   "label_slot_center": [
+    282,
+    542
+   ],
+   "label_note": "پلاک رابط (UI)؛ ≥8px از مسیر"
+  }
+ }
+}

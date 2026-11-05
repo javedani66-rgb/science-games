@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>نمونهٔ حرکت v5</title>
+<style>
+/*__FONTS__*/
+/*__TOKENS__*/
+/*__CARDCSS__*/
+/* ===== نمونهٔ حرکت: فقط transform و opacity؛ بدون حرکت بی‌پایان؛ مبنا: MOTION_SPEC_FA.md ===== */
+:root{
+  /* رنگ‌ها از component_spec.json (palette) */
+/*__PALETTE__*/
+  --k:1;                                   /* ضریب سرعت تعویض: 1 = پیشنهاد ۲۸۰ms؛ .535 = سقف ۱۵۰ms */
+  --ease-out:cubic-bezier(.22,.9,.25,1);   /* بدون جهش */
+  --ease-io:cubic-bezier(.45,0,.55,1);     /* گذار نور */
+  --ease-in:cubic-bezier(.5,0,.8,.4);
+  --cd-front-h:392px;
+  --y1:calc(var(--cd-front-h) + 8px);
+  --y2:calc(var(--cd-front-h) + 72px);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font:400 16px/1.6 'Vazirmatn',system-ui,sans-serif;background:#e7e2d3;color:#241a5e;display:flex;flex-direction:column;align-items:center;gap:12px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+svg{display:block}
+.spr{position:absolute;inline-size:0;block-size:0;overflow:hidden}
+
+/* ui_tokens.css حلقهٔ «اینجایی» را بی‌پایان می‌چرخاند (uispin 14s)؛ با قاعدهٔ «بدون حرکت بی‌پایان» نمی‌خواند → خاموش */
+.ui-ring-dash{animation:none!important}
+
+/* ---------- قاب گوشی ---------- */
+#phone{position:relative;overflow:hidden;inline-size:min(390px,100vw);block-size:var(--ph,800px);background:var(--night_bg);flex:none}
+.lay{position:absolute;inset:0;pointer-events:none}
+/* لایه‌های نور: روز (آسمان، آب) و شب (پس‌زمینه، لبهٔ نئونی). فقط opacity */
+.sky{background:linear-gradient(#4cc3f5 0 46%,#bfe9fb 46% 100%);opacity:1;transition:opacity 1200ms var(--ease-io)}
+.water{background:repeating-linear-gradient(#2a8fd0 0 18px,#3aa3e0 18px 36px);inset:46% 0 0 0;opacity:1;transition:opacity 1000ms var(--ease-io) 100ms}
+.night{background-color:#190539;background-image:radial-gradient(ellipse 70% 70% at 20% 15%,rgba(90,20,168,.55),transparent 70%),radial-gradient(ellipse 70% 70% at 85% 85%,rgba(160,25,122,.4),transparent 70%),radial-gradient(circle at 2px 2px,rgba(138,79,224,.28) 1.3px,transparent 1.6px);background-size:auto,auto,9px 9px;opacity:0;transition:opacity 1200ms var(--ease-io)}
+.rim{background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 62%,rgba(70,240,216,.22) 100%);opacity:0;transition:opacity 1000ms var(--ease-io) 200ms}
+#phone[data-scr=env] .sky{opacity:0}
+#phone[data-scr=env] .water{opacity:0}
+#phone[data-scr=env] .night{opacity:1}
+#phone[data-scr=env] .rim{opacity:1}
+
+/* ---------- نقشه (روز) ---------- */
+.mapc{position:absolute;inset:0;opacity:1;transition:opacity 300ms linear}
+#phone[data-scr=env] .mapc{opacity:0;pointer-events:none}
+.node{position:absolute;inset-inline:0;inset-block-start:34%;margin-inline:auto;inline-size:96px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.node .pin{inline-size:72px;block-size:72px;border-radius:50%;background:var(--cream);border:4px solid var(--navy_line);display:flex;align-items:center;justify-content:center}
+.node .pin .ui-svg{inline-size:48px;block-size:48px}
+.node .plate{background:var(--cream);border:2.6px solid var(--navy_line);border-radius:10px;padding:2px 14px;font-weight:700;font-size:16px;white-space:nowrap}
+.node .ui-heretag{position:absolute;inset-block-start:-58px;font:700 16px/1.3 'Vazirmatn',sans-serif;white-space:nowrap}
+.node:focus-visible{outline:3px solid var(--navy_line);outline-offset:6px}
+/* برگهٔ مرحله: باز ۲۵۰ms، بسته ۱۵۰ms */
+.scrim{position:absolute;inset:0;background:rgba(36,26,94,.55);opacity:0;pointer-events:none;transition:opacity 150ms linear}
+.sheet{position:absolute;inset-inline:0;inset-block-end:0;transform:translateY(40px);opacity:0;pointer-events:none;transition:transform 150ms var(--ease-in),opacity 150ms linear;padding:12px 16px 20px;background:var(--cream);border:3.5px solid var(--navy_line);border-block-end:0;border-radius:22px 22px 0 0}
+.sheet::before{content:"";display:block;inline-size:44px;block-size:6px;margin:0 auto 10px;border-radius:3px;background:var(--navy_line);opacity:.35}
+.sheet h2{margin:0;font:400 24px/1.4 'Lalezar','Vazirmatn',sans-serif}
+.sheet p{margin:0 0 12px;font-weight:700}
+.sheet .ui-btn{inline-size:100%}
+#phone.sheet-open .scrim{opacity:1;pointer-events:auto;transition:opacity 200ms linear}
+#phone.sheet-open .sheet{transform:none;opacity:1;pointer-events:auto;transition:transform 250ms var(--ease-out),opacity 200ms linear}
+#phone[data-scr=env] .scrim,#phone[data-scr=env] .sheet{pointer-events:none}
+
+/* ---------- محیط (شب) ---------- */
+.envc{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity 300ms linear}
+#phone[data-scr=env] .envc{opacity:1;pointer-events:auto;transition:opacity 400ms linear 800ms}
+.tb{flex:none;block-size:64px;display:flex;align-items:center;justify-content:center;background:#241a5e;border-block-end:3px solid var(--cyan)}
+.tb h1{margin:0;font:400 28px/1 'Lalezar','Vazirmatn',sans-serif;color:#fff;text-shadow:0 0 12px #ff7be5,0 0 3px #ff7be5}
+.mid{flex:1;min-block-size:0;display:flex;align-items:center;justify-content:center;padding-inline:0}
+.stk{position:relative;inline-size:min(390px,100%);block-size:calc(var(--cd-front-h) + 72px + 56px);flex:none;clip-path:inset(-14px -14px 0 -14px)}
+.bot{flex:none;block-size:72px;display:flex;align-items:center;padding:0 16px}
+.bot .ui-btn{inline-size:100%}
+
+/* ---------- پشتهٔ سه کارت ---------- */
+.ch{position:absolute;inset-inline:0;inset-block-start:0;block-size:var(--cd-front-h);pointer-events:none;z-index:1;
+    transform:translateY(0);transition:transform calc(280ms*var(--k)) var(--ease-out)}
+.ch[data-slot="0"]{z-index:3;transform:translateY(0)}
+.ch[data-slot="1"]{z-index:2;transform:translateY(var(--y1))}
+.ch[data-slot="2"]{z-index:1;transform:translateY(var(--y2))}
+.ch-in{position:absolute;inset:0;opacity:0;transform:translateY(20px)}
+/* ورود کارت‌ها: از عقب به جلو (قرمز، نارنجی، سبز)، ۷۰ms فاصله، هر کدام ۲۴۰ms، شروع ۷۰۰ms پس از آغاز گذار نور → پایان ≤ ۱۲۰۰ms */
+#phone.dealt .ch-in{opacity:1;transform:none;transition:opacity 240ms var(--ease-out) var(--dd,700ms),transform 240ms var(--ease-out) var(--dd,700ms)}
+#phone.dealt .ch[data-slot="2"] .ch-in{--dd:700ms}
+#phone.dealt .ch[data-slot="1"] .ch-in{--dd:770ms}
+#phone.dealt .ch[data-slot="0"] .ch-in{--dd:840ms}
+#phone.noanim *{transition:none!important}
+/* دو رخ هر کارت: رخ جلو (کارت کامل) و رخ نوار */
+.ff,.fs{position:absolute;inset-inline:0;inset-block-start:0}
+.ff{transform-origin:50% 0}
+.fs{inset-block-start:0}
+/* رفتن به عقب: رخ جلو زود محو و کمی کوچک می‌شود؛ نوار پس از آن ظاهر می‌شود */
+.ch:not([data-slot="0"]) .ff{opacity:0;transform:scale(.96);pointer-events:none;
+   transition:opacity calc(80ms*var(--k)) linear,transform calc(140ms*var(--k)) var(--ease-in)}
+.ch:not([data-slot="0"]) .fs{opacity:1;pointer-events:auto;transition:opacity calc(140ms*var(--k)) linear calc(70ms*var(--k))}
+/* آمدن به جلو: رخ جلو با کمی تأخیر روشن و به اندازهٔ کامل می‌رسد؛ نوار زود ناپدید می‌شود */
+.ch[data-slot="0"] .ff{opacity:1;transform:none;pointer-events:auto;
+   transition:opacity calc(200ms*var(--k)) var(--ease-out) calc(70ms*var(--k)),transform calc(240ms*var(--k)) var(--ease-out) calc(40ms*var(--k))}
+.ch[data-slot="0"] .fs{opacity:0;pointer-events:none;transition:opacity calc(100ms*var(--k)) linear}
+.fs.cd-strip{inline-size:100%}
+.fs:focus-visible{outline:3px solid var(--gold);outline-offset:-3px;border-radius:14px}
+
+/* ---------- ابزار طراحی (نه رابط کودک) ---------- */
+.dev{inline-size:min(390px,100vw);display:flex;flex-wrap:wrap;gap:8px;padding:8px 12px 16px;align-items:center}
+.dev button{min-block-size:48px;padding:0 14px;border:2.6px solid #241a5e;border-radius:10px;background:#fff3c4;font-weight:700}
+.dev button[aria-pressed=true]{background:#ffd23f}
+.dev p{flex:1 1 100%;margin:0;font-size:14px}
+/* کاهش حرکت: برش مستقیم */
+#phone.rm *,#phone.rm *::before,#phone.rm *::after{transition:none!important;animation:none!important}
+@media (prefers-reduced-motion:reduce){#phone *,#phone *::before,#phone *::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="spr" aria-hidden="true"><!--__SPRITE_CARD__--><!--__SPRITE_UI__--></div>
+<main id="phone" data-scr="map">
+  <div class="lay sky"></div><div class="lay water"></div><div class="lay night"></div><div class="lay rim"></div>
+  <div class="mapc" id="mapc">
+    <button class="node" id="node" aria-label="" data-act="open">
+      <span class="ui-heretag" id="here"></span>
+      <span class="pin"><svg class="ui-svg" aria-hidden="true"><use href="#ui-ic-pin"/></svg></span>
+      <span class="plate" id="nodename"></span>
+    </button>
+    <div class="scrim" data-act="close"></div>
+    <div class="sheet" role="dialog" id="sheet"><h2 id="sh-t"></h2><p id="sh-s"></p><button class="ui-btn" id="enter" data-act="enter"></button></div>
+  </div>
+  <div class="envc" id="envc" data-world="night">
+    <div class="tb"><h1 id="env-t"></h1></div>
+    <div class="mid"><div class="stk" id="stk"></div></div>
+    <div class="bot"><button class="ui-btn ui-btn--sec ui-cut" id="tomap" data-act="leave"></button></div>
+  </div>
+</main>
+<div class="dev" id="dev"><button id="b-reset"></button><button id="b-rm" aria-pressed="false"></button><button id="b-fast" aria-pressed="false"></button><p id="hint"></p></div>
+<script>
+const S=/*__STRINGS__*/{};
+const T=k=>S[k]||k;
+const $=s=>document.querySelector(s);
+const phone=$('#phone');
+const CH=[
+  {i:0,d:'easy',t:'flow.harbor.green.title',w:'flow.harbor.green.ready',art:'cd-art-harbor-day'},
+  {i:1,d:'mid',t:'flow.harbor.orange.title',w:'flow.harbor.orange.ready',art:'cd-art-harbor-dusk'},
+  {i:2,d:'hard',t:'flow.harbor.red.title',w:'flow.harbor.red.ready',art:'cd-art-harbor-night'}];
+let order=[0,1,2];           /* order[slot] = شمارهٔ چالش؛ slot 0 = جلو */
+let resetT=0;
+const badge=d=>`<svg class="ui-badge" aria-hidden="true"><use href="#ui-badge-${d}"/></svg>`;
+function build(){
+  const stk=$('#stk');
+  stk.innerHTML=CH.map(c=>`<div class="ch" data-i="${c.i}"><div class="ch-in">
+    <section class="ff cd-front" aria-label="${T(c.t)}"><svg class="cd-frame" viewBox="0 0 390 392" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-frame-night"/></svg><svg class="cd-tbar" viewBox="0 0 360 60" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-title-bar"/></svg>
+      <span class="cd-diff">${badge(c.d)}<span>${T('difficulty.'+c.d)}</span></span><div class="cd-title">${T(c.t)}</div>
+      <div class="cd-art"><svg viewBox="0 0 360 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#${c.art}"/></svg></div>
+      <svg class="cd-ib" viewBox="0 0 334 150" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-image-border"/></svg><div class="cd-sentence">${T(c.w)}</div>
+      <div class="cd-go"><button class="ui-btn cd-btn-practice" data-act="start">${T('flow.env.start')}</button></div></section>
+    <div class="fs cd-strip" role="button" tabindex="0" data-act="pick" aria-label="${T(c.t)}"><svg class="cd-bg" viewBox="0 0 360 56" preserveAspectRatio="none" aria-hidden="true"><use href="#cd-stack-strip"/></svg><span class="cd-diff">${badge(c.d)}<span>${T('difficulty.'+c.d)}</span></span><span class="cd-t">${T(c.t)}</span></div>
+  </div></div>`).join('');
+  applySlots();
+}
+function applySlots(){
+  order.forEach((ci,slot)=>{
+    const el=$(`.ch[data-i="${ci}"]`);el.dataset.slot=slot;
+    el.querySelector('.ff').toggleAttribute('inert',slot!==0);el.querySelector('.ff').setAttribute('aria-hidden',slot!==0);
+    el.querySelector('.fs').toggleAttribute('inert',slot===0);el.querySelector('.fs').setAttribute('aria-hidden',slot===0);
+  });
+}
+/* انتخاب کارت پشتی: خودش جلو، کارت جلوی قبلی به جای اول نوار؛ سومی در جای خود یا یک پله پایین */
+function pick(ci){
+  const slot=order.indexOf(ci);if(slot<=0)return;
+  const old=order[0];order=slot===1?[ci,old,order[2]]:[ci,old,order[1]];applySlots();
+}
+function openSheet(){phone.classList.add('sheet-open')}
+function closeSheet(){phone.classList.remove('sheet-open')}
+function enter(){
+  clearTimeout(resetT);phone.classList.remove('noanim');
+  closeSheet();phone.dataset.scr='env';phone.classList.add('dealt');
+}
+function leave(){
+  phone.dataset.scr='map';
+  clearTimeout(resetT);
+  /* پس از پایان گذار نور، ورود کارت‌ها برای بار بعد بی‌صدا بازنشانی می‌شود */
+  resetT=setTimeout(()=>{phone.classList.add('noanim');phone.classList.remove('dealt');void phone.offsetWidth;phone.classList.remove('noanim')},1300);
+}
+function reset(){clearTimeout(resetT);phone.classList.add('noanim');phone.dataset.scr='map';closeSheet();phone.classList.remove('dealt');order=[0,1,2];applySlots();void phone.offsetWidth;phone.classList.remove('noanim')}
+phone.addEventListener('click',e=>{
+  const a=e.target.closest('[data-act]');if(!a)return;
+  switch(a.dataset.act){
+    case'open':openSheet();break;case'close':closeSheet();break;case'enter':enter();break;case'leave':leave();break;
+    case'pick':pick(+a.closest('.ch').dataset.i);break;
+  }
+});
+phone.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.fs')){e.preventDefault();pick(+e.target.closest('.ch').dataset.i)}});
+function fit(){phone.style.setProperty('--ph',Math.min(innerHeight,800)+'px')}
+addEventListener('resize',fit);
+function init(){
+  fit();
+  $('#here').textContent=T('flow.map.here');$('#nodename').textContent=T('motion.demo.node');$('#node').setAttribute('aria-label',T('motion.demo.node'));
+  $('#sh-t').textContent=T('motion.demo.node');$('#sh-s').textContent=T('motion.demo.topic');$('#enter').textContent=T('motion.demo.enter');
+  $('#env-t').textContent=T('motion.demo.node');$('#tomap').textContent=T('flow.nav.toMap');
+  $('#b-reset').textContent=T('motion.demo.reset');$('#b-rm').textContent=T('motion.demo.rm');$('#b-fast').textContent=T('motion.demo.fast');$('#hint').textContent=T('motion.demo.hint');
+  $('#b-reset').onclick=reset;
+  $('#b-rm').onclick=e=>{const on=phone.classList.toggle('rm');e.currentTarget.setAttribute('aria-pressed',on)};
+  $('#b-fast').onclick=e=>{const on=e.currentTarget.getAttribute('aria-pressed')!=='true';e.currentTarget.setAttribute('aria-pressed',on);phone.style.setProperty('--k',on?.535:1)};
+  build();
+  if(location.search.includes('dev=0'))$('#dev').style.display='none';
+}
+window.__m={pick,enter,leave,reset,openSheet,closeSheet,get order(){return order.slice()}};
+init();
+</script>
+</body>
+</html>

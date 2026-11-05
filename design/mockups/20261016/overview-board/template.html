@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>نقشهٔ کلی سرزمین</title>
+<script>if(/^#o-/.test(location.hash))document.documentElement.className='ent'</script>
+<style>.ent,.ent body{background:#000!important}.ent #app,.ent #rv{visibility:hidden}</style>
+<link rel="prefetch" href="map.html">
+<style>
+@font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
+@font-face{font-family:Vazirmatn;font-weight:700;src:url(data:font/woff2;base64,{{FONT_VB}}) format("woff2")}
+@font-face{font-family:Lalezar;font-weight:400;src:url(data:font/woff2;base64,{{FONT_L}}) format("woff2")}
+:root{--navy:#241a5e;--edge:#120c3a;--cream:#fff4d2;--cream2:#fff9e6;--teal:#2fb8a8;--gold:#ffd23f;--ease:cubic-bezier(.22,.9,.25,1);color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#190539;color:var(--navy);font:400 16px/1.6 Vazirmatn,system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+:focus-visible{outline:4px solid var(--cream);outline-offset:3px}
+#rv{height:44px;background:#2b3a2b;color:#fff;display:flex;align-items:center;gap:6px;padding:0 10px;font-size:14px}
+#rv .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#rv button{background:#fff;color:#2b3a2b;border-radius:999px;padding:0 10px;min-height:32px;font-size:14px;font-weight:700}
+#rv button[aria-pressed=true]{background:var(--cream);outline:2px solid #fff}
+#app{position:relative;max-width:430px;margin:0 auto;height:calc(100% - 44px);overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(#2c1470 0%,#190539 100%)}
+#head{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}  /* عنوان فقط برای صفحه‌خوان؛ جا برای خود نقشه */
+.ttl{margin:0;font:400 26px/1.3 Lalezar,Vazirmatn,sans-serif;color:#fff;-webkit-text-stroke:7px var(--navy);paint-order:stroke fill;text-shadow:0 3px 0 var(--edge)}
+#bw{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:12px 16px 0}
+#bd{width:100%;height:100%;overflow:visible}
+/* قاعدهٔ رنگ نمادها و حالت «هنوز نرسیده» = همان نقشهٔ بلند */
+.eo{stroke:#241a5e;stroke-linejoin:round;stroke-linecap:round}.elit{fill:#fff4cf;opacity:.3}.esh{fill:#4a3a8c;opacity:.22}.esd{fill:#10083a;opacity:.28}
+.gray{filter:grayscale(1) brightness(1.1) contrast(.86)}   /* درخواست مالک ۵ نوامبر: نقشهٔ کلی مرحله‌به‌مرحله از خاکستری به رنگی */
+.paint{animation:paint 1.6s .9s ease-out both}@keyframes paint{from{filter:grayscale(1) brightness(1.1) contrast(.86)}to{filter:grayscale(0) brightness(1) contrast(1)}}
+.unpaint{animation:unpaint 1.6s .9s ease-out both}@keyframes unpaint{from{opacity:1}to{opacity:0}}
+@media (prefers-reduced-motion:reduce){.paint,.unpaint{animation:none}}
+.stn{cursor:pointer;outline:none}
+.stn:focus-visible .hb{stroke:#fff;stroke-width:4;stroke-dasharray:6 5}
+.lab{font:400 24px Lalezar,Vazirmatn,sans-serif;fill:#fff;stroke:var(--navy);stroke-width:7;paint-order:stroke;stroke-linejoin:round}
+#bot .row{display:flex;gap:10px;align-items:stretch}#bot .row .btn{flex:1}#home{flex:none;width:64px;min-height:60px;border-radius:16px;border:3.5px solid var(--navy);background:var(--cream);box-shadow:0 4px 0 var(--edge);display:flex;align-items:center;justify-content:center;padding:0}#home svg{width:30px;height:30px}
+#bot{flex:none;display:flex;flex-direction:column;gap:6px;padding:6px 16px calc(14px + env(safe-area-inset-bottom,0px))}
+#here{margin:0;text-align:center;font-size:16px;font-weight:700;color:var(--cream)}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:60px;border:4px solid var(--navy);border-radius:22px;background:var(--teal);box-shadow:0 5px 0 var(--edge);font:400 32px/1 Lalezar,Vazirmatn,sans-serif;color:var(--navy);transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--edge)}
+.btn svg{width:28px;height:28px;flex:none}
+#shd{position:fixed;inset:44px 0 0;z-index:20;background:rgba(18,12,58,.55);display:flex;align-items:flex-end;justify-content:center;padding:16px}
+#shd[hidden]{display:none}
+#sheet{width:100%;max-width:398px;background:var(--cream);border:4px solid var(--navy);border-radius:28px;box-shadow:0 6px 0 var(--edge);padding:18px 16px 16px;display:flex;flex-direction:column;gap:12px}
+#sheet p{margin:0;font-size:18px;font-weight:700;text-align:center;line-height:1.7}
+.btn2{min-height:52px;background:var(--cream2);font:700 18px/1.3 Vazirmatn,sans-serif;box-shadow:0 4px 0 var(--edge);border-radius:18px}
+#fade{position:fixed;inset:0;z-index:30;background:#000;opacity:0;pointer-events:none}
+.ent #fade{opacity:1}
+@media (max-height:700px){#bw{padding-top:8px}.btn{min-height:54px;font-size:28px}#here{font-size:15px}}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+<div id="fade"></div>
+<div id="rv" role="group"><span class="t" id="rvt"></span><button id="ma"></button><button id="mb"></button><button id="mt"></button></div>
+<div id="app">
+ <header id="head"><h1 class="ttl" id="ti"></h1></header>
+ <div id="bw"><svg id="bd" xmlns="http://www.w3.org/2000/svg" role="group"></svg></div>
+ <div id="bot"><p id="here"></p><div class="row"><button id="home" type="button"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 15 16 5l11 10M8.5 12.5V27h15V12.5" fill="none" stroke="#241a5e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 27v-7.5h5V27" fill="none" stroke="#241a5e" stroke-width="3" stroke-linejoin="round"/></svg></button><button class="btn" id="go"><svg viewBox="0 0 32 32" aria-hidden="true" fill="var(--navy)"><path d="M11 6.5v19l15-9.5z" stroke="var(--navy)" stroke-width="3" stroke-linejoin="round"/></svg><span id="gol"></span></button></div></div>
+</div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>{{SYMS}}</defs></svg>
+<div id="shd" hidden><div id="sheet" role="dialog" aria-modal="true"><p id="sm"></p><button class="btn btn2" id="sx"></button></div></div>
+<script>
+const S0={{STRINGS}},R={{REVIEW}},CELLS={{CELLS}},LANDC={{LANDS}},FIG={{FIGS}},LANDO={{LANDO}};
+/* D206: پروندهٔ کودک روی همین دستگاه؛ آدمک = کاراکتر و رنگ انتخاب‌شده */
+const SAVE=(()=>{try{const s=JSON.parse(localStorage.getItem('sw-save-v1'));return s&&s.profiles&&s.profiles[s.cur]||null}catch(e){return null}})();
+if(SAVE&&SAVE.fig)for(const l in LANDO)if(SAVE.fig[LANDO[l]])FIG[l]=SAVE.fig[LANDO[l]];
+document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','fa');
+const S=k=>(S0[k]||{}).text||k,$=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,wait=ms=>new Promise(r=>setTimeout(r,ms));
+/* حالت‌ها (همان سه حالت منوی ورود): a = اولین بار، b = وسط راه (پیست اسکی روی یخ)، t = آخر راه (کارخانهٔ کشتی‌سازی) */
+const HERE={a:'F01',b:'F06',t:'M11'};
+const HM=location.hash.match(/^#o-(?:([abt])|([A-Z]\d\d)(?:-([A-Z]\d\d))?)$/)||[];
+let mode=HM[1]||(HM[2]?'x':'b');if(HM[2]){HERE.x=HM[2]}
+let SAT=null;if(!location.hash&&SAVE&&SAVE.front){mode='x';HERE.x=SAVE.front;SAT=SAVE.here}
+/* D205: جای کودک (حلقه و آدمک) می‌تواند پشت سر مرز پیشرفت باشد، اگر روی نقشهٔ بلند به ایستگاه قبل برگشته */
+const atId=()=>mode==='x'&&(HM[3]||SAT)?(HM[3]||SAT):HERE[mode];
+/* زبان تصویری = نقشهٔ بلند به‌صورت جمع‌وجور: بافت زمین هر سرزمین، راه خاکستری با خط سرمه‌ای و خط‌چین کرم، ردپای بنفش روی راه رفته،
+   روی دریا راه نقطه‌چین (B70)، نماد هر ایستگاه مستقیم روی زمین (بدون جعبه)، تیک و حلقهٔ زرد و آدمک همان نقشه.
+   راه مارپیچ از پایین راست؛ هر ردیف از لبه تا لبه، پس آخرین ایستگاه هر ردیف درست زیر اولین ایستگاه ردیف بعد است و راه عمودی آن دو را وصل می‌کند. */
+const ROWS=[['sports',4],['sports',4],['space',5],['farm',3],['city',4],['city',4],['city',4],['sea',6]];
+const W=390,SW=62,SH=SW*.95,PY=.788*SH,XR=352,XL=38,RP=60,LS=38,TOPM=54,BOTM=54,K=SW/144;
+const rowY=[],POS=[],ROWOF=[];
+{let y=0;ROWS.forEach(([l],r)=>{if(r>0)y-=RP+(ROWS[r-1][0]!==l?LS:0);rowY[r]=y});const top=rowY[rowY.length-1]-TOPM;for(let r=0;r<rowY.length;r++)rowY[r]-=top}
+const H=rowY[0]+BOTM;
+ROWS.forEach(([l,n],r)=>{for(let j=0;j<n;j++){const f=n>1?j/(n-1):0,x=r%2===0?XR-(XR-XL)*f:XL+(XR-XL)*f;POS.push([x,rowY[r]]);ROWOF.push(r)}});
+/* نوار نام: زیر اولین ردیف هر سرزمین، طرف مقابل راه عمودی */
+const LAB={};ROWS.forEach(([l],r)=>{if(LAB[l])return;const below=r===0?null:r-1;const y=r===0?rowY[0]+37:rowY[below]-PY-17;
+ const jx=r===0?XR:POS[CELLS.findIndex((c,i)=>ROWOF[i]===r)][0];LAB[l]=[jx>W/2?W/2-30:W/2+30,y]});
+/* مرز سرزمین‌ها: کمی بالای نماد‌های آخرین ردیف سرزمین پایینی؛ موج‌دار */
+const EDGE={};ROWS.forEach(([l],r)=>{if(r>0&&ROWS[r-1][0]!==l)EDGE[l]=rowY[r-1]-PY-5});
+const STRIP={sports:[0,1494],space:[0,891],farm:[0,543],city:[1200,2693],sea:[60,2693]};  /* کدام تکهٔ بافت نقشه */
+const BADGE='<ellipse cx="1.5" cy="3.5" rx="12.5" ry="11" fill="#10083a" opacity=".35"/><circle r="12.6" fill="#241a5e"/><circle r="10.8" fill="#fff"/><circle r="8.7" fill="#3fcf72"/><path d="M-6,-3.2 a7,7 0 0 1 7.4,-4.6" fill="none" stroke="#c8ffd8" stroke-width="2" stroke-linecap="round"/><polyline points="-4.8,.4 -1.4,3.9 5.2,-3.6" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>';
+const PAW='<path d="M-3.1,-1.5 C-3.2,-3.4 -1.6,-4.2 0.2,-4.2 C2,-4.2 3.3,-3.4 3.2,-1.2 C3.1,0.8 2.1,1.6 2,3 C1.9,4.8 0.9,5.8 -0.5,5.8 C-1.9,5.8 -2.4,4.6 -2.3,3 C-2.2,1.5 -3,0.6 -3.1,-1.5Z"/><circle cx="-1.9" cy="-6.1" r="1.6"/><circle cx="0.4" cy="-7.1" r="1.25"/><circle cx="2.2" cy="-6.6" r="1.15"/><circle cx="3.5" cy="-5.3" r="1.05"/><circle cx="4" cy="-3.6" r=".95"/>';
+const el=(tag,at,html)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);if(html)e.innerHTML=html;return e};
+const wavePts=(y,amp)=>{const a=[];for(let x=-10;x<=W+10;x+=10)a.push([x,+(y+amp*Math.sin(x/37)+amp*.5*Math.sin(x/13+1)).toFixed(1)]);return a};
+const wave=(y,amp)=>'M'+wavePts(y,amp).map(q=>q[0]+','+q[1]).join(' L');
+let busy=false;
+function draw(){
+ const bd=$('bd');bd.replaceChildren();bd.setAttribute('viewBox','-4 -4 '+(W+8)+' '+(H+12));bd.setAttribute('aria-label',S('overview.title'));
+ const hi=CELLS.findIndex(c=>c.id===HERE[mode]),ai=CELLS.findIndex(c=>c.id===atId());
+ bd.appendChild(el('defs',{},'<clipPath id="bclip"><rect width="'+W+'" height="'+H+'" rx="28"/></clipPath>'));
+ bd.appendChild(el('rect',{x:0,y:7,width:W,height:H,rx:28,fill:'#0a0420',opacity:.55}));
+ const g=el('g',{'clip-path':'url(#bclip)'});bd.appendChild(g);
+ /* زمین: از پایین به بالا، هر سرزمین روی قبلی با لبهٔ موج‌دار */
+ const order=['sports','space','farm','city','sea'];
+ order.forEach(l=>{const top=l==='sea'?-10:0,bot=EDGE[l]!==undefined?EDGE[l]:H+10;
+  const cp='c_'+l,wp=wavePts(bot,3.2).reverse();
+  bd.querySelector('defs').appendChild(el('clipPath',{id:cp},'<path d="M-10,-10 L'+(W+10)+',-10 '+wp.map(q=>'L'+q[0]+','+q[1]).join(' ')+' Z"/>'));
+  const s=STRIP[l],h=Math.min(s[1]-s[0],H+20);
+  const lg=el('g',{'clip-path':'url(#'+cp+')'});
+  lg.appendChild(el('rect',{x:-10,y:-10,width:W+20,height:H+20,fill:LANDC[l]}));
+  lg.appendChild(el('svg',{x:0,y:-10,width:W,height:H+20,viewBox:'0 '+s[0]+' 390 '+(H+20),preserveAspectRatio:'xMidYMin slice',overflow:'hidden'},'<use href="#zb_strip_'+(l==='sea'?'city':l)+'"/>'));
+  g.appendChild(lg);
+  if(EDGE[l]!==undefined)g.appendChild(el('path',{d:wave(bot,3.2),fill:'none',stroke:'#10083a','stroke-width':4,opacity:.22}))});
+ /* راه */
+ const pts=POS.map(p=>[p[0],p[1]]);const seaFrom=CELLS.findIndex(c=>c.land==='sea');
+ const pl=a=>'M'+a.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' L');
+ const startStub=[[W+12,pts[0][1]],...pts.slice(0,seaFrom)];   /* راه از لبهٔ راستِ پایین وارد صفحه می‌شود */
+ const land=pl(startStub),sea=pl(pts.slice(seaFrom-1));
+ g.appendChild(el('path',{d:land,fill:'none',stroke:'#241a5e','stroke-width':18,'stroke-linecap':'round','stroke-linejoin':'round'}));
+ g.appendChild(el('path',{d:land,fill:'none',stroke:'#fff3c4','stroke-width':11.5,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.6}));
+ g.appendChild(el('path',{d:land,fill:'none',stroke:'#fff3c4','stroke-width':2.6,'stroke-linecap':'round','stroke-dasharray':'2 8',opacity:.95}));
+ /* روی دریا: نقطه‌چین کرم (B70)؛ از ساحل (آخرین ایستگاه شهر) شروع می‌شود */
+ g.appendChild(el('path',{d:sea,fill:'none',stroke:'#241a5e','stroke-width':8,'stroke-linecap':'round','stroke-dasharray':'0 15'}));
+ g.appendChild(el('path',{d:sea,fill:'none',stroke:'#fff4d2','stroke-width':5,'stroke-linecap':'round','stroke-dasharray':'0 15'}));
+ /* ردپای بنفش روی راه‌های رفته (فقط خشکی) */
+ const pr=el('g',{fill:'#a66be8',stroke:'#2a0f5e','stroke-width':1,'stroke-linejoin':'round'});let side=1;
+ for(let k=0;k<Math.min(hi,seaFrom-1);k++){const [x0,y0]=pts[k],[x1,y1]=pts[k+1],L=Math.hypot(x1-x0,y1-y0),ang=Math.atan2(y1-y0,x1-x0);
+  for(let s=30;s<L-26;s+=12){const x=x0+(x1-x0)*s/L-Math.sin(ang)*1.3*side,y=y0+(y1-y0)*s/L+Math.cos(ang)*1.3*side;   /* D195: ردپا کوچک و نزدیک محور تا کاملاً داخل راه باریک بماند */
+   pr.appendChild(el('g',{transform:'translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+') scale('+(.5*side)+' .5)'},PAW));side=-side}}
+ g.appendChild(pr);
+ for(const l in LAB){const t=el('text',{x:LAB[l][0],y:LAB[l][1],'text-anchor':'middle',class:'lab','aria-hidden':'true',transform:'rotate(-3 '+LAB[l][0]+' '+LAB[l][1]+')'});t.textContent=S('overview.land.'+l);g.appendChild(t)}
+ /* خاکستری تا رنگی: کپی خاکستری زمین روی زمین رنگی؛ جای هر ایستگاهی که کودک به آن رسیده از کپی خاکستری بریده می‌شود (لبهٔ نرم).
+    جای هر ایستگاه = خانه‌ای در ردیف خودش: از میانهٔ فاصله با همسایه‌ها تا زیر سکوی ردیف بالایی؛ سر ردیف تا لبهٔ صفحه. */
+ const cell=i=>{const r=ROWOF[i],mates=CELLS.map((c,j)=>j).filter(j=>ROWOF[j]===r),xs=mates.map(j=>POS[j][0]).sort((a,b)=>a-b),x=POS[i][0],k=xs.indexOf(x);
+  const x0=k===0?-10:(xs[k-1]+x)/2,x1=k===xs.length-1?W+10:(xs[k+1]+x)/2,y1=r===0?H+10:rowY[r]+14,y0=r===ROWS.length-1?-10:ROWS[r+1][0]!==ROWS[r][0]?EDGE[ROWS[r+1][0]]+8:rowY[r+1]+14;   /* از مرز سرزمین بالاتر نمی‌رود */return [x0,y0,x1-x0,y1-y0]};
+ const R_=c=>'<rect x="'+c[0]+'" y="'+c[1]+'" width="'+c[2]+'" height="'+c[3]+'" fill="#'+c[4]+'"/>';
+ let mk='<rect x="-10" y="-10" width="'+(W+20)+'" height="'+(H+20)+'" fill="#fff"/><g filter="url(#mblur)">';
+ for(let i=0;i<=hi;i++)mk+=R_([...cell(i),'000']);
+ const defs=bd.querySelector('defs');
+ defs.appendChild(el('filter',{id:'mblur',x:'-20%',y:'-20%',width:'140%',height:'140%'},'<feGaussianBlur stdDeviation="7"/>'));
+ defs.appendChild(el('mask',{id:'unreached',maskUnits:'userSpaceOnUse',x:-10,y:-10,width:W+20,height:H+20},mk+'</g>'));
+ defs.appendChild(el('mask',{id:'newcell',maskUnits:'userSpaceOnUse',x:-10,y:-10,width:W+20,height:H+20},'<g filter="url(#mblur)">'+R_([...cell(hi),'fff'])+'</g>'));
+ const gray=(m,cls)=>{const c=g.cloneNode(true);c.setAttribute('class',cls);c.setAttribute('mask','url(#'+m+')');c.setAttribute('aria-hidden','true');c.style.pointerEvents='none';bd.appendChild(c)};
+ gray('unreached','gray');
+ if(!reduce)gray('newcell','gray unpaint');   /* جای تازه: لایهٔ خاکستری‌اش آرام محو می‌شود (D149: fade) */
+ /* ایستگاه‌ها: از بالا به پایین کشیده می‌شوند تا نماد پایینی روی پای نماد بالایی بیفتد */
+ const idx=CELLS.map((c,i)=>i).sort((a,b)=>POS[a][1]-POS[b][1]);
+ for(const i of idx){const c=CELLS[i],[x,y]=POS[i],st=i<hi?'done':i===hi?'here':'ahead',hid=c.id==='M12';
+  const sg=el('g',{class:'stn '+st,tabindex:0,role:'button','data-i':i});
+  sg.setAttribute('aria-label',hid?S('overview.cell.hidden'):S('overview.cell.'+st).replace('{place}',c.title));
+  sg.appendChild(el('rect',{class:'hb',x:x-35,y:y-PY-4,width:70,height:RP-2,rx:12,fill:'transparent'}));   /* هدف لمس = تقریباً کل جای ایستگاه (۷۰×۶۲ واحد) */
+  if(i===ai){const p=c.pad,rg=c.rg||[0,0,0],rx=(p[0]+5+rg[0])*K,ry=(p[1]+p[2]/2+3+rg[1])*K,cy=y+(p[2]/2+2)*K;
+   sg.appendChild(el('ellipse',{cx:x+rg[2]*K,cy,rx:rx+2,ry:ry+2,fill:'none',stroke:'#241a5e','stroke-width':6.5}));
+   sg.appendChild(el('ellipse',{cx:x+rg[2]*K,cy,rx:rx+2,ry:ry+2,fill:'none',stroke:'#ffd23f','stroke-width':3.6}))}
+  if(hid){/* جای آخر: فقط سکوی بنفش با «؟»؛ مخفی‌گاه لو نمی‌رود */
+   sg.appendChild(el('g',{},'<ellipse cx="'+x+'" cy="'+(y+6)+'" rx="27" ry="10" fill="#10083a" opacity=".3"/><path d="M'+(x-25)+','+y+' v6 a25 9 0 0 0 50 0 v-6" fill="#5b3fb0" stroke="#241a5e" stroke-width="3"/><ellipse cx="'+x+'" cy="'+y+'" rx="25" ry="9" fill="#8a6ad8" stroke="#241a5e" stroke-width="3"/>'));
+   const q=el('text',{x:x,y:y-4,'text-anchor':'middle',class:'lab','aria-hidden':'true'});q.style.fontSize='38px';q.textContent='؟';sg.appendChild(q)}
+  else{const s=el('svg',{class:st==='ahead'?'gray':st==='here'?'paint':'',x:x-SW/2,y:y-PY,width:SW,height:SH,viewBox:'0 0 200 190',overflow:'visible'});s.appendChild(el('use',{href:'#node_'+c.sym}));sg.appendChild(s)}
+  if(st==='done')sg.appendChild(el('g',{transform:'translate('+(x+44*K)+' '+(y+25*K)+') scale(.62)'},BADGE));
+  if(i===ai){const fh=36,fx=x+(c.pad[0]*.62)*K,fy=y+5;
+   sg.appendChild(el('ellipse',{cx:fx,cy:fy,rx:7,ry:2.4,fill:'#10083a',opacity:.35}));
+   sg.appendChild(el('image',{href:FIG[c.land],x:fx-fh*.33,y:fy-fh,height:fh,width:fh*.66,preserveAspectRatio:'xMidYMax meet','aria-hidden':'true'}))}
+  sg.addEventListener('click',()=>tap(i));sg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tap(i)}});
+  bd.appendChild(sg)}
+ bd.appendChild(el('rect',{width:W,height:H,rx:28,fill:'none',stroke:'#241a5e','stroke-width':5}));
+ $('here').textContent=S('overview.here').replace('{place}',CELLS[ai].title);
+}
+function render(){$('ti').textContent=S('overview.title');$('gol').textContent=S('overview.go');$('sx').textContent=S('overview.sheet.close');$('rvt').textContent=R.banner;
+ for(const [id,m] of [['ma','a'],['mb','b'],['mt','t']]){$(id).textContent=R['mode.'+m];$(id).setAttribute('aria-pressed',mode===m)}draw()}
+for(const [id,m] of [['ma','a'],['mb','b'],['mt','t']])$(id).onclick=()=>{if(busy)return;mode=m;render()};
+function shake(i){if(reduce)return;const g=document.querySelector('.stn[data-i="'+i+'"]');g.animate([{transform:'translateX(0)'},{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(-2px)'},{transform:'translateX(0)'}],{duration:320})}
+let lastFocus=null;
+function sheet(key){lastFocus=document.activeElement;$('sm').textContent=S(key);$('shd').hidden=false;$('sx').focus()}
+function closeSheet(){$('shd').hidden=true;if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+$('sx').onclick=closeSheet;$('shd').onclick=e=>{if(e.target.id==='shd')closeSheet()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('shd').hidden)closeSheet()});
+function tap(i){const hi=CELLS.findIndex(c=>c.id===HERE[mode]);if(i>hi){shake(i);return}enter(i)}
+/* رفتن به نقشهٔ بلند: فقط فید به سیاه و بعد نقشه که از سیاه باز می‌شود (مثل بقیهٔ بازی؛ بدون زوم)؛ فقط با لمس کودک (B5) */
+async function enter(i){if(busy)return;busy=true;const hid=HERE[mode],gid=CELLS[i].id,f=$('fade');
+ const an=f.animate([{opacity:0},{opacity:1}],{duration:reduce?120:380,fill:'forwards'});await an.finished;
+ try{location.href='map.html#enter-'+hid+(gid!==hid?'-'+gid:'')+(mode==='a'?'-tut':'')}catch(e){}
+ let left=false;addEventListener('pagehide',()=>{left=true},{once:true});await wait(15000);if(left)return;
+ an.cancel();busy=false;sheet('overview.mock.map')}
+/* D205: نقشهٔ کلی ← منوی ورود با فید سیاه */
+$('home').setAttribute('aria-label',S('overview.home'));
+$('home').onclick=async()=>{if(busy)return;busy=true;await $('fade').animate([{opacity:0},{opacity:1}],{duration:reduce?120:380,fill:'forwards'}).finished;try{location.href='index.html#back'}catch(e){}};
+$('go').onclick=()=>enter(CELLS.findIndex(c=>c.id===atId()));
+render();
+/* رسیدن از منوی ورود: صفحه کامل ساخته و فقط بعد از سیاه آرام باز می‌شود (هیچ چیزی پیش از فید دیده نمی‌شود) */
+if(document.documentElement.classList.contains('ent')){const f=$('fade');f.style.opacity=1;
+ addEventListener('load',()=>setTimeout(async()=>{document.documentElement.classList.remove('ent');await f.animate([{opacity:1},{opacity:0}],{duration:reduce?120:480,fill:'forwards'}).finished;f.style.opacity=0},30))}
+addEventListener('pageshow',e=>{if(e.persisted){busy=false;const f=$('fade');f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0}});
+</script>
+</body>
+</html>

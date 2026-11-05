@@ -1,0 +1,122 @@
+{
+ "overview.title": {
+  "text": "سرزمین ماشین‌های ساده",
+  "kind": "title",
+  "where_fa": "پلاک عنوان بالای نقشهٔ کلی",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.land.sports": {
+  "text": "ورزشگاه",
+  "kind": "ui",
+  "where_fa": "نام سرزمین روی نقشهٔ کلی",
+  "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.land.space": {
+  "text": "پایگاه فضایی",
+  "kind": "ui",
+  "where_fa": "نام سرزمین روی نقشهٔ کلی",
+  "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.land.farm": {
+  "text": "مزرعه و آسیاب",
+  "kind": "ui",
+  "where_fa": "نام سرزمین روی نقشهٔ کلی",
+  "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.land.city": {
+  "text": "شهر صنعتی",
+  "kind": "ui",
+  "where_fa": "نام سرزمین روی نقشهٔ کلی",
+  "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.land.sea": {
+  "text": "منطقهٔ دریایی",
+  "kind": "ui",
+  "where_fa": "نام سرزمین روی نقشهٔ کلی",
+  "context_fa": "همان نام سرزمین در نقشهٔ بلند؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.here": {
+  "text": "اینجایی: {place}",
+  "kind": "ui",
+  "where_fa": "خط زیر نقشهٔ کلی؛ {place} = نام ایستگاه کودک",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.go": {
+  "text": "برو",
+  "kind": "button",
+  "where_fa": "دکمهٔ اصلی زیر نقشهٔ کلی؛ به نقشهٔ بلند می‌برد",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.cell.done": {
+  "text": "{place}، رفته",
+  "kind": "a11y",
+  "where_fa": "برچسب صفحه‌خوان خانهٔ رفته",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.cell.here": {
+  "text": "{place}، اینجایی",
+  "kind": "a11y",
+  "where_fa": "برچسب صفحه‌خوان خانهٔ کودک",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.cell.ahead": {
+  "text": "{place}، هنوز نرسیده",
+  "kind": "a11y",
+  "where_fa": "برچسب صفحه‌خوان خانهٔ جلوتر",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.cell.hidden": {
+  "text": "جای آخر، هنوز پنهان",
+  "kind": "a11y",
+  "where_fa": "برچسب صفحه‌خوان خانهٔ آخر (مخفی‌گاه لو نمی‌رود)",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.mock.map": {
+  "text": "اینجا نقشهٔ بلند باز می‌شود. (ماکت)",
+  "kind": "ui",
+  "where_fa": "پیام ماکت اگر نقشهٔ بلند باز نشد",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.sheet.close": {
+  "text": "باشه",
+  "kind": "button",
+  "where_fa": "بستن پیام ماکت",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "overview.home": {
+  "text": "برگشت به منوی اول",
+  "kind": "button",
+  "where_fa": "دکمهٔ اصلی زیر نقشهٔ کلی؛ به نقشهٔ بلند می‌برد",
+  "context_fa": "پیش‌نویس؛ ماکت نقشهٔ کلی (D192)",
+  "band": "همه",
+  "status": "draft"
+ }
+}

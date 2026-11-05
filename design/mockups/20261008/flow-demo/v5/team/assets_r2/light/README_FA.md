@@ -1,0 +1,9 @@
+# light r2 (بر پایهٔ رنگ‌های واقعی v4؛ پیشنهاد، آزموده‌نشده با کودک)
+- منبع رنگ: `zone_tokens_v4.json` (هر مقدار با hex و منبع: عکس‌های v4/style/shots/r10_*، r11_* یا خط کد v4/style/gen/*.py). ساخته با `extract_v4_colors.py` (PIL: میانهٔ پیکسل‌های نزدیک به رنگ کد، بدون بنا/مسیر).
+- `zone_tokens.json` = توکن نهایی (رنگ v4 + اصلاح‌های کمینه با فهرست `_corrections`). `build_light_r2.py` ← `tokens.css`، `common_defs.svg`، `palette_day|dusk|night.svg`، `light_contrast.json/md`. `build_demos_r2.py` ← `scene_demo.html`، `samples_demo.html`. `shoot_r2.py`، `compare_r2.py` ← `shots/`.
+- زمین‌ها همان v4 دیده‌شده: ورزشگاه #469d36، فضا #c55535، مزرعه #9d8e16، شهر/آب #155f77، یخ #d7efff، شن #f0d07e؛ مسیر کرم #fff3c4 با خط دور #241a5e؛ کارت شب #190539 و فیروزه‌ای #25cdc0.
+- اصلاح‌های کمینه: (۱) مسیر مانده opacity .34→.42؛ (۲) خط دور دوم روشن #aef0f4 (۳px) فقط وقتی مسیر روی آب شهر است؛ (۳) قرص سختی (v4 نداشت): پر سبز #2fa44a / نارنجی #ff9d1c / قرمز #ff4b4b، خط دور #241a5e ۴٫۵px، متن #241a5e، ۱/۲/۳ قله + واژه از `difficulty.*` در strings.fa.json؛ (۴) آیکون سفید روی کارت فیروزه‌ای: خط دور ۲px #190539.
+- نور: نقشه همیشه روز (`data-light=day`). غروب فقط صحنهٔ ماجرا ۲: آسمان بنفش←سرخابی←نارنجی، rim کهربایی #ffb21c روی لبهٔ بالا-چپ + سایهٔ بنفش #5a2a9a روی لبهٔ پایین-راست، سایهٔ افتاده بنفش، بازتاب خط‌های افقی. بدون multiply، بدون دایرهٔ خورشید، بدون لکه (rim/سایه ماسک سیلوئت با blend عادی).
+- شب = ضرب v4 (#6a55d8→#3a1c90، ‎.8) که در هگز «پخته» شده؛ هیچ blend زنده‌ای نیست. انتقال روز←شب ۱٫۲ث: دو لایهٔ کامل (`.lt-layer[data-for=day|night]`) فقط opacity؛ reduced-motion بدون انیمیشن.
+- در demo ها فقط b_harbor کد v4 به‌عنوان نمونهٔ بنا آمده؛ شخصیت‌ها دست نخورده‌اند. برچسب‌های فارسی در demo/مقایسه ابزار بازبینی‌اند، نه متن بازی.
+- عکس‌ها: `shots/compare_palette_v4_vs_r2.png` (v4 | جدید)، `scene_390x800_full.png`، `scene_360x640_full.png`، `samples_*.png`، `transition_mid.png` (opacity ‎.48/.52).

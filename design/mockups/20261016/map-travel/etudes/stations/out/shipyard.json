@@ -1,0 +1,46 @@
+{
+ "id": "shipyard",
+ "kind": "sea",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  94
+ ],
+ "stand": [
+  51.0,
+  -2.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_shipyard_hammer"
+ ],
+ "inside_pad": {
+  "min_margin_px": 7.0,
+  "base_on_pad": true,
+  "height_px": 115.0,
+  "bbox_px": [
+   19.0,
+   14.5,
+   111.0,
+   129.5
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_shipyard_hammer": {
+   "translate_y": [
+    0,
+    -5
+   ],
+   "rotate_about": "ته دسته (پیشنهادی ±15°)",
+   "cycle_s": 1.2,
+   "note": "چکش بلند می‌شود و می‌کوبد؛ بدنهٔ نیمه‌ساخته، داربست و تخته‌ها ثابت و کامل‌اند."
+  },
+  "reduced_motion": "چکش ثابت"
+ }
+}

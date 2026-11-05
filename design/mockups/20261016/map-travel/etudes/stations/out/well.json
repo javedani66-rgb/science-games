@@ -1,0 +1,55 @@
+{
+ "id": "well",
+ "kind": "farm",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  86
+ ],
+ "stand": [
+  -48.0,
+  1.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_well_bucket"
+ ],
+ "inside_pad": {
+  "min_margin_px": 12.8,
+  "base_on_pad": true,
+  "height_px": 97.5,
+  "bbox_px": [
+   27.5,
+   21.8,
+   124.8,
+   119.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_well_bucket": {
+   "offsets": [
+    [
+     0,
+     -10
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "dy_units": -10,
+   "dy_px": -7.2,
+   "duration_s": 2,
+   "repeat": 1,
+   "ease": "ease-in-out",
+   "note": "دلو با طناب ۱۰ واحد از بالا آهسته پایین می‌آید و در حالت ایستا (پایین) می‌ماند؛ سر طناب پشت قرقره؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "دلو ثابت در حالت پایین"
+ }
+}

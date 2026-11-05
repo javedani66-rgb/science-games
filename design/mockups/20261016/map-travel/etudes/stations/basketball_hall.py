@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+"""ایستگاه F02 «سالن بسکتبال» — بازطراحی دور ۶ (همسطح پیچ‌کاری).
+ایده: تختهٔ ¾ با حلقهٔ نارنجی و تور توری (لوزی)، ستون و پایهٔ جعبه‌ای؛ توپ از کنار پایه پرتاب می‌شود و توی تور می‌افتد (D194).
+اجزای درشت: ۱) تخته با کادر قرمز ۲) حلقه+تور ۳) ستون+پایه (سه‌پله فولادی) ۴) توپ r=26 با درزهای سیاه.
+واحد symbol؛ بالاترین نقطه ≈ -144 (قاب دیده می‌شود). حرکت: فقط ball؛ از زیر حلقه (-38,-72) می‌افتد تا جای پایان؛ ایستا=پایان؛ بدون بیکار."""
+import sys, pathlib, json, math
+HERE = pathlib.Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent))
+import functools, station_kit as _k
+from station_kit import *
+_k.margin_check = functools.partial(_k.margin_check, min_margin=8); _k.motion_check = functools.partial(_k.motion_check, min_margin=8)
+OUTD = pathlib.Path(__file__).resolve().parent / 'out'
+SHOTS = '/tmp/claude-0/-home-claude/b8272ea8-e944-5634-98c3-e9535737ce2f/scratchpad/s24/basketball_hall'   # فقط شات سنجش
+S_B, S_L, S_D = '#7f9bc8', '#b4c8e8', '#4f6794'
+W_B, W_L, W_D = '#f4f7fd', '#ffffff', '#c3d1e8'
+RED = '#e0553a'
+OR_B, OR_L, OR_D = '#ff9a2e', '#ffc27a', '#c4600c'
+NETL = '#8aa6d2'
+HOLE = '#4a1f4a'
+BX0, BX1, BT, BB = -56, 56, -134, -72      # روی تخته
+TX, TY = 8, -6                              # ضخامت
+RIMY = -76
+BR = 17; BALL = (0, -56)          # D194: توپ آخر حرکت داخل تور می‌ماند (مالک ۴ نوامبر: «توپ آخرش نمی‌افته توش»)
+KF = [(0, 40), (44, 52), (52, -38), (22, -66), (2, -42), (0, 0)]   # از تور پایین می‌افتد، کنار پایه می‌غلتد، بالا می‌رود، از بالای حلقه می‌افتد توی تور (واحد symbol، نسبت به جای پایان)
+SHIFT = KF[0]
+def poly(p, pts, col, op=1):
+    p.raw('<polygon points="%s" fill="%s"%s/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, (' stroke="%s" stroke-width=".6" stroke-linejoin="round"' % col) if op == 1 else ' opacity="%s"' % op))   # حاشیهٔ هم‌رنگ: درز مویی بین چندضلعی‌ها نماند
+def rect(x0, y0, x1, y1): return [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+def pline(p, pts, col, w):
+    p.raw('<polyline points="%s" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round" stroke-linejoin="round"/>' % (' '.join('%.1f,%.1f' % q for q in p.X(pts)), col, w))
+def box(p, x0, y0, x1, y1, dx, dy, cols, extra=(), sw=3.6):
+    """جعبهٔ ¾ یک‌پارچه: وجه‌ها فقط با پلهٔ رنگ، یک خط دور؛ extra = شکل‌های متصل (اتحاد)."""
+    from shapely.geometry import Polygon
+    from shapely.ops import unary_union
+    R = [(x1, y0), (x1 + dx, y0 + dy), (x1 + dx, y1 + dy), (x1, y1)]
+    T = [(x0, y0), (x1, y0), (x1 + dx, y0 + dy), (x0 + dx, y0 + dy)]
+    F = rect(x0, y0, x1, y1)
+    u = unary_union([Polygon(q).buffer(0) for q in (R, T, F)] + [Polygon(q).buffer(0) for q in extra]).buffer(0.01)
+    xy = list(u.exterior.coords)[:-1]
+    p.shape(xy, cols[0], sw, j=.05, step=8, clip=False)
+    poly(p, R, cols[2]); poly(p, T, cols[1]); poly(p, F, cols[0])
+    return xy
+def build():
+    p = Pen('basketball_hall', 'sports'); pad(p, line=((16, 27), (34, 24)), tri=((-74, 14), (70, 8)), dot=(62, -22))
+    p.xf = (1.0, 0.0, 0.0)
+    p.tipshadow(0, 4, 36); p.foot_tip(0, 2, 26)
+    # ۳) ستون و پایه: یک شکل
+    pole = rect(-9, -80, 9, -10)
+    xy = box(p, -26, -16, 26, 0, 10, -7, (S_B, S_L, S_D), extra=(pole,))
+    poly(p, rect(-5, -76, -2, -23), S_L); poly(p, rect(3, -76, 6.5, -23), S_D)
+    poly(p, rect(-22, -12, -16, -3), S_L)
+    p.stroke(xy, 3.6, j=.05, step=8)
+    # ۱) تخته
+    xy = box(p, BX0, BT, BX1, BB, TX, TY, (W_B, W_L, W_D))
+    poly(p, rect(BX0 + 6, BT + 6, BX0 + 14, BB - 6), W_L)
+    poly(p, rect(BX1 - 20, BT + 5, BX1 - 5, BB - 5), '#e3ebf8')
+    p.stroke(xy, 3.6, j=.05, step=8)
+    q = rect(-22, -118, 22, -88)
+    p.shape(q, RED, 2.6, j=.05, step=6, clip=False)
+    poly(p, rect(-14, -111, 14, -95), W_B)
+    # ۲) حلقه (پشت)، توپ، تور و لبهٔ جلوی حلقه — به این ترتیب تا توپ واقعاً «توی» تور بیفتد
+    ring = ell(0, RIMY, 32, 11, 0, 360, 36)
+    p.fill(ring, OR_B)
+    p.fill(ell(0, RIMY - 1, 24, 6.5, 0, 360, 28), HOLE)
+    p.shape(ring, 'none', 2.6, j=.05, step=99, clip=False)
+    # ۴) توپ (لایهٔ متحرک)
+    with layer(p, 'ball'):
+        cx, cy = BALL
+        circ = ell(cx, cy, BR, BR, 0, 360, 36)
+        p.shape(circ, OR_B, 3.2, j=.05, step=99)
+        h = math.degrees(math.acos(7 / (2 * BR))); phi = 40.6
+        c1 = [(cx + BR * math.cos(math.radians(a)), cy + BR * math.sin(math.radians(a))) for a in [phi - h + 2 * h * i / 16 for i in range(17)]]
+        c1 += [(cx - 7 + BR * math.cos(math.radians(a)), cy - 5.5 + BR * math.sin(math.radians(a))) for a in [phi + h - 2 * h * i / 16 for i in range(17)]]
+        poly(p, c1, OR_D)
+        poly(p, [(cx - BR * .55 + 3.5 * math.cos(math.radians(t)), cy - BR * .5 + 2.2 * math.sin(math.radians(t))) for t in range(0, 360, 30)], OR_L)
+        for a, b in (((cx, cy - BR + 1), (cx, cy + BR - 1)), ((cx - BR + 1, cy), (cx + BR - 1, cy))): p.ln(a, b, 1.9, NAVY, j=0)
+        for sg in (-1, 1):
+            pts = [(cx + sg * (1.45 * BR - 1.05 * BR * math.cos(math.radians(t))), cy + 1.05 * BR * math.sin(math.radians(t))) for t in range(-60, 61, 6)]
+            pts = [q_ for q_ in pts if math.hypot(q_[0] - cx, q_[1] - cy) < BR - 1.5]
+            pline(p, pts, NAVY, 1.9)
+        p.stroke(circ, 3.2, j=.05, step=99)
+    # تور: از لبهٔ جلوی حلقه تا پایین، کمی باریک‌تر؛ سفید نیمه‌شفاف تا توپ پشتش دیده شود؛ شبکهٔ لوزی؛ لبهٔ پایین دندانه‌ای
+    NB, NW = -38, 21
+    front = [(32 * math.cos(math.radians(t)), RIMY + 11 * math.sin(math.radians(t))) for t in range(0, 181, 10)]
+    bottom = []
+    for i in range(7):
+        x = -NW + 2 * NW * i / 6
+        bottom.append((x, NB + (3 if i % 2 else 0)))
+    net = front + bottom
+    p.raw('<polygon points="%s" fill="#ffffff" opacity=".32"/>' % ' '.join('%.1f,%.1f' % q for q in p.X(net)))
+    tops = [(32 * math.cos(math.radians(t)), RIMY + 11 * math.sin(math.radians(t))) for t in (180, 150, 120, 90, 60, 30, 0)]
+    for i in range(7):
+        for j in (i - 1, i + 1):
+            if 0 <= j < 7: p.ln(tops[i], bottom[j], 1.7, NETL, j=0)
+    p.stroke(net, 2.6, j=.04, step=99)
+    band = [(32 * math.cos(math.radians(t)), RIMY + 11 * math.sin(math.radians(t))) for t in range(0, 181, 10)]
+    band += [(24 * math.cos(math.radians(t)), RIMY - 1 + 6.5 * math.sin(math.radians(t))) for t in range(180, -1, -10)]
+    p.shape(band, OR_B, 2.6, j=.04, step=99, clip=False)    # لبهٔ جلوی حلقه روی توپ و تور
+    return p
+if __name__ == '__main__':
+    p = build()
+    offs = [p.V(k) for k in KF[:-1]] + [(0, 0)]
+    r = finish(p, 'basketball_hall', None, motion={'ball': dict(offsets=offs)}, out=OUTD, shots=SHOTS)
+    sp = r['spec']
+    sp['motion_spec'] = {'node_basketball_hall_ball': dict(
+        kind='توپ از کنار پایه بالا می‌رود و از بالای حلقه توی تور می‌افتد؛ حالت ایستا = پایان (توپ داخل تور)',
+        translate_symbol_units=[list(k) for k in KF], translate_map_px_start=[round(SHIFT[0] * K, 1), round(SHIFT[1] * K, 1)],
+        duration_s=1.4, easing='بالا رفتن ease-out، افتادن ease-in', loop=False, trigger='رسیدن کودک (یک‌بار)', reduced_motion='ایستا',
+        note='تخته، حلقه، تور و ستون ثابت؛ بدون حلقهٔ بیکار.')}
+    (OUTD / 'basketball_hall.json').write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
+    print(json.dumps({k: r[k] for k in ('ok', 'margin', 'inside', 'motion')} | {'widths': [(w['label'], w['measured_px'], w['ok']) for w in r['widths']]}, ensure_ascii=False))

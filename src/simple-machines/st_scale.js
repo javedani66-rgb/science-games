@@ -61,7 +61,7 @@ function makeBalance(A,cfg){
       s+=`<path d="M${x} ${y+5} L${x-80} ${py-12} M${x} ${y+5} L${x+80} ${py-12}" stroke="#3B2417" stroke-width="4" fill="none"/><path d="M${x} ${y+5} L${x-80} ${py-12} M${x} ${y+5} L${x+80} ${py-12}" stroke="#6F8589" stroke-width="2" fill="none"/>`;
       s+=`<g data-zone="pan" data-side="${side}" ${button("pan-"+side,side==="L"?"گذاشتن شیء انتخاب‌شده روی کفهٔ چپ":"گذاشتن شیء انتخاب‌شده روی کفهٔ راست",canEdit(side)&&!st.frozen)}>${art(key,x+(pan.x-pc)*k,py+(pan.y-934)*k,k)}${hov?`<ellipse cx="${x}" cy="${py}" rx="96" ry="16" fill="#FFF3C4" opacity=".45"/>`:""}${canEdit(side)?`<rect x="${x-100}" y="${py-150}" width="200" height="190" fill="#fff" fill-opacity="0"/>`:""}</g><circle cx="${x}" cy="${y}" r="5" fill="none" stroke="#3B2417" stroke-width="2.5"/>`;
       layoutPan(st[side],x,py,u).forEach((p,i)=>{const drag=canEdit(side)&&!p.it.fixed;s+=`<g ${drag?`data-drag="pan" data-side="${side}" data-i="${st[side].indexOf(p.it)}" ${button(`item-${side}-${st[side].indexOf(p.it)}`,`برداشتن ${p.it.k==="w"?wLabelLong(p.it.v,u):OB[p.it.id].n} از کفه`,!st.frozen)} style="cursor:grab"`:""}>${itSvg(p.it,p.x,p.yb,u)}</g>`;});
-      if(S.forces&&st[side].length){const m=mass(side),gg=cfg.bg==="moon"?1.6:10,hide=side==="L"?st.hideL:st.hideR,ax=x+(side==="L"?64:-64),L2=Math.max(12,wlen(side)*wk),col=side==="L"?BLUE:RED,tip=py+22+L2;s+=arrow(ax,py+22,ax,tip,10,col);const side2=tip+54>398,lx2=side2?ax+(side==="L"?16:-16):ax,ly=side2?py+22+L2/2-4:tip+22,lo=side2?{size:12,col,anchor:side==="L"?"end":"start"}:{size:12,col};s+=T(lx2,ly,"وزن",lo);if(!(hide||u==="cube"))s+=T(lx2,ly+26,`<tspan class="num">${fa(r1((u==="g"?m/1000:m)*gg))} نیوتن</tspan>`,lo);}}
+      if(S.forces&&st[side].length){const m=mass(side),gg=cfg.bg==="moon"?1.6:10,hide=side==="L"?st.hideL:st.hideR,ax=x+(side==="L"?64:-64),L2=Math.max(12,wlen(side)*wk),col=side==="L"?BLUE:RED,tip=py+22+L2;s+=arrow(ax,py+22,ax,tip,10,col);const side2=tip+54>398,lx2=side2?ax+(side==="L"?16:-16):ax,ly=side2?py+22+L2/2-4:tip+22,lo=side2?{size:12,col,anchor:side==="L"?"end":"start"}:{size:12,col};s+=T(lx2,ly,"وزن",lo);if(!(hide||u==="cube"))s+=T(lx2,ly+26,`<tspan class="num">${fa(r1((u==="g"?m/1000:m)*gg))} نیوتون</tspan>`,lo);}}
     if(st.edit){s+=trayPanel("",404);
       if(st.trayMode==="w"&&u!=="cube")s+=T(28,436,u==="kg"?"کیلوگرم":"گرم",{size:12,col:MUT,anchor:"end"});
       if(st.trayMode==="w"){const n=st.tray.length;st.tray.forEach((v,j)=>{const x=320+(j-(n-1)/2)*Math.min(90,560/n),sel=st.sel&&st.sel.k==="w"&&st.sel.v===v;s+=`<g data-drag="tray" data-k="w" data-v="${v}" ${button("weight-"+v,`انتخاب ${wLabelLong(v,u)}`,!A.locked&&!st.frozen)} style="cursor:grab"><rect x="${x-44}" y="420" width="88" height="90" fill="#fff" fill-opacity="0"/><g transform="translate(${x} 500) scale(1.2) translate(${-x} -500)">${wSvg(x,500,v,u,sel)}</g></g>`;});}
@@ -104,7 +104,7 @@ function makeBalance(A,cfg){
 
 /* ================= نیروسنج، ماه و آب ================= */
 const GV={earth:10,moon:1.6};
-/* هر سه جسم زیر آب: حجم ۱ یا ۲ لیتر؛ نیروی شناوری روی زمین = ۱۰ نیوتن برای هر لیتر */
+/* هر سه جسم زیر آب: حجم ۱ یا ۲ لیتر؛ نیروی شناوری روی زمین = ۱۰ نیوتون برای هر لیتر */
 const SPR={stone:{m:5,Fb:20,sc:1.7},brick:{m:2,Fb:10,sc:1.6},iron:{m:8,Fb:10,sc:1.6}};
 function moonBg(fy){let s=`<rect width="640" height="520" fill="#1B2440"/>`;
   [[40,40],[120,90],[210,30],[300,70],[420,24],[500,96],[590,140],[80,170],[250,150],[360,120],[460,180]].forEach(([x,y])=>s+=`<circle cx="${x}" cy="${y}" r="1.8" fill="#fff" opacity=".8"/>`);
@@ -137,13 +137,13 @@ function makeSpring(A,cfg){
     if(cfg.lower)g+=`<circle cx="${cx}" cy="${hy}" r="15" fill="#FFC43D" stroke="#D99A12" stroke-width="3"/><path d="M${cx} ${hy-8} v16 M${cx-5} ${hy-3} l5 -5 5 5 M${cx-5} ${hy+3} l5 5 5 -5" stroke="#8A5A00" stroke-width="2" fill="none"/>`;
     s+=cfg.lower?`<g data-drag="hook" tabindex="${A.locked&&!A.lab?-1:0}" role="slider" aria-label="بالا و پایین بردن جسم؛ کلیدهای بالا و پایین" aria-valuemin="${hmin}" aria-valuemax="${hmax}" aria-valuenow="${st.hy}" aria-valuetext="${sub()>.98?"کاملاً زیر آب":sub()>.02?"بخشی از جسم در آب":"بیرون از آب"}" style="cursor:grab"><rect x="${cx-70}" y="${hy-24}" width="140" height="${ob-hy+30}" fill="#fff" fill-opacity="0"/>${g}</g>`:g;
     s+=T(cx-40,tt+30,"نیروسنج",{size:12,col:INK,anchor:"start",haloCol:moon?"#DDE3EC":"#fff"});
-    if(NUMS())s+=T(cx-40,tt+60,st.hide?"؟ نیوتن":`${fa(pv)} نیوتن`,{size:15,col:"#C93B22",anchor:"start"});
+    if(NUMS())s+=T(cx-40,tt+60,st.hide?"؟ نیوتون":`${fa(pv)} نیوتون`,{size:15,col:"#C93B22",anchor:"start"});
     if(S.forces){const top=ob-oh,wl=14+Math.min(46,W()*.6);s+=arrow(cx+58,top,cx+58,top+wl,9,RED)+T(cx+76,top+16,"وزن",{size:12,col:RED,anchor:"end"});
       if(sub()>0.02){const bl=10+Math.min(46,FB()*sub()*1.4);const bw=KID()?["نیروی","آب"]:["نیروی","شناوری"];s+=arrow(cx-54,ob,cx-54,ob-bl,9,BLUE)+T(cx-70,Math.min(ob-bl/2,348)-12,bw[0],{size:12,col:BLUE,anchor:"start"})+T(cx-70,Math.min(ob-bl/2,348)+18,bw[1],{size:12,col:BLUE,anchor:"start"});}}
     const focused=svg.contains(document.activeElement)&&document.activeElement.dataset.drag==="hook";
     P.paint(s);
     if(focused){const hook=svg.querySelector('[data-drag="hook"]');if(hook)hook.focus({preventScroll:true});}
-    if(NUMS())A.counter(`<span class="cc">عدد نیروسنج: <b class="num">${st.hide?"؟":fa(pv)+" نیوتن"}</b></span>${cfg.water?`<span class="cc">${sub()>.98?"کاملاً زیر آب":sub()>.02?"تا نیمه در آب":"بیرون از آب"}</span>`:""}<span class="cc">جرم: <b class="num">${cfg.hideM?"؟":fa(cfg.m)+" کیلوگرم"}</b></span>`);
+    if(NUMS())A.counter(`<span class="cc">عدد نیروسنج: <b class="num">${st.hide?"؟":fa(pv)+" نیوتون"}</b></span>${cfg.water?`<span class="cc">${sub()>.98?"کاملاً زیر آب":sub()>.02?"تا نیمه در آب":"بیرون از آب"}</span>`:""}<span class="cc">جرم: <b class="num">${cfg.hideM?"؟":fa(cfg.m)+" کیلوگرم"}</b></span>`);
     else A.counter("");
     if(cfg.onRender)cfg.onRender();}
   const hmin=40,hmax=cfg.water?Math.min(150,372-ROD-oh):64;
@@ -167,7 +167,7 @@ function springPanel(x0,w,where,massKg,reading,label,obj){obj=obj||"rice";const 
   s+=`<rect x="${cx-34}" y="56" width="68" height="${sl+40}" rx="10" fill="#fff" stroke="#8C9BB0" stroke-width="2.5"/>`;
   let zz=`M${cx} 66`;const n=9;for(let i=1;i<=n;i++)zz+=` L${cx+(i%2?-12:12)} ${66+i*(sl-10)/n}`;s+=`<path d="${zz}" stroke="#7D8CA3" stroke-width="3" fill="none"/>`;
   const ry=66+sl;s+=`<rect x="${cx-26}" y="${ry-4}" width="52" height="8" rx="3" fill="#E8590C"/>`;
-  s+=T(cx+44,ry+7,!hung?"؟":NUMS()?`${fa(reading)} نیوتن`:"",{size:14,col:"#C93B22",anchor:"end",haloCol:moon?"#1E2A44":"#fff"});
+  s+=T(cx+44,ry+7,!hung?"؟":NUMS()?`${fa(reading)} نیوتون`:"",{size:14,col:"#C93B22",anchor:"end",haloCol:moon?"#1E2A44":"#fff"});
   if(hung)s+=`<line x1="${cx}" y1="${ry+4}" x2="${cx}" y2="${96+sl+14}" stroke="#5E6E86" stroke-width="3"/><g transform="translate(${cx} ${150+sl+10}) scale(.9)">${OB[obj].d}</g>`+T(cx,160+sl+22,label,{size:13,col:moon?"#fff":INK,haloCol:moon?"#1E2A44":"#fff"});
   else s+=`<g transform="translate(${cx+60} 350) scale(.8)">${OB[obj].d}</g>`;
   return s+"</g>";}
@@ -216,7 +216,7 @@ const ST_scale={key:"scale",name:"جرم و وزن",c:"#3B6FD4",sub:"ترازو�
      btn(c,"نیروسنج و آب","pri",sprMode);}
    function sprMode(){mode="spr";A.prompt(KID()?"سنگ را با دستگیرهٔ زرد پایین ببر و در آب فرو کن. به فنر نگاه کن.":"آزمایشگاه نیروسنج: دستگیرهٔ زرد را پایین بکش تا جسم در آب برود. جسم را عوض کن یا به ماه برو و ببین عدد نیروسنج چه می‌شود.");A.fb("");
      const mk=()=>{spr=makeSpring(A,{obj,m:SPR[obj].m,Fb:SPR[obj].Fb,place,water:true,lower:true});A.refresh=()=>spr.render();};mk();
-     A.formula(FX(`${sy("W")} = ${sy("m")} × ${sy("g")}`,"",[[sy("W"),"وزن (N)"],[sy("m"),"جرم (kg)"],[sy("g"),"وزنِ هر کیلوگرم (نیوتن بر کیلوگرم)؛ زمین ≈ ۱۰ و ماه ≈ ۱٫۶"]]));
+     A.formula(FX(`${sy("W")} = ${sy("m")} × ${sy("g")}`,"",[[sy("W"),"وزن (N)"],[sy("m"),"جرم (kg)"],[sy("g"),"وزنِ هر کیلوگرم (نیوتون بر کیلوگرم)؛ زمین ≈ ۱۰ و ماه ≈ ۱٫۶"]]));
      const c=A.ctrl("");
      ["stone","brick","iron"].forEach(id=>btn(c,OB[id].n,"",()=>{obj=id;mk();}));
      const pb=btn(c,"رفتن به ماه","",()=>{place=place==="earth"?"moon":"earth";pb.textContent=place==="earth"?"رفتن به ماه":"برگشت به زمین";spr.setPlace(place);});
@@ -312,7 +312,7 @@ function minCoinsStr(t,vals,u){const out=[];let s=t;const vs=vals.slice().sort((
   while(s>0){let best=null;for(const v of vs)if(v<=s&&minCoins(s-v,vals)+1===minCoins(s,vals)){best=v;break;}if(best==null)break;out.push(best);s-=best;}
   return out.map(v=>wLabelLong(v,u)).join(" + ");}
 
-const FX_W=(sub)=>FX(`${sy("W")} = ${sy("m")} × ${sy("g")}`,sub||"",[[sy("W"),"وزن (N)"],[sy("m"),"جرم (kg)"],[sy("g"),"وزنِ هر کیلوگرم (نیوتن بر کیلوگرم)؛ زمین ≈ ۱۰ و ماه ≈ ۱٫۶"]]);
+const FX_W=(sub)=>FX(`${sy("W")} = ${sy("m")} × ${sy("g")}`,sub||"",[[sy("W"),"وزن (N)"],[sy("m"),"جرم (kg)"],[sy("g"),"وزنِ هر کیلوگرم (نیوتون بر کیلوگرم)؛ زمین ≈ ۱۰ و ماه ≈ ۱٫۶"]]);
 const FX_B=(sub)=>FX(`${sy("W","آب")} = ${sy("W")} − ${sy("F","b")}`,sub||"",[[sy("W"),"وزن جسم (N)"],[sy("F","b"),"نیروی شناوری: نیروی رو به بالای آب (N)"],[sy("W","آب"),"عدد نیروسنج در آب (وزن ظاهری)"]]);
 function mwMcq(A,opts,ans,msg){const c=A.ctrl("");const m=mcq(c,opts,(i,bt)=>{if(A.locked)return;if(msg.gate&&!msg.gate())return;
     if(i===ans){m.disable();m.mark(i,"right");if(msg.reveal)msg.reveal();A.judge(true,{ok:msg.ok,k:msg.k?{ok:msg.k.ok}:undefined});}
@@ -333,10 +333,10 @@ function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
   if(sp.t==="moon"){A.view(404);const draw=rev=>P.paint(`<rect width="640" height="520" style="fill:var(--sw)"/>`+springPanel(16,296,"earth",5,50,K?"کیسهٔ برنج":"کیسهٔ ۵ کیلوگرمی")+springPanel(328,296,"moon",5,rev?8:null,"همان کیسه"));draw(false);
     A.formula(FX_W(`${sy("W")} = ۵ × ۱۰ = ۵۰ N`));
     poe(A,{prompt:K?"همین کیسه را به ماه بردیم و به نیروسنج آویزان کردیم. حدس بزن فنرِ نیروسنج روی ماه بیشتر کش می‌آید، همان‌قدر یا کمتر.":"همین کیسه را به ماه بردیم و به نیروسنج آویزان کردیم. حدس بزن نیروسنج روی ماه چه عددی نشان می‌دهد. حدس امتیاز ندارد.",
-      opts:K?["بیشتر کش می‌آید","همان‌قدر کش می‌آید","کمتر کش می‌آید"]:["بیشتر از ۵۰ نیوتن","همان ۵۰ نیوتن","کمتر از ۵۰ نیوتن"],right:2,reveal:(i,next)=>{draw(true);later(500,next);}},
-     {prompt:K?"روی ماه فنر کمتر کش آمد. چرا؟":"روی ماه نیروسنج ۸ نیوتن نشان داد. چه چیزی کم شد؟",
+      opts:K?["بیشتر کش می‌آید","همان‌قدر کش می‌آید","کمتر کش می‌آید"]:["بیشتر از ۵۰ نیوتون","همان ۵۰ نیوتون","کمتر از ۵۰ نیوتون"],right:2,reveal:(i,next)=>{draw(true);later(500,next);}},
+     {prompt:K?"روی ماه فنر کمتر کش آمد. چرا؟":"روی ماه نیروسنج ۸ نیوتون نشان داد. چه چیزی کم شد؟",
       opts:K?["برنجِ کیسه کم شد","ماه کیسه را کمتر از زمین می‌کشد","فنر خراب شد"]:["جرم کیسه","وزن کیسه","هم جرم و هم وزن"],ans:1,
-      ok:K?"هیچ برنجی کم نشده. ماه کیسه را کمتر از زمین به طرف خودش می‌کشد؛ برای همین فنر کمتر کش آمد.":"هیچ برنجی کم نشده، پس جرم همان ۵ کیلوگرم است. ماه کیسه را کمتر می‌کشد، پس وزن کم شد: ۵ × ۱٫۶ = ۸ نیوتن. نیروسنج وزن را نشان می‌دهد.",
+      ok:K?"هیچ برنجی کم نشده. ماه کیسه را کمتر از زمین به طرف خودش می‌کشد؛ برای همین فنر کمتر کش آمد.":"هیچ برنجی کم نشده، پس جرم همان ۵ کیلوگرم است. ماه کیسه را کمتر می‌کشد، پس وزن کم شد: ۵ × ۱٫۶ = ۸ نیوتون. نیروسنج وزن را نشان می‌دهد.",
       retry:K?"آیا برنجی از کیسه بیرون ریخت؟":"جرم یعنی مقدار ماده و وزن یعنی کشش. آیا برنجی از کیسه کم شد؟"});return;}
   if(sp.t==="massq"){A.view(404);P.paint((sp.water?bgRoom(382):moonBg(382))+placeTag(sp.water?"earth":"moon",540,70)+(sp.water?`<rect x="206" y="228" width="228" height="156" rx="12" fill="#fff" fill-opacity=".45" stroke="#7FA7C4" stroke-width="4"/><rect x="210" y="262" width="220" height="118" rx="8" fill="#6EC3EA" fill-opacity=".6"/><g transform="translate(320 360) scale(1.7)">${OB.stone.d}</g>`:`<g transform="translate(320 382) scale(1.6)">${OB.rice.d}</g>`));
     A.formula(sp.water?FX_B(""):FX_W(""));
@@ -357,19 +357,19 @@ function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
   const o=SPR[sp.obj]||{m:sp.m},m=sp.m||o.m;
   if(sp.t==="wcalc"){const moon=sp.where==="moon",ans=r1(m*GV[sp.where]);
     const s=makeSpring(A,{obj:sp.obj||"rice",sc:1.2,m,place:sp.where,hide:true});A.refresh=()=>s.render();A.formula(FX_W(""));
-    A.prompt(`جرم این کیسه ${fa(m)} کیلوگرم است. نیروسنج ${moon?"<b>روی ماه</b>":"روی زمین"} چند نیوتن نشان می‌دهد؟ (${moon?"در مدل ما روی ماه هر کیلوگرم حدود ۱٫۶ نیوتن وزن دارد":"در مدل ما روی زمین هر کیلوگرم حدود ۱۰ نیوتن وزن دارد"})`);
-    const c=A.ctrl("");const stp=stepper(c,{init:0,max:200,steps:moon?[.1,1,10]:[1,10],unit:"نیوتن"});
+    A.prompt(`جرم این کیسه ${fa(m)} کیلوگرم است. نیروسنج ${moon?"<b>روی ماه</b>":"روی زمین"} چند نیوتون نشان می‌دهد؟ (${moon?"در مدل ما روی ماه هر کیلوگرم حدود ۱٫۶ نیوتون وزن دارد":"در مدل ما روی زمین هر کیلوگرم حدود ۱۰ نیوتون وزن دارد"})`);
+    const c=A.ctrl("");const stp=stepper(c,{init:0,max:200,steps:moon?[.1,1,10]:[1,10],unit:"نیوتون"});
     const chk=btn(c,"بررسی","go",()=>{const v=stp.get(),ok=Math.abs(v-ans)<1e-6;
-      A.judge(ok,{ok:`وزن = ${fa(m)} × ${moon?"۱٫۶":"۱۰"} = ${fa(ans)} نیوتن.${moon?` جرم همان ${fa(m)} کیلوگرم است؛ فقط وزن کم شد.`:""}`,retry:moon?"روی ماه، جرم را در ۱٫۶ ضرب کن.":"جرم را در ۱۰ ضرب کن.",final:`${fa(m)} × ${moon?"۱٫۶":"۱۰"} = ${fa(ans)} نیوتن.`});
+      A.judge(ok,{ok:`وزن = ${fa(m)} × ${moon?"۱٫۶":"۱۰"} = ${fa(ans)} نیوتون.${moon?` جرم همان ${fa(m)} کیلوگرم است؛ فقط وزن کم شد.`:""}`,retry:moon?"روی ماه، جرم را در ۱٫۶ ضرب کن.":"جرم را در ۱۰ ضرب کن.",final:`${fa(m)} × ${moon?"۱٫۶":"۱۰"} = ${fa(ans)} نیوتون.`});
       if(A.locked){chk.disabled=true;stp.disable();s.st.hide=false;s.render();}});return;}
   if(sp.t==="mcalc"){const mm=sp.W/10,s=makeSpring(A,{obj:sp.obj,sc:sp.obj==="rice"?1.2:undefined,m:mm,place:"earth",hideM:true});A.refresh=()=>s.render();A.formula(FX_W(""));
-    A.prompt(`نیروسنج روی زمین ${fa(sp.W)} نیوتن نشان می‌دهد. جرم ${OB[sp.obj].n} چند کیلوگرم است؟ (روی زمین هر کیلوگرم حدود ۱۰ نیوتن وزن دارد)`);
+    A.prompt(`نیروسنج روی زمین ${fa(sp.W)} نیوتون نشان می‌دهد. جرم ${OB[sp.obj].n} چند کیلوگرم است؟ (روی زمین هر کیلوگرم حدود ۱۰ نیوتون وزن دارد)`);
     const c=A.ctrl("");const stp=stepper(c,{init:0,max:99,steps:[1,10],unit:"کیلوگرم"});
     const chk=btn(c,"بررسی","go",()=>{const ok=stp.get()===mm;
-      A.judge(ok,{ok:`${fa(sp.W)} ÷ ۱۰ = ${fa(mm)} کیلوگرم. روی زمین هر کیلوگرم حدود ۱۰ نیوتن وزن دارد.`,retry:"وزن را بر ۱۰ تقسیم کن.",final:`جرم = وزن ÷ ۱۰ = ${fa(sp.W)} ÷ ۱۰ = ${fa(mm)} کیلوگرم.`});
+      A.judge(ok,{ok:`${fa(sp.W)} ÷ ۱۰ = ${fa(mm)} کیلوگرم. روی زمین هر کیلوگرم حدود ۱۰ نیوتون وزن دارد.`,retry:"وزن را بر ۱۰ تقسیم کن.",final:`جرم = وزن ÷ ۱۰ = ${fa(sp.W)} ÷ ۱۰ = ${fa(mm)} کیلوگرم.`});
       if(A.locked){chk.disabled=true;stp.disable();}});return;}
   /* آب */
-  let dunked=false;const s=makeSpring(A,{obj:sp.obj,m:o.m,Fb:o.Fb,place:"earth",water:true,lower:true,onDrop:f=>{if(f>.98&&!dunked){dunked=true;A.fb(K?"حالا به فنر نگاه کن.":`در هوا ${fa(o.m*10)} نیوتن بود؛ حالا ${fa(o.m*10-o.Fb)} نیوتن است.`,"info");}}});A.refresh=()=>s.render();
+  let dunked=false;const s=makeSpring(A,{obj:sp.obj,m:o.m,Fb:o.Fb,place:"earth",water:true,lower:true,onDrop:f=>{if(f>.98&&!dunked){dunked=true;A.fb(K?"حالا به فنر نگاه کن.":`در هوا ${fa(o.m*10)} نیوتون بود؛ حالا ${fa(o.m*10-o.Fb)} نیوتون است.`,"info");}}});A.refresh=()=>s.render();
   A.hint(`M320 40 L320 150`);
   const gate=()=>{if(s.sub()<.98){A.fb(K?`اول ${OB[sp.obj].n} را با دستگیرهٔ زرد تا ته در آب ببر.`:`اول ${OB[sp.obj].n} را کامل در آب ببر (دستگیرهٔ زرد را پایین بکش).`,"info");return false;}return true;};
   A.formula(FX_B(""));
@@ -378,9 +378,9 @@ function massWeight(sp,A){const P=A.P,K=KID();A.counter("");
     mwMcq(A,K?["بیشتر کش می‌آید","همان‌قدر کش می‌آید","کمتر کش می‌آید"]:["بیشتر می‌شود","همان می‌ماند","کمتر می‌شود"],2,{gate,ok:wOk,retry:"دوباره به نوار نارنجی نگاه کن. خط‌چین جای قبلی آن است.",k:{ok:`آب ${OB[sp.obj].n} را کمی به بالا هل می‌دهد؛ برای همین فنر کمتر کش می‌آید. ${OB[sp.obj].n} کوچک‌تر نشده است.`,retry:"به نوار نارنجی نگاه کن. خط‌چین جای قبلی آن است."}});return;}
   if(sp.t==="waterWhy"){A.prompt(`${OB[sp.obj].n} را در آب ببر. چرا عدد نیروسنج کم می‌شود؟`);
     mwMcq(A,[`چون وزن ${OB[sp.obj].n} کم می‌شود`,"چون آب آن را به بالا هل می‌دهد",`چون جرم ${OB[sp.obj].n} کم می‌شود`],1,{gate,ok:wOk+` جرم و وزن واقعی ${OB[sp.obj].n} همان است.`,retry:"وقتی در استخر هستی، آب تو را به کدام طرف هل می‌دهد؟"});return;}
-  A.prompt(`${OB[sp.obj].n} را کامل در آب ببر. آب با چند نیوتن آن را به بالا هل می‌دهد؟ (نیروی آب = عدد نیروسنج در هوا − عددش در آب)`);
-  const c=A.ctrl("");const stp=stepper(c,{init:0,max:100,steps:[1,10],unit:"نیوتن"});
+  A.prompt(`${OB[sp.obj].n} را کامل در آب ببر. آب با چند نیوتون آن را به بالا هل می‌دهد؟ (نیروی آب = عدد نیروسنج در هوا − عددش در آب)`);
+  const c=A.ctrl("");const stp=stepper(c,{init:0,max:100,steps:[1,10],unit:"نیوتون"});
   const chk=btn(c,"بررسی","go",()=>{if(!gate())return;const ok=stp.get()===o.Fb;
-    A.judge(ok,{ok:`نیروی شناوری = ${fa(o.m*10)} − ${fa(o.m*10-o.Fb)} = ${fa(o.Fb)} نیوتن.`,retry:"عدد نیروسنج در آب را از عددش در هوا کم کن.",final:`در هوا ${fa(o.m*10)} و در آب ${fa(o.m*10-o.Fb)} نیوتن؛ پس نیروی شناوری ${fa(o.Fb)} نیوتن است.`});
+    A.judge(ok,{ok:`نیروی شناوری = ${fa(o.m*10)} − ${fa(o.m*10-o.Fb)} = ${fa(o.Fb)} نیوتون.`,retry:"عدد نیروسنج در آب را از عددش در هوا کم کن.",final:`در هوا ${fa(o.m*10)} و در آب ${fa(o.m*10-o.Fb)} نیوتون؛ پس نیروی شناوری ${fa(o.Fb)} نیوتون است.`});
     if(A.locked){chk.disabled=true;stp.disable();}});
 }

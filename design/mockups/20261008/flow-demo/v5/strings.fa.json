@@ -1,0 +1,474 @@
+{
+ "v5.build.ok": {
+  "text": "ساخت موفق: {kb} کیلوبایت؛ {n} نماد در sprite؛ ماژول‌ها: {mods}",
+  "kind": "ui",
+  "where_fa": "پیام موفقیت ساخت v5 (ابزار توسعه)",
+  "context_fa": "فقط در خروجی ترمینال ساخت؛ کودک نمی‌بیند",
+  "band": "همه"
+ },
+ "v5.build.fail": {
+  "text": "ساخت شکست خورد؛ {n} خطا:",
+  "kind": "ui",
+  "where_fa": "سرتیتر خطاهای ساخت v5",
+  "context_fa": "ابزار توسعه؛ کودک نمی‌بیند",
+  "band": "همه"
+ },
+ "v5.build.page_over": {
+  "text": "حجم صفحهٔ نهایی {kb} کیلوبایت است و از سقف {cap} کیلوبایت بیشتر شده.",
+  "kind": "ui",
+  "where_fa": "خطای سقف صفحه",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.module_over": {
+  "text": "پوشهٔ «{mod}» {kb} کیلوبایت است و از بودجهٔ {cap} کیلوبایت بیشتر شده.",
+  "kind": "ui",
+  "where_fa": "خطای بودجهٔ پوشهٔ هنرمند",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.svg_over": {
+  "text": "فایل {file} {kb} کیلوبایت است و از سقف {cap} کیلوبایت برای هر SVG بیشتر شده.",
+  "kind": "ui",
+  "where_fa": "خطای سقف یک SVG",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.bad_svg": {
+  "text": "فایل {file} قابل خواندن نیست: {why}",
+  "kind": "ui",
+  "where_fa": "خطای SVG ناخوانا",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.forbidden": {
+  "text": "فایل {file} چیز ممنوع دارد: {what}",
+  "kind": "ui",
+  "where_fa": "خطای محتوای ممنوع در SVG",
+  "context_fa": "اسکریپت یا ارجاع بیرونی",
+  "band": "همه"
+ },
+ "v5.build.dup_id": {
+  "text": "شناسهٔ تکراری «{id}» در فایل‌های {a} و {b}؛ پیشوند یکتا بگذارید.",
+  "kind": "ui",
+  "where_fa": "خطای شناسهٔ تکراری",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.missing_ref": {
+  "text": "فایل {file} به شناسهٔ «{id}» ارجاع می‌دهد که در همان فایل نیست.",
+  "kind": "ui",
+  "where_fa": "خطای ارجاع بی‌مقصد",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.no_viewbox": {
+  "text": "فایل {file} viewBox ندارد.",
+  "kind": "ui",
+  "where_fa": "خطای نبود viewBox",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.unknown_module": {
+  "text": "هشدار: پوشهٔ «{mod}» جزو پوشه‌های شناخته‌شده نیست و بودجه ندارد.",
+  "kind": "ui",
+  "where_fa": "هشدار پوشهٔ ناشناس",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.live_effect": {
+  "text": "هشدار: فایل {file} اثر زندهٔ {what} دارد؛ سند سبک آن را ممنوع کرده (جز پشتیبان ابزار).",
+  "kind": "ui",
+  "where_fa": "هشدار filter/blend زنده",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.placeholder": {
+  "text": "هیچ هنر واقعی نیست؛ جاگذار آزمون در sprite گذاشته شد.",
+  "kind": "ui",
+  "where_fa": "پیام استفاده از جاگذار",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "v5.build.no_placeholder_tpl": {
+  "text": "الگوی template.html نشانگر {mark} را ندارد.",
+  "kind": "ui",
+  "where_fa": "خطای الگو",
+  "context_fa": "ابزار توسعه",
+  "band": "همه"
+ },
+ "difficulty.easy": {
+  "text": "آسان",
+  "kind": "ui",
+  "where_fa": "واژهٔ سختی کنار قرص سبز",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "difficulty.mid": {
+  "text": "متوسط",
+  "kind": "ui",
+  "where_fa": "واژهٔ سختی کنار قرص نارنجی",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "difficulty.hard": {
+  "text": "سخت",
+  "kind": "ui",
+  "where_fa": "واژهٔ سختی کنار قرص قرمز",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.base.label": {
+  "text": "پایه",
+  "kind": "ui",
+  "where_fa": "برچسب بالای چیپ پایه",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.base.b12": {
+  "text": "۱ تا ۲",
+  "kind": "ui",
+  "where_fa": "چیپ پایه ۱ تا ۲",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.base.b34": {
+  "text": "۳ تا ۴",
+  "kind": "ui",
+  "where_fa": "چیپ پایه ۳ تا ۴",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.base.b56": {
+  "text": "۵ تا ۶",
+  "kind": "ui",
+  "where_fa": "چیپ پایه ۵ تا ۶",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.kit.title": {
+  "text": "کیت رابط",
+  "kind": "ui",
+  "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.kit.s_buttons": {
+  "text": "دکمه‌ها",
+  "kind": "ui",
+  "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.kit.s_base": {
+  "text": "انتخاب‌گر پایه",
+  "kind": "ui",
+  "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.kit.s_icons": {
+  "text": "آیکون‌ها",
+  "kind": "ui",
+  "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.kit.s_badges": {
+  "text": "نشان سختی",
+  "kind": "ui",
+  "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.kit.s_lock": {
+  "text": "قفل و برچسب",
+  "kind": "ui",
+  "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.kit.s_ring": {
+  "text": "حلقهٔ اینجایی",
+  "kind": "ui",
+  "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.kit.s_sheets": {
+  "text": "برگه‌ها",
+  "kind": "ui",
+  "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.kit.s_type": {
+  "text": "اندازهٔ نوشته",
+  "kind": "ui",
+  "where_fa": "عنوان بخش صفحهٔ کیت (فقط توسعه)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.state.pressed": {
+  "text": "فشرده",
+  "kind": "ui",
+  "where_fa": "برچسب حالت دکمه در کیت",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.state.disabled": {
+  "text": "غیرفعال",
+  "kind": "ui",
+  "where_fa": "برچسب حالت دکمه در کیت",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.state.focus": {
+  "text": "فوکوس",
+  "kind": "ui",
+  "where_fa": "برچسب حالت دکمه در کیت",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.state.compact": {
+  "text": "کوچک",
+  "kind": "ui",
+  "where_fa": "برچسب حالت دکمه در کیت",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.state.search": {
+  "text": "جستجو",
+  "kind": "ui",
+  "where_fa": "برچسب حالت دکمه در کیت",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.ui.state.video": {
+  "text": "فیلم",
+  "kind": "ui",
+  "where_fa": "دکمهٔ فیلم پشت کارت (کیت)",
+  "context_fa": "draft؛ ماکت کیت رابط v5",
+  "band": "همه"
+ },
+ "v5.flow.search.none": {
+  "text": "چیزی پیدا نشد.",
+  "kind": "ui",
+  "where_fa": "نتیجهٔ خالی جست‌وجو",
+  "context_fa": "draft؛ ماکت v5",
+  "band": "همه"
+ },
+ "v5.flow.search.hint": {
+  "text": "اسم یک جا یا یک درس را بنویس.",
+  "kind": "ui",
+  "where_fa": "راهنمای کادر جست‌وجوی نقشه",
+  "context_fa": "draft؛ ماکت v5",
+  "band": "همه"
+ },
+ "v5.flow.search.ph": {
+  "text": "اسم جا یا درس",
+  "kind": "ui",
+  "where_fa": "متن جایگزین کادر جست‌وجو",
+  "context_fa": "draft؛ ماکت v5",
+  "band": "همه"
+ },
+ "v5.flow.tut.base": {
+  "text": "اینجا پایهٔ خودت را انتخاب می‌کنی؛ نوشتهٔ کارت‌ها با آن عوض می‌شود.",
+  "kind": "ui",
+  "where_fa": "آموزش نقشه، گام چیپ پایه",
+  "context_fa": "draft؛ ماکت v5",
+  "band": "همه"
+ },
+ "motion.demo.node": {
+  "text": "اسکله",
+  "kind": "ui",
+  "where_fa": "نام گرهٔ نمونه روی نقشه و عنوان محیط در نمونهٔ حرکت",
+  "context_fa": "draft؛ جای‌نگهدار نام مرحله (stage.place)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.topic": {
+  "text": "قرقره",
+  "kind": "ui",
+  "where_fa": "موضوع علمی نمونه زیر نام گره در برگهٔ مرحله",
+  "context_fa": "draft؛ جای‌نگهدار stage.topic",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.enter": {
+  "text": "برو داخل",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ورود در برگهٔ مرحلهٔ نمونهٔ حرکت",
+  "context_fa": "draft؛ همان «برو داخل» سند جریان v5",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.reset": {
+  "text": "از اول",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ابزار: برگرداندن نمونه به نقشه",
+  "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.rm": {
+  "text": "کاهش حرکت",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ابزار: شبیه‌سازی prefers-reduced-motion",
+  "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.fast": {
+  "text": "تعویض سریع ۱۵۰ میلی‌ثانیه",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ابزار: نسخهٔ سقف ۱۵۰ms (سند STYLE_BIBLE) برای تعویض کارت",
+  "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "motion.demo.hint": {
+  "text": "کارت پشتی را بزن؛ دوباره نوار کارت قبلی را بزن تا برگردد.",
+  "kind": "ui",
+  "where_fa": "راهنمای کوتاه زیر نمونه (ابزار)",
+  "context_fa": "draft؛ نمونهٔ حرکت v5 (فقط ابزار طراحی، نه رابط کودک)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.ui.base.row": {
+  "text": "پایه: {b}",
+  "kind": "ui",
+  "where_fa": "ردیف انتخاب پایه در منو",
+  "context_fa": "فقط در منو؛ {b} از v5.ui.base.b12/b34/b56 می‌آید",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.ui.base.row.sub": {
+  "text": "برای عوض‌کردن بزن",
+  "kind": "ui",
+  "where_fa": "جملهٔ زیر ردیف پایه در منو",
+  "context_fa": "Vazirmatn ۱۶",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.ui.base.sheet.title": {
+  "text": "پایهٔ من",
+  "kind": "ui",
+  "where_fa": "عنوان برگهٔ انتخاب پایه",
+  "context_fa": "نوار عنوان بنفش گرد",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.tag": {
+  "text": "اختیاری",
+  "kind": "ui",
+  "where_fa": "پلاک بنفش زیر گرهٔ مسیر جانبی",
+  "context_fa": "مسیر جانبی اختیاری (D70)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.lead": {
+  "text": "راه فرعی؛ اگر دوست داشتی.",
+  "kind": "ui",
+  "where_fa": "جملهٔ برگهٔ مرحلهٔ جانبی",
+  "context_fa": "پیش از داستان مرحله",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.F04.story": {
+  "text": "یک آهنربای شیطون پشت میز قایم شده! ببین از دور هم می‌شود چیزی را کشید.",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی F04",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.F07.story": {
+  "text": "امروز استخر شلوغ است. دست‌وپا زدن توی آب سخت‌تر است یا توی هوا؟",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی F07",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.F05.story": {
+  "text": "توپ را بالا می‌اندازی و دوباره پایین می‌آید. زمین چه کار می‌کند؟",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی F05",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.W02.story": {
+  "text": "ترازوی آزمایشگاه منتظر توست. هر چیز چقدر ماده دارد؟",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی W02",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.E01.story": {
+  "text": "باد می‌وزد و پره‌ها می‌چرخند. انرژی از کجا می‌آید و به کجا می‌رود؟",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی E01",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.B02.story": {
+  "text": "دو کفهٔ ترازو باید برابر شوند تا انبار مرتب شود.",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی B02",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.F08.story": {
+  "text": "دو تیم طناب را می‌کشند. طناب کِی از جایش تکان نمی‌خورد؟",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی F08",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.W03.story": {
+  "text": "اینجا سطح ماه است. نیروسنج را بردار و وزن را بسنج.",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی W03",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.W04.story": {
+  "text": "در ایستگاه فضایی همه‌چیز شناور است. جرم و وزن یکی‌اند؟",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی W04",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.M06.story": {
+  "text": "ابزارخانه پر از اهرم است. هر کدام را جور دیگری می‌شود به کار برد.",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی M06",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.side.M08.story": {
+  "text": "جرثقیل بزرگ بندر قرقره‌های بیشتری دارد. با آن کشیدن چطور می‌شود؟",
+  "kind": "card",
+  "where_fa": "داستان مسیر جانبی M08",
+  "context_fa": "draft؛ نام‌ها و داستان‌ها بعداً با اپ نام‌گذاری عوض می‌شوند",
+  "band": "همه",
+  "status": "draft"
+ },
+ "v5.env.bar.aria": {
+  "text": "چالش دیگر: {name}",
+  "kind": "ui",
+  "where_fa": "نام دسترس‌پذیر نوار چالش پشتی",
+  "context_fa": "برای صفحه‌خوان",
+  "band": "همه",
+  "status": "draft"
+ }
+}

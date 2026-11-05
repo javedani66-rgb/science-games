@@ -1,0 +1,51 @@
+{
+ "id": "beam_store",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  65
+ ],
+ "stand": [
+  -48.0,
+  -4.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_beam_store_prop"
+ ],
+ "inside_pad": {
+  "min_margin_px": 15.4,
+  "base_on_pad": true,
+  "height_px": 83.2,
+  "bbox_px": [
+   35.5,
+   37.0,
+   118.8,
+   120.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_beam_store_prop": {
+   "translate_from": [
+    0,
+    -8
+   ],
+   "translate_to": [
+    0,
+    0
+   ],
+   "dur_s": 1.2,
+   "repeat": 1,
+   "easing": "ease-in",
+   "note": "تیر بالایی (با بست زرد) از 8 واحد بالاتر آرام می‌نشیند و می‌ماند؛ دو تیر پایین ثابت؛ حالت ایستا = نشسته؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "تیر بالا در جای نشسته"
+ }
+}

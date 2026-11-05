@@ -1,0 +1,52 @@
+{
+ "id": "skate_park",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  46
+ ],
+ "stand": [
+  33.0,
+  -14.5
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_skate_park_skateboard"
+ ],
+ "inside_pad": {
+  "min_margin_px": 4.7,
+  "base_on_pad": true,
+  "height_px": 72.2,
+  "bbox_px": [
+   26.8,
+   61.8,
+   129.5,
+   134.0
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_skate_park_skateboard": {
+   "from_offset_symbol": [
+    -12,
+    3
+   ],
+   "to_offset": [
+    0,
+    0
+   ],
+   "duration_s": 0.9,
+   "repeat": 1,
+   "easing": "ease-out",
+   "note": "تخته یک‌بار از چپ روی کف رمپ می‌لغزد و می‌ایستد؛ حالت ایستا = پایان؛ چرخ‌ها جزو همان لایه"
+  },
+  "idle_loop": false,
+  "reduced_motion": "تخته ایستا"
+ }
+}

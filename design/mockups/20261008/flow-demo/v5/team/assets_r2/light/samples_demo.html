@@ -1,0 +1,144 @@
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=390"><title>samples demo</title><style>/* خودکار از zone_tokens.json (build_light_r2.py) - رنگ‌های واقعی v4. نقشه همیشه روز؛ غروب/شب فقط صحنهٔ ماجرا. بدون blend و بدون filter زنده. نور از بالا-چپ. */
+:root{
+  --c-cream: #fff3c4;
+  --c-line: #241a5e;
+  --c-bar: #241a5e;
+  --c-chip: #4b3b9e;
+  --c-chip-text: #fff3c4;
+  --c-chip-on: #ffd23f;
+  --c-chip-shadow: #120c3a;
+  --c-menu: #fff3c4;
+  --c-accent-yellow: #ffd23f;
+  --c-white: #ffffff;
+  --c-label-fill: #fff3c4;
+  --c-zone-title-fill: #ffffff;
+  --card-bg: #190539;
+  --card-front-top: #25cdc0;
+  --card-front-bottom: #0a86a4;
+  --card-glow: #46f0d8;
+  --card-plate: #07203a;
+  --card-gold: #ffd23f;
+  --card-cream: #fff3c4;
+  --card-edge: #190539;
+  --card-pill-cyan: #46f0d8;
+  --card-pill-pink: #ff7be5;
+  --card-pill-gold: #ffd23f;
+  --card-pill-text: #190539;
+  --card-title-fill: #ffffff;
+  --card-title-glow: #ff5ad6;
+  --card-body-text: #ffffff;
+  --card-kept-top: #7a6af5;
+  --card-kept-bottom: #4a2fb8;
+  --card-kept-glow: #a99dff;
+  --card-empty-fill: #2a0b60;
+  --card-empty-dash: #9a78e0;
+  --card-locked: #34145f;
+  --card-locked-icon: #cdb8ff;
+  --card-plank-top: #d9a05a;
+  --card-plank-side: #8a5a2e;
+  --card-icon-outline: #190539;
+  --hard-easy: #2fa44a; --hard-easy-peaks: 1;
+  --hard-mid: #ff9d1c; --hard-mid-peaks: 2;
+  --hard-hard: #ff4b4b; --hard-hard-peaks: 3;
+  --hard-ink: #241a5e; --hard-outline: #241a5e; --hard-outline-px: 4.5px;
+  --z-sports-base: #469d36;
+  --z-sports-shade: #2f8a2b;
+  --z-sports-patch: #6fcf5e;
+  --z-sports-night: #469d36;
+  --z-sports-ring: #ffd23f;
+  --z-sports-ring-outline: 10px; --z-sports-ring-px: 5.5px;
+  --z-space-base: #c55535;
+  --z-space-shade: #8e2c1a;
+  --z-space-patch: #ffb08a;
+  --z-space-night: #c55535;
+  --z-space-ring: #ffd23f;
+  --z-space-ring-outline: 10px; --z-space-ring-px: 5.5px;
+  --z-farm-base: #9d8e16;
+  --z-farm-shade: #7e7212;
+  --z-farm-patch: #e9c24a;
+  --z-farm-night: #9d8e16;
+  --z-farm-ring: #ffd23f;
+  --z-farm-ring-outline: 10px; --z-farm-ring-px: 5.5px;
+  --z-city-base: #155f77;
+  --z-city-shade: #55697d;
+  --z-city-patch: #aef0f4;
+  --z-city-night: #155f77;
+  --z-city-ring: #ffd23f;
+  --z-city-ring-outline: 10px; --z-city-ring-px: 5.5px;
+  --ground-ice: #d7efff; --ground-sand: #f0d07e;
+  --water-sea: #155f77;
+  --water-river: #58d8ee;
+  --water-river-foam: #d4f6ff;
+  --water-wave: #aef0f4;
+  --path-cream: #fff3c4; --path-outline: #241a5e; --path-rest: #807589; --path-rest-opacity: 0.42; --path-done-dash: #f0b429; --path-boardwalk: #c98a45;
+  --path-city-foam: #aef0f4; --path-city-foam-px: 3px;
+  --line-6: 6px; --line-4-5: 4.5px; --line-2-6: 2.6px; --line-1-2: 1.2px;
+  --light-dir: top-left; --light-transition: 1.2s;
+  /* پیش‌فرض = روز */
+  --l-sky0: #7fd4ff;
+  --l-sky1: #d4f6ff;
+  --l-sky2: #d4f6ff;
+  --l-water: #155f77;
+  --l-lit: #fff6dc;
+  --l-shade: #4b3b9e;
+  --l-line: #241a5e;
+  --l-build: #fff6dc;
+  --l-pier: #f6dba0;
+  --l-windows: transparent; --l-windows-opacity: 0;
+  --l-lit-a: 0.5; --l-shade-a: 0.22; --l-nlit-a: 0.3; --l-nshade-a: 0.18;
+  --l-shadow-color: #10083a; --l-shadow-opacity: .28; --l-shadow-dx: 8px; --l-shadow-dy: 6px;
+}
+[data-light="day"]{
+  --l-sky0: #7fd4ff;
+  --l-sky1: #d4f6ff;
+  --l-sky2: #d4f6ff;
+  --l-water: #155f77;
+  --l-lit: #fff6dc;
+  --l-shade: #4b3b9e;
+  --l-line: #241a5e;
+  --l-build: #fff6dc;
+  --l-pier: #f6dba0;
+  --l-windows: transparent; --l-windows-opacity: 0;
+  --l-shadow-color: #10083a; --l-shadow-opacity: 0.28; --l-shadow-dx: 8px; --l-shadow-dy: 6px;
+  --l-lit-a: 0.5; --l-shade-a: 0.22; --l-nlit-a: 0.3; --l-nshade-a: 0.18;
+}
+[data-light="dusk"]{
+  --l-sky0: #5a2a9a;
+  --l-sky1: #c2379a;
+  --l-sky2: #ff7a3d;
+  --l-water: #1f5a86;
+  --l-lit: #ffb21c;
+  --l-shade: #5a2a9a;
+  --l-line: #241a5e;
+  --l-build: #fff6dc;
+  --l-pier: #f6dba0;
+  --l-windows: transparent; --l-windows-opacity: 0;
+  --l-shadow-color: #241a5e; --l-shadow-opacity: 0.36; --l-shadow-dx: 14px; --l-shadow-dy: 7px;
+  --l-lit-a: 0.7; --l-shade-a: 0.42; --l-nlit-a: 0.42; --l-nshade-a: 0.34;
+}
+[data-light="night"]{
+  --l-sky0: #190539;
+  --l-sky1: #2a1064;
+  --l-sky2: #4b3b9e;
+  --l-water: #081b4e;
+  --l-lit: #a99dff;
+  --l-shade: #190539;
+  --l-line: #100a48;
+  --l-build: #755ca8;
+  --l-pier: #70527a;
+  --l-windows: #fff3a8; --l-windows-opacity: 1;
+  --l-shadow-color: #0d0426; --l-shadow-opacity: 0.4; --l-shadow-dx: 8px; --l-shadow-dy: 6px;
+  --l-lit-a: 0.55; --l-shade-a: 0.45; --l-nlit-a: 0.33; --l-nshade-a: 0.36;
+}
+/* انتقال: دو لایهٔ کامل (روز و شب) هر دو در DOM؛ فقط opacity ‎1.2ث. غروب ثابت و فقط صحنهٔ ماجرا ۲ (میان‌یابی ندارد). نقشه: همیشه data-light=day */
+.lt-layer{opacity:0;transition:opacity var(--light-transition) ease-in-out}
+[data-light="day"] .lt-layer[data-for~="day"],[data-light="dusk"] .lt-layer[data-for~="dusk"],[data-light="night"] .lt-layer[data-for~="night"]{opacity:1}
+@media (prefers-reduced-motion: reduce){.lt-layer{transition:none}}
+/* rim گرم و سایهٔ بنفش بناها: کلاس‌های .elit/.esh */
+[data-light] .elit{opacity:var(--l-nlit-a,.3)}
+[data-light] .esh{opacity:var(--l-nshade-a,.22)}
+
+*{box-sizing:border-box;margin:0}body{background:#190539;color:#fff3c4;font:700 15px Vazirmatn,system-ui,sans-serif;width:390px}
+.tag{display:inline-block;margin:8px 10px 4px;padding:2px 12px;border:3px solid #fff3c4;border-radius:12px;background:#241a5e;font-size:15px}
+.fr{border-block:4px solid #241a5e;line-height:0}button{min-height:48px;min-width:80px;margin:6px;border:3.5px solid #241a5e;border-radius:16px;background:#ffd23f;color:#241a5e;font:700 16px Vazirmatn,system-ui}
+</style></head><body><svg viewBox="0 0 390 520" width="390" height="520"><rect y="0" width="390" height="130" fill="#469d36"/><path d="M-10,70 C70,20 120,100 190,52 S320,10 400,56" fill="none" stroke="#241a5e" stroke-width="33" stroke-linecap="round"/><path d="M-10,70 C70,20 120,100 190,52" fill="none" stroke="#fff3c4" stroke-width="22" stroke-linecap="round"/><path d="M190,52 S320,10 400,56" fill="none" stroke="#807589" stroke-width="22" stroke-linecap="round"/><path d="M190,52 S320,10 400,56" fill="none" stroke="#fff3c4" stroke-width="5" stroke-dasharray="3 14" stroke-linecap="round"/><path d="M-10,70 C70,20 120,100 190,52" fill="none" stroke="#f0b429" stroke-width="3.2" stroke-dasharray="10 12"/><rect x="14" y="80" width="112" height="38" rx="14" fill="#2fa44a" stroke="#241a5e" stroke-width="4.5"/><text x="90" y="106" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">آسان</text><path d="M26,107 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect x="140" y="76" width="112" height="38" rx="14" fill="#ff9d1c" stroke="#241a5e" stroke-width="4.5"/><text x="216" y="102" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">متوسط</text><path d="M152,103 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M166,103 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect x="266" y="80" width="112" height="38" rx="14" fill="#ff4b4b" stroke="#241a5e" stroke-width="4.5"/><text x="342" y="106" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">سخت</text><path d="M278,107 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M292,107 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M306,107 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect y="130" width="390" height="130" fill="#c55535"/><path d="M-10,200 C70,150 120,230 190,182 S320,140 400,186" fill="none" stroke="#241a5e" stroke-width="33" stroke-linecap="round"/><path d="M-10,200 C70,150 120,230 190,182" fill="none" stroke="#fff3c4" stroke-width="22" stroke-linecap="round"/><path d="M190,182 S320,140 400,186" fill="none" stroke="#807589" stroke-width="22" stroke-linecap="round"/><path d="M190,182 S320,140 400,186" fill="none" stroke="#fff3c4" stroke-width="5" stroke-dasharray="3 14" stroke-linecap="round"/><path d="M-10,200 C70,150 120,230 190,182" fill="none" stroke="#f0b429" stroke-width="3.2" stroke-dasharray="10 12"/><rect x="14" y="210" width="112" height="38" rx="14" fill="#2fa44a" stroke="#241a5e" stroke-width="4.5"/><text x="90" y="236" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">آسان</text><path d="M26,237 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect x="140" y="206" width="112" height="38" rx="14" fill="#ff9d1c" stroke="#241a5e" stroke-width="4.5"/><text x="216" y="232" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">متوسط</text><path d="M152,233 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M166,233 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect x="266" y="210" width="112" height="38" rx="14" fill="#ff4b4b" stroke="#241a5e" stroke-width="4.5"/><text x="342" y="236" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">سخت</text><path d="M278,237 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M292,237 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M306,237 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect y="260" width="390" height="130" fill="#9d8e16"/><path d="M-10,330 C70,280 120,360 190,312 S320,270 400,316" fill="none" stroke="#241a5e" stroke-width="33" stroke-linecap="round"/><path d="M-10,330 C70,280 120,360 190,312" fill="none" stroke="#fff3c4" stroke-width="22" stroke-linecap="round"/><path d="M190,312 S320,270 400,316" fill="none" stroke="#807589" stroke-width="22" stroke-linecap="round"/><path d="M190,312 S320,270 400,316" fill="none" stroke="#fff3c4" stroke-width="5" stroke-dasharray="3 14" stroke-linecap="round"/><path d="M-10,330 C70,280 120,360 190,312" fill="none" stroke="#f0b429" stroke-width="3.2" stroke-dasharray="10 12"/><rect x="14" y="340" width="112" height="38" rx="14" fill="#2fa44a" stroke="#241a5e" stroke-width="4.5"/><text x="90" y="366" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">آسان</text><path d="M26,367 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect x="140" y="336" width="112" height="38" rx="14" fill="#ff9d1c" stroke="#241a5e" stroke-width="4.5"/><text x="216" y="362" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">متوسط</text><path d="M152,363 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M166,363 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect x="266" y="340" width="112" height="38" rx="14" fill="#ff4b4b" stroke="#241a5e" stroke-width="4.5"/><text x="342" y="366" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">سخت</text><path d="M278,367 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M292,367 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M306,367 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect y="390" width="390" height="130" fill="#155f77"/><path d="M-10,460 C70,410 120,490 190,442 S320,400 400,446" fill="none" stroke="#aef0f4" stroke-width="39" stroke-linecap="round"/><path d="M-10,460 C70,410 120,490 190,442 S320,400 400,446" fill="none" stroke="#241a5e" stroke-width="33" stroke-linecap="round"/><path d="M-10,460 C70,410 120,490 190,442" fill="none" stroke="#fff3c4" stroke-width="22" stroke-linecap="round"/><path d="M190,442 S320,400 400,446" fill="none" stroke="#807589" stroke-width="22" stroke-linecap="round"/><path d="M190,442 S320,400 400,446" fill="none" stroke="#fff3c4" stroke-width="5" stroke-dasharray="3 14" stroke-linecap="round"/><path d="M-10,460 C70,410 120,490 190,442" fill="none" stroke="#f0b429" stroke-width="3.2" stroke-dasharray="10 12"/><rect x="14" y="470" width="112" height="38" rx="14" fill="#2fa44a" stroke="#241a5e" stroke-width="4.5"/><text x="90" y="496" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">آسان</text><path d="M26,497 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect x="140" y="466" width="112" height="38" rx="14" fill="#ff9d1c" stroke="#241a5e" stroke-width="4.5"/><text x="216" y="492" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">متوسط</text><path d="M152,493 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M166,493 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><rect x="266" y="470" width="112" height="38" rx="14" fill="#ff4b4b" stroke="#241a5e" stroke-width="4.5"/><text x="342" y="496" text-anchor="middle" font-family="Vazirmatn" font-weight="700" font-size="17" fill="#241a5e">سخت</text><path d="M278,497 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M292,497 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/><path d="M306,497 l6,-11 l6,11z" fill="#241a5e" stroke="#241a5e" stroke-width="2" stroke-linejoin="round"/></svg></body></html>

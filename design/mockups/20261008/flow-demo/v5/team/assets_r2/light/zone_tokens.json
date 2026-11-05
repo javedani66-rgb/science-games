@@ -1,0 +1,229 @@
+{
+ "_doc": "r2: رنگ‌های v4 (استخراج‌شده در zone_tokens_v4.json با منبع). منبع حقیقت hex؛ tokens.css/palette ها/light_contrast از روی همین ساخته می‌شوند (build_light_r2.py).",
+ "ui": {
+  "cream": "#fff3c4",
+  "line": "#241a5e",
+  "bar": "#241a5e",
+  "chip": "#4b3b9e",
+  "chip_text": "#fff3c4",
+  "chip_on": "#ffd23f",
+  "chip_shadow": "#120c3a",
+  "menu": "#fff3c4",
+  "accent_yellow": "#ffd23f",
+  "white": "#ffffff",
+  "label_fill": "#fff3c4",
+  "zone_title_fill": "#ffffff"
+ },
+ "card": {
+  "bg": "#190539",
+  "front_top": "#25cdc0",
+  "front_bottom": "#0a86a4",
+  "glow": "#46f0d8",
+  "plate": "#07203a",
+  "gold": "#ffd23f",
+  "cream": "#fff3c4",
+  "edge": "#190539",
+  "pill_cyan": "#46f0d8",
+  "pill_pink": "#ff7be5",
+  "pill_gold": "#ffd23f",
+  "pill_text": "#190539",
+  "title_fill": "#ffffff",
+  "title_glow": "#ff5ad6",
+  "body_text": "#ffffff",
+  "kept_top": "#7a6af5",
+  "kept_bottom": "#4a2fb8",
+  "kept_glow": "#a99dff",
+  "empty_fill": "#2a0b60",
+  "empty_dash": "#9a78e0",
+  "locked": "#34145f",
+  "locked_icon": "#cdb8ff",
+  "plank_top": "#d9a05a",
+  "plank_side": "#8a5a2e",
+  "icon_outline": "#190539"
+ },
+ "hardness": {
+  "easy": {
+   "hex": "#2fa44a",
+   "peaks": 1,
+   "word_key": "difficulty.easy",
+   "ink": "#241a5e",
+   "outline": "#241a5e",
+   "outline_px": 4.5
+  },
+  "mid": {
+   "hex": "#ff9d1c",
+   "peaks": 2,
+   "word_key": "difficulty.mid",
+   "ink": "#241a5e",
+   "outline": "#241a5e",
+   "outline_px": 4.5
+  },
+  "hard": {
+   "hex": "#ff4b4b",
+   "peaks": 3,
+   "word_key": "difficulty.hard",
+   "ink": "#241a5e",
+   "outline": "#241a5e",
+   "outline_px": 4.5
+  }
+ },
+ "zones": {
+  "sports": {
+   "base": "#469d36",
+   "code": "#3f9a2b",
+   "ring": "#ffd23f",
+   "ring_px": 5.5,
+   "ring_outline_px": 10,
+   "shade": "#2f8a2b",
+   "patch": "#6fcf5e",
+   "detail": "درخت/ریسه راه‌راه چمن",
+   "night": "#469d36"
+  },
+  "space": {
+   "base": "#c55535",
+   "code": "#c4502f",
+   "ring": "#ffd23f",
+   "ring_px": 5.5,
+   "ring_outline_px": 10,
+   "shade": "#8e2c1a",
+   "patch": "#ffb08a",
+   "detail": "دهانه‌ها",
+   "night": "#c55535"
+  },
+  "farm": {
+   "base": "#9d8e16",
+   "code": "#9a8a10",
+   "ring": "#ffd23f",
+   "ring_px": 5.5,
+   "ring_outline_px": 10,
+   "shade": "#7e7212",
+   "patch": "#e9c24a",
+   "detail": "شیار/کاه‌بسته (shade محاسبه‌ای ×0.8)",
+   "night": "#9d8e16"
+  },
+  "city": {
+   "base": "#155f77",
+   "code": "#075a73",
+   "ring": "#ffd23f",
+   "ring_px": 5.5,
+   "ring_outline_px": 10,
+   "shade": "#55697d",
+   "patch": "#aef0f4",
+   "detail": "موج؛ shade = اسلب خاکستری قفل (عکس r11_map_y0)",
+   "night": "#155f77"
+  }
+ },
+ "ground": {
+  "ice": "#d7efff",
+  "sand": "#f0d07e",
+  "sea": "#155f77"
+ },
+ "water": {
+  "sea": "#155f77",
+  "river": "#58d8ee",
+  "river_foam": "#d4f6ff",
+  "wave": "#aef0f4"
+ },
+ "path": {
+  "cream": "#fff3c4",
+  "outline": "#241a5e",
+  "rest": "#807589",
+  "rest_opacity": 0.42,
+  "rest_v4_opacity": 0.34,
+  "done_dash": "#f0b429",
+  "boardwalk": "#c98a45",
+  "outline_px": 33,
+  "fill_px": 22,
+  "city_foam": "#aef0f4",
+  "city_foam_px": 3,
+  "city_foam_note": "فقط جایی که مسیر روی آب شهر است؛ خط دور دوم بیرون خط دور"
+ },
+ "lights": {
+  "day": {
+   "sky0": "#7fd4ff",
+   "sky1": "#d4f6ff",
+   "sky2": "#d4f6ff",
+   "water": "#155f77",
+   "lit": "#fff6dc",
+   "shade": "#4b3b9e",
+   "line": "#241a5e",
+   "windows": null,
+   "build": "#fff6dc",
+   "pier": "#f6dba0",
+   "shadow": {
+    "color": "#10083a",
+    "opacity": 0.28,
+    "dx": 8,
+    "dy": 6
+   },
+   "intensity": {
+    "lit_a": 0.5,
+    "shade_a": 0.22,
+    "nlit_a": 0.3,
+    "nshade_a": 0.18
+   }
+  },
+  "dusk": {
+   "sky0": "#5a2a9a",
+   "sky1": "#c2379a",
+   "sky2": "#ff7a3d",
+   "water": "#1f5a86",
+   "lit": "#ffb21c",
+   "shade": "#5a2a9a",
+   "line": "#241a5e",
+   "windows": null,
+   "build": "#fff6dc",
+   "pier": "#f6dba0",
+   "shadow": {
+    "color": "#241a5e",
+    "opacity": 0.36,
+    "dx": 14,
+    "dy": 7
+   },
+   "intensity": {
+    "lit_a": 0.7,
+    "shade_a": 0.42,
+    "nlit_a": 0.42,
+    "nshade_a": 0.34
+   }
+  },
+  "night": {
+   "sky0": "#190539",
+   "sky1": "#2a1064",
+   "sky2": "#4b3b9e",
+   "water": "#081b4e",
+   "lit": "#a99dff",
+   "shade": "#190539",
+   "line": "#100a48",
+   "windows": "#fff3a8",
+   "build": "#755ca8",
+   "pier": "#70527a",
+   "shadow": {
+    "color": "#0d0426",
+    "opacity": 0.4,
+    "dx": 8,
+    "dy": 6
+   },
+   "intensity": {
+    "lit_a": 0.55,
+    "shade_a": 0.45,
+    "nlit_a": 0.33,
+    "nshade_a": 0.36
+   },
+   "moon": "#fff6c8"
+  }
+ },
+ "transition": {
+  "day_to_night_seconds": 1.2,
+  "method": "opacity دو لایهٔ کامل روز/شب (هر دو در DOM)",
+  "dusk": "ثابت، فقط صحنهٔ ماجرا ۲؛ با انتقال میان‌یابی نمی‌شود",
+  "map": "همیشه روز"
+ },
+ "_corrections": [
+  "مسیر باقی‌مانده: opacity ‎.34 → ‎.42 (کرم روی خط دور؛ rest÷خط دور 2.75 → ≥3)",
+  "مسیر روی آب شهر: خط دور دوم روشن #aef0f4 (رنگ موج v4) ۳px بیرون خط دور (خط دور÷آب 2.12 → کف÷آب ≥3)",
+  "نشان سختی (v4 نداشت): پر سبز/نارنجی/قرمز v4 + خط دور #241a5e ۴٫۵px + متن #241a5e (سفید روی سبز 3.2 بود)",
+  "آیکون چشم/جعبه سفید روی کارت فیروزه‌ای (1.99): خط دور ۲px #190539 (رنگ عوض نشد)",
+  "شب: خط دور پخته‌شدهٔ v4 تقریباً هم‌رنگ آب است؛ سیلوئت با بدنهٔ روشن‌تر خوانده می‌شود و rim لیلکی (#a99dff) اضافه شد"
+ ]
+}

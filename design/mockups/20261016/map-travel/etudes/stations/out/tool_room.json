@@ -1,0 +1,52 @@
+{
+ "id": "tool_room",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  30
+ ],
+ "stand": [
+  -53.0,
+  1.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_tool_room_hammer"
+ ],
+ "inside_pad": {
+  "min_margin_px": 4.4,
+  "base_on_pad": true,
+  "height_px": 52.5,
+  "bbox_px": [
+   30.8,
+   78.5,
+   130.5,
+   131.0
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_tool_room_hammer": {
+   "kind": "چکش خوابیده روی میز؛ یک‌بار کمی می‌چرخد (±۶° حول مرکز دسته) و برمی‌گردد؛ ایستا = پایان",
+   "pivot": [
+    -1.0,
+    -22.4
+   ],
+   "rotate_deg": [
+    0,
+    6,
+    0
+   ],
+   "dur_s": 1.2,
+   "once": true,
+   "note": "میز و آچار ثابت؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "ایستا"
+ }
+}

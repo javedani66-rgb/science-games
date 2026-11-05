@@ -1,0 +1,45 @@
+{
+ "id": "pier",
+ "kind": "sea",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  86
+ ],
+ "stand": [
+  0.0,
+  19.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_pier_lantern"
+ ],
+ "inside_pad": {
+  "min_margin_px": 10.1,
+  "base_on_pad": true,
+  "height_px": 100.2,
+  "bbox_px": [
+   27.0,
+   22.5,
+   121.0,
+   122.8
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_pier_lantern": {
+   "translate_y": [
+    0,
+    -3
+   ],
+   "unit": "symbol",
+   "note": "فانوس کمی بالا/پایین (تکان نرم)"
+  },
+  "fixed": "عرشه، پایه‌ها، شمع‌ها، بولاردها و طناب"
+ }
+}

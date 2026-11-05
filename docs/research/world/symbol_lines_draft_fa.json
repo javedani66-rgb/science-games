@@ -1,0 +1,311 @@
+{
+  "_readme_fa": "پیش‌نویس خط نماد؛ نماد = ساختمان (B77). فقط نمادهایی که باید عوض شوند خط دارند؛ بقیه (change=false) فعلاً می‌مانند.",
+  "nodes": [
+    {
+      "id": "F01",
+      "name": "زمین فوتبال",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_03",
+      "status": "draft"
+    },
+    {
+      "id": "F02",
+      "name": "سالن بسکتبال",
+      "symbol_line_fa": "ساختمان سالن بسکتبال با سقف قوس‌دار؛ حلقهٔ بسکتبال و توپ روی نمای جلو.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_09",
+      "status": "draft"
+    },
+    {
+      "id": "F03",
+      "name": "میدان کمان‌کِشی",
+      "symbol_line_fa": "سرای کمانداری سقف‌دار؛ یک هدف دایره‌ای بزرگ روی دیوار و کمانی بالای در.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_10",
+      "status": "draft"
+    },
+    {
+      "id": "F04",
+      "name": "هاکی آهنربایی",
+      "symbol_line_fa": "ساختمان سالن هاکی؛ آهنربای نعل‌اسبی قرمز-آبی بزرگ روی نما.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_12",
+      "status": "draft"
+    },
+    {
+      "id": "F06",
+      "name": "پیست اسکی روی یخ",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_02",
+      "status": "draft"
+    },
+    {
+      "id": "F07",
+      "name": "استخر",
+      "symbol_line_fa": "ساختمان استخر با دیوار کاشی آبی؛ لولهٔ سرسره و موج روی نما.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_01",
+      "status": "draft"
+    },
+    {
+      "id": "F08",
+      "name": "میدان طناب‌کشی",
+      "symbol_line_fa": "ساختمان باشگاه طناب‌کشی؛ طنابِ پیچیده و پرچم قرمز بالای سقف.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_06",
+      "status": "draft"
+    },
+    {
+      "id": "F09",
+      "name": "زمین اسکیت",
+      "symbol_line_fa": "سالن اسکیت با ورودی نیم‌لوله‌ای؛ اسکیت‌برد روی بام.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_07",
+      "status": "draft"
+    },
+    {
+      "id": "W01",
+      "name": "ایستگاه بارگیری فضایی",
+      "symbol_line_fa": "ساختمان انبار با در بزرگ؛ جرثقیل کوچک روی بام و جعبه‌های بار جلوی در.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_02",
+      "status": "draft"
+    },
+    {
+      "id": "W02",
+      "name": "آزمایشگاه ترازو",
+      "symbol_line_fa": "ساختمان آزمایشگاه؛ روی بام ترازوی دوکفهٔ بزرگ با ستونی به شکل موشک.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "node_04",
+      "status": "draft"
+    },
+    {
+      "id": "F05",
+      "name": "سکوی پرتاب",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_05",
+      "status": "draft"
+    },
+    {
+      "id": "W03",
+      "name": "کرهٔ ماه",
+      "symbol_line_fa": "گنبد پایگاه ماه با دهانه‌های دور آن؛ پرچم و نیروسنج فنری روی گنبد.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_08",
+      "status": "draft"
+    },
+    {
+      "id": "W04",
+      "name": "ایستگاه فضایی",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_06",
+      "status": "draft"
+    },
+    {
+      "id": "E01",
+      "name": "آسیاب بادی",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_08",
+      "status": "draft"
+    },
+    {
+      "id": "E02",
+      "name": "ایستگاه گاری‌ها",
+      "symbol_line_fa": "ایستگاه چوبی با سقف شیب‌دار؛ یک گاری بارکرده زیر سایبان.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_05",
+      "status": "draft"
+    },
+    {
+      "id": "E07",
+      "name": "چاه آب",
+      "symbol_line_fa": "ساختمان سنگی چاه با سقف کوچک؛ چرخ و دو سطل روی نما.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_11",
+      "status": "draft"
+    },
+    {
+      "id": "M01",
+      "name": "دروازهٔ شهر",
+      "symbol_line_fa": "ساختمان دروازهٔ شهر با دو برج و طاق؛ چرخ‌دندهٔ بزرگ بالای طاق.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_16",
+      "status": "draft"
+    },
+    {
+      "id": "B01",
+      "name": "داربست",
+      "symbol_line_fa": "ساختمان نیمه‌ساخت با داربست؛ تخته‌ای که روی یک پایه متعادل ایستاده.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_07",
+      "status": "draft"
+    },
+    {
+      "id": "B02",
+      "name": "انبار مصالح",
+      "symbol_line_fa": "ساختمان انبار با ترازوی بزرگ بالای در؛ کیسه‌های مصالح جلوی آن.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_02",
+      "status": "draft"
+    },
+    {
+      "id": "M04",
+      "name": "گودبرداری",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_07",
+      "status": "draft"
+    },
+    {
+      "id": "M05",
+      "name": "انبار تیرآهن",
+      "symbol_line_fa": "انبار با تیرآهن‌های بیرون‌زده از در ریلی؛ یک تیر روی غلتک.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_07",
+      "status": "draft"
+    },
+    {
+      "id": "M06",
+      "name": "اتاق ابزار",
+      "symbol_line_fa": "کارگاه کوچک با پنجره؛ سه ابزار اهرمی بالای در: فرغون، انبردست و الاکلنگ.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_13",
+      "status": "draft"
+    },
+    {
+      "id": "E05",
+      "name": "اتاق مخصوص آچارها",
+      "symbol_line_fa": "کارگاه کوچک با آچار غول‌پیکر بالای در و یک مهرهٔ بزرگ کنار آن.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_13",
+      "status": "draft"
+    },
+    {
+      "id": "M03",
+      "name": "رمپ بارگیری",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_01",
+      "status": "draft"
+    },
+    {
+      "id": "M09",
+      "name": "چوب‌شکافی",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_09",
+      "status": "draft"
+    },
+    {
+      "id": "M10",
+      "name": "پیچ‌کاری",
+      "symbol_line_fa": "ساختمان پیچ‌کاری با برج مارپیچی (پیچ بزرگ) روی بام.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_14",
+      "status": "draft"
+    },
+    {
+      "id": "E03",
+      "name": "انبار الوار",
+      "symbol_line_fa": "انبار چوب با دو رمپ ورودی: یکی کوتاه‌وشیب‌دار، یکی بلند و ملایم.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_03",
+      "status": "draft"
+    },
+    {
+      "id": "M02",
+      "name": "بارانداز",
+      "symbol_line_fa": "ساختمان چوبی بارانداز؛ چرخ چوبی بزرگ با محور و دستگیره روی نما.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_05",
+      "status": "draft"
+    },
+    {
+      "id": "M07",
+      "name": "اسکله",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_10",
+      "status": "draft"
+    },
+    {
+      "id": "M08",
+      "name": "جرثقیل بندر",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_12",
+      "status": "draft"
+    },
+    {
+      "id": "M11",
+      "name": "کارخانهٔ کشتی‌سازی",
+      "symbol_line_fa": null,
+      "rule": "ساختمان",
+      "change": false,
+      "current_asset": "node_11",
+      "status": "draft"
+    },
+    {
+      "id": "E06",
+      "name": "بازارچهٔ شناور",
+      "symbol_line_fa": "ساختمان بازارچهٔ شناور روی سکو؛ دو قرقره با طنابِ کوتاه و بلند.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_04",
+      "status": "draft"
+    },
+    {
+      "id": "E04",
+      "name": "فانوس دریایی",
+      "symbol_line_fa": "فانوس دریایی با نور؛ دستگاه قرقره‌ای کوچک کنار پنجرهٔ بالا.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "prop_15",
+      "status": "draft"
+    },
+    {
+      "id": "M12",
+      "name": "مخفی‌گاه هیولای مخترع",
+      "symbol_line_fa": "ورودی غاری زیر اسکله (نمادِ جدا، نه مشترک با کارخانهٔ کشتی‌سازی)؛ ردپای بنفش پشمالو روی تخته‌ها.",
+      "rule": "ساختمان",
+      "change": true,
+      "current_asset": "node_11",
+      "status": "draft"
+    }
+  ]
+}

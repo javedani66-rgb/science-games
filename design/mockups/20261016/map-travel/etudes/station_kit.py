@@ -1,0 +1,526 @@
+#!/usr/bin/env python3
+"""کیت مشترک نماد ایستگاه نقشه (قواعد D107-D115، docs/STATION_SYMBOL_RULES_FA.md).
+ماژول مستقل: فقط numpy / scipy / playwright لازم است (برای سنجش‌ها)، به هیچ اتودی وابسته نیست.
+
+گردش کار یک ایستگاه:
+    pen = Pen('my_station', kind='land'|'sea')      # kind پالت را تعیین می‌کند
+    pad(pen, line=..., tri=..., dot=...)             # سکو (اول از همه)
+    with layer(pen, 'gear'): ...                      # بخش متحرک = id پایدار node_<id>_<part>
+    ... شیء قهرمان را با pen.shape / pen.ln / pen.fill بکش ...
+    sym = symbol(pen, 'my_station', motion_layers=['gear'], out=پوشه)   # node_my_station.svg
+    margin_check(pen, stand=(dx, dy)); width_check(pen)
+    spec('my_station', pad_px(pen, bh), stand, ['node_my_station_gear'], kind=pen.kind, out=پوشه)
+قاعده: همه‌چیز مستقیم در مختصات symbol (0 0 200 190، مرکز translate(100 150)) کشیده شود؛ هیچ scale() روی زیرگروه.
+"""
+import os, math, random, json, pathlib
+from contextlib import contextmanager
+
+HERE = pathlib.Path(__file__).resolve().parent
+SET_SCALE = 1.0                           # ضریب یکِ کل مجموعه (سکو+نماد+فیگور) روی نقشه؛ برای کوچک‌تر کردن همه، فقط این عدد را کم کن (مثلاً 0.9)
+K = .72 * SET_SCALE                       # مقیاس نماد روی نقشه (۱۴۴px از ۲۰۰ در SET_SCALE=1)
+MAP_W = round(200 * K)                    # پهنای رندر نماد روی نقشه (px)
+PAD_RX, PAD_RY, PAD_WALL = 92, 44, 16     # D127: اندازهٔ سکوی یکسان همهٔ ایستگاه‌ها (واحد symbol)؛ قبلاً 76/38/16
+OUT, PART, INNER = 7.6, 5.8, 3.9         # ضخامت اسمی (واحد symbol)؛ ×۰٫۷۲ ⇒ روی نقشه ≈ 5.5 / 4.2 / 2.8px (هم‌قطر مرجع M09 و راه، D113)
+SEAM = INNER                              # درز ریز هم‌اندازهٔ داخلی (حداقل 2.5px نقشه)
+SHADOW_SX = .96                           # کمی باریک‌تر تا نوک‌های چپ و راست بیرون نزنند
+SHADOW_DY = 6                             # جابه‌جایی سایهٔ بیرونی سکو (واحد symbol) ⇒ ≈4.3px هلال پایین
+FIG_H, FIG_HALO = 56, 2.75               # فیگور روی نقشه: ارتفاع 56px + هالهٔ سفید ≈2.75px (⇒ ≈61px، مثل template #fimg)
+# سیلوئت واقعی فیگور (اجتماع «ملوان» و «کارگر»)، هر ردیف 2px از بالا به پایین: (xmin, xmax) نسبت به مرکز پایین
+FIG_ROWS = [(-5.8, 6.2), (-7.2, 7.2), (-7.8, 8.2), (-7.8, 8.2), (-8.5, 8.0), (-8.5, 7.0), (-7.5, 6.0), (-6.8, 6.0), (-6.2, 4.8), (-4.0, 3.5),
+            (-5.2, 2.5), (-5.8, 3.0), (-6.0, 3.2), (-6.5, 4.0), (-7.0, 4.2), (-6.8, 4.2), (-6.2, 4.8), (-6.2, 5.0), (-6.5, 5.0), (-6.5, 4.8),
+            (-5.5, 4.2), (-4.0, 3.5), (-4.0, 3.2), (-4.2, 3.8), (-4.2, 4.5), (-4.2, 5.2), (-7.0, 8.5), (-7.2, 8.5)]
+FIG_FEET = (-10, 0, 11)                   # نقطه‌های کف (با هاله) برای فاصله از لبهٔ رویه
+
+
+def fig_footprint(dsf):
+    """پوشهٔ فیگور (با هاله) به‌صورت آرایهٔ بولی؛ لنگر = وسط ردیف آخر (کف). برمی‌گرداند (آرایه، ردیف_لنگر، ستون_لنگر)."""
+    import numpy as np
+    from scipy.ndimage import distance_transform_edt as edt
+    dsf = dsf * SET_SCALE                                  # فیگور هم با ضریب مجموعه کوچک می‌شود
+    h = int(round(2 * dsf)); halo = int(math.ceil(FIG_HALO * dsf)) + 2
+    R = len(FIG_ROWS) * h; Wd = int(40 * dsf) | 1
+    raw = np.zeros((R + 2 * halo, Wd + 2 * halo), bool); c = raw.shape[1] // 2
+    for i, (a, b) in enumerate(FIG_ROWS):
+        raw[halo + i * h: halo + (i + 1) * h, c + int(math.floor(a * dsf)): c + int(math.ceil(b * dsf))] = True
+    fp = edt(~raw) <= FIG_HALO * dsf
+    return fp, halo + R - 1, c
+MIN_PX = 2.5                              # کمینهٔ قطر خط روی نقشه
+NAVY = '#241a5e'
+CREAM = '#fff3c4'
+
+# پالت سکو. «زمینی» = کرم/زیتونی (سکوی چوب‌شکافی)؛ «دریایی» = آبی روشن/آبی تیره (رنگ‌های node_wheel_dock).
+PALETTES = {
+    'land': dict(top='#f4e6a0', wall='#8a7a2a', line='#d4c26a', tri='#8f8bd6', dot='#8a7a2a'),
+    # سکوهای سرزمین‌ها (سند سبک §3-b): رویه = رنگ زمین
+    'sports': dict(top='#7fbf4a', wall='#4f8a2c', line='#a8d878', tri='#8f8bd6', dot='#3f7a24'),
+    'farm': dict(top='#d6c98a', wall='#9a8a4a', line='#ece0a8', tri='#8f8bd6', dot='#8a7a2a'),
+    'city': dict(top='#5b7390', wall='#3c4f6a', line='#8aa0bb', tri='#8f8bd6', dot='#2d3d54'),
+    'space': dict(top='#7a5cd0', wall='#4a3a8c', line='#a58ae8', tri='#b9b4f0', dot='#33286a'),
+    'sea': dict(top='#a6bde8', wall='#6c8fd6', line='#d6e8ff', tri='#7b8fe0', dot='#4d6fb0'),
+}
+STYLE = ('.eo{stroke:#241a5e;stroke-linejoin:round;stroke-linecap:round}.elit{fill:#fff4cf;opacity:.3}'
+         '.esh{fill:#4a3a8c;opacity:.22}.esd{fill:#10083a;opacity:.28}')
+
+# شکل ارگانیک لبهٔ سکو (از node_09)، در مختصات «نیم‌پهنا≈۵۱، نیم‌ارتفاع≈۱۹٫۴»
+_M09 = [(50.9, 0), (49.6, 9.1), (34.2, 16.3), (12.2, 20.2), (-12, 19.9), (-33.9, 16.1), (-44, 8.1), (-52.8, 0),
+        (-45.4, -8.3), (-33.3, -15.9), (-11.5, -19.1), (11.7, -19.4), (32.6, -15.5), (47.3, -8.7)]
+
+
+# ---------------- هندسه و خط دستی ----------------
+def sub(pts, closed, step):
+    out = []; n = len(pts)
+    for i in range(n if closed else n - 1):
+        a, b = pts[i], pts[(i + 1) % n]
+        L = math.hypot(b[0] - a[0], b[1] - a[1]); k = max(1, int(L / step))
+        for t in range(k): out.append((a[0] + (b[0] - a[0]) * t / k, a[1] + (b[1] - a[1]) * t / k))
+    if not closed: out.append(pts[-1])
+    return out
+
+
+def hd(pts, closed=True, seed=1, j=1.1, step=11):
+    """مسیر «خط دست» برداری: لرزش در خود مسیر پخته می‌شود (بدون فیلتر رستری)."""
+    r = random.Random(seed); p = [(x + r.uniform(-j, j), y + r.uniform(-j, j)) for x, y in sub(pts, closed, step)]
+    f = lambda a, b: ((a[0] + b[0]) / 2, (a[1] + b[1]) / 2)
+    n = len(p)
+    if closed:
+        s = f(p[-1], p[0]); d = 'M%.1f,%.1f' % s
+        for i in range(n): m = f(p[i], p[(i + 1) % n]); d += 'Q%.1f,%.1f %.1f,%.1f' % (p[i][0], p[i][1], m[0], m[1])
+        return d + 'Z'
+    d = 'M%.1f,%.1f' % p[0]
+    for i in range(1, n - 1): m = f(p[i], p[i + 1]); d += 'Q%.1f,%.1f %.1f,%.1f' % (p[i][0], p[i][1], m[0], m[1])
+    return d + 'L%.1f,%.1f' % p[-1]
+
+
+def ell(cx, cy, rx, ry, a0=0, a1=360, n=40):
+    return [(cx + rx * math.cos(math.radians(a0 + (a1 - a0) * i / n)), cy + ry * math.sin(math.radians(a0 + (a1 - a0) * i / n)))
+            for i in range(n + (0 if a1 - a0 >= 360 else 1))]
+
+
+def rot(ox, oy, deg):
+    """تبدیل نقطه‌ها (چرخش حول (ox,oy)) — به‌جای transform روی زیرگروه، تا ضخامت خط تغییر نکند."""
+    c, sn = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+    f = lambda p: (ox + p[0] * c - p[1] * sn, oy + p[0] * sn + p[1] * c)
+    f.dir = lambda v: (v[0] * c - v[1] * sn, v[0] * sn + v[1] * c)
+    return f
+
+
+def TP(f, pts): return [f(p) for p in pts]
+
+
+# ---------------- قلم ----------------
+class Pen:
+    def __init__(s, station_id, kind='land', rx=PAD_RX, ry=PAD_RY, wall=PAD_WALL):
+        assert kind in PALETTES, 'kind باید land یا sea باشد'
+        s.id = s.uid = station_id; s.kind = kind; s.rx, s.ry, s.wall = rx, ry, wall
+        s.ntop = s.npad = 0; s.o = []; s.clip = []; s.k = 0; s.probes = []; s.foot = []; s.layers = {}
+        s.padtop = _padtop(rx, ry); s.xf = (1.0, 0.0, 0.0)
+
+    def X(s, p):
+        """قاب قهرمان: هندسه (نه ضخامت خط) با مقیاس و جابه‌جایی pen.xf=(مقیاس، dx، dy) نقطه‌به‌نقطه تبدیل می‌شود؛
+        ضخامت‌های OUT/PART/INNER دست‌نخورده می‌مانند (D113). p نقطه یا فهرست نقطه. pad() قبل از xf اجرا می‌شود."""
+        k, dx, dy = s.xf
+        if p and isinstance(p[0], (tuple, list)): return [(x * k + dx, y * k + dy) for x, y in p]
+        return (p[0] * k + dx, p[1] * k + dy)
+
+    def V(s, v):
+        """بردار جابه‌جایی (مثل offsets حرکت) در قاب قهرمان."""
+        return (v[0] * s.xf[0], v[1] * s.xf[0])
+
+    def _d(s, pts, j, step):
+        s.k += 1
+        return hd(s.X(pts), True, s.k * 7 + 3, j, step)
+
+    def shape(s, pts, fill, sw=OUT, j=.7, step=11, clip=True):
+        d = s._d(pts, j, step)
+        s.o.append('<path d="%s" fill="%s" class="eo" stroke-width="%s"/>' % (d, fill, sw))
+        if clip: s.clip.append(d)
+        return d
+
+    def fill(s, pts, fill, op=1):
+        s.o.append('<path d="%s" fill="%s"%s/>' % (hd(s.X(pts), True, 1, 0, 999), fill, '' if op == 1 else ' opacity="%s"' % op))
+
+    def stroke(s, pts, sw=OUT, j=.7, step=11):
+        s.o.append('<path d="%s" fill="none" class="eo" stroke-width="%s"/>' % (s._d(pts, j, step), sw))
+
+    def ln(s, a, b, sw, col, op=1, j=.2, probe=None):
+        """خط راست. probe='برچسب' آن را برای width_check ثبت می‌کند."""
+        s.k += 1; a, b = s.X(a), s.X(b)
+        r = random.Random(s.k * 13)
+        s.o.append('<path d="M%.1f,%.1f L%.1f,%.1f" fill="none" stroke="%s" stroke-width="%s" stroke-linecap="round"%s%s/>' % (
+            a[0] + r.uniform(-j, j), a[1] + r.uniform(-j, j), b[0] + r.uniform(-j, j), b[1] + r.uniform(-j, j), col, sw,
+            '' if op == 1 else ' opacity="%s"' % op, ' class="eo"' if col == NAVY else ''))
+        if probe:
+            mx, my = (a[0] + b[0]) / 2, (a[1] + b[1]) / 2; L = math.hypot(b[0] - a[0], b[1] - a[1]) or 1
+            s.probes.append((probe, sw, (mx, my), (-(b[1] - a[1]) / L, (b[0] - a[0]) / L), col))
+
+    def raw(s, x): s.o.append(x)
+
+    def svg(s): return ''.join(s.o)
+
+    def tipshadow(s, x, y, r=11):
+        """سایهٔ کوچک زیر نقطهٔ تماس (روی سکو)."""
+        x, y = s.X((x, y)); r *= s.xf[0]
+        s.raw('<ellipse cx="%s" cy="%s" rx="%s" ry="%s" fill="#10083a" opacity=".2"/>' % (x + 2, y + 1, r, r * .34))
+
+    def foot_tip(s, x, y, r=8):
+        """ردپای تماس با سکو؛ margin_check فاصلهٔ آن تا لبهٔ سکو را می‌سنجد."""
+        x, y = s.X((x, y)); r *= s.xf[0]
+        s.foot.append(ell(x, y, r, r * .4, 0, 360, 12))
+
+
+@contextmanager
+def layer(pen, name):
+    """بخش متحرک: همهٔ ترسیم‌های داخل with در <g id="node_<id>_<name>"> می‌روند (قاعدهٔ ۱۱)."""
+    pen.o.append('<g id="node_%s_%s">' % (pen.id, name)); i = len(pen.o)
+    yield
+    pen.layers[name] = (i, len(pen.o)); pen.o.append('</g>')
+
+
+def _padtop(rx, ry):
+    return [(x * (rx / 50.9 if x > 0 else rx / 52.8), y * ry / 19.4) for x, y in _M09]
+
+
+def _wall_pts(pen):
+    low = pen.padtop[:8]
+    return low + [(x, y + pen.wall) for x, y in low[::-1]]
+
+
+# ---------------- سکو ----------------
+def pad(pen, kind=None, rx=None, ry=None, wall=None, line=None, tri=(), dot=None):
+    """سکوی هم‌ساختار چوب‌شکافی: دیوارهٔ دو‌رنگ + رویه + یک خط روشن + مثلث‌های ریز لبه + یک نقطهٔ تیره.
+    kind و اندازه‌ها (در مختصات symbol) در صورت پرشدن Pen را به‌روز می‌کنند. باید اولین فراخوانی ترسیم باشد."""
+    assert not pen.o, 'pad باید قبل از هر ترسیم دیگر صدا زده شود'
+    if kind: assert kind in PALETTES; pen.kind = kind
+    if rx or ry or wall:
+        pen.rx, pen.ry, pen.wall = rx or pen.rx, ry or pen.ry, wall or pen.wall; pen.padtop = _padtop(pen.rx, pen.ry)
+    pal = PALETTES[pen.kind]
+    pen.shape(_wall_pts(pen), pal['wall'], OUT); pen.ntop = len(pen.o)
+    sw_seam = float(os.environ.get('PAD_SEAM_W', INNER))   # D199: مرز رویه/دیواره خط داخلی است → INNER (مالک ۴ نوامبر)
+    pen.shape(pen.padtop, pal['top'], sw_seam)
+    if sw_seam != OUT:   # کمان بالای رویه لبهٔ بیرونی نماد است و OUT می‌ماند؛ فقط کمان پایین (مرز با دیواره) نازک می‌شود
+        lo = sorted([(x, y) for x, y in pen.padtop if y >= 0 and abs(x) < pen.rx - 7], key=lambda q: q[0])
+        if len(lo) > 2:   # نیمهٔ زیرینِ خط دور دیواره که زیر کمان مانده با رنگ دیواره پوشانده می‌شود تا مرز واقعاً نازک دیده شود
+            band = [(x, y + sw_seam / 2 - .2) for x, y in lo] + [(x, y + OUT / 2 + .8) for x, y in reversed(lo)]
+            pen.raw('<polygon points="%s" fill="%s"/>' % (' '.join('%.1f,%.1f' % q for q in band), pal['wall']))
+        up = [(x, y) for x, y in pen.padtop if y <= 1]
+        up.sort(key=lambda q: q[0])
+        pen.raw('<polyline data-seam="%s" points="%s" fill="none" class="eo" stroke-width="%s"/>' % (sw_seam, ' '.join('%.1f,%.1f' % q for q in up), OUT))
+    pen.probes.append(('خط دور سکو (لبهٔ پایین دیواره)', OUT, (-12 * pen.rx / 52.8, 19.9 * pen.ry / 19.4 + pen.wall), (0, 1), NAVY))
+    if line: pen.ln(line[0], line[1], INNER, pal['line'], j=.15, probe='خط داخلی (خط روشن سکو)')
+    # D194 (مالک ۴ نوامبر): مثلث‌های لبه و نقطهٔ تیره روی نقشه مثل لکه دیده می‌شدند؛ دیگر کشیده نمی‌شوند (پارامترها برای سازگاری می‌مانند)
+    pen.npad = len(pen.o)
+
+
+# ---------------- symbol ----------------
+def symbol(pen, name, motion_layers=(), out=None, legacy_shadow=False):
+    """symbol با viewBox 0 0 200 190، مرکز translate(100 150)، گروه‌های _shadow/_base/_lit/_shade و clipPath.
+    name = شناسهٔ ایستگاه؛ id نماد node_<name>. اگر out (پوشه) داده شود، فایل node_<name>.svg نوشته می‌شود.
+    legacy_shadow=True سایهٔ زیرین قدیمی اتود ب را می‌سازد (فقط برای مقایسه؛ روی راه می‌افتد)."""
+    for m in motion_layers:
+        assert m in pen.layers, 'لایهٔ متحرک %r در Pen ساخته نشده' % m
+    sid = 'node_' + name; RX, RY, W = pen.rx, pen.ry, pen.wall
+    # سایهٔ بیرونی کوچک و هم‌شکل سکو (D113): رویه+دیواره، ۶ واحد پایین‌تر؛ فقط هلال پایین دیده می‌شود (مثل M09)
+    sh = hd(_wall_pts(pen), True, 1, 0, 999) + hd([(x, y) for x, y in pen.padtop], True, 1, 0, 999)
+    shadow = '<path d="%s" transform="translate(0 %s) scale(%s 1)" class="esd"/>' % (sh, SHADOW_DY, SHADOW_SX) if not legacy_shadow else \
+        '<ellipse cx="2" cy="5" rx="%s" ry="%s" class="esd"/>' % (RX - 1, RY - 3)
+    if legacy_shadow:
+        under = '<ellipse cx="0" cy="%s" rx="%s" ry="%s" fill="#10083a" opacity=".3"/>' % (RY * 1.05 + 1, RX - 2, RY * 1.0)
+    else:   # زیرسایهٔ داخلی زیر قهرمان، درون سیلوئت سکو
+        under = '<ellipse cx="2" cy="%s" rx="%s" ry="%s" fill="#10083a" opacity=".3"/>' % (W * .6, RX - 4, RY * .9 + W * .4 - 1)
+    under = '<g class="under">%s</g>' % under
+    cid = sid + '_clip'
+    allpad = '<path d="%s"/><path d="%s"/>' % (hd(_wall_pts(pen), True, 1, 0, 999), hd(pen.padtop, True, 1, 0, 999))
+    clip = '<defs><clipPath id="%s">%s</clipPath></defs>' % (cid, allpad)     # روکش نور/سایه فقط روی خود سکو (قهرمان بی‌لکه، ۲۰۲۶-۱۰-۲۳)
+    npad = getattr(pen, 'npad', 0) or 0
+    pad_svg, hero_svg = ''.join(pen.o[:npad]), ''.join(pen.o[npad:])
+    lit = '<polygon points="-%s,-165 -%s,-165 -%s,50 -%s,50" class="elit"/>' % (RX, RX * .37, RX * .7, RX)
+    shade = '<polygon points="%s,-165 %s,-165 %s,50 0,50" class="esh"/>' % (RX * .33, RX, RX)
+    sym = ('<symbol id="%s" viewBox="0 0 200 190" overflow="visible">%s'
+           '<g id="%s_shadow" transform="translate(100 150)">%s</g>'
+           '<g id="%s_base" transform="translate(100 150)">%s%s</g>'
+           '<g id="%s_lit" transform="translate(100 150)" clip-path="url(#%s)">%s</g>'
+           '<g id="%s_shade" transform="translate(100 150)" clip-path="url(#%s)">%s</g>'
+           '<g id="%s_hero" transform="translate(100 150)">%s</g></symbol>') % (
+        sid, clip, sid, shadow, sid, under, pad_svg, sid, cid, lit, sid, cid, shade, sid, hero_svg)
+    if out:
+        out = pathlib.Path(out); out.mkdir(parents=True, exist_ok=True)
+        (out / ('node_%s.svg' % name)).write_text(sym, encoding='utf-8')
+    return sym
+
+
+def preview(sym, name, w=MAP_W, tall=False):
+    """صفحهٔ svg مستقل برای دیدن نماد (با STYLE). w = پهنای نمایش؛ ۱۴۴ = اندازهٔ نقشه."""
+    vh = 222.2 if tall else 190     # tall: دیوارهٔ سکو زیر خط ۱۹۰ بریده نشود (فقط برای شات)
+    return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 %s" width="%s" height="%s"><style>%s</style>%s'
+            '<use href="#node_%s"/></svg>') % (vh, w, round(w * vh / 200), STYLE, sym, name)
+
+
+def pad_px(pen, bh):
+    """اندازهٔ سکو به px نقشه (مقیاس ۰٫۷۲): [rx, ry, wall, bh]. bh = ارتفاع بنا/قهرمان روی سکو (از margin_check)."""
+    return [round(pen.rx * K, 1), round(pen.ry * K, 1), round(pen.wall * K, 1), round(bh)]
+
+
+def spec(id, pad_px, stand, motion, kind='land', ring=(0, 0, 0), out=None):
+    """فایل مشخصات ایستگاه: stations/<id>.json.
+    pad=[rx,ry,wall,bh] px نقشه؛ stand=[dx,dy] جای فیگور از مرکز سکو؛ ring=[drx,dry,dx]؛ motion=[ids لایه‌ها]."""
+    d = dict(id=id, kind=kind, pad=list(pad_px), stand=list(stand), ring=list(ring), motion=list(motion))
+    p = pathlib.Path(out) if out else HERE / 'stations'; p.mkdir(parents=True, exist_ok=True)
+    (p / ('%s.json' % id)).write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding='utf-8')
+    return d
+
+
+# ---------------- رندر و سنجش ----------------
+_PW = {}
+
+
+def _browser():
+    """یک مرورگر برای همهٔ شات‌های سنجش (سریع‌تر از راه‌اندازی دوباره)."""
+    if 'b' not in _PW:
+        import atexit
+        from playwright.sync_api import sync_playwright
+        _PW['p'] = sync_playwright().start(); _PW['b'] = _PW['p'].chromium.launch()
+        atexit.register(lambda: (_PW['b'].close(), _PW['p'].stop()))
+    return _PW['b']
+
+
+def _shot(body, dsf=4, bg=None, w=MAP_W, h=round(160 * SET_SCALE)):
+    """body: محتوای svg (سطر بالا مثل symbol؛ پایین بلندتر تا دیوارهٔ سکو بریده نشود) → آرایهٔ RGBA. هر px نقشه = dsf پیکسل."""
+    import numpy as np, io
+    from PIL import Image
+    from playwright.sync_api import sync_playwright
+    html = ('<body style="margin:0;background:%s"><svg xmlns="http://www.w3.org/2000/svg" width="%s" height="%s" viewBox="0 0 200 %.1f">'
+            '<style>%s</style><g transform="translate(100 150)">%s</g></svg>') % (bg or 'transparent', w, h, h / K, STYLE, body)
+    b = _browser(); pg = b.new_page(device_scale_factor=dsf, viewport={'width': w, 'height': h})
+    pg.set_content(html); png = pg.screenshot(omit_background=bg is None); pg.close()
+    return np.array(Image.open(io.BytesIO(png)).convert('RGBA'))
+
+
+def _poly(pts): return '<path d="%s" fill="#000"/>' % hd(pts, True, 1, 0, 999)
+
+
+def _place_fig(shape, sx, sy, dsf):
+    import numpy as np
+    fp, ar, ac = fig_footprint(dsf); out = np.zeros(shape, bool)
+    y0, x0 = int(round(sy)) - ar, int(round(sx)) - ac
+    ya, xa = max(y0, 0), max(x0, 0); yb, xb = min(y0 + fp.shape[0], shape[0]), min(x0 + fp.shape[1], shape[1])
+    if yb > ya and xb > xa: out[ya:yb, xa:xb] = fp[ya - y0:yb - y0, xa - x0:xb - x0]
+    return out
+
+
+def margin_check(pen, stand=None, dsf=4, min_margin=8, min_stand=10, save=None, legacy_shadow=False):
+    """سنجش از رندر: (۱) پیکسل‌های قهرمان بیرون از سیلوئت سکو، (۲) حاشیهٔ افقی قهرمان تا لبهٔ سکو،
+    (۳) حاشیهٔ ردپا (foot) تا لبهٔ رویه، (۴) سایه روی راه، (۵) فاصلهٔ جای فیگور (stand) از قهرمان و از لبهٔ رویه.
+    همه به px نقشه. stand=(dx,dy) px نقشه از مرکز سکو. برمی‌گرداند dict با کلید ok."""
+    import numpy as np
+    from scipy.ndimage import distance_transform_edt as edt
+    A = lambda im: im[..., 3] > 128
+    top = A(_shot(_poly(pen.padtop), dsf)); wall = A(_shot(_poly(_wall_pts(pen)), dsf)); sil = top | wall
+    hero_svg = ''.join(pen.o[pen.npad:])
+    hero = A(_shot(hero_svg, dsf))
+    # ناحیهٔ مجاز: هر ستونِ سکو، از بالا تا پایین‌ترین نقطهٔ سیلوئت (قهرمان بلند می‌تواند بالای سکو بیاید)
+    cols = sil.any(0); low = np.where(cols, sil.shape[0] - 1 - np.argmax(sil[::-1], 0), -1)
+    rows = np.arange(sil.shape[0])[:, None]
+    allowed = cols[None, :] & (rows <= low[None, :])
+    outside = hero & ~allowed
+    res = dict(out_px=round(float(outside.sum()) / dsf ** 2, 1))
+    xs = np.where(hero.any(0))[0]; px = np.where(top.any(0))[0]
+    res['x_margin'] = round(float(min(xs.min() - px.min(), px.max() - xs.max())) / dsf, 1) if len(xs) else None
+    ys = np.where(hero.any(1))[0]
+    cy = 150 * K * dsf                                   # ردیف مرکز سکو
+    res['bh'] = round((cy - ys.min()) / dsf, 1) if len(ys) else 0
+    if pen.foot:
+        foot = A(_shot(''.join(_poly(f) for f in pen.foot), dsf)); d = edt(top)
+        res['foot_margin'] = round(float(d[foot].min()) / dsf, 1) if foot.any() else None
+    # سایه روی راه: سایه‌های _shadow و under را جدا رندر کن
+    res['shadow_on_road_px'] = _shadow_leak(pen, sil, dsf, legacy_shadow)
+    if stand:   # فیگور = سیلوئت واقعی با هاله، کف در نقطهٔ stand (مثل template.placeFig)
+        sx, sy = (100 * K + stand[0]) * dsf, (150 * K + stand[1]) * dsf
+        fig = _place_fig(top.shape, sx, sy, dsf)
+        res['stand_to_hero'] = round(float(edt(~fig)[hero].min()) / dsf, 1) if hero.any() else 99
+        dtop = edt(top)
+        pts = [(int(sy), int(sx + k * dsf * SET_SCALE)) for k in FIG_FEET]
+        res['stand_to_pad_edge'] = round(min(float(dtop[a, b]) for a, b in pts) / dsf, 1)
+        res['stand_on_pad'] = all(bool(top[a, b]) for a, b in pts)
+    ok = res['out_px'] == 0 and (res['x_margin'] or 0) >= min_margin and res['shadow_on_road_px'] == 0
+    if 'foot_margin' in res: ok = ok and (res['foot_margin'] or 0) >= min_margin
+    if stand: ok = ok and res['stand_on_pad'] and res['stand_to_hero'] >= min_stand and res['stand_to_pad_edge'] >= min_stand
+    res['ok'] = bool(ok)
+    if save:
+        from PIL import Image
+        Image.fromarray((np.dstack([hero * 255, top * 255, outside * 255]).astype('uint8'))).save(save)
+    return res
+
+
+def _shadow_leak(pen, sil, dsf, legacy=False):
+    """پیکسل‌های سایه (_shadow و under) که بیرون از سیلوئت سکو افتاده‌اند (px نقشه²). سایه‌ها را از symbol می‌خوانیم."""
+    import re
+    s = symbol(pen, 'x_probe', legacy_shadow=legacy)
+    parts = re.findall(r'<g id="node_x_probe_shadow"[^>]*>(.*?)</g>', s) + re.findall(r'<g class="under">(.*?)</g>', s)
+    im = _shot(''.join(parts), dsf)
+    from scipy.ndimage import binary_dilation
+    out = (im[..., 3] > 10) & ~binary_dilation(sil, iterations=2)       # 2 پیکسل رندر = تحمل لبهٔ نرم
+    if not legacy:   # سایهٔ بیرونی مجاز است؛ فقط در نوار راه (±۱۴px دور خط مرکز سکو) شمرده می‌شود
+        cy = int(150 * K * dsf); out[:cy - 14 * dsf] = False; out[cy + 14 * dsf:] = False
+    return round(float(out.sum()) / dsf ** 2, 1)
+
+
+def find_stand(pen, motion=None, dsf=2, gmax=24):
+    """بهترین جای فیگور (stand) روی سکو: بزرگ‌ترین g که مستطیل فیگور (FIG_W×FIG_H، کف در نقطه) ≥g از قهرمان (و همهٔ
+    وضعیت‌های متحرک) باشد و سه نقطهٔ کف ≥g از لبهٔ رویه. بین بهترین‌ها نزدیک‌ترین به جلوی مرکز (0، ۰٫۶ ry). برمی‌گرداند ((dx,dy) px نقشه، g)."""
+    import numpy as np
+    from scipy.ndimage import distance_transform_edt as edt, minimum_filter
+    A = lambda im: im[..., 3] > 128
+    top = A(_shot(_poly(pen.padtop), dsf))
+    hero = A(_shot(''.join(pen.o[pen.npad:]), dsf))
+    for part, kw in (motion or {}).items():
+        i, j = pen.layers[part]; body = ''.join(pen.o[i:j])
+        ts = ['rotate(%s %s %s)' % (a * 360 / 12, kw['rotate'][0], kw['rotate'][1]) for a in range(12)] if kw.get('rotate') else []
+        ts += ['translate(%s %s)' % tuple(o) for o in kw.get('offsets', [])]
+        for t in ts: hero |= A(_shot('<g transform="%s">%s</g>' % (t, body), dsf))
+    Dh = edt(~hero) / dsf; Dt = edt(top) / dsf
+    from scipy.signal import fftconvolve
+    fp, ar, ac = fig_footprint(dsf)
+    if fp.shape[0] % 2 == 0: fp = np.vstack([fp, np.zeros((1, fp.shape[1]), bool)])
+    if fp.shape[1] % 2 == 0: fp = np.hstack([fp, np.zeros((fp.shape[0], 1), bool)])
+    rows, cols = top.shape; fr = fp[::-1, ::-1].astype(float); sh = ar - fp.shape[0] // 2
+    pref = (100 * K * dsf, (150 * K + pen.ry * K * .6) * dsf)
+
+    def feasible(g):
+        bad = (Dh < g).astype(float)
+        C = fftconvolve(bad, fr, mode='same') < .5          # فیگور با مرکز هندسی‌اش روی هر پیکسل
+        Rs = np.zeros_like(C)
+        if sh > 0: Rs[sh:] = C[:rows - sh]
+        elif sh < 0: Rs[:sh] = C[-sh:]
+        else: Rs = C
+        F = np.ones_like(Rs)
+        for k in FIG_FEET: F &= np.roll(Dt >= g, -int(k * dsf * SET_SCALE), axis=1)
+        return Rs & F
+    best = None; lo, hi = 0.0, float(gmax)
+    if not feasible(0).any(): return ((0, 0), -1)
+    while hi - lo > .25:
+        mid = (lo + hi) / 2
+        if feasible(mid).any(): lo = mid
+        else: hi = mid
+    ok = feasible(lo); ys, xs = np.nonzero(ok); d = np.hypot(xs - pref[0], ys - pref[1]); k2 = int(d.argmin())
+    best = ((round(xs[k2] / dsf - 100 * K, 1), round(ys[k2] / dsf - 150 * K, 1)), round(lo, 2))
+    return best if best else ((0, 0), -1)
+
+
+def motion_check(pen, part, rotate=None, offsets=(), steps=12, stand=None, dsf=4, min_margin=8, min_stand=10):
+    """قاب حرکت (قاعدهٔ ۱۲): لایهٔ متحرک را در همهٔ وضعیت‌ها (چرخش حول rotate=(x,y) یا جابه‌جایی‌های offsets=[(dx,dy)] در
+    مختصات symbol) می‌کشد و اجتماع را می‌سنجد: پیکسل بیرون از سکو، حاشیهٔ افقی، فاصله از جای فیگور."""
+    import numpy as np
+    A = lambda im: im[..., 3] > 128
+    i, j = pen.layers[part]; body = ''.join(pen.o[i:j])
+    ts = ['rotate(%s %s %s)' % (a * 360 / steps, rotate[0], rotate[1]) for a in range(steps)] if rotate else []
+    ts += ['translate(%s %s)' % tuple(o) for o in offsets] or ([] if ts else ['translate(0 0)'])
+    top = A(_shot(_poly(pen.padtop), dsf)); sil = top | A(_shot(_poly(_wall_pts(pen)), dsf))
+    cols = sil.any(0); low = np.where(cols, sil.shape[0] - 1 - np.argmax(sil[::-1], 0), -1)
+    allowed = cols[None, :] & (np.arange(sil.shape[0])[:, None] <= low[None, :])
+    U = np.zeros_like(sil)
+    for t in ts: U |= A(_shot('<g transform="%s">%s</g>' % (t, body), dsf))
+    outside = U & ~allowed
+    xs = np.where(U.any(0))[0]; px = np.where(top.any(0))[0]
+    r = dict(part=part, states=len(ts), out_px=round(float(outside.sum()) / dsf ** 2, 1),
+             x_margin=round(float(min(xs.min() - px.min(), px.max() - xs.max())) / dsf, 1))
+    ok = r['out_px'] == 0 and r['x_margin'] >= min_margin
+    if stand:
+        sx, sy = (100 * K + stand[0]) * dsf, (150 * K + stand[1]) * dsf
+        yy, xx = np.mgrid[0:U.shape[0], 0:U.shape[1]]
+        from scipy.ndimage import distance_transform_edt as edt
+        fig = _place_fig(U.shape, sx, sy, dsf)
+        r['stand_to_motion'] = round(float(edt(~fig)[U].min()) / dsf, 1); ok = ok and r['stand_to_motion'] >= min_stand
+    r['ok'] = bool(ok); return r
+
+
+def width_check(pen, dsf=8, tol=.6):
+    """قطر رندرشدهٔ خط‌های ثبت‌شده (probe) را روی نقشه (۰٫۷۲) می‌سنجد: از وسط خط، عمود بر آن، طول ران همرنگ.
+    ok اگر |اندازه‌گیری-اسمی×۰٫۷۲| ≤ tol و ≥ ۲٫۵px. خروجی: فهرست dict."""
+    import numpy as np
+    # فقط _base، بدون روکش‌های lit/shade که رنگ را تغییر می‌دهند، روی زمینهٔ سفید
+    im = _shot(pen.svg(), dsf, bg='#ffffff')[..., :3].astype(int)
+    out = []
+    for label, sw, (mx, my), (nx, ny), col in pen.probes:
+        L = math.hypot(nx, ny) or 1; nx, ny = nx / L, ny / L
+        tgt = np.array([int(col[i:i + 2], 16) for i in (1, 3, 5)])
+        R = int(sw * 2.5 * K * dsf); run = []
+        for t in range(-R, R + 1):
+            x = (100 + mx) * K * dsf + nx * t; y = (150 + my) * K * dsf + ny * t
+            xi, yi = int(round(x)), int(round(y))
+            ok = 0 <= yi < im.shape[0] and 0 <= xi < im.shape[1] and np.abs(im[yi, xi] - tgt).max() < 28
+            run.append(ok)
+        c = R; best = None                       # ران شامل مرکز، یا نزدیک‌ترین ران
+        runs = []; i = 0
+        while i < len(run):
+            if run[i]:
+                j = i
+                while j < len(run) and run[j]: j += 1
+                runs.append((i, j)); i = j
+            else: i += 1
+        if runs: best = min(runs, key=lambda r: 0 if r[0] <= c < r[1] else min(abs(r[0] - c), abs(r[1] - c)))
+        meas = round((best[1] - best[0]) / dsf, 2) if best else None
+        exp = round(sw * K, 2)
+        out.append(dict(label=label, nominal=sw, expected_px=exp, measured_px=meas,
+                        ok=bool(meas is not None and abs(meas - exp) <= tol and meas >= MIN_PX)))
+    return out
+
+
+def _split_layers(pen):
+    """(ثابت، {لایه: محتوا}) از pen.o بعد از سکو؛ ثابت = هرچه بیرون از هر with layer است."""
+    spans = sorted((i - 1, j, name) for name, (i, j) in pen.layers.items())
+    fixed = []; moving = {}; k = pen.npad
+    for a, b, name in spans:
+        fixed += pen.o[k:a]; moving[name] = ''.join(pen.o[a + 1:b]); k = b + 1
+    fixed += pen.o[k:]
+    return ''.join(fixed), moving
+
+
+def inside_check(pen, motion=None, dsf=4, min_margin=4):
+    """بالازدگی (D112): کل قهرمان (بخش ثابت + همهٔ وضعیت‌های لایه‌های متحرک، با خط دور) باید درون رویهٔ سکو باشد.
+    motion مثل finish: {'لایه': dict(rotate=(x,y)) یا dict(offsets=[...])}. برمی‌گرداند dict(min_margin_px، bbox_px، ok)؛ ok اگر کمینهٔ فاصله تا لبهٔ رویه ≥ min_margin px نقشه.
+    D122: قهرمان از بالا آزاد است (مثل تبر روی کنده) ولی از چپ، راست و پایین باید ≥ min_margin از لبهٔ رویه فاصله داشته باشد
+    (ناحیه = هر ستون رویه از بالای تصویر تا پایین‌ترین نقطهٔ رویه) و پایه‌اش (۸px پایین قهرمان) کامل روی رویه بنشیند. حالت strict حذف شد."""
+    import numpy as np
+    from scipy.ndimage import distance_transform_edt as edt
+    A = lambda im: im[..., 3] > 128
+    top = A(_shot(_poly(pen.padtop), dsf))
+    fixed, moving = _split_layers(pen)
+    hero = A(_shot(fixed, dsf))
+    for name, body in moving.items():
+        kw = (motion or {}).get(name, {})
+        ts = ['rotate(%s %s %s)' % (a * 30, kw['rotate'][0], kw['rotate'][1]) for a in range(12)] if kw.get('rotate') else []
+        ts += ['translate(%s %s)' % tuple(o) for o in kw.get('offsets', [])] or ([] if ts else ['translate(0 0)'])
+        for t in ts: hero |= A(_shot('<g transform="%s">%s</g>' % (t, body), dsf))
+    cols = top.any(0); low = np.where(cols, top.shape[0] - 1 - np.argmax(top[::-1], 0), -1)
+    reg = cols[None, :] & (np.arange(top.shape[0])[:, None] <= low[None, :])
+    d = edt(reg) / dsf; ys, xs = np.where(hero)
+    mm = round(float(d[hero].min()), 1)
+    ys0 = ys.max(); band = hero.copy(); band[:max(0, ys0 - 8 * dsf)] = False
+    base_ok = bool((top | ~band).all())
+    return dict(min_margin_px=mm, base_on_pad=base_ok, height_px=round(float((ys.max() - ys.min()) / dsf), 1), bbox_px=[round(float(xs.min() / dsf), 1), round(float(ys.min() / dsf), 1), round(float(xs.max() / dsf), 1), round(float(ys.max() / dsf), 1)], ok=bool(mm >= min_margin and base_ok))
+
+
+def finish(pen, name, stand, motion=None, out=None, shots=None, ring=(0, 0, 0), legacy_shadow=False):
+    """همهٔ مراحل پایانی یک ایستگاه: symbol → سنجش حاشیه → سنجش قاب حرکت → سنجش قطر خط → spec json → شات.
+    motion = {'gear': dict(rotate=(x, y))} یا {'door': dict(offsets=[(0,0),(0,-10)])}. برمی‌گرداند dict همهٔ اعداد."""
+    motion = motion or {}
+    auto = None
+    if stand is None:
+        stand, auto = find_stand(pen, motion)
+    sym = symbol(pen, name, list(motion), out=out, legacy_shadow=legacy_shadow)
+    m = margin_check(pen, stand=stand)
+    mo = [motion_check(pen, part, stand=stand, **kw) for part, kw in motion.items()]
+    w = width_check(pen)
+    ic = inside_check(pen, motion)
+    sp = spec(name, pad_px(pen, m['bh']), stand, ['node_%s_%s' % (name, x) for x in motion], kind=pen.kind, ring=ring, out=out)
+    if shots:
+        shots = pathlib.Path(shots); shots.mkdir(parents=True, exist_ok=True)
+        b = _browser()
+        for tag in ('map', 'big'):
+            pg = b.new_page(device_scale_factor=4 if tag == 'big' else 2, viewport={'width': MAP_W * (3 if tag == 'big' else 1), 'height': round(160 * SET_SCALE) * (3 if tag == 'big' else 1)})
+            pg.set_content(('<body style="margin:0;background:#c9a35c">' + preview(sym, name, MAP_W * (3 if tag == 'big' else 1), tall=True)))
+            pg.screenshot(path=str(shots / ('%s_%s.png' % (name, tag)))); pg.close()
+    sp['inside_pad'] = ic; (pathlib.Path(out) if out else HERE / 'stations').joinpath('%s.json' % name).write_text(json.dumps(sp, ensure_ascii=False, indent=1), encoding='utf-8')
+    r = dict(name=name, kind=pen.kind, margin=m, motion=mo, widths=w, inside=ic, spec=sp, ok=bool(m['ok'] and ic['ok'] and all(x['ok'] for x in mo) and all(x['ok'] for x in w)))
+    print('CHECK ' + json.dumps(dict(name=name, ok=r['ok'], stand=list(stand), auto_gap=auto, margin=m, inside=ic, motion=mo, widths=[(x['label'], x['nominal'], x['measured_px'], x['ok']) for x in w]), ensure_ascii=False))
+    return r

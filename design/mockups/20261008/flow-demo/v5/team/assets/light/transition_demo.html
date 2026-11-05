@@ -1,0 +1,155 @@
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>transition demo</title>
+<style>/* خودکار از zone_tokens.json (build_light.py). فقط روشن/غروب/شب + رنگ‌ها. بدون blend و بدون filter زنده. نور: بالا-چپ، در هر سه نور ثابت. */
+:root{
+  --c-cream: #fff4d2;
+  --c-deep-violet: #3a2a7a;
+  --c-line: #241a5e;
+  --c-line-night: #0d0426;
+  --c-teal: #2fb8a8;
+  --c-danger-violet: #8a4fd0;
+  --c-pink: #d070c0;
+  --c-card-bg: #190539;
+  --c-card-text-bg: #12243a;
+  --c-shelf: #2a1f5c;
+  --c-accent-yellow: #ffd23f;
+  --c-white: #ffffff;
+  --c-badge-line-day: #0d0426;
+  --hard-easy: #28853f;
+  --hard-mid: #e08a1e;
+  --hard-hard: #c4262e;
+  --z-sports-base: #7fbf4a;
+  --z-sports-shade: #66993b;
+  --z-sports-patch: #a6d86a;
+  --z-sports-night: #a6d86a;
+  --z-sports-ring: #ffd23f;
+  --z-sports-ring-outline: 4.5px;
+  --z-space-base: #7a5cd0;
+  --z-space-shade: #5c459c;
+  --z-space-patch: #9a7ee0;
+  --z-space-night: #9a7ee0;
+  --z-space-ring: #ffd23f;
+  --z-space-ring-outline: 4.5px;
+  --z-farm-base: #d6c98a;
+  --z-farm-shade: #aba16e;
+  --z-farm-patch: #ece2ae;
+  --z-farm-night: #ece2ae;
+  --z-farm-ring: #ffd23f;
+  --z-farm-ring-outline: 10px;
+  --z-city-base: #5b7390;
+  --z-city-shade: #44566c;
+  --z-city-patch: #7a93ae;
+  --z-city-night: #5fa8d6;
+  --z-city-ring: #ffd23f;
+  --z-city-ring-outline: 4.5px;
+  --water-sea: #1f87b8;
+  --water-river: #3fb6e0;
+  --water-river-lip: #1f87b8;
+  --water-foam: #ffffff;
+  --ice-rim: #eaf8ff;
+  --ice-body: #a3d5ea;
+  --ice-crack: #6ab7d8;
+  --ice-cloud: #ffffff;
+  --path-cream: #fff4d2;
+  --path-outline: #241a5e;
+  --path-boardwalk: #c98a45;
+  --line-6: 6px; --line-4-5: 4.5px; --line-2-6: 2.6px; --line-1-2: 1.2px;
+  --light-dir: top-left; --light-transition: 1.2s;
+  /* پیش‌فرض = روز */
+  --l-sky0: #9fdcf2;
+  --l-sky1: #d6f1ee;
+  --l-sky2: #d6f1ee;
+  --l-water: #1f87b8;
+  --l-lit: #fff4cf;
+  --l-shade: #4a3a8c;
+  --l-line: #241a5e;
+  --l-build: #e9e4d6;
+  --l-pier: #c6c1b6;
+  --l-lit-a: 0.5; --l-shade-a: 0.3; --l-nlit-a: 0.3; --l-nshade-a: 0.22;
+  --l-windows: transparent; --l-windows-opacity: 0;
+  --l-shadow-color: #10083a; --l-shadow-opacity: 0.28; --l-shadow-dx: 8px; --l-shadow-dy: 6px;
+}
+[data-light="day"]{
+  --l-sky0: #9fdcf2;
+  --l-sky1: #d6f1ee;
+  --l-sky2: #d6f1ee;
+  --l-water: #1f87b8;
+  --l-lit: #fff4cf;
+  --l-shade: #4a3a8c;
+  --l-line: #241a5e;
+  --l-build: #e9e4d6;
+  --l-pier: #c6c1b6;
+  --l-windows: transparent; --l-windows-opacity: 0;
+  --l-shadow-color: #10083a; --l-shadow-opacity: 0.28; --l-shadow-dx: 8px; --l-shadow-dy: 6px;
+  --l-lit-a: 0.5; --l-shade-a: 0.3; --l-nlit-a: 0.3; --l-nshade-a: 0.22;
+}
+[data-light="dusk"]{
+  --l-sky0: #6a3fa0;
+  --l-sky1: #e0728a;
+  --l-sky2: #f2a65a;
+  --l-water: #3679a8;
+  --l-lit: #ffd48a;
+  --l-shade: #5b3490;
+  --l-line: #241a5e;
+  --l-build: #f3d9c0;
+  --l-pier: #e0a874;
+  --l-windows: transparent; --l-windows-opacity: 0;
+  --l-shadow-color: #3a1f6a; --l-shadow-opacity: 0.35; --l-shadow-dx: 14px; --l-shadow-dy: 7px;
+  --l-lit-a: 0.75; --l-shade-a: 0.4; --l-nlit-a: 0.5; --l-nshade-a: 0.35;
+}
+[data-light="night"]{
+  --l-sky0: #1c1460;
+  --l-sky1: #2a1f7a;
+  --l-sky2: #2a1f7a;
+  --l-water: #245090;
+  --l-lit: #d8e6ff;
+  --l-shade: #190539;
+  --l-line: #aab4f0;
+  --l-build: #aab4f0;
+  --l-pier: #6f78c8;
+  --l-windows: #ffd86b; --l-windows-opacity: 1;
+  --l-shadow-color: #0d0426; --l-shadow-opacity: 0.4; --l-shadow-dx: 8px; --l-shadow-dy: 6px;
+  --l-lit-a: 0.5; --l-shade-a: 0.45; --l-nlit-a: 0.35; --l-nshade-a: 0.4;
+}
+/* لایه‌های ثابت انتقال: هر لایه یک id (با پیشوند صفحه) و data-for؛ فقط opacity عوض می‌شود. روز←شب مستقیم 1.2ث. غروب میان‌یابی نیست. */
+.lt-layer{opacity:0;transition:opacity var(--light-transition) ease-in-out}
+[data-light="day"] .lt-layer[data-for~="day"],[data-light="dusk"] .lt-layer[data-for~="dusk"],[data-light="night"] .lt-layer[data-for~="night"]{opacity:1}
+.lt-layer[data-for="windows"]{opacity:0}[data-light="night"] .lt-layer[data-for="windows"]{opacity:1}
+@media (prefers-reduced-motion: reduce){.lt-layer{transition:none}}
+/* شدت rim/سایهٔ بناهای env (کلاس‌های .elit/.esh در node_*.svg مقدار ثابت دارند؛ این‌ها آن‌ها را به نور وصل می‌کنند). شخصیت‌ها خودشان var(--l-lit-a) و var(--l-shade-a) می‌خوانند. */
+[data-light] .elit{opacity:var(--l-nlit-a,.3)}
+[data-light] .esh{opacity:var(--l-nshade-a,.22)}
+
+*{box-sizing:border-box;margin:0}body{background:#e8e4f4;color:#241a5e;font:16px/1.7 Vazirmatn,system-ui,sans-serif;direction:rtl;padding:12px 16px 40px;max-width:430px;margin:auto}
+h1{font-size:22px}h2{font-size:18px;margin:14px 0 6px}p{font-size:14px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}button,label.chk{min-height:48px;min-width:48px;padding:0 16px;border:2.6px solid #241a5e;border-radius:14px 6px 14px 6px;background:#fff4d2;color:#241a5e;font:700 16px Vazirmatn,sans-serif;display:inline-flex;align-items:center;gap:6px}
+button:focus-visible{outline:3px solid #2fb8a8;outline-offset:2px}
+.fr{border:4.5px solid #241a5e;border-radius:18px;overflow:hidden;margin:8px 0;line-height:0}
+#scene svg,#tr-dusk{display:block}
+</style></head><body>
+<h1>انتقال روز ← شب (۱٫۲ ثانیه، فقط opacity)</h1>
+<p>دو لایهٔ روز و شب هر دو در DOM می‌مانند؛ فقط شفافیتشان عوض می‌شود. با reduced-motion بدون انیمیشن. نه متغیر در حال میان‌یابی، نه blend.</p>
+<div class="bar"><button id="b1" type="button">روز</button><button id="b2" type="button">شب</button></div>
+<div class="fr"><div id="scene" data-light="day"><svg viewBox="0 0 390 440" width="100%" role="img" aria-label="harbor day-night"><g class="lt-layer" data-for="day" id="tr-day"><g data-light="day"><rect width="390" height="250" fill="url(#lt-sky-day)"/><rect y="250" width="390" height="190" fill="#1f87b8"/>
+<svg x="45" y="150" width="300" height="285" viewBox="0 0 200 190" overflow="visible"><g><style>.eo{stroke:var(--l-line,#241a5e);stroke-linejoin:round;stroke-linecap:round}.elit{fill:var(--l-lit,#fff4cf);opacity:.3}.esh{fill:var(--l-shade,#4a3a8c);opacity:.22}.ew{fill:var(--l-windows,transparent);opacity:var(--l-windows-opacity,0)}.esd{fill:var(--l-shadow-color,#10083a);opacity:var(--l-shadow-opacity,.28)}</style><defs><clipPath id="node_12_d_clip"><rect x="-82" y="-22" width="164" height="44" rx="10"/><rect x="-82" y="-22" width="164" height="30" rx="10"/><polygon points="-96,-36 -34,-36 -46,-10 -84,-10"/><rect x="-84" y="-62" width="40" height="26" rx="4"/><rect x="-54" y="-56" width="8" height="20" rx="2"/><rect x="44" y="-124" width="14" height="124" rx="3"/><rect x="-32" y="-126" width="92" height="12" rx="3"/><polygon points="44,-96 44,-114 6,-114"/><rect x="30" y="-118" width="18" height="12" rx="3"/><rect x="-38" y="-70" width="28" height="24" rx="3"/><rect x="50" y="-6" width="12" height="14" rx="2"/></clipPath></defs><g id="node_12_d_shadow" transform="translate(100 150)"><ellipse cx="8" cy="6" rx="90" ry="30" class="esd"/></g><g id="node_12_d_base" transform="translate(100 150)"><rect x="-82" y="-22" width="164" height="44" rx="10" fill="#c6c1b6" class="eo" stroke-width="4.5"/><rect x="-82" y="-22" width="164" height="30" rx="10" fill="#e9e4d6" class="eo" stroke-width="4.5"/><path d="M-70,10L70,10" fill="none" stroke-linecap="round" style="stroke:#c6c1b6" stroke-width="1.2"/><polygon points="-96,-36 -34,-36 -46,-10 -84,-10" fill="#3a2a7a" class="eo" stroke-width="4.5"/><path d="M-90,-30L-38,-30" fill="none" stroke-linecap="round" style="stroke:#fff4d2" stroke-width="2.6"/><rect x="-84" y="-62" width="40" height="26" rx="4" fill="#fff4d2" class="eo" stroke-width="4.5"/><rect x="-54" y="-56" width="8" height="20" rx="2" fill="#8a4fd0" class="eo" stroke-width="2.6"/><path d="M-70,-62L-70,-84" fill="none" stroke-linecap="round" style="stroke:var(--l-line,#241a5e)" stroke-width="2.6"/><rect x="44" y="-124" width="14" height="124" rx="3" fill="#2fb8a8" class="eo" stroke-width="4.5"/><rect x="-32" y="-126" width="92" height="12" rx="3" fill="#2fb8a8" class="eo" stroke-width="4.5"/><polygon points="44,-96 44,-114 6,-114" fill="#2fb8a8" class="eo" stroke-width="2.6"/><rect x="30" y="-118" width="18" height="12" rx="3" fill="#fff4d2" class="eo" stroke-width="2.6"/><path d="M-24,-114L-24,-70" fill="none" stroke-linecap="round" style="stroke:#a06a30" stroke-width="2.6"/><rect x="-38" y="-70" width="28" height="24" rx="3" fill="#c98a45" class="eo" stroke-width="4.5"/><path d="M-38,-70L-10,-46" fill="none" stroke-linecap="round" style="stroke:#a06a30" stroke-width="1.2"/><path d="M-10,-70L-38,-46" fill="none" stroke-linecap="round" style="stroke:#a06a30" stroke-width="1.2"/><rect x="50" y="-6" width="12" height="14" rx="2" fill="#8a4fd0" class="eo" stroke-width="2.6"/><ellipse cx="20" cy="-10" rx="7" ry="5" fill="#fff" class="eo" stroke-width="2.6"/><circle cx="26" cy="-16" r="3.6" fill="#fff" class="eo" stroke-width="2.6"/></g><g id="node_12_d_lit" transform="translate(100 150)" clip-path="url(#node_12_d_clip)"><polygon points="-102,-132 -43.4,-132 -76.2,52 -102,52" class="elit"/></g><g id="node_12_d_shade" transform="translate(100 150)" clip-path="url(#node_12_d_clip)"><polygon points="25.8,-132 88,-132 88,52 -7,52" class="esh"/></g><g id="node_12_d_windows" transform="translate(100 150)"><rect x="-78" y="-56" width="8" height="8" rx="2" class="ew"/><rect x="-64" y="-56" width="8" height="8" rx="2" class="ew"/><rect x="-52" y="-56" width="6" height="8" rx="2" class="ew"/><rect x="33" y="-115" width="12" height="6" rx="2" class="ew"/></g></g></svg></g></g>
+<g class="lt-layer" data-for="night" id="tr-night"><g data-light="night"><rect width="390" height="250" fill="url(#lt-sky-night)"/><g id="tr-stars" fill="#fff"><circle cx="120" cy="30" r="1.6" fill="#fff"/><circle cx="190" cy="70" r="1.2" fill="#fff"/><circle cx="250" cy="25" r="1.8" fill="#fff"/><circle cx="310" cy="80" r="1.3" fill="#fff"/><circle cx="350" cy="40" r="1.6" fill="#fff"/><circle cx="90" cy="110" r="1.2" fill="#fff"/><circle cx="330" cy="140" r="1.2" fill="#fff"/><circle cx="220" cy="120" r="1.4" fill="#fff"/></g><path id="tr-moon" d="M64 34A24 24 0 1 0 88 62A19 19 0 0 1 64 34Z" fill="#d8e6ff"/><rect y="250" width="390" height="190" fill="#245090"/>
+<svg x="45" y="150" width="300" height="285" viewBox="0 0 200 190" overflow="visible"><g><style>.eo{stroke:var(--l-line,#241a5e);stroke-linejoin:round;stroke-linecap:round}.elit{fill:var(--l-lit,#fff4cf);opacity:.3}.esh{fill:var(--l-shade,#4a3a8c);opacity:.22}.ew{fill:var(--l-windows,transparent);opacity:var(--l-windows-opacity,0)}.esd{fill:var(--l-shadow-color,#10083a);opacity:var(--l-shadow-opacity,.28)}</style><defs><clipPath id="node_12_n_clip"><rect x="-82" y="-22" width="164" height="44" rx="10"/><rect x="-82" y="-22" width="164" height="30" rx="10"/><polygon points="-96,-36 -34,-36 -46,-10 -84,-10"/><rect x="-84" y="-62" width="40" height="26" rx="4"/><rect x="-54" y="-56" width="8" height="20" rx="2"/><rect x="44" y="-124" width="14" height="124" rx="3"/><rect x="-32" y="-126" width="92" height="12" rx="3"/><polygon points="44,-96 44,-114 6,-114"/><rect x="30" y="-118" width="18" height="12" rx="3"/><rect x="-38" y="-70" width="28" height="24" rx="3"/><rect x="50" y="-6" width="12" height="14" rx="2"/></clipPath></defs><g id="node_12_n_shadow" transform="translate(100 150)"><ellipse cx="8" cy="6" rx="90" ry="30" class="esd"/></g><g id="node_12_n_base" transform="translate(100 150)"><rect x="-82" y="-22" width="164" height="44" rx="10" fill="#c6c1b6" class="eo" stroke-width="4.5"/><rect x="-82" y="-22" width="164" height="30" rx="10" fill="#e9e4d6" class="eo" stroke-width="4.5"/><path d="M-70,10L70,10" fill="none" stroke-linecap="round" style="stroke:#c6c1b6" stroke-width="1.2"/><polygon points="-96,-36 -34,-36 -46,-10 -84,-10" fill="#3a2a7a" class="eo" stroke-width="4.5"/><path d="M-90,-30L-38,-30" fill="none" stroke-linecap="round" style="stroke:#fff4d2" stroke-width="2.6"/><rect x="-84" y="-62" width="40" height="26" rx="4" fill="#fff4d2" class="eo" stroke-width="4.5"/><rect x="-54" y="-56" width="8" height="20" rx="2" fill="#8a4fd0" class="eo" stroke-width="2.6"/><path d="M-70,-62L-70,-84" fill="none" stroke-linecap="round" style="stroke:var(--l-line,#241a5e)" stroke-width="2.6"/><rect x="44" y="-124" width="14" height="124" rx="3" fill="#2fb8a8" class="eo" stroke-width="4.5"/><rect x="-32" y="-126" width="92" height="12" rx="3" fill="#2fb8a8" class="eo" stroke-width="4.5"/><polygon points="44,-96 44,-114 6,-114" fill="#2fb8a8" class="eo" stroke-width="2.6"/><rect x="30" y="-118" width="18" height="12" rx="3" fill="#fff4d2" class="eo" stroke-width="2.6"/><path d="M-24,-114L-24,-70" fill="none" stroke-linecap="round" style="stroke:#a06a30" stroke-width="2.6"/><rect x="-38" y="-70" width="28" height="24" rx="3" fill="#c98a45" class="eo" stroke-width="4.5"/><path d="M-38,-70L-10,-46" fill="none" stroke-linecap="round" style="stroke:#a06a30" stroke-width="1.2"/><path d="M-10,-70L-38,-46" fill="none" stroke-linecap="round" style="stroke:#a06a30" stroke-width="1.2"/><rect x="50" y="-6" width="12" height="14" rx="2" fill="#8a4fd0" class="eo" stroke-width="2.6"/><ellipse cx="20" cy="-10" rx="7" ry="5" fill="#fff" class="eo" stroke-width="2.6"/><circle cx="26" cy="-16" r="3.6" fill="#fff" class="eo" stroke-width="2.6"/></g><g id="node_12_n_lit" transform="translate(100 150)" clip-path="url(#node_12_n_clip)"><polygon points="-102,-132 -43.4,-132 -76.2,52 -102,52" class="elit"/></g><g id="node_12_n_shade" transform="translate(100 150)" clip-path="url(#node_12_n_clip)"><polygon points="25.8,-132 88,-132 88,52 -7,52" class="esh"/></g><g id="node_12_n_windows" transform="translate(100 150)"><rect x="-78" y="-56" width="8" height="8" rx="2" class="ew"/><rect x="-64" y="-56" width="8" height="8" rx="2" class="ew"/><rect x="-52" y="-56" width="6" height="8" rx="2" class="ew"/><rect x="33" y="-115" width="12" height="6" rx="2" class="ew"/></g></g></svg></g></g></svg></div></div>
+<h2>غروب ثابت (فقط صحنهٔ ماجرای ۲)</h2><p>گرمای لبه از بالا-چپ + سایهٔ بنفش داخل سیلوئت؛ بازتاب افقی؛ بدون multiply سراسری و بدون دایرهٔ خورشید.</p>
+<div class="fr"><div data-light="dusk"><svg id="tr-dusk" viewBox="0 0 390 440" width="100%" role="img" aria-label="scene"><g data-light="dusk"><rect width="390" height="250" fill="url(#lt-sky-dusk)"/><rect y="190" width="390" height="60" fill="#f2a65a" fill-opacity=".35"/><rect y="250" width="390" height="190" fill="#3679a8"/>
+<svg x="45" y="150" width="300" height="285" viewBox="0 0 200 190" overflow="visible"><g><style>.eo{stroke:var(--l-line,#241a5e);stroke-linejoin:round;stroke-linecap:round}.elit{fill:var(--l-lit,#fff4cf);opacity:.3}.esh{fill:var(--l-shade,#4a3a8c);opacity:.22}.ew{fill:var(--l-windows,transparent);opacity:var(--l-windows-opacity,0)}.esd{fill:var(--l-shadow-color,#10083a);opacity:var(--l-shadow-opacity,.28)}</style><defs><clipPath id="node_12_k_clip"><rect x="-82" y="-22" width="164" height="44" rx="10"/><rect x="-82" y="-22" width="164" height="30" rx="10"/><polygon points="-96,-36 -34,-36 -46,-10 -84,-10"/><rect x="-84" y="-62" width="40" height="26" rx="4"/><rect x="-54" y="-56" width="8" height="20" rx="2"/><rect x="44" y="-124" width="14" height="124" rx="3"/><rect x="-32" y="-126" width="92" height="12" rx="3"/><polygon points="44,-96 44,-114 6,-114"/><rect x="30" y="-118" width="18" height="12" rx="3"/><rect x="-38" y="-70" width="28" height="24" rx="3"/><rect x="50" y="-6" width="12" height="14" rx="2"/></clipPath></defs><g id="node_12_k_shadow" transform="translate(100 150)"><ellipse cx="8" cy="6" rx="90" ry="30" class="esd"/></g><g id="node_12_k_base" transform="translate(100 150)"><rect x="-82" y="-22" width="164" height="44" rx="10" fill="#c6c1b6" class="eo" stroke-width="4.5"/><rect x="-82" y="-22" width="164" height="30" rx="10" fill="#e9e4d6" class="eo" stroke-width="4.5"/><path d="M-70,10L70,10" fill="none" stroke-linecap="round" style="stroke:#c6c1b6" stroke-width="1.2"/><polygon points="-96,-36 -34,-36 -46,-10 -84,-10" fill="#3a2a7a" class="eo" stroke-width="4.5"/><path d="M-90,-30L-38,-30" fill="none" stroke-linecap="round" style="stroke:#fff4d2" stroke-width="2.6"/><rect x="-84" y="-62" width="40" height="26" rx="4" fill="#fff4d2" class="eo" stroke-width="4.5"/><rect x="-54" y="-56" width="8" height="20" rx="2" fill="#8a4fd0" class="eo" stroke-width="2.6"/><path d="M-70,-62L-70,-84" fill="none" stroke-linecap="round" style="stroke:var(--l-line,#241a5e)" stroke-width="2.6"/><rect x="44" y="-124" width="14" height="124" rx="3" fill="#2fb8a8" class="eo" stroke-width="4.5"/><rect x="-32" y="-126" width="92" height="12" rx="3" fill="#2fb8a8" class="eo" stroke-width="4.5"/><polygon points="44,-96 44,-114 6,-114" fill="#2fb8a8" class="eo" stroke-width="2.6"/><rect x="30" y="-118" width="18" height="12" rx="3" fill="#fff4d2" class="eo" stroke-width="2.6"/><path d="M-24,-114L-24,-70" fill="none" stroke-linecap="round" style="stroke:#a06a30" stroke-width="2.6"/><rect x="-38" y="-70" width="28" height="24" rx="3" fill="#c98a45" class="eo" stroke-width="4.5"/><path d="M-38,-70L-10,-46" fill="none" stroke-linecap="round" style="stroke:#a06a30" stroke-width="1.2"/><path d="M-10,-70L-38,-46" fill="none" stroke-linecap="round" style="stroke:#a06a30" stroke-width="1.2"/><rect x="50" y="-6" width="12" height="14" rx="2" fill="#8a4fd0" class="eo" stroke-width="2.6"/><ellipse cx="20" cy="-10" rx="7" ry="5" fill="#fff" class="eo" stroke-width="2.6"/><circle cx="26" cy="-16" r="3.6" fill="#fff" class="eo" stroke-width="2.6"/></g><g id="node_12_k_lit" transform="translate(100 150)" clip-path="url(#node_12_k_clip)"><polygon points="-102,-132 -43.4,-132 -76.2,52 -102,52" class="elit"/></g><g id="node_12_k_shade" transform="translate(100 150)" clip-path="url(#node_12_k_clip)"><polygon points="25.8,-132 88,-132 88,52 -7,52" class="esh"/></g><g id="node_12_k_windows" transform="translate(100 150)"><rect x="-78" y="-56" width="8" height="8" rx="2" class="ew"/><rect x="-64" y="-56" width="8" height="8" rx="2" class="ew"/><rect x="-52" y="-56" width="6" height="8" rx="2" class="ew"/><rect x="33" y="-115" width="12" height="6" rx="2" class="ew"/></g></g></svg></g><use href="#lt-reflect-dusk" transform="translate(240 270)"/><use href="#lt-reflect-dusk" transform="translate(60 330) scale(.8)"/></svg></div></div>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<!-- فقط پشتیبان ابزار ماکت؛ در خروجی نهایی brush در هندسه پخته می‌شود -->
+<filter id="lt-brush" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>
+<linearGradient id="lt-sky-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fdcf2"/><stop offset=".55" stop-color="#d6f1ee"/><stop offset="1" stop-color="#d6f1ee"/></linearGradient>
+<linearGradient id="lt-water-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f87b8"/><stop offset="1" stop-color="#1f87b8"/></linearGradient>
+<linearGradient id="lt-sky-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a3fa0"/><stop offset=".55" stop-color="#e0728a"/><stop offset="1" stop-color="#f2a65a"/></linearGradient>
+<linearGradient id="lt-water-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3679a8"/><stop offset="1" stop-color="#3679a8"/></linearGradient>
+<linearGradient id="lt-sky-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1460"/><stop offset=".55" stop-color="#2a1f7a"/><stop offset="1" stop-color="#2a1f7a"/></linearGradient>
+<linearGradient id="lt-water-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#245090"/><stop offset="1" stop-color="#245090"/></linearGradient>
+<clipPath id="lt-clip-card"><rect width="360" height="240" rx="12"/></clipPath>
+<clipPath id="lt-clip-node"><rect width="200" height="180"/></clipPath>
+<!-- رگهٔ بازتاب آب غروب: خط‌های افقی نه لکه -->
+<g id="lt-reflect-dusk" fill="#ffb27a" fill-opacity=".4"><rect x="0" y="0" width="120" height="3" rx="1.5"/><rect x="20" y="9" width="90" height="3" rx="1.5"/><rect x="40" y="18" width="60" height="3" rx="1.5"/></g>
+</defs></svg>
+
+<script>var s=document.getElementById('scene');function set(v){s.setAttribute('data-light',v)}document.getElementById('b1').onclick=function(){set('day')};document.getElementById('b2').onclick=function(){set('night')};var q=location.search.match(/light=(day|night)/);if(q)set(q[1])</script>
+</body></html>

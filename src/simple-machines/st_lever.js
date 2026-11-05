@@ -85,8 +85,8 @@ function makeLift(A,cfg){const svg=A.svg,P=A.P;A.view(524);svg.setAttribute('rol
       s+=arrow(geo.rock.x,wy,geo.rock.x,wy+st.W*forceScale,8,RED);
       s+=arrow(geo.press.x,sy,geo.press.x,sy+st.S*forceScale,8,"#D9498B");}
     // Force labels stay on a separate row, away from the arrow geometry.
-    s+=T(28,36,KID()?"سنگ":"وزن سنگ: "+fa(st.W)+" نیوتن",{size:20,anchor:"end",halo:false})+
-       T(612,36,KID()?"فشار دست":"نیروی دست: "+fa(st.S)+" نیوتن",{size:20,anchor:"start",halo:false});
+    s+=T(28,36,KID()?"سنگ":"وزن سنگ: "+fa(st.W)+" نیوتون",{size:20,anchor:"end",halo:false})+
+       T(612,36,KID()?"فشار دست":"نیروی دست: "+fa(st.S)+" نیوتون",{size:20,anchor:"start",halo:false});
     s+=`<g data-zone="press" data-focus="press" tabindex="${A.locked?-1:0}" role="button" aria-label="فشار دادن سر راست تخته"><circle cx="${geo.press.x}" cy="${geo.press.y-12}" r="22" fill="#fff" fill-opacity=".03" stroke="#D9498B" stroke-width="2" stroke-dasharray="4 4"/></g>`;
     s+=`<g pointer-events="none">${T(geo.fx,PY+29,"⟷",{size:20,col:"#8A5427",halo:false})}</g>`;
     s+=`<path d="M60 492 H${geo.fx} M${geo.fx} 489 V495 M${geo.fx} 492 H580 M60 489 V495 M580 489 V495" fill="none" stroke="#7D8CA3"/>`;
@@ -102,8 +102,8 @@ function makeLift(A,cfg){const svg=A.svg,P=A.P;A.view(524);svg.setAttribute('rol
         for(const v of [pts[0],pts[24]])s+=`<circle cx="${v.x}" cy="${v.y}" r="4" fill="#7A3FC8" pointer-events="none"/>`;}
       s+=`<path d="${paths.join(' ')}" fill="none" stroke="#7A3FC8" stroke-width="4" stroke-dasharray="5 4" pointer-events="none"/>`;}
     P.paint(s);if(focused)svg.querySelector(`[data-focus="${focused}"]`)?.focus({preventScroll:true});
-    A.counter(`<span class="cc">${KID()?"":`نیروی تعادل: <b class="num">${fa(Math.round(F*10)/10)} نیوتن</b>`}</span>`);
-    A.formula(FX(`${sy("F")} = ${sy("W")} × ${sy("d","بار")} ÷ ${sy("d","دست")}`,`${fa(st.W)} × ${fa(st.f+5)} ÷ ${fa(5-st.f)} = ${fa(Math.round(F*10)/10)} N`,[[sy("F"),"نیروی نگه‌داشتن سنگ؛ برای بلند شدن کمی بیشتر لازم است"],[sy("W"),"وزن سنگ (نیوتن)"],[sy("d","بار"),"بازوی مقاوم"],[sy("d","دست"),"بازوی محرک"]]));
+    A.counter(`<span class="cc">${KID()?"":`نیروی تعادل: <b class="num">${fa(Math.round(F*10)/10)} نیوتون</b>`}</span>`);
+    A.formula(FX(`${sy("F")} = ${sy("W")} × ${sy("d","بار")} ÷ ${sy("d","دست")}`,`${fa(st.W)} × ${fa(st.f+5)} ÷ ${fa(5-st.f)} = ${fa(Math.round(F*10)/10)} N`,[[sy("F"),"نیروی نگه‌داشتن سنگ؛ برای بلند شدن کمی بیشتر لازم است"],[sy("W"),"وزن سنگ (نیوتون)"],[sy("d","بار"),"بازوی مقاوم"],[sy("d","دست"),"بازوی محرک"]]));
     if(window.__TEST||window.__JT){window.__T=window.__T||{};window.__T.lift={f:st.f,a:st.a,W:st.W,S:st.S,need:F,pivot:{x:geo.fx,y:PY},rock:geo.rock,press:geo.press,angle:geo.angle,busy:st.busy};}
   }
   function moveTo(f){if(A.locked||st.busy||cfg.paths)return;st.f=clamp(f,-4,4);st.a=0;render();if(cfg.onChange)cfg.onChange();}
@@ -161,13 +161,13 @@ const ST_lever={key:"lever",name:"اهرم",c:"#D97706",sub:"الاکلنگ، ت
  mount(sp,A){
   if(sp.t==='lift'||sp.t==='liftq'){
     const observe=sp.t==='liftq';
-    A.prompt(observe?'با تکیه‌گاه نزدیک سنگ، تخته را فشار بده. حرکت سنگ و سرِ دست را دنبال کن.':KID()?'تکیه‌گاه نقطه‌ای است که تخته دور آن می‌چرخد. آن را جابه‌جا کن و سر راست تخته را فشار بده تا سنگ بالا برود.':`تکیه‌گاه نقطهٔ چرخش تخته است. سنگ ${fa(sp.W)} نیوتنی را با نیروی دستِ ${fa(sp.S)} نیوتن بلند کن. تکیه‌گاه را جابه‌جا کن و «فشار بده!» را بزن. فاصلهٔ سنگ تا تکیه‌گاه «بازوی مقاوم» و فاصلهٔ دست تا آن «بازوی محرک» است. تخته بی‌وزن است و اصطکاک را نادیده می‌گیریم.`);
+    A.prompt(observe?'با تکیه‌گاه نزدیک سنگ، تخته را فشار بده. حرکت سنگ و سرِ دست را دنبال کن.':KID()?'تکیه‌گاه نقطه‌ای است که تخته دور آن می‌چرخد. آن را جابه‌جا کن و سر راست تخته را فشار بده تا سنگ بالا برود.':`تکیه‌گاه نقطهٔ چرخش تخته است. سنگ ${fa(sp.W)} نیوتونی را با نیروی دستِ ${fa(sp.S)} نیوتون بلند کن. تکیه‌گاه را جابه‌جا کن و «فشار بده!» را بزن. فاصلهٔ سنگ تا تکیه‌گاه «بازوی مقاوم» و فاصلهٔ دست تا آن «بازوی محرک» است. تخته بی‌وزن است و اصطکاک را نادیده می‌گیریم.`);
     const c=A.ctrl('');let go;
     const press=()=>{if(A.locked||lf.st.busy||go.disabled)return;go.disabled=true;lf.push(ok=>{
       if(observe){go.remove();A.prompt('خط‌های بنفش، مسیر سنگ و سرِ دست را نشان می‌دهند. کدام سر تخته مسیر بیشتری رفت؟');
         const m=mcq(c,['سرِ دست که از تکیه‌گاه دورتر است','سرِ سنگ که به تکیه‌گاه نزدیک‌تر است','هر دو یک مسیر رفتند'],(i,b)=>{if(A.locked)return;
           A.judge(i===0,{ok:'سرِ دست از تکیه‌گاه دورتر بود و مسیر بیشتری رفت. در این چیدمان سنگ با نیروی کمتر بالا می‌رود؛ دست مسیر بیشتری طی می‌کند.',retry:'طول دو خط بنفش را مقایسه کن. سر دورتر از تکیه‌گاه مسیر بیشتری می‌رود.',final:'خط سمت راست بلندتر است؛ سرِ دست مسیر بیشتری رفت.'});if(A.locked){m.disable();m.mark(0,'right');}else{m.mark(i,'wrong');b.disabled=true;}});return;}
-      const result=A.trial(ok,{pts:2,ok:KID()?'سنگ بالا رفت. تکیه‌گاه را نزدیک سنگ گذاشتی.':`سنگ بالا رفت. بازوی دست ${fa(5-lf.st.f)} و بازوی سنگ ${fa(lf.st.f+5)} خانه بود؛ نیروی دست از نیروی تعادلِ ${fa(Math.round(lf.need()*10)/10)} نیوتن بیشتر شد.`,
+      const result=A.trial(ok,{pts:2,ok:KID()?'سنگ بالا رفت. تکیه‌گاه را نزدیک سنگ گذاشتی.':`سنگ بالا رفت. بازوی دست ${fa(5-lf.st.f)} و بازوی سنگ ${fa(lf.st.f+5)} خانه بود؛ نیروی دست از نیروی تعادلِ ${fa(Math.round(lf.need()*10)/10)} نیوتون بیشتر شد.`,
         retry:'سنگ بالا نرفت. تکیه‌گاه را به سنگِ سمت چپ نزدیک‌تر کن و دوباره فشار بده.',more:'فاصلهٔ دست از تکیه‌گاه بیشتر و فاصلهٔ سنگ کمتر می‌شود؛ نیروی لازم کاهش می‌یابد.',
         final:'تکیه‌گاه را نزدیک سنگ می‌گذاریم؛ سنگ با همین نیروی دست بالا می‌رود.',show:()=>{lf.st.f=-4;lf.st.a=1;lf.render();go.disabled=true;}});
       if(!result&&!A.locked){go.disabled=false;lf.st.a=0;lf.render();}

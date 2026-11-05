@@ -1,0 +1,45 @@
+{
+ "id": "materials_store",
+ "kind": "city",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  56
+ ],
+ "stand": [
+  26.0,
+  -21.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_materials_store_brick"
+ ],
+ "inside_pad": {
+  "min_margin_px": 10.1,
+  "base_on_pad": true,
+  "height_px": 79.2,
+  "bbox_px": [
+   28.0,
+   43.0,
+   122.8,
+   122.2
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_materials_store_brick": {
+   "layer": "آجر بالای پشته",
+   "dx": 0,
+   "dy_from": -11,
+   "dy_to": 0,
+   "dur_s": 1.2,
+   "note": "هنگام رسیدن: آجر از ۱۱ واحد بالاتر پایین می‌افتد و روی پشته می‌نشیند؛ حالت ایستا = روی پشته؛ بدون حلقهٔ بیکار."
+  },
+  "reduced_motion": "آجر روی پشته (ایستا)"
+ }
+}

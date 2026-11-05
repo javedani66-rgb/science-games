@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 460" font-family="sans-serif" font-size="11">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="12" y="22" font-size="16" font-weight="700" fill="#241a5e">palette day (r2، بر پایهٔ v4؛ نور از بالا-چپ)</text>
+<rect x="12" y="36" width="116" height="34" rx="6" fill="#7fd4ff" stroke="#241a5e" stroke-width="1.4"/><text x="12" y="84" fill="#241a5e">sky0</text><text x="76" y="84" fill="#241a5e" font-family="monospace">#7fd4ff</text>
+<rect x="138" y="36" width="116" height="34" rx="6" fill="#d4f6ff" stroke="#241a5e" stroke-width="1.4"/><text x="138" y="84" fill="#241a5e">sky1</text><text x="202" y="84" fill="#241a5e" font-family="monospace">#d4f6ff</text>
+<rect x="264" y="36" width="116" height="34" rx="6" fill="#d4f6ff" stroke="#241a5e" stroke-width="1.4"/><text x="264" y="84" fill="#241a5e">sky2</text><text x="328" y="84" fill="#241a5e" font-family="monospace">#d4f6ff</text>
+<rect x="390" y="36" width="116" height="34" rx="6" fill="#155f77" stroke="#241a5e" stroke-width="1.4"/><text x="390" y="84" fill="#241a5e">water</text><text x="454" y="84" fill="#241a5e" font-family="monospace">#155f77</text>
+<rect x="12" y="102" width="116" height="34" rx="6" fill="#f6dba0" stroke="#241a5e" stroke-width="1.4"/><text x="12" y="150" fill="#241a5e">pier</text><text x="76" y="150" fill="#241a5e" font-family="monospace">#f6dba0</text>
+<rect x="138" y="102" width="116" height="34" rx="6" fill="#fff6dc" stroke="#241a5e" stroke-width="1.4"/><text x="138" y="150" fill="#241a5e">build</text><text x="202" y="150" fill="#241a5e" font-family="monospace">#fff6dc</text>
+<rect x="264" y="102" width="116" height="34" rx="6" fill="#fff6dc" stroke="#241a5e" stroke-width="1.4"/><text x="264" y="150" fill="#241a5e">lit (rim)</text><text x="328" y="150" fill="#241a5e" font-family="monospace">#fff6dc</text>
+<rect x="390" y="102" width="116" height="34" rx="6" fill="#4b3b9e" stroke="#241a5e" stroke-width="1.4"/><text x="390" y="150" fill="#241a5e">shade</text><text x="454" y="150" fill="#241a5e" font-family="monospace">#4b3b9e</text>
+<rect x="12" y="168" width="116" height="34" rx="6" fill="#10083a" stroke="#241a5e" stroke-width="1.4"/><text x="12" y="216" fill="#241a5e">shadow</text><text x="76" y="216" fill="#241a5e" font-family="monospace">#10083a</text>
+<rect x="138" y="168" width="116" height="34" rx="6" fill="#241a5e" stroke="#241a5e" stroke-width="1.4"/><text x="138" y="216" fill="#241a5e">line</text><text x="202" y="216" fill="#241a5e" font-family="monospace">#241a5e</text>
+<rect x="264" y="168" width="116" height="34" rx="6" fill="none" stroke="#241a5e" stroke-width="1.4"/><text x="264" y="216" fill="#241a5e">windows</text><text x="328" y="216" fill="#241a5e" font-family="monospace">off</text>
+<rect x="390" y="168" width="116" height="34" rx="6" fill="#ffd23f" stroke="#241a5e" stroke-width="1.4"/><text x="390" y="216" fill="#241a5e">accent</text><text x="454" y="216" fill="#241a5e" font-family="monospace">#ffd23f</text>
+<text x="12" y="240" font-weight="700" fill="#241a5e">زمین‌های نقشه (v4 دیده‌شده) + مسیر + سختی</text>
+<rect x="12" y="250" width="116" height="34" rx="6" fill="#469d36" stroke="#241a5e" stroke-width="1.4"/><text x="12" y="298" fill="#241a5e">ورزشگاه</text><text x="76" y="298" fill="#241a5e" font-family="monospace">#469d36</text>
+<rect x="138" y="250" width="116" height="34" rx="6" fill="#c55535" stroke="#241a5e" stroke-width="1.4"/><text x="138" y="298" fill="#241a5e">فضا</text><text x="202" y="298" fill="#241a5e" font-family="monospace">#c55535</text>
+<rect x="264" y="250" width="116" height="34" rx="6" fill="#9d8e16" stroke="#241a5e" stroke-width="1.4"/><text x="264" y="298" fill="#241a5e">مزرعه</text><text x="328" y="298" fill="#241a5e" font-family="monospace">#9d8e16</text>
+<rect x="390" y="250" width="116" height="34" rx="6" fill="#155f77" stroke="#241a5e" stroke-width="1.4"/><text x="390" y="298" fill="#241a5e">شهر/آب</text><text x="454" y="298" fill="#241a5e" font-family="monospace">#155f77</text>
+<rect x="12" y="312" width="116" height="34" rx="6" fill="#d7efff" stroke="#241a5e" stroke-width="1.4"/><text x="12" y="360" fill="#241a5e">یخ</text><text x="76" y="360" fill="#241a5e" font-family="monospace">#d7efff</text>
+<rect x="138" y="312" width="116" height="34" rx="6" fill="#f0d07e" stroke="#241a5e" stroke-width="1.4"/><text x="138" y="360" fill="#241a5e">شن</text><text x="202" y="360" fill="#241a5e" font-family="monospace">#f0d07e</text>
+<rect x="264" y="312" width="116" height="34" rx="6" fill="#fff3c4" stroke="#241a5e" stroke-width="1.4"/><text x="264" y="360" fill="#241a5e">مسیر کرم</text><text x="328" y="360" fill="#241a5e" font-family="monospace">#fff3c4</text>
+<rect x="390" y="312" width="116" height="34" rx="6" fill="#807589" stroke="#241a5e" stroke-width="1.4"/><text x="390" y="360" fill="#241a5e">مسیر مانده</text><text x="454" y="360" fill="#241a5e" font-family="monospace">#807589</text>
+<rect x="12" y="374" width="116" height="34" rx="6" fill="#241a5e" stroke="#241a5e" stroke-width="1.4"/><text x="12" y="422" fill="#241a5e">خط دور</text><text x="76" y="422" fill="#241a5e" font-family="monospace">#241a5e</text>
+<rect x="138" y="374" width="116" height="34" rx="6" fill="#2fa44a" stroke="#241a5e" stroke-width="1.4"/><text x="138" y="422" fill="#241a5e">آسان</text><text x="202" y="422" fill="#241a5e" font-family="monospace">#2fa44a</text>
+<rect x="264" y="374" width="116" height="34" rx="6" fill="#ff9d1c" stroke="#241a5e" stroke-width="1.4"/><text x="264" y="422" fill="#241a5e">متوسط</text><text x="328" y="422" fill="#241a5e" font-family="monospace">#ff9d1c</text>
+<rect x="390" y="374" width="116" height="34" rx="6" fill="#ff4b4b" stroke="#241a5e" stroke-width="1.4"/><text x="390" y="422" fill="#241a5e">سخت</text><text x="454" y="422" fill="#241a5e" font-family="monospace">#ff4b4b</text>
+</svg>

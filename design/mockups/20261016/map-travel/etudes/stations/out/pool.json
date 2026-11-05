@@ -1,0 +1,55 @@
+{
+ "id": "pool",
+ "kind": "sports",
+ "pad": [
+  66.2,
+  31.7,
+  11.5,
+  54
+ ],
+ "stand": [
+  51.5,
+  6.0
+ ],
+ "ring": [
+  0,
+  0,
+  0
+ ],
+ "motion": [
+  "node_pool_ball"
+ ],
+ "inside_pad": {
+  "min_margin_px": 8.9,
+  "base_on_pad": true,
+  "height_px": 71.2,
+  "bbox_px": [
+   32.5,
+   54.5,
+   111.2,
+   125.8
+  ],
+  "ok": true
+ },
+ "motion_spec": {
+  "node_pool_ball": {
+   "kind": "توپ ساحلی روی آب می‌لغزد؛ حالت ایستا = پایان",
+   "translate_symbol_units": [
+    [
+     -12,
+     3
+    ],
+    [
+     0,
+     0
+    ]
+   ],
+   "duration_s": 1.6,
+   "easing": "ease-out",
+   "loop": false,
+   "trigger": "رسیدن کودک (یک‌بار)",
+   "reduced_motion": "ایستا",
+   "note": "بدنه، آب و نردبان ثابت؛ بدون حلقهٔ بیکار (بخش ۰ فهرست)."
+  }
+ }
+}

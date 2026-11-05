@@ -1,0 +1,461 @@
+{
+ "ui": [
+  {
+   "name": "دکمهٔ اصلی: متن ÷ فیروزه‌ای",
+   "fg": "#241a5e",
+   "bg": "#2fb8a8",
+   "min": 4.5,
+   "val": 6.17,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "دکمهٔ ثانویه: متن ÷ کرم",
+   "fg": "#241a5e",
+   "bg": "#fff4d2",
+   "min": 4.5,
+   "val": 13.81,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "نگه‌دار: سفید ÷ بنفش",
+   "fg": "#ffffff",
+   "bg": "#8a4fd0",
+   "min": 4.5,
+   "val": 5.11,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "دکمهٔ فیلم: متن ÷ #d9608f",
+   "fg": "#241a5e",
+   "bg": "#d9608f",
+   "min": 4.5,
+   "val": 4.35,
+   "ok": false,
+   "note": "این hex در ui_tokens.css هنوز #d9608f است؛ :root --ui-pink = #d070c0"
+  },
+  {
+   "name": "دکمهٔ فیلم با --ui-pink: متن ÷ صورتی",
+   "fg": "#241a5e",
+   "bg": "#d070c0",
+   "min": 4.5,
+   "val": 4.88,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "غیرفعال: متن ÷ پس‌زمینه",
+   "fg": "#4a4268",
+   "bg": "#d9d3e8",
+   "min": 3,
+   "val": 6.36,
+   "ok": true,
+   "note": "مستثنا از 4.5 (WCAG)؛ حداقل 3"
+  },
+  {
+   "name": "چیپ غیرفعال: سفید ÷ بنفش",
+   "fg": "#ffffff",
+   "bg": "#3a2a7a",
+   "min": 4.5,
+   "val": 11.72,
+   "ok": true,
+   "note": "متن 14px کوچک"
+  },
+  {
+   "name": "چیپ انتخاب‌شده: خط ÷ کرم",
+   "fg": "#241a5e",
+   "bg": "#fff4d2",
+   "min": 4.5,
+   "val": 13.81,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "پلاک: خط ÷ کرم",
+   "fg": "#241a5e",
+   "bg": "#fff4d2",
+   "min": 4.5,
+   "val": 13.81,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "ورودی: خط ÷ سفید",
+   "fg": "#241a5e",
+   "bg": "#ffffff",
+   "min": 4.5,
+   "val": 15.17,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "کاشی: خط ÷ #d6ecf7",
+   "fg": "#241a5e",
+   "bg": "#d6ecf7",
+   "min": 4.5,
+   "val": 12.42,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "برگهٔ روز: خط ÷ کرم",
+   "fg": "#241a5e",
+   "bg": "#fff4d2",
+   "min": 4.5,
+   "val": 13.81,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "برگهٔ شب: سفید ÷ #190539",
+   "fg": "#ffffff",
+   "bg": "#190539",
+   "min": 4.5,
+   "val": 18.71,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "لبهٔ برگهٔ شب ÷ زمینه",
+   "fg": "#2fb8a8",
+   "bg": "#190539",
+   "min": 3,
+   "val": 7.61,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "حلقهٔ فوکوس روز: بنفش ÷ کرم",
+   "fg": "#3a2a7a",
+   "bg": "#fff4d2",
+   "min": 3,
+   "val": 10.67,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "حلقهٔ فوکوس شب: کرم ÷ #190539",
+   "fg": "#fff4d2",
+   "bg": "#190539",
+   "min": 3,
+   "val": 17.04,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "خط دور دکمه ÷ کرم",
+   "fg": "#241a5e",
+   "bg": "#fff4d2",
+   "min": 3,
+   "val": 13.81,
+   "ok": true,
+   "note": ""
+  },
+  {
+   "name": "لبهٔ زیرین دکمهٔ اصلی (lip) ÷ فیروزه‌ای",
+   "fg": "#1f8a7d",
+   "bg": "#2fb8a8",
+   "min": 1.3,
+   "val": 1.71,
+   "ok": true,
+   "note": "فقط حس ضخامت؛ نه معنا"
+  },
+  {
+   "name": "نقطهٔ «تازه» فیروزه‌ای ÷ کرم",
+   "fg": "#2fb8a8",
+   "bg": "#fff4d2",
+   "min": 1.0,
+   "val": 2.24,
+   "ok": true,
+   "note": "فقط اطلاع؛ با خط دور 2.6 خوانده می‌شود"
+  },
+  {
+   "name": "نقطهٔ «تازه»: خط ÷ فیروزه‌ای",
+   "fg": "#241a5e",
+   "bg": "#2fb8a8",
+   "min": 3,
+   "val": 6.17,
+   "ok": true,
+   "note": ""
+  }
+ ],
+ "ui_hue": [
+  {
+   "name": "btn-video",
+   "hex": "#d9608f",
+   "level": "easy",
+   "dist": 158,
+   "ok": true
+  },
+  {
+   "name": "btn-video",
+   "hex": "#d9608f",
+   "level": "mid",
+   "dist": 57,
+   "ok": true
+  },
+  {
+   "name": "btn-video",
+   "hex": "#d9608f",
+   "level": "hard",
+   "dist": 20,
+   "ok": false
+  },
+  {
+   "name": "ui-pink",
+   "hex": "#d070c0",
+   "level": "easy",
+   "dist": 175,
+   "ok": true
+  },
+  {
+   "name": "ui-pink",
+   "hex": "#d070c0",
+   "level": "mid",
+   "dist": 83,
+   "ok": true
+  },
+  {
+   "name": "ui-pink",
+   "hex": "#d070c0",
+   "level": "hard",
+   "dist": 47,
+   "ok": true
+  },
+  {
+   "name": "btn-hold",
+   "hex": "#8a4fd0",
+   "level": "easy",
+   "dist": 133,
+   "ok": true
+  },
+  {
+   "name": "btn-hold",
+   "hex": "#8a4fd0",
+   "level": "mid",
+   "dist": 126,
+   "ok": true
+  },
+  {
+   "name": "btn-hold",
+   "hex": "#8a4fd0",
+   "level": "hard",
+   "dist": 90,
+   "ok": true
+  },
+  {
+   "name": "teal",
+   "hex": "#2fb8a8",
+   "level": "easy",
+   "dist": 38,
+   "ok": true
+  },
+  {
+   "name": "teal",
+   "hex": "#2fb8a8",
+   "level": "mid",
+   "dist": 140,
+   "ok": true
+  },
+  {
+   "name": "teal",
+   "hex": "#2fb8a8",
+   "level": "hard",
+   "dist": 176,
+   "ok": true
+  },
+  {
+   "name": "tile-bg",
+   "hex": "#d6ecf7",
+   "level": "easy",
+   "dist": 65,
+   "ok": true
+  },
+  {
+   "name": "tile-bg",
+   "hex": "#d6ecf7",
+   "level": "mid",
+   "dist": 167,
+   "ok": true
+  },
+  {
+   "name": "tile-bg",
+   "hex": "#d6ecf7",
+   "level": "hard",
+   "dist": 157,
+   "ok": true
+  }
+ ],
+ "chars": [
+  {
+   "id": "b1",
+   "top": "#2fb8a8",
+   "top_hue_min_dist": 38,
+   "top_ok": true,
+   "top_vs_line": 6.17,
+   "skin_vs_line": 5.26,
+   "hair_vs_skin": 3.96,
+   "top_vs_skin": 1.17,
+   "trim_vs_top": 2.24,
+   "line_vs_bg": {
+    "چمن": 6.83,
+    "فضا": 3.08,
+    "شب": 1.23
+   },
+   "top_vs_bg": {
+    "چمن": 1.11,
+    "فضا": 2.0,
+    "شب": 7.61
+   }
+  },
+  {
+   "id": "b2",
+   "top": "#8a4fd0",
+   "top_hue_min_dist": 90,
+   "top_ok": true,
+   "top_vs_line": 2.97,
+   "skin_vs_line": 1.53,
+   "hair_vs_skin": 1.83,
+   "top_vs_skin": 1.95,
+   "trim_vs_top": 4.65,
+   "line_vs_bg": {
+    "چمن": 6.83,
+    "فضا": 3.08,
+    "شب": 1.23
+   },
+   "top_vs_bg": {
+    "چمن": 2.3,
+    "فضا": 1.04,
+    "شب": 3.66
+   }
+  },
+  {
+   "id": "b3",
+   "top": "#9a3a8a",
+   "top_hue_min_dist": 47,
+   "top_ok": true,
+   "top_vs_line": 2.42,
+   "skin_vs_line": 8.18,
+   "hair_vs_skin": 1.64,
+   "top_vs_skin": 3.38,
+   "trim_vs_top": 5.71,
+   "line_vs_bg": {
+    "چمن": 6.83,
+    "فضا": 3.08,
+    "شب": 1.23
+   },
+   "top_vs_bg": {
+    "چمن": 2.83,
+    "فضا": 1.28,
+    "شب": 2.98
+   }
+  },
+  {
+   "id": "b4",
+   "top": "#2f7bd6",
+   "top_hue_min_dist": 78,
+   "top_ok": true,
+   "top_vs_line": 3.56,
+   "skin_vs_line": 2.64,
+   "hair_vs_skin": 1.53,
+   "top_vs_skin": 1.35,
+   "trim_vs_top": 3.88,
+   "line_vs_bg": {
+    "چمن": 6.83,
+    "فضا": 3.08,
+    "شب": 1.23
+   },
+   "top_vs_bg": {
+    "چمن": 1.92,
+    "فضا": 1.15,
+    "شب": 4.39
+   }
+  },
+  {
+   "id": "b5",
+   "top": "#d070c0",
+   "top_hue_min_dist": 47,
+   "top_ok": true,
+   "top_vs_line": 4.88,
+   "skin_vs_line": 5.26,
+   "hair_vs_skin": 1.25,
+   "top_vs_skin": 1.08,
+   "trim_vs_top": 2.83,
+   "line_vs_bg": {
+    "چمن": 6.83,
+    "فضا": 3.08,
+    "شب": 1.23
+   },
+   "top_vs_bg": {
+    "چمن": 1.4,
+    "فضا": 1.58,
+    "شب": 6.03
+   }
+  },
+  {
+   "id": "b6",
+   "top": "#fff4d2",
+   "top_hue_min_dist": 12,
+   "top_ok": true,
+   "top_vs_line": 13.81,
+   "skin_vs_line": 8.18,
+   "hair_vs_skin": 1.64,
+   "top_vs_skin": 1.69,
+   "trim_vs_top": 5.31,
+   "line_vs_bg": {
+    "چمن": 6.83,
+    "فضا": 3.08,
+    "شب": 1.23
+   },
+   "top_vs_bg": {
+    "چمن": 2.02,
+    "فضا": 4.48,
+    "شب": 17.04
+   }
+  },
+  {
+   "id": "b7",
+   "top": "#1f6f78",
+   "top_hue_min_dist": 51,
+   "top_ok": true,
+   "top_vs_line": 2.6,
+   "skin_vs_line": 2.64,
+   "hair_vs_skin": 3.17,
+   "top_vs_skin": 1.02,
+   "trim_vs_top": 5.31,
+   "line_vs_bg": {
+    "چمن": 6.83,
+    "فضا": 3.08,
+    "شب": 1.23
+   },
+   "top_vs_bg": {
+    "چمن": 2.62,
+    "فضا": 1.18,
+    "شب": 3.21
+   }
+  },
+  {
+   "id": "b8",
+   "top": "#fff4d2",
+   "top_hue_min_dist": 12,
+   "top_ok": true,
+   "top_vs_line": 13.81,
+   "skin_vs_line": 1.53,
+   "hair_vs_skin": 1.83,
+   "top_vs_skin": 9.06,
+   "trim_vs_top": 3.88,
+   "line_vs_bg": {
+    "چمن": 6.83,
+    "فضا": 3.08,
+    "شب": 1.23
+   },
+   "top_vs_bg": {
+    "چمن": 2.02,
+    "فضا": 4.48,
+    "شب": 17.04
+   }
+  }
+ ]
+}
