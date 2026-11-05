@@ -12661,6 +12661,21 @@
    ],
    "text": "برگشت به منوی اول",
    "status": "draft"
+  },
+  "maptravel.hide.enter": {
+   "id": "maptravel.hide.enter",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایین نقشه وقتی کودک به مخفی‌گاه رسیده (به‌جای «بریم به ایستگاه بعد»)",
+   "context_fa": "دکمهٔ پایین نقشه وقتی کودک به مخفی‌گاه رسیده؛ پیش‌نویس (D210)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.enter",
+    "text"
+   ],
+   "text": "برویم داخل مخفی‌گاه",
+   "status": "draft"
   }
  },
  "meta": {
