@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>نقشه و سفر</title>
-<script>if(/^#enter-/.test(location.hash))document.documentElement.className='ent'</script><style>.ent,.ent body{background:#000}.ent #blk{opacity:1}</style>
+<script>if(/^#enter-/.test(location.hash))document.documentElement.className='ent flowx'</script><style>.flowx #rv{display:none}</style><style>.ent,.ent body{background:#000}.ent #blk{opacity:1}</style>
 <style>
 @font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
 @font-face{font-family:Vazirmatn;font-weight:700;src:url(data:font/woff2;base64,{{FONT_VB}}) format("woff2")}
@@ -39,6 +39,13 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
  filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))} /* D81: فقط هالهٔ کرم */
 #bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;min-height:76px}
 #home{position:absolute;top:10px;right:12px;z-index:30;width:52px;height:52px;border-radius:16px;border:3.5px solid var(--navy);background:var(--cream);box-shadow:0 4px 0 var(--edge);display:flex;align-items:center;justify-content:center;padding:0}#home svg{width:30px;height:30px}#home:active{transform:translateY(3px);box-shadow:0 1px 0 var(--edge)}
+#tut{position:fixed;inset:0;z-index:36;pointer-events:auto;opacity:0;transition:opacity .35s}#tut.on{opacity:1}#tut[hidden]{display:none}
+#tut .hole{position:fixed;border-radius:22px;box-shadow:0 0 0 4px #ffd23f,0 0 0 9999px rgba(10,4,32,.62);transition:left .45s cubic-bezier(.22,.9,.25,1),top .45s cubic-bezier(.22,.9,.25,1),width .45s cubic-bezier(.22,.9,.25,1),height .45s cubic-bezier(.22,.9,.25,1);pointer-events:none}
+#tut .card{position:fixed;left:16px;right:16px;max-width:398px;margin:0 auto;background:#fff4d2;border:3.5px solid var(--navy);border-radius:20px;box-shadow:0 5px 0 var(--edge);padding:14px 16px 12px;transition:top .45s cubic-bezier(.22,.9,.25,1)}
+#tut .card p{margin:0 0 12px;font-size:17px;font-weight:700;line-height:1.7;transition:opacity .2s}
+#tut .row{display:flex;gap:10px}#tut .row button{flex:1;min-height:52px;border:3.5px solid var(--navy);border-radius:16px;font-weight:700;font-size:17px;box-shadow:0 4px 0 var(--edge)}
+#tut #tn{background:var(--gold)}#tut #ts{background:#fff;flex:0 0 auto;padding:0 16px}
+@media (prefers-reduced-motion:reduce){#tut,#tut .hole,#tut .card{transition:none}}
 #blk{position:absolute;inset:0;z-index:40;background:#000;opacity:0;pointer-events:none}#dv{position:absolute;left:0;top:0;width:100%;height:520px;pointer-events:none;opacity:0;background:linear-gradient(#031526 0%,rgba(5,35,60,.78) 42%,rgba(8,60,95,0) 100%)}
 #ov{flex-direction:column;gap:12px;animation:ovIn .55s ease both}@keyframes ovIn{from{opacity:0}to{opacity:1}}
 #hs{position:relative;width:100%;max-width:360px;aspect-ratio:1998/1116;overflow:hidden;border:4px solid var(--navy);border-radius:22px;box-shadow:0 6px 0 var(--edge);flex:none;background:#12323a}#ov.nosc #hs{display:none}
@@ -79,7 +86,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <button class="opt" id="o_sea"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6v28" /><path d="M26 8L44 32H26Z" fill="#fff3c4"/><path d="M8 36h36l-6 9H14Z" fill="#ff9a3c"/></svg><span id="t_sea"></span></button>
 <button class="opt soft" id="o_cr"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><path d="M26 44C8 31 7 16 17 12c5-2 8 1 9 5 1-4 4-7 9-5 10 4 9 19-9 32Z" fill="#f08a8a"/></svg><span id="t_cr"></span></button></div>
 <p id="ovn" aria-live="polite"></p><button class="btn" id="ovc"></button></div></div>
-<button id="home" type="button"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 15 16 5l11 10M8.5 12.5V27h15V12.5" fill="none" stroke="#241a5e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 27v-7.5h5V27" fill="none" stroke="#241a5e" stroke-width="3" stroke-linejoin="round"/></svg></button><div id="blk"></div>
+<button id="home" type="button"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 15 16 5l11 10M8.5 12.5V27h15V12.5" fill="none" stroke="#241a5e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 27v-7.5h5V27" fill="none" stroke="#241a5e" stroke-width="3" stroke-linejoin="round"/></svg></button><div id="tut" hidden><div class="hole" id="th"></div><div class="card" role="dialog" aria-live="polite"><p id="tt"></p><div class="row"><button id="tn" type="button"></button><button id="ts" type="button"></button></div></div></div><div id="blk"></div>
 <div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn sec" id="prv" hidden></button><button class="btn" id="fin" hidden></button><button class="btn sec" id="again"></button></div>
 </div>
 <script>
@@ -303,6 +310,20 @@ function status(){$('st').textContent=T('here').replace('%s',NODES[here].title||
 async function finish(){if(busy)return;const b=nxt();if(!b)return;
  if(!done.has(here)){await run(()=>monsterTrail(here,b,leg(here,b)));done.add(here);updateTrail();showPrints(false)}
  await go(b)}
+
+/* D205 (مالک ۵ نوامبر): آموزش کوتاه بار اول روی نقشهٔ بلند (#enter-…-tut). چند گام با نورافکن روی چیز موردنظر؛ «بعدی» و «رد کن» همیشه هست؛ تغییر گام نرم است (بدون پرش). */
+async function tutorial(){const tut=$('tut'),th=$('th'),tt=$('tt'),card=tut.querySelector('.card');
+ const tgt=[()=>document.querySelector('.hit[data-id="'+here+'"]'),()=>document.querySelector('.hit[data-id="'+here+'"]'),()=>$('fin'),()=>$('prv'),()=>$('home')];
+ const steps=[1,2,3,4,5].filter(i=>{const e=tgt[i-1]();return e&&!e.hidden});let k=0;$('ts').textContent=T('tut.skip');
+ function show(){const i=steps[k],e=tgt[i-1](),r=e.getBoundingClientRect(),pad=i<=2?2:6;
+  let x=r.left-pad,y=r.top-pad,w=r.width+2*pad,h=r.height+2*pad;if(i<=2){const c=Math.min(w,h)*0.9;x+=(w-c*1.25)/2;y+=h*.18;w=c*1.25;h=c*.95}
+  th.style.left=x+'px';th.style.top=y+'px';th.style.width=w+'px';th.style.height=h+'px';
+  tt.style.opacity=0;setTimeout(()=>{tt.textContent=T('tut.'+i);tt.style.opacity=1},reduce?0:180);
+  $('tn').textContent=k===steps.length-1?T('tut.done'):T('tut.next');
+  const ch=card.offsetHeight||150,vh=innerHeight;card.style.top=(y+h/2>vh/2?Math.max(12,y-ch-18):Math.min(vh-ch-12,y+h+18))+'px'}
+ const end=()=>{tut.classList.remove('on');setTimeout(()=>{tut.hidden=true},reduce?0:380)};
+ $('tn').onclick=()=>{if(k<steps.length-1){k++;show()}else end()};$('ts').onclick=end;
+ tut.hidden=false;show();void tut.offsetWidth;tut.classList.add('on')}
 $('fin').onclick=finish;
 /* D205: نقشهٔ بلند ← نقشهٔ کلی با فید سیاه (و برعکس، در خود نقشهٔ کلی)؛ پیشرفت و جای کودک در نشانی می‌رود */
 $('home').onclick=async()=>{if(busy)return;busy=true;STA.forEach(a=>{try{a.cancel()}catch(e){}});const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
@@ -437,9 +458,9 @@ let ret=false;try{if(sessionStorage.getItem(RET)||localStorage.getItem(RET)){ses
 if(ret){ORDER.forEach(i=>visited.add(i));ORDER.slice(0,ORDER.indexOf('M12')).forEach(i=>done.add(i));here='M12'}
 /* D190: ورود از منوی ورود (#enter-new = اولین بار از اولین جا؛ #enter-cont = ادامه از «پیست اسکی روی یخ»): نقشه از سیاه باز می‌شود و حرکت رسیدن ایستگاه پخش می‌شود */
 /* D192: از نقشهٔ کلی: #enter-<پیشرفت> یا #enter-<پیشرفت>-<جای رفته> (پیشرفت = جای کودک؛ جای رفته = خانه‌ای که روی نقشهٔ کلی زد) */
-const EN=location.hash.match(/^#enter-(new|cont|[A-Z]\d\d)(?:-([A-Z]\d\d))?$/);
+const EN=location.hash.match(/^#enter-(new|cont|[A-Z]\d\d)(?:-([A-Z]\d\d))?(-tut)?$/);
 if(EN&&!ret){const id=EN[1]==='new'?ORDER[0]:EN[1]==='cont'?'F06':EN[1],ix=Math.max(0,ORDER.indexOf(id));visited.clear();done.clear();ORDER.slice(0,ix+1).forEach(i=>visited.add(i));ORDER.slice(0,ix).forEach(i=>done.add(i));here=ORDER[ix];if(EN[2]&&ORDER.indexOf(EN[2])>=0&&ORDER.indexOf(EN[2])<=ix)here=EN[2]}
-fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}if(EN&&!ret){updateDim();blk.style.opacity=1;addEventListener('load',()=>setTimeout(async()=>{await fadeBlk(1,0,reduce?150:800);playStation(here)},350))}addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
+fit();putAt(here);status();refreshRing();updateTrail();showPrints(false);if(ret){blk.style.opacity=1;setTimeout(()=>{openHide();fadeBlk(1,0,600)},250)}if(EN&&!ret){updateDim();blk.style.opacity=1;addEventListener('load',()=>setTimeout(async()=>{await fadeBlk(1,0,reduce?150:800);playStation(here);if(EN[3])setTimeout(tutorial,reduce?100:1600)},350))}addEventListener('load',()=>{fit();sc.scrollTop=Math.max(0,NODES[here].y*k-sc.clientHeight*.55)});
 </script>
 </body>
 </html>

@@ -150,5 +150,53 @@
   "context_fa": "فقط ماکت",
   "band": "همه",
   "status": "draft"
+ },
+ "name.title": {
+  "text": "اسمت چیه؟",
+  "kind": "button",
+  "where_fa": "تیتر صفحهٔ اسم (بار اول، پیش از انتخاب کاراکتر)",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "name.placeholder": {
+  "text": "اسمت را اینجا بنویس",
+  "kind": "button",
+  "where_fa": "متن خاکستری داخل جای نوشتن اسم",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "name.hint": {
+  "text": "بعد ماجراجویت را انتخاب می‌کنی.",
+  "kind": "button",
+  "where_fa": "زیر جای اسم، تا اسم نوشته نشده",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "name.hello": {
+  "text": "سلام {name}! بزن بریم.",
+  "kind": "button",
+  "where_fa": "زیر جای اسم، وقتی اسم نوشته شد",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "name.go": {
+  "text": "بعدی",
+  "kind": "button",
+  "where_fa": "دکمهٔ رفتن به انتخاب کاراکتر",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "name.back": {
+  "text": "برگشت به منو",
+  "kind": "button",
+  "where_fa": "نام دکمهٔ برگشت (برای صفحه‌خوان)",
+  "context_fa": "پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
  }
 }

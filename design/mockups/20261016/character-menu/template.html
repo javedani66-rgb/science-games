@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>منوی انتخاب کاراکتر</title>
+<script>if(/^#flow/.test(location.hash))document.documentElement.className="flow ent"</script><style>.ent,.ent body{background:#000!important}.ent #fade{opacity:1!important}.flow #rv,.flow #namesec{display:none!important}.flow #app{min-height:100vh}#fade{position:fixed;inset:0;z-index:30;background:#000;opacity:0;pointer-events:none}#cback{display:none}.flow #cback{display:flex;position:absolute;top:12px;right:12px;width:52px;height:52px;border-radius:16px;border:3.5px solid var(--navy);background:#fff4d2;box-shadow:0 4px 0 #120c3a;align-items:center;justify-content:center;z-index:4}#cback svg{width:26px;height:26px}.flow .title{padding-inline:58px;font-size:28px}</style>
 <style>
 @font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
 @font-face{font-family:Vazirmatn;font-weight:700;src:url(data:font/woff2;base64,{{FONT_VB}}) format("woff2")}
@@ -81,6 +82,7 @@ h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-ser
 <div id="rv"><span class="t" id="rvt"></span><span id="rvl"></span><button id="m1" aria-pressed="true"></button><button id="m2" aria-pressed="false"></button><button id="m3"></button></div>
 <div class="toast" id="toast" role="status"></div>
 <main id="app">
+ <button id="cback" type="button" aria-label="برگشت به صفحهٔ اسم"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 7l10 9-10 9" fill="none" stroke="#241a5e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <h1 class="title" id="ttl"></h1>
  <span class="sub" id="sub"></span>
  <div class="chars" id="chars" role="radiogroup"></div>
@@ -91,6 +93,7 @@ h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-ser
  <section class="card sec" id="ofsec"><h2 id="ofh"></h2><span class="sub" id="ofs" style="margin-bottom:12px"></span><div class="outfits" id="outfits" role="radiogroup"></div></section>
  <section class="sec" id="mapsec"><h2 id="mph" style="text-shadow:none"></h2><div class="map" id="map"><div class="road"></div><div class="pl"><i></i><span id="mpl"></span></div><div class="who"><div class="ring"></div><img id="mini" alt=""></div></div></section>
 </main>
+<div id="fade"></div>
 <div class="bar"><button class="go" id="go" disabled></button></div>
 <script>
 const S={{STRINGS}};const R={{REVIEW}};const IMG={{IMAGES}};
@@ -161,7 +164,16 @@ function render(){
  $('ofsec').style.display=has?'block':'none';$('mapsec').style.display=has?'block':'none';
  if(has){$('big').src=IMG.big[st.ch][st.outfit];$('mini').src=IMG.mini[st.ch];$('pname').textContent=st.name.trim()||T('charmenu.myname.plate');$('pcap').textContent=T('charmenu.outfit.'+st.outfit);paint()}
 }
-build();render();
+build();
+/* D205 (مالک ۵ نوامبر): در جریان بار اول (#flow-<اسم>) اسم از صفحهٔ قبل می‌آید و اینجا نوشته نمی‌شود؛ «بریم!» ← نقشهٔ کلی با فید سیاه؛ ماکت: انتخاب فقط در همین نشست */
+const FLOW=/^#flow/.test(location.hash);
+if(FLOW){let n='';try{n=decodeURIComponent(location.hash.slice(6))}catch(e){}if(!n){try{n=sessionStorage.getItem('sw-name')||''}catch(e){}}st.mode='first';st.name=n||'…';
+ $('go').onclick=async()=>{if(!st.ch)return;try{sessionStorage.setItem('sw-char',JSON.stringify({ch:st.ch,color:st.color}))}catch(e){}$('go').disabled=true;
+  await $('fade').animate([{opacity:0},{opacity:1}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?120:600,fill:'forwards'}).finished;try{location.href='overview.html#o-a'}catch(e){}};
+ $('cback').onclick=async()=>{await $('fade').animate([{opacity:0},{opacity:1}],{duration:500,fill:'forwards'}).finished;try{location.href='name.html'}catch(e){}};
+ addEventListener('load',()=>setTimeout(async()=>{const f=$('fade');document.documentElement.classList.remove('ent');f.style.opacity=1;await f.animate([{opacity:1},{opacity:0}],{duration:750,fill:'forwards'}).finished;f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0},200));
+ addEventListener('pageshow',e=>{if(e.persisted){const f=$('fade');f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0;render()}})}
+render();
 </script>
 </body>
 </html>

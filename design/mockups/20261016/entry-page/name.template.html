@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>اسم تو</title>
+<script>document.documentElement.className='ent'</script><style>.ent,.ent body{background:#000!important}.ent #fade{opacity:1!important}</style>
+<link rel="prefetch" href="character.html">
+<style>
+@font-face{font-family:Vazirmatn;font-weight:400;src:url(data:font/woff2;base64,{{FONT_VR}}) format("woff2")}
+@font-face{font-family:Vazirmatn;font-weight:700;src:url(data:font/woff2;base64,{{FONT_VB}}) format("woff2")}
+@font-face{font-family:Lalezar;font-weight:400;src:url(data:font/woff2;base64,{{FONT_L}}) format("woff2")}
+:root{--navy:#241a5e;--edge:#120c3a;--cream:#fff4d2;--teal:#2fb8a8;--ease:cubic-bezier(.22,.9,.25,1);color-scheme:light}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#190539;color:var(--navy);font:400 16px/1.6 Vazirmatn,system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+:focus-visible{outline:4px solid #fff;outline-offset:3px}
+#app{position:relative;max-width:430px;margin:0 auto;height:100%;display:flex;flex-direction:column;align-items:stretch;padding:0 16px;background:radial-gradient(ellipse 80% 38% at 50% 40%,#5a3fb8 0%,rgba(90,63,184,0) 70%),linear-gradient(#2c1470 0%,#190539 100%)}
+#top{flex:none;display:flex;justify-content:flex-start;padding-top:calc(12px + env(safe-area-inset-top,0px))}
+.back{width:56px;height:56px;border-radius:16px;border:3.5px solid var(--navy);background:var(--cream);box-shadow:0 4px 0 var(--edge);display:flex;align-items:center;justify-content:center}
+.back svg{width:28px;height:28px}
+#mid{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;gap:18px;min-height:0}
+h1{margin:0;text-align:center;font:400 40px/1.25 Lalezar,Vazirmatn,sans-serif;color:#fff;-webkit-text-stroke:8px var(--navy);paint-order:stroke fill;text-shadow:0 4px 0 var(--edge);text-wrap:balance}
+.hint{margin:0;text-align:center;color:var(--cream);font-size:17px;font-weight:700}
+input{display:block;width:100%;height:68px;border:4px solid var(--navy);border-radius:20px;background:#fffaf0;padding:0 18px;font:700 26px/1 Vazirmatn,sans-serif;color:var(--navy);text-align:center;box-shadow:0 5px 0 var(--edge)}
+input::placeholder{color:#7a7498;font-weight:400;font-size:20px}
+input:focus{outline:4px solid #ffd23f;outline-offset:3px}
+#bot{flex:none;padding:12px 0 calc(16px + env(safe-area-inset-bottom,0px))}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:64px;border:4px solid var(--navy);border-radius:22px;background:var(--teal);box-shadow:0 5px 0 var(--edge);font:400 32px/1 Lalezar,Vazirmatn,sans-serif;color:var(--navy);transition:transform .12s var(--ease),box-shadow .12s var(--ease)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--edge)}
+.btn[disabled]{background:#9a93bd;color:#3e3770;cursor:default}
+.btn svg{width:28px;height:28px}
+#fade{position:fixed;inset:0;z-index:30;background:#000;opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<main id="app">
+ <div id="top"><button class="back" id="back" type="button"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M12 7l10 9-10 9" fill="none" stroke="#241a5e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+ <div id="mid">
+  <h1 id="ttl"></h1>
+  <input id="nm" type="text" maxlength="14" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="next" aria-labelledby="ttl">
+  <p class="hint" id="hint"></p>
+ </div>
+ <div id="bot"><button class="btn" id="go" disabled><svg viewBox="0 0 32 32" aria-hidden="true" fill="var(--navy)"><path d="M21 6.5v19l-15-9.5z" stroke="var(--navy)" stroke-width="3" stroke-linejoin="round"/></svg><span id="gol"></span></button></div>
+</main>
+<div id="fade"></div>
+<script>
+/* D205 (مالک ۵ نوامبر): بار اول، اسم پیش از انتخاب کاراکتر. ماکت: اسم فقط در همین نشست مرورگر نگه داشته می‌شود و جایی فرستاده نمی‌شود. */
+const S0={{STRINGS}},S=k=>(S0[k]||{}).text||k,$=id=>document.getElementById(id);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('ttl').textContent=S('name.title');$('nm').placeholder=S('name.placeholder');$('gol').textContent=S('name.go');$('back').setAttribute('aria-label',S('name.back'));
+let busy=false;
+const ok=()=>$('nm').value.trim().length>0;
+function upd(){$('go').disabled=!ok();$('hint').textContent=ok()?S('name.hello').replace('{name}',$('nm').value.trim()):S('name.hint')}
+$('nm').addEventListener('input',upd);
+$('nm').addEventListener('keydown',e=>{if(e.key==='Enter'&&ok())$('go').click()});
+try{const v=sessionStorage.getItem('sw-name');if(v)$('nm').value=v}catch(e){}
+upd();
+async function leave(url){if(busy)return;busy=true;$('nm').blur();await $('fade').animate([{opacity:0},{opacity:1}],{duration:reduce?120:600,fill:'forwards'}).finished;try{location.href=url}catch(e){busy=false}}
+$('go').onclick=()=>{if(!ok())return;const n=$('nm').value.trim();try{sessionStorage.setItem('sw-name',n)}catch(e){}leave('character.html#flow-'+encodeURIComponent(n))};
+$('back').onclick=()=>leave('index.html#back');
+addEventListener('load',()=>setTimeout(async()=>{const f=$('fade');document.documentElement.classList.remove('ent');f.style.opacity=1;await f.animate([{opacity:1},{opacity:0}],{duration:reduce?150:750,fill:'forwards'}).finished;f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0},200));
+addEventListener('pageshow',e=>{if(e.persisted){busy=false;const f=$('fade');f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0}});
+</script>
+</body>
+</html>

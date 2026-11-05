@@ -112,7 +112,7 @@ $('go').onclick=async()=>{if(busy)return;busy=true;const g=$('hsv').querySelecto
  if(!reduce){$('hsv').animate([{filter:'brightness(1) drop-shadow(0 10px 18px rgba(8,2,30,.55))'},{filter:'brightness(1.3) saturate(1.1) drop-shadow(0 0 12px rgba(255,244,210,.95)) drop-shadow(0 0 36px rgba(160,130,255,.9))'}],{duration:800,fill:'forwards',easing:'ease-out'});
   if(ST[SYM[mode]])ST[SYM[mode]](g);await wait(2300)}
  const an=f.animate([{opacity:0},{opacity:1}],{duration:reduce?120:650,fill:'forwards'});await an.finished;
- try{location.href='overview.html#o-'+mode}catch(e){}   /* D192: اول نقشهٔ کلی، بعد نقشهٔ بلند */
+ try{location.href=mode==='a'?'name.html':'overview.html#o-'+mode}catch(e){}   /* D205: بار اول ← اسم ← کاراکتر ← نقشهٔ کلی */   /* D192: اول نقشهٔ کلی، بعد نقشهٔ بلند */
  /* صفحهٔ بعد ممکن است روی دستگاه کند دیرتر بیاید؛ فقط اگر بعد از ۱۵ ثانیه هنوز اینجاییم (ناوبری ممکن نشد) پیام ماکت */
  let left=false;addEventListener('pagehide',()=>{left=true},{once:true});await wait(15000);if(left)return;mountHero();sheet(k);an.cancel();busy=false};
 document.querySelectorAll('.tile').forEach(b=>b.onclick=()=>sheet('entry.mock.'+b.dataset.k));

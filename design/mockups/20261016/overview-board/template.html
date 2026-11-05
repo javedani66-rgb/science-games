@@ -177,7 +177,7 @@ function tap(i){const hi=CELLS.findIndex(c=>c.id===HERE[mode]);if(i>hi){shake(i)
 /* رفتن به نقشهٔ بلند: فقط فید به سیاه و بعد نقشه که از سیاه باز می‌شود (مثل بقیهٔ بازی؛ بدون زوم)؛ فقط با لمس کودک (B5) */
 async function enter(i){if(busy)return;busy=true;const hid=HERE[mode],gid=CELLS[i].id,f=$('fade');
  const an=f.animate([{opacity:0},{opacity:1}],{duration:reduce?120:600,fill:'forwards'});await an.finished;
- try{location.href='map.html#enter-'+hid+(gid!==hid?'-'+gid:'')}catch(e){}
+ try{location.href='map.html#enter-'+hid+(gid!==hid?'-'+gid:'')+(mode==='a'?'-tut':'')}catch(e){}
  let left=false;addEventListener('pagehide',()=>{left=true},{once:true});await wait(15000);if(left)return;
  an.cancel();busy=false;sheet('overview.mock.map')}
 /* D205: نقشهٔ کلی ← منوی ورود با فید سیاه */

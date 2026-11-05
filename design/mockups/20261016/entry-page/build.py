@@ -27,6 +27,12 @@ def main():
                      SYMS=SYMS, ANIM=ANIM).items():
         t = t.replace('{{%s}}' % k, v)
     (HERE / 'index.html').write_text(t, encoding='utf-8')
+    # D205: صفحهٔ اسم (بار اول، پیش از کاراکتر) و صفحهٔ کاراکتر (ماکت character-menu در حالت جریان #flow)
+    n = open(HERE / 'name.template.html', encoding='utf-8').read()
+    for k, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'), STRINGS=json.dumps(strings, ensure_ascii=False)).items():
+        n = n.replace('{{%s}}' % k, v)
+    (HERE / 'name.html').write_text(n, encoding='utf-8')
+    shutil.copyfile(HERE.parent / 'character-menu' / 'index.html', HERE / 'character.html')
     a = re.sub(r'<!doctype html>\s*<html[^>]*>\s*<head>\s*<meta[^>]*>\s*<meta[^>]*>\s*', '', t, count=1, flags=re.I)
     a = a.replace('</head>\n<body>', '<div id="root" dir="rtl" lang="fa">', 1).replace('</body>\n</html>', '</div>', 1)
     (HERE / 'artifact.html').write_text(a, encoding='utf-8')
