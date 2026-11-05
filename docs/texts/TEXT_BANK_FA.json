@@ -12676,10 +12676,25 @@
    ],
    "text": "برویم داخل مخفی‌گاه",
    "status": "draft"
+  },
+  "maptravel.hide.bsea": {
+   "id": "maptravel.hide.bsea",
+   "kind": "ui",
+   "where_fa": "حباب گفتگوی صحنهٔ مخفی‌گاه، بالای قایق",
+   "context_fa": "عنوان کوتاه حباب (مالک ۶ نوامبر: عنوان‌ها مثل حباب گفتگو)؛ پیش‌نویس (D214)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.hide.bsea",
+    "text"
+   ],
+   "text": "آب‌های آزاد",
+   "status": "draft"
   }
  },
  "meta": {
-  "updated": "2026-11-05",
+  "updated": "2026-11-06",
   "glossary": {
    "نیرو": "نه «زور»",
    "جرم": "مقدار ماده؛ ترازو، گرم و کیلوگرم",

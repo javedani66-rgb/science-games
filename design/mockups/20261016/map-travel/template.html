@@ -57,6 +57,11 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 #hsm,#hsc{filter:drop-shadow(0 0 1px #fff3c8) drop-shadow(0 0 1px #fff3c8) drop-shadow(0 0 5px rgba(255,243,200,.85))}
 .hsh{position:absolute;border-radius:50%;background:rgba(10,40,50,.38);filter:blur(2px)}#hss1{left:57%;bottom:7%;width:22%;height:3.2%}#hss2{left:39.5%;bottom:5.4%;width:8%;height:2.2%}
 #hsm{left:60%;bottom:9%;height:62%;transform-origin:50% 100%;animation:hsb 3.2s ease-in-out infinite}#hsc{left:41%;bottom:7%;height:40%}@keyframes hsb{50%{transform:scaleY(1.012) translateY(-.4%)}}
+#hs{overflow:visible}#ov:not(.nosc){padding-top:30px}#ov:not(.nosc) #opts{display:none}
+.bb{position:absolute;z-index:5;min-height:48px;min-width:48px;display:flex;align-items:center;justify-content:center;background:#fff4d2;border:3.5px solid #241a5e;border-radius:16px;box-shadow:0 3px 0 #120c3a;padding:4px 12px;font:700 14px/1.3 Vazirmatn,sans-serif;color:#241a5e;white-space:nowrap;transform:translate(-50%,-100%);cursor:pointer;transition:opacity .4s ease,margin .4s ease;animation:bbIn .45s ease both}
+.bb:after{content:"";position:absolute;left:50%;bottom:-11px;width:14px;height:14px;background:#fff4d2;border:3.5px solid #241a5e;border-top:0;border-left:0;transform:translateX(-50%) rotate(45deg)}
+.bb.s{background:#fff;font-size:12px}.bb:active{margin-top:3px}#bb2{animation-delay:.15s}#bb3{animation-delay:.3s}#bb4{animation-delay:.45s}
+#ov.wait .bb{opacity:0;pointer-events:none;animation:none}#ov.nosc .bb{display:none}@keyframes bbIn{from{opacity:0;transform:translate(-50%,-90%) scale(.85)}}@media (prefers-reduced-motion:reduce){.bb{animation:none}}
 #ov:not(.nosc) .opt{min-height:84px}@media (prefers-reduced-motion:reduce){#hsm{animation:none}#ov{animation:none}}
 #ov{position:absolute;inset:0;z-index:30;background:rgba(36,26,94,.78);display:flex;align-items:center;justify-content:center;padding:16px}#ov[hidden]{display:none}
 #ovp{width:100%;max-width:360px;background:var(--cream);border:4px solid var(--navy);border-radius:26px;box-shadow:0 6px 0 var(--edge);padding:16px;display:flex;flex-direction:column;gap:12px;text-align:center}
@@ -84,7 +89,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <div id="boat"><svg width="130" height="130" viewBox="0 0 120 120" aria-hidden="true"><use href="#env_dec_city_sail" width="120" height="120"/></svg></div>
 <div id="fig"><div id="tilt"><img id="fimg" alt=""></div></div>
 </div></div>
-<div id="ov" hidden><div id="hs"><img id="hsb" alt="" src="{{HS_BG}}"><div class="hsh" id="hss1"></div><div class="hsh" id="hss2"></div><img id="hsm" alt="" src="{{HS_MO}}"><img id="hsc" alt="" src="{{HS_CH}}"></div><div id="ovp" role="dialog" aria-modal="true"><p id="ovt"></p>
+<div id="ov" hidden><div id="hs"><img id="hsb" alt="" src="{{HS_BG}}"><div class="hsh" id="hss1"></div><div class="hsh" id="hss2"></div><img id="hsm" alt="" src="{{HS_MO}}"><img id="hsc" alt="" src="{{HS_CH}}"><button class="bb" id="bb1" style="left:19%;top:30%"></button><button class="bb" id="bb2" style="left:22%;top:70%"></button><button class="bb" id="bb3" style="left:86%;top:42%"></button><button class="bb s" id="bb4" style="left:58%;top:13%"></button></div><div id="ovp" role="dialog" aria-modal="true"><p id="ovt"></p>
 <div id="opts"><button class="opt" id="o_rev"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 16A17 17 0 1 0 43 28" fill="#fff3c4"/><path d="M42 6v11H31" fill="#fff3c4"/><circle cx="26" cy="27" r="4" fill="#241a5e"/></svg><span id="t_rev"></span></button>
 <button class="opt" id="o_card"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="14" width="26" height="32" rx="5" fill="#f5a3c7" transform="rotate(-10 19 30)"/><rect x="18" y="8" width="26" height="32" rx="5" fill="#fff3c4" transform="rotate(8 31 24)"/></svg><span id="t_card"></span></button>
 <button class="opt" id="o_sea"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M26 6v28" /><path d="M26 8L44 32H26Z" fill="#fff3c4"/><path d="M8 36h36l-6 9H14Z" fill="#ff9a3c"/></svg><span id="t_sea"></span></button>
@@ -105,7 +110,7 @@ if(PROF&&PROF.fig){if(PROF.fig.sailor)IM.sailor=PROF.fig.sailor;if(PROF.fig.cons
 function saveNow(){if(!PROF||!document.documentElement.classList.contains('flowx'))return;const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
  PROF.here=here;PROF.front=fr;PROF.done=[...done];try{localStorage.setItem(SVK,JSON.stringify(SAVE))}catch(e){}}const PATHD={{PATHD}};const COAST={{COAST}};
 const T=k=>S['maptravel.'+k].text;const $=id=>document.getElementById(id);
-$('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');$('fin').textContent=T('finish');$('prv').textContent=T('prev');$('home').setAttribute('aria-label',T('home'));$('ovt').textContent=T('hide.title');$('t_rev').textContent=T('hide.review');$('t_card').textContent=T('hide.cards');$('t_sea').textContent=T('hide.sea');$('t_cr').textContent=T('hide.credits');$('ovc').textContent=T('hide.close');
+$('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');$('fin').textContent=T('finish');$('prv').textContent=T('prev');$('home').setAttribute('aria-label',T('home'));$('ovt').textContent=T('hide.title');$('t_rev').textContent=T('hide.review');$('t_card').textContent=T('hide.cards');$('t_sea').textContent=T('hide.sea');$('t_cr').textContent=T('hide.credits');$('bb1').textContent=T('hide.review');$('bb2').textContent=T('hide.bsea');$('bb3').textContent=T('hide.cards');$('bb4').textContent=T('hide.credits');[['bb1','o_rev'],['bb2','o_sea'],['bb3','o_card'],['bb4','o_cr']].forEach(([a,b])=>$(a).onclick=e=>{e.stopPropagation();$(b).click()});$('ovc').textContent=T('hide.close');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let skip=false,busy=false;
 const sc=$('sc'),world=$('world'),fig=$('fig'),tilt=$('tilt'),fimg=$('fimg'),boat=$('boat');
 let k=1;
@@ -347,7 +352,7 @@ addEventListener('pageshow',e=>{if(e.persisted){blk.style.opacity=1;fadeBlk(1,0,
 const ov=$('ov'),ovn=$('ovn');let atSea=false;
 let HT=0;
 /* D211 (مالک ۵ نوامبر): ورود به مخفی‌گاه: اول فقط تصویر درون مخفی‌گاه با هیولا و کودک؛ بعد از ~۲٫۴ ثانیه (یا لمس تصویر) پیام و گزینه‌ها بالا می‌آید */
-function openHide(){ovn.textContent='';ov.classList.remove('nosc');clearTimeout(HT);if(!reduce){ov.classList.add('wait');HT=setTimeout(()=>ov.classList.remove('wait'),2400)}else ov.classList.remove('wait');ov.hidden=false}
+function openHide(){if(PROF&&PROF.fig&&PROF.fig.sailor)$('hsc').src=PROF.fig.sailor;/* D214: بچهٔ مخفی‌گاه همان کاراکتر انتخابیِ هر کودک است، نه تصویر ثابت */ovn.textContent='';ov.classList.remove('nosc');clearTimeout(HT);if(!reduce){ov.classList.add('wait');HT=setTimeout(()=>ov.classList.remove('wait'),2400)}else ov.classList.remove('wait');ov.hidden=false}
 $('hs').addEventListener('click',()=>{clearTimeout(HT);ov.classList.remove('wait')});
 $('ovc').onclick=()=>{ov.hidden=true;$('ovt').textContent=T('hide.title');$('opts').hidden=false;$('ovc').textContent=T('hide.close');if(atSea)seaBack()};
 /* D184: هر گزینهٔ خروج از مخفی‌گاه = سفر قایق به آب‌های ناشناخته (آب تیره‌تر می‌شود) ← خروج از کادر ← فید سیاه ← مقصد (ماکت: پیام)؛ برگشت: فید از سیاه + قایق از بالا */
