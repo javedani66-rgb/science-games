@@ -198,6 +198,8 @@ KIT_NODES = {'screw_workshop': 'M10', 'lumber': 'E03', 'wheel_dock': 'M02', 'pie
 KIT_XY = {'M01': (118, 2627), 'B01': (284, 2495), 'B02': (108, 2363), 'M04': (288, 2231), 'M05': (104, 2099), 'M06': (280, 1967), 'E05': (112, 1835), 'M03': (286, 1703), 'M10': (256, 1385), 'E03': (158, 1251), 'M02': (302, 1119), 'M07': (140, 959), 'M08': (250, 759), 'M11': (162, 524), 'E06': (250, 324), 'E04': (140, 192), 'M12': (272, 96), 'M09': (118, 1543)}   # مرکز سکو = مرکز گره
 _SL = json.load(open(EA / 'slots.json', encoding='utf-8'))['slots']
 for _n in ('F01', 'F02', 'F03', 'F04', 'F05', 'F06', 'F07', 'F08', 'F09', 'W01', 'W02', 'W03', 'W04', 'E01', 'E02', 'E07'): KIT_XY[_n] = tuple(_SL[_n]['base_center'])   # D175
+NUDGE = {'F02': (-20, 2), 'E07': (-18, 4)}   # مالک ۵ نوامبر: تخته بسکتبال و سقف/دستهٔ چاه روی راه افتاده بودند؛ ایستگاه (و نامش) کمی از راه دور شد
+for _n, (_dx, _dy) in NUDGE.items(): KIT_XY[_n] = (KIT_XY[_n][0] + _dx, KIT_XY[_n][1] + _dy)
 E03_SH = '<ellipse cx=\"7\" cy=\"21\" rx=\"46\" ry=\"18.5\" fill=\"#10083a\" opacity=\".3\"/>'
 
 WAVE_AVOID = []
@@ -369,6 +371,9 @@ def main():
                      STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False),
                      NODES=json.dumps(nodes, ensure_ascii=False), PATHD=json.dumps(d['path_d']), IMAGES=json.dumps(im), HS_BG=HSU[0], HS_MO=HSU[1], HS_CH=HSU[2], H=str(H), COAST=str(COAST)).items():
         t = t.replace('{{%s}}' % k, v)
+    for _n, _t in (('F02', 'سالن بسکتبال'), ('E07', 'چاه آب')):
+        _m = re.search(r'<text x="([\d.]+)" y="([\d.]+)"([^>]*)>' + _t + '</text>', t); assert _m, _t
+        t = t.replace(_m.group(0), '<text x="%g" y="%g"%s>%s</text>' % (float(_m.group(1)) + NUDGE[_n][0], float(_m.group(2)) + NUDGE[_n][1], _m.group(3), _t), 1)
     # مالک ۵ نوامبر: «خطوط کنار جاده و رودخونه ... پرش داره» = فیلتر لرزش رستری (env_wob) روی راه، رود، پل و نقطه‌چین دریا پله‌پله می‌سازد؛ برداشته شد (مثل M10، D107)
     for a_, b_ in (('<g id="env_path" filter="url(#env_wob)">', '<g id="env_path">'), ('<g filter="url(#env_wob)"><use href="#env_river"', '<g><use href="#env_river"'),
                    ('<g id="seadots" filter="url(#env_wob)">', '<g id="seadots">'), ('scale(1 1.45)" filter="url(#env_wob)"><use href="#env_bridge"', 'scale(1 1.45)"><use href="#env_bridge"'),
