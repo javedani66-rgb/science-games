@@ -38,7 +38,7 @@ def main():
     t = (HERE / 'template.html').read_text(encoding='utf-8')
     for key, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
                        STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False), SYMS=syms,
-                       CELLS=json.dumps(cells, ensure_ascii=False), LANDS=json.dumps({l: c for l, _, c, _ in LANDS}), FIGS=json.dumps(figs)).items():
+                       CELLS=json.dumps(cells, ensure_ascii=False), LANDS=json.dumps({l: c for l, _, c, _ in LANDS}), FIGS=json.dumps(figs), LANDO=json.dumps({l: o for l, _, _, o in LANDS})).items():
         t = t.replace('{{%s}}' % key, v)
     (HERE / 'index.html').write_text(t, encoding='utf-8')
     a = re.sub(r'<!doctype html>\s*<html[^>]*>\s*<head>\s*<meta[^>]*>\s*<meta[^>]*>\s*', '', t, count=1, flags=re.I)

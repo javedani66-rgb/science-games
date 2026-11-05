@@ -62,7 +62,10 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>{{SYMS}}</defs></svg>
 <div id="shd" hidden><div id="sheet" role="dialog" aria-modal="true"><p id="sm"></p><button class="btn btn2" id="sx"></button></div></div>
 <script>
-const S0={{STRINGS}},R={{REVIEW}},CELLS={{CELLS}},LANDC={{LANDS}},FIG={{FIGS}};
+const S0={{STRINGS}},R={{REVIEW}},CELLS={{CELLS}},LANDC={{LANDS}},FIG={{FIGS}},LANDO={{LANDO}};
+/* D206: پروندهٔ کودک روی همین دستگاه؛ آدمک = کاراکتر و رنگ انتخاب‌شده */
+const SAVE=(()=>{try{const s=JSON.parse(localStorage.getItem('sw-save-v1'));return s&&s.profiles&&s.profiles[s.cur]||null}catch(e){return null}})();
+if(SAVE&&SAVE.fig)for(const l in LANDO)if(SAVE.fig[LANDO[l]])FIG[l]=SAVE.fig[LANDO[l]];
 document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','fa');
 const S=k=>(S0[k]||{}).text||k,$=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -70,8 +73,9 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,wait=ms=>new
 const HERE={a:'F01',b:'F06',t:'M11'};
 const HM=location.hash.match(/^#o-(?:([abt])|([A-Z]\d\d)(?:-([A-Z]\d\d))?)$/)||[];
 let mode=HM[1]||(HM[2]?'x':'b');if(HM[2]){HERE.x=HM[2]}
+let SAT=null;if(!location.hash&&SAVE&&SAVE.front){mode='x';HERE.x=SAVE.front;SAT=SAVE.here}
 /* D205: جای کودک (حلقه و آدمک) می‌تواند پشت سر مرز پیشرفت باشد، اگر روی نقشهٔ بلند به ایستگاه قبل برگشته */
-const atId=()=>mode==='x'&&HM[3]?HM[3]:HERE[mode];
+const atId=()=>mode==='x'&&(HM[3]||SAT)?(HM[3]||SAT):HERE[mode];
 /* زبان تصویری = نقشهٔ بلند به‌صورت جمع‌وجور: بافت زمین هر سرزمین، راه خاکستری با خط سرمه‌ای و خط‌چین کرم، ردپای بنفش روی راه رفته،
    روی دریا راه نقطه‌چین (B70)، نماد هر ایستگاه مستقیم روی زمین (بدون جعبه)، تیک و حلقهٔ زرد و آدمک همان نقشه.
    راه مارپیچ از پایین راست؛ هر ردیف از لبه تا لبه، پس آخرین ایستگاه هر ردیف درست زیر اولین ایستگاه ردیف بعد است و راه عمودی آن دو را وصل می‌کند. */

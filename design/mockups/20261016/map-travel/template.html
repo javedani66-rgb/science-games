@@ -94,7 +94,12 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn sec" id="prv" hidden></button><button class="btn" id="fin" hidden></button><button class="btn sec" id="again"></button></div>
 </div>
 <script>
-const S={{STRINGS}};const REV={{REVIEW}};const NODES={{NODES}};const IM={{IMAGES}};const PATHD={{PATHD}};const COAST={{COAST}};
+const S={{STRINGS}};const REV={{REVIEW}};const NODES={{NODES}};const IM={{IMAGES}};
+/* D206: پروندهٔ کودک روی همین دستگاه (حافظهٔ مرورگر، کلید sw-save-v1): آدمک = کاراکتر و رنگ انتخاب‌شده؛ جای کودک و ایستگاه‌های تمام‌شده بعد از هر اتفاق بی‌صدا ذخیره می‌شود */
+const SVK='sw-save-v1',SAVE=(()=>{try{const s=JSON.parse(localStorage.getItem(SVK));return s&&s.profiles&&s.profiles[s.cur]?s:null}catch(e){return null}})(),PROF=SAVE?SAVE.profiles[SAVE.cur]:null;
+if(PROF&&PROF.fig){if(PROF.fig.sailor)IM.sailor=PROF.fig.sailor;if(PROF.fig.construction)IM.construction=PROF.fig.construction}
+function saveNow(){if(!PROF||!document.documentElement.classList.contains('flowx'))return;const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
+ PROF.here=here;PROF.front=fr;PROF.done=[...done];try{localStorage.setItem(SVK,JSON.stringify(SAVE))}catch(e){}}const PATHD={{PATHD}};const COAST={{COAST}};
 const T=k=>S['maptravel.'+k].text;const $=id=>document.getElementById(id);
 $('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');$('fin').textContent=T('finish');$('prv').textContent=T('prev');$('home').setAttribute('aria-label',T('home'));$('ovt').textContent=T('hide.title');$('t_rev').textContent=T('hide.review');$('t_card').textContent=T('hide.cards');$('t_sea').textContent=T('hide.sea');$('t_cr').textContent=T('hide.credits');$('ovc').textContent=T('hide.close');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let skip=false,busy=false;
@@ -310,7 +315,7 @@ async function run(fn){if(busy)return;busy=true;skip=false;$('fin').hidden=true;
 /* D205 (مالک ۵ نوامبر): گذر ایستگاه به ایستگاه فقط روی نقشه و بدون فید: «بریم به ایستگاه بعد» (ردپای هیولا می‌آید و کودک راه می‌افتد) یا «برگردیم به ایستگاه قبل» */
 function nxt(){const i=ORDER.indexOf(here),b=ORDER[i+1];if(!b||b==='M12'&&ORDER.slice(0,ORDER.indexOf('M12')).some(x=>x!==here&&!done.has(x)))return null;return b}
 function prv(){const i=ORDER.indexOf(here);return i>0?ORDER[i-1]:null}
-function status(){$('st').textContent=T('here').replace('%s',NODES[here].title||'');$('fin').hidden=!nxt()||busy;$('prv').hidden=!prv()||busy}
+function status(){saveNow();$('st').textContent=T('here').replace('%s',NODES[here].title||'');$('fin').hidden=!nxt()||busy;$('prv').hidden=!prv()||busy}
 async function finish(){if(busy)return;const b=nxt();if(!b)return;
  if(!done.has(here)){await run(()=>monsterTrail(here,b,leg(here,b)));done.add(here);updateTrail();showPrints(false)}
  await go(b)}
@@ -325,7 +330,7 @@ async function tutorial(){const tut=$('tut'),th=$('th'),tt=$('tt'),card=tut.quer
   tt.style.opacity=0;setTimeout(()=>{tt.textContent=T('tut.'+i);tt.style.opacity=1},reduce?0:180);
   $('tn').textContent=k===steps.length-1?T('tut.done'):T('tut.next');
   const ch=card.offsetHeight||150,vh=innerHeight;card.style.top=(y+h/2>vh/2?Math.max(12,y-ch-18):Math.min(vh-ch-12,y+h+18))+'px'}
- const end=()=>{tut.classList.remove('on');setTimeout(()=>{tut.hidden=true},reduce?0:380)};
+ const end=()=>{if(PROF){PROF.tut=true;saveNow()}tut.classList.remove('on');setTimeout(()=>{tut.hidden=true},reduce?0:380)};
  $('tn').onclick=()=>{if(k<steps.length-1){k++;show()}else end()};$('ts').onclick=end;
  tut.hidden=false;show();void tut.offsetWidth;tut.classList.add('on')}
 $('fin').onclick=finish;

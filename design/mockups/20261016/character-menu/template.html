@@ -168,7 +168,11 @@ build();
 /* D205 (مالک ۵ نوامبر): در جریان بار اول (#flow-<اسم>) اسم از صفحهٔ قبل می‌آید و اینجا نوشته نمی‌شود؛ «بریم!» ← نقشهٔ کلی با فید سیاه؛ ماکت: انتخاب فقط در همین نشست */
 const FLOW=/^#flow/.test(location.hash);
 if(FLOW){let n='';try{n=decodeURIComponent(location.hash.slice(6))}catch(e){}if(!n){try{n=sessionStorage.getItem('sw-name')||''}catch(e){}}st.mode='first';st.name=n||'…';
- $('go').onclick=async()=>{if(!st.ch)return;try{sessionStorage.setItem('sw-char',JSON.stringify({ch:st.ch,color:st.color}))}catch(e){}$('go').disabled=true;
+ $('go').onclick=async()=>{if(!st.ch)return;$('go').disabled=true;
+  /* D206: پرونده‌ی کودک روی همین دستگاه (حافظهٔ مرورگر)؛ آدمک نقشه با همین کاراکتر و رنگ لباس */
+  const tgt=COLORS[st.color][3],fig={};
+  for(const o of ['construction','sailor','sports','astronaut','farmer']){try{const src=IMG.big[st.ch][o],u=tgt===null?src:await tint(st.ch,o,src,tgt),im=await load(u),h=200,w=Math.round(im.naturalWidth*h/im.naturalHeight),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);fig[o]=c.toDataURL('image/webp',.82)}catch(e){}}
+  try{const P={name:st.name,ch:st.ch,color:st.color,fig,here:'F01',front:'F01',done:[],tut:false};localStorage.setItem('sw-save-v1',JSON.stringify({v:1,cur:'p1',profiles:{p1:P}}))}catch(e){}
   await $('fade').animate([{opacity:0},{opacity:1}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?120:600,fill:'forwards'}).finished;try{location.href='overview.html#o-a'}catch(e){}};
  $('cback').onclick=async()=>{await $('fade').animate([{opacity:0},{opacity:1}],{duration:500,fill:'forwards'}).finished;try{location.href='name.html'}catch(e){}};
  addEventListener('load',()=>setTimeout(async()=>{const f=$('fade');document.documentElement.classList.remove('ent');f.style.opacity=1;await f.animate([{opacity:1},{opacity:0}],{duration:750,fill:'forwards'}).finished;f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0},200));
