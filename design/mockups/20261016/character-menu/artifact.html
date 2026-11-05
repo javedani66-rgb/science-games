@@ -16,7 +16,7 @@ img{display:block;max-width:100%}
 #rv button{background:#fff;color:#2b3a2b;border-radius:999px;padding:0 12px;height:30px;font-size:14px;font-weight:700}
 #rv button[aria-pressed=true]{background:var(--gold)}
 #app{max-width:430px;margin:0 auto;background:var(--sky);min-height:calc(100vh - 40px);padding:18px 16px 112px;position:relative}
-.title{margin:4px 0 6px;text-align:center;font:400 32px/1.3 Lalezar,Vazirmatn,sans-serif;color:var(--cream);-webkit-text-stroke:6px var(--navy);paint-order:stroke fill;text-shadow:0 3px 0 var(--edge);word-spacing:.6em}
+.title{margin:4px 0 6px;text-align:center;font:400 32px/1.3 Lalezar,Vazirmatn,sans-serif;color:var(--cream);-webkit-text-stroke:6px var(--navy);paint-order:stroke fill;text-shadow:0 3px 0 var(--edge);word-spacing:.22em}
 .sub{display:block;width:fit-content;max-width:100%;margin:0 auto 16px;text-align:center;background:var(--cream);border:2.6px solid var(--navy);border-radius:24px;padding:4px 16px;font-size:16px}
 h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-serif;color:var(--navy)}
 .card{background:var(--cream);border:3.5px solid var(--navy);border-radius:28px;box-shadow:0 4px 0 var(--edge);padding:14px 12px}
@@ -136,7 +136,7 @@ async function tint(ch,o,src,tgt){
  let sS=0,sV=0,nn=0;for(let q=0;q<hs.length;q++){if(vs[q]>0||ss[q]>0){sS+=ss[q];sV+=vs[q];nn++}}
  const mv=nn?sV/nn:0,kS=nn?Math.min(2,Math.max(1,.85/(sS/nn))):1,kV=nn?Math.min(2,Math.max(1,.88/(sV/nn))):1;
  for(let k=0,q=0;k<p.length;k+=4,q++){if(m[k]<128||p[k+3]<128)continue;
-  let off=((hs[q]-mean+540)%360)-180,hh=tgt==='gray'?hs[q]:(tgt+(Math.abs(off)>60?0:off*.3)+720)%360,s=tgt==='gray'?ss[q]*.1:Math.min(1,ss[q]*kS),v=tgt==='gray'?vs[q]:Math.min(1,(mv+(vs[q]-mv)*.6)*kV);
+  let off=((hs[q]-mean+540)%360)-180,hh=tgt==='gray'?hs[q]:(tgt+(Math.abs(off)>60?0:off*.3)+720)%360,s=tgt==='gray'?ss[q]*.1:Math.min(1,ss[q]*kS),v=tgt==='gray'?vs[q]*.62:Math.min(1,(mv+(vs[q]-mv)*.6)*kV);
   const cc=v*s,xx=cc*(1-Math.abs((hh/60)%2-1)),mm=v-cc,i=Math.floor(hh/60)%6;
   const rgb=[[cc,xx,0],[xx,cc,0],[0,cc,xx],[0,xx,cc],[xx,0,cc],[cc,0,xx]][i];
   p[k]=(rgb[0]+mm)*255;p[k+1]=(rgb[1]+mm)*255;p[k+2]=(rgb[2]+mm)*255}
@@ -160,13 +160,17 @@ function render(){
  if(has){$('big').src=IMG.big[st.ch][st.outfit];$('mini').src=IMG.mini[st.ch];$('pname').textContent=st.name.trim()||T('charmenu.myname.plate');$('pcap').textContent=T('charmenu.outfit.'+st.outfit);paint()}
 }
 build();
+/* کوچک کردن باکیفیت (نصف‌نصف) تا آدمک روی نقشه تار و کم‌رنگ نشود (مالک ۵ نوامبر) */
+function shrink(im,h){let src=im,w0=im.naturalWidth,h0=im.naturalHeight;const W=Math.round(w0*h/h0);
+ while(h0/2>=h){const c=document.createElement('canvas');c.width=Math.round(w0/2);c.height=Math.round(h0/2);const x=c.getContext('2d');x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';x.drawImage(src,0,0,c.width,c.height);src=c;w0=c.width;h0=c.height}
+ const c=document.createElement('canvas');c.width=W;c.height=h;const x=c.getContext('2d');x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';x.drawImage(src,0,0,W,h);return c.toDataURL('image/webp',.92)}
 /* D205 (مالک ۵ نوامبر): در جریان بار اول (#flow-<اسم>) اسم از صفحهٔ قبل می‌آید و اینجا نوشته نمی‌شود؛ «بریم!» ← نقشهٔ کلی با فید سیاه؛ ماکت: انتخاب فقط در همین نشست */
 const FLOW=/^#flow/.test(location.hash);
 if(FLOW){let n='';try{n=decodeURIComponent(location.hash.slice(6))}catch(e){}if(!n){try{n=sessionStorage.getItem('sw-name')||''}catch(e){}}st.mode='first';st.name=n||'…';
  $('go').onclick=async()=>{if(!st.ch)return;$('go').disabled=true;
   /* D206: پرونده‌ی کودک روی همین دستگاه (حافظهٔ مرورگر)؛ آدمک نقشه با همین کاراکتر و رنگ لباس */
   const tgt=COLORS[st.color][3],fig={};
-  for(const o of ['construction','sailor','sports','astronaut','farmer']){try{const src=IMG.big[st.ch][o],u=tgt===null?src:await tint(st.ch,o,src,tgt),im=await load(u),h=200,w=Math.round(im.naturalWidth*h/im.naturalHeight),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);fig[o]=c.toDataURL('image/webp',.82)}catch(e){}}
+  for(const o of ['construction','sailor','sports','astronaut','farmer']){try{const src=IMG.big[st.ch][o],u=tgt===null?src:await tint(st.ch,o,src,tgt),im=await load(u);fig[o]=shrink(im,300)}catch(e){}}
   try{const P={name:st.name,ch:st.ch,color:st.color,fig,here:'F01',front:'F01',done:[],tut:false};localStorage.setItem('sw-save-v1',JSON.stringify({v:1,cur:'p1',profiles:{p1:P}}))}catch(e){}
   await $('fade').animate([{opacity:0},{opacity:1}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?120:600,fill:'forwards'}).finished;try{location.href='overview.html#o-a'}catch(e){}};
  $('cback').onclick=async()=>{await $('fade').animate([{opacity:0},{opacity:1}],{duration:500,fill:'forwards'}).finished;try{location.href='name.html'}catch(e){}};
