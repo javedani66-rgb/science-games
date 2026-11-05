@@ -380,6 +380,8 @@ def main():
                    ("jet.id='jetty';jet.setAttribute('filter','url(#env_wob)');", "jet.id='jetty';")):
         assert a_ in t, a_
         t = t.replace(a_, b_)
+    t, _bad = re.subn(r'<path d="M[-\d.,]+l[-\d.]+,[-\d.]+,-?[\d.]+" fill="none"[^>]*/>', '', t)   # D209: چهار مسیر ناقص قدیمی (نمادهای ۰۱ ۰۵ ۰۷ ۰۸، خطای کنسول) برداشته شد
+    print('bad paths removed', _bad)
     (HERE / 'index.html').write_text(t, encoding='utf-8')
     a = re.sub(r'<!doctype html>\s*<html[^>]*>\s*<head>\s*<meta[^>]*>\s*<meta[^>]*>\s*', '', t, count=1, flags=re.I)
     a = a.replace('</head>\n<body data-light="day">', '<div id="root" dir="rtl" lang="fa" data-light="day">', 1).replace('</body>\n</html>', '</div>', 1)
