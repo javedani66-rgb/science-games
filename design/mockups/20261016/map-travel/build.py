@@ -369,6 +369,12 @@ def main():
                      STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False),
                      NODES=json.dumps(nodes, ensure_ascii=False), PATHD=json.dumps(d['path_d']), IMAGES=json.dumps(im), HS_BG=HSU[0], HS_MO=HSU[1], HS_CH=HSU[2], H=str(H), COAST=str(COAST)).items():
         t = t.replace('{{%s}}' % k, v)
+    # مالک ۵ نوامبر: «خطوط کنار جاده و رودخونه ... پرش داره» = فیلتر لرزش رستری (env_wob) روی راه، رود، پل و نقطه‌چین دریا پله‌پله می‌سازد؛ برداشته شد (مثل M10، D107)
+    for a_, b_ in (('<g id="env_path" filter="url(#env_wob)">', '<g id="env_path">'), ('<g filter="url(#env_wob)"><use href="#env_river"', '<g><use href="#env_river"'),
+                   ('<g id="seadots" filter="url(#env_wob)">', '<g id="seadots">'), ('scale(1 1.45)" filter="url(#env_wob)"><use href="#env_bridge"', 'scale(1 1.45)"><use href="#env_bridge"'),
+                   ("jet.id='jetty';jet.setAttribute('filter','url(#env_wob)');", "jet.id='jetty';")):
+        assert a_ in t, a_
+        t = t.replace(a_, b_)
     (HERE / 'index.html').write_text(t, encoding='utf-8')
     a = re.sub(r'<!doctype html>\s*<html[^>]*>\s*<head>\s*<meta[^>]*>\s*<meta[^>]*>\s*', '', t, count=1, flags=re.I)
     a = a.replace('</head>\n<body data-light="day">', '<div id="root" dir="rtl" lang="fa" data-light="day">', 1).replace('</body>\n</html>', '</div>', 1)
