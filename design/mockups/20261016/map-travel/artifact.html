@@ -149,7 +149,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .foam{position:absolute;left:0;top:0;width:26px;height:10px;margin:-5px 0 0 -13px;border-radius:50%;background:var(--cream);opacity:0;pointer-events:none}
 #fig{position:absolute;left:0;top:0;transform-origin:0 0;pointer-events:none}
 #tilt{transform-origin:50% 58%}
-#fimg{height:56px;width:auto;max-width:none;display:block;transform-origin:50% 100%;
+#fimg{height:76px;width:auto;max-width:none;display:block;transform-origin:50% 100%;
  filter:drop-shadow(2.5px 0 0 var(--cream)) drop-shadow(-2.5px 0 0 var(--cream)) drop-shadow(0 2.5px 0 var(--cream)) drop-shadow(0 -2.5px 0 var(--cream))} /* D81: فقط هالهٔ کرم (D220 برگشت: مالک نخواست خط دور عوض شود) */
 #bar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;min-height:76px}
 #home{position:absolute;top:10px;right:12px;z-index:30;width:52px;height:52px;border-radius:16px;border:3.5px solid var(--navy);background:var(--cream);box-shadow:0 4px 0 var(--edge);display:flex;align-items:center;justify-content:center;padding:0}#home svg{width:30px;height:30px}#home:active{transform:translateY(3px);box-shadow:0 1px 0 var(--edge)}
@@ -162,7 +162,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 @media (prefers-reduced-motion:reduce){#tut,#tut .hole,#tut .card{transition:none}}
 #endsea{position:fixed;inset:0;z-index:38;overflow:hidden;background:#165f77}#endsea[hidden]{display:none}
 #endsea svg.bg{position:absolute;left:0;top:0;width:100%;will-change:transform}
-#esb{position:absolute;left:0;top:0;width:0;height:0;will-change:transform}#esb svg{position:absolute;left:-65px;top:-65px;width:130px;height:130px}#esb img{position:absolute;height:56px;width:auto;left:0;top:27px;transform:translate(-50%,-100%)}
+#esb{position:absolute;left:0;top:0;width:0;height:0;will-change:transform}#esb svg{position:absolute;left:-65px;top:-65px;width:130px;height:130px}#esb img{position:absolute;height:76px;width:auto;left:0;top:27px;transform:translate(-50%,-100%)}
 #esm{position:absolute;left:16px;right:16px;top:12%;margin:0;text-align:center;font:400 34px/1.35 Lalezar,Vazirmatn,sans-serif;color:#fff4d2;-webkit-text-stroke:7px var(--navy);paint-order:stroke fill;text-shadow:0 4px 0 var(--edge);opacity:0;transition:opacity .9s;text-wrap:balance}
 #blk{position:absolute;inset:0;z-index:40;background:#000;opacity:0;pointer-events:none}#dv{position:absolute;left:0;top:0;width:100%;height:520px;pointer-events:none;opacity:0;background:linear-gradient(#031526 0%,rgba(5,35,60,.78) 42%,rgba(8,60,95,0) 100%)}
 #ov{flex-direction:column;gap:12px;animation:ovIn .55s ease both}#ovp{transition:opacity .55s ease,transform .55s ease}#ov.wait #ovp{opacity:0;transform:translateY(26px);pointer-events:none}@keyframes ovIn{from{opacity:0}to{opacity:1}}
@@ -255,7 +255,7 @@ function crisp(url,cssH,done){const dpr=Math.max(1,devicePixelRatio||1),H=Math.m
   x.putImageData(d,0,0);const u=c.toDataURL('image/webp',.95);CR.set(key,u);done(u)}catch(e){done(url)}};im.src=url}
 function crispEl(el,src){const isSvg=el.tagName.toLowerCase()==='image',set=u=>isSvg?el.setAttribute('href',u):(el.src=u);crisp(src,el.getBoundingClientRect().height||el.offsetHeight||80,set)}
 
-const fcss=()=>{const h=document.getElementById('fimg').getBoundingClientRect().height;return h>20?h:56*Math.min(2,innerWidth/390)};
+const fcss=()=>{const h=document.getElementById('fimg').getBoundingClientRect().height;return h>20?h:76*Math.min(2,innerWidth/390)};
 ['sailor','construction'].forEach(k=>{const old=IM[k];crisp(old,fcss(),u=>{IM[k]=u;{const f=document.getElementById('fimg');if(f&&f.src===old)f.src=u}})});
 
 function saveNow(){if(!PROF||!document.documentElement.classList.contains('flowx'))return;const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
@@ -374,7 +374,7 @@ const DN={};let dnReady=false;const BADGE='<ellipse cx="1.5" cy="3.5" rx="12.5" 
 function updateDone(){const L=document.getElementById('dnlayer');if(!L)return;const NS='http://www.w3.org/2000/svg';for(const id of ORDER){const on=done.has(id);let g=DN[id];if(on&&!g){const n=NODES[id];g=DN[id]=document.createElementNS(NS,'g');g.setAttribute('transform','translate('+(n.x+44)+' '+(n.y+25)+')');g.innerHTML='<g'+(dnReady?' class="pop"':'')+'>'+BADGE+'</g>';L.appendChild(g)}else if(!on&&g){g.remove();delete DN[id]}}dnReady=true} /* D173: تیک «انجام‌شد» هم‌جا با قفل، سبز نعنایی با خط سرمه‌ای */
 function updateTrail(){updateDone();trail.innerHTML='';let P=[];for(let k=0;k<=ORDER.length-2;k++)if(done.has(ORDER[k]))P=P.concat(legDots(k));if(!P.length)return;trail.innerHTML=dotSvg(P,5,3.2,'#241a5e','#b07af0',1,1)} /* R19: نقطه‌های بنفشِ مسیرِ رفته مثل ردپا می‌مانند؛ پاک نمی‌شوند */
 /* کاراکتر و قایق */
-const SEAT=27,FH=56;
+const SEAT=27,FH=76;
 const scaleAt=()=>1;
 function setOutfit(sea){fimg.src=sea?IM.sailor:IM.construction}
 function placeFig(x,y){fig.style.transform='translate('+x+'px,'+y+'px) translate(-50%,-100%)'}
