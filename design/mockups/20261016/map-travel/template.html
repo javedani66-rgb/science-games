@@ -122,10 +122,11 @@ const S={{STRINGS}};const REV={{REVIEW}};const NODES={{NODES}};const IM={{IMAGES
 /* D206: پروندهٔ کودک روی همین دستگاه (حافظهٔ مرورگر، کلید sw-save-v1): آدمک = کاراکتر و رنگ انتخاب‌شده؛ جای کودک و ایستگاه‌های تمام‌شده بعد از هر اتفاق بی‌صدا ذخیره می‌شود */
 const SVK='sw-save-v1',SAVE=(()=>{try{const s=JSON.parse(localStorage.getItem(SVK));return s&&s.profiles&&s.profiles[s.cur]?s:null}catch(e){return null}})(),PROF=SAVE?SAVE.profiles[SAVE.cur]:null;
 if(PROF&&PROF.fig){if(PROF.fig.sailor)IM.sailor=PROF.fig.sailor;if(PROF.fig.construction)IM.construction=PROF.fig.construction}
-/* D210: شکل کاراکتر روی نقشه ۵٫۶ برابر کوچک می‌شد و محو بود؛ اینجا چندمرحله‌ای تا ۱۷۰ پیکسل کوچک می‌شود */
-['sailor','construction'].forEach(k=>{const old=IM[k],im=new Image();im.onload=()=>{try{let src=im,w0=im.naturalWidth,h0=im.naturalHeight;const H=170;if(h0<=H*1.3)return;const W=Math.round(w0*H/h0);
- while(h0/2>=H){const c=document.createElement('canvas');c.width=Math.round(w0/2);c.height=Math.round(h0/2);const x=c.getContext('2d');x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';x.drawImage(src,0,0,c.width,c.height);src=c;w0=c.width;h0=c.height}
- const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');x.imageSmoothingEnabled=true;x.imageSmoothingQuality='high';x.drawImage(src,0,0,W,H);const u=c.toDataURL('image/webp',.92);IM[k]=u;if(typeof fimg!=='undefined'&&fimg.src===old)fimg.src=u}catch(e){}};im.src=old});
+/* D217: وضوح کاراکترها. تصویر منبع (۳۶۰ تا ۴۲۰ پیکسل) برای هر نمایش، چندمرحله‌ای (نصف‌نصف) تا اندازهٔ واقعیِ روی صفحه × چگالی پیکسل کوچک می‌شود و یک تیز‌کنندهٔ ملایم می‌گیرد؛ کوچک‌کردن یک‌مرحله‌ایِ مرورگر خطوط نازک را گل‌آلود می‌کند */
+{{CRISP}}
+const fcss=()=>{const h=document.getElementById('fimg').getBoundingClientRect().height;return h>20?h:56*Math.min(2,innerWidth/390)};
+['sailor','construction'].forEach(k=>{const old=IM[k];crisp(old,fcss(),u=>{IM[k]=u;{const f=document.getElementById('fimg');if(f&&f.src===old)f.src=u}})});
+
 function saveNow(){if(!PROF||!document.documentElement.classList.contains('flowx'))return;const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
  PROF.here=here;PROF.front=fr;PROF.done=[...done];try{localStorage.setItem(SVK,JSON.stringify(SAVE))}catch(e){}}const PATHD={{PATHD}};const COAST={{COAST}};
 const T=k=>S['maptravel.'+k].text;const $=id=>document.getElementById(id);
@@ -394,7 +395,7 @@ addEventListener('pageshow',e=>{if(e.persisted){blk.style.opacity=1;fadeBlk(1,0,
 const ov=$('ov'),ovn=$('ovn');let atSea=false;
 let HT=0;
 /* D211 (مالک ۵ نوامبر): ورود به مخفی‌گاه: اول فقط تصویر درون مخفی‌گاه با هیولا و کودک؛ بعد از ~۲٫۴ ثانیه (یا لمس تصویر) پیام و گزینه‌ها بالا می‌آید */
-function openHide(){if(PROF&&PROF.fig&&PROF.fig.sailor)$('hsc').src=PROF.fig.sailor;/* D214: بچهٔ مخفی‌گاه همان کاراکتر انتخابیِ هر کودک است، نه تصویر ثابت */ovn.textContent='';ov.classList.remove('nosc');clearTimeout(HT);if(!reduce){ov.classList.add('wait');HT=setTimeout(()=>ov.classList.remove('wait'),2400)}else ov.classList.remove('wait');ov.hidden=false}
+function openHide(){crispEl($('hsc'),(PROF&&PROF.fig&&PROF.fig.sailor)||IM.hsc0||$('hsc').src);crispEl($('hsm'),$('hsm').dataset.o||($('hsm').dataset.o=$('hsm').src));/* D214: بچهٔ مخفی‌گاه همان کاراکتر انتخابیِ هر کودک است، نه تصویر ثابت */ovn.textContent='';ov.classList.remove('nosc');clearTimeout(HT);if(!reduce){ov.classList.add('wait');HT=setTimeout(()=>ov.classList.remove('wait'),2400)}else ov.classList.remove('wait');ov.hidden=false}
 $('hs').addEventListener('click',()=>{clearTimeout(HT);ov.classList.remove('wait')});
 $('ovc').onclick=()=>{ov.hidden=true;$('ovt').textContent=T('hide.title');$('opts').hidden=false;$('ovc').textContent=T('hide.close');if(atSea)seaBack()};
 /* D184: هر گزینهٔ خروج از مخفی‌گاه = سفر قایق به آب‌های ناشناخته (آب تیره‌تر می‌شود) ← خروج از کادر ← فید سیاه ← مقصد (ماکت: پیام)؛ برگشت: فید از سیاه + قایق از بالا */

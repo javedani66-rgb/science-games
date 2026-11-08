@@ -382,11 +382,11 @@ def main():
     HSU = re.findall(r'data:[a-z/+]+;base64,[A-Za-z0-9+/=]+', (HERE.parent / 'hideout-scene' / 'index.html').read_text(encoding='utf-8')); assert len(HSU) == 3   # D185: صحنهٔ مخفی‌گاه (ماکت ۱۶ اکتبر)
     im = {}
     for o in ['sailor', 'construction']:
-        im[o] = enc(scaled(Image.open(CACHE / o / 'nima.webp').convert('RGBA'), 200))
+        im[o] = enc(scaled(Image.open(CACHE / o / 'nima.webp').convert('RGBA'), 360))
     f = lambda p: base64.b64encode(open(ROOT / 'assets/fonts' / p, 'rb').read()).decode()
     t = open(HERE / 'template.html', encoding='utf-8').read()
     sym = re.search(r'<symbol id="env_dec_city_sail".*?</symbol>', (EA / 'sprite_env.svg').read_text(encoding='utf-8'), re.S).group(0)
-    for k, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
+    for k, v in dict(CRISP=(HERE.parent / 'shared' / 'crisp.js').read_text(encoding='utf-8'), FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
                      LIGHTCSS=style, SPRITE=clean_strips(add_assets(sprite if 'env_dec_city_sail' in sprite else sprite.replace('</defs>', sym + '</defs>', 1))), MAPSVG=mapsvg,
                      STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False),
                      NODES=json.dumps(nodes, ensure_ascii=False), PATHD=json.dumps(d['path_d']), IMAGES=json.dumps(im), ENVIMG=json.dumps(_envimgs()), HS_BG=HSU[0], HS_MO=HSU[1], HS_CH=HSU[2], H=str(H), COAST=str(COAST)).items():

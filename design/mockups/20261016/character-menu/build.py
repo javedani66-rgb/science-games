@@ -9,7 +9,7 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 spec = importlib.util.spec_from_file_location('mk', ROOT / 'design/characters/tools/make_cutouts.py')
 mk = importlib.util.module_from_spec(spec); spec.loader.exec_module(mk)
-CACHE = HERE / '_cache'
+CACHE = HERE / '_cache'   # D217: برش‌ها ۷۲۰ پیکسل (پیش‌تر ۴۲۰ بود و روی گوشی‌های پرچگالی محو می‌شد)
 NAMES, OUTFITS = mk.NAMES, mk.OUTFITS
 
 
@@ -19,7 +19,7 @@ def ensure_cache():
         for n in NAMES:
             p = CACHE / o / f'{n}.webp'
             if not p.exists():
-                mk.cutout(mk.src_path(o, n), 420).save(p, quality=80, method=6)
+                mk.cutout(mk.src_path(o, n), 720).save(p, quality=82, method=6)
 
 
 def enc(im, q=78):
@@ -47,11 +47,11 @@ def images():
     out = dict(head={}, big={}, thumbc={}, thumb={}, mini={}, mask={})
     for n in NAMES:
         b = load('base', n)
-        out['head'][n] = enc(scaled(head_crop(b), 190))
-        out['mini'][n] = enc(scaled(b, 180))
+        out['head'][n] = enc(scaled(head_crop(b), 300))
+        out['mini'][n] = enc(scaled(b, 300))
         out['mask'][n] = {o: enc_mask(ROOT / 'design/characters/recolor-masks' / o / f'{n}.png') for o in OUTFITS}
-        out['big'][n] = {o: enc(load(o, n), 80) for o in OUTFITS}
-        out['thumbc'][n] = {o: enc(scaled(load(o, n), 150)) for o in OUTFITS}
+        out['big'][n] = {o: enc(scaled(load(o, n), 600), 80) for o in OUTFITS}
+        out['thumbc'][n] = {o: enc(scaled(load(o, n), 260)) for o in OUTFITS}
     out['thumb'] = out['thumbc']['nima']
     return out
 
@@ -61,7 +61,7 @@ def main():
     review = json.load(open(HERE / 'review.fa.json', encoding='utf-8'))
     f = lambda p: base64.b64encode(open(ROOT / 'assets/fonts' / p, 'rb').read()).decode()
     t = open(HERE / 'template.html', encoding='utf-8').read()
-    for k, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
+    for k, v in dict(CRISP=(HERE.parent / 'shared' / 'crisp.js').read_text(encoding='utf-8'), FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
                      STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False),
                      IMAGES=json.dumps(images(), ensure_ascii=False)).items():
         t = t.replace('{{%s}}' % k, v)

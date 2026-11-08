@@ -96,6 +96,7 @@ h2{margin:0 0 8px;text-align:center;font:400 24px/1.3 Lalezar,Vazirmatn,sans-ser
 <div id="fade"></div>
 <div class="bar"><button class="go" id="go" disabled></button></div>
 <script>
+{{CRISP}}
 const S={{STRINGS}};const R={{REVIEW}};const IMG={{IMAGES}};
 const CHARS=['nima','roya','sam','tara','mani','goli'];
 const COLORS=[['original','#fff3c4','ring',null],['blue','#3d7be8','circle',215],['teal','#1bb5b0','square',180],['violet','#8a4fe0','triangle',275],['magenta','#c14fd0','diamond',315],['gray','#6b7490','hexagon','gray'],['red','#e0343a','cross',356],['yellow','#f2b400','pent',46]];
@@ -149,7 +150,7 @@ async function tint(ch,o,src,tgt){
 let tok=0;
 async function paint(){
  const my=++tok,tgt=COLORS[st.color][3],ch=st.ch;if(!ch)return;
- const set=async(el,src,o)=>{const u=tgt===null?src:await tint(ch,o,src,tgt);if(my===tok)el.src=u};
+ const set=async(el,src,o)=>{const u=tgt===null?src:await tint(ch,o,src,tgt);if(my===tok)crisp(u,el.getBoundingClientRect().height||el.offsetHeight||100,v=>{if(my===tok)el.src=v})};
  await Promise.all([set($('big'),IMG.big[ch][st.outfit],st.outfit),set($('mini'),IMG.mini[ch],'base'),
   ...[...document.querySelectorAll('.of img')].map(im=>set(im,IMG.thumbc[ch][im.dataset.o],im.dataset.o))])}
 function render(){
@@ -175,13 +176,14 @@ if(FLOW){let n='';try{n=decodeURIComponent(location.hash.slice(6))}catch(e){}if(
  $('go').onclick=async()=>{if(!st.ch)return;$('go').disabled=true;
   /* D206: پرونده‌ی کودک روی همین دستگاه (حافظهٔ مرورگر)؛ آدمک نقشه با همین کاراکتر و رنگ لباس */
   const tgt=COLORS[st.color][3],fig={};
-  for(const o of ['construction','sailor','sports','astronaut','farmer']){try{const src=IMG.big[st.ch][o],u=tgt===null?src:await tint(st.ch,o,src,tgt),im=await load(u);fig[o]=shrink(im,300)}catch(e){}}
+  for(const o of ['construction','sailor','sports','astronaut','farmer']){try{const src=IMG.big[st.ch][o],u=tgt===null?src:await tint(st.ch,o,src,tgt),im=await load(u);fig[o]=shrink(im,420)}catch(e){}}
   try{const P={name:st.name,ch:st.ch,color:st.color,fig,here:'F01',front:'F01',done:[],tut:false};localStorage.setItem('sw-save-v1',JSON.stringify({v:1,cur:'p1',profiles:{p1:P}}))}catch(e){}
   await $('fade').animate([{opacity:0},{opacity:1}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?120:600,fill:'forwards'}).finished;try{location.href='overview.html#o-a'}catch(e){}};
  $('cback').onclick=async()=>{await $('fade').animate([{opacity:0},{opacity:1}],{duration:380,fill:'forwards'}).finished;try{location.href='name.html'}catch(e){}};
  addEventListener('load',()=>setTimeout(async()=>{const f=$('fade');document.documentElement.classList.remove('ent');f.style.opacity=1;await f.animate([{opacity:1},{opacity:0}],{duration:480,fill:'forwards'}).finished;f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0},30));
  addEventListener('pageshow',e=>{if(e.persisted){const f=$('fade');f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0;render()}})}
 render();
+requestAnimationFrame(()=>setTimeout(()=>document.querySelectorAll('.char .hd img').forEach(im=>crispEl(im,im.getAttribute('src'))),50));
 </script>
 </body>
 </html>

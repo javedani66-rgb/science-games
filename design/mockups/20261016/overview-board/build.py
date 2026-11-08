@@ -36,7 +36,7 @@ def main():
     review = json.load(open(HERE / 'review.fa.json', encoding='utf-8'))
     f = lambda p: base64.b64encode(open(ROOT / 'assets/fonts' / p, 'rb').read()).decode()
     t = (HERE / 'template.html').read_text(encoding='utf-8')
-    for key, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
+    for key, v in dict(CRISP=(HERE.parent / 'shared' / 'crisp.js').read_text(encoding='utf-8'), FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
                        STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False), SYMS=syms,
                        CELLS=json.dumps(cells, ensure_ascii=False), LANDS=json.dumps({l: c for l, _, c, _ in LANDS}), FIGS=json.dumps(figs), LANDO=json.dumps({l: o for l, _, _, o in LANDS})).items():
         t = t.replace('{{%s}}' % key, v)

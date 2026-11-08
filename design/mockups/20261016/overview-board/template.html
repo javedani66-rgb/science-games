@@ -62,6 +62,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>{{SYMS}}</defs></svg>
 <div id="shd" hidden><div id="sheet" role="dialog" aria-modal="true"><p id="sm"></p><button class="btn btn2" id="sx"></button></div></div>
 <script>
+{{CRISP}}
 const S0={{STRINGS}},R={{REVIEW}},CELLS={{CELLS}},LANDC={{LANDS}},FIG={{FIGS}},LANDO={{LANDO}};
 /* D206: پروندهٔ کودک روی همین دستگاه؛ آدمک = کاراکتر و رنگ انتخاب‌شده */
 const SAVE=(()=>{try{const s=JSON.parse(localStorage.getItem('sw-save-v1'));return s&&s.profiles&&s.profiles[s.cur]||null}catch(e){return null}})();
@@ -165,6 +166,7 @@ function draw(){
    sg.appendChild(el('image',{href:FIG[c.land],x:fx-fh*.33,y:fy-fh,height:fh,width:fh*.66,preserveAspectRatio:'xMidYMax meet','aria-hidden':'true'}))}
   sg.addEventListener('click',()=>tap(i));sg.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tap(i)}});
   bd.appendChild(sg)}
+ setTimeout(()=>bd.querySelectorAll('image[aria-hidden]').forEach(im=>crispEl(im,im.getAttribute('href'))),0);
  bd.appendChild(el('rect',{width:W,height:H,rx:28,fill:'none',stroke:'#241a5e','stroke-width':5}));
  $('here').textContent=S('overview.here').replace('{place}',CELLS[ai].title);
 }
