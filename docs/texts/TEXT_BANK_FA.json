@@ -12691,6 +12691,261 @@
    ],
    "text": "آب‌های آزاد",
    "status": "draft"
+  },
+  "maptravel.env.go": {
+   "id": "maptravel.env.go",
+   "kind": "ui",
+   "where_fa": "دکمهٔ نوار پایین نقشه، وقتی کودک روی ایستگاهی ایستاده",
+   "context_fa": "باز کردن صفحهٔ محیط ایستگاه؛ جملهٔ مالک (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.go",
+    "text"
+   ],
+   "text": "بریم به این مرحله",
+   "status": "draft"
+  },
+  "maptravel.env.back": {
+   "id": "maptravel.env.back",
+   "kind": "ui",
+   "where_fa": "دکمهٔ صفحهٔ محیط",
+   "context_fa": "بازگشت فقط با انتخاب کودک (B5) (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.back",
+    "text"
+   ],
+   "text": "برگردیم به نقشه",
+   "status": "draft"
+  },
+  "maptravel.env.start": {
+   "id": "maptravel.env.start",
+   "kind": "ui",
+   "where_fa": "دکمهٔ شروع چالش در صفحهٔ محیط",
+   "context_fa": "از ماکت قدیمی جریان (flow.env.start) (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.start",
+    "text"
+   ],
+   "text": "بزن بریم!",
+   "status": "draft"
+  },
+  "maptravel.env.tap": {
+   "id": "maptravel.env.tap",
+   "kind": "ui",
+   "where_fa": "راهنمای زیر پشتهٔ کارت‌ها",
+   "context_fa": "از ماکت قدیمی جریان (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.tap",
+    "text"
+   ],
+   "text": "کارت پشتی را بزن تا بیاید جلو. روی کارت جلو بزن تا شروع کنی.",
+   "status": "draft"
+  },
+  "maptravel.env.pending": {
+   "id": "maptravel.env.pending",
+   "kind": "ui",
+   "where_fa": "برچسب کارت‌های موقت",
+   "context_fa": "از ماکت قدیمی جریان (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.pending",
+    "text"
+   ],
+   "text": "این چالش داره آماده می‌شه؛ زود برمی‌گردیم!",
+   "status": "draft"
+  },
+  "maptravel.env.tmpimg": {
+   "id": "maptravel.env.tmpimg",
+   "kind": "ui",
+   "where_fa": "برچسب جای هنر در کارت‌های موقت",
+   "context_fa": " (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.tmpimg",
+    "text"
+   ],
+   "text": "تصویر موقت",
+   "status": "draft"
+  },
+  "maptravel.env.scene.note": {
+   "id": "maptravel.env.scene.note",
+   "kind": "ui",
+   "where_fa": "یادداشت صحنهٔ چالش",
+   "context_fa": "ماکت، نه بازی (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.scene.note",
+    "text"
+   ],
+   "text": "صحنهٔ بازی در گام ۳ ساخته می‌شود. این فقط ماکت است.",
+   "status": "draft"
+  },
+  "maptravel.env.scene.back": {
+   "id": "maptravel.env.scene.back",
+   "kind": "ui",
+   "where_fa": "دکمهٔ صحنهٔ چالش",
+   "context_fa": " (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.scene.back",
+    "text"
+   ],
+   "text": "برگردیم به کارت‌ها",
+   "status": "draft"
+  },
+  "maptravel.env.tier.green": {
+   "id": "maptravel.env.tier.green",
+   "kind": "ui",
+   "where_fa": "نام کارت موقت",
+   "context_fa": "نام رنگ سختی (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.tier.green",
+    "text"
+   ],
+   "text": "چالش سبز",
+   "status": "draft"
+  },
+  "maptravel.env.tier.orange": {
+   "id": "maptravel.env.tier.orange",
+   "kind": "ui",
+   "where_fa": "نام کارت موقت",
+   "context_fa": "نام رنگ سختی (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.tier.orange",
+    "text"
+   ],
+   "text": "چالش نارنجی",
+   "status": "draft"
+  },
+  "maptravel.env.tier.red": {
+   "id": "maptravel.env.tier.red",
+   "kind": "ui",
+   "where_fa": "نام کارت موقت",
+   "context_fa": "نام رنگ سختی (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.tier.red",
+    "text"
+   ],
+   "text": "چالش قرمز",
+   "status": "draft"
+  },
+  "maptravel.env.harbor.green.title": {
+   "id": "maptravel.env.harbor.green.title",
+   "kind": "ui",
+   "where_fa": "عنوان کارت چالش اسکله",
+   "context_fa": "از ماکت قدیمی جریان (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.harbor.green.title",
+    "text"
+   ],
+   "text": "اسکلهٔ ماهیگیری",
+   "status": "draft"
+  },
+  "maptravel.env.harbor.green.ready": {
+   "id": "maptravel.env.harbor.green.ready",
+   "kind": "ui",
+   "where_fa": "جملهٔ پایین کارت اسکله",
+   "context_fa": "از ماکت قدیمی جریان (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.harbor.green.ready",
+    "text"
+   ],
+   "text": "تو می‌تونی؛ بزن بریم!",
+   "status": "draft"
+  },
+  "maptravel.env.harbor.orange.title": {
+   "id": "maptravel.env.harbor.orange.title",
+   "kind": "ui",
+   "where_fa": "عنوان کارت چالش اسکله",
+   "context_fa": "از ماکت قدیمی جریان (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.harbor.orange.title",
+    "text"
+   ],
+   "text": "اسکلهٔ دزدان دریایی",
+   "status": "draft"
+  },
+  "maptravel.env.harbor.orange.ready": {
+   "id": "maptravel.env.harbor.orange.ready",
+   "kind": "ui",
+   "where_fa": "جملهٔ پایین کارت اسکله",
+   "context_fa": "از ماکت قدیمی جریان (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.harbor.orange.ready",
+    "text"
+   ],
+   "text": "یه کم سخته؛ پایه‌ای؟!",
+   "status": "draft"
+  },
+  "maptravel.env.harbor.red.title": {
+   "id": "maptravel.env.harbor.red.title",
+   "kind": "ui",
+   "where_fa": "عنوان کارت چالش اسکله",
+   "context_fa": "از ماکت قدیمی جریان (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.harbor.red.title",
+    "text"
+   ],
+   "text": "شکار اژدر!",
+   "status": "draft"
+  },
+  "maptravel.env.harbor.red.ready": {
+   "id": "maptravel.env.harbor.red.ready",
+   "kind": "ui",
+   "where_fa": "جملهٔ پایین کارت اسکله",
+   "context_fa": "از ماکت قدیمی جریان (D216، پیش‌نویس)",
+   "band": "همه",
+   "file": "design/mockups/20261016/map-travel/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "maptravel.env.harbor.red.ready",
+    "text"
+   ],
+   "text": "ببینم از پسش برمیای؟!",
+   "status": "draft"
   }
  },
  "meta": {

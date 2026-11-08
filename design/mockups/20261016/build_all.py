@@ -4,7 +4,7 @@
 بعد هر صفحه با مرورگر باز می‌شود و خطای کنسول شمرده می‌شود. انتشار: entry-page/artifact.html + files بالا (نام «index.html» در files نیاید)."""
 import subprocess, sys, pathlib
 H = pathlib.Path(__file__).resolve().parent
-for d in ('map-travel', 'overview-board', 'character-menu', 'entry-page'):
+for d in ('character-menu', 'map-travel', 'overview-board', 'entry-page'):   # character-menu اول: کش برش کاراکترها را (گیت‌نشده) از نو می‌سازد
     r = subprocess.run([sys.executable, 'build.py'], cwd=H / d, capture_output=True, text=True)
     print(d, 'OK' if r.returncode == 0 else 'FAIL\n' + r.stderr[-800:])
     if r.returncode: sys.exit(1)

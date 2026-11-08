@@ -336,6 +336,26 @@ def add_assets(sprite):
     i = sprite.rindex('</svg>')
     return sprite[:i] + '<defs>' + extra + '</defs>' + sprite[i:]
 
+def _envimgs():
+    """هنر تأییدشدهٔ سه کارت چالش اسکله (design/cards/approved) برای صفحهٔ محیط؛ همان منبع ماکت قدیمی جریان"""
+    from PIL import ImageDraw
+    def slices(path):
+        s = open(path, encoding='utf-8').read()
+        return [base64.b64decode(m.group(2)) for m in re.finditer(r'data:(image/[a-z+]+);base64,([A-Za-z0-9+/=]{100,})', s)]
+    def webp(raw, w, alpha=False, q=78):
+        im = Image.open(io.BytesIO(raw)).convert('RGBA' if alpha else 'RGB')
+        if alpha:
+            seeds = [(x, y) for x in range(0, im.width, 16) for y in (0, im.height - 1)] + [(x, y) for y in range(0, im.height, 16) for x in (0, im.width - 1)]
+            for p in seeds:
+                px = im.getpixel(p)
+                if px[3] and min(px[:3]) > 225: ImageDraw.floodfill(im, p, (255, 255, 255, 0), thresh=30)
+        im = im.resize((w, round(w * im.height / im.width)), Image.LANCZOS)
+        buf = io.BytesIO(); im.save(buf, 'WEBP', quality=q); return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
+    FLOW = slices(ROOT / 'design/cards/approved/card-space-full-flow-v1/fragment.html')   # 0 عنوان، 1 قرمز، 2 نارنجی، 3 سبز
+    INTER = slices(ROOT / 'design/cards/approved/harbor-interaction-v1/fragment.html')    # تصویر صحنهٔ سبز، نارنجی، قرمز
+    return dict(head=webp(FLOW[0], 420, True), c0=webp(FLOW[3], 520, True), c1=webp(FLOW[2], 520, True), c2=webp(FLOW[1], 520, True),
+                a0=webp(INTER[0], 395), a1=webp(INTER[1], 395), a2=webp(INTER[2], 395))
+
 def main():
     strings = json.load(open(HERE / 'strings.fa.json', encoding='utf-8'))
     review = json.load(open(HERE / 'review.fa.json', encoding='utf-8'))
@@ -369,7 +389,7 @@ def main():
     for k, v in dict(FONT_VR=f('Vazirmatn-Regular.woff2'), FONT_VB=f('Vazirmatn-Bold.woff2'), FONT_L=f('Lalezar-Regular.woff2'),
                      LIGHTCSS=style, SPRITE=clean_strips(add_assets(sprite if 'env_dec_city_sail' in sprite else sprite.replace('</defs>', sym + '</defs>', 1))), MAPSVG=mapsvg,
                      STRINGS=json.dumps(strings, ensure_ascii=False), REVIEW=json.dumps(review, ensure_ascii=False),
-                     NODES=json.dumps(nodes, ensure_ascii=False), PATHD=json.dumps(d['path_d']), IMAGES=json.dumps(im), HS_BG=HSU[0], HS_MO=HSU[1], HS_CH=HSU[2], H=str(H), COAST=str(COAST)).items():
+                     NODES=json.dumps(nodes, ensure_ascii=False), PATHD=json.dumps(d['path_d']), IMAGES=json.dumps(im), ENVIMG=json.dumps(_envimgs()), HS_BG=HSU[0], HS_MO=HSU[1], HS_CH=HSU[2], H=str(H), COAST=str(COAST)).items():
         t = t.replace('{{%s}}' % k, v)
     for _n, _t in (('F02', 'سالن بسکتبال'), ('E07', 'چاه آب')):
         _m = re.search(r'<text x="([\d.]+)" y="([\d.]+)"([^>]*)>' + _t + '</text>', t); assert _m, _t

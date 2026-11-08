@@ -62,6 +62,24 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .bb:after{content:"";position:absolute;left:50%;bottom:-11px;width:14px;height:14px;background:#fff4d2;border:3.5px solid #241a5e;border-top:0;border-left:0;transform:translateX(-50%) rotate(45deg)}
 .bb.s{background:#fff;font-size:12px}.bb:active{margin-top:3px}#bb2{animation-delay:.15s}#bb3{animation-delay:.3s}#bb4{animation-delay:.45s}
 #ov.wait .bb{opacity:0;pointer-events:none;animation:none}#ov.nosc .bb{display:none}@keyframes bbIn{from{opacity:0;transform:translate(-50%,-90%) scale(.85)}}@media (prefers-reduced-motion:reduce){.bb{animation:none}}
+
+/* D216: صفحهٔ محیط ایستگاه: پشتهٔ سه کارت چالش (هنر تأییدشدهٔ اسکله؛ بقیه موقت) */
+#env,#envsc{position:absolute;inset:0;z-index:31;background:#d5ecf4;display:flex;flex-direction:column;animation:ovIn .45s ease both}#envsc{z-index:32}#env[hidden],#envsc[hidden]{display:none}
+#envh{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--cream);border-bottom:3px solid var(--navy)}#envh h2{margin:0;flex:1;font-size:20px;color:var(--navy);text-align:center}#envh .btn{flex:0 0 auto;min-width:48px;min-height:48px;font-size:14px}
+#envbody{flex:1;overflow-y:auto;padding:14px 16px 18px;display:flex;flex-direction:column;align-items:center;gap:10px}
+#envhead{width:min(62%,230px);height:auto;display:block}
+#stk{position:relative;width:min(92%,340px);margin:0 auto;flex:none}
+.sc{position:absolute;left:0;width:100%;border:0;background:none;padding:0;cursor:pointer;transition:top .55s cubic-bezier(.3,.9,.3,1);-webkit-tap-highlight-color:transparent}.sc img{width:100%;display:block;filter:drop-shadow(0 4px 6px rgba(20,12,60,.35))}
+.sc.gen{height:300px;border:4px solid var(--navy);border-radius:22px;background:var(--tone);box-shadow:0 5px 0 var(--edge);overflow:hidden;text-align:center;font-family:inherit;color:var(--navy)}
+.sc.gen .gt{height:62px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:19px;background:var(--tone);border-bottom:4px solid var(--navy);padding:0 10px}
+.sc.gen .ga{margin:14px;height:150px;border:3px dashed var(--navy);border-radius:14px;background:rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
+.sc.gen .gm{padding:0 14px;font-size:14px;font-weight:700}
+.tapn{margin:0;text-align:center;font-size:14px;color:var(--navy);max-width:320px}
+#envbar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;gap:10px}
+#envsb{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px}#envsb img{width:min(100%,340px);border:4px solid var(--navy);border-radius:20px;display:block}
+#envsb .gen{width:min(100%,340px);height:230px;border:4px dashed var(--navy);border-radius:20px;background:rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--navy)}
+#envsb h3{margin:0;color:var(--navy);font-size:20px;text-align:center}#envsb p{margin:0;text-align:center;font-size:15px;color:var(--navy)}
+@media (prefers-reduced-motion:reduce){.sc{transition:none}#env,#envsc{animation:none}}
 #ov:not(.nosc) .opt{min-height:84px}@media (prefers-reduced-motion:reduce){#hsm{animation:none}#ov{animation:none}}
 #ov{position:absolute;inset:0;z-index:30;background:rgba(36,26,94,.78);display:flex;align-items:center;justify-content:center;padding:16px}#ov[hidden]{display:none}
 #ovp{width:100%;max-width:360px;background:var(--cream);border:4px solid var(--navy);border-radius:26px;box-shadow:0 6px 0 var(--edge);padding:16px;display:flex;flex-direction:column;gap:12px;text-align:center}
@@ -89,6 +107,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <div id="boat"><svg width="130" height="130" viewBox="0 0 120 120" aria-hidden="true"><use href="#env_dec_city_sail" width="120" height="120"/></svg></div>
 <div id="fig"><div id="tilt"><img id="fimg" alt=""></div></div>
 </div></div>
+<div id="env" hidden><div id="envh"><h2 id="envt"></h2></div><div id="envbody"></div><div id="envbar"><button class="btn" id="envgo"></button><button class="btn sec" id="envb"></button></div></div><div id="envsc" hidden><div id="envh2" style="display:contents"></div><div id="envsb"></div><div id="envbar"><button class="btn sec" id="envsbk"></button></div></div>
 <div id="ov" hidden><div id="hs"><img id="hsb" alt="" src="{{HS_BG}}"><div class="hsh" id="hss1"></div><div class="hsh" id="hss2"></div><img id="hsm" alt="" src="{{HS_MO}}"><img id="hsc" alt="" src="{{HS_CH}}"><button class="bb" id="bb1" style="left:19%;top:30%"></button><button class="bb" id="bb2" style="left:22%;top:70%"></button><button class="bb" id="bb3" style="left:86%;top:42%"></button><button class="bb s" id="bb4" style="left:58%;top:13%"></button></div><div id="ovp" role="dialog" aria-modal="true"><p id="ovt"></p>
 <div id="opts"><button class="opt" id="o_rev"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M40 16A17 17 0 1 0 43 28" fill="#fff3c4"/><path d="M42 6v11H31" fill="#fff3c4"/><circle cx="26" cy="27" r="4" fill="#241a5e"/></svg><span id="t_rev"></span></button>
 <button class="opt" id="o_card"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="14" width="26" height="32" rx="5" fill="#f5a3c7" transform="rotate(-10 19 30)"/><rect x="18" y="8" width="26" height="32" rx="5" fill="#fff3c4" transform="rotate(8 31 24)"/></svg><span id="t_card"></span></button>
@@ -96,7 +115,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 <button class="opt soft" id="o_cr"><svg viewBox="0 0 52 52" fill="none" stroke="#241a5e" stroke-width="4.5" stroke-linejoin="round" aria-hidden="true"><path d="M26 44C8 31 7 16 17 12c5-2 8 1 9 5 1-4 4-7 9-5 10 4 9 19-9 32Z" fill="#f08a8a"/></svg><span id="t_cr"></span></button></div>
 <p id="ovn" aria-live="polite"></p><button class="btn" id="ovc"></button></div></div>
 <button id="home" type="button"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 15 16 5l11 10M8.5 12.5V27h15V12.5" fill="none" stroke="#241a5e" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 27v-7.5h5V27" fill="none" stroke="#241a5e" stroke-width="3" stroke-linejoin="round"/></svg></button><div id="tut" hidden><div class="hole" id="th"></div><div class="card" role="dialog" aria-live="polite"><p id="tt"></p><div class="row"><button id="tn" type="button"></button><button id="ts" type="button"></button></div></div></div><div id="endsea" hidden aria-hidden="true"><svg class="bg" id="esbg"></svg><div id="esb"><svg viewBox="0 0 120 120"><use href="#env_dec_city_sail" width="120" height="120"/></svg><img id="esf" alt=""></div><p id="esm"></p></div><div id="blk"></div>
-<div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn sec" id="prv" hidden></button><button class="btn" id="fin" hidden></button><button class="btn sec" id="again"></button></div>
+<div id="bar"><p id="st" aria-live="polite"></p><button class="btn" id="skip" hidden></button><button class="btn sec" id="prv" hidden></button><button class="btn" id="goenv" hidden></button><button class="btn sec" id="fin" hidden></button><button class="btn sec" id="again"></button></div>
 </div>
 <script>
 const S={{STRINGS}};const REV={{REVIEW}};const NODES={{NODES}};const IM={{IMAGES}};
@@ -325,7 +344,7 @@ async function run(fn){if(busy)return;busy=true;skip=false;$('fin').hidden=true;
 /* D205 (مالک ۵ نوامبر): گذر ایستگاه به ایستگاه فقط روی نقشه و بدون فید: «بریم به ایستگاه بعد» (ردپای هیولا می‌آید و کودک راه می‌افتد) یا «برگردیم به ایستگاه قبل» */
 function nxt(){const i=ORDER.indexOf(here),b=ORDER[i+1];if(!b||b==='M12'&&ORDER.slice(0,ORDER.indexOf('M12')).some(x=>x!==here&&!done.has(x)))return null;return b}
 function prv(){const i=ORDER.indexOf(here);return i>0?ORDER[i-1]:null}
-function status(){saveNow();$('st').textContent=T('here').replace('%s',NODES[here].title||'');const atH=here==='M12';$('fin').textContent=atH?T('hide.enter'):T('finish');$('fin').hidden=(!nxt()&&!atH)||busy;$('prv').hidden=!prv()||busy}
+function status(){saveNow();$('st').textContent=T('here').replace('%s',NODES[here].title||'');const atH=here==='M12';$('fin').textContent=atH?T('hide.enter'):T('finish');$('fin').hidden=(!nxt()&&!atH)||busy;$('prv').hidden=!prv()||busy;$('goenv').textContent=T('env.go');$('goenv').hidden=busy||atH}
 async function finish(){if(busy)return;if(here==='M12'){openHide();return}const b=nxt();if(!b)return;
  if(!done.has(here)){await run(()=>monsterTrail(here,b,leg(here,b)));done.add(here);updateTrail();showPrints(false)}
  await go(b)}
@@ -344,6 +363,29 @@ async function tutorial(){const tut=$('tut'),th=$('th'),tt=$('tt'),card=tut.quer
  $('tn').onclick=()=>{if(k<steps.length-1){k++;show()}else end()};$('ts').onclick=end;
  tut.hidden=false;show();void tut.offsetWidth;tut.classList.add('on')}
 $('fin').onclick=finish;
+/* ===== D216: صفحهٔ محیط ===== */
+const ENVIMG={{ENVIMG}};
+const TIERS=[{k:'green',tone:'#8fd19e',e:'🟢'},{k:'orange',tone:'#f6b36b',e:'🟠'},{k:'red',tone:'#ee8f84',e:'🔴'}];
+let envOrd=[2,1,0],envNode=null;
+function envCards(id){const n=NODES[id]||{};
+ if(id==='M07')return TIERS.map((x,i)=>({t:T('env.harbor.'+x.k+'.title'),w:T('env.harbor.'+x.k+'.ready'),img:ENVIMG['c'+i],art:ENVIMG['a'+i]}));
+ return TIERS.map(x=>({t:T('env.tier.'+x.k)+': '+(n.title||''),w:T('env.pending'),img:null,art:null}))}
+function envRender(){const C=envCards(envNode),OFF=62,harbor=envNode==='M07';
+ let h='';if(harbor)h+='<img id="envhead" alt="" src="'+ENVIMG.head+'">';
+ h+='<div id="stk">'+envOrd.map((ti,p)=>{const c=C[ti],X=TIERS[ti];
+  return harbor?'<button class="sc" data-t="'+ti+'" data-p="'+p+'" style="top:'+(p*OFF)+'px;z-index:'+(p+1)+'" aria-label="'+c.t+'"><img src="'+c.img+'" alt=""></button>'
+  :'<button class="sc gen" data-t="'+ti+'" data-p="'+p+'" style="top:'+(p*OFF)+'px;z-index:'+(p+1)+';--tone:'+X.tone+'"><div class="gt">'+c.t+'</div><div class="ga">'+T('env.tmpimg')+' '+X.e+'</div><div class="gm">'+c.w+'</div></button>'}).join('')+'</div><p class="tapn">'+T('env.tap')+'</p>';
+ $('envbody').innerHTML=h;
+ const stk=$('stk'),fit=()=>{const f=stk.querySelector('.sc[data-p="2"]');stk.style.height=(2*OFF+f.getBoundingClientRect().height+8)+'px'};
+ const im=stk.querySelector('img');if(im&&!im.complete)im.onload=fit;fit();setTimeout(fit,60);
+ stk.querySelectorAll('.sc').forEach(b=>b.onclick=()=>{const ti=+b.dataset.t;if(b.dataset.p==='2'){envScene(ti);return}
+  envOrd=envOrd.filter(x=>x!==ti).concat([ti]);stk.querySelectorAll('.sc').forEach(e=>{const q=envOrd.indexOf(+e.dataset.t);e.dataset.p=q;e.style.top=(q*OFF)+'px';e.style.zIndex=q+1})})}
+function openEnv(){if(busy)return;envNode=here;envOrd=[2,1,0];$('envt').textContent=NODES[here].title||'';$('envb').textContent=T('env.back');$('envgo').textContent=T('env.start');envRender();$('env').hidden=false}
+function closeEnv(){$('env').hidden=true;$('envsc').hidden=true}
+function envScene(ti){const c=envCards(envNode)[ti];$('envsbk').textContent=T('env.scene.back');
+ $('envsb').innerHTML=(c.art?'<img alt="" src="'+c.art+'">':'<div class="gen">'+T('env.tmpimg')+'</div>')+'<h3>'+c.t+'</h3><p>'+T('env.scene.note')+'</p>';$('envsc').hidden=false}
+$('goenv').onclick=openEnv;$('envb').onclick=closeEnv;$('envgo').onclick=()=>envScene(envOrd[2]);$('envsbk').onclick=()=>{$('envsc').hidden=true};
+
 /* D205: نقشهٔ بلند ← نقشهٔ کلی با فید سیاه (و برعکس، در خود نقشهٔ کلی)؛ پیشرفت و جای کودک در نشانی می‌رود */
 $('home').onclick=async()=>{if(busy)return;busy=true;STA.forEach(a=>{try{a.cancel()}catch(e){}});const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
  await fadeBlk(0,1,reduce?120:380);try{location.href='overview.html#o-'+fr+(here!==fr?'-'+here:'')}catch(e){}busy=false};
