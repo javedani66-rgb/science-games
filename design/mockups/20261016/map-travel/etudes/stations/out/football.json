@@ -5,7 +5,7 @@
   66.2,
   31.7,
   11.5,
-  88
+  70.4
  ],
  "stand": [
   0.0,
@@ -17,7 +17,8 @@
   0
  ],
  "motion": [
-  "node_football_ball"
+  "node_football_ball",
+  "node_football_bshadow"
  ],
  "inside_pad": {
   "min_margin_px": 13.0,
@@ -35,7 +36,7 @@
   "node_football_ball": {
    "kind": "توپ؛ حالت ایستا = پایان (کنار دروازه، وسط سکو)",
    "translate_x_symbol_units": [
-    -17,
+    -13.6,
     0
    ],
    "translate_x_map_px": [
@@ -47,15 +48,25 @@
     0
    ],
    "pivot_symbol": [
-    -14,
-    -29
+    -11.2,
+    -23.2
    ],
    "duration_s": 1.6,
    "easing": "ease-out (کندشونده)",
    "loop": false,
    "trigger": "رسیدن کودک (یک‌بار)",
    "reduced_motion": "ایستا",
-   "note": "دروازه و تور ثابت؛ سایهٔ تماس با توپ می‌رود؛ بدون عامل هل و بدون خط حرکت؛ بدون حلقهٔ بیکار."
+   "note": "دروازه و توپ ۰٫۸ اندازهٔ قبلی (D218)؛ سایهٔ توپ گروه جدا (node_football_bshadow) و فقط افقی همراه توپ می‌رود، نمی‌چرخد."
+  },
+  "node_football_bshadow": {
+   "kind": "سایهٔ توپ؛ فقط جابه‌جایی افقی هم‌زمان با توپ",
+   "translate_x_symbol_units": [
+    -28.8,
+    0
+   ],
+   "duration_s": 1.6,
+   "easing": "ease-out",
+   "loop": false
   }
  }
 }

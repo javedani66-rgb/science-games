@@ -199,18 +199,24 @@ const EXC=[],PRINT_R=10,GAP=5,POFF=5.2,PSC=.9; /* R17-10: ردپا کوچک‌ت
   [...sym.children].forEach(c=>{if(c.tagName==='defs'||/_(shadow|lit|shade|base)$/.test(c.id))return;const cl=c.cloneNode(true);cl.removeAttribute('id');tg.appendChild(cl)});
   svgMap.appendChild(tg);
   /* D195: جعبهٔ هر شکل جدا (نه کل گروه)، تا فضای خالی کنار بنا (مثلاً زیر بازوی جرثقیل) ردپا را حذف نکند؛ سایه‌های زیرین (class under) حساب نمی‌شوند */
-  tg.querySelectorAll('path,polygon,polyline,rect,ellipse,circle,line').forEach(c=>{if(c.closest('.under'))return;const r=c.getBoundingClientRect();if(r.width<1||r.height<1)return;EXC.push([(r.left-mr.left)/kk,(r.top-mr.top)/kk,(r.right-mr.left)/kk,(r.bottom-mr.top)/kk])});
+  tg.querySelectorAll('path,polygon,polyline,rect,ellipse,circle,line').forEach(c=>{if(c.closest('.under'))return;const r=c.getBoundingClientRect();if(r.width<1||r.height<1)return;const bx=[(r.left-mr.left)/kk,(r.top-mr.top)/kk,(r.right-mr.left)/kk,(r.bottom-mr.top)/kk],nd=NODES[g.dataset.id];
+   if(nd){const q=pd(nd);/* D218: شکل‌هایی که کامل داخل جعبهٔ سکو هستند (لایه‌های خود سکو، وسیله‌های رویش) حریم نمی‌گیرند؛ گوشه‌های خالی جعبهٔ مستطیلیِ سکو ردپای کنار راه را حذف می‌کرد. خود سکو را inO نگه می‌دارد */
+    if(bx[0]>=nd.x-q.rx-4&&bx[2]<=nd.x+q.rx+4&&bx[1]>=nd.y+q.w/2-q.ry-4&&bx[3]<=nd.y+q.w/2+q.ry+q.w+4)return}
+   EXC.push(bx)});
   tg.remove()})})();
 const nearStn=(x,y,g)=>EXC.some(b=>{const dx=Math.max(b[0]-x,0,x-b[2]),dy=Math.max(b[1]-y,0,y-b[3]);return Math.hypot(dx,dy)<(g===undefined?GAP:g)+PRINT_R});
-const PLACED=[];
+const PLACED=[];let tries=0;
 (function(){
  for(let k=-1;k<ORDER.length-1;k++){const P=legPoly(k);let acc=0,side=1,need=0,STEP=26;{let T=0;for(let m=1;m<P.length;m++)T+=Math.hypot(P[m][0]-P[m-1][0],P[m][1]-P[m-1][1]);const E0=k<0?48:8,n=Math.max(1,Math.round((T-2*E0)/26));STEP=n?(T-2*E0)/n:26;need=E0}
   for(let m=1;m<P.length;m++){const [x0,y0]=P[m-1],[x1,y1]=P[m],L=Math.hypot(x1-x0,y1-y0);if(!L)continue;const ang=Math.atan2(y1-y0,x1-x0);
    while(need<=L){const x=x0+(x1-x0)*need/L,y=y0+(y1-y0)*need/L;need+=STEP;
     const jt=onJetty(x,y),po=jt?5:POFF; /* روی عرشه: ردپا یک‌درمیان چپ/راست داخل عرشه؛ حریم بنای بارانداز کوچک‌تر (عرشه راه تنهاست) */
-    if(!(y>=COAST+14||jt)||onWall(x,y)||y>{{H}}-8||Object.values(NODES).some(n=>inO(n,x,y))||(!jt&&nearStn(x-Math.sin(ang)*po*side,y+Math.cos(ang)*po*side))||PLACED.some(q=>Math.hypot(q[0]-x,q[1]-y)<19))continue;PLACED.push([x,y]);
-    const g=document.createElementNS(NS,'g');g.dataset.leg=k<0?-7:k;g.dataset.px=(x-Math.sin(ang)*po*side).toFixed(1);g.dataset.py=(y+Math.cos(ang)*po*side).toFixed(1);g.dataset.s=k*100000+acc+need;g.style.display='none';
-    g.setAttribute('transform','translate('+(x-Math.sin(ang)*po*side).toFixed(1)+' '+(y+Math.cos(ang)*po*side).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
+    if(!(y>=COAST+14||jt)||onWall(x,y)||y>{{H}}-8||Object.values(NODES).some(n=>inO(n,x,y)))continue;
+    /* D218: اگر کنار راه به بنا نزدیک است، به‌جای حذف، ردپا روی خط وسط راه (یا سمت دیگر) می‌نشیند؛ جای خالی نمی‌ماند */
+    const lo=jt?po*side:[po*side,0,-po*side].find(o=>!nearStn(x-Math.sin(ang)*o,y+Math.cos(ang)*o));if(lo===undefined)continue;
+    if(PLACED.some(q=>Math.hypot(q[0]-x,q[1]-y)<19)){if(tries++<8){need+=3-STEP}continue}tries=0;/* D218: نزدیکیِ ردپای قبلی (مثلاً سر یک پاره‌راه) جای خالی نمی‌سازد؛ نقطه ۳ واحد جلوتر دوباره امتحان می‌شود */PLACED.push([x,y]);
+    const g=document.createElementNS(NS,'g');g.dataset.leg=k<0?-7:k;g.dataset.px=(x-Math.sin(ang)*lo).toFixed(1);g.dataset.py=(y+Math.cos(ang)*lo).toFixed(1);g.dataset.s=k*100000+acc+need;g.style.display='none';
+    g.setAttribute('transform','translate('+(x-Math.sin(ang)*lo).toFixed(1)+' '+(y+Math.cos(ang)*lo).toFixed(1)+') rotate('+(ang*180/Math.PI+90).toFixed(0)+')');
     g.innerHTML='<g class="pr"><g transform="scale('+(PSC*side)+' '+PSC+')" fill="#a66be8" stroke="#2a0f5e" stroke-width="1" stroke-linejoin="round"><path d="M-3.1,-1.5 C-3.2,-3.4 -1.6,-4.2 0.2,-4.2 C2,-4.2 3.3,-3.4 3.2,-1.2 C3.1,0.8 2.1,1.6 2,3 C1.9,4.8 0.9,5.8 -0.5,5.8 C-1.9,5.8 -2.4,4.6 -2.3,3 C-2.2,1.5 -3,0.6 -3.1,-1.5Z"/><circle cx="-1.9" cy="-6.1" r="1.6"/><circle cx="0.4" cy="-7.1" r="1.25"/><circle cx="2.2" cy="-6.6" r="1.15"/><circle cx="3.5" cy="-5.3" r="1.05"/><circle cx="4" cy="-3.6" r=".95"/></g></g>';
     side=-side;prints.appendChild(g)}
    need-=L;acc+=L}}})();
@@ -371,7 +377,7 @@ let envOrd=[2,1,0],envNode=null;
 function envCards(id){const n=NODES[id]||{};
  if(id==='M07')return TIERS.map((x,i)=>({t:T('env.harbor.'+x.k+'.title'),w:T('env.harbor.'+x.k+'.ready'),img:ENVIMG['c'+i],art:ENVIMG['a'+i]}));
  return TIERS.map(x=>({t:T('env.tier.'+x.k)+': '+(n.title||''),w:T('env.pending'),img:null,art:null}))}
-function envRender(){const C=envCards(envNode),OFF=62,harbor=envNode==='M07';
+function envRender(){const C=envCards(envNode),OFF=80,harbor=envNode==='M07';
  let h='';if(harbor)h+='<img id="envhead" alt="" src="'+ENVIMG.head+'">';
  h+='<div id="stk">'+envOrd.map((ti,p)=>{const c=C[ti],X=TIERS[ti];
   return harbor?'<button class="sc" data-t="'+ti+'" data-p="'+p+'" style="top:'+(p*OFF)+'px;z-index:'+(p+1)+'" aria-label="'+c.t+'"><img src="'+c.img+'" alt=""></button>'
@@ -470,7 +476,7 @@ const ST={
  tool_room(g){const e=Lh(g,'hammer');if(!e)return;const A=-42,rt=a=>({transform:'translate(-1px,-22.4px) rotate('+a+'deg) translate(1px,22.4px)'}),kf=[];for(let i=0;i<3;i++){const o=i/3,w=1/3;kf.push(Object.assign(rt(0),{offset:o,easing:'ease-out'}),Object.assign(rt(A),{offset:o+w*.6,easing:'cubic-bezier(.6,0,1,.8)'}),Object.assign(rt(0),{offset:o+w*.8}))}kf.push(Object.assign(rt(0),{offset:1}));e.style.transformOrigin='0 0';return_(e.animate(kf,{duration:2700,fill:'backwards',iterations:1}))},
  wrench_room(g){const e=Lh(g,'nut');if(!e)return;const c=ctr(e);return_(an(e,rotKf(e,c[0],c[1],[0,-30,0,-30,0]),2200,0,'ease-in-out',false,1))},   /* دور دوم عامل‌ها: مهره در دهانهٔ آچار می‌چرخد، از آن بیرون نمی‌آید */
  loading_ramp(g){return_(an2(Ly(g,'crate'),[{transform:'translate(21px,9.1px)'},{transform:'translate(0,0)'}],1600,0,'ease-in-out',true,3))},
- football(g){const e=Lh(g,'ball');if(!e)return;const f=(x,a)=>'translate('+x+'px,0) translate(-14px,-29px) rotate('+a+'deg) translate(14px,29px)';return_(an2(e,[{transform:f(-36,-55)},{transform:f(0,0)}],1600,0,'ease-out',true,3))},
+ football(g){const e=Lh(g,'ball');if(!e)return;/* D218: دروازه و توپ ۰٫۸؛ سایه گروه جدا و فقط افقی */const f=(x,a)=>'translate('+x+'px,0) translate(-11.2px,-23.2px) rotate('+a+'deg) translate(11.2px,23.2px)';const sh=Lh(g,'bshadow');if(sh)return_(an2(sh,[{transform:'translate(-29px,0)'},{transform:'translate(0,0)'}],1600,0,'ease-out',true,3));return_(an2(e,[{transform:f(-29,-55)},{transform:f(0,0)}],1600,0,'ease-out',true,3))},
  basketball_hall(g){const e=Lh(g,'ball');if(!e)return;return_(an2(e,[{transform:'translate(0,28.8px)',easing:'ease-out'},{transform:'translate(31.7px,37.4px)',easing:'ease-out'},{transform:'translate(37.4px,-27.4px)',easing:'ease-out'},{transform:'translate(15.8px,-47.5px)',easing:'ease-in'},{transform:'translate(1.4px,-30.2px)',easing:'ease-in'},{transform:'translate(0,0)'}],1700,0,'linear',true,3))}, /* D194: از تور پایین می‌افتد، می‌غلتد، بالا می‌رود و از بالای حلقه دوباره توی تور */
  archery_range(g){const ar=Lh(g,'string_arrow'),cd=Lh(g,'string_cord');if(!ar||!cd)return;const ps=[...cd.querySelectorAll('path')],d0=ps.map(p=>p.getAttribute('d')),X0=16.4,pos=o=>{const x=X0+o;ar.style.transform='translateX('+o+'px)';ps[0].setAttribute('d','M-1.3,-111.2 L'+x+',-62.6');ps[1].setAttribute('d','M'+x+',-62.6 L-1.4,-14.0')};
   const ez=u=>1-(1-u)*(1-u),DUR=550,N=4,T0=performance.now();let alive=true,raf=0;const done=()=>{if(!alive)return;alive=false;cancelAnimationFrame(raf);ar.style.transform='';ps.forEach((p,i)=>p.setAttribute('d',d0[i]))};

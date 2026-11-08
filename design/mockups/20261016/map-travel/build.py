@@ -348,7 +348,12 @@ def _envimgs():
             seeds = [(x, y) for x in range(0, im.width, 16) for y in (0, im.height - 1)] + [(x, y) for y in range(0, im.height, 16) for x in (0, im.width - 1)]
             for p in seeds:
                 px = im.getpixel(p)
-                if px[3] and min(px[:3]) > 225: ImageDraw.floodfill(im, p, (255, 255, 255, 0), thresh=30)
+                if px[3] and min(px[:3]) > 225: ImageDraw.floodfill(im, p, (255, 255, 255, 0), thresh=40)
+            # D218: لبهٔ سفید دور طناب (JPEG) = پیکسل‌های نیمه‌سفید کنار ناحیهٔ شفاف؛ شفافیت ۲ پیکسل به داخل گسترده و نرم می‌شود
+            from PIL import ImageFilter
+            a = im.getchannel('A'); hole = a.point(lambda v: 255 if v == 0 else 0)
+            hole = hole.filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.GaussianBlur(0.8))
+            im.putalpha(Image.eval(hole, lambda v: 255 - v))
         im = im.resize((w, round(w * im.height / im.width)), Image.LANCZOS)
         buf = io.BytesIO(); im.save(buf, 'WEBP', quality=q); return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
     FLOW = slices(ROOT / 'design/cards/approved/card-space-full-flow-v1/fragment.html')   # 0 عنوان، 1 قرمز، 2 نارنجی، 3 سبز
