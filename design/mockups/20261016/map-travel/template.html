@@ -124,8 +124,9 @@ const SVK='sw-save-v1',SAVE=(()=>{try{const s=JSON.parse(localStorage.getItem(SV
 if(PROF&&PROF.fig){if(PROF.fig.sailor)IM.sailor=PROF.fig.sailor;if(PROF.fig.construction)IM.construction=PROF.fig.construction}
 /* D217: وضوح کاراکترها. تصویر منبع (۳۶۰ تا ۴۲۰ پیکسل) برای هر نمایش، چندمرحله‌ای (نصف‌نصف) تا اندازهٔ واقعیِ روی صفحه × چگالی پیکسل کوچک می‌شود و یک تیز‌کنندهٔ ملایم می‌گیرد؛ کوچک‌کردن یک‌مرحله‌ایِ مرورگر خطوط نازک را گل‌آلود می‌کند */
 {{CRISP}}
-const fcss=()=>{const h=document.getElementById('fimg').getBoundingClientRect().height;return h>20?h:76*Math.min(2,innerWidth/390)};
-['sailor','construction'].forEach(k=>{const old=IM[k];crisp(old,fcss(),u=>{IM[k]=u;{const f=document.getElementById('fimg');if(f&&f.src===old)f.src=u}})});
+/* D222: علت فلوبودن روی کامپیوتر: نقشه با fit() تا ۱٫۲ برابر بزرگ می‌شود (k)، ولی تصویر فیگور فقط برای ۷۶ پیکسل بدون k برش می‌خورد، پس مرورگر آن را ۱٫۲ برابر بزرگ می‌کرد. اکنون اندازهٔ نمایش واقعی = ۷۶×k و با هر تغییر اندازه دوباره برش می‌خورد؛ اصل تصویرها در IM0 می‌ماند */
+const IM0={sailor:IM.sailor,construction:IM.construction},IMP={};let sfT=0;
+function sharpFig(){const h=76*1.05*(typeof k==="number"?k:1);['sailor','construction'].forEach(n=>crisp(IM0[n],h,u=>{const f=document.getElementById('fimg'),prev=IMP[n];IM[n]=u;IMP[n]=u;if(f&&(f.src===IM0[n]||f.src===prev))f.src=u}))}
 
 function saveNow(){if(!PROF||!document.documentElement.classList.contains('flowx'))return;const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
  PROF.here=here;PROF.front=fr;PROF.done=[...done];try{localStorage.setItem(SVK,JSON.stringify(SAVE))}catch(e){}}const PATHD={{PATHD}};const COAST={{COAST}};
@@ -134,7 +135,7 @@ $('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textCont
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let skip=false,busy=false;
 const sc=$('sc'),world=$('world'),fig=$('fig'),tilt=$('tilt'),fimg=$('fimg'),boat=$('boat');
 let k=1;
-function fit(){k=Math.min(1.2,sc.clientWidth/390);world.style.transform='scale('+k+')';world.style.marginBottom=(({{H}}*k)-{{H}})+'px';world.style.width='390px'}
+function fit(){k=Math.min(1.2,sc.clientWidth/390);world.style.transform='scale('+k+')';world.style.marginBottom=(({{H}}*k)-{{H}})+'px';world.style.width='390px';clearTimeout(sfT);sfT=setTimeout(sharpFig,120)}
 addEventListener('resize',fit);
 /* هندسهٔ مسیر */
 const NS='http://www.w3.org/2000/svg';
