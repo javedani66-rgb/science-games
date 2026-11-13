@@ -383,16 +383,30 @@ function envRender(){const C=envCards(envNode),OFF=80,harbor=envNode==='M07';
  h+='<div id="stk">'+envOrd.map((ti,p)=>{const c=C[ti],X=TIERS[ti];
   return harbor?'<button class="sc" data-t="'+ti+'" data-p="'+p+'" style="top:'+(p*OFF)+'px;z-index:'+(p+1)+'" aria-label="'+c.t+'"><img src="'+c.img+'" alt=""></button>'
   :'<button class="sc gen" data-t="'+ti+'" data-p="'+p+'" style="top:'+(p*OFF)+'px;z-index:'+(p+1)+';--tone:'+X.tone+'"><div class="gt">'+c.t+'</div><div class="ga">'+T('env.tmpimg')+' '+X.e+'</div><div class="gm">'+c.w+'</div></button>'}).join('')+'</div><p class="tapn">'+T('env.tap')+'</p>';
- $('envbody').innerHTML=h;
+ $('envbody').innerHTML=h;envIn();
  const stk=$('stk'),fit=()=>{const f=stk.querySelector('.sc[data-p="2"]');stk.style.height=(2*OFF+f.getBoundingClientRect().height+8)+'px'};
  const im=stk.querySelector('img');if(im&&!im.complete)im.onload=fit;fit();setTimeout(fit,60);
- stk.querySelectorAll('.sc').forEach(b=>b.onclick=()=>{const ti=+b.dataset.t;if(b.dataset.p==='2'){envScene(ti);return}
+ stk.querySelectorAll('.sc').forEach(b=>b.onclick=()=>{const ti=+b.dataset.t;if(envBusy)return;if(b.dataset.p==='2'){envStart(ti);return}
   envOrd=envOrd.filter(x=>x!==ti).concat([ti]);stk.querySelectorAll('.sc').forEach(e=>{const q=envOrd.indexOf(+e.dataset.t);e.dataset.p=q;e.style.top=(q*OFF)+'px';e.style.zIndex=q+1})})}
+/* D224: حرکت تأییدشدهٔ کارت‌ها (card-space-full-flow-v1): ورود = عنوان از بالا، سپس کارت‌های عقب، میانی، جلو از پایین؛ خروج = برعکس؛ شروع = ورق‌خوردن کارت جلو و ورود صحنه از راست */
+let envBusy=false;const EV={enter:'cubic-bezier(.22,.08,.16,1)',out:'cubic-bezier(.4,0,.7,1)',turn:'cubic-bezier(.35,0,.25,1)'};
+function envCardsEls(){const s=$('stk');return s?[...s.querySelectorAll('.sc')].sort((a,b)=>+a.dataset.p-+b.dataset.p):[]}
+function envIn(){if(reduce)return;const hd=$('envhead'),cs=envCardsEls();
+ if(hd)hd.animate([{transform:'translateY(-48px)',opacity:0},{transform:'none',opacity:1}],{duration:800,delay:150,easing:'cubic-bezier(.35,0,.15,1)',fill:'backwards'});
+ cs.forEach((e,i)=>e.animate([{transform:'translateY(95px)',opacity:0,offset:0},{opacity:1,offset:.6},{transform:'none',opacity:1,offset:1}],{duration:1000,delay:600+i*250,easing:EV.enter,fill:'backwards'}));
+ const t=document.querySelector('#env .tapn');if(t)t.animate([{opacity:0},{opacity:1}],{duration:400,delay:1700,fill:'backwards'})}
+function envOut(done){if(reduce||envBusy){done();return}envBusy=true;const hd=$('envhead'),cs=envCardsEls().reverse(),A=(e,y,d)=>e.animate([{transform:'none',opacity:1},{transform:'translateY('+y+'px)',opacity:0}],{duration:y===-100?1000:1150,delay:d,easing:EV.out,fill:'forwards'});
+ cs.forEach((e,i)=>A(e,200,i*180));if(hd)A(hd,-100,550);const tn=document.querySelector('#env .tapn');if(tn)tn.animate([{opacity:1},{opacity:0}],{duration:300,fill:'forwards'});
+ setTimeout(()=>{envBusy=false;done()},1250)}
+function envStart(ti){if(reduce||envBusy){envScene(ti);return}envBusy=true;const cs=envCardsEls(),front=cs[cs.length-1],hd=$('envhead');
+ cs.slice(0,-1).forEach(e=>e.animate([{opacity:1},{opacity:0}],{duration:650,fill:'forwards'}));if(hd)hd.animate([{opacity:1},{opacity:0}],{duration:650,fill:'forwards'});
+ const st=$('stk');st.style.perspective='1400px';front.style.transformOrigin='left center';front.animate([{transform:'rotateY(0) translateX(0)',opacity:1,filter:'brightness(1)'},{transform:'rotateY(-100deg) translateX(-18px)',opacity:0,filter:'brightness(.7)'}],{duration:800,easing:EV.turn,fill:'forwards'});
+ setTimeout(()=>{envScene(ti);const sc=$('envsc');sc.animate([{transform:'translateX(100%)'},{transform:'none'}],{duration:900,easing:EV.enter});envBusy=false},900)}
 function openEnv(){if(busy)return;envNode=here;envOrd=[2,1,0];$('envt').textContent=NODES[here].title||'';$('envb').textContent=T('env.back');$('envgo').textContent=T('env.start');envRender();$('env').hidden=false}
-function closeEnv(){$('env').hidden=true;$('envsc').hidden=true}
+function closeEnv(){if(envBusy)return;$('envsc').hidden=true;envOut(()=>{$('env').hidden=true})}
 function envScene(ti){const c=envCards(envNode)[ti];$('envsbk').textContent=T('env.scene.back');
  $('envsb').innerHTML=(c.art?'<img alt="" src="'+c.art+'">':'<div class="gen">'+T('env.tmpimg')+'</div>')+'<h3>'+c.t+'</h3><p>'+T('env.scene.note')+'</p>';$('envsc').hidden=false}
-$('goenv').onclick=openEnv;$('envb').onclick=closeEnv;$('envgo').onclick=()=>envScene(envOrd[2]);$('envsbk').onclick=()=>{$('envsc').hidden=true};
+$('goenv').onclick=openEnv;$('envb').onclick=closeEnv;$('envgo').onclick=()=>envStart(envOrd[2]);$('envsbk').onclick=()=>{$('envsc').hidden=true;envRender()};
 
 /* D205: نقشهٔ بلند ← نقشهٔ کلی با فید سیاه (و برعکس، در خود نقشهٔ کلی)؛ پیشرفت و جای کودک در نشانی می‌رود */
 $('home').onclick=async()=>{if(busy)return;busy=true;STA.forEach(a=>{try{a.cancel()}catch(e){}});const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);

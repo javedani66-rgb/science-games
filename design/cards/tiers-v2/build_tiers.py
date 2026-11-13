@@ -51,38 +51,55 @@ TIERS = {
  'orange': dict(hue=26, v=1.28, s=1.05, glow=(255, 160, 40)),
  'red':    dict(hue=358, v=1.12, s=1.0, glow=(255, 70, 50)),
 }
+def chaikin(pts, n=2, closed=True):
+    for _ in range(n):
+        out = []
+        m = len(pts)
+        for k in range(m if closed else m - 1):
+            p, q = pts[k], pts[(k + 1) % m]
+            out += [(.75 * p[0] + .25 * q[0], .75 * p[1] + .25 * q[1]), (.25 * p[0] + .75 * q[0], .25 * p[1] + .75 * q[1])]
+        pts = out
+    return pts
+
 def emblem(kind, size=360):
-    """نشان سختی روی دیسک نشان اصلی: دیسک مرکز با رنگ سطح پر می‌شود و نماد تازه کشیده می‌شود."""
-    S = 4; im = Image.new('RGBA', (size * S, size * S), (0, 0, 0, 0)); d = ImageDraw.Draw(im); c = size * S / 2
-    def P(pts): return [(c + x * S, c + y * S) for x, y in pts]
-    if kind == 'orange':
-        d.polygon(P([(0,-92),(26,-52),(52,-18),(58,22),(42,64),(0,88),(-42,64),(-58,22),(-46,-14),(-30,-40),(-22,-10),(-8,-44)]), fill=(255,150,30,255), outline=(70,28,8,255))
-        d.polygon(P([(2,-36),(24,0),(32,34),(18,62),(0,70),(-18,62),(-28,34),(-14,6),(-6,-14)]), fill=(255,205,70,255), outline=(70,28,8,255))
-        d.polygon(P([(0,18),(12,40),(8,58),(0,62),(-8,58),(-12,40)]), fill=(255,244,200,255))
-        ol = (70,28,8,255)
+    """نماد سختی با همان زبان کارت: شکل نرم، خط دور تیرهٔ ضخیم، یک رنگ روشن و یک سایه."""
+    S = 4; im = Image.new('RGBA', (size * S, size * S), (0, 0, 0, 0)); d = ImageDraw.Draw(im); c = size * S / 2; k = size / 360 * 1.0
+    def P(pts): return [(c + x * k * S, c + y * k * S) for x, y in pts]
+    def shape(pts, fill, ol, w=7, sm=2):
+        pp = P(chaikin(pts, sm)) if sm else P(pts)
+        d.polygon(pp, fill=fill); d.line(pp + [pp[0]], fill=ol, width=int(w * k * S), joint='curve')
+    if kind == 'green':
+        ol = (14, 56, 26, 255)
+        shape([(-14,86),(-16,-4),(14,-4),(16,86)], (110,190,55,255), ol, 6, 0)
+        shape([(-10,-2),(-34,22),(-78,18),(-100,-18),(-86,-62),(-44,-52)], (130,214,64,255), ol)
+        shape([(12,-14),(40,10),(92,-4),(108,-46),(86,-96),(36,-80)], (168,238,92,255), ol)
+        d.line(P([(-20,8),(-72,-14)]), fill=(66,150,40,255), width=int(5 * k * S)); d.line(P([(22,-4),(78,-48)]), fill=(80,170,44,255), width=int(5 * k * S))
+        shape([(-64,98),(-30,82),(0,78),(30,82),(64,98),(36,112),(0,116),(-36,112)], (126,76,34,255), (52,28,10,255))
+    elif kind == 'orange':
+        ol = (84, 30, 6, 255)
+        shape([(0,-112),(40,-62),(70,-24),(76,30),(54,82),(0,104),(-54,82),(-76,30),(-64,-14),(-36,-40),(-24,-6),(-6,-52)], (255,150,34,255), ol)
+        shape([(4,-40),(30,0),(40,40),(22,76),(0,86),(-22,76),(-34,40),(-18,8),(-8,-18)], (255,208,72,255), ol, 5)
+        shape([(0,28),(14,52),(8,72),(0,76),(-8,72),(-14,52)], (255,246,206,255), (255,246,206,255), 1)
     else:
-        # آذرخش-چنگال: سه سر تیز به بالا، پایه‌ای پهن
-        d.polygon(P([(-70,70),(-82,-40),(-46,-4),(-30,-84),(-8,-20),(0,-98),(8,-20),(30,-84),(46,-4),(82,-40),(70,70),(0,50)]), fill=(255,90,70,255), outline=(70,10,10,255))
-        d.polygon(P([(-40,58),(-46,-6),(-26,18),(-14,-40),(0,10),(14,-40),(26,18),(46,-6),(40,58),(0,44)]), fill=(255,170,130,255), outline=(70,10,10,255))
-        ol = (70,10,10,255)
-    for _ in range(1):
-        pass
+        ol = (80, 8, 10, 255)
+        shape([(-84,86),(-98,-44),(-56,-6),(-36,-100),(-10,-24),(0,-116),(10,-24),(36,-100),(56,-6),(98,-44),(84,86),(0,64)], (255,88,70,255), ol, 7, 1)
+        shape([(-48,70),(-56,-8),(-30,22),(-16,-50),(0,12),(16,-50),(30,22),(56,-8),(48,70),(0,54)], (255,172,134,255), ol, 5, 1)
     return im.resize((size, size), Image.LANCZOS)
 
 def medallion(tier):
     base = Image.open(AP / 'core-difficulty-medallion.png').convert('RGBA')
-    if tier == 'green': return base
-    t = TIERS[tier]; m = recolor(base, t['hue'], t['v'], t['s'], lo=40, hi=175)
+    t = TIERS[tier]; m = base.copy() if tier == 'green' else recolor(base, t['hue'], t['v'], t['s'], lo=40, hi=175)
     size = base.width; cx = cy = size / 2
     # دیسک داخلی: بازنقاشی با شیب رنگ سطح تا نهال پنهان شود
     inner = Image.new('RGBA', base.size, (0, 0, 0, 0)); dd = ImageDraw.Draw(inner)
-    R = size * .245
+    R = size * .335
     for i in range(24):
         f = i / 23; rr = R * (1 - f * .9)
-        col = tuple(int(a + (b - a) * f) for a, b in zip((70, 26, 14) if tier == 'orange' else (74, 12, 16), (150, 60, 18) if tier == 'orange' else (150, 24, 28)))
+        lo_, hi_ = {'green': ((8, 52, 30), (20, 110, 50)), 'orange': ((70, 26, 14), (150, 60, 18)), 'red': ((74, 12, 16), (150, 24, 28))}[tier]
+        col = tuple(int(a + (b - a) * f) for a, b in zip(lo_, hi_))
         dd.ellipse([cx - rr, cy - rr, cx + rr, cy + rr], fill=col + (255,))
     m.alpha_composite(inner)
-    e = emblem(tier, int(size * .42)); m.alpha_composite(e, (int(cx - e.width / 2), int(cy - e.height / 2 + 2)))
+    e = emblem(tier, int(size * .74)); m.alpha_composite(e, (int(cx - e.width / 2), int(cy - e.height / 2 + 2)))
     return m
 
 CARDS = {
