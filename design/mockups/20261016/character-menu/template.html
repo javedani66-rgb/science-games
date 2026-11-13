@@ -178,7 +178,7 @@ if(FLOW){let n='';try{n=decodeURIComponent(location.hash.slice(6))}catch(e){}if(
   const tgt=COLORS[st.color][3],fig={};
   for(const o of ['construction','sailor','sports','astronaut','farmer']){try{const src=IMG.big[st.ch][o],u=tgt===null?src:await tint(st.ch,o,src,tgt),im=await load(u);fig[o]=shrink(im,420)}catch(e){}}
   try{const P={name:st.name,ch:st.ch,color:st.color,fig,here:'F01',front:'F01',done:[],tut:false};localStorage.setItem('sw-save-v1',JSON.stringify({v:1,cur:'p1',profiles:{p1:P}}))}catch(e){}
-  await $('fade').animate([{opacity:0},{opacity:1}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?120:600,fill:'forwards'}).finished;try{location.href='overview.html#o-a'}catch(e){}};
+  await $('fade').animate([{opacity:0},{opacity:1}],{duration:(()=>{try{return localStorage.getItem('sw-reduce')==='1'}catch(e){return false}})()?120:600,fill:'forwards'}).finished;try{location.href='overview.html#o-a'}catch(e){}};
  $('cback').onclick=async()=>{await $('fade').animate([{opacity:0},{opacity:1}],{duration:380,fill:'forwards'}).finished;try{location.href='name.html'}catch(e){}};
  addEventListener('load',()=>setTimeout(async()=>{const f=$('fade');document.documentElement.classList.remove('ent');f.style.opacity=1;await f.animate([{opacity:1},{opacity:0}],{duration:480,fill:'forwards'}).finished;f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0},30));
  addEventListener('pageshow',e=>{if(e.persisted){const f=$('fade');f.getAnimations().forEach(a=>a.cancel());f.style.opacity=0;render()}})}

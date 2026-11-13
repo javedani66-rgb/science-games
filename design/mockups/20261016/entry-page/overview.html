@@ -79,7 +79,7 @@ const SAVE=(()=>{try{const s=JSON.parse(localStorage.getItem('sw-save-v1'));retu
 if(SAVE&&SAVE.fig)for(const l in LANDO)if(SAVE.fig[LANDO[l]])FIG[l]=SAVE.fig[LANDO[l]];
 document.documentElement.setAttribute('dir','rtl');document.documentElement.setAttribute('lang','fa');
 const S=k=>(S0[k]||{}).text||k,$=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg';
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,wait=ms=>new Promise(r=>setTimeout(r,ms));
+const reduce=(()=>{try{return localStorage.getItem('sw-reduce')==='1'}catch(e){return false}})(),wait=ms=>new Promise(r=>setTimeout(r,ms));
 /* حالت‌ها (همان سه حالت منوی ورود): a = اولین بار، b = وسط راه (پیست اسکی روی یخ)، t = آخر راه (کارخانهٔ کشتی‌سازی) */
 const HERE={a:'F01',b:'F06',t:'M11'};
 const HM=location.hash.match(/^#o-(?:([abt])|([A-Z]\d\d)(?:-([A-Z]\d\d))?)$/)||[];

@@ -132,7 +132,7 @@ function saveNow(){if(!PROF||!document.documentElement.classList.contains('flowx
  PROF.here=here;PROF.front=fr;PROF.done=[...done];try{localStorage.setItem(SVK,JSON.stringify(SAVE))}catch(e){}}const PATHD={{PATHD}};const COAST={{COAST}};
 const T=k=>S['maptravel.'+k].text;const $=id=>document.getElementById(id);
 $('rvt').textContent=REV.note;$('rvl').textContent=REV.legend;$('skip').textContent=T('skip');$('again').textContent=T('again');$('fin').textContent=T('finish');$('prv').textContent=T('prev');$('home').setAttribute('aria-label',T('home'));$('ovt').textContent=T('hide.title');$('t_rev').textContent=T('hide.review');$('t_card').textContent=T('hide.cards');$('t_sea').textContent=T('hide.sea');$('t_cr').textContent=T('hide.credits');$('bb1').textContent=T('hide.review');$('bb2').textContent=T('hide.bsea');$('bb3').textContent=T('hide.cards');$('bb4').textContent=T('hide.credits');[['bb1','o_rev'],['bb2','o_sea'],['bb3','o_card'],['bb4','o_cr']].forEach(([a,b])=>$(a).onclick=e=>{e.stopPropagation();$(b).click()});$('ovc').textContent=T('hide.close');
-const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let skip=false,busy=false;
+const reduce=(()=>{try{return localStorage.getItem('sw-reduce')==='1'}catch(e){return false}})();let skip=false,busy=false;
 const sc=$('sc'),world=$('world'),fig=$('fig'),tilt=$('tilt'),fimg=$('fimg'),boat=$('boat');
 let k=1;
 function fit(){k=Math.min(1.2,sc.clientWidth/390);world.style.transform='scale('+k+')';world.style.marginBottom=(({{H}}*k)-{{H}})+'px';world.style.width='390px';clearTimeout(sfT);sfT=setTimeout(sharpFig,120)}
