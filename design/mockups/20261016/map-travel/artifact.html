@@ -528,9 +528,9 @@ function envRender(){const C=envCards(envNode),harbor=envNode==='M07',eb=$('envb
  stk.onkeydown=ev=>{if((ev.key==='Enter'||ev.key===' ')&&ev.target.classList.contains('sc')){ev.preventDefault();ev.target.click()}}}
 /* D228 (تعامل تأییدشدهٔ harbor-interaction-v1): کارت عقب از کنار بیرون می‌آید (۲۲px، ۶۵۰ms) و جلو می‌نشیند؛ کارت‌های پشت کم‌رنگ‌اند؛ لمس کارت جلو، جمله و «بزن بریم!» را هم‌زمان نشان می‌دهد (۲۶۰ms)، شروع خودکار نیست */
 function envSwitch(ti){const stk=$('stk'),els=[...stk.querySelectorAll('.sc')],sel=els.find(e=>+e.dataset.t===ti);envOrd=envOrd.filter(x=>x!==ti).concat([ti]);envReady=false;els.forEach(e=>e.classList.remove('on'));
- els.forEach(e=>{const q=envOrd.indexOf(+e.dataset.t);e.dataset.p=q;e.style.top=(q*envOFF)+'px';if(e!==sel)e.style.zIndex=q+1});
+ els.forEach(e=>{const q=envOrd.indexOf(+e.dataset.t);e.dataset.p=q;e.style.top=(q*envOFF)+'px';if(reduce&&e!==sel)e.style.zIndex=q+1});
  if(reduce){sel.style.zIndex=3;return}
- sel.animate([{transform:'none'},{transform:'translateX(-22px)',offset:.45},{transform:'none'}],{duration:650,easing:'ease-in-out'});setTimeout(()=>{sel.style.zIndex=3},290)}
+ sel.animate([{transform:'none'},{transform:'translateX(-22px)',offset:.45},{transform:'none'}],{duration:650,easing:'ease-in-out'});setTimeout(()=>{els.forEach(e=>{e.style.zIndex=e===sel?3:envOrd.indexOf(+e.dataset.t)+1})},290)}
 /* D224: حرکت تأییدشدهٔ کارت‌ها (card-space-full-flow-v1): ورود = عنوان از بالا، سپس کارت‌های عقب، میانی، جلو از پایین؛ خروج = برعکس؛ شروع = ورق‌خوردن کارت جلو و ورود صحنه از راست */
 let envBusy=false;const EV={enter:'cubic-bezier(.22,.08,.16,1)',out:'cubic-bezier(.4,0,.7,1)',turn:'cubic-bezier(.35,0,.25,1)'};
 function envCardsEls(){const s=$('stk');return s?[...s.querySelectorAll('.sc')].sort((a,b)=>+a.dataset.p-+b.dataset.p):[]}
