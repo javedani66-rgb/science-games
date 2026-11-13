@@ -530,7 +530,7 @@ function envRender(){const C=envCards(envNode),harbor=envNode==='M07',eb=$('envb
 function envSwitch(ti){const stk=$('stk'),els=[...stk.querySelectorAll('.sc')],sel=els.find(e=>+e.dataset.t===ti);envOrd=envOrd.filter(x=>x!==ti).concat([ti]);envReady=false;els.forEach(e=>e.classList.remove('on'));
  els.forEach(e=>{const q=envOrd.indexOf(+e.dataset.t);e.dataset.p=q;e.style.top=(q*envOFF)+'px';if(reduce&&e!==sel)e.style.zIndex=q+1});
  if(reduce){sel.style.zIndex=3;return}
- const dx=Math.round(stk.getBoundingClientRect().width*.9);sel.animate([{transform:'none'},{transform:'translateX(-'+dx+'px) rotate(-4deg)',offset:.42},{transform:'none'}],{duration:900,easing:'ease-in-out'});setTimeout(()=>{els.forEach(e=>{e.style.zIndex=e===sel?3:envOrd.indexOf(+e.dataset.t)+1})},378)}
+ sel.animate([{transform:'none',opacity:1},{transform:'translateX(-22px)',opacity:.1,offset:.25},{transform:'translateX(-22px)',opacity:.1,offset:.4},{transform:'none',opacity:1}],{duration:800,easing:'ease-in-out'});setTimeout(()=>{els.forEach(e=>{e.style.zIndex=e===sel?3:envOrd.indexOf(+e.dataset.t)+1})},260)}
 /* D224: حرکت تأییدشدهٔ کارت‌ها (card-space-full-flow-v1): ورود = عنوان از بالا، سپس کارت‌های عقب، میانی، جلو از پایین؛ خروج = برعکس؛ شروع = ورق‌خوردن کارت جلو و ورود صحنه از راست */
 let envBusy=false;const EV={enter:'cubic-bezier(.22,.08,.16,1)',out:'cubic-bezier(.4,0,.7,1)',turn:'cubic-bezier(.35,0,.25,1)'};
 function envCardsEls(){const s=$('stk');return s?[...s.querySelectorAll('.sc')].sort((a,b)=>+a.dataset.p-+b.dataset.p):[]}
