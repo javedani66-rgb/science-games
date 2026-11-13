@@ -48,8 +48,8 @@ def recolor(im, hue_to, vmul=1.0, smul=1.0, lo=60, hi=175):
 
 TIERS = {
  'green':  dict(hue=None),
- 'orange': dict(hue=26, v=1.28, s=1.05, glow=(255, 160, 40)),
- 'red':    dict(hue=358, v=1.12, s=1.0, glow=(255, 70, 50)),
+ 'orange': dict(hue=28, v=1.8, s=1.3, glow=(255, 160, 40)),
+ 'red':    dict(hue=356, v=1.65, s=1.3, glow=(255, 70, 50)),
 }
 def chaikin(pts, n=2, closed=True):
     for _ in range(n):
