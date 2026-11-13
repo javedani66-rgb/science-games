@@ -421,8 +421,7 @@ function envScene(ti){const c=envCards(envNode)[ti];$('envsbk').textContent=T('e
 $('goenv').onclick=openEnv;$('envb').onclick=closeEnv;$('envgo').onclick=()=>envStart(envOrd[2]);$('envsbk').onclick=()=>{$('envsc').hidden=true;envRender()};
 
 /* D205: نقشهٔ بلند ← نقشهٔ کلی با فید سیاه (و برعکس، در خود نقشهٔ کلی)؛ پیشرفت و جای کودک در نشانی می‌رود */
-$('home').onclick=async()=>{if(busy)return;busy=true;STA.forEach(a=>{try{a.cancel()}catch(e){}});const fr=ORDER.filter(i=>visited.has(i)).reduce((m,i)=>ORDER.indexOf(i)>ORDER.indexOf(m)?i:m,ORDER[0]);
- await fadeBlk(0,1,reduce?120:380);try{location.href='overview.html#o-'+fr+(here!==fr?'-'+here:'')}catch(e){}busy=false};
+$('home').onclick=async()=>{if(busy)return;busy=true;STA.forEach(a=>{try{a.cancel()}catch(e){}});saveNow();await fadeBlk(0,1,reduce?120:380);try{location.href='index.html#back'}catch(e){}busy=false};
 addEventListener('pageshow',e=>{if(e.persisted){blk.style.opacity=1;fadeBlk(1,0,reduce?120:380)}});$('prv').onclick=()=>{const a=prv();if(a)go(a)};
 /* D138/D139 (پیشنهاد، ماکت): صفحهٔ انتخاب مخفی‌گاه؛ چهار گزینه کنار هم؛ آب‌های آزاد: قایق از بالای کادر می‌رود و پیام می‌آید */
 const ov=$('ov'),ovn=$('ovn');let atSea=false;
