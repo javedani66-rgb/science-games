@@ -10,13 +10,18 @@ import build_tiers as B
 H = B.H; LAND = sys.argv[1] if len(sys.argv) > 1 else 'sports'
 SRC = H.parent / 'lands' / LAND
 OUT = B.OUT / LAND; OUT.mkdir(parents=True, exist_ok=True)
-CARDS = {
- 'sports': {
-  'green':  dict(loc='ورزشگاه', title='زمین صبحگاهی', mission='توپ را به هدف بزن!', tcol='#0a3033', mcol='#193b39'),
-  'orange': dict(loc='ورزشگاه', title='شب مسابقه', mission='توپ را سریع‌تر بزن!', tcol='#3a1a06', mcol='#4a2208'),
-  'red':    dict(loc='ورزشگاه', title='فینال بزرگ!', mission='توپ را محکم بزن!', tcol='#3a0a0a', mcol='#4a0f10')},
-}[LAND]
-CX, CY, DISC = 426, 1452, 60   # مرکز مدالیون داخل قاب و شعاع دیسک رنگی
+def _t(loc, g, o, r):
+    cols = {'green': ('#0a3033', '#193b39'), 'orange': ('#3a1a06', '#4a2208'), 'red': ('#3a0a0a', '#4a0f10')}
+    return {t: dict(loc=loc, title=x[0], mission=x[1], tcol=cols[t][0], mcol=cols[t][1]) for t, x in zip(('green', 'orange', 'red'), (g, o, r))}
+# متن‌ها فقط پیش‌نویس (draft)؛ برای دیدن قاب
+LANDS = {
+ 'sports': (_t('ورزشگاه', ('زمین صبحگاهی', 'توپ را به هدف بزن!'), ('شب مسابقه', 'توپ را سریع‌تر بزن!'), ('فینال بزرگ!', 'توپ را محکم بزن!')), 60),
+ 'space':  (_t('پایگاه فضایی', ('ایستگاه آرام', 'بار را بالا ببر!'), ('پروازِ شبانه', 'وزن را بسنج!'), ('طوفان خورشیدی!', 'موشک را نگه دار!')), 54),
+ 'farm':   (_t('مزرعه و آسیاب', ('مزرعهٔ صبح', 'گونی را بالا بکش!'), ('آسیابِ غروب', 'آسیاب را بچرخان!'), ('طوفان گندم!', 'کار را سبک کن!')), 46),
+ 'city':   (_t('شهر صنعتی', ('کارگاه روز', 'بار را جابه‌جا کن!'), ('کارخانهٔ شب', 'اهرم را بزن!'), ('خرابیِ بزرگ!', 'ماشین را راه بینداز!')), 56),
+}
+CARDS, DISC = LANDS[LAND]
+CX, CY = 426, 1452   # مرکز مدالیون
 
 def load_frame():
     im = Image.open(SRC / 'frame-source.jpg').convert('RGBA')
@@ -60,10 +65,10 @@ def cards():
                 return (f'<text x="{x+dx}" y="{y+dy}" {a} fill="{sh_fill}" stroke="{sh_fill}" stroke-width="{sh_sw}">{text}</text>'
                         f'<text x="{x}" y="{y}" {a} fill="{fill}" stroke="{stroke}" stroke-width="{sw}">{text}</text>')
             svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="853" height="1844" viewBox="0 0 853 1844">
-<defs><clipPath id="cl"><rect x="88" y="520" width="676" height="692" rx="30"/></clipPath></defs>
+<defs><clipPath id="cl"><rect x="88" y="520" width="676" height="692" rx="36"/></clipPath></defs>
 <image href="{(OUT / f'frame_{tier}.png').as_uri()}" width="853" height="1844"/>
 <image href="{(OUT / f'{tier}_art.webp').as_uri()}" x="88" y="520" width="676" height="692" preserveAspectRatio="xMidYMid slice" clip-path="url(#cl)"/>
-{tx(426,246,47,c['loc'],'#273333','#17292a',1.1,'#8aa0a8',2.1,2,2)}
+{tx(426,244,min(47,round(215/(.47*len(c['loc'])))),c['loc'],'#273333','#17292a',1.1,'#8aa0a8',2.1,2,2)}
 {tx(426.5,436,76,c['title'],'#fff9e9',c['tcol'],1.7,c['tcol'],2.7)}
 {tx(426,1345,57,c['mission'],c['mcol'],'#f6edda',.6,'#b9a27a',1.6,2,3)}
 {tx(426,1637,58,'برگردیم به نقشه','#543016','#f9e9cb',.5,'#9e7042',1.5,2,3)}
