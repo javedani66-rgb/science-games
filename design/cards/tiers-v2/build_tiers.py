@@ -103,9 +103,9 @@ def medallion(tier):
     return m
 
 CARDS = {
- 'green':  dict(loc='بندر', title='اسکلهٔ ماهیگیری', mission='تور را با طناب بکش بالا!', art=AP / 'fishing-dock-art.jpg', tcol='#0a3033', mcol='#193b39'),
- 'orange': dict(loc='بندر', title='اسکلهٔ دزدان دریایی', mission='بار را بکش بالا!', art=pathlib.Path('/tmp/orange.jpg'), tcol='#3a1a06', mcol='#4a2208'),
- 'red':    dict(loc='بندر', title='شکار اژدر!', mission='اژدها را بکش بالا!', art=pathlib.Path('/tmp/red.jpg'), tcol='#3a0a0a', mcol='#4a0f10'),
+ 'green':  dict(loc='اسکله', title='اسکلهٔ ماهیگیری', mission='تور را با طناب بکش بالا!', art=AP / 'fishing-dock-art.jpg', tcol='#0a3033', mcol='#193b39'),
+ 'orange': dict(loc='اسکله', title='اسکلهٔ دزدان دریایی', mission='بار را بکش بالا!', art=pathlib.Path('/tmp/orange.jpg'), tcol='#3a1a06', mcol='#4a2208'),
+ 'red':    dict(loc='اسکله', title='شکار اژدر!', mission='اژدها را بکش بالا!', art=pathlib.Path('/tmp/red.jpg'), tcol='#3a0a0a', mcol='#4a0f10'),
 }
 def build_assets():
     frame0 = clean_alpha(Image.open(AP / 'card-frame-base.png'))

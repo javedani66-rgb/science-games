@@ -64,10 +64,10 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 #ov.wait .bb{opacity:0;pointer-events:none;animation:none}#ov.nosc .bb{display:none}@keyframes bbIn{from{opacity:0;transform:translate(-50%,-90%) scale(.85)}}@media (prefers-reduced-motion:reduce){.bb{animation:none}}
 
 /* D216: صفحهٔ محیط ایستگاه: پشتهٔ سه کارت چالش (هنر تأییدشدهٔ اسکله؛ بقیه موقت) */
-#env,#envsc{position:absolute;inset:0;z-index:31;background:#d5ecf4;display:flex;flex-direction:column;animation:ovIn .45s ease both}#envsc{z-index:32}#env[hidden],#envsc[hidden]{display:none}
-#envh{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--cream);border-bottom:3px solid var(--navy)}#envh h2{margin:0;flex:1;font-size:20px;color:var(--navy);text-align:center}#envh .btn{flex:0 0 auto;min-width:48px;min-height:48px;font-size:14px}
-#envbody{flex:1;overflow-y:auto;padding:14px 16px 18px;display:flex;flex-direction:column;align-items:center;gap:10px}
-#envhead{width:min(62%,230px);height:auto;display:block}
+#env,#envsc{position:absolute;inset:0;z-index:31;background:#f6f0dd;display:flex;flex-direction:column;animation:ovIn .45s ease both}#envsc{z-index:32}#env[hidden],#envsc[hidden]{display:none}
+#env #envh{display:none}#envh{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--cream);border-bottom:3px solid var(--navy)}#envh h2{margin:0;flex:1;font-size:20px;color:var(--navy);text-align:center}#envh .btn{flex:0 0 auto;min-width:48px;min-height:48px;font-size:14px}
+#envbody{flex:1;overflow-y:auto;padding:10px 16px 12px;display:flex;flex-direction:column;align-items:center;gap:10px}
+#envbody .envt2{margin:0;font-size:22px;color:var(--navy)}#envhead{width:min(62%,230px);height:auto;display:block}
 #stk{position:relative;width:min(92%,340px);margin:0 auto;flex:none}
 .sc{position:absolute;left:0;width:100%;border:0;background:none;padding:0;cursor:pointer;transition:top .55s cubic-bezier(.3,.9,.3,1);-webkit-tap-highlight-color:transparent}.sc img{width:100%;display:block;filter:drop-shadow(0 4px 6px rgba(20,12,60,.35))}
 .sc.gen{height:300px;border:4px solid var(--navy);border-radius:22px;background:var(--tone);box-shadow:0 5px 0 var(--edge);overflow:hidden;text-align:center;font-family:inherit;color:var(--navy)}
@@ -75,7 +75,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 .sc.gen .ga{margin:14px;height:150px;border:3px dashed var(--navy);border-radius:14px;background:rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700}
 .sc.gen .gm{padding:0 14px;font-size:14px;font-weight:700}
 .tapn{margin:0;text-align:center;font-size:14px;color:var(--navy);max-width:320px}
-#envbar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#d5ecf4;border-top:3px solid var(--navy);display:flex;gap:10px}
+#envbar{padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:#f6f0dd;border-top:3px solid var(--navy);display:flex;gap:10px}
 #envsb{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;align-items:center;gap:12px}#envsb img{width:min(100%,340px);border:4px solid var(--navy);border-radius:20px;display:block}
 #envsb .gen{width:min(100%,340px);height:230px;border:4px dashed var(--navy);border-radius:20px;background:rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--navy)}
 #envsb h3{margin:0;color:var(--navy);font-size:20px;text-align:center}#envsb p{margin:0;text-align:center;font-size:15px;color:var(--navy)}
@@ -378,13 +378,13 @@ let envOrd=[2,1,0],envNode=null;
 function envCards(id){const n=NODES[id]||{};
  if(id==='M07')return TIERS.map((x,i)=>({t:T('env.harbor.'+x.k+'.title'),w:T('env.harbor.'+x.k+'.ready'),img:ENVIMG['c'+i],art:ENVIMG['a'+i]}));
  return TIERS.map(x=>({t:T('env.tier.'+x.k)+': '+(n.title||''),w:T('env.pending'),img:null,art:null}))}
-function envRender(){const C=envCards(envNode),OFF=80,harbor=envNode==='M07';
- let h='';if(harbor)h+='<img id="envhead" alt="" src="'+ENVIMG.head+'">';
+function envRender(){const C=envCards(envNode),harbor=envNode==='M07',eb=$('envbody'),avail=eb.clientHeight||560,hh=harbor?Math.min(.62*innerWidth,230)*.46:44,W=Math.max(250,Math.min(340,(avail-hh-34)/1.84)),OFF=Math.round(W*.2);
+ let h='';if(harbor)h+='<img id="envhead" alt="" src="'+ENVIMG.head+'">';else h+='<h2 class="envt2">'+(NODES[envNode].title||'')+'</h2>';
  h+='<div id="stk">'+envOrd.map((ti,p)=>{const c=C[ti],X=TIERS[ti];
   return harbor?'<button class="sc" data-t="'+ti+'" data-p="'+p+'" style="top:'+(p*OFF)+'px;z-index:'+(p+1)+'" aria-label="'+c.t+'"><img src="'+c.img+'" alt=""></button>'
   :'<button class="sc gen" data-t="'+ti+'" data-p="'+p+'" style="top:'+(p*OFF)+'px;z-index:'+(p+1)+';--tone:'+X.tone+'"><div class="gt">'+c.t+'</div><div class="ga">'+T('env.tmpimg')+' '+X.e+'</div><div class="gm">'+c.w+'</div></button>'}).join('')+'</div><p class="tapn">'+T('env.tap')+'</p>';
  $('envbody').innerHTML=h;envIn();
- const stk=$('stk'),fit=()=>{const f=stk.querySelector('.sc[data-p="2"]');stk.style.height=(2*OFF+f.getBoundingClientRect().height+8)+'px'};
+ const stk=$('stk');stk.style.width=W+'px';const fit=()=>{const f=stk.querySelector('.sc[data-p="2"]');stk.style.height=(2*OFF+f.getBoundingClientRect().height+8)+'px'};
  const im=stk.querySelector('img');if(im&&!im.complete)im.onload=fit;fit();setTimeout(fit,60);
  stk.querySelectorAll('.sc').forEach(b=>b.onclick=()=>{const ti=+b.dataset.t;if(envBusy)return;if(b.dataset.p==='2'){envStart(ti);return}
   envOrd=envOrd.filter(x=>x!==ti).concat([ti]);stk.querySelectorAll('.sc').forEach(e=>{const q=envOrd.indexOf(+e.dataset.t);e.dataset.p=q;e.style.top=(q*OFF)+'px';e.style.zIndex=q+1})})}
