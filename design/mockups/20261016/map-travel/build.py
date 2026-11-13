@@ -356,10 +356,20 @@ def _envimgs():
             im.putalpha(Image.eval(hole, lambda v: 255 - v))
         im = im.resize((w, round(w * im.height / im.width)), Image.LANCZOS)
         buf = io.BytesIO(); im.save(buf, 'WEBP', quality=q); return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
-    FLOW = slices(ROOT / 'design/cards/approved/card-space-full-flow-v1/fragment.html')   # 0 عنوان، 1 قرمز، 2 نارنجی، 3 سبز
-    INTER = slices(ROOT / 'design/cards/approved/harbor-interaction-v1/fragment.html')    # تصویر صحنهٔ سبز، نارنجی، قرمز
-    return dict(head=webp(FLOW[0], 420, True), c0=webp(FLOW[3], 520, True), c1=webp(FLOW[2], 520, True), c2=webp(FLOW[1], 520, True),
-                a0=webp(INTER[0], 395), a1=webp(INTER[1], 395), a2=webp(INTER[2], 395))
+    # D223: کارت‌های سه‌رنگ تازه (design/cards/tiers-v2/out، ساخته با build_tiers.py): قاب سبز تأییدشده با چرخش رنگ + تصویر هر چالش
+    T2 = ROOT / 'design/cards/tiers-v2/out'
+    def card(tier):
+        im = Image.open(T2 / f'card_{tier}.png').convert('RGBA').crop((20, 285, 833, 1535))   # بدنهٔ کارت بی‌سرِ لنگر و بی‌دکمهٔ بازگشت
+        im = im.resize((520, round(520 * im.height / im.width)), Image.LANCZOS)
+        buf = io.BytesIO(); im.save(buf, 'WEBP', quality=84); return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
+    def head():
+        im = Image.open(T2 / 'card_green.png').convert('RGBA').crop((140, 25, 715, 274))
+        im = im.resize((420, round(420 * im.height / im.width)), Image.LANCZOS)
+        buf = io.BytesIO(); im.save(buf, 'WEBP', quality=84); return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
+    def art(tier):
+        im = Image.open(T2 / f'{tier}_art.webp').convert('RGB'); im = im.resize((395, round(395 * im.height / im.width)), Image.LANCZOS)
+        buf = io.BytesIO(); im.save(buf, 'WEBP', quality=80); return 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
+    return dict(head=head(), c0=card('green'), c1=card('orange'), c2=card('red'), a0=art('green'), a1=art('orange'), a2=art('red'))
 
 def main():
     strings = json.load(open(HERE / 'strings.fa.json', encoding='utf-8'))
