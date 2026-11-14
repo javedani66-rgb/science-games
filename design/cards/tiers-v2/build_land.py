@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """D235: کارت‌های سه‌رنگ برای یک سرزمین از قاب سبزِ همان سرزمین (ساخته با نانوبنانا).
-استفاده: python3 build_land.py sports   → out/<land>/card_<tier>.png و frame_/medal_/art
+استفاده: python3 build_land.py sports [F01]   → (با ایستگاه: out/<land>/<station>/) out/<land>/card_<tier>.png و frame_/medal_/art
 قاب باید همان چیدمان قاب دریایی را داشته باشد (۸۵۳×۱۸۴۴ پس از کوچک‌کردن). صحنه از ../lands/<land>/art_<tier>.(jpg|png|webp)؛ اگر نبود جای‌نگهدار."""
 import sys, pathlib, io
 from PIL import Image, ImageDraw, ImageFilter
@@ -9,7 +9,8 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent))
 import build_tiers as B
 H = B.H; LAND = sys.argv[1] if len(sys.argv) > 1 else 'sports'
 SRC = H.parent / 'lands' / LAND
-OUT = B.OUT / LAND; OUT.mkdir(parents=True, exist_ok=True)
+STATION = sys.argv[2] if len(sys.argv) > 2 else None   # مثلاً F01 → صحنه art_F01_<tier> و متن از strings.fa.json
+OUT = B.OUT / LAND / (STATION or ''); OUT.mkdir(parents=True, exist_ok=True)
 def _t(loc, g, o, r):
     cols = {'green': ('#0a3033', '#193b39'), 'orange': ('#3a1a06', '#4a2208'), 'red': ('#3a0a0a', '#4a0f10')}
     return {t: dict(loc=loc, title=x[0], mission=x[1], tcol=cols[t][0], mcol=cols[t][1]) for t, x in zip(('green', 'orange', 'red'), (g, o, r))}
@@ -21,6 +22,11 @@ LANDS = {
  'city':   (_t('شهر صنعتی', ('کارگاه روز', 'بار را جابه‌جا کن!'), ('کارخانهٔ شب', 'اهرم را بزن!'), ('خرابیِ بزرگ!', 'ماشین را راه بینداز!')), 56),
 }
 CARDS, DISC = LANDS[LAND]
+if STATION:   # متن هر ایستگاه از لایهٔ متن (B49)
+    import json
+    S = json.loads((SRC / 'strings.fa.json').read_text(encoding='utf-8'))
+    for t, c in CARDS.items():
+        c.update(loc=S[f'card.{STATION}.loc']['text'], title=S[f'card.{STATION}.{t}.title']['text'], mission=S[f'card.{STATION}.{t}.mission']['text'])
 CX, CY = 426, 1452   # مرکز مدالیون
 
 def load_frame():
@@ -30,7 +36,7 @@ def load_frame():
 
 def art_for(tier):
     for ext in ('webp', 'png', 'jpg'):
-        f = SRC / f'art_{tier}.{ext}'
+        f = SRC / (f'art_{STATION}_{tier}.{ext}' if STATION else f'art_{tier}.{ext}')
         if f.exists(): return Image.open(f).convert('RGB')
     col = {'green': (70, 160, 80), 'orange': (230, 140, 50), 'red': (190, 50, 50)}[tier]
     im = Image.new('RGB', (679, 696), col); d = ImageDraw.Draw(im)
@@ -70,7 +76,7 @@ def cards():
 <image href="{(OUT / f'{tier}_art.webp').as_uri()}" x="88" y="520" width="676" height="692" preserveAspectRatio="xMidYMid slice" clip-path="url(#cl)"/>
 {tx(426,244,min(47,round(215/(.47*len(c['loc'])))),c['loc'],'#273333','#17292a',1.1,'#8aa0a8',2.1,2,2)}
 {tx(426.5,436,76,c['title'],'#fff9e9',c['tcol'],1.7,c['tcol'],2.7)}
-{tx(426,1345,57,c['mission'],c['mcol'],'#f6edda',.6,'#b9a27a',1.6,2,3)}
+{tx(426,1345,min(57,round(600/(.47*len(c['mission'])))),c['mission'],c['mcol'],'#f6edda',.6,'#b9a27a',1.6,2,3)}
 {tx(426,1637,58,'برگردیم به نقشه','#543016','#f9e9cb',.5,'#9e7042',1.5,2,3)}
 </svg>'''
             (OUT / f'card_{tier}.html').write_text(f'<style>@font-face{{font-family:Lalezar;src:url({font})}}html,body{{margin:0;background:transparent}}</style>{svg}', encoding='utf-8')

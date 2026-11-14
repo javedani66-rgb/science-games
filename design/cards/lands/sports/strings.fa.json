@@ -1,0 +1,58 @@
+{
+ "card.F01.loc": {
+  "text": "زمین فوتبال",
+  "kind": "title",
+  "where_fa": "نام ایستگاه بالای کارت چالش F01",
+  "context_fa": "F01، D242؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "card.F01.green.title": {
+  "text": "تمرین صبحگاهی",
+  "kind": "title",
+  "where_fa": "عنوان چالش سبز روی کارت F01",
+  "context_fa": "نام مصوب مالک (D242)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "card.F01.green.mission": {
+  "text": "وسایل را سر جایشان ببر!",
+  "kind": "mission",
+  "where_fa": "جملهٔ مأموریت زیر تصویر کارت سبز F01",
+  "context_fa": "F01، D242؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "card.F01.orange.title": {
+  "text": "بازی عصر",
+  "kind": "title",
+  "where_fa": "عنوان چالش نارنجی روی کارت F01",
+  "context_fa": "نام مصوب مالک (D242)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "card.F01.orange.mission": {
+  "text": "اول حدس بزن، بعد امتحان کن!",
+  "kind": "mission",
+  "where_fa": "جملهٔ مأموریت زیر تصویر کارت نارنجی F01",
+  "context_fa": "F01، D242؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ },
+ "card.F01.red.title": {
+  "text": "مسابقهٔ شب",
+  "kind": "title",
+  "where_fa": "عنوان چالش قرمز روی کارت F01",
+  "context_fa": "نام مصوب مالک (D242)",
+  "band": "همه",
+  "status": "draft"
+ },
+ "card.F01.red.mission": {
+  "text": "خودت انتخاب کن: هل یا کشش؟",
+  "kind": "mission",
+  "where_fa": "جملهٔ مأموریت زیر تصویر کارت قرمز F01",
+  "context_fa": "F01، D242؛ پیش‌نویس",
+  "band": "همه",
+  "status": "draft"
+ }
+}
