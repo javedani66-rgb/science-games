@@ -1,8 +1,8 @@
 # از اینجا شروع کن: بازی‌های علوم
 
-آخرین بازبینی این ورودی: ۸ نوامبر ۲۰۲۶.
+آخرین بازبینی این ورودی: ۱۴ نوامبر ۲۰۲۶.
 
-**اگر Claude در دسترس نیست:** [ادامهٔ کار بدون Claude](docs/CONTINUE_WITHOUT_CLAUDE_FA.md) (راهنمای معلم + پیام شروع آمادهٔ هر هوش مصنوعی). نقطهٔ ادامهٔ فعلی: [docs/handoffs/20261108-claude.md](docs/handoffs/20261108-claude.md).
+**اگر Claude در دسترس نیست:** [ادامهٔ کار بدون Claude](docs/CONTINUE_WITHOUT_CLAUDE_FA.md) (راهنمای معلم + پیام شروع آمادهٔ هر هوش مصنوعی). نقطهٔ ادامهٔ فعلی: [docs/handoffs/20261114-fable-next-chat.md](docs/handoffs/20261114-fable-next-chat.md) (پیام شروع آمادهٔ چت تازه: [START_PROMPT_20261114_FA.md](docs/handoffs/START_PROMPT_20261114_FA.md)).
 
 **سه گام (حدود ۵۰۰۰ توکن):**
 
