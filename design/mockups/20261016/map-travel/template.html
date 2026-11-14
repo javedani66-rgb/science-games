@@ -380,11 +380,11 @@ const ENVIMG={{ENVIMG}};
 const TIERS=[{k:'green',tone:'#8fd19e',e:'🟢'},{k:'orange',tone:'#f6b36b',e:'🟠'},{k:'red',tone:'#ee8f84',e:'🔴'}];
 let envOrd=[2,1,0],envNode=null;
 function envCards(id){const n=NODES[id]||{};
- if(id==='M07')return TIERS.map((x,i)=>({t:T('env.harbor.'+x.k+'.title'),w:T('env.harbor.'+x.k+'.ready'),img:ENVIMG['c'+i],art:ENVIMG['a'+i]}));
+ const E=ENVIMG[id];if(E)return TIERS.map((x,i)=>({t:id==='M07'?T('env.harbor.'+x.k+'.title'):E['t'+i],w:T('env.harbor.'+x.k+'.ready'),img:E['c'+i],art:E['a'+i]}));   // D246: هر ایستگاهی که کارت ساخته‌شده دارد (M07، F01، …)
  return TIERS.map(x=>({t:T('env.tier.'+x.k)+': '+(n.title||''),w:T('env.pending'),img:null,art:null}))}
 let envOFF=60,envReady=false;
-function envRender(){const C=envCards(envNode),harbor=envNode==='M07',eb=$('envbody'),avail=eb.clientHeight||560,hh=harbor?Math.min(.62*innerWidth,230)*.46:44,W=Math.max(250,Math.min(340,(avail-hh-34)/1.84)),OFF=Math.round(W*.2);envOFF=OFF;
- let h='';if(harbor)h+='<img id="envhead" alt="" src="'+ENVIMG.head+'">';else h+='<h2 class="envt2">'+(NODES[envNode].title||'')+'</h2>';
+function envRender(){const C=envCards(envNode),harbor=!!ENVIMG[envNode],eb=$('envbody'),avail=eb.clientHeight||560,hh=harbor?Math.min(.62*innerWidth,230)*.46:44,W=Math.max(250,Math.min(340,(avail-hh-34)/1.84)),OFF=Math.round(W*.2);envOFF=OFF;
+ let h='';if(harbor)h+='<img id="envhead" alt="" src="'+ENVIMG[envNode].head+'">';else h+='<h2 class="envt2">'+(NODES[envNode].title||'')+'</h2>';
  h+='<div id="stk">'+envOrd.map((ti,p)=>{const c=C[ti],X=TIERS[ti],rd='<div class="cready"><p>'+c.w+'</p><button type="button" class="gob">'+T('env.start')+'</button></div>',st='style="top:'+(p*OFF)+'px;z-index:'+(p+1)+(harbor?'':';--tone:'+X.tone)+'"';
   return harbor?'<div class="sc'+(p===2&&envReady?' on':'')+'" role="button" tabindex="0" data-t="'+ti+'" data-p="'+p+'" '+st+' aria-label="'+c.t+'"><img src="'+c.img+'" alt="">'+rd+'</div>'
   :'<div class="sc gen'+(p===2&&envReady?' on':'')+'" role="button" tabindex="0" data-t="'+ti+'" data-p="'+p+'" '+st+'><div class="gt">'+c.t+'</div><div class="ga">'+T('env.tmpimg')+' '+X.e+'</div><div class="gm">'+c.w+'</div>'+rd+'</div>'}).join('')+'</div><p class="tapn">'+T('env.tap')+'</p>';
