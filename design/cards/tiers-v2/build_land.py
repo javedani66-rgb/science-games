@@ -55,10 +55,10 @@ def build():
         e = B.emblem(tier, 112); fr.alpha_composite(e, (CX - 56, CY - 56 + 2))
         fr.save(OUT / f'frame_{tier}.png')
         src = art_for(tier); w, h = 679, 696
-        k = max(w / src.width, h / src.height) * 1.6
+        k = max(w / src.width, h / src.height) * 2
         src = src.resize((round(src.width * k), round(src.height * k)), Image.LANCZOS)
-        l, tp = (src.width - w * 1.6) // 2, (src.height - h * 1.6) // 2
-        src.crop((int(l), int(tp), int(l + w * 1.6), int(tp + h * 1.6))).save(OUT / f'{tier}_art.webp', 'WEBP', quality=88)
+        l, tp = (src.width - w * 2) // 2, (src.height - h * 2) // 2
+        src.crop((int(l), int(tp), int(l + w * 2), int(tp + h * 2))).save(OUT / f'{tier}_art.webp', 'WEBP', quality=92)
 
 def cards():
     from playwright.sync_api import sync_playwright
@@ -80,7 +80,7 @@ def cards():
 {tx(426,1637,58,'برگردیم به نقشه','#543016','#f9e9cb',.5,'#9e7042',1.5,2,3)}
 </svg>'''
             (OUT / f'card_{tier}.html').write_text(f'<style>@font-face{{font-family:Lalezar;src:url({font})}}html,body{{margin:0;background:transparent}}</style>{svg}', encoding='utf-8')
-            pg = b.new_page(viewport={'width': 853, 'height': 1844}); pg.goto((OUT / f'card_{tier}.html').as_uri()); pg.wait_for_timeout(800)
+            pg = b.new_page(viewport={'width': 853, 'height': 1844}, device_scale_factor=2); pg.goto((OUT / f'card_{tier}.html').as_uri()); pg.wait_for_timeout(800)
             pg.screenshot(path=str(OUT / f'card_{tier}.png'), omit_background=True); pg.close()
         b.close()
 if __name__ == '__main__':
