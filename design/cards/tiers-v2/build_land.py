@@ -32,7 +32,20 @@ CX, CY = 426, 1452   # مرکز مدالیون
 def load_frame():
     im = Image.open(SRC / 'frame-source.jpg').convert('RGBA')
     im = im.resize((853, round(im.height * 853 / im.width)), Image.LANCZOS)
-    im = im.crop((0, 0, 853, 1844)); return B.clean_alpha(im)
+    im = im.crop((0, 0, 853, 1844)); return land_alpha(im)
+
+def land_alpha(im):
+    # پس‌زمینهٔ سفید و سایهٔ خاکستری کم‌رنگ دور قاب را برمی‌دارد؛ فقط بخش‌های وصل به لبهٔ تصویر
+    # (سفیدِ داخل قاب، مثل توپ بیس‌بال یا کادر نام، دست نمی‌خورد؛ D244)
+    from scipy import ndimage
+    a = np.asarray(im).astype(int); mx = a[..., :3].max(-1); mn = a[..., :3].min(-1)
+    cand = (mn > 150) & ((mx - mn) < 45)
+    lab, n = ndimage.label(cand)
+    edge = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    bg = np.isin(lab, list(edge))
+    bg = ndimage.binary_dilation(bg, iterations=1)
+    A = Image.fromarray(np.where(bg, 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.8))
+    im.putalpha(A); return im
 
 def art_for(tier):
     for ext in ('webp', 'png', 'jpg'):
