@@ -156,6 +156,13 @@ def run_band(pw_browser, band, g, width):
     pg.locator('[data-show]').click(); assert finished(pg), band + ': show-me ends the mission'
     # selector shows marks, no counts of the "n of m" kind
     pg.evaluate('()=>__J.harborSelector()'); scan(pg, f'{band} selector')
+    # 'n of m' only on the teacher page, never for the child
+    pg.evaluate('()=>__J.teacherPage()')
+    ttxt = pg.locator('#app').inner_text()
+    assert len(re.findall(r'۳ از ۳ مأموریت', ttxt)) == 3, f'{band}: teacher page shows n of m for the three challenges'
+    pg.evaluate('()=>__J.harborSelector()')
+    mm = re.search(r'.{0,30}[۰-۹]+\s*از\s*[۰-۹]+.{0,20}', pg.locator('.sheet').first.inner_text(), re.S)
+    assert not mm, f'{band}: child must not see n of m: {mm and mm.group(0)!r}'
     assert pg.evaluate("()=>document.documentElement.scrollWidth<=innerWidth"), f'{band} w{width}: horizontal overflow'
     saved = pg.evaluate('()=>JSON.stringify(__J.curP().routeProgress)'); pg.reload()
     assert pg.evaluate('()=>JSON.stringify(__J.curP().routeProgress)') == saved, 'reload keeps harbor progress'

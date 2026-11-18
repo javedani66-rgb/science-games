@@ -1643,5 +1643,33 @@
   "where_fa": "دکمهٔ بستن کارت درس",
   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
   "band": "همه"
+ },
+ "harbor.teacher.title": {
+  "text": "بندر: خلاصهٔ هر چالش",
+  "kind": "ui",
+  "where_fa": "عنوان بخش بندر در صفحهٔ معلم (فقط صفحهٔ معلم؛ کودک نمی~بیند)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.teacher.route": {
+  "text": "<t/>: <n/> از <m/> مأموریت انجام شده؛ <i/> مستقل، <a/> با کمک.",
+  "kind": "ui",
+  "where_fa": "سطر هر چالش در صفحهٔ معلم (فقط صفحهٔ معلم؛ کودک نمی~بیند)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.teacher.none": {
+  "text": "هنوز مأموریتی در بندر انجام نشده است.",
+  "kind": "ui",
+  "where_fa": "پیام نبودن ثبت در صفحهٔ معلم (فقط صفحهٔ معلم؛ کودک نمی~بیند)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.teacher.note": {
+  "text": "این خلاصه فقط شمارش ثبت‌های بازی است و دربارهٔ فهم کودک چیزی نمی‌گوید.",
+  "kind": "ui",
+  "where_fa": "یادداشت زیر خلاصهٔ بندر در صفحهٔ معلم (فقط صفحهٔ معلم؛ کودک نمی~بیند)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
  }
 }

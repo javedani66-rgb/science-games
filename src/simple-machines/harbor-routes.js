@@ -111,6 +111,15 @@ function harborResult(id){
  const o=jsheet(`<h2>${done?hs('harbor.ui.res.done'):hs('harbor.ui.res.more')}</h2><p class="j-note">${hs('harbor.ui.res.note')}</p><div class="nav"><button class="btn" id="hag" type="button">${hs('harbor.ui.res.again')}</button><button class="btn" id="hother" type="button">${hs('harbor.ui.res.other')}</button><button class="btn go" id="hmap" type="button">${hs('harbor.ui.sel.close')}</button></div>`,hs('harbor.ui.res.label'),"#1F6F7F");
  o.querySelector('#hag').onclick=()=>harborRouteSheet(id);o.querySelector('#hother').onclick=harborSelector;o.querySelector('#hmap').onclick=()=>jmap({scroll:false});o.querySelector('#hmap').focus();
 }
+/* Teacher page only (never shown to the child): how many missions of each challenge are done, and how many of those were independent or assisted. A count of records, not a claim about understanding (B9). */
+function harborTeacherPanel(q){
+ if(!harborEligible(q))return '';
+ const st=harborState(q),rows=[];let any=false;
+ for(const r of HARBOR_CONTENT.routes){let n=0,ind=0,asst=0;
+  for(const a of r.activities){const l=st.activities[a.id]&&st.activities[a.id].latest;if(l&&l.correct){n++;any=true;if(l.independent)ind++;else asst++;}}
+  rows.push(hs('harbor.teacher.route',null,{t:harborRouteText(r,'title'),n:fa(n),m:fa(r.activities.length),i:fa(ind),a:fa(asst)}));}
+ return `<h5>${hs('harbor.teacher.title')}</h5>${any?rows.map(x=>`<p>${x}</p>`).join(''):`<p>${hs('harbor.teacher.none')}</p>`}<p class="j-note">${hs('harbor.teacher.note')}</p>`;
+}
 function harborHelp(route,band){
  const o=jsheet(`<h2>${hs('harbor.ui.help.title')}</h2><p>${hs('harbor.'+route.color+'.help',band)}</p><p>${hs('harbor.ui.model')}</p><button class="btn" id="hhelpclose" type="button">${hs('harbor.ui.help.close')}</button>`,hs('harbor.ui.help.title'),'#1F6F7F');o.querySelector('#hhelpclose').onclick=closeOv;o.querySelector('#hhelpclose').focus();
 }

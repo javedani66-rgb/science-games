@@ -16576,6 +16576,66 @@
    ],
    "text": "فهمیدم",
    "status": "draft"
+  },
+  "harbor.teacher.title": {
+   "id": "harbor.teacher.title",
+   "kind": "ui",
+   "where_fa": "عنوان بخش بندر در صفحهٔ معلم (فقط صفحهٔ معلم؛ کودک نمی~بیند)",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "همه",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.teacher.title",
+    "text"
+   ],
+   "text": "بندر: خلاصهٔ هر چالش",
+   "status": "draft"
+  },
+  "harbor.teacher.route": {
+   "id": "harbor.teacher.route",
+   "kind": "ui",
+   "where_fa": "سطر هر چالش در صفحهٔ معلم (فقط صفحهٔ معلم؛ کودک نمی~بیند)",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "همه",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.teacher.route",
+    "text"
+   ],
+   "text": "<t/>: <n/> از <m/> مأموریت انجام شده؛ <i/> مستقل، <a/> با کمک.",
+   "status": "draft"
+  },
+  "harbor.teacher.none": {
+   "id": "harbor.teacher.none",
+   "kind": "ui",
+   "where_fa": "پیام نبودن ثبت در صفحهٔ معلم (فقط صفحهٔ معلم؛ کودک نمی~بیند)",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "همه",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.teacher.none",
+    "text"
+   ],
+   "text": "هنوز مأموریتی در بندر انجام نشده است.",
+   "status": "draft"
+  },
+  "harbor.teacher.note": {
+   "id": "harbor.teacher.note",
+   "kind": "ui",
+   "where_fa": "یادداشت زیر خلاصهٔ بندر در صفحهٔ معلم (فقط صفحهٔ معلم؛ کودک نمی~بیند)",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "همه",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.teacher.note",
+    "text"
+   ],
+   "text": "این خلاصه فقط شمارش ثبت‌های بازی است و دربارهٔ فهم کودک چیزی نمی‌گوید.",
+   "status": "draft"
   }
  },
  "meta": {
