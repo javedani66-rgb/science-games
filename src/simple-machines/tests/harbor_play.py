@@ -48,7 +48,7 @@ def guess(pg):
 def arr(pg, k):   # arrangement button k (0-based) among the control buttons
     pg.locator('#cl .btn').nth(k).click()
 
-def run_mission(pg, band, route, idx, tag):
+def run_mission(pg, band, route, idx, tag, two_wrong=False):
     sp = pg.evaluate('()=>window.__T.spec')
     t = sp['t']
     scan(pg, f'{tag} start')
@@ -90,6 +90,13 @@ def run_mission(pg, band, route, idx, tag):
         pg.locator(f'.mcq [data-i="{wrong}"]').click()
         assert not finished(pg), f'{tag}: first wrong answer must leave a second chance'
         scan(pg, f'{tag} after wrong')
+        if two_wrong and q['n'] >= 3:
+            pg.locator(f'.mcq [data-i="{(right + 2) % q["n"]}"]').click()
+            assert finished(pg), f'{tag}: second wrong answer ends the question'
+            assert pg.locator('.mcq .btn.right').count() == 1, f'{tag}: the right option is shown after two wrong answers'
+            cause = pg.evaluate("([c,b])=>__J.hs('harbor.'+c+'.q.explain',b)", [sp['color'], band])
+            assert cause in pg.locator('#fb').inner_text(), f'{tag}: the cause is shown after two wrong answers'
+            return
         pg.locator(f'.mcq [data-i="{right}"]').click()
     assert finished(pg), f'{tag}: mission did not finish'
     scan(pg, f'{tag} done')
@@ -115,9 +122,22 @@ def run_band(pw_browser, band, g, width):
             pg.wait_for_selector('[data-drag="grip"]')
             if width == 390 and mi == 0: sh(pg, f'harbor_{band}_{rid.split(".")[1]}_m1')
             run_mission(pg, band, rid, mi, tag)
+            rec = pg.evaluate("([rid,i])=>{const r=__J.harborRoute(rid),a=r.activities[i];return __J.harborState(__J.curP()).activities[a.id].latest}", [rid, mi])
+            assert rec['correct'], tag + ': mission recorded as done'
+            if not pg.evaluate('()=>!!window.__T.spec.q'): assert rec['independent'], tag + ': blocked tries cost nothing (A8): still independent'
             if width == 390 and mi == 2: sh(pg, f'harbor_{band}_{rid.split(".")[1]}_m3')
         pg.evaluate('()=>__J.harborSelector()')
         assert pg.evaluate("rid=>__J.harborRouteDone(__J.curP(),__J.harborRoute(rid))", rid), f'{band} {rid}: route should be done'
+    # two wrong answers end the scored question with the cause shown; 'show me' after three blocked tries (replays do not change the record)
+    for rid in ['harbor.fishing', 'harbor.pirate', 'harbor.dragon']:
+        tag = f'{band} {rid} two-wrong'
+        pg.evaluate("rid=>__J.harborPlay(rid,2,null,true)", rid); pg.wait_for_selector('[data-drag="grip"]')
+        run_mission(pg, band, rid, 2, tag, two_wrong=True)
+    pg.evaluate("([i])=>__J.harborPlay('harbor.dragon',i,null,true)", [0 if band == '1-2' else 1]); pg.wait_for_selector('[data-drag="grip"]')
+    guess(pg); arr(pg, 0)
+    for _ in range(3): pull(pg, 2)
+    assert pg.locator('[data-show]').count() == 1, band + ': show-me appears after three blocked tries'
+    pg.locator('[data-show]').click(); assert finished(pg), band + ': show-me ends the mission'
     # selector shows marks, no counts of the "n of m" kind
     pg.evaluate('()=>__J.harborSelector()'); scan(pg, f'{band} selector')
     assert pg.evaluate("()=>document.documentElement.scrollWidth<=innerWidth"), f'{band} w{width}: horizontal overflow'
