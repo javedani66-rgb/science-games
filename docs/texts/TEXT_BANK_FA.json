@@ -16636,6 +16636,201 @@
    ],
    "text": "این خلاصه فقط شمارش ثبت‌های بازی است و دربارهٔ فهم کودک چیزی نمی‌گوید.",
    "status": "draft"
+  },
+  "demo.harbor.grade.title": {
+   "id": "demo.harbor.grade.title",
+   "kind": "ui",
+   "where_fa": "عنوان انتخاب پایه (پس از انتخاب کاراکتر یا پیش از شروع چالش اسکله)",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.grade.title",
+    "text"
+   ],
+   "text": "پایهٔ تو کدام است؟",
+   "status": "draft"
+  },
+  "demo.harbor.grade.note": {
+   "id": "demo.harbor.grade.note",
+   "kind": "ui",
+   "where_fa": "جملهٔ زیر عنوان انتخاب پایه",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.grade.note",
+    "text"
+   ],
+   "text": "پایه فقط تعیین می‌کند چالش اسکله با کدام متن و سختی باز شود.",
+   "status": "draft"
+  },
+  "demo.harbor.grade.1": {
+   "id": "demo.harbor.grade.1",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایه در انتخاب پایه",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.grade.1",
+    "text"
+   ],
+   "text": "پایهٔ اول",
+   "status": "draft"
+  },
+  "demo.harbor.grade.2": {
+   "id": "demo.harbor.grade.2",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایه در انتخاب پایه",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.grade.2",
+    "text"
+   ],
+   "text": "پایهٔ دوم",
+   "status": "draft"
+  },
+  "demo.harbor.grade.3": {
+   "id": "demo.harbor.grade.3",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایه در انتخاب پایه",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.grade.3",
+    "text"
+   ],
+   "text": "پایهٔ سوم",
+   "status": "draft"
+  },
+  "demo.harbor.grade.4": {
+   "id": "demo.harbor.grade.4",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایه در انتخاب پایه",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.grade.4",
+    "text"
+   ],
+   "text": "پایهٔ چهارم",
+   "status": "draft"
+  },
+  "demo.harbor.grade.5": {
+   "id": "demo.harbor.grade.5",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایه در انتخاب پایه",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.grade.5",
+    "text"
+   ],
+   "text": "پایهٔ پنجم",
+   "status": "draft"
+  },
+  "demo.harbor.grade.6": {
+   "id": "demo.harbor.grade.6",
+   "kind": "ui",
+   "where_fa": "دکمهٔ پایه در انتخاب پایه",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.grade.6",
+    "text"
+   ],
+   "text": "پایهٔ ششم",
+   "status": "draft"
+  },
+  "demo.harbor.grade.cancel": {
+   "id": "demo.harbor.grade.cancel",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بستن انتخاب پایه هنگام شروع چالش",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.grade.cancel",
+    "text"
+   ],
+   "text": "برگشت",
+   "status": "draft"
+  },
+  "demo.harbor.game.back": {
+   "id": "demo.harbor.game.back",
+   "kind": "ui",
+   "where_fa": "دکمهٔ خروج از بازی واقعی اسکله، بالای صفحه",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.game.back",
+    "text"
+   ],
+   "text": "بازگشت به نقشه",
+   "status": "draft"
+  },
+  "demo.harbor.game.grade": {
+   "id": "demo.harbor.game.grade",
+   "kind": "ui",
+   "where_fa": "دکمهٔ عوض‌کردن پایه بالای بازی اسکله؛ {g} نام پایه",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.game.grade",
+    "text"
+   ],
+   "text": "پایه: {g}",
+   "status": "draft"
+  },
+  "demo.harbor.game.title": {
+   "id": "demo.harbor.game.title",
+   "kind": "label",
+   "where_fa": "برچسب دسترس‌پذیری قاب بازی",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.game.title",
+    "text"
+   ],
+   "text": "بازی اسکله",
+   "status": "draft"
+  },
+  "demo.harbor.frame.title": {
+   "id": "demo.harbor.frame.title",
+   "kind": "label",
+   "where_fa": "عنوان صفحهٔ ماکت",
+   "context_fa": "ماکت کامل با بازی واقعی اسکله (۱۸ نوامبر ۲۰۲۶)؛ پیش‌نویس",
+   "band": "همه",
+   "file": "design/mockups/20261016/demo-harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "demo.harbor.frame.title",
+    "text"
+   ],
+   "text": "ماکت کامل جهان علوم با بازی اسکله",
+   "status": "draft"
   }
  },
  "meta": {
