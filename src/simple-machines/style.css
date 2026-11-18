@@ -195,6 +195,7 @@ svg text{font-family:"VazirLocal",Tahoma,sans-serif}
 .j-in:focus{border-color:var(--focus);outline:none}
 .j-ta{font:inherit;font-size:15px;width:100%;min-height:150px;border-radius:14px;border:2px solid var(--line);padding:10px;background:#fff;color:var(--ink);box-sizing:border-box;line-height:1.9}
 .j-grid5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.j-grid5.g6{grid-template-columns:repeat(3,minmax(0,1fr))}
 .j-grid6{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
 .j-grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .j-choice{border:0;border-radius:18px;background:#fff;box-shadow:inset 0 0 0 3px var(--line);padding:10px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-weight:700;font-size:18px;min-height:64px;font-family:inherit;color:var(--ink)}

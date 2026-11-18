@@ -11,7 +11,7 @@ with sync_playwright() as pw:
     pg.locator('#jnx').click()
     pg.locator('[data-t="0"]').click()
     pg.locator('#jnx').click()
-    assert pg.locator('[data-g]').count()==5
+    assert pg.locator('[data-g]').count()==6
     assert not pg.locator('[data-g="5"], [data-g="6"], [data-g="7"]').count()
     pg.screenshot(path='/tmp/primary-grade-mobile.png')
     assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth')
@@ -27,7 +27,7 @@ with sync_playwright() as pw:
     pg.screenshot(path='/tmp/primary-finish-mobile.png')
     assert pg.evaluate('document.documentElement.scrollWidth<=innerWidth')
     pg.evaluate('__J.closeOv();__J.adults()')
-    assert pg.locator('[data-g]').count()==5
+    assert pg.locator('[data-g]').count()==6
     assert pg.locator('[data-lv="d"]').count()==0
     assert pg.locator('[data-lv]').count()==3
     # Real legacy saves retain all three historical grades, data and code identities.
@@ -39,7 +39,7 @@ with sync_playwright() as pw:
         assert r['star']==2 and r['done']=='abcd' and r['evidence']['corrected']
         pg.evaluate('__J.adults()')
         assert 'نسخهٔ قبلی' in pg.locator('#app').inner_text()
-        assert pg.locator('[data-g]').count()==5 and pg.locator('[data-lv="d"]').count()==0
+        assert pg.locator('[data-g]').count()==6 and pg.locator('[data-lv="d"]').count()==0
         pg.locator('[data-g="4"]').click()
         pg.locator('#jgy').click()
         r=pg.evaluate('''()=>{const p=__J.curP();return {g:p.g,tr:__J.trk(p),star:p.S.ls["d:force.2"],evidence:p.quizEvidence.d[0].first.items[0],stash:p.stash.d.quiz};}''')

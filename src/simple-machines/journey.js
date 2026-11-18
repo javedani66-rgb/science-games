@@ -1,8 +1,9 @@
 /* ================= نقشهٔ سفر: ۱۲ منزل، به ترتیب جلسه‌های کلاس ================= */
-const GRADES=["دوم","سوم","چهارم","پنجم","ششم","هفتم","هشتم","نهم"];
-const trackOfG=g=>g<=1?"a":g===2?"b":g<=4?"c":"d";
+/* Index 8 = «اول» was appended at the END so every saved index 0..7 keeps its meaning (دوم=0 … نهم=7). In the progress code it is stored as g=0 plus the reserved top bits = 1 (see makeCode/readCode). */
+const GRADES=["دوم","سوم","چهارم","پنجم","ششم","هفتم","هشتم","نهم","اول"],G1=8;
+const trackOfG=g=>g===G1||g<=1?"a":g===2?"b":g<=4?"c":"d";
 const TRK="abcd"; // Keep persisted grade/track indices and historical progress codes stable.
-const ACTIVE_GRADES=[0,1,2,3,4],ACTIVE_TRK="abc";
+const ACTIVE_GRADES=[G1,0,1,2,3,4],ACTIVE_TRK="abc";
 const canOfferLevel=to=>typeof to==="string"&&to.length===1&&ACTIVE_TRK.includes(to);
 const LVLN={a:"سطح ۱ (دوم و سوم)",b:"سطح ۲ (چهارم)",c:"سطح ۳ (پنجم و ششم)",d:"سطح ۴ (هفتم تا نهم)"};
 const LVLG={a:"دوم و سوم",b:"چهارم",c:"پنجم و ششم",d:"هفتم تا نهم"};
@@ -108,7 +109,7 @@ const maxLevel=p=>{let m=TRK.indexOf(trackOfG(p.g));for(const c of p.done)m=Math
    نسخهٔ ۱: ۲۳ حرف (کدهای قدیمی همچنان خوانده می‌شوند). نسخهٔ ۲: ۲۶ حرف، با کاراکتر، رنگ لباس، سطح، سطح‌های تمام‌شده و آزمون‌ها. */
 const ABC="بپتثجچحخدذرزژسشصضطظعغفقکگلمنوهی",B31=31n,CMASK=0x5A3F9C1E07B4D268A3C5F1n,CLEN=23,CMASK2=0x1B7E3C95A0F24D6C8E1357A9B2D46F0n,CLEN2=26,CMASK3=0xE490FDC393FD0E1CC62BE5783646BF0324AAC3n,CLEN3=31;
 /* نسخهٔ ۳: ۳۱ حرف؛ برای هر منزل ۲ بیت هم برای چالش‌های اختیاری «خیلی سخت» و «هیولا» */
-function makeCode(p){let v=0n;const add=(x,b)=>{v=(v<<BigInt(b))|BigInt(x);};add(0,2);add(p.g,3);add(p.t%8,3);add(p.shirt?SHIRTS.indexOf(p.shirt)+1:0,3);add(TRK.indexOf(trk(p)),2);
+function makeCode(p){let v=0n;const add=(x,b)=>{v=(v<<BigInt(b))|BigInt(x);};add(p.g===G1?1:0,2);add(p.g===G1?0:p.g,3);add(p.t%8,3);add(p.shirt?SHIRTS.indexOf(p.shirt)+1:0,3);add(TRK.indexOf(trk(p)),2);
   add([..."abcd"].reduce((m,c,i)=>m|(p.done.includes(c)?1<<i:0),0),4);
   for(let i=0;i<12;i++)for(let j=0;j<3;j++)add(j<missions(p,i).length?mStars(p,i,j):0,2);
   for(let i=0;i<12;i++)add(p.home[i]?1:0,1);for(let i=0;i<12;i++)add(p.side[i]?1:0,1);for(let i=0;i<5;i++)add(p.quiz[i]?1:0,1);
@@ -120,7 +121,7 @@ function readCode(str){const s=(str||"").replace(/[\s\-‌]/g,"").replace(/ي/g,
   const side=[],home=[],st=[];for(let i=11;i>=0;i--)side[i]=take(1);for(let i=11;i>=0;i--)home[i]=take(1);
   for(let i=11;i>=0;i--){st[i]=[];for(let j=2;j>=0;j--)st[i][j]=take(2);}
   if(!v2){const t=take(2),g=take(3);if(g>4)return null;return oldOrder({g,t,st,home,side,quiz,opt,shirt:"",lvl:trackOfG(g),done:""});}
-  const dm=take(4),lv=take(2),sh=take(3),t=take(3),g=take(3);if(v3&&take(2)!==0)return null;if(g>7)return null;const r={g,t,st,home,side,quiz,opt,shirt:sh?SHIRTS[sh-1]||"":"",lvl:TRK[lv],done:[..."abcd"].filter((c,i)=>dm&(1<<i)).join("")};return v3?r:oldOrder(r);}
+  const dm=take(4),lv=take(2),sh=take(3),t=take(3),g=take(3);const gx=v3?take(2):0;if(gx>1||(gx===1&&g!==0))return null;if(g>7)return null;const r={g:gx===1?G1:g,t,st,home,side,quiz,opt,shirt:sh?SHIRTS[sh-1]||"":"",lvl:TRK[lv],done:[..."abcd"].filter((c,i)=>dm&(1<<i)).join("")};return v3?r:oldOrder(r);}
 /* کدهای نسخهٔ ۱ و ۲ با ترتیب قدیم منزل‌ها ساخته شده‌اند */
 function oldOrder(r){for(const a of [r.st,r.home,r.side])[a[6],a[7]]=[a[7],a[6]];return r;}
 function applyCode(p,r){fixProfile(p);p.g=r.g;p.t=r.t;p.shirt=r.shirt;p.done=r.done;const tr=r.lvl;p.lvl=tr===trackOfG(r.g)?null:tr;p.S.track=tr;p.S.prog=p.S.prog||{};
@@ -186,7 +187,7 @@ function welcome(canBack){epoch++;closeOv();clearToasts();offBoard(0);document.b
       ${st.t!=null?`<div class="j-me">${fullImg(null,st.t+1,st.shirt)}<div><p class="j-q" style="margin:0">اوستا ${esc(st.name)}</p><p class="j-note">رنگ لباس</p>${shirtPicker(st)}</div></div>`:""}
       <button class="btn go j-wide" id="jnx" type="button" ${st.t==null?"disabled":""}>بعدی</button>`;
     if(st.step===2){const tr=st.g!=null?trackOfG(st.g):null;body=`<h2 class="j-h2">کلاس چندمی؟</h2>
-      <p class="j-grp">دبستان</p><div class="j-grid5" role="group" aria-label="پایه دبستان">${ACTIVE_GRADES.map(i=>`<button class="j-choice" type="button" data-g="${i}" aria-pressed="${st.g===i}">${GRADES[i]}</button>`).join("")}</div>
+      <p class="j-grp">دبستان</p><div class="j-grid5 g6" role="group" aria-label="پایه دبستان">${ACTIVE_GRADES.map(i=>`<button class="j-choice" type="button" data-g="${i}" aria-pressed="${st.g===i}">${GRADES[i]}</button>`).join("")}</div>
       ${tr?`<p class="j-grp">نمونهٔ یک چالش در این کلاس:</p><div class="j-sample">${bustImg({t:st.t,shirt:st.shirt},"happy","bi")}<p><b>اوستا ${esc(st.name)}:</b> ${LVSAMPLE[tr]}</p></div>`:""}
       <button class="btn go j-wide" id="jnx" type="button" ${st.g==null?"disabled":""}>شروع</button>`;}
     app.innerHTML=`<div class="j-page"><span class="j-step">قدم ${fa(st.step+1)} از ۳</span>${body}${st.step||canBack?`<button class="btn" id="jbk" type="button">برگشت</button>`:""}</div>`;tintAll(app);
@@ -386,8 +387,8 @@ function adults(){epoch++;closeOv();clearToasts();const p=JP(),cs=curStop(p);off
   app.innerHTML=jtop(`<h2 class="j-h2" style="flex:1">بزرگ‌ترها</h2>`)+`<div class="j-page">
    <section class="j-sec"><h3 class="j-h3">پیشرفت ${esc(p.name)} · پایهٔ ${GRADES[p.g]}</h3><p>الان در منزل ${fa(Math.min(12,cs+1))} از ۱۲ است و ${fa(totStars(p))} ستاره دارد. وقتی کار خانهٔ هر منزل انجام شد، آن را تأیید کنید.</p><div class="j-scroll"><table class="j-tbl"><thead><tr><th>منزل و کار خانه</th><th>ستاره</th><th>جانبی</th></tr></thead><tbody>${rows}</tbody></table></div></section>
    <section class="j-sec"><h3 class="j-h3">گزارش پاسخ‌های آزمون</h3>${quizEvidencePanel(p,trk(p))}</section>
-   <section class="j-sec"><h3 class="j-h3">پایهٔ ${esc(p.name)}</h3><p>اگر پایه اشتباه انتخاب شده، اینجا درستش کنید.</p><div class="j-grid5" role="group" aria-label="پایه">${ACTIVE_GRADES.map(i=>`<button class="j-choice" type="button" data-g="${i}" aria-pressed="${p.g===i}">${GRADES[i]}</button>`).join("")}</div><div id="jgc"></div></section>
-   ${trk(p)==="d"||p.g>4?`<p class="j-note">این پروفایل از نسخهٔ قبلی است؛ پایه و پیشرفت قبلی محفوظ‌اند. مسیرهای تازه برای دبستان‌اند. با انتخاب پایه یا سطح دبستان، به همان مسیر می‌روی و داده‌های قبلی نگه داشته می‌شوند.</p>`:""}<section class="j-sec"><h3 class="j-h3">سطح بازی</h3><p>بچه بعد از تمام کردن هر سطح می‌تواند به سطح بالاتر برود. ستاره‌های هر سطح جدا می‌ماند. سطح‌های باز: </p><div class="j-grid2" role="group" aria-label="سطح">${[...ACTIVE_TRK].map((c,i)=>i<=maxLevel(p)?`<button class="j-choice" type="button" data-lv="${c}" aria-pressed="${trk(p)===c}">${LVLN[c]}</button>`:"").join("")}</div></section>
+   <section class="j-sec"><h3 class="j-h3">پایهٔ ${esc(p.name)}</h3><p>اگر پایه اشتباه انتخاب شده، اینجا درستش کنید.</p><div class="j-grid5 g6" role="group" aria-label="پایه">${ACTIVE_GRADES.map(i=>`<button class="j-choice" type="button" data-g="${i}" aria-pressed="${p.g===i}">${GRADES[i]}</button>`).join("")}</div><div id="jgc"></div></section>
+   ${trk(p)==="d"||(p.g>4&&p.g!==G1)?`<p class="j-note">این پروفایل از نسخهٔ قبلی است؛ پایه و پیشرفت قبلی محفوظ‌اند. مسیرهای تازه برای دبستان‌اند. با انتخاب پایه یا سطح دبستان، به همان مسیر می‌روی و داده‌های قبلی نگه داشته می‌شوند.</p>`:""}<section class="j-sec"><h3 class="j-h3">سطح بازی</h3><p>بچه بعد از تمام کردن هر سطح می‌تواند به سطح بالاتر برود. ستاره‌های هر سطح جدا می‌ماند. سطح‌های باز: </p><div class="j-grid2" role="group" aria-label="سطح">${[...ACTIVE_TRK].map((c,i)=>i<=maxLevel(p)?`<button class="j-choice" type="button" data-lv="${c}" aria-pressed="${trk(p)===c}">${LVLN[c]}</button>`:"").join("")}</div></section>
    <section class="j-sec"><h3 class="j-h3">کار این هفته</h3><p>معلم هر هفته می‌گوید کلاس به کدام منزل رسیده. آن را اینجا انتخاب کنید تا روی نقشه پرچم بخورد.</p><div class="j-grid6">${STOPS.map((S0,i)=>`<button class="j-choice" type="button" data-w="${i}" aria-pressed="${DB.week===i}">${fa(i+1)}</button>`).join("")}</div><button class="chip-btn" id="jnw" type="button">بدون پرچم</button></section>
    <section class="j-sec"><h3 class="j-h3">بازیکن‌های این دستگاه</h3>${DB.profiles.map(q=>`<div class="j-row"><span style="flex:1;display:flex;gap:8px;align-items:center"><span class="j-bic">${bustImg(q,"happy","bi sm")}</span> ${esc(q.name)} · ${GRADES[q.g]}</span>${q.id===p.id?`<span class="j-small">(الان)</span>`:`<button class="chip-btn" type="button" data-sw="${q.id}">رفتن به این بازیکن</button>`}<button class="chip-btn" type="button" data-del="${q.id}">پاک کردن</button></div>`).join("")}<button class="chip-btn" id="jadd" type="button">+ بازیکن تازه</button><div id="jdel"></div></section>
    <section class="j-sec"><h3 class="j-h3">شروع دوباره برای ${esc(p.name)}</h3><p>همهٔ ستاره‌ها، منزل‌ها، کارهای خانه و آزمون‌ها پاک می‌شود و بازی از منزل ۱ شروع می‌شود. نام، پایه و شخصیت می‌ماند.</p><button class="chip-btn" id="jrs" type="button">شروع دوباره</button><div id="jrsc"></div></section>
