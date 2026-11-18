@@ -40,7 +40,7 @@ tools/publish_game.py          build + wrap with PWA head + copy into site + bum
 
 1. Edit files in `src/simple-machines/`.
 2. `python3 src/simple-machines/build.py` (writes gitignored page/preview/test/jtest html next to it).
-3. Test (from `src/simple-machines/tests/`):
+3. Test (from `src/simple-machines/tests/`). **Fast driver (2026-11-18):** `python3 run_fast.py <logdir>` builds once and runs the whole needed suite in parallel (measured about 8 minutes instead of about 90; each call stops starting jobs after 480 s, then `--resume` runs only failed/missing jobs); `--changed harbor,pulley` (or `--changed auto`) runs only the matching tests; `--full` restores the old exhaustive loops for a final release check. Details: `docs/STATE.md`. The single tests below still work alone:
    - `python3 t2.py all all a|b|c` — solves every level of every station per track (expect all `p2`, `ERR []`). Slow: run stations in parallel background jobs, ~2 min per station.
    - `python3 t5.py a|b|c` — endless mode.
    - `python3 ov.py <track> <stations>` — **text/arrow overlap + clipping detector**. Must print nothing. The teacher has complained twice about text overlapping arrows/graphics; run this after any scene change and also eyeball `gal.py <track> <stations>` contact sheets (tests/shots/sheet_*.png) for text over non-arrow shapes.

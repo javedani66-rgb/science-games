@@ -1,7 +1,12 @@
 import sys, os
 from harness import *
-from t2 import SOL, spec
+from t2 import SOL, spec, FLAGS   # t2 removes --flags from sys.argv on import and keeps them in FLAGS
 JURL='file://'+D+'jtest.html'
+# --real=N (new, 2026-11-18; without it everything is played as before = "full" mode): play only the first N stops through the UI
+# as a child, then give the stars of the remaining stops by writing them into the save (the same way mapchk.py does) and go on with the
+# final quiz, level-up, side quest, hold button, progress-code round trip and teacher page. Reason: stops 4-12 run the same journey code
+# on levels that t2.py already solves one by one; replaying them took 6-9 minutes per grade.
+REAL=next((int(a.split('=')[1]) for a in FLAGS if a.startswith('--real=')),None)
 grade=int(sys.argv[1]); upto=int(sys.argv[2]) if len(sys.argv)>2 else 12
 tag=f'g{grade}'
 def solve_quiz(pg,log,shot=None):
@@ -41,7 +46,7 @@ with sync_playwright() as pw:
     # validate all mission levels exist
     bad=pg.evaluate("()=>{const {curP,missions,levelsOf}=__J;const p=curP();const out=[];for(let i=0;i<12;i++)missions(p,i).forEach(id=>{const k=id.split('.')[0];if(!levelsOf(k).some(l=>l.id===id))out.push(i+':'+id)});return out}")
     print('bad levels',bad)
-    for stop in range(upto):
+    for stop in range(upto if REAL is None else min(upto,REAL)):
         pg.click('#jgo'); pg.wait_for_timeout(300)
         if pg.locator('#jqs').count():
             solve_quiz(pg,log,tag+f'_quiz{stop}' if stop in (2,) else None); pg.wait_for_timeout(300)
@@ -68,6 +73,11 @@ with sync_playwright() as pw:
             else:
                 pg.click('#jn'); pg.wait_for_timeout(700); break
         cs=pg.evaluate("()=>{const {curP,curStop}=__J;return curStop(curP())}"); print('stop',stop+1,'-> curStop',cs+1)
+    if upto>=12 and REAL is not None and REAL<12:
+        pg.evaluate("""()=>{const {curP,missions,trk,save}=__J;const p=curP();p.S.ls=p.S.ls||{};
+          for(let i=0;i<12;i++)missions(p,i).forEach(id=>{p.S.ls[trk(p)+':'+id]=Math.max(p.S.ls[trk(p)+':'+id]||0,2);});save();}""")
+        pg.reload(); pg.wait_for_timeout(400)
+        print('injected stars for stops',REAL+1,'to 12; curStop',pg.evaluate("()=>__J.curStop(__J.curP())+1"))
     if upto>=12:
         pg.click('#jgo'); pg.wait_for_timeout(300)
         if pg.locator('#jqs').count(): solve_quiz(pg,log,tag+'_final')

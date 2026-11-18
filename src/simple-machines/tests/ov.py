@@ -47,3 +47,4 @@ with sync_playwright() as pw:
                 nb.first.click(); pg.wait_for_timeout(300)
     for x,w in found.items(): print(track,'|',w,'|',x)
     b.close()
+if found: sys.exit(1)   # exit code 1 when any overlap/clipping was found (run_fast.py uses it)

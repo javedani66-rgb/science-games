@@ -5,6 +5,9 @@ D=str(pathlib.Path(__file__).resolve().parent.parent)+'/'
 OUT_=str(pathlib.Path(__file__).resolve().parent)+'/shots/'
 OUT=OUT_
 import os; os.makedirs(OUT,exist_ok=True)
+if os.environ.get('SM_NOSHOT'):   # run_fast.py sets this: page screenshots are only for human eyes (gal.py, jt, mapchk), not for pass/fail
+    from playwright.sync_api import Page
+    Page.screenshot=lambda self,*a,**k: b''
 URL='file://'+D+'preview.html'
 
 class G:

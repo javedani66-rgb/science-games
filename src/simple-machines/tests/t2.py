@@ -1,5 +1,12 @@
 from harness import *
 import math, sys
+# Flags (new, 2026-11-18). Without any flag every script behaves exactly as before (= the exhaustive "full" mode).
+#   --ov      also run the text overlap/clipping detector of ov.py inside this same walk (same levels, same solves, see run_fast.py)
+#   --dedupe  (track b only) skip a level that track c also has with the same title+text, because its generator and scene are
+#             identical (only wedge.3, ramp.3, scale.4 read S.track, so those are never skipped); track c must be run too.
+FLAGS={a for a in sys.argv[1:] if a.startswith('--')}
+sys.argv=[a for a in sys.argv if not a.startswith('--')]
+TRACK_DEP={'فرمول گوه و پیچ','فرمول سطح شیب‌دار','نیروسنج و ماه'}
 TURL='file://'+D+'test.html'
 SHOT=False
 def spec(pg): return pg.evaluate("()=>window.__T")
@@ -215,32 +222,60 @@ def fric(g,pg,sp):
         stepper_set(pg,ans-5); click_text(pg,'هل بده'); pg.wait_for_timeout(1900); return
 
 SOL={'force':force,'fric':fric,'scale':scale,'lever':lever,'ramp':ramp,'pulley':pulley,'wheel':wheel,'wedge':wedge,'sort':sort}
+def mode_texts(pg):
+    return pg.evaluate("()=>[...document.querySelectorAll('.mode[data-l]')].map(m=>[+m.dataset.l,m.querySelector('.t').textContent.replace(/^\\s+/,''),m.querySelector('.d').textContent])")
+def start_track(pg,track,k):
+    pg.goto(TURL); pg.evaluate("p=>localStorage.setItem('sm-workshop-v3',JSON.stringify(p))",{"prog":{f"{track}:{k}":{"lv":[3,3,3,3,3],"best":0}},"nums":True,"forces":True,"formula":True,"track":track}); pg.reload(); pg.wait_for_timeout(150)
+    pg.click(f'.st[data-k={k}]')
 if __name__=='__main__':
     track=sys.argv[3] if len(sys.argv)>3 else 'c'
     keys=sys.argv[1].split(',') if len(sys.argv)>1 and sys.argv[1]!='all' else list(SOL)
+    OV='--ov' in FLAGS; bad=False; found={}
+    if OV:
+        import re
+        CHK=re.search(r'CHK=r"""(.*?)"""',open(OUT_+'../ov.py',encoding='utf-8').read(),re.S).group(1)
+    def check(pg,where):
+        try: r=pg.evaluate(CHK)
+        except Exception as e: r=['ERR '+str(e)[:60]]
+        new=[x for x in r if x not in found]
+        for x in r: found.setdefault(x,where)
+        if new:
+            fn=OUT+'ov_'+track+'_'+re.sub(r'[^a-zA-Z0-9]+','_',where)+'.png'
+            try: pg.locator('#sc').screenshot(path=fn)
+            except Exception: pass
     with sync_playwright() as pw:
         b=pw.chromium.launch(); pg=b.new_page(viewport={'width':400,'height':900})
         errs=[]; pg.on('pageerror',lambda e:errs.append(str(e)))
         g=G(pg)
         for k in keys:
-            pg.goto(TURL); pg.evaluate("p=>localStorage.setItem('sm-workshop-v3',JSON.stringify(p))",{"prog":{f"{track}:{k}":{"lv":[3,3,3,3,3],"best":0}},"nums":True,"forces":True,"formula":True,"track":track}); pg.reload(); pg.wait_for_timeout(150)
-            pg.click(f'.st[data-k={k}]'); nL=pg.locator('[data-l]').count()
+            skip=set()
+            if '--dedupe' in FLAGS and track=='b':
+                start_track(pg,'c',k); ctx_={tuple(m[1:]) for m in mode_texts(pg)}
+                start_track(pg,'b',k); skip={m[0] for m in mode_texts(pg) if tuple(m[1:]) in ctx_ and m[1] not in TRACK_DEP}
+            else: start_track(pg,track,k)
+            nL=pg.locator('[data-l]').count()
+            if OV: pg.click('#lab'); pg.wait_for_timeout(400); check(pg,f'{k} lab')
             levels=[int(x) for x in sys.argv[2].split(',')] if len(sys.argv)>2 and sys.argv[2]!='all' else list(range(1,nL+1))
             for L in levels:
+                if L in skip: print(track,k,L,'skipped: identical level is solved on track c'); continue
                 pg.goto(TURL); pg.wait_for_timeout(100); pg.click(f'.st[data-k={k}]'); pg.click(f'[data-l="{L}"]'); pg.wait_for_timeout(300)
                 got=[]; n=pg.locator('#dots i').count()
                 for i in range(n):
                     sp=spec(pg)['spec']
+                    if OV: check(pg,f'{k} L{L} c{i} {sp.get("t")} pre')
                     try: SOL[k](g,pg,sp)
-                    except Exception as e: print('  EXC',k,L,i,sp.get('t'),e)
+                    except Exception as e: print('  EXC',k,L,i,sp.get('t'),e); bad=True
                     pg.wait_for_timeout(500)
                     if not pg.locator('#nv .btn.next').count(): pg.wait_for_timeout(1500)
+                    if OV: check(pg,f'{k} L{L} c{i} {sp.get("t")} post')
                     cls=pg.evaluate("i=>{const d=document.querySelectorAll('#dots i')[i];return d?d.className:''}",i)
                     got.append(cls)
-                    if cls!='p2': print('  !!',k,L,i,sp.get('t'),cls,g.text('#fb')[:120].replace('\n',' '))
+                    if cls!='p2': print('  !!',k,L,i,sp.get('t'),cls,g.text('#fb')[:120].replace('\n',' ')); bad=True
                     nb=pg.locator('#nv .btn')
-                    if nb.count()==0: print('  no next button',k,L,i); break
+                    if nb.count()==0: print('  no next button',k,L,i); bad=True; break
                     nb.first.click(); pg.wait_for_timeout(300)
                 res=g.text('.res') if pg.locator('.res').count() else ''
                 print(track,k,L,got,res.replace('\n',' ')[:30])
+        for x,w in found.items(): print('OVERLAP',track,'|',w,'|',x); bad=True
         print('ERR',errs[:8]); b.close()
+    if errs or bad: sys.exit(1)

@@ -5,6 +5,9 @@
 # از ۲۰۲۶-۰۹-۳۰ (تصمیم معلم) در سطح ۲ به بالا هم همین قاعده است.
 # استفاده: python3 failtry.py
 from t2 import *
+# usage: python3 failtry.py [track a|b|c] [station]   (no arguments = everything, as before; run_fast.py runs one case per job)
+TRK_F=sys.argv[1] if len(sys.argv)>1 and sys.argv[1] in ('a','b','c') else None
+ST_F=sys.argv[2] if len(sys.argv)>2 else None
 KIND={'ramp':('fit',),'pulley':('choose',),'wheel':('choose',),'wedge':('wc','sc')}
 LEVEL={'a':{'ramp':2,'pulley':2,'wheel':2,'wedge':1},'b':{'ramp':2,'pulley':1,'wheel':1,'wedge':1}}
 def fail_once(g,pg,k,sp):
@@ -26,7 +29,9 @@ ok=True
 with sync_playwright() as pw:
     b=pw.chromium.launch(); pg=b.new_page(viewport={'width':400,'height':900}); errs=[]; pg.on('pageerror',lambda e:errs.append(str(e))); g=G(pg)
     for track,cases in (('a',((1,'p2'),(2,'p2'),(3,'p2'))),('b',((1,'p2'),(2,'p2'),(3,'p2')))):
+        if TRK_F and track!=TRK_F: continue
         for k in KIND:
+            if ST_F and k!=ST_F: continue
             for nfail,want in cases:
                 pg.goto(TURL); pg.evaluate("p=>localStorage.setItem('sm-workshop-v3',JSON.stringify(p))",{"prog":{f"{track}:{k}":{"lv":[3,3,3,3,3],"best":0}},"nums":True,"forces":True,"formula":True,"track":track}); pg.reload(); pg.wait_for_timeout(150)
                 pg.click(f'.st[data-k={k}]'); pg.click(f'[data-l="{LEVEL[track][k]}"]'); pg.wait_for_timeout(300)
@@ -51,6 +56,7 @@ ok2=True
 with sync_playwright() as pw:
     b=pw.chromium.launch(); pg=b.new_page(viewport={'width':400,'height':900}); g=G(pg)
     for track in ('b','c'):
+        if (TRK_F and track!=TRK_F) or (ST_F and ST_F!='scale'): continue
         for nfail,want in ((2,'p2'),(3,'p1')):
             pg.goto(TURL); pg.evaluate("p=>localStorage.setItem('sm-workshop-v3',JSON.stringify(p))",{"prog":{f"{track}:scale":{"lv":[3,3,3,3,3],"best":0}},"nums":True,"forces":True,"formula":True,"track":track}); pg.reload(); pg.wait_for_timeout(150)
             pg.click('.st[data-k=scale]'); pg.click(f'[data-l="{2 if track=="b" else 1}"]'); pg.wait_for_timeout(300); i=0
@@ -68,3 +74,4 @@ with sync_playwright() as pw:
             print('OK ' if good else '!! ',track,'scale mystery fails',nfail,'->',got,'(want',want+')','|',msg)
     b.close()
 print('ALL OK' if ok and ok2 else 'PROBLEMS')
+sys.exit(0 if ok and ok2 else 1)
