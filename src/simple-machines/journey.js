@@ -165,7 +165,7 @@ function jsheet(html,label,col){const o=overlay(`<div class="sheet j-sheet">${ht
 function jtop(extra){return `<header class="j-top"><button class="j-ib" id="jmap" type="button">${MAPICON}<span>نقشه</span></button>${extra||""}</header>`;}
 
 /* ---------- شروع ---------- */
-function startApp(){const h=(location.hash||"").slice(1);const wm=h.match(/^m(\d{1,2})$/);if(wm){const w=+wm[1];if(w>=1&&w<=12){DB.week=w-1;save();}}
+function startApp(){if(DEMO&&demoStart())return;const h=(location.hash||"").slice(1);const wm=h.match(/^m(\d{1,2})$/);if(wm){const w=+wm[1];if(w>=1&&w<=12){DB.week=w-1;save();}}
   if(TESTMODE){applyNums();home();return;}
   if(h==="teacher"){teacherPage();return;}
   if(!DB.profiles.length){welcome();return;}
@@ -226,7 +226,7 @@ function hereSpot(pos,cs,W){const q=pos[cs],o=q.x>200?1:-1,M=5,cir=[],box=[],B=(
   const C=[];for(let dy=-110;dy<=90;dy+=6)for(let dx=-180;dx<=180;dx+=6)C.push([dx,dy]);
   const cost=([dx,dy])=>Math.hypot(dx,dy*1.3)+(dy>0?25:0)-(dx*o>0?10:0);
   const c=C.filter(fits).sort((a,b)=>cost(a)-cost(b))[0]||[o*74,-6];return{x:Math.max(52,Math.min(W-52,q.x+c[0])),y:q.y+c[1]};}
-function jmap(opt){opt=opt||{};epoch++;closeOv();clearToasts();const p=JP();if(!p){startApp();return;}fixProfile(p);useProfile(p);applyNums();setC("scale");
+function jmap(opt){opt=opt||{};if(DEMO&&DEMO.exit){DEMO.exit();return;}epoch++;closeOv();clearToasts();const p=JP();if(!p){startApp();return;}fixProfile(p);useProfile(p);applyNums();setC("scale");
   const cs=curStop(p),{pos,H:H0}=mlayout(),H=H0+200,W=MW,L=WL();offBoard(landOf(Math.min(cs,11)));
   let s=`<svg class="j-map" direction="rtl" viewBox="0 0 ${W} ${H}" role="group" aria-label="نقشهٔ سفر">`;
   LANDS.forEach((Ld,li)=>{const y0=pos[Ld.from].y-MBAN-34,y1=li===2?H:pos[Ld.to+1].y-MBAN-34;s+=`<rect x="0" y="${y0}" width="${W}" height="${y1-y0}" rx="26" fill="${Ld.bg}"/>`;});
@@ -420,5 +420,12 @@ function teacherPage(){epoch++;closeOv();clearToasts();offBoard(0);document.body
     $("#jout").innerHTML=rows.length?`<div class="j-scroll"><table class="j-tbl"><thead><tr><th>نام</th><th>پایه</th><th>سطح</th><th>منزل</th><th>ستاره</th><th>کار خانه</th><th>جانبی</th><th>آزمون</th><th>منزل‌های کم‌ستاره</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${GRADES[r.g]}</td><td>${fa(TRK.indexOf(r.lv)+1)}</td><td>${r.cs>=12?"تمام":fa(r.cs+1)}</td><td>${fa(r.stars)}</td><td>${fa(r.home)}</td><td>${fa(r.side)}</td><td>${fa(r.quiz)}</td><td>${r.per.map((v,i)=>v===1?fa(i+1):null).filter(Boolean).join("، ")||"-"}</td></tr>`).join("")}</tbody></table></div>${bad?`<p class="fb no">${fa(bad)} پیام خوانده نشد؛ احتمالاً کامل کپی نشده است.</p>`:""}`:`<p class="fb no">پیام درستی پیدا نشد. هر پیام باید «نام:» و «کد:» داشته باشد.</p>`;};
   window.scrollTo(0,0);}
 
+/* Demo deep link (owner request 18 Nov 2026): a wrapper page may set window.__START={env:"harbor",challenge:"green|orange|red",grade:<index in GRADES>,name,t,shirt,exit:fn}
+   before this script runs. Then the game opens that harbor challenge for the grade's band and every "back to map" calls exit() instead of showing the journey map.
+   Without __START nothing changes. It never touches the progress-code format or the sm-journey-v1 logic (the wrapper isolates storage). */
+const DEMO=typeof window!=="undefined"&&window.__START&&window.__START.env==="harbor"?window.__START:null;
+const DEMO_ROUTE={green:"harbor.fishing",orange:"harbor.pirate",red:"harbor.dragon"};
+function demoStart(){const D=DEMO,id=DEMO_ROUTE[D.challenge],g=ACTIVE_GRADES.includes(D.grade)?D.grade:G1;if(!id||!harborRoute(id))return false;
+  const p=newProfile(D.name||"دوست",g,D.t||0,D.shirt||"");p.id="pdemo";DB.profiles=[p];DB.week=null;useProfile(p);save();applyNums();epoch++;closeOv();setC("scale");harborPlay(id,0);return true;}
 if(window.__JT)window.__J={teacherPage,backpack,harborResult,HARBOR_STR,harborBand,harborContent:HARBOR_CONTENT,hs,harborSpec,harborSolutions,harborMargins,harborCanPlay,harborSelector,harborPlay,harborState,harborRecord,harborEligible,harborRouteDone,harborRoute,quizPick,curP,missions,mStars,curStop,levelsOf,closeOv,trk,makeCode,readCode,jmap,save,hereSpot,mlayout,adults};
 startApp();
