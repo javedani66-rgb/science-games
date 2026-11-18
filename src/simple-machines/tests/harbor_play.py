@@ -126,6 +126,22 @@ def run_band(pw_browser, band, g, width):
             assert rec['correct'], tag + ': mission recorded as done'
             if not pg.evaluate('()=>!!window.__T.spec.q'): assert rec['independent'], tag + ': blocked tries cost nothing (A8): still independent'
             if width == 390 and mi == 2: sh(pg, f'harbor_{band}_{rid.split(".")[1]}_m3')
+            if rid == 'harbor.fishing' and mi == 2:
+                # lesson card after green (B15/B16): only the direction of pull; it must not give the orange/red answers
+                assert pg.evaluate("()=>!(__J.curP().cards||[]).includes('harbor.card.pull')"), tag + ': card not yet taken'
+                pg.locator('#nv .btn.go').click()
+                pg.wait_for_selector('#hcardgo')
+                ctext = pg.locator('.j-sheet').inner_text()
+                for bad in ['متحرک', 'نیروی لازم', 'کم نمی', 'نصف', 'ستاره', 'امتیاز']:
+                    assert bad not in ctext, f'{tag}: lesson card must not contain "{bad}"'
+                assert 'جهت کشیدن' in ctext, tag + ': lesson card is about the direction of pull'
+                assert pg.evaluate("()=>document.documentElement.scrollWidth<=innerWidth"), tag + ': card overflow'
+                pg.locator('#hcardgo').click()
+                pg.wait_for_selector('#hother')
+                assert pg.evaluate("()=>(__J.curP().cards||[]).includes('harbor.card.pull')"), tag + ': card saved in the card box'
+                pg.locator('#hmap').click()
+                pg.evaluate("()=>__J.backpack('w')")
+                assert 'جهت کشیدن' in pg.locator('#app').inner_text(), tag + ': card is listed in the backpack word notebook'
         pg.evaluate('()=>__J.harborSelector()')
         assert pg.evaluate("rid=>__J.harborRouteDone(__J.curP(),__J.harborRoute(rid))", rid), f'{band} {rid}: route should be done'
     # two wrong answers end the scored question with the cause shown; 'show me' after three blocked tries (replays do not change the record)

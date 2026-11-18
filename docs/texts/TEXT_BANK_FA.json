@@ -16471,6 +16471,111 @@
    ],
    "text": "قرقرهٔ ثابت نیرو را کم نمی‌کند. برای بار سنگین نیروی بیشتری لازم است. دو دزد با هم نیروی بیشتری دارند.",
    "status": "draft"
+  },
+  "harbor.card.pull.title": {
+   "id": "harbor.card.pull.title",
+   "kind": "title",
+   "where_fa": "عنوان کارت درس پس از چالش سبز",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "همه",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.card.pull.title",
+    "text"
+   ],
+   "text": "جهت کشیدن",
+   "status": "draft"
+  },
+  "harbor.card.pull.tag": {
+   "id": "harbor.card.pull.tag",
+   "kind": "ui",
+   "where_fa": "برچسب بالای کارت درس بندر",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "همه",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.card.pull.tag",
+    "text"
+   ],
+   "text": "کارت درس",
+   "status": "draft"
+  },
+  "harbor.card.pull.text.b12": {
+   "id": "harbor.card.pull.text.b12",
+   "kind": "ui",
+   "where_fa": "متن کارت درس پس از سبز، پایهٔ ۱ و ۲",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "پایهٔ ۱ و ۲",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.card.pull.text.b12",
+    "text"
+   ],
+   "text": "طناب را پایین می‌کشی و جعبه بالا می‌رود. این قرقره، قرقرهٔ ثابت است. قرقره جهت کشیدن را عوض می‌کند.",
+   "status": "draft"
+  },
+  "harbor.card.pull.text.b34": {
+   "id": "harbor.card.pull.text.b34",
+   "kind": "ui",
+   "where_fa": "متن کارت درس پس از سبز، پایهٔ ۳ و ۴",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "پایهٔ ۳ و ۴",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.card.pull.text.b34",
+    "text"
+   ],
+   "text": "طناب ۲ پله پایین می‌آید و جعبه ۲ پله بالا می‌رود: همان اندازه. قرقرهٔ ثابت جهت کشیدن را عوض می‌کند.",
+   "status": "draft"
+  },
+  "harbor.card.pull.text.b56": {
+   "id": "harbor.card.pull.text.b56",
+   "kind": "ui",
+   "where_fa": "متن کارت درس پس از سبز، پایهٔ ۵ و ۶",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "پایهٔ ۵ و ۶",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.card.pull.text.b56",
+    "text"
+   ],
+   "text": "طناب ۲ متر پایین می‌آید و بار ۲ متر بالا می‌رود (در این مدل، بدون اصطکاک). قرقرهٔ ثابت جهت کشیدن را عوض می‌کند.",
+   "status": "draft"
+  },
+  "harbor.card.pull.note": {
+   "id": "harbor.card.pull.note",
+   "kind": "ui",
+   "where_fa": "یادداشت پایین کارت درس",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "همه",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.card.pull.note",
+    "text"
+   ],
+   "text": "این کارت در دفترچهٔ کوله‌پشتی‌ات می‌ماند.",
+   "status": "draft"
+  },
+  "harbor.card.pull.btn": {
+   "id": "harbor.card.pull.btn",
+   "kind": "ui",
+   "where_fa": "دکمهٔ بستن کارت درس",
+   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+   "band": "همه",
+   "file": "src/simple-machines/harbor/strings.fa.json",
+   "target": "json",
+   "locator": [
+    "harbor.card.pull.btn",
+    "text"
+   ],
+   "text": "فهمیدم",
+   "status": "draft"
   }
  },
  "meta": {

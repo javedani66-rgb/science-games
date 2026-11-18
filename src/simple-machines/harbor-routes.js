@@ -94,9 +94,20 @@ function harborPlay(id,index,sameSpec,practice){
  if(window.__TEST||window.__JT)window.__T={spec,k:'pulley',i:index,harbor:true};mountHarborActivity(spec,A);window.scrollTo(0,0);
 }
 /* The child sees no counts, stars or points here (B4); per-mission evidence stays in the saved state for the teacher page. */
+/* Lesson card after the green challenge (B15, B16): only the direction of pull; nothing about force or moving wheels (those are the orange and red answers). Same backpack list as word cards (p.cards). */
+const HARBOR_CARDS={"harbor.card.pull":{route:"green"}};
+function harborCardIcon(){const L='stroke="#7A5634" stroke-width="3" stroke-linecap="round"';return `<svg viewBox="0 0 160 110" width="160" height="110" role="img" aria-hidden="true" style="display:block;margin:0 auto"><rect x="30" y="4" width="100" height="8" rx="3" fill="#8A5427"/><line x1="80" y1="12" x2="80" y2="18" ${L}/><circle cx="80" cy="34" r="16" fill="#F4F7FA" stroke="#34425E" stroke-width="4"/><line x1="64" y1="34" x2="64" y2="76" ${L}/><line x1="96" y1="34" x2="96" y2="64" ${L}/><rect x="48" y="76" width="32" height="26" rx="3" fill="#E0A45F" stroke="#94602D" stroke-width="2"/><path d="M96 66 V96 M88 88 L96 98 L104 88" fill="none" stroke="#D8452B" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 92 V62 M32 70 L40 60 L48 70" fill="none" stroke="#22965A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;}
+const harborCardTitle=w=>HARBOR_CARDS[w]?hs(w+".title"):w;
+const harborCardText=(w,band)=>hs(w+".text",band);
+function harborLessonCard(cardId,then,force){
+ const p=JP();p.cards=p.cards||[];if(!force&&p.cards.includes(cardId)){then();return;}
+ const band=harborBand(p),o=jsheet(`<span class="j-step" style="text-align:center">${hs(cardId+'.tag')}</span><div class="j-word"><span class="w">${hs(cardId+'.title')}</span>${harborCardIcon()}<p>${harborCardText(cardId,band)}</p></div><p class="j-note" style="text-align:center">${hs(cardId+'.note')}</p><button class="btn go j-wide" id="hcardgo" type="button">${hs(cardId+'.btn')}</button>`,hs(cardId+'.tag'),'#2F6BD0');
+ o.querySelector('#hcardgo').onclick=()=>{if(!p.cards.includes(cardId)){p.cards.push(cardId);save();}closeOv();then();};o.querySelector('#hcardgo').focus();
+}
 function harborResult(id){
  const p=JP(),route=harborRoute(id);if(!harborEligible(p)||!route)return;
  const done=harborRouteDone(p,route);
+ if(route.color==='green'&&done&&!(p.cards||[]).includes('harbor.card.pull')){harborLessonCard('harbor.card.pull',()=>harborResult(id));return;}
  const o=jsheet(`<h2>${done?hs('harbor.ui.res.done'):hs('harbor.ui.res.more')}</h2><p class="j-note">${hs('harbor.ui.res.note')}</p><div class="nav"><button class="btn" id="hag" type="button">${hs('harbor.ui.res.again')}</button><button class="btn" id="hother" type="button">${hs('harbor.ui.res.other')}</button><button class="btn go" id="hmap" type="button">${hs('harbor.ui.sel.close')}</button></div>`,hs('harbor.ui.res.label'),"#1F6F7F");
  o.querySelector('#hag').onclick=()=>harborRouteSheet(id);o.querySelector('#hother').onclick=harborSelector;o.querySelector('#hmap').onclick=()=>jmap({scroll:false});o.querySelector('#hmap').focus();
 }

@@ -1594,5 +1594,54 @@
   "where_fa": "راهنمای چالش نارنجی، پایهٔ ۱ و ۲",
   "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
   "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.card.pull.title": {
+  "text": "جهت کشیدن",
+  "kind": "title",
+  "where_fa": "عنوان کارت درس پس از چالش سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.card.pull.tag": {
+  "text": "کارت درس",
+  "kind": "ui",
+  "where_fa": "برچسب بالای کارت درس بندر",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.card.pull.text.b12": {
+  "text": "طناب را پایین می‌کشی و جعبه بالا می‌رود. این قرقره، قرقرهٔ ثابت است. قرقره جهت کشیدن را عوض می‌کند.",
+  "kind": "ui",
+  "where_fa": "متن کارت درس پس از سبز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.card.pull.text.b34": {
+  "text": "طناب ۲ پله پایین می‌آید و جعبه ۲ پله بالا می‌رود: همان اندازه. قرقرهٔ ثابت جهت کشیدن را عوض می‌کند.",
+  "kind": "ui",
+  "where_fa": "متن کارت درس پس از سبز، پایهٔ ۳ و ۴",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.card.pull.text.b56": {
+  "text": "طناب ۲ متر پایین می‌آید و بار ۲ متر بالا می‌رود (در این مدل، بدون اصطکاک). قرقرهٔ ثابت جهت کشیدن را عوض می‌کند.",
+  "kind": "ui",
+  "where_fa": "متن کارت درس پس از سبز، پایهٔ ۵ و ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.card.pull.note": {
+  "text": "این کارت در دفترچهٔ کوله‌پشتی‌ات می‌ماند.",
+  "kind": "ui",
+  "where_fa": "یادداشت پایین کارت درس",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.card.pull.btn": {
+  "text": "فهمیدم",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بستن کارت درس",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
  }
 }
