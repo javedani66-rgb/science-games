@@ -4,20 +4,22 @@ const pulName=k=>(KID()?PUL_NAMES_K:PUL_NAMES_B)[k];
 const pulFrac=n=>n===1?"برابر وزن بار":({2:"نصفِ",3:"یک‌سومِ",4:"یک‌چهارمِ",6:"یک‌ششمِ"}[n]||`یک‌${fa(n)}مِ`)+" وزن بار";
 function pulleyIcon(n){let s=`<rect x="4" y="1" width="32" height="3" fill="#8A5427"/>`;if(n===1)return s+`<circle cx="20" cy="9" r="5" fill="none" stroke="${INK}" stroke-width="2"/><path d="M15 9 V22 M25 9 V26" stroke="#7A5634" stroke-width="1.6"/><rect x="11" y="21" width="8" height="6" fill="#E0A45F"/>`;
   const k=n/2;for(let i=0;i<n;i++)s+=`<path d="M${8+i*(24/(n-1||1))} 8 V19" stroke="#7A5634" stroke-width="1.5"/>`;return s+`<rect x="6" y="5" width="28" height="5" rx="2" fill="#8C9BB0"/><rect x="6" y="17" width="28" height="5" rx="2" fill="#8C9BB0"/><rect x="14" y="22" width="12" height="5" fill="#E0A45F"/>`;}
-function makePulley(A,cfg){cfg=machineScene(A,cfg);const qualitative=!!(cfg.qualitative||A.qualitative);const svg=A.svg,P=A.P;A.view(544);const G=380,PXM=60,REST=250,MAXD=150;
+/* Harbor crate: bigger label plate so the word «بار» reads at 14px or more on a 390px phone */
+function harborCrate(x,yb,label){const w=84,h=56;return `<g><rect x="${x-w/2}" y="${yb-h}" width="${w}" height="${h}" rx="4" fill="#E0A45F" stroke="#94602D" stroke-width="2.5"/><path d="M${x-w/2+5} ${yb-h+5} L${x+w/2-5} ${yb-5} M${x+w/2-5} ${yb-h+5} L${x-w/2+5} ${yb-5}" stroke="#B97C40" stroke-width="3" opacity=".7"/><rect x="${x-w*.4}" y="${yb-h+12}" width="${w*.8}" height="32" rx="6" fill="#FFF7EA" stroke="#94602D" stroke-width="1.5"/>${T(x,yb-h+35,label,{size:24,col:"#5B3A18",halo:false})}</g>`;}
+function makePulley(A,cfg){cfg=machineScene(A,cfg);const qualitative=!!(cfg.qualitative||A.qualitative);const svg=A.svg,P=A.P;const hb0=!!cfg.band;A.view(hb0?580:544);const G=380,PXM=60,REST=250,MAXD=150;
   const st={hideW:!!cfg.hideW,n:cfg.n||1,W:cfg.W,S:cfg.S,h:cfg.h||2,pulled:0,stroke:0,busy:false,blocked:false,flash:0,edit:cfg.edit!==false,hideF:!!cfg.hideF};
   const F=()=>MACHINE.pulley(st.W,st.n);const rise=()=>st.pulled/st.n;
   /* Harbor mode (cfg.band): one force scale for every arrow (A4), the available force and the rope supply are drawn (A2, A11). */
-  const hb=!!cfg.band,ropeMax=cfg.ropeMax==null?Infinity:cfg.ropeMax,used0=cfg.ropeUsed0||0,SC=Math.min(1.5,100/Math.max(cfg.W,cfg.S||0,1)),LB=cfg.labels||{},fmtN=cfg.fmt||(()=>"");
+  const hb=!!cfg.band,LS=15,DG="#0B7A43",ropeMax=cfg.ropeMax==null?Infinity:cfg.ropeMax,used0=cfg.ropeUsed0||0,SC=Math.min(1.5,100/Math.max(cfg.W,cfg.S||0,1)),LB=cfg.labels||{},fmtN=cfg.fmt||(()=>"");
   const ropeLeft=()=>ropeMax-used0-st.pulled,ropeCap=()=>Math.min(st.h*st.n,Math.max(0,ropeMax-used0));
   const ticks=(x,y,len,w)=>{let t="";if(cfg.band!=="3-4")return t;for(let k=1;k*10*SC<len-w*2.6-1;k++)t+=`<line x1="${x-w/2}" y1="${(y+k*10*SC).toFixed(1)}" x2="${x+w/2}" y2="${(y+k*10*SC).toFixed(1)}" stroke="#fff" stroke-width="2"/>`;return t;};
-  const dash=(a,col)=>a.replace(/fill="[^"]*" stroke="#fff" stroke-width="1.5"/,`fill="${col}" fill-opacity=".14" stroke="${col}" stroke-width="2.5" stroke-dasharray="6 4"`);
+  const dash=(a,col)=>a.replace(/fill="[^"]*" stroke="#fff" stroke-width="1.5"/,`fill="${col}" fill-opacity=".35" stroke="${col}" stroke-width="4" stroke-dasharray="9 5"`);
   const sailor=(x)=>`<g><circle cx="${x}" cy="${G-70}" r="9" fill="#F7DCA5" stroke="#3B2417" stroke-width="2"/><rect x="${x-9}" y="${G-60}" width="18" height="40" rx="6" fill="#4C7FB0" stroke="#3B2417" stroke-width="2"/><rect x="${x-9}" y="${G-20}" width="7" height="20" fill="#3B2417"/><rect x="${x+2}" y="${G-20}" width="7" height="20" fill="#3B2417"/></g>`;
   const R=(a,b,c,d)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#7A5634" stroke-width="4" stroke-linecap="round"/>`;
   const Wh=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#F4F7FA" stroke="#34425E" stroke-width="5"/><circle cx="${x}" cy="${y}" r="4" fill="#34425E"/>`;
-  function render(){if(!cfg.current())return;const ok=canLift(F(),st.S),y0=G-56-rise()*PXM,hy=REST+st.stroke;let s=bgRoom(G)+`<rect y="520" width="640" height="24" style="fill:var(--sf)"/>`;
+  function render(){if(!cfg.current())return;const ok=canLift(F(),st.S),y0=G-56-rise()*PXM,hy=REST+st.stroke;let s=bgRoom(G)+`<rect y="520" width="640" height="${hb0?60:24}" style="fill:var(--sf)"/>`;
     s+=`<rect x="100" y="16" width="440" height="22" rx="6" fill="#8A5427"/><rect x="100" y="16" width="440" height="6" rx="3" fill="#A86A36"/>`;
-    const th=G-st.h*PXM;s+=`<line x1="70" y1="${G}" x2="70" y2="${th-26}" stroke="#7D8CA3" stroke-width="4"/><path d="M70 ${th-26} l34 10 -34 10Z" fill="${GRN}"/><line x1="60" y1="${th}" x2="560" y2="${th}" stroke="${GRN}" stroke-width="2" stroke-dasharray="8 6" opacity=".7"/>`+T(hb?112:82,hb?th-8:th+22,hb?(cfg.targetText||""):!qualitative&&NUMS()?`هدف: ${fa(st.h)} متر`:"هدف",{size:13,col:GRN,anchor:"end"});
+    const th=G-st.h*PXM;s+=`<line x1="70" y1="${G}" x2="70" y2="${th-26}" stroke="#7D8CA3" stroke-width="4"/><path d="M70 ${th-26} l34 10 -34 10Z" fill="${GRN}"/><line x1="60" y1="${th}" x2="560" y2="${th}" stroke="${GRN}" stroke-width="2" stroke-dasharray="8 6" opacity=".7"/>`+T(hb?112:82,hb?th-30:th+22,hb?(cfg.targetText||""):!qualitative&&NUMS()?`هدف: ${fa(st.h)} متر`:"هدف",{size:hb?LS:13,col:hb?DG:GRN,anchor:"end"});
     let lx,hx,body="";const yp=y0-34;
     if(st.n===1){lx=272;hx=328;body=R(300,38,300,50)+R(272,70,272,y0)+R(328,70,328,hy)+`<path d="M272 70 A28 28 0 0 1 328 70" stroke="#7A5634" stroke-width="4" fill="none"/>`+Wh(300,70,28);}
     else if(st.n===2){lx=304;hx=376;body=R(352,38,352,48)+R(280,38,280,yp)+R(328,yp,328,70)+R(376,70,376,hy)+`<path d="M328 70 A24 24 0 0 1 376 70" stroke="#7A5634" stroke-width="4" fill="none"/><path d="M280 ${yp} A24 24 0 0 0 328 ${yp}" stroke="#7A5634" stroke-width="4" fill="none"/>`+Wh(352,70,24)+Wh(304,yp,24)+R(304,yp,304,y0);}
@@ -34,19 +36,19 @@ function makePulley(A,cfg){cfg=machineScene(A,cfg);const qualitative=!!(cfg.qual
     s+=body;
     const coil=hb?0:Math.min(60,st.pulled*6);if(coil>0){s+=`<g>`;for(let i=0;i<Math.ceil(coil/6);i++)s+=`<ellipse cx="${hx+74}" cy="${G-4-i*3}" rx="${22-i*.4}" ry="6" fill="none" stroke="#7A5634" stroke-width="3"/>`;s+=`</g>`;}
     s+=R(hx,hy,hx+10,G-6);
-    s+=crateSvg(lx,y0+56,64,56,hb?(LB.crate||""):qualitative?"بار":st.hideW?"؟":kn(st.W),null);
+    s+=hb?harborCrate(lx,y0+56,LB.crate||""):crateSvg(lx,y0+56,64,56,qualitative?"بار":st.hideW?"؟":kn(st.W),null);
     if(S.forces||hb){const wl=st.W*SC,fl=F()*SC,fc=st.hideF?"#7D8CA3":ok?GRN:RED;s+=arrow(lx,y0+62,lx,y0+62+wl,9,"#7D8CA3",.9);
-      if(hb)s+=ticks(lx,y0+62,wl,9)+T(lx-16,y0+62+Math.max(wl/2,20)-6,LB.weight,{size:12,anchor:"start"})+(fmtN(st.W)?T(lx-16,y0+62+Math.max(wl/2,20)+20,fmtN(st.W),{size:12,anchor:"start"}):"");
+      if(hb)s+=ticks(lx,y0+62,wl,9)+T(lx-16,y0+62+Math.max(wl/2,20)-6,LB.weight,{size:LS,anchor:"start"})+(fmtN(st.W)?T(lx-16,y0+62+Math.max(wl/2,20)+28,fmtN(st.W),{size:LS,anchor:"start"}):"");
       s+=arrow(hx+34,hy+8,hx+34,hy+8+fl,11,fc);
-      if(hb){s+=ticks(hx+34,hy+8,fl,11)+T(hx+22,hy+8+fl+22,LB.need,{size:12,col:fc,anchor:"end"})+(fmtN(F())?T(hx+22,hy+8+fl+48,fmtN(F()),{size:12,col:fc,anchor:"end"}):"");
-        const al=st.S*SC,AX=540,AY=REST+8;s+=dash(arrow(AX,AY,AX,AY+al,11,GRN),GRN)+ticks(AX,AY,al,11)+T(AX,AY+al+22,LB.avail,{size:12,col:GRN})+(fmtN(st.S)?T(AX,AY+al+48,fmtN(st.S),{size:12,col:GRN}):"");
-        for(let i=0;i<(cfg.helpers||1);i++)s+=sailor(626-i*22);
+      if(hb){s+=ticks(hx+34,hy+8,fl,11)+T(hx+22,hy+8+fl+24,LB.need,{size:LS,col:fc,anchor:"end"})+(fmtN(F())?T(hx+22,hy+8+fl+58,fmtN(F()),{size:LS,col:fc,anchor:"end"}):"");
+        const al=st.S*SC,AX=540,AY=REST+8,fN=fmtN(st.S);s+=dash(arrow(AX,AY,AX,AY+al,14,DG),DG)+ticks(AX,AY,al,14)+T(AX,AY-(fN?48:16),LB.avail,{size:LS,col:DG})+(fN?T(AX,AY-14,fN,{size:LS,col:DG}):"");
+        for(let i=0;i<(cfg.helpers||1);i++)s+=sailor(604-i*28);
         if(isFinite(ropeMax)){const U=28,bx=40,total=ropeMax*U,left=Math.max(0,ropeLeft())*U;
-          s+=`<rect x="${bx}" y="498" width="${total}" height="14" rx="7" fill="none" stroke="#7A5634" stroke-width="2" stroke-dasharray="5 4"/><rect x="${bx}" y="498" width="${left}" height="14" rx="7" fill="#C28A4E" stroke="#7A5634" stroke-width="2"/>`;
-          if(cfg.band!=="1-2")for(let k=1;k<ropeMax;k++)s+=`<line x1="${bx+k*U}" y1="498" x2="${bx+k*U}" y2="512" stroke="#fff" stroke-width="2"/>`;
-          s+=T(bx+total/2,490,cfg.ropeText||"",{size:12});}}
+          s+=`<rect x="${bx}" y="526" width="${total}" height="20" rx="10" fill="#fff" fill-opacity=".6" stroke="#5B3A18" stroke-width="3" stroke-dasharray="7 5"/><rect x="${bx}" y="526" width="${left}" height="20" rx="10" fill="#B9742F" stroke="#5B3A18" stroke-width="3"/>`;
+          for(let k=1;k<ropeMax;k++)s+=`<line x1="${bx+k*U}" y1="528" x2="${bx+k*U}" y2="544" stroke="#fff" stroke-width="2.5"/>`;
+          s+=T(bx+total/2,516,cfg.ropeText||"",{size:LS});}}
       else s+=T(hx+56,hy+30+fl/2,qualitative?"نیروی لازم":`نیروی لازم<tspan class="num">: ${st.hideF?"؟":fa(r1(F()))}</tspan>`,{size:13,col:st.hideF?INK:ok?GRN:RED,anchor:"end"});}
-    const flash=st.flash>0;s+=`<g data-drag="grip" style="cursor:ns-resize"><rect x="${hx-40}" y="${hy-14}" width="80" height="70" fill="#fff" fill-opacity="0"/><rect x="${hx-26}" y="${hy}" width="52" height="40" rx="12" fill="${flash?RED:"#FFC43D"}" stroke="#fff" stroke-width="3"/>${T(hx,hy+28,"⇩",{size:22,col:INK,halo:false})}</g>`;
+    const flash=st.flash>0;s+=`<g data-drag="grip" style="cursor:ns-resize"><rect x="${hx-48}" y="${hy-24}" width="96" height="92" fill="#fff" fill-opacity="0"/><rect x="${hx-26}" y="${hy}" width="52" height="40" rx="12" fill="${flash?RED:"#FFC43D"}" stroke="#fff" stroke-width="3"/>${T(hx,hy+29,"⇩",{size:24,col:INK,halo:false})}</g>`;
     if(!qualitative)s+=gBar(st.hideF?0:F(),st.S,400,70,170);
     
     machinePaint(A,s);
