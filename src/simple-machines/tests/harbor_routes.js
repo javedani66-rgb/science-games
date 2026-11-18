@@ -64,26 +64,33 @@ function challenge(){
   return ui.A;
 }
 challenge();
-// Route evidence is local and isolated from all old save/code slots.
+// Route evidence is local and isolated from all old save/code slots (content version 2: bands, per-mission goals, migration).
+const strings=JSON.parse(fs.readFileSync(path.join(dir,'harbor','strings.fa.json'),'utf8'));
+const HARBOR_STR=Object.fromEntries(Object.entries(strings).map(([k,v])=>[k,v.text]));
+const FA='۰۱۲۳۴۵۶۷۸۹';
 const content=fs.readFileSync(path.join(dir,'harbor-content.js'),'utf8');
 const routes=fs.readFileSync(path.join(dir,'harbor-routes.js'),'utf8');
-const pure=vm.createContext({trk:p=>p.lvl|| (p.g<=1?'a':p.g===2?'b':p.g<=4?'c':'d')});
-vm.runInContext(content.slice(0,content.indexOf('function mountHarborActivity('))+routes.slice(0,routes.indexOf('function harborEntry(')),pure);
+const pure=vm.createContext({HARBOR_STR,fa:v=>String(v).replace(/\d/g,d=>FA[d]),pulleyIcon:()=>''});
+vm.runInContext(content.slice(0,content.indexOf('function mountHarborActivity('))+routes.slice(routes.indexOf('const harborBand='),routes.indexOf('function harborEntry(')),pure);
 const pilot=vm.runInContext('HARBOR_CONTENT',pure);
-const record=pure.harborRecord,eligible=vm.runInContext('harborEligible',pure),done=vm.runInContext('harborRouteDone',pure);
+const record=pure.harborRecord,eligible=vm.runInContext('harborEligible',pure),done=vm.runInContext('harborRouteDone',pure),band=vm.runInContext('harborBand',pure);
 const canPlay=pure.harborCanPlay,prereq={g:3};
-assert.equal(canPlay(prereq,pilot.routes[0].activities[0]),true);
-assert.equal(canPlay(prereq,pilot.routes[0].activities[1]),false);
-assert.equal(canPlay(prereq,pilot.routes[0].activities[2]),false);
-record(prereq,pilot.routes[0].id,pilot.routes[0].activities[0].id,{correct:true},false);
-assert.equal(canPlay(prereq,pilot.routes[1].activities[1]),true,'shared observed goal follows route switching');
-assert.equal(canPlay(prereq,pilot.routes[1].activities[2]),false,'fit still needs comparison');
-record(prereq,pilot.routes[1].id,pilot.routes[1].activities[1].id,{correct:true},false);
-assert.equal(canPlay(prereq,pilot.routes[0].activities[2]),true);
+assert.equal(pilot.version,2);assert.deepEqual(Array.from(pilot.routes.map(r=>r.id)),['harbor.fishing','harbor.pirate','harbor.dragon']);
+assert.equal(pilot.routes[2].difficulty.tier,'very-hard');
+const [green,orange,red]=pilot.routes;
+assert.equal(canPlay(prereq,green.activities[0]),true);
+assert.equal(canPlay(prereq,green.activities[1]),false);
+assert.equal(canPlay(prereq,green.activities[2]),false);
+for(const r of pilot.routes)assert.equal(canPlay(prereq,r.activities[0]),true,'no lock between challenges (B18)');
+record(prereq,green.id,green.activities[0].id,{correct:true},false);
+assert.equal(canPlay(prereq,green.activities[1]),true);
+assert.equal(canPlay(prereq,orange.activities[1]),false,'progress in one challenge does not open another');
+record(prereq,orange.id,orange.activities[0].id,{correct:true},false);
+assert.equal(canPlay(prereq,orange.activities[1]),true);
 prereq.routeProgress.regions.harbor.contentVersion=0;
-assert.equal(canPlay(prereq,pilot.routes[0].activities[1]),false,'stale evidence cannot open prerequisites');
+assert.equal(canPlay(prereq,green.activities[1]),false,'stale evidence cannot open prerequisites');
 const p={g:3,lvl:null,S:{ls:{'c:pulley.2':2},cb:{kept:1}},at:{i:9,j:1,r:{i:2}},stash:{b:{quiz:[1]}},quiz:[1],words:[1],home:[1],side:[1],opt:[1],done:'ab'};
-const legacy=JSON.stringify(p),r=pilot.routes[0],a=r.activities[0],ok={correct:true,independent:true,assisted:false,observed:['fixed']};
+const legacy=JSON.stringify(p),r=green,a=r.activities[0],ok={correct:true,independent:true,assisted:false,observed:['guess:0']};
 assert.equal(record(p,'bad',a.id,ok,false),false);assert.equal(record(p,r.id,'bad',ok,false),false);
 assert.equal(JSON.stringify(p),legacy,'invalid IDs do not create any state');
 assert.equal(record(p,r.id,a.id,{...ok,correct:false,independent:false},false),true);
@@ -94,47 +101,32 @@ record(p,r.id,a.id,{...ok,correct:false},true);
 assert.equal(JSON.stringify(e.first),first);assert.equal(JSON.stringify(e.latest),latest);assert.equal(e.runs,2);assert.equal(e.practices,1);
 assert.equal(done(p,r),false);for(const act of r.activities.slice(1))record(p,r.id,act.id,ok,false);assert.equal(done(p,r),true);
 const copied={...p};delete copied.routeProgress;assert.equal(JSON.stringify(copied),legacy);
-for(const g of [0,1,2,5,6,7]){const q={g};assert.equal(eligible(q),false);assert.equal(record(q,r.id,a.id,ok,false),false);assert.equal(q.routeProgress,undefined);}
-assert.equal(eligible({g:4}),true);assert.equal(eligible({g:3,lvl:'b'}),false);
+// Bands from the grade only (B1, D250): 0 = second grade ... 4 = sixth grade.
+assert.deepEqual([0,1,2,3,4].map(g=>band({g})),['1-2','3-4','3-4','5-6','5-6']);
+for(const g of [0,1,2,3,4])assert.equal(eligible({g}),true,'harbor open for grade index '+g);
+for(const g of [-1,5,6,7,undefined,null,'3'])assert.equal(eligible({g}),false);
+assert.equal(eligible({g:3,lvl:'b'}),true,'band follows the grade, not the old track');
+assert.equal(eligible(null),false);
 assert.equal(done({g:3},r),false,'another player has no route completion');
 const restored=JSON.parse(JSON.stringify(p));assert.equal(done(restored,r),true);assert.equal(JSON.stringify(restored.routeProgress),JSON.stringify(p.routeProgress));
-restored.routeProgress.regions.harbor.contentVersion=0;assert.equal(done(restored,r),false);assert.deepEqual(Object.keys(pure.harborState(restored).activities),[]);
-for(const corrupt of [null,[],{version:99,regions:{}},{version:1,regions:[]},{version:1,regions:{harbor:{contentVersion:1,activities:[]}}}]){
+// A content-version change migrates (keeps the old activities as legacy) and never wipes saved progress (B5, T8).
+const oldKeys=Object.keys(restored.routeProgress.regions.harbor.activities);
+restored.routeProgress.regions.harbor.contentVersion=1;restored.routeProgress.regions.harbor.routeId='harbor.pirate';
+assert.equal(done(restored,r),false);
+const st=pure.harborState(restored);
+assert.deepEqual(Object.keys(st.activities),[]);assert.equal(st.contentVersion,2);assert.equal(st.routeId,'harbor.pirate');
+assert.deepEqual(Object.keys(st.legacy.v1),oldKeys,'old activities are kept read-only');
+pure.harborState(restored);assert.deepEqual(Object.keys(restored.routeProgress.regions.harbor.legacy),['v1'],'migration runs once');
+for(const corrupt of [null,[],{version:99,regions:{}},{version:1,regions:[]},{version:1,regions:{harbor:{contentVersion:2,activities:[]}}}]){
  const q={g:3,routeProgress:corrupt};record(q,r.id,a.id,ok,false);assert.equal(q.routeProgress.regions.harbor.activities[a.id].runs,1);
 }
 for(const corrupt of ['broken',{},[]]){
  const q={g:3};pure.harborState(q).activities[a.id]=corrupt;record(q,r.id,a.id,ok,false);assert.equal(q.routeProgress.regions.harbor.activities[a.id].runs,1);
 }
-// Drive real content transitions: lifting is evidence, answering is the assessment.
-function activity(spec){
- let controls=[],question,physics,judged=[];
- const A={locked:false,ctrl:()=>{controls=[];return controls;},counter(){},prompt(){},fb(){},judge:(ok,m)=>{judged.push(m.pts);}};
- const c=vm.createContext({
-  rng:()=>()=>0,makePulley:(Q,p)=>{physics=p;return {render(){},auto:done=>done()};},
-  btn:(parent,label,cls,click)=>{const b={label,click};parent.push(b);return b;},
-  mcq:(parent,options,callback)=>{question={options,callback};return {disable(){},mark(){}};}
- });vm.runInContext(content.slice(content.indexOf('function mountHarborActivity(')),c);
- c.mountHarborActivity(spec,A);
- return {A,click:label=>{const b=controls.find(b=>b.label===label);assert.ok(b,label);b.click();},
-  observe:result=>physics[result==='blocked'?'onBlocked':'onTop'](),answer:i=>question.callback(i,{disabled:false}),
-  hasQuestion:()=>!!question,judged};
-}
-for(const route of pilot.routes){
- const fixed=activity(route.activities[0].make());assert.equal(fixed.hasQuestion(),false);
- fixed.click('آزمایش را ببین');assert.equal(fixed.hasQuestion(),true);assert.equal(fixed.judged.length,0);
- fixed.answer(1);assert.equal(fixed.judged[0],2);assert.ok(fixed.A.harborEvidence.observed.includes('fixed.direction'));
- const compare=activity(route.activities[1].make());compare.observe('blocked');assert.equal(compare.hasQuestion(),false);
- compare.click('ثابت و متحرک');compare.observe('lifted');assert.equal(compare.hasQuestion(),true);assert.equal(compare.judged.length,0);
- compare.answer(route.id==='harbor.pirate'?0:1);assert.equal(compare.judged[0],2);assert.equal(compare.A.harborEvidence.observed.length,2);
- const fit=activity(route.activities[2].make());
- if(route.id==='harbor.pirate'){fit.observe('blocked');assert.equal(fit.hasQuestion(),false);fit.click('ثابت و متحرک');fit.observe('lifted');}
- else fit.observe('lifted');
- assert.equal(fit.hasQuestion(),true);fit.answer(route.id==='harbor.pirate'?1:0);assert.equal(fit.judged[0],2);
-}
-// Data extension: a third route has its own stable activity IDs and state.
-const third={...r,id:'harbor.third',activities:r.activities.map((a,i)=>({...a,id:'harbor.third.'+i}))};
-pilot.routes.push(third);const thirdProfile={g:4};
-for(const act of third.activities)record(thirdProfile,third.id,act.id,ok,false);
-assert.equal(done(thirdProfile,third),true);assert.equal(done(thirdProfile,r),false);
-assert.equal(Object.keys(thirdProfile.routeProgress.regions.harbor.activities).length,3);
-console.log('harbor_routes: original score/resume, assistance, isolated evidence, corrupt saves and observed route goals passed');
+// Data extension: a fourth route has its own stable activity IDs and state.
+const extra={...r,id:'harbor.extra',activities:r.activities.map((x,i)=>({...x,id:'harbor.extra.'+i,goals:['harbor.extra.'+i],prerequisiteGoals:i?['harbor.extra.'+(i-1)]:[]}))};
+pilot.routes.push(extra);const extraProfile={g:4};
+for(const act of extra.activities)record(extraProfile,extra.id,act.id,ok,false);
+assert.equal(done(extraProfile,extra),true);assert.equal(done(extraProfile,r),false);
+assert.equal(Object.keys(extraProfile.routeProgress.regions.harbor.activities).length,3);
+console.log('harbor_routes: original score/resume, assistance, per-mission goals, bands for all grades, migration without wipe, corrupt saves passed');

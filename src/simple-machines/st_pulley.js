@@ -7,11 +7,17 @@ function pulleyIcon(n){let s=`<rect x="4" y="1" width="32" height="3" fill="#8A5
 function makePulley(A,cfg){cfg=machineScene(A,cfg);const qualitative=!!(cfg.qualitative||A.qualitative);const svg=A.svg,P=A.P;A.view(544);const G=380,PXM=60,REST=250,MAXD=150;
   const st={hideW:!!cfg.hideW,n:cfg.n||1,W:cfg.W,S:cfg.S,h:cfg.h||2,pulled:0,stroke:0,busy:false,blocked:false,flash:0,edit:cfg.edit!==false,hideF:!!cfg.hideF};
   const F=()=>MACHINE.pulley(st.W,st.n);const rise=()=>st.pulled/st.n;
+  /* Harbor mode (cfg.band): one force scale for every arrow (A4), the available force and the rope supply are drawn (A2, A11). */
+  const hb=!!cfg.band,ropeMax=cfg.ropeMax==null?Infinity:cfg.ropeMax,used0=cfg.ropeUsed0||0,SC=Math.min(1.5,100/Math.max(cfg.W,cfg.S||0,1)),LB=cfg.labels||{},fmtN=cfg.fmt||(()=>"");
+  const ropeLeft=()=>ropeMax-used0-st.pulled,ropeCap=()=>Math.min(st.h*st.n,Math.max(0,ropeMax-used0));
+  const ticks=(x,y,len,w)=>{let t="";if(cfg.band!=="3-4")return t;for(let k=1;k*10*SC<len-w*2.6-1;k++)t+=`<line x1="${x-w/2}" y1="${(y+k*10*SC).toFixed(1)}" x2="${x+w/2}" y2="${(y+k*10*SC).toFixed(1)}" stroke="#fff" stroke-width="2"/>`;return t;};
+  const dash=(a,col)=>a.replace(/fill="[^"]*" stroke="#fff" stroke-width="1.5"/,`fill="${col}" fill-opacity=".14" stroke="${col}" stroke-width="2.5" stroke-dasharray="6 4"`);
+  const sailor=(x)=>`<g><circle cx="${x}" cy="${G-70}" r="9" fill="#F7DCA5" stroke="#3B2417" stroke-width="2"/><rect x="${x-9}" y="${G-60}" width="18" height="40" rx="6" fill="#4C7FB0" stroke="#3B2417" stroke-width="2"/><rect x="${x-9}" y="${G-20}" width="7" height="20" fill="#3B2417"/><rect x="${x+2}" y="${G-20}" width="7" height="20" fill="#3B2417"/></g>`;
   const R=(a,b,c,d)=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#7A5634" stroke-width="4" stroke-linecap="round"/>`;
   const Wh=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#F4F7FA" stroke="#34425E" stroke-width="5"/><circle cx="${x}" cy="${y}" r="4" fill="#34425E"/>`;
   function render(){if(!cfg.current())return;const ok=canLift(F(),st.S),y0=G-56-rise()*PXM,hy=REST+st.stroke;let s=bgRoom(G)+`<rect y="520" width="640" height="24" style="fill:var(--sf)"/>`;
     s+=`<rect x="100" y="16" width="440" height="22" rx="6" fill="#8A5427"/><rect x="100" y="16" width="440" height="6" rx="3" fill="#A86A36"/>`;
-    const th=G-st.h*PXM;s+=`<line x1="70" y1="${G}" x2="70" y2="${th-26}" stroke="#7D8CA3" stroke-width="4"/><path d="M70 ${th-26} l34 10 -34 10Z" fill="${GRN}"/><line x1="60" y1="${th}" x2="560" y2="${th}" stroke="${GRN}" stroke-width="2" stroke-dasharray="8 6" opacity=".7"/>`+T(82,th+22,!qualitative&&NUMS()?`هدف: ${fa(st.h)} متر`:"هدف",{size:13,col:GRN,anchor:"end"});
+    const th=G-st.h*PXM;s+=`<line x1="70" y1="${G}" x2="70" y2="${th-26}" stroke="#7D8CA3" stroke-width="4"/><path d="M70 ${th-26} l34 10 -34 10Z" fill="${GRN}"/><line x1="60" y1="${th}" x2="560" y2="${th}" stroke="${GRN}" stroke-width="2" stroke-dasharray="8 6" opacity=".7"/>`+T(hb?112:82,hb?th-8:th+22,hb?(cfg.targetText||""):!qualitative&&NUMS()?`هدف: ${fa(st.h)} متر`:"هدف",{size:13,col:GRN,anchor:"end"});
     let lx,hx,body="";const yp=y0-34;
     if(st.n===1){lx=272;hx=328;body=R(300,38,300,50)+R(272,70,272,y0)+R(328,70,328,hy)+`<path d="M272 70 A28 28 0 0 1 328 70" stroke="#7A5634" stroke-width="4" fill="none"/>`+Wh(300,70,28);}
     else if(st.n===2){lx=304;hx=376;body=R(352,38,352,48)+R(280,38,280,yp)+R(328,yp,328,70)+R(376,70,376,hy)+`<path d="M328 70 A24 24 0 0 1 376 70" stroke="#7A5634" stroke-width="4" fill="none"/><path d="M280 ${yp} A24 24 0 0 0 328 ${yp}" stroke="#7A5634" stroke-width="4" fill="none"/>`+Wh(352,70,24)+Wh(304,yp,24)+R(304,yp,304,y0);}
@@ -26,27 +32,37 @@ function makePulley(A,cfg){cfg=machineScene(A,cfg);const qualitative=!!(cfg.qual
       rope+=` V${hy}`;body+=`<path data-rope-route="continuous" d="${rope}" stroke="#7A5634" stroke-width="4" fill="none"/>`+R(308,yp+22,308,y0);
       cs.forEach(x=>{[x-r,x+r].forEach(xx=>body+=`<line data-support="1" x1="${xx}" y1="94" x2="${xx}" y2="${yp-18}" stroke="#D58A23" stroke-width="4" opacity=".7"/>`);});}
     s+=body;
-    const coil=Math.min(60,st.pulled*6);if(coil>0){s+=`<g>`;for(let i=0;i<Math.ceil(coil/6);i++)s+=`<ellipse cx="${hx+74}" cy="${G-4-i*3}" rx="${22-i*.4}" ry="6" fill="none" stroke="#7A5634" stroke-width="3"/>`;s+=`</g>`;}
+    const coil=hb?0:Math.min(60,st.pulled*6);if(coil>0){s+=`<g>`;for(let i=0;i<Math.ceil(coil/6);i++)s+=`<ellipse cx="${hx+74}" cy="${G-4-i*3}" rx="${22-i*.4}" ry="6" fill="none" stroke="#7A5634" stroke-width="3"/>`;s+=`</g>`;}
     s+=R(hx,hy,hx+10,G-6);
-    s+=crateSvg(lx,y0+56,64,56,qualitative?"بار":st.hideW?"؟":kn(st.W),null);
-    if(S.forces){s+=arrow(lx,y0+62,lx,y0+62+Math.min(80,st.W*.5),9,"#7D8CA3",.9);
-      const fl=Math.max(24,Math.min(120,F()*1.6));s+=arrow(hx+34,hy+8,hx+34,hy+8+fl,11,st.hideF?"#7D8CA3":ok?GRN:RED)+T(hx+56,hy+30+fl/2,qualitative?"نیروی لازم":`نیروی لازم<tspan class="num">: ${st.hideF?"؟":fa(r1(F()))}</tspan>`,{size:13,col:st.hideF?INK:ok?GRN:RED,anchor:"end"});}
+    s+=crateSvg(lx,y0+56,64,56,hb?(LB.crate||""):qualitative?"بار":st.hideW?"؟":kn(st.W),null);
+    if(S.forces||hb){const wl=st.W*SC,fl=F()*SC,fc=st.hideF?"#7D8CA3":ok?GRN:RED;s+=arrow(lx,y0+62,lx,y0+62+wl,9,"#7D8CA3",.9);
+      if(hb)s+=ticks(lx,y0+62,wl,9)+T(lx-16,y0+62+Math.max(wl/2,20)-6,LB.weight,{size:12,anchor:"start"})+(fmtN(st.W)?T(lx-16,y0+62+Math.max(wl/2,20)+20,fmtN(st.W),{size:12,anchor:"start"}):"");
+      s+=arrow(hx+34,hy+8,hx+34,hy+8+fl,11,fc);
+      if(hb){s+=ticks(hx+34,hy+8,fl,11)+T(hx+22,hy+8+fl+22,LB.need,{size:12,col:fc,anchor:"end"})+(fmtN(F())?T(hx+22,hy+8+fl+48,fmtN(F()),{size:12,col:fc,anchor:"end"}):"");
+        const al=st.S*SC,AX=540,AY=REST+8;s+=dash(arrow(AX,AY,AX,AY+al,11,GRN),GRN)+ticks(AX,AY,al,11)+T(AX,AY+al+22,LB.avail,{size:12,col:GRN})+(fmtN(st.S)?T(AX,AY+al+48,fmtN(st.S),{size:12,col:GRN}):"");
+        for(let i=0;i<(cfg.helpers||1);i++)s+=sailor(626-i*22);
+        if(isFinite(ropeMax)){const U=28,bx=40,total=ropeMax*U,left=Math.max(0,ropeLeft())*U;
+          s+=`<rect x="${bx}" y="498" width="${total}" height="14" rx="7" fill="none" stroke="#7A5634" stroke-width="2" stroke-dasharray="5 4"/><rect x="${bx}" y="498" width="${left}" height="14" rx="7" fill="#C28A4E" stroke="#7A5634" stroke-width="2"/>`;
+          if(cfg.band!=="1-2")for(let k=1;k<ropeMax;k++)s+=`<line x1="${bx+k*U}" y1="498" x2="${bx+k*U}" y2="512" stroke="#fff" stroke-width="2"/>`;
+          s+=T(bx+total/2,490,cfg.ropeText||"",{size:12});}}
+      else s+=T(hx+56,hy+30+fl/2,qualitative?"نیروی لازم":`نیروی لازم<tspan class="num">: ${st.hideF?"؟":fa(r1(F()))}</tspan>`,{size:13,col:st.hideF?INK:ok?GRN:RED,anchor:"end"});}
     const flash=st.flash>0;s+=`<g data-drag="grip" style="cursor:ns-resize"><rect x="${hx-40}" y="${hy-14}" width="80" height="70" fill="#fff" fill-opacity="0"/><rect x="${hx-26}" y="${hy}" width="52" height="40" rx="12" fill="${flash?RED:"#FFC43D"}" stroke="#fff" stroke-width="3"/>${T(hx,hy+28,"⇩",{size:22,col:INK,halo:false})}</g>`;
     if(!qualitative)s+=gBar(st.hideF?0:F(),st.S,400,70,170);
     
     machinePaint(A,s);
     machineKeys(A,'[data-drag="grip"]',"کشیدن طناب؛ ورود یا کلید پایین",()=>{if(st.busy||!st.edit||st.done)return;
       if(!canLift(F(),st.S)){if(cfg.onBlocked)cfg.onBlocked();return;}
+      if(ropeLeft()<.5-1e-9&&st.pulled<st.h*st.n-1e-9){if(cfg.onRopeOut)cfg.onRopeOut();return;}
       st.pulled=Math.min(st.h*st.n,st.pulled+.5);render();if(rise()>=st.h-1e-6&&!st.done){st.done=true;if(cfg.onTop)cfg.onTop();}});
     A.counter(`<span class="cc">طناب‌هایی که بار را نگه می‌دارند: <b>${fa(st.n)}</b></span><span class="cc">طناب کشیدی: <b>${fa(r1(st.pulled))} متر</b></span><span class="cc">بار بالا رفت: <b>${fa(r1(rise()))} متر</b></span><span class="cc ${ok?"":"r"}">نیروی لازم: <b class="num">${st.hideF?"؟":fa(r1(F()))+" نیوتون"}</b></span>`);
     A.formula(FX(`${sy("F")} = ${sy("W")} ÷ ${sy("n")}`,st.hideF?"":`${sy("F")} = ${fa(st.W)} ÷ ${fa(st.n)} = ${fa(r1(F()))} N`,[[sy("F"),"نیروی لازم (N)"],[sy("W"),"وزن بار (N)"],[sy("n"),"تعداد طناب‌های نگه‌دارنده"]])+FX(`${sy("s")} = ${sy("n")} × ${sy("h")}`,`${sy("s")} = ${fa(st.n)} × ${fa(r1(rise()))} = ${fa(r1(st.pulled))} m`,[[sy("s"),"طول طناب کشیده (m)"],[sy("h"),"بالا رفتن بار (m)"]]));}
   let y0drag=0;
   dragKit(svg,{blocked:()=>A.locked||st.busy||!st.edit,start(d){return d.drag==="grip"?{}:null;},begin(g,p){y0drag=p.y;g.base=st.pulled;},
     move(g,p){const dy=clamp(p.y-y0drag,0,MAXD);if(!canLift(F(),st.S)){st.stroke=Math.min(dy,12);st.flash=1;if(!g.failed&&cfg.onBlocked){g.failed=true;cfg.onBlocked();}render();return;}
-      const maxPull=st.h*st.n;const want=g.base+dy/PXM;st.pulled=Math.min(maxPull,want);st.stroke=Math.min(dy,(st.pulled-g.base)*PXM);render();},
+      const maxPull=ropeCap();const want=g.base+dy/PXM;if(want>maxPull+1e-9&&maxPull<st.h*st.n-1e-9&&!g.ropeFail){g.ropeFail=true;if(cfg.onRopeOut)cfg.onRopeOut();}st.pulled=Math.min(maxPull,want);st.stroke=Math.min(dy,(st.pulled-g.base)*PXM);render();},
     end(){st.flash=0;const from=st.stroke;tween(200,p=>{st.stroke=from*(1-p);render();},()=>{st.stroke=0;render();if(rise()>=st.h-1e-6&&!st.done){st.done=true;if(cfg.onTop)cfg.onTop();}});},tap(){}});
   render();
-  return{st,render,F,rise,reset(){st.pulled=0;st.stroke=0;st.done=false;render();},auto(done){st.busy=true;tween(1800,p=>{const total=MACHINE.rope(st.n,st.h)*PXM,cycles=Math.ceil(total/MAXD),q=p*cycles,i=Math.min(cycles-1,Math.floor(q)),phase=p===1?1:q-i,base=i*MAXD,len=Math.min(MAXD,total-base),down=clamp(phase/.8,0,1);
+  return{st,render,F,rise,ropeLeft,reset(){st.pulled=0;st.stroke=0;st.done=false;render();},auto(done){st.busy=true;tween(1800,p=>{const total=MACHINE.rope(st.n,st.h)*PXM,cycles=Math.ceil(total/MAXD),q=p*cycles,i=Math.min(cycles-1,Math.floor(q)),phase=p===1?1:q-i,base=i*MAXD,len=Math.min(MAXD,total-base),down=clamp(phase/.8,0,1);
       st.pulled=(base+len*down)/PXM;st.stroke=st.n===1?len*down:len*(phase<=.8?down:1-(phase-.8)/.2);render();},()=>{st.busy=false;st.done=true;render();if(cfg.current()&&done)done();});}};
 }
 function pulleyStatic(A,n){const pl=makePulley(A,{n,W:80,S:100,h:2,edit:false});return pl;}

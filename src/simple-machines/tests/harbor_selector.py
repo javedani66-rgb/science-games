@@ -5,7 +5,7 @@ import os, json
 ROOT=Path(__file__).resolve().parent.parent
 OUT=ROOT/'tests'/'shots';OUT.mkdir(exist_ok=True)
 fixture=OUT/'harbor_selector_fixture.html'
-fixture.write_text((ROOT/'jtest.html').read_text().replace('window.__J={harborCanPlay','window.__J={harborContent:HARBOR_CONTENT,harborCanPlay'))
+fixture.write_text((ROOT/'jtest.html').read_text())
 profile={'id':'ui-test','name':'آزمایش','g':3,'t':0,'lvl':None,'coach':0,'sv':2,'S':{'prog':{},'ls':{},'cb':{},'nums':True,'forces':True,'formula':True,'track':'c'}}
 metrics="""()=>{
  const box=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom}};
@@ -50,16 +50,16 @@ with sync_playwright() as pw:
         pg.evaluate("()=>{const p=__J.curP(),r=__J.harborRoute('harbor.fishing');__J.harborRecord(p,r.id,r.activities[0].id,{correct:true},false)}")
         pg.locator('[data-route="harbor.fishing"]').click()
         locked=pg.locator('[data-activity="2"]').locator('..').inner_text()
-        assert 'مقایسهٔ دو آرایش' in locked and 'تغییر جهت کشیدن' not in locked,'lock lists only unmet goals'
+        assert 'پرچم اسکله' in locked and 'بالا کشیدن تور' not in locked,'lock lists only unmet missions of the same challenge'
         assert pg.locator('[data-activity="2"]').is_disabled()
         pg.evaluate('()=>__J.harborSelector()')
         pg.evaluate("()=>{const p=__J.curP(),r=__J.harborRoute('harbor.fishing');__J.harborState(p).routeId=r.id;for(const a of r.activities)__J.harborRecord(p,r.id,a.id,{correct:true},false);__J.harborSelector()}")
         pg.wait_for_timeout(80);check(pg)
         assert pg.locator('[aria-pressed="true"] .harbor-selection').inner_text()=='● راه انتخاب‌شده'
-        assert 'فعالیت‌ها انجام شده‌اند' in pg.locator('[aria-pressed="true"] .harbor-completion').inner_text()
+        assert 'مأموریت‌ها انجام شده‌اند' in pg.locator('[aria-pressed="true"] .harbor-completion').inner_text()
         pg.evaluate("""()=>{const es=[...document.querySelectorAll('.harbor-routes,.harbor-title,.harbor-difficulty,.harbor-summary,.harbor-selection,.harbor-completion,.harbor-card-action,.harbor-intro,.harbor-selector h2,.harbor-selector .chip-btn,.harbor-selector .j-note')];const sizes=es.map(e=>parseFloat(getComputedStyle(e).fontSize));es.forEach((e,i)=>e.style.fontSize=sizes[i]*2+'px')}""")
         pg.wait_for_timeout(80);check(pg);pg.screenshot(path=str(OUT/f'harbor_selector_{width}_text200.png'))
-        pg.evaluate("""()=>{const c=__J.harborContent,base=c.routes[0];for(const [suffix,tier] of [['third','very-hard'],['fourth','unknown']])c.routes.push({...base,id:'harbor.'+suffix,title:'اسکلهٔ آزمایشی با عنوان بلند فارسی',difficulty:{...base.difficulty,tier},activities:base.activities.map((a,i)=>({...a,id:'harbor.'+suffix+'.'+i}))});c.routes.reverse();__J.harborSelector()}""")
+        pg.evaluate("""()=>{const c=__J.harborContent,base=c.routes[0];for(const k of ['title','label','desc'])__J.HARBOR_STR['harbor.long.'+k]='اسکلهٔ آزمایشی با عنوان بلند فارسی';for(const [suffix,tier] of [['third','very-hard'],['fourth','unknown']])c.routes.push({...base,id:'harbor.'+suffix,color:'long',difficulty:{...base.difficulty,tier},activities:base.activities.map((a,i)=>({...a,id:'harbor.'+suffix+'.'+i}))});c.routes.reverse();__J.harborSelector()}""")
         pg.wait_for_timeout(80);check(pg)
         assert pg.locator('[data-route="harbor.fishing"]').evaluate("e=>e.classList.contains('tier-core')")
         assert pg.locator('[data-route="harbor.third"]').evaluate("e=>e.classList.contains('tier-very-hard')")
