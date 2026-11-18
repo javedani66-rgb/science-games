@@ -1,0 +1,1584 @@
+{
+ "harbor.green.title": {
+  "text": "اسکلهٔ ماهیگیری",
+  "kind": "title",
+  "where_fa": "عنوان چالش سبز (اسکلهٔ ماهیگیری)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.label": {
+  "text": "آغاز آرام",
+  "kind": "title",
+  "where_fa": "برچسب سختی چالش سبز (اسکلهٔ ماهیگیری)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.desc": {
+  "text": "تور را با طناب بالا ببر.",
+  "kind": "card",
+  "where_fa": "توضیح کوتاه روی کارت چالش سبز (اسکلهٔ ماهیگیری)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.story": {
+  "text": "ماهیگیرها از دریا برگشته‌اند. تور پر از ماهی را با جرثقیل بالا بیاور.",
+  "kind": "story",
+  "where_fa": "داستان چالش سبز (اسکلهٔ ماهیگیری) (بالای فهرست مأموریت‌ها)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.help": {
+  "text": "قرقرهٔ ثابت بالای جرثقیل می‌ماند. سر آزاد طناب را پایین می‌کشی و بار بالا می‌رود. قرقرهٔ ثابت فقط سوی کشیدن را عوض می‌کند.",
+  "kind": "ui",
+  "where_fa": "راهنمای چالش سبز (اسکلهٔ ماهیگیری)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.title": {
+  "text": "اسکلهٔ دزدان دریایی",
+  "kind": "title",
+  "where_fa": "عنوان چالش نارنجی (اسکلهٔ دزدان دریایی)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.label": {
+  "text": "دلیل بیاور",
+  "kind": "title",
+  "where_fa": "برچسب سختی چالش نارنجی (اسکلهٔ دزدان دریایی)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.desc": {
+  "text": "برای صندوق سنگین، نیروی کافی پیدا کن.",
+  "kind": "card",
+  "where_fa": "توضیح کوتاه روی کارت چالش نارنجی (اسکلهٔ دزدان دریایی)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.story": {
+  "text": "دزدان دریایی یک صندوق گنج سنگین دارند. ببین چه کسی می‌تواند آن را بالا بیاورد.",
+  "kind": "story",
+  "where_fa": "داستان چالش نارنجی (اسکلهٔ دزدان دریایی) (بالای فهرست مأموریت‌ها)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.help": {
+  "text": "با قرقرهٔ ثابت، نیروی لازم برابر وزن بار است. اگر نیروی دزد کمتر باشد، بار بالا نمی‌رود. دو دزد با هم نیروی بیشتری دارند.",
+  "kind": "ui",
+  "where_fa": "راهنمای چالش نارنجی (اسکلهٔ دزدان دریایی)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.title": {
+  "text": "شکار اژدر!",
+  "kind": "title",
+  "where_fa": "عنوان چالش قرمز (شکار اژدر)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.label": {
+  "text": "فکر کن و انتخاب کن",
+  "kind": "title",
+  "where_fa": "برچسب سختی چالش قرمز (شکار اژدر)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.desc": {
+  "text": "اژدرِ بازیگوش را با تور و قفس می‌گیریم و آخر رهایش می‌کنیم.",
+  "kind": "card",
+  "where_fa": "توضیح کوتاه روی کارت چالش قرمز (شکار اژدر)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.story": {
+  "text": "اژدر، اژدهای کوچک و بازیگوشِ دریا، بارها را به آب انداخته است. او را با دقت بالا می‌آوریم و بعد رهایش می‌کنیم؛ کسی آسیب نمی‌بیند.",
+  "kind": "story",
+  "where_fa": "داستان چالش قرمز (شکار اژدر) (بالای فهرست مأموریت‌ها)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.help": {
+  "text": "در آرایش ثابت و متحرک، قرقرهٔ پایینی با بار بالا می‌رود. نیروی لازم نصف می‌شود، ولی طنابِ بیشتری باید بکشی. نوار طناب را نگاه کن.",
+  "kind": "ui",
+  "where_fa": "راهنمای چالش قرمز (شکار اژدر)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.help.b12": {
+  "text": "دو چرخ نیروی لازم را کم می‌کند، ولی طنابِ بیشتری می‌خواهد. نوار طناب را نگاه کن.",
+  "kind": "ui",
+  "where_fa": "راهنمای چالش قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.green.m1.title": {
+  "text": "بالا کشیدن تور",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۱ سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m1.prompt.b12": {
+  "text": "تور پر از ماهی کنار قایق است. می‌خواهیم تور را بالا بیاوریم.",
+  "kind": "story",
+  "where_fa": "مأموریت ۱ سبز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.green.m1.prompt": {
+  "text": "تور پر از ماهی <w/> وزن دارد. ملوان <s/> نیرو دارد. تور را <h/> بالا بیاور.",
+  "kind": "story",
+  "where_fa": "مأموریت ۱ سبز، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m1.guess.q": {
+  "text": "اگر سر طناب را پایین بکشی، تور کجا می‌رود؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۱ سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m1.guess.opt1": {
+  "text": "بالا می‌رود",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m1.guess.opt2": {
+  "text": "پایین می‌رود",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m1.done": {
+  "text": "طناب پایین آمد و تور بالا رفت. قرقرهٔ ثابت فقط سوی کشیدن را عوض کرد.",
+  "kind": "explainer",
+  "where_fa": "پایان مأموریت ۱ سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m2.title": {
+  "text": "پرچم اسکله",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۲ سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m2.prompt.b12": {
+  "text": "پرچم اسکله را باید بالا ببریم.",
+  "kind": "story",
+  "where_fa": "مأموریت ۲ سبز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.green.m2.prompt": {
+  "text": "پرچم <w/> وزن دارد. آن را <h/> بالا ببر.",
+  "kind": "story",
+  "where_fa": "مأموریت ۲ سبز، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m2.guess.q": {
+  "text": "برای بالا رفتن پرچم، سر طناب را به کدام سو می‌کشی؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۲ سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m2.guess.opt1": {
+  "text": "پایین",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m2.guess.opt2": {
+  "text": "بالا",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m2.done": {
+  "text": "طناب پایین آمد و پرچم بالا رفت.",
+  "kind": "explainer",
+  "where_fa": "پایان مأموریت ۲ سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m3.title": {
+  "text": "جعبهٔ سبک",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۳ سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m3.prompt.b12": {
+  "text": "یک جعبهٔ سبک کنار قایق است. جعبه را تا لبهٔ اسکله بالا بیاور.",
+  "kind": "story",
+  "where_fa": "مأموریت ۳ سبز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.green.m3.prompt": {
+  "text": "جعبه <w/> وزن دارد. آن را <h/> بالا ببر تا به لبهٔ اسکله برسد.",
+  "kind": "story",
+  "where_fa": "مأموریت ۳ سبز، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m3.guess.q": {
+  "text": "حدس بزن: جعبه با کشیدن طناب به لبهٔ اسکله می‌رسد؟",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۳ سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m3.guess.opt1": {
+  "text": "بله، می‌رسد",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m3.guess.opt2": {
+  "text": "نه، نمی‌رسد",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.m3.seen": {
+  "text": "جعبه به لبهٔ اسکله رسید.",
+  "kind": "explainer",
+  "where_fa": "پس از بالا رفتن جعبه، پیش از پرسش",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.green.q.prompt.b12": {
+  "text": "طناب را پایین کشیدی. جعبه به کدام سو رفت؟",
+  "kind": "question",
+  "where_fa": "پرسش نمره~دار سبز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.green.q.opt1.b12": {
+  "text": "پایین",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.green.q.opt2.b12": {
+  "text": "بالا",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۲ (درست)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.green.q.prompt.b34": {
+  "text": "طناب چند پله پایین آمد و بار چند پله بالا رفت؟",
+  "kind": "question",
+  "where_fa": "پرسش نمره~دار سبز، پایهٔ ۳ و ۴",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.green.q.opt1.b34": {
+  "text": "هر دو ۲ پله",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۱ (درست)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.green.q.opt2.b34": {
+  "text": "طناب ۱ پله، بار ۲ پله",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.green.q.opt3.b34": {
+  "text": "طناب ۲ پله، بار ۱ پله",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۳",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.green.q.prompt.b56": {
+  "text": "طناب ۲ متر پایین آمد. بار چند متر بالا رفت؟",
+  "kind": "question",
+  "where_fa": "پرسش نمره~دار سبز، پایهٔ ۵ و ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.green.q.opt1.b56": {
+  "text": "۱ متر",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.green.q.opt2.b56": {
+  "text": "۲ متر",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۲ (درست)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.green.q.opt3.b56": {
+  "text": "۴ متر",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۳",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.green.q.explain.b12": {
+  "text": "طناب پایین آمد و جعبه بالا رفت. قرقرهٔ ثابت فقط سوی کشیدن را عوض می‌کند.",
+  "kind": "explainer",
+  "where_fa": "علت پاسخ سبز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.green.q.explain.b34": {
+  "text": "طناب ۲ پله پایین آمد و بار ۲ پله بالا رفت. با قرقرهٔ ثابت این دو برابرند.",
+  "kind": "explainer",
+  "where_fa": "علت پاسخ سبز، پایهٔ ۳ و ۴",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.green.q.explain.b56": {
+  "text": "طناب ۲ متر پایین آمد و بار ۲ متر بالا رفت. با قرقرهٔ ثابت این دو برابرند.",
+  "kind": "explainer",
+  "where_fa": "علت پاسخ سبز، پایهٔ ۵ و ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.green.q.retry.b12": {
+  "text": "به جهت حرکت طناب و جعبه نگاه کن.",
+  "kind": "hint",
+  "where_fa": "سرنخ پس از پاسخ نادرست سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.green.q.retry": {
+  "text": "شمارنده‌های زیر صحنه را با هم مقایسه کن.",
+  "kind": "hint",
+  "where_fa": "سرنخ پس از پاسخ نادرست سبز، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m1.title": {
+  "text": "آزمایش صندوق",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۱ نارنجی",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m1.prompt.b12": {
+  "text": "صندوق گنجِ دزدان دریایی خیلی سنگین است. یک دزد می‌خواهد آن را بالا بیاورد.",
+  "kind": "story",
+  "where_fa": "مأموریت ۱ نارنجی، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.m1.prompt": {
+  "text": "صندوق گنج <w/> وزن دارد و یک دزد <s/> نیرو دارد. طناب را بکش و ببین چه می‌شود.",
+  "kind": "story",
+  "where_fa": "مأموریت ۱ نارنجی، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m1.guess.q": {
+  "text": "یک دزد می‌تواند صندوق را بالا بیاورد؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۱ نارنجی",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m1.guess.opt1": {
+  "text": "بله، می‌تواند",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m1.guess.opt2": {
+  "text": "نه، نمی‌تواند",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m1.done.b12": {
+  "text": "صندوق تکان نخورد. پیکان نیروی لازم از پیکان نیروی دزد بلندتر است.",
+  "kind": "explainer",
+  "where_fa": "پایان مأموریت ۱ نارنجی، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.m1.done": {
+  "text": "صندوق بالا نرفت. نیروی لازم <f/> است و یک دزد فقط <s/> نیرو دارد.",
+  "kind": "explainer",
+  "where_fa": "پایان مأموریت ۱ نارنجی، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m2.title": {
+  "text": "دو دزد با هم",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۲ نارنجی",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m2.prompt.b12": {
+  "text": "حالا دزد دوم را بیاور تا با هم بکشند.",
+  "kind": "story",
+  "where_fa": "مأموریت ۲ نارنجی، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.m2.prompt": {
+  "text": "دزد دوم را بیاور. دو دزد با هم <s2/> نیرو دارند. صندوق <w/> وزن دارد.",
+  "kind": "story",
+  "where_fa": "مأموریت ۲ نارنجی، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m2.guess.q": {
+  "text": "اگر دو دزد با هم بکشند، صندوق بالا می‌رود؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۲ نارنجی",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m2.guess.opt1": {
+  "text": "بله",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m2.guess.opt2": {
+  "text": "نه",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m2.btn.helper": {
+  "text": "دزد دوم را بیاور",
+  "kind": "ui",
+  "where_fa": "دکمهٔ آوردن دزد دوم",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m2.helperIn": {
+  "text": "دزد دوم کنار طناب آمد. حالا بکشید.",
+  "kind": "explainer",
+  "where_fa": "پس از آمدن دزد دوم",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m2.done": {
+  "text": "دو دزد با هم کشیدند و صندوق بالا رفت. وزن صندوق عوض نشد؛ نیروی دزدها بیشتر شد.",
+  "kind": "explainer",
+  "where_fa": "پایان مأموریت ۲ نارنجی",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m3.title": {
+  "text": "جعبهٔ سبک",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۳ نارنجی",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m3.prompt.b12": {
+  "text": "یک جعبهٔ سبک هم هست. این بار یک دزد تنها طناب را می‌کشد.",
+  "kind": "story",
+  "where_fa": "مأموریت ۳ نارنجی، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.m3.prompt": {
+  "text": "جعبهٔ سبک <w/> وزن دارد و یک دزد <s/> نیرو دارد. جعبه را بالا ببر.",
+  "kind": "story",
+  "where_fa": "مأموریت ۳ نارنجی، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m3.guess.q": {
+  "text": "یک دزد جعبهٔ سبک را بالا می‌آورد؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۳ نارنجی",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m3.guess.opt1": {
+  "text": "بله",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m3.guess.opt2": {
+  "text": "نه",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.m3.seen": {
+  "text": "جعبه بالا رفت. پیکان نیروی لازم را با پیکان وزن جعبه مقایسه کن.",
+  "kind": "explainer",
+  "where_fa": "پس از بالا رفتن جعبه، پیش از پرسش",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.orange.q.prompt.b12": {
+  "text": "پیکان نیروی لازم و پیکان وزن جعبه چطورند؟",
+  "kind": "question",
+  "where_fa": "پرسش نمره~دار نارنجی، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.q.opt1.b12": {
+  "text": "هم‌اندازه‌اند",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۱ (درست)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.q.opt2.b12": {
+  "text": "پیکان نیروی لازم خیلی کوتاه‌تر است",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.q.opt3.b12": {
+  "text": "پیکان نیروی لازم خیلی بلندتر است",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۳",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.q.prompt.b34": {
+  "text": "پیکان نیروی لازم چند خانه است و پیکان وزن جعبه چند خانه؟",
+  "kind": "question",
+  "where_fa": "پرسش نمره~دار نارنجی، پایهٔ ۳ و ۴",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.orange.q.opt1.b34": {
+  "text": "نیروی لازم ۴ خانه، وزن ۳ خانه",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.orange.q.opt2.b34": {
+  "text": "هر دو ۳ خانه",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۲ (درست)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.orange.q.opt3.b34": {
+  "text": "نیروی لازم ۱ خانه، وزن ۳ خانه",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۳",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.orange.q.prompt.b56": {
+  "text": "جعبه ۳۰۰ نیوتون وزن دارد. با قرقرهٔ ثابت، نیروی لازم چند نیوتون است؟",
+  "kind": "question",
+  "where_fa": "پرسش نمره~دار نارنجی، پایهٔ ۵ و ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.orange.q.opt1.b56": {
+  "text": "۱۵۰ نیوتون",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.orange.q.opt2.b56": {
+  "text": "۳۰۰ نیوتون",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۲ (درست)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.orange.q.opt3.b56": {
+  "text": "۴۰۰ نیوتون",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۳",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.orange.q.explain.b12": {
+  "text": "دو پیکان هم‌اندازه‌اند. قرقرهٔ ثابت نیرو را کم نمی‌کند؛ فقط سوی کشیدن را عوض می‌کند.",
+  "kind": "explainer",
+  "where_fa": "علت پاسخ نارنجی، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.q.explain.b34": {
+  "text": "هر دو پیکان ۳ خانه‌اند. قرقرهٔ ثابت نیرو را کم نمی‌کند.",
+  "kind": "explainer",
+  "where_fa": "علت پاسخ نارنجی، پایهٔ ۳ و ۴",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.orange.q.explain.b56": {
+  "text": "نیروی لازم با وزن جعبه برابر است: ۳۰۰ نیوتون. قرقرهٔ ثابت نیرو را کم نمی‌کند.",
+  "kind": "explainer",
+  "where_fa": "علت پاسخ نارنجی، پایهٔ ۵ و ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.orange.q.retry.b12": {
+  "text": "دو پیکان را از نظر اندازه با هم مقایسه کن.",
+  "kind": "hint",
+  "where_fa": "سرنخ نارنجی، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.orange.q.retry": {
+  "text": "عددهای کنار پیکان‌ها را بخوان.",
+  "kind": "hint",
+  "where_fa": "سرنخ نارنجی، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m1.title.b12": {
+  "text": "قفس سنگین",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۱ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m1.title": {
+  "text": "تور طعمه",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۱ قرمز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m1.prompt.b12": {
+  "text": "اژدر بازیگوش در یک قفس سنگین است. آرایش را انتخاب کن و قفس را بالا بیاور.",
+  "kind": "story",
+  "where_fa": "مأموریت ۱ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m1.prompt": {
+  "text": "تور سبکِ طعمه <w/> وزن دارد. ملوان <s/> نیرو دارد و طناب فقط <r/> است. آرایش را انتخاب کن و تور را <h/> بالا ببر.",
+  "kind": "story",
+  "where_fa": "مأموریت ۱ قرمز، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m1.guess.q.b12": {
+  "text": "کدام آرایش قفس سنگین را بالا می‌آورد؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۱ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m1.guess.q": {
+  "text": "کدام آرایش برای این تور و این طنابِ کوتاه مناسب است؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۱ قرمز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m1.guess.opt1.b12": {
+  "text": "یک چرخ",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m1.guess.opt2.b12": {
+  "text": "دو چرخ",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m1.guess.opt1": {
+  "text": "قرقرهٔ ثابت",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m1.guess.opt2": {
+  "text": "ثابت و متحرک",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m1.done.b12": {
+  "text": "با دو چرخ قفس بالا آمد. دو چرخ نیروی لازم را کم کرد.",
+  "kind": "explainer",
+  "where_fa": "پایان مأموریت ۱ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m1.done": {
+  "text": "تور با قرقرهٔ ثابت بالا آمد. ثابت و متحرک طنابِ بیشتری می‌خواهد و طناب این‌جا کوتاه است.",
+  "kind": "explainer",
+  "where_fa": "پایان مأموریت ۱ قرمز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m1.showed": {
+  "text": "آرایش درست را نشانت دادم. یک بار دیگر خودت امتحانش کن.",
+  "kind": "explainer",
+  "where_fa": "پس از «نشانم بده»",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m2.title.b12": {
+  "text": "دیدن دو کلاف",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۲ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m2.title": {
+  "text": "قفس سنگین",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۲ قرمز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m2.prompt.b12": {
+  "text": "تور سبک را یک بار با یک چرخ و یک بار با دو چرخ بالا ببر. اندازهٔ طنابی را که می‌کشی ببین.",
+  "kind": "story",
+  "where_fa": "مأموریت ۲ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m2.prompt": {
+  "text": "قفس سنگین <w/> وزن دارد. ملوان <s/> نیرو دارد و طناب <r/> است. آرایش را انتخاب کن.",
+  "kind": "story",
+  "where_fa": "مأموریت ۲ قرمز، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m2.guess.q.b12": {
+  "text": "با کدام آرایش طنابِ بیشتری کشیده می‌شود؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۲ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m2.guess.q": {
+  "text": "کدام آرایش قفس را بالا می‌برد؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۲ قرمز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m2.guess.opt1.b12": {
+  "text": "یک چرخ",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m2.guess.opt2.b12": {
+  "text": "دو چرخ",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m2.guess.opt1": {
+  "text": "قرقرهٔ ثابت",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m2.guess.opt2": {
+  "text": "ثابت و متحرک",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m2.other.b12": {
+  "text": "این آرایش را دیدی. آرایش دیگر را هم امتحان کن.",
+  "kind": "explainer",
+  "where_fa": "پس از دیدن یک آرایش",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m2.other": {
+  "text": "این آرایش را دیدی. آرایش دیگر را هم امتحان کن.",
+  "kind": "explainer",
+  "where_fa": "پس از دیدن یک آرایش",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m2.done.b12": {
+  "text": "هر دو را دیدی. با دو چرخ کلافِ طناب بزرگ‌تر شد.",
+  "kind": "explainer",
+  "where_fa": "پایان مأموریت ۲ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m2.done": {
+  "text": "با ثابت و متحرک، نیروی لازم نصف شد: <f2/>. طنابِ کشیده‌شده <rn2/> بود.",
+  "kind": "explainer",
+  "where_fa": "پایان مأموریت ۲ قرمز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m2.showed": {
+  "text": "آرایش درست را نشانت دادم. یک بار دیگر خودت امتحانش کن.",
+  "kind": "explainer",
+  "where_fa": "پس از «نشانم بده»",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.title.b12": {
+  "text": "تور طعمه",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۳ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m3.title": {
+  "text": "دو بار پشت‌سرهم",
+  "kind": "title",
+  "where_fa": "عنوان مأموریت ۳ قرمز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.prompt.b12": {
+  "text": "اژدر روی تور سبک نشسته است. کلاف طناب کوتاه است. آرایش را انتخاب کن.",
+  "kind": "story",
+  "where_fa": "مأموریت ۳ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m3.prompt": {
+  "text": "اول تور <w1/> و بعد قفس <w2/> را بالا ببر. یک کلاف مشترک <r/> داری.",
+  "kind": "story",
+  "where_fa": "مأموریت ۳ قرمز، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.guess.q.b12": {
+  "text": "با کدام آرایش طناب کافی است؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۳ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m3.guess.q": {
+  "text": "برای تور و قفس چه آرایش‌هایی لازم است؟ حدس بزن.",
+  "kind": "question",
+  "where_fa": "حدس بی~نمرهٔ مأموریت ۳ قرمز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.guess.opt1.b12": {
+  "text": "یک چرخ",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m3.guess.opt2.b12": {
+  "text": "دو چرخ",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m3.guess.opt1": {
+  "text": "هر دو قرقرهٔ ثابت",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.guess.opt2": {
+  "text": "تور ثابت، قفس ثابت و متحرک",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.guess.opt3": {
+  "text": "هر دو ثابت و متحرک",
+  "kind": "option",
+  "where_fa": "گزینهٔ حدس ۳",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.seen.b12": {
+  "text": "تور بالا آمد. دو آرایش را کنار هم ببین.",
+  "kind": "explainer",
+  "where_fa": "پس از بالا رفتن بار، پیش از پرسش",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.m3.seen": {
+  "text": "هر دو بار بالا آمدند: تور با ثابت، قفس با ثابت و متحرک. دو آرایش را کنار هم ببین.",
+  "kind": "explainer",
+  "where_fa": "پس از بالا رفتن دو بار، پیش از پرسش",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.showed": {
+  "text": "آرایش درست را نشانت دادم. یک بار دیگر خودت امتحانش کن.",
+  "kind": "explainer",
+  "where_fa": "پس از «نشانم بده»",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.plan.first": {
+  "text": "بار اول: تور سبک. آرایش را انتخاب کن.",
+  "kind": "explainer",
+  "where_fa": "آغاز نقشهٔ دو باری",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.plan.next": {
+  "text": "تور بالا آمد. حالا قفس سنگین را بالا ببر. طنابِ باقی‌مانده را روی نوار ببین.",
+  "kind": "explainer",
+  "where_fa": "پس از بالا رفتن تور",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.plan.restarted": {
+  "text": "کلاف از اول پر شد. دوباره از تور شروع کن.",
+  "kind": "explainer",
+  "where_fa": "پس از «از اول»",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.m3.plan.fail.rope": {
+  "text": "طنابِ مشترک تمام شد؛ این آرایش <rn/> طناب می‌خواهد و فقط <r/> مانده است. با «از اول» کلاف را دوباره پر کن.",
+  "kind": "explainer",
+  "where_fa": "علت نرسیدن طناب در نقشهٔ دو باری",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.red.q.prompt.b12": {
+  "text": "با کدام آرایش طنابِ بیشتری کشیده شد؟",
+  "kind": "question",
+  "where_fa": "پرسش نمره~دار قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.q.opt1.b12": {
+  "text": "یک چرخ",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.q.opt2.b12": {
+  "text": "دو چرخ",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۲ (درست)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.q.prompt.b34": {
+  "text": "با ثابت و متحرک، نیروی لازم چه شد و طناب چه شد؟",
+  "kind": "question",
+  "where_fa": "پرسش نمره~دار قرمز، پایهٔ ۳ و ۴",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.red.q.opt1.b34": {
+  "text": "نیرو نصف، طناب همان",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.red.q.opt2.b34": {
+  "text": "نیرو نصف، طناب دوبرابر",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۲ (درست)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.red.q.opt3.b34": {
+  "text": "نیرو همان، طناب دوبرابر",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۳",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.red.q.prompt.b56": {
+  "text": "قفس ۶۰۰ نیوتون است و ۲ رشته آن را نگه داشته‌اند. نیروی لازم و طنابِ کشیده‌شده برای ۲ متر بالا رفتن چقدر است؟",
+  "kind": "question",
+  "where_fa": "پرسش نمره~دار قرمز، پایهٔ ۵ و ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.red.q.opt1.b56": {
+  "text": "۳۰۰ نیوتون و ۴ متر",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۱ (درست)",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.red.q.opt2.b56": {
+  "text": "۳۰۰ نیوتون و ۲ متر",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.red.q.opt3.b56": {
+  "text": "۶۰۰ نیوتون و ۴ متر",
+  "kind": "option",
+  "where_fa": "گزینهٔ ۳",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.red.q.explain.b12": {
+  "text": "دو چرخ نیرو را کم می‌کند، ولی طنابِ بیشتری لازم دارد. کلافِ دو چرخ بزرگ‌تر است.",
+  "kind": "explainer",
+  "where_fa": "علت پاسخ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.q.explain.b34": {
+  "text": "نیرو نصف شد و طناب دوبرابر شد: از ۸ خانه به ۴ خانه، و از ۲ پله به ۴ پله.",
+  "kind": "explainer",
+  "where_fa": "علت پاسخ قرمز، پایهٔ ۳ و ۴",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۳ و ۴"
+ },
+ "harbor.red.q.explain.b56": {
+  "text": "نیروی لازم نصف شد (۳۰۰ نیوتون) و طنابِ کشیده‌شده دوبرابر شد (۴ متر). نیروی کمتر، طنابِ بیشتر.",
+  "kind": "explainer",
+  "where_fa": "علت پاسخ قرمز، پایهٔ ۵ و ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۵ و ۶"
+ },
+ "harbor.red.q.retry.b12": {
+  "text": "دو کلاف را کنار هم مقایسه کن.",
+  "kind": "hint",
+  "where_fa": "سرنخ قرمز، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.red.q.retry": {
+  "text": "ردیف‌های زیر صحنه را برای دو آرایش مقایسه کن.",
+  "kind": "hint",
+  "where_fa": "سرنخ قرمز، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.unit.square": {
+  "text": "خانه",
+  "kind": "ui",
+  "where_fa": "یکای نیرو برای پایهٔ ۳ و ۴",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.unit.newton": {
+  "text": "نیوتون",
+  "kind": "ui",
+  "where_fa": "یکای نیرو برای پایهٔ ۵ و ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.unit.step": {
+  "text": "پله",
+  "kind": "ui",
+  "where_fa": "یکای ارتفاع و طناب برای پایهٔ ۳ و ۴",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.unit.meter": {
+  "text": "متر",
+  "kind": "ui",
+  "where_fa": "یکای ارتفاع و طناب برای پایهٔ ۵ و ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.arr.1": {
+  "text": "قرقرهٔ ثابت",
+  "kind": "ui",
+  "where_fa": "دکمهٔ آرایش ۱",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.arr.1.b12": {
+  "text": "یک چرخ",
+  "kind": "ui",
+  "where_fa": "دکمهٔ آرایش ۱، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.ui.arr.2": {
+  "text": "ثابت و متحرک",
+  "kind": "ui",
+  "where_fa": "دکمهٔ آرایش ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.arr.2.b12": {
+  "text": "دو چرخ",
+  "kind": "ui",
+  "where_fa": "دکمهٔ آرایش ۲، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.ui.label.weight": {
+  "text": "وزن بار",
+  "kind": "ui",
+  "where_fa": "برچسب پیکان وزن",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.label.need": {
+  "text": "نیروی لازم",
+  "kind": "ui",
+  "where_fa": "برچسب پیکان نیروی لازم",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.label.avail.sailor": {
+  "text": "نیروی ملوان",
+  "kind": "ui",
+  "where_fa": "برچسب پیکان خط~چین ملوان",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.label.avail.pirate": {
+  "text": "نیروی دزد",
+  "kind": "ui",
+  "where_fa": "برچسب پیکان خط~چین دزد",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.label.avail.pirates2": {
+  "text": "نیروی دو دزد",
+  "kind": "ui",
+  "where_fa": "برچسب پیکان خط~چین دو دزد",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.label.crate": {
+  "text": "بار",
+  "kind": "ui",
+  "where_fa": "نوشتهٔ روی جعبه",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.label.target": {
+  "text": "هدف",
+  "kind": "ui",
+  "where_fa": "برچسب خط سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.label.target.n": {
+  "text": "هدف: <h/>",
+  "kind": "ui",
+  "where_fa": "برچسب خط سبز با اندازه",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.label.rope": {
+  "text": "طناب",
+  "kind": "ui",
+  "where_fa": "برچسب نوار طناب",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.label.rope.n": {
+  "text": "طناب: <r/>",
+  "kind": "ui",
+  "where_fa": "برچسب نوار طناب با اندازه",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.counter.rope": {
+  "text": "طناب پایین آمد: <v/>",
+  "kind": "ui",
+  "where_fa": "شمارندهٔ طناب",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.counter.rise": {
+  "text": "بار بالا رفت: <v/>",
+  "kind": "ui",
+  "where_fa": "شمارندهٔ بار",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.tryNow": {
+  "text": "حالا خودت امتحان کن: دستگیرهٔ زرد را پایین بکش.",
+  "kind": "ui",
+  "where_fa": "پس از حدس",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.guessSaved": {
+  "text": "حدس تو ثبت شد؛ درست یا غلط بودنش مهم نیست. ببین چه می‌شود.",
+  "kind": "ui",
+  "where_fa": "پس از حدس",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.btn.showMe": {
+  "text": "نشانم بده",
+  "kind": "ui",
+  "where_fa": "دکمهٔ نمایش آرایش درست",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.btn.restartPlan": {
+  "text": "از اول",
+  "kind": "ui",
+  "where_fa": "دکمهٔ شروع دوبارهٔ نقشهٔ دو باری",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.fail.force": {
+  "text": "نیروی لازم <f/> است، ولی نیروی در دسترس فقط <s/> است. بار بالا نرفت.",
+  "kind": "explainer",
+  "where_fa": "علت بالا نرفتن، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.fail.force.b12": {
+  "text": "نیروی لازم از نیروی در دسترس بیشتر است. بار بالا نرفت.",
+  "kind": "explainer",
+  "where_fa": "علت بالا نرفتن، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.ui.fail.rope": {
+  "text": "طناب تمام شد. این آرایش <rn/> طناب می‌خواهد و فقط <r/> مانده است.",
+  "kind": "explainer",
+  "where_fa": "علت تمام شدن طناب، پایهٔ ۳ تا ۶",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.fail.rope.b12": {
+  "text": "طناب تمام شد. این آرایش طنابِ بیشتری می‌خواهد.",
+  "kind": "explainer",
+  "where_fa": "علت تمام شدن طناب، پایهٔ ۱ و ۲",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "پایهٔ ۱ و ۲"
+ },
+ "harbor.ui.strip.row": {
+  "text": "<a/>: نیروی لازم <f/>، طنابِ کشیده‌شده <rn/>",
+  "kind": "ui",
+  "where_fa": "ردیف مقایسهٔ دو آرایش",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.backLabel": {
+  "text": "بندر",
+  "kind": "ui",
+  "where_fa": "دکمهٔ برگشت از مأموریت",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.practiceSuffix": {
+  "text": " · تمرین دوباره",
+  "kind": "ui",
+  "where_fa": "زیرنویس هنگام تمرین",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.scr.practice": {
+  "text": "تمرین دوباره؛ نتیجهٔ قبلی محفوظ است.",
+  "kind": "ui",
+  "where_fa": "متن خوانندهٔ صفحه",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.scr.normal": {
+  "text": "بار و طناب را آزمایش کن.",
+  "kind": "ui",
+  "where_fa": "متن خوانندهٔ صفحه",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.btn.again": {
+  "text": "بیا یک بار دیگر انجامش بدهیم",
+  "kind": "ui",
+  "where_fa": "دکمهٔ تمرین دوباره",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.btn.next": {
+  "text": "مأموریت بعد",
+  "kind": "ui",
+  "where_fa": "دکمهٔ مأموریت بعد",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.btn.result": {
+  "text": "پایان این اسکله",
+  "kind": "ui",
+  "where_fa": "دکمهٔ پایان اسکله",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.btn.changeRoute": {
+  "text": "تغییر راه",
+  "kind": "ui",
+  "where_fa": "دکمهٔ تغییر راه",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.help.title": {
+  "text": "راهنمای قرقره",
+  "kind": "title",
+  "where_fa": "عنوان راهنما",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.help.close": {
+  "text": "برگشت به آزمایش",
+  "kind": "ui",
+  "where_fa": "دکمهٔ بستن راهنما",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.model": {
+  "text": "در این مدل، اصطکاک و وزن طناب و قرقره را در نظر نمی‌گیریم.",
+  "kind": "explainer",
+  "where_fa": "یادداشت مدل",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.entry.title": {
+  "text": "بندر: راهت را انتخاب کن",
+  "kind": "title",
+  "where_fa": "کادر ورود به بندر روی نقشه",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.entry.text": {
+  "text": "ماهیگیری، دزدان دریایی یا شکار اژدر؟",
+  "kind": "card",
+  "where_fa": "کادر ورود به بندر روی نقشه",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.entry.btn": {
+  "text": "دیدن راه‌های بندر",
+  "kind": "ui",
+  "where_fa": "دکمهٔ ورود به بندر",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.tier.core": {
+  "text": "آسان‌تر",
+  "kind": "ui",
+  "where_fa": "نام سختی سبز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.tier.challenge": {
+  "text": "چالشی",
+  "kind": "ui",
+  "where_fa": "نام سختی نارنجی",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.tier.very-hard": {
+  "text": "خیلی سخت",
+  "kind": "ui",
+  "where_fa": "نام سختی قرمز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.tier.unknown": {
+  "text": "سختی مشخص نشده",
+  "kind": "ui",
+  "where_fa": "نام سختی نامشخص",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.chosen": {
+  "text": "● راه انتخاب‌شده",
+  "kind": "ui",
+  "where_fa": "نشانهٔ کارت انتخاب~شده",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.open": {
+  "text": "○ راه باز است",
+  "kind": "ui",
+  "where_fa": "نشانهٔ کارت باز",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.done": {
+  "text": "✓ مأموریت‌ها انجام شده‌اند",
+  "kind": "ui",
+  "where_fa": "نشانهٔ کارت تمام~شده",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.missions": {
+  "text": "مأموریت‌ها:",
+  "kind": "ui",
+  "where_fa": "برچسب نشانه~های مأموریت روی کارت",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.again": {
+  "text": "دوباره تمرین کن",
+  "kind": "ui",
+  "where_fa": "کنش کارت تمام~شده",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.go": {
+  "text": "از این راه برو",
+  "kind": "ui",
+  "where_fa": "کنش کارت",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.title": {
+  "text": "از کدام اسکله می‌روی؟",
+  "kind": "title",
+  "where_fa": "عنوان انتخاب اسکله",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.close": {
+  "text": "نقشه",
+  "kind": "ui",
+  "where_fa": "دکمهٔ برگشت به نقشه",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.intro": {
+  "text": "راهت را انتخاب کن. هر وقت خواستی می‌توانی آن را عوض کنی.",
+  "kind": "card",
+  "where_fa": "مقدمهٔ انتخاب اسکله",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.note": {
+  "text": "این راه‌ها برای تمرین قرقره‌اند. برای ادامهٔ سفر به نقشه برگرد.",
+  "kind": "card",
+  "where_fa": "یادداشت پایین انتخاب اسکله",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sel.label": {
+  "text": "راه‌های بندر",
+  "kind": "ui",
+  "where_fa": "برچسب دسترسی پنجرهٔ انتخاب",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sheet.done": {
+  "text": "انجام شد؛ دوباره هم می‌توانی تمرین کنی",
+  "kind": "ui",
+  "where_fa": "وضعیت مأموریت در فهرست",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sheet.ready": {
+  "text": "ببین، حدس بزن، امتحان کن",
+  "kind": "ui",
+  "where_fa": "وضعیت مأموریت در فهرست",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sheet.locked": {
+  "text": "🔒 اول <t/> را انجام بده",
+  "kind": "ui",
+  "where_fa": "وضعیت مأموریت قفل~شده در فهرست",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sheet.btnAgain": {
+  "text": "دوباره",
+  "kind": "ui",
+  "where_fa": "دکمهٔ مأموریت انجام~شده",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sheet.btnStart": {
+  "text": "شروع",
+  "kind": "ui",
+  "where_fa": "دکمهٔ مأموریت",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.sheet.change": {
+  "text": "تغییر راه",
+  "kind": "ui",
+  "where_fa": "دکمهٔ تغییر راه در فهرست",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.res.done": {
+  "text": "مأموریت‌های این راه انجام شد",
+  "kind": "title",
+  "where_fa": "عنوان پایان اسکله",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.res.more": {
+  "text": "یک بار دیگر تمرین کنیم",
+  "kind": "title",
+  "where_fa": "عنوان پایان اسکله",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.res.note": {
+  "text": "هر وقت خواستی دوباره تمرین کن. برای ادامهٔ سفر به نقشه برگرد.",
+  "kind": "card",
+  "where_fa": "یادداشت پایان اسکله",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.res.again": {
+  "text": "تمرین دوباره",
+  "kind": "ui",
+  "where_fa": "دکمهٔ پایان اسکله",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.res.other": {
+  "text": "راه دیگر",
+  "kind": "ui",
+  "where_fa": "دکمهٔ پایان اسکله",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ },
+ "harbor.ui.res.label": {
+  "text": "پایان اسکله",
+  "kind": "ui",
+  "where_fa": "برچسب دسترسی",
+  "context_fa": "پیش‌نویس؛ بندر M07 (spec M07_HARBOR_PILOT_SPEC_FA)",
+  "band": "همه"
+ }
+}

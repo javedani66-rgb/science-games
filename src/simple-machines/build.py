@@ -1,10 +1,16 @@
-import base64, pathlib, sys
+import base64, pathlib, sys, json
 D = pathlib.Path(__file__).parent
 FONTS = D.parent.parent/'assets'/'fonts'
 css = (D/'style.css').read_text(encoding='utf-8')
 for k, f in [('__VAZ_R__','Vazirmatn-Regular.woff2'),('__VAZ_B__','Vazirmatn-Bold.woff2'),('__LALE__','Lalezar-Regular.woff2')]:
     css = css.replace(k, base64.b64encode((FONTS/f).read_bytes()).decode())
-js = "\n".join((D/n).read_text(encoding='utf-8') for n in ['core.js','voice.js','machines.js','st_force.js','st_fric.js','balance_art.js','st_scale.js','lever_art.js','st_lever.js','st_ramp.js','st_pulley.js','st_wheel.js','st_wedge.js','st_sort.js','content.js','quiz.js','assets.js','harbor-content.js','app.js','harbor-routes.js','journey.js'])
+def chunk(n):
+    # harbor text layer (B49/B50): harbor/strings.fa.json is embedded as HARBOR_STR (id -> text) just before the harbor code
+    if n == 'harbor-strings':
+        d = json.loads((D/'harbor'/'strings.fa.json').read_text(encoding='utf-8'))
+        return 'const HARBOR_STR=' + json.dumps({k: v['text'] for k, v in d.items() if not k.startswith('_')}, ensure_ascii=False) + ';'
+    return (D/n).read_text(encoding='utf-8')
+js = "\n".join(chunk(n) for n in ['core.js','voice.js','machines.js','st_force.js','st_fric.js','balance_art.js','st_scale.js','lever_art.js','st_lever.js','st_ramp.js','st_pulley.js','st_wheel.js','st_wedge.js','st_sort.js','content.js','quiz.js','assets.js','harbor-strings','harbor-content.js','app.js','harbor-routes.js','journey.js'])
 page = f'<title>کارگاه ماشین‌های ساده</title>\n<style>\n{css}\n</style>\n<div class="wrap" id="app"></div>\n<script>\n(function(){{\n{js}\n}})();\n</script>\n'
 (D/'page.html').write_text(page, encoding='utf-8')
 (D/'preview.html').write_text('<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>'+page+'</body></html>', encoding='utf-8')
